@@ -309,11 +309,21 @@ function preprocessForParse(text: string): string {
   // Use Unicode escapes inside the character classes — U+2028 and
   // U+2029 are line terminators in JS source, so writing them as
   // literal chars in a regex literal breaks the parser across lines.
-  return text
+  let out = text
     .replace(/[\u201c\u201d]/g, '"')
     .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u0085\u2028\u2029]/g, ' ')
     .replace(/\t/g, ' ');
+  // Quote bare object keys. Production audit (build 7dc700f) caught
+  // "Italian Game: Blackburne-Kosti\u0107 Gambit" failing both attempts on
+  // iOS Safari's "Property name must be a string literal" \u2014 the LLM
+  // emitted unquoted keys like `{ node: { san: "e4" } }` for niche
+  // openings it knows less well. Anchor on a newline + indentation +
+  // identifier + colon \u2014 JSON keys appear at line start in pretty-
+  // printed output, and JSON strings can't legally contain raw
+  // newlines, so this won't touch prose values.
+  out = out.replace(/(\n\s+)([a-zA-Z_][a-zA-Z0-9_]*)(\s*:)/g, '$1"$2"$3');
+  return out;
 }
 
 /** Walk a parsed tree and ensure every node carries a `children`

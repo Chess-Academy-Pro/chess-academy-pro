@@ -774,18 +774,20 @@ export function CoachTeachPage(): JSX.Element {
         if (!stageHint && !faceMode) {
           const pickerData = findLinePickerOptions(requestedName);
           if (pickerData) {
-            // Enumerate visible variations in the chat message so the
-            // brain (which reads up to 200 conversation history lines
-            // per envelope) can answer follow-ups like "which one has
-            // the most traps?" in context. Without this, the brain
-            // sees only "branches into many lines" and free-associates
-            // — production audit (build 998f5c4) caught the brain
-            // answering about the Sicilian when the user asked which
-            // ITALIAN variation had the most traps.
+            // Two messages:
+            //  1. Short ack for UI + TTS — the user doesn't need to
+            //     hear all 15 variation names read aloud.
+            //  2. Hidden context message in conversationHistory only —
+            //     so the brain can answer follow-ups like "which has
+            //     the most traps?" with the picker visible. Production
+            //     audit (build 998f5c4) caught the brain answering
+            //     about Sicilian when asked which Italian variation
+            //     had the most traps.
+            const ack = `The ${pickerData.canonicalName} branches into many lines. Pick one to dive in deep, or just type the variation name.`;
             const variationList = pickerData.options
               .map((o) => o.label)
               .join(', ');
-            const ack = `The ${pickerData.canonicalName} branches into many lines. Variations on screen: ${variationList}. Which one do you want to learn? Pick one to dive in deep, or just type the variation name.`;
+            const pickerContextNote = `[ui-state: line picker visible for "${pickerData.canonicalName}". Variations on screen: ${variationList}.]`;
             setMessages((prev) => [...prev, {
               id: `${surfaceTurnId}-c`,
               role: 'assistant',
@@ -796,6 +798,15 @@ export function CoachTeachPage(): JSX.Element {
               surface: 'chat-teach',
               role: 'coach',
               text: ack,
+              fen: gameRef.current.fen,
+              trigger: null,
+            });
+            // Hidden context entry: stays in conversationHistory for
+            // the brain envelope but is never rendered or spoken.
+            useCoachMemoryStore.getState().appendConversationMessage({
+              surface: 'chat-teach',
+              role: 'coach',
+              text: pickerContextNote,
               fen: gameRef.current.fen,
               trigger: null,
             });
