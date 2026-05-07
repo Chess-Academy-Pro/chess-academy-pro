@@ -608,13 +608,15 @@ describe('repairTreeIllegalSubtrees', () => {
 });
 
 describe('repairTreeContent', () => {
-  it('fills empty ideas with the SAN', () => {
+  it('fills empty ideas with a sentence-form template containing the SAN', () => {
     const tree = makeTree([
       { node: { san: 'e4', movedBy: 'white', idea: '', children: [] } },
     ]);
     const r = repairTreeContent(tree, 'Test Opening');
     expect(r.ideasFilled).toBe(1);
-    expect(tree.root.children[0].node.idea).toBe('e4');
+    // Template is sentence-form, contains the SAN, and is not just the bare SAN.
+    expect(tree.root.children[0].node.idea).toContain('e4');
+    expect(tree.root.children[0].node.idea.length).toBeGreaterThan(2);
   });
 
   it('fills empty tree-level fields with fallbacks', () => {

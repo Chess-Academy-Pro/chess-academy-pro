@@ -1079,9 +1079,16 @@ export function repairTreeContent(
   function walk(node: WalkthroughTreeNode): void {
     if (node.san !== null && !node.idea.trim()) {
       // The validator's empty-idea check is hard-error; the
-      // mention-SAN check is a warning. Putting the SAN in the idea
-      // satisfies both with the smallest possible filler.
-      node.idea = node.san;
+      // mention-SAN check is a warning. Use a sentence-form template
+      // with the SAN embedded so narration is at least readable
+      // ("Bare SAN" was unusable — TTS would say just "e4" with no
+      // context). Word count is low (~7 words) which still trips the
+      // "short idea" warning, but warnings don't fail the gen.
+      const piece = node.san[0];
+      const isPiece = ['N', 'B', 'R', 'Q', 'K'].includes(piece);
+      node.idea = isPiece
+        ? `${node.san} continues development for ${node.movedBy ?? 'the side to move'}.`
+        : `${node.san} — the standard reply in this line.`;
       out.ideasFilled += 1;
     }
     if (node.narration !== undefined) {
@@ -1301,6 +1308,26 @@ Fix the issues above and produce a SHORTER, valid tree.`
   // is usually fine — failing the whole tree over one bad child wastes
   // a 30-60s LLM call. Production audit (build 59282db).
   const illegalSubtreesPruned = repairTreeIllegalSubtrees(tree);
+  // Sanity: pruning must not produce a degenerate tree. If the root
+  // has no children left, there's no lesson to ship — fail fast and
+  // let the caller retry. Same for a 1-deep "lesson" (root → one leaf
+  // with no continuation) — that's not pedagogically usable.
+  const rootHasNoChildren = tree.root.children.length === 0;
+  const onlyOneShallowChild =
+    tree.root.children.length === 1 &&
+    tree.root.children[0].node.children.length === 0;
+  if (rootHasNoChildren || onlyOneShallowChild) {
+    void logAppAudit({
+      kind: 'llm-error',
+      category: 'subsystem',
+      source: 'openingGenerator.generateOnce',
+      summary: `tree is degenerate after pruning for "${name}" (rootChildren=${tree.root.children.length}, pruned=${illegalSubtreesPruned})`,
+    });
+    return {
+      ok: false,
+      reason: `tree degenerate after pruning ${illegalSubtreesPruned} illegal subtree(s)`,
+    };
+  }
   if (illegalSubtreesPruned > 0) {
     void logAppAudit({
       kind: 'coach-surface-migrated',
@@ -1759,6 +1786,7 @@ export function getMissingStages(tree: WalkthroughTree): OptionalStage[] {
 export async function generateMissingStagesInBackground(
   openingName: string,
   tree: WalkthroughTree,
+  onStageMerged?: (stage: 'concepts' | 'findMove' | 'drill' | 'punish') => void,
 ): Promise<void> {
   const missing = getMissingStages(tree);
   if (missing.length === 0) return;
@@ -1783,7 +1811,17 @@ export async function generateMissingStagesInBackground(
         return;
       }
       const merge = await mergeStageIntoCache(openingName, stage, first.data);
-      if (merge.merged) return;
+      if (merge.merged) {
+        // Notify caller — the walkthrough is likely already running
+        // and needs to refresh its in-memory tree so newly-arrived
+        // punish lessons / drill lines / quiz questions become
+        // available for trap-prompt and stage menus. Production audit
+        // (build bc1eb69): "I never saw the punish lines" — root
+        // cause was that the walkthrough's tree was a snapshot at
+        // start() time, never updated when stages merged later.
+        try { onStageMerged?.(stage); } catch { /* swallow */ }
+        return;
+      }
       // First attempt produced data but everything got dropped during
       // per-entry repair (e.g. all 5 punish lessons had illegal
       // setupMoves / inaccuracy / punishment). Try ONE more time with
@@ -1814,6 +1852,8 @@ export async function generateMissingStagesInBackground(
           source: 'openingGenerator.generateMissingStagesInBackground',
           summary: `${stage} retry merge failed for "${openingName}": ${retryMerge.reason ?? 'unknown'}`,
         });
+      } else {
+        try { onStageMerged?.(stage); } catch { /* swallow */ }
       }
     }),
   );

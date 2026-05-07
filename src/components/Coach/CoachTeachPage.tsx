@@ -873,7 +873,11 @@ export function CoachTeachPage(): JSX.Element {
           // again every visit; the merge step is idempotent (only
           // writes if there's data to write) and getMissingStages
           // makes this a no-op when everything's already cached.
-          void generateMissingStagesInBackground(cachedTree.openingName, cachedTree);
+          void generateMissingStagesInBackground(
+            cachedTree.openingName,
+            cachedTree,
+            () => { void walkthrough.mergeStagesFromCache(); },
+          );
           return;
         }
 
@@ -935,7 +939,11 @@ export function CoachTeachPage(): JSX.Element {
           }
           // Kick off background stage gens for any missing stages
           // (the shared row may not have all of them populated).
-          void generateMissingStagesInBackground(sharedTree.openingName, sharedTree);
+          void generateMissingStagesInBackground(
+            sharedTree.openingName,
+            sharedTree,
+            () => { void walkthrough.mergeStagesFromCache(); },
+          );
           return;
         }
 
@@ -999,6 +1007,7 @@ export function CoachTeachPage(): JSX.Element {
             void generateMissingStagesInBackground(
               requestedName,
               result.tree,
+              () => { void walkthrough.mergeStagesFromCache(); },
             );
           } else {
             // Generation failed both attempts. Render an honest fallback.
@@ -1896,6 +1905,10 @@ export function CoachTeachPage(): JSX.Element {
                       <span>{opt.eco}</span>
                       <span>·</span>
                       <span>{opt.style}</span>
+                      <span>·</span>
+                      <span title={`This line is named after ${opt.leadingSide}'s play in the Lichess DB`}>
+                        {opt.leadingSide === 'white' ? 'W-led' : 'B-led'}
+                      </span>
                     </div>
                     <span className="text-sm font-semibold text-theme-text leading-tight">{opt.label}</span>
                   </button>

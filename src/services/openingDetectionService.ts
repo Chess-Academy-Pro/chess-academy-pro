@@ -350,6 +350,19 @@ export interface LinePickerOption {
    *  small color/icon hint on each tile so the student knows which
    *  side they'll be playing before tapping in. */
   studentSide: 'white' | 'black';
+  /** Which side actually "named" this variation per the Lichess DB
+   *  PGN — i.e. who moved last in the canonical line. Independent
+   *  of the parent opening's studentSide. Examples:
+   *    - "Sicilian Defense: Najdorf Variation" (1.e4 c5 … 5...a6) →
+   *      leadingSide=black (even ply count)
+   *    - "Sicilian Defense: Alapin Variation" (1.e4 c5 2.c3) →
+   *      leadingSide=white (odd ply count, White's deflection)
+   *    - "Pirc Defense: Austrian Attack" (1.e4 d6 … 4.f4) →
+   *      leadingSide=white (White's chosen attack against the Pirc)
+   *  UI uses this to label each tile with a small W/B chip so the
+   *  student can see whether they'll be following a same-side plan
+   *  or learning to face an opposite-side attack. */
+  leadingSide: 'white' | 'black';
 }
 
 /** Classify a variation's style from name keywords. Falls through to
@@ -492,14 +505,24 @@ export function findLinePickerOptions(
     /\b(sicilian|french|caro|pirc|modern|alekhine|scandinavian|king.s indian|queen.s indian|nimzo|grunfeld|grünfeld|benoni|benko|dutch|philidor|petroff|petrov|slav|two knights)\b/.test(parentLower);
   const studentSide: 'white' | 'black' = isBlackOpening ? 'black' : 'white';
 
+  // Trust the Lichess DB: every named sub-variation in
+  // openings-lichess.json is a real chess opening worth learning.
+  // No filtering — both Black-led variations (Najdorf, Dragon) and
+  // White-led variations (Austrian Attack vs Pirc, Closed vs Sicilian)
+  // belong in the picker. Earlier builds tried to filter by ply-parity
+  // and broke Pirc (all variations are White-led there). The user's
+  // word: "use the Lichess DB to determine if the line is black or
+  // white led" — i.e. trust what's in the DB and let the student pick.
+  // Per-variation led-by is exposed via the leadingSide field below
+  // so the UI can render a small W/B chip on each tile.
   const options: LinePickerOption[] = Array.from(byName.values())
     .map((e) => {
       const label = e.name.slice(prefix.length).trim();
-      // Sub-variations like "King's Indian Attack" inside an otherwise
-      // Black opening don't actually exist — the DB nests names under
-      // the parent. But "King's Indian Defense: Fianchetto Variation"
-      // keeps the student on Black. So studentSide is parent-driven,
-      // not variation-driven, for every tile in the picker.
+      const pgnLength = e.pgn.split(/\s+/).filter(Boolean).length;
+      // The actual led-by side from the variation's own PGN —
+      // odd ply = White moved last, even = Black. Independent of
+      // the parent opening's studentSide (which is parent-derived).
+      const leadingSide: 'white' | 'black' = pgnLength % 2 === 1 ? 'white' : 'black';
       return {
         label,
         fullName: e.name,
@@ -510,26 +533,10 @@ export function findLinePickerOptions(
         // and every variation would be sharp. We want each tile
         // colored by ITS character, not the parent's.
         style: classifyVariationStyle(label),
-        pgnLength: e.pgn.split(/\s+/).filter(Boolean).length,
+        pgnLength,
         studentSide,
+        leadingSide,
       };
-    })
-    // Filter: only keep variations characterized by the student-side's
-    // play. A variation's PGN ends on the side that "named" the
-    // sub-line. Production audit (build 7dc700f) caught the Sicilian
-    // picker offering "Amazon Attack" (1.e4 c5 2.Qg4) — a tile
-    // characterized by WHITE's queen sortie that the user (learning
-    // the Sicilian as Black) didn't want to see. Same rule symmetrically
-    // for White openings: filter out Black-response variations like
-    // Two Knights Defense from an Italian Game picker so the picker
-    // shows what WHITE plays.
-    //
-    // Ply count parity → who moved last:
-    //   odd  = White (after 1.e4, 3 plies after 2.Nf3, etc.)
-    //   even = Black (after 1.e4 c5, 4 plies after 2.Nf3 d6, etc.)
-    .filter((opt) => {
-      if (studentSide === 'black') return opt.pgnLength % 2 === 0;
-      return opt.pgnLength % 2 === 1;
     })
     // Sort by popularity descending (count of DB entries falling under
     // this top-level sub-name — a proxy that surfaces real main lines
