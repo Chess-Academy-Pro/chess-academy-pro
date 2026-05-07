@@ -23,7 +23,7 @@
  * Style drift is the main risk; that's why we anchor on a sample.
  */
 import { Chess } from 'chess.js';
-import { getCoachChatResponse } from './coachApi';
+import { getCoachChatResponse, getCoachStructuredResponse } from './coachApi';
 import {
   validateWalkthroughTree,
   validateMoveLegality,
@@ -1160,6 +1160,86 @@ function describeTreeShape(tree: WalkthroughTree): string {
 
 /** Single generation attempt — calls the LLM, parses, validates.
  *  No retry; the wrapper `generateOpening` does the retry. */
+/** JSON Schema for the WalkthroughTree, used as the input schema in
+ *  Anthropic tool-use mode. The API validates the LLM's output
+ *  against this schema server-side, eliminating the entire class of
+ *  client-side JSON parse errors that have plagued niche-opening
+ *  gens. Keep this synced with the WalkthroughTree TypeScript type
+ *  in src/types/walkthroughTree.ts (only the fields the LLM emits;
+ *  optional fields like leafOutros are allowed but not required). */
+const WALKTHROUGH_TREE_SCHEMA: Record<string, unknown> = {
+  type: 'object',
+  required: ['openingName', 'eco', 'studentSide', 'intro', 'outro', 'root'],
+  properties: {
+    openingName: { type: 'string' },
+    eco: { type: 'string' },
+    studentSide: { type: 'string', enum: ['white', 'black'] },
+    intro: { type: 'string' },
+    outro: { type: 'string' },
+    leafOutros: {
+      type: 'object',
+      additionalProperties: { type: 'string' },
+    },
+    root: { $ref: '#/$defs/treeNode' },
+  },
+  $defs: {
+    treeNode: {
+      type: 'object',
+      required: ['children'],
+      properties: {
+        san: { type: ['string', 'null'] },
+        movedBy: { type: ['string', 'null'], enum: ['white', 'black', null] },
+        idea: { type: 'string' },
+        narration: {
+          type: 'array',
+          items: {
+            type: 'object',
+            required: ['text'],
+            properties: {
+              text: { type: 'string' },
+              arrows: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  required: ['from', 'to'],
+                  properties: {
+                    from: { type: 'string' },
+                    to: { type: 'string' },
+                    color: { type: 'string' },
+                  },
+                },
+              },
+              highlights: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  required: ['square'],
+                  properties: {
+                    square: { type: 'string' },
+                    color: { type: 'string' },
+                  },
+                },
+              },
+            },
+          },
+        },
+        children: {
+          type: 'array',
+          items: {
+            type: 'object',
+            required: ['node'],
+            properties: {
+              label: { type: 'string' },
+              forkSubtitle: { type: 'string' },
+              node: { $ref: '#/$defs/treeNode' },
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
 async function generateOnce(
   name: string,
   retryContext?: string,
@@ -1182,44 +1262,95 @@ CRITICAL on this retry:
 Fix the issues above and produce a SHORTER, valid tree.`
     : `Generate the WalkthroughTree for: ${name}`;
 
-  let rawResponse: string;
+  // PRIMARY PATH: Anthropic tool-use mode. The LLM is forced to
+  // emit a JSON object matching WALKTHROUGH_TREE_SCHEMA and the API
+  // validates it server-side. Eliminates the entire class of parse
+  // errors (smart quotes, control chars, unbalanced braces, unquoted
+  // keys, truncation mid-string) that have plagued niche openings
+  // like Najdorf / Pirc / Blackburne-Kostić. Production audit (build
+  // e86aa19): "THIS IS GETTING OLD" — text-mode kept failing in
+  // ways the parse-recovery pipeline couldn't catch. Tool-use is the
+  // structural fix.
+  //
+  // Falls through to legacy text-mode path on tool-use failure
+  // (e.g. no Anthropic key configured, network error). Either path
+  // produces a tree we run through the same validation + repair
+  // pipeline downstream — the only difference is HOW we got the
+  // raw object.
+  let tree: WalkthroughTree | null = null;
+  let rawResponse = '';
+  let parseResult: ParseResult = { tree: null };
   try {
-    rawResponse = await getCoachChatResponse(
+    const toolResult = await getCoachStructuredResponse(
       [{ role: 'user', content: userMessage }],
       systemPrompt,
-      undefined, // no streaming
       'chat_response',
-      // 32768 max tokens — Claude Opus 4's full output budget. User
-      // feedback (build 12d9ff3): "We also need to go deeper into
-      // lines. This is becoming an issue." The walkthrough has been
-      // stopping at 5-7 plies in branches because the prompt + DB
-      // book source + tree JSON were splitting 16K tokens across
-      // multiple branches. Bumping to 32K gives each branch real
-      // room to land at the middlegame.
       32768,
-      undefined,
-      'anthropic',
+      'emit_walkthrough_tree',
+      `Emit the walkthrough tree for the requested opening. The tree must follow WalkthroughTree schema exactly. Every children array must contain {node: ...} wrappers, never bare nodes.`,
+      WALKTHROUGH_TREE_SCHEMA,
     );
-  } catch (err) {
-    return {
-      ok: false,
-      reason: `LLM call failed: ${err instanceof Error ? err.message : String(err)}`,
-    };
-  }
-
-  if (rawResponse.startsWith('⚠️')) {
+    // The API guarantees `toolResult` matches WALKTHROUGH_TREE_SCHEMA
+    // — but we still run our own assertTreeShape because (a) JSON
+    // Schema can't express "every child has a `node` key whose
+    // children are also valid trees" recursively in all SDK versions,
+    // and (b) downstream walkers depend on every node having a
+    // `children` array (assertTreeShape now auto-fills empty
+    // children, see commit 59282db).
+    assertTreeShape(toolResult);
+    tree = toolResult as WalkthroughTree;
+    void logAppAudit({
+      kind: 'coach-surface-migrated',
+      category: 'subsystem',
+      source: 'openingGenerator.generateOnce',
+      summary: `tool-use gen succeeded for "${name}"${retryContext ? ' (retry)' : ''}`,
+    });
+  } catch (toolErr) {
     void logAppAudit({
       kind: 'llm-error',
       category: 'subsystem',
       source: 'openingGenerator.generateOnce',
-      summary: `LLM provider error for "${name}"${retryContext ? ' (retry)' : ''}`,
-      details: rawResponse.slice(0, 500),
+      summary: `tool-use failed for "${name}" — falling back to text mode: ${toolErr instanceof Error ? toolErr.message : String(toolErr)}`,
     });
-    return { ok: false, reason: rawResponse };
-  }
+    // Fallthrough to text-mode path.
+    try {
+      rawResponse = await getCoachChatResponse(
+        [{ role: 'user', content: userMessage }],
+        systemPrompt,
+        undefined, // no streaming
+        'chat_response',
+        // 32768 max tokens — Claude Opus 4's full output budget. User
+        // feedback (build 12d9ff3): "We also need to go deeper into
+        // lines. This is becoming an issue." The walkthrough has been
+        // stopping at 5-7 plies in branches because the prompt + DB
+        // book source + tree JSON were splitting 16K tokens across
+        // multiple branches. Bumping to 32K gives each branch real
+        // room to land at the middlegame.
+        32768,
+        undefined,
+        'anthropic',
+      );
+    } catch (err) {
+      return {
+        ok: false,
+        reason: `LLM call failed: ${err instanceof Error ? err.message : String(err)}`,
+      };
+    }
 
-  const parseResult = parseGeneratedTree(rawResponse);
-  const tree = parseResult.tree;
+    if (rawResponse.startsWith('⚠️')) {
+      void logAppAudit({
+        kind: 'llm-error',
+        category: 'subsystem',
+        source: 'openingGenerator.generateOnce',
+        summary: `LLM provider error for "${name}"${retryContext ? ' (retry)' : ''}`,
+        details: rawResponse.slice(0, 500),
+      });
+      return { ok: false, reason: rawResponse };
+    }
+
+    parseResult = parseGeneratedTree(rawResponse);
+    tree = parseResult.tree;
+  }
   if (!tree) {
     // Detect truncation explicitly — if the last non-whitespace char
     // isn't `}`, the response was cut off mid-stream (most likely

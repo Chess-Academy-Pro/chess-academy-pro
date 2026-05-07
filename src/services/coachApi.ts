@@ -494,6 +494,66 @@ async function callAnthropic(
   return content.type === 'text' ? content.text : '';
 }
 
+/** Force the LLM to emit a structured JSON object matching the
+ *  given input schema by defining a tool and using `tool_choice` to
+ *  require the LLM call it. The API enforces schema validation
+ *  server-side, so the returned object is guaranteed to be valid
+ *  JSON of the right shape — no client-side parse errors possible.
+ *
+ *  Production audit (build e86aa19): "THIS IS GETTING OLD" — the
+ *  LLM kept emitting structurally broken JSON for niche openings
+ *  (Najdorf, Pirc, Blackburne-Kostić) and our parse-recovery
+ *  pipeline couldn't catch all edge cases. Tool-use eliminates the
+ *  parse problem at the source. Returns the tool's input as an
+ *  unknown so the caller can validate field shapes (we still need
+ *  to assertTreeShape for our own invariants).
+ *
+ *  Throws if the API doesn't return a tool_use block (network error,
+ *  rate limit, etc.). */
+export async function callAnthropicWithTool(
+  apiKey: string,
+  model: string,
+  systemPrompt: string,
+  messages: { role: 'user' | 'assistant'; content: string }[],
+  maxTokens: number,
+  task: string,
+  toolName: string,
+  toolDescription: string,
+  inputSchema: Record<string, unknown>,
+): Promise<unknown> {
+  const client = new Anthropic({
+    apiKey,
+    dangerouslyAllowBrowser: true,
+  });
+  const response = await client.messages.create({
+    model,
+    max_tokens: maxTokens,
+    system: [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }],
+    messages,
+    tools: [
+      {
+        name: toolName,
+        description: toolDescription,
+        // SDK types want a specific shape; cast through unknown so
+        // the caller can pass any JSON Schema sub-tree.
+        input_schema: inputSchema as unknown as { type: 'object' },
+      },
+    ],
+    // Force the model to call THIS tool and only this tool. No prose,
+    // no choice — the API validates the input matches input_schema.
+    tool_choice: { type: 'tool', name: toolName },
+  });
+  void recordApiUsage(task, model, response.usage.input_tokens, response.usage.output_tokens);
+  for (const block of response.content) {
+    if (block.type === 'tool_use' && block.name === toolName) {
+      return block.input;
+    }
+  }
+  throw new Error(
+    `Anthropic API returned no tool_use block for tool "${toolName}" — got ${response.content.map((b) => b.type).join(',')}`,
+  );
+}
+
 // ── Public API ──
 
 async function callChatWithConfig(
@@ -551,6 +611,37 @@ function buildSystemPromptWithVerbosity(base: string, verbosity: CoachVerbosity,
   if (verbosityInstr) parts.push(verbosityInstr);
   if (addition) parts.push(addition);
   return parts.join('\n\n');
+}
+
+/** Top-level helper for tool-use generation. Forces Anthropic
+ *  (DeepSeek's tool-use API has different semantics; sticking to
+ *  Anthropic for now keeps the path single-provider). Returns the
+ *  tool's input as `unknown` — caller validates field shapes. */
+export async function getCoachStructuredResponse(
+  messages: { role: 'user' | 'assistant'; content: string }[],
+  systemPrompt: string,
+  task: CoachTask,
+  maxTokens: number,
+  toolName: string,
+  toolDescription: string,
+  inputSchema: Record<string, unknown>,
+): Promise<unknown> {
+  const config = await getForcedProviderConfig('anthropic');
+  if (!config) {
+    throw new Error('No Anthropic API key configured for tool-use call');
+  }
+  const model = getModel(task, config.provider, config.preferredModel);
+  return callAnthropicWithTool(
+    config.apiKey,
+    model,
+    systemPrompt,
+    messages,
+    maxTokens,
+    task,
+    toolName,
+    toolDescription,
+    inputSchema,
+  );
 }
 
 export async function getCoachChatResponse(
