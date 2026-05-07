@@ -31,7 +31,7 @@ import {
   formatIssues,
   stripSanAnnotations,
 } from '../data/openingWalkthroughs/validate';
-import { findRelatedDbEntries } from './openingDetectionService';
+import { findRelatedDbEntries, resolveOpeningEntry } from './openingDetectionService';
 import { db, type CachedOpening } from '../db/schema';
 import { logAppAudit } from './appAuditor';
 import type {
@@ -1517,6 +1517,43 @@ type OptionalStage = 'concepts' | 'findMove' | 'drill' | 'punish';
 
 /** Per-stage system prompt — focused on ONE stage at a time so the
  *  LLM has plenty of token budget to generate quality content. */
+/** Compute the FEN at the end of an opening's canonical PGN. Lets
+ *  the stage prompt anchor the LLM at the actual position where
+ *  punish setupMoves typically branch from, so it stops inventing
+ *  illegal moves like "Bxf7+" when the bishop isn't on a diagonal
+ *  to f7. Returns null if the PGN can't be replayed (the validator
+ *  will catch it later anyway). */
+function computeEndOfBookFen(openingName?: string): string | null {
+  if (!openingName) return null;
+  const entry = resolveOpeningEntry(openingName);
+  if (!entry || entry.moves.length === 0) return null;
+  try {
+    const c = new Chess();
+    for (const san of entry.moves) c.move(stripSanAnnotations(san));
+    return c.fen();
+  } catch {
+    return null;
+  }
+}
+
+function buildStagePositionBlock(openingName?: string): string {
+  const entry = openingName ? resolveOpeningEntry(openingName) : null;
+  if (!entry || entry.moves.length === 0) return '';
+  const endFen = computeEndOfBookFen(openingName);
+  if (!endFen) return '';
+  // Trim PGN to a readable form for the prompt.
+  const pgn = entry.moves.join(' ');
+  return `
+
+OPENING POSITION CONTEXT:
+- Canonical name: ${entry.canonicalName}
+- ECO: ${entry.eco}
+- Moves to reach the end-of-book position: ${pgn}
+- FEN at the end of those moves: ${endFen}
+
+Use this position as your anchor. Stage entries' setup paths (findMove.path, drill.moves prefixes, punish.setupMoves) typically branch from this position or earlier in the line. Verify each SAN against the actual piece placement at the relevant FEN before emitting it.`;
+}
+
 function buildStageSystemPrompt(stage: OptionalStage, openingName?: string): string {
   const schemas: Record<OptionalStage, string> = {
     concepts: `Output a JSON array of ConceptCheckQuestion objects:
@@ -1573,12 +1610,16 @@ CRITICAL:
   • KINGSIDE CASTLING (O-O): both the f1 bishop AND the g1 knight (or f8 / g8 for Black) must be developed.
   • Pawns move FORWARD only. e4-to-e3 is illegal.
 - Coach voice: first-person, conversational, pedagogically clear.
-${stage === 'concepts' ? `- Single-select questions (multiSelect omitted or false) need EXACTLY ONE correct choice. If 2+ choices are correct, set multiSelect: true on that question.\n` : ''}${stage === 'findMove' ? `- Each question needs 2+ candidates. EXACTLY ONE is correct. The path SANs must be a legal sequence from the standard starting position.\n` : ''}${stage === 'drill' ? `- Trace the FULL move sequence with chess.js mentally before emitting. Each move must be legal from the position the prior moves create. studentSide MUST match the opening — black for Sicilian, French, Caro-Kann, Pirc, KID, Nimzo-Indian, Modern, Alekhine, Scandinavian, etc.; white for Italian, Vienna, Spanish, Queen's Gambit, etc.\n` : ''}${stage === 'punish' ? `- setupMoves + inaccuracy + punishment + each distractor + each followup move must ALL be legal in sequence. Distractors are LEGAL alternatives that don't punish as well — they are NOT illegal moves. Each lesson needs at least 2 distractors.\n` : ''}- Output JSON only. Validation pipeline rejects anything else.${buildBookSourceBlock(openingName)}`;
+${stage === 'concepts' ? `- Single-select questions (multiSelect omitted or false) need EXACTLY ONE correct choice. If 2+ choices are correct, set multiSelect: true on that question.\n` : ''}${stage === 'findMove' ? `- Each question needs 2+ candidates. EXACTLY ONE is correct. The path SANs must be a legal sequence from the standard starting position.\n` : ''}${stage === 'drill' ? `- Trace the FULL move sequence with chess.js mentally before emitting. Each move must be legal from the position the prior moves create. studentSide MUST match the opening — black for Sicilian, French, Caro-Kann, Pirc, KID, Nimzo-Indian, Modern, Alekhine, Scandinavian, etc.; white for Italian, Vienna, Spanish, Queen's Gambit, etc.\n` : ''}${stage === 'punish' ? `- setupMoves + inaccuracy + punishment + each distractor + each followup move must ALL be legal in sequence. Distractors are LEGAL alternatives that don't punish as well — they are NOT illegal moves. Each lesson needs at least 2 distractors.\n` : ''}- Output JSON only. Validation pipeline rejects anything else.${buildBookSourceBlock(openingName)}${buildStagePositionBlock(openingName)}`;
 }
 
-/** Parse a stage array from raw LLM output. Same defensive handling
- *  as the main tree parser — strips markdown fences, trailing
- *  commas, and line comments. Returns null if parse fails. */
+/** Parse a stage array from raw LLM output. Mirrors the recovery
+ *  pipeline used for tree parses (parseGeneratedTree): markdown
+ *  fences, line comments, trailing commas, then on failure a second
+ *  attempt with preprocessForParse (smart quotes, control chars,
+ *  unquoted object keys). Production audit (build 9dedf2a): stage
+ *  gen was failing silently with the same iOS Safari parse errors
+ *  the tree gen had recovery for, but parseStageArray bypassed it. */
 function parseStageArray<T>(raw: string): T[] | null {
   let text = raw.trim();
   text = text.replace(/^```(?:json)?\s*/, '').replace(/\s*```\s*$/, '');
@@ -1588,12 +1629,22 @@ function parseStageArray<T>(raw: string): T[] | null {
   let jsonText = text.slice(firstBracket, lastBracket + 1);
   jsonText = jsonText.replace(/^\s*\/\/[^\n]*$/gm, '');
   jsonText = jsonText.replace(/,(\s*[}\]])/g, '$1');
-  try {
-    const parsed = JSON.parse(jsonText);
-    return Array.isArray(parsed) ? (parsed as T[]) : null;
-  } catch {
-    return null;
+  function tryParse(t: string): T[] | null {
+    try {
+      const parsed = JSON.parse(t);
+      return Array.isArray(parsed) ? (parsed as T[]) : null;
+    } catch {
+      return null;
+    }
   }
+  const first = tryParse(jsonText);
+  if (first !== null) return first;
+  const preprocessed = preprocessForParse(jsonText);
+  if (preprocessed !== jsonText) {
+    const second = tryParse(preprocessed);
+    if (second !== null) return second;
+  }
+  return null;
 }
 
 /** Generate one stage's data via a focused LLM call. Optional
