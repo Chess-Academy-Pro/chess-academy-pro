@@ -338,6 +338,14 @@ export function assertTreeShape(tree: unknown): asserts tree is WalkthroughTree 
       throw new Error(`${path}: node is not an object`);
     }
     const n = node as { children?: unknown; san?: unknown };
+    // Tolerate leaf nodes the LLM emits without an explicit empty
+    // children array — production audit (build 998f5c4) caught
+    // "Italian Game: Rousseau Gambit" failing both gen attempts at
+    // depth 12 because the deepest node was missing `children: []`.
+    // Treat undefined/null as an empty leaf instead of failing.
+    if (n.children === undefined || n.children === null) {
+      n.children = [];
+    }
     if (!Array.isArray(n.children)) {
       throw new Error(`${path}: children missing or not an array`);
     }

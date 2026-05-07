@@ -445,11 +445,24 @@ describe('assertTreeShape', () => {
     expect(() => assertTreeShape(tree as never)).not.toThrow();
   });
 
-  it('throws when a non-root node is missing children', () => {
+  it('treats a node missing children as a leaf (auto-fills empty array)', () => {
+    // Production audit (build 998f5c4): "Italian Game: Rousseau Gambit"
+    // failed both gen attempts because the deepest LLM-emitted node
+    // omitted `children: []`. We now tolerate it as a leaf.
     const tree = makeShell([
       { node: { san: 'e4', movedBy: 'white', idea: 'center' } }, // no children
     ]);
-    expect(() => assertTreeShape(tree as never)).toThrow(/children missing/);
+    expect(() => assertTreeShape(tree as never)).not.toThrow();
+    const e4 = (tree.root as { children: { node: { children: unknown[] } }[] })
+      .children[0].node;
+    expect(e4.children).toEqual([]);
+  });
+
+  it('throws when children is the wrong type (non-array, non-nullish)', () => {
+    const tree = makeShell([
+      { node: { san: 'e4', movedBy: 'white', idea: 'center', children: 'oops' } },
+    ]);
+    expect(() => assertTreeShape(tree as never)).toThrow(/children.*not an array/);
   });
 
   it('throws when a child wrapper is missing .node', () => {
@@ -462,14 +475,16 @@ describe('assertTreeShape', () => {
     expect(() => assertTreeShape(tree as never)).toThrow(/root missing/);
   });
 
-  it('reports the path to the broken node', () => {
+  it('reports the path to a broken node', () => {
     const tree = makeShell([
       {
         node: {
           san: 'e4',
           movedBy: 'white',
           idea: '',
-          children: [{ node: { san: 'e5', movedBy: 'black', idea: '' } }], // no children at depth 2
+          children: [
+            { node: { san: 'e5', movedBy: 'black', idea: '', children: 'bad' } },
+          ],
         },
       },
     ]);

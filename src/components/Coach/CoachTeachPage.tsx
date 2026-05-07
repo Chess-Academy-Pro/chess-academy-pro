@@ -774,7 +774,18 @@ export function CoachTeachPage(): JSX.Element {
         if (!stageHint && !faceMode) {
           const pickerData = findLinePickerOptions(requestedName);
           if (pickerData) {
-            const ack = `The ${pickerData.canonicalName} branches into many lines. Which one do you want to learn? Pick one to dive in deep, or just type the variation name.`;
+            // Enumerate visible variations in the chat message so the
+            // brain (which reads up to 200 conversation history lines
+            // per envelope) can answer follow-ups like "which one has
+            // the most traps?" in context. Without this, the brain
+            // sees only "branches into many lines" and free-associates
+            // — production audit (build 998f5c4) caught the brain
+            // answering about the Sicilian when the user asked which
+            // ITALIAN variation had the most traps.
+            const variationList = pickerData.options
+              .map((o) => o.label)
+              .join(', ');
+            const ack = `The ${pickerData.canonicalName} branches into many lines. Variations on screen: ${variationList}. Which one do you want to learn? Pick one to dive in deep, or just type the variation name.`;
             setMessages((prev) => [...prev, {
               id: `${surfaceTurnId}-c`,
               role: 'assistant',
