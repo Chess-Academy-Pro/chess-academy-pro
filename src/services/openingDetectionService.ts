@@ -461,7 +461,12 @@ export function findLinePickerOptions(
 
   // Dedupe by everything-after-the-colon (DB lists same variation at
   // multiple PGN depths). Keep shortest PGN per unique sub-name.
+  // Also tally how many entries fall under each top-level sub-name —
+  // a popularity proxy that surfaces real main lines (Najdorf, Dragon,
+  // Sveshnikov) over obscure 4-ply sidelines (Brussels Gambit) which
+  // would otherwise win on a pure trunk-distance sort.
   const byName = new Map<string, OpeningEntry>();
+  const popularity = new Map<string, number>();
   for (const c of children) {
     const subName = c.name.slice(prefix.length).trim();
     // Only the FIRST sub-variation segment (split on ',' — DB nests
@@ -469,6 +474,7 @@ export function findLinePickerOptions(
     // Attack" becomes just "Najdorf Variation" for the picker.
     const topSub = subName.split(',')[0].trim();
     const fullName = `${bareCandidate.name}: ${topSub}`;
+    popularity.set(topSub, (popularity.get(topSub) ?? 0) + 1);
     const existing = byName.get(topSub);
     if (!existing || c.pgn.length < existing.pgn.length) {
       byName.set(topSub, { ...c, name: fullName });
@@ -508,8 +514,32 @@ export function findLinePickerOptions(
         studentSide,
       };
     })
-    // Sort by PGN length asc (trunk-near first), then alphabetically.
+    // Filter: only keep variations characterized by the student-side's
+    // play. A variation's PGN ends on the side that "named" the
+    // sub-line. Production audit (build 7dc700f) caught the Sicilian
+    // picker offering "Amazon Attack" (1.e4 c5 2.Qg4) — a tile
+    // characterized by WHITE's queen sortie that the user (learning
+    // the Sicilian as Black) didn't want to see. Same rule symmetrically
+    // for White openings: filter out Black-response variations like
+    // Two Knights Defense from an Italian Game picker so the picker
+    // shows what WHITE plays.
+    //
+    // Ply count parity → who moved last:
+    //   odd  = White (after 1.e4, 3 plies after 2.Nf3, etc.)
+    //   even = Black (after 1.e4 c5, 4 plies after 2.Nf3 d6, etc.)
+    .filter((opt) => {
+      if (studentSide === 'black') return opt.pgnLength % 2 === 0;
+      return opt.pgnLength % 2 === 1;
+    })
+    // Sort by popularity descending (count of DB entries falling under
+    // this top-level sub-name — a proxy that surfaces real main lines
+    // like Najdorf / Dragon / Sveshnikov over 4-ply curiosities like
+    // Brussels Gambit). Tie-break: shorter PGN first (trunk-near),
+    // then alphabetically.
     .sort((a, b) => {
+      const popA = popularity.get(a.label) ?? 0;
+      const popB = popularity.get(b.label) ?? 0;
+      if (popA !== popB) return popB - popA;
       if (a.pgnLength !== b.pgnLength) return a.pgnLength - b.pgnLength;
       return a.label.localeCompare(b.label);
     });
