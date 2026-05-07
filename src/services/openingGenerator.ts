@@ -207,8 +207,8 @@ SCOPE: You are generating ONLY the walkthrough tree (the move-by-move lesson). D
 OPENING-NAME INTERPRETATION (read the user's request carefully):
 - TYPO TOLERANCE: if the request has a misspelling, normalize to the closest canonical opening name and use that in the openingName field. Examples: "Phillador" → "Philidor Defense"; "Sicillian" → "Sicilian Defense"; "Caro Khan" → "Caro-Kann Defense"; "Kings Indian" → "King's Indian Defense"; "Naijdorf" → "Najdorf Sicilian"; "Reuy Lopez" → "Ruy Lopez". Never refuse a request just because of a typo.
 - BROAD vs SPECIFIC depth: a walkthrough is "substantial" when the student leaves it ready to play the early middlegame, not at move 4 holding a pawn. Take the student through the named opening AND a few plies into the resulting middlegame; the deep-dive flow handles drilling further inside any single variation, so this top-level walkthrough must cover the whole opening, not a fragment.
-  - BROAD opening (e.g. "Sicilian Defense", "Italian Game", "King's Indian", "Slav", "Caro-Kann Defense"): give an OVERVIEW that reaches the middlegame. 2-3 forks at moves 2-4 surveying the main variations, EACH branch continuing 12-15 plies past the fork into a typical middlegame structure. Pawn-only fragments are not acceptable: develop minor pieces, castle when applicable, reach a position where the student knows what plan they're on.
-  - SPECIFIC VARIATION (e.g. "Najdorf Sicilian", "Italian Two Knights", "King's Indian Mar del Plata", "Hampe-Allgaier", "Vienna Gambit", or any ECO code like "B90"/"C25"): fewer top-level forks (1-2), MORE depth — 15-20 plies of theory inside the variation, with the forks placed at the critical decision points within the variation, ending in a recognizable middlegame plan.
+  - BROAD opening (e.g. "Sicilian Defense", "Italian Game", "King's Indian", "Slav", "Caro-Kann Defense"): give an OVERVIEW that reaches the middlegame. 2-3 forks at moves 2-4 surveying the main variations, EACH branch continuing 18-25 plies past the fork into a typical middlegame structure. Pawn-only fragments are not acceptable: develop minor pieces, castle when applicable, reach a position where the student knows what plan they're on. Go DEEP — many MORE moves per branch — but keep narration per move concise. Depth comes from move count, not from longer prose.
+  - SPECIFIC VARIATION (e.g. "Najdorf Sicilian", "Italian Two Knights", "King's Indian Mar del Plata", "Hampe-Allgaier", "Vienna Gambit", or any ECO code like "B90"/"C25"): fewer top-level forks (1-2), MORE plies — 25-35 plies of theory inside the variation, with the forks placed at the critical decision points within the variation, ending well into a real middlegame position with a clear plan articulated. Each move's narration stays the same length as before; we go deeper by adding MOVES, not words.
   - The deep-dive UI lets the student pick any leaf or fork and ask for more — DO NOT compress your tree on the assumption that they'll dig deeper later. The walkthrough they get from this call IS the foundation; deep-dive is for the next zoom, not for filling in moves you skipped.
 
 SCHEMA (TypeScript types) — these are the ONLY fields you output:
@@ -249,7 +249,7 @@ CONVENTIONS:
 - Each idea must MENTION the SAN played (e.g. "Bc4 develops..." or "bishop to c4 develops...").
 - Branch points (forks) need every child to have label + forkSubtitle.
 - Move-order matters: trace each line carefully. For example, you can't push f4 with Black's bishop on c5 (the long diagonal opens and the g1-knight hangs). The trade or the move-order matters.
-- TARGET SIZE: see the BROAD vs SPECIFIC depth rules above for fork count + branch length per opening type. Idea text 40-90 words. Narration 2-4 segments per node, each 1-2 sentences. The hard ceiling is ~14K characters of JSON output (longer truncates and fails to load) — stay under that by using fewer top-level forks when branches are deep, never by clipping a branch in the opening phase.
+- TARGET SIZE: see the BROAD vs SPECIFIC depth rules above for fork count + branch length per opening type. Idea text 40-90 words PER MOVE — keep this constant. Narration 2-4 segments per node, each 1-2 sentences — keep this constant. The way to go deeper is to add MORE NODES (more plies), NOT to make each node's narration longer. max_tokens is 32768 so the budget covers many nodes; spend the budget on additional plies, not on verbose prose per ply.
 
 ARROW + HIGHLIGHT RULES (production audit caught useless arrows; follow these strictly):
 - DO NOT draw an arrow on the move being played in this node. The board animates the SAN itself — adding an arrow from the same from→to is redundant noise.
@@ -990,13 +990,14 @@ Fix the issues above and produce a SHORTER, valid tree.`
       systemPrompt,
       undefined, // no streaming
       'chat_response',
-      // 16384 max tokens — full opening trees with all 5 stages
-      // (concepts, findMove, drill, punish, plus a deep walkthrough
-      // tree with 4-5 forks) routinely exceed 8192. Production audit
-      // (build ea296eb) caught "The Pirc" generation failing because
-      // the response was truncated mid-JSON. 16K gives plenty of room
-      // without bumping into the per-call API ceiling.
-      16384,
+      // 32768 max tokens — Claude Opus 4's full output budget. User
+      // feedback (build 12d9ff3): "We also need to go deeper into
+      // lines. This is becoming an issue." The walkthrough has been
+      // stopping at 5-7 plies in branches because the prompt + DB
+      // book source + tree JSON were splitting 16K tokens across
+      // multiple branches. Bumping to 32K gives each branch real
+      // room to land at the middlegame.
+      32768,
       undefined,
       'anthropic',
     );

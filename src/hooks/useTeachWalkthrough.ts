@@ -536,6 +536,13 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
   // Active narration cancel + backup timer refs.
   const cancelNarrationRef = useRef<(() => void) | null>(null);
   const advanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // When transitionAfter detects a matching punish-lesson trap, the
+  // original "what would happen next" (linear advance / fork picker /
+  // leaf) gets stashed here so acceptTrap / skipTrap can resume the
+  // walkthrough flow once the trap line finishes. Without this, every
+  // trap-completed node fell through to setPhase('fork') even if the
+  // node was a linear advance — interrupting the walkthrough mid-line.
+  const deferredTransitionRef = useRef<(() => void) | null>(null);
 
   const cleanupNarration = useCallback((): void => {
     if (cancelNarrationRef.current) {
@@ -642,58 +649,70 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
           clearTimeout(advanceTimerRef.current);
           advanceTimerRef.current = null;
         }
-        if (node.children.length === 0) {
-          setPhase('leaf');
-        } else if (node.children.length === 1) {
-          advanceTimerRef.current = setTimeout(() => {
-            advanceTimerRef.current = null;
-            narrateAndAdvance([...path, node.children[0].node]);
-          }, POST_NARRATION_BUFFER_MS);
-        } else {
-          // Fork: check for trap lessons matching this exact position.
-          // Match condition: lesson.setupMoves === current path SANs
-          // exactly (the next move IS the inaccuracy from this fork).
-          const sansSoFar = path
-            .filter((n) => n.san !== null)
-            .map((n) => n.san as string);
-          const allPunish = treeRef.current?.punish ?? [];
-          const matches = findMatchingTraps(sansSoFar, allPunish);
-          // Audit log: production audit (build a802d1c) caught no
-          // traps firing for Bishop's Opening even though the cache
-          // had 1 punish lesson. Without seeing what the lesson's
-          // setupMoves were vs. the fork's pathSans, we couldn't
-          // tell why no match. This audit makes both visible.
-          void logAppAudit({
-            kind: 'coach-surface-migrated',
-            category: 'subsystem',
-            source: 'useTeachWalkthrough.transitionAfter',
-            summary: `fork@[${sansSoFar.join(' ')}] — ${matches.length}/${allPunish.length} punish lesson(s) match`,
-            details:
-              allPunish.length === 0
-                ? 'tree has no punish lessons'
-                : allPunish
-                    .slice(0, 5)
-                    .map(
-                      (p) =>
-                        `[${p.setupMoves.join(' ')}] inaccuracy=${p.inaccuracy}`,
-                    )
-                    .join('\n'),
-          });
-          if (matches.length > 0) {
-            setTrapQueue(matches);
-            setTrapIndex(0);
-            // Speak the intro for the first trap; fall through to
-            // 'trap-prompt' phase. Fire-and-forget — voice promise
-            // resolution doesn't gate the UI, the buttons appear
-            // immediately so impatient users can skip ahead.
-            const first = matches[0];
-            const intro = `Hold on — a common mistake here is ${first.inaccuracy}. ${first.whyBad} Want to see it now, or keep going with the walkthrough?`;
-            void voiceService.speakForced(intro).catch(() => undefined);
-            setPhase('trap-prompt');
+
+        // Default transition (no traps) — what we'd do without
+        // trap-prompt interception. Captured here so the trap-flow
+        // can defer to it after the user skips/finishes the trap.
+        const defaultTransition = (): void => {
+          if (node.children.length === 0) {
+            setPhase('leaf');
+          } else if (node.children.length === 1) {
+            advanceTimerRef.current = setTimeout(() => {
+              advanceTimerRef.current = null;
+              narrateAndAdvance([...path, node.children[0].node]);
+            }, POST_NARRATION_BUFFER_MS);
           } else {
             setPhase('fork');
           }
+        };
+
+        // Check for trap lessons matching THIS position (after the
+        // current node's move was just played). Match condition:
+        // lesson.setupMoves === current path SANs exactly (the next
+        // move WOULD BE the inaccuracy from this position).
+        //
+        // Production audit (build 12d9ff3) caught the Vienna's
+        // 4 punish lessons sitting at [e4 e5 Nc3 Nf6 f4 exf4 e5] —
+        // but that position is a LINEAR ADVANCE in the tree (single
+        // child Ng8), so the trap-prompt skipped right past it.
+        // Trap detection now runs at every transition (linear AND
+        // fork AND leaf), then defers to the default transition
+        // when the trap-flow ends.
+        const sansSoFar = path
+          .filter((n) => n.san !== null)
+          .map((n) => n.san as string);
+        const allPunish = treeRef.current?.punish ?? [];
+        const matches = findMatchingTraps(sansSoFar, allPunish);
+        void logAppAudit({
+          kind: 'coach-surface-migrated',
+          category: 'subsystem',
+          source: 'useTeachWalkthrough.transitionAfter',
+          summary: `pos@[${sansSoFar.join(' ')}] (children=${node.children.length}) — ${matches.length}/${allPunish.length} punish lesson(s) match`,
+          details:
+            allPunish.length === 0
+              ? 'tree has no punish lessons'
+              : allPunish
+                  .slice(0, 5)
+                  .map(
+                    (p) =>
+                      `[${p.setupMoves.join(' ')}] inaccuracy=${p.inaccuracy}`,
+                  )
+                  .join('\n'),
+        });
+        if (matches.length > 0) {
+          // Park the default transition so the trap-flow can run it
+          // after the user is done. acceptTrap / skipTrap pop the
+          // queue and call this when no traps remain.
+          deferredTransitionRef.current = defaultTransition;
+          setTrapQueue(matches);
+          setTrapIndex(0);
+          const first = matches[0];
+          const intro = `Hold on — a common mistake here is ${first.inaccuracy}. ${first.whyBad} Want to see it now, or keep going with the walkthrough?`;
+          void voiceService.speakForced(intro).catch(() => undefined);
+          setPhase('trap-prompt');
+          return;
         }
+        defaultTransition();
       };
 
       // ── Path 1: segmented narration with arrows ──────────────
@@ -945,10 +964,21 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
         setPhase('trap-prompt');
         return next;
       }
-      // No more traps queued — show the fork picker.
+      // No more traps queued — resume the walkthrough's intended
+      // transition for the node where the traps fired (linear advance
+      // / fork picker / leaf). transitionAfter stashed this in the
+      // ref before kicking off the trap-flow.
       setTrapQueue([]);
       setTrapFen(null);
-      setPhase('fork');
+      const deferred = deferredTransitionRef.current;
+      deferredTransitionRef.current = null;
+      if (deferred) {
+        deferred();
+      } else {
+        // Fallback when no deferred transition was captured (legacy
+        // entry point or edge case) — old behavior of jumping to fork.
+        setPhase('fork');
+      }
       return 0;
     });
   }, [trapQueue]);
@@ -1041,6 +1071,7 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
     setTrapQueue([]);
     setTrapIndex(0);
     setTrapFen(null);
+    deferredTransitionRef.current = null;
   }, [cleanupNarration]);
 
   const skipNarration = useCallback((): void => {
