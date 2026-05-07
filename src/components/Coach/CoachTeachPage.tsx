@@ -559,6 +559,42 @@ export function CoachTeachPage(): JSX.Element {
     // "teach me / walk me through / show me [opening]" ask. The
     // brain only sees asks that DON'T match.
     if (!opts?.kickoff) {
+      // /clearcache — emergency lever for the user when iOS Safari's
+      // Reset Website Data hasn't been cooperating. Wipes Dexie's
+      // cachedOpenings table (all LLM-generated lesson trees), then
+      // hard-refreshes (clears Cache Storage + unregisters service
+      // workers + reloads). Used to force regeneration with the
+      // current build's prompts after an architectural change.
+      const cmd = text.trim().toLowerCase();
+      if (cmd === '/clearcache' || cmd === 'clear cache' || cmd === 'clear cached openings') {
+        try {
+          const { db } = await import('../../db/schema');
+          await db.cachedOpenings.clear();
+          setMessages((prev) => [...prev, {
+            id: `clearcache-${Date.now()}`,
+            role: 'assistant',
+            content: 'Cleared cached openings. Reloading the app to refresh service worker + cache storage…',
+            timestamp: Date.now(),
+          }]);
+          void logAppAudit({
+            kind: 'coach-surface-migrated',
+            category: 'subsystem',
+            source: 'CoachTeachPage.handleSubmit.clearcache',
+            summary: 'user cleared cached openings + triggered hard refresh',
+          });
+          // Hard refresh (clears Cache Storage + unregisters SW + reloads).
+          const { hardRefresh } = await import('../../utils/hardRefresh');
+          await hardRefresh();
+        } catch (err) {
+          setMessages((prev) => [...prev, {
+            id: `clearcache-err-${Date.now()}`,
+            role: 'assistant',
+            content: `Cache clear failed: ${err instanceof Error ? err.message : String(err)}`,
+            timestamp: Date.now(),
+          }]);
+        }
+        return;
+      }
       // Two-pass routing.
       // Pass 1 (verb-prefix): "teach me X", "walk me through X", etc.
       // Pass 2 (bare-name): if input is short and resolveWalkthroughTree
