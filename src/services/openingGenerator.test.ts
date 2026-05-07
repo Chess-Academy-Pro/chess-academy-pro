@@ -11,6 +11,8 @@ import {
   repairFindMoveStage,
   repairDrillStage,
   repairPunishStage,
+  repairLeafOutros,
+  repairTreeIllegalSubtrees,
   assertTreeShape,
 } from './openingGenerator';
 import type {
@@ -489,5 +491,117 @@ describe('assertTreeShape', () => {
       },
     ]);
     expect(() => assertTreeShape(tree as never)).toThrow(/e4.*e5/);
+  });
+});
+
+describe('repairLeafOutros', () => {
+  it('drops keys that do not match any leaf path; keeps matching ones', () => {
+    const tree = makeTree([
+      {
+        node: {
+          san: 'e4',
+          movedBy: 'white',
+          idea: '',
+          children: [
+            { node: { san: 'e5', movedBy: 'black', idea: '', children: [] } },
+          ],
+        },
+      },
+    ]);
+    tree.leafOutros = {
+      'e4 e5': 'real leaf',
+      'e4 e5 Nf3 Nc6': 'orphan — these moves never appear in the tree',
+    };
+    const dropped = repairLeafOutros(tree);
+    expect(dropped).toBe(1);
+    expect(tree.leafOutros).toEqual({ 'e4 e5': 'real leaf' });
+  });
+
+  it('returns 0 when leafOutros is undefined', () => {
+    const tree = makeTree([]);
+    expect(repairLeafOutros(tree)).toBe(0);
+  });
+});
+
+describe('repairTreeIllegalSubtrees', () => {
+  it('prunes a child whose root SAN is illegal at the parent FEN', () => {
+    const tree = makeTree([
+      {
+        node: {
+          san: 'e4',
+          movedBy: 'white',
+          idea: '',
+          children: [
+            { node: { san: 'e5', movedBy: 'black', idea: '', children: [] } },
+            // Bg7 is illegal at the position after 1.e4 — bishop is
+            // locked behind the g7 pawn — should be pruned.
+            { node: { san: 'Bg7', movedBy: 'black', idea: '', children: [] } },
+          ],
+        },
+      },
+    ]);
+    const pruned = repairTreeIllegalSubtrees(tree);
+    expect(pruned).toBe(1);
+    expect(tree.root.children[0].node.children).toHaveLength(1);
+    expect(tree.root.children[0].node.children[0].node.san).toBe('e5');
+  });
+
+  it('prunes deep illegal SAN, keeps the legal ancestor branch', () => {
+    // After 1.e4 e5 2.Nf3, the LLM emits an illegal Be6 that should be
+    // dropped while the rest of the line survives.
+    const tree = makeTree([
+      {
+        node: {
+          san: 'e4',
+          movedBy: 'white',
+          idea: '',
+          children: [
+            {
+              node: {
+                san: 'e5',
+                movedBy: 'black',
+                idea: '',
+                children: [
+                  {
+                    node: {
+                      san: 'Nf3',
+                      movedBy: 'white',
+                      idea: '',
+                      children: [
+                        // Be6 illegal — black has no bishop that can reach
+                        // e6 from the starting position with this prefix.
+                        { node: { san: 'Be6', movedBy: 'black', idea: '', children: [] } },
+                        { node: { san: 'Nc6', movedBy: 'black', idea: '', children: [] } },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ]);
+    const pruned = repairTreeIllegalSubtrees(tree);
+    expect(pruned).toBe(1);
+    const nf3 = tree.root.children[0].node.children[0].node.children[0].node;
+    expect(nf3.children).toHaveLength(1);
+    expect(nf3.children[0].node.san).toBe('Nc6');
+  });
+
+  it('returns 0 for a fully-legal tree', () => {
+    const tree = makeTree([
+      {
+        node: {
+          san: 'e4',
+          movedBy: 'white',
+          idea: '',
+          children: [
+            { node: { san: 'e5', movedBy: 'black', idea: '', children: [] } },
+          ],
+        },
+      },
+    ]);
+    expect(repairTreeIllegalSubtrees(tree)).toBe(0);
   });
 });

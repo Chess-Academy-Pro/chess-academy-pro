@@ -937,6 +937,89 @@ export function repairForkLabels(tree: WalkthroughTree): number {
   return filled;
 }
 
+/** Drop leafOutros keys that don't correspond to any actual leaf
+ *  path in the tree. Production audit (build 998f5c4) caught
+ *  "Pirc Defense: Austrian Attack" failing both gen attempts because
+ *  two leafOutros keys referenced paths the LLM emitted in its outro
+ *  draft but never built into the actual tree. The text is harmless
+ *  metadata — orphan keys do nothing at runtime — but the validator
+ *  was failing the WHOLE tree over them. Drop the orphans, keep the
+ *  rest. Returns count of keys dropped. */
+export function repairLeafOutros(tree: WalkthroughTree): number {
+  if (!tree.leafOutros) return 0;
+  const validLeafPaths = new Set<string>();
+  function collect(node: WalkthroughTreeNode, path: string[]): void {
+    const here = node.san !== null ? [...path, node.san] : path;
+    if (node.children.length === 0) {
+      validLeafPaths.add(here.join(' '));
+      return;
+    }
+    for (const c of node.children) collect(c.node, here);
+  }
+  collect(tree.root, []);
+  let dropped = 0;
+  for (const key of Object.keys(tree.leafOutros)) {
+    if (!validLeafPaths.has(key)) {
+      delete tree.leafOutros[key];
+      dropped += 1;
+    }
+  }
+  return dropped;
+}
+
+/** Walk the tree and prune any subtree rooted at an illegal SAN —
+ *  keep the parent node but drop the bad child wrapper entirely.
+ *  Production audit (build 59282db) caught "Italian Game:
+ *  Blackburne-Kostić Gambit" failing because deep in a punish line
+ *  the LLM emitted Be6 from a position where neither bishop could
+ *  reach e6 (geometric hallucination). Rather than fail the whole
+ *  tree over one bad branch, prune the bad branch and let the rest
+ *  of the lesson ship. Returns count of subtrees pruned. */
+export function repairTreeIllegalSubtrees(tree: WalkthroughTree): number {
+  let pruned = 0;
+  const startFen =
+    tree.startFen ?? 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+  function walk(node: WalkthroughTreeNode, parentFen: string): void {
+    let currentFen = parentFen;
+    if (node.san !== null) {
+      const probe = new Chess(parentFen);
+      try {
+        probe.move(stripSanAnnotations(node.san));
+      } catch {
+        // Caller prunes — we never enter here directly. Children of an
+        // illegal node can't be replayed because the FEN is unknown,
+        // so dump them too.
+        node.children = [];
+        return;
+      }
+      currentFen = probe.fen();
+    }
+    // Drop child wrappers whose root SAN is illegal at currentFen, then
+    // recurse into surviving children to prune deeper illegality.
+    const kept: typeof node.children = [];
+    for (const child of node.children) {
+      const childSan = child.node.san;
+      if (childSan === null) {
+        kept.push(child);
+        continue;
+      }
+      const probe = new Chess(currentFen);
+      try {
+        probe.move(stripSanAnnotations(childSan));
+        kept.push(child);
+      } catch {
+        pruned += 1;
+      }
+    }
+    node.children = kept;
+    for (const child of node.children) {
+      walk(child.node, currentFen);
+    }
+  }
+  walk(tree.root, startFen);
+  return pruned;
+}
+
 /** Pull the first N SAN values from a generated tree by walking
  *  root.children depth-first along the leftmost path. Used in audit
  *  logs so we can SEE what the LLM produced — the most diagnostic
@@ -1110,6 +1193,34 @@ Fix the issues above and produce a SHORTER, valid tree.`
       category: 'subsystem',
       source: 'openingGenerator.generateOnce',
       summary: `dropped ${noopArrowsDropped} no-op (from===to) arrows for "${name}"`,
+    });
+  }
+
+  // Prune subtrees rooted at an illegal SAN. The rest of the lesson
+  // is usually fine — failing the whole tree over one bad child wastes
+  // a 30-60s LLM call. Production audit (build 59282db).
+  const illegalSubtreesPruned = repairTreeIllegalSubtrees(tree);
+  if (illegalSubtreesPruned > 0) {
+    void logAppAudit({
+      kind: 'coach-surface-migrated',
+      category: 'subsystem',
+      source: 'openingGenerator.generateOnce',
+      summary: `pruned ${illegalSubtreesPruned} subtree(s) at illegal SAN for "${name}"`,
+    });
+  }
+
+  // Drop leafOutros keys that don't correspond to actual leaf paths.
+  // Pure metadata cleanup; the runtime never reads orphan keys.
+  // Production audit (build 998f5c4): Pirc Austrian Attack failed
+  // because two leafOutros keys referenced paths the LLM drafted in
+  // outro text but never built into the tree.
+  const orphanLeafOutros = repairLeafOutros(tree);
+  if (orphanLeafOutros > 0) {
+    void logAppAudit({
+      kind: 'coach-surface-migrated',
+      category: 'subsystem',
+      source: 'openingGenerator.generateOnce',
+      summary: `dropped ${orphanLeafOutros} orphan leafOutros key(s) for "${name}"`,
     });
   }
 
