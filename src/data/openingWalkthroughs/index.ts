@@ -57,6 +57,16 @@ export function resolveWalkthroughTree(query: string): WalkthroughTree | null {
   const ecoMatch = ALL_TREES.find((t) => t.eco.toLowerCase() === q);
   if (ecoMatch) return ecoMatch;
 
+  // Sub-variation specifier (`:`): the user typed a specific variation
+  // ("Vienna Game: Stanley Variation"). Don't fall back to substring
+  // / word-level matches — those would hijack the request and route
+  // to the BARE static tree, robbing the user of the focused
+  // LLM-generated lesson for the specific variation. Production
+  // audit (build 00aadcd) found Tier 1 was capturing every
+  // "Vienna Game: X" query and routing to the un-specific Vienna
+  // walkthrough.
+  if (q.includes(':')) return null;
+
   // 3. Sub-string match.
   const sub = ALL_TREES.find(
     (t) => t.openingName.toLowerCase().includes(q) || q.includes(t.openingName.toLowerCase()),

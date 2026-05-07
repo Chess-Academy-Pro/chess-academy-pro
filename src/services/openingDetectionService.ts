@@ -177,65 +177,102 @@ const NAME_ALIASES: Record<string, string> = {
   "bird's opening": 'Bird Opening',
   'alekhines defense': 'Alekhine Defense',
   "alekhine's defense": 'Alekhine Defense',
+  // Common typos surfaced by production audits — the user types
+  // these often enough that we shouldn't lose the lesson over a
+  // single misspelled letter.
+  phillador: 'Philidor Defense',
+  philidor: 'Philidor Defense',
+  // Bare popular sub-variation names — let the user type just the
+  // variation and we route to the canonical full name. Keeps audit
+  // logs and Dexie cache keyed on the canonical entry rather than a
+  // user-typed shorthand. Production audit (build 00aadcd): a bare
+  // "najdorf" was sent to LLM gen as "najdorf" rather than the
+  // canonical "Sicilian Defense: Najdorf Variation", causing cache
+  // misses on follow-up queries.
+  najdorf: 'Sicilian Defense: Najdorf Variation',
+  dragon: 'Sicilian Defense: Dragon Variation',
+  sveshnikov: 'Sicilian Defense: Lasker-Pelikan Variation',
+  scheveningen: 'Sicilian Defense: Scheveningen Variation',
+  taimanov: 'Sicilian Defense: Taimanov Variation',
+  kan: 'Sicilian Defense: Kan Variation',
 };
 
-export function getOpeningMoves(openingName: string): string[] | null {
+/** Resolve a user-typed opening name against the Lichess DB and
+ *  return the matched entry's canonical name, ECO, and moves. The
+ *  user's word: "tie the user's request FIRST opening — so the LLM
+ *  can match the request to an opening before even getting started."
+ *  Callers should use the returned `canonicalName` for cache keys
+ *  and gen requests so that "najdorf" and "Sicilian Defense: Najdorf
+ *  Variation" land on the same cache row.
+ *
+ *  Returns null when no DB entry matches (the user is asking about
+ *  something not in the openings DB; surface routing rejects). */
+export function resolveOpeningEntry(
+  openingName: string,
+): { canonicalName: string; eco: string; moves: string[] } | null {
   const entries = openingsData as OpeningEntry[];
   const trimmed = openingName.trim();
   if (!trimmed) return null;
 
-  // Apply alias map first (KID → King's Indian Defense, etc.).
+  // Apply alias map first (KID → King's Indian Defense, najdorf →
+  // Sicilian Defense: Najdorf Variation, etc.). Case-insensitive.
   const aliased = NAME_ALIASES[trimmed.toLowerCase()] ?? trimmed;
   const queryNorm = normalizeNameForMatch(aliased);
 
-  // 1. Exact match (case + diacritic + apostrophe + hyphen insensitive).
-  //    "Kings Gambit" → matches "King's Gambit" entry.
-  const exact = entries.filter(
-    (e) => normalizeNameForMatch(e.name) === queryNorm,
-  );
-  if (exact.length > 0) {
-    const best = exact.reduce((a, b) => (a.pgn.length > b.pgn.length ? a : b));
-    return best.pgn.split(/\s+/).filter(Boolean);
-  }
-
-  // 2. Prefix match (normalized) — "Kings Indian" → "King's Indian
-  //    Defense" / "King's Indian Attack".
-  const prefix = entries.filter((e) =>
-    normalizeNameForMatch(e.name).startsWith(queryNorm),
-  );
-  if (prefix.length > 0) {
-    const bare = prefix.find((e) => normalizeNameForMatch(e.name) === queryNorm);
-    const best = bare ?? prefix.reduce((a, b) => {
+  function pick(matches: OpeningEntry[]): OpeningEntry {
+    // Tie-break: prefer entries whose NAME exactly equals the query
+    // (the parent / canonical entry rather than a sub-variation),
+    // then the longest PGN (most specific gameplay) — the DB often
+    // has multiple entries with the same name at different depths
+    // (e.g. "French Defense" appears at both 2 plies and 4 plies),
+    // and the deeper one gives more useful book-source moves.
+    const exact = matches.filter(
+      (e) => normalizeNameForMatch(e.name) === queryNorm,
+    );
+    const pool = exact.length > 0 ? exact : matches;
+    return pool.reduce((a, b) => {
       if (a.name.length !== b.name.length) return a.name.length < b.name.length ? a : b;
       return a.pgn.length > b.pgn.length ? a : b;
     });
-    return best.pgn.split(/\s+/).filter(Boolean);
   }
+  function emit(e: OpeningEntry) {
+    return {
+      canonicalName: e.name,
+      eco: e.eco,
+      moves: e.pgn.split(/\s+/).filter(Boolean),
+    };
+  }
+
+  // 1. Exact match (case + diacritic + apostrophe + hyphen insensitive).
+  const exact = entries.filter((e) => normalizeNameForMatch(e.name) === queryNorm);
+  if (exact.length > 0) return emit(pick(exact));
+
+  // 2. Prefix match (normalized) — "Kings Indian" → "King's Indian Defense".
+  const prefix = entries.filter((e) =>
+    normalizeNameForMatch(e.name).startsWith(queryNorm),
+  );
+  if (prefix.length > 0) return emit(pick(prefix));
 
   // 3. Substring match (normalized).
   const sub = entries.filter((e) =>
     normalizeNameForMatch(e.name).includes(queryNorm),
   );
-  if (sub.length > 0) {
-    const best = sub.reduce((a, b) => {
-      if (a.name.length !== b.name.length) return a.name.length < b.name.length ? a : b;
-      return a.pgn.length > b.pgn.length ? a : b;
-    });
-    return best.pgn.split(/\s+/).filter(Boolean);
-  }
+  if (sub.length > 0) return emit(pick(sub));
 
   // 4. Token-set match — word-order-insensitive. "Najdorf Sicilian"
-  //    matches "Sicilian Defense: Najdorf Variation" (tokens najdorf
-  //    + sicilian both present, order doesn't matter).
-  const tokenMatches = entries.filter((e) =>
-    tokensMatchTarget(aliased, e.name),
-  );
+  //    matches "Sicilian Defense: Najdorf Variation".
+  const tokenMatches = entries.filter((e) => tokensMatchTarget(aliased, e.name));
   if (tokenMatches.length === 0) return null;
-  const best = tokenMatches.reduce((a, b) => {
-    if (a.name.length !== b.name.length) return a.name.length < b.name.length ? a : b;
-    return a.pgn.length > b.pgn.length ? a : b;
-  });
-  return best.pgn.split(/\s+/).filter(Boolean);
+  return emit(pick(tokenMatches));
+}
+
+/** Backward-compatible thin wrapper. Existing callers want just the
+ *  PGN moves; new code should prefer resolveOpeningEntry to also get
+ *  the canonical name (so cache + gen key on the canonical entry,
+ *  not the user's typed string). */
+export function getOpeningMoves(openingName: string): string[] | null {
+  const r = resolveOpeningEntry(openingName);
+  return r ? r.moves : null;
 }
 
 /** Find ALL Lichess-DB entries related to an opening name. Returns

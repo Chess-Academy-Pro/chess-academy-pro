@@ -37,6 +37,7 @@ import {
 import {
   getOpeningMoves,
   findLinePickerOptions,
+  resolveOpeningEntry,
   type LinePickerOption,
 } from '../../services/openingDetectionService';
 import { getNeonColor, scaledShadow } from '../../utils/neonColors';
@@ -679,6 +680,28 @@ export function CoachTeachPage(): JSX.Element {
         // letting full sentences through (sentences usually have a
         // verb, > 60 chars, or end with ?/.).
         requestedName = workingInput;
+      }
+      // Tier 0: canonicalize the user's request against the Lichess
+      // DB BEFORE any routing tiers run. The user's word: "tie the
+      // user's request to the FIRST opening — so the LLM can match
+      // the request to an opening before even getting started."
+      // Without this, typos like "phillador" → cache miss; bare
+      // shorthand like "najdorf" → cache key on shorthand instead of
+      // canonical "Sicilian Defense: Najdorf Variation". Static
+      // registry queries (e.g. "Vienna") and unmatchable typos still
+      // fall through with the original name — DB resolution only
+      // kicks in when there's a confident match.
+      if (requestedName) {
+        const dbEntry = resolveOpeningEntry(requestedName);
+        if (dbEntry && dbEntry.canonicalName !== requestedName) {
+          void logAppAudit({
+            kind: 'coach-surface-migrated',
+            category: 'subsystem',
+            source: 'CoachTeachPage.handleSubmit.surfaceRouting',
+            summary: `canonicalized "${requestedName}" → "${dbEntry.canonicalName}" via Lichess DB`,
+          });
+          requestedName = dbEntry.canonicalName;
+        }
       }
       // Cache key includes face-mode prefix so the same opening
       // doesn't collide between "learn Najdorf as Black" and "face
