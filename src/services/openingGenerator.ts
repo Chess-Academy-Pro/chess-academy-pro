@@ -232,8 +232,8 @@ interface WalkthroughTree {
 interface WalkthroughTreeNode {
   san: string | null;        // null only for root
   movedBy: 'white' | 'black' | null;
-  idea: string;              // 40-90 word coach explanation; mention the SAN played
-  narration?: NarrationSegment[];  // Optional: 2-4 segments max, each 1-2 short sentences
+  idea: string;              // 15-25 word coach explanation of THIS move ONLY; mention the SAN played; do NOT forecast future moves (the next node's narration covers them)
+  narration?: NarrationSegment[];  // STRONGLY PREFERRED: include 1-2 segments per move, each with 1-3 arrows showing strategic intent (what the piece NOW eyes / attacks / pressures), NOT the move itself
   children: { label?: string; forkSubtitle?: string; node: WalkthroughTreeNode }[];
 }
 
@@ -255,7 +255,9 @@ CONVENTIONS:
 - Each idea must MENTION the SAN played (e.g. "Bc4 develops..." or "bishop to c4 develops...").
 - Branch points (forks) need every child to have label + forkSubtitle.
 - Move-order matters: trace each line carefully. For example, you can't push f4 with Black's bishop on c5 (the long diagonal opens and the g1-knight hangs). The trade or the move-order matters.
-- TARGET SIZE: see the BROAD vs SPECIFIC depth rules above for fork count + branch length per opening type. Idea text 40-90 words PER MOVE — keep this constant. Narration 2-4 segments per node, each 1-2 sentences — keep this constant. The way to go deeper is to add MORE NODES (more plies), NOT to make each node's narration longer. max_tokens is 32768 so the budget covers many nodes; spend the budget on additional plies, not on verbose prose per ply.
+- TARGET SIZE: see the BROAD vs SPECIFIC depth rules above for fork count + branch length per opening type. Idea text 15-25 words PER MOVE — TIGHT. Narration 1-2 segments per node, EACH with 1-3 arrows showing strategic intent (what the piece NOW eyes / attacks / pressures — NOT the move's own from→to which the board already animates). The way to go deeper is to add MORE NODES (more plies), NOT to make each node's narration longer. max_tokens is 32768 so the budget covers many nodes; spend the budget on additional plies, not on verbose prose per ply.
+- DO NOT forecast future moves in idea text. Each node's idea explains ONLY the move JUST PLAYED. Do not say "Now White should play X" or "After this Black will Y" — the next node's narration covers the next move. Production audit (build d9a5f28) caught Yugoslav Attack narrations running to 80 words with sentences like "Now White should retreat to c5" and "Black will then play e5" — the user is reading the same content twice (once forecast, once on the actual move). Keep each idea grounded in WHAT JUST HAPPENED.
+- ARROWS ARE REQUIRED on most moves. Each move's narration should include 1-3 arrows pointing at squares the piece NOW threatens, supports, or pressures. Examples: Bc4 narration arrow c4→f7 ("eyes f7"); Nf3 arrow f3→e5 ("controls e5"); ...c5 arrow c5→d4 ("fights for d4"). Skip arrows only on castling and obvious developing moves.
 
 ARROW + HIGHLIGHT RULES (production audit caught useless arrows; follow these strictly):
 - DO NOT draw an arrow on the move being played in this node. The board animates the SAN itself — adding an arrow from the same from→to is redundant noise.
@@ -1261,7 +1263,7 @@ ${retryContext}
 CRITICAL on this retry:
 - Output ONLY raw JSON. First character must be \`{\`, last must be \`}\`. The validator checks that the LAST character of your response is \`}\` — if your output is truncated mid-JSON, parsing fails.
 - DO NOT include concepts/findMove/drill/punish — they are generated separately. Including them is the #1 cause of truncation.
-- Keep idea text 40-70 words, narration 2-3 segments per node. Shorter is better.
+- Keep idea text 15-25 words PER MOVE — short. Don't forecast future moves. Include 1-3 arrows per node showing strategic intent.
 - Aim for 3 forks total, each ~6-8 plies deep. NOT 4-5 forks.
 - No markdown fences. No prose. No comments. No trailing commas.
 
