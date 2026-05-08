@@ -2170,7 +2170,10 @@ CRITICAL:
   • KINGSIDE CASTLING (O-O): both the f1 bishop AND the g1 knight (or f8 / g8 for Black) must be developed.
   • Pawns move FORWARD only. e4-to-e3 is illegal.
 - Coach voice: first-person, conversational, pedagogically clear.
-${stage === 'concepts' ? `- Single-select questions (multiSelect omitted or false) need EXACTLY ONE correct choice. If 2+ choices are correct, set multiSelect: true on that question.\n` : ''}${stage === 'findMove' ? `- Each question needs 2+ candidates. EXACTLY ONE is correct. The path SANs must be a legal sequence from the standard starting position.\n` : ''}${stage === 'drill' ? `- Trace the FULL move sequence with chess.js mentally before emitting. Each move must be legal from the position the prior moves create. studentSide MUST match the opening — black for Sicilian, French, Caro-Kann, Pirc, KID, Nimzo-Indian, Modern, Alekhine, Scandinavian, etc.; white for Italian, Vienna, Spanish, Queen's Gambit, etc.\n` : ''}${stage === 'punish' ? `- setupMoves + inaccuracy + punishment + each distractor + each followup move must ALL be legal in sequence. Distractors are LEGAL alternatives that don't punish as well — they are NOT illegal moves. Each lesson needs at least 2 distractors.\n` : ''}- Output JSON only. Validation pipeline rejects anything else.${buildBookSourceBlock(openingName)}${buildStagePositionBlock(openingName)}`;
+${stage === 'concepts' ? `- Single-select questions (multiSelect omitted or false) need EXACTLY ONE correct choice. If 2+ choices are correct, set multiSelect: true on that question.\n` : ''}${stage === 'findMove' ? `- Each question needs 2+ candidates. EXACTLY ONE is correct. The path SANs must be a legal sequence from the standard starting position.\n` : ''}${stage === 'drill' ? `- Trace the FULL move sequence with chess.js mentally before emitting. Each move must be legal from the position the prior moves create. studentSide MUST match the opening — black for Sicilian, French, Caro-Kann, Pirc, KID, Nimzo-Indian, Modern, Alekhine, Scandinavian, etc.; white for Italian, Vienna, Spanish, Queen's Gambit, etc.\n` : ''}${stage === 'punish' ? `- setupMoves + inaccuracy + punishment + each distractor + each followup move must ALL be legal in sequence. Distractors are LEGAL alternatives that don't punish as well — they are NOT illegal moves. Each lesson needs at least 2 distractors.
+- CRITICAL — STAY ON THE OPENING: setupMoves MUST match the canonical PGN of "${openingName}" exactly for the first N plies (where N = the canonical PGN's ply count). Production audit (build 1304700) caught the LLM emitting Dragon punishes (5...g6) under the Najdorf banner (5...a6) — same family but a different sub-variation. The OPENING POSITION CONTEXT block below shows the exact moves; do NOT substitute a different sub-line just because you find traps there easier to write.
+- The inaccuracy is what the OPPONENT plays AFTER the canonical line is reached. setupMoves usually ends RIGHT AT the canonical spine's end FEN (or at most 1-2 plies deeper on a known main-line continuation).
+\n` : ''}- Output JSON only. Validation pipeline rejects anything else.${buildBookSourceBlock(openingName)}${buildStagePositionBlock(openingName)}`;
 }
 
 /** Parse a stage array from raw LLM output. Mirrors the recovery
@@ -2297,9 +2300,42 @@ async function mergeStageIntoCache(
       repairedData = r.kept;
       repairReport = r.report;
     } else if (stage === 'punish') {
-      const r = repairPunishStage(data as PunishLesson[]);
+      // Pin punish lessons to the canonical opening: drop any whose
+      // setupMoves diverge from the canonical PGN prefix. Production
+      // audit (build 1304700): the LLM emitted Dragon punish lessons
+      // (5...g6) under the Najdorf banner (5...a6) — same family,
+      // different sub-variation, traps would never overlap with the
+      // walkthrough spine. The stage-gen prompt now warns against
+      // this, but we belt-and-suspenders here too in case the LLM
+      // drifts anyway.
+      const canonicalEntry = resolveOpeningEntry(openingName);
+      const canonicalPlies = canonicalEntry?.moves ?? [];
+      const onCanonical = (data as PunishLesson[]).filter((lesson) => {
+        if (canonicalPlies.length === 0) return true; // can't enforce
+        const setup = lesson.setupMoves ?? [];
+        // Setup must be at LEAST canonical-length and start with the
+        // canonical prefix verbatim (after stripping annotation marks).
+        if (setup.length < canonicalPlies.length) return false;
+        for (let k = 0; k < canonicalPlies.length; k += 1) {
+          if (
+            stripSanAnnotations(setup[k]) !==
+            stripSanAnnotations(canonicalPlies[k])
+          ) {
+            return false;
+          }
+        }
+        return true;
+      });
+      const droppedOffCanonical = data.length - onCanonical.length;
+      const r = repairPunishStage(onCanonical);
       repairedData = r.kept;
       repairReport = r.report;
+      if (droppedOffCanonical > 0) {
+        repairReport.dropped += droppedOffCanonical;
+        repairReport.notes.unshift(
+          `punish: dropped ${droppedOffCanonical} lesson(s) whose setupMoves diverged from "${openingName}" canonical PGN`,
+        );
+      }
     }
     if (repairReport && (repairReport.dropped > 0 || repairReport.fixed > 0)) {
       void logAppAudit({
