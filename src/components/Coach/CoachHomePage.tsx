@@ -77,8 +77,8 @@ export function CoachHomePage(): JSX.Element {
       <div className="grid grid-cols-2 gap-3 flex-1 content-start max-w-lg mx-auto w-full">
         <PrimaryTile
           icon={<Swords size={40} className="text-emerald-400" />}
-          label="Play"
-          subtitle="Vs the engine. Coach narrates each move."
+          label="Play with Coach"
+          subtitle="Real game vs the engine. Coach narrates each move and helps when you're stuck."
           info="Play a full game against Stockfish (difficulty matches your rating). The coach narrates your moves, calls out tactics you missed, walks you through phase transitions, and offers a hint ladder when you're stuck. Post-game, opens a review walk."
           rgb="52, 211, 153"
           bgClass="bg-emerald-500/10"
@@ -90,8 +90,8 @@ export function CoachHomePage(): JSX.Element {
         />
         <PrimaryTile
           icon={<GraduationCap size={40} className="text-cyan-400" />}
-          label="Learn"
-          subtitle="Guided lessons from Sonnet — pick a topic and dive in."
+          label="Learn with Coach"
+          subtitle="Guided lessons — pick a topic and dive in."
           info={
             "Ask the coach to teach you something. Defaults to an animated walkthrough when you say \"teach me [opening]\", but you can also:\n\n• Walk through an opening — moves animate with voice-over\n• Set up specific positions — coach explains the idea\n• Play it out as a game — you take a side, coach plays the other\n• Quiz me on the moves — coach tests recall\n\nJust ask in plain language."
           }
