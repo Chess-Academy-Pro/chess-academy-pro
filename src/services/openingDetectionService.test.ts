@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { detectOpening, isStillInOpening, getOpeningMoves, getNextOpeningBookMove, findRelatedDbEntries, _resetTrie } from './openingDetectionService';
+import { detectOpening, isStillInOpening, getOpeningMoves, getNextOpeningBookMove, findRelatedDbEntries, resolveOpeningEntry, findContinuationsAtPly, findLinePickerOptions, _resetTrie } from './openingDetectionService';
 
 describe('openingDetectionService', () => {
   beforeEach(() => {
@@ -247,6 +247,90 @@ describe('openingDetectionService', () => {
       for (const e of entries) {
         expect(e.name.toLowerCase()).toContain('sicilian');
       }
+    });
+  });
+
+  describe('terminal-short filter (≤8 plies + no DB extension)', () => {
+    it('hides Gunderam Gambit from name resolution (4-ply terminal)', () => {
+      // 'King's Pawn Game: Gunderam Gambit' is a 4-ply terminal
+      // entry — a useless namesake-only walkthrough. Production
+      // audit (build 2fcec7e+) showed the walkthrough ending after
+      // 4 plies because the DB has no continuation. Filter must
+      // hide it from name resolution so the user can't land on it.
+      const result = resolveOpeningEntry("King's Pawn Game: Gunderam Gambit");
+      expect(result).toBeNull();
+    });
+
+    it('keeps short non-terminal entries (Vienna Game at 3 plies)', () => {
+      // Vienna Game is `e4 e5 Nc3` — only 3 plies, but has many
+      // sub-variations in the DB. Must still be resolvable.
+      const result = resolveOpeningEntry('Vienna Game');
+      expect(result).not.toBeNull();
+      expect(result?.canonicalName).toBe('Vienna Game');
+    });
+
+    it('keeps long terminal entries (>8 plies, even with no continuation)', () => {
+      // Najdorf at 10 plies is the bare canonical entry — even if
+      // it had no DB sub-variations, 10 plies is plenty to teach.
+      const result = resolveOpeningEntry('Sicilian Defense: Najdorf Variation');
+      expect(result).not.toBeNull();
+      expect(result?.canonicalName).toContain('Najdorf');
+    });
+  });
+
+  describe("'Vienna Gambit' alias routes to Nf6 f4 line", () => {
+    it("routes 'Vienna Gambit' to 'Vienna Game: Vienna Gambit' (Nf6 f4)", () => {
+      // The DB has TWO Vienna-Gambit candidates: 'Vienna Gambit,
+      // with Max Lange Defense' (Nc6 f4, niche) and 'Vienna Game:
+      // Vienna Gambit' (Nf6 f4, canonical). The alias map pins the
+      // bare 'Vienna Gambit' to the Nf6 line so the resolver
+      // doesn't bounce the user back to a parent picker.
+      const result = resolveOpeningEntry('Vienna Gambit');
+      expect(result).not.toBeNull();
+      expect(result?.canonicalName).toBe('Vienna Game: Vienna Gambit');
+      // Verify the moves are e4 e5 Nc3 Nf6 f4.
+      expect(result?.moves).toEqual(['e4', 'e5', 'Nc3', 'Nf6', 'f4']);
+    });
+  });
+
+  describe('findContinuationsAtPly', () => {
+    it('returns multiple SANs at the starting position', () => {
+      const map = findContinuationsAtPly([]);
+      expect(map.size).toBeGreaterThan(5);
+      expect(map.has('e4')).toBe(true);
+      expect(map.has('d4')).toBe(true);
+      expect(map.has('Nf3')).toBe(true);
+      expect(map.has('c4')).toBe(true);
+    });
+
+    it('returns the canonical Italian branchpoint candidates after e4 e5 Nf3 Nc6', () => {
+      const map = findContinuationsAtPly(['e4', 'e5', 'Nf3', 'Nc6']);
+      // The four classical branches at this position.
+      expect(map.has('Bc4')).toBe(true); // Italian
+      expect(map.has('Bb5')).toBe(true); // Spanish / Ruy Lopez
+      expect(map.has('d4')).toBe(true);  // Scotch
+      // Each entry should have a representative opening name.
+      const ruy = map.get('Bb5');
+      expect(ruy?.name).toBe('Ruy Lopez');
+      const scotch = map.get('d4');
+      expect(scotch?.name).toBe('Scotch Game');
+    });
+
+    it('returns empty map when prefix has no DB extension', () => {
+      // A prefix that doesn't appear in the DB (made-up sequence).
+      const map = findContinuationsAtPly(['a3', 'a6', 'a4', 'a5']);
+      expect(map.size).toBe(0);
+    });
+  });
+
+  describe('findLinePickerOptions excludes terminal-short variations', () => {
+    it("hides 4-ply terminal sub-variations from the King's Pawn picker", () => {
+      const result = findLinePickerOptions("King's Pawn Game", 1);
+      expect(result).not.toBeNull();
+      // None of the surfaced options should be the Gunderam Gambit
+      // tile — the filter drops 4-ply terminal entries.
+      const labels = result?.options.map((o) => o.label) ?? [];
+      expect(labels.some((l) => l.includes('Gunderam Gambit'))).toBe(false);
     });
   });
 });
