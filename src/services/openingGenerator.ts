@@ -1566,6 +1566,152 @@ export interface GenerateOpeningOptions {
   mode?: 'learn' | 'face';
 }
 
+/** Schema for the narration-only LLM call. Inverts the gen
+ *  architecture: code provides the move sequence (legal by DB
+ *  construction) and the FENs (correct by chess.js replay); the LLM
+ *  only writes one short sentence per move plus intro/outro. User's
+ *  insight: "Have the LLM trust the structure. It is the source of
+ *  truth. Sounds like the LLM is trying to verify the structure
+ *  before running narration. It shouldn't have to do that if the
+ *  brain is pulling straight from the DB."
+ *
+ *  Output is a small flat object, easy for any model (DeepSeek
+ *  cheap, Anthropic, even small DeepSeek-coder) to emit reliably.
+ *  No tree shape to validate, no JSON nesting that might truncate. */
+const NARRATION_SCHEMA: Record<string, unknown> = {
+  type: 'object',
+  required: ['intro', 'outro', 'ideas'],
+  properties: {
+    intro: { type: 'string' },
+    outro: { type: 'string' },
+    ideas: { type: 'array', items: { type: 'string' } },
+  },
+};
+
+interface NarrationOutput {
+  intro: string;
+  outro: string;
+  ideas: string[];
+}
+
+/** PRIMARY gen path: build the walkthrough tree skeleton from the
+ *  Lichess DB's canonical PGN (deterministic — moves are legal by
+ *  DB construction, FENs are correct by chess.js replay), then ask
+ *  the LLM for ONE short sentence per move plus an intro and outro.
+ *  Same end-state as the legacy free-form tree gen but with all the
+ *  failure modes structurally eliminated:
+ *    - No invalid SANs (DB guarantees them).
+ *    - No JSON tree shape errors (the schema is tiny + flat).
+ *    - No truncation mid-tree (output is N short strings, not a
+ *      deeply-nested tree).
+ *    - Token usage is roughly N × 25 words, far smaller than the
+ *      old 30-50K-char tree responses.
+ *
+ *  Returns null when the opening isn't in the DB (caller should
+ *  fall through to the legacy free-form gen path). */
+async function generateOpeningFromDbNarration(
+  name: string,
+): Promise<WalkthroughTree | null> {
+  const entry = resolveOpeningEntry(name);
+  if (!entry || entry.moves.length === 0) return null;
+
+  // 1. Replay the PGN, collect each move's SAN + post-move FEN.
+  type Position = { san: string; fen: string; ply: number; movedBy: 'white' | 'black' };
+  const positions: Position[] = [];
+  const c = new Chess();
+  for (let i = 0; i < entry.moves.length; i += 1) {
+    try {
+      c.move(stripSanAnnotations(entry.moves[i]));
+    } catch {
+      return null; // DB entry corrupt — extremely rare, abort
+    }
+    positions.push({
+      san: entry.moves[i],
+      fen: c.fen(),
+      ply: i,
+      movedBy: i % 2 === 0 ? 'white' : 'black',
+    });
+  }
+
+  // 2. Single LLM call: ask for narration text only.
+  const studentSide = inferStudentSideFromName(entry.canonicalName);
+  const moveLabels = positions
+    .map((p, idx) => {
+      const moveNum = Math.floor(p.ply / 2) + 1;
+      const dotted = p.movedBy === 'white' ? `${moveNum}.` : `${moveNum}…`;
+      return `${idx + 1}. ${dotted}${p.san}  (after this move FEN: ${p.fen})`;
+    })
+    .join('\n');
+  const systemPrompt = `You are an expert chess coach narrating a walkthrough of "${entry.canonicalName}". Output ONLY a JSON object matching the schema. The move sequence and positions are PROVIDED — do NOT invent or alter them. Your only job is to write short coach commentary.
+
+For each move in the line, write ONE sentence (max 25 words) explaining the IDEA behind that move. First-person, second-person, conversational. Mention the SAN or its spoken form somewhere in the sentence. Examples:
+- "1.e4 grabs the center and frees the king's bishop and queen."
+- "1...c5 — Black declines the symmetry and aims for asymmetric play on the queenside."
+- "5.Nc3 develops the knight, defends e4, and prepares Bc4 or Qe2."
+
+The student is playing as ${studentSide}. Frame ideas from that perspective when relevant.
+
+Also produce:
+- intro: 2-3 sentences framing the lesson
+- outro: 1-2 sentences inviting the next step (drill / face the variation / try a deeper line)`;
+  const userPrompt = `Opening: ${entry.canonicalName} (${entry.eco})
+Student plays: ${studentSide}
+Total moves: ${positions.length}
+
+Moves with post-move FENs:
+${moveLabels}
+
+Emit a JSON object with intro (string), outro (string), and ideas (array of ${positions.length} strings, one per move in order).`;
+
+  let narration: NarrationOutput;
+  try {
+    const result = await getCoachStructuredResponse(
+      [{ role: 'user', content: userPrompt }],
+      systemPrompt,
+      'chat_response',
+      // Each idea is ~25 words ≈ 35 tokens. N moves + intro + outro
+      // + JSON envelope ≈ N×40 + 200. Cap at 4K which fits ~95 ideas
+      // (more than any realistic walkthrough).
+      4096,
+      'emit_walkthrough_narration',
+      'Emit short coach narrations (one sentence per provided move) plus an intro and outro for the line.',
+      NARRATION_SCHEMA,
+    );
+    narration = result as NarrationOutput;
+  } catch (err) {
+    void logAppAudit({
+      kind: 'llm-error',
+      category: 'subsystem',
+      source: 'openingGenerator.generateOpeningFromDbNarration',
+      summary: `narration LLM call failed for "${name}" — falling back to template ideas: ${err instanceof Error ? err.message : String(err)}`,
+    });
+    // Template fallback: each move gets a generic sentence with
+    // its SAN. Same as buildFallbackTreeFromDb logic.
+    narration = {
+      intro: `${entry.canonicalName} — book moves from the Lichess opening database. Quick walkthrough of the canonical line.`,
+      outro: `That's the canonical book line for the ${entry.canonicalName}. Drill the moves to lock them in, or ask for a deeper variation.`,
+      ideas: positions.map((p) => synthesizeIdeaFromSan(p.san, p.movedBy, p.ply)),
+    };
+  }
+
+  // 3. Build the tree from the bottom up using the LLM's ideas.
+  type ChildWrap = { node: WalkthroughTreeNode };
+  let nextChildren: ChildWrap[] = [];
+  for (let i = positions.length - 1; i >= 0; i -= 1) {
+    const p = positions[i];
+    const idea = narration.ideas[i]?.trim() || synthesizeIdeaFromSan(p.san, p.movedBy, p.ply);
+    nextChildren = [{ node: { san: p.san, movedBy: p.movedBy, idea, children: nextChildren } }];
+  }
+  return {
+    openingName: entry.canonicalName,
+    eco: entry.eco,
+    studentSide,
+    intro: narration.intro?.trim() || `${entry.canonicalName} — let's walk through the main line.`,
+    outro: narration.outro?.trim() || `Drill the moves to lock them in.`,
+    root: { san: null, movedBy: null, idea: '', children: nextChildren },
+  };
+}
+
 /** DB-only fallback walkthrough builder. When both LLM gen attempts
  *  fail (parse errors, validation failures, etc.), we DON'T fail the
  *  user-facing experience. We synthesize a minimal linear walkthrough
@@ -1679,6 +1825,40 @@ export async function generateOpening(
     source: 'openingGenerator.generateOpening',
     summary: `generation requested for "${name}" (mode=${mode})`,
   });
+
+  // PRIMARY PATH: trust the Lichess DB as the source of truth. Code
+  // builds the tree skeleton (legal moves from DB, FENs from chess.js
+  // replay); the LLM only writes per-move narration text. User's
+  // word: "Have the LLM trust the structure. It is the source of
+  // truth. Sounds like the LLM is trying to verify the structure
+  // before running narration. It shouldn't have to do that if the
+  // brain is pulling straight from the DB."
+  //
+  // Skipped for FACE mode (the user is learning to PLAY THE COUNTER
+  // to a named opening, not the named opening itself — the canonical
+  // PGN we'd pull would be wrong). FACE goes through the legacy
+  // free-form gen which handles counter-system selection.
+  if (mode === 'learn') {
+    try {
+      const fromDb = await generateOpeningFromDbNarration(name);
+      if (fromDb) {
+        void logAppAudit({
+          kind: 'coach-surface-migrated',
+          category: 'subsystem',
+          source: 'openingGenerator.generateOpening',
+          summary: `generation OK via DB-narration path for "${name}"`,
+        });
+        return { ok: true, tree: fromDb };
+      }
+    } catch (err) {
+      void logAppAudit({
+        kind: 'llm-error',
+        category: 'subsystem',
+        source: 'openingGenerator.generateOpening',
+        summary: `DB-narration path threw for "${name}" — falling back to free-form gen: ${err instanceof Error ? err.message : String(err)}`,
+      });
+    }
+  }
 
   const first = await generateOnce(name, undefined, mode);
   if (first.ok) {
