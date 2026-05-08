@@ -473,21 +473,40 @@ export function validateMoveLegality(
         });
       }
 
-      // setup
-      const setupReplay = tryReplay(lesson.setupMoves);
-      if ('error' in setupReplay) {
-        issues.push({
-          severity: 'error',
-          path: ['punish', String(i), 'setupMoves'],
-          message: `setupMoves illegal at index ${setupReplay.failedAt} ("${setupReplay.failedSan}")`,
-        });
-        continue;
+      // setup — when setupFen is provided, use it directly (puzzle-DB
+      // derived lessons start from a real-game mid-opening FEN that
+      // can't always be reached by replaying SAN). Otherwise replay
+      // the setupMoves SAN sequence from the standard start.
+      let setupFen: string;
+      if (lesson.setupFen) {
+        try {
+          // Validate by constructing — Chess() throws on malformed FEN.
+          setupFen = new Chess(lesson.setupFen).fen();
+        } catch {
+          issues.push({
+            severity: 'error',
+            path: ['punish', String(i), 'setupFen'],
+            message: `setupFen is not a valid FEN`,
+          });
+          continue;
+        }
+      } else {
+        const setupReplay = tryReplay(lesson.setupMoves);
+        if ('error' in setupReplay) {
+          issues.push({
+            severity: 'error',
+            path: ['punish', String(i), 'setupMoves'],
+            message: `setupMoves illegal at index ${setupReplay.failedAt} ("${setupReplay.failedSan}")`,
+          });
+          continue;
+        }
+        setupFen = setupReplay.fen;
       }
 
       // inaccuracy
       let postInaccuracyFen: string | null = null;
       try {
-        const probe = new Chess(setupReplay.fen);
+        const probe = new Chess(setupFen);
         probe.move(stripSanAnnotations(lesson.inaccuracy));
         postInaccuracyFen = probe.fen();
       } catch {

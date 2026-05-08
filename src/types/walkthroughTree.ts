@@ -272,9 +272,21 @@ export interface PunishLesson {
   /** Display name on the lesson-picker tap target — e.g. "Vienna:
    *  Black plays 2…d6? — punish the loose center". */
   name: string;
+  /** Optional FEN to load directly as the lesson's starting position
+   *  (the position right BEFORE the inaccuracy). Used by puzzle-DB-
+   *  derived punish lessons where the position comes from a real
+   *  game's mid-opening state that can't always be reached by
+   *  replaying SAN from the start. When present, the runtime uses
+   *  this FEN as the walkthrough's startFen and skips the
+   *  setupMoves animation — jumps straight to "Black has just played
+   *  the canonical opening; now they play this mistake". `setupMoves`
+   *  is still set to the canonical opening PGN so the lesson knows
+   *  what context to narrate. */
+  setupFen?: string;
   /** SAN path UP TO the position right BEFORE the inaccuracy. The
    *  opponent's bad move (`inaccuracy` field) is the next move
-   *  played in the runtime. */
+   *  played in the runtime. When `setupFen` is set, this serves as
+   *  contextual / canonical-pinning info but is NOT replayed. */
   setupMoves: string[];
   /** The opponent's sub-optimal move (SAN). Played by the runtime
    *  as part of the lesson setup. */

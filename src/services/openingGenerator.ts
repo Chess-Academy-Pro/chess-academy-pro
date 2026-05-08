@@ -23,6 +23,7 @@
  * Style drift is the main risk; that's why we anchor on a sample.
  */
 import { Chess } from 'chess.js';
+import puzzleData from '../data/puzzles.json';
 import { getCoachChatResponse, getCoachStructuredResponse } from './coachApi';
 import {
   validateWalkthroughTree,
@@ -792,16 +793,32 @@ export function repairPunishStage(
   const report: StageRepairReport = { dropped: 0, fixed: 0, notes: [] };
   for (let i = 0; i < data.length; i += 1) {
     const lesson = data[i];
-    const setupChess = replayAll(lesson.setupMoves ?? []);
-    if (!setupChess) {
-      report.dropped += 1;
-      report.notes.push(`punish[${i}]: dropped — illegal setupMoves`);
-      continue;
+    // Resolve the setup FEN. Puzzle-DB-derived lessons carry an
+    // explicit setupFen; LLM-emitted lessons replay setupMoves from
+    // the standard start. Either way we end up with a single FEN to
+    // probe the inaccuracy / punishment / distractors against.
+    let setupFen: string;
+    if (lesson.setupFen) {
+      try {
+        setupFen = new Chess(lesson.setupFen).fen();
+      } catch {
+        report.dropped += 1;
+        report.notes.push(`punish[${i}]: dropped — invalid setupFen`);
+        continue;
+      }
+    } else {
+      const setupChess = replayAll(lesson.setupMoves ?? []);
+      if (!setupChess) {
+        report.dropped += 1;
+        report.notes.push(`punish[${i}]: dropped — illegal setupMoves`);
+        continue;
+      }
+      setupFen = setupChess.fen();
     }
     // Apply inaccuracy to get the post-inaccuracy FEN.
     let postInaccuracyFen: string;
     try {
-      const probe = new Chess(setupChess.fen());
+      const probe = new Chess(setupFen);
       probe.move(stripSanAnnotations(lesson.inaccuracy));
       postInaccuracyFen = probe.fen();
     } catch {
@@ -2667,6 +2684,372 @@ Emit a JSON object: { questions: [ ${picked.length} entries, in the same order, 
   });
 }
 
+// ─── Punish-stage DB inversion ──────────────────────────────────────
+// Pulls real opening-tagged tactical puzzles from the Lichess puzzle
+// database (`src/data/puzzles.json`, 15K curated entries) and turns
+// them into PunishLesson objects. Code provides every move (the
+// puzzle's UCI sequence converted to SAN) and every distractor
+// (chess.js legal moves at the post-inaccuracy FEN, scored to prefer
+// captures/checks/developing moves so they look tempting). The LLM
+// only writes:
+//   - lesson `name` (4-8 words tying it to the opening + the tactic)
+//   - `whyBad` (2 sentences on the opponent's mistake — the SETUP)
+//   - `whyPunish` (2 sentences on why the tactic works — the IDEA)
+//   - per-distractor `label` + `explanation`
+//   - per-followup `idea`
+//
+// David's principle: "the DB is the brain." Punish lessons are
+// grounded in real master-game puzzles tagged with the opening, with
+// the puzzle's themes (mate, fork, sacrifice, hangingPiece) telling
+// the LLM what tactical motif it's narrating. The opening's family
+// (Italian → Bxf7+ themes; Caro-Kann → tempo/structure punishments)
+// shapes the prose framing. No moves are LLM-emitted.
+
+interface RawPuzzle {
+  id: string;
+  fen: string;
+  moves: string;
+  rating: number;
+  themes: string[];
+  openingTags: string | string[] | null;
+  popularity: number;
+  nbPlays: number;
+}
+
+const PUNISH_PUZZLE_THEMES = new Set([
+  'mate', 'mateIn1', 'mateIn2', 'mateIn3',
+  'fork', 'pin', 'skewer', 'discoveredAttack',
+  'hangingPiece', 'trappedPiece', 'sacrifice',
+  'attraction', 'deflection', 'doubleAttack',
+  'kingsideAttack', 'queensideAttack', 'attackingF2F7',
+  'xRayAttack',
+]);
+
+const PUNISH_LABEL_SCHEMA: Record<string, unknown> = {
+  type: 'object',
+  required: ['lessons'],
+  properties: {
+    lessons: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['name', 'whyBad', 'whyPunish', 'distractors'],
+        properties: {
+          name: { type: 'string' },
+          whyBad: { type: 'string' },
+          whyPunish: { type: 'string' },
+          distractors: {
+            type: 'array',
+            items: {
+              type: 'object',
+              required: ['label', 'explanation'],
+              properties: {
+                label: { type: 'string' },
+                explanation: { type: 'string' },
+              },
+            },
+          },
+          followupIdeas: {
+            type: 'array',
+            items: { type: 'string' },
+          },
+        },
+      },
+    },
+  },
+};
+
+interface PunishLabelOutput {
+  lessons: {
+    name: string;
+    whyBad: string;
+    whyPunish: string;
+    distractors: { label: string; explanation: string }[];
+    followupIdeas?: string[];
+  }[];
+}
+
+/** Tags from the Lichess puzzle DB use underscore-separated names
+ *  ("Italian_Game", "Sicilian_Defense_Najdorf_Variation"). Our
+ *  canonical names use ":" + spaces. Convert and match generously:
+ *  the puzzle tag must equal one of the canonical-derived forms OR
+ *  start with one of them + "_" (so a "Najdorf" lesson catches both
+ *  the bare Najdorf and any sub-variation like "Najdorf_English_Attack"). */
+function puzzleTagsMatchOpening(
+  puzzleTags: string[],
+  canonicalName: string,
+): boolean {
+  // Lichess tag normalization: strip apostrophes ("King's" → "Kings",
+  // "Bishop's" → "Bishops"), turn ":" + spaces into "_". Spot-checked
+  // against the DB: tags use "Bishops_Opening" / "Kings_Gambit"
+  // / "Queens_Gambit_Declined" — no apostrophes anywhere.
+  const normalize = (s: string): string =>
+    s.replace(/['']/g, '').replace(/[: ]+/g, '_');
+  const candidates = new Set<string>();
+  // Full canonical: "Sicilian Defense: Najdorf Variation"
+  candidates.add(normalize(canonicalName));
+  // Drop the colon-suffix: "Sicilian Defense" / "Bishop's Opening"
+  const colonIdx = canonicalName.indexOf(':');
+  if (colonIdx > 0) {
+    candidates.add(normalize(canonicalName.slice(0, colonIdx).trim()));
+  }
+  // For Najdorf/Dragon/etc named after the colon, also try the
+  // sub-variation name alone — Lichess sometimes tags only the
+  // family ("Sicilian_Defense") without the variation, but we want
+  // to match family-tagged puzzles for variation lessons too.
+  for (const tag of puzzleTags) {
+    for (const cand of candidates) {
+      if (tag === cand) return true;
+      if (tag.startsWith(cand + '_')) return true;
+    }
+  }
+  return false;
+}
+
+function tagsOfPuzzle(p: RawPuzzle): string[] {
+  if (!p.openingTags) return [];
+  if (Array.isArray(p.openingTags)) return p.openingTags;
+  return String(p.openingTags).split(/\s+/).filter(Boolean);
+}
+
+/** Convert a UCI move string ("e2e4", "e7e8q") to SAN by playing it
+ *  on the given Chess instance. Mutates `chess` (advances the
+ *  position). Returns the SAN string, or null if illegal. */
+function uciToSan(chess: Chess, uci: string): string | null {
+  if (uci.length < 4) return null;
+  const from = uci.slice(0, 2);
+  const to = uci.slice(2, 4);
+  const promotion = uci.length >= 5 ? uci[4] : undefined;
+  try {
+    const move = chess.move({ from, to, promotion });
+    return move.san;
+  } catch {
+    return null;
+  }
+}
+
+/** Score a candidate distractor SAN at the post-inaccuracy FEN to
+ *  pick "tempting but wrong" alternatives. Captures + checks +
+ *  developing moves rank high. Edge pawn moves and king shuffles
+ *  rank low. The puzzle solution itself is excluded by the caller. */
+function scoreDistractor(san: string): number {
+  let score = 0;
+  if (san.includes('x')) score += 3; // capture
+  if (san.includes('+') || san.includes('#')) score += 2; // check
+  // Knight or bishop development (uppercase first char, dest is in
+  // central or near-central squares).
+  if (/^[NB]/.test(san)) {
+    const dest = san.match(/[a-h][1-8]/g)?.slice(-1)[0];
+    if (dest) {
+      const file = dest[0];
+      const rank = parseInt(dest[1], 10);
+      // d4-e5 / d5-e4 central squares get +2; c-d-e-f files +1;
+      // edge files (a/h) get -1.
+      if (['d', 'e'].includes(file) && rank >= 3 && rank <= 6) score += 2;
+      else if (['c', 'd', 'e', 'f'].includes(file)) score += 1;
+      else if (['a', 'h'].includes(file)) score -= 1;
+    }
+  }
+  // King move that isn't castling = bad sign.
+  if (/^K[a-h]/.test(san) && !san.startsWith('O-O')) score -= 2;
+  // a- or h-file pawn push without capture = unlikely to be tempting.
+  if (/^[ah][2-7]$/.test(san)) score -= 2;
+  return score;
+}
+
+interface PreparedPunishLesson {
+  setupFen: string;
+  inaccuracy: string;
+  punishment: string;
+  followup: { san: string }[];
+  distractors: { san: string }[];
+  themes: string[];
+  rating: number;
+}
+
+/** Walk one Lichess puzzle into a PunishLesson skeleton.
+ *  Returns null when the puzzle's UCI sequence doesn't replay
+ *  cleanly or when we can't generate at least 2 distractors. */
+function preparePunishFromPuzzle(p: RawPuzzle): PreparedPunishLesson | null {
+  const uciMoves = p.moves.split(/\s+/).filter(Boolean);
+  if (uciMoves.length < 2) return null; // need at least inaccuracy + punishment
+  const chess = new Chess(p.fen);
+  // moves[0] = inaccuracy (opponent's bad move from puzzle.fen)
+  const inaccuracy = uciToSan(chess, uciMoves[0]);
+  if (!inaccuracy) return null;
+  const postInaccuracyFen = chess.fen();
+  // moves[1] = punishment (student's reply)
+  const punishment = uciToSan(chess, uciMoves[1]);
+  if (!punishment) return null;
+  // moves[2..] = followup
+  const followup: { san: string }[] = [];
+  for (let i = 2; i < uciMoves.length; i += 1) {
+    const san = uciToSan(chess, uciMoves[i]);
+    if (!san) break;
+    followup.push({ san });
+  }
+  // Distractors: chess.js legal moves at post-inaccuracy FEN, score
+  // and pick top 3 (excluding the punishment itself).
+  const probe = new Chess(postInaccuracyFen);
+  const legal = probe.moves();
+  const candidates = legal
+    .filter((san) => san !== punishment)
+    .map((san) => ({ san, score: scoreDistractor(san) }))
+    .sort((a, b) => b.score - a.score);
+  const distractors = candidates.slice(0, 3).map((c) => ({ san: c.san }));
+  if (distractors.length < 2) return null; // need at least 2 alternatives
+  return {
+    setupFen: p.fen,
+    inaccuracy,
+    punishment,
+    followup,
+    distractors,
+    themes: p.themes,
+    rating: p.rating,
+  };
+}
+
+/** Generate `punish` stage entries by mining the Lichess puzzle DB.
+ *  Filters to puzzles tagged with the canonical opening's name
+ *  family AND carrying punish-style tactical themes. Each surviving
+ *  puzzle becomes a PunishLesson skeleton (positions + moves +
+ *  distractors all from data); the LLM only labels the prose. */
+async function generatePunishFromDb(
+  openingName: string,
+): Promise<PunishLesson[] | null> {
+  const entry = resolveOpeningEntry(openingName);
+  if (!entry || entry.moves.length === 0) return null;
+
+  const puzzles = puzzleData as RawPuzzle[];
+  const matching = puzzles.filter((p) => {
+    const tags = tagsOfPuzzle(p);
+    if (tags.length === 0) return false;
+    if (!puzzleTagsMatchOpening(tags, entry.canonicalName)) return false;
+    if (!p.themes.some((t) => PUNISH_PUZZLE_THEMES.has(t))) return false;
+    if (p.popularity < 70) return false;
+    if (p.nbPlays < 80) return false;
+    return true;
+  });
+  if (matching.length === 0) return null;
+  // Sort: popularity desc, then rating asc (easier first for teaching).
+  matching.sort((a, b) => {
+    if (b.popularity !== a.popularity) return b.popularity - a.popularity;
+    return a.rating - b.rating;
+  });
+
+  // Walk top candidates; keep first 5 that prepare cleanly.
+  const prepared: PreparedPunishLesson[] = [];
+  for (const p of matching) {
+    if (prepared.length >= 5) break;
+    const lesson = preparePunishFromPuzzle(p);
+    if (lesson) prepared.push(lesson);
+  }
+  if (prepared.length < 2) return null; // not enough to make a stage
+
+  // Single LLM call: ask for prose labels for all lessons. The LLM
+  // sees the SANs, the FENs, the themes, and the opening context; it
+  // writes coach prose tying each tactic back to the opening's
+  // strategic character.
+  const studentSide = inferStudentSideFromName(entry.canonicalName);
+  const systemPrompt = `You are an expert chess coach narrating punish lessons rooted in the "${entry.canonicalName}" opening. The student plays ${studentSide}. For each lesson below, output:
+- name: 4-8 words tying the lesson to the opening + the tactic. Examples:
+  • "Italian: Knight grabs f7 — fork on the queen"
+  • "Caro-Kann: Careless Ngf6?? — Nd6 is mate"
+  • "Sicilian: Loose d6 invites the bishop sack"
+- whyBad: 1-2 sentences on WHY the opponent's move loses. Tie it back to the opening's character (Italian's Bc4-and-Ng5 pressure on f7, Caro-Kann's solid-but-tempo-sensitive structure, Sicilian's tactical density on the queenside, etc.).
+- whyPunish: 1-2 sentences on the punishing IDEA — sacrifice for tempo, fork the queen, exploit the loose bishop, etc. Reference the puzzle's themes when natural ("a classic Bxf7+ sac that wins the queen by deflection").
+- distractors: for EACH distractor (in the SAME ORDER given), write a short label (2-5 words) and a 1-sentence explanation of why it doesn't work or doesn't punish as well.
+- followupIdeas: ONE short sentence per followup move (in order) describing the tactical thread — "rook lifts to win the queen", "the king is dragged into the open", etc.
+
+The SANs and FENs are GIVEN by the puzzle database — DO NOT alter them, do NOT add or reorder distractors, do NOT invent moves. Just write the prose. Output ONLY via the tool.`;
+
+  const lessonsBlock = prepared
+    .map((l, i) => {
+      const themesLine = l.themes.slice(0, 6).join(', ');
+      return `Lesson ${i + 1} (rating ${l.rating}; themes: ${themesLine}):
+  setupFen: ${l.setupFen}
+  Opponent's mistake (inaccuracy): ${l.inaccuracy}
+  Punishing move: ${l.punishment}
+  Distractors (in order — write label + explanation for each):
+${l.distractors.map((d, j) => `    ${String.fromCharCode(97 + j)}) ${d.san}`).join('\n')}
+  Followup moves after the punishment (in order):
+${l.followup.length > 0 ? l.followup.map((f, j) => `    ${j + 1}. ${f.san}`).join('\n') : '    (none)'}`;
+    })
+    .join('\n\n');
+
+  const userPrompt = `Opening: ${entry.canonicalName} (${entry.eco})
+Canonical line: ${entry.moves.join(' ')}
+Student plays: ${studentSide}
+
+${prepared.length} lessons to label (in order):
+
+${lessonsBlock}
+
+Emit a JSON object: { lessons: [ ${prepared.length} entries, in the same order, each with { name, whyBad, whyPunish, distractors[${prepared.map((l) => l.distractors.length).join('/')}], followupIdeas? } ] }.`;
+
+  let labels: PunishLabelOutput;
+  try {
+    const result = await getCoachStructuredResponse(
+      [{ role: 'user', content: userPrompt }],
+      systemPrompt,
+      'chat_response',
+      // Each lesson's prose ≈ 80-120 tokens × 5 lessons ≈ 600 tokens
+      // plus distractor explanations ≈ 60 tokens × 15 = 900 tokens.
+      // 3K cap is generous.
+      3072,
+      'emit_punish_labels',
+      'Emit prose labels for puzzle-derived punish lessons.',
+      PUNISH_LABEL_SCHEMA,
+    );
+    labels = result as PunishLabelOutput;
+  } catch (err) {
+    void logAppAudit({
+      kind: 'llm-error',
+      category: 'subsystem',
+      source: 'openingGenerator.generatePunishFromDb',
+      summary: `punish-label LLM call failed for "${openingName}" — using template prose: ${err instanceof Error ? err.message : String(err)}`,
+    });
+    labels = {
+      lessons: prepared.map(() => ({
+        name: '',
+        whyBad: '',
+        whyPunish: '',
+        distractors: [],
+        followupIdeas: [],
+      })),
+    };
+  }
+
+  return prepared.map((l, i) => {
+    const lab = labels.lessons?.[i];
+    const themePrimary = l.themes.find((t) => PUNISH_PUZZLE_THEMES.has(t)) ?? 'tactical';
+    const fallbackName = `${entry.canonicalName} — ${themePrimary} trap`;
+    return {
+      name: (lab?.name?.trim()) || fallbackName,
+      setupFen: l.setupFen,
+      // Keep the canonical PGN as setupMoves for context display
+      // (the runtime ignores it when setupFen is set, but stage
+      // metadata + canonical-pinning stay coherent).
+      setupMoves: entry.moves,
+      inaccuracy: l.inaccuracy,
+      whyBad: (lab?.whyBad?.trim()) || `${l.inaccuracy} drops the thread of the opening — the position now has a tactical hole.`,
+      punishment: l.punishment,
+      whyPunish: (lab?.whyPunish?.trim()) || `${l.punishment} exploits the resulting weakness; a classic ${themePrimary} motif.`,
+      distractors: l.distractors.map((d, j) => ({
+        san: d.san,
+        label: (lab?.distractors?.[j]?.label?.trim()) || `${d.san} — alternative`,
+        explanation:
+          (lab?.distractors?.[j]?.explanation?.trim()) ||
+          `${d.san} is legal but doesn't capitalize on the inaccuracy as sharply as ${l.punishment}.`,
+      })),
+      followup: l.followup.map((f, j) => ({
+        san: f.san,
+        idea: (lab?.followupIdeas?.[j]?.trim()) || `${f.san} — continues the winning sequence.`,
+      })),
+    } satisfies PunishLesson;
+  });
+}
+
 /** Parse a stage array from raw LLM output. Mirrors the recovery
  *  pipeline used for tree parses (parseGeneratedTree): markdown
  *  fences, line comments, trailing commas, then on failure a second
@@ -2757,6 +3140,28 @@ async function generateOneStage(
         category: 'subsystem',
         source: 'openingGenerator.generateOneStage',
         summary: `findMove DB path failed for "${openingName}" — falling back to free-form LLM gen`,
+        details: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+  if (!retryContext && stage === 'punish') {
+    try {
+      const punishData = await generatePunishFromDb(openingName);
+      if (punishData && punishData.length >= 2) {
+        void logAppAudit({
+          kind: 'coach-surface-migrated',
+          category: 'subsystem',
+          source: 'openingGenerator.generateOneStage',
+          summary: `punish via Lichess-puzzle-DB path for "${openingName}" — ${punishData.length} lessons (real opening-tagged tactical puzzles)`,
+        });
+        return { ok: true, data: punishData };
+      }
+    } catch (err) {
+      void logAppAudit({
+        kind: 'llm-error',
+        category: 'subsystem',
+        source: 'openingGenerator.generateOneStage',
+        summary: `punish DB path failed for "${openingName}" — falling back to free-form LLM gen`,
         details: err instanceof Error ? err.message : String(err),
       });
     }
@@ -2856,6 +3261,13 @@ async function mergeStageIntoCache(
       const canonicalPlies = canonicalEntry?.moves ?? [];
       const onCanonical = (data as PunishLesson[]).filter((lesson) => {
         if (canonicalPlies.length === 0) return true; // can't enforce
+        // Puzzle-DB-derived lessons (setupFen present) are already
+        // pinned to the opening by the Lichess openingTags filter
+        // upstream — no need to enforce setupMoves equality. The
+        // setupMoves field on these lessons is the canonical PGN
+        // for context display only; the actual board position comes
+        // from the puzzle FEN.
+        if (lesson.setupFen) return true;
         const setup = lesson.setupMoves ?? [];
         // Setup must be at LEAST canonical-length and start with the
         // canonical prefix verbatim (after stripping annotation marks).

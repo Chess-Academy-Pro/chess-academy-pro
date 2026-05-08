@@ -2,6 +2,11 @@
 
 This file is loaded automatically in every Claude Code session. Follow these instructions exactly.
 
+## 👋 The user
+
+The user is **David**. Address him by name when relevant. Single-user
+app, built for him. No multi-tenancy, no other accounts.
+
 ## ⏰ Standing notes
 
 **The DB is the source of truth — the LLM only writes prose.**

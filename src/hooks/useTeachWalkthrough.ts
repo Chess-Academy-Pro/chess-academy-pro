@@ -173,16 +173,23 @@ export function buildPunishWalkthroughTree(
     (a.label ?? '').localeCompare(b.label ?? ''),
   );
 
-  // Inaccuracy node: animates Black's bad move, narrates whyBad with
-  // red highlight, then forks to the candidate moves.
-  const inaccuracySide = sideAtIndex(lesson.setupMoves.length);
+  // Inaccuracy node: animates the opponent's bad move, narrates
+  // whyBad with red highlight, then forks to the candidate moves.
+  // Side determination: when setupFen is present, the FEN itself
+  // tells us whose turn it is — parse the side-to-move character.
+  // Otherwise count from the start position by ply parity of
+  // setupMoves.length.
+  const inaccuracySide: 'white' | 'black' = lesson.setupFen
+    ? (lesson.setupFen.split(' ')[1] === 'b' ? 'black' : 'white')
+    : sideAtIndex(lesson.setupMoves.length);
+  const opponentLabel = inaccuracySide === 'white' ? 'White' : 'Black';
   const inaccuracyNode: WalkthroughTreeNode = {
     san: lesson.inaccuracy,
     movedBy: inaccuracySide,
     idea: lesson.whyBad,
     narration: [
       {
-        text: `Now Black plays ${sanToFriendly(lesson.inaccuracy)}.`,
+        text: `Now ${opponentLabel} plays ${sanToFriendly(lesson.inaccuracy)}.`,
         highlights: [{ square: 'a1', color: 'red' }], // placeholder; will be overridden
       },
       {
@@ -195,22 +202,27 @@ export function buildPunishWalkthroughTree(
     children: forkChildren,
   };
 
-  // Setup chain: animate setupMoves quickly with empty idea (no
-  // narration) so the position lands without narrating each move.
-  // Build from the END backwards.
-  let setupChain: WalkthroughTreeNode = inaccuracyNode;
-  for (let i = lesson.setupMoves.length - 1; i >= 0; i -= 1) {
-    const san = lesson.setupMoves[i];
-    const movedBy = sideAtIndex(i);
-    setupChain = {
-      san,
-      movedBy,
-      // Empty idea triggers root-treatment-style fast advance; the
-      // narration array with one short text segment plays the move
-      // name briefly so the student tracks the position.
-      idea: '',
-      children: [{ node: setupChain }],
-    };
+  // Two paths to position the board at the inaccuracy:
+  //   (a) setupFen is provided (puzzle-DB-derived lessons). The
+  //       built tree's startFen carries the position directly; the
+  //       inaccuracy node sits as the root child with no setup
+  //       animation — the student starts at the puzzle position
+  //       with the lesson's intro framing the opening context.
+  //   (b) setupMoves SAN sequence (LLM-emitted lessons). Animate
+  //       each setup move quickly with empty idea so the position
+  //       builds visibly from the standard start.
+  let rootChild: WalkthroughTreeNode = inaccuracyNode;
+  if (!lesson.setupFen) {
+    for (let i = lesson.setupMoves.length - 1; i >= 0; i -= 1) {
+      const san = lesson.setupMoves[i];
+      const movedBy = sideAtIndex(i);
+      rootChild = {
+        san,
+        movedBy,
+        idea: '',
+        children: [{ node: rootChild }],
+      };
+    }
   }
 
   // Root wrapper.
@@ -218,7 +230,7 @@ export function buildPunishWalkthroughTree(
     san: null,
     movedBy: null,
     idea: '',
-    children: [{ node: setupChain }],
+    children: [{ node: rootChild }],
   };
 
   return {
@@ -227,7 +239,13 @@ export function buildPunishWalkthroughTree(
     // Inherit board orientation from the parent opening so a black-
     // side opening's punish lessons keep Black on bottom.
     studentSide: parentOpening.studentSide,
-    intro: `${lesson.name}. Watch the position set up, then find the punishment.`,
+    // When setupFen is set, the walkthrough loads from that FEN
+    // directly. Otherwise the walkthrough animates setupMoves from
+    // the standard start.
+    startFen: lesson.setupFen,
+    intro: lesson.setupFen
+      ? `${lesson.name}. ${opponentLabel} has just played a careless move out of the opening — find the punishment.`
+      : `${lesson.name}. Watch the position set up, then find the punishment.`,
     outro: lesson.whyPunish,
     root,
   };
