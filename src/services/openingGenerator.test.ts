@@ -715,3 +715,95 @@ describe('repairTreeContent', () => {
     });
   });
 });
+
+// ─── Punish-DB inversion data invariants ────────────────────────────
+// Locks in the contract that the Lichess puzzle DB has enough
+// opening-tagged tactical puzzles for the popular openings. If
+// puzzles.json is rotated and a popular opening drops below the
+// threshold, this test fails loudly so we don't silently regress
+// punish coverage.
+
+describe('Lichess puzzle DB coverage for punish-stage inversion', () => {
+  // Re-implement the filter from generatePunishFromDb (kept private
+  // to its module). Matches exactly: openingTags + tactical themes
+  // + popularity ≥ 70 + nbPlays ≥ 80. If the prod filter changes,
+  // mirror it here.
+  const PUNISH_THEMES = new Set([
+    'mate', 'mateIn1', 'mateIn2', 'mateIn3',
+    'fork', 'pin', 'skewer', 'discoveredAttack',
+    'hangingPiece', 'trappedPiece', 'sacrifice',
+    'attraction', 'deflection', 'doubleAttack',
+    'kingsideAttack', 'queensideAttack', 'attackingF2F7',
+    'xRayAttack',
+  ]);
+
+  interface Puzzle {
+    fen: string;
+    moves: string;
+    rating: number;
+    themes: string[];
+    openingTags: string | string[] | null;
+    popularity: number;
+    nbPlays: number;
+  }
+
+  function tagsOf(p: Puzzle): string[] {
+    if (!p.openingTags) return [];
+    if (Array.isArray(p.openingTags)) return p.openingTags;
+    return String(p.openingTags).split(/\s+/).filter(Boolean);
+  }
+
+  function tagsMatch(tags: string[], canonical: string): boolean {
+    const normalize = (s: string): string =>
+      s.replace(/['']/g, '').replace(/[: ]+/g, '_');
+    const cands = new Set([normalize(canonical)]);
+    const colon = canonical.indexOf(':');
+    if (colon > 0) cands.add(normalize(canonical.slice(0, colon).trim()));
+    return tags.some((t) =>
+      Array.from(cands).some((c) => t === c || t.startsWith(c + '_')),
+    );
+  }
+
+  function countMatching(canonical: string): number {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const data = require('../data/puzzles.json') as Puzzle[];
+    return data.filter((p) => {
+      const tags = tagsOf(p);
+      if (!tags.length) return false;
+      if (!tagsMatch(tags, canonical)) return false;
+      if (!p.themes.some((t) => PUNISH_THEMES.has(t))) return false;
+      if (p.popularity < 70) return false;
+      if (p.nbPlays < 80) return false;
+      return true;
+    }).length;
+  }
+
+  it('Italian Game has at least 50 punish candidates', () => {
+    expect(countMatching('Italian Game')).toBeGreaterThanOrEqual(50);
+  });
+
+  it("Bishop's Opening apostrophe handling: matches Bishops_Opening tag", () => {
+    // Apostrophe-stripping is critical — the DB tag is "Bishops_Opening"
+    // (no apostrophe). If normalization regresses this drops to 0.
+    expect(countMatching("Bishop's Opening")).toBeGreaterThanOrEqual(20);
+  });
+
+  it("King's Gambit apostrophe handling: matches Kings_Gambit_* tags", () => {
+    expect(countMatching("King's Gambit")).toBeGreaterThanOrEqual(40);
+  });
+
+  it('Caro-Kann Defense has at least 50 punish candidates', () => {
+    expect(countMatching('Caro-Kann Defense')).toBeGreaterThanOrEqual(50);
+  });
+
+  it('Pirc Defense has enough candidates to populate a stage', () => {
+    expect(countMatching('Pirc Defense')).toBeGreaterThanOrEqual(10);
+  });
+
+  it('Sicilian Najdorf matches via family tag (Sicilian_Defense)', () => {
+    // Lichess tags rarely carry the variation in the openingTag —
+    // they tag at the family level. The matcher's "drop colon-suffix"
+    // candidate captures this case.
+    expect(countMatching('Sicilian Defense: Najdorf Variation')).toBeGreaterThanOrEqual(50);
+  });
+});
