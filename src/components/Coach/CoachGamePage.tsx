@@ -137,7 +137,8 @@ import { resolveVerbosity, shouldCallLlmForMove } from '../../services/coachComm
 import { BLUNDER_ALERT_ADDITION, EXPLORE_REACTION_ADDITION } from '../../services/coachPrompts';
 import { stockfishEngine } from '../../services/stockfishEngine';
 import { resolveConfig as resolvePlayConfig } from '../../services/coachPlaySession';
-import { detectOpening, getOpeningMoves } from '../../services/openingDetectionService';
+import { detectOpening, getOpeningMoves, resolveOpeningEntry } from '../../services/openingDetectionService';
+import { stripSanAnnotations } from '../../data/openingWalkthroughs/validate';
 import { getCapturedPieces, getMaterialAdvantage } from '../../services/boardUtils';
 import { uciMoveToSan, uciLinesToSan } from '../../utils/uciToSan';
 import { db } from '../../db/schema';
@@ -861,6 +862,86 @@ export function CoachGamePage({ surfaceMode = 'play' }: CoachGamePageProps = {})
       gameChatRef.current?.injectAssistantMessage(hintState.nudgeText);
     }
   }, [hintState.nudgeText]);
+
+  // ─── Plan tracker (Upgrade D) ──────────────────────────────────────────────
+  // When the student declared an intendedOpening before sitting down to
+  // play (e.g. "I want to play the Najdorf today"), watch the move list
+  // and call out the moment they LEAVE the canonical PGN of that
+  // opening. One-shot per game so we don't nag every move past the
+  // divergence point. User: "D yes!" — highest-enthusiasm upgrade in
+  // the Play with Coach helping-hand pass.
+  const offBookFiredRef = useRef(false);
+  useEffect(() => {
+    if (offBookFiredRef.current) return;
+    const intent = useCoachMemoryStore.getState().intendedOpening;
+    if (!intent) return;
+    const playedMoves = gameState.moves.map((m) => m.san);
+    if (playedMoves.length === 0) return;
+    const entry = resolveOpeningEntry(intent.name);
+    if (!entry || entry.moves.length === 0) return;
+    // Use the LONGEST canonical PGN under intent.name as the book —
+    // gives the player the most theory before being called off-book.
+    const allEntries = (() => {
+      try {
+        // findShortestCanonicalPgn isn't quite right here; we want the
+        // deepest version of the user's declared opening. resolveOpeningEntry
+        // returns the deepest match by default (longest PGN preferred on
+        // exact-name ties), so entry.moves IS the deep book.
+        return entry.moves;
+      } catch {
+        return entry.moves;
+      }
+    })();
+    // Replay user's path against the book PGN. First divergence wins.
+    let divergenceIdx = -1;
+    for (let i = 0; i < playedMoves.length; i += 1) {
+      if (i >= allEntries.length) break;
+      // Same-side moves only: book[i] is the i-th ply played from the
+      // start position; gameState.moves[i] is also the i-th ply.
+      if (
+        stripSanAnnotations(playedMoves[i]) !==
+        stripSanAnnotations(allEntries[i])
+      ) {
+        divergenceIdx = i;
+        break;
+      }
+    }
+    // Only fire if the JUST-played move (last entry) is the divergence.
+    // Prior moves matched the book; this one breaks it.
+    if (
+      divergenceIdx === playedMoves.length - 1 &&
+      divergenceIdx >= 0 &&
+      divergenceIdx < allEntries.length
+    ) {
+      offBookFiredRef.current = true;
+      const movedSan = playedMoves[divergenceIdx];
+      const bookSan = allEntries[divergenceIdx];
+      const moveNumber = Math.floor(divergenceIdx / 2) + 1;
+      const dotted = divergenceIdx % 2 === 0 ? `${moveNumber}.` : `${moveNumber}…`;
+      const whoMoved = divergenceIdx % 2 === 0 ? 'White' : 'Black';
+      const studentMoved = whoMoved.toLowerCase() === intent.color;
+      const verb = studentMoved ? 'You' : `${whoMoved}`;
+      const msg = studentMoved
+        ? `Heads up — ${verb} just left ${entry.canonicalName} theory. The book here was ${dotted}${bookSan}, you played ${dotted}${movedSan}. Out of book.`
+        : `${verb} deviated from the book ${entry.canonicalName} line at ${dotted}${movedSan} (theory was ${dotted}${bookSan}). You're on your own from here.`;
+      gameChatRef.current?.injectAssistantMessage(msg);
+      void logAppAudit({
+        kind: 'coach-surface-migrated',
+        category: 'subsystem',
+        source: 'CoachGamePage.planTracker',
+        summary: `off-book warning fired at ply ${divergenceIdx + 1} for "${entry.canonicalName}"`,
+        details: `played=${movedSan}, book=${bookSan}, studentMoved=${studentMoved}`,
+      });
+    }
+  }, [gameState.moves]);
+
+  // Reset plan-tracker on new game so the warning fires once per game,
+  // not once per app session.
+  useEffect(() => {
+    if (gameState.moves.length === 0) {
+      offBookFiredRef.current = false;
+    }
+  }, [gameState.moves.length]);
 
   // ─── Coach Tip Bubble (floating overlay near board) ─────────────────────────
   const [tipBubbleText, setTipBubbleText] = useState<string | null>(null);
