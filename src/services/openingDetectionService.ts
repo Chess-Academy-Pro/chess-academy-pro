@@ -197,6 +197,20 @@ const NAME_ALIASES: Record<string, string> = {
   kan: 'Sicilian Defense: Kan Variation',
 };
 
+/** Find the shortest canonical-PGN entry for a given exact name.
+ *  When the DB carries multiple rows with the same opening name at
+ *  different depths (e.g. "Sicilian Defense: Najdorf Variation" at
+ *  10/11/12/13/14 plies), the SHORTEST is the parent / bare entry —
+ *  every other listed depth is the bare line plus a few extra plies
+ *  the curator wanted to register. For walkthroughs we want the
+ *  bare spine so the fork picker at the end has the most choices. */
+export function findShortestCanonicalPgn(canonicalName: string): string | null {
+  const entries = openingsData as OpeningEntry[];
+  const matches = entries.filter((e) => e.name === canonicalName);
+  if (matches.length === 0) return null;
+  return matches.reduce((a, b) => (a.pgn.length < b.pgn.length ? a : b)).pgn;
+}
+
 /** Resolve a user-typed opening name against the Lichess DB and
  *  return the matched entry's canonical name, ECO, and moves. The
  *  user's word: "tie the user's request FIRST opening — so the LLM
@@ -310,6 +324,96 @@ export function findOpeningByPgnPrefix(
 export function getOpeningMoves(openingName: string): string[] | null {
   const r = resolveOpeningEntry(openingName);
   return r ? r.moves : null;
+}
+
+/** Sibling DB extensions of a canonical opening, surfaced as
+ *  fork branches at the end of a DB-narration walkthrough. Used by
+ *  `generateOpeningFromDbNarration` to give the student deep-dive
+ *  tiles for every named sub-variation the DB knows about — for
+ *  Najdorf this is English Attack, Adams Attack, Bg5 Main Line,
+ *  Opocensky / Scheveningen (under Be2), etc. */
+export interface ForkBranch {
+  /** First divergent move (e.g. "Be3" for English Attack). */
+  san: string;
+  /** Sub-variation name shown on the fork tile (e.g. "English Attack"). */
+  label: string;
+  /** Canonical full name for the deep-dive resolver
+   *  (e.g. "Sicilian Defense: Najdorf Variation, English Attack"). */
+  fullName: string;
+  /** How many sibling DB entries share this divergent move; used to
+   *  rank popularity and cap the picker. */
+  count: number;
+}
+
+/** Find sibling DB entries that EXTEND a canonical opening's PGN
+ *  by one or more plies. Groups by the FIRST divergent move so the
+ *  picker shows one tile per genuine fork choice (multiple sub-sub-
+ *  lines under the same first move collapse into a single branch
+ *  represented by the most-general member of the group). Caps at 6
+ *  branches to keep the fork picker readable. */
+export function findSiblingExtensionBranches(
+  canonicalName: string,
+  canonicalPgn: string,
+): ForkBranch[] {
+  const entries = openingsData as OpeningEntry[];
+  // The DB sometimes carries multiple entries with the same canonical
+  // name at different depths (e.g. "Sicilian Defense: Najdorf
+  // Variation" appears at 10, 11, 12, 13, 14 plies). For fork
+  // detection we want the SHORTEST PGN (the parent / bare entry) so
+  // we can surface every sub-variation that branches off it. If the
+  // caller passed a longer-PGN match, fall back to the shortest
+  // exact-name PGN we can find in the DB.
+  const exactNameMatches = entries.filter((e) => e.name === canonicalName);
+  const refPgn = exactNameMatches.length > 0
+    ? exactNameMatches.reduce((a, b) => (a.pgn.length < b.pgn.length ? a : b)).pgn
+    : canonicalPgn;
+  const canonPlies = refPgn.split(/\s+/).filter(Boolean);
+  const namePrefix = canonicalName + ', ';
+  const pgnPrefix = canonPlies.join(' ') + ' ';
+  const candidates = entries.filter((e) => {
+    if (e.name === canonicalName) return false;
+    if (!e.name.startsWith(namePrefix)) return false;
+    return e.pgn.startsWith(pgnPrefix);
+  });
+  if (candidates.length === 0) return [];
+
+  type Group = { reps: OpeningEntry[]; count: number };
+  const byFirstMove = new Map<string, Group>();
+  for (const e of candidates) {
+    const moves = e.pgn.split(/\s+/).filter(Boolean);
+    if (moves.length <= canonPlies.length) continue;
+    const first = moves[canonPlies.length];
+    const g = byFirstMove.get(first);
+    if (g) {
+      g.reps.push(e);
+      g.count += 1;
+    } else {
+      byFirstMove.set(first, { reps: [e], count: 1 });
+    }
+  }
+
+  const branches: ForkBranch[] = Array.from(byFirstMove.entries()).map(
+    ([san, group]) => {
+      // Pick the rep with the SHORTEST sub-name (most general —
+      // e.g. "English Attack" beats "English Attack, Anti-English");
+      // ties broken by shortest PGN (closest to divergence point).
+      const rep = group.reps.reduce((a, b) => {
+        const aSub = a.name.slice(namePrefix.length);
+        const bSub = b.name.slice(namePrefix.length);
+        if (aSub.length !== bSub.length) return aSub.length < bSub.length ? a : b;
+        return a.pgn.length < b.pgn.length ? a : b;
+      });
+      const subName = rep.name.slice(namePrefix.length).split(',')[0].trim();
+      return {
+        san,
+        label: subName,
+        fullName: `${canonicalName}, ${subName}`,
+        count: group.count,
+      };
+    },
+  );
+  branches.sort((a, b) => b.count - a.count);
+  return branches.slice(0, 6);
 }
 
 /** Find ALL Lichess-DB entries related to an opening name. Returns

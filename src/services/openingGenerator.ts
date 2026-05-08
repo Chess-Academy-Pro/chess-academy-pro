@@ -31,7 +31,13 @@ import {
   formatIssues,
   stripSanAnnotations,
 } from '../data/openingWalkthroughs/validate';
-import { findRelatedDbEntries, resolveOpeningEntry } from './openingDetectionService';
+import {
+  findRelatedDbEntries,
+  resolveOpeningEntry,
+  findSiblingExtensionBranches,
+  findShortestCanonicalPgn,
+  type ForkBranch,
+} from './openingDetectionService';
 import { db, type CachedOpening } from '../db/schema';
 import { logAppAudit } from './appAuditor';
 import type {
@@ -1569,15 +1575,13 @@ export interface GenerateOpeningOptions {
 /** Schema for the narration-only LLM call. Inverts the gen
  *  architecture: code provides the move sequence (legal by DB
  *  construction) and the FENs (correct by chess.js replay); the LLM
- *  only writes one short sentence per move plus intro/outro. User's
- *  insight: "Have the LLM trust the structure. It is the source of
- *  truth. Sounds like the LLM is trying to verify the structure
- *  before running narration. It shouldn't have to do that if the
- *  brain is pulling straight from the DB."
+ *  only writes one short sentence per move plus intro/outro.
  *
- *  Output is a small flat object, easy for any model (DeepSeek
- *  cheap, Anthropic, even small DeepSeek-coder) to emit reliably.
- *  No tree shape to validate, no JSON nesting that might truncate. */
+ *  v2 extension: when the canonical opening has sibling DB entries
+ *  that extend its PGN (e.g. Najdorf has English Attack, Adams
+ *  Attack, Bg5 Main Line, Opocensky etc), code surfaces them as
+ *  fork branches at the end of the spine and asks the LLM for a
+ *  one-sentence teaser idea per branch. */
 const NARRATION_SCHEMA: Record<string, unknown> = {
   type: 'object',
   required: ['intro', 'outro', 'ideas'],
@@ -1585,6 +1589,7 @@ const NARRATION_SCHEMA: Record<string, unknown> = {
     intro: { type: 'string' },
     outro: { type: 'string' },
     ideas: { type: 'array', items: { type: 'string' } },
+    branchIdeas: { type: 'array', items: { type: 'string' } },
   },
 };
 
@@ -1592,6 +1597,7 @@ interface NarrationOutput {
   intro: string;
   outro: string;
   ideas: string[];
+  branchIdeas?: string[];
 }
 
 /** PRIMARY gen path: build the walkthrough tree skeleton from the
@@ -1609,29 +1615,55 @@ interface NarrationOutput {
  *
  *  Returns null when the opening isn't in the DB (caller should
  *  fall through to the legacy free-form gen path). */
+// Helper for sibling DB extensions (deep-dive forks) is in
+// openingDetectionService — we use it here without re-importing the
+// raw openings-lichess.json data.
+
+
 async function generateOpeningFromDbNarration(
   name: string,
 ): Promise<WalkthroughTree | null> {
   const entry = resolveOpeningEntry(name);
   if (!entry || entry.moves.length === 0) return null;
 
+  // Use the SHORTEST canonical PGN as the spine. The DB carries
+  // multiple rows for popular openings at different depths (Najdorf
+  // at 10/11/12/13/14 plies); the bare entry is the natural spine
+  // and leaves the most room for fork branches at the end. The
+  // longer-depth rows ARE valid lines but they're better surfaced
+  // as DB-grounded deep-dive targets, not the default walkthrough.
+  const shortPgn = findShortestCanonicalPgn(entry.canonicalName);
+  const spineMoves = shortPgn
+    ? shortPgn.split(/\s+/).filter(Boolean)
+    : entry.moves;
+
   // 1. Replay the PGN, collect each move's SAN + post-move FEN.
   type Position = { san: string; fen: string; ply: number; movedBy: 'white' | 'black' };
   const positions: Position[] = [];
   const c = new Chess();
-  for (let i = 0; i < entry.moves.length; i += 1) {
+  for (let i = 0; i < spineMoves.length; i += 1) {
     try {
-      c.move(stripSanAnnotations(entry.moves[i]));
+      c.move(stripSanAnnotations(spineMoves[i]));
     } catch {
       return null; // DB entry corrupt — extremely rare, abort
     }
     positions.push({
-      san: entry.moves[i],
+      san: spineMoves[i],
       fen: c.fen(),
       ply: i,
       movedBy: i % 2 === 0 ? 'white' : 'black',
     });
   }
+
+  // 1b. Find sibling extensions to inject as deep-dive fork branches
+  //     at the end of the spine. For Najdorf this surfaces English
+  //     Attack, Adams Attack, Bg5 Main Line, Opocensky / Scheveningen
+  //     under Be2, etc. — the actual deep-dive choices a student
+  //     would expect.
+  const branches: ForkBranch[] = findSiblingExtensionBranches(
+    entry.canonicalName,
+    spineMoves.join(' '),
+  );
 
   // 2. Single LLM call: ask for narration text only.
   const studentSide = inferStudentSideFromName(entry.canonicalName);
@@ -1641,6 +1673,12 @@ async function generateOpeningFromDbNarration(
       const dotted = p.movedBy === 'white' ? `${moveNum}.` : `${moveNum}…`;
       return `${idx + 1}. ${dotted}${p.san}  (after this move FEN: ${p.fen})`;
     })
+    .join('\n');
+  // Branches sit at the position AFTER the canonical's last move.
+  // Same FEN = positions[last].fen. Whose turn is determined by the
+  // total ply count's parity.
+  const branchLabels = branches
+    .map((b, idx) => `${idx + 1}. "${b.label}" (move: ${b.san}) — ${b.count} sub-line${b.count === 1 ? '' : 's'} in DB`)
     .join('\n');
   const systemPrompt = `You are an expert chess coach narrating a walkthrough of "${entry.canonicalName}". Output ONLY a JSON object matching the schema. The move sequence and positions are PROVIDED — do NOT invent or alter them. Your only job is to write short coach commentary.
 
@@ -1653,15 +1691,17 @@ The student is playing as ${studentSide}. Frame ideas from that perspective when
 
 Also produce:
 - intro: 2-3 sentences framing the lesson
-- outro: 1-2 sentences inviting the next step (drill / face the variation / try a deeper line)`;
+- outro: 1-2 sentences inviting the next step (drill / face the variation / try a deeper line)
+${branches.length > 0 ? `- branchIdeas: ONE sentence (max 20 words) for EACH branch the student might dive into next. Mention the named line and its strategic flavor (sharp / positional / pawn-storm / quiet etc).` : ''}`;
   const userPrompt = `Opening: ${entry.canonicalName} (${entry.eco})
 Student plays: ${studentSide}
-Total moves: ${positions.length}
+Total moves in spine: ${positions.length}
 
 Moves with post-move FENs:
 ${moveLabels}
+${branches.length > 0 ? `\nBranches available at the end of the spine (the student picks one to dive deeper):\n${branchLabels}\n\nFor each branch, write ONE short sentence describing what kind of line it is.` : ''}
 
-Emit a JSON object with intro (string), outro (string), and ideas (array of ${positions.length} strings, one per move in order).`;
+Emit a JSON object with intro (string), outro (string), ideas (array of ${positions.length} strings, one per spine move in order)${branches.length > 0 ? `, and branchIdeas (array of ${branches.length} strings, one per branch in order)` : ''}.`;
 
   let narration: NarrationOutput;
   try {
@@ -1695,8 +1735,35 @@ Emit a JSON object with intro (string), outro (string), and ideas (array of ${po
   }
 
   // 3. Build the tree from the bottom up using the LLM's ideas.
-  type ChildWrap = { node: WalkthroughTreeNode };
-  let nextChildren: ChildWrap[] = [];
+  //    Branches (if any) become the children of the spine's LAST
+  //    node, so when the user reaches the end of the canonical line
+  //    they see fork tiles for each named extension. Tapping a tile
+  //    fires the deep-dive flow that resolves the canonical name and
+  //    starts a fresh focused walkthrough.
+  type ChildWrap = { node: WalkthroughTreeNode; label?: string; forkSubtitle?: string };
+  const branchChildren: ChildWrap[] = branches.map((b, idx) => {
+    // The branch's first move belongs to the side whose turn it is
+    // after the canonical's last ply. Position[i].ply = i, so after
+    // the last spine move the next ply is positions.length (odd =
+    // Black moved last → White to move; even = White moved last →
+    // Black to move).
+    const branchMovedBy: 'white' | 'black' =
+      positions.length % 2 === 0 ? 'white' : 'black';
+    const teaser =
+      narration.branchIdeas?.[idx]?.trim() ||
+      `${b.san} — ${b.label} (${b.count} sub-line${b.count === 1 ? '' : 's'} in the database).`;
+    return {
+      label: b.label,
+      forkSubtitle: teaser,
+      node: {
+        san: b.san,
+        movedBy: branchMovedBy,
+        idea: teaser,
+        children: [],
+      },
+    };
+  });
+  let nextChildren: ChildWrap[] = branchChildren;
   for (let i = positions.length - 1; i >= 0; i -= 1) {
     const p = positions[i];
     const idea = narration.ideas[i]?.trim() || synthesizeIdeaFromSan(p.san, p.movedBy, p.ply);

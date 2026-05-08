@@ -563,6 +563,38 @@ export function CoachTeachPage(): JSX.Element {
     return { ok: true };
   }, []);
 
+  /** Notify the user when a background-generated stage finishes
+   *  loading. Pushes a coach chat message + refreshes the
+   *  walkthrough's in-memory tree so the leaf-menu picks up the new
+   *  content. User: "How would a user know there are new lines now?
+   *  Need to figure out a way for coach to let them know that punish
+   *  lines and quizzes have loaded." */
+  const handleStageMerged = useCallback(
+    (stage: 'concepts' | 'findMove' | 'drill' | 'punish'): void => {
+      void walkthrough.mergeStagesFromCache();
+      const labels: Record<typeof stage, string> = {
+        concepts: 'Quiz questions',
+        findMove: 'Find-the-move puzzles',
+        drill: 'Drill lines',
+        punish: 'Punish (trap) lessons',
+      };
+      const msg = `${labels[stage]} just loaded — they'll show up in the menu when you reach the end of the walkthrough.`;
+      const id = `stage-loaded-${stage}-${Date.now()}`;
+      setMessages((prev) => [
+        ...prev,
+        { id, role: 'assistant', content: msg, timestamp: Date.now() },
+      ]);
+      useCoachMemoryStore.getState().appendConversationMessage({
+        surface: 'chat-teach',
+        role: 'coach',
+        text: msg,
+        fen: gameRef.current.fen,
+        trigger: null,
+      });
+    },
+    [walkthrough],
+  );
+
   const handleSubmit = useCallback(async (
     text: string,
     opts?: {
@@ -936,7 +968,7 @@ export function CoachTeachPage(): JSX.Element {
           void generateMissingStagesInBackground(
             cachedTree.openingName,
             cachedTree,
-            () => { void walkthrough.mergeStagesFromCache(); },
+            handleStageMerged,
           );
           return;
         }
@@ -1002,7 +1034,7 @@ export function CoachTeachPage(): JSX.Element {
           void generateMissingStagesInBackground(
             sharedTree.openingName,
             sharedTree,
-            () => { void walkthrough.mergeStagesFromCache(); },
+            handleStageMerged,
           );
           return;
         }
@@ -1067,7 +1099,7 @@ export function CoachTeachPage(): JSX.Element {
             void generateMissingStagesInBackground(
               requestedName,
               result.tree,
-              () => { void walkthrough.mergeStagesFromCache(); },
+              handleStageMerged,
             );
           } else {
             // Generation failed both attempts. Render an honest fallback.
