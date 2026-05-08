@@ -38,6 +38,7 @@ import {
   getOpeningMoves,
   findLinePickerOptions,
   resolveOpeningEntry,
+  findOpeningByPgnPrefix,
   type LinePickerOption,
 } from '../../services/openingDetectionService';
 import { getNeonColor, scaledShadow } from '../../utils/neonColors';
@@ -91,6 +92,15 @@ interface DeepDiveOption {
   pathSans: string[];
   label: string;
   subtitle: string;
+  /** The actual SAN of the chosen branch's first move (e.g. "Nf3"
+   *  for the Classical Pirc fork). Combined with pathSans this gives
+   *  the full move sequence for the branch, which we look up against
+   *  the Lichess DB to find the canonical opening name. Without this,
+   *  the click handler had to glue label/subtitle prose onto the
+   *  parent name and produced garbage like "Pirc Defense: Classical
+   *  Variation: Solid and flexible" — production audit (build
+   *  3ad9a2b). */
+  childSan: string;
 }
 
 /** Walk every fork in the tree and emit one DeepDiveOption per
@@ -109,6 +119,7 @@ function extractDeepDiveOptions(tree: WalkthroughTree): DeepDiveOption[] {
             pathSans: [...pathSans],
             label: child.label,
             subtitle: child.forkSubtitle,
+            childSan: child.node.san,
           });
         }
       }
@@ -123,6 +134,32 @@ function extractDeepDiveOptions(tree: WalkthroughTree): DeepDiveOption[] {
   }
   walk(tree.root, []);
   return options;
+}
+
+/** Build the canonical deep-dive query for a chosen branch:
+ *    1. Replay path + childSan against the Lichess DB.
+ *    2. If the resulting move sequence matches a named DB entry, use
+ *       that canonical name verbatim ("Pirc Defense: Classical
+ *       Variation").
+ *    3. Otherwise fall back to "${parentName}: ${labelOrSubtitle}"
+ *       and let the surface-router's canonicalization sort it out.
+ *  Production audit (build 3ad9a2b): the old code blindly glued
+ *  forkSubtitle prose ("Solid and flexible") onto the parent name,
+ *  producing nonsense queries that pre-flight rejected and the brain
+ *  re-routed to a different, bare-named walkthrough — trampling the
+ *  in-progress lesson. */
+function buildDeepDiveQuery(
+  parentName: string,
+  pathSans: string[],
+  childSan: string,
+  fallbackLabel: string,
+): string {
+  const fullPath = [...pathSans, childSan];
+  const canon = findOpeningByPgnPrefix(fullPath);
+  if (canon) return canon.canonicalName;
+  // Last resort: parent + label. May still mis-route but at least the
+  // string is short enough for canonicalization to take a shot.
+  return `${parentName}: ${fallbackLabel}`;
 }
 
 export function CoachTeachPage(): JSX.Element {
@@ -2505,7 +2542,15 @@ function WalkthroughControls({
                   (opt.forkSubtitle ?? '').split('—')[0].trim() ||
                   opt.label ||
                   `variation ${idx + 1}`;
-                const query = `${tree.openingName}: ${variationName}`;
+                const childSan = opt.node.san ?? '';
+                const query = childSan
+                  ? buildDeepDiveQuery(
+                      tree.openingName,
+                      walkthrough.pathSans,
+                      childSan,
+                      variationName,
+                    )
+                  : `${tree.openingName}: ${variationName}`;
                 return (
                   <button
                     key={`fork-deepdive-${idx}`}
@@ -2619,7 +2664,12 @@ function WalkthroughControls({
                   opt.subtitle.split('—')[0].trim() ||
                   opt.label ||
                   `variation ${idx + 1}`;
-                const query = `${tree.openingName}: ${variationName}`;
+                const query = buildDeepDiveQuery(
+                  tree.openingName,
+                  opt.pathSans,
+                  opt.childSan,
+                  variationName,
+                );
                 return (
                   <button
                     key={`leaf-deepdive-${idx}`}
@@ -2741,20 +2791,22 @@ function WalkthroughControls({
                 <button
                   key={`deepdive-${idx}`}
                   onClick={() => {
-                    // Production audit (build 0c6c02c): the original
-                    // "${name} after ${path} ${label}" query (~50 chars
-                    // for Pirc) failed bare-name routing's 60-char cap
-                    // AND didn't match TEACH_PATTERN, so the surface
-                    // sent the deep-dive query straight to chat. New
-                    // shape: "${openingName}: ${variationName}" where
-                    // variationName is the prose part of forkSubtitle
-                    // before the "—". For Pirc that produces:
-                    // "Pirc Defense: Main line", "Pirc Defense: Baz
-                    // Counter-gambit", etc. — short, route-friendly,
-                    // and gets deep-dive treatment from the LLM via
-                    // the broad-vs-specific prompt rule.
+                    // Resolve the chosen branch (path + childSan) to
+                    // a canonical Lichess DB opening name so the
+                    // deep-dive routes correctly. Production audit
+                    // (build 3ad9a2b): the old code concatenated the
+                    // LLM's forkSubtitle prose ("Solid and flexible")
+                    // onto the parent name producing nonsense queries
+                    // that pre-flight rejected and the brain
+                    // re-routed to the BARE opening, trampling the
+                    // in-progress walkthrough and freezing the board.
                     const variationName = opt.subtitle.split('—')[0].trim() || opt.label;
-                    const query = `${tree.openingName}: ${variationName}`;
+                    const query = buildDeepDiveQuery(
+                      tree.openingName,
+                      opt.pathSans,
+                      opt.childSan,
+                      variationName,
+                    );
                     walkthrough.stop();
                     onDeepDive(query);
                   }}

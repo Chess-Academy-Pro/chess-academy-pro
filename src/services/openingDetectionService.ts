@@ -266,6 +266,43 @@ export function resolveOpeningEntry(
   return emit(pick(tokenMatches));
 }
 
+/** Find the most specific Lichess DB entry whose canonical PGN
+ *  matches the given SAN sequence as a prefix. Used by the deep-dive
+ *  flow: when the user picks a branch in a walkthrough fork, the
+ *  combined `pathSans + childSan` identifies a position; we resolve
+ *  THAT position to the named DB opening so the next walkthrough
+ *  loads as a focused, canonical lesson. Production audit (build
+ *  3ad9a2b): deep-dive was concatenating the LLM's `forkSubtitle`
+ *  prose ("Solid and flexible") onto the parent name, producing
+ *  garbage queries like "Pirc Defense: Classical Variation: Solid
+ *  and flexible" that nothing matched.
+ *
+ *  Match strategy: among DB entries whose PGN is a prefix of `moves`,
+ *  return the LONGEST (most-specific). Tie-break: prefer the entry
+ *  with the longest name (more specific naming). Returns null when
+ *  no DB entry matches the sequence even at length 1. */
+export function findOpeningByPgnPrefix(
+  moves: string[],
+): { canonicalName: string; eco: string } | null {
+  if (moves.length === 0) return null;
+  const entries = openingsData as OpeningEntry[];
+  const target = moves.join(' ');
+  // We want entries whose PGN is a *prefix* of `target` — i.e. the
+  // user's sequence is a continuation of (or equal to) the entry's
+  // canonical PGN. So `target.startsWith(entry.pgn + ' ')` OR
+  // `target === entry.pgn`.
+  const matches = entries.filter((e) => {
+    if (e.pgn === target) return true;
+    return target.startsWith(e.pgn + ' ');
+  });
+  if (matches.length === 0) return null;
+  const best = matches.reduce((a, b) => {
+    if (a.pgn.length !== b.pgn.length) return a.pgn.length > b.pgn.length ? a : b;
+    return a.name.length > b.name.length ? a : b;
+  });
+  return { canonicalName: best.name, eco: best.eco };
+}
+
 /** Backward-compatible thin wrapper. Existing callers want just the
  *  PGN moves; new code should prefer resolveOpeningEntry to also get
  *  the canonical name (so cache + gen key on the canonical entry,
