@@ -910,34 +910,49 @@ function sanDestSquare(san: string): string | null {
  *    just clutters the board — production audit (build bdc447a)
  *    caught Bishop's Opening drawing a green arrow on Bc4 showing
  *    the bishop's destination square it was just animated TO).
+ *  - ALL arrows on the FIRST ply of the spine. The very first
+ *    opening move (1.e4 etc.) doesn't have a meaningful threat to
+ *    point at, and pawn-pointing-straight-ahead arrows look weird.
+ *    Production audit (build 5fec0dc): David flagged "first arrow
+ *    looks weird, pawn points straight ahead." Skip move 1 entirely.
  *  Mutates in place. Returns the count dropped. */
 export function repairNarrationArrows(tree: WalkthroughTree): number {
   let dropped = 0;
-  function walk(node: WalkthroughTreeNode): void {
+  function walk(node: WalkthroughTreeNode, plyIndex: number): void {
     if (node.narration && node.san !== null) {
       const dest = sanDestSquare(node.san);
+      const isFirstPly = plyIndex === 0;
       for (const seg of node.narration) {
         if (seg.arrows) {
           const before = seg.arrows.length;
-          seg.arrows = seg.arrows.filter((a) => {
-            if (a.from === a.to) return false;
-            // Drop arrows where the END is the move's destination
-            // (showing where the piece just moved TO). Note: arrows
-            // FROM the destination toward another square (e.g.
-            // c4→f7 to show "now this bishop eyes f7") are kept —
-            // those convey new information beyond the move itself.
-            if (dest && a.to === dest) return false;
-            return true;
-          });
+          if (isFirstPly) {
+            // Strip ALL arrows on the spine's first move.
+            seg.arrows = [];
+          } else {
+            seg.arrows = seg.arrows.filter((a) => {
+              if (a.from === a.to) return false;
+              // Drop arrows where the END is the move's destination
+              // (showing where the piece just moved TO). Note: arrows
+              // FROM the destination toward another square (e.g.
+              // c4→f7 to show "now this bishop eyes f7") are kept —
+              // those convey new information beyond the move itself.
+              if (dest && a.to === dest) return false;
+              return true;
+            });
+          }
           dropped += before - seg.arrows.length;
         }
       }
     }
+    // Track ply: root contributes 0 (no SAN), each move-bearing
+    // descendant adds 1. The first ply node is the one whose plyIndex
+    // computes to 0 (root's first move-bearing child).
+    const nextPly = node.san === null ? plyIndex : plyIndex + 1;
     for (const child of node.children) {
-      walk(child.node);
+      walk(child.node, nextPly);
     }
   }
-  walk(tree.root);
+  walk(tree.root, -1);
   return dropped;
 }
 
@@ -1811,12 +1826,13 @@ For each move in the line, return:
   (a) THREATS — squares the moved piece NOW attacks / pressures / eyes (Bc4 → f7, Nf3 → e5, c5 → d4).
   (b) LOOK-AHEAD — the next critical square on the line we're walking (Re1 → e8 because the rook will land there in 2 moves; Nc3 → d5 because the knight is going to d5 next).
   Do NOT draw the move's own from→to (the board animates that — drawing it again is noise). Do NOT draw retrospective arrows. Skip arrows entirely when neither category fits (O-O, generic developing moves).
+  THE FIRST OPENING MOVE (move 1, 1.e4 / 1.d4 / 1.c4 / 1.Nf3 / etc.) MUST have arrows: [] — the student is just learning what the opening starts with; there's no threat to point at and no look-ahead is sharp enough to be useful. Pawn-pointing-straight-ahead arrows on the very first move look weird and add nothing. Skip arrows on move 1 always.
 - Use squares in algebraic notation only (e.g. "e4", "f7"). Empty arrows array is fine; do NOT invent arrows just to fill the field.
 
 The student is playing as ${studentSide}. Frame ideas from that perspective when relevant.
 
 Also produce:
-- intro: 2-3 sentences framing the lesson
+- intro: ONE OR TWO sentences MAX framing the lesson. Hard cap 30 words total. Do NOT preview moves the student is about to see ("we'll see Bc4 later", "after a few moves White castles", etc.). Do NOT explain what the position will look like in the future. Just establish what the opening IS and why someone plays it. The student is about to walk every move; previewing them is unacceptable.
 - outro: 1-2 sentences inviting the next step (drill / face the variation / try a deeper line)
 ${branches.length > 0 ? `- branchIdeas: ONE sentence (max 20 words) for EACH branch the student might dive into next. Mention the named line and its strategic flavor (sharp / positional / pawn-storm / quiet etc).
 - branchExtensionIdeas: a 2D array. For EACH branch (in the same order as branches[]), emit an array of EXACTLY ONE idea object per extension move provided. If a branch has 6 extension moves you MUST emit 6 idea objects in its inner array — no fewer. This is the most-undersized field in past gens and the student ends up reading template prose instead of your prose; do not skimp.

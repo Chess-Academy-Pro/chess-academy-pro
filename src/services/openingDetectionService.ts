@@ -492,7 +492,14 @@ export function findSiblingExtensionBranches(
     }
   }
 
-  const MAX_EXTENSION_PLIES = 6;
+  // Was capped at 6 plies, but production audit (build 5fec0dc)
+  // showed Italian Classical → Greco Gambit cutting off at ply 13
+  // when Lichess has the line documented through ply 23 (Moeller-
+  // Bayonet Attack). David's principle: every walkthrough goes as
+  // deep as Lichess allows. Cap raised to 24 plies — generous
+  // enough for the deepest entries currently in the DB while still
+  // protecting against pathological future entries.
+  const MAX_EXTENSION_PLIES = 24;
   const branches: ForkBranch[] = Array.from(byFirstMove.entries()).map(
     ([san, group]) => {
       // Pick the rep whose sub-name is most useful as a fork-tile
