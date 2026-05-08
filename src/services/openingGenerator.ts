@@ -1789,12 +1789,11 @@ For each move in the line, return:
   - "1.e4 grabs the center and frees the king's bishop and queen."
   - "1...c5 — Black declines the symmetry and aims for asymmetric play on the queenside."
   - "5.Nc3 develops the knight, defends e4, and prepares Bc4 or Qe2."
-- arrows (OPTIONAL, 0-3 per move): squares to highlight on the board AFTER the move. Use these to show STRATEGIC INTENT — what the piece NOW eyes, what's attacked, where pressure shifts. Do NOT draw the move itself (the board animates that automatically). Examples:
-  - For Bc4: arrow c4→f7 ("the bishop now eyes f7")
-  - For Nf3: arrow f3→e5 ("the knight controls e5")
-  - For ...c5: arrow c5→d4 ("c5 fights for d4")
-  - For O-O: no arrows needed
-- Use squares in algebraic notation only (e.g. "e4", "f7"). Skip the arrows field when there's nothing useful to show.
+- arrows (OPTIONAL, 0-3 per move): the user wants arrows ONLY for two purposes:
+  (a) THREATS — squares the moved piece NOW attacks / pressures / eyes (Bc4 → f7, Nf3 → e5, c5 → d4).
+  (b) LOOK-AHEAD — the next critical square on the line we're walking (Re1 → e8 because the rook will land there in 2 moves; Nc3 → d5 because the knight is going to d5 next).
+  Do NOT draw the move's own from→to (the board animates that — drawing it again is noise). Do NOT draw retrospective arrows. Skip arrows entirely when neither category fits (O-O, generic developing moves).
+- Use squares in algebraic notation only (e.g. "e4", "f7"). Empty arrows array is fine; do NOT invent arrows just to fill the field.
 
 The student is playing as ${studentSide}. Frame ideas from that perspective when relevant.
 
@@ -1802,7 +1801,13 @@ Also produce:
 - intro: 2-3 sentences framing the lesson
 - outro: 1-2 sentences inviting the next step (drill / face the variation / try a deeper line)
 ${branches.length > 0 ? `- branchIdeas: ONE sentence (max 20 words) for EACH branch the student might dive into next. Mention the named line and its strategic flavor (sharp / positional / pawn-storm / quiet etc).
-- branchExtensionIdeas: a 2D array. For EACH branch (in the same order as branches), an array of one idea object per extension move provided. Same rules as the spine ideas: text (max ${pace === 'tour' ? 12 : 25} words mentioning the SAN), optional arrows. These narrate the branch's main-line continuation into middlegame so the student lands at a position with a real plan, not at the moment the variation gets named. Example: for "English Attack" with extension "Ng4 Bg5 Qa5+", emit 3 idea objects narrating those three plies.` : ''}`;
+- branchExtensionIdeas: a 2D array. For EACH branch (in the same order as branches[]), emit an array of EXACTLY ONE idea object per extension move provided. If a branch has 6 extension moves you MUST emit 6 idea objects in its inner array — no fewer. This is the most-undersized field in past gens and the student ends up reading template prose instead of your prose; do not skimp.
+  - text rules: same as the spine ideas (max ${pace === 'tour' ? 12 : 25} words, mention the SAN, do NOT forecast future moves).
+  - arrow rules (CRITICAL): arrows on the EXTENSION moves should ONLY show:
+      (a) THREATS — squares the moved piece NOW attacks/pressures (Bc4 → f7), or
+      (b) LOOK-AHEAD — the next critical square on the line you're walking (Re1 → e8 if the rook is going to lift, Nc3 → d5 if the knight is heading to d5 next).
+    Do NOT draw the move's own from→to (the board animates that). Skip arrows when nothing useful to show.
+  Example: for "English Attack" with extension "Ng4 Bg5 Qa5+", emit 3 idea objects narrating those three plies.` : ''}`;
   const userPrompt = `Opening: ${entry.canonicalName} (${entry.eco})
 Student plays: ${studentSide}
 Total moves in spine: ${positions.length}
