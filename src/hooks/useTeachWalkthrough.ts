@@ -31,6 +31,7 @@
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Chess } from 'chess.js';
+import { stripSanAnnotations } from '../data/openingWalkthroughs/validate';
 import { voiceService } from '../services/voiceService';
 import { logAppAudit } from '../services/appAuditor';
 import { markStageComplete } from '../services/openingProgress';
@@ -377,6 +378,11 @@ export interface UseTeachWalkthroughReturn {
    *  reply if next ply is opponent's). On mismatch, sets
    *  drillWrongMove and the UI shows the correction. */
   attemptDrillMove: (san: string) => { ok: boolean };
+  /** Attempt a Find-the-Move answer via the BOARD: the student
+   *  drags a piece on the rendered position; we route to
+   *  pickQuizChoice if the SAN matches a candidate. Returns the
+   *  matched candidate index, or null if no candidate matches. */
+  attemptFindMoveAnswer: (san: string) => { matchedIndex: number | null };
   /** Dismiss the wrong-move feedback and let the student try again
    *  from the same drill position. */
   acknowledgeDrillMistake: () => void;
@@ -1279,6 +1285,38 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
     }
   }, [tree, activeStage, stageIndex, backToStageMenu]);
 
+  /** Attempt a Find-the-Move answer via the BOARD instead of tapping
+   *  a multiple-choice tile. The student drags a piece on the
+   *  rendered position; we look up the candidate whose SAN matches
+   *  (case-insensitive after stripping annotation marks) and route
+   *  to pickQuizChoice with that candidate's index. Returns the
+   *  matched index, or null if no candidate matches. User: "Find
+   *  the move should be able to move the piece on the board as
+   *  another way to get the right answer." */
+  const attemptFindMoveAnswer = useCallback(
+    (san: string): { matchedIndex: number | null } => {
+      if (!tree?.findMove || phase !== 'quiz' || activeStage !== 'findMove') {
+        return { matchedIndex: null };
+      }
+      if (stageIndex < 0 || stageIndex >= tree.findMove.length) {
+        return { matchedIndex: null };
+      }
+      if (quizSelected !== null) {
+        return { matchedIndex: null };
+      }
+      const q = tree.findMove[stageIndex];
+      const norm = stripSanAnnotations(san).toLowerCase();
+      const idx = q.candidates.findIndex(
+        (c) => stripSanAnnotations(c.san).toLowerCase() === norm,
+      );
+      if (idx < 0) return { matchedIndex: null };
+      setQuizSelected(idx);
+      setQuizShowingFeedback(true);
+      return { matchedIndex: idx };
+    },
+    [tree, phase, activeStage, stageIndex, quizSelected],
+  );
+
   /** Attempt a drill move. Returns ok=true on match (advances state),
    *  ok=false on mismatch (sets drillWrongMove for UI feedback). */
   const attemptDrillMove = useCallback(
@@ -1448,6 +1486,7 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
     pickQuizChoice,
     nextQuizQuestion,
     attemptDrillMove,
+    attemptFindMoveAnswer,
     acknowledgeDrillMistake,
     restartDrill,
     backToStageMenu,

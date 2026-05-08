@@ -1235,13 +1235,29 @@ export function CoachTeachPage(): JSX.Element {
     //   1. opts.fenOverride — required when handleSubmit is called
     //      from a board onMove (React hasn't re-rendered yet, so
     //      gameRef.current is one tick stale).
-    //   2. gameRef.current — fresh after the next render commit, which
-    //      covers async coach trips and chat-input submissions.
+    //   2. walkthrough's displayed FEN — when a walkthrough or stage
+    //      (drill, punish quiz, find-the-move quiz, trap-playing) is
+    //      active, the board is showing the walkthrough's path/quiz
+    //      position, NOT the underlying chess game state. Production
+    //      audit (build 859956e): user asked "do I not just take the
+    //      bishop with the pond" during a punish quiz at FEN
+    //      r1b1kb1r/... and the brain saw the starting position FEN
+    //      because gameRef hadn't moved. Brain answered as if at the
+    //      start of a new game. Match the same priority used by the
+    //      board renderer (drill > trap > walkthrough.fen).
+    //   3. gameRef.current — fresh after the next render commit, which
+    //      covers async coach trips and chat-input submissions when
+    //      no walkthrough is active.
     // Derive turn from the FEN string ('w' or 'b' field) rather than
     // game.turn so override + turn always agree on the same FEN.
     const overrideFen = opts?.fenOverride;
     const liveGame = gameRef.current;
-    const fen = overrideFen ?? liveGame.fen;
+    const walkthroughFen = walkthrough.isActive
+      ? (walkthrough.phase === 'drill'
+          ? walkthrough.drillFen
+          : walkthrough.trapFen ?? walkthrough.fen)
+      : null;
+    const fen = overrideFen ?? walkthroughFen ?? liveGame.fen;
     const fenTurn: 'white' | 'black' = fen.split(' ')[1] === 'b' ? 'black' : 'white';
     // Inject the latest Stockfish eval into the envelope when its FEN
     // matches the FEN we're asking about. The brain otherwise
@@ -1806,26 +1822,44 @@ export function CoachTeachPage(): JSX.Element {
                   // own FEN; trap-playing mode owns trapFen (so the
                   // detour animates without mutating walkthrough path
                   // state); otherwise use the walkthrough's path FEN.
-                  <ChessBoard
-                    key={`walkthrough-board-${
+                  //
+                  // Find-the-Move quiz: enable board interaction so
+                  // the student can drag a piece to answer instead of
+                  // tapping a multiple-choice tile. Production
+                  // request from user: "Find the move should be able
+                  // to move the piece on the board as another way to
+                  // get the right answer."
+                  (() => {
+                    const isFindMoveQuiz =
+                      walkthrough.phase === 'quiz' &&
+                      walkthrough.activeStage === 'findMove' &&
+                      walkthrough.quizSelected === null;
+                    const fenToShow =
                       walkthrough.phase === 'drill'
                         ? walkthrough.drillFen
-                        : walkthrough.trapFen ?? walkthrough.fen
-                    }`}
-                    initialFen={
-                      walkthrough.phase === 'drill'
-                        ? walkthrough.drillFen
-                        : walkthrough.trapFen ?? walkthrough.fen
-                    }
-                    orientation={playerColor}
-                    interactive={false}
-                    showFlipButton={false}
-                    showUndoButton={false}
-                    showResetButton={false}
-                    showEvalBar={false}
-                    showVoiceMic={false}
-                    showLastMoveHighlight
-                  />
+                        : walkthrough.trapFen ?? walkthrough.fen;
+                    return (
+                      <ChessBoard
+                        key={`walkthrough-board-${fenToShow}`}
+                        initialFen={fenToShow}
+                        orientation={playerColor}
+                        interactive={isFindMoveQuiz}
+                        showFlipButton={false}
+                        showUndoButton={false}
+                        showResetButton={false}
+                        showEvalBar={false}
+                        showVoiceMic={false}
+                        showLastMoveHighlight
+                        onMove={
+                          isFindMoveQuiz
+                            ? (move) => {
+                                walkthrough.attemptFindMoveAnswer(move.san);
+                              }
+                            : undefined
+                        }
+                      />
+                    );
+                  })()
                 )}
                 <NarrationArrowOverlay
                   arrows={walkthrough.narrationArrows}
