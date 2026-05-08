@@ -2387,6 +2387,17 @@ const redGlowStyle: React.CSSProperties = {
     '0 0 8px rgba(239, 68, 68, 0.4), 0 0 18px rgba(239, 68, 68, 0.2), 0 0 30px rgba(239, 68, 68, 0.1)',
 };
 
+/** Purple glow for the quiz / concept-check tile. Signals
+ *  "thinking-style content — recall and ideas". */
+const purpleGlowStyle: React.CSSProperties = {
+  borderTop: '1px solid rgba(167, 139, 250, 0.3)',
+  borderRight: '1px solid rgba(167, 139, 250, 0.3)',
+  borderLeft: '2px solid rgba(167, 139, 250, 0.8)',
+  borderBottom: '2px solid rgba(167, 139, 250, 0.8)',
+  boxShadow:
+    '0 0 8px rgba(167, 139, 250, 0.4), 0 0 18px rgba(167, 139, 250, 0.2), 0 0 30px rgba(167, 139, 250, 0.1)',
+};
+
 /** Estimated mean wall-clock time for an LLM opening generation.
  *  Drives the progress bar's fill rate. Real wall times observed:
  *  30-60s typical, up to 90s on retry. We aim for 95% fill at this
@@ -2987,7 +2998,7 @@ function WalkthroughControls({
             <button
               onClick={() => walkthrough.startStage('findMove')}
               className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg bg-theme-surface hover:bg-theme-bg text-left min-h-[52px] transition-colors"
-              style={goldGlowStyle}
+              style={greenGlowStyle}
               data-testid="walkthrough-stage-findmove"
             >
               <div className="flex flex-col">
@@ -3001,7 +3012,7 @@ function WalkthroughControls({
             <button
               onClick={() => walkthrough.startStage('concepts')}
               className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg bg-theme-surface hover:bg-theme-bg text-left min-h-[52px] transition-colors"
-              style={goldGlowStyle}
+              style={purpleGlowStyle}
               data-testid="walkthrough-stage-concepts"
             >
               <div className="flex flex-col">
