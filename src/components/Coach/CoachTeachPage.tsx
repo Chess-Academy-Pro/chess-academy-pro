@@ -1311,6 +1311,26 @@ export function CoachTeachPage(): JSX.Element {
       trigger: null,
     });
 
+    // Auto-pause the walkthrough when the student asks a chat
+    // question while it's running. This frees the audio channel so
+    // the brain's voice answer plays instead of being suppressed,
+    // and freezes the board so the student can think about the
+    // current position alongside the answer. The existing pause UI
+    // (Resume / End buttons) lets them restart manually. User: "I
+    // want that. Pause walkthrough and answer questions then confirm
+    // continuation with user before restarting walkthrough."
+    const autoPausedThisTurn =
+      walkthrough.isActive && walkthrough.phase !== 'paused';
+    if (autoPausedThisTurn) {
+      walkthrough.pause();
+      void logAppAudit({
+        kind: 'coach-surface-migrated',
+        category: 'subsystem',
+        source: 'CoachTeachPage.handleSubmit',
+        summary: 'auto-paused walkthrough — student asked a chat question',
+      });
+    }
+
     try {
       const result = await coachService.ask(
         { surface: 'teach', ask: text, liveState },
@@ -1513,6 +1533,28 @@ export function CoachTeachPage(): JSX.Element {
           surface: 'chat-teach',
           role: 'coach',
           text: finalText,
+          fen: gameRef.current.fen,
+          trigger: null,
+        });
+      }
+
+      // If we auto-paused the walkthrough at the start of this turn,
+      // tell the student how to continue. The Resume button is
+      // already visible on the paused-state UI, but the explicit
+      // chat prompt makes the workflow obvious. User: "...then
+      // confirm continuation with user before restarting walkthrough."
+      if (autoPausedThisTurn) {
+        const resumeMsg = `Walkthrough is paused. Tap Resume to continue, or ask another question.`;
+        setMessages((prev) => [...prev, {
+          id: `${turnId}-resume-prompt`,
+          role: 'assistant',
+          content: resumeMsg,
+          timestamp: Date.now(),
+        }]);
+        useCoachMemoryStore.getState().appendConversationMessage({
+          surface: 'chat-teach',
+          role: 'coach',
+          text: resumeMsg,
           fen: gameRef.current.fen,
           trigger: null,
         });

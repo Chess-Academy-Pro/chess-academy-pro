@@ -343,6 +343,14 @@ export interface ForkBranch {
   /** How many sibling DB entries share this divergent move; used to
    *  rank popularity and cap the picker. */
   count: number;
+  /** Continuation moves AFTER the first divergent SAN, capped at a
+   *  few plies, so each branch progresses into a real middlegame
+   *  position rather than dropping off at the moment the variation
+   *  gets named. Pulled from the longest DB entry under this branch
+   *  whose name still falls under the parent canonical. User: "Can
+   *  we code in that every line needs to progress into the start of
+   *  the middlegame?" */
+  extensionMoves: string[];
 }
 
 /** Find sibling DB entries that EXTEND a canonical opening's PGN
@@ -392,6 +400,7 @@ export function findSiblingExtensionBranches(
     }
   }
 
+  const MAX_EXTENSION_PLIES = 6;
   const branches: ForkBranch[] = Array.from(byFirstMove.entries()).map(
     ([san, group]) => {
       // Pick the rep with the SHORTEST sub-name (most general —
@@ -404,11 +413,34 @@ export function findSiblingExtensionBranches(
         return a.pgn.length < b.pgn.length ? a : b;
       });
       const subName = rep.name.slice(namePrefix.length).split(',')[0].trim();
+      // Pick the LONGEST DB entry under this branch's first move to
+      // pull middlegame extension plies. Restrict to entries whose
+      // name still falls under the canonical (so we stay in this
+      // sub-variation, not drift to a totally different opening).
+      const branchPgnPrefix = canonPlies.join(' ') + ' ' + san + ' ';
+      const branchExactPgn = canonPlies.join(' ') + ' ' + san;
+      const extensionCandidates = entries.filter(
+        (e) =>
+          e.name.startsWith(namePrefix) &&
+          (e.pgn === branchExactPgn || e.pgn.startsWith(branchPgnPrefix)),
+      );
+      const longest =
+        extensionCandidates.length > 0
+          ? extensionCandidates.reduce((a, b) => (a.pgn.length > b.pgn.length ? a : b))
+          : null;
+      const allMoves = longest ? longest.pgn.split(/\s+/).filter(Boolean) : [];
+      // Skip the canonical spine + the branch's first move; keep at
+      // most MAX_EXTENSION_PLIES plies so the branch lands in
+      // middlegame territory without ballooning the lesson.
+      const extensionMoves = allMoves
+        .slice(canonPlies.length + 1)
+        .slice(0, MAX_EXTENSION_PLIES);
       return {
         san,
         label: subName,
         fullName: `${canonicalName}, ${subName}`,
         count: group.count,
+        extensionMoves,
       };
     },
   );

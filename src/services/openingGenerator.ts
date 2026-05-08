@@ -1595,10 +1595,6 @@ const NARRATION_SCHEMA: Record<string, unknown> = {
         required: ['text'],
         properties: {
           text: { type: 'string' },
-          // Optional arrows: 0-3 per move, showing strategic intent
-          // (what the piece NOW eyes / attacks / pressures), NOT the
-          // move itself. The board animates the move's own from→to;
-          // the LLM-supplied arrows add information beyond that.
           arrows: {
             type: 'array',
             items: {
@@ -1614,6 +1610,36 @@ const NARRATION_SCHEMA: Record<string, unknown> = {
       },
     },
     branchIdeas: { type: 'array', items: { type: 'string' } },
+    // For each fork branch, ideas for the EXTENSION moves that walk
+    // the line into middlegame. Outer index matches branches[]; inner
+    // index matches branches[i].extensionMoves[]. User: "ALL lines
+    // extend to here [middlegame]." Without this every branch was
+    // just the one divergent move, dropping the student off at the
+    // moment the variation gets named with no idea what to play next.
+    branchExtensionIdeas: {
+      type: 'array',
+      items: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['text'],
+          properties: {
+            text: { type: 'string' },
+            arrows: {
+              type: 'array',
+              items: {
+                type: 'object',
+                required: ['from', 'to'],
+                properties: {
+                  from: { type: 'string' },
+                  to: { type: 'string' },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
 };
 
@@ -1627,6 +1653,7 @@ interface NarrationOutput {
   outro: string;
   ideas: NarrationIdea[];
   branchIdeas?: string[];
+  branchExtensionIdeas?: NarrationIdea[][];
 }
 
 /** PRIMARY gen path: build the walkthrough tree skeleton from the
@@ -1707,7 +1734,13 @@ async function generateOpeningFromDbNarration(
   // Same FEN = positions[last].fen. Whose turn is determined by the
   // total ply count's parity.
   const branchLabels = branches
-    .map((b, idx) => `${idx + 1}. "${b.label}" (move: ${b.san}) — ${b.count} sub-line${b.count === 1 ? '' : 's'} in DB`)
+    .map((b, idx) => {
+      const extInfo =
+        b.extensionMoves.length > 0
+          ? ` extending into middlegame with: ${b.extensionMoves.join(' ')}`
+          : '';
+      return `${idx + 1}. "${b.label}" (entry move: ${b.san}) — ${b.count} sub-line${b.count === 1 ? '' : 's'} in DB${extInfo}`;
+    })
     .join('\n');
   const systemPrompt = `You are an expert chess coach narrating a walkthrough of "${entry.canonicalName}". Output ONLY a JSON object matching the schema. The move sequence and positions are PROVIDED — do NOT invent or alter them. Your only job is to write short coach commentary plus optional visualization arrows.
 
@@ -1728,7 +1761,8 @@ The student is playing as ${studentSide}. Frame ideas from that perspective when
 Also produce:
 - intro: 2-3 sentences framing the lesson
 - outro: 1-2 sentences inviting the next step (drill / face the variation / try a deeper line)
-${branches.length > 0 ? `- branchIdeas: ONE sentence (max 20 words) for EACH branch the student might dive into next. Mention the named line and its strategic flavor (sharp / positional / pawn-storm / quiet etc).` : ''}`;
+${branches.length > 0 ? `- branchIdeas: ONE sentence (max 20 words) for EACH branch the student might dive into next. Mention the named line and its strategic flavor (sharp / positional / pawn-storm / quiet etc).
+- branchExtensionIdeas: a 2D array. For EACH branch (in the same order as branches), an array of one idea object per extension move provided. Same rules as the spine ideas: text (max 25 words mentioning the SAN), optional arrows. These narrate the branch's main-line continuation into middlegame so the student lands at a position with a real plan, not at the moment the variation gets named. Example: for "English Attack" with extension "Ng4 Bg5 Qa5+", emit 3 idea objects narrating those three plies.` : ''}`;
   const userPrompt = `Opening: ${entry.canonicalName} (${entry.eco})
 Student plays: ${studentSide}
 Total moves in spine: ${positions.length}
@@ -1777,6 +1811,7 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
   //    fires the deep-dive flow that resolves the canonical name and
   //    starts a fresh focused walkthrough.
   type ChildWrap = { node: WalkthroughTreeNode; label?: string; forkSubtitle?: string };
+  const SQUARE_RE = /^[a-h][1-8]$/;
   const branchChildren: ChildWrap[] = branches.map((b, idx) => {
     // The branch's first move belongs to the side whose turn it is
     // after the canonical's last ply. Position[i].ply = i, so after
@@ -1788,6 +1823,43 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
     const teaser =
       narration.branchIdeas?.[idx]?.trim() ||
       `${b.san} — ${b.label} (${b.count} sub-line${b.count === 1 ? '' : 's'} in the database).`;
+    // Walk extension moves bottom-up to build the branch's chain.
+    // Each extension ply gets its own node. User: "ALL lines extend
+    // to here [middlegame]." Without these extensions every branch
+    // dropped off at the moment the variation gets named — no plan,
+    // no middlegame transition.
+    const extIdeas = narration.branchExtensionIdeas?.[idx] ?? [];
+    let extChildren: ChildWrap[] = [];
+    for (let j = b.extensionMoves.length - 1; j >= 0; j -= 1) {
+      const extSan = b.extensionMoves[j];
+      // Branch ply 0 is the branch's first move (b.san), so the
+      // extension's first move is ply 1 from the branch's perspective.
+      // From the spine's perspective the extension's j-th ply is at
+      // ply positions.length + 1 + j. Whose turn is determined by
+      // that absolute ply count's parity.
+      const absolutePly = positions.length + 1 + j;
+      const extMovedBy: 'white' | 'black' =
+        absolutePly % 2 === 0 ? 'black' : 'white';
+      const ideaEntry = extIdeas[j];
+      const text =
+        (typeof ideaEntry === 'object' && ideaEntry?.text?.trim()) ||
+        synthesizeIdeaFromSan(extSan, extMovedBy, absolutePly - 1);
+      const rawArrows =
+        typeof ideaEntry === 'object' && Array.isArray(ideaEntry?.arrows)
+          ? ideaEntry.arrows
+          : [];
+      const arrows = rawArrows.filter(
+        (a) => SQUARE_RE.test(a.from) && SQUARE_RE.test(a.to) && a.from !== a.to,
+      );
+      const node: WalkthroughTreeNode = {
+        san: extSan,
+        movedBy: extMovedBy,
+        idea: text,
+        children: extChildren,
+      };
+      if (arrows.length > 0) node.narration = [{ text, arrows }];
+      extChildren = [{ node }];
+    }
     return {
       label: b.label,
       forkSubtitle: teaser,
@@ -1795,11 +1867,10 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
         san: b.san,
         movedBy: branchMovedBy,
         idea: teaser,
-        children: [],
+        children: extChildren,
       },
     };
   });
-  const SQUARE_RE = /^[a-h][1-8]$/;
   let nextChildren: ChildWrap[] = branchChildren;
   for (let i = positions.length - 1; i >= 0; i -= 1) {
     const p = positions[i];
