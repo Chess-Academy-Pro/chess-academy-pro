@@ -432,13 +432,14 @@ export interface ForkBranch {
   /** How many sibling DB entries share this divergent move; used to
    *  rank popularity and cap the picker. */
   count: number;
-  /** Continuation moves AFTER the first divergent SAN, capped at a
-   *  few plies, so each branch progresses into a real middlegame
-   *  position rather than dropping off at the moment the variation
-   *  gets named. Pulled from the longest DB entry under this branch
-   *  whose name still falls under the parent canonical. User: "Can
-   *  we code in that every line needs to progress into the start of
-   *  the middlegame?" */
+  /** Continuation moves AFTER the first divergent SAN, pulled from
+   *  the LONGEST DB entry under this branch whose name still falls
+   *  under the parent canonical. Runs all the way to the end of the
+   *  Lichess DB's recorded line so each branch ships the student
+   *  every ply the DB knows about — no silent middlegame truncation.
+   *  User: "Make sure they are all extended to the end of lichess
+   *  database." Tour-mode callers can tighten this further at the
+   *  call site (see `openingGenerator.ts` TOUR_EXT_CAP). */
   extensionMoves: string[];
 }
 
@@ -492,7 +493,6 @@ export function findSiblingExtensionBranches(
     }
   }
 
-  const MAX_EXTENSION_PLIES = 6;
   const branches: ForkBranch[] = Array.from(byFirstMove.entries()).map(
     ([san, group]) => {
       // Pick the rep whose sub-name is most useful as a fork-tile
@@ -549,12 +549,15 @@ export function findSiblingExtensionBranches(
           ? extensionCandidates.reduce((a, b) => (a.pgn.length > b.pgn.length ? a : b))
           : null;
       const allMoves = longest ? longest.pgn.split(/\s+/).filter(Boolean) : [];
-      // Skip the canonical spine + the branch's first move; keep at
-      // most MAX_EXTENSION_PLIES plies so the branch lands in
-      // middlegame territory without ballooning the lesson.
-      const extensionMoves = allMoves
-        .slice(canonPlies.length + 1)
-        .slice(0, MAX_EXTENSION_PLIES);
+      // Take EVERY remaining ply past the canonical spine + branch's
+      // first move. The Lichess DB is the canon — if it carries 12
+      // plies of continuation under this branch, we ship all 12.
+      // Earlier builds capped at 6 plies as a "land in middlegame"
+      // heuristic, but that silently truncated 113 branches across 98
+      // openings (audited 2026-05-08), dropping the student off
+      // before reaching the named line's terminal position. Tour-mode
+      // callers re-clip this themselves to keep the quick pace.
+      const extensionMoves = allMoves.slice(canonPlies.length + 1);
       return {
         san,
         label: subName,

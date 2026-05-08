@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { detectOpening, isStillInOpening, getOpeningMoves, getNextOpeningBookMove, findRelatedDbEntries, resolveOpeningEntry, findContinuationsAtPly, findLinePickerOptions, _resetTrie } from './openingDetectionService';
+import { detectOpening, isStillInOpening, getOpeningMoves, getNextOpeningBookMove, findRelatedDbEntries, resolveOpeningEntry, findContinuationsAtPly, findLinePickerOptions, findSiblingExtensionBranches, findShortestCanonicalPgn, _resetTrie } from './openingDetectionService';
+import openingsData from '../data/openings-lichess.json';
 
 describe('openingDetectionService', () => {
   beforeEach(() => {
@@ -331,6 +332,84 @@ describe('openingDetectionService', () => {
       // tile — the filter drops 4-ply terminal entries.
       const labels = result?.options.map((o) => o.label) ?? [];
       expect(labels.some((l) => l.includes('Gunderam Gambit'))).toBe(false);
+    });
+  });
+
+  describe('findSiblingExtensionBranches extends to end of Lichess DB', () => {
+    interface OpeningEntry { eco: string; name: string; pgn: string }
+
+    it('returns Najdorf branches with full DB-length extensions (no 6-ply cap)', () => {
+      const canonical = 'Sicilian Defense: Najdorf Variation';
+      const shortPgn = findShortestCanonicalPgn(canonical);
+      expect(shortPgn).not.toBeNull();
+      const branches = findSiblingExtensionBranches(canonical, shortPgn!);
+      expect(branches.length).toBeGreaterThan(0);
+      // Pre-fix this branch was capped at 6 plies. The Lichess DB
+      // carries longer same-name lines (Polugaevsky / Ivkov) so at
+      // least ONE branch must now expose 7+ plies of extension.
+      const hasDeep = branches.some((b) => b.extensionMoves.length >= 7);
+      expect(hasDeep).toBe(true);
+    });
+
+    it('every branch extension equals the full sub-line minus spine + divergent move', () => {
+      const entries = openingsData as OpeningEntry[];
+      const canonical = 'Sicilian Defense: Najdorf Variation';
+      const shortPgn = findShortestCanonicalPgn(canonical)!;
+      const spinePlies = shortPgn.split(/\s+/).filter(Boolean).length;
+      const branches = findSiblingExtensionBranches(canonical, shortPgn);
+
+      for (const b of branches) {
+        const branchExactPgn = `${shortPgn} ${b.san}`;
+        const candidates = entries.filter(
+          (e) =>
+            e.name.startsWith(`${canonical}, `) &&
+            (e.pgn === branchExactPgn || e.pgn.startsWith(`${branchExactPgn} `)),
+        );
+        if (candidates.length === 0) continue;
+        const longest = candidates.reduce((a, b2) =>
+          a.pgn.length > b2.pgn.length ? a : b2,
+        );
+        const longestPlies = longest.pgn.split(/\s+/).filter(Boolean).length;
+        const expectedExtPlies = longestPlies - spinePlies - 1;
+        expect(b.extensionMoves.length).toBe(expectedExtPlies);
+      }
+    });
+
+    it('audits ALL canonical openings — no branch is silently truncated', () => {
+      // Whole-DB regression. For every opening that has fork
+      // branches, every branch's extensionMoves length must equal
+      // the full delta past spine + divergent move. If a future cap
+      // gets reintroduced this fires immediately.
+      const entries = openingsData as OpeningEntry[];
+      const allNames = new Set(entries.map((e) => e.name));
+      const offenders: string[] = [];
+      for (const canonical of allNames) {
+        const shortPgn = findShortestCanonicalPgn(canonical);
+        if (!shortPgn) continue;
+        const branches = findSiblingExtensionBranches(canonical, shortPgn);
+        if (branches.length === 0) continue;
+        const spinePlies = shortPgn.split(/\s+/).filter(Boolean).length;
+        for (const b of branches) {
+          const branchExactPgn = `${shortPgn} ${b.san}`;
+          const candidates = entries.filter(
+            (e) =>
+              e.name.startsWith(`${canonical}, `) &&
+              (e.pgn === branchExactPgn || e.pgn.startsWith(`${branchExactPgn} `)),
+          );
+          if (candidates.length === 0) continue;
+          const longest = candidates.reduce((a, b2) =>
+            a.pgn.length > b2.pgn.length ? a : b2,
+          );
+          const expected =
+            longest.pgn.split(/\s+/).filter(Boolean).length - spinePlies - 1;
+          if (b.extensionMoves.length !== expected) {
+            offenders.push(
+              `${canonical} / ${b.label}: got ${b.extensionMoves.length} plies, expected ${expected}`,
+            );
+          }
+        }
+      }
+      expect(offenders).toEqual([]);
     });
   });
 });

@@ -83,3 +83,63 @@ describe('Pro Repertoire PGN Legality', () => {
     }
   });
 });
+
+describe('Pro Repertoire Trap Line Quality', () => {
+  it('no opening has duplicate trap-line names', () => {
+    const dupes: string[] = [];
+    for (const op of entries) {
+      if (!op.trapLines) continue;
+      const seen = new Map<string, number>();
+      for (const t of op.trapLines) {
+        seen.set(t.name, (seen.get(t.name) ?? 0) + 1);
+      }
+      for (const [name, count] of seen) {
+        if (count > 1) dupes.push(`${op.id}: "${name}" appears ${count} times`);
+      }
+    }
+    expect(dupes).toEqual([]);
+  });
+
+  it('every trap line is at least 6 plies long', () => {
+    // A trap by definition has setup → bait → spring → win-material.
+    // Six plies (3 full moves per side) is the minimum credible
+    // length; anything shorter is a tactical motif, not a trap line.
+    const offenders: string[] = [];
+    for (const op of entries) {
+      if (!op.trapLines) continue;
+      for (const t of op.trapLines) {
+        const tPlies = t.pgn.trim().split(/\s+/).filter(Boolean).length;
+        if (tPlies < 6) {
+          offenders.push(`${op.id} / ${t.name}: only ${tPlies} plies`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it('every trap line shares a legal opening prefix with the main line or a variation', () => {
+    // A trap line is meant to live INSIDE the opening's tree. If its
+    // first 2 plies don't agree with the main line OR any variation,
+    // it's filed under the wrong opening. (We compare 2 plies — the
+    // ECO root — rather than the full main pgn so deviations don't
+    // false-flag legitimate sub-variations.)
+    const offenders: string[] = [];
+    for (const op of entries) {
+      if (!op.trapLines) continue;
+      const acceptablePrefixes = new Set<string>();
+      const mainTokens = op.pgn.trim().split(/\s+/).filter(Boolean);
+      acceptablePrefixes.add(mainTokens.slice(0, 2).join(' '));
+      for (const v of op.variations ?? []) {
+        const vTokens = v.pgn.trim().split(/\s+/).filter(Boolean);
+        acceptablePrefixes.add(vTokens.slice(0, 2).join(' '));
+      }
+      for (const t of op.trapLines) {
+        const trapPrefix = t.pgn.trim().split(/\s+/).filter(Boolean).slice(0, 2).join(' ');
+        if (!acceptablePrefixes.has(trapPrefix)) {
+          offenders.push(`${op.id} / ${t.name}: trap prefix "${trapPrefix}" not in opening's tree`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+});

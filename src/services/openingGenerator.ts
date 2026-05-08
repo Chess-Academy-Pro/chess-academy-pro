@@ -1758,9 +1758,10 @@ async function generateOpeningFromDbNarration(
     spineMoves.join(' '),
   );
   // Tour mode caps branch extensions tighter so the lesson stays
-  // snappy. Full mode gets up to 6 plies per branch (already capped
-  // inside findSiblingExtensionBranches); tour shortens to 3 plies
-  // so each branch is a quick taste, not a deep walkthrough.
+  // snappy. Full mode runs each branch to the END of the Lichess DB
+  // entry (no truncation — `findSiblingExtensionBranches` returns
+  // every ply the DB carries); tour shortens to 3 plies so each
+  // branch is a quick taste, not a deep walkthrough.
   const TOUR_EXT_CAP = 3;
   const branches: ForkBranch[] = pace === 'tour'
     ? rawBranches.map((b) => ({
