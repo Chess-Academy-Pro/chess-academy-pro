@@ -16,6 +16,7 @@ import {
   repairTreeContent,
   assertTreeShape,
   repairNarrationArrows,
+  stripMoveRecitationLeadIn,
 } from './openingGenerator';
 import type {
   WalkthroughTree,
@@ -806,6 +807,51 @@ describe('Lichess puzzle DB coverage for punish-stage inversion', () => {
     // they tag at the family level. The matcher's "drop colon-suffix"
     // candidate captures this case.
     expect(countMatching('Sicilian Defense: Najdorf Variation')).toBeGreaterThanOrEqual(50);
+  });
+});
+
+describe('stripMoveRecitationLeadIn', () => {
+  it('strips the audited "After 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 — symmetrical opening" pattern', () => {
+    // The exact failure mode the user called out: the intro recites
+    // 4 plies then finally says something useful. Strip the recitation,
+    // keep the substance.
+    const intro =
+      'After 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 — symmetrical opening with classical setup.';
+    expect(stripMoveRecitationLeadIn(intro)).toBe(
+      'symmetrical opening with classical setup.',
+    );
+  });
+
+  it('strips a leading "Following 1.d4..." sentence', () => {
+    const intro =
+      'Following 1.d4 d5 2.c4. White offers the queen-pawn gambit. Black has many ways to handle it.';
+    const result = stripMoveRecitationLeadIn(intro);
+    expect(result).toContain('queen-pawn gambit');
+    expect(result).not.toMatch(/1\.d4/);
+  });
+
+  it('leaves move-free intros untouched', () => {
+    const intro =
+      'The Italian Game targets the weak f7 square with the bishop.';
+    expect(stripMoveRecitationLeadIn(intro)).toBe(intro);
+  });
+
+  it('returns "" when the entire intro is move recitation', () => {
+    const intro = 'After 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5.';
+    expect(stripMoveRecitationLeadIn(intro)).toBe('');
+  });
+
+  it('handles black-move ellipsis notation (1...e5)', () => {
+    const intro =
+      'After 1...e5 — Black mirrors the center push. Solid and well-trodden.';
+    const result = stripMoveRecitationLeadIn(intro);
+    expect(result).not.toMatch(/1\.\.\./);
+    expect(result).toContain('Solid and well-trodden');
+  });
+
+  it('returns "" for empty / whitespace input', () => {
+    expect(stripMoveRecitationLeadIn('')).toBe('');
+    expect(stripMoveRecitationLeadIn('   ')).toBe('');
   });
 });
 
