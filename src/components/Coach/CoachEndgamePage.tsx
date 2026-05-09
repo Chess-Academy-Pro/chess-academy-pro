@@ -21,7 +21,9 @@
  */
 import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Chess } from 'chess.js';
 import { ArrowLeft, Crown, ChevronRight, RotateCw, Lightbulb, MessageCircle } from 'lucide-react';
+import type { PieceDropHandlerArgs } from 'react-chessboard';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { useTeachWalkthrough } from '../../hooks/useTeachWalkthrough';
@@ -43,8 +45,22 @@ const TIER_OPTIONS: { value: EndgameTier; label: string }[] = [
   { value: 'mixed', label: 'Mixed' },
 ];
 
+/** Top-level endgame surface tabs. Mating Patterns is the only
+ *  populated one today — the others are placeholders for future
+ *  endgame surfaces (K+P fundamentals, rook endings, etc.) so the
+ *  page's IA reflects the real "Endgame" scope, not just mating
+ *  patterns. User: "Can you put the mating patterns in their own
+ *  tab under endgames?" */
+type EndgameTab = 'mating-patterns' | 'k-and-pawn' | 'rook-endings';
+const TAB_OPTIONS: { value: EndgameTab; label: string; ready: boolean }[] = [
+  { value: 'mating-patterns', label: 'Mating Patterns', ready: true },
+  { value: 'k-and-pawn', label: 'K + Pawn', ready: false },
+  { value: 'rook-endings', label: 'Rook Endings', ready: false },
+];
+
 export function CoachEndgamePage(): JSX.Element {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<EndgameTab>('mating-patterns');
   const [selectedPatternId, setSelectedPatternId] = useState<string | null>(null);
   const [tier, setTier] = useState<EndgameTier>('beginner');
   // Session seed — bump on each lesson load so the within-tier
@@ -138,6 +154,8 @@ export function CoachEndgamePage(): JSX.Element {
       onBack={() => void navigate('/coach/home')}
       tier={tier}
       onTierChange={onTierChange}
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
     />;
   }
 
@@ -169,9 +187,11 @@ interface PickerProps {
   onBack: () => void;
   tier: EndgameTier;
   onTierChange: (next: EndgameTier) => void;
+  activeTab: EndgameTab;
+  onTabChange: (next: EndgameTab) => void;
 }
 
-function PatternPicker({ onPick, onBack, tier, onTierChange }: PickerProps): JSX.Element {
+function PatternPicker({ onPick, onBack, tier, onTierChange, activeTab, onTabChange }: PickerProps): JSX.Element {
   const patterns = useMemo(() => getAllPatterns(), []);
   const named = patterns.filter((p) => p.category === 'named-pattern');
   const piece = patterns.filter((p) => p.category === 'piece-mate');
@@ -194,30 +214,76 @@ function PatternPicker({ onPick, onBack, tier, onTierChange }: PickerProps): JSX
         <div className="w-[44px]" />
       </div>
 
-      <p className="text-sm text-center text-theme-text-muted max-w-lg mx-auto">
-        Pick a checkmate pattern. Listen to the geometry, then practice setting it up across multiple positions.
-      </p>
-
-      {/* Tier selector */}
-      <div className="flex justify-center gap-1 max-w-lg mx-auto w-full">
-        {TIER_OPTIONS.map((opt) => (
+      {/* Top-level endgame surface tabs. Mating Patterns is the
+          populated tab; the others surface "coming soon" so the
+          user can see the surface scope without us shipping
+          half-built content. */}
+      <div className="flex justify-center gap-1 max-w-lg mx-auto w-full border-b border-theme-border pb-0.5">
+        {TAB_OPTIONS.map((opt) => (
           <button
             key={opt.value}
-            onClick={() => onTierChange(opt.value)}
-            className={`flex-1 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              tier === opt.value
-                ? 'bg-theme-accent text-theme-bg'
-                : 'bg-theme-surface text-theme-text-muted hover:bg-theme-bg'
+            onClick={() => opt.ready && onTabChange(opt.value)}
+            disabled={!opt.ready}
+            className={`flex-1 px-2 py-2 text-xs font-medium transition-colors border-b-2 ${
+              activeTab === opt.value
+                ? 'border-theme-accent text-theme-text'
+                : opt.ready
+                  ? 'border-transparent text-theme-text-muted hover:text-theme-text'
+                  : 'border-transparent text-theme-text-muted/40 cursor-not-allowed'
             }`}
-            data-testid={`endgame-tier-${opt.value}`}
+            data-testid={`endgame-tab-${opt.value}`}
           >
             {opt.label}
+            {!opt.ready && <span className="text-[9px] block opacity-70">soon</span>}
           </button>
         ))}
       </div>
 
-      <PatternSection title="Named Patterns" patterns={named} onPick={onPick} />
-      <PatternSection title="Piece Mates" patterns={piece} onPick={onPick} subtitle="Recognition only — practice corpus coming soon" />
+      {activeTab === 'mating-patterns' && (
+        <>
+          <p className="text-sm text-center text-theme-text-muted max-w-lg mx-auto">
+            Pick a checkmate pattern. Listen to the geometry, then practice setting it up across multiple positions.
+          </p>
+
+          {/* Tier selector */}
+          <div className="flex justify-center gap-1 max-w-lg mx-auto w-full">
+            {TIER_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => onTierChange(opt.value)}
+                className={`flex-1 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                  tier === opt.value
+                    ? 'bg-theme-accent text-theme-bg'
+                    : 'bg-theme-surface text-theme-text-muted hover:bg-theme-bg'
+                }`}
+                data-testid={`endgame-tier-${opt.value}`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+
+          <PatternSection title="Named Patterns" patterns={named} onPick={onPick} />
+          <PatternSection title="Piece Mates" patterns={piece} onPick={onPick} subtitle="Recognition only — practice corpus coming soon" />
+        </>
+      )}
+
+      {activeTab !== 'mating-patterns' && (
+        <div className="max-w-lg mx-auto w-full text-center text-theme-text-muted text-sm py-12 px-4">
+          {activeTab === 'k-and-pawn' && (
+            <>
+              <p className="font-semibold text-theme-text">King + Pawn endings — coming soon</p>
+              <p className="mt-2">Opposition, key squares, the rule of the square, Lucena and Philidor positions.</p>
+            </>
+          )}
+          {activeTab === 'rook-endings' && (
+            <>
+              <p className="font-semibold text-theme-text">Rook endings — coming soon</p>
+              <p className="mt-2">Lucena, Philidor, rook + pawn vs rook, active rook principles.</p>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -305,6 +371,52 @@ function LessonView({
   const { phase, fen, forkOptions, isLeaf, leafOutro } = walkthrough;
   const hasPractice = getPracticePuzzleCount(pattern) > 0;
   const studentSide = walkthrough.tree?.studentSide ?? 'white';
+  const [wrongFlash, setWrongFlash] = useState<string | null>(null);
+
+  // Drop handler — turns a board piece-drop into a fork pick. Only
+  // fires during the 'fork' phase (when the student is supposed to
+  // find the move). User: "not able to move any pieces. They are
+  // not functional. Can you make them functional". The lesson tree
+  // is built as a series of fork choices (correct mate move + 2-3
+  // distractors); this handler converts a board drop into the
+  // matching fork index so the student can solve by playing the
+  // move directly instead of tapping a tile.
+  const handlePieceDrop = useCallback(
+    (args: PieceDropHandlerArgs): boolean => {
+      if (phase !== 'fork') return false;
+      if (!args.sourceSquare || !args.targetSquare) return false;
+      const probe = new Chess(fen);
+      let move;
+      try {
+        move = probe.move({
+          from: args.sourceSquare,
+          to: args.targetSquare,
+          promotion: 'q',
+        });
+      } catch {
+        return false;
+      }
+      const idx = forkOptions.findIndex((opt) => opt.node.san === move.san);
+      if (idx >= 0) {
+        walkthrough.pickFork(idx);
+        return true;
+      }
+      // Legal move but not the right answer — flash the destination
+      // square red briefly so the student gets feedback instead of
+      // a silent snap-back.
+      setWrongFlash(args.targetSquare);
+      window.setTimeout(() => setWrongFlash(null), 600);
+      return false;
+    },
+    [phase, fen, forkOptions, walkthrough],
+  );
+
+  const wrongFlashStyles = useMemo<Record<string, React.CSSProperties>>(() => {
+    if (!wrongFlash) return {};
+    return {
+      [wrongFlash]: { background: 'rgba(239, 68, 68, 0.45)' },
+    };
+  }, [wrongFlash]);
 
   const header = (
     <div className="px-3 py-2 md:p-4 border-b border-theme-border">
@@ -416,11 +528,18 @@ function LessonView({
     );
   }
 
-  // Live lesson: render walkthrough state.
+  // Live lesson: render walkthrough state. Board is interactive
+  // during the 'fork' phase so the student can drag pieces to
+  // attempt the correct mate move directly. During narration /
+  // animation the board is non-interactive — pieces wouldn't make
+  // sense to move while the coach is still talking.
   const board = (
     <ConsistentChessboard
       fen={fen}
       boardOrientation={studentSide}
+      interactive={phase === 'fork'}
+      onPieceDrop={handlePieceDrop}
+      squareStyles={wrongFlashStyles}
     />
   );
 
