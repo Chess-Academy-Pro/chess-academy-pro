@@ -59,17 +59,39 @@ export interface TrapTile {
   explanation: string;
 }
 
+/** Suppress trap tiles when the picker's canonical opening is too
+ *  broad (≤ this ply count). Production audit (build cca83fb): user
+ *  searched a family-level parent like "King's Pawn Game" (canonical
+ *  PGN = `e4`, 1 ply) and the picker drowned in 30+ red TRAP tiles
+ *  from every B/C-code opening that starts with 1.e4 — Sicilian,
+ *  Caro-Kann, Scandinavian, Petroff, Vienna, Italian, Scotch all
+ *  flooded in. Their words: "for real tho, we can't have this." A
+ *  1-3 ply prefix is shared by hundreds of unrelated openings so a
+ *  prefix match is meaningless that shallow. At 4+ plies the
+ *  variations have actually diverged and trap matches become
+ *  topical. */
+const MIN_TRAP_PREFIX_PLIES = 4;
+
+/** Hard cap on trap tiles surfaced per picker. Even at a 4-ply
+ *  prefix, popular families (Italian, Sicilian) carry 5+ curated
+ *  traps; capping at 4 keeps the grid scannable without
+ *  overwhelming the variation tiles. */
+const MAX_TRAP_TILES_PER_PICKER = 4;
+
 /** Find curated trap lines whose PGN starts with the given canonical
  *  bare-opening line (e.g. for "Italian Game" with canonical PGN
  *  "e4 e5 Nf3 Nc6 Bc4", returns every trap line whose PGN starts
  *  with that prefix). Used by the Coach line picker to surface red
  *  trap tiles alongside the Lichess-DB variation tiles. Returns []
- *  when no curated traps fall under this opening family. */
+ *  when no curated traps fall under this opening family OR when the
+ *  canonical PGN is too shallow for prefix matching to be topical. */
 export function findTrapTilesForCanonicalLine(
   canonicalPgn: string,
 ): TrapTile[] {
   const prefix = canonicalPgn.trim();
   if (!prefix) return [];
+  const prefixPlies = prefix.split(/\s+/).filter(Boolean).length;
+  if (prefixPlies < MIN_TRAP_PREFIX_PLIES) return [];
   const tiles: TrapTile[] = [];
   for (const op of data.openings) {
     if (!op.trapLines) continue;
@@ -84,5 +106,5 @@ export function findTrapTilesForCanonicalLine(
       });
     }
   }
-  return tiles;
+  return tiles.slice(0, MAX_TRAP_TILES_PER_PICKER);
 }
