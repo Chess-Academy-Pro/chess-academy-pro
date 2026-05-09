@@ -324,6 +324,46 @@ describe('openingDetectionService', () => {
     });
   });
 
+  describe('Lichess-extended entries conform to canonical shape', () => {
+    /* eslint-disable @typescript-eslint/no-require-imports */
+    const extended = require('../data/openings-lichess-extended.json') as Array<{
+      eco?: unknown;
+      name?: unknown;
+      pgn?: unknown;
+    }>;
+    /* eslint-enable @typescript-eslint/no-require-imports */
+
+    it('every extended entry has the {eco, name, pgn} shape canonical entries use', () => {
+      // Existing trie-build, name-resolution, and longest-PGN reducers
+      // all assume each entry is `{eco: string, name: string, pgn:
+      // string}`. If the mining script ever emits a different shape,
+      // every downstream resolver crashes silently. Lock the
+      // invariant here — empty array is fine; non-empty must conform.
+      for (const e of extended) {
+        expect(typeof e.eco).toBe('string');
+        expect(typeof e.name).toBe('string');
+        expect(typeof e.pgn).toBe('string');
+      }
+    });
+
+    it('every extended PGN replays cleanly through chess.js', () => {
+      /* eslint-disable @typescript-eslint/no-require-imports */
+      const { Chess } = require('chess.js') as typeof import('chess.js');
+      /* eslint-enable @typescript-eslint/no-require-imports */
+      for (const e of extended) {
+        const c = new Chess();
+        const moves = (e.pgn as string).trim().split(/\s+/).filter(Boolean);
+        for (const m of moves) {
+          try {
+            c.move(m);
+          } catch {
+            throw new Error(`extended entry "${e.name as string}" — illegal move "${m}" in pgn: ${e.pgn as string}`);
+          }
+        }
+      }
+    });
+  });
+
   describe('findLinePickerOptions excludes terminal-short variations', () => {
     it("hides 4-ply terminal sub-variations from the King's Pawn picker", () => {
       const result = findLinePickerOptions("King's Pawn Game", 1);

@@ -1,4 +1,5 @@
-import openingsData from '../data/openings-lichess.json';
+import canonicalOpenings from '../data/openings-lichess.json';
+import extendedOpenings from '../data/openings-lichess-extended.json';
 import type { DetectedOpening } from '../types';
 
 interface OpeningEntry {
@@ -6,6 +7,23 @@ interface OpeningEntry {
   name: string;
   pgn: string;
 }
+
+/** Canonical Lichess named-opening DB + curator-extended deeper PGNs.
+ *  Both arrays follow the EXACT same `{ eco, name, pgn }` shape so
+ *  every existing function (trie build, name resolution, longest-
+ *  PGN reducers, etc.) treats them uniformly. Extended entries have
+ *  the same eco + name as their canonical counterpart but a longer
+ *  PGN — the existing "longest matching entry wins" logic naturally
+ *  prefers the deeper line for `findShortestCanonicalPgn` callers
+ *  that walk to middlegame. When `openings-lichess-extended.json` is
+ *  empty (e.g. before the mining script has run), behavior is
+ *  identical to canonical-only. User: "Do not break my app!!
+ *  Everything is coded in the exact same way it is now!" — this
+ *  merge respects that contract. */
+const openingsData: OpeningEntry[] = [
+  ...(canonicalOpenings as OpeningEntry[]),
+  ...(extendedOpenings as OpeningEntry[]),
+];
 
 interface TrieNode {
   children: Map<string, TrieNode>;
