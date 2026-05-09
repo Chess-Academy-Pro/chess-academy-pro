@@ -225,7 +225,7 @@ interface WalkthroughTree {
   openingName: string;       // Display name, e.g. "Italian Game"
   eco: string;               // ECO code, e.g. "C50"
   studentSide: 'white' | 'black';  // REQUIRED. Which side the student is learning. White for openings the student plays AS WHITE (Italian, Vienna, Ruy Lopez, Queen's Gambit, etc.). Black for defenses the student plays AS BLACK (Sicilian, French, Caro-Kann, Pirc, King's Indian, Nimzo-Indian, etc.). Drives board orientation.
-  intro: string;             // 2-4 sentence opening framing, coach voice
+  intro: string;             // ONE sentence framing OPENING CHARACTER (sharp/quiet/etc) + ONE concrete plan. NEVER recite the move list — the board animates moves; the intro tells the student what the OPENING IS, not what the moves ARE. Coach voice.
   outro: string;             // 1-2 sentences inviting next steps
   leafOutros?: Record<string, string>;  // Optional per-leaf custom outros, key = SAN path joined by spaces
   root: WalkthroughTreeNode;
@@ -1817,8 +1817,8 @@ For each move in the line, return:
 The student is playing as ${studentSide}. Frame ideas from that perspective when relevant.
 
 Also produce:
-- intro: 2-3 sentences framing the lesson
-- outro: 1-2 sentences inviting the next step (drill / face the variation / try a deeper line)
+- intro: ONE sentence (max 25 words) framing the OPENING'S CHARACTER — sharp / positional / aggressive / quiet / etc. Name ONE concrete plan or square the student should care about. CRITICAL: do NOT recite the move list (the board will animate it). Do NOT say "after 1.e4 e5 2.Nf3..." or any variant of that — production audit (build 6393c0f) caught the LLM opening with "After 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 — symmetrical opening" before saying anything useful. The student already sees the moves; tell them what the OPENING IS, not what the moves ARE.
+- outro: ONE sentence (max 15 words). Action-oriented — what to do next.
 ${branches.length > 0 ? `- branchIdeas: ONE sentence (max 20 words) for EACH branch the student might dive into next. Mention the named line and its strategic flavor (sharp / positional / pawn-storm / quiet etc).
 - branchExtensionIdeas: a 2D array. For EACH branch (in the same order as branches[]), emit an array of EXACTLY ONE idea object per extension move provided. If a branch has 6 extension moves you MUST emit 6 idea objects in its inner array — no fewer. This is the most-undersized field in past gens and the student ends up reading template prose instead of your prose; do not skimp.
   - text rules: same as the spine ideas (max ${pace === 'tour' ? 12 : 25} words, mention the SAN, do NOT forecast future moves).
@@ -1977,7 +1977,9 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
     openingName: displayName,
     eco: entry.eco,
     studentSide,
-    intro: narration.intro?.trim() || `${displayName} — let's walk through the main line.`,
+    intro:
+      stripMoveRecitationLeadIn(narration.intro?.trim() || '') ||
+      `${displayName} — let's walk through the main line.`,
     outro: narration.outro?.trim() || `Drill the moves to lock them in.`,
     root: { san: null, movedBy: null, idea: '', children: nextChildren },
   };
@@ -2096,6 +2098,47 @@ function synthesizeIdeaFromSan(
   const moveNumber = Math.floor(plyIndex / 2) + 1;
   const prefix = movedBy === 'white' ? `${moveNumber}.${san}` : `${moveNumber}…${san}`;
   return `${prefix}.`;
+}
+
+/** Strip a leading move-recitation sentence from an intro string.
+ *
+ *  Production audit (build 6393c0f): user reported the intro for
+ *  Italian Game opened with "After 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 —
+ *  symmetrical opening" before saying anything useful. The student
+ *  is about to SEE those moves animate; reading them aloud first
+ *  is filler. Their words: "the narration said the 4 fen lines in
+ *  a row and then said symmetrical opening. That's what I wanted
+ *  fixed."
+ *
+ *  Heuristic: if the FIRST sentence mentions a move-number pattern
+ *  (e.g. "1.e4", "2...Nc6", "After 1.d4..."), drop it and keep
+ *  whatever comes after. If the entire intro is move recitation
+ *  with nothing after, returns "" so the caller can fall back to
+ *  the generic frame.
+ *
+ *  Exported for testing. */
+export function stripMoveRecitationLeadIn(intro: string): string {
+  const trimmed = intro.trim();
+  if (!trimmed) return '';
+  // Match the opening lead-in patterns that recite moves:
+  //   "After 1.e4 e5 2.Nf3..."
+  //   "Following 1.d4 d5 c4..."
+  //   "Starting from 1.e4 c5..."
+  //   "1.e4 e5 2.Nf3 — ..."  (move list at the very start)
+  // Detect a move-number token like "1.e4", "12.Nf3", "1...e5".
+  const MOVE_TOKEN_RE = /\b\d{1,2}(?:\.{1,3})\s*[A-Za-z][a-h0-9OxNBRQK+#=…-]*/;
+  // Split into sentences on punctuation. Em-dashes count as breaks
+  // because the LLM often writes "After 1.e4 e5 2.Nf3 — symmetrical
+  // opening" where the dash is the structural break.
+  const sentences = trimmed
+    .split(/(?<=[.!?])\s+|\s+—\s+|\s+–\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  // Strip any leading sentence that contains a move-number token.
+  while (sentences.length > 0 && MOVE_TOKEN_RE.test(sentences[0])) {
+    sentences.shift();
+  }
+  return sentences.join(' ').trim();
 }
 
 /** Build a linear walkthrough tree from a curated trap PGN (no LLM
