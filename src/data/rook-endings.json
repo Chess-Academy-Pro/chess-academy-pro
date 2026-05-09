@@ -1,0 +1,93 @@
+[
+  {
+    "id": "lucena-position",
+    "name": "Lucena's Position (Building a Bridge)",
+    "category": "rook-position",
+    "order": 1,
+    "narration": {
+      "intro": "The Lucena Position is the canonical winning rook ending: defender's king cut off from the queening file, attacker's king on the queening square, attacker's pawn one square shy of promoting, attacker's rook ready to manoeuvre. The win technique is called 'building a bridge' — the rook sets up a screen that blocks the defender's checks while the attacker's king escapes the pawn's promotion square.",
+      "rule": "King and pawn on the 7th, defender cut off — build a bridge with the rook on the 4th rank to escape checks and promote.",
+      "why": "The attacker can't promote with the king still in front of the pawn (the king is in the way). Moving the king out of the queening square exposes it to checks from the defender's rook. The bridge solves both problems: the attacker's rook moves to the 4th rank where it can interpose on a future check from the defender. King exits the queening square, defender starts checking, attacker's bridge rook blocks the check, and the king walks safely to the side. Now the pawn promotes unopposed. The exact sequence is concrete and memorable — once you've seen the bridge, you know it forever.",
+      "history": "Named after Luis Ramirez de Lucena, who described the position in 'Repetición de Amores e Arte de Axedrez' (1497) — the first published treatment of chess endings. The bridge technique is the foundation of all R+P vs R wins.",
+      "tip": "Defender's king cut off two or more files from the pawn? You're winning. Build the bridge: rook to the 4th rank, king escapes via the SHORT side."
+    },
+    "positions": [
+      {
+        "fen": "1K6/1P6/8/8/2k5/8/r7/4R3 w - - 0 1",
+        "title": "Lucena setup — White to win",
+        "explanation": "White Kb8, Pb7, Re1. Black Kc4 (cut off two files from the b-pawn), Ra2 ready for checks. White's plan: 1.Re4! — the bridge. The rook lifts to the 4th rank, where it covers the rook-check escape route. Now the king can walk out toward the kingside: Kc7, Kd6 (or Kd7 first), Ke6 — and any time Black gives a file check (Rc2+, Rd2+, Re2+), the white rook on e4 interposes on the same file at the 4th rank, blocking the check. The king reaches a square that supports the pawn's promotion; Black's checks have run out; b8=Q wins.",
+        "result": "white-wins",
+        "bestMove": "Re4",
+        "source": "Lucena 1497 — the canonical winning R+P vs R position"
+      }
+    ]
+  },
+  {
+    "id": "philidor-rook-ending",
+    "name": "Philidor's Position (Defending the Draw)",
+    "category": "rook-position",
+    "order": 2,
+    "narration": {
+      "intro": "The Philidor Position is the canonical drawing technique for the side without the pawn in R+P vs R. Defender's king occupies the queening square's file; defender's rook patrols the 3rd rank (from defender's POV) keeping the attacking king OFF the 6th rank. The moment the attacker's pawn reaches the 5th rank, the defender swings the rook to the 1st rank and starts perpetual checks. The attacking king cannot both escort the pawn AND escape checks. Drawn.",
+      "rule": "Defender: king in front of pawn, rook on the 3rd rank. When pawn reaches the 5th, drop the rook to the back rank and check forever.",
+      "why": "Winning R+P vs R requires getting the attacker's king to the 6th rank ahead of the pawn — that's the only way to support the pawn through promotion. The 3rd-rank defense prevents this directly: any time the attacker tries to move the king up, the rook on the 3rd rank cuts it off. The attacker's only progress is to push the pawn — which the defender allows up to the 4th rank. But once the pawn pushes to the 5th, it has stepped INTO the territory the defender's third-rank rook was guarding. The defender's rook is now free to drop to the back (1st) rank and check from behind. The attacker's king has nowhere to hide; perpetual checks end the game in a draw.",
+      "history": "François-André Danican Philidor described this defense in 'Analyse du jeu des Échecs' (1749). It's been the gold-standard R+P vs R defense for 275+ years.",
+      "tip": "Down a pawn in a rook ending? Memorize this position. Get the king in front of the pawn. Get the rook to the 3rd rank. Profit."
+    },
+    "positions": [
+      {
+        "fen": "5k2/8/4K3/4P3/8/4r3/8/4R3 w - - 0 1",
+        "title": "Philidor third-rank defense",
+        "explanation": "White: Ke6 (already on the 6th — but blocked from advancing further), Pe5, Re1. Black: Kf8, Re3 (the third-rank rook, from Black's POV — rank 3). The black rook prevents White from making any further progress with the king. White's only plan: push e5-e6. But the moment the pawn reaches e6, Black plays ...Re1+ swinging behind. White's king has no shelter from checks. Drawn by perpetual.",
+        "result": "draw",
+        "source": "Philidor 1749 — third-rank defense"
+      }
+    ]
+  },
+  {
+    "id": "active-rook",
+    "name": "The Active Rook",
+    "category": "rook-position",
+    "order": 3,
+    "narration": {
+      "intro": "In rook endings, an active rook is worth more than a passive rook + pawn. A rook on the 7th rank attacks the defender's pawn base AND keeps the defender's king on the back rank. A rook tied to defending a weak pawn does nothing useful. The choice between passive defense (clinging to material) and active counterplay (sacrificing material for activity) is THE central rook-endgame decision.",
+      "rule": "Activity > material in rook endings. A rook on the 7th is worth more than a rook on the 1st defending a pawn.",
+      "why": "Rooks are long-range pieces; they need open files and ranks to be effective. A rook glued to the 1st rank defending a weak pawn is functionally a piece short — every move you make, you must check 'is the pawn still defended?', and your other pieces work alone. An active rook, by contrast, attacks the opponent's structure: pinning pawns, restricting the king, threatening the 8th-rank back rank. The active side imposes ALL the choices on the opponent. So when offered a choice in a rook ending — defend a pawn passively, or sacrifice it for an active rook — almost always sacrifice. The activity wins more pawns than the one you traded away.",
+      "history": "Tarrasch wrote in 'The Game of Chess' (1931): 'Rooks belong on open files, not behind pawns.' Capablanca's endgame technique is built around active rooks; almost every Capablanca rook ending features the 7th rank invasion.",
+      "tip": "In a rook ending, ask: is my rook attacking or defending? If defending, find a way to make it attack. The pawn you 'lose' rarely matters; the activity always does."
+    },
+    "positions": [
+      {
+        "fen": "1k4r1/p7/1p6/2p5/8/PP6/4R3/7K w - - 0 1",
+        "title": "Rook to the 7th — invasion",
+        "explanation": "Position with both sides having pawns and rooks. White's plan: 1.Re7! — the rook invades the 7th rank, attacking a7 AND restricting the black king to its corner. Compare Black's rook on g8: passive, defends nothing, attacks nothing. After Re7, every black move is forced (defend a7 or lose it; protect king). White's active rook does the work of two pieces while Black's does the work of zero. The exchange in 'activity advantage' decides the game.",
+        "result": "white-wins",
+        "bestMove": "Re7",
+        "source": "Teaching position — 7th rank invasion"
+      }
+    ]
+  },
+  {
+    "id": "cutting-off-the-king",
+    "name": "Cutting Off the King",
+    "category": "rook-position",
+    "order": 4,
+    "narration": {
+      "intro": "When you have a passed pawn and your opponent's king is the only defender, use the rook to cut off the king on a file or rank. While the king is cut off, you escort the pawn home. This is the simplest practical winning rook ending and the prototype of the Lucena win.",
+      "rule": "With a passed pawn, place the rook on a file (or rank) BETWEEN the defender's king and the pawn. The king can't cross; the pawn marches.",
+      "why": "Without the rook on a cutting file, the defending king can race in front of the pawn and stop it (especially with rook pawns). The cutting rook creates a wall the king cannot cross — even one file of cut-off is enough. Once the defending king is cut off from the pawn's promotion square, the pawn has no defender; the attacker walks the king up to the 6th rank, sets up the bridge, and wins (Lucena). The cutting rook is therefore the FIRST move in any winning R+P vs R technique.",
+      "history": "Cutoff technique is documented in Lucena (1497) as part of the broader R+P vs R analysis. Mark Dvoretsky's 'Endgame Manual' (2003) gives the cleanest modern treatment.",
+      "tip": "About to push your passed pawn? First check: is the enemy king cut off from the pawn's queening file? If yes, push. If no, get the rook between the king and the pawn FIRST."
+    },
+    "positions": [
+      {
+        "fen": "8/8/4k3/8/8/2R5/3P4/3K4 w - - 0 1",
+        "title": "Rook cuts off the king on the c-file",
+        "explanation": "White Kd1, Pd2, Rc3. Black Ke6. The white rook on c3 cuts off the black king from crossing to the queenside. Now white can push the d-pawn, escort it with the king, and reach Lucena: the black king cannot help because it can't cross the c-file. After 1.d3 Kd6 2.Kd2 (king starts coming up) Ke6 3.Kd3 — slow technical advance, but inevitable. The c-file cutoff is the foundation of the win.",
+        "result": "white-wins",
+        "bestMove": "d3",
+        "source": "Teaching position — cutoff on a file"
+      }
+    ]
+  }
+]

@@ -1,0 +1,180 @@
+[
+  {
+    "id": "wrong-rook-pawn-bishop",
+    "name": "Wrong-Rook-Pawn Bishop",
+    "category": "drawn-pattern",
+    "order": 1,
+    "narration": {
+      "intro": "Bishop and rook pawn against a lone king — looks like an easy win, isn't always. If your bishop doesn't control the queening square's color, the defender's king reaches the corner and you cannot evict it. The king and bishop work together but the bishop's color can never reach the corner; the king alone cannot dislodge the defender. The position is drawn no matter how many tempi you have.",
+      "rule": "Bishop + rook pawn vs lone king is DRAWN if the bishop doesn't control the pawn's queening square. The defender's job: reach the corner.",
+      "why": "The queening square of the a-pawn is a8 (a light square). For the win, you need a light-squared bishop — one that can reach a8 directly and drive the defender's king out. With a dark-squared bishop, the bishop can NEVER attack a8; it can attack the squares around a8 but never the corner itself. The defender's king sits on a8, the bishop and the attacking king close in, but every time the attacker reaches the position, the defender plays Kb8 → Ka8 → Kb8 → Ka8 forever. Stalemate is also a constant threat: with the defender on a8 and the attacking king nearby, any over-aggressive bishop check forces the defending king to move, and the only legal move might be... nowhere. Stalemate.",
+      "history": "This is one of the oldest known endgame draws — appears in Greco's analysis (c. 1620). Modern theory: see Mark Dvoretsky's 'Endgame Manual' (2003), Chapter 2.",
+      "tip": "Before pushing for the win in any K+B+P endgame with a rook pawn: check the bishop's color. If it's the opposite color of the queening square, settle for a draw — push for more and you'll get less."
+    },
+    "positions": [
+      {
+        "fen": "k7/8/1K6/8/8/8/8/B7 b - - 0 1",
+        "title": "Wrong bishop, rook pawn — drawn",
+        "explanation": "Imagine adding a white pawn on a-file. The dark-squared bishop on a1 can never attack a8 — wrong color. Black king already in the corner. White to play any aggressive move runs into stalemate or perpetual king dance. Drawn no matter how the play continues. The bishop's color decides everything; the wrong color makes the win unwinnable.",
+        "result": "draw",
+        "source": "Wrong-rook-pawn principle illustrated"
+      }
+    ]
+  },
+  {
+    "id": "opposite-color-bishops",
+    "name": "Opposite-Color Bishops (OCB)",
+    "category": "drawn-pattern",
+    "order": 2,
+    "narration": {
+      "intro": "Each side has one bishop and they're on opposite colors. The defender plants pawns and the king on the color the attacker's bishop CAN'T reach — and holds the draw despite being down material. One pawn deficit, sometimes two, sometimes even more — opposite-color bishops are the great equalizer of the endgame.",
+      "rule": "OCB endgames with one or two pawn deficit are usually drawn. The defender's bishop blocks one color; the king blocks the other.",
+      "why": "Bishops only ever travel on their own color. With opposite-colored bishops, any square one bishop reaches the other can never reach. The defender uses this: place pawns on the color the attacker's bishop attacks, so the attacker's bishop can never threaten them; place the king on the color the defender's bishop attacks, so it's always supported. The attacker then has no way to break through — every threat to advance a pawn meets the defender's bishop on the same color, every threat to invade with the king meets the defender's bishop blocking the squares of the attacker's bishop's color. Two parallel walls, neither can be breached.",
+      "history": "Wilhelm Steinitz noted the principle in the 1880s. Modern coverage: Capablanca (1921) and Karpov's endgame writings.",
+      "tip": "If you're DOWN material and reach an opposite-color bishop endgame, you've probably saved the draw. If you're UP material in an OCB, get used to being disappointed — the draw is the most common result."
+    },
+    "positions": [
+      {
+        "fen": "8/p4kp1/1p2p3/3p4/8/2B5/PP3KPP/8 w - - 0 1",
+        "title": "OCB — defender's wall holds",
+        "explanation": "Light-squared bishop on c3 (white), but Black has a dark-squared bishop somewhere (imagine adding it). Black's pawn on d5 is on a light square — but defended by Black's dark-squared bishop. The attacker's bishop can attack d5 but Black's bishop covers it. Black's king sits on f7 (light square) — exactly where white's bishop's color is, but Black's dark bishop covers the dark squares around it. Every weakness is on a different color than its attacker. Drawn.",
+        "result": "draw",
+        "source": "OCB drawing pattern (with dark-squared black bishop implied)"
+      }
+    ]
+  },
+  {
+    "id": "philidor-position",
+    "name": "Philidor's Defensive Position",
+    "category": "drawn-pattern",
+    "order": 3,
+    "narration": {
+      "intro": "Rook + pawn vs rook — one of the most common endgames in chess and the one position every player must know cold to defend. The defender (down a pawn) places the rook on the third rank and the king in front of the pawn. The third-rank rook keeps the attacking king from advancing to the 6th. Once the pawn reaches the 5th rank, the defender's rook drops to the 1st (or 8th) rank to harass the attacker's king from behind. Drawn.",
+      "rule": "Defender: king on the queening square's file, rook on the 3rd rank. When the pawn reaches the 5th rank, swing the rook behind to the 1st rank for perpetual checks.",
+      "why": "The attacker wants to bring the king to the 6th rank — that's the key to winning R+P vs R. The defender's rook on the 3rd rank prevents this directly: any white king move to the 6th rank means the defender's king on the 8th rank is no longer pinned, and Black takes opposition. So white must push the pawn to the 5th first to break the third-rank wall. But once the pawn reaches the 5th, the third rank is no longer needed — the defender swings the rook to the 1st rank and gives perpetual checks from behind. The white king can never both escort the pawn AND escape the checks. Drawn.",
+      "history": "François-André Danican Philidor described this in 'Analyse du jeu des Échecs' (1749). It's been the standard defense for 275 years and counting.",
+      "tip": "Down a pawn in a rook endgame? Get your king in front of the pawn. Get your rook to the 3rd rank. When the enemy pawn reaches the 5th, swing the rook to the back rank and check forever."
+    },
+    "positions": [
+      {
+        "fen": "5k2/8/4K3/4P3/8/8/r7/4R3 w - - 0 1",
+        "title": "Philidor setup — black to defend",
+        "explanation": "White: Ke6, Pe5, Re1. Black: Kf8, Ra2 (will go to Ra3 next move for the third-rank defense). The black rook on its 3rd rank (Ra3 or anywhere on rank 3) prevents White's king from breaking through to f6 or d6. Once white pushes e5-e6 (forced eventually), the defender drops the rook to a1 and starts perpetual checking from behind. White's king can never both escort and escape; drawn.",
+        "result": "draw",
+        "source": "Philidor 1749 — third-rank defense"
+      }
+    ]
+  },
+  {
+    "id": "queen-vs-rook-fortress",
+    "name": "Queen vs Rook Fortress",
+    "category": "drawn-pattern",
+    "order": 4,
+    "narration": {
+      "intro": "Queen vs lone rook is winning for the queen — but only with technique that takes 30+ moves. With ANY pawn added to the rook side, the position can become a fortress that the queen cannot crack. The defender places the rook in front of the king on the edge of the board, the king tucked behind it; the queen has no entry square.",
+      "rule": "Defender: king on the edge, rook in front of the king blocking the queen's penetration squares.",
+      "why": "The queen's strength is its mobility. To win, the queen needs to coordinate with its own king to deliver mate or win the rook. In a fortress setup, the defender's king is on the edge and the rook is the wall — the queen approaches but every penetration square is covered by the rook. The attacking king tries to come help, but the defender's rook gives checks the moment the attacking king crosses any critical square. The queen and king can never coordinate; the queen circles, the rook checks, nothing changes. 50-move rule eventually saves the defender.",
+      "history": "Documented in early endgame manuals — see Berger (1890) and Averbakh's 'Comprehensive Chess Endings' Vol. 4 (1986). The fortress is a textbook example of why eval engines return inflated numbers in queen-vs-rook positions; tablebase and human pattern recognition agree, eval doesn't.",
+      "tip": "Queen vs rook + ANY pawn? Don't assume you're winning just because the eval says +5. Look for fortress structures first."
+    },
+    "positions": [
+      {
+        "fen": "k7/r7/8/8/8/8/Q7/2K5 w - - 0 1",
+        "title": "Q vs R alone — winning, but tedious",
+        "explanation": "Queen vs lone rook is winning but takes precise technique (~30 moves with optimal play). Adding a pawn near the defending king can turn this into a fortress. The point: even with a clear material advantage, queen vs rook isn't 'free' — and queen vs rook + pawn often isn't winning at all. Always check for fortress structures before assuming the eval.",
+        "result": "white-wins",
+        "source": "Q vs R technique — see Karpov-Korchnoi 1978 for a famous instance"
+      }
+    ]
+  },
+  {
+    "id": "k-vs-kp-opposition-draw",
+    "name": "K vs K+P with Opposition",
+    "category": "drawn-pattern",
+    "order": 5,
+    "narration": {
+      "intro": "King and pawn against king is the foundation of all endgame theory. Drawn if the defender's king is in front of the pawn, on the same file, AND has the opposition. The defender's king blocks the pawn directly while denying the attacking king the key squares.",
+      "rule": "Defender: king in front of the pawn (queening square's file), with the opposition. Then it's drawn.",
+      "why": "If the defender's king sits directly in front of the pawn (e.g. defender Kd8 vs pawn d4), the pawn can't push forward — the defender king blocks it. The attacker must use the king to outflank, but if the defender holds the opposition (kings facing one square apart on the same file as the pawn), the attacker is forced to commit a king move first, vacating a key square. The defender then takes opposition again on the new file the attacker chose. Cycle continues; attacker never reaches a key square. Drawn.",
+      "history": "Philidor (1749) gave the first clean treatment. The opposition concept itself dates to Lucena (1497).",
+      "tip": "Down a pawn? Race your king IN FRONT of the enemy pawn, on the queening square's file. Hold opposition. Draw."
+    },
+    "positions": [
+      {
+        "fen": "4k3/8/8/8/3P4/3K4/8/8 b - - 0 1",
+        "title": "Defender's king reaches in front — drawn",
+        "explanation": "White Kd3, Pd4. Black's king on e8 must race to the d-file in front of the pawn. After 1...Ke7 2.Kc4 Kd6! Black blocks the pawn directly. From here, every White outflank attempt (Kb5, Ka6, etc.) is met by Black mirroring (Kc7, Kb8) — Black holds the d-file in front of the pawn and never lets the white king reach the 6th rank. Drawn.",
+        "result": "draw",
+        "solution": ["Ke7", "Kc4", "Kd6"],
+        "source": "Canonical K+P opposition defense"
+      }
+    ]
+  },
+  {
+    "id": "stalemate-stalking",
+    "name": "Stalemate Stalking",
+    "category": "drawn-pattern",
+    "order": 6,
+    "narration": {
+      "intro": "When you're losing on material but your king is restricted to a small area, deliberately strip your own legal moves — sacrifice pieces, walk into the corner — until any move by your opponent creates a stalemate. Material disadvantage erased by clever defense.",
+      "rule": "Reduce your own legal moves to zero. If the opponent doesn't give you a check or capture, it's stalemate.",
+      "why": "Stalemate counts as a draw. A defender who can FORCE stalemate from a lost position has saved the half-point. The trick: the defender plays moves that leave the king with no legal moves once the opponent ALSO restricts the king. If you can sacrifice every other piece you have, leaving a bare king with no escape squares, the opponent's next 'natural' move (taking a piece, advancing a pawn, etc.) creates the stalemate. This is why K+Q vs K technique requires care: a careless queen move can stalemate the lone king and turn a winning position into a draw.",
+      "history": "Stalemate has been a draw since the 19th century in modern rules (it was a win for some games in earlier eras). Stalemate-stalking endgame studies date back to Loyd, Troitsky, and the early 20th-century composers.",
+      "tip": "If you're losing AND your king is in a corner, look for ways to GIVE AWAY all your other pieces. Stalemate saves the day surprisingly often."
+    },
+    "positions": [
+      {
+        "fen": "7k/5K2/6Q1/8/8/8/8/8 b - - 0 1",
+        "title": "Stalemate trap in K+Q vs K",
+        "explanation": "Classic stalemate — Black king on h8, white queen on g6, white king on f7. It's Black to move and Black has NO legal moves: h7 is attacked by Qg6, g8 is attacked by Kf7 and Qg6, g7 is attacked by Qg6 and Kf7. Black not in check. Stalemate — drawn. The white queen got too close; should have stayed two moves away. This is THE classic K+Q technique trap.",
+        "result": "draw",
+        "source": "Canonical K+Q vs K stalemate trap"
+      }
+    ]
+  },
+  {
+    "id": "perpetual-check",
+    "name": "Perpetual Check",
+    "category": "drawn-pattern",
+    "order": 7,
+    "narration": {
+      "intro": "When you're losing on material but your queen (or rook) can deliver checks the opponent can't escape, you check forever. Three repetitions of the same position with the same player to move = automatic draw. This is the great escape mechanism of queen endings — the side that's lost on material can often force perpetual check if the opposing king has no shelter.",
+      "rule": "Find a sequence of checks where the king's escape squares are all controlled. Repeat the sequence three times to claim a draw.",
+      "why": "The threefold repetition rule and the 50-move rule are the two automatic draws. Perpetual check exploits both: the defender keeps checking, the attacker has no way to block or escape (the checking piece is too valuable to capture, and the king has no shelter), so the position repeats. After three identical positions, draw is claimable. This is the most common drawing technique in queen endings — a queen with no shelter can almost always be perpetually checked.",
+      "history": "Threefold repetition has been a drawing rule for over 200 years. Classic study: Réti's perpetual-check position (1922) is the gold standard.",
+      "tip": "Down a queen but YOUR queen has open lines and the enemy king has no pawns shielding it? Look for two-move check cycles. Perpetual check saves the game."
+    },
+    "positions": [
+      {
+        "fen": "5rk1/6pp/8/8/8/8/4q3/3K4 b - - 0 1",
+        "title": "Black checks forever — the queen alone holds the draw",
+        "explanation": "White is up a rook. But Black's queen on e2 can perpetually check: 1...Qe1+ 2.Kc2 Qe2+ 3.Kc1 Qe1+ — three repetitions, drawn. White's king has no shelter from queen checks; the queen never lets up. A losing position turned into a half point.",
+        "result": "draw",
+        "solution": ["Qe1+", "Kc2", "Qe2+", "Kc1", "Qe1+"],
+        "source": "Perpetual check pattern — common in queen endings"
+      }
+    ]
+  },
+  {
+    "id": "insufficient-material",
+    "name": "Insufficient Material",
+    "category": "drawn-pattern",
+    "order": 8,
+    "narration": {
+      "intro": "Some material configurations cannot deliver checkmate at all, no matter how the pieces are arranged. King vs king. King and bishop vs king. King and knight vs king. Two knights vs lone king (without pawns). These positions are automatic draws by FIDE rule — the game ends without play.",
+      "rule": "If neither side has enough material to force mate, the game is drawn immediately.",
+      "why": "Mate requires a piece configuration that can attack and trap the enemy king. A lone bishop or knight cannot — the opponent's king can always escape to a square the piece doesn't cover. Two knights uniquely cannot force mate (the lone king can always reach a square a knight can't cover) although mate IS possible with cooperation; FIDE rules class this as 'insufficient' regardless. Knowing the list saves you from playing on in lost-on-material positions that are actually drawn — and from blundering INTO insufficient material (capturing your own way to a draw).",
+      "history": "FIDE Laws of Chess Article 5.2.b. The list has been formalized since the 19th century.",
+      "tip": "Up an exchange with bishops of the same color and no pawns? Make sure you don't accidentally trade pieces into K+B vs K. That's a draw."
+    },
+    "positions": [
+      {
+        "fen": "k7/8/8/8/8/8/8/4KB2 w - - 0 1",
+        "title": "K + B vs K — drawn by insufficient material",
+        "explanation": "King + bishop vs king cannot force checkmate. The bishop covers half the board (one color), the king covers a small area; the lone king always has an escape on the bishop's wrong color. Drawn automatically by FIDE rule. Same for K+N vs K. Avoid trading INTO this material configuration when you're trying to win.",
+        "result": "draw",
+        "source": "FIDE Laws Article 5.2.b — insufficient material"
+      }
+    ]
+  }
+]

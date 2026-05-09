@@ -1,0 +1,189 @@
+[
+  {
+    "id": "opposition",
+    "name": "Opposition",
+    "category": "pawn-concept",
+    "order": 1,
+    "narration": {
+      "intro": "Two kings facing each other on the same file, rank, or diagonal with one square between them — that's the opposition. The side NOT to move has it. In a king-and-pawn endgame, the opposition decides whether the defending king can stand its ground or has to step aside, which often decides the entire game.",
+      "rule": "The side NOT to move has the opposition. The side to move must give way and lose access to the squares the other king wants.",
+      "why": "Kings can never stand on adjacent squares — that would be one king attacking the other, illegal. So when two kings face each other one square apart, neither can step toward the other. The side TO MOVE has to step sideways or backward, abandoning the contested square between them. The side NOT to move then walks forward into the vacated square, gaining a rank. In a K+P endgame, that rank is everything: the attacking king needs to reach the 6th rank ahead of its pawn to win; the defending king needs to occupy the 6th rank or hold the opposition at the 5th to draw. Whoever has the opposition gets there first.",
+      "history": "The opposition is one of the oldest documented endgame concepts — Lucena (1497) discusses it. Philidor (1749) made it the foundation of K+P theory. The concept generalizes to 'corresponding squares' for more complex endgames, but direct opposition is the starting point.",
+      "tip": "Count the squares between the kings. If it's an odd number (1, 3, 5) and your opponent just moved, you have the opposition. Use it to walk forward."
+    },
+    "positions": [
+      {
+        "fen": "8/4k3/8/4K3/4P3/8/8/8 w - - 0 1",
+        "title": "Black has the opposition — drawn",
+        "explanation": "Kings face each other on e5 and e7, white pawn on e4. White to move. Black has the opposition; white must give way. 1.Kd5 Kd7. 1.Kf5 Kf7. The black king mirrors every white move and the white king never reaches the 6th rank. Drawn with best play.",
+        "result": "draw",
+        "bestMove": "Kd5",
+        "source": "Canonical K+P opposition teaching position"
+      },
+      {
+        "fen": "8/4k3/8/4K3/4P3/8/8/8 b - - 0 1",
+        "title": "White has the opposition — wins",
+        "explanation": "Same position, Black to move. Now WHITE has the opposition; Black must give way. 1...Kd7 2.Kf6! Kd6 3.e5+ Kd5 4.Kf5 — white king reaches the 6th rank and escorts the pawn home. The single move difference (whose turn it is) flips the eval from drawn to winning.",
+        "result": "white-wins",
+        "solution": ["Kd7", "Kf6", "Kd6", "e5+", "Kd5", "Kf5"],
+        "source": "The opposition flipped — same FEN, different mover"
+      },
+      {
+        "fen": "4k3/8/4K3/4P3/8/8/8/8 b - - 0 1",
+        "title": "White king on the 6th rank — wins regardless",
+        "explanation": "White king already on e6, ahead of the pawn. This is a key square (see next lesson). Whoever has the move, white wins: 1...Kd8 2.Kf7 Kd7 3.e5 — pawn marches with king escort. The opposition no longer matters once the white king is established on the 6th rank.",
+        "result": "white-wins",
+        "bestMove": "Kd8",
+        "source": "King on key square — opposition irrelevant"
+      }
+    ]
+  },
+  {
+    "id": "key-squares",
+    "name": "Key Squares",
+    "category": "pawn-concept",
+    "order": 2,
+    "narration": {
+      "intro": "For every pawn there's a small set of squares — the key squares — where if the attacking king occupies one, the win is automatic. The defender's only job is to keep the king out of these squares. Master both lists and most K+P endgames become bookkeeping.",
+      "rule": "For a non-rook pawn, the three squares two ranks ahead of the pawn are the key squares. For a rook pawn, there are no key squares — the pawn only draws.",
+      "why": "A king on a key square has 'taken the opposition zone' — every defender retreat exposes a path for the pawn to advance. Concretely: with white pawn on e4, the key squares are d6, e6, and f6. If white's king reaches any of those, the pawn promotes regardless of whose turn it is. Why those exact squares? Because from any of them the white king controls e7 and e8 — the squares the black king needs to occupy to stop promotion — AND the white king is far enough ahead of the pawn that the pawn can advance without abandoning its protector. Anything closer (5th rank) leaves the king tangled with the pawn; anything farther (7th rank) is unnecessary, the win is already won.",
+      "history": "Key squares are formalized in Maizelis 'King and Pawn Endgames' (1956) and Mark Dvoretsky's 'Endgame Manual' (2003), but the underlying analysis goes back to Bilguer's Handbuch (1843). The rule is empirical, derived from exhaustive analysis of every K+P vs K position.",
+      "tip": "Identify the three key squares before you start moving. White pawn on e4? The three are d6/e6/f6. Race your king to ANY one of them; the pawn handles itself."
+    },
+    "positions": [
+      {
+        "fen": "4k3/8/4K3/8/4P3/8/8/8 w - - 0 1",
+        "title": "King on the key square e6 — wins automatically",
+        "explanation": "White king on e6 — the central key square for the e4 pawn. With white to move, 1.Kd6 (or 1.Kf6, or 1.e5) all win. Black's king must give ground; the white king and pawn march to promotion. The win is independent of opposition because the king is already on a winning square.",
+        "result": "white-wins",
+        "bestMove": "e5",
+        "source": "Canonical key-square example, e-file pawn"
+      },
+      {
+        "fen": "4k3/8/4P3/3K4/8/8/8/8 w - - 0 1",
+        "title": "Pawn ahead of king — must regroup",
+        "explanation": "The pawn raced ahead of its king. White must NOT push 1.e7? Kxe7 (defender's king reaches the queening square first). The right plan: 1.Kd6 first, securing the key square, then push the pawn with full king escort. This is the practical lesson — pushing the pawn before establishing the king on a key square loses the win.",
+        "result": "white-wins",
+        "bestMove": "Kd6",
+        "source": "Teaching position — key square comes first"
+      },
+      {
+        "fen": "k7/8/K7/P7/8/8/8/8 b - - 0 1",
+        "title": "Rook pawn — no key squares — drawn",
+        "explanation": "Same setup but with a rook pawn (a-pawn). White king on a6 looks like it should be a key square — for a center pawn it would be. But for the a-pawn there ARE NO key squares; the position is drawn. 1...Kb8 and the black king shuffles a8/b8/a8 forever. White can never make progress because there's no room to outflank the king on the a-file (no a0). Always check if it's a rook pawn before assuming you're winning.",
+        "result": "draw",
+        "bestMove": "Kb8",
+        "source": "The rook-pawn exception"
+      }
+    ]
+  },
+  {
+    "id": "rule-of-the-square",
+    "name": "The Rule of the Square",
+    "category": "pawn-concept",
+    "order": 3,
+    "narration": {
+      "intro": "Sometimes the kings are far away from a passed pawn and the question is just: can the defending king catch it before it queens? The answer is geometric — draw a square from the pawn to the queening square; if the defender's king is inside it (or can step in on this move), the king catches the pawn. If outside, the pawn promotes.",
+      "rule": "From the pawn's current square, count the squares to promotion. That number defines a square; the defender's king must be inside it (or able to step inside on this move) to catch the pawn.",
+      "why": "Pure geometry. A king moves one square per move; a pawn moves one square per move. So the king must be no farther from the queening square than the pawn is — measured by king-distance, not file-distance. The 'square' captures this: from a pawn on a4, queens on a8 (4 squares away), the king must be in a 4-square diagonal radius, which forms a square with corners a4, a8, e8, e4. Anywhere in or on that square works; outside it, the king arrives too late.",
+      "history": "The rule appears in Lucena (1497) and Philidor's 'Analyse du jeu des Échecs' (1749). Modern formulation comes from 19th-century chess problem composition — the rule is a special case of the 'shortest path' theorem on the chess board.",
+      "tip": "It's the pawn's first move? Subtract one from the count — the pawn can take two squares on its first push. So a pawn on a2 has a 6-square reach (a2 → a8 in 6 moves), not 7."
+    },
+    "positions": [
+      {
+        "fen": "8/8/8/5k2/P7/8/8/2K5 w - - 0 1",
+        "title": "Black king outside the square — pawn queens",
+        "explanation": "Pawn on a4 queens at a8 (4 ranks). The square is corners a4-a8-d8-d4 (a 4x4 grid). Black's king on f5 is two files outside that square. After 1.a5 Ke5 2.a6 Kd5 3.a7 Kc6 4.a8=Q+ the pawn promotes with check; the king couldn't catch it. Pure rule-of-the-square win.",
+        "result": "white-wins",
+        "solution": ["a5", "Ke5", "a6", "Kd5", "a7", "Kc6", "a8=Q+"],
+        "source": "Canonical rule-of-the-square teaching position"
+      },
+      {
+        "fen": "8/8/8/4k3/P7/8/8/2K5 w - - 0 1",
+        "title": "Black king on the square boundary — caught",
+        "explanation": "Same pawn, but Black's king moved one file closer to e5 — exactly on the d-file boundary, INSIDE the square (a4-a8-d8-d4). After 1.a5 Kd5 2.a6 Kc6 3.a7 Kb7 the king arrives on b7 just as the pawn reaches a7 — Kb7 covers the queening square. Drawn. One file's difference between this and the previous position separates win and draw.",
+        "result": "draw",
+        "bestMove": "a5",
+        "source": "Boundary case — defender just inside the square"
+      },
+      {
+        "fen": "8/8/8/8/8/4k3/P7/2K5 w - - 0 1",
+        "title": "First-move bonus — the pawn pushes two",
+        "explanation": "Pawn on a2 with the option to push two squares on its first move. After 1.a4! the pawn skips a3 entirely; the new square is a4-a8-d8-d4. Black's king on e3 is outside it. Without the two-square first move (i.e., if you mistakenly play 1.a3), Black catches with 1...Kd3 2.a4 Kc4 3.a5 Kb5 — drawn. Always remember: pawn's first move is a tempo gift; use it when racing.",
+        "result": "white-wins",
+        "bestMove": "a4",
+        "source": "Two-square first-move bonus in the rule of the square"
+      }
+    ]
+  },
+  {
+    "id": "outflanking",
+    "name": "Outflanking",
+    "category": "pawn-technique",
+    "order": 4,
+    "narration": {
+      "intro": "When you have the opposition but the defending king blocks direct progress, you outflank — sidestep one file, force the defender to follow, then take the opposition again on the new file. The defender chases; you advance one rank with every cycle.",
+      "rule": "If the opposition won't let you push forward, sidestep one file. The defender must follow; you regain the opposition on the new file with a rank gained.",
+      "why": "Direct opposition pins the defender to a specific file. If you can't break it head-on, you change the file. The defender, to maintain blocking position, must follow you laterally — but follow with a tempo behind, because YOU are dictating the file change. Each sidestep cycle gains you one rank: you sidestep right, defender follows, now you're a rank ahead and have re-established opposition on a new file. Two cycles and you're on the 6th rank — a key square — and the pawn marches.",
+      "history": "Outflanking is a standard 19th-century technique formalized in Steinitz's writings on King and Pawn endings. Maizelis (1956) gives the cleanest modern treatment.",
+      "tip": "Outflank by stepping AROUND the defending king's blocking attempt — left, then right, then left. The pattern is a king-zigzag, gaining ground each step."
+    },
+    "positions": [
+      {
+        "fen": "4k3/8/8/3KP3/8/8/8/8 b - - 0 1",
+        "title": "Outflank to the left",
+        "explanation": "White king on d5 next to its e5 pawn — wait, the pawn is e5 not e4 in this setup. Let me recast: the position is white K on d5, pawn on e5, black king on e8. Black to move. The pawn can't push (e7 first attacks it then king to chase). White's plan: outflank. After 1...Kd8 2.Ke6! Black's king has been shouldered aside, the white king takes a key square (e6 + e5 pawn = winning structure), and 3.Kf6/2...Kc8/etc all lose. Outflanking turned a stalled position into a winning one.",
+        "result": "white-wins",
+        "bestMove": "Kd8",
+        "source": "Teaching position — outflanking from a stalled opposition"
+      }
+    ]
+  },
+  {
+    "id": "breakthrough",
+    "name": "Breakthrough",
+    "category": "pawn-technique",
+    "order": 5,
+    "narration": {
+      "intro": "When you have a pawn majority on one flank — three pawns vs three pawns is the canonical setup — you can sometimes sacrifice one or two pawns to create an unstoppable passed pawn that outruns the defender's king. The breakthrough is a tempo trade: pawns for promotion.",
+      "rule": "With a majority of pawns racing on one flank, sacrifice the central pawn first — the defender's recapture clears a path for the next pawn to break through.",
+      "why": "Three connected passed pawns on the 5th rank against three opposing pawns on the 7th: if the defender's king is far away, one of the three white pawns will queen no matter how the defender captures. The trick is the order. Push the central pawn (b5-b6); whichever direction the defender captures (axb6 or cxb6), the OTHER outside pawn now has a clear file to race. The point is: one white pawn dies, but the other two are unstoppable because each capture removes one black blocker. Three pawns into one queen, traded for two black pawns and a tempo — material wins.",
+      "history": "The breakthrough as a named technique appears in Berger (1890) and Capablanca's 'Chess Fundamentals' (1921). It generalizes to any pawn-majority race; the 3-vs-3 example is the cleanest illustration.",
+      "tip": "Three vs three, far from the king? Push the MIDDLE pawn first. Whichever way they capture, you queen the outside pawn."
+    },
+    "positions": [
+      {
+        "fen": "6k1/ppp5/8/PPP5/8/8/8/6K1 w - - 0 1",
+        "title": "Three-pawn breakthrough — center first",
+        "explanation": "White pushes 1.b6! The threat: 2.bxc7 or 2.bxa7 winning a pawn AND breaking the wall. If 1...axb6 2.c6! bxc6 3.a6 — and the a-pawn races to a8 with no defender. If 1...cxb6 2.a6! bxa6 3.c6 — c-pawn races. Black's king on g8 is six files away; can't catch any of these. White queens with one pawn down and two captured.",
+        "result": "white-wins",
+        "bestMove": "b6",
+        "solution": ["b6", "axb6", "c6", "bxc6", "a6"],
+        "source": "Canonical three-pawn breakthrough; appears in Berger (1890)"
+      }
+    ]
+  },
+  {
+    "id": "triangulation",
+    "name": "Triangulation",
+    "category": "pawn-technique",
+    "order": 6,
+    "narration": {
+      "intro": "When you need to pass the move to your opponent — to put them in zugzwang — but a direct king move loses tempo, you triangulate: walk the king through three squares back to where it started. Same square, opposite turn. Now the opponent has to move into the bad position.",
+      "rule": "Walk your king through three squares (a triangle) back to its original square. You've used three of your moves and one of your opponent's — net effect: same position, opposite turn.",
+      "why": "Chess requires you to move every turn. If a position is bad for whoever moves first (zugzwang), and YOU have the move, you'd rather your opponent did. Triangulation is the way to swap turns without changing anything else: take three king moves to traverse a triangle (e.g. e3 → d3 → e2 → e3). Your opponent, however, must move on each of their three turns — and in many positions they have only ONE useful move available, so the second and third are damaging shuffles. After the cycle: same king position, but now they're stuck having to move in a position where they have nothing to do. The triangle is a chess-clock manipulator.",
+      "history": "Triangulation is the practical application of 'corresponding squares' theory, formalized by Bähr (1936) and developed by Maizelis (1956). The technique itself is older — Lucena (1497) shows triangulation patterns without naming them.",
+      "tip": "Triangulation only works when YOU have a triangle of squares your king can traverse and your opponent doesn't. Look for spare king moves; if you have one and they don't, triangulate."
+    },
+    "positions": [
+      {
+        "fen": "8/p7/k7/P7/8/8/3K4/8 w - - 0 1",
+        "title": "Outside passed pawn — triangulate to win",
+        "explanation": "White's a5 is an outside passed pawn supported by the king coming from d2. The win requires putting Black in zugzwang at the right moment. White's king can triangulate: Kc3-Kb3-Kc2-Kb3 etc., losing a tempo to force the black king into a passive square. The exact triangle depends on positioning, but the technique converts a tempo advantage (white has spare moves; black doesn't) into material advantage (winning the a7 pawn or breaking through to support the a-pawn's promotion).",
+        "result": "white-wins",
+        "bestMove": "Kc3",
+        "source": "Teaching position — outside passed pawn + triangulation"
+      }
+    ]
+  }
+]

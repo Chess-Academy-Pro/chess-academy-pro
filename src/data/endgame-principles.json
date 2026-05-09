@@ -1,0 +1,178 @@
+[
+  {
+    "id": "activate-the-king",
+    "name": "Activate the King",
+    "category": "principle",
+    "order": 1,
+    "narration": {
+      "intro": "In the middlegame the king is precious cargo — tucked behind pawns, defended by pieces, never exposed. The endgame inverts this. With most attacking pieces traded off, the king becomes a fighting piece in its own right — strong enough to attack pawns directly, support its own pawns' advance, and crowd the enemy king out of contested squares.",
+      "rule": "When queens come off, march the king toward the center.",
+      "why": "Endgames are won by mobilizing more material toward the action. A king on g1 is two ranks of wasted distance from a central pawn fight on the 5th rank. Centralized, the king attacks weaknesses, escorts passed pawns to promotion, and holds the opposition. A passed pawn without king support typically stops at the 6th rank; with the king escorting, it queens. Failing to centralize is the most common amateur endgame error — the king sits at home for ten moves while the opponent's king walks to the 5th and takes over the board.",
+      "history": "Aaron Nimzowitsch made this principle explicit in 'My System' (1925): 'The king is a strong piece — use it.' Capablanca had played that way for a decade, but Nimzowitsch named the principle.",
+      "tip": "After every queen trade, your next move should usually be a king move. Not the rook, not a pawn — the king."
+    },
+    "positions": [
+      {
+        "fen": "6k1/p5pp/1p6/8/4K3/PP6/6PP/8 w - - 0 1",
+        "title": "Centralized king vs back-rank king",
+        "explanation": "Material is exactly equal — four pawns each, no pieces. White's king is on e4, fully centralized; Black's king is on g8, glued to the back rank. This eval-equal position is winning for White on king activity alone. The white king can roam to attack Black's queenside pawns while the black king takes 3-4 moves just to reach the action.",
+        "result": "white-wins",
+        "bestMove": "Kd5",
+        "source": "Teaching position illustrating the principle"
+      },
+      {
+        "fen": "8/p4kpp/1pK5/8/8/PP6/6PP/8 b - - 0 4",
+        "title": "Three moves later — White has invaded",
+        "explanation": "After 1.Kd5 Kf7 2.Kc6 Ke7 3.Kxb6, the white king has eaten a pawn and dominates the queenside. Black's king has covered three squares; the white king has covered four AND captured material. This is what 'king activity' looks like in concrete numbers.",
+        "result": "white-wins",
+        "source": "Continuation of the previous position"
+      }
+    ]
+  },
+  {
+    "id": "push-passed-pawns",
+    "name": "Push Your Passed Pawns",
+    "category": "principle",
+    "order": 2,
+    "narration": {
+      "intro": "A passed pawn is a pawn with no enemy pawn ahead of it on its own file or either adjacent file. Nothing stops it except a piece — and pieces are expensive to commit. Every square it advances forces the defender to commit more material to stop it, freeing your other pieces to attack elsewhere.",
+      "rule": "Passed pawns must be pushed.",
+      "why": "A passed pawn is a clock. Every rank it crosses gains tempo; every defender it ties down is one less defender of something else on the board. Held back, a passed pawn is a one-sentence threat. Pushed, it forces the opponent to spend pieces on prevention rather than attack — a permanent material handicap until the pawn is finally captured or queens. The classic mistake is to keep the pawn on the 2nd rank 'safe' instead of letting it do the work it's there to do.",
+      "history": "Aaron Nimzowitsch coined the rule's modern form: 'Passed pawns must be pushed.' The principle is older — Philidor wrote in 1749 that 'pawns are the soul of chess', and the passed pawn is the soul made urgent.",
+      "tip": "If you have a passed pawn and don't know what to move, push it."
+    },
+    "positions": [
+      {
+        "fen": "8/8/8/5k2/P7/8/8/2K5 w - - 0 1",
+        "title": "Outside the square — push and queen",
+        "explanation": "White's a-pawn races to a8. Black's king on f5 is too far away — it's outside the rule-of-the-square box (a4 to d4 to d8 to a8). 1.a5 Ke5 2.a6 Kd5 3.a7 Kc6 4.a8=Q+ wins. White's own king never had to help; the passed pawn alone decides the game.",
+        "result": "white-wins",
+        "bestMove": "a5",
+        "solution": ["a5", "Ke5", "a6", "Kd5", "a7", "Kc6", "a8=Q+"],
+        "source": "Canonical rule-of-the-square teaching position"
+      },
+      {
+        "fen": "8/8/3k4/8/3K4/8/3P4/8 w - - 0 1",
+        "title": "Don't push without king support",
+        "explanation": "Same idea inverted. Pushing 1.d3? would be a panic-push — Black's king is in the square and the white king isn't supporting. The right move is 1.Ke4, bringing the king first, then pushing the pawn with escort. The principle is 'push your passed pawns' — but with king support, not without it.",
+        "result": "white-wins",
+        "bestMove": "Ke4",
+        "source": "Teaching position — push WITH support"
+      }
+    ]
+  },
+  {
+    "id": "attack-weak-pawns",
+    "name": "Attack Weak Pawns",
+    "category": "principle",
+    "order": 3,
+    "narration": {
+      "intro": "A weak pawn is one that can't be defended by another pawn — isolated, doubled, backward, or hanging on a half-open file. In the endgame these pawns are anchors. They can't move forward without losing themselves; they can't be defended without tying down a piece; they slowly bleed the position.",
+      "rule": "Target the pawn that can't be defended by another pawn.",
+      "why": "An isolated pawn requires a piece to defend it. A piece tied to defense is a piece not attacking. Endgames are decided by the side whose pieces are doing more work — and a piece glued to a weak pawn is doing less than nothing. Attack the weak pawn from a square the defender can't easily contest, and you either win the pawn or force the defender to make a positional concession (passive piece placement, allowing your invasion). Either is a step toward winning.",
+      "history": "Wilhelm Steinitz formalized this in the 1880s as part of his 'accumulation of small advantages' theory. The pawn weakness is the prototype of the small advantage that compounds.",
+      "tip": "Find the enemy pawn no other pawn defends. Aim every piece you have at it."
+    },
+    "positions": [
+      {
+        "fen": "6k1/pp4pp/3p4/8/8/3P4/PP4PP/3R2K1 w - - 0 1",
+        "title": "Isolated d-pawn under fire",
+        "explanation": "Black's d6 pawn has no neighbor — no c-pawn, no e-pawn — and sits on a half-open file. White's rook on d1 is already exerting pressure. Black must commit a rook OR king to defend; either way that piece is passive for the rest of the game. Compare to White's d3 pawn: defended by c2 and e2 if needed, mobile, healthy.",
+        "result": "white-wins",
+        "bestMove": "Rd2",
+        "source": "Teaching position — isolated pawn pressure"
+      }
+    ]
+  },
+  {
+    "id": "two-weaknesses",
+    "name": "Two Weaknesses",
+    "category": "principle",
+    "order": 4,
+    "narration": {
+      "intro": "A defender with one weakness can usually hold — defend the pawn, hold the line, draw. A defender with two weaknesses on opposite sides of the board cannot. Pieces can't be in two places at once. The attacker shifts the action between flanks; the defender chases; eventually one of the two weaknesses falls.",
+      "rule": "Create a second weakness on the opposite flank, then alternate threats.",
+      "why": "Defense is a finite resource. A king can defend either the queenside or the kingside, not both. A rook can hold one half-open file or the other, not both at the same time. When the defender has only one weakness, all their pieces can converge on it — defense holds. When you create a second weakness on the far side of the board, the defender's pieces split. Now every move you make on the kingside forces a king move toward the kingside, vacating the queenside; the moment the queenside is vacated, you switch fronts and attack there. The defender oscillates and runs out of moves before you run out of threats.",
+      "history": "José Raúl Capablanca codified this in 'Chess Fundamentals' (1921). His endgame technique is built on systematically creating a second weakness, then exploiting the defender's inability to hold both. The principle predates him — Philidor, Steinitz, Lasker all played it — but Capablanca named it.",
+      "tip": "If your opponent's only weakness is on one side and you can't break through there, look for a way to weaken the OTHER side."
+    },
+    "positions": [
+      {
+        "fen": "8/4k1p1/p3p2p/1p2P3/1P6/P5P1/4K2P/8 w - - 0 1",
+        "title": "Two weaknesses — queenside AND a kingside lever",
+        "explanation": "Black has the weak a6 pawn (target #1, queenside). White's plan: bring the king to attack a6, then create a second front by playing g4-g5 to fix Black's kingside pawns. Once both sides have weaknesses, the black king can't defend both — it commits to one and White wins the other.",
+        "result": "white-wins",
+        "bestMove": "Kd3",
+        "source": "Teaching position — Capablanca's two-weakness principle"
+      }
+    ]
+  },
+  {
+    "id": "do-not-rush",
+    "name": "Don't Rush",
+    "category": "principle",
+    "order": 5,
+    "narration": {
+      "intro": "Endgames reward patience. A move played quickly under blitz logic — 'this looks active, push it' — often gives away the win. The right move in an endgame is frequently the slow one: improve a piece, take an opposition, choose the better king square, then commit.",
+      "rule": "Improve every piece to its best square before committing to a plan.",
+      "why": "Endgames have very few pieces, so each one matters disproportionately. A king one square out of place is a 25% loss of king effectiveness. A rook on a passive 2nd-rank defense instead of active 7th-rank attack changes the entire eval. Before you commit to pushing a pawn or trading material, ask: is there a better square for my king? My rook? My knight? In endgames the answer is often yes, and committing too early throws away the technique you would have gotten by waiting one more move. Capablanca's whole reputation as the 'chess machine' was patience — he made the same moves as everyone else, just one or two moves later, after the position was perfectly arranged.",
+      "history": "Capablanca's games are the canon. His technique: find the right square for every piece, take time to reach it, then act. Mark Dvoretsky in 'Endgame Manual' (2003) restates the principle as the 'principle of two weaknesses' precondition — you can't exploit weaknesses with a half-prepared army.",
+      "tip": "Before pushing a pawn or trading material, count how many of your pieces are on optimal squares. If the answer isn't 'all of them', improve a piece first."
+    },
+    "positions": [
+      {
+        "fen": "6k1/5pp1/4p2p/p2pP3/Pp1P4/1P6/5PPP/3R2K1 w - - 0 1",
+        "title": "Improve before you commit",
+        "explanation": "White is winning, but the rush move 1.Rd3 (heading for the queenside) wastes tempo — the rook isn't yet on the right square. The slower 1.Kf1 first, centralizing the king, gives White a permanent grip. Once the king reaches e2 or e3, THEN the rook swings to the queenside; the king covers the d-file invasion squares and Black has no counterplay. The whole win is built on starting with the king, not the rook.",
+        "result": "white-wins",
+        "bestMove": "Kf1",
+        "source": "Teaching position — Capablanca-style technique"
+      }
+    ]
+  },
+  {
+    "id": "rooks-behind-passed-pawns",
+    "name": "Rooks Behind Passed Pawns",
+    "category": "principle",
+    "order": 6,
+    "narration": {
+      "intro": "A rook on the same file as a passed pawn — same color or opposite — belongs BEHIND the pawn, not in front of it. Behind your own passed pawn, the rook supports every push. Behind your opponent's passed pawn, the rook restrains every push.",
+      "rule": "Place rooks behind passed pawns. Yours OR your opponent's.",
+      "why": "A rook in front of a pawn loses scope every time the pawn advances. Pawn pushes from a4 to a5 to a6 — a rook on a8 (in front) progressively boxes itself into the corner with nothing left to attack. Behind the pawn (rook on a1, pawn on a4 → a5 → a6), the rook's range increases with every push: it covers more squares on the file as the pawn vacates them. Same rule applies to opponent's pawns: a rook BEHIND the enemy passed pawn forces the pawn to advance INTO the rook's attack, slowing it down. A rook in front of the enemy pawn just gets pushed back.",
+      "history": "Siegbert Tarrasch stated this in his 1931 book 'The Game of Chess': 'Rooks belong behind passed pawns.' The principle has been folklore since the 1860s — Tarrasch named it.",
+      "tip": "Look at every passed pawn on the board. Where's the rook? If it's not behind, move it there."
+    },
+    "positions": [
+      {
+        "fen": "6k1/8/8/4P3/8/8/4R3/6K1 w - - 0 1",
+        "title": "Rook supporting from behind",
+        "explanation": "Pawn on e5, rook on e2 — the canonical Tarrasch setup. The rook covers e3, e4, e5, and as the pawn advances the rook's coverage extends: after e6 it covers e3-e6, after e7 it covers e3-e7. The rook gets MORE active as the pawn pushes. Reverse it (rook on e8 in front of the pawn) and the rook is dead in the corner the moment the pawn reaches e7.",
+        "result": "white-wins",
+        "bestMove": "e6",
+        "source": "Tarrasch's canonical 'rook behind passed pawn' position"
+      }
+    ]
+  },
+  {
+    "id": "trade-when-ahead",
+    "name": "Trade Pieces When Ahead, Pawns When Behind",
+    "category": "principle",
+    "order": 7,
+    "narration": {
+      "intro": "Material asymmetries shrink as pieces come off and grow as pawns come off. A one-pawn advantage means little with all 32 pieces on the board; it means a winning K+P endgame with one piece each side. Conversely, a one-pawn deficit is small with eight pawns each, large with one pawn each.",
+      "rule": "Up material? Trade pieces. Down material? Trade pawns.",
+      "why": "Pieces are the means of converting material; pawns are the material being converted. With more pieces on the board, each piece has more targets and more interactions, so a small material edge is one factor among many. With fewer pieces, each piece's job is clearer — escort the pawn, defend the pawn, capture the pawn — and the side with extra material has a higher fraction of the total force on the board. Symmetrically: with no pawns at all, even a knight or bishop ahead is often just a draw (no pawns means no promotion threats, no attacking weaknesses). So if you're DOWN material, kill the pawns. If you're UP material, kill the pieces.",
+      "history": "Capablanca's 'Chess Fundamentals' (1921) makes this rule explicit. He played it ruthlessly — every Capablanca endgame win starts with a piece trade that simplifies a small material edge into a winning K+P or R+P endgame.",
+      "tip": "Up a pawn? Look for piece trades. Down a pawn? Look for pawn trades. The eval shifts in your favor either way."
+    },
+    "positions": [
+      {
+        "fen": "4k3/p7/4P3/4K3/8/8/8/8 b - - 0 1",
+        "title": "Pieces gone, the extra pawn decides",
+        "explanation": "From a position with one pawn advantage and minor pieces, trading down to this K+P endgame ends the game. The white king is on a key square (e5), the pawn is escorted, Black has no counterplay. The original eval (+1 pawn with pieces on) becomes a clean win once pieces are off. This is what 'trade pieces when ahead' looks like at the end of the rainbow.",
+        "result": "white-wins",
+        "source": "Teaching position — simplification's payoff"
+      }
+    ]
+  }
+]
