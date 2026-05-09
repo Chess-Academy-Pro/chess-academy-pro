@@ -235,13 +235,13 @@ function PatternPicker({ onPick, onBack, tier, onTierChange, activeTab, onTabCha
           populated tab; the others surface "coming soon" so the
           user can see the surface scope without us shipping
           half-built content. */}
-      <div className="flex justify-center gap-1 max-w-lg mx-auto w-full border-b border-theme-border pb-0.5">
+      <div className="flex gap-1 max-w-lg mx-auto w-full border-b border-theme-border pb-0.5 overflow-x-auto">
         {TAB_OPTIONS.map((opt) => (
           <button
             key={opt.value}
             onClick={() => opt.ready && onTabChange(opt.value)}
             disabled={!opt.ready}
-            className={`flex-1 px-2 py-2 text-xs font-medium transition-colors border-b-2 ${
+            className={`flex-1 min-w-[68px] px-2 py-2 text-xs font-medium transition-colors border-b-2 whitespace-nowrap ${
               activeTab === opt.value
                 ? 'border-theme-accent text-theme-text'
                 : opt.ready
