@@ -3516,25 +3516,49 @@ function PunishLessonPicker({
         Plays out as a walkthrough on the board.
       </div>
       <div className="flex flex-col gap-2">
-        {tree.punish.map((lesson, idx) => (
-          <button
-            key={idx}
-            onClick={() => walkthrough.startPunishLesson(idx)}
-            className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg bg-theme-surface hover:bg-theme-bg text-left min-h-[56px] transition-colors"
-            style={goldGlowStyle}
-            data-testid={`walkthrough-punish-lesson-${idx}`}
-          >
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold text-theme-text">
-                {lesson.name}
-              </span>
-              <span className="text-[11px] text-theme-text-muted">
-                Black plays {lesson.inaccuracy}
-              </span>
-            </div>
-            <ChevronRight size={16} className="text-theme-text-muted flex-shrink-0" />
-          </button>
-        ))}
+        {tree.punish.map((lesson, idx) => {
+          // Per-lesson kind: 'trap' (forced tactical refutation),
+          // 'mistake' (counting/structural blunder, default), 'theme'
+          // (positional plan). Drives the colored chip on the tile so
+          // the student knows whether they're about to find a hidden
+          // tactic or learn a counting principle. User: "How would
+          // you organize this mess of data" — Tier 2 of the taxonomy
+          // cleanup surfaces the classification at every entry.
+          const kind = lesson.kind ?? 'mistake';
+          const chipStyle =
+            kind === 'trap'
+              ? 'bg-red-500/15 text-red-400 border-red-500/40'
+              : kind === 'theme'
+                ? 'bg-blue-500/15 text-blue-400 border-blue-500/40'
+                : 'bg-amber-500/15 text-amber-400 border-amber-500/40';
+          return (
+            <button
+              key={idx}
+              onClick={() => walkthrough.startPunishLesson(idx)}
+              className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg bg-theme-surface hover:bg-theme-bg text-left min-h-[56px] transition-colors"
+              style={goldGlowStyle}
+              data-testid={`walkthrough-punish-lesson-${idx}`}
+            >
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-1.5">
+                  <span
+                    className={`inline-block px-1.5 py-0.5 rounded border text-[9px] font-mono font-semibold tracking-wider ${chipStyle}`}
+                    data-testid={`walkthrough-punish-kind-${idx}`}
+                  >
+                    {kind.toUpperCase()}
+                  </span>
+                  <span className="text-sm font-semibold text-theme-text">
+                    {lesson.name}
+                  </span>
+                </div>
+                <span className="text-[11px] text-theme-text-muted">
+                  Black plays {lesson.inaccuracy}
+                </span>
+              </div>
+              <ChevronRight size={16} className="text-theme-text-muted flex-shrink-0" />
+            </button>
+          );
+        })}
         <button
           onClick={() => walkthrough.backToStageMenu()}
           className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-md bg-theme-surface hover:bg-theme-border text-theme-text-muted hover:text-theme-text text-xs transition-colors"

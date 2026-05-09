@@ -272,6 +272,25 @@ export interface PunishLesson {
   /** Display name on the lesson-picker tap target — e.g. "Vienna:
    *  Black plays 2…d6? — punish the loose center". */
   name: string;
+  /** Pedagogical kind. Drives the colored chip on the lesson tile
+   *  AND whether downstream surfaces (line picker, leaf prompts)
+   *  treat the entry as a tactical trap vs a counting blunder vs a
+   *  positional theme.
+   *  - 'trap'    : opponent's natural-looking move has a CONCRETE
+   *                tactical refutation (forced material/mate within
+   *                ~3 plies). Bright-red chip.
+   *  - 'mistake' : counting / structural blunder, no forced tactic
+   *                — punishment is "now you're better" via principle.
+   *                Orange chip.
+   *  - 'theme'   : long maneuvering middlegame plan. Blue chip.
+   *  When omitted, runtime defaults to 'mistake' (safe — won't
+   *  surface as a red TRAP if a curator forgets to tag).
+   *  See also `pro-repertoires.json` trapLines + their sidecar
+   *  classification file `trap-line-classifications.json`; same
+   *  taxonomy applies. User audit (build 79f3a20): "How would you
+   *  organize this mess of data I have now vomited through the
+   *  app?" — three-kind taxonomy is the answer. */
+  kind?: 'trap' | 'mistake' | 'theme';
   /** Optional FEN to load directly as the lesson's starting position
    *  (the position right BEFORE the inaccuracy). Used by puzzle-DB-
    *  derived punish lessons where the position comes from a real

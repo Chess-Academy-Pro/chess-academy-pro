@@ -420,6 +420,7 @@ export const VIENNA_GAME: WalkthroughTree = {
   punish: [
     {
       name: "4...Ng4? — the active retreat that hangs",
+      kind: 'trap',
       setupMoves: ['e4', 'e5', 'Nc3', 'Nf6', 'f4', 'exf4', 'e5'],
       inaccuracy: 'Ng4',
       whyBad:
@@ -462,6 +463,7 @@ export const VIENNA_GAME: WalkthroughTree = {
     },
     {
       name: "4...Nh5? — same diagonal, same fate",
+      kind: 'trap',
       setupMoves: ['e4', 'e5', 'Nc3', 'Nf6', 'f4', 'exf4', 'e5'],
       inaccuracy: 'Nh5',
       whyBad:
@@ -504,6 +506,7 @@ export const VIENNA_GAME: WalkthroughTree = {
     },
     {
       name: "4...Nd5? — another knight square that just loses",
+      kind: 'trap',
       setupMoves: ['e4', 'e5', 'Nc3', 'Nf6', 'f4', 'exf4', 'e5'],
       inaccuracy: 'Nd5',
       whyBad:
@@ -546,6 +549,7 @@ export const VIENNA_GAME: WalkthroughTree = {
     },
     {
       name: "4...Ne4? — last of the failed knight tries",
+      kind: 'trap',
       setupMoves: ['e4', 'e5', 'Nc3', 'Nf6', 'f4', 'exf4', 'e5'],
       inaccuracy: 'Ne4',
       whyBad:
@@ -576,6 +580,7 @@ export const VIENNA_GAME: WalkthroughTree = {
     },
     {
       name: "6...Nxe4? — the 'free pawn' that wasn't",
+      kind: 'mistake',
       setupMoves: [
         'e4', 'e5', 'Nc3', 'Nc6', 'Bc4', 'Nf6', 'd3', 'Bc5',
         'Be3', 'Bxe3', 'fxe3',
