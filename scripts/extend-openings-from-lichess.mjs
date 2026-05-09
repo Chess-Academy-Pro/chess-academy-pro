@@ -46,9 +46,12 @@ const EXTENDED_PATH = path.join(ROOT, 'src/data/openings-lichess-extended.json')
 const DEFAULT_TARGET_PLIES = 36;
 
 /** Stop walking when the most-popular continuation at a position has
- *  fewer than this many total games. Below this we're past the
- *  serious-theory cliff; the line drifts into noise. */
-const DEFAULT_POPULARITY_FLOOR = 500;
+ *  fewer than this many total master games. Below this we're past
+ *  the serious-theory cliff; the line drifts into noise. The
+ *  masters DB has ~3M games total — popular openings see thousands
+ *  of master games at the parent position but only dozens 25 plies
+ *  in. 50 is the typical "still-real-theory" floor. */
+const DEFAULT_POPULARITY_FLOOR = 50;
 
 /** Polite pause between Lichess Explorer requests (ms). Public API
  *  allows ~5 req/sec; we run at ~3 req/sec to leave headroom. */
@@ -68,14 +71,21 @@ function parseArg(name, fallback) {
 const TARGET_PLIES = parseArg('target', DEFAULT_TARGET_PLIES);
 const POPULARITY_FLOOR = parseArg('floor', DEFAULT_POPULARITY_FLOOR);
 
-// ─── Lichess Explorer client ─────────────────────────────────────
+// ─── Lichess Explorer client (MASTERS endpoint) ──────────────────
+// User: "Pull the continuation lines from the master levels games
+// from lichess DB". The /masters endpoint serves a curated DB of
+// FIDE-master-and-above games (~3M games, all 2200+ ELO). Theory-
+// heavy, high signal — every popular continuation here is real
+// master-level practice, not random Lichess noise. The /lichess
+// endpoint (random Lichess games filtered by rating buckets) was
+// the alternative; we explicitly chose masters.
 async function fetchExplorer(fen) {
-  const url = new URL('https://explorer.lichess.ovh/lichess');
-  url.searchParams.set('variant', 'standard');
+  const url = new URL('https://explorer.lichess.ovh/masters');
   url.searchParams.set('fen', fen);
   url.searchParams.set('moves', '6');
-  url.searchParams.set('speeds', 'rapid,classical');
-  url.searchParams.set('ratings', '1800,2000,2200,2500');
+  // Modern theory only — pre-1952 master games shape opening tastes
+  // less and are noisier statistically. 'until' defaults to current.
+  url.searchParams.set('since', '1952');
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
       const res = await fetch(url.toString(), {
