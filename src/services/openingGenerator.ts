@@ -2079,17 +2079,14 @@ function inferStudentSideFromName(name: string): 'white' | 'black' {
   return 'white';
 }
 
-/** Terse SAN-only fallback when the LLM didn't supply a per-move
- *  idea. User audit (build 088b57a): the previous templates spoke
- *  generic prose like "knight develops toward the center; standard
- *  opening principle" or "pawn move shaping the center and clearing
- *  lines for the pieces behind" for every move the LLM skipped —
- *  the student called it out specifically: "rambling generic
- *  narration. It hurts the ears. Not helpful or constructive."
+/** Build a short idea sentence for a SAN at the given ply index.
+ *  Keeps the spoken narration meaningful even without LLM gen.
  *
- *  Better-silence-than-slop: announce the move number + SAN and
- *  stop. The board animates the move; we don't pretend to teach
- *  pedagogy we don't have. */
+ *  Per-piece templates that DESCRIBE WHAT THE MOVE DOES rather than
+ *  just announcing the SAN. The student wants commentary on the
+ *  move's purpose; an empty fallback that just reads the move number
+ *  is worse — it tells them nothing. User: "I don't want fen calls
+ *  I want descriptions of what the moves do." */
 function synthesizeIdeaFromSan(
   san: string,
   movedBy: 'white' | 'black',
@@ -2097,7 +2094,20 @@ function synthesizeIdeaFromSan(
 ): string {
   const moveNumber = Math.floor(plyIndex / 2) + 1;
   const prefix = movedBy === 'white' ? `${moveNumber}.${san}` : `${moveNumber}…${san}`;
-  return `${prefix}.`;
+  const piece = san[0];
+  if (san === 'O-O' || san === '0-0') {
+    return `${prefix} — ${movedBy === 'white' ? 'White' : 'Black'} castles kingside, tucking the king behind the wall and connecting the rooks.`;
+  }
+  if (san === 'O-O-O' || san === '0-0-0') {
+    return `${prefix} — ${movedBy === 'white' ? 'White' : 'Black'} castles queenside, an aggressive choice that activates the rook on the d-file.`;
+  }
+  if (piece === 'N') return `${prefix} — knight develops toward the center; standard opening principle.`;
+  if (piece === 'B') return `${prefix} — bishop activates and eyes the long diagonal; supports the central squares.`;
+  if (piece === 'R') return `${prefix} — rook lifts to a more active square, often preparing a file battle.`;
+  if (piece === 'Q') return `${prefix} — queen joins the action; mind the early development principles.`;
+  if (piece === 'K') return `${prefix} — king step; usually a sign castling has happened or the position is in a late-opening transition.`;
+  // Pawn move (lowercase first char).
+  return `${prefix} — pawn move shaping the center and clearing lines for the pieces behind.`;
 }
 
 /** Strip a leading move-recitation sentence from an intro string.
