@@ -1,11 +1,25 @@
 /**
- * Registry of in-place walkthrough trees, keyed by canonical opening
- * name. The `start_walkthrough_for_opening` tool calls
- * `resolveWalkthroughTree(name)` to get the tree the runtime will
- * walk.
+ * Registry of in-place HAND-CRAFTED walkthrough trees.
  *
- * To add a new opening: write a `<name>.ts` file in this directory
- * that exports a `WalkthroughTree`, then register it below.
+ * ─── DEPRECATED FOR NEW OPENINGS ────────────────────────────────
+ *
+ * The DB-narration path in
+ * `services/openingGenerator.ts > generateOpeningFromDbNarration`
+ * is the canonical authoring pattern. It builds the tree skeleton
+ * from `openings-lichess.json` (moves are legal by DB construction,
+ * FENs are correct by chess.js replay) and asks the LLM only to
+ * write narration prose. CLAUDE.md's DON'T BREAK section locks
+ * that inversion in.
+ *
+ * This registry exists only for historical hand-crafted trees that
+ * predate the inversion. Currently: Vienna only. New openings
+ * should NOT add files here — let DB-narration handle them.
+ *
+ * Tier 3 architecture cleanup (deferred): once Vienna's DB-narration
+ * output reaches parity with the hand-crafted tree, drop the entry
+ * from ALL_TREES and route Vienna through the DB path like every
+ * other opening. The `vienna.ts` file's header comment describes
+ * the migration plan.
  */
 import type { WalkthroughTree } from '../../types/walkthroughTree';
 import { VIENNA_GAME } from './vienna';

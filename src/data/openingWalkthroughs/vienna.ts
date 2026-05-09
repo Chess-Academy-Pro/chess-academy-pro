@@ -1,11 +1,49 @@
 /**
- * Vienna Game (ECO C25–C29) — opening walkthrough tree.
+ * Vienna Game (ECO C25–C29) — hand-crafted opening walkthrough tree.
  *
- * Voice/style: this is the coach speaking. Plain language, real
- * teaching content, no length cap, no template. Each `idea` should
- * read like how a strong coach actually explains the move to a
- * 1200-1600 player who said "teach me the Vienna." Names squares,
- * names ideas, calls out what to watch for.
+ * ─── LEGACY ARCHITECTURE — DO NOT EXTEND ────────────────────────
+ *
+ * This is the ONLY hand-crafted static walkthrough left in the
+ * codebase. New openings should NOT clone this pattern — they
+ * route through `generateOpeningFromDbNarration` in
+ * `services/openingGenerator.ts`, which builds the tree skeleton
+ * from `openings-lichess.json` (moves are legal by DB construction)
+ * and asks the LLM only to write narration text. That's the
+ * post-inversion pattern documented in CLAUDE.md's DON'T BREAK
+ * section.
+ *
+ * Why is this file still here?
+ *   1. The Vienna walkthrough is the user's primary opening and
+ *      this hand-crafted version has been heavily tested. Removing
+ *      it would replace tested content with LLM-generated content
+ *      whose quality hasn't been validated for parity.
+ *   2. The 5 punish lessons (Stage 5: Ng4? / Nh5? / Nd5? / Ne4? /
+ *      Nxe4?) are written with chess-coach precision that the
+ *      DB-mined puzzle path can't currently match.
+ *   3. CoachTeachPage.tsx's resolver still calls
+ *      `resolveWalkthroughTree(name)` as Tier 1 — falling back to
+ *      DB cache then runtime gen. That order means Vienna users
+ *      hit this static tree before the DB path runs.
+ *
+ * Migration path (Tier 3 of the trap-data taxonomy cleanup,
+ * deferred):
+ *   1. Run a parity audit comparing the hand-crafted Vienna tree
+ *      against `generateOpeningFromDbNarration('Vienna Game')`
+ *      output. Score: narration quality, punish-stage coverage,
+ *      arrow placement.
+ *   2. If parity is acceptable, remove `VIENNA_GAME` from
+ *      `index.ts` and let Vienna requests fall through to the DB
+ *      path. Keep this file as a template / reference for future
+ *      hand-crafted authoring if needed.
+ *   3. If parity is NOT acceptable, identify the gap (likely the
+ *      hand-written `idea` prose) and tighten the DB-narration
+ *      prompt to close it.
+ *
+ * Voice/style for the existing content: this is the coach speaking.
+ * Plain language, real teaching content, no length cap, no
+ * template. Each `idea` reads like how a strong coach actually
+ * explains the move to a 1200-1600 player who said "teach me the
+ * Vienna." Names squares, names ideas, calls out what to watch for.
  *
  * Tree shape:
  *   start → 1.e4 → 1...e5 → 2.Nc3 → FORK on Black's response

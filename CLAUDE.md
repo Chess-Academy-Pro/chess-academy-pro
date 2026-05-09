@@ -131,6 +131,36 @@ each is still satisfied.
   function carries a UA fallback chain because Lichess's CDN 401s
   iOS Safari's default UA.
 
+**Trap-data taxonomy (commits `79f3a20`, `d575c84`).** Three kinds
+across every "punish-style" lesson — drives whether the entry
+surfaces as a bright-red TRAP tile or stays internal as a softer
+chip:
+- `trap`    : opponent's natural-looking move has a CONCRETE
+              tactical refutation (forced material/mate within ~3
+              plies). Bright-red chip. Examples: Noah's Ark Trap,
+              Legal's Mate, Nb5-Nc7 fork, Stafford "Oh No My
+              Queen", Qb6-Nb5 queen trap. ONLY these reach the
+              line picker as red TRAP tiles.
+- `mistake` : counting / structural blunder, no forced tactic —
+              "now you're better" via principle. Amber chip.
+              Examples: doubled pawns from a6 Bxc6, gambit accepted
+              with structural edge, knight chases that lose tempo.
+- `theme`   : long maneuvering middlegame plan. Blue chip.
+              Examples: Berlin Wall bishop pair, KID kingside storm,
+              Stonewall fortress, Catalan diagonal pressure.
+
+Two data sources, same taxonomy:
+- `pro-repertoires.json > trapLines[]` — classified via the
+  sidecar file `src/data/trap-line-classifications.json` (keyed
+  `<openingId>::<trapName>` → kind). Sidecar so the curated
+  source JSON stays untouched.
+- `vienna.ts > punish[]` — embedded `kind` field on each
+  `PunishLesson`. New static walkthroughs (if any are ever added)
+  should set this field directly.
+
+When in doubt, default to `mistake` — never accidentally surface
+an unvetted entry as a red TRAP.
+
 **Stage gen — fully inverted for every stage with moves (commit `2094ce5`).**
 The DB is the brain for all four stages; LLM only writes prose.
 - `drill` (commit `1927ab9`): top 5 sibling-extension branches →
