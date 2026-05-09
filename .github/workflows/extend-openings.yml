@@ -1,0 +1,96 @@
+name: Refresh openings-lichess-extended.json from Masters DB
+
+# Auto-runs the mining script against Lichess's masters DB
+# (~3M FIDE-master+ games) and commits any deepened opening
+# continuations back to main. Set-and-forget — David doesn't have to
+# remember to run it. See `scripts/extend-openings-from-lichess.mjs`
+# for the mining logic itself.
+#
+# Schedule: 1st of every month at 06:00 UTC (low-traffic window).
+# Workflow_dispatch lets you trigger it on demand from the Actions
+# UI when you want a refresh between scheduled runs.
+
+on:
+  schedule:
+    # cron: minute hour day-of-month month day-of-week
+    # → 06:00 UTC on the 1st of every month
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target ply depth per entry (default: 30)'
+        required: false
+        default: '30'
+      floor:
+        description: 'Min master games for a continuation to count (default: 50)'
+        required: false
+        default: '50'
+
+# Permissions for the create-pull-request action: needs to push the
+# branch (contents) and open the PR (pull-requests).
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  extend:
+    runs-on: ubuntu-latest
+    # GitHub-hosted runners have a 6-hour per-job cap. The mining
+    # script flushes incrementally every 10 entries, so a timeout
+    # produces a useful partial result. Subsequent scheduled runs
+    # pick up where we left off (resume-skip in the script).
+    timeout-minutes: 350
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund --prefer-offline
+
+      - name: Mine masters DB for deepened opening continuations
+        run: |
+          node scripts/extend-openings-from-lichess.mjs \
+            --target=${{ inputs.target || '30' }} \
+            --floor=${{ inputs.floor || '50' }}
+
+      # Open a PR with the refreshed JSON rather than pushing direct
+      # to main (main is branch-protected). peter-evans/create-pull-
+      # request does the branch + commit + PR dance in one step and
+      # handles the "no changes" case gracefully.
+      - name: Open PR with refreshed extended.json
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: |
+            chore(openings): refresh extended.json from masters DB
+
+            Automated mining run. Pulled deeper continuation lines
+            from Lichess masters DB (~3M FIDE-master+ games) and
+            updated openings-lichess-extended.json so opening
+            walkthroughs reflect current top-level theory.
+
+            Run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          branch: chore/extend-openings-${{ github.run_id }}
+          delete-branch: true
+          title: 'chore(openings): refresh extended.json from masters DB'
+          body: |
+            Automated mining run from `.github/workflows/extend-openings.yml`.
+
+            Pulls deeper opening continuations from Lichess's masters database
+            (~3M FIDE-master+ games via `explorer.lichess.ovh/masters`) and
+            updates `src/data/openings-lichess-extended.json`.
+
+            Settings:
+            - Target: ${{ inputs.target || '30' }} plies
+            - Popularity floor: ${{ inputs.floor || '50' }} master games
+
+            Run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          add-paths: |
+            src/data/openings-lichess-extended.json
+          author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
+          committer: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
