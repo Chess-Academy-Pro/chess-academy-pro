@@ -43,6 +43,7 @@ import {
 import { EndgameLessonTab } from './EndgameLessonTab';
 import { EvalLabQuiz } from './EvalLabQuiz';
 import { CalculationTab } from './CalculationTab';
+import { FromYourGamesTab } from './FromYourGamesTab';
 import { useAppStore } from '../../stores/appStore';
 import { logAppAudit } from '../../services/appAuditor';
 import type { MatingPattern } from '../../types/matingPattern';
@@ -67,7 +68,8 @@ type EndgameTab =
   | 'rook-endings'
   | 'drawing-patterns'
   | 'eval-lab'
-  | 'calculation';
+  | 'calculation'
+  | 'from-your-games';
 const TAB_OPTIONS: { value: EndgameTab; label: string; ready: boolean }[] = [
   { value: 'mating-patterns', label: 'Mating', ready: true },
   { value: 'principles', label: 'Principles', ready: true },
@@ -76,6 +78,7 @@ const TAB_OPTIONS: { value: EndgameTab; label: string; ready: boolean }[] = [
   { value: 'drawing-patterns', label: 'Drawn', ready: true },
   { value: 'eval-lab', label: 'Eval Lab', ready: true },
   { value: 'calculation', label: 'Calc', ready: true },
+  { value: 'from-your-games', label: 'Your Games', ready: true },
 ];
 
 export function CoachEndgamePage(): JSX.Element {
@@ -326,6 +329,10 @@ function PatternPicker({ onPick, onBack, tier, onTierChange, activeTab, onTabCha
 
       {activeTab === 'calculation' && (
         <CalculationTab onExit={() => onTabChange('mating-patterns')} />
+      )}
+
+      {activeTab === 'from-your-games' && (
+        <FromYourGamesTab onExit={() => onTabChange('mating-patterns')} />
       )}
     </div>
   );
