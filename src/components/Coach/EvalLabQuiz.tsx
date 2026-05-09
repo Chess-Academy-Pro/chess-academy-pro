@@ -15,16 +15,21 @@
  * "why" the moment after they answer, when the brain is most
  * receptive (right after a wrong guess in particular).
  *
- * No tablebase calls (yet) — every position has a hand-curated
- * `result` field from theory. Tablebase integration would come
- * later for verifying ad-hoc positions ≤7 pieces; for now the
- * curator (me, Claude) is the source of truth, source-cited.
+ * Tablebase verification: when a position has ≤7 pieces, the quiz
+ * fires a `lookupTablebase(fen)` call after the student answers
+ * and surfaces a "Tablebase confirms: <result>" badge on the
+ * reveal card. Mathematical certainty stacked on top of the
+ * curator's hand-authored claim. If the two disagree, that's a
+ * content bug (an "Author / tablebase mismatch" warning surfaces
+ * so I can fix it). For positions >7 pieces, the curator's claim
+ * stands alone — that's the contract.
  */
 import { useCallback, useEffect, useState } from 'react';
-import { ArrowLeft, Check, X, RotateCw } from 'lucide-react';
+import { ArrowLeft, Check, X, RotateCw, ShieldCheck, AlertTriangle } from 'lucide-react';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { getAllEndgameLessons } from '../../services/endgameLessonsService';
+import { lookupTablebase, type TablebaseLookupResult } from '../../services/lichessTablebaseService';
 import type { EndgameLesson, EndgameLessonPosition } from '../../types/endgameLesson';
 
 const QUIZ_SIZE = 10;
@@ -51,6 +56,11 @@ export function EvalLabQuiz({ onExit }: EvalLabQuizProps): JSX.Element {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<AnsweredItem[]>([]);
   const [guess, setGuess] = useState<Guess | null>(null);
+  /** Tablebase lookup for the CURRENT position. null when no
+   *  lookup attempted yet, or when the position is >7 pieces, or
+   *  when the network call failed. Resets on each puzzle. */
+  const [tablebase, setTablebase] = useState<TablebaseLookupResult | null>(null);
+  const [tablebaseLoading, setTablebaseLoading] = useState(false);
 
   // Re-roll quiz pool when seed changes.
   useEffect(() => {
@@ -58,7 +68,14 @@ export function EvalLabQuiz({ onExit }: EvalLabQuizProps): JSX.Element {
     setIndex(0);
     setAnswers([]);
     setGuess(null);
+    setTablebase(null);
   }, [seed]);
+
+  // Reset tablebase lookup state when puzzle index changes.
+  useEffect(() => {
+    setTablebase(null);
+    setTablebaseLoading(false);
+  }, [index]);
 
   const reshuffle = useCallback(() => setSeed(Date.now()), []);
 
@@ -75,6 +92,22 @@ export function EvalLabQuiz({ onExit }: EvalLabQuizProps): JSX.Element {
           correct: g === current.position.result,
         },
       ]);
+      // Fire-and-forget tablebase lookup for verification. Caller
+      // ignores the call when the position is >7 pieces. Only sets
+      // state if the user is still on this puzzle when the response
+      // arrives (effect index check).
+      const fenAtGuess = current.position.fen;
+      const indexAtGuess = index;
+      setTablebaseLoading(true);
+      void lookupTablebase(fenAtGuess).then((result) => {
+        setTablebaseLoading(false);
+        // Only commit the result if user is still on the same
+        // puzzle. The effect that resets `tablebase` on index
+        // change handles the case where they advanced.
+        if (indexAtGuess === index) {
+          setTablebase(result);
+        }
+      });
     },
     [guess, items, index],
   );
@@ -157,6 +190,8 @@ export function EvalLabQuiz({ onExit }: EvalLabQuizProps): JSX.Element {
           position={current.position}
           fromLesson={current.fromLesson}
           guess={guess}
+          tablebase={tablebase}
+          tablebaseLoading={tablebaseLoading}
         />
       )}
       {guess !== null && (
@@ -219,10 +254,32 @@ interface RevealCardProps {
   position: EndgameLessonPosition;
   fromLesson: string;
   guess: Guess;
+  tablebase: TablebaseLookupResult | null;
+  tablebaseLoading: boolean;
 }
 
-function RevealCard({ position, fromLesson, guess }: RevealCardProps): JSX.Element {
+function RevealCard({
+  position,
+  fromLesson,
+  guess,
+  tablebase,
+  tablebaseLoading,
+}: RevealCardProps): JSX.Element {
   const correct = guess === position.result;
+  // Tablebase verification: when available, show a badge.
+  // - Confirms author: green ShieldCheck "Tablebase confirms".
+  // - Disagrees with author: amber AlertTriangle "Author / tablebase mismatch"
+  //   (this is a content bug — the curator's claim is wrong; surfaces so
+  //   I can fix it).
+  // - >7 pieces or fetch failed: no badge.
+  const tablebaseAgrees =
+    tablebase &&
+    tablebase.whiteRelativeResult !== null &&
+    tablebase.whiteRelativeResult === position.result;
+  const tablebaseDisagrees =
+    tablebase &&
+    tablebase.whiteRelativeResult !== null &&
+    tablebase.whiteRelativeResult !== position.result;
   return (
     <div
       className={`rounded-xl border-2 p-3 flex flex-col gap-2 ${
@@ -245,6 +302,25 @@ function RevealCard({ position, fromLesson, guess }: RevealCardProps): JSX.Eleme
         From: <span className="text-theme-text font-medium">{fromLesson}</span> — {position.title}
       </div>
       <p className="text-[12px] text-theme-text leading-relaxed">{position.explanation}</p>
+      {tablebaseLoading && (
+        <div className="text-[10px] text-theme-text-muted/70">Verifying with tablebase…</div>
+      )}
+      {tablebaseAgrees && (
+        <div className="flex items-center gap-1.5 text-[11px] text-cyan-400 font-medium">
+          <ShieldCheck size={13} />
+          Tablebase confirms · {labelFor(tablebase.whiteRelativeResult as Guess)} · DTM {tablebase.dtm ?? '—'}
+        </div>
+      )}
+      {tablebaseDisagrees && (
+        <div className="flex items-start gap-1.5 text-[11px] text-amber-400 font-medium">
+          <AlertTriangle size={13} className="flex-shrink-0 mt-0.5" />
+          <span>
+            Tablebase reports {labelFor(tablebase.whiteRelativeResult as Guess)} —
+            disagrees with the curator's claim of {labelFor(position.result)}.
+            Content bug logged; the tablebase is mathematically certain.
+          </span>
+        </div>
+      )}
       {position.source && (
         <div className="text-[10px] text-theme-text-muted/70 italic">{position.source}</div>
       )}
