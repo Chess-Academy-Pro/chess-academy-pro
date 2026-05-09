@@ -34,6 +34,13 @@ import {
   buildMatingPatternLesson,
   type EndgameTier,
 } from '../../services/endgameService';
+import {
+  getEndgamePrinciples,
+  getPawnEndings,
+  getDrawingPatterns,
+  getRookEndings,
+} from '../../services/endgameLessonsService';
+import { EndgameLessonTab } from './EndgameLessonTab';
 import { useAppStore } from '../../stores/appStore';
 import { logAppAudit } from '../../services/appAuditor';
 import type { MatingPattern } from '../../types/matingPattern';
@@ -51,11 +58,18 @@ const TIER_OPTIONS: { value: EndgameTier; label: string }[] = [
  *  page's IA reflects the real "Endgame" scope, not just mating
  *  patterns. User: "Can you put the mating patterns in their own
  *  tab under endgames?" */
-type EndgameTab = 'mating-patterns' | 'k-and-pawn' | 'rook-endings';
+type EndgameTab =
+  | 'mating-patterns'
+  | 'principles'
+  | 'pawn-endings'
+  | 'rook-endings'
+  | 'drawing-patterns';
 const TAB_OPTIONS: { value: EndgameTab; label: string; ready: boolean }[] = [
-  { value: 'mating-patterns', label: 'Mating Patterns', ready: true },
-  { value: 'k-and-pawn', label: 'K + Pawn', ready: false },
-  { value: 'rook-endings', label: 'Rook Endings', ready: false },
+  { value: 'mating-patterns', label: 'Mating', ready: true },
+  { value: 'principles', label: 'Principles', ready: true },
+  { value: 'pawn-endings', label: 'Pawn', ready: true },
+  { value: 'rook-endings', label: 'Rook', ready: true },
+  { value: 'drawing-patterns', label: 'Drawn', ready: true },
 ];
 
 export function CoachEndgamePage(): JSX.Element {
@@ -268,21 +282,36 @@ function PatternPicker({ onPick, onBack, tier, onTierChange, activeTab, onTabCha
         </>
       )}
 
-      {activeTab !== 'mating-patterns' && (
-        <div className="max-w-lg mx-auto w-full text-center text-theme-text-muted text-sm py-12 px-4">
-          {activeTab === 'k-and-pawn' && (
-            <>
-              <p className="font-semibold text-theme-text">King + Pawn endings — coming soon</p>
-              <p className="mt-2">Opposition, key squares, the rule of the square, Lucena and Philidor positions.</p>
-            </>
-          )}
-          {activeTab === 'rook-endings' && (
-            <>
-              <p className="font-semibold text-theme-text">Rook endings — coming soon</p>
-              <p className="mt-2">Lucena, Philidor, rook + pawn vs rook, active rook principles.</p>
-            </>
-          )}
-        </div>
+      {activeTab === 'principles' && (
+        <EndgameLessonTab
+          lessons={getEndgamePrinciples()}
+          tabLabel="Endgame Principles"
+          tabSubtitle="The seven universal rules. Master these, and every endgame decision gets simpler."
+        />
+      )}
+
+      {activeTab === 'pawn-endings' && (
+        <EndgameLessonTab
+          lessons={getPawnEndings()}
+          tabLabel="Pawn Endings"
+          tabSubtitle="Opposition, key squares, the rule of the square — the foundation of all endgame technique."
+        />
+      )}
+
+      {activeTab === 'rook-endings' && (
+        <EndgameLessonTab
+          lessons={getRookEndings()}
+          tabLabel="Rook Endings"
+          tabSubtitle="Lucena, Philidor, the active rook — the most common endgames in practice."
+        />
+      )}
+
+      {activeTab === 'drawing-patterns' && (
+        <EndgameLessonTab
+          lessons={getDrawingPatterns()}
+          tabLabel="Drawing Patterns"
+          tabSubtitle="The eight positions every player should recognize. Knowing these turns lost games into half-points."
+        />
       )}
     </div>
   );
