@@ -31,6 +31,31 @@ describe('findTrapTilesForCanonicalLine', () => {
     expect(findTrapTilesForCanonicalLine('')).toEqual([]);
     expect(findTrapTilesForCanonicalLine('   ')).toEqual([]);
   });
+
+  it('returns [] for too-shallow canonical PGNs (King\'s Pawn Game / Queen\'s Pawn Game etc.)', () => {
+    // Production audit (build cca83fb): user typed a family-level
+    // parent like "King's Pawn Game" (canonical PGN = `e4`) and the
+    // picker drowned in 30+ red TRAP tiles from every B/C-code
+    // opening that starts with 1.e4. A 1-3 ply prefix is shared by
+    // hundreds of unrelated openings — the prefix match is
+    // meaningless that shallow. User: "for real tho, we can't have
+    // this." Lock the threshold so it can't regress.
+    expect(findTrapTilesForCanonicalLine('e4')).toEqual([]);
+    expect(findTrapTilesForCanonicalLine('d4')).toEqual([]);
+    expect(findTrapTilesForCanonicalLine('e4 c5')).toEqual([]);
+    expect(findTrapTilesForCanonicalLine('e4 e5 Nf3')).toEqual([]);
+  });
+
+  it('caps trap tiles at the picker maximum even when many curated traps qualify', () => {
+    // Italian Game (5-ply canonical) has 5+ curated trap lines
+    // across multiple pro repertoires (Caruana, Firouzja). Without
+    // the cap the picker would surface them all and squeeze out the
+    // variation tiles. Cap should clip to a single-screen-friendly
+    // count.
+    const traps = findTrapTilesForCanonicalLine('e4 e5 Nf3 Nc6 Bc4');
+    expect(traps.length).toBeGreaterThan(0);
+    expect(traps.length).toBeLessThanOrEqual(4);
+  });
 });
 
 describe('buildTrapWalkthroughTreeFromPgn', () => {
