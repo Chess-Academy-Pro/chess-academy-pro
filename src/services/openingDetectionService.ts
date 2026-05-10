@@ -496,8 +496,9 @@ export interface ForkBranch {
  *  by one or more plies. Groups by the FIRST divergent move so the
  *  picker shows one tile per genuine fork choice (multiple sub-sub-
  *  lines under the same first move collapse into a single branch
- *  represented by the most-general member of the group). Caps at 6
- *  branches to keep the fork picker readable. */
+ *  represented by the most-general member of the group). Caps at 3
+ *  branches to keep the fork picker readable — matches the trim of
+ *  the entry-level picker (top 3 popular variations only). */
 export function findSiblingExtensionBranches(
   canonicalName: string,
   canonicalPgn: string,
@@ -617,7 +618,7 @@ export function findSiblingExtensionBranches(
     },
   );
   branches.sort((a, b) => b.count - a.count);
-  return branches.slice(0, 6);
+  return branches.slice(0, 3);
 }
 
 /** Find ALL Lichess-DB entries related to an opening name. Returns
@@ -947,10 +948,13 @@ export function findLinePickerOptions(
 
   if (options.length < minVariations) return null;
 
-  // Cap at 15 options — beyond that the picker becomes overwhelming.
-  // The 15 trunk-near variations cover what a 1200-1600 rated player
-  // would reasonably encounter.
-  const MAX_OPTIONS = 15;
+  // Cap at 3 options — only the most popular variations per opening
+  // family. The Lichess-DB popularity sort runs above; the top 3
+  // are the real main lines a learner needs (e.g. for Sicilian:
+  // Najdorf, Dragon, Sveshnikov). User trim 2026-05-09: the picker
+  // had grown to 15 tiles + curated trap tiles and become noise;
+  // strip it back to the essentials.
+  const MAX_OPTIONS = 3;
   return {
     canonicalName: bareCandidate.name,
     canonicalPgn: bareCandidate.pgn,

@@ -29,12 +29,7 @@ import {
   getCachedOpening,
   cacheOpening,
   generateMissingStagesInBackground,
-  buildTrapWalkthroughTreeFromPgn,
 } from '../../services/openingGenerator';
-import {
-  findTrapTilesForCanonicalLine,
-  type TrapTile,
-} from '../../services/proRepertoireService';
 import {
   readSharedCache,
   writeSharedCache,
@@ -244,12 +239,6 @@ export function CoachTeachPage(): JSX.Element {
   const [linePicker, setLinePicker] = useState<{
     canonicalName: string;
     options: LinePickerOption[];
-    /** Curated trap lines surfaced as bright-red sibling tiles in the
-     *  same picker grid. Tapping one builds a walkthrough from the
-     *  trap's PGN (curator-written explanation as the intro) and
-     *  hands it to the walkthrough runner. Empty when the opening
-     *  family has no curated traps in pro-repertoires.json. */
-    traps: TrapTile[];
   } | null>(null);
   // 'play' = student studies the chosen variation as its natural side
   // (Black for Sicilian, White for Italian, etc.); 'face' = student
@@ -974,22 +963,12 @@ export function CoachTeachPage(): JSX.Element {
             });
             voiceService.stop();
             void voiceService.speakForced(ack).catch(() => undefined);
-            // Surface curated trap lines (from pro-repertoires.json)
-            // whose PGN starts with this opening's bare canonical
-            // line. Picker grid renders them as bright-red sibling
-            // tiles — student can pick a real master-line variation
-            // OR a punishment-trap and the walkthrough loads it.
-            // User: "Add the trap lines into the selections of
-            // different lines. Make them a nice bright red." +
-            // "I haven't even seen one yet. I don't care how. Just
-            // do it."
-            const trapTiles = findTrapTilesForCanonicalLine(pickerData.canonicalPgn);
-            setLinePicker({ ...pickerData, traps: trapTiles });
+            setLinePicker(pickerData);
             void logAppAudit({
               kind: 'coach-surface-migrated',
               category: 'subsystem',
               source: 'CoachTeachPage.handleSubmit.surfaceRouting',
-              summary: `line picker shown for "${pickerData.canonicalName}" — ${pickerData.options.length} variations + ${trapTiles.length} trap tiles (pre-cache)`,
+              summary: `line picker shown for "${pickerData.canonicalName}" — ${pickerData.options.length} variations (pre-cache)`,
             });
             return;
           }
@@ -2228,51 +2207,6 @@ export function CoachTeachPage(): JSX.Element {
                 );
               });
               })()}
-              {/* Trap tiles — bright red glow, separate from variation
-                  tiles by visual treatment. Clicking builds a custom
-                  WalkthroughTree from the trap PGN (curator-written
-                  explanation as the intro) and starts the runner —
-                  no LLM round-trip, instant load. User: "Make them a
-                  nice bright red." */}
-              {linePicker.traps.map((trap) => (
-                <button
-                  key={`trap-${trap.parentOpeningName}-${trap.trapName}`}
-                  onClick={() => {
-                    const tree = buildTrapWalkthroughTreeFromPgn({
-                      trapName: trap.trapName,
-                      parentOpeningName: trap.parentOpeningName,
-                      eco: trap.eco,
-                      pgn: trap.pgn,
-                      explanation: trap.explanation,
-                    });
-                    if (!tree) return;
-                    setLinePicker(null);
-                    walkthrough.start(tree);
-                    void logAppAudit({
-                      kind: 'coach-surface-migrated',
-                      category: 'subsystem',
-                      source: 'CoachTeachPage.linePicker.trapTile',
-                      summary: `trap walkthrough started: "${trap.trapName}" from ${trap.parentOpeningName}`,
-                    });
-                  }}
-                  className="flex flex-col items-start gap-0.5 px-2.5 py-2 rounded-lg bg-theme-surface hover:bg-theme-bg text-left min-h-[52px] transition-colors"
-                  style={{
-                    borderTop: '1px solid rgba(239, 68, 68, 0.35)',
-                    borderRight: '1px solid rgba(239, 68, 68, 0.35)',
-                    borderLeft: '2px solid rgba(239, 68, 68, 0.95)',
-                    borderBottom: '2px solid rgba(239, 68, 68, 0.95)',
-                    boxShadow: scaledShadow('239, 68, 68', 90),
-                  }}
-                  data-testid={`line-picker-trap-${trap.trapName.replace(/\s+/g, '-').toLowerCase()}`}
-                >
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-red-400">
-                    <span>{trap.eco}</span>
-                    <span>·</span>
-                    <span className="font-semibold tracking-wider">TRAP</span>
-                  </div>
-                  <span className="text-sm font-semibold text-theme-text leading-tight">{trap.trapName}</span>
-                </button>
-              ))}
             </div>
             <button
               onClick={() => setLinePicker(null)}
