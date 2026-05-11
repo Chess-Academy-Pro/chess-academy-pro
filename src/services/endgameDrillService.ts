@@ -184,6 +184,50 @@ export function getDrillPositionsForLesson(
   return out;
 }
 
+/** Pick a single drill position at (approximately) the given
+ *  target rating, excluding any puzzles already played. Used by
+ *  the adaptive-difficulty session: after each drill, the host
+ *  passes the current target + played-ids, and we hand back the
+ *  closest-to-target unplayed puzzle.
+ *
+ *  Tolerance starts tight (±50 cp) and widens progressively until
+ *  a candidate is found. Returns null only when the entire theme
+ *  pool is exhausted. */
+export function getPuzzleAtRating(
+  lesson: EndgameLesson,
+  targetRating: number,
+  excludeIds: ReadonlySet<string>,
+  options: { minPopularity?: number; minPlays?: number } = {},
+): EndgameLessonPosition | null {
+  const themes = lesson.practiceThemes ?? [];
+  if (themes.length === 0) return null;
+  const minPopularity = options.minPopularity ?? 50;
+  const minPlays = options.minPlays ?? 80;
+  const themeSet = new Set(themes);
+
+  // Eligible pool — theme match + popularity floor + not already played.
+  const eligible = PUZZLES.filter((p) => {
+    if (excludeIds.has(p.id)) return false;
+    if (p.popularity < minPopularity) return false;
+    if (p.nbPlays < minPlays) return false;
+    return p.themes.some((t) => themeSet.has(t));
+  });
+  if (eligible.length === 0) return null;
+
+  // Pick the unplayed puzzle whose rating is closest to target.
+  let best: RawPuzzle | null = null;
+  let bestDistance = Infinity;
+  for (const p of eligible) {
+    const d = Math.abs(p.rating - targetRating);
+    if (d < bestDistance) {
+      bestDistance = d;
+      best = p;
+    }
+  }
+  if (!best) return null;
+  return puzzleToLessonPosition(best, lesson.name);
+}
+
 /** Total available drill puzzle count for a lesson — used by the
  *  picker to surface "X drills available" on the tile. Pass a
  *  tier to count only that tier's pool. */
