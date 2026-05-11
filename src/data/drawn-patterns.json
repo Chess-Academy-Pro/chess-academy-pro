@@ -26,6 +26,10 @@
         "result": "white-wins",
         "source": "Compare-and-contrast with the wrong-color version above"
       }
+    ],
+    "practiceThemes": [
+      "bishopEndgame",
+      "endgame"
     ]
   },
   {
@@ -49,6 +53,9 @@
         "source": "OCB drawing pattern — Steinitz / Capablanca theory",
         "auditSkip": "OCB endings are notoriously eval-resistant; engines often score them as winning for the side with material/king activity, but human/practice play converts to draw. The position is a textbook OCB structure."
       }
+    ],
+    "practiceThemes": [
+      "bishopEndgame"
     ]
   },
   {
@@ -71,6 +78,9 @@
         "result": "draw",
         "source": "Philidor 1749 — third-rank defense"
       }
+    ],
+    "practiceThemes": [
+      "rookEndgame"
     ]
   },
   {
@@ -93,6 +103,10 @@
         "result": "white-wins",
         "source": "Q vs R technique — see Karpov-Korchnoi 1978 for a famous instance"
       }
+    ],
+    "practiceThemes": [
+      "queenEndgame",
+      "queenRookEndgame"
     ]
   },
   {
@@ -113,9 +127,16 @@
         "title": "Defender's king reaches in front — drawn",
         "explanation": "White Kd3, Pd4. Black's king on e8 must race to the d-file in front of the pawn. After 1...Ke7 2.Kc4 Kd6! Black blocks the pawn directly. From here, every White outflank attempt (Kb5, Ka6, etc.) is met by Black mirroring (Kc7, Kb8) — Black holds the d-file in front of the pawn and never lets the white king reach the 6th rank. Drawn.",
         "result": "draw",
-        "solution": ["Ke7", "Kc4", "Kd6"],
+        "solution": [
+          "Ke7",
+          "Kc4",
+          "Kd6"
+        ],
         "source": "Canonical K+P opposition defense"
       }
+    ],
+    "practiceThemes": [
+      "pawnEndgame"
     ]
   },
   {
@@ -138,6 +159,9 @@
         "result": "draw",
         "source": "Canonical K+Q vs K stalemate trap"
       }
+    ],
+    "practiceThemes": [
+      "endgame"
     ]
   },
   {
@@ -158,9 +182,18 @@
         "title": "Black checks forever — the queen alone holds the draw",
         "explanation": "White is up a rook. But Black's queen on e2 can perpetually check: 1...Qe1+ 2.Kc2 Qe2+ 3.Kc1 Qe1+ — three repetitions, drawn. White's king has no shelter from queen checks; the queen never lets up. A losing position turned into a half point.",
         "result": "draw",
-        "solution": ["Qe1+", "Kc2", "Qe2+", "Kc1", "Qe1+"],
+        "solution": [
+          "Qe1+",
+          "Kc2",
+          "Qe2+",
+          "Kc1",
+          "Qe1+"
+        ],
         "source": "Perpetual check pattern — common in queen endings"
       }
+    ],
+    "practiceThemes": [
+      "endgame"
     ]
   },
   {
@@ -197,6 +230,9 @@
         "result": "draw",
         "source": "Two-knight checkmate impossibility — FIDE Laws"
       }
+    ],
+    "practiceThemes": [
+      "endgame"
     ]
   }
 ]

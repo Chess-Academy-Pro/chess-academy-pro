@@ -19,7 +19,7 @@
  * hand-crafted prose. The LLM is voice (Polly TTS) only — zero
  * authorship at runtime.
  */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Chess } from 'chess.js';
 import { ArrowLeft, Crown, ChevronRight, RotateCw, Lightbulb, MessageCircle } from 'lucide-react';
@@ -27,6 +27,7 @@ import type { PieceDropHandlerArgs } from 'react-chessboard';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { useTeachWalkthrough } from '../../hooks/useTeachWalkthrough';
+import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import {
   getAllPatterns,
   getPatternById,
@@ -422,15 +423,28 @@ function LessonView({
   const hasPractice = getPracticePuzzleCount(pattern) > 0;
   const studentSide = walkthrough.tree?.studentSide ?? 'white';
   const [wrongFlash, setWrongFlash] = useState<string | null>(null);
+  // Wrong-attempt counter on the current fork. Resets on each new
+  // fork. Used to surface a "Show options" bail-out after 2 wrong
+  // tries so the student isn't permanently stuck — but the
+  // primary interaction is always board-play, not multiple choice.
+  const [wrongAttempts, setWrongAttempts] = useState<number>(0);
+  const [showBailoutOptions, setShowBailoutOptions] = useState<boolean>(false);
+
+  // Reset the wrong-attempt counter whenever the fork changes
+  // (forkOptions identity flips on fork transition).
+  useEffect(() => {
+    setWrongAttempts(0);
+    setShowBailoutOptions(false);
+  }, [forkOptions]);
 
   // Drop handler — turns a board piece-drop into a fork pick. Only
   // fires during the 'fork' phase (when the student is supposed to
-  // find the move). User: "not able to move any pieces. They are
-  // not functional. Can you make them functional". The lesson tree
-  // is built as a series of fork choices (correct mate move + 2-3
-  // distractors); this handler converts a board drop into the
-  // matching fork index so the student can solve by playing the
-  // move directly instead of tapping a tile.
+  // find the move). The lesson tree is built as a series of fork
+  // choices (correct mate move + 2-3 distractors); this handler
+  // converts a board drop into the matching fork index. The MC
+  // button list is gone — the student answers by playing on the
+  // board. A bail-out toggle (after 2 wrong drops) lets them
+  // reveal options if they're stuck.
   const handlePieceDrop = useCallback(
     (args: PieceDropHandlerArgs): boolean => {
       if (phase !== 'fork') return false;
@@ -452,9 +466,10 @@ function LessonView({
         return true;
       }
       // Legal move but not the right answer — flash the destination
-      // square red briefly so the student gets feedback instead of
-      // a silent snap-back.
+      // square red and bump the wrong-attempts counter. After 2
+      // wrong drops, the bail-out toggle becomes available.
       setWrongFlash(args.targetSquare);
+      setWrongAttempts((n) => n + 1);
       window.setTimeout(() => setWrongFlash(null), 600);
       return false;
     },
@@ -529,9 +544,28 @@ function LessonView({
     </div>
   );
 
-  // No-practice fallback: show recognition position from the JSON
-  // with the narration prose. No interactive lesson.
+  // No-practice fallback: when Lichess has no puzzle corpus for
+  // the pattern, fall back to the curated lessonPositions data.
+  // The pychess study data carries multi-move setup-and-mate
+  // sequences for several recognition-only patterns — those become
+  // playable via useEndgamePlayout. Patterns with neither a
+  // Lichess theme tag NOR a curated playable position render as
+  // recognition-only (the final fallback).
   if (!hasPractice) {
+    const curatedPlayable = pattern.lessonPositions.find(
+      (lp) => lp.solution && lp.solution.length > 0,
+    );
+    if (curatedPlayable && curatedPlayable.solution) {
+      return (
+        <CuratedMatingLessonView
+          pattern={pattern}
+          startFen={curatedPlayable.fen}
+          solution={curatedPlayable.solution}
+          header={header}
+          onExit={onExit}
+        />
+      );
+    }
     const recognition = pattern.lessonPositions.find((p) => p.movesToMate === 1) ?? pattern.lessonPositions[0];
     return (
       <ChessLessonLayout
@@ -595,29 +629,64 @@ function LessonView({
 
   let controls: React.ReactNode;
   if (phase === 'fork') {
+    // Board-play primary. The student drags a piece on the board to
+    // answer; the drop handler routes to pickFork. After 2 wrong
+    // drops a "Show options" bail-out reveals the MC choices so
+    // the student isn't permanently stuck — but they only appear
+    // on request, not by default.
+    const canBailOut = wrongAttempts >= 2;
     controls = (
       <div className="flex flex-col gap-2 px-2">
-        <div className="text-xs font-medium text-theme-text-muted px-1">
-          Find the move.
-        </div>
-        {forkOptions.map((opt, idx) => (
-          <button
-            key={`${opt.label ?? idx}-${idx}`}
-            onClick={() => walkthrough.pickFork(idx)}
-            className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg bg-theme-surface hover:bg-theme-bg text-left min-h-[52px] transition-colors border-2 border-cyan-500/30"
-            data-testid={`endgame-fork-option-${idx}`}
-          >
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold text-theme-text">
-                {opt.label ?? `Option ${idx + 1}`}
-              </span>
-              {opt.forkSubtitle && (
-                <span className="text-xs text-theme-text-muted">{opt.forkSubtitle}</span>
-              )}
+        <div className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-2.5 flex items-start gap-2">
+          <Lightbulb size={14} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+          <div className="flex-1">
+            <div className="text-sm font-semibold text-theme-text">Find the move.</div>
+            <div className="text-[11px] text-theme-text-muted leading-snug">
+              Drag a piece on the board to play the move that completes the {pattern.name}.
             </div>
-            <ChevronRight size={16} className="text-theme-text-muted flex-shrink-0" />
+          </div>
+        </div>
+        {wrongAttempts > 0 && !showBailoutOptions && (
+          <div className="text-[11px] text-amber-400 px-1">
+            {wrongAttempts === 1
+              ? 'Not the mate. Try again.'
+              : `${wrongAttempts} wrong tries — drag a different piece.`}
+          </div>
+        )}
+        {canBailOut && !showBailoutOptions && (
+          <button
+            onClick={() => setShowBailoutOptions(true)}
+            className="text-xs text-cyan-400 hover:text-cyan-300 underline self-start px-1"
+            data-testid="endgame-show-options"
+          >
+            Show options
           </button>
-        ))}
+        )}
+        {showBailoutOptions && (
+          <div className="flex flex-col gap-2">
+            <div className="text-[10px] font-semibold uppercase tracking-wider text-theme-text-muted px-1">
+              Pick the right move
+            </div>
+            {forkOptions.map((opt, idx) => (
+              <button
+                key={`${opt.label ?? idx}-${idx}`}
+                onClick={() => walkthrough.pickFork(idx)}
+                className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg bg-theme-surface hover:bg-theme-bg text-left min-h-[48px] transition-colors border border-theme-border"
+                data-testid={`endgame-fork-option-${idx}`}
+              >
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-theme-text">
+                    {opt.label ?? `Option ${idx + 1}`}
+                  </span>
+                  {opt.forkSubtitle && (
+                    <span className="text-xs text-theme-text-muted">{opt.forkSubtitle}</span>
+                  )}
+                </div>
+                <ChevronRight size={16} className="text-theme-text-muted flex-shrink-0" />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     );
   } else if (isLeaf) {
@@ -661,6 +730,123 @@ function LessonView({
         >
           Skip
         </button>
+      </div>
+    );
+  }
+
+  return <ChessLessonLayout header={header} board={board} controls={controls} />;
+}
+
+// ─── Curated mating lesson — playable fallback for untagged patterns ──
+// Used when the pattern has no Lichess puzzle corpus but does have
+// a multi-move setup-and-mate solution in mating-patterns.json.
+// Runs the curated SAN sequence through useEndgamePlayout so the
+// student plays the technique on the board — same playability
+// guarantee as the tagged-pattern path, sourced from the same
+// curated DB.
+
+interface CuratedMatingLessonViewProps {
+  pattern: MatingPattern;
+  startFen: string;
+  solution: string[];
+  header: React.ReactNode;
+  onExit: () => void;
+}
+
+function CuratedMatingLessonView({
+  pattern,
+  startFen,
+  solution,
+  header,
+  onExit,
+}: CuratedMatingLessonViewProps): JSX.Element {
+  const playout = useEndgamePlayout({
+    startFen,
+    solution,
+    stockfishFallback: false,
+    replyDelayMs: 450,
+  });
+  const wrongFlashStyles = useMemo<Record<string, React.CSSProperties>>(() => {
+    if (!playout.wrongSquare) return {};
+    return {
+      [playout.wrongSquare]: { background: 'rgba(239, 68, 68, 0.45)' },
+    };
+  }, [playout.wrongSquare]);
+
+  const board = (
+    <ConsistentChessboard
+      fen={playout.fen}
+      boardOrientation={playout.studentSide}
+      interactive={playout.phase === 'student-to-move'}
+      onPieceDrop={playout.onPieceDrop}
+      squareStyles={wrongFlashStyles}
+    />
+  );
+
+  let controls: React.ReactNode;
+  if (playout.isComplete) {
+    controls = (
+      <div className="flex flex-col gap-3 px-2">
+        <div className="text-sm leading-relaxed text-theme-text">
+          That&apos;s {pattern.name}.{' '}
+          {playout.firstTryPerfect ? 'Played perfectly.' : 'Line completed.'} The geometry is the same
+          every time you spot this pattern in your own games.
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={playout.reset}
+            className="flex-1 px-4 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold"
+          >
+            Play it again
+          </button>
+          <button
+            onClick={onExit}
+            className="flex-1 px-4 py-2 rounded-lg bg-theme-surface text-sm font-medium text-theme-text hover:bg-theme-bg"
+          >
+            Back to patterns
+          </button>
+        </div>
+      </div>
+    );
+  } else if (playout.phase === 'opponent-replying') {
+    controls = (
+      <div className="px-2">
+        <div className="text-[11px] text-amber-400">
+          {playout.studentSide === 'white' ? 'Black' : 'White'} responds…
+        </div>
+      </div>
+    );
+  } else {
+    controls = (
+      <div className="flex flex-col gap-2 px-2">
+        <div className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-2.5 flex items-start gap-2">
+          <Lightbulb size={14} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+          <div className="flex-1">
+            <div className="text-sm font-semibold text-theme-text">
+              {playout.studentMovesPlayed === 0 ? `Find the ${pattern.name}.` : 'Keep the line going.'}
+            </div>
+            <div className="text-[11px] text-theme-text-muted leading-snug">
+              Drag a piece — {playout.curatedStudentMoves - playout.studentMovesPlayed} move
+              {playout.curatedStudentMoves - playout.studentMovesPlayed === 1 ? '' : 's'} to mate.
+            </div>
+          </div>
+        </div>
+        {playout.wrongAttempts > 0 && (
+          <div className="text-[11px] text-amber-400 px-1">
+            {playout.wrongAttempts === 1
+              ? 'Not the move. Try again.'
+              : `${playout.wrongAttempts} wrong tries.`}
+          </div>
+        )}
+        {playout.wrongAttempts >= 2 && (
+          <button
+            onClick={playout.reveal}
+            className="text-xs text-cyan-400 hover:text-cyan-300 underline self-start px-1"
+            data-testid="curated-mating-reveal"
+          >
+            Reveal the line
+          </button>
+        )}
       </div>
     );
   }

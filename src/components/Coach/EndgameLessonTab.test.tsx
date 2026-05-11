@@ -53,13 +53,11 @@ describe('EndgameLessonTab', () => {
     expect(screen.getByText(/Centralized king/i)).toBeInTheDocument();
   });
 
-  it('lessons render correctly even when they have only one position', () => {
-    // Some principles only have a single illustrative position. The
-    // navigation should disable Prev/Next correctly when there's
-    // only one to step through.
-    const oneOff = getEndgamePrinciples().filter((p) => p.positions.length === 1);
-    if (oneOff.length === 0) return;
-    const target = oneOff[0];
+  it('opens to position 1 with Prev disabled', () => {
+    // The total position count now equals keystones + DB-sourced
+    // drills, so we lock the entry-state invariant (position 1,
+    // Prev disabled) rather than the exact total.
+    const target = getEndgamePrinciples()[0];
     render(
       <EndgameLessonTab
         lessons={[target]}
@@ -68,14 +66,12 @@ describe('EndgameLessonTab', () => {
       />,
     );
     fireEvent.click(screen.getByTestId(`endgame-lesson-${target.id}`));
-    // Both Prev and Next should be disabled when there's only one position.
     const prevButton = screen.getByText('Prev').closest('button');
-    const nextButton = screen.getByText('Next').closest('button');
     expect(prevButton?.disabled).toBe(true);
-    expect(nextButton?.disabled).toBe(true);
+    expect(screen.getByText(/^1\/\d+$/)).toBeInTheDocument();
   });
 
-  it('navigates between positions when there are multiple', () => {
+  it('navigates forward through positions', () => {
     const lessons = getPawnEndings();
     const multi = lessons.find((l) => l.positions.length > 1);
     if (!multi) return;
@@ -87,8 +83,11 @@ describe('EndgameLessonTab', () => {
       />,
     );
     fireEvent.click(screen.getByTestId(`endgame-lesson-${multi.id}`));
-    expect(screen.getByText('1/' + multi.positions.length)).toBeInTheDocument();
+    // Counter format: "N/total" where total = keystones + drills.
+    // We assert progression rather than exact total — the DB-driven
+    // drill count can shift if puzzles.json or themes change.
+    expect(screen.getByText(/^1\/\d+$/)).toBeInTheDocument();
     fireEvent.click(screen.getByText('Next'));
-    expect(screen.getByText('2/' + multi.positions.length)).toBeInTheDocument();
+    expect(screen.getByText(/^2\/\d+$/)).toBeInTheDocument();
   });
 });

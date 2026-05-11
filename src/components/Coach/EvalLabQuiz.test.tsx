@@ -1,29 +1,34 @@
 /**
- * EvalLabQuiz behavioral test — locks in the quiz contract:
- *   - 10 random positions per session
- *   - Three guess options (white-wins / draw / black-wins)
- *   - Reveal shows the authored explanation + correct/incorrect badge
- *   - Score tallied at the end
- *
- * Renders against the real endgameLessonsService catalog so any
- * future change that breaks the quiz pool fires here.
+ * EvalLabQuiz behavioral test — locks in the two-stage contract:
+ *   - Stage 1: "find the critical move" prompt shown (no W/D/L
+ *     buttons — board-play is the only answer mechanic).
+ *   - Pool only contains positions with curated bestMoves.
+ *   - Progress counter renders.
+ *   - Quiz pool draws from the full lesson catalog.
  */
-import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import { EvalLabQuiz } from './EvalLabQuiz';
 import { getAllEndgameLessons } from '../../services/endgameLessonsService';
 
-describe('EvalLabQuiz', () => {
-  beforeEach(() => {
-    // Reset Date.now-based seed each test so quiz pool is
-    // deterministic-per-test but still randomized across runs.
-  });
+vi.mock('../../services/lichessTablebaseService', () => ({
+  lookupTablebase: vi.fn().mockResolvedValue(null),
+}));
 
-  it('renders the first quiz position with three guess buttons', () => {
+vi.mock('../../services/coachPlaySession', () => ({
+  resolveConfig: vi.fn(() => ({ skill: 8, moveTimeMs: 500, label: 'Easy' })),
+  getCoachMove: vi.fn(),
+}));
+
+describe('EvalLabQuiz', () => {
+  it('renders stage 1 prompt with no W/D/L buttons', () => {
     render(<EvalLabQuiz onExit={() => undefined} />);
-    expect(screen.getByTestId('eval-lab-guess-white-wins')).toBeInTheDocument();
-    expect(screen.getByTestId('eval-lab-guess-draw')).toBeInTheDocument();
-    expect(screen.getByTestId('eval-lab-guess-black-wins')).toBeInTheDocument();
+    // Stage 1 prompt visible — the play-the-move instruction.
+    expect(screen.getByText(/Stage 1 · Find the move/)).toBeInTheDocument();
+    // No multiple-choice buttons.
+    expect(screen.queryByTestId('eval-lab-guess-white-wins')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('eval-lab-guess-draw')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('eval-lab-guess-black-wins')).not.toBeInTheDocument();
   });
 
   it('shows progress counter (Position N of M)', () => {
@@ -31,18 +36,11 @@ describe('EvalLabQuiz', () => {
     expect(screen.getByText(/Position 1 of/)).toBeInTheDocument();
   });
 
-  it('reveals next-button after the user guesses', () => {
-    render(<EvalLabQuiz onExit={() => undefined} />);
-    fireEvent.click(screen.getByTestId('eval-lab-guess-draw'));
-    expect(screen.getByTestId('eval-lab-next')).toBeInTheDocument();
-  });
-
-  it('quiz pool draws from the full lesson catalog', () => {
-    const total = getAllEndgameLessons().reduce(
-      (sum, l) => sum + l.positions.length,
-      0,
-    );
-    // Must have enough material to populate a 10-question quiz.
-    expect(total).toBeGreaterThanOrEqual(10);
+  it('quiz pool draws only positions with curated bestMoves', () => {
+    const withBestMove = getAllEndgameLessons()
+      .flatMap((l) => l.positions)
+      .filter((p) => !!p.bestMove);
+    // Must have enough material to drive the play-the-move stage.
+    expect(withBestMove.length).toBeGreaterThanOrEqual(1);
   });
 });

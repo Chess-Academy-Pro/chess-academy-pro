@@ -25,7 +25,14 @@
         "title": "White has the opposition — wins",
         "explanation": "Same position, Black to move. Now WHITE has the opposition; Black must give way. 1...Kd7 2.Kf6! Kd6 3.e5+ Kd5 4.Kf5 — white king reaches the 6th rank and escorts the pawn home. The single move difference (whose turn it is) flips the eval from drawn to winning.",
         "result": "white-wins",
-        "solution": ["Kd7", "Kf6", "Kd6", "e5+", "Kd5", "Kf5"],
+        "solution": [
+          "Kd7",
+          "Kf6",
+          "Kd6",
+          "e5+",
+          "Kd5",
+          "Kf5"
+        ],
         "source": "The opposition flipped — same FEN, different mover"
       },
       {
@@ -36,6 +43,9 @@
         "bestMove": "Kd8",
         "source": "King on key square — opposition irrelevant"
       }
+    ],
+    "practiceThemes": [
+      "pawnEndgame"
     ]
   },
   {
@@ -75,6 +85,9 @@
         "bestMove": "Kb8",
         "source": "The rook-pawn exception"
       }
+    ],
+    "practiceThemes": [
+      "pawnEndgame"
     ]
   },
   {
@@ -95,7 +108,15 @@
         "title": "Black king outside the square — pawn queens",
         "explanation": "Pawn on a4 queens at a8 (4 ranks). The square is corners a4-a8-d8-d4 (a 4x4 grid). Black's king on f5 is two files outside that square. After 1.a5 Ke5 2.a6 Kd5 3.a7 Kc6 4.a8=Q+ the pawn promotes with check; the king couldn't catch it. Pure rule-of-the-square win.",
         "result": "white-wins",
-        "solution": ["a5", "Ke5", "a6", "Kd5", "a7", "Kc6", "a8=Q+"],
+        "solution": [
+          "a5",
+          "Ke5",
+          "a6",
+          "Kd5",
+          "a7",
+          "Kc6",
+          "a8=Q+"
+        ],
         "source": "Canonical rule-of-the-square teaching position"
       },
       {
@@ -114,6 +135,10 @@
         "bestMove": "a4",
         "source": "Two-square first-move bonus in the rule of the square"
       }
+    ],
+    "practiceThemes": [
+      "pawnEndgame",
+      "advancedPawn"
     ]
   },
   {
@@ -143,6 +168,9 @@
         "result": "draw",
         "source": "Pure-king teaching position — same FEN, Black to move"
       }
+    ],
+    "practiceThemes": [
+      "pawnEndgame"
     ]
   },
   {
@@ -166,6 +194,9 @@
         "bestMove": "Kd8",
         "source": "Teaching position — outflanking from a stalled opposition"
       }
+    ],
+    "practiceThemes": [
+      "pawnEndgame"
     ]
   },
   {
@@ -187,10 +218,20 @@
         "explanation": "White pushes 1.b6! The threat: 2.bxc7 or 2.bxa7 winning a pawn AND breaking the wall. If 1...axb6 2.c6! bxc6 3.a6 — and the a-pawn races to a8 with no defender. If 1...cxb6 2.a6! bxa6 3.c6 — c-pawn races. Black's king on g8 is six files away; can't catch any of these. White queens with one pawn down and two captured.",
         "result": "white-wins",
         "bestMove": "b6",
-        "solution": ["b6", "axb6", "c6", "bxc6", "a6"],
+        "solution": [
+          "b6",
+          "axb6",
+          "c6",
+          "bxc6",
+          "a6"
+        ],
         "source": "Canonical three-pawn breakthrough; appears in Berger (1890)",
         "auditSkip": "Forced pawn race that requires deep calculation; Stockfish-WASM-lite at audit depth scores 0cp because it can't see the queening 8 plies out. Verified at Stockfish-deep depth 30 (eval +1761cp = decisive white win)."
       }
+    ],
+    "practiceThemes": [
+      "pawnEndgame",
+      "advancedPawn"
     ]
   },
   {
@@ -214,6 +255,10 @@
         "bestMove": "Kc3",
         "source": "Teaching position — outside passed pawn + triangulation"
       }
+    ],
+    "practiceThemes": [
+      "pawnEndgame",
+      "zugzwang"
     ]
   }
 ]

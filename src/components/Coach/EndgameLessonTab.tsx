@@ -1,20 +1,22 @@
 /**
- * EndgameLessonTab — generic UI for the new hand-authored endgame
- * lesson catalogs (Principles / Pawn Endings / Drawing Patterns /
- * Rook Endings).
+ * EndgameLessonTab — playable endgame lesson surface.
  *
  * Two views:
  *   1. Picker grid — tiles per lesson with the rule / one-line teaser
- *   2. Lesson view — full narration (intro / rule / why / history /
- *      tip) + reference positions on board with explanations
+ *   2. Lesson view — full narration + a multi-ply playout per
+ *      reference position. The student plays each of their moves
+ *      on the board; the opponent's curated reply auto-plays
+ *      after a brief delay. Wrong drops flash red and let the
+ *      student retry. The lesson advances only after the student
+ *      plays the entire authored sequence.
  *
- * Identical chrome and feel to the existing Mating Patterns surface,
- * so the surface coheres across tabs. ConsistentChessboard is the
- * only board used; voice narration goes through Polly TTS via
- * voiceService.
+ * Architectural contract — same as everywhere else:
+ *   - chessboard always goes through ConsistentChessboard
+ *   - timing/playback driven by useEndgamePlayout
+ *   - moves come from the JSON data (solution[] / bestMove)
+ *   - LLM authorship is zero at runtime
  */
 import { useCallback, useMemo, useState } from 'react';
-import { Chess } from 'chess.js';
 import {
   ArrowLeft,
   ChevronLeft,
@@ -22,11 +24,14 @@ import {
   Lightbulb,
   BookOpen,
   CheckCircle,
+  RotateCw,
+  Eye,
 } from 'lucide-react';
-import type { PieceDropHandlerArgs } from 'react-chessboard';
 import type { CSSProperties } from 'react';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
+import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
+import { getDrillPositionsForLesson, getDrillPuzzleCount } from '../../services/endgameDrillService';
 import type { EndgameLesson, EndgameLessonPosition } from '../../types/endgameLesson';
 
 interface EndgameLessonTabProps {
@@ -77,31 +82,42 @@ function PickerGrid({ lessons, tabLabel, tabSubtitle, onPick }: PickerGridProps)
         <p className="text-xs text-theme-text-muted mt-1">{tabSubtitle}</p>
       </div>
       <div className="grid grid-cols-1 gap-2">
-        {lessons.map((lesson) => (
-          <button
-            key={lesson.id}
-            onClick={() => onPick(lesson.id)}
-            className="relative rounded-xl border-2 p-3 text-left transition-colors bg-cyan-500/10 border-cyan-500/30 hover:bg-cyan-500/15"
-            data-testid={`endgame-lesson-${lesson.id}`}
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-[10px] font-mono font-semibold">
-                    {lesson.order}
-                  </span>
-                  <span className="text-sm font-semibold text-theme-text leading-tight">
-                    {lesson.name}
-                  </span>
+        {lessons.map((lesson) => {
+          const playableCount = lesson.positions.filter(
+            (p) => p.bestMove || (p.solution && p.solution.length > 0),
+          ).length;
+          const drillCount = getDrillPuzzleCount(lesson);
+          return (
+            <button
+              key={lesson.id}
+              onClick={() => onPick(lesson.id)}
+              className="relative rounded-xl border-2 p-3 text-left transition-colors bg-cyan-500/10 border-cyan-500/30 hover:bg-cyan-500/15"
+              data-testid={`endgame-lesson-${lesson.id}`}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-[10px] font-mono font-semibold">
+                      {lesson.order}
+                    </span>
+                    <span className="text-sm font-semibold text-theme-text leading-tight">
+                      {lesson.name}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-theme-text-muted leading-snug line-clamp-2">
+                    {lesson.narration.rule}
+                  </p>
+                  <div className="text-[10px] text-cyan-400 mt-1.5">
+                    {lesson.positions.length} keystone{lesson.positions.length === 1 ? '' : 's'}
+                    {playableCount > 0 && ` · ${playableCount} playable`}
+                    {drillCount > 0 && ` · ${drillCount.toLocaleString()} drill puzzles`}
+                  </div>
                 </div>
-                <p className="text-[11px] text-theme-text-muted leading-snug line-clamp-2">
-                  {lesson.narration.rule}
-                </p>
+                <ChevronRight size={16} className="text-cyan-400 flex-shrink-0 mt-1" />
               </div>
-              <ChevronRight size={16} className="text-cyan-400 flex-shrink-0 mt-1" />
-            </div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -113,78 +129,99 @@ interface LessonViewProps {
 }
 
 function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
-  const [posIndex, setPosIndex] = useState(0);
-  const position = lesson.positions[posIndex];
-  const studentSide = useMemo<'white' | 'black'>(
-    () => (position.fen.split(' ')[1] === 'w' ? 'white' : 'black'),
-    [position.fen],
+  const [drillSeed, setDrillSeed] = useState<number>(() => Date.now());
+  // The full position list = keystone positions (hand-authored)
+  // followed by drill positions (Lichess puzzle DB). The student
+  // sees keystones first (named theory, explained), then drills
+  // (real-game tests of the same technique).
+  const drillPositions = useMemo(
+    () => getDrillPositionsForLesson(lesson, { limit: 3, seed: drillSeed }),
+    [lesson, drillSeed],
   );
-
-  // Interactive practice state — when a position has bestMove, the
-  // student can drag a piece to attempt it. Right move → green
-  // success flash. Wrong move → red destination square flash. The
-  // board snaps back via FEN unchanged either way; the student can
-  // retry as many times as they want.
-  const [solved, setSolved] = useState(false);
-  const [wrongSquare, setWrongSquare] = useState<string | null>(null);
+  const allPositions = useMemo(
+    () => [...lesson.positions, ...drillPositions],
+    [lesson.positions, drillPositions],
+  );
+  const [posIndex, setPosIndex] = useState(0);
+  const position = allPositions[posIndex];
+  const isDrill = posIndex >= lesson.positions.length;
 
   const goPrev = useCallback(() => {
-    setPosIndex((i) => {
-      const next = Math.max(0, i - 1);
-      setSolved(false);
-      setWrongSquare(null);
-      return next;
-    });
+    setPosIndex((i) => Math.max(0, i - 1));
   }, []);
   const goNext = useCallback(() => {
-    setPosIndex((i) => {
-      const next = Math.min(lesson.positions.length - 1, i + 1);
-      setSolved(false);
-      setWrongSquare(null);
-      return next;
-    });
+    setPosIndex((i) => Math.min(allPositions.length - 1, i + 1));
+  }, [allPositions.length]);
+  const reshuffleDrills = useCallback(() => {
+    setDrillSeed(Date.now());
+    setPosIndex(lesson.positions.length); // jump to first new drill
   }, [lesson.positions.length]);
 
-  const handlePieceDrop = useCallback(
-    (args: PieceDropHandlerArgs): boolean => {
-      if (!position.bestMove) return false;
-      if (solved) return false;
-      if (!args.sourceSquare || !args.targetSquare) return false;
-      const probe = new Chess(position.fen);
-      let played;
-      try {
-        played = probe.move({
-          from: args.sourceSquare,
-          to: args.targetSquare,
-          promotion: 'q',
-        });
-      } catch {
-        return false;
-      }
-      // Strip annotations and compare. chess.js's SAN includes
-      // disambiguation; the authored bestMove may not. Compare on
-      // the cleaned forms.
-      const stripAnnotations = (san: string): string =>
-        san.replace(/[+#!?]+$/, '').replace(/=Q$|=R$|=B$|=N$/, '');
-      if (stripAnnotations(played.san) === stripAnnotations(position.bestMove)) {
-        setSolved(true);
-        setWrongSquare(null);
-        return true;
-      }
-      setWrongSquare(args.targetSquare);
-      window.setTimeout(() => setWrongSquare(null), 600);
-      return false;
-    },
-    [position.bestMove, position.fen, solved],
+  return (
+    <PositionRunner
+      key={`${lesson.id}-${posIndex}-${drillSeed}`}
+      lesson={lesson}
+      position={position}
+      posIndex={posIndex}
+      totalPositions={allPositions.length}
+      keystoneCount={lesson.positions.length}
+      isDrill={isDrill}
+      drillCount={drillPositions.length}
+      onExit={onExit}
+      onPrev={goPrev}
+      onNext={goNext}
+      canPrev={posIndex > 0}
+      canNext={posIndex < allPositions.length - 1}
+      onReshuffleDrills={drillPositions.length > 0 ? reshuffleDrills : undefined}
+    />
   );
+}
 
-  const flashStyles = useMemo<Record<string, CSSProperties>>(() => {
-    const out: Record<string, CSSProperties> = {};
-    if (wrongSquare) {
-      out[wrongSquare] = { background: 'rgba(239, 68, 68, 0.45)' };
-    }
-    return out;
-  }, [wrongSquare]);
+interface PositionRunnerProps {
+  lesson: EndgameLesson;
+  position: EndgameLessonPosition;
+  posIndex: number;
+  totalPositions: number;
+  keystoneCount: number;
+  isDrill: boolean;
+  drillCount: number;
+  onExit: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  canPrev: boolean;
+  canNext: boolean;
+  onReshuffleDrills?: () => void;
+}
+
+function PositionRunner({
+  lesson,
+  position,
+  posIndex,
+  totalPositions,
+  keystoneCount,
+  isDrill,
+  drillCount,
+  onExit,
+  onPrev,
+  onNext,
+  canPrev,
+  canNext,
+  onReshuffleDrills,
+}: PositionRunnerProps): JSX.Element {
+  const playout = useEndgamePlayout({
+    startFen: position.fen,
+    solution: position.solution ?? [],
+    bestMove: position.bestMove,
+    stockfishFallback: false,
+    replyDelayMs: 450,
+  });
+  const studentSide = playout.studentSide;
+  const isPlayable = playout.curatedStudentMoves > 0;
+
+  const wrongFlash = useMemo<Record<string, CSSProperties>>(() => {
+    if (!playout.wrongSquare) return {};
+    return { [playout.wrongSquare]: { background: 'rgba(239, 68, 68, 0.45)' } };
+  }, [playout.wrongSquare]);
 
   const header = (
     <div className="px-3 py-2 md:p-4 border-b border-theme-border">
@@ -197,9 +234,17 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
           <ArrowLeft size={20} className="text-theme-text" />
         </button>
         <div className="flex-1 min-w-0 text-center">
-          <h2 className="text-sm font-semibold text-theme-text truncate">{lesson.name}</h2>
+          <h2 className="text-sm font-semibold text-theme-text truncate">
+            {lesson.name}
+            {isDrill && <span className="ml-1.5 text-[10px] text-amber-400">DRILL</span>}
+          </h2>
           <p className="text-xs text-theme-text-muted truncate">
-            Position {posIndex + 1} of {lesson.positions.length}
+            {isDrill
+              ? `Drill ${posIndex - keystoneCount + 1} of ${drillCount}`
+              : `Keystone ${posIndex + 1} of ${keystoneCount}`}
+            {isPlayable && playout.curatedStudentMoves > 1
+              ? ` · ${playout.studentMovesPlayed}/${playout.curatedStudentMoves} moves`
+              : ''}
           </p>
         </div>
         <div className="w-[44px]" />
@@ -209,11 +254,11 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
 
   const board = (
     <ConsistentChessboard
-      fen={position.fen}
+      fen={playout.fen}
       boardOrientation={studentSide}
-      interactive={!!position.bestMove && !solved}
-      onPieceDrop={handlePieceDrop}
-      squareStyles={flashStyles}
+      interactive={playout.phase === 'student-to-move'}
+      onPieceDrop={playout.onPieceDrop}
+      squareStyles={wrongFlash}
     />
   );
 
@@ -236,30 +281,42 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
         position={position}
         resultColor={resultColor}
         resultLabel={resultLabel}
-        solved={solved}
+        studentSide={studentSide}
+        playout={playout}
+        isPlayable={isPlayable}
       />
       {posIndex === 0 && <NarrationPanel lesson={lesson} />}
       <div className="flex items-center justify-between gap-2">
         <button
-          onClick={goPrev}
-          disabled={posIndex === 0}
+          onClick={onPrev}
+          disabled={!canPrev}
           className="flex items-center gap-1 px-3 py-2 rounded-lg bg-theme-surface text-sm text-theme-text-muted hover:text-theme-text disabled:opacity-30 disabled:cursor-not-allowed"
         >
           <ChevronLeft size={16} />
           Prev
         </button>
         <span className="text-xs text-theme-text-muted font-mono">
-          {posIndex + 1}/{lesson.positions.length}
+          {posIndex + 1}/{totalPositions}
         </span>
         <button
-          onClick={goNext}
-          disabled={posIndex === lesson.positions.length - 1}
-          className="flex items-center gap-1 px-3 py-2 rounded-lg bg-theme-surface text-sm text-theme-text-muted hover:text-theme-text disabled:opacity-30 disabled:cursor-not-allowed"
+          onClick={onNext}
+          disabled={!canNext}
+          className="flex items-center gap-1 px-3 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold disabled:opacity-30 disabled:cursor-not-allowed"
         >
           Next
           <ChevronRight size={16} />
         </button>
       </div>
+      {onReshuffleDrills && !canNext && (
+        <button
+          onClick={onReshuffleDrills}
+          className="self-center flex items-center gap-1 px-3 py-2 rounded-lg bg-theme-surface text-xs text-cyan-400 hover:text-cyan-300"
+          data-testid="endgame-reshuffle-drills"
+        >
+          <RotateCw size={12} />
+          New drill set
+        </button>
+      )}
     </div>
   );
 
@@ -270,10 +327,19 @@ interface PositionCardProps {
   position: EndgameLessonPosition;
   resultColor: string;
   resultLabel: string;
-  solved: boolean;
+  studentSide: 'white' | 'black';
+  playout: ReturnType<typeof useEndgamePlayout>;
+  isPlayable: boolean;
 }
 
-function PositionCard({ position, resultColor, resultLabel, solved }: PositionCardProps): JSX.Element {
+function PositionCard({
+  position,
+  resultColor,
+  resultLabel,
+  studentSide,
+  playout,
+  isPlayable,
+}: PositionCardProps): JSX.Element {
   return (
     <div className="rounded-xl border border-theme-border bg-theme-surface p-3 flex flex-col gap-2">
       <div className="flex items-start justify-between gap-2">
@@ -283,22 +349,74 @@ function PositionCard({ position, resultColor, resultLabel, solved }: PositionCa
         </span>
       </div>
       <p className="text-[12px] text-theme-text-muted leading-relaxed">{position.explanation}</p>
-      {position.bestMove && (
-        <div className="flex items-center gap-2">
-          {solved ? (
-            <div className="flex items-center gap-1.5 text-[11px] text-green-400 font-semibold">
-              <CheckCircle size={14} />
-              Solved — best move was {position.bestMove}
-            </div>
-          ) : (
-            <div className="text-[11px] text-cyan-400">
-              Drag a piece to play your move.
-            </div>
-          )}
+      {isPlayable ? (
+        <PlayoutStatus playout={playout} studentSide={studentSide} />
+      ) : (
+        <div className="text-[11px] text-theme-text-muted italic">
+          Reference position — no playable line authored. Study the position and tap Next.
         </div>
       )}
       {position.source && (
         <div className="text-[10px] text-theme-text-muted/70 italic">{position.source}</div>
+      )}
+    </div>
+  );
+}
+
+interface PlayoutStatusProps {
+  playout: ReturnType<typeof useEndgamePlayout>;
+  studentSide: 'white' | 'black';
+}
+
+function PlayoutStatus({ playout, studentSide }: PlayoutStatusProps): JSX.Element {
+  if (playout.isComplete) {
+    return (
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center gap-1.5 text-[11px] text-green-400 font-semibold">
+          <CheckCircle size={14} />
+          {playout.firstTryPerfect ? 'Played perfectly' : 'Line played out'}
+        </div>
+        <button
+          onClick={playout.reset}
+          className="flex items-center gap-1 text-[11px] text-cyan-400 hover:text-cyan-300 self-start"
+        >
+          <RotateCw size={11} />
+          Try again
+        </button>
+      </div>
+    );
+  }
+  if (playout.phase === 'opponent-replying') {
+    return (
+      <div className="text-[11px] text-amber-400">
+        {studentSide === 'white' ? 'Black' : 'White'} is responding…
+      </div>
+    );
+  }
+  // student-to-move
+  return (
+    <div className="flex flex-col gap-1.5">
+      <div className="text-[11px] text-cyan-400">
+        {studentSide === 'white' ? 'White' : 'Black'} to play.{' '}
+        {playout.curatedStudentMoves > 1
+          ? `Play the move — ${playout.curatedStudentMoves - playout.studentMovesPlayed} to go.`
+          : 'Play the best move.'}
+      </div>
+      {playout.wrongAttempts > 0 && (
+        <div className="text-[11px] text-amber-400">
+          {playout.wrongAttempts === 1
+            ? 'Not the move — try again.'
+            : `${playout.wrongAttempts} wrong tries.`}
+        </div>
+      )}
+      {playout.wrongAttempts >= 2 && (
+        <button
+          onClick={playout.reveal}
+          className="flex items-center gap-1 text-[11px] text-theme-text-muted hover:text-theme-text self-start"
+        >
+          <Eye size={11} />
+          Reveal answer
+        </button>
       )}
     </div>
   );

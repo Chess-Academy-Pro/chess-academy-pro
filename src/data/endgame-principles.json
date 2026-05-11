@@ -27,6 +27,10 @@
         "result": "white-wins",
         "source": "Continuation of the previous position"
       }
+    ],
+    "practiceThemes": [
+      "pawnEndgame",
+      "endgame"
     ]
   },
   {
@@ -48,7 +52,15 @@
         "explanation": "White's a-pawn races to a8. Black's king on f5 is too far away — it's outside the rule-of-the-square box (a4 to d4 to d8 to a8). 1.a5 Ke5 2.a6 Kd5 3.a7 Kc6 4.a8=Q+ wins. White's own king never had to help; the passed pawn alone decides the game.",
         "result": "white-wins",
         "bestMove": "a5",
-        "solution": ["a5", "Ke5", "a6", "Kd5", "a7", "Kc6", "a8=Q+"],
+        "solution": [
+          "a5",
+          "Ke5",
+          "a6",
+          "Kd5",
+          "a7",
+          "Kc6",
+          "a8=Q+"
+        ],
         "source": "Canonical rule-of-the-square teaching position"
       },
       {
@@ -59,6 +71,10 @@
         "bestMove": "Ke4",
         "source": "Teaching position — push WITH support"
       }
+    ],
+    "practiceThemes": [
+      "advancedPawn",
+      "promotion"
     ]
   },
   {
@@ -82,6 +98,9 @@
         "bestMove": "Rd2",
         "source": "Teaching position — isolated pawn pressure"
       }
+    ],
+    "practiceThemes": [
+      "endgame"
     ]
   },
   {
@@ -106,6 +125,9 @@
         "source": "Teaching position — Capablanca's two-weakness principle",
         "auditSkip": "Long-theoretical pawn endgame; the win takes 30+ moves of two-weaknesses technique that exceeds Stockfish-WASM-lite's reachable horizon at audit depth. Validated against Capablanca's principle in 'Chess Fundamentals' (1921)."
       }
+    ],
+    "practiceThemes": [
+      "endgame"
     ]
   },
   {
@@ -129,6 +151,10 @@
         "bestMove": "Kf1",
         "source": "Teaching position — Capablanca-style technique"
       }
+    ],
+    "practiceThemes": [
+      "endgame",
+      "quietMove"
     ]
   },
   {
@@ -152,6 +178,10 @@
         "bestMove": "e6",
         "source": "Tarrasch's canonical 'rook behind passed pawn' position"
       }
+    ],
+    "practiceThemes": [
+      "rookEndgame",
+      "advancedPawn"
     ]
   },
   {
@@ -174,6 +204,9 @@
         "result": "white-wins",
         "source": "Teaching position — simplification's payoff"
       }
+    ],
+    "practiceThemes": [
+      "endgame"
     ]
   }
 ]
