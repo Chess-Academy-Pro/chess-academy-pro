@@ -1551,3 +1551,36 @@ export interface SearchFilter {
   op: 'eq' | 'contains' | 'gt' | 'lt' | 'gte' | 'lte';
   value: string | number | boolean;
 }
+
+// ─── Endgame Progress ────────────────────────────────────────────────────────
+
+/** Per-position progress record for the endgame lesson surface.
+ *  Tracks whether the student has played a given position perfectly
+ *  on their first try (mastery), the running play count, and the
+ *  last play timestamp. The composite id `${lessonId}::${fen}`
+ *  scopes records to a specific position within a specific lesson
+ *  so the same FEN appearing in two lessons gets two records.
+ *
+ *  `mastered` is sticky — once true, subsequent plays don't unset
+ *  it. The student earned mastery; we don't take it away if they
+ *  later make a mistake on a retry. */
+export interface EndgameProgressRecord {
+  /** Composite key: `<lessonId>::<fen>`. */
+  id: string;
+  /** Lesson slug — index for "all positions in a lesson" queries. */
+  lessonId: string;
+  /** Position FEN this record describes. */
+  fen: string;
+  /** True once the student has completed the playout on first try
+   *  without a wrong drop. Sticky — never goes false after going
+   *  true. */
+  mastered: boolean;
+  /** Total number of times the student has completed the playout
+   *  for this position. */
+  timesPlayed: number;
+  /** Total number of wrong-move attempts across all plays. Used
+   *  for "you needed N tries" UX. */
+  totalWrongAttempts: number;
+  /** Unix ms timestamp of the last completed playout. */
+  lastPlayedAt: number;
+}

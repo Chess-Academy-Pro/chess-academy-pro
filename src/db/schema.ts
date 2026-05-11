@@ -18,6 +18,7 @@ import type {
   ClassifiedTactic,
   SetupPuzzle,
   OpeningNarration,
+  EndgameProgressRecord,
 } from '../types';
 import type { WalkthroughTree } from '../types/walkthroughTree';
 
@@ -55,6 +56,7 @@ class ChessAcademyDB extends Dexie {
   setupPuzzles!: EntityTable<SetupPuzzle, 'id'>;
   openingNarrations!: EntityTable<OpeningNarration, 'id'>;
   cachedOpenings!: EntityTable<CachedOpening, 'normalizedName'>;
+  endgameProgress!: EntityTable<EndgameProgressRecord, 'id'>;
 
   constructor() {
     super('ChessAcademyDB');
@@ -480,6 +482,35 @@ class ChessAcademyDB extends Dexie {
       setupPuzzles: 'id, tacticType, difficulty, srsDueDate, status, sourceGameId',
       openingNarrations: 'id, openingName, variation, moveSan, fen, approved',
       cachedOpenings: 'normalizedName, eco, generatedAt',
+    });
+
+    // v23: endgameProgress — per-position mastery tracking for the
+    // endgame lesson surface. Stores whether the student has played
+    // a given position perfectly on first try (sticky mastery),
+    // running play count, and last-played timestamp. Index lessonId
+    // for "all positions in this lesson" queries; index mastered so
+    // the picker can quickly count completed positions per lesson.
+    this.version(23).stores({
+      puzzles: 'id, rating, *themes, srsDueDate, userRating',
+      openings: 'id, eco, name, color, isRepertoire, isFavorite',
+      games: 'id, source, eco, date, isMasterGame, openingId',
+      flashcards: 'id, openingId, type, srsDueDate',
+      profiles: 'id',
+      sessions: 'id, date, profileId',
+      meta: 'key',
+      mistakePuzzles: 'id, sourceGameId, classification, srsDueDate, status, sourceMode, gamePhase',
+      modelGames: 'id, openingId',
+      middlegamePlans: 'id, openingId',
+      generatedContent: 'id, openingId, type, generatedAt',
+      openingWeakSpots: 'id, openingId, failCount, lastFailedAt',
+      classifiedTactics: 'id, sourceGameId, tacticType, playerColor, createdAt',
+      setupPuzzles: 'id, tacticType, difficulty, srsDueDate, status, sourceGameId',
+      openingNarrations: 'id, openingName, variation, moveSan, fen, approved',
+      cachedOpenings: 'normalizedName, eco, generatedAt',
+      endgameProgress: 'id, lessonId, lastPlayedAt',
+    }).upgrade(async () => {
+      // No data migration needed — endgameProgress is a brand-new
+      // store. Existing data lives in older stores and is untouched.
     });
   }
 }

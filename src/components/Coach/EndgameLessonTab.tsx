@@ -16,7 +16,7 @@
  *   - moves come from the JSON data (solution[] / bestMove)
  *   - LLM authorship is zero at runtime
  */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowLeft,
   ChevronLeft,
@@ -37,7 +37,12 @@ import {
   type DrillTier,
 } from '../../services/endgameDrillService';
 import { voiceService } from '../../services/voiceService';
+import {
+  getLessonProgress,
+  recordPlay,
+} from '../../services/endgameProgressService';
 import type { EndgameLesson, EndgameLessonPosition } from '../../types/endgameLesson';
+import type { EndgameProgressRecord } from '../../types';
 
 const TIER_OPTIONS: { value: DrillTier; label: string }[] = [
   { value: 'beginner', label: 'Beginner' },
@@ -94,6 +99,25 @@ interface PickerGridProps {
 }
 
 function PickerGrid({ lessons, tabLabel, tabSubtitle, onPick }: PickerGridProps): JSX.Element {
+  // Persisted progress per lesson — { [lessonId]: masteredCount }.
+  // Loaded once on mount; not live-updated because the picker is
+  // re-mounted whenever the student returns from a lesson.
+  const [masteredByLesson, setMasteredByLesson] = useState<Record<string, number>>({});
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const entries: Record<string, number> = {};
+      for (const lesson of lessons) {
+        const records: EndgameProgressRecord[] = await getLessonProgress(lesson.id);
+        entries[lesson.id] = records.filter((r) => r.mastered).length;
+      }
+      if (!cancelled) setMasteredByLesson(entries);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [lessons]);
+
   return (
     <div className="flex flex-col gap-4 max-w-lg mx-auto w-full">
       <div className="text-center">
@@ -107,18 +131,31 @@ function PickerGrid({ lessons, tabLabel, tabSubtitle, onPick }: PickerGridProps)
           ).length;
           const drillCount = getDrillPuzzleCount(lesson, 'mixed');
           const beginnerCount = getDrillPuzzleCount(lesson, 'beginner');
+          const masteredCount = masteredByLesson[lesson.id] ?? 0;
+          const isFullyMastered =
+            masteredCount > 0 && masteredCount >= playableCount && playableCount > 0;
           return (
             <button
               key={lesson.id}
               onClick={() => onPick(lesson.id)}
-              className="relative rounded-xl border-2 p-3 text-left transition-colors bg-cyan-500/10 border-cyan-500/30 hover:bg-cyan-500/15"
+              className={`relative rounded-xl border-2 p-3 text-left transition-colors ${
+                isFullyMastered
+                  ? 'bg-green-500/10 border-green-500/30 hover:bg-green-500/15'
+                  : 'bg-cyan-500/10 border-cyan-500/30 hover:bg-cyan-500/15'
+              }`}
               data-testid={`endgame-lesson-${lesson.id}`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-[10px] font-mono font-semibold">
-                      {lesson.order}
+                    <span
+                      className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-mono font-semibold ${
+                        isFullyMastered
+                          ? 'bg-green-500/20 text-green-400'
+                          : 'bg-cyan-500/20 text-cyan-400'
+                      }`}
+                    >
+                      {isFullyMastered ? '✓' : lesson.order}
                     </span>
                     <span className="text-sm font-semibold text-theme-text leading-tight">
                       {lesson.name}
@@ -130,6 +167,12 @@ function PickerGrid({ lessons, tabLabel, tabSubtitle, onPick }: PickerGridProps)
                   <div className="text-[10px] text-cyan-400 mt-1.5">
                     {lesson.positions.length} keystone{lesson.positions.length === 1 ? '' : 's'}
                     {playableCount > 0 && ` · ${playableCount} playable`}
+                    {masteredCount > 0 && playableCount > 0 && (
+                      <span className="text-green-400 font-medium">
+                        {' '}
+                        · {masteredCount}/{playableCount} mastered
+                      </span>
+                    )}
                     {drillCount > 0 && (
                       <>
                         {' · '}
@@ -144,7 +187,12 @@ function PickerGrid({ lessons, tabLabel, tabSubtitle, onPick }: PickerGridProps)
                     )}
                   </div>
                 </div>
-                <ChevronRight size={16} className="text-cyan-400 flex-shrink-0 mt-1" />
+                <ChevronRight
+                  size={16}
+                  className={`flex-shrink-0 mt-1 ${
+                    isFullyMastered ? 'text-green-400' : 'text-cyan-400'
+                  }`}
+                />
               </div>
             </button>
           );
@@ -287,6 +335,27 @@ function PositionRunner({
       voiceService.stop();
     };
   }, [position.fen, position.title, position.explanation, posIndex, isDrill, lesson.narration.rule, lesson.narration.intro]);
+
+  // Persistence: write a progress record when the student completes
+  // the playout. Guard against double-recording per position via
+  // the ref — the effect dep on `isComplete` would otherwise fire
+  // on every re-render with isComplete=true. Reset the guard when
+  // the position changes (key change re-mounts PositionRunner via
+  // the parent key prop so this ref is fresh per position anyway,
+  // but the guard is defensive).
+  const recordedRef = useRef(false);
+  useEffect(() => {
+    if (!playout.isComplete) return;
+    if (recordedRef.current) return;
+    if (!isPlayable) return; // Reference-only positions don't persist.
+    recordedRef.current = true;
+    void recordPlay({
+      lessonId: lesson.id,
+      fen: position.fen,
+      firstTryPerfect: playout.firstTryPerfect,
+      wrongAttempts: playout.wrongAttempts,
+    });
+  }, [playout.isComplete, playout.firstTryPerfect, playout.wrongAttempts, isPlayable, lesson.id, position.fen]);
 
   const wrongFlash = useMemo<Record<string, CSSProperties>>(() => {
     if (!playout.wrongSquare) return {};
