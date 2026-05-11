@@ -16,7 +16,7 @@
  *   - moves come from the JSON data (solution[] / bestMove)
  *   - LLM authorship is zero at runtime
  */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ArrowLeft,
   ChevronLeft,
@@ -36,6 +36,7 @@ import {
   getDrillPuzzleCount,
   type DrillTier,
 } from '../../services/endgameDrillService';
+import { voiceService } from '../../services/voiceService';
 import type { EndgameLesson, EndgameLessonPosition } from '../../types/endgameLesson';
 
 const TIER_OPTIONS: { value: DrillTier; label: string }[] = [
@@ -75,7 +76,14 @@ export function EndgameLessonTab({ lessons, tabLabel, tabSubtitle }: EndgameLess
     return <div />;
   }
 
-  return <LessonView lesson={lesson} onExit={() => setSelectedId(null)} />;
+  const onExitLesson = (): void => {
+    // Kill any in-flight voice the moment the student leaves so a
+    // half-played narration doesn't continue speaking on the picker.
+    voiceService.stop();
+    setSelectedId(null);
+  };
+
+  return <LessonView lesson={lesson} onExit={onExitLesson} />;
 }
 
 interface PickerGridProps {
@@ -258,6 +266,27 @@ function PositionRunner({
   });
   const studentSide = playout.studentSide;
   const isPlayable = playout.curatedStudentMoves > 0;
+
+  // Voice-first: speak the position's hand-authored explanation the
+  // moment the student lands on it. On the FIRST position of the
+  // lesson we lead with the rule + intro so the student hears the
+  // principle before the geometry. Polly TTS via voiceService.
+  // Manual position change cancels in-flight speech (the speak()
+  // implementation calls stop() first).
+  useEffect(() => {
+    const isFirstPosition = posIndex === 0 && !isDrill;
+    const prefix = isFirstPosition
+      ? `${lesson.narration.rule} ${lesson.narration.intro} `
+      : '';
+    const text = `${prefix}${position.title}. ${position.explanation}`;
+    void voiceService.speak(text);
+    return () => {
+      // Stop any in-flight narration when the position changes or
+      // the component unmounts so it doesn't keep speaking over the
+      // next position.
+      voiceService.stop();
+    };
+  }, [position.fen, position.title, position.explanation, posIndex, isDrill, lesson.narration.rule, lesson.narration.intro]);
 
   const wrongFlash = useMemo<Record<string, CSSProperties>>(() => {
     if (!playout.wrongSquare) return {};
