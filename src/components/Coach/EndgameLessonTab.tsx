@@ -40,6 +40,7 @@ import { voiceService } from '../../services/voiceService';
 import {
   getLessonProgress,
   recordPlay,
+  resetLessonProgress,
 } from '../../services/endgameProgressService';
 import type { EndgameLesson, EndgameLessonPosition } from '../../types/endgameLesson';
 import type { EndgameProgressRecord } from '../../types';
@@ -134,17 +135,22 @@ function PickerGrid({ lessons, tabLabel, tabSubtitle, onPick }: PickerGridProps)
           const masteredCount = masteredByLesson[lesson.id] ?? 0;
           const isFullyMastered =
             masteredCount > 0 && masteredCount >= playableCount && playableCount > 0;
+          const onResetLesson = async (): Promise<void> => {
+            if (!window.confirm(`Reset progress for "${lesson.name}"?`)) return;
+            await resetLessonProgress(lesson.id);
+            setMasteredByLesson((prev) => ({ ...prev, [lesson.id]: 0 }));
+          };
           return (
-            <button
-              key={lesson.id}
-              onClick={() => onPick(lesson.id)}
-              className={`relative rounded-xl border-2 p-3 text-left transition-colors ${
-                isFullyMastered
-                  ? 'bg-green-500/10 border-green-500/30 hover:bg-green-500/15'
-                  : 'bg-cyan-500/10 border-cyan-500/30 hover:bg-cyan-500/15'
-              }`}
-              data-testid={`endgame-lesson-${lesson.id}`}
-            >
+            <div key={lesson.id} className="relative">
+              <button
+                onClick={() => onPick(lesson.id)}
+                className={`w-full relative rounded-xl border-2 p-3 text-left transition-colors ${
+                  isFullyMastered
+                    ? 'bg-green-500/10 border-green-500/30 hover:bg-green-500/15'
+                    : 'bg-cyan-500/10 border-cyan-500/30 hover:bg-cyan-500/15'
+                }`}
+                data-testid={`endgame-lesson-${lesson.id}`}
+              >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
@@ -195,6 +201,18 @@ function PickerGrid({ lessons, tabLabel, tabSubtitle, onPick }: PickerGridProps)
                 />
               </div>
             </button>
+            {isFullyMastered && (
+              <button
+                onClick={onResetLesson}
+                className="absolute top-2 right-9 w-7 h-7 rounded-md hover:bg-green-500/20 flex items-center justify-center text-green-400/70 hover:text-green-400 transition-colors"
+                aria-label={`Reset progress for ${lesson.name}`}
+                title="Reset progress"
+                data-testid={`endgame-lesson-reset-${lesson.id}`}
+              >
+                <RotateCw size={12} />
+              </button>
+            )}
+          </div>
           );
         })}
       </div>
