@@ -180,7 +180,17 @@
         "result": "white-wins",
         "bestMove": "Kd3",
         "source": "Teaching position — Capablanca's two-weakness principle",
-        "auditSkip": "Long-theoretical pawn endgame; the win takes 30+ moves of two-weaknesses technique that exceeds Stockfish-WASM-lite's reachable horizon at audit depth. Validated against Capablanca's principle in 'Chess Fundamentals' (1921)."
+        "auditSkip": "Long-theoretical pawn endgame; the win takes 30+ moves of two-weaknesses technique that exceeds Stockfish-WASM-lite's reachable horizon at audit depth. Validated against Capablanca's principle in 'Chess Fundamentals' (1921).",
+        "solution": [
+          "Kd3",
+          "Kd7",
+          "Ke3",
+          "Kc6",
+          "Kd4",
+          "Kb6",
+          "Ke4",
+          "Kc6"
+        ]
       }
     ],
     "practiceThemes": [
