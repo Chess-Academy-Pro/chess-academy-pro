@@ -501,14 +501,27 @@ function PositionRunner({
         <span className="text-xs text-theme-text-muted font-mono">
           {posIndex + 1}/{totalPositions}
         </span>
-        <button
-          onClick={onNext}
-          disabled={!canNext}
-          className="flex items-center gap-1 px-3 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold disabled:opacity-30 disabled:cursor-not-allowed"
-        >
-          Next
-          <ChevronRight size={16} />
-        </button>
+        {canNext ? (
+          <button
+            onClick={onNext}
+            className="flex items-center gap-1 px-3 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold"
+          >
+            Next
+            <ChevronRight size={16} />
+          </button>
+        ) : (
+          // Last position — flip to a "Done" CTA that returns the
+          // student to the lesson picker instead of a dead-end
+          // disabled Next button.
+          <button
+            onClick={onExit}
+            className="flex items-center gap-1 px-3 py-2 rounded-lg bg-green-500 text-theme-bg text-sm font-semibold"
+            data-testid="endgame-lesson-done"
+          >
+            Done
+            <CheckCircle size={16} />
+          </button>
+        )}
       </div>
       {onReshuffleDrills && !canNext && (
         <button
