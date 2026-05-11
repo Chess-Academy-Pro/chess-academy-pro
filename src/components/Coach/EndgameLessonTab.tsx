@@ -32,6 +32,7 @@ import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import { useClickToMove } from '../../hooks/useClickToMove';
+import { useAdaptiveDrillSession } from '../../hooks/useAdaptiveDrillSession';
 import {
   getDrillPositionsForLesson,
   getDrillPuzzleCount,
@@ -247,23 +248,53 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
     };
   }, [lesson.id]);
 
-  // The full position list = keystone positions (hand-authored)
-  // followed by drill positions (Lichess puzzle DB). The student
-  // sees keystones first (named theory, explained), then drills
-  // (real-game tests of the same technique). Tier narrows the
-  // drill pool to a rating band; mixed = full range.
-  const drillPositions = useMemo(
+  // The full position list = keystones (hand-authored) followed by
+  // drills. Drill mode toggles between 'fixed' (3 puzzles from the
+  // selected tier — predictable, used for warm-up) and 'adaptive'
+  // (infinite stream from the puzzle DB; each puzzle's rating
+  // adjusts up/down based on the student's performance — used for
+  // sustained training).
+  type DrillMode = 'fixed' | 'adaptive';
+  const [drillMode, setDrillMode] = useState<DrillMode>('adaptive');
+
+  const adaptive = useAdaptiveDrillSession(lesson, { initialRating: 1200 });
+  // History of completed adaptive drills + the current one (if any).
+  // The current drill comes from adaptive.currentDrill; played
+  // drills get pushed into adaptiveHistory on recordOutcome.
+  const [adaptiveHistory, setAdaptiveHistory] = useState<EndgameLessonPosition[]>([]);
+
+  const fixedDrills = useMemo(
     () => getDrillPositionsForLesson(lesson, { limit: 3, seed: drillSeed, tier }),
     [lesson, drillSeed, tier],
   );
+  const drillPositions = useMemo<EndgameLessonPosition[]>(() => {
+    if (drillMode === 'fixed') return fixedDrills;
+    // Adaptive: history (already played) + the current pending drill.
+    return adaptive.currentDrill
+      ? [...adaptiveHistory, adaptive.currentDrill]
+      : adaptiveHistory;
+  }, [drillMode, fixedDrills, adaptiveHistory, adaptive.currentDrill]);
+
   const allPositions = useMemo(
     () => [...lesson.positions, ...drillPositions],
     [lesson.positions, drillPositions],
   );
   const [posIndex, setPosIndex] = useState(0);
-  const position = allPositions[posIndex];
+  const position = allPositions[posIndex] ?? lesson.positions[0];
   const isDrill = posIndex >= lesson.positions.length;
+  const isAdaptiveCurrent =
+    drillMode === 'adaptive' &&
+    isDrill &&
+    posIndex === allPositions.length - 1 &&
+    adaptive.currentDrill !== null;
   const isMastered = !isDrill && (masteryByFen[position.fen] ?? false);
+
+  // Reset posIndex when drill mode changes so we jump to a
+  // sensible start (the first keystone) rather than landing in a
+  // drill slot that may no longer exist.
+  useEffect(() => {
+    setPosIndex(0);
+  }, [drillMode]);
 
   const goPrev = useCallback(() => {
     setPosIndex((i) => Math.max(0, i - 1));
@@ -286,17 +317,43 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
     [lesson.positions.length],
   );
 
-  // Optimistic mastery flip on local play completion — the
-  // PositionRunner persists the play asynchronously; we update
-  // the in-memory map immediately so the chip appears without a
-  // round-trip to Dexie.
   const onPlayPerfect = useCallback((fen: string) => {
     setMasteryByFen((prev) => ({ ...prev, [fen]: true }));
   }, []);
 
+  // When a drill completes, the adaptive session needs to know so
+  // it can step the target rating and pick the next puzzle. Only
+  // fires for the CURRENT adaptive puzzle (the last item in the
+  // adaptive history), not when the student navigates back to a
+  // played drill via Prev.
+  const onDrillComplete = useCallback(
+    (stats: { wrongAttempts: number; durationMs: number }) => {
+      if (drillMode !== 'adaptive') return;
+      if (!isAdaptiveCurrent) return;
+      // Push the finished drill to the history BEFORE advancing
+      // the adaptive session, otherwise we'd lose the position
+      // when adaptive.currentDrill swaps.
+      if (adaptive.currentDrill) {
+        setAdaptiveHistory((prev) => [...prev, adaptive.currentDrill as EndgameLessonPosition]);
+      }
+      adaptive.recordOutcome(stats);
+    },
+    [drillMode, isAdaptiveCurrent, adaptive],
+  );
+
+  // Auto-advance posIndex when a new adaptive drill appears at the
+  // tail so the student lands on it immediately without clicking
+  // Next. Triggered after recordOutcome by the adaptive session's
+  // currentDrill changing.
+  useEffect(() => {
+    if (drillMode !== 'adaptive') return;
+    if (adaptive.completedCount === 0) return;
+    setPosIndex(allPositions.length - 1);
+  }, [drillMode, adaptive.completedCount, allPositions.length]);
+
   return (
     <PositionRunner
-      key={`${lesson.id}-${posIndex}-${drillSeed}-${tier}`}
+      key={`${lesson.id}-${posIndex}-${drillSeed}-${tier}-${drillMode}-${adaptive.completedCount}`}
       lesson={lesson}
       position={position}
       posIndex={posIndex}
@@ -306,14 +363,20 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
       drillCount={drillPositions.length}
       tier={tier}
       isMastered={isMastered}
+      drillMode={drillMode}
+      onDrillModeChange={setDrillMode}
+      adaptiveTargetRating={adaptive.targetRating}
+      adaptiveCompletedCount={adaptive.completedCount}
+      adaptiveLastAdjustment={adaptive.lastAdjustment}
       onTierChange={onTierChange}
       onExit={onExit}
       onPrev={goPrev}
       onNext={goNext}
       canPrev={posIndex > 0}
-      canNext={posIndex < allPositions.length - 1}
-      onReshuffleDrills={drillPositions.length > 0 ? reshuffleDrills : undefined}
+      canNext={posIndex < allPositions.length - 1 || (isAdaptiveCurrent && adaptive.currentDrill !== null)}
+      onReshuffleDrills={drillPositions.length > 0 && drillMode === 'fixed' ? reshuffleDrills : undefined}
       onPlayPerfect={onPlayPerfect}
+      onDrillComplete={onDrillComplete}
     />
   );
 }
@@ -331,6 +394,16 @@ interface PositionRunnerProps {
    *  Dexie). Drives the ✓ chip on the position card. Drills don't
    *  surface mastery, so this is always false for drills. */
   isMastered: boolean;
+  /** Drill mode: 'fixed' = 3 puzzles at the chosen tier;
+   *  'adaptive' = infinite stream with auto difficulty stepping. */
+  drillMode: 'fixed' | 'adaptive';
+  onDrillModeChange: (mode: 'fixed' | 'adaptive') => void;
+  /** Current adaptive target rating — surfaces in the header. */
+  adaptiveTargetRating: number;
+  /** Adaptive drills completed in this session. */
+  adaptiveCompletedCount: number;
+  /** Last adjustment direction — for the up/down arrow chip. */
+  adaptiveLastAdjustment: 'up' | 'down' | 'hold' | null;
   onTierChange: (next: DrillTier) => void;
   onExit: () => void;
   onPrev: () => void;
@@ -342,6 +415,10 @@ interface PositionRunnerProps {
    *  Lets the parent flip the in-memory mastery map without
    *  re-querying Dexie. */
   onPlayPerfect?: (fen: string) => void;
+  /** Called once when a drill playout completes, with stats the
+   *  adaptive session uses to step difficulty. Fired only when
+   *  isDrill is true; ignored otherwise. */
+  onDrillComplete?: (stats: { wrongAttempts: number; durationMs: number }) => void;
 }
 
 function PositionRunner({
@@ -354,6 +431,11 @@ function PositionRunner({
   drillCount,
   tier,
   isMastered,
+  drillMode,
+  onDrillModeChange,
+  adaptiveTargetRating,
+  adaptiveCompletedCount,
+  adaptiveLastAdjustment,
   onTierChange,
   onExit,
   onPrev,
@@ -362,6 +444,7 @@ function PositionRunner({
   canNext,
   onReshuffleDrills,
   onPlayPerfect,
+  onDrillComplete,
 }: PositionRunnerProps): JSX.Element {
   // Toggle for the optional "Play it out vs Stockfish" extension
   // surfaced after a single-bestMove curated portion completes.
@@ -432,6 +515,13 @@ function PositionRunner({
   // the position changes (key change re-mounts PositionRunner via
   // the parent key prop so this ref is fresh per position anyway,
   // but the guard is defensive).
+  // Time-to-solve tracking — starts when the position mounts,
+  // captured on completion to feed the adaptive-difficulty hook.
+  const startTimeRef = useRef<number>(Date.now());
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+  }, [position.fen]);
+
   const recordedRef = useRef(false);
   useEffect(() => {
     if (!playout.isComplete) return;
@@ -444,12 +534,19 @@ function PositionRunner({
       firstTryPerfect: playout.firstTryPerfect,
       wrongAttempts: playout.wrongAttempts,
     });
-    // Optimistically flip the parent's mastery map so the chip
-    // appears immediately, without waiting for the next lesson re-mount.
     if (playout.firstTryPerfect && !isDrill && onPlayPerfect) {
       onPlayPerfect(position.fen);
     }
-  }, [playout.isComplete, playout.firstTryPerfect, playout.wrongAttempts, isPlayable, isDrill, lesson.id, position.fen, onPlayPerfect]);
+    // Adaptive: report drill completion so the session can step
+    // difficulty for the next puzzle. Fires once per drill, in
+    // addition to the mastery persistence above.
+    if (isDrill && onDrillComplete) {
+      onDrillComplete({
+        wrongAttempts: playout.wrongAttempts,
+        durationMs: Date.now() - startTimeRef.current,
+      });
+    }
+  }, [playout.isComplete, playout.firstTryPerfect, playout.wrongAttempts, isPlayable, isDrill, lesson.id, position.fen, onPlayPerfect, onDrillComplete]);
 
   const wrongFlash = useMemo<Record<string, CSSProperties>>(() => {
     if (!playout.wrongSquare) return {};
@@ -474,7 +571,9 @@ function PositionRunner({
           </h2>
           <p className="text-xs text-theme-text-muted truncate">
             {isDrill
-              ? `Drill ${posIndex - keystoneCount + 1} of ${drillCount} · ${tier} tier`
+              ? drillMode === 'adaptive'
+                ? `Drill #${adaptiveCompletedCount + 1} · target ${adaptiveTargetRating}${adaptiveLastAdjustment === 'up' ? ' ↑' : adaptiveLastAdjustment === 'down' ? ' ↓' : ''}`
+                : `Drill ${posIndex - keystoneCount + 1} of ${drillCount} · ${tier} tier`
               : `Keystone ${posIndex + 1} of ${keystoneCount}`}
             {isPlayable && playout.curatedStudentMoves > 1
               ? ` · ${playout.studentMovesPlayed}/${playout.curatedStudentMoves} moves`
@@ -484,21 +583,51 @@ function PositionRunner({
         <div className="w-[44px]" />
       </div>
       {hasDrillPool && (
-        <div className="flex justify-center gap-1 mt-2">
-          {TIER_OPTIONS.map((opt) => (
+        <div className="flex flex-col gap-1 mt-2">
+          <div className="flex justify-center gap-1">
             <button
-              key={opt.value}
-              onClick={() => onTierChange(opt.value)}
+              onClick={() => onDrillModeChange('adaptive')}
               className={`flex-1 px-2 py-1 rounded text-[11px] font-medium transition-colors ${
-                tier === opt.value
+                drillMode === 'adaptive'
                   ? 'bg-theme-accent text-theme-bg'
                   : 'bg-theme-surface text-theme-text-muted hover:bg-theme-bg'
               }`}
-              data-testid={`endgame-drill-tier-${opt.value}`}
+              data-testid="endgame-drill-mode-adaptive"
+              title="Infinite stream; difficulty adapts to your performance"
             >
-              {opt.label}
+              Adaptive
             </button>
-          ))}
+            <button
+              onClick={() => onDrillModeChange('fixed')}
+              className={`flex-1 px-2 py-1 rounded text-[11px] font-medium transition-colors ${
+                drillMode === 'fixed'
+                  ? 'bg-theme-accent text-theme-bg'
+                  : 'bg-theme-surface text-theme-text-muted hover:bg-theme-bg'
+              }`}
+              data-testid="endgame-drill-mode-fixed"
+              title="3 fixed puzzles at the selected tier"
+            >
+              Fixed tier
+            </button>
+          </div>
+          {drillMode === 'fixed' && (
+            <div className="flex justify-center gap-1">
+              {TIER_OPTIONS.map((opt) => (
+                <button
+                  key={opt.value}
+                  onClick={() => onTierChange(opt.value)}
+                  className={`flex-1 px-2 py-1 rounded text-[11px] font-medium transition-colors ${
+                    tier === opt.value
+                      ? 'bg-theme-accent text-theme-bg'
+                      : 'bg-theme-surface text-theme-text-muted hover:bg-theme-bg'
+                  }`}
+                  data-testid={`endgame-drill-tier-${opt.value}`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
