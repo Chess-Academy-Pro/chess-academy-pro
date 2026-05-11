@@ -18,14 +18,43 @@
         "explanation": "Material is exactly equal — four pawns each, no pieces. White's king is on e4, fully centralized; Black's king is on g8, glued to the back rank. This eval-equal position is winning for White on king activity alone. The white king can roam to attack Black's queenside pawns while the black king takes 3-4 moves just to reach the action.",
         "result": "white-wins",
         "bestMove": "Kd5",
-        "source": "Teaching position illustrating the principle"
+        "source": "Teaching position illustrating the principle",
+        "solution": [
+          "Kd5",
+          "Kf7",
+          "Kc6",
+          "Ke6",
+          "Kb7",
+          "Kd5",
+          "Kxa7",
+          "Kc5",
+          "a4",
+          "Kc6",
+          "Ka6",
+          "Kc5"
+        ]
       },
       {
         "fen": "8/p4kpp/1pK5/8/8/PP6/6PP/8 b - - 0 4",
         "title": "Three moves later — White has invaded",
         "explanation": "After 1.Kd5 Kf7 2.Kc6 Ke7 3.Kxb6, the white king has eaten a pawn and dominates the queenside. Black's king has covered three squares; the white king has covered four AND captured material. This is what 'king activity' looks like in concrete numbers.",
         "result": "white-wins",
-        "source": "Continuation of the previous position"
+        "source": "Continuation of the previous position",
+        "solution": [
+          "b5",
+          "Kxb5",
+          "Ke6",
+          "Ka6",
+          "Kd5",
+          "Kxa7",
+          "Kd4",
+          "a4",
+          "Ke3",
+          "a5",
+          "Kf2",
+          "a6"
+        ],
+        "bestMove": "b5"
       }
     ],
     "practiceThemes": [
@@ -69,7 +98,21 @@
         "explanation": "Same idea inverted. Pushing 1.d3? would be a panic-push — Black's king is in the square and the white king isn't supporting. The right move is 1.Ke4, bringing the king first, then pushing the pawn with escort. The principle is 'push your passed pawns' — but with king support, not without it.",
         "result": "white-wins",
         "bestMove": "Ke4",
-        "source": "Teaching position — push WITH support"
+        "source": "Teaching position — push WITH support",
+        "solution": [
+          "d3",
+          "Ke6",
+          "Kc5",
+          "Kd7",
+          "Kd5",
+          "Ke7",
+          "Kc6",
+          "Kf6",
+          "d4",
+          "Kf5",
+          "d5",
+          "Kg4"
+        ]
       }
     ],
     "practiceThemes": [
@@ -96,7 +139,21 @@
         "explanation": "Black's d6 pawn has no neighbor — no c-pawn, no e-pawn — and sits on a half-open file. White's rook on d1 is already exerting pressure. Black must commit a rook OR king to defend; either way that piece is passive for the rest of the game. Compare to White's d3 pawn: defended by c2 and e2 if needed, mobile, healthy.",
         "result": "white-wins",
         "bestMove": "Rd2",
-        "source": "Teaching position — isolated pawn pressure"
+        "source": "Teaching position — isolated pawn pressure",
+        "solution": [
+          "Rf1",
+          "h5",
+          "g4",
+          "h4",
+          "g5",
+          "Kh7",
+          "Rf7",
+          "Kg6",
+          "Rxb7",
+          "a5",
+          "Kf2",
+          "Kf5"
+        ]
       }
     ],
     "practiceThemes": [
@@ -149,7 +206,21 @@
         "explanation": "White is winning, but the rush move 1.Rd3 (heading for the queenside) wastes tempo — the rook isn't yet on the right square. The slower 1.Kf1 first, centralizing the king, gives White a permanent grip. Once the king reaches e2 or e3, THEN the rook swings to the queenside; the king covers the d-file invasion squares and Black has no counterplay. The whole win is built on starting with the king, not the rook.",
         "result": "white-wins",
         "bestMove": "Kf1",
-        "source": "Teaching position — Capablanca-style technique"
+        "source": "Teaching position — Capablanca-style technique",
+        "solution": [
+          "g4",
+          "Kh7",
+          "f4",
+          "Kg6",
+          "Rf1",
+          "f5",
+          "exf6",
+          "Kxf6",
+          "h4",
+          "h5",
+          "f5",
+          "hxg4"
+        ]
       }
     ],
     "practiceThemes": [
@@ -176,7 +247,20 @@
         "explanation": "Pawn on e5, rook on e2 — the canonical Tarrasch setup. The rook covers e3, e4, e5, and as the pawn advances the rook's coverage extends: after e6 it covers e3-e6, after e7 it covers e3-e7. The rook gets MORE active as the pawn pushes. Reverse it (rook on e8 in front of the pawn) and the rook is dead in the corner the moment the pawn reaches e7.",
         "result": "white-wins",
         "bestMove": "e6",
-        "source": "Tarrasch's canonical 'rook behind passed pawn' position"
+        "source": "Tarrasch's canonical 'rook behind passed pawn' position",
+        "solution": [
+          "e6",
+          "Kg7",
+          "e7",
+          "Kg6",
+          "e8=Q+",
+          "Kf6",
+          "Qf8+",
+          "Kg6",
+          "Rg2+",
+          "Kh7",
+          "Qg7#"
+        ]
       }
     ],
     "practiceThemes": [
@@ -202,7 +286,22 @@
         "title": "Pieces gone, the extra pawn decides",
         "explanation": "From a position with one pawn advantage and minor pieces, trading down to this K+P endgame ends the game. The white king is on a key square (e5), the pawn is escorted, Black has no counterplay. The original eval (+1 pawn with pieces on) becomes a clean win once pieces are off. This is what 'trade pieces when ahead' looks like at the end of the rainbow.",
         "result": "white-wins",
-        "source": "Teaching position — simplification's payoff"
+        "source": "Teaching position — simplification's payoff",
+        "solution": [
+          "Ke7",
+          "Kd5",
+          "a5",
+          "Kc4",
+          "Kxe6",
+          "Kb3",
+          "Kd5",
+          "Ka3",
+          "Kd4",
+          "Ka4",
+          "Kc4",
+          "Kxa5"
+        ],
+        "bestMove": "Ke7"
       }
     ],
     "practiceThemes": [

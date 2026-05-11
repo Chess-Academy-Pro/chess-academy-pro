@@ -18,7 +18,21 @@
         "explanation": "Kings face each other on e5 and e7, white pawn on e4. White to move. Black has the opposition; white must give way. 1.Kd5 Kd7. 1.Kf5 Kf7. The black king mirrors every white move and the white king never reaches the 6th rank. Drawn with best play.",
         "result": "draw",
         "bestMove": "Kd5",
-        "source": "Canonical K+P opposition teaching position"
+        "source": "Canonical K+P opposition teaching position",
+        "solution": [
+          "Kd5",
+          "Kd7",
+          "Kc5",
+          "Ke7",
+          "Kb4",
+          "Kd6",
+          "Kc3",
+          "Kc6",
+          "Kd4",
+          "Kd6",
+          "Kc4",
+          "Ke5"
+        ]
       },
       {
         "fen": "8/4k3/8/4K3/4P3/8/8/8 b - - 0 1",
@@ -41,7 +55,21 @@
         "explanation": "White king already on e6, ahead of the pawn. This is a key square (see next lesson). Whoever has the move, white wins: 1...Kd8 2.Kf7 Kd7 3.e5 — pawn marches with king escort. The opposition no longer matters once the white king is established on the 6th rank.",
         "result": "white-wins",
         "bestMove": "Kd8",
-        "source": "King on key square — opposition irrelevant"
+        "source": "King on key square — opposition irrelevant",
+        "solution": [
+          "Kd8",
+          "Kf7",
+          "Kd7",
+          "e6+",
+          "Kd6",
+          "e7",
+          "Ke5",
+          "e8=Q+",
+          "Kd4",
+          "Ke6",
+          "Kc4",
+          "Qc8+"
+        ]
       }
     ],
     "practiceThemes": [
@@ -67,7 +95,21 @@
         "explanation": "White king on e6 — the central key square for the e4 pawn. With white to move, 1.Kd6 (or 1.Kf6, or 1.e5) all win. Black's king must give ground; the white king and pawn march to promotion. The win is independent of opposition because the king is already on a winning square.",
         "result": "white-wins",
         "bestMove": "e5",
-        "source": "Canonical key-square example, e-file pawn"
+        "source": "Canonical key-square example, e-file pawn",
+        "solution": [
+          "e5",
+          "Kd8",
+          "Kf7",
+          "Kd7",
+          "e6+",
+          "Kd6",
+          "Kf6",
+          "Kc6",
+          "e7",
+          "Kd7",
+          "Kf7",
+          "Kc6"
+        ]
       },
       {
         "fen": "4k3/8/4P3/3K4/8/8/8/8 w - - 0 1",
@@ -75,7 +117,14 @@
         "explanation": "The pawn raced ahead of its king. White must NOT push 1.e7? Kxe7 (defender's king reaches the queening square first). The right plan: 1.Kd6 first, securing the key square, then push the pawn with full king escort. This is the practical lesson — pushing the pawn before establishing the king on a key square loses the win.",
         "result": "white-wins",
         "bestMove": "Kd6",
-        "source": "Teaching position — key square comes first"
+        "source": "Teaching position — key square comes first",
+        "solution": [
+          "Ke5",
+          "Ke7",
+          "Kd5",
+          "Ke8",
+          "Ke5"
+        ]
       },
       {
         "fen": "k7/8/K7/P7/8/8/8/8 b - - 0 1",
@@ -83,7 +132,21 @@
         "explanation": "Same setup but with a rook pawn (a-pawn). White king on a6 looks like it should be a key square — for a center pawn it would be. But for the a-pawn there ARE NO key squares; the position is drawn. 1...Kb8 and the black king shuffles a8/b8/a8 forever. White can never make progress because there's no room to outflank the king on the a-file (no a0). Always check if it's a rook pawn before assuming you're winning.",
         "result": "draw",
         "bestMove": "Kb8",
-        "source": "The rook-pawn exception"
+        "source": "The rook-pawn exception",
+        "solution": [
+          "Kb8",
+          "Kb6",
+          "Ka8",
+          "a6",
+          "Kb8",
+          "Ka5",
+          "Ka8",
+          "Ka4",
+          "Ka7",
+          "Kb5",
+          "Ka8",
+          "Ka5"
+        ]
       }
     ],
     "practiceThemes": [
@@ -125,7 +188,21 @@
         "explanation": "Same pawn, but Black's king moved one file closer to e5 — exactly on the d-file boundary, INSIDE the square (a4-a8-d8-d4). After 1.a5 Kd5 2.a6 Kc6 3.a7 Kb7 the king arrives on b7 just as the pawn reaches a7 — Kb7 covers the queening square. Drawn. One file's difference between this and the previous position separates win and draw.",
         "result": "draw",
         "bestMove": "a5",
-        "source": "Boundary case — defender just inside the square"
+        "source": "Boundary case — defender just inside the square",
+        "solution": [
+          "Kb2",
+          "Kd6",
+          "Kc3",
+          "Kc7",
+          "Kc4",
+          "Kc6",
+          "a5",
+          "Kb7",
+          "Kc5",
+          "Ka6",
+          "Kb4",
+          "Ka7"
+        ]
       },
       {
         "fen": "8/8/8/8/8/4k3/P7/2K5 w - - 0 1",
@@ -133,7 +210,21 @@
         "explanation": "Pawn on a2 with the option to push two squares on its first move. After 1.a4! the pawn skips a3 entirely; the new square is a4-a8-d8-d4. Black's king on e3 is outside it. Without the two-square first move (i.e., if you mistakenly play 1.a3), Black catches with 1...Kd3 2.a4 Kc4 3.a5 Kb5 — drawn. Always remember: pawn's first move is a tempo gift; use it when racing.",
         "result": "white-wins",
         "bestMove": "a4",
-        "source": "Two-square first-move bonus in the rule of the square"
+        "source": "Two-square first-move bonus in the rule of the square",
+        "solution": [
+          "Kb2",
+          "Kd4",
+          "Kb3",
+          "Kc5",
+          "Kc3",
+          "Kb5",
+          "Kd4",
+          "Kb4",
+          "Kd5",
+          "Kb5",
+          "Kd6",
+          "Kb6"
+        ]
       }
     ],
     "practiceThemes": [
@@ -159,14 +250,44 @@
         "title": "Distant opposition — five squares apart",
         "explanation": "White Ke1, Black Ke8. Five squares between the kings on the e-file. White to move — Black has the distant opposition. After 1.Ke2 Ke7 2.Ke3 Ke6 3.Ke4 (now direct opposition: kings 1 square apart) Black must move 3...Ke7? No wait — kings facing on e3 and e6, 2 squares between. White moves 4.Ke5? Kings adjacent, illegal. White options narrow. Each cycle the player WITHOUT the opposition gives way; in this pure K vs K position the result is just shuffling, drawn — but the technique is the same when a pawn is added.",
         "result": "draw",
-        "source": "Pure-king teaching position for distant opposition"
+        "source": "Pure-king teaching position for distant opposition",
+        "solution": [
+          "Kd2",
+          "Kd8",
+          "Ke3",
+          "Kd7",
+          "Kd3",
+          "Ke7",
+          "Kc3",
+          "Kd7",
+          "Kd4",
+          "Kd6",
+          "Ke4",
+          "Ke6"
+        ],
+        "bestMove": "Kd2"
       },
       {
         "fen": "4k3/8/8/8/8/8/8/4K3 b - - 0 1",
         "title": "Same position, Black to move — White has the opposition",
         "explanation": "Same kings, but Black moves first. Now WHITE has distant opposition. After 1...Ke7 2.Ke2 Ke6 3.Ke3 Ke5 4.Ke3? — illegal (adjacent). White plays the technique: maintains distant opposition, forces Black to commit. With a pawn on the board this technique is what wins.",
         "result": "draw",
-        "source": "Pure-king teaching position — same FEN, Black to move"
+        "source": "Pure-king teaching position — same FEN, Black to move",
+        "solution": [
+          "Ke7",
+          "Kd2",
+          "Kd6",
+          "Ke2",
+          "Ke6",
+          "Kf3",
+          "Kf5",
+          "Ke3",
+          "Ke5",
+          "Kd3",
+          "Kd5",
+          "Kc3"
+        ],
+        "bestMove": "Ke7"
       }
     ],
     "practiceThemes": [
@@ -192,7 +313,16 @@
         "explanation": "White king on d5 next to its e5 pawn — wait, the pawn is e5 not e4 in this setup. Let me recast: the position is white K on d5, pawn on e5, black king on e8. Black to move. The pawn can't push (e7 first attacks it then king to chase). White's plan: outflank. After 1...Kd8 2.Ke6! Black's king has been shouldered aside, the white king takes a key square (e6 + e5 pawn = winning structure), and 3.Kf6/2...Kc8/etc all lose. Outflanking turned a stalled position into a winning one.",
         "result": "white-wins",
         "bestMove": "Kd8",
-        "source": "Teaching position — outflanking from a stalled opposition"
+        "source": "Teaching position — outflanking from a stalled opposition",
+        "solution": [
+          "Kd7",
+          "Kd4",
+          "Ke7",
+          "Ke4",
+          "Ke6",
+          "Kf4",
+          "Ke7"
+        ]
       }
     ],
     "practiceThemes": [
@@ -253,7 +383,21 @@
         "explanation": "White's a5 is an outside passed pawn supported by the king coming from d2. The win requires putting Black in zugzwang at the right moment. White's king can triangulate: Kc3-Kb3-Kc2-Kb3 etc., losing a tempo to force the black king into a passive square. The exact triangle depends on positioning, but the technique converts a tempo advantage (white has spare moves; black doesn't) into material advantage (winning the a7 pawn or breaking through to support the a-pawn's promotion).",
         "result": "white-wins",
         "bestMove": "Kc3",
-        "source": "Teaching position — outside passed pawn + triangulation"
+        "source": "Teaching position — outside passed pawn + triangulation",
+        "solution": [
+          "Kc3",
+          "Kxa5",
+          "Kb2",
+          "Ka4",
+          "Ka2",
+          "a5",
+          "Kb2",
+          "Kb4",
+          "Ka2",
+          "a4",
+          "Kb2",
+          "a3+"
+        ]
       }
     ],
     "practiceThemes": [
