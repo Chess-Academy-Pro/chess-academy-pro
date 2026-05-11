@@ -37,6 +37,18 @@ interface RawPuzzle {
 
 const PUZZLES = puzzlesData as RawPuzzle[];
 
+/** Difficulty tier for the per-lesson drill picker. Each tier maps to
+ *  a Lichess-rating band; the student picks one to scope the drill
+ *  pool. 'mixed' returns drills across all bands sorted asc — the
+ *  default before the student narrows their target. */
+export type DrillTier = 'beginner' | 'intermediate' | 'advanced' | 'mixed';
+
+const TIER_BANDS: Record<Exclude<DrillTier, 'mixed'>, [number, number]> = {
+  beginner: [0, 1300],
+  intermediate: [1300, 1700],
+  advanced: [1700, 4000],
+};
+
 interface DrillOptions {
   /** Max drill positions to return per lesson. Default 3 — gives
    *  each lesson a 4-6 position depth (1-2 keystones + 3 drills)
@@ -46,8 +58,10 @@ interface DrillOptions {
   minPopularity?: number;
   /** Minimum plays — filters under-tested puzzles. */
   minPlays?: number;
-  /** Difficulty band. When set, only puzzles with rating in
-   *  [min, max) qualify. Default — full range. */
+  /** Difficulty tier. Maps to a rating band per TIER_BANDS. Default
+   *  'mixed' — no rating filter. */
+  tier?: DrillTier;
+  /** Direct rating-band override. Takes precedence over `tier`. */
   ratingBand?: [number, number];
   /** Deterministic shuffle seed for within-rating-band ordering.
    *  Same seed = same drill order. */
@@ -131,11 +145,17 @@ export function getDrillPositionsForLesson(
   const seed = options.seed ?? 0;
   const themeSet = new Set(themes);
 
+  // Resolve the rating band — explicit `ratingBand` override wins,
+  // otherwise the tier maps to a band, otherwise unbounded.
+  const tier = options.tier ?? 'mixed';
+  const band: [number, number] | null = options.ratingBand
+    ?? (tier !== 'mixed' ? TIER_BANDS[tier] : null);
+
   const matching = PUZZLES.filter((p) => {
     if (p.popularity < minPopularity) return false;
     if (p.nbPlays < minPlays) return false;
-    if (options.ratingBand) {
-      const [min, max] = options.ratingBand;
+    if (band) {
+      const [min, max] = band;
       if (p.rating < min || p.rating >= max) return false;
     }
     return p.themes.some((t) => themeSet.has(t));
@@ -165,15 +185,21 @@ export function getDrillPositionsForLesson(
 }
 
 /** Total available drill puzzle count for a lesson — used by the
- *  picker to surface "X drills available" on the tile. */
-export function getDrillPuzzleCount(lesson: EndgameLesson): number {
+ *  picker to surface "X drills available" on the tile. Pass a
+ *  tier to count only that tier's pool. */
+export function getDrillPuzzleCount(lesson: EndgameLesson, tier: DrillTier = 'mixed'): number {
   const themes = lesson.practiceThemes ?? [];
   if (themes.length === 0) return 0;
   const themeSet = new Set(themes);
+  const band: [number, number] | null = tier !== 'mixed' ? TIER_BANDS[tier] : null;
   let count = 0;
   for (const p of PUZZLES) {
     if (p.popularity < 50) continue;
     if (p.nbPlays < 80) continue;
+    if (band) {
+      const [min, max] = band;
+      if (p.rating < min || p.rating >= max) continue;
+    }
     if (p.themes.some((t) => themeSet.has(t))) count += 1;
   }
   return count;

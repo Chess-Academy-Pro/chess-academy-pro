@@ -31,8 +31,19 @@ import type { CSSProperties } from 'react';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
-import { getDrillPositionsForLesson, getDrillPuzzleCount } from '../../services/endgameDrillService';
+import {
+  getDrillPositionsForLesson,
+  getDrillPuzzleCount,
+  type DrillTier,
+} from '../../services/endgameDrillService';
 import type { EndgameLesson, EndgameLessonPosition } from '../../types/endgameLesson';
+
+const TIER_OPTIONS: { value: DrillTier; label: string }[] = [
+  { value: 'beginner', label: 'Beginner' },
+  { value: 'intermediate', label: 'Intermediate' },
+  { value: 'advanced', label: 'Advanced' },
+  { value: 'mixed', label: 'Mixed' },
+];
 
 interface EndgameLessonTabProps {
   /** Lessons to surface in the picker (already sorted by order). */
@@ -86,7 +97,8 @@ function PickerGrid({ lessons, tabLabel, tabSubtitle, onPick }: PickerGridProps)
           const playableCount = lesson.positions.filter(
             (p) => p.bestMove || (p.solution && p.solution.length > 0),
           ).length;
-          const drillCount = getDrillPuzzleCount(lesson);
+          const drillCount = getDrillPuzzleCount(lesson, 'mixed');
+          const beginnerCount = getDrillPuzzleCount(lesson, 'beginner');
           return (
             <button
               key={lesson.id}
@@ -110,7 +122,18 @@ function PickerGrid({ lessons, tabLabel, tabSubtitle, onPick }: PickerGridProps)
                   <div className="text-[10px] text-cyan-400 mt-1.5">
                     {lesson.positions.length} keystone{lesson.positions.length === 1 ? '' : 's'}
                     {playableCount > 0 && ` · ${playableCount} playable`}
-                    {drillCount > 0 && ` · ${drillCount.toLocaleString()} drill puzzles`}
+                    {drillCount > 0 && (
+                      <>
+                        {' · '}
+                        {drillCount.toLocaleString()} drill puzzles
+                        {beginnerCount > 0 && (
+                          <span className="text-theme-text-muted">
+                            {' '}
+                            ({beginnerCount.toLocaleString()} beginner)
+                          </span>
+                        )}
+                      </>
+                    )}
                   </div>
                 </div>
                 <ChevronRight size={16} className="text-cyan-400 flex-shrink-0 mt-1" />
@@ -130,13 +153,15 @@ interface LessonViewProps {
 
 function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
   const [drillSeed, setDrillSeed] = useState<number>(() => Date.now());
+  const [tier, setTier] = useState<DrillTier>('beginner');
   // The full position list = keystone positions (hand-authored)
   // followed by drill positions (Lichess puzzle DB). The student
   // sees keystones first (named theory, explained), then drills
-  // (real-game tests of the same technique).
+  // (real-game tests of the same technique). Tier narrows the
+  // drill pool to a rating band; mixed = full range.
   const drillPositions = useMemo(
-    () => getDrillPositionsForLesson(lesson, { limit: 3, seed: drillSeed }),
-    [lesson, drillSeed],
+    () => getDrillPositionsForLesson(lesson, { limit: 3, seed: drillSeed, tier }),
+    [lesson, drillSeed, tier],
   );
   const allPositions = useMemo(
     () => [...lesson.positions, ...drillPositions],
@@ -156,10 +181,20 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
     setDrillSeed(Date.now());
     setPosIndex(lesson.positions.length); // jump to first new drill
   }, [lesson.positions.length]);
+  const onTierChange = useCallback(
+    (next: DrillTier) => {
+      setTier(next);
+      setDrillSeed(Date.now());
+      // Jump to the first drill of the new tier if we're currently
+      // viewing a drill; otherwise keep the keystone position.
+      setPosIndex((i) => (i >= lesson.positions.length ? lesson.positions.length : i));
+    },
+    [lesson.positions.length],
+  );
 
   return (
     <PositionRunner
-      key={`${lesson.id}-${posIndex}-${drillSeed}`}
+      key={`${lesson.id}-${posIndex}-${drillSeed}-${tier}`}
       lesson={lesson}
       position={position}
       posIndex={posIndex}
@@ -167,6 +202,8 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
       keystoneCount={lesson.positions.length}
       isDrill={isDrill}
       drillCount={drillPositions.length}
+      tier={tier}
+      onTierChange={onTierChange}
       onExit={onExit}
       onPrev={goPrev}
       onNext={goNext}
@@ -185,6 +222,8 @@ interface PositionRunnerProps {
   keystoneCount: number;
   isDrill: boolean;
   drillCount: number;
+  tier: DrillTier;
+  onTierChange: (next: DrillTier) => void;
   onExit: () => void;
   onPrev: () => void;
   onNext: () => void;
@@ -201,6 +240,8 @@ function PositionRunner({
   keystoneCount,
   isDrill,
   drillCount,
+  tier,
+  onTierChange,
   onExit,
   onPrev,
   onNext,
@@ -223,6 +264,7 @@ function PositionRunner({
     return { [playout.wrongSquare]: { background: 'rgba(239, 68, 68, 0.45)' } };
   }, [playout.wrongSquare]);
 
+  const hasDrillPool = (lesson.practiceThemes?.length ?? 0) > 0;
   const header = (
     <div className="px-3 py-2 md:p-4 border-b border-theme-border">
       <div className="flex items-center justify-between gap-2">
@@ -240,7 +282,7 @@ function PositionRunner({
           </h2>
           <p className="text-xs text-theme-text-muted truncate">
             {isDrill
-              ? `Drill ${posIndex - keystoneCount + 1} of ${drillCount}`
+              ? `Drill ${posIndex - keystoneCount + 1} of ${drillCount} · ${tier} tier`
               : `Keystone ${posIndex + 1} of ${keystoneCount}`}
             {isPlayable && playout.curatedStudentMoves > 1
               ? ` · ${playout.studentMovesPlayed}/${playout.curatedStudentMoves} moves`
@@ -249,6 +291,24 @@ function PositionRunner({
         </div>
         <div className="w-[44px]" />
       </div>
+      {hasDrillPool && (
+        <div className="flex justify-center gap-1 mt-2">
+          {TIER_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => onTierChange(opt.value)}
+              className={`flex-1 px-2 py-1 rounded text-[11px] font-medium transition-colors ${
+                tier === opt.value
+                  ? 'bg-theme-accent text-theme-bg'
+                  : 'bg-theme-surface text-theme-text-muted hover:bg-theme-bg'
+              }`}
+              data-testid={`endgame-drill-tier-${opt.value}`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 
