@@ -28,6 +28,7 @@ import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { useTeachWalkthrough } from '../../hooks/useTeachWalkthrough';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
+import { voiceService } from '../../services/voiceService';
 import {
   getAllPatterns,
   getPatternById,
@@ -766,6 +767,21 @@ function CuratedMatingLessonView({
     stockfishFallback: false,
     replyDelayMs: 450,
   });
+
+  // Voice-first: read the pattern intro + recognition cue aloud
+  // when the lesson opens, then stop on unmount. Same pattern as
+  // EndgameLessonTab's position narration.
+  useEffect(() => {
+    const text = [
+      `${pattern.name}.`,
+      pattern.narration.intro,
+      pattern.narration.recognition,
+    ].filter(Boolean).join(' ');
+    void voiceService.speak(text);
+    return () => {
+      voiceService.stop();
+    };
+  }, [pattern.id, pattern.name, pattern.narration.intro, pattern.narration.recognition]);
   const wrongFlashStyles = useMemo<Record<string, React.CSSProperties>>(() => {
     if (!playout.wrongSquare) return {};
     return {
