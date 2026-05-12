@@ -48,7 +48,7 @@ describe('CoachHomePage', () => {
     expect(card).toHaveTextContent('Game Insights');
   });
 
-  it('shows secondary actions: Training Plan, Analyse, Chat', () => {
+  it('shows secondary actions: Training Plan, Analyse, Review', () => {
     render(<CoachHomePage />);
 
     const plan = screen.getByTestId('coach-action-plan');
@@ -59,9 +59,24 @@ describe('CoachHomePage', () => {
     expect(analyse).toBeInTheDocument();
     expect(analyse).toHaveTextContent('Analyse');
 
-    const chat = screen.getByTestId('coach-action-chat');
-    expect(chat).toBeInTheDocument();
-    expect(chat).toHaveTextContent('Chat');
+    const review = screen.getByTestId('coach-action-review');
+    expect(review).toBeInTheDocument();
+    expect(review).toHaveTextContent('Review');
+  });
+
+  it('does NOT show a Chat tile — chat is inline on every board', () => {
+    render(<CoachHomePage />);
+    expect(screen.queryByTestId('coach-action-chat')).not.toBeInTheDocument();
+  });
+
+  it('shows the Endgame tile as a primary (col-span-2 layout)', () => {
+    render(<CoachHomePage />);
+    const tile = screen.getByTestId('coach-action-endgame');
+    expect(tile).toBeInTheDocument();
+    expect(tile).toHaveTextContent('Endgame');
+    // The wide-primary variant uses col-span-2 to peer visually
+    // with the Learn/Play pair above.
+    expect(tile.className).toMatch(/col-span-2/);
   });
 
   it('navigates to /coach/play when "Play" is clicked', () => {
@@ -88,9 +103,9 @@ describe('CoachHomePage', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/coach/analyse');
   });
 
-  it('navigates to /coach/chat when "Chat" is clicked', () => {
+  it('navigates to /coach/endgame when "Endgame" is clicked', () => {
     render(<CoachHomePage />);
-    fireEvent.click(screen.getByTestId('coach-action-chat'));
-    expect(mockNavigate).toHaveBeenCalledWith('/coach/chat');
+    fireEvent.click(screen.getByTestId('coach-action-endgame'));
+    expect(mockNavigate).toHaveBeenCalledWith('/coach/endgame');
   });
 });

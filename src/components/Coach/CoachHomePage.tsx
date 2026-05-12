@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Swords, BarChart3, Calendar, Search, MessageCircle, GraduationCap, History, Info, X, Crown } from 'lucide-react';
+import { Swords, BarChart3, Calendar, Search, GraduationCap, History, Info, X, Crown } from 'lucide-react';
 import { useState } from 'react';
 import { SmartSearchBar } from '../Search/SmartSearchBar';
 import { useSettings } from '../../hooks/useSettings';
@@ -68,26 +68,15 @@ export function CoachHomePage(): JSX.Element {
         <SmartSearchBar placeholder="Ask your coach or say what you want to do..." />
       </div>
 
-      {/* Tile grid — same neon pattern the Dashboard and Tactics page
-          use. Play + Learn are the two primary big aspect-square tiles
-          with subtitle descriptions; Game Insights / Training Plan /
-          Analyse / Chat fill the secondary row. The old "Work with
-          Coach" tile was removed — it overlapped with Learn (live
-          teach session) and Training Plan (structured plan). */}
+      {/* Tile grid. Primary tiles are Learn (lessons), Play (real
+          game vs engine), and Endgame (the audit-driven endgame
+          surface — now equal in visual weight). Endgame sits in
+          its own row spanning 2 columns at the same HEIGHT as the
+          aspect-square Learn/Play pair above, so the three big
+          tiles read as peers. Chat was dropped — the inline Chat
+          button on every board surface makes the dedicated tile
+          redundant. */}
       <div className="grid grid-cols-2 gap-3 flex-1 content-start max-w-lg mx-auto w-full">
-        <PrimaryTile
-          icon={<Swords size={40} className="text-emerald-400" />}
-          label="Play with Coach"
-          subtitle="Real game vs the engine. Coach narrates each move and helps when you're stuck."
-          info="Play a full game against Stockfish (difficulty matches your rating). The coach narrates your moves, calls out tactics you missed, walks you through phase transitions, and offers a hint ladder when you're stuck. Post-game, opens a review walk."
-          rgb="52, 211, 153"
-          bgClass="bg-emerald-500/10"
-          textColorClass="text-emerald-400"
-          onClick={goTo('play', '/coach/play')}
-          gB={gB}
-          gS={gS}
-          testId="coach-action-play"
-        />
         <PrimaryTile
           icon={<GraduationCap size={40} className="text-cyan-400" />}
           label="Learn with Coach"
@@ -102,6 +91,39 @@ export function CoachHomePage(): JSX.Element {
           gB={gB}
           gS={gS}
           testId="coach-action-teach"
+        />
+        <PrimaryTile
+          icon={<Swords size={40} className="text-emerald-400" />}
+          label="Play with Coach"
+          subtitle="Real game vs the engine. Coach narrates each move and helps when you're stuck."
+          info="Play a full game against Stockfish (difficulty matches your rating). The coach narrates your moves, calls out tactics you missed, walks you through phase transitions, and offers a hint ladder when you're stuck. Post-game, opens a review walk."
+          rgb="52, 211, 153"
+          bgClass="bg-emerald-500/10"
+          textColorClass="text-emerald-400"
+          onClick={goTo('play', '/coach/play')}
+          gB={gB}
+          gS={gS}
+          testId="coach-action-play"
+        />
+
+        {/* Endgame — third primary tile, spans 2 cols at half-height
+            so its HEIGHT matches the aspect-square Learn/Play tiles
+            above. Reads as a peer of the other two big tiles. */}
+        <PrimaryTile
+          icon={<Crown size={40} className="text-fuchsia-400" />}
+          label="Endgame with Coach"
+          subtitle="Mating patterns, drawn fortresses, calc skills, your own missed wins — all adaptive."
+          info={
+            "The endgame surface. 8 tabs:\n\n• Mating — named patterns (Anastasia, Boden, Smothered…) drilled via Lichess puzzles at your rating.\n• Principles / Pawn / Rook / Drawn — keystone positions with curator prose, then adaptive drills from the puzzle DB.\n• Eval Lab — recognition + find-the-move + play-it-out, three grades per puzzle.\n• Calc — six skills + an Adaptive (auto) tile. Weakness-boost biases every fifth puzzle.\n• Your Games — mined mistakes from your imports.\n\nAll surfaces share a single persistent endgame Elo (Stats page) and max-strength Stockfish on play-out."
+          }
+          rgb="217, 70, 239"
+          bgClass="bg-fuchsia-500/10"
+          textColorClass="text-fuchsia-400"
+          onClick={goTo('endgame', '/coach/endgame')}
+          gB={gB}
+          gS={gS}
+          testId="coach-action-endgame"
+          wide
         />
 
         <SecondaryTile
@@ -143,32 +165,6 @@ export function CoachHomePage(): JSX.Element {
           testId="coach-action-analyse"
         />
         <SecondaryTile
-          icon={<MessageCircle size={28} className="text-rose-400" />}
-          label="Chat"
-          info="Open-ended chat with the coach. No board required. Ask about openings, principles, study advice, anything chess. Coach has access to Stockfish and the Lichess opening explorer when needed."
-          rgb="251, 113, 133"
-          bgClass="bg-rose-500/10"
-          textColorClass="text-rose-400"
-          onClick={goTo('chat', '/coach/chat')}
-          gB={gB}
-          gS={gS}
-          testId="coach-action-chat"
-        />
-        <SecondaryTile
-          icon={<Crown size={28} className="text-fuchsia-400" />}
-          label="Endgame"
-          info={
-            "Master the named checkmating patterns and the fundamental piece-mate techniques. Each pattern opens with a hand-crafted geometry intro, then runs you through real master-game positions where you set up the mate from several moves out — not just one-move recognition.\n\nCovers Anastasia, Boden, Smothered, Arabian, Hook, Opera, Pillsbury, and 30+ more, plus K+Q, K+R, B+N piece-mate fundamentals."
-          }
-          rgb="217, 70, 239"
-          bgClass="bg-fuchsia-500/10"
-          textColorClass="text-fuchsia-400"
-          onClick={goTo('endgame', '/coach/endgame')}
-          gB={gB}
-          gS={gS}
-          testId="coach-action-endgame"
-        />
-        <SecondaryTile
           icon={<History size={28} className="text-teal-400" />}
           label="Review with Coach"
           info={
@@ -204,6 +200,11 @@ interface TileProps {
   gB: number;
   gS: number;
   testId: string;
+  /** Primary tiles only: render col-span-2 with a 2:1 aspect ratio
+   *  so the tile's HEIGHT matches an aspect-square tile in the
+   *  same row. Used by Endgame so it reads as a peer of the
+   *  Learn/Play pair above. */
+  wide?: boolean;
 }
 
 /** Small ⓘ button anchored to the top-right corner of a tile. Clicking
@@ -265,15 +266,20 @@ function InfoButton({ label, info, textColorClass }: { label: string; info: stri
   );
 }
 
-/** Big aspect-square primary tile. Used for Play + Learn so they're
- *  the visual focus of the hub. Title + subtitle stacked. */
-function PrimaryTile({ icon, label, subtitle, info, rgb, bgClass, textColorClass, onClick, gB, gS, testId }: TileProps): JSX.Element {
+/** Primary tile. Default: aspect-square in one column (Learn /
+ *  Play). With `wide`: spans 2 columns at 2:1 aspect so HEIGHT
+ *  equals the aspect-square primaries above (the Endgame layout).
+ *  Title + subtitle stacked. */
+function PrimaryTile({ icon, label, subtitle, info, rgb, bgClass, textColorClass, onClick, gB, gS, testId, wide }: TileProps): JSX.Element {
   const shadow = scaledShadow(rgb, gB);
   const shadowHover = scaledShadow(rgb, Math.min(200, gB * 1.4));
+  const sizeClass = wide
+    ? 'col-span-2 aspect-[2/1] px-6 py-4'
+    : 'aspect-square px-3 py-4';
   return (
     <button
       onClick={onClick}
-      className={`${bgClass} rounded-2xl flex flex-col items-center justify-center gap-2 px-3 py-4 transition-all duration-200 aspect-square relative`}
+      className={`${bgClass} ${sizeClass} rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-200 relative`}
       style={{ ...neonBorderStyle(rgb, gS), boxShadow: shadow }}
       onMouseEnter={(e) => { applyHoverBorder(e.currentTarget, rgb, gS); e.currentTarget.style.boxShadow = shadowHover; }}
       onMouseLeave={(e) => { applyRestBorder(e.currentTarget, rgb, gS); e.currentTarget.style.boxShadow = shadow; }}
@@ -283,7 +289,10 @@ function PrimaryTile({ icon, label, subtitle, info, rgb, bgClass, textColorClass
       {icon}
       <span className={`text-base font-bold ${textColorClass}`}>{label}</span>
       {subtitle && (
-        <span className="text-[11px] text-center leading-snug" style={{ color: 'var(--color-text-muted)' }}>
+        <span
+          className={`text-[11px] text-center leading-snug ${wide ? 'max-w-md' : ''}`}
+          style={{ color: 'var(--color-text-muted)' }}
+        >
           {subtitle}
         </span>
       )}
