@@ -393,7 +393,7 @@ function PuzzleRunner({
     solution: puzzle.solutionSans,
     extendToObviousWin: true,
     fallbackPliesToPlay: 8,
-    fallbackDifficulty: 'easy',
+    fallbackDifficulty: 'hard',
     replyDelayMs: 450,
   });
   const clickToMove = useClickToMove(playout);

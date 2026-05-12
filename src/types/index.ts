@@ -622,6 +622,13 @@ export interface UserProfile {
   isKidMode: boolean;
   currentRating: number;
   puzzleRating: number;
+  /** Separate Elo rating for the endgame puzzle pool (mating
+   *  patterns, calc, lesson drills). Tracked independently from
+   *  the general tactic puzzleRating so a flurry of easy
+   *  pawn-endings doesn't deflate the general tactic rating
+   *  (and vice versa). Default 1200; updated K=32 Elo against
+   *  the puzzle's Lichess rating on each endgame puzzle attempt. */
+  endgameRating?: number;
   xp: number;
   level: number;
   currentStreak: number;

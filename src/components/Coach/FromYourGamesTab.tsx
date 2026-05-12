@@ -207,7 +207,7 @@ function Lesson({ positions, index, onExit, onIndexChange }: LessonProps): JSX.E
     solution: position.bestMove ? [position.bestMove] : [],
     extendToObviousWin: !!position.bestMove,
     fallbackPliesToPlay: 8,
-    fallbackDifficulty: 'easy',
+    fallbackDifficulty: 'hard',
     replyDelayMs: 450,
   });
   const clickToMove = useClickToMove(playout);

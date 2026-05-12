@@ -512,6 +512,34 @@ class ChessAcademyDB extends Dexie {
       // No data migration needed — endgameProgress is a brand-new
       // store. Existing data lives in older stores and is untouched.
     });
+
+    // v24: UserProfile gains optional `endgameRating` (Elo for
+    // endgame puzzles, K=32). Default 1200 — applied lazily on
+    // first endgame puzzle attempt so existing profiles don't
+    // need migration. No index needed (profile lookup is by id).
+    this.version(24).stores({
+      puzzles: 'id, rating, *themes, srsDueDate, userRating',
+      openings: 'id, eco, name, color, isRepertoire, isFavorite',
+      games: 'id, source, eco, date, isMasterGame, openingId',
+      flashcards: 'id, openingId, type, srsDueDate',
+      profiles: 'id',
+      sessions: 'id, date, profileId',
+      meta: 'key',
+      mistakePuzzles: 'id, sourceGameId, classification, srsDueDate, status, sourceMode, gamePhase',
+      modelGames: 'id, openingId',
+      middlegamePlans: 'id, openingId',
+      generatedContent: 'id, openingId, type, generatedAt',
+      openingWeakSpots: 'id, openingId, failCount, lastFailedAt',
+      classifiedTactics: 'id, sourceGameId, tacticType, playerColor, createdAt',
+      setupPuzzles: 'id, tacticType, difficulty, srsDueDate, status, sourceGameId',
+      openingNarrations: 'id, openingName, variation, moveSan, fen, approved',
+      cachedOpenings: 'normalizedName, eco, generatedAt',
+      endgameProgress: 'id, lessonId, lastPlayedAt',
+    }).upgrade(async () => {
+      // No data migration needed — adding an optional field; existing
+      // profile rows remain valid (endgameRating is read with a 1200
+      // fallback at the call site).
+    });
   }
 }
 
