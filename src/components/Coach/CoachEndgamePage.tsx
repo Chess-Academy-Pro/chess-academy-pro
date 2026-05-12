@@ -19,13 +19,14 @@
  * hand-crafted prose. The LLM is voice (Polly TTS) only — zero
  * authorship at runtime.
  */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Chess, type Square } from 'chess.js';
 import { ArrowLeft, Crown, ChevronRight, RotateCw, Lightbulb, MessageCircle } from 'lucide-react';
 import type { PieceDropHandlerArgs } from 'react-chessboard';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
+import { ScrollHintBar } from '../Common/ScrollHintBar';
 import { useTeachWalkthrough } from '../../hooks/useTeachWalkthrough';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import { useClickToMove } from '../../hooks/useClickToMove';
@@ -222,6 +223,10 @@ function PatternPicker({ onPick, onBack, tier, onTierChange, activeTab, onTabCha
   const patterns = useMemo(() => getAllPatterns(), []);
   const named = patterns.filter((p) => p.category === 'named-pattern');
   const piece = patterns.filter((p) => p.category === 'piece-mate');
+  // Ref on the horizontally-scrollable tab strip below — drives the
+  // animated amber scroll-hint that hints "swipe for more tabs"
+  // when the row overflows on narrow viewports.
+  const tabStripRef = useRef<HTMLDivElement>(null);
 
   // Cumulative mastery across every endgame lesson tab. Cheap
   // Dexie aggregate; re-runs whenever the picker mounts so the
@@ -271,8 +276,14 @@ function PatternPicker({ onPick, onBack, tier, onTierChange, activeTab, onTabCha
       {/* Top-level endgame surface tabs. Mating Patterns is the
           populated tab; the others surface "coming soon" so the
           user can see the surface scope without us shipping
-          half-built content. */}
-      <div className="flex gap-1 max-w-lg mx-auto w-full border-b border-theme-border pb-0.5 overflow-x-auto">
+          half-built content. ScrollHintBar below the strip
+          animates an amber accent when the row overflows the
+          viewport (8 tabs on a narrow phone), telling the user
+          they can swipe horizontally. */}
+      <div
+        ref={tabStripRef}
+        className="flex gap-1 max-w-lg mx-auto w-full border-b border-theme-border pb-0.5 overflow-x-auto"
+      >
         {TAB_OPTIONS.map((opt) => (
           <button
             key={opt.value}
@@ -292,6 +303,7 @@ function PatternPicker({ onPick, onBack, tier, onTierChange, activeTab, onTabCha
           </button>
         ))}
       </div>
+      <ScrollHintBar targetRef={tabStripRef} axis="x" className="max-w-lg mx-auto w-full" />
 
       {activeTab === 'mating-patterns' && (
         <>

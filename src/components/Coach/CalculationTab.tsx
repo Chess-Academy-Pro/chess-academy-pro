@@ -16,7 +16,7 @@
  * input via chess.js. No runtime LLM authorship.
  */
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Chess, type Square } from 'chess.js';
+import { Chess } from 'chess.js';
 import {
   ArrowLeft,
   Check,
@@ -25,10 +25,11 @@ import {
   RotateCw,
   X,
 } from 'lucide-react';
-import type { PieceDropHandlerArgs } from 'react-chessboard';
 import type { CSSProperties } from 'react';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
+import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
+import { useClickToMove } from '../../hooks/useClickToMove';
 import {
   getCalculationSkills,
   getCalculationSkillById,
@@ -56,11 +57,13 @@ interface DrillState {
 
 interface DrillPuzzle {
   id: string;
+  /** Starting FEN with the student to move (post-setup). */
   fen: string;
-  /** Expected first move in SAN (computed from puzzle's UCI moves
-   *  + chess.js for the FEN). Comparing against this is how we
-   *  decide if the user got it right. */
-  expectedSan: string;
+  /** Full alternating SAN sequence — student/opponent/student/...
+   *  The student plays each of their moves; opponent replies
+   *  auto-play. After the curated line ends, the playout extends
+   *  via Stockfish until mate / promotion / decisive material. */
+  solutionSans: string[];
   /** Lichess puzzle rating — surfaced as difficulty info. */
   rating: number;
   /** Short concept hint mapped from the puzzle's theme tags. Shown
@@ -98,24 +101,39 @@ export function CalculationTab({ onExit }: CalculationTabProps): JSX.Element {
       const c = new Chess(p.fen);
       const ucis = p.moves.split(/\s+/).filter(Boolean);
       if (ucis.length < 2) continue;
-      const setupUci = ucis[0];
-      const studentUci = ucis[1];
+      // Apply opponent's setup move (ucis[0]) → student-to-move FEN.
+      // Then convert ucis[1..] (the full puzzle solution, alternating
+      // student/opponent) to SAN so the playout runner can drive
+      // each prompt.
       try {
+        const setupUci = ucis[0];
         c.move({
           from: setupUci.slice(0, 2),
           to: setupUci.slice(2, 4),
           promotion: setupUci.length > 4 ? (setupUci[4] as 'q' | 'r' | 'b' | 'n') : undefined,
         });
         const startFen = c.fen();
-        const studentMove = c.move({
-          from: studentUci.slice(0, 2),
-          to: studentUci.slice(2, 4),
-          promotion: studentUci.length > 4 ? (studentUci[4] as 'q' | 'r' | 'b' | 'n') : undefined,
-        });
+        const solutionSans: string[] = [];
+        let parseOk = true;
+        for (let i = 1; i < ucis.length; i += 1) {
+          const u = ucis[i];
+          try {
+            const mv = c.move({
+              from: u.slice(0, 2),
+              to: u.slice(2, 4),
+              promotion: u.length > 4 ? (u[4] as 'q' | 'r' | 'b' | 'n') : undefined,
+            });
+            solutionSans.push(mv.san);
+          } catch {
+            parseOk = false;
+            break;
+          }
+        }
+        if (!parseOk || solutionSans.length === 0) continue;
         puzzles.push({
           id: p.id,
           fen: startFen,
-          expectedSan: studentMove.san,
+          solutionSans,
           rating: p.rating,
           conceptHint: pickConceptHint(p.themes),
         });
@@ -283,124 +301,7 @@ interface DrillScreenProps {
 }
 
 function DrillScreen({ skill, drill, setDrill, onExit, onReshuffle }: DrillScreenProps): JSX.Element {
-  const [wrongSquare, setWrongSquare] = useState<string | null>(null);
-  // Per-puzzle wrong-attempt counter — drives the post-mistake
-  // concept hint. Resets on puzzle change. Used INSTEAD of
-  // pushing a parallel array into DrillState because it's a UI
-  // concern, not part of the persisted drill result.
-  const [wrongCount, setWrongCount] = useState<number>(0);
   const current = drill.puzzles[drill.currentIndex];
-  const studentSide: 'white' | 'black' = useMemo(
-    () => (current?.fen.split(' ')[1] === 'w' ? 'white' : 'black'),
-    [current?.fen],
-  );
-  const outcome = drill.outcomes[drill.currentIndex];
-  const score = drill.outcomes.filter((o) => o === 'correct').length;
-  const answered = drill.outcomes.filter((o) => o !== null).length;
-
-  // Reset the wrong-square flash + wrong-count when the puzzle changes.
-  useEffect(() => {
-    setWrongSquare(null);
-    setWrongCount(0);
-  }, [drill.currentIndex]);
-
-  // Core move attempt — shared by drag (handleDrop) and click-to-
-  // move (handleSquareClick). Returns true on a correct attempt.
-  const tryMove = useCallback(
-    (from: string, to: string): boolean => {
-      if (!current) return false;
-      if (outcome !== null) return false;
-      const probe = new Chess(current.fen);
-      let played;
-      try {
-        played = probe.move({ from, to, promotion: 'q' });
-      } catch {
-        return false;
-      }
-      const stripAnnotations = (san: string): string =>
-        san.replace(/[+#!?]+$/, '').replace(/=Q$|=R$|=B$|=N$/, '');
-      if (stripAnnotations(played.san) === stripAnnotations(current.expectedSan)) {
-        setDrill((prev) => {
-          if (!prev) return prev;
-          const newOutcomes = [...prev.outcomes];
-          newOutcomes[prev.currentIndex] = 'correct';
-          return { ...prev, outcomes: newOutcomes };
-        });
-        return true;
-      }
-      setWrongSquare(to);
-      setWrongCount((n) => n + 1);
-      window.setTimeout(() => setWrongSquare(null), 600);
-      return false;
-    },
-    [current, outcome, setDrill],
-  );
-
-  const handleDrop = useCallback(
-    (args: PieceDropHandlerArgs): boolean => {
-      if (!args.sourceSquare || !args.targetSquare) return false;
-      return tryMove(args.sourceSquare, args.targetSquare);
-    },
-    [tryMove],
-  );
-
-  // Click-to-move selection state. Tap a friendly piece → select it
-  // + highlight legal targets. Tap a target → tryMove. Tap an empty
-  // or opponent square (or the same piece) → cancel selection.
-  const [selectedSquare, setSelectedSquare] = useState<string | null>(null);
-  useEffect(() => {
-    setSelectedSquare(null);
-  }, [current?.fen]);
-  const legalTargets = useMemo<string[]>(() => {
-    if (!selectedSquare || !current) return [];
-    try {
-      const c = new Chess(current.fen);
-      return c.moves({ square: selectedSquare as Square, verbose: true }).map((m) => m.to);
-    } catch {
-      return [];
-    }
-  }, [selectedSquare, current]);
-  const handleSquareClick = useCallback(
-    (args: { square?: string }) => {
-      const sq = args.square;
-      if (!sq || !current || outcome !== null) return;
-      if (!selectedSquare) {
-        try {
-          const c = new Chess(current.fen);
-          const piece = c.get(sq as Square);
-          if (!piece) return;
-          const stm = current.fen.split(' ')[1];
-          if (piece.color !== stm) return;
-          setSelectedSquare(sq);
-        } catch {
-          /* swallow */
-        }
-        return;
-      }
-      if (sq === selectedSquare) {
-        setSelectedSquare(null);
-        return;
-      }
-      if (legalTargets.includes(sq)) {
-        tryMove(selectedSquare, sq);
-        setSelectedSquare(null);
-        return;
-      }
-      try {
-        const c = new Chess(current.fen);
-        const piece = c.get(sq as Square);
-        const stm = current.fen.split(' ')[1];
-        if (piece && piece.color === stm) {
-          setSelectedSquare(sq);
-          return;
-        }
-      } catch {
-        /* swallow */
-      }
-      setSelectedSquare(null);
-    },
-    [current, outcome, selectedSquare, legalTargets, tryMove],
-  );
 
   const advance = useCallback(() => {
     setDrill((prev) => {
@@ -410,60 +311,124 @@ function DrillScreen({ skill, drill, setDrill, onExit, onReshuffle }: DrillScree
     });
   }, [setDrill]);
 
-  const skipPuzzle = useCallback(() => {
-    setDrill((prev) => {
-      if (!prev) return prev;
-      const newOutcomes = [...prev.outcomes];
-      if (newOutcomes[prev.currentIndex] === null) {
-        newOutcomes[prev.currentIndex] = 'incorrect';
-      }
-      return { ...prev, outcomes: newOutcomes };
-    });
-  }, [setDrill]);
-
-  const flashStyles = useMemo<Record<string, CSSProperties>>(() => {
-    if (!wrongSquare) return {};
-    return { [wrongSquare]: { background: 'rgba(239, 68, 68, 0.45)' } };
-  }, [wrongSquare]);
-
-  const clickStyles = useMemo<Record<string, CSSProperties>>(() => {
-    const out: Record<string, CSSProperties> = {};
-    if (selectedSquare) {
-      out[selectedSquare] = {
-        background: 'rgba(0, 229, 255, 0.35)',
-        boxShadow: 'inset 0 0 0 2px rgba(0, 229, 255, 0.7)',
-      };
-    }
-    for (const t of legalTargets) {
-      out[t] = {
-        ...(out[t] ?? {}),
-        background:
-          out[t]?.background ??
-          'radial-gradient(circle, rgba(0, 229, 255, 0.5) 18%, transparent 22%)',
-      };
-    }
-    return out;
-  }, [selectedSquare, legalTargets]);
-
-  const mergedSquareStyles = useMemo<Record<string, CSSProperties>>(
-    () => ({ ...clickStyles, ...flashStyles }),
-    [clickStyles, flashStyles],
+  const recordOutcome = useCallback(
+    (firstTryPerfect: boolean) => {
+      setDrill((prev) => {
+        if (!prev) return prev;
+        // Don't overwrite an existing outcome — recordOutcome can
+        // fire multiple times on re-renders after completion; we
+        // only commit the FIRST result.
+        if (prev.outcomes[prev.currentIndex] !== null) return prev;
+        const newOutcomes = [...prev.outcomes];
+        newOutcomes[prev.currentIndex] = firstTryPerfect ? 'correct' : 'incorrect';
+        return { ...prev, outcomes: newOutcomes };
+      });
+    },
+    [setDrill],
   );
 
   if (!current) {
     return <DrillSummary drill={drill} skill={skill} onReshuffle={onReshuffle} onExit={onExit} />;
   }
 
-  // Quiz is finished when every puzzle has an outcome AND user
-  // pressed "Show summary" — the summary screen surfaces from the
-  // last puzzle's "next" button. So if currentIndex is at the
-  // last puzzle and outcome is set, show "show summary" CTA.
   const onLastPuzzle = drill.currentIndex === drill.puzzles.length - 1;
   const allAnswered = drill.outcomes.every((o) => o !== null);
-
   if (onLastPuzzle && allAnswered) {
     return <DrillSummary drill={drill} skill={skill} onReshuffle={onReshuffle} onExit={onExit} />;
   }
+
+  return (
+    <PuzzleRunner
+      key={`${drill.currentIndex}-${current.id}`}
+      puzzle={current}
+      drillIndex={drill.currentIndex}
+      drillTotal={drill.puzzles.length}
+      score={drill.outcomes.filter((o) => o === 'correct').length}
+      answered={drill.outcomes.filter((o) => o !== null).length}
+      skill={skill}
+      currentOutcome={drill.outcomes[drill.currentIndex]}
+      onRecordOutcome={recordOutcome}
+      onAdvance={advance}
+      onExit={onExit}
+    />
+  );
+}
+
+interface PuzzleRunnerProps {
+  puzzle: DrillPuzzle;
+  drillIndex: number;
+  drillTotal: number;
+  score: number;
+  answered: number;
+  skill: CalculationSkill;
+  currentOutcome: 'correct' | 'incorrect' | null;
+  onRecordOutcome: (firstTryPerfect: boolean) => void;
+  onAdvance: () => void;
+  onExit: () => void;
+}
+
+function PuzzleRunner({
+  puzzle,
+  drillIndex,
+  drillTotal,
+  score,
+  answered,
+  skill,
+  currentOutcome,
+  onRecordOutcome,
+  onAdvance,
+  onExit,
+}: PuzzleRunnerProps): JSX.Element {
+  const studentSide: 'white' | 'black' =
+    puzzle.fen.split(' ')[1] === 'w' ? 'white' : 'black';
+
+  // Drive the entire puzzle through the playout runner. The
+  // student plays each of their moves; opponent replies auto-play
+  // from the puzzle's UCI sequence. After the curated line ends,
+  // Stockfish extends until mate / promotion / decisive material —
+  // so every puzzle plays out to a clear win, not stopping mid-
+  // combination. extendToObviousWin caps at 8 fallback plies.
+  const playout = useEndgamePlayout({
+    startFen: puzzle.fen,
+    solution: puzzle.solutionSans,
+    extendToObviousWin: true,
+    fallbackPliesToPlay: 8,
+    fallbackDifficulty: 'easy',
+    replyDelayMs: 450,
+  });
+  const clickToMove = useClickToMove(playout);
+
+  const wrongFlash = useMemo<Record<string, CSSProperties>>(() => {
+    if (!playout.wrongSquare) return {};
+    return { [playout.wrongSquare]: { background: 'rgba(239, 68, 68, 0.45)' } };
+  }, [playout.wrongSquare]);
+  const hintStyles = useMemo<Record<string, CSSProperties>>(() => {
+    if (!playout.hintRevealed || !playout.hintMove) return {};
+    return {
+      [playout.hintMove.from]: {
+        background: 'rgba(251, 191, 36, 0.55)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.9)',
+      },
+      [playout.hintMove.to]: {
+        background: 'rgba(251, 191, 36, 0.35)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.7)',
+      },
+    };
+  }, [playout.hintRevealed, playout.hintMove]);
+  const mergedSquareStyles = useMemo<Record<string, CSSProperties>>(
+    () => ({ ...clickToMove.squareStyles, ...hintStyles, ...wrongFlash }),
+    [clickToMove.squareStyles, hintStyles, wrongFlash],
+  );
+
+  // When the playout finishes, record outcome ONCE. firstTryPerfect
+  // means zero wrong attempts + no hint/reveal taken.
+  useEffect(() => {
+    if (playout.isComplete && currentOutcome === null) {
+      onRecordOutcome(playout.firstTryPerfect);
+    }
+  }, [playout.isComplete, playout.firstTryPerfect, currentOutcome, onRecordOutcome]);
+
+  const isLast = drillIndex === drillTotal - 1;
 
   const header = (
     <div className="px-3 py-2 md:p-4 border-b border-theme-border">
@@ -478,7 +443,7 @@ function DrillScreen({ skill, drill, setDrill, onExit, onReshuffle }: DrillScree
         <div className="flex-1 min-w-0 text-center">
           <h2 className="text-sm font-semibold text-theme-text truncate">{skill.name}</h2>
           <p className="text-xs text-theme-text-muted truncate">
-            Puzzle {drill.currentIndex + 1} of {drill.puzzles.length} · rating {current.rating} · score {score}/{answered}
+            Puzzle {drillIndex + 1} of {drillTotal} · rating {puzzle.rating} · score {score}/{answered}
           </p>
         </div>
         <div className="w-[44px]" />
@@ -488,11 +453,11 @@ function DrillScreen({ skill, drill, setDrill, onExit, onReshuffle }: DrillScree
 
   const board = (
     <ConsistentChessboard
-      fen={current.fen}
+      fen={playout.fen}
       boardOrientation={studentSide}
-      interactive={outcome === null}
-      onPieceDrop={handleDrop}
-      onSquareClick={handleSquareClick}
+      interactive={playout.phase === 'student-to-move'}
+      onPieceDrop={playout.onPieceDrop}
+      onSquareClick={clickToMove.onSquareClick}
       squareStyles={mergedSquareStyles}
     />
   );
@@ -501,53 +466,72 @@ function DrillScreen({ skill, drill, setDrill, onExit, onReshuffle }: DrillScree
     <div className="flex flex-col gap-3 px-2 pb-4">
       <div className="rounded-xl border border-theme-border bg-theme-surface p-3 flex flex-col gap-2">
         <p className="text-sm text-theme-text">
-          {studentSide === 'white' ? 'White' : 'Black'} to play. Find the best move.
+          {studentSide === 'white' ? 'White' : 'Black'} to play.{' '}
+          {playout.isComplete
+            ? playout.firstTryPerfect
+              ? 'Solved — played to the win.'
+              : 'Played through to the win.'
+            : 'Play the best move — keep going until the win.'}
         </p>
-        {outcome === null && wrongCount > 0 && current.conceptHint && (
+        {!playout.isComplete && playout.wrongAttempts > 0 && puzzle.conceptHint && (
           <div
             className="text-[12px] text-amber-300 leading-relaxed border-l-2 border-amber-500/40 pl-2"
             data-testid="calc-concept-hint"
           >
-            <span className="font-semibold">Concept:</span> {current.conceptHint}
+            <span className="font-semibold">Concept:</span> {puzzle.conceptHint}
           </div>
         )}
-        {outcome === 'correct' && (
+        {playout.isComplete && currentOutcome === 'correct' && (
           <div className="flex items-center gap-1.5 text-[12px] text-green-400 font-semibold">
             <Check size={14} />
-            Correct — {current.expectedSan}
+            Correct
           </div>
         )}
-        {outcome === 'incorrect' && (
+        {playout.isComplete && currentOutcome === 'incorrect' && (
           <div className="flex items-center gap-1.5 text-[12px] text-red-400 font-semibold">
             <X size={14} />
-            Skipped — the move was {current.expectedSan}
+            Played out — needed a hint or retry
           </div>
         )}
-        {outcome === null && (
-          <p className="text-[11px] text-cyan-400">
-            {wrongCount > 0 ? 'Try again — drag or tap a piece.' : 'Drag or tap a piece to play your move.'}
-          </p>
+        {!playout.isComplete && (
+          <div className="flex items-center gap-3">
+            <p className="text-[11px] text-cyan-400">
+              {playout.wrongAttempts > 0
+                ? 'Try again — drag or tap a piece.'
+                : 'Drag or tap a piece to play your move.'}
+            </p>
+            {playout.hintMove && !playout.hintRevealed && (
+              <button
+                onClick={playout.revealHint}
+                className="flex items-center gap-1 text-[11px] text-amber-400 hover:text-amber-300"
+                data-testid="calc-hint"
+              >
+                <Lightbulb size={11} />
+                Hint
+              </button>
+            )}
+          </div>
         )}
       </div>
       <div className="flex items-center justify-between gap-2">
         <button
-          onClick={skipPuzzle}
-          disabled={outcome !== null}
+          onClick={playout.reveal}
+          disabled={playout.isComplete}
           className="px-3 py-2 rounded-lg bg-theme-surface text-sm text-theme-text-muted hover:text-theme-text disabled:opacity-30"
           data-testid="calculation-skip"
         >
           Skip / Reveal
         </button>
         <span className="text-xs text-theme-text-muted font-mono">
-          {drill.currentIndex + 1}/{drill.puzzles.length}
+          {drillIndex + 1}/{drillTotal}
         </span>
         <button
-          onClick={advance}
-          disabled={outcome === null}
+          onClick={onAdvance}
+          disabled={!playout.isComplete}
           className="px-4 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold disabled:opacity-30 disabled:cursor-not-allowed"
           data-testid="calculation-next"
         >
-          Next
+          {isLast ? 'Done' : 'Next'}
         </button>
       </div>
     </div>
@@ -627,7 +611,7 @@ function DrillSummary({ drill, skill, onReshuffle, onExit }: DrillSummaryProps):
               <div className="flex-1 min-w-0">
                 <div className="text-xs text-theme-text">Puzzle #{i + 1}</div>
                 <div className="text-[10px] text-theme-text-muted">
-                  rating {p.rating} · solution: {p.expectedSan}
+                  rating {p.rating} · {p.solutionSans.length} ply solution starting {p.solutionSans[0]}
                 </div>
               </div>
             </div>

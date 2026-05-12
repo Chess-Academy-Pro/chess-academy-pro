@@ -97,6 +97,31 @@ body {
   animation: fadeIn 0.2s ease-out;
 }
 
+/* ─── Scroll-hint indicator ───────────────────────────────────────────────── */
+/* A thin amber line with a moving accent — sits below horizontally
+   scrollable tab strips (or beside vertically scrollable lists) to
+   tell the user there's more content outside the viewport. The
+   accent slides corner-to-corner on a 2-second loop. */
+@keyframes scrollHintSlideX {
+  0%   { transform: translateX(0%);   opacity: 0.7; }
+  50%  { opacity: 1; }
+  100% { transform: translateX(calc(100% - 100%)); opacity: 0.7; }
+}
+@keyframes scrollHintBounceX {
+  0%, 100% { left: 0%; opacity: 0.7; }
+  50%      { left: calc(100% - 2.5rem); opacity: 1; }
+}
+.animate-scroll-hint-x {
+  animation: scrollHintBounceX 2.2s ease-in-out infinite;
+}
+@keyframes scrollHintBounceY {
+  0%, 100% { top: 0%; opacity: 0.7; }
+  50%      { top: calc(100% - 2.5rem); opacity: 1; }
+}
+.animate-scroll-hint-y {
+  animation: scrollHintBounceY 2.2s ease-in-out infinite;
+}
+
 /* ─── Puzzle board flash animations ──────────────────────────────────────── */
 @keyframes boardFlashError {
   0% { box-shadow: inset 0 0 0 0 rgba(224, 82, 82, 0); }

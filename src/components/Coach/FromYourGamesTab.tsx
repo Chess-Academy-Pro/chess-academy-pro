@@ -15,18 +15,19 @@
  *   - All games are mistake-free in the endgame phase (lucky you)
  */
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Chess, type Square } from 'chess.js';
 import {
   ArrowLeft,
   ChevronLeft,
   ChevronRight,
   Check,
   AlertCircle,
+  Lightbulb,
 } from 'lucide-react';
-import type { PieceDropHandlerArgs } from 'react-chessboard';
 import type { CSSProperties } from 'react';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
+import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
+import { useClickToMove } from '../../hooks/useClickToMove';
 import {
   mineEndgamePositions,
   type MinedEndgamePosition,
@@ -195,127 +196,43 @@ function Lesson({ positions, index, onExit, onIndexChange }: LessonProps): JSX.E
     () => (position.fen.split(' ')[1] === 'w' ? 'white' : 'black'),
     [position.fen],
   );
-  const [solved, setSolved] = useState(false);
-  const [wrongSquare, setWrongSquare] = useState<string | null>(null);
 
-  // Reset solve state when navigating to a different position.
-  useEffect(() => {
-    setSolved(false);
-    setWrongSquare(null);
-  }, [index]);
+  // Drive the position through the playout runner. Solution is the
+  // single engine-recommended bestMove; after that, Stockfish
+  // fallback extends until mate / promotion / decisive material so
+  // the lesson plays out to the actual win the player missed, not
+  // just the first correct move.
+  const playout = useEndgamePlayout({
+    startFen: position.fen,
+    solution: position.bestMove ? [position.bestMove] : [],
+    extendToObviousWin: !!position.bestMove,
+    fallbackPliesToPlay: 8,
+    fallbackDifficulty: 'easy',
+    replyDelayMs: 450,
+  });
+  const clickToMove = useClickToMove(playout);
 
-  // Core move attempt — shared by drag (handleDrop) and click-to-
-  // move (handleSquareClick).
-  const tryMove = useCallback(
-    (from: string, to: string): boolean => {
-      if (!position.bestMove) return false;
-      if (solved) return false;
-      const probe = new Chess(position.fen);
-      let played;
-      try {
-        played = probe.move({ from, to, promotion: 'q' });
-      } catch {
-        return false;
-      }
-      const stripAnnotations = (san: string): string =>
-        san.replace(/[+#!?]+$/, '').replace(/=Q$|=R$|=B$|=N$/, '');
-      if (stripAnnotations(played.san) === stripAnnotations(position.bestMove)) {
-        setSolved(true);
-        setWrongSquare(null);
-        return true;
-      }
-      setWrongSquare(to);
-      window.setTimeout(() => setWrongSquare(null), 600);
-      return false;
-    },
-    [position.fen, position.bestMove, solved],
+  const wrongFlash = useMemo<Record<string, CSSProperties>>(() => {
+    if (!playout.wrongSquare) return {};
+    return { [playout.wrongSquare]: { background: 'rgba(239, 68, 68, 0.45)' } };
+  }, [playout.wrongSquare]);
+  const hintStyles = useMemo<Record<string, CSSProperties>>(() => {
+    if (!playout.hintRevealed || !playout.hintMove) return {};
+    return {
+      [playout.hintMove.from]: {
+        background: 'rgba(251, 191, 36, 0.55)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.9)',
+      },
+      [playout.hintMove.to]: {
+        background: 'rgba(251, 191, 36, 0.35)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.7)',
+      },
+    };
+  }, [playout.hintRevealed, playout.hintMove]);
+  const flashStyles = useMemo<Record<string, CSSProperties>>(
+    () => ({ ...clickToMove.squareStyles, ...hintStyles, ...wrongFlash }),
+    [clickToMove.squareStyles, hintStyles, wrongFlash],
   );
-
-  const handleDrop = useCallback(
-    (args: PieceDropHandlerArgs): boolean => {
-      if (!args.sourceSquare || !args.targetSquare) return false;
-      return tryMove(args.sourceSquare, args.targetSquare);
-    },
-    [tryMove],
-  );
-
-  // Click-to-move selection.
-  const [selectedSquare, setSelectedSquare] = useState<string | null>(null);
-  useEffect(() => {
-    setSelectedSquare(null);
-  }, [position.fen]);
-  const legalTargets = useMemo<string[]>(() => {
-    if (!selectedSquare) return [];
-    try {
-      const c = new Chess(position.fen);
-      return c.moves({ square: selectedSquare as Square, verbose: true }).map((m) => m.to);
-    } catch {
-      return [];
-    }
-  }, [selectedSquare, position.fen]);
-  const handleSquareClick = useCallback(
-    (args: { square?: string }) => {
-      const sq = args.square;
-      if (!sq || solved) return;
-      if (!selectedSquare) {
-        try {
-          const c = new Chess(position.fen);
-          const piece = c.get(sq as Square);
-          if (!piece) return;
-          const stm = position.fen.split(' ')[1];
-          if (piece.color !== stm) return;
-          setSelectedSquare(sq);
-        } catch {
-          /* swallow */
-        }
-        return;
-      }
-      if (sq === selectedSquare) {
-        setSelectedSquare(null);
-        return;
-      }
-      if (legalTargets.includes(sq)) {
-        tryMove(selectedSquare, sq);
-        setSelectedSquare(null);
-        return;
-      }
-      try {
-        const c = new Chess(position.fen);
-        const piece = c.get(sq as Square);
-        const stm = position.fen.split(' ')[1];
-        if (piece && piece.color === stm) {
-          setSelectedSquare(sq);
-          return;
-        }
-      } catch {
-        /* swallow */
-      }
-      setSelectedSquare(null);
-    },
-    [position.fen, solved, selectedSquare, legalTargets, tryMove],
-  );
-
-  const flashStyles = useMemo<Record<string, CSSProperties>>(() => {
-    const out: Record<string, CSSProperties> = {};
-    if (selectedSquare) {
-      out[selectedSquare] = {
-        background: 'rgba(0, 229, 255, 0.35)',
-        boxShadow: 'inset 0 0 0 2px rgba(0, 229, 255, 0.7)',
-      };
-    }
-    for (const t of legalTargets) {
-      out[t] = {
-        ...(out[t] ?? {}),
-        background:
-          out[t]?.background ??
-          'radial-gradient(circle, rgba(0, 229, 255, 0.5) 18%, transparent 22%)',
-      };
-    }
-    if (wrongSquare) {
-      out[wrongSquare] = { background: 'rgba(239, 68, 68, 0.45)' };
-    }
-    return out;
-  }, [selectedSquare, legalTargets, wrongSquare]);
 
   const goPrev = useCallback(
     () => onIndexChange(Math.max(0, index - 1)),
@@ -325,6 +242,8 @@ function Lesson({ positions, index, onExit, onIndexChange }: LessonProps): JSX.E
     () => onIndexChange(Math.min(positions.length - 1, index + 1)),
     [index, positions.length, onIndexChange],
   );
+
+  const solved = playout.isComplete;
 
   const header = (
     <div className="px-3 py-2 md:p-4 border-b border-theme-border">
@@ -354,11 +273,11 @@ function Lesson({ positions, index, onExit, onIndexChange }: LessonProps): JSX.E
 
   const board = (
     <ConsistentChessboard
-      fen={position.fen}
+      fen={playout.fen}
       boardOrientation={studentSide}
-      interactive={!!position.bestMove && !solved}
-      onPieceDrop={handleDrop}
-      onSquareClick={handleSquareClick}
+      interactive={playout.phase === 'student-to-move'}
+      onPieceDrop={playout.onPieceDrop}
+      onSquareClick={clickToMove.onSquareClick}
       squareStyles={flashStyles}
     />
   );
@@ -369,12 +288,14 @@ function Lesson({ positions, index, onExit, onIndexChange }: LessonProps): JSX.E
         <p className="text-sm text-theme-text">
           {studentSide === 'white' ? 'White' : 'Black'} to play. The move actually played
           was {position.playedMove} ({position.evalDrop > 0 ? '+' : ''}
-          {position.evalDrop}cp). Find the better move.
+          {position.evalDrop}cp). Find the better move — keep going until the win.
         </p>
         {solved && position.bestMove && (
           <div className="flex items-center gap-1.5 text-[12px] text-green-400 font-semibold">
             <Check size={14} />
-            Solved — engine recommended {position.bestMove}
+            {playout.firstTryPerfect
+              ? `Solved — engine recommended ${position.bestMove}`
+              : `Played through — engine recommended ${position.bestMove}`}
           </div>
         )}
         {!solved && !position.bestMove && (
@@ -383,7 +304,23 @@ function Lesson({ positions, index, onExit, onIndexChange }: LessonProps): JSX.E
           </div>
         )}
         {!solved && position.bestMove && (
-          <p className="text-[11px] text-cyan-400">Drag a piece to play your move.</p>
+          <div className="flex items-center gap-3">
+            <p className="text-[11px] text-cyan-400">
+              {playout.wrongAttempts > 0
+                ? 'Try again — drag or tap a piece.'
+                : 'Drag or tap a piece to play your move.'}
+            </p>
+            {playout.hintMove && !playout.hintRevealed && (
+              <button
+                onClick={playout.revealHint}
+                className="flex items-center gap-1 text-[11px] text-amber-400 hover:text-amber-300"
+                data-testid="from-games-hint"
+              >
+                <Lightbulb size={11} />
+                Hint
+              </button>
+            )}
+          </div>
         )}
       </div>
       <div className="flex items-center justify-between gap-2">
