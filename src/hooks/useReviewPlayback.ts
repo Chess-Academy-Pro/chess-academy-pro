@@ -16,6 +16,12 @@ export interface UseReviewPlaybackArgs {
    *  When omitted, falls back to segments.length, which can silently
    *  truncate nav if segment generation was partial (WO-REVIEW-02a-FIX). */
   totalPlies?: number;
+  /** Game id of the review being walked. Used to scope hint callouts
+   *  to THIS game — without it, a hint requested on game A ply 12
+   *  leaked as a callout on game B's ply 12 (ship-5). Optional only
+   *  because legacy callers (the post-coach-game review path) don't
+   *  always thread the id; when omitted, hint callouts are disabled. */
+  gameId?: string;
   /** Optional callback whenever the selected ply changes (for the
    *  parent to sync the board FEN / arrows). Called with the new
    *  currentPly (0 = starting position). */
@@ -64,7 +70,7 @@ export interface UseReviewPlaybackResult {
  * enough.
  */
 export function useReviewPlayback(args: UseReviewPlaybackArgs): UseReviewPlaybackResult {
-  const { narration, totalPlies, onPlyChange } = args;
+  const { narration, totalPlies, gameId, onPlyChange } = args;
   const [currentPly, setCurrentPly] = useState(0);
   const [narrationState, setNarrationState] = useState<ReviewNarrationState>('idle');
   const introSpokenRef = useRef(false);
@@ -108,12 +114,17 @@ export function useReviewPlayback(args: UseReviewPlaybackArgs): UseReviewPlaybac
   // but possible during analysis-phase exploration) shows up.
   const hintRequests = useCoachMemoryStore((s) => s.hintRequests);
 
-  /** Look up a hint record for the given ply. Used by both the
-   *  current-text override below and by callers building Key Moment
-   *  indices in the parent component. */
+  /** Look up a hint record for the given ply within the CURRENT game.
+   *  ship-5: scoped by `gameId` so a hint requested on game A doesn't
+   *  prepend a stale callout to game B's ply N. When the caller didn't
+   *  supply a gameId, hint callouts are disabled rather than risking
+   *  cross-game leakage. */
   const hintRecordForPly = useCallback(
-    (ply: number) => hintRequests.find((r) => r.ply === ply) ?? null,
-    [hintRequests],
+    (ply: number) => {
+      if (!gameId) return null;
+      return hintRequests.find((r) => r.ply === ply && r.gameId === gameId) ?? null;
+    },
+    [hintRequests, gameId],
   );
 
   const currentText = useMemo<string | null>(() => {
@@ -282,8 +293,13 @@ export function useReviewPlayback(args: UseReviewPlaybackArgs): UseReviewPlaybac
   }, [speakCurrent, currentText, currentPly]);
 
   const hintPlies = useMemo(
-    () => hintRequests.map((r) => r.ply).filter((ply) => ply > 0),
-    [hintRequests],
+    () => {
+      if (!gameId) return [];
+      return hintRequests
+        .filter((r) => r.gameId === gameId && r.ply > 0)
+        .map((r) => r.ply);
+    },
+    [hintRequests, gameId],
   );
 
   return {
