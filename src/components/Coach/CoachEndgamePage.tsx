@@ -588,6 +588,48 @@ function LessonView({
     return out;
   }, [forkSelected, forkLegalTargets]);
 
+  // Hint for the main mating board (fork-based). Parse the correct
+  // forkOption's SAN against the current FEN to derive from/to.
+  // The correct option is whichever option ISN'T marked
+  // 'Not the mate' (curator-set forkSubtitle from endgameService).
+  const [matingHintRevealed, setMatingHintRevealed] = useState<boolean>(false);
+  useEffect(() => {
+    setMatingHintRevealed(false);
+  }, [forkOptions]);
+  const matingHintMove = useMemo<{ from: string; to: string } | null>(() => {
+    if (phase !== 'fork') return null;
+    const correct = forkOptions.find((o) => o.forkSubtitle !== 'Not the mate');
+    if (!correct || !correct.node.san) return null;
+    const correctSan = correct.node.san;
+    try {
+      const probe = new Chess(fen);
+      const moves = probe.moves({ verbose: true });
+      const strip = (s: string) =>
+        s.replace(/[+#!?]+$/, '').replace(/=Q$|=R$|=B$|=N$/, '');
+      const match = moves.find((m) => strip(m.san) === strip(correctSan));
+      if (!match) return null;
+      return { from: match.from, to: match.to };
+    } catch {
+      return null;
+    }
+  }, [phase, forkOptions, fen]);
+  const matingHintStyles = useMemo<Record<string, React.CSSProperties>>(() => {
+    if (!matingHintRevealed || !matingHintMove) return {};
+    return {
+      [matingHintMove.from]: {
+        background: 'rgba(251, 191, 36, 0.55)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.9)',
+      },
+      [matingHintMove.to]: {
+        background: 'rgba(251, 191, 36, 0.35)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.7)',
+      },
+    };
+  }, [matingHintRevealed, matingHintMove]);
+  const revealMatingHint = useCallback(() => {
+    setMatingHintRevealed(true);
+  }, []);
+
   const wrongFlashStyles = useMemo<Record<string, React.CSSProperties>>(() => {
     if (!wrongFlash) return {};
     return {
@@ -731,8 +773,9 @@ function LessonView({
   // sense to move while the coach is still talking.
   const mergedForkStyles = useMemo<Record<string, React.CSSProperties>>(() => ({
     ...forkClickStyles,
+    ...matingHintStyles,
     ...wrongFlashStyles,
-  }), [forkClickStyles, wrongFlashStyles]);
+  }), [forkClickStyles, matingHintStyles, wrongFlashStyles]);
 
   const board = (
     <ConsistentChessboard
@@ -771,15 +814,32 @@ function LessonView({
               : `${wrongAttempts} wrong tries — drag a different piece.`}
           </div>
         )}
-        {canBailOut && !showBailoutOptions && (
-          <button
-            onClick={() => setShowBailoutOptions(true)}
-            className="text-xs text-cyan-400 hover:text-cyan-300 underline self-start px-1"
-            data-testid="endgame-show-options"
-          >
-            Show options
-          </button>
-        )}
+        <div className="flex items-center gap-3 px-1">
+          {matingHintMove && !matingHintRevealed && (
+            <button
+              onClick={revealMatingHint}
+              className="flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300"
+              data-testid="endgame-mating-hint"
+            >
+              <Lightbulb size={11} />
+              Hint
+            </button>
+          )}
+          {matingHintRevealed && matingHintMove && (
+            <span className="text-[11px] text-amber-400/80 italic">
+              Move highlighted on the board.
+            </span>
+          )}
+          {canBailOut && !showBailoutOptions && (
+            <button
+              onClick={() => setShowBailoutOptions(true)}
+              className="text-xs text-cyan-400 hover:text-cyan-300 underline"
+              data-testid="endgame-show-options"
+            >
+              Show options
+            </button>
+          )}
+        </div>
         {showBailoutOptions && (
           <div className="flex flex-col gap-2">
             <div className="text-[10px] font-semibold uppercase tracking-wider text-theme-text-muted px-1">
@@ -907,10 +967,24 @@ function CuratedMatingLessonView({
   }, [playout.wrongSquare]);
 
   const clickToMove = useClickToMove(playout);
+  const hintStyles = useMemo<Record<string, React.CSSProperties>>(() => {
+    if (!playout.hintRevealed || !playout.hintMove) return {};
+    return {
+      [playout.hintMove.from]: {
+        background: 'rgba(251, 191, 36, 0.55)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.9)',
+      },
+      [playout.hintMove.to]: {
+        background: 'rgba(251, 191, 36, 0.35)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.7)',
+      },
+    };
+  }, [playout.hintRevealed, playout.hintMove]);
   const mergedStyles = useMemo<Record<string, React.CSSProperties>>(() => ({
     ...clickToMove.squareStyles,
+    ...hintStyles,
     ...wrongFlashStyles,
-  }), [clickToMove.squareStyles, wrongFlashStyles]);
+  }), [clickToMove.squareStyles, hintStyles, wrongFlashStyles]);
 
   const board = (
     <ConsistentChessboard
@@ -978,15 +1052,32 @@ function CuratedMatingLessonView({
               : `${playout.wrongAttempts} wrong tries.`}
           </div>
         )}
-        {playout.wrongAttempts >= 2 && (
-          <button
-            onClick={playout.reveal}
-            className="text-xs text-cyan-400 hover:text-cyan-300 underline self-start px-1"
-            data-testid="curated-mating-reveal"
-          >
-            Reveal the line
-          </button>
-        )}
+        <div className="flex items-center gap-3 px-1">
+          {playout.hintMove && !playout.hintRevealed && (
+            <button
+              onClick={playout.revealHint}
+              className="flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300"
+              data-testid="curated-mating-hint"
+            >
+              <Lightbulb size={11} />
+              Hint
+            </button>
+          )}
+          {playout.hintRevealed && playout.hintMove && (
+            <span className="text-[11px] text-amber-400/80 italic">
+              Move highlighted on the board.
+            </span>
+          )}
+          {playout.wrongAttempts >= 2 && (
+            <button
+              onClick={playout.reveal}
+              className="text-xs text-cyan-400 hover:text-cyan-300 underline"
+              data-testid="curated-mating-reveal"
+            >
+              Reveal the line
+            </button>
+          )}
+        </div>
       </div>
     );
   }

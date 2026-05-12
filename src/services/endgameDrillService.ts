@@ -90,7 +90,7 @@ function uciToSan(chess: Chess, uci: string): string | null {
  *  opponent replies.
  *
  *  Returns null when the UCI sequence doesn't replay cleanly. */
-function puzzleToLessonPosition(p: RawPuzzle, lessonName: string): EndgameLessonPosition | null {
+function puzzleToLessonPosition(p: RawPuzzle, _lessonName: string): EndgameLessonPosition | null {
   const ucis = p.moves.split(/\s+/).filter(Boolean);
   if (ucis.length < 2) return null;
   const chess = new Chess(p.fen);
@@ -117,8 +117,16 @@ function puzzleToLessonPosition(p: RawPuzzle, lessonName: string): EndgameLesson
     studentSide === 'white' ? 'white-wins' : 'black-wins';
   return {
     fen: startFen,
-    title: `Drill — rating ${p.rating}`,
-    explanation: `${studentSide === 'white' ? 'White' : 'Black'} to play. Play the ${sanSequence.length}-move sequence from ${lessonName} — every move is forced.`,
+    // Short, non-templated title. Used to be "Drill — rating XXXX"
+    // which voiced as "Drill, rating fourteen hundred" on every
+    // single drill; got monotonous fast. The rating already
+    // surfaces in the source citation below.
+    title: 'Drill',
+    // No prose explanation — the position itself is the lesson at
+    // this point; the previous "{Side} to play. Play the N-move
+    // sequence from {lesson} — every move is forced." was voiced
+    // verbatim across every DB-sourced drill and tuned out.
+    explanation: '',
     result,
     bestMove: sanSequence[0],
     solution: sanSequence,

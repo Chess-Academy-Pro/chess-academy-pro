@@ -487,13 +487,18 @@ function PositionRunner({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playItOut]);
 
-  // Voice-first: speak the position's hand-authored explanation the
-  // moment the student lands on it. On the FIRST position of the
-  // lesson we lead with the rule + intro so the student hears the
-  // principle before the geometry. Polly TTS via voiceService.
-  // Manual position change cancels in-flight speech (the speak()
-  // implementation calls stop() first).
+  // Voice-first on keystones, silent on drills. Per CLAUDE.md
+  // narration voice rules: the curator-authored prose for keystones
+  // teaches the principle; DB-sourced drills are practice (the
+  // position IS the lesson at that point) and stay silent so we
+  // don't repeat templated phrases across hundreds of puzzles.
   useEffect(() => {
+    // Drill positions have an empty explanation by design — speak
+    // nothing.
+    if (!position.explanation) {
+      voiceService.stop();
+      return;
+    }
     const isFirstPosition = posIndex === 0 && !isDrill;
     const prefix = isFirstPosition
       ? `${lesson.narration.rule} ${lesson.narration.intro} `
@@ -501,9 +506,6 @@ function PositionRunner({
     const text = `${prefix}${position.title}. ${position.explanation}`;
     void voiceService.speak(text);
     return () => {
-      // Stop any in-flight narration when the position changes or
-      // the component unmounts so it doesn't keep speaking over the
-      // next position.
       voiceService.stop();
     };
   }, [position.fen, position.title, position.explanation, posIndex, isDrill, lesson.narration.rule, lesson.narration.intro]);
@@ -634,10 +636,28 @@ function PositionRunner({
   );
 
   const clickToMove = useClickToMove(playout);
+  const hintStyles = useMemo<Record<string, CSSProperties>>(() => {
+    if (!playout.hintRevealed || !playout.hintMove) return {};
+    // Amber tint on the from + to squares; distinct from the cyan
+    // click-to-move highlight so the hint reads as something the
+    // student requested (peek), not a routine move suggestion.
+    return {
+      [playout.hintMove.from]: {
+        background: 'rgba(251, 191, 36, 0.55)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.9)',
+      },
+      [playout.hintMove.to]: {
+        background: 'rgba(251, 191, 36, 0.35)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.7)',
+      },
+    };
+  }, [playout.hintRevealed, playout.hintMove]);
+
   const mergedStyles = useMemo<Record<string, CSSProperties>>(() => {
-    // wrongFlash wins over click-to-move highlighting so red flash is visible.
-    return { ...clickToMove.squareStyles, ...wrongFlash };
-  }, [clickToMove.squareStyles, wrongFlash]);
+    // wrongFlash wins over hint wins over click-to-move so red is
+    // always visible for the latest action.
+    return { ...clickToMove.squareStyles, ...hintStyles, ...wrongFlash };
+  }, [clickToMove.squareStyles, hintStyles, wrongFlash]);
 
   const board = (
     <ConsistentChessboard
@@ -874,15 +894,32 @@ function PlayoutStatus({
             : `${playout.wrongAttempts} wrong tries.`}
         </div>
       )}
-      {playout.wrongAttempts >= 2 && (
-        <button
-          onClick={playout.reveal}
-          className="flex items-center gap-1 text-[11px] text-theme-text-muted hover:text-theme-text self-start"
-        >
-          <Eye size={11} />
-          Reveal answer
-        </button>
-      )}
+      <div className="flex items-center gap-3 mt-0.5">
+        {playout.hintMove && !playout.hintRevealed && (
+          <button
+            onClick={playout.revealHint}
+            className="flex items-center gap-1 text-[11px] text-amber-400 hover:text-amber-300 self-start"
+            data-testid="endgame-hint"
+          >
+            <Lightbulb size={11} />
+            Hint
+          </button>
+        )}
+        {playout.hintRevealed && playout.hintMove && (
+          <span className="text-[11px] text-amber-400/80 italic">
+            Move highlighted on the board.
+          </span>
+        )}
+        {playout.wrongAttempts >= 2 && (
+          <button
+            onClick={playout.reveal}
+            className="flex items-center gap-1 text-[11px] text-theme-text-muted hover:text-theme-text self-start"
+          >
+            <Eye size={11} />
+            Reveal answer
+          </button>
+        )}
+      </div>
     </div>
   );
 }

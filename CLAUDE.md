@@ -281,6 +281,58 @@ Lesson playback (TTS + auto-advance) must use `useStrictNarration` (`src/hooks/u
 
 Spoken text comes from `pickNarrationText(annotation, length)` (`src/services/walkthroughNarration.ts`). New annotations should populate the optional `narration` and `shortNarration` fields on `OpeningMoveAnnotation` so the spoken script can diverge from the displayed annotation when needed; otherwise the helper falls back to the display text.
 
+### Narration Voice Rules (IMPORTANT)
+
+Every spoken line in the app — whether hand-authored in JSON or
+generated in code templates — must follow these rules. The voice
+is the *position* teaching the student, not the interface
+explaining itself. Violations make a 30-puzzle session feel
+robotic and tune out fast.
+
+1. **Concrete over generic.** "The rook attacks the c7-pawn"
+   beats "this is a good move." Every spoken sentence either
+   names a square, a piece, or a chess concept the student can
+   look at. If it doesn't, it's filler.
+2. **Never reference the interface.** No "tap a different move,"
+   "click Practice more," "press Next," "use the chat button."
+   The voice doesn't know about buttons; it knows about the
+   position.
+3. **Don't restate the board.** If the rook just moved to h7,
+   don't speak "Rook to h7." The student saw it. Voice carries
+   only what the *picture* doesn't.
+4. **Silence is acceptable.** An empty `idea` string means no
+   narration. Use it for routine moves (auto-played opponent
+   replies, intermediate student moves in a long sequence). Save
+   voice for the moments that change the student's understanding
+   — the principle, the named pattern, the surprise.
+5. **Ban acknowledgments.** "Correct!" / "Great job!" /
+   "Excellent!" / "Well done!" — never. The position changing in
+   the student's favor IS the acknowledgment. Praise rings hollow
+   after the third puzzle.
+6. **Ban first-person and meta.** "I think..." / "Let me
+   show you..." / "Now we'll see..." / "Watch the forced reply"
+   — never. The narrator is the position, not a tutor character.
+7. **Name the pattern, not the move.** On a mating-pattern leaf,
+   speak "Anastasia's mate" not "Bxh7 mate" — the SAN is on the
+   board; the *name* is the takeaway. Same principle anywhere a
+   named theoretical idea applies (Lucena, Philidor, Vancura,
+   triangulation, opposition, …).
+8. **Drill positions stay silent.** DB-sourced drills (puzzles
+   loaded by theme from `puzzles.json`) are *practice*, not
+   teaching. The board is the lesson at that point. Voice
+   resumes only when the student returns to a hand-authored
+   keystone.
+9. **Vary stems.** When a phrase MUST repeat (transitions
+   between puzzles, e.g.), alternate stems rather than copying
+   the same opener verbatim. Curators should write 3-5 variants
+   and rotate; code templates should not be the source of
+   frequently-spoken text.
+10. **No length floor.** Two words beats two sentences when two
+    words is what the position needs.
+
+Code templates that violate these rules are bugs. When in doubt,
+prefer silence.
+
 ### State Management
 - **Zustand** for global app state (user profile, settings, current session, theme).
 - **React state** (`useState`) for local component state only.

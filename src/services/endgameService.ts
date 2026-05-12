@@ -360,7 +360,10 @@ export function buildMatingPatternLesson(
           node: {
             san: oppSan,
             movedBy: opponentSide,
-            idea: `${oppSan} — the only legal reply.`,
+            // Empty idea — the board's auto-played reply is self-evident
+            // and the prior "X — the only legal reply." voice line was
+            // heard on every opponent move, which got annoying fast.
+            idea: '',
             children: chainTail,
           },
         },
@@ -368,27 +371,35 @@ export function buildMatingPatternLesson(
     }
 
     const distractorSans = pickDistractors(promptFen, correctSan);
-    // Correct child carries the mating-move narration.
+    // Correct child — empty narration on non-mating moves, brief
+    // "Mate." on the final move. The board's piece-move is the
+    // signal; voice repetition adds noise, not value.
     const correctChild: WalkthroughTreeChild = {
       label: correctSan,
       forkSubtitle: isMatingMove ? 'Mate' : 'Right move — keep the sequence going',
       node: {
         san: correctSan,
         movedBy: studentSide,
-        idea: isMatingMove
-          ? `${correctSan} — checkmate. The ${pattern.name} pattern completes.`
-          : `${correctSan} — correct. Now watch the forced reply.`,
+        // Mating-move cue: just name the pattern. Previously
+        // "{san} — checkmate. The {pattern.name} pattern completes."
+        // — three sentences for one payoff. The pattern name IS
+        // the educational moment; everything else is filler.
+        // Per CLAUDE.md narration voice rules.
+        idea: isMatingMove ? `${pattern.name}.` : '',
         children: afterCorrect,
       },
     };
-    // Distractors are dead-end leaves with an "incorrect" outro.
+    // Distractors are dead-end leaves with a brief incorrect cue.
+    // Previous prose "X is legal but doesn't deliver the {pattern}.
+    // Tap a different move." was voiced on every wrong attempt and
+    // got irritating; "Try again." is the same info, said once.
     const distractorChildren: WalkthroughTreeChild[] = distractorSans.map((d) => ({
       label: d,
       forkSubtitle: 'Not the mate',
       node: {
         san: d,
         movedBy: studentSide,
-        idea: `${d} is legal but doesn't deliver the ${pattern.name}. Tap a different move.`,
+        idea: 'Try again.',
         children: [],
       },
     }));
@@ -414,7 +425,11 @@ export function buildMatingPatternLesson(
   const intro = isFirstOfSession
     ? introParts.join(' ')
     : `Next position — ${pattern.name}, mate in ${puzzle.movesToMate}.`;
-  const outro = `That's ${pattern.name}. Tap "Practice more" for another setup, or "Back to patterns" to pick a different mate.`;
+  // Outro: just name the pattern. The previous version embedded UI
+  // references ("Tap Practice more...") into the spoken script,
+  // which violates the voice rule that the narrator never references
+  // the interface. CLAUDE.md narration voice rules.
+  const outro = `That's ${pattern.name}.`;
 
   const root: WalkthroughTreeNode = {
     san: null,

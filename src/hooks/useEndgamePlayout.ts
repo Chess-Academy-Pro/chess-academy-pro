@@ -108,6 +108,17 @@ export interface EndgamePlayoutState {
    *  can render a "Show hint" button or post-bail reveal. Empty
    *  string when no expected move (engine fallback phase or done). */
   expectedSan: string;
+  /** Parsed source + destination of the expected move. Available
+   *  whenever expectedSan is non-empty. Drives the hint button's
+   *  square highlighting. null when the move can't be parsed
+   *  against the current FEN. */
+  hintMove: { from: string; to: string } | null;
+  /** Whether the student has revealed the hint on this prompt.
+   *  Sticky for the lifetime of the current student-to-move
+   *  phase; resets when the playout advances to the next prompt
+   *  or is reset. Used to flag a position as imperfect (no
+   *  mastery) when the hint is taken. */
+  hintRevealed: boolean;
   /** Number of opponent moves left in the curated line after the
    *  student's next correct move. Used for "X moves to go" UX. */
   curatedRepliesRemaining: number;
@@ -131,6 +142,10 @@ export interface EndgamePlayoutControls {
    *  curated line is auto-played at full speed to land on the
    *  final position. */
   reveal: () => void;
+  /** Reveal the hint for the current prompt — flips
+   *  hintRevealed to true and sets firstTryPerfect to false.
+   *  Idempotent on repeated calls. */
+  revealHint: () => void;
 }
 
 /** The hook return shape — state + controls. Components destructure
@@ -192,6 +207,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
   const [fallbackPliesPlayed, setFallbackPliesPlayed] = useState<number>(0);
   const [fallbackOutcome, setFallbackOutcome] =
     useState<'curated' | 'survived' | 'unknown'>('curated');
+  const [hintRevealed, setHintRevealed] = useState<boolean>(false);
 
   // Reset state + chess.js whenever startFen changes (lesson navigation).
   useEffect(() => {
@@ -203,6 +219,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     setFirstTryPerfect(true);
     setFallbackPliesPlayed(0);
     setFallbackOutcome(effectiveLine.length > 0 ? 'curated' : 'survived');
+    setHintRevealed(false);
     setPhase(effectiveLine.length > 0 ? 'student-to-move' : 'complete');
   }, [startFen, effectiveLine.length]);
 
@@ -324,6 +341,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
         setFen(chessRef.current.fen());
         setStudentMovesPlayed((n) => n + 1);
         setWrongAttempts(0);
+        setHintRevealed(false);
         void playOpponentReply();
         return true;
       }
@@ -332,6 +350,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
       setFen(chessRef.current.fen());
       setStudentMovesPlayed((n) => n + 1);
       setFallbackPliesPlayed((n) => n + 1);
+      setHintRevealed(false);
       void playOpponentReply();
       return true;
     },
@@ -355,6 +374,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     setFirstTryPerfect(true);
     setFallbackPliesPlayed(0);
     setFallbackOutcome(effectiveLine.length > 0 ? 'curated' : 'survived');
+    setHintRevealed(false);
     setPhase(effectiveLine.length > 0 ? 'student-to-move' : 'complete');
   }, [startFen, effectiveLine.length]);
 
@@ -383,6 +403,28 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     return Math.max(0, totalCuratedReplies - consumedReplies);
   }, [effectiveLine.length, studentMovesPlayed]);
 
+  // Parse the expected SAN against the current FEN to derive
+  // from/to squares for the hint button's highlighting. Cheap;
+  // recomputes whenever the prompt changes.
+  const hintMove = useMemo<{ from: string; to: string } | null>(() => {
+    if (!expectedSan) return null;
+    try {
+      const probe = new Chess(fen);
+      const moves = probe.moves({ verbose: true });
+      const stripped = stripSan(expectedSan);
+      const match = moves.find((m) => stripSan(m.san) === stripped);
+      if (!match) return null;
+      return { from: match.from, to: match.to };
+    } catch {
+      return null;
+    }
+  }, [expectedSan, fen]);
+
+  const revealHint = useCallback((): void => {
+    setHintRevealed(true);
+    setFirstTryPerfect(false);
+  }, []);
+
   return {
     fen,
     studentSide,
@@ -395,10 +437,13 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     isComplete: phase === 'complete',
     fallbackOutcome,
     expectedSan,
+    hintMove,
+    hintRevealed,
     curatedRepliesRemaining,
     onPieceDrop,
     playMove,
     reset,
     reveal,
+    revealHint,
   };
 }

@@ -279,10 +279,24 @@ function QuizItemRunner({
   );
 
   const clickToMove = useClickToMove(playout);
+  const hintStyles = useMemo<Record<string, CSSProperties>>(() => {
+    if (!playout.hintRevealed || !playout.hintMove) return {};
+    return {
+      [playout.hintMove.from]: {
+        background: 'rgba(251, 191, 36, 0.55)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.9)',
+      },
+      [playout.hintMove.to]: {
+        background: 'rgba(251, 191, 36, 0.35)',
+        boxShadow: 'inset 0 0 0 2px rgba(251, 191, 36, 0.7)',
+      },
+    };
+  }, [playout.hintRevealed, playout.hintMove]);
   const mergedStyles = useMemo<Record<string, CSSProperties>>(() => ({
     ...clickToMove.squareStyles,
+    ...hintStyles,
     ...wrongFlash,
-  }), [clickToMove.squareStyles, wrongFlash]);
+  }), [clickToMove.squareStyles, hintStyles, wrongFlash]);
 
   const board = (
     <ConsistentChessboard
@@ -302,6 +316,9 @@ function QuizItemRunner({
         <Stage1Prompt
           studentSide={studentSide}
           wrongAttempts={playout.wrongAttempts}
+          hintAvailable={playout.hintMove !== null}
+          hintRevealed={playout.hintRevealed}
+          onRevealHint={playout.revealHint}
         />
       </div>
     );
@@ -347,9 +364,18 @@ function QuizItemRunner({
 interface Stage1PromptProps {
   studentSide: 'white' | 'black';
   wrongAttempts: number;
+  hintAvailable: boolean;
+  hintRevealed: boolean;
+  onRevealHint: () => void;
 }
 
-function Stage1Prompt({ studentSide, wrongAttempts }: Stage1PromptProps): JSX.Element {
+function Stage1Prompt({
+  studentSide,
+  wrongAttempts,
+  hintAvailable,
+  hintRevealed,
+  onRevealHint,
+}: Stage1PromptProps): JSX.Element {
   return (
     <div className="rounded-xl border-2 border-cyan-500/30 bg-cyan-500/10 p-3 flex flex-col gap-2">
       <div className="flex items-center gap-2">
@@ -368,6 +394,21 @@ function Stage1Prompt({ studentSide, wrongAttempts }: Stage1PromptProps): JSX.El
             ? 'Not the critical move. Look again — the right move often isn\'t the most natural one.'
             : `${wrongAttempts} wrong tries. Drag a different piece.`}
         </p>
+      )}
+      {hintAvailable && !hintRevealed && (
+        <button
+          onClick={onRevealHint}
+          className="flex items-center gap-1 text-[11px] text-amber-400 hover:text-amber-300 self-start"
+          data-testid="eval-lab-hint"
+        >
+          <Lightbulb size={11} />
+          Hint
+        </button>
+      )}
+      {hintRevealed && (
+        <span className="text-[11px] text-amber-400/80 italic">
+          Move highlighted on the board.
+        </span>
       )}
     </div>
   );
