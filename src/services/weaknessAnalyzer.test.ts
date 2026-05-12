@@ -45,6 +45,7 @@ function createAnnotation(
     san: 'e4',
     evaluation: 0,
     bestMove: 'e4',
+    bestMoveEval: 0,
     classification,
     comment: null,
   };

@@ -103,4 +103,46 @@ describe('getPhaseBreakdown', () => {
     const opening = result.find((r) => r.phase === 'opening');
     expect(opening?.moveCount).toBe(1);
   });
+
+  it('uses harmonic mean so a single blunder drags the phase grade down (ship-2)', () => {
+    // One catastrophic blunder + 10 clean moves in the same phase.
+    // Under the old arithmetic-mean path this returned ~91%; the
+    // win-percent + harmonic-mean path `calculateAccuracy` uses
+    // produces a much lower number — the whole point of unifying.
+    // All moves use white-player ply indices (odd moveNumbers) so they
+    // land in `opening` (fullMoveNumber ≤ 10) for the assertion below.
+    const cleanMoves = Array.from({ length: 9 }, (_, i): Partial<CoachGameMove> => ({
+      moveNumber: i * 2 + 1,
+      evaluation: 30,
+      preMoveEval: 20,
+      classification: 'good',
+    }));
+    const blunder: Partial<CoachGameMove> = {
+      moveNumber: 19,
+      evaluation: -700,
+      preMoveEval: 30,
+      classification: 'blunder',
+    };
+    const moves = makeMoves([...cleanMoves, blunder]);
+    const result = getPhaseBreakdown(moves, 'white');
+    const opening = result.find((r) => r.phase === 'opening');
+    expect(opening?.moveCount).toBe(10); // sanity: all 10 moves landed
+    // Arithmetic mean would put this in the high 80s; harmonic mean
+    // floors near the blunder's per-move accuracy (~0%).
+    expect(opening?.accuracy).toBeLessThan(80);
+    expect(opening?.mistakes).toBe(1);
+  });
+
+  it('skips book moves like calculateAccuracy does (ship-2)', () => {
+    // A run of book-classified moves shouldn't lift the phase grade;
+    // book moves are excluded from the hero accuracy too.
+    const moves = makeMoves([
+      { moveNumber: 1, classification: 'book' },
+      { moveNumber: 3, classification: 'book' },
+      { moveNumber: 5, classification: 'good' },
+    ]);
+    const result = getPhaseBreakdown(moves, 'white');
+    const opening = result.find((r) => r.phase === 'opening');
+    expect(opening?.moveCount).toBe(1); // only the non-book move counted
+  });
 });

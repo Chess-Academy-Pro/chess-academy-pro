@@ -20,7 +20,12 @@ import { db } from '../db/schema';
 import type { GameRecord, MoveAnnotation, MoveClassification } from '../types';
 import { logAppAudit } from './appAuditor';
 
-const SAMPLES_SEEDED_META_KEY = 'review-samples-seeded.v1';
+// .v2 — bumped when `bestMoveEval` was added to MoveAnnotation. Old
+// .v1-seeded sample records carry no `bestMoveEval`, which would leave
+// the Missed Tactics / Missed Opportunities surfaces empty on samples.
+// Bumping the key forces a re-seed on next mount; `bulkPut` at the
+// same ids overwrites cleanly.
+const SAMPLES_SEEDED_META_KEY = 'review-samples-seeded.v2';
 
 interface SampleAnnotation {
   /** 1-indexed full move number, matching MoveAnnotation.moveNumber. */
@@ -350,15 +355,27 @@ const SAMPLE_GAMES: SampleGame[] = [
 ];
 
 function expandAnnotations(annots: SampleAnnotation[]): MoveAnnotation[] {
-  return annots.map((a) => ({
-    moveNumber: a.m,
-    color: a.c,
-    san: a.san,
-    evaluation: a.eval,
-    bestMove: a.best ?? null,
-    classification: a.classification ?? 'good',
-    comment: a.comment ?? null,
-  }));
+  // `bestMoveEval` for each entry = the prior annotation's `eval`
+  // (i.e., the eval of the position BEFORE this move was played). For
+  // the very first entry, the pre-move position is the starting
+  // position which the engine treats as ~0.0. Same cp/White-POV unit
+  // as `evaluation` so detectMisses / detectMissedTactics can compute
+  // the swing the moving side conceded.
+  let prevEval = 0;
+  return annots.map((a) => {
+    const annotation: MoveAnnotation = {
+      moveNumber: a.m,
+      color: a.c,
+      san: a.san,
+      evaluation: a.eval,
+      bestMove: a.best ?? null,
+      bestMoveEval: prevEval,
+      classification: a.classification ?? 'good',
+      comment: a.comment ?? null,
+    };
+    prevEval = a.eval;
+    return annotation;
+  });
 }
 
 function buildGameRecord(s: SampleGame): GameRecord {

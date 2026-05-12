@@ -61,10 +61,12 @@ export function reconstructMovesFromGame(
     const chessMoveNumber = Math.ceil(moveNumber / 2);
     const annotation = annotationMap.get(`${chessMoveNumber}-${color}`);
 
-    // Annotations store evaluations in pawns (eval / 100). Convert back to
-    // centipawns so every consumer (accuracy, eval graph, move list) gets
-    // consistent units matching the live-game path.
-    const evaluation = annotation?.evaluation != null ? annotation.evaluation * 100 : null;
+    // Annotations now store evaluations in centipawns (White POV) — the
+    // legacy pawn-unit storage was retired when `bestMoveEval` was
+    // added. The compensating `* 100` that used to live here is gone:
+    // `annotation.evaluation` already matches the consumer-expected
+    // cp scale. See gameAnalysisService.ts.
+    const evaluation = annotation?.evaluation ?? null;
     const bestMove = annotation?.bestMove ?? null;
     const classification = annotation?.classification ?? null;
     const comment = annotation?.comment ?? '';

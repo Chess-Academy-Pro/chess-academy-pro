@@ -3,10 +3,12 @@ import { db } from '../db/schema';
 import { getCoachCommentary } from './coachApi';
 import { buildChessContextMessage } from './coachPrompts';
 import { coachService } from '../coach/coachService';
+// REVIEW_MOVE_SEGMENT_ADDITION dropped in ship-3 — the per-ply segments
+// are now built deterministically from the engine annotations. See
+// `buildReviewSegments` / `generateReviewNarration` for the new path.
 import {
   GAME_POST_REVIEW_ADDITION,
   REVIEW_INTRO_ADDITION,
-  REVIEW_MOVE_SEGMENT_ADDITION,
 } from './coachPrompts';
 import { getThemeSkills } from './puzzleService';
 import { logAppAudit } from './appAuditor';
@@ -488,47 +490,9 @@ export interface ReviewMoveInput {
   fenAfter: string;
 }
 
-/** Extract a JSON array from an LLM response. Accepts either a raw
- *  JSON array or one wrapped in markdown fences. Returns null on any
- *  shape that doesn't cleanly parse to an array — caller decides
- *  whether to retry or fall back to silence. */
-function parseSegmentsJson(raw: string): Array<{ ply?: unknown; narration?: unknown }> | null {
-  if (!raw) return null;
-  const fenceStripped = raw.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim();
-  // Find the first `[` and its matching `]` — handles prose prefixes/suffixes.
-  const firstBracket = fenceStripped.indexOf('[');
-  const lastBracket = fenceStripped.lastIndexOf(']');
-  if (firstBracket < 0 || lastBracket <= firstBracket) return null;
-  const slice = fenceStripped.slice(firstBracket, lastBracket + 1);
-  try {
-    const parsed: unknown = JSON.parse(slice);
-    return Array.isArray(parsed) ? (parsed as Array<{ ply?: unknown; narration?: unknown }>) : null;
-  } catch {
-    return null;
-  }
-}
-
-/** Build the grounded [Per-move analysis] block the LLM uses to decide
- *  what to narrate. Mirrors the shape generateNarrativeSummary uses
- *  (WO-REVIEW-01) so the LLM sees the same data it's already trained
- *  on via our previous prompts. */
-function buildPerMoveBlock(moves: ReviewMoveInput[], playerColor: 'white' | 'black'): string {
-  const coachColor: 'White' | 'Black' = playerColor === 'white' ? 'Black' : 'White';
-  const rows: string[] = [];
-  for (const m of moves) {
-    const fullMove = Math.ceil(m.ply / 2);
-    const moverColor: 'White' | 'Black' = m.ply % 2 === 1 ? 'White' : 'Black';
-    const side = m.isCoachMove || moverColor === coachColor ? `${moverColor}/coach` : `${moverColor}/student`;
-    const evalBefore = m.preMoveEval !== null ? (m.preMoveEval / 100).toFixed(2) : 'n/a';
-    const evalAfter = m.evaluation !== null ? (m.evaluation / 100).toFixed(2) : 'n/a';
-    const best = m.bestMove ?? 'n/a';
-    const classification = m.classification ?? 'unclassified';
-    rows.push(
-      `Ply ${m.ply} — Move ${fullMove}. ${m.san} (${side}) — eval before: ${evalBefore}, eval after: ${evalAfter}, best: ${best}, classification: ${classification}`,
-    );
-  }
-  return `[Per-move analysis]\n${rows.join('\n')}`;
-}
+// `parseSegmentsJson` + `buildPerMoveBlock` deleted in ship-3 — both
+// only fed the legacy LLM segments call (REVIEW_MOVE_SEGMENT_ADDITION),
+// which has been replaced by `buildReviewSegments` (deterministic).
 
 /** Reconstruct the FEN at each ply from the move list. Uses chess.js
  *  to replay the SAN sequence — if any SAN is invalid we bail with a
@@ -551,39 +515,192 @@ function buildFenChain(moves: ReviewMoveInput[]): { fenBefore: string; fenAfter:
   return chain;
 }
 
-/** Deterministic fallback narration for a single ply. Used when the
- *  LLM either omits a ply entirely or returns null for it. The user
- *  has explicitly asked for narration on every move — silent plies
- *  leave the student staring at the board. Production audit (build
- *  06b6d5d) showed only 6/10 plies narrated; this guarantees a read
- *  on every move even when the LLM regresses. Tone stays neutral —
- *  the LLM produces the rich personality narration; this is just a
- *  safety net. */
-function fallbackMoveNarration(params: {
-  san: string;
-  color: 'white' | 'black';
+/** Convert a UCI move (e.g., "e2e4", "g7g8q") to SAN at the given
+ *  pre-move FEN. Returns null when the UCI is missing or chess.js
+ *  can't legally play the move from that position. Used by the
+ *  deterministic narration builder to surface "best move" SANs in
+ *  the per-ply prose. */
+function uciToSanAt(uci: string | null, fenBefore: string): string | null {
+  if (!uci || uci.length < 4) return null;
+  try {
+    const chess = new Chess(fenBefore);
+    const move = chess.move({
+      from: uci.slice(0, 2),
+      to: uci.slice(2, 4),
+      promotion: uci.length > 4 ? uci[4] : undefined,
+    });
+    return move.san;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Deterministic per-ply narration. Drives the walk-the-game banner
+ * directly from the engine annotations — no LLM segments call (ship-3).
+ *
+ * Follows CLAUDE.md narration voice rules:
+ *   - Silent on `book` / `good` / `null` (rule #4 — silence is OK).
+ *   - No "great job" / "well played" filler on routine moves (rule #5).
+ *   - Talks about the move's chess content (best alternative + swing in
+ *     pawns), not the interface or restating the SAN (rules #2/3).
+ *   - 3 stem variants per classification rotate by ply so the narration
+ *     doesn't read like a metronome across 40 moves (rule #9).
+ *
+ * Returns `null` when the position deserves silence. The walk UI
+ * already renders "(this move passes silently…)" for null narrations.
+ */
+function buildDeterministicNarration(params: {
+  ply: number;
   isStudentMove: boolean;
   classification: import('../types').MoveClassification | null;
-}): string {
-  const { san, isStudentMove, classification } = params;
-  const subject = isStudentMove ? 'You played' : 'The coach played';
-  const sanReadable = san.replace(/\+|#/g, '');
-  if (classification === 'blunder') {
-    return `${subject} ${sanReadable} — flagged as a blunder. Step through to see the better line.`;
+  bestMoveSan: string | null;
+  preMoveEval: number | null;
+  evaluation: number | null;
+}): string | null {
+  const { ply, isStudentMove, classification, bestMoveSan, preMoveEval, evaluation } = params;
+  if (classification === null || classification === 'book' || classification === 'good') {
+    return null;
   }
-  if (classification === 'mistake') {
-    return `${subject} ${sanReadable} — flagged as a mistake. There was a stronger continuation.`;
-  }
-  if (classification === 'inaccuracy') {
-    return `${subject} ${sanReadable} — slightly inaccurate, but still in the game.`;
-  }
+
+  const variant = ply % 3;
+
+  // Swing magnitude in pawns (positive = how much the moving side
+  // conceded). Both evals are centipawns, white POV; the absolute
+  // difference is the swing regardless of moving side because the
+  // classification flags the bad direction.
+  const swingPawns =
+    preMoveEval !== null && evaluation !== null
+      ? Math.abs((preMoveEval - evaluation) / 100)
+      : null;
+  const swingPhrase =
+    swingPawns !== null && swingPawns >= 0.1
+      ? ` Drops about ${swingPawns.toFixed(1)} pawns.`
+      : '';
+
   if (classification === 'brilliant') {
-    return `${subject} ${sanReadable} — a brilliant move. The engine approves.`;
+    if (isStudentMove) {
+      const stems = [
+        'Brilliant — that was the move.',
+        'Brilliant find.',
+        'Brilliant. The engine agrees.',
+      ];
+      return stems[variant];
+    }
+    return 'Brilliant shot — your opponent found the only line.';
   }
+
   if (classification === 'great') {
-    return `${subject} ${sanReadable} — a strong, accurate move.`;
+    return isStudentMove ? 'Strong, accurate move.' : null;
   }
-  return `${subject} ${sanReadable}.`;
+
+  if (classification === 'miss') {
+    if (bestMoveSan) {
+      return `Missed chance — ${bestMoveSan} was the move.`;
+    }
+    return 'Missed chance here — the engine had a stronger continuation.';
+  }
+
+  if (classification === 'inaccuracy') {
+    if (isStudentMove) {
+      if (bestMoveSan) {
+        const stems = [
+          `Inaccuracy. ${bestMoveSan} was sharper.`,
+          `Slightly off — ${bestMoveSan} kept the edge.`,
+          `${bestMoveSan} was the more accurate move.`,
+        ];
+        return stems[variant];
+      }
+      return 'Inaccuracy — there was a more precise move available.';
+    }
+    if (bestMoveSan) {
+      return `Your opponent slipped — ${bestMoveSan} was stronger.`;
+    }
+    return null;
+  }
+
+  if (classification === 'mistake') {
+    if (isStudentMove) {
+      if (bestMoveSan) {
+        const stems = [
+          `Mistake. The best move was ${bestMoveSan}.${swingPhrase}`,
+          `${bestMoveSan} was the move — this one gave back real ground.${swingPhrase}`,
+          `Mistake here. ${bestMoveSan} held the position.${swingPhrase}`,
+        ];
+        return stems[variant];
+      }
+      return `Mistake — the engine had a stronger continuation.${swingPhrase}`;
+    }
+    if (bestMoveSan) {
+      return `Your opponent erred — ${bestMoveSan} was much better.${swingPhrase}`;
+    }
+    return `Your opponent gave ground here.${swingPhrase}`;
+  }
+
+  if (classification === 'blunder') {
+    if (isStudentMove) {
+      if (bestMoveSan) {
+        const stems = [
+          `Blunder. ${bestMoveSan} was the move.${swingPhrase}`,
+          `Costly. ${bestMoveSan} held everything together.${swingPhrase}`,
+          `Blunder — ${bestMoveSan} kept you in the game.${swingPhrase}`,
+        ];
+        return stems[variant];
+      }
+      return `Blunder — the engine had a much stronger continuation.${swingPhrase}`;
+    }
+    if (bestMoveSan) {
+      return `Your opponent blundered — ${bestMoveSan} would have held.${swingPhrase}`;
+    }
+    return `Your opponent blundered here.${swingPhrase}`;
+  }
+
+  return null;
+}
+
+/**
+ * Build the full `ReviewMoveSegment[]` deterministically from the
+ * per-ply annotations + a reconstructed FEN chain. Exported for tests;
+ * `generateReviewNarration` calls this directly. Replaces the LLM
+ * segments call that used to drive the walk (ship-3) — see the
+ * generateReviewNarration commentary for the rationale.
+ */
+export function buildReviewSegments(
+  moves: ReviewMoveInput[],
+): ReviewMoveSegment[] {
+  const fenChain = buildFenChain(moves);
+  const usable = fenChain.length;
+  const segments: ReviewMoveSegment[] = [];
+  for (let i = 0; i < usable; i++) {
+    const m = moves[i];
+    const fenPair = fenChain[i];
+    const fullMove = Math.ceil(m.ply / 2);
+    const moverColor: 'white' | 'black' = m.ply % 2 === 1 ? 'white' : 'black';
+    const bestMoveSan = uciToSanAt(m.bestMove, fenPair.fenBefore);
+    const narration = buildDeterministicNarration({
+      ply: m.ply,
+      isStudentMove: !m.isCoachMove,
+      classification: m.classification,
+      bestMoveSan,
+      preMoveEval: m.preMoveEval,
+      evaluation: m.evaluation,
+    });
+    segments.push({
+      ply: m.ply,
+      moveNumber: fullMove,
+      san: m.san,
+      playerColor: moverColor,
+      fenBefore: fenPair.fenBefore,
+      fenAfter: fenPair.fenAfter,
+      classification: m.classification,
+      evalBefore: m.preMoveEval,
+      evalAfter: m.evaluation,
+      bestMoveSan,
+      bestMoveUci: m.bestMove,
+      narration,
+    });
+  }
+  return segments;
 }
 
 /** Fallback intro used if the LLM intro call fails. Still grounded in
@@ -604,12 +721,28 @@ function defaultIntroText(params: {
 }
 
 /**
- * Build the per-move walk-the-game narration for a completed coach
- * game. Dispatches two LLM calls in parallel: one for the short intro,
- * one for the per-ply segment JSON. Parsing failures degrade
- * gracefully — the ReviewNarration always returns a valid intro and a
- * segments array covering every ply, with `narration: null` for any
- * ply the LLM didn't cover.
+ * Build the per-move walk-the-game narration for a completed game.
+ *
+ * ship-3 inversion: the per-ply segments come from a deterministic
+ * builder (`buildReviewSegments`) driven by the Stockfish annotations
+ * the analysis pipeline already produced. The legacy LLM segments
+ * call (REVIEW_MOVE_SEGMENT_ADDITION) is gone — it was the single
+ * point of failure for the entire walk-the-game UX:
+ *   - 30s spine timeout on long games → silent walk
+ *   - JSON parse failure on malformed output → silent walk
+ *   - 4000-token cap truncation past ~30 plies → silent tail
+ *   - Voice-marker collision with REVIEW_MODE_ADDITION → markdown leak
+ *   - "Every ply gets prose" prompt → chatty filler that contradicts
+ *     CLAUDE.md narration voice rules (silence is acceptable, etc.)
+ *
+ * The deterministic builder produces narration grounded in
+ * classification + bestMove + eval swing. Silent on book/good per the
+ * narration voice rules; templated prose on inaccuracy/mistake/blunder/
+ * brilliant with stem rotation to avoid repetition.
+ *
+ * The intro LLM call is preserved — it's short (200 tokens), useful
+ * framing, and doesn't load-bear the per-ply experience. If it fails,
+ * a deterministic default intro covers the gap.
  */
 export async function generateReviewNarration(params: {
   moves: ReviewMoveInput[];
@@ -618,7 +751,7 @@ export async function generateReviewNarration(params: {
   result: string;
   playerRating: number;
 }): Promise<ReviewNarration> {
-  const { moves, playerColor, openingName, result, playerRating } = params;
+  const { moves, playerColor, openingName, result } = params;
 
   // Reconstruct FENs via chess.js so the UI can rewind cleanly.
   const fenChain = buildFenChain(moves);
@@ -643,34 +776,22 @@ export async function generateReviewNarration(params: {
     };
   }
 
-  const perMoveBlock = buildPerMoveBlock(moves.slice(0, usableCount), playerColor);
   const introUserMessage = [
     `Student color: ${playerColor}.`,
     `Game result: ${result}.`,
     openingName ? `Opening: ${openingName}.` : 'Opening: (not classified).',
     `Student errors: ${mistakeCount} (blunders + mistakes + inaccuracies).`,
   ].join('\n');
-  const segmentsUserMessage = [
-    `Student color: ${playerColor}.`,
-    `Game result: ${result}.`,
-    openingName ? `Opening: ${openingName}.` : 'Opening: (not classified).',
-    `Student rating: ~${playerRating}.`,
-    '',
-    perMoveBlock,
-  ].join('\n');
 
-  // WO-COACH-UNIFY-01 Review-tab parity: route both prep calls through
-  // coachService.ask with surface='review' so the unified envelope
-  // (REVIEW_MODE_ADDITION + memory + live-state) wraps the prep-scan
-  // step too. Same shape as /coach/teach + /coach/play. The two
-  // surface-specific prompts thread as systemPromptAddition.
-  // Fire both in parallel so the review opens faster.
+  // Per-ply segments are now built deterministically from the engine
+  // annotations — no LLM round-trip. The intro LLM call still rides
+  // the unified envelope so it picks up memory + live-state context.
   const reviewLiveState = {
     surface: 'review' as const,
     fen: fenChain[fenChain.length - 1]?.fenAfter,
     userJustDid: 'Opening review of the completed game (prep scan)',
   };
-  const introPromise = coachService.ask(
+  const introRaw = await coachService.ask(
     {
       surface: 'review',
       ask: introUserMessage,
@@ -683,73 +804,11 @@ export async function generateReviewNarration(params: {
       systemPromptAddition: REVIEW_INTRO_ADDITION,
       // REVIEW_INTRO_ADDITION asks for prose only; REVIEW_MODE_ADDITION
       // (surface block) mandates [VOICE:] / [BOARD:] markers per turn.
-      // The two collide — production audit (build 6459def+) caught the
-      // intro coming back wrapped in markers. Keep memory + live-state
-      // injection by leaving surface='review', but skip the surface
-      // mode addition so the JSON-only / prose-only addendum wins.
+      // Keep memory + live-state injection via surface='review', but
+      // skip the surface mode block so the prose-only contract wins.
       suppressSurfaceMode: true,
     },
   ).then((a) => unwrapSpineError(a.text)).catch(() => '');
-
-  // max_tokens: 8000 — the per-ply JSON array scales with game length
-  // and the prior 2000 cap silently truncated output for games past ~20
-  // plies, producing unparseable JSON and empty narration. Match the
-  // "max_tokens is not a useful filter" posture from WO-POLISH-02.
-  const segmentsPromise = coachService.ask(
-    {
-      surface: 'review',
-      ask: segmentsUserMessage,
-      liveState: reviewLiveState,
-    },
-    {
-      // WO-COACH-UNIFY-01 follow-up: switched task from
-      // 'game_narrative_summary' (which routes to deepseek-reasoner)
-      // to 'chat_response' (deepseek-chat). Same fix shipped for
-      // phase-narration: under the heavy spine envelope, the
-      // reasoner spends its full token budget on reasoning_content
-      // and emits zero content. Production audit on build 088fe97
-      // showed zero coach-brain-* entries from this prep call —
-      // partly because of autoStartReview gating it out, but also
-      // because when it DID fire elsewhere, deepseek-reasoner was
-      // returning empty. Chat-tier model is fast + uses full budget
-      // for the JSON output. 8000 max tokens still required since
-      // per-ply JSON scales with game length.
-      task: 'chat_response',
-      // WO-COACH-UNIFY-01 follow-up: dropped 8000 → 4000. Production
-      // audit on build ae46bcd caught the segments call hitting the
-      // spine's 30s PROVIDER_TIMEOUT_MS on a long game ("(coach-brain
-      // provider error: coach-brain-deepseek-timeout)" in finding 47).
-      // Most games are 30-50 plies; 4000 tokens (~150 chars per ply
-      // commentary) covers that comfortably while keeping latency
-      // inside the 30s envelope. Long-game truncation is graceful —
-      // segments end early and the walk plays out silent plies.
-      maxTokens: 4000,
-      maxToolRoundTrips: 1,
-      systemPromptAddition: REVIEW_MOVE_SEGMENT_ADDITION,
-      // REVIEW_MOVE_SEGMENT_ADDITION mandates JSON output;
-      // REVIEW_MODE_ADDITION (surface block) mandates [VOICE:] /
-      // [BOARD:] markers. Production audit (build 6459def+) Finding 69
-      // showed the segments call returning markdown-with-markers and
-      // failing parse, leaving every ply on the deterministic fallback
-      // ("You played X" / "The coach played X"). Skip the surface
-      // block here — the per-call addition is the single source of
-      // truth for output format. Memory + live-state injection still
-      // happens since `surface='review'`.
-      suppressSurfaceMode: true,
-    },
-  ).then((a) => unwrapSpineError(a.text)).catch((err: unknown) => {
-    const msg = err instanceof Error ? err.message : String(err);
-    void logAppAudit({
-      kind: 'review-segments-parse-failed',
-      category: 'subsystem',
-      source: 'coachFeatureService.generateReviewNarration',
-      summary: 'segments LLM call failed',
-      details: msg,
-    });
-    return '';
-  });
-
-  const [introRaw, segmentsRaw] = await Promise.all([introPromise, segmentsPromise]);
 
   // Intro: use LLM response if non-empty and not the ⚠️ error placeholder;
   // else fall back to a grounded default.
@@ -758,86 +817,15 @@ export async function generateReviewNarration(params: {
     ? introTrimmed
     : defaultIntroText({ playerColor, result, openingName, mistakeCount });
 
-  // Parse per-ply segments. Build a lookup { ply → narration } with
-  // relaxed validation — reject obviously-malformed entries but accept
-  // anything that has a plausible ply + string-or-null narration.
-  const parsed = parseSegmentsJson(segmentsRaw);
-  const narrationByPly = new Map<number, string | null>();
-  if (parsed) {
-    for (const entry of parsed) {
-      if (typeof entry !== 'object') continue;
-      const plyVal = entry.ply;
-      const narrationVal = entry.narration;
-      if (typeof plyVal !== 'number' || !Number.isFinite(plyVal)) continue;
-      const ply = Math.round(plyVal);
-      if (ply < 1 || ply > usableCount) continue;
-      if (narrationVal === null || narrationVal === undefined) {
-        narrationByPly.set(ply, null);
-      } else if (typeof narrationVal === 'string') {
-        const trimmed = narrationVal.trim();
-        narrationByPly.set(ply, trimmed.length > 0 ? trimmed : null);
-      }
-    }
-  } else if (segmentsRaw) {
-    void logAppAudit({
-      kind: 'review-segments-parse-failed',
-      category: 'subsystem',
-      source: 'coachFeatureService.generateReviewNarration',
-      summary: 'segments JSON parse failed — falling back to silent walk',
-      details: segmentsRaw.slice(0, 300),
-    });
-  }
-
-  // Stitch into ReviewMoveSegment[] with one entry per ply, narration
-  // filled where the LLM provided one and null for ply gaps.
-  const segments: ReviewMoveSegment[] = [];
-  for (let i = 0; i < usableCount; i++) {
-    const m = moves[i];
-    const fenPair = fenChain[i];
-    const fullMove = Math.ceil(m.ply / 2);
-    const moverColor: 'white' | 'black' = m.ply % 2 === 1 ? 'white' : 'black';
-    const bestUci = m.bestMove;
-    // Prefer the LLM's per-ply narration. When it's missing (LLM
-    // returned a null, omitted the ply, or the parse failed), fall
-    // back to a deterministic one-liner so EVERY ply speaks. The user
-    // has explicitly asked for narration on every move — silent plies
-    // leave the student staring at the board with no audio. Production
-    // audit (build 06b6d5d) showed only 6 of 10 plies narrated under
-    // the old "null = silence" prompt; this fallback closes the gap
-    // even when the LLM regresses.
-    const llmNarration = narrationByPly.get(m.ply);
-    const narration =
-      llmNarration && llmNarration.trim().length > 0
-        ? llmNarration
-        : fallbackMoveNarration({
-            san: m.san,
-            color: moverColor,
-            isStudentMove: !m.isCoachMove,
-            classification: m.classification,
-          });
-    segments.push({
-      ply: m.ply,
-      moveNumber: fullMove,
-      san: m.san,
-      playerColor: moverColor,
-      fenBefore: fenPair.fenBefore,
-      fenAfter: fenPair.fenAfter,
-      classification: m.classification,
-      evalBefore: m.preMoveEval,
-      evalAfter: m.evaluation,
-      bestMoveSan: bestUci, // UCI is passed through as SAN when SAN isn't available
-      bestMoveUci: bestUci,
-      narration,
-    });
-  }
+  const segments = buildReviewSegments(moves.slice(0, usableCount));
 
   const narratedCount = segments.filter((s) => s.narration !== null).length;
   void logAppAudit({
     kind: 'review-segments-generated',
     category: 'subsystem',
     source: 'coachFeatureService.generateReviewNarration',
-    summary: `${narratedCount} of ${segments.length} plies narrated`,
-    details: JSON.stringify({ totalSegments: segments.length, narratedCount }),
+    summary: `${narratedCount} of ${segments.length} plies narrated (deterministic)`,
+    details: JSON.stringify({ totalSegments: segments.length, narratedCount, source: 'deterministic-ship3' }),
   });
 
   return { intro, segments, closing: null };

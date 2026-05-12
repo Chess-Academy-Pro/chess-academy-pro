@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { db } from '../db/schema';
-import { detectBadHabits, detectBadHabitsFromGame, buildProfileContext } from './coachFeatureService';
+import { detectBadHabits, detectBadHabitsFromGame, buildProfileContext, buildReviewSegments } from './coachFeatureService';
+import type { ReviewMoveInput } from './coachFeatureService';
 import { buildUserProfile, buildBadHabit } from '../test/factories';
 import type { UserProfile } from '../types';
 
@@ -228,6 +229,123 @@ describe('coachFeatureService', () => {
       expect(ctx.stockfishAnalysis).toBeNull();
       expect(ctx.playerMove).toBeNull();
       expect(ctx.moveClassification).toBeNull();
+    });
+  });
+
+  describe('buildReviewSegments (ship-3 — deterministic narration)', () => {
+    // Helper to build a ReviewMoveInput with sensible defaults so the
+    // test bodies stay focused on classification + bestMove.
+    function move(overrides: Partial<ReviewMoveInput> & { ply: number; san: string }): ReviewMoveInput {
+      return {
+        isCoachMove: false,
+        classification: 'good',
+        evaluation: 0,
+        preMoveEval: 0,
+        bestMove: null,
+        fenAfter: '',
+        ...overrides,
+      };
+    }
+
+    it('returns silence for book + good moves (CLAUDE.md voice rule #4)', () => {
+      const segments = buildReviewSegments([
+        move({ ply: 1, san: 'e4', classification: 'book' }),
+        move({ ply: 2, san: 'e5', classification: 'book', isCoachMove: true }),
+        move({ ply: 3, san: 'Nf3', classification: 'good' }),
+      ]);
+      expect(segments).toHaveLength(3);
+      expect(segments.every((s) => s.narration === null)).toBe(true);
+    });
+
+    it('returns templated prose for student mistakes with the best move SAN', () => {
+      // Pre-move position: classical Italian. White just played a
+      // blunder ("Qh5??"); engine wanted Nf3 instead.
+      const segments = buildReviewSegments([
+        move({ ply: 1, san: 'e4', classification: 'book' }),
+        move({ ply: 2, san: 'e5', classification: 'book', isCoachMove: true }),
+        move({
+          ply: 3,
+          san: 'Qh5',
+          classification: 'blunder',
+          bestMove: 'g1f3',
+          preMoveEval: 25,
+          evaluation: -300,
+        }),
+      ]);
+      const blunderSeg = segments[2];
+      expect(blunderSeg.narration).not.toBeNull();
+      expect(blunderSeg.narration).toMatch(/Nf3/);
+      // Should NOT include the played SAN — rule #3 ("don't restate the board")
+      expect(blunderSeg.narration).not.toMatch(/Qh5/);
+      // Should include the swing magnitude in pawns
+      expect(blunderSeg.narration).toMatch(/3\.[0-9] pawns/);
+    });
+
+    it('frames opponent mistakes from the student perspective', () => {
+      const segments = buildReviewSegments([
+        move({ ply: 1, san: 'e4', classification: 'book' }),
+        move({
+          ply: 2,
+          san: 'f6',
+          classification: 'mistake',
+          isCoachMove: true,
+          bestMove: 'e7e5',
+          preMoveEval: 25,
+          evaluation: 180,
+        }),
+      ]);
+      const seg = segments[1];
+      expect(seg.narration).toMatch(/opponent/i);
+      expect(seg.narration).toMatch(/e5/);
+      // Never frame an opponent move with "you played" (voice rule)
+      expect(seg.narration).not.toMatch(/^You /);
+    });
+
+    it('falls back to a generic line when bestMove is missing', () => {
+      const segments = buildReviewSegments([
+        move({ ply: 1, san: 'e4', classification: 'book' }),
+        move({
+          ply: 2,
+          san: 'e5',
+          classification: 'book',
+          isCoachMove: true,
+        }),
+        move({
+          ply: 3,
+          san: 'Bc4',
+          classification: 'inaccuracy',
+          bestMove: null,
+          preMoveEval: 30,
+          evaluation: -10,
+        }),
+      ]);
+      const seg = segments[2];
+      expect(seg.narration).not.toBeNull();
+      // Generic version still mentions the classification family
+      expect(seg.narration?.toLowerCase()).toMatch(/inaccuracy|more precise/);
+    });
+
+    it('reconstructs fenBefore / fenAfter per ply via chess.js', () => {
+      const segments = buildReviewSegments([
+        move({ ply: 1, san: 'e4' }),
+        move({ ply: 2, san: 'e5', isCoachMove: true }),
+      ]);
+      expect(segments).toHaveLength(2);
+      expect(segments[0].fenBefore).toContain('rnbqkbnr/pppppppp');
+      expect(segments[0].fenAfter).toContain('4P3');
+      expect(segments[1].fenBefore).toBe(segments[0].fenAfter);
+    });
+
+    it('stops at the first illegal SAN without crashing', () => {
+      const segments = buildReviewSegments([
+        move({ ply: 1, san: 'e4' }),
+        move({ ply: 2, san: 'NOT_A_MOVE', isCoachMove: true }),
+        move({ ply: 3, san: 'Nf3' }),
+      ]);
+      // Only the first move could replay; the chain truncates at the
+      // bad SAN. Better one usable ply than refusing the whole review.
+      expect(segments).toHaveLength(1);
+      expect(segments[0].san).toBe('e4');
     });
   });
 });

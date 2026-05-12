@@ -261,8 +261,12 @@ function movesToAnnotations(moves: CoachGameMove[], playerColor: 'white' | 'blac
       moveNumber: Math.ceil(m.moveNumber / 2),
       color: playerColor,
       san: m.san,
+      // Both values are already centipawns (White POV) from the live
+      // CoachGamePage classifier — pass through unchanged so the review
+      // surface's swing math matches the live game's classifier output.
       evaluation: m.evaluation,
       bestMove: m.bestMove,
+      bestMoveEval: m.bestMoveEval,
       classification: m.classification,
       comment: m.commentary || null,
     }));

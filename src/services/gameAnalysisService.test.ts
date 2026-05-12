@@ -61,17 +61,19 @@ describe('gameAnalysisService', () => {
     });
 
     it('counts games with missing or partial annotations', async () => {
-      // Game with full annotations (1 annotation per move) should NOT be counted
+      // Game with full annotations (1 annotation per move) should NOT be counted.
+      // Evals are centipawns; `bestMoveEval` present so gameNeedsAnalysis
+      // doesn't flag the record as a pre-fix legacy shape.
       const fullPgn = '1. e4 e5 1/2-1/2';
       const fullAnnotations = [
-        { moveNumber: 1, color: 'white' as const, san: 'e4', evaluation: 0.3, bestMove: null, classification: 'good' as const, comment: null },
-        { moveNumber: 1, color: 'black' as const, san: 'e5', evaluation: 0.2, bestMove: null, classification: 'good' as const, comment: null },
+        { moveNumber: 1, color: 'white' as const, san: 'e4', evaluation: 30, bestMove: null, bestMoveEval: 0, classification: 'good' as const, comment: null },
+        { moveNumber: 1, color: 'black' as const, san: 'e5', evaluation: 20, bestMove: null, bestMoveEval: 30, classification: 'good' as const, comment: null },
       ];
 
       await db.games.bulkAdd([
         buildGameRecord({ id: 'g1', annotations: null }),
         buildGameRecord({ id: 'g2', annotations: [] }),
-        buildGameRecord({ id: 'g3', pgn: fullPgn, annotations: fullAnnotations }),
+        buildGameRecord({ id: 'g3', pgn: fullPgn, annotations: fullAnnotations, fullyAnalyzed: true }),
       ]);
 
       const count = await countGamesNeedingAnalysis();
@@ -145,13 +147,17 @@ describe('gameAnalysisService', () => {
     });
 
     it('skips games that already have full annotations', async () => {
+      // Centipawn evals + `bestMoveEval` present + fullyAnalyzed flag —
+      // matches the post-ship-1 annotation shape so gameNeedsAnalysis
+      // short-circuits.
       await db.games.add(buildGameRecord({
         id: 'already-done',
         pgn: '1. e4 e5 1/2-1/2',
         annotations: [
-          { moveNumber: 1, color: 'white', san: 'e4', evaluation: 0.3, bestMove: null, classification: 'good', comment: null },
-          { moveNumber: 1, color: 'black', san: 'e5', evaluation: 0.2, bestMove: null, classification: 'good', comment: null },
+          { moveNumber: 1, color: 'white', san: 'e4', evaluation: 30, bestMove: null, bestMoveEval: 0, classification: 'good', comment: null },
+          { moveNumber: 1, color: 'black', san: 'e5', evaluation: 20, bestMove: null, bestMoveEval: 30, classification: 'good', comment: null },
         ],
+        fullyAnalyzed: true,
         isMasterGame: false,
       }));
 

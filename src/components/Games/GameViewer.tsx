@@ -203,7 +203,9 @@ export function GameViewer({ game, onClose }: GameViewerProps): JSX.Element {
             {currentAnnotation.moveNumber}{currentAnnotation.color === 'black' ? '...' : '.'} {currentAnnotation.san}
             {currentAnnotation.evaluation !== null && (
               <span className="ml-1">
-                ({currentAnnotation.evaluation > 0 ? '+' : ''}{currentAnnotation.evaluation.toFixed(1)})
+                {/* Annotation evals are centipawns (White POV); display
+                    as pawns for the inline chip. */}
+                ({currentAnnotation.evaluation > 0 ? '+' : ''}{(currentAnnotation.evaluation / 100).toFixed(1)})
               </span>
             )}
             {currentAnnotation.bestMove && (

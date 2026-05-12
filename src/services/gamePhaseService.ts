@@ -1,5 +1,5 @@
 import type { CoachGameMove, GamePhase, PhaseAccuracy } from '../types';
-import { capEval, cpLossToAccuracy } from './accuracyService';
+import { winPercent, accuracyFromWinDelta } from './accuracyService';
 
 /**
  * Piece material values for endgame detection.
@@ -60,17 +60,22 @@ export function classifyPhase(fen: string, moveNumber: number): GamePhase {
 }
 
 /**
- * Compute accuracy + mistake counts per game phase for a given player color.
- * Uses the same centipawn-loss formula as accuracyService.
+ * Compute accuracy + mistake counts per game phase for a given player
+ * color. Uses the SAME win-percent + harmonic-mean algorithm as
+ * `calculateAccuracy` so per-phase grades agree with the hero accuracy
+ * number on the review summary card. The previous arithmetic-mean
+ * `cpLossToAccuracy` path consistently overreported phase accuracy —
+ * one blunder + 30 clean moves came back as 96.7% phase / 47% hero
+ * because arithmetic mean ≠ harmonic mean. Same algo means same scale.
  */
 export function getPhaseBreakdown(
   moves: CoachGameMove[],
   playerColor: 'white' | 'black',
 ): PhaseAccuracy[] {
-  const phases: Record<GamePhase, { accuracySum: number; count: number; mistakes: number }> = {
-    opening: { accuracySum: 0, count: 0, mistakes: 0 },
-    middlegame: { accuracySum: 0, count: 0, mistakes: 0 },
-    endgame: { accuracySum: 0, count: 0, mistakes: 0 },
+  const phases: Record<GamePhase, { accs: number[]; mistakes: number }> = {
+    opening: { accs: [], mistakes: 0 },
+    middlegame: { accs: [], mistakes: 0 },
+    endgame: { accs: [], mistakes: 0 },
   };
 
   for (const move of moves) {
@@ -83,6 +88,11 @@ export function getPhaseBreakdown(
       continue;
     }
 
+    // Book moves are excluded from accuracy in `calculateAccuracy`; we
+    // mirror that here so book-heavy openings don't drag the phase
+    // grade above the player's actual play.
+    if (move.classification === 'book') continue;
+
     // Need evaluations for accuracy
     if (move.evaluation === null || move.preMoveEval === null) {
       continue;
@@ -91,15 +101,17 @@ export function getPhaseBreakdown(
     const phase = classifyPhase(move.fen, move.moveNumber);
     const bucket = phases[phase];
 
-    // Compute centipawn loss and per-move accuracy (same as accuracyService)
-    const sign = isWhiteMove ? 1 : -1;
-    const evalBefore = capEval(move.preMoveEval) * sign;
-    const evalAfter = capEval(move.evaluation) * sign;
-    const cpLoss = Math.max(0, evalBefore - evalAfter);
-    const moveAccuracy = cpLossToAccuracy(cpLoss);
+    // Win-percent must be from the moving side's perspective. Same
+    // contract as calculateAccuracy:108-118.
+    const winBefore = isWhiteMove
+      ? winPercent(move.preMoveEval)
+      : 100 - winPercent(move.preMoveEval);
+    const winAfter = isWhiteMove
+      ? winPercent(move.evaluation)
+      : 100 - winPercent(move.evaluation);
 
-    bucket.accuracySum += moveAccuracy;
-    bucket.count++;
+    const moveAcc = accuracyFromWinDelta(winBefore - winAfter);
+    bucket.accs.push(moveAcc);
 
     // Count mistakes (inaccuracy, mistake, blunder)
     const cls = move.classification;
@@ -112,9 +124,28 @@ export function getPhaseBreakdown(
     const bucket = phases[phase];
     return {
       phase,
-      accuracy: bucket.count > 0 ? Math.round(bucket.accuracySum / bucket.count * 10) / 10 : 0,
-      moveCount: bucket.count,
+      accuracy: bucket.accs.length > 0
+        ? Math.round(harmonicMean(bucket.accs) * 10) / 10
+        : 0,
+      moveCount: bucket.accs.length,
       mistakes: bucket.mistakes,
     };
   });
+}
+
+/**
+ * Harmonic mean — same aggregator `calculateAccuracy` uses in
+ * `accuracyService`. Gives extra weight to bad moves so a single
+ * blunder drags the phase grade down meaningfully instead of being
+ * averaged away by a stretch of clean moves. Clamped at 1 per value to
+ * avoid division-by-zero on perfect-zero scores (matches the upstream
+ * implementation).
+ */
+function harmonicMean(values: number[]): number {
+  if (values.length === 0) return 0;
+  let reciprocalSum = 0;
+  for (const v of values) {
+    reciprocalSum += 1 / Math.max(1, v);
+  }
+  return values.length / reciprocalSum;
 }

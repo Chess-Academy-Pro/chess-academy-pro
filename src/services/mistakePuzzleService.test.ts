@@ -33,21 +33,27 @@ vi.mock('./stockfishEngine', () => ({
 // ─── Test Data ──────────────────────────────────────────────────────────────
 
 function buildAnnotations(): MoveAnnotation[] {
+  // Evals here are CENTIPAWNS (White POV) — the unit the production
+  // pipeline standardised on once `bestMoveEval` was added to the
+  // annotation shape. `bestMoveEval` is set from the position eval
+  // BEFORE this move (i.e., the prior annotation's eval; starting
+  // position ~0) so downstream cpLoss / swing math has data to work
+  // with.
   return [
     // Move 1: White e4 — good
-    { moveNumber: 1, color: 'white', san: 'e4', evaluation: 0.3, bestMove: 'e2e4', classification: 'good', comment: null },
+    { moveNumber: 1, color: 'white', san: 'e4', evaluation: 30, bestMove: 'e2e4', bestMoveEval: 0, classification: 'good', comment: null },
     // Move 1: Black e5 — good
-    { moveNumber: 1, color: 'black', san: 'e5', evaluation: 0.2, bestMove: 'e7e5', classification: 'good', comment: null },
+    { moveNumber: 1, color: 'black', san: 'e5', evaluation: 20, bestMove: 'e7e5', bestMoveEval: 30, classification: 'good', comment: null },
     // Move 2: White Nf3 — good
-    { moveNumber: 2, color: 'white', san: 'Nf3', evaluation: 0.4, bestMove: 'g1f3', classification: 'good', comment: null },
+    { moveNumber: 2, color: 'white', san: 'Nf3', evaluation: 40, bestMove: 'g1f3', bestMoveEval: 20, classification: 'good', comment: null },
     // Move 2: Black Nc6 — good
-    { moveNumber: 2, color: 'black', san: 'Nc6', evaluation: 0.3, bestMove: 'b8c6', classification: 'good', comment: null },
-    // Move 3: White Ng5?? — blunder (drops from 0.4 to -3.5, cpLoss = 390)
-    { moveNumber: 3, color: 'white', san: 'Ng5', evaluation: -3.5, bestMove: 'f1b5', classification: 'blunder', comment: null },
+    { moveNumber: 2, color: 'black', san: 'Nc6', evaluation: 30, bestMove: 'b8c6', bestMoveEval: 40, classification: 'good', comment: null },
+    // Move 3: White Ng5?? — blunder (drops from +40 to -350, cpLoss = 390)
+    { moveNumber: 3, color: 'white', san: 'Ng5', evaluation: -350, bestMove: 'f1b5', bestMoveEval: 30, classification: 'blunder', comment: null },
     // Move 3: Black d5 — good
-    { moveNumber: 3, color: 'black', san: 'd5', evaluation: -3.3, bestMove: 'd7d5', classification: 'good', comment: null },
-    // Move 4: White d3? — mistake (from -3.3 to -4.8, cpLoss = 150)
-    { moveNumber: 4, color: 'white', san: 'd3', evaluation: -4.8, bestMove: 'e4d5', classification: 'mistake', comment: null },
+    { moveNumber: 3, color: 'black', san: 'd5', evaluation: -330, bestMove: 'd7d5', bestMoveEval: -350, classification: 'good', comment: null },
+    // Move 4: White d3? — mistake (from -330 to -480, cpLoss = 150)
+    { moveNumber: 4, color: 'white', san: 'd3', evaluation: -480, bestMove: 'e4d5', bestMoveEval: -330, classification: 'mistake', comment: null },
   ];
 }
 
@@ -176,9 +182,9 @@ describe('mistakePuzzleService', () => {
 
     it('generates puzzles from imported lichess game with username', async () => {
       const annotations: MoveAnnotation[] = [
-        { moveNumber: 1, color: 'white', san: 'e4', evaluation: 0.3, bestMove: null, classification: 'good', comment: null },
-        { moveNumber: 1, color: 'black', san: 'e5', evaluation: 0.2, bestMove: null, classification: 'good', comment: null },
-        { moveNumber: 2, color: 'white', san: 'Qh5', evaluation: -1.5, bestMove: null, classification: 'blunder', comment: null },
+        { moveNumber: 1, color: 'white', san: 'e4', evaluation: 30, bestMove: null, bestMoveEval: 0, classification: 'good', comment: null },
+        { moveNumber: 1, color: 'black', san: 'e5', evaluation: 20, bestMove: null, bestMoveEval: 30, classification: 'good', comment: null },
+        { moveNumber: 2, color: 'white', san: 'Qh5', evaluation: -150, bestMove: null, bestMoveEval: 20, classification: 'blunder', comment: null },
       ];
       const game = buildGameRecord({
         id: 'lichess-abc123',
@@ -202,8 +208,8 @@ describe('mistakePuzzleService', () => {
 
     it('generates puzzles from chess.com imports', async () => {
       const annotations: MoveAnnotation[] = [
-        { moveNumber: 1, color: 'white', san: 'e4', evaluation: 0.3, bestMove: null, classification: 'good', comment: null },
-        { moveNumber: 1, color: 'black', san: 'f6', evaluation: 1.8, bestMove: null, classification: 'mistake', comment: null },
+        { moveNumber: 1, color: 'white', san: 'e4', evaluation: 30, bestMove: null, bestMoveEval: 0, classification: 'good', comment: null },
+        { moveNumber: 1, color: 'black', san: 'f6', evaluation: 180, bestMove: null, bestMoveEval: 30, classification: 'mistake', comment: null },
       ];
       const game = buildGameRecord({
         id: 'chesscom-xyz',
