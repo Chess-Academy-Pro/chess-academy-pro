@@ -60,7 +60,11 @@ export interface EndgamePlayoutOptions {
   fallbackPlayerElo?: number;
   /** How many extra plies of student play to require in the
    *  fallback. After this many student moves, the playout is
-   *  marked complete (won the holding test). Default 4. */
+   *  marked complete (won the holding test). Default 8 — enough
+   *  to play past the critical move into an obvious-win position
+   *  (David's Photo 1 audit: "should have played out a few more
+   *  moves until it was an obvious win"). Stockfish-side moves
+   *  in between are NOT counted toward this cap. */
   fallbackPliesToPlay?: number;
   /** When true, after the curated line ends the playout enters
    *  engine fallback automatically AND completes the moment the
@@ -252,6 +256,24 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
   /** Play the opponent's curated reply (or engine move) and advance
    *  the phase. Called after the student's correct move lands. */
   const playOpponentReply = useCallback(async (): Promise<void> => {
+    // If the student's last move already ended the game (mate,
+    // stalemate, insufficient material, …), there is no reply to
+    // play — surface the outcome immediately.
+    if (chessRef.current.isGameOver()) {
+      if (chessRef.current.isCheckmate()) setFallbackOutcome('survived');
+      setPhase('complete');
+      return;
+    }
+    // Promotion is an obvious-win signal — David's Photo 1 audit
+    // wanted the playout to keep going past the critical move
+    // "until it was an obvious win." Once the student queens a
+    // pawn the lesson is over regardless of whose turn comes next.
+    const lastMove = chessRef.current.history({ verbose: true }).slice(-1)[0];
+    if (lastMove && lastMove.flags.includes('p')) {
+      setFallbackOutcome('survived');
+      setPhase('complete');
+      return;
+    }
     const curatedIdx = studentMovesPlayed * 2 + 1;
     // Curated reply available — play it after the animation delay.
     if (curatedIdx < effectiveLine.length) {
@@ -267,6 +289,11 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
         // Curated line is broken — surface as complete rather than
         // hanging the UI. The build-time audit should have caught
         // this, but defensive in case a hand-edit slipped through.
+        setPhase('complete');
+        return;
+      }
+      // Opponent's reply ended the game — stop here.
+      if (chessRef.current.isGameOver()) {
         setPhase('complete');
         return;
       }

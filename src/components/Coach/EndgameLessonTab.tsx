@@ -601,7 +601,9 @@ function PositionRunner({
                 : `Drill ${posIndex - keystoneCount + 1} of ${drillCount} · ${tier} tier`
               : `Keystone ${posIndex + 1} of ${keystoneCount}`}
             {isPlayable && playout.curatedStudentMoves > 1
-              ? ` · ${playout.studentMovesPlayed}/${playout.curatedStudentMoves} moves`
+              ? playout.studentMovesPlayed < playout.curatedStudentMoves
+                ? ` · ${playout.studentMovesPlayed}/${playout.curatedStudentMoves} moves`
+                : ' · playing it out'
               : ''}
           </p>
         </div>

@@ -221,6 +221,55 @@ describe('useEndgamePlayout', () => {
     });
   });
 
+  describe('natural endpoints (David\'s Photo 1: play past the critical moment)', () => {
+    it('terminates on student-delivered checkmate without asking for an engine reply', async () => {
+      // K+Q vs K, queen delivers mate in one. There should be no
+      // engine reply requested — chess.js says the game is over.
+      const MATE_FEN = '7k/5Q2/6K1/8/8/8/8/8 w - - 0 1';
+      const { result } = renderHook(() =>
+        useEndgamePlayout({
+          startFen: MATE_FEN,
+          solution: [], // no curated moves — straight into fallback
+          bestMove: 'Qg7#',
+          stockfishFallback: true,
+          replyDelayMs: 0,
+        }),
+      );
+      act(() => {
+        result.current.onPieceDrop(drop('f7', 'g7'));
+      });
+      await waitFor(() => {
+        expect(result.current.phase).toBe('complete');
+      });
+      expect(getCoachMove).not.toHaveBeenCalled();
+    });
+
+    it('terminates after the student promotes (obvious-win signal)', async () => {
+      // 7th-rank pawn one push from promotion, with king escort.
+      // a8=Q ends the playout immediately even though there's no
+      // checkmate yet — promotion is the obvious-win cue David
+      // wanted us to honor.
+      const PROMO_FEN = '8/P7/K7/8/8/8/8/4k3 w - - 0 1';
+      const { result } = renderHook(() =>
+        useEndgamePlayout({
+          startFen: PROMO_FEN,
+          solution: [],
+          bestMove: 'a8=Q',
+          stockfishFallback: true,
+          fallbackPliesToPlay: 8,
+          replyDelayMs: 0,
+        }),
+      );
+      act(() => {
+        result.current.onPieceDrop(drop('a7', 'a8'));
+      });
+      await waitFor(() => {
+        expect(result.current.phase).toBe('complete');
+      });
+      expect(getCoachMove).not.toHaveBeenCalled();
+    });
+  });
+
   describe('Stockfish fallback (Eval Lab stage 2)', () => {
     it('hands off to getCoachMove after the curated line ends', async () => {
       vi.mocked(getCoachMove).mockResolvedValueOnce({
