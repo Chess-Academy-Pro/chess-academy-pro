@@ -15,8 +15,7 @@
  * puzzle DB (already on disk, 15K curated). The UI verifies user
  * input via chess.js. No runtime LLM authorship.
  */
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Chess } from 'chess.js';
+import { useCallback, useMemo, useState } from 'react';
 import {
   ArrowLeft,
   Check,
@@ -33,50 +32,21 @@ import { useClickToMove } from '../../hooks/useClickToMove';
 import {
   getCalculationSkills,
   getCalculationSkillById,
-  getDrillPuzzles,
   getDrillPuzzleCount,
   type CalculationSkill,
 } from '../../services/calculationDrillService';
-import { pickConceptHint } from '../../services/puzzleConceptHint';
-
-const PUZZLES_PER_DRILL = 5;
+import type { EndgameLessonPosition } from '../../types/endgameLesson';
+import { useAdaptiveEndgameSession } from '../../hooks/useAdaptiveEndgameSession';
 
 interface CalculationTabProps {
   onExit: () => void;
 }
 
-type ViewMode = 'picker' | 'rationale' | 'drill';
-
-interface DrillState {
-  puzzles: DrillPuzzle[];
-  currentIndex: number;
-  /** Per-puzzle outcome: 'correct' | 'incorrect' | null when not
-   *  yet answered. */
-  outcomes: ('correct' | 'incorrect' | null)[];
-}
-
-interface DrillPuzzle {
-  id: string;
-  /** Starting FEN with the student to move (post-setup). */
-  fen: string;
-  /** Full alternating SAN sequence — student/opponent/student/...
-   *  The student plays each of their moves; opponent replies
-   *  auto-play. After the curated line ends, the playout extends
-   *  via Stockfish until mate / promotion / decisive material. */
-  solutionSans: string[];
-  /** Lichess puzzle rating — surfaced as difficulty info. */
-  rating: number;
-  /** Short concept hint mapped from the puzzle's theme tags. Shown
-   *  under the prompt only AFTER the student plays a wrong first
-   *  move — gives them a tactical nudge without revealing the move. */
-  conceptHint: string | null;
-}
+type ViewMode = 'picker' | 'rationale' | 'drill' | 'summary';
 
 export function CalculationTab({ onExit }: CalculationTabProps): JSX.Element {
   const [view, setView] = useState<ViewMode>('picker');
   const [skillId, setSkillId] = useState<string | null>(null);
-  const [seed, setSeed] = useState(() => Date.now());
-  const [drill, setDrill] = useState<DrillState | null>(null);
 
   const startSkill = useCallback((id: string) => {
     setSkillId(id);
@@ -85,80 +55,13 @@ export function CalculationTab({ onExit }: CalculationTabProps): JSX.Element {
 
   const startDrill = useCallback(() => {
     if (!skillId) return;
-    const raw = getDrillPuzzles(skillId, { limit: PUZZLES_PER_DRILL, seed });
-    const puzzles: DrillPuzzle[] = [];
-    for (const p of raw) {
-      // Lichess puzzle convention:
-      //   puzzle.fen   = position BEFORE the opponent's setup move
-      //   moves[0]     = opponent's setup move (auto-played)
-      //   moves[1]     = the FIRST move the student must find
-      // We apply the setup so the student is presented with the
-      // position to solve from — side-to-move is THEIR side.
-      // Previous code stored p.fen directly, which left the
-      // student looking at the opponent-to-move position and
-      // asked them to play the opponent's setup move (find-the-
-      // mate from the wrong side).
-      const c = new Chess(p.fen);
-      const ucis = p.moves.split(/\s+/).filter(Boolean);
-      if (ucis.length < 2) continue;
-      // Apply opponent's setup move (ucis[0]) → student-to-move FEN.
-      // Then convert ucis[1..] (the full puzzle solution, alternating
-      // student/opponent) to SAN so the playout runner can drive
-      // each prompt.
-      try {
-        const setupUci = ucis[0];
-        c.move({
-          from: setupUci.slice(0, 2),
-          to: setupUci.slice(2, 4),
-          promotion: setupUci.length > 4 ? (setupUci[4] as 'q' | 'r' | 'b' | 'n') : undefined,
-        });
-        const startFen = c.fen();
-        const solutionSans: string[] = [];
-        let parseOk = true;
-        for (let i = 1; i < ucis.length; i += 1) {
-          const u = ucis[i];
-          try {
-            const mv = c.move({
-              from: u.slice(0, 2),
-              to: u.slice(2, 4),
-              promotion: u.length > 4 ? (u[4] as 'q' | 'r' | 'b' | 'n') : undefined,
-            });
-            solutionSans.push(mv.san);
-          } catch {
-            parseOk = false;
-            break;
-          }
-        }
-        if (!parseOk || solutionSans.length === 0) continue;
-        puzzles.push({
-          id: p.id,
-          fen: startFen,
-          solutionSans,
-          rating: p.rating,
-          conceptHint: pickConceptHint(p.themes),
-        });
-      } catch {
-        // Skip malformed puzzles — defensive.
-      }
-    }
-    setDrill({
-      puzzles,
-      currentIndex: 0,
-      outcomes: puzzles.map(() => null),
-    });
     setView('drill');
-  }, [skillId, seed]);
+  }, [skillId]);
 
   const exitToPicker = useCallback(() => {
     setView('picker');
     setSkillId(null);
-    setDrill(null);
   }, []);
-
-  const reshuffle = useCallback(() => {
-    setSeed(Date.now());
-    if (skillId) startDrill();
-  }, [skillId, startDrill]);
 
   if (view === 'picker') {
     return <SkillPicker onPick={startSkill} onBack={onExit} />;
@@ -179,16 +82,8 @@ export function CalculationTab({ onExit }: CalculationTabProps): JSX.Element {
     );
   }
 
-  if (view === 'drill' && drill) {
-    return (
-      <DrillScreen
-        skill={skill}
-        drill={drill}
-        setDrill={setDrill}
-        onExit={exitToPicker}
-        onReshuffle={reshuffle}
-      />
-    );
+  if (view === 'drill') {
+    return <AdaptiveDrillScreen skill={skill} onExit={exitToPicker} />;
   }
 
   return <SkillPicker onPick={startSkill} onBack={onExit} />;
@@ -290,113 +185,92 @@ function RationaleScreen({ skill, onStart, onBack }: RationaleScreenProps): JSX.
   );
 }
 
-// ─── Drill screen ────────────────────────────────────────────────
+// ─── Drill screen — adaptive stream ──────────────────────────────
 
-interface DrillScreenProps {
+interface AdaptiveDrillScreenProps {
   skill: CalculationSkill;
-  drill: DrillState;
-  setDrill: React.Dispatch<React.SetStateAction<DrillState | null>>;
   onExit: () => void;
-  onReshuffle: () => void;
 }
 
-function DrillScreen({ skill, drill, setDrill, onExit, onReshuffle }: DrillScreenProps): JSX.Element {
-  const current = drill.puzzles[drill.currentIndex];
+function AdaptiveDrillScreen({ skill, onExit }: AdaptiveDrillScreenProps): JSX.Element {
+  // Adaptive endgame session scoped to this skill's puzzle themes.
+  // currentDrill auto-advances when recordOutcome is called.
+  const adaptive = useAdaptiveEndgameSession(null, { themes: skill.themes });
 
-  const advance = useCallback(() => {
-    setDrill((prev) => {
-      if (!prev) return prev;
-      if (prev.currentIndex >= prev.puzzles.length - 1) return prev;
-      return { ...prev, currentIndex: prev.currentIndex + 1 };
-    });
-  }, [setDrill]);
-
-  const recordOutcome = useCallback(
-    (firstTryPerfect: boolean) => {
-      setDrill((prev) => {
-        if (!prev) return prev;
-        // Don't overwrite an existing outcome — recordOutcome can
-        // fire multiple times on re-renders after completion; we
-        // only commit the FIRST result.
-        if (prev.outcomes[prev.currentIndex] !== null) return prev;
-        const newOutcomes = [...prev.outcomes];
-        newOutcomes[prev.currentIndex] = firstTryPerfect ? 'correct' : 'incorrect';
-        return { ...prev, outcomes: newOutcomes };
-      });
-    },
-    [setDrill],
-  );
-
-  if (!current) {
-    return <DrillSummary drill={drill} skill={skill} onReshuffle={onReshuffle} onExit={onExit} />;
-  }
-
-  const onLastPuzzle = drill.currentIndex === drill.puzzles.length - 1;
-  const allAnswered = drill.outcomes.every((o) => o !== null);
-  if (onLastPuzzle && allAnswered) {
-    return <DrillSummary drill={drill} skill={skill} onReshuffle={onReshuffle} onExit={onExit} />;
+  if (!adaptive.currentDrill) {
+    // Pool exhausted (or still loading the first puzzle on initial mount).
+    return (
+      <DrillSummary
+        skill={skill}
+        sessionRating={adaptive.sessionRating}
+        userRating={adaptive.userRating}
+        solved={adaptive.solved}
+        failed={adaptive.failed}
+        bestStreak={adaptive.bestStreak}
+        onExit={onExit}
+        onReshuffle={() => adaptive.reset()}
+      />
+    );
   }
 
   return (
-    <PuzzleRunner
-      key={`${drill.currentIndex}-${current.id}`}
-      puzzle={current}
-      drillIndex={drill.currentIndex}
-      drillTotal={drill.puzzles.length}
-      score={drill.outcomes.filter((o) => o === 'correct').length}
-      answered={drill.outcomes.filter((o) => o !== null).length}
+    <AdaptivePuzzleRunner
+      key={`${skill.id}-${adaptive.currentDrillRating}-${adaptive.solved + adaptive.failed}`}
       skill={skill}
-      currentOutcome={drill.outcomes[drill.currentIndex]}
-      onRecordOutcome={recordOutcome}
-      onAdvance={advance}
+      drill={adaptive.currentDrill}
+      drillRating={adaptive.currentDrillRating ?? 0}
+      sessionRating={adaptive.sessionRating}
+      userRating={adaptive.userRating}
+      solved={adaptive.solved}
+      failed={adaptive.failed}
+      lastAdjustment={adaptive.lastAdjustment}
+      onRecordOutcome={adaptive.recordOutcome}
       onExit={onExit}
     />
   );
 }
 
-interface PuzzleRunnerProps {
-  puzzle: DrillPuzzle;
-  drillIndex: number;
-  drillTotal: number;
-  score: number;
-  answered: number;
+interface AdaptivePuzzleRunnerProps {
   skill: CalculationSkill;
-  currentOutcome: 'correct' | 'incorrect' | null;
+  drill: EndgameLessonPosition;
+  drillRating: number;
+  sessionRating: number;
+  userRating: number;
+  solved: number;
+  failed: number;
+  lastAdjustment: 'up' | 'down' | null;
   onRecordOutcome: (firstTryPerfect: boolean) => void;
-  onAdvance: () => void;
   onExit: () => void;
 }
 
-function PuzzleRunner({
-  puzzle,
-  drillIndex,
-  drillTotal,
-  score,
-  answered,
+function AdaptivePuzzleRunner({
   skill,
-  currentOutcome,
+  drill,
+  drillRating,
+  sessionRating,
+  userRating,
+  solved,
+  failed,
+  lastAdjustment,
   onRecordOutcome,
-  onAdvance,
   onExit,
-}: PuzzleRunnerProps): JSX.Element {
+}: AdaptivePuzzleRunnerProps): JSX.Element {
   const studentSide: 'white' | 'black' =
-    puzzle.fen.split(' ')[1] === 'w' ? 'white' : 'black';
+    drill.fen.split(' ')[1] === 'w' ? 'white' : 'black';
 
-  // Drive the entire puzzle through the playout runner. The
-  // student plays each of their moves; opponent replies auto-play
-  // from the puzzle's UCI sequence. After the curated line ends,
-  // Stockfish extends until mate / promotion / decisive material —
-  // so every puzzle plays out to a clear win, not stopping mid-
-  // combination. extendToObviousWin caps at 8 fallback plies.
+  // Drive the puzzle through the playout runner with max-strength
+  // Stockfish extending to obvious win after the curated line.
   const playout = useEndgamePlayout({
-    startFen: puzzle.fen,
-    solution: puzzle.solutionSans,
+    startFen: drill.fen,
+    solution: drill.solution ?? [],
     extendToObviousWin: true,
     fallbackPliesToPlay: 8,
     fallbackDifficulty: 'hard',
     replyDelayMs: 450,
   });
   const clickToMove = useClickToMove(playout);
+
+  const [recorded, setRecorded] = useState(false);
 
   const wrongFlash = useMemo<Record<string, CSSProperties>>(() => {
     if (!playout.wrongSquare) return {};
@@ -420,15 +294,14 @@ function PuzzleRunner({
     [clickToMove.squareStyles, hintStyles, wrongFlash],
   );
 
-  // When the playout finishes, record outcome ONCE. firstTryPerfect
-  // means zero wrong attempts + no hint/reveal taken.
-  useEffect(() => {
-    if (playout.isComplete && currentOutcome === null) {
-      onRecordOutcome(playout.firstTryPerfect);
-    }
-  }, [playout.isComplete, playout.firstTryPerfect, currentOutcome, onRecordOutcome]);
+  const answered = solved + failed;
 
-  const isLast = drillIndex === drillTotal - 1;
+  const advance = useCallback(() => {
+    if (!playout.isComplete) return;
+    if (recorded) return;
+    setRecorded(true);
+    onRecordOutcome(playout.firstTryPerfect);
+  }, [playout.isComplete, playout.firstTryPerfect, recorded, onRecordOutcome]);
 
   const header = (
     <div className="px-3 py-2 md:p-4 border-b border-theme-border">
@@ -443,7 +316,8 @@ function PuzzleRunner({
         <div className="flex-1 min-w-0 text-center">
           <h2 className="text-sm font-semibold text-theme-text truncate">{skill.name}</h2>
           <p className="text-xs text-theme-text-muted truncate">
-            Puzzle {drillIndex + 1} of {drillTotal} · rating {puzzle.rating} · score {score}/{answered}
+            Puzzle #{answered + 1} · {drillRating}
+            {lastAdjustment === 'up' ? ' ↑' : lastAdjustment === 'down' ? ' ↓' : ''} · target {sessionRating} · you {userRating} · {solved}/{answered}
           </p>
         </div>
         <div className="w-[44px]" />
@@ -473,24 +347,24 @@ function PuzzleRunner({
               : 'Played through to the win.'
             : 'Play the best move — keep going until the win.'}
         </p>
-        {!playout.isComplete && playout.wrongAttempts > 0 && puzzle.conceptHint && (
+        {!playout.isComplete && playout.wrongAttempts > 0 && drill.conceptHint && (
           <div
             className="text-[12px] text-amber-300 leading-relaxed border-l-2 border-amber-500/40 pl-2"
             data-testid="calc-concept-hint"
           >
-            <span className="font-semibold">Concept:</span> {puzzle.conceptHint}
+            <span className="font-semibold">Concept:</span> {drill.conceptHint}
           </div>
         )}
-        {playout.isComplete && currentOutcome === 'correct' && (
+        {playout.isComplete && playout.firstTryPerfect && (
           <div className="flex items-center gap-1.5 text-[12px] text-green-400 font-semibold">
             <Check size={14} />
-            Correct
+            Correct — first try
           </div>
         )}
-        {playout.isComplete && currentOutcome === 'incorrect' && (
-          <div className="flex items-center gap-1.5 text-[12px] text-red-400 font-semibold">
+        {playout.isComplete && !playout.firstTryPerfect && (
+          <div className="flex items-center gap-1.5 text-[12px] text-amber-400 font-semibold">
             <X size={14} />
-            Played out — needed a hint or retry
+            Solved with hint or retry
           </div>
         )}
         {!playout.isComplete && (
@@ -523,15 +397,15 @@ function PuzzleRunner({
           Skip / Reveal
         </button>
         <span className="text-xs text-theme-text-muted font-mono">
-          {drillIndex + 1}/{drillTotal}
+          {answered}/∞
         </span>
         <button
-          onClick={onAdvance}
+          onClick={advance}
           disabled={!playout.isComplete}
           className="px-4 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold disabled:opacity-30 disabled:cursor-not-allowed"
           data-testid="calculation-next"
         >
-          {isLast ? 'Done' : 'Next'}
+          Next
         </button>
       </div>
     </div>
@@ -543,16 +417,28 @@ function PuzzleRunner({
 // ─── Summary ─────────────────────────────────────────────────────
 
 interface DrillSummaryProps {
-  drill: DrillState;
   skill: CalculationSkill;
+  sessionRating: number;
+  userRating: number;
+  solved: number;
+  failed: number;
+  bestStreak: number;
   onReshuffle: () => void;
   onExit: () => void;
 }
 
-function DrillSummary({ drill, skill, onReshuffle, onExit }: DrillSummaryProps): JSX.Element {
-  const correct = drill.outcomes.filter((o) => o === 'correct').length;
-  const total = drill.outcomes.length;
-  const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
+function DrillSummary({
+  skill,
+  sessionRating,
+  userRating,
+  solved,
+  failed,
+  bestStreak,
+  onReshuffle,
+  onExit,
+}: DrillSummaryProps): JSX.Element {
+  const total = solved + failed;
+  const percent = total > 0 ? Math.round((solved / total) * 100) : 0;
   const grade =
     percent === 100
       ? 'Perfect'
@@ -582,41 +468,24 @@ function DrillSummary({ drill, skill, onReshuffle, onExit }: DrillSummaryProps):
       </div>
       <div className="rounded-xl border-2 border-cyan-500/30 bg-cyan-500/5 p-4 text-center">
         <div className="text-4xl font-bold text-cyan-400">
-          {correct} / {total}
+          {solved} / {total}
         </div>
-        <div className="text-sm text-theme-text-muted mt-1">{percent}%</div>
+        <div className="text-sm text-theme-text-muted mt-1">{percent}% solved on first try</div>
         <div className="text-xs font-semibold text-theme-text mt-2">{grade}</div>
-      </div>
-      <div className="flex flex-col gap-2">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-theme-text-muted">
-          Puzzles
-        </h3>
-        {drill.puzzles.map((p, i) => {
-          const o = drill.outcomes[i];
-          const isCorrect = o === 'correct';
-          return (
-            <div
-              key={p.id}
-              className={`rounded-lg border p-2 flex items-center gap-2 ${
-                isCorrect
-                  ? 'border-green-500/30 bg-green-500/5'
-                  : 'border-red-500/30 bg-red-500/5'
-              }`}
-            >
-              {isCorrect ? (
-                <Check size={14} className="text-green-400 flex-shrink-0" />
-              ) : (
-                <X size={14} className="text-red-400 flex-shrink-0" />
-              )}
-              <div className="flex-1 min-w-0">
-                <div className="text-xs text-theme-text">Puzzle #{i + 1}</div>
-                <div className="text-[10px] text-theme-text-muted">
-                  rating {p.rating} · {p.solutionSans.length} ply solution starting {p.solutionSans[0]}
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        <div className="mt-3 grid grid-cols-3 gap-2 text-[11px] text-theme-text-muted">
+          <div>
+            <div className="text-cyan-400 font-mono text-base">{userRating}</div>
+            <div>Endgame rating</div>
+          </div>
+          <div>
+            <div className="text-cyan-400 font-mono text-base">{sessionRating}</div>
+            <div>Session target</div>
+          </div>
+          <div>
+            <div className="text-cyan-400 font-mono text-base">{bestStreak}</div>
+            <div>Best streak</div>
+          </div>
+        </div>
       </div>
       <div className="flex gap-2 mt-2">
         <button
