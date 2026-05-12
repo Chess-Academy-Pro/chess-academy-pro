@@ -184,6 +184,12 @@ interface BuildLessonOptions {
    *  one puzzle per lesson and bumps this index on "Practice more"
    *  to advance through the difficulty ladder. */
   puzzleIndex?: number;
+  /** Specific Lichess puzzle ID to build the tree from — bypasses
+   *  the tier+index lookup entirely. Used by the adaptive drill
+   *  flow where the puzzle is chosen by the adaptive session.
+   *  When set and the id resolves, tier/seed/puzzleIndex are
+   *  ignored. */
+  specificPuzzleId?: string;
 }
 
 /** Convert a UCI move ("e2e4", "e7e8q") to SAN by playing it on the
@@ -307,20 +313,33 @@ export function buildMatingPatternLesson(
   const tier = options.tier ?? 'beginner';
   const seed = options.seed ?? Date.now();
   const puzzleIndex = options.puzzleIndex ?? 0;
-  // Tier fallback: if the requested tier has no puzzles, walk up.
-  const tierOrder: EndgameTier[] = tier === 'mixed'
-    ? ['mixed']
-    : [tier, 'intermediate', 'advanced', 'expert', 'mixed'];
+  let rawPuzzle: RawPuzzle | undefined;
   let candidates: RawPuzzle[] = [];
-  for (const t of tierOrder) {
-    candidates = getPracticePuzzles(pattern, { tier: t, seed });
-    if (candidates.length > 0) break;
+  let wrappedIndex = 0;
+
+  if (options.specificPuzzleId) {
+    // Adaptive flow: caller has already chosen a specific puzzle.
+    // Look it up in the full pattern pool (mixed tier so we don't
+    // exclude it on rating-band grounds).
+    candidates = getPracticePuzzles(pattern, { tier: 'mixed', seed });
+    rawPuzzle = candidates.find((p) => p.id === options.specificPuzzleId);
+    wrappedIndex = rawPuzzle ? candidates.indexOf(rawPuzzle) : 0;
   }
-  if (candidates.length === 0) return null;
-  // Wrap puzzleIndex around so the user can keep tapping "Practice
-  // more" indefinitely without running out.
-  const wrappedIndex = puzzleIndex % candidates.length;
-  const rawPuzzle = candidates[wrappedIndex];
+  if (!rawPuzzle) {
+    // Tier fallback: if the requested tier has no puzzles, walk up.
+    const tierOrder: EndgameTier[] = tier === 'mixed'
+      ? ['mixed']
+      : [tier, 'intermediate', 'advanced', 'expert', 'mixed'];
+    for (const t of tierOrder) {
+      candidates = getPracticePuzzles(pattern, { tier: t, seed });
+      if (candidates.length > 0) break;
+    }
+    if (candidates.length === 0) return null;
+    // Wrap puzzleIndex around so the user can keep tapping "Practice
+    // more" indefinitely without running out.
+    wrappedIndex = puzzleIndex % candidates.length;
+    rawPuzzle = candidates[wrappedIndex];
+  }
   const puzzle = preparePuzzleForLesson(rawPuzzle);
   if (!puzzle) {
     // Try the next one if this puzzle had a UCI parse error.

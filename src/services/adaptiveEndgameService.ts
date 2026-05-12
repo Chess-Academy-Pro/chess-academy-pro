@@ -26,6 +26,7 @@
  */
 import puzzlesData from '../data/puzzles.json';
 import { calculateRatingDelta } from './puzzleService';
+import { pickConceptHint } from './puzzleConceptHint';
 import type { EndgameLesson, EndgameLessonPosition } from '../types/endgameLesson';
 
 interface RawPuzzle {
@@ -242,6 +243,10 @@ export function adaptivePuzzleToLessonPosition(
       source: `Lichess puzzle #${p.id} (rating ${p.rating})${
         lesson ? ` · ${lesson.name}` : ''
       }`,
+      // Concept hint mapped from the puzzle's theme tags. Shown
+      // under the prompt after a wrong first move so the student
+      // gets a tactical nudge without revealing the move.
+      conceptHint: pickConceptHint(p.themes) ?? undefined,
     };
   } catch {
     return null;

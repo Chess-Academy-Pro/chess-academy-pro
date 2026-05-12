@@ -30,6 +30,7 @@ import { ScrollHintBar } from '../Common/ScrollHintBar';
 import { useTeachWalkthrough } from '../../hooks/useTeachWalkthrough';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import { useClickToMove } from '../../hooks/useClickToMove';
+import { useAdaptiveEndgameSession } from '../../hooks/useAdaptiveEndgameSession';
 import { voiceService } from '../../services/voiceService';
 import { getMasteredCount } from '../../services/endgameProgressService';
 import {
@@ -90,12 +91,11 @@ export function CoachEndgamePage(): JSX.Element {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<EndgameTab>('mating-patterns');
   const [selectedPatternId, setSelectedPatternId] = useState<string | null>(null);
+  // Tier kept for backward compatibility on the recognition-only
+  // fallback; adaptive mode is the primary driver for puzzle picks.
   const [tier, setTier] = useState<EndgameTier>('beginner');
-  // Session seed — bump on each lesson load so the within-tier
-  // shuffle surfaces fresh puzzles even at the same difficulty.
   const [sessionSeed, setSessionSeed] = useState<number>(() => Date.now());
 
-  const [puzzleIndex, setPuzzleIndex] = useState<number>(0);
   const [lessonMeta, setLessonMeta] = useState<{
     rating: number;
     movesToMate: number;
@@ -104,22 +104,34 @@ export function CoachEndgamePage(): JSX.Element {
   } | null>(null);
   const walkthrough = useTeachWalkthrough();
 
-  const startLesson = useCallback(
-    (patternId: string, t: EndgameTier, seed: number, index: number): void => {
+  // Adaptive endgame session scoped to the active pattern's
+  // theme tag (when present). Drives puzzle picks on Practice More.
+  const selectedPattern = selectedPatternId ? getPatternById(selectedPatternId) : null;
+  const adaptiveThemes = useMemo<string[]>(() => {
+    if (!selectedPattern?.puzzleThemeTag) return [];
+    return [selectedPattern.puzzleThemeTag];
+  }, [selectedPattern?.puzzleThemeTag]);
+  const adaptive = useAdaptiveEndgameSession(null, { themes: adaptiveThemes });
+
+  // Build a tree for a SPECIFIC puzzle id (adaptive path).
+  const buildAndStart = useCallback(
+    (patternId: string, puzzleId: string | null): void => {
       const pattern = getPatternById(patternId);
       if (!pattern) return;
       const built = buildMatingPatternLesson(pattern, {
-        tier: t,
-        seed,
-        puzzleIndex: index,
+        tier,
+        seed: sessionSeed,
+        // Adaptive flow passes specificPuzzleId. Falls back to
+        // tier-based selection when null.
+        specificPuzzleId: puzzleId ?? undefined,
       });
       void logAppAudit({
         kind: 'coach-surface-migrated',
         category: 'subsystem',
         source: 'CoachEndgamePage.startLesson',
         summary: built
-          ? `endgame lesson started: ${pattern.name} #${built.puzzleIndex + 1}/${built.totalAvailable} (mate in ${built.movesToMate}, rating ${built.rating}, tier=${t})`
-          : `endgame lesson recognition-only: ${pattern.name} (no practice puzzles for tier=${t})`,
+          ? `endgame lesson started: ${pattern.name} #${built.puzzleIndex + 1}/${built.totalAvailable} (mate in ${built.movesToMate}, rating ${built.rating}${puzzleId ? `, adaptive` : `, tier=${tier}`})`
+          : `endgame lesson recognition-only: ${pattern.name} (no practice puzzles)`,
       });
       setSelectedPatternId(patternId);
       if (built) {
@@ -134,50 +146,81 @@ export function CoachEndgamePage(): JSX.Element {
         setLessonMeta(null);
       }
     },
-    [walkthrough],
+    [tier, sessionSeed, walkthrough],
   );
+
+  // Extract the Lichess puzzle id from the adaptive session's
+  // currentDrill source string. The drill service writes
+  // "Lichess puzzle #<id> (rating ...)" — we pull <id> back out.
+  const adaptivePuzzleId = useMemo<string | null>(() => {
+    const src = adaptive.currentDrill?.source ?? '';
+    const m = src.match(/Lichess puzzle\s*#?\s*([A-Za-z0-9]+)/);
+    return m ? m[1] : null;
+  }, [adaptive.currentDrill]);
 
   const exitLesson = useCallback((): void => {
     walkthrough.stop();
     setSelectedPatternId(null);
-    setPuzzleIndex(0);
     setLessonMeta(null);
   }, [walkthrough]);
 
-  const practiceMore = useCallback((): void => {
+  // Practice More: report the previous puzzle's outcome to the
+  // adaptive session (which steps target + Elo + picks next), then
+  // build a tree from the newly-picked puzzle.
+  const practiceMore = useCallback(
+    (firstTryPerfect: boolean): void => {
+      if (!selectedPatternId) return;
+      adaptive.recordOutcome(firstTryPerfect);
+      // The adaptive session will surface a NEW currentDrill on
+      // its next render; the effect below kicks the rebuild.
+    },
+    [selectedPatternId, adaptive],
+  );
+
+  // Whenever the adaptive session's currentDrill changes for the
+  // active pattern, rebuild the walkthrough tree to feature it.
+  useEffect(() => {
     if (!selectedPatternId) return;
-    const nextIndex = puzzleIndex + 1;
-    setPuzzleIndex(nextIndex);
-    startLesson(selectedPatternId, tier, sessionSeed, nextIndex);
-  }, [selectedPatternId, tier, sessionSeed, puzzleIndex, startLesson]);
+    if (!adaptivePuzzleId) return;
+    buildAndStart(selectedPatternId, adaptivePuzzleId);
+    // Don't depend on buildAndStart's full closure — it changes on
+    // every render via walkthrough identity. Just re-run when the
+    // puzzle id flips.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedPatternId, adaptivePuzzleId]);
 
   const reshufflePractice = useCallback((): void => {
     if (!selectedPatternId) return;
-    const newSeed = Date.now();
-    setSessionSeed(newSeed);
-    setPuzzleIndex(0);
-    startLesson(selectedPatternId, tier, newSeed, 0);
-  }, [selectedPatternId, tier, startLesson]);
+    setSessionSeed(Date.now());
+    adaptive.reset();
+  }, [selectedPatternId, adaptive]);
 
   const onTierChange = useCallback(
     (next: EndgameTier): void => {
+      // Tier is now a passive preference (used only when the
+      // pattern has no Lichess theme tag so adaptive can't run).
+      // For tagged patterns the adaptive session is the driver.
       setTier(next);
-      if (selectedPatternId) {
-        const newSeed = Date.now();
-        setSessionSeed(newSeed);
-        setPuzzleIndex(0);
-        startLesson(selectedPatternId, next, newSeed, 0);
-      }
     },
-    [selectedPatternId, startLesson],
+    [],
   );
 
-  // Picker view.
+  // Picker view — tap a pattern to start the lesson. For tagged
+  // patterns, the adaptive session will pick the first puzzle and
+  // the buildAndStart effect kicks in. For untagged ones, fall
+  // back to the tier-based path.
   if (selectedPatternId === null) {
     return <PatternPicker
       onPick={(id) => {
-        setPuzzleIndex(0);
-        startLesson(id, tier, sessionSeed, 0);
+        const pat = getPatternById(id);
+        if (pat?.puzzleThemeTag) {
+          // Adaptive will populate currentDrill, which triggers
+          // buildAndStart via the effect above.
+          setSelectedPatternId(id);
+        } else {
+          // No Lichess tag → use legacy tier-based flow.
+          buildAndStart(id, null);
+        }
       }}
       onBack={() => void navigate('/coach/home')}
       tier={tier}
@@ -447,7 +490,7 @@ interface LessonViewProps {
   } | null;
   onTierChange: (next: EndgameTier) => void;
   onExit: () => void;
-  onPracticeMore: () => void;
+  onPracticeMore: (firstTryPerfect: boolean) => void;
   onReshuffle: () => void;
 }
 
@@ -471,9 +514,19 @@ function LessonView({
   // primary interaction is always board-play, not multiple choice.
   const [wrongAttempts, setWrongAttempts] = useState<number>(0);
   const [showBailoutOptions, setShowBailoutOptions] = useState<boolean>(false);
+  // Cumulative wrong attempts across the entire lesson (all forks).
+  // Drives the adaptive Elo update when the student reaches the
+  // mating leaf — firstTryPerfect = `lessonWrongAttempts === 0`.
+  // Reset only when the LESSON changes (FEN starts over), not on
+  // each fork transition.
+  const [lessonWrongAttempts, setLessonWrongAttempts] = useState<number>(0);
+  const lessonStartFen = walkthrough.tree?.startFen;
+  useEffect(() => {
+    setLessonWrongAttempts(0);
+  }, [lessonStartFen]);
 
-  // Reset the wrong-attempt counter whenever the fork changes
-  // (forkOptions identity flips on fork transition).
+  // Reset the per-fork wrong-attempt counter whenever the fork
+  // changes (forkOptions identity flips on fork transition).
   useEffect(() => {
     setWrongAttempts(0);
     setShowBailoutOptions(false);
@@ -507,6 +560,7 @@ function LessonView({
       }
       setWrongFlash(to);
       setWrongAttempts((n) => n + 1);
+      setLessonWrongAttempts((n) => n + 1);
       window.setTimeout(() => setWrongFlash(null), 600);
       return false;
     },
@@ -887,7 +941,7 @@ function LessonView({
         )}
         <div className="flex gap-2">
           <button
-            onClick={onPracticeMore}
+            onClick={() => onPracticeMore(lessonWrongAttempts === 0)}
             className="flex-1 px-4 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold"
             data-testid="endgame-practice-more"
           >

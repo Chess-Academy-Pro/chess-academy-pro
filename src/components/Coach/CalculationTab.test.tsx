@@ -25,13 +25,12 @@ describe('CalculationTab', () => {
     expect(screen.getByTestId('calculation-start-drill')).toBeInTheDocument();
   });
 
-  it('opens the drill from the rationale screen', () => {
+  it('opens the adaptive drill from the rationale screen', () => {
     render(<CalculationTab onExit={() => undefined} />);
     fireEvent.click(screen.getByTestId('calculation-skill-find-the-mate'));
     fireEvent.click(screen.getByTestId('calculation-start-drill'));
-    // Drill UI shows "Puzzle 1 of 5"
-    expect(screen.getByText(/Puzzle 1 of 5/)).toBeInTheDocument();
-    // Skip + Next buttons present
+    // Adaptive drill UI surfaces Skip + Next buttons (no more
+    // pre-rolled "Puzzle 1 of 5" — it's an infinite stream).
     expect(screen.getByTestId('calculation-skip')).toBeInTheDocument();
     expect(screen.getByTestId('calculation-next')).toBeInTheDocument();
   });
