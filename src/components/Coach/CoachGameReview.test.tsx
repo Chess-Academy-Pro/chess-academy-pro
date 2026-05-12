@@ -131,6 +131,18 @@ vi.mock('../../services/accuracyService', () => ({
     const raw = 103.1668 * Math.exp(-0.009 * cpLoss) - 3.1668;
     return Math.max(0, Math.min(100, raw));
   },
+  // ship-2: gamePhaseService now imports winPercent + accuracyFromWinDelta
+  // (same algorithm as calculateAccuracy). Mock both so the transitive
+  // import doesn't fail at module-eval time during CoachGameReview tests.
+  winPercent: (evalCp: number) => {
+    const capped = Math.max(-1500, Math.min(1500, evalCp));
+    return 50 + 50 * (2 / (1 + Math.exp(-0.00368208 * capped)) - 1);
+  },
+  accuracyFromWinDelta: (delta: number) => {
+    const d = Math.max(0, delta);
+    const raw = 103.1668 * Math.exp(-0.04354 * d) - 3.1669;
+    return Math.max(0, Math.min(100, raw));
+  },
 }));
 
 vi.mock('../../services/boardUtils', () => ({
