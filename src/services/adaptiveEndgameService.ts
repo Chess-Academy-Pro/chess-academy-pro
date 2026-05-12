@@ -24,6 +24,7 @@
  * target; the Elo update is what the Stats page will display as
  * the player's endgame puzzle strength.
  */
+import { Chess } from 'chess.js';
 import puzzlesData from '../data/puzzles.json';
 import { calculateRatingDelta } from './puzzleService';
 import { pickConceptHint } from './puzzleConceptHint';
@@ -276,11 +277,6 @@ export function adaptivePuzzleToLessonPosition(
 ): EndgameLessonPosition | null {
   const ucis = p.moves.split(/\s+/).filter(Boolean);
   if (ucis.length < 2) return null;
-  // We can't import Chess from chess.js at module top because this
-  // file is consumed by tests without a chess instance — lazy via
-  // dynamic require for runtime.
-  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-  const { Chess } = require('chess.js');
   const chess = new Chess(p.fen);
   try {
     chess.move({
