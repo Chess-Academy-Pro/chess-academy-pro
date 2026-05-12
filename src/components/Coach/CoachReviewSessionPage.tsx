@@ -293,6 +293,10 @@ export function CoachReviewSessionPage(): JSX.Element {
         // (and the cache stays game-A-keyed against game-B's move
         // indices). Audit-driven (Coach-tab full audit, item #9).
         key={gameId}
+        // ship-5: forward gameId so `useReviewPlayback` can scope hint
+        // callouts to this specific game (no cross-game leakage via
+        // useCoachMemoryStore.hintRequests).
+        gameId={gameId}
         moves={adapted.moves}
         keyMoments={adapted.keyMoments}
         playerColor={adapted.playerColor}
