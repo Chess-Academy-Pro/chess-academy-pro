@@ -1,46 +1,42 @@
 /**
- * EvalLabQuiz behavioral test — locks in the two-stage contract:
- *   - Stage 1: "find the critical move" prompt shown (no W/D/L
- *     buttons — board-play is the only answer mechanic).
- *   - Pool only contains positions with curated bestMoves.
- *   - Progress counter renders.
- *   - Quiz pool draws from the full lesson catalog.
+ * EvalLabQuiz behavioral test — locks in the new three-stage
+ * adaptive contract:
+ *   - Pool combines keystones + Lichess endgame puzzles.
+ *   - Keystones open with Stage 0 (W/D/L recognition); Lichess
+ *     puzzles skip Stage 0 (always student-wins).
+ *   - Header shows the adaptive rating chrome.
  */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { EvalLabQuiz } from './EvalLabQuiz';
-import { getAllEndgameLessons } from '../../services/endgameLessonsService';
 
 vi.mock('../../services/lichessTablebaseService', () => ({
   lookupTablebase: vi.fn().mockResolvedValue(null),
 }));
 
 vi.mock('../../services/coachPlaySession', () => ({
-  resolveConfig: vi.fn(() => ({ skill: 8, moveTimeMs: 500, label: 'Easy' })),
+  resolveConfig: vi.fn(() => ({ skill: 20, moveTimeMs: 1000, label: 'Hard' })),
   getCoachMove: vi.fn(),
 }));
 
 describe('EvalLabQuiz', () => {
-  it('renders stage 1 prompt with no W/D/L buttons', () => {
+  it('renders the adaptive header (rating + target + score)', () => {
     render(<EvalLabQuiz onExit={() => undefined} />);
-    // Stage 1 prompt visible — the play-the-move instruction.
-    expect(screen.getByText(/Stage 1 · Find the move/)).toBeInTheDocument();
-    // No multiple-choice buttons.
-    expect(screen.queryByTestId('eval-lab-guess-white-wins')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('eval-lab-guess-draw')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('eval-lab-guess-black-wins')).not.toBeInTheDocument();
+    // New header shape: "#1 · <rating>... · target X · you Y · 0/0"
+    expect(screen.getByText(/target /)).toBeInTheDocument();
+    expect(screen.getByText(/you /)).toBeInTheDocument();
   });
 
-  it('shows progress counter (Position N of M)', () => {
+  it('opens with EITHER Stage 0 (keystone) or Stage 1 (Lichess) — both forms valid', () => {
     render(<EvalLabQuiz onExit={() => undefined} />);
-    expect(screen.getByText(/Position 1 of/)).toBeInTheDocument();
+    const stage0 = screen.queryByText(/Stage 0 · What's the result/);
+    const stage1 = screen.queryByText(/Stage 1 · Find the critical move/);
+    expect(stage0 || stage1).not.toBeNull();
   });
 
-  it('quiz pool draws only positions with curated bestMoves', () => {
-    const withBestMove = getAllEndgameLessons()
-      .flatMap((l) => l.positions)
-      .filter((p) => !!p.bestMove);
-    // Must have enough material to drive the play-the-move stage.
-    expect(withBestMove.length).toBeGreaterThanOrEqual(1);
+  it('pool is non-empty (at least 1 eligible item)', () => {
+    render(<EvalLabQuiz onExit={() => undefined} />);
+    // Header always renders when there's at least one item.
+    expect(screen.getByText('Eval Lab')).toBeInTheDocument();
   });
 });
