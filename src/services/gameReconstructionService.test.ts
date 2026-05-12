@@ -62,13 +62,17 @@ describe('reconstructMovesFromGame', () => {
   });
 
   it('merges annotations (evaluation, bestMove, classification, comment)', () => {
+    // Evals are CENTIPAWNS (White POV) — the unit MoveAnnotation
+    // standardised on when `bestMoveEval` was added. Reconstruction
+    // passes the value through unchanged now (no more pawn→cp `* 100`).
     const annotations: MoveAnnotation[] = [
       {
         moveNumber: 1,
         color: 'white',
         san: 'e4',
-        evaluation: 0.3,
+        evaluation: 30,
         bestMove: 'd4',
+        bestMoveEval: 0,
         classification: 'good',
         comment: 'Solid opening move',
       },
@@ -76,8 +80,9 @@ describe('reconstructMovesFromGame', () => {
         moveNumber: 1,
         color: 'black',
         san: 'e5',
-        evaluation: 0.1,
+        evaluation: 10,
         bestMove: 'c5',
+        bestMoveEval: 30,
         classification: 'book',
         comment: 'Classical response',
       },
@@ -90,7 +95,6 @@ describe('reconstructMovesFromGame', () => {
 
     const moves = reconstructMovesFromGame(game);
 
-    // Annotations store eval in pawns (0.3) → reconstruction converts to centipawns (30)
     expect(moves[0].evaluation).toBe(30);
     expect(moves[0].bestMove).toBe('d4');
     expect(moves[0].classification).toBe('good');
@@ -153,13 +157,15 @@ describe('reconstructMovesFromGame', () => {
   });
 
   it('chains preMoveEval from previous move evaluations', () => {
+    // Centipawn evals, same contract as the merge test above.
     const annotations: MoveAnnotation[] = [
       {
         moveNumber: 1,
         color: 'white',
         san: 'e4',
-        evaluation: 0.3,
+        evaluation: 30,
         bestMove: null,
+        bestMoveEval: 0,
         classification: 'good',
         comment: null,
       },
@@ -167,8 +173,9 @@ describe('reconstructMovesFromGame', () => {
         moveNumber: 1,
         color: 'black',
         san: 'e5',
-        evaluation: -0.1,
+        evaluation: -10,
         bestMove: null,
+        bestMoveEval: 30,
         classification: 'book',
         comment: null,
       },
@@ -176,8 +183,9 @@ describe('reconstructMovesFromGame', () => {
         moveNumber: 2,
         color: 'white',
         san: 'Nf3',
-        evaluation: 0.5,
+        evaluation: 50,
         bestMove: null,
+        bestMoveEval: -10,
         classification: 'good',
         comment: null,
       },
@@ -192,9 +200,9 @@ describe('reconstructMovesFromGame', () => {
 
     // First move has no previous eval
     expect(moves[0].preMoveEval).toBeNull();
-    // Second move's preMoveEval = first move's evaluation (0.3 pawns → 30 centipawns)
+    // Second move's preMoveEval = first move's evaluation (30 cp)
     expect(moves[1].preMoveEval).toBe(30);
-    // Third move's preMoveEval = second move's evaluation (-0.1 pawns → -10 centipawns)
+    // Third move's preMoveEval = second move's evaluation (-10 cp)
     expect(moves[2].preMoveEval).toBe(-10);
   });
 

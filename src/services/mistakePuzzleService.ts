@@ -397,13 +397,18 @@ async function analyzeGameWithStockfish(
       evalBefore: evalBeforeFromPlayer,
     });
 
-    // Store annotation for the game record
+    // Store annotation for the game record. Centipawns, White POV —
+    // same contract as gameAnalysisService (legacy `/ 100` storage
+    // retired when `bestMoveEval` was added).
     annotations.push({
       moveNumber,
       color: moveColor,
       san,
-      evaluation: evalAfter / 100,
+      evaluation: evalAfter,
       bestMove,
+      // `evalBefore` is the engine's read of the position before this
+      // move — what the player could have achieved with best play.
+      bestMoveEval: evalBefore,
       classification,
       comment: null,
     });
@@ -503,11 +508,15 @@ async function generateFromAnnotations(
       }
 
       if (prevEval !== null) {
-        // Eval is from white's perspective in coach games
+        // Both evals are White-POV centipawns. The `* 100` that used
+        // to live here compensated for the legacy pawn-unit storage
+        // in gameAnalysisService — that storage was switched to
+        // centipawns when `bestMoveEval` was added, so the raw
+        // difference IS the cpLoss now.
         if (playerColor === 'white') {
-          cpLoss = Math.round(Math.max(0, (prevEval - annotation.evaluation) * 100));
+          cpLoss = Math.round(Math.max(0, prevEval - annotation.evaluation));
         } else {
-          cpLoss = Math.round(Math.max(0, (annotation.evaluation - prevEval) * 100));
+          cpLoss = Math.round(Math.max(0, annotation.evaluation - prevEval));
         }
       }
     }

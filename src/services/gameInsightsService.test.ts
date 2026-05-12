@@ -139,14 +139,17 @@ describe('gameInsightsService', () => {
       await db.profiles.add(buildUserProfile({ id: 'p1', name: 'TestUser' }));
 
       // Default PGN has 6 plies (1.e4 e5 2.Nf3 Nc6 3.Bb5 a6). Provide an
-      // annotation per ply so gameNeedsAnalysis() returns false.
+      // annotation per ply so gameNeedsAnalysis() returns false. Evals
+      // are centipawns (White POV) with `bestMoveEval` set — matches
+      // the post-ship-1 annotation shape so gameNeedsAnalysis doesn't
+      // flag the record as a pre-fix legacy record.
       const fullAnnotations = [
-        { moveNumber: 1, color: 'white' as const, san: 'e4', evaluation: 0.3, bestMove: 'e4', classification: 'good' as const },
-        { moveNumber: 1, color: 'black' as const, san: 'e5', evaluation: 0.2, bestMove: 'e5', classification: 'good' as const },
-        { moveNumber: 2, color: 'white' as const, san: 'Nf3', evaluation: 0.3, bestMove: 'Nf3', classification: 'good' as const },
-        { moveNumber: 2, color: 'black' as const, san: 'Nc6', evaluation: 0.2, bestMove: 'Nc6', classification: 'good' as const },
-        { moveNumber: 3, color: 'white' as const, san: 'Bb5', evaluation: 0.3, bestMove: 'Bb5', classification: 'good' as const },
-        { moveNumber: 3, color: 'black' as const, san: 'a6', evaluation: 0.2, bestMove: 'a6', classification: 'good' as const },
+        { moveNumber: 1, color: 'white' as const, san: 'e4', evaluation: 30, bestMove: 'e4', bestMoveEval: 0, classification: 'good' as const, comment: null },
+        { moveNumber: 1, color: 'black' as const, san: 'e5', evaluation: 20, bestMove: 'e5', bestMoveEval: 30, classification: 'good' as const, comment: null },
+        { moveNumber: 2, color: 'white' as const, san: 'Nf3', evaluation: 30, bestMove: 'Nf3', bestMoveEval: 20, classification: 'good' as const, comment: null },
+        { moveNumber: 2, color: 'black' as const, san: 'Nc6', evaluation: 20, bestMove: 'Nc6', bestMoveEval: 30, classification: 'good' as const, comment: null },
+        { moveNumber: 3, color: 'white' as const, san: 'Bb5', evaluation: 30, bestMove: 'Bb5', bestMoveEval: 20, classification: 'good' as const, comment: null },
+        { moveNumber: 3, color: 'black' as const, san: 'a6', evaluation: 20, bestMove: 'a6', bestMoveEval: 30, classification: 'good' as const, comment: null },
       ];
 
       await db.games.add(
@@ -158,6 +161,7 @@ describe('gameInsightsService', () => {
           blackElo: 1500,
           eco: 'C65',
           annotations: fullAnnotations,
+          fullyAnalyzed: true,
         }),
       );
 

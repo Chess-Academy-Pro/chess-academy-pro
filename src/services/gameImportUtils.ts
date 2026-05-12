@@ -102,8 +102,15 @@ export function detectBlunders(pgn: string): MoveAnnotation[] | null {
         moveNumber,
         color,
         san,
-        evaluation: curr.cp / 100,
+        // Eval stored in CENTIPAWNS (White POV) to match the contract
+        // established by gameAnalysisService — the legacy `curr.cp / 100`
+        // pawn-unit storage was retired when `bestMoveEval` was added.
+        evaluation: curr.cp,
         bestMove: null,
+        // `prev.cp` is the engine's read of the position BEFORE this
+        // move — i.e., what the player could have achieved with best
+        // play. Same cp/White-POV unit as `evaluation`.
+        bestMoveEval: prev.cp,
         classification,
         comment: null,
       });

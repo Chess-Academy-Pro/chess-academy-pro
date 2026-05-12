@@ -346,8 +346,17 @@ export interface MoveAnnotation {
   moveNumber: number;
   color: 'white' | 'black';
   san: string;
+  /** Stockfish eval AFTER this move was played, in centipawns from
+   *  White's perspective. +200 = White is up ~2 pawns. */
   evaluation: number | null;
   bestMove: string | null;
+  /** Stockfish eval if the engine's best move had been played from the
+   *  position BEFORE this move — same unit (centipawns, White POV) as
+   *  `evaluation`. Used by review accuracy / missed-tactic / missed-
+   *  opportunity surfaces to compare what the player got vs what they
+   *  could have gotten. Undefined on annotations produced before this
+   *  field existed — `gameNeedsAnalysis` flags those for re-analysis. */
+  bestMoveEval: number | null;
   classification: MoveClassification;
   comment: string | null;
 }

@@ -115,7 +115,12 @@ function adaptGameRecord(
       classification: (annot?.classification as MoveClassification | null) ?? null,
       expanded: false,
       bestMove: annot?.bestMove ?? null,
-      bestMoveEval: null,
+      // Propagate the annotation's `bestMoveEval` (centipawns, White POV)
+      // so the review's Missed Tactics + Missed Opportunities surfaces
+      // can compute the swing the player conceded. Pre-fix annotations
+      // are flagged for re-analysis by `gameNeedsAnalysis`, so by the
+      // time we read here the field is reliably populated.
+      bestMoveEval: annot?.bestMoveEval ?? null,
       preMoveEval: prevEval,
     });
     prevEval = evaluation;

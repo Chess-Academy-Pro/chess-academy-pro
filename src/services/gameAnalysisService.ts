@@ -242,21 +242,37 @@ async function analyzeGameOnWorker(
       moveNumber,
       color,
       san: moves[moveIdx],
-      evaluation: evalAfter !== null ? evalAfter / 100 : null,
+      // Evals stored in CENTIPAWNS (White POV) — the unit Stockfish
+      // returns natively and every downstream threshold (BLUNDER_CP,
+      // MISS_EVAL_THRESHOLD, MIN_EVAL_SWING, winPercent's sigmoid
+      // coefficient) is calibrated for. Pre-fix records that stored
+      // pawn-units (evalAfter / 100) are flagged for re-analysis via
+      // the missing `bestMoveEval` field in `gameNeedsAnalysis`.
+      evaluation: evalAfter !== null ? evalAfter : null,
       bestMove: null,
+      // `bestMoveEval` = engine's read of the position BEFORE this move
+      // (i.e., what the player could have achieved with best play),
+      // same cp/White-POV unit as `evaluation`. Shallow value for
+      // non-mistakes; refined to BEST_MOVE_DEPTH for mistakes below.
+      bestMoveEval: evalBefore !== null ? evalBefore : null,
       classification,
       comment: null,
     });
   }
 
-  // Get best moves for mistakes (deeper analysis)
+  // Get best moves + refined evals for mistakes (deeper analysis)
   for (const moveIdx of mistakeIndices) {
     if (_abortAnalysis) return null;
     try {
       const result = await worker.analyzePosition(fens[moveIdx], BEST_MOVE_DEPTH);
       annotations[moveIdx].bestMove = result.bestMove;
+      // Overwrite the shallow bestMoveEval with the deeper-depth value
+      // for this position. Same engine, deeper search — keeps the swing
+      // math (detectMisses / detectMissedTactics) on the most reliable
+      // number available for the moves where it actually matters.
+      annotations[moveIdx].bestMoveEval = result.evaluation;
     } catch {
-      // Leave bestMove null
+      // Leave bestMove null + keep the shallow bestMoveEval
     }
   }
 
@@ -297,6 +313,10 @@ async function analyzeGamePositions(game: GameRecord): Promise<MoveAnnotation[] 
 
     let classification: MoveClassification = 'good';
     let bestMove: string | null = null;
+    // `refinedBestMoveEval` overrides `evalBefore` when a deeper analysis
+    // succeeds for this mistake; otherwise we fall back to the shallow
+    // pre-move eval (see annotation push below).
+    let refinedBestMoveEval: number | null = null;
 
     if (evalBefore !== null && evalAfter !== null) {
       const cpLoss = isWhiteMove
@@ -309,8 +329,9 @@ async function analyzeGamePositions(game: GameRecord): Promise<MoveAnnotation[] 
         try {
           const bestAnalysis: StockfishAnalysis = await stockfishEngine.analyzePosition(fens[moveIdx], BEST_MOVE_DEPTH);
           bestMove = bestAnalysis.bestMove;
+          refinedBestMoveEval = bestAnalysis.evaluation;
         } catch {
-          // Leave bestMove null
+          // Leave bestMove null + keep the shallow bestMoveEval below
         }
       }
     }
@@ -319,8 +340,13 @@ async function analyzeGamePositions(game: GameRecord): Promise<MoveAnnotation[] 
       moveNumber,
       color,
       san: moves[moveIdx],
-      evaluation: evalAfter !== null ? evalAfter / 100 : null,
+      // Centipawns, White POV — same contract as analyzeGameOnWorker.
+      evaluation: evalAfter !== null ? evalAfter : null,
       bestMove,
+      // Deeper-depth value for refined mistakes; shallow `evalBefore`
+      // otherwise. Both are cp/White-POV — same unit as `evaluation`.
+      bestMoveEval: refinedBestMoveEval !== null ? refinedBestMoveEval
+        : (evalBefore !== null ? evalBefore : null),
       classification,
       comment: null,
     });
@@ -363,11 +389,28 @@ export async function analyzeSingleGame(
  * heuristic (`annotations.length < moves.length / 2`) is kept as a
  * fallback for games imported before the flag existed — once the
  * flag is set, the heuristic is never consulted again.
+ *
+ * Also flags annotations produced before the `bestMoveEval` field
+ * existed. Those records stored `evaluation` in pawn units (legacy
+ * `/ 100` storage) — running the new cp-calibrated consumer math
+ * against them would underreport every accuracy / swing by a factor
+ * of 100. Re-running Stockfish normalises to centipawns and
+ * populates `bestMoveEval` for the missed-tactic / missed-opportunity
+ * surfaces. Master games and sample-seeded games already carry
+ * pre-baked annotations in the correct unit, so they short-circuit
+ * out of this branch via the earlier guards.
  */
 export function gameNeedsAnalysis(game: GameRecord): boolean {
   if (game.isMasterGame) return false;
-  if (game.fullyAnalyzed === true) return false;
   if (!game.annotations || game.annotations.length === 0) return true;
+
+  // Pre-`bestMoveEval` annotations are stale-unit (pawns) — re-analyze.
+  // Hand-curated sample games carry the field; master games are gated
+  // out above. Only real Stockfish-produced legacy records hit this.
+  const first = game.annotations[0];
+  if (first.bestMoveEval === undefined) return true;
+
+  if (game.fullyAnalyzed === true) return false;
 
   // Legacy fallback for games imported before the fullyAnalyzed flag.
   const { moves } = replayPgnToFens(game.pgn);
