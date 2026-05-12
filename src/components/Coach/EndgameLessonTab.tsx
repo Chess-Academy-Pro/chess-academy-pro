@@ -32,7 +32,7 @@ import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import { useClickToMove } from '../../hooks/useClickToMove';
-import { useAdaptiveDrillSession } from '../../hooks/useAdaptiveDrillSession';
+import { useAdaptiveEndgameSession } from '../../hooks/useAdaptiveEndgameSession';
 import {
   getDrillPositionsForLesson,
   getDrillPuzzleCount,
@@ -257,7 +257,7 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
   type DrillMode = 'fixed' | 'adaptive';
   const [drillMode, setDrillMode] = useState<DrillMode>('adaptive');
 
-  const adaptive = useAdaptiveDrillSession(lesson, { initialRating: 1200 });
+  const adaptive = useAdaptiveEndgameSession(lesson);
   // History of completed adaptive drills + the current one (if any).
   // The current drill comes from adaptive.currentDrill; played
   // drills get pushed into adaptiveHistory on recordOutcome.
@@ -336,10 +336,20 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
       if (adaptive.currentDrill) {
         setAdaptiveHistory((prev) => [...prev, adaptive.currentDrill as EndgameLessonPosition]);
       }
-      adaptive.recordOutcome(stats);
+      // New adaptive algorithm uses a binary correct/wrong signal
+      // (matches the tactic puzzle tab). First-try-perfect = no
+      // wrong attempts AND no hint/reveal taken — `firstTryPerfect`
+      // is tracked by useEndgamePlayout but we only have
+      // `wrongAttempts` here; treat 0 wrong attempts as the proxy
+      // for first-try-perfect since hint usage already flips
+      // firstTryPerfect inside the hook and would have surfaced
+      // wrongAttempts via the same playout state.
+      adaptive.recordOutcome(stats.wrongAttempts === 0);
     },
     [drillMode, isAdaptiveCurrent, adaptive],
   );
+
+  const completedCount = adaptive.solved + adaptive.failed;
 
   // Auto-advance posIndex when a new adaptive drill appears at the
   // tail so the student lands on it immediately without clicking
@@ -347,13 +357,13 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
   // currentDrill changing.
   useEffect(() => {
     if (drillMode !== 'adaptive') return;
-    if (adaptive.completedCount === 0) return;
+    if (completedCount === 0) return;
     setPosIndex(allPositions.length - 1);
-  }, [drillMode, adaptive.completedCount, allPositions.length]);
+  }, [drillMode, completedCount, allPositions.length]);
 
   return (
     <PositionRunner
-      key={`${lesson.id}-${posIndex}-${drillSeed}-${tier}-${drillMode}-${adaptive.completedCount}`}
+      key={`${lesson.id}-${posIndex}-${drillSeed}-${tier}-${drillMode}-${completedCount}`}
       lesson={lesson}
       position={position}
       posIndex={posIndex}
@@ -365,9 +375,10 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
       isMastered={isMastered}
       drillMode={drillMode}
       onDrillModeChange={setDrillMode}
-      adaptiveTargetRating={adaptive.targetRating}
-      adaptiveCompletedCount={adaptive.completedCount}
+      adaptiveTargetRating={adaptive.sessionRating}
+      adaptiveCompletedCount={completedCount}
       adaptiveLastAdjustment={adaptive.lastAdjustment}
+      adaptiveUserRating={adaptive.userRating}
       onTierChange={onTierChange}
       onExit={onExit}
       onPrev={goPrev}
@@ -403,7 +414,10 @@ interface PositionRunnerProps {
   /** Adaptive drills completed in this session. */
   adaptiveCompletedCount: number;
   /** Last adjustment direction — for the up/down arrow chip. */
-  adaptiveLastAdjustment: 'up' | 'down' | 'hold' | null;
+  adaptiveLastAdjustment: 'up' | 'down' | null;
+  /** Persistent user endgame Elo. Surfaces beside the session
+   *  target in the header so the student sees both numbers. */
+  adaptiveUserRating: number;
   onTierChange: (next: DrillTier) => void;
   onExit: () => void;
   onPrev: () => void;
@@ -436,6 +450,7 @@ function PositionRunner({
   adaptiveTargetRating,
   adaptiveCompletedCount,
   adaptiveLastAdjustment,
+  adaptiveUserRating,
   onTierChange,
   onExit,
   onPrev,
@@ -467,6 +482,10 @@ function PositionRunner({
     // material. Keystones: keep the existing fixed-fallback path
     // (their lines are curated to end at an instructive point).
     extendToObviousWin: isDrill,
+    // Max-strength Stockfish on the puzzle-extension path so the
+    // engine plays the best defense — the student earns the win
+    // against optimal play, not a weakened sparring partner.
+    fallbackDifficulty: 'hard',
     replyDelayMs: 450,
   });
   const studentSide = playout.studentSide;
@@ -578,7 +597,7 @@ function PositionRunner({
           <p className="text-xs text-theme-text-muted truncate">
             {isDrill
               ? drillMode === 'adaptive'
-                ? `Drill #${adaptiveCompletedCount + 1} · target ${adaptiveTargetRating}${adaptiveLastAdjustment === 'up' ? ' ↑' : adaptiveLastAdjustment === 'down' ? ' ↓' : ''}`
+                ? `Drill #${adaptiveCompletedCount + 1} · target ${adaptiveTargetRating}${adaptiveLastAdjustment === 'up' ? ' ↑' : adaptiveLastAdjustment === 'down' ? ' ↓' : ''} · you ${adaptiveUserRating}`
                 : `Drill ${posIndex - keystoneCount + 1} of ${drillCount} · ${tier} tier`
               : `Keystone ${posIndex + 1} of ${keystoneCount}`}
             {isPlayable && playout.curatedStudentMoves > 1

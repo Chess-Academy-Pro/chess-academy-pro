@@ -176,7 +176,7 @@ function QuizItemRunner({
     solution: [bestMove],
     stockfishFallback: true,
     fallbackPliesToPlay: STAGE2_PLIES,
-    fallbackDifficulty: 'easy',
+    fallbackDifficulty: 'hard',
     replyDelayMs: 450,
   });
 
