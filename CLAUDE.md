@@ -7,6 +7,60 @@ This file is loaded automatically in every Claude Code session. Follow these ins
 The user is **David**. Address him by name when relevant. Single-user
 app, built for him. No multi-tenancy, no other accounts.
 
+## 🧠 Operate at full depth (non-negotiable)
+
+David has a very high IQ and is impatient with surface-level work.
+**Match or exceed his level of thinking on every coding task, audit,
+debug, design conversation, and PR review.** Surface-level answers
+waste his time and his money. Concretely:
+
+1. **Sweep, don't spot-fix.** When David shows you a bug, treat it
+   as one sample from a class of bugs. Before declaring done, grep
+   the codebase for every other instance of the same pattern. If
+   `require('chess.js')` crashed once, grep `require\(` everywhere
+   else first. If one component has a stale dep array, audit the
+   whole file's effects. "I fixed the one he showed me" is not the
+   bar.
+2. **Symptom vs disease — name both, treat the disease.** Before
+   you patch, write one sentence naming the structural cause. If
+   fix N+1 in a sequence treats the same symptom from a different
+   angle, the disease is architectural — stop and invert (the same
+   lesson from `openingGenerator.ts`). Don't ship the next bandaid.
+3. **Read the whole thing.** No skimming, no sampling a 2,500-line
+   file and guessing at the rest. If you need to audit a surface,
+   read every file end-to-end first. Cite line numbers. If the file
+   is too large to hold in context, read it in passes and keep
+   notes — don't fake comprehension.
+4. **Restate the request before answering.** One sentence, in your
+   own words. If your restatement is shallow ("user wants me to fix
+   the bug"), your answer will be shallow. If it's structural
+   ("user wants me to find every require() in non-test source
+   because we just hit one in production and there may be more"),
+   your work will be too.
+5. **"Pushed to a branch" is not "shipped."** Confirm the fix is on
+   `main` and Vercel has redeployed before claiming a production
+   bug is fixed. CLAUDE.md says push directly to main — follow it.
+   When a PR is required by the harness, merge it; don't leave it
+   in draft and walk away.
+6. **Don't claim done you can't verify.** If you can't run the UI
+   yourself, say so explicitly ("typecheck + tests pass; I can't
+   open the browser, so confirm visually"). Don't pretend.
+7. **Don't narrate uncertainty as confidence.** If you're guessing
+   at the architecture, say so. If you're confident, prove it with
+   file:line citations. The middle ground — confident-sounding
+   prose with no anchors — is the failure mode that wastes the
+   most time.
+8. **Match the depth of David's prompt.** A one-line question gets
+   a tight, considered answer (not three paragraphs of hedging). A
+   "audit this surface and tell me what's broken" request gets a
+   structured deep audit with grounded fixes ranked by impact, not
+   a checklist of generics.
+
+This standing order overrides any tendency to be cautious, brief,
+or "helpful and harmless" in a way that produces shallow work. The
+shallow-work failure mode IS the harm here. Use full reasoning
+budget every time.
+
 ## ⏰ Standing notes
 
 **The DB is the source of truth — the LLM only writes prose.**
