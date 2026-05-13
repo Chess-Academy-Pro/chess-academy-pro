@@ -41,6 +41,37 @@ async function gotoSession(page: Page, gameId: string): Promise<void> {
   // though the Dexie record is in place. Poll Dexie directly for
   // the record so the wait is deterministic instead of dependent
   // on a React re-render race.
+  //
+  // Also stub the LLM endpoints — CoachGameReview's mount fires
+  // generateReviewNarration which calls DeepSeek/Anthropic for the
+  // intro paragraph. Under suite-level contention the embedded
+  // fallback keys can rate-limit and the walk-UI gates on the
+  // narration being ready, so the testid never mounts. A cheap
+  // canned response keeps every session test deterministic.
+  await page.route(/api\.deepseek\.com|api\.anthropic\.com/, async (route) => {
+    const url = route.request().url();
+    if (url.includes('anthropic.com')) {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          id: 'stub-msg', type: 'message', role: 'assistant',
+          content: [{ type: 'text', text: 'Walk-through intro.' }],
+          stop_reason: 'end_turn', usage: { input_tokens: 1, output_tokens: 1 },
+        }),
+      });
+    } else {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          id: 'stub-chatcmpl', object: 'chat.completion',
+          choices: [{ index: 0, message: { role: 'assistant', content: 'Walk-through intro.' }, finish_reason: 'stop' }],
+          usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+        }),
+      });
+    }
+  });
   await page.goto('/coach/review');
   await page.waitForSelector('[data-testid="coach-review-list-page"]', { timeout: 15_000 });
   await page.waitForFunction(
