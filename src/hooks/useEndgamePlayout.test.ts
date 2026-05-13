@@ -151,6 +151,68 @@ describe('useEndgamePlayout', () => {
     });
   });
 
+  describe('acceptableSans (Phase 6 — eval-tolerant gate)', () => {
+    it('accepts an alternate SAN as if it were curated-correct', async () => {
+      const { result } = renderHook(() =>
+        useEndgamePlayout({
+          startFen: KP_FEN,
+          solution: ['a5'],
+          // Alternative: just push the king to the centre instead.
+          // In the real review flow this comes from useAcceptableMoves'
+          // multipv eval; here we hand it in directly.
+          acceptableSans: ['Kd2'],
+          replyDelayMs: 0,
+        }),
+      );
+      let accepted = false;
+      act(() => {
+        accepted = result.current.onPieceDrop(drop('c1', 'd2'));
+      });
+      expect(accepted).toBe(true);
+      expect(result.current.wrongAttempts).toBe(0);
+      expect(result.current.firstTryPerfect).toBe(true);
+      await waitFor(() => {
+        expect(result.current.studentMovesPlayed).toBe(1);
+      });
+    });
+
+    it('still rejects moves outside the acceptable set', () => {
+      const { result } = renderHook(() =>
+        useEndgamePlayout({
+          startFen: KP_FEN,
+          solution: ['a5'],
+          acceptableSans: ['Kd2'],
+          replyDelayMs: 0,
+        }),
+      );
+      let accepted = true;
+      act(() => {
+        // Pushing the king backwards is neither expected nor in the
+        // acceptable set — should flash red as before.
+        accepted = result.current.onPieceDrop(drop('c1', 'b1'));
+      });
+      expect(accepted).toBe(false);
+      expect(result.current.wrongAttempts).toBe(1);
+      expect(result.current.firstTryPerfect).toBe(false);
+    });
+
+    it('is inert when acceptableSans is omitted (strict mode preserved)', () => {
+      const { result } = renderHook(() =>
+        useEndgamePlayout({
+          startFen: KP_FEN,
+          solution: ['a5'],
+          replyDelayMs: 0,
+        }),
+      );
+      let accepted = true;
+      act(() => {
+        accepted = result.current.onPieceDrop(drop('c1', 'd2'));
+      });
+      expect(accepted).toBe(false);
+      expect(result.current.wrongAttempts).toBe(1);
+    });
+  });
+
   describe('reveal and reset', () => {
     it('reveal auto-plays the remaining curated line and marks complete', () => {
       const { result } = renderHook(() =>
