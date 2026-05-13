@@ -674,6 +674,7 @@
       {
         "fen": "5rk1/5p1p/8/3N4/8/8/1B6/7K w - - 0 1",
         "movesToMate": 1,
+        "solution": ["Ne7#"],
         "sourceComment": "The Suffocation Mate works by using the knight to attack the enemy king and the bishop to confine the king's escape routes."
       },
       {
@@ -714,6 +715,7 @@
       {
         "fen": "r4r1k/ppn1NBpp/4b3/4P3/3p1R2/1P6/P1P3PP/R5K1 w - - 0 1",
         "movesToMate": 2,
+        "solution": ["Ng6+", "hxg6", "Rh4#"],
         "sourceComment": "From Max Euwe - Wiersma, 1920."
       },
       {
@@ -767,6 +769,7 @@
       {
         "fen": "5rk1/7p/8/6N1/8/8/1BB5/6K1 w - - 0 1",
         "movesToMate": 1,
+        "solution": ["Bxh7#"],
         "sourceComment": "Blackburne's Mate is named for Joseph Henry Blackburne. This checkmate utilizes an enemy rook (or bishop or queen) to confine the black king's escape to the f8 square.. One of the bishops confines the black king's movement by operating at a distance, while the knight and the other bishop operate within close range."
       },
       {
