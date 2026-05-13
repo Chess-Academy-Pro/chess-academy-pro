@@ -300,17 +300,26 @@ describe('PracticeMode', () => {
   it('clicking hint advances through levels', async () => {
     renderPractice();
 
-    // Click 1: level 0→1 (arrows)
+    // Click 1: level 0→1 (arrows). useHintSystem flips isAnalyzing=true
+    // one microtask later, which sets button.disabled=true on
+    // HintButton — so a back-to-back click would be a silent no-op.
+    // Wait for the level bump AND for the button to be re-enabled
+    // before issuing the second click.
     await act(async () => {
       screen.getByTestId('hint-button').click();
     });
-    expect(screen.getByTestId('hint-button')).toHaveAttribute('data-level', '1');
+    await waitFor(() => {
+      expect(screen.getByTestId('hint-button')).toHaveAttribute('data-level', '1');
+      expect(screen.getByTestId('hint-button')).not.toBeDisabled();
+    });
 
     // Click 2: level 1→2 (nudge text appears)
     await act(async () => {
       screen.getByTestId('hint-button').click();
     });
-    expect(screen.getByTestId('hint-button')).toHaveAttribute('data-level', '2');
+    await waitFor(() => {
+      expect(screen.getByTestId('hint-button')).toHaveAttribute('data-level', '2');
+    });
   });
 
   it('hint resets after making the correct move', async () => {
