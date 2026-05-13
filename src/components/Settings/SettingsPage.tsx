@@ -242,7 +242,9 @@ function BoardGameplayTab({ profile, setProfile }: TabProps): JSX.Element {
   const [showLegalMoves, setShowLegalMoves] = useState(prefs.showLegalMoves);
   const [showCoordinates, setShowCoordinates] = useState(prefs.showCoordinates);
   const [pieceAnimationSpeed, setPieceAnimationSpeed] = useState<PieceAnimationSpeed>(prefs.pieceAnimationSpeed);
-  const [boardOrientation, setBoardOrientation] = useState(prefs.boardOrientation);
+  // boardOrientation persisted but no UI — see Game Behavior section.
+  // Read directly from prefs in the autosave effect.
+  const boardOrientation = prefs.boardOrientation;
 
   const [boardColor, setBoardColor] = useState(prefs.boardColor);
   const [pieceSet, setPieceSet] = useState(prefs.pieceSet);
@@ -257,8 +259,10 @@ function BoardGameplayTab({ profile, setProfile }: TabProps): JSX.Element {
   const [voiceEnabled, setVoiceEnabled] = useState(prefs.voiceEnabled);
 
   const [moveMethod, setMoveMethod] = useState<MoveMethod>(prefs.moveMethod);
-  const [moveConfirmation, setMoveConfirmation] = useState(prefs.moveConfirmation);
-  const [autoPromoteQueen, setAutoPromoteQueen] = useState(prefs.autoPromoteQueen);
+  // moveConfirmation + autoPromoteQueen persisted but no UI yet — see
+  // Game Behavior section. Read directly from prefs in autosave effect.
+  const moveConfirmation = prefs.moveConfirmation;
+  const autoPromoteQueen = prefs.autoPromoteQueen;
 
   const [masterAllOff, setMasterAllOff] = useState(prefs.masterAllOff);
   const [boardSaveStatus, setBoardSaveStatus] = useState<string | null>(null);
