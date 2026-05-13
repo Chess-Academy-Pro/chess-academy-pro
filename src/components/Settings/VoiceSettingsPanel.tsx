@@ -190,16 +190,24 @@ export function VoiceSettingsPanel(): JSX.Element {
             <Volume2 size={16} />
             Coach Voice
           </h3>
-          <label className="flex items-center gap-2 cursor-pointer" data-testid="coach-voice-toggle">
+          {/* Same fix as the Polly toggle below: outer <button
+              role="switch"> so the entire row is clickable, not just
+              the toggle pill. The old <label> wrapper had no
+              associated input, so clicks on the "On"/"Off" text were
+              swallowed silently. */}
+          <button
+            type="button"
+            role="switch"
+            aria-checked={coachVoiceOn}
+            onClick={toggleCoachVoice}
+            className="flex items-center gap-2 cursor-pointer rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1"
+            data-testid="coach-voice-toggle"
+          >
             <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
               {coachVoiceOn ? 'On' : 'Off'}
             </span>
-            <div
-              role="switch"
-              aria-checked={coachVoiceOn}
-              tabIndex={0}
-              onClick={toggleCoachVoice}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCoachVoice(); } }}
+            <span
+              aria-hidden="true"
               className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
               style={{ background: coachVoiceOn ? 'var(--color-accent)' : 'var(--color-border)' }}
             >
@@ -207,8 +215,8 @@ export function VoiceSettingsPanel(): JSX.Element {
                 className="inline-block h-4 w-4 rounded-full bg-white transition-transform"
                 style={{ transform: coachVoiceOn ? 'translateX(24px)' : 'translateX(4px)' }}
               />
-            </div>
-          </label>
+            </span>
+          </button>
         </div>
         <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
           When enabled, the coach reads messages and commentary aloud during games and chat.
@@ -227,16 +235,26 @@ export function VoiceSettingsPanel(): JSX.Element {
             <Sparkles size={16} />
             Cloud voice (Polly) priority
           </h3>
-          <label className="flex items-center gap-2 cursor-pointer" data-testid="polly-toggle">
+          {/* Switch element. Was a <label> wrapping an inner <div
+              role="switch">, but the label had no associated input so
+              clicking the label area (outside the small toggle pill)
+              did nothing. Audit caught it: clicks landed on the
+              label, not the pill, so the handler never fired. Switched
+              the whole row to a single <button role="switch"> so any
+              click on the label area or the toggle pill toggles. */}
+          <button
+            type="button"
+            role="switch"
+            aria-checked={pollyEnabled}
+            onClick={() => void handlePollyToggle(!pollyEnabled)}
+            className="flex items-center gap-2 cursor-pointer rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1"
+            data-testid="polly-toggle"
+          >
             <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
               {pollyEnabled ? 'Polly first' : 'System voice first'}
             </span>
-            <div
-              role="switch"
-              aria-checked={pollyEnabled}
-              tabIndex={0}
-              onClick={() => void handlePollyToggle(!pollyEnabled)}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); void handlePollyToggle(!pollyEnabled); } }}
+            <span
+              aria-hidden="true"
               className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
               style={{ background: pollyEnabled ? 'var(--color-accent)' : 'var(--color-border)' }}
             >
@@ -244,8 +262,8 @@ export function VoiceSettingsPanel(): JSX.Element {
                 className="inline-block h-4 w-4 rounded-full bg-white transition-transform"
                 style={{ transform: pollyEnabled ? 'translateX(24px)' : 'translateX(4px)' }}
               />
-            </div>
-          </label>
+            </span>
+          </button>
         </div>
         <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
           When Polly is the priority, the coach uses Amazon's high-quality AI voice; if Polly
