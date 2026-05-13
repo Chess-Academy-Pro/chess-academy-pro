@@ -543,6 +543,37 @@ When you add a new lesson flow, reuse these primitives:
 - Never pass narration in a parallel array — embed it on the
   `WalkthroughStep`.
 
+## Plan docs for large fixes (standing order)
+
+**For any non-trivial multi-step fix, write a `PLAN.md`-style
+document at the start of the work and commit it to `main` before
+diving in.** This is non-negotiable for any change that:
+
+- spans 3+ files,
+- touches multiple surfaces,
+- needs a sequence of PRs to ship safely,
+- or carries decisions David needs to make.
+
+Why: the auto-summary that compresses old messages loses nuance —
+exact tool results, screenshots, the architectural reasoning behind
+ordering. A planning doc preserves that durably so the next session
+can resume cleanly without re-deriving context.
+
+The doc lives at `PLAN.md` (single file, append-and-update; archive
+to `docs/plans/<date>-<topic>.md` when a major chunk lands and a
+new plan starts). It should include:
+
+- **Open findings** — the running list of audit items with one-line
+  diagnoses, not just symptoms.
+- **Phased plan** — each phase as one PR, with status markers
+  (`pending` / `in progress` / `done`).
+- **Decisions log** — anything that needs David's call, dated.
+- **Sequencing logic** — why this order and not another.
+- **Next-session pickup** — short instructions for resuming.
+
+Update the file as work lands. Tick checkboxes. Move decisions to
+the log. Don't let it rot.
+
 ## Deployment Policy
 
 **Push every build directly to `main`. No feature branches, no PRs, no
