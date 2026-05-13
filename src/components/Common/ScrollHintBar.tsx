@@ -8,15 +8,23 @@
  * there's nothing to scroll. Hides itself automatically once the
  * student has scrolled to discover the off-screen content.
  *
+ * Design (David's iterative spec):
+ *   - Solid gold track with a layered glow (inner highlight + mid
+ *     amber bloom + soft amber halo) so the bar pops on dark bg.
+ *   - Spotlight gradient: when caller passes `spotlightAt`, the
+ *     track is brightest at that fractional position [0..1] and
+ *     fades toward the edges — visually ties the bar to the active
+ *     tab above without needing an explicit connector.
+ *   - Accent is a comet, not a shape that moves: bright leading
+ *     edge with a long trailing gradient, clipped into the arrow
+ *     polygon. Reads as motion.
+ *   - Sweeps in ONE direction only — left → right for x, top →
+ *     bottom for y. No bouncing.
+ *
  * Usage:
  *   const ref = useRef<HTMLDivElement>(null);
  *   <div ref={ref} className="overflow-x-auto">...</div>
- *   <ScrollHintBar targetRef={ref} axis="x" />
- *
- * Design (David's spec): solid gold bar, bright arrow accent that
- * passes ONLY rightward (or downward on the y-axis variant) — no
- * bouncing. The arrow shape comes from a clip-path polygon so the
- * accent reads as a direction cue, not a generic shimmer.
+ *   <ScrollHintBar targetRef={ref} axis="x" spotlightAt={0.5} />
  */
 import { useEffect, useRef, useState } from 'react';
 
@@ -26,24 +34,47 @@ interface ScrollHintBarProps {
   targetRef: React.RefObject<HTMLElement | null>;
   /** Scroll axis to monitor. Default 'x' (horizontal tab strips). */
   axis?: 'x' | 'y';
+  /** Fractional position [0..1] where the bar is brightest — used
+   *  to align the lit region with the active tab above. When
+   *  omitted, the whole bar is uniformly bright. */
+  spotlightAt?: number;
   /** Optional extra Tailwind classes for positioning. */
   className?: string;
 }
 
-// Arrow polygons — drawn as a horizontal arrow head + shaft for x,
-// rotated for y. The accent sits ON TOP of the gold track and is
-// brighter, so it reads as a sweep, not a separate shape.
-const ARROW_CLIP_X = 'polygon(0% 25%, 65% 25%, 65% 0%, 100% 50%, 65% 100%, 65% 75%, 0% 75%)';
-const ARROW_CLIP_Y = 'polygon(25% 0%, 75% 0%, 75% 65%, 100% 65%, 50% 100%, 0% 65%, 25% 65%)';
+// Arrow polygons — chevron-flag shape pointing in the sweep
+// direction. The accent gets clipped to this shape so the comet
+// trail reads as an arrow head, not a generic shimmer.
+const ARROW_CLIP_X = 'polygon(0% 25%, 70% 25%, 70% 0%, 100% 50%, 70% 100%, 70% 75%, 0% 75%)';
+const ARROW_CLIP_Y = 'polygon(25% 0%, 75% 0%, 75% 70%, 100% 70%, 50% 100%, 0% 70%, 25% 70%)';
 
-const ACCENT_GRADIENT_X = 'linear-gradient(90deg, rgba(255, 250, 220, 0.4), rgba(255, 250, 220, 1))';
-const ACCENT_GRADIENT_Y = 'linear-gradient(180deg, rgba(255, 250, 220, 0.4), rgba(255, 250, 220, 1))';
+// Comet gradients — fully transparent at the tail, bright white at
+// the leading edge. The clip-path keeps the visible region an arrow.
+const COMET_GRADIENT_X =
+  'linear-gradient(90deg, rgba(255, 245, 200, 0) 0%, rgba(255, 220, 120, 0.5) 55%, rgba(255, 255, 255, 1) 100%)';
+const COMET_GRADIENT_Y =
+  'linear-gradient(180deg, rgba(255, 245, 200, 0) 0%, rgba(255, 220, 120, 0.5) 55%, rgba(255, 255, 255, 1) 100%)';
 
-const ACCENT_SHADOW = '0 0 10px rgba(251, 191, 36, 0.95)';
+// Three-layer glow: outer halo, mid bloom, inner highlight. Same
+// gold, three magnitudes — the bar reads as "lit" rather than
+// "drawn."
+const TRACK_GLOW =
+  '0 0 24px rgba(251, 191, 36, 0.35), 0 0 8px rgba(251, 191, 36, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4)';
+const ACCENT_GLOW = '0 0 18px rgba(255, 240, 170, 1), 0 0 6px rgba(255, 255, 255, 0.95)';
+
+/** Build a spotlight gradient: brightest gold at `at`, falling off
+ *  toward the edges. Falls back to a flat gold when `at` is null. */
+function buildSpotlightBg(axis: 'x' | 'y', at: number | undefined): string {
+  if (at === undefined) return 'rgb(251, 191, 36)'; // amber-400 flat
+  const pct = Math.round(Math.max(0, Math.min(1, at)) * 100);
+  const direction = axis === 'x' ? '90deg' : '180deg';
+  return `linear-gradient(${direction}, rgba(251, 191, 36, 0.55) 0%, rgba(255, 215, 80, 1) ${pct}%, rgba(251, 191, 36, 0.55) 100%)`;
+}
 
 export function ScrollHintBar({
   targetRef,
   axis = 'x',
+  spotlightAt,
   className = '',
 }: ScrollHintBarProps): JSX.Element | null {
   const [overflow, setOverflow] = useState<boolean>(false);
@@ -85,35 +116,50 @@ export function ScrollHintBar({
   if (axis === 'x') {
     return (
       <div
-        className={`relative h-1.5 bg-amber-400 rounded-full overflow-hidden ${className}`}
+        className={`relative h-1.5 rounded-full ${className}`}
         aria-hidden="true"
         data-testid="scroll-hint-x"
+        style={{
+          background: buildSpotlightBg('x', spotlightAt),
+          boxShadow: TRACK_GLOW,
+        }}
       >
-        <div
-          className="absolute top-0 h-full w-10 animate-scroll-hint-x"
-          style={{
-            background: ACCENT_GRADIENT_X,
-            clipPath: ARROW_CLIP_X,
-            boxShadow: ACCENT_SHADOW,
-          }}
-        />
+        {/* Comet accent — wider than the old arrow so the sweep
+            reads as motion. overflow-hidden on a child wrapper so
+            the glow on the track itself isn't clipped. */}
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div
+            className="absolute top-0 h-full w-20 animate-scroll-hint-x"
+            style={{
+              background: COMET_GRADIENT_X,
+              clipPath: ARROW_CLIP_X,
+              boxShadow: ACCENT_GLOW,
+            }}
+          />
+        </div>
       </div>
     );
   }
   return (
     <div
-      className={`relative w-1.5 bg-amber-400 rounded-full overflow-hidden ${className}`}
+      className={`relative w-1.5 rounded-full ${className}`}
       aria-hidden="true"
       data-testid="scroll-hint-y"
+      style={{
+        background: buildSpotlightBg('y', spotlightAt),
+        boxShadow: TRACK_GLOW,
+      }}
     >
-      <div
-        className="absolute left-0 w-full h-10 animate-scroll-hint-y"
-        style={{
-          background: ACCENT_GRADIENT_Y,
-          clipPath: ARROW_CLIP_Y,
-          boxShadow: ACCENT_SHADOW,
-        }}
-      />
+      <div className="absolute inset-0 rounded-full overflow-hidden">
+        <div
+          className="absolute left-0 w-full h-20 animate-scroll-hint-y"
+          style={{
+            background: COMET_GRADIENT_Y,
+            clipPath: ARROW_CLIP_Y,
+            boxShadow: ACCENT_GLOW,
+          }}
+        />
+      </div>
     </div>
   );
 }
