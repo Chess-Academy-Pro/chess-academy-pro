@@ -74,7 +74,7 @@ async function clearGames(page: Page): Promise<void> {
         tx.objectStore('games').clear();
         // Mark the sample-seeder as already-done so re-mounting the
         // list page doesn't re-seed.
-        tx.objectStore('meta').put({ key: 'review-samples-seeded.v2', value: 'true' });
+        tx.objectStore('meta').put({ key: 'review-samples-seeded.v3', value: 'true' });
         tx.oncomplete = () => resolve();
         tx.onerror = () => resolve();
       };
@@ -92,7 +92,7 @@ async function resetSeeder(page: Page): Promise<void> {
         const db = req.result;
         if (!db.objectStoreNames.contains('meta')) { resolve(); return; }
         const tx = db.transaction('meta', 'readwrite');
-        tx.objectStore('meta').delete('review-samples-seeded.v2');
+        tx.objectStore('meta').delete('review-samples-seeded.v3');
         tx.oncomplete = () => resolve();
         tx.onerror = () => resolve();
       };
