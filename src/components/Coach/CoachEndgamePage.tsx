@@ -758,6 +758,29 @@ function LessonView({
         />
       );
     }
+    // Phase 7d: piece-mate fundamentals (K+Q vs K, K+B+B vs K, K+Q+B vs K,
+    // K+Q+N vs K) have no curated solution because there's no single
+    // "correct" technique — the student drives the lone king to mate
+    // against Stockfish defense. Route them through CuratedMatingLessonView
+    // in free-play mode (any legal move accepted, ends when mate is on
+    // the board).
+    if (pattern.category === 'piece-mate' && pattern.lessonPositions[0]) {
+      return (
+        <CuratedMatingLessonView
+          pattern={pattern}
+          positions={[
+            {
+              fen: pattern.lessonPositions[0].fen,
+              solution: [],
+              movesToMate: null,
+            },
+          ]}
+          freePlay
+          header={header}
+          onExit={onExit}
+        />
+      );
+    }
     const recognition = pattern.lessonPositions.find((p) => p.movesToMate === 1) ?? pattern.lessonPositions[0];
     return (
       <ChessLessonLayout
@@ -972,6 +995,11 @@ interface CuratedMatingLessonViewProps {
   positions: CuratedMatingLessonPosition[];
   header: React.ReactNode;
   onExit: () => void;
+  /** Phase 7d: open-board piece-mate fundamentals (K+Q vs K, K+B+B vs K,
+   *  K+Q+B vs K, K+Q+N vs K). No curated SAN — student plays any legal
+   *  move; Stockfish defends; phase 'complete' fires when mate is on
+   *  the board (or the playout runs out of plies). */
+  freePlay?: boolean;
 }
 
 function CuratedMatingLessonView({
@@ -979,6 +1007,7 @@ function CuratedMatingLessonView({
   positions,
   header,
   onExit,
+  freePlay = false,
 }: CuratedMatingLessonViewProps): JSX.Element {
   const [posIndex, setPosIndex] = useState(0);
   const safeIndex = Math.min(posIndex, positions.length - 1);
@@ -988,7 +1017,10 @@ function CuratedMatingLessonView({
   const playout = useEndgamePlayout({
     startFen: current.fen,
     solution,
-    stockfishFallback: false,
+    stockfishFallback: freePlay,
+    extendToObviousWin: freePlay,
+    fallbackPliesToPlay: freePlay ? 50 : undefined,
+    fallbackDifficulty: 'hard',
     replyDelayMs: 450,
   });
 
@@ -1132,11 +1164,18 @@ function CuratedMatingLessonView({
           <Lightbulb size={14} className="text-cyan-400 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
             <div className="text-sm font-semibold text-theme-text">
-              {playout.studentMovesPlayed === 0 ? `Find the ${pattern.name}.` : 'Keep the line going.'}
+              {freePlay
+                ? playout.studentMovesPlayed === 0
+                  ? `Drive the king to mate.`
+                  : 'Keep restricting the king.'
+                : playout.studentMovesPlayed === 0
+                  ? `Find the ${pattern.name}.`
+                  : 'Keep the line going.'}
             </div>
             <div className="text-[11px] text-theme-text-muted leading-snug">
-              Drag a piece — {playout.curatedStudentMoves - playout.studentMovesPlayed} move
-              {playout.curatedStudentMoves - playout.studentMovesPlayed === 1 ? '' : 's'} to mate.
+              {freePlay
+                ? 'Stockfish defends. Any legal move is fine — find mate.'
+                : `Drag a piece — ${playout.curatedStudentMoves - playout.studentMovesPlayed} move${playout.curatedStudentMoves - playout.studentMovesPlayed === 1 ? '' : 's'} to mate.`}
             </div>
           </div>
         </div>
