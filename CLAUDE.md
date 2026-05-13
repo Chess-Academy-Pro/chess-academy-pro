@@ -576,20 +576,30 @@ the log. Don't let it rot.
 
 ## Deployment Policy
 
-**Push every build directly to `main`. No feature branches, no PRs, no
-preview deploys.** Dave wants every change to land on production
-immediately. Workflow:
+**Land every change on `main` as fast as possible.** David doesn't
+want preview-deploy latency — every commit ships.
 
-1. Run tests, typecheck, lint — fix any failures
-2. Commit with a clear message on `main`
-3. `git push origin main` — Vercel picks it up and deploys
-4. iOS/TestFlight builds are produced locally via Capacitor when needed
+**Workflow (Claude Code via the harness):**
 
-Do NOT create feature branches, do NOT open PRs, do NOT merge through
-the UI. The previous "branch + PR + merge" flow is retired — Vercel
-preview builds add latency without value for a single-developer app.
+1. Run tests, typecheck, lint — fix any failures.
+2. Branch from `main` as `claude/<short-topic>` (the harness blocks
+   direct pushes to `main` with 403, so branch + PR is the
+   functional equivalent of "push to main").
+3. Open a PR with `mcp__github__create_pull_request` (not draft).
+4. Merge it immediately with `mcp__github__merge_pull_request`
+   (squash). Vercel picks up the merged commit and deploys.
+5. iOS / TestFlight builds are produced locally via Capacitor when
+   needed.
 
-Never ask "want me to merge?" / "want me to push?" — just push to main.
+**Branch hygiene:** delete `claude/*` branches after their PR
+merges. The harness blocks `git push --delete origin <branch>`, so
+clean-up needs the GitHub UI or a follow-up tooling pass. Don't let
+old branches accumulate — a fresh session looking at the branch
+list gets buried in stale Claude branches and can't tell what's
+current.
+
+**Don't ask for permission to push or merge.** Just do it. Asking
+adds round-trips David doesn't want.
 
 ## Before Finishing a Session
 
