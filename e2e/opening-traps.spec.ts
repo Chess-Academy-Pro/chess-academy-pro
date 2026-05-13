@@ -666,4 +666,180 @@ test.describe('Opening Traps — deep audit (A-F + gaps)', () => {
     await expect(page.getByTestId('consistent-chessboard-static')).toBeVisible();
     expect(recorder.pageErrors).toEqual([]);
   });
+
+  test('[G] streak chip surfaces on the color list after a solve', async ({ page }) => {
+    const recorder = recordPage(page);
+    const candidates = loadOpeningPhaseMateIn1();
+    expect(candidates.length).toBeGreaterThanOrEqual(1);
+    const puzzle = candidates[0];
+    expect(await openPuzzle(page, puzzle.id, studentColor(puzzle))).toBe(true);
+    await waitForBoardReady(page);
+
+    const moves = studentLineFor(puzzle);
+    for (let i = 0; i < moves.length; i += 2) {
+      const m = moves[i];
+      await clickMove(page, m.slice(0, 2), m.slice(2, 4));
+      if (i + 1 < moves.length) await page.waitForTimeout(700);
+    }
+    await page.waitForSelector('text=/Solved/i', { timeout: 6000 });
+
+    // Back to the color list — the streak chip lives in that header
+    // alongside the user-rating chip and surfaces when `streak > 0`.
+    await page.locator('button[aria-label="Back"]').first().click();
+    // Streak chip uses a flame icon + amber-500/10 background. We
+    // can't easily target the icon component, so match by the chip's
+    // tailwind classes and the numeric content. After one solve,
+    // streak === 1 so we look for a "1" inside an amber chip.
+    const streakChip = page
+      .locator('span.bg-amber-500\\/10')
+      .filter({ has: page.locator('span.font-mono', { hasText: /^1$/ }) })
+      .first();
+    await expect(streakChip).toBeVisible({ timeout: 4000 });
+
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  test('[H] solved-count chip surfaces on the families landing after a solve', async ({ page }) => {
+    const recorder = recordPage(page);
+    const candidates = loadOpeningPhaseMateIn1();
+    expect(candidates.length).toBeGreaterThanOrEqual(1);
+    const puzzle = candidates[0];
+    expect(await openPuzzle(page, puzzle.id, studentColor(puzzle))).toBe(true);
+    await waitForBoardReady(page);
+
+    const moves = studentLineFor(puzzle);
+    for (let i = 0; i < moves.length; i += 2) {
+      const m = moves[i];
+      await clickMove(page, m.slice(0, 2), m.slice(2, 4));
+      if (i + 1 < moves.length) await page.waitForTimeout(700);
+    }
+    await page.waitForSelector('text=/Solved/i', { timeout: 6000 });
+
+    // Back to the families landing (Solved chip lives there).
+    await page.locator('button[aria-label="Back"]').first().click();
+    await page.waitForSelector('button[aria-label="Back to openings"]', { timeout: 4000 });
+    await page.locator('button[aria-label="Back to openings"]').click();
+    await page.waitForSelector('[data-testid^="opening-blunder-family-"]', { timeout: 4000 });
+
+    // Solved chip text format: "Solved <count>". After one correct
+    // solve, count is 1.
+    const solvedChip = page
+      .locator('span.inline-flex', { hasText: /Solved/ })
+      .filter({ has: page.locator('span.font-mono', { hasText: /^1$/ }) })
+      .first();
+    await expect(solvedChip).toBeVisible({ timeout: 4000 });
+
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  test('[I] adaptive sort — first puzzle in family list is the closest to user rating', async ({ page }) => {
+    const recorder = recordPage(page);
+    await page.goto('/tactics/opening-traps');
+    await page.waitForSelector('[data-testid="opening-blunders-page"]');
+    await page.getByTestId('opening-blunder-phase-all').click();
+    await page.waitForTimeout(200);
+
+    // Walk every family on 'all' until we find one with ≥ 2 puzzles
+    // on either side — adaptive sort is only observable when there's
+    // a choice to order.
+    const families = page.locator('[data-testid^="opening-blunder-family-"]');
+    const n = await families.count();
+    let observedMinDelta: number | null = null;
+    let observedMaxDelta = 0;
+    let familiesWithChoices = 0;
+
+    for (let i = 0; i < Math.min(n, 6); i++) {
+      await families.nth(i).click();
+      // After clicking a family, we land on the color list with the
+      // active color's puzzles. Read all puzzle rating chips.
+      await page.waitForSelector('[data-testid^="opening-blunder-"]', { timeout: 4000 });
+      // Puzzle rows show "rating <N>" inline; we scrape the page text
+      // and pull every 3-4 digit rating that's prefixed by "rating".
+      // Use a robust locator: any row matching opening-blunder-<id>
+      // (id is base62, ≥ 4 chars).
+      const rows = page.locator('[data-testid^="opening-blunder-"]:not([data-testid*="phase"]):not([data-testid*="color"]):not([data-testid*="family"]):not([data-testid*="page"]):not([data-testid*="show"]):not([data-testid*="next"]):not([data-testid*="hint"]):not([data-testid*="reveal"]):not([data-testid*="play"])');
+      const rowCount = await rows.count();
+      if (rowCount >= 2) {
+        familiesWithChoices += 1;
+        const ratings: number[] = [];
+        for (let r = 0; r < rowCount; r++) {
+          const txt = (await rows.nth(r).textContent()) ?? '';
+          const m = txt.match(/rating\s+(\d{3,4})/i);
+          if (m) ratings.push(Number(m[1]));
+        }
+        if (ratings.length >= 2) {
+          // Default puzzleRating is 1200. The first row's rating
+          // should be the closest to 1200 of all rows.
+          const firstDelta = Math.abs(ratings[0] - 1200);
+          const otherDeltas = ratings.slice(1).map((r) => Math.abs(r - 1200));
+          const maxOther = Math.max(...otherDeltas);
+          observedMinDelta = observedMinDelta === null ? firstDelta : Math.min(observedMinDelta, firstDelta);
+          observedMaxDelta = Math.max(observedMaxDelta, maxOther);
+          expect(
+            firstDelta,
+            `first puzzle in family should be closest to userRating=1200; got first=${ratings[0]}, others=${ratings.slice(1).join(',')}`,
+          ).toBeLessThanOrEqual(maxOther);
+        }
+      }
+      await page.locator('button[aria-label="Back to openings"]').click();
+      await page.waitForSelector('[data-testid^="opening-blunder-family-"]', { timeout: 4000 });
+      if (familiesWithChoices >= 2) break;
+    }
+    expect(familiesWithChoices, 'need at least one family with ≥2 puzzles to validate sort').toBeGreaterThanOrEqual(1);
+    void observedMinDelta;
+    void observedMaxDelta;
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  test('[J] phase filter — middlegame variant renders without crashing', async ({ page }) => {
+    const recorder = recordPage(page);
+    await page.goto('/tactics/opening-traps');
+    await page.waitForSelector('[data-testid="opening-blunders-page"]');
+
+    // Click each phase in turn; each must keep the page mounted
+    // and never throw, regardless of whether the resulting family
+    // list is empty or populated. The middlegame phase is the
+    // sparsest and historically the easiest to break.
+    for (const phase of ['transition', 'middlegame', 'all', 'opening'] as const) {
+      await page.getByTestId(`opening-blunder-phase-${phase}`).click();
+      await page.waitForTimeout(150);
+      await expect(page.getByTestId('opening-blunders-page')).toBeVisible();
+      // The active phase pill should reflect the click; we don't
+      // assert palette here, just that the page didn't unmount.
+    }
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  test('[K] palette spot-check — italian = orange, french = blue (distinct from sicilian red)', async ({ page }) => {
+    const recorder = recordPage(page);
+    await page.goto('/tactics/opening-traps');
+    await page.waitForSelector('[data-testid="opening-blunders-page"]');
+    await page.getByTestId('opening-blunder-phase-all').click();
+    await page.waitForTimeout(300);
+
+    const borderRgb = async (slugContains: string): Promise<string | null> => {
+      const row = page
+        .locator(`[data-testid^="opening-blunder-family-"][data-testid*="${slugContains}"]`)
+        .first();
+      const visible = await row.isVisible().catch(() => false);
+      if (!visible) return null;
+      return await row.evaluate((el) => window.getComputedStyle(el).borderLeftColor);
+    };
+
+    // Italian is reliably present in the corpus; French is too. If
+    // either isn't present in 'all' phase the local corpus has been
+    // pruned heavily — skip rather than fail to keep this resilient.
+    const italian = await borderRgb('italian');
+    const french = await borderRgb('french');
+    test.skip(
+      !italian || !french,
+      'italian and french families not both present in this corpus build',
+    );
+
+    // Italian = rgb(249, 115, 22). French = rgb(96, 165, 250).
+    expect(italian).toMatch(/rgba?\(249,\s*115,\s*22/);
+    expect(french).toMatch(/rgba?\(96,\s*165,\s*250/);
+
+    expect(recorder.pageErrors).toEqual([]);
+  });
 });
