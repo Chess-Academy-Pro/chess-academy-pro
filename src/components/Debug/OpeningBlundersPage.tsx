@@ -10,7 +10,7 @@
 // color-coded by opening type (CLAUDE.md "UI Design Language" + the
 // /tactics page pattern).
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Chess } from 'chess.js';
 import { ArrowLeft, ChevronRight, Target, Flame } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -24,6 +24,9 @@ import { useAppStore } from '../../stores/appStore';
 import { scaledShadow } from '../../utils/neonColors';
 import { createStreamingSpeaker } from '../../services/streamingSpeaker';
 import { voiceService } from '../../services/voiceService';
+import { ScrollHintBar } from '../Common/ScrollHintBar';
+import { updatePuzzleRating } from '../../services/puzzleService';
+import { reconstructPathToFen } from '../../services/openingWalkthroughService';
 import {
   groupByOpeningFamily,
   familyLabel,
@@ -270,6 +273,7 @@ function applyPhaseFilter(
 
 export function OpeningBlundersPage(): JSX.Element {
   const activeProfile = useAppStore((s) => s.activeProfile);
+  const setActiveProfile = useAppStore((s) => s.setActiveProfile);
   const userRating = activeProfile?.puzzleRating ?? 1200;
   const allFamilies = useMemo<OpeningBlunderFamily[]>(() => groupByOpeningFamily(), []);
   // Default to true opening-phase puzzles. Per user: "lets start with
@@ -288,6 +292,19 @@ export function OpeningBlundersPage(): JSX.Element {
   const [activeFamily, setActiveFamily] = useState<string | null>(null);
   const [activeColor, setActiveColor] = useState<ColorTab>('white');
   const [activePuzzle, setActivePuzzle] = useState<OpeningBlunderPuzzle | null>(null);
+
+  // Ordered list of puzzles for the active family + color — drives
+  // auto-advance. Adaptive-sorted (closest-to-rating first) so the
+  // session moves the user toward their level.
+  const orderedPuzzles = useMemo<{ white: OpeningBlunderPuzzle[]; black: OpeningBlunderPuzzle[] }>(() => {
+    if (!activeFamily) return { white: [], black: [] };
+    const family = families.find((f) => f.family === activeFamily);
+    if (!family) return { white: [], black: [] };
+    return {
+      white: adaptiveSort(family.white, userRating),
+      black: adaptiveSort(family.black, userRating),
+    };
+  }, [activeFamily, families, userRating]);
   // Lightweight session counters — solved / attempted across the
   // current family browse, mirroring the adaptive-drill UX so the user
   // sees forward progress without persisting to Dexie. Resets when
@@ -307,6 +324,44 @@ export function OpeningBlundersPage(): JSX.Element {
     } else {
       setStreak(0);
     }
+    // Persist the ELO update to the active profile so the rating
+    // travels with the user across surfaces. Same updatePuzzleRating
+    // formula every other puzzle surface uses.
+    if (activeProfile && activePuzzle) {
+      const newRating = updatePuzzleRating(
+        activeProfile.puzzleRating,
+        activePuzzle.rating,
+        correct,
+      );
+      setActiveProfile({ ...activeProfile, puzzleRating: newRating });
+    }
+  };
+
+  /** Auto-advance flow:
+   *  1. Try the next puzzle in the current color's list.
+   *  2. If we're at the end of that list, flip color and try its list.
+   *  3. If THAT list is also exhausted, bounce out to the family picker.
+   */
+  const handleNextPuzzle = (): void => {
+    if (!activePuzzle) return;
+    const currentList = orderedPuzzles[activeColor];
+    const otherColor: ColorTab = activeColor === 'white' ? 'black' : 'white';
+    const otherList = orderedPuzzles[otherColor];
+
+    const idx = currentList.findIndex((p) => p.id === activePuzzle.id);
+    if (idx >= 0 && idx + 1 < currentList.length) {
+      setActivePuzzle(currentList[idx + 1]);
+      return;
+    }
+    // Current color exhausted — try the other color from the top.
+    if (otherList.length > 0) {
+      setActiveColor(otherColor);
+      setActivePuzzle(otherList[0]);
+      return;
+    }
+    // Both colors exhausted — exit to family list.
+    setActivePuzzle(null);
+    setActiveFamily(null);
   };
 
   if (activePuzzle) {
@@ -315,6 +370,7 @@ export function OpeningBlundersPage(): JSX.Element {
         puzzle={activePuzzle}
         onExit={() => setActivePuzzle(null)}
         onResult={handlePuzzleResult}
+        onNext={handleNextPuzzle}
       />
     );
   }
@@ -380,6 +436,7 @@ function FamilyPickerView({
   const { settings } = useSettings();
   const gB = settings.glowBrightness;
   const gS = gB / 100;
+  const phaseStripRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -393,9 +450,15 @@ function FamilyPickerView({
       </p>
 
       {/* Phase filter — defaults to true opening-phase puzzles so the
-          picker starts on the cleanest shallow set, sorted by depth. */}
+          picker starts on the cleanest shallow set, sorted by depth.
+          ScrollHintBar paints the app's signature gold track beneath
+          the strip with the spotlight pooled under the active tab. */}
       <div className="max-w-lg mx-auto w-full">
-        <div className="flex gap-1 rounded-lg p-1" style={{ background: 'var(--color-bg-secondary)' }}>
+        <div
+          ref={phaseStripRef}
+          className="flex gap-1 rounded-lg p-1"
+          style={{ background: 'var(--color-bg-secondary)' }}
+        >
           {(['opening', 'transition', 'middlegame', 'all'] as const).map((p) => (
             <button
               key={p}
@@ -411,6 +474,15 @@ function FamilyPickerView({
             </button>
           ))}
         </div>
+        <ScrollHintBar
+          targetRef={phaseStripRef}
+          axis="x"
+          spotlightAt={
+            (['opening', 'transition', 'middlegame', 'all'] as const).indexOf(phaseFilter) /
+              3 +
+            0.125
+          }
+        />
       </div>
 
       {/* Adaptive rating + session-progress chip row. Matches the
@@ -515,6 +587,7 @@ function FamilyDetailView({
   const gB = settings.glowBrightness;
   const gS = gB / 100;
   const palette = paletteFor(family.family);
+  const colorStripRef = useRef<HTMLDivElement>(null);
   // Adaptive sort: prefer puzzles closest to the user's rating; tie-break
   // by popularity. Then split into in-band (userRating ± 400) vs the rest.
   const rawList = activeColor === 'white' ? family.white : family.black;
@@ -574,9 +647,11 @@ function FamilyDetailView({
         <SmartSearchBar scope="opening" placeholder="Search openings…" />
       </div>
 
-      {/* White / Black toggle — same shape as Settings tab bar */}
+      {/* White / Black toggle — same shape as Settings tab bar +
+          gold ScrollHintBar underneath so it carries the app's signature. */}
       <div className="max-w-lg mx-auto w-full">
         <div
+          ref={colorStripRef}
           className="flex gap-1 rounded-lg p-1"
           style={{ background: 'var(--color-bg-secondary)' }}
         >
@@ -599,6 +674,11 @@ function FamilyDetailView({
             </button>
           ))}
         </div>
+        <ScrollHintBar
+          targetRef={colorStripRef}
+          axis="x"
+          spotlightAt={activeColor === 'white' ? 0.25 : 0.75}
+        />
       </div>
 
       {/* Puzzle list — keep as a vertical list since each row needs
@@ -663,9 +743,13 @@ interface PuzzleViewProps {
   puzzle: OpeningBlunderPuzzle;
   onExit: () => void;
   onResult?: (correct: boolean) => void;
+  /** Auto-advance: the page passes a handler that walks to the next
+   *  puzzle in the active color's list, then flips color when
+   *  exhausted, then exits to family list when both are done. */
+  onNext: () => void;
 }
 
-function PuzzleView({ puzzle, onExit, onResult }: PuzzleViewProps): JSX.Element {
+function PuzzleView({ puzzle, onExit, onResult, onNext }: PuzzleViewProps): JSX.Element {
   const navigate = useNavigate();
   void navigate; // reserved for future "next puzzle" navigation
   const startFen = useMemo<string>(() => {
@@ -687,13 +771,68 @@ function PuzzleView({ puzzle, onExit, onResult }: PuzzleViewProps): JSX.Element 
   });
   const clickToMove = useClickToMove(playout);
 
-  // Fire onResult once when the puzzle reaches a terminal state.
-  // first-try-perfect counts as correct; otherwise wrong.
+  // Fire onResult once when the puzzle reaches a terminal state and
+  // then auto-advance to the next puzzle after a brief beat so the
+  // user has time to see "Solved" before the board flips.
   const [reported, setReported] = useState(false);
-  if (playout.isComplete && !reported) {
+  useEffect(() => {
+    if (!playout.isComplete || reported) return;
     setReported(true);
     onResult?.(playout.firstTryPerfect);
-  }
+    const t = window.setTimeout(() => onNext(), 1400);
+    return () => window.clearTimeout(t);
+  }, [playout.isComplete, playout.firstTryPerfect, reported, onResult, onNext]);
+
+  // ─── Walkthrough state — optional "Show the opening" affordance ──
+  // Reconstructs the move sequence from the chess start position to
+  // this puzzle's pre-state by probing Lichess Explorer. The user
+  // taps the button → spinner → board animates ply-by-ply to the
+  // puzzle position. No jump-cut.
+  const [walkthroughMoves, setWalkthroughMoves] = useState<string[] | null>(null);
+  const [walkthroughLoading, setWalkthroughLoading] = useState(false);
+  const [walkthroughError, setWalkthroughError] = useState<string | null>(null);
+  const [walkthroughPly, setWalkthroughPly] = useState(0);
+
+  const startWalkthrough = async (): Promise<void> => {
+    if (walkthroughLoading || walkthroughMoves) return;
+    setWalkthroughLoading(true);
+    setWalkthroughError(null);
+    try {
+      const result = await reconstructPathToFen(puzzle.fen);
+      if (!result.found) {
+        setWalkthroughError("Couldn't find a popular path to this position. Skipping straight to the puzzle.");
+        setWalkthroughLoading(false);
+        return;
+      }
+      setWalkthroughMoves(result.sans);
+      setWalkthroughPly(0);
+    } catch {
+      setWalkthroughError('Walkthrough lookup failed. Skipping straight to the puzzle.');
+    } finally {
+      setWalkthroughLoading(false);
+    }
+  };
+
+  // Step the walkthrough one ply per ~600 ms so the user can follow.
+  useEffect(() => {
+    if (!walkthroughMoves) return;
+    if (walkthroughPly >= walkthroughMoves.length) return;
+    const t = window.setTimeout(() => setWalkthroughPly((n) => n + 1), 600);
+    return () => window.clearTimeout(t);
+  }, [walkthroughMoves, walkthroughPly]);
+
+  // While the walkthrough plays, derive the position from the
+  // start-of-game plus the moves so far. After it finishes, fall back
+  // to the playout's normal fen.
+  const walkthroughActive = walkthroughMoves !== null && walkthroughPly < walkthroughMoves.length;
+  const walkthroughFen = useMemo<string | null>(() => {
+    if (!walkthroughMoves) return null;
+    const c = new Chess();
+    for (let i = 0; i < walkthroughPly && i < walkthroughMoves.length; i++) {
+      try { c.move(walkthroughMoves[i]); } catch { return null; }
+    }
+    return c.fen();
+  }, [walkthroughMoves, walkthroughPly]);
 
   // Streaming intro narration — multi-sentence brief that queues
   // sentence-by-sentence so the FIRST Polly fetch fires immediately
@@ -758,9 +897,9 @@ function PuzzleView({ puzzle, onExit, onResult }: PuzzleViewProps): JSX.Element 
 
   const board = (
     <ConsistentChessboard
-      fen={playout.fen}
+      fen={walkthroughActive && walkthroughFen ? walkthroughFen : playout.fen}
       boardOrientation={studentSide}
-      interactive={playout.phase === 'student-to-move'}
+      interactive={!walkthroughActive && playout.phase === 'student-to-move'}
       onPieceDrop={playout.onPieceDrop}
       onSquareClick={clickToMove.onSquareClick}
       squareStyles={clickToMove.squareStyles}
@@ -788,6 +927,29 @@ function PuzzleView({ puzzle, onExit, onResult }: PuzzleViewProps): JSX.Element 
           </p>
         )}
       </div>
+      {/* Optional "Show the opening" affordance — reconstructs the
+          move sequence from start to the puzzle position via Lichess
+          explorer probe and animates it ply-by-ply. No jump-cut. */}
+      {!walkthroughMoves && !walkthroughLoading && !walkthroughError && (
+        <button
+          onClick={() => void startWalkthrough()}
+          className="px-3 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-sm font-medium hover:bg-cyan-500/20"
+          data-testid="opening-blunder-show-opening"
+        >
+          Show the opening
+        </button>
+      )}
+      {walkthroughLoading && (
+        <p className="text-[11px] text-theme-text-muted text-center">Finding the line…</p>
+      )}
+      {walkthroughError && (
+        <p className="text-[11px] text-amber-400">{walkthroughError}</p>
+      )}
+      {walkthroughActive && (
+        <p className="text-[11px] text-cyan-300 text-center font-mono">
+          Showing the opening · ply {walkthroughPly}/{walkthroughMoves?.length ?? 0}
+        </p>
+      )}
       <div className="flex gap-2">
         <button
           onClick={() => playout.reset()}
@@ -817,8 +979,9 @@ function PuzzleView({ puzzle, onExit, onResult }: PuzzleViewProps): JSX.Element 
           </button>
         )}
         <button
-          onClick={onExit}
+          onClick={onNext}
           className="flex-1 px-3 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold"
+          data-testid="opening-blunder-next"
         >
           Next trap
         </button>
