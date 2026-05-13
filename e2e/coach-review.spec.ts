@@ -727,6 +727,11 @@ test.describe('Review with Coach — full-play audit', () => {
       `event: content_block_stop\ndata: ${JSON.stringify({ type: 'content_block_stop', index: 0 })}\n\n` +
       `event: message_delta\ndata: ${JSON.stringify({ type: 'message_delta', delta: { stop_reason: 'end_turn', stop_sequence: null }, usage: { output_tokens: 1 } })}\n\n` +
       `event: message_stop\ndata: ${JSON.stringify({ type: 'message_stop' })}\n\n`;
+    // Visit the session FIRST so gotoSession registers its default
+    // JSON stub for the intro narration call. THEN register our
+    // streaming stub — Playwright matches routes last-registered-
+    // first, so this one wins over gotoSession's for the ask call.
+    await gotoSession(page, 'sample-morphy-opera-1858');
     await page.route(/api\.deepseek\.com|api\.anthropic\.com/, async (route) => {
       const url = route.request().url();
       if (url.includes('anthropic.com')) {
@@ -745,8 +750,6 @@ test.describe('Review with Coach — full-play audit', () => {
         });
       }
     });
-
-    await gotoSession(page, 'sample-morphy-opera-1858');
 
     const askToggle = page.getByTestId('walk-ask-toggle-btn');
     await askToggle.scrollIntoViewIfNeeded();
