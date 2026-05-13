@@ -305,16 +305,39 @@ The "make-the-app-feel-cohesive" pass.
   sprite trail once we have a place to hook it in without a re-
   render storm).
 
-### Phase 6 — Game review hint button (~2 hrs, 1 PR) [STATUS: pending]
-Depends on Phase 2 (narration substrate) so the hint reveal speech
-cooperates.
+### Phase 6 — Game review hint button [STATUS: shipped this PR]
 
-- [ ] (#6) Hint button on `/coach/review` puzzle surface, reusing
-  the same affordance keystones have (revealed move highlighted on
-  the board).
-- [ ] (#6) Broaden the acceptance gate — accept any move within an
-  eval threshold of the engine's pick. Fixes the Kf8-in-check dead
-  end.
+Reading `FromYourGamesTab` end-to-end showed the hint button (#6
+first half) already exists — wired to `playout.revealHint`, gated on
+`playout.hintMove && !playout.hintRevealed`. The audit's framing was
+correct that the surface needed work, but the missing piece was the
+acceptance gate, not the hint UI.
+
+The Kf8-in-check dead end traces to `useEndgamePlayout.playMove`'s
+strict exact-SAN check: when the position record carries a single
+`bestMove` (e.g., `Re8`), every other reasonable defensive move
+(`Kg8`, `Ke8`, …) flashes red. The audit log on those reports shows
+the user dropped a legal good move and got nothing back.
+
+**Built:** `useAcceptableMoves(fen, toleranceCp)` — runs
+`stockfishEngine.analyzePosition(fen, depth=12)` (returns top 3 PV
+lines via the existing MultiPV config), normalises to the student's
+perspective, and emits SANs of every line whose cp loss vs the best
+line is ≤ tolerance (default 30 cp). Cached by the engine's LRU.
+
+**Added:** `EndgamePlayoutOptions.acceptableSans?: string[]` — extra
+SANs the playout treats as curated-correct alongside `expectedSan`.
+Keystones leave it undefined → strict exact match preserved.
+
+**Wired:** `FromYourGamesTab.Lesson` passes the hook's result as
+`acceptableSans`. Eval kicks off on position mount; until it returns
+(~200-500ms) the gate stays in strict mode, then opens up to the
+within-tolerance set. No UI hiccup at the call site.
+
+Tests: 6 new for `useAcceptableMoves` (loading, enabled=false,
+tolerance inclusion/exclusion, black-to-move sign flip, engine
+failure). Existing `useEndgamePlayout` (13) and `FromYourGamesTab`
+(3) tests still pass. Typecheck clean.
 
 ### Phase 7 — Mating pattern DB augmentation [STATUS: NEEDS DECISION]
 Open question on data source:

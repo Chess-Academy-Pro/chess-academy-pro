@@ -78,6 +78,14 @@ export interface EndgamePlayoutOptions {
    *  Keeps the board readable rather than instantly snapping to
    *  the next position. Default 450. */
   replyDelayMs?: number;
+  /** Additional SANs (in current-position notation) that should be
+   *  accepted as correct in place of the curated `expectedSan` — used
+   *  by review surfaces where multiple moves within an eval threshold
+   *  of the engine's pick are all "good enough." When the student's
+   *  move matches `expectedSan` OR appears in this list, the playout
+   *  accepts and advances (curated-style). Empty/undefined keeps the
+   *  default exact-match behavior. */
+  acceptableSans?: string[];
 }
 
 export type PlayoutPhase =
@@ -199,6 +207,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     fallbackPliesToPlay = 4,
     extendToObviousWin = false,
     replyDelayMs = 450,
+    acceptableSans,
   } = options;
   // Extend-to-obvious-win implies fallback is on; treat them as
   // a single effective flag in the playOpponentReply path.
@@ -391,11 +400,17 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
       } catch {
         return false;
       }
-      // Inside the curated line — must match the expected SAN.
+      // Inside the curated line — must match the expected SAN or
+      // one of the host-supplied `acceptableSans` alternates (review
+      // surfaces use the latter to accept any move within an eval
+      // threshold of the engine's pick).
       if (expectedSan) {
         const expectedClean = stripSan(expectedSan);
         const playedClean = stripSan(played.san);
-        if (playedClean !== expectedClean) {
+        const isAcceptableAlternate =
+          !!acceptableSans &&
+          acceptableSans.some((s) => stripSan(s) === playedClean);
+        if (playedClean !== expectedClean && !isAcceptableAlternate) {
           setWrongSquare(to);
           setWrongAttempts((n) => n + 1);
           setFirstTryPerfect(false);
@@ -431,7 +446,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
       void playOpponentReply();
       return true;
     },
-    [phase, expectedSan, playOpponentReply],
+    [phase, expectedSan, acceptableSans, playOpponentReply],
   );
 
   const onPieceDrop = useCallback(

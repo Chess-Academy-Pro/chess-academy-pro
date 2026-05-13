@@ -29,6 +29,7 @@ import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { ImportGamesButton } from '../Games/ImportGamesButton';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import { useClickToMove } from '../../hooks/useClickToMove';
+import { useAcceptableMoves } from '../../hooks/useAcceptableMoves';
 import {
   mineEndgamePositions,
   type MinedEndgamePosition,
@@ -199,6 +200,17 @@ function Lesson({ positions, index, onExit, onIndexChange }: LessonProps): JSX.E
     [position.fen],
   );
 
+  // Phase 6 (#6): accept any move within ~30 cp of the engine's pick.
+  // Stockfish multipv runs on mount; until it lands, the playout falls
+  // back to exact-SAN match (the prior behavior). Fixes the "asks for
+  // a better move than Kf8 but accepts no legal move" dead-end where
+  // the curated bestMove was just one of several equally good options.
+  const { sans: acceptableSans } = useAcceptableMoves({
+    fen: position.fen,
+    toleranceCp: 30,
+    enabled: !!position.bestMove,
+  });
+
   // Drive the position through the playout runner. Solution is the
   // single engine-recommended bestMove; after that, Stockfish
   // fallback extends until mate / promotion / decisive material so
@@ -211,6 +223,7 @@ function Lesson({ positions, index, onExit, onIndexChange }: LessonProps): JSX.E
     fallbackPliesToPlay: 8,
     fallbackDifficulty: 'hard',
     replyDelayMs: 450,
+    acceptableSans,
   });
   const clickToMove = useClickToMove(playout);
 
