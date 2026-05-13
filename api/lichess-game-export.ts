@@ -61,8 +61,9 @@ export default async function handler(req: Request): Promise<Response> {
   }
   const upstreamUrl = `${UPSTREAM_BASE}/${id}`;
 
-  // Optional LICHESS_TOKEN — see lichess-explorer.ts.
-  const token = process.env.LICHESS_TOKEN;
+  // Optional LICHESS_API_KEY — see lichess-explorer.ts. Also accepts
+  // the legacy LICHESS_TOKEN name.
+  const token = process.env.LICHESS_API_KEY ?? process.env.LICHESS_TOKEN;
   const upstreamHeaders: Record<string, string> = {
     Accept: 'application/x-chess-pgn',
     'User-Agent': UPSTREAM_USER_AGENT,

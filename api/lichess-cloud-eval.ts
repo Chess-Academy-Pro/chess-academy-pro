@@ -57,8 +57,9 @@ export default async function handler(req: Request): Promise<Response> {
   for (const [k, v] of url.searchParams) upstreamParams.set(k, v);
   const upstreamUrl = `${UPSTREAM}?${upstreamParams.toString()}`;
 
-  // Optional LICHESS_TOKEN — see lichess-explorer.ts.
-  const token = process.env.LICHESS_TOKEN;
+  // Optional LICHESS_API_KEY — see lichess-explorer.ts. Also accepts
+  // the legacy LICHESS_TOKEN name.
+  const token = process.env.LICHESS_API_KEY ?? process.env.LICHESS_TOKEN;
   const upstreamHeaders: Record<string, string> = {
     Accept: 'application/json',
     'User-Agent': UPSTREAM_USER_AGENT,

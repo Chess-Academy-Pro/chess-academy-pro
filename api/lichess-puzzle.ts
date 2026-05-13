@@ -60,10 +60,11 @@ export default async function handler(req: Request): Promise<Response> {
   }
   const upstreamUrl = `${UPSTREAM_BASE}/${id}`;
 
-  // Optional LICHESS_TOKEN — when set, authenticated requests bypass
-  // the IP-based nginx block that hits Vercel's edge IPs and get
-  // higher rate limits. See lichess-explorer.ts.
-  const token = process.env.LICHESS_TOKEN;
+  // Optional LICHESS_API_KEY — when set, authenticated requests
+  // bypass the IP-based nginx block that hits Vercel's edge IPs and
+  // get higher rate limits. See lichess-explorer.ts. Also accepts
+  // the legacy LICHESS_TOKEN name.
+  const token = process.env.LICHESS_API_KEY ?? process.env.LICHESS_TOKEN;
   const upstreamHeaders: Record<string, string> = {
     Accept: 'application/json',
     'User-Agent': UPSTREAM_USER_AGENT,
