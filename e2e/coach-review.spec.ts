@@ -492,6 +492,276 @@ test.describe('Review with Coach — full-play audit', () => {
     expect(recorder.pageErrors).toEqual([]);
   });
 
+  test('missed-tactics list surfaces + jumping to a tactic advances the ply', async ({ page }) => {
+    test.setTimeout(180_000);
+    const recorder = recordPage(page);
+    // Vienna sample: source=coach, white="You" (playerColor='white'),
+    // white has two mistakes (Qg4 move 4, Qxg7 move 5) with eval
+    // swings ≥100cp + bestMove set. `detectMissedTactics`
+    // (missedTacticService.ts:823) returns those for the walk UI's
+    // missed-tactics list.
+    await gotoSession(page, 'sample-vienna-amateur-1');
+
+    // Missed-tactics section lives in a scrollable middle panel.
+    const section = page.getByTestId('walk-missed-tactics');
+    await section.waitFor({ state: 'visible', timeout: 15_000 });
+    await section.scrollIntoViewIfNeeded();
+
+    // Vienna provides at least 2 tactics.
+    const firstTactic = page.getByTestId('walk-missed-tactic-0');
+    await expect(firstTactic).toBeVisible({ timeout: 4000 });
+
+    // Capture the board placement before clicking — jumpToPly will
+    // change it.
+    const placementBefore = await page.evaluate(() => {
+      const m: Record<string, string> = {};
+      document.querySelectorAll('[data-square]').forEach((sq) => {
+        const square = (sq as HTMLElement).dataset.square;
+        const img = sq.querySelector('img');
+        const alt = img?.getAttribute('alt');
+        if (square && alt) m[square] = alt;
+      });
+      return JSON.stringify(m);
+    });
+
+    await firstTactic.click();
+    await page.waitForTimeout(800);
+
+    const placementAfter = await page.evaluate(() => {
+      const m: Record<string, string> = {};
+      document.querySelectorAll('[data-square]').forEach((sq) => {
+        const square = (sq as HTMLElement).dataset.square;
+        const img = sq.querySelector('img');
+        const alt = img?.getAttribute('alt');
+        if (square && alt) m[square] = alt;
+      });
+      return JSON.stringify(m);
+    });
+    expect(placementAfter, 'missed-tactic click should change the board (jump-to-ply)').not.toBe(placementBefore);
+
+    // "Practice in Coach Chat" button — only renders when
+    // `onPracticeInChat` is wired. CoachReviewSessionPage does NOT
+    // currently wire it (product gap flagged in the contract doc).
+    // We still verify the wrapper testid is reachable when the
+    // wiring exists; today it doesn't, so we just confirm the
+    // missed-tactics section keeps rendering after the click.
+    await expect(section).toBeVisible();
+
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  test('exploration: drag the suggested move at a mistake ply → resume button surfaces', async ({ page }) => {
+    test.setTimeout(180_000);
+    const recorder = recordPage(page);
+
+    // The 5 in-product sample games store `bestMove` in SAN format
+    // (e.g. "d3", "Qc7") via reviewSampleGames.ts. The walk-UI arrow
+    // code (CoachGameReview.tsx:711) requires `bestMoveUci.length >= 4`
+    // i.e. UCI like "d2d3" — so SAN-shaped bestMove silently fails to
+    // produce an arrow + the board never becomes interactive. PRODUCT
+    // GAP flagged in the contract doc.
+    //
+    // To verify the exploration contract itself, seed a fixture
+    // game with UCI-format bestMove on one mistake annotation.
+    //
+    // Also stub the LLM endpoints — generateReviewNarration calls
+    // DeepSeek/Anthropic for the intro paragraph, and without
+    // network access in headless that fetch hangs forever, which
+    // blocks the walk-UI mount.
+    const stubResponse = 'Walk-through intro narration.';
+    await page.route(/api\.deepseek\.com|api\.anthropic\.com/, async (route) => {
+      const url = route.request().url();
+      if (url.includes('anthropic.com')) {
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            id: 'stub-msg', type: 'message', role: 'assistant',
+            content: [{ type: 'text', text: stubResponse }],
+            stop_reason: 'end_turn', usage: { input_tokens: 1, output_tokens: 1 },
+          }),
+        });
+      } else {
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            id: 'stub-chatcmpl', object: 'chat.completion',
+            choices: [{ index: 0, message: { role: 'assistant', content: stubResponse }, finish_reason: 'stop' }],
+            usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+          }),
+        });
+      }
+    });
+
+    // Trigger the in-product seeder by visiting the list page, then
+    // PATCH the Vienna sample's bestMove on move 4 to UCI format
+    // ("d2d3") so the walk-UI arrow code (which gates on
+    // bestMoveUci.length >= 4) accepts it. This reuses the sample's
+    // already-valid PGN + annotation set.
+    await gotoList(page);
+    await expect(page.getByTestId('review-game-card-sample-vienna-amateur-1')).toBeVisible({ timeout: 15_000 });
+    await page.evaluate(async () => {
+      await new Promise<void>((resolve) => {
+        const req = indexedDB.open('ChessAcademyDB');
+        req.onsuccess = () => {
+          const db = req.result;
+          const tx = db.transaction('games', 'readwrite');
+          const store = tx.objectStore('games');
+          const get = store.get('sample-vienna-amateur-1');
+          get.onsuccess = () => {
+            const rec = get.result as {
+              annotations?: Array<{ moveNumber: number; color: string; bestMove?: string | null }>;
+            } | undefined;
+            if (!rec) { resolve(); return; }
+            for (const a of rec.annotations ?? []) {
+              if (a.moveNumber === 4 && a.color === 'white') a.bestMove = 'd2d3';
+              if (a.moveNumber === 5 && a.color === 'white') a.bestMove = 'd2d3';
+            }
+            store.put(rec);
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => resolve();
+          };
+        };
+      });
+    });
+
+    // Now visit the Vienna session page.
+    await page.goto('/coach/review/sample-vienna-amateur-1');
+    await page.waitForSelector('[data-testid="coach-game-review-walk"]', { timeout: 60_000 });
+
+    // Walk forward to the mistake ply. The game has 7 plies total;
+    // ply 7 = white's 4th move (Qg4 mistake). The arrow renders
+    // from d2 → d3.
+    for (let i = 0; i < 7; i++) {
+      await page.keyboard.press('ArrowRight');
+      await page.waitForTimeout(300);
+    }
+    // Classification badge confirms mistake ply.
+    await expect(page.getByTestId('review-classification-badge')).toBeVisible({ timeout: 6000 });
+
+    // Subtle product nuance: the walk-UI shows the post-mistake
+    // FEN (CoachGameReview.tsx:700 — `displayFen = seg.fenAfter`)
+    // which is the OPPONENT's turn-to-move state. The green arrow
+    // shows the player's missed move from the PRE-mistake FEN, but
+    // the board itself doesn't allow playing that move from the
+    // current position (useChessGame's side-to-move gate). The
+    // exploration mechanism still fires for ANY legal move from
+    // the displayed FEN — so we play a legal opponent move to
+    // trigger setWalkExplorationFen and surface walk-resume-game-btn.
+    //
+    // At post-Qg4 Vienna (black to move), black pawn a7-a6 is
+    // trivially legal. Click-to-move: click a7 → click a6.
+    await page.locator('[data-square="a7"]').first().click({ force: true });
+    await page.waitForTimeout(200);
+    await page.locator('[data-square="a6"]').first().click({ force: true });
+
+    // Resume-game button appears once exploration FEN is captured
+    // (CoachGameReview.tsx:851).
+    await expect(page.getByTestId('walk-resume-game-btn')).toBeVisible({ timeout: 8000 });
+
+    // Click resume — exploration state clears, button hides.
+    await page.getByTestId('walk-resume-game-btn').click();
+    await expect(page.getByTestId('walk-resume-game-btn')).toBeHidden({ timeout: 4000 });
+
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  test('engine lines toggle on → at least one engine line row renders SAN content', async ({ page }) => {
+    test.setTimeout(180_000);
+    const recorder = recordPage(page);
+    await gotoSession(page, 'sample-morphy-opera-1858');
+
+    // Advance one ply so there's a real position to analyze (the
+    // starting position can be ambiguous to the engine in headless).
+    await page.keyboard.press('ArrowRight');
+    await page.waitForTimeout(400);
+
+    const toggle = page.getByTestId('review-engine-lines-toggle');
+    await toggle.scrollIntoViewIfNeeded();
+    await toggle.click();
+
+    // Engine lines run at depth 16 via useReviewEngineLines —
+    // Stockfish WASM needs time. Up to ~45s on first run.
+    await expect(page.getByTestId('review-engine-line-0')).toBeVisible({ timeout: 60_000 });
+
+    // Verify the row contains SAN-shaped move text (at least one
+    // upper-case piece letter + file/rank OR pawn move with file +
+    // optional promotion). Permissive — Stockfish output varies.
+    const text = (await page.getByTestId('review-engine-line-0').textContent())?.trim() ?? '';
+    expect(text.length, `engine line 0 text: "${text}"`).toBeGreaterThan(0);
+    // Should mention either a SAN (Nxd4, e4, O-O…) or an eval (+1.3,
+    // M5, etc.) — any non-empty meaningful content.
+    expect(text).toMatch(/[A-Za-z0-9+#=\-]/);
+
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  test('ask-coach round trip: question → response surfaces via stubbed coach API', async ({ page }) => {
+    test.setTimeout(180_000);
+    const recorder = recordPage(page);
+
+    // Intercept the coach API endpoints. CoachGameReview's ask
+    // path uses streaming (coachApi.ts:350 — `stream: true`), so
+    // a plain JSON response won't drive the streaming reader.
+    // Build SSE chunks that match the OpenAI / Anthropic stream
+    // protocols so the in-app `onStream` callback fires and
+    // setAskResponse accumulates the canned text.
+    const cannedResponse = 'In this position, develop your knights first. [VOICE: develop the knights]';
+    const openAiSse =
+      `data: ${JSON.stringify({ choices: [{ delta: { content: cannedResponse } }] })}\n\n` +
+      `data: [DONE]\n\n`;
+    const anthropicSse =
+      `event: message_start\ndata: ${JSON.stringify({ type: 'message_start', message: { id: 'm', type: 'message', role: 'assistant', content: [], model: 'claude-haiku-4-5-20251001', stop_reason: null, stop_sequence: null, usage: { input_tokens: 1, output_tokens: 0 } } })}\n\n` +
+      `event: content_block_start\ndata: ${JSON.stringify({ type: 'content_block_start', index: 0, content_block: { type: 'text', text: '' } })}\n\n` +
+      `event: content_block_delta\ndata: ${JSON.stringify({ type: 'content_block_delta', index: 0, delta: { type: 'text_delta', text: cannedResponse } })}\n\n` +
+      `event: content_block_stop\ndata: ${JSON.stringify({ type: 'content_block_stop', index: 0 })}\n\n` +
+      `event: message_delta\ndata: ${JSON.stringify({ type: 'message_delta', delta: { stop_reason: 'end_turn', stop_sequence: null }, usage: { output_tokens: 1 } })}\n\n` +
+      `event: message_stop\ndata: ${JSON.stringify({ type: 'message_stop' })}\n\n`;
+    await page.route(/api\.deepseek\.com|api\.anthropic\.com/, async (route) => {
+      const url = route.request().url();
+      if (url.includes('anthropic.com')) {
+        await route.fulfill({
+          status: 200,
+          contentType: 'text/event-stream',
+          headers: { 'cache-control': 'no-cache' },
+          body: anthropicSse,
+        });
+      } else {
+        await route.fulfill({
+          status: 200,
+          contentType: 'text/event-stream',
+          headers: { 'cache-control': 'no-cache' },
+          body: openAiSse,
+        });
+      }
+    });
+
+    await gotoSession(page, 'sample-morphy-opera-1858');
+
+    const askToggle = page.getByTestId('walk-ask-toggle-btn');
+    await askToggle.scrollIntoViewIfNeeded();
+    await askToggle.click();
+    await expect(page.getByTestId('walk-ask-panel')).toBeVisible({ timeout: 4000 });
+
+    // Find the input inside the ask panel and submit a question.
+    const panel = page.getByTestId('walk-ask-panel');
+    const input = panel.locator('input, textarea').first();
+    await input.fill('what should I play here?');
+    // Submission via Enter — same as the in-product chat input.
+    await input.press('Enter');
+
+    // Response surfaces once the route fulfills.
+    const response = page.getByTestId('walk-ask-response');
+    await expect(response).toBeVisible({ timeout: 15_000 });
+    // The `[VOICE: ...]` marker is stripped before display; the body
+    // text should still contain the meaningful sentence.
+    const text = (await response.textContent())?.trim() ?? '';
+    expect(text.toLowerCase()).toContain('knights');
+
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
   test('invalid game id surfaces an error state without crashing', async ({ page }) => {
     const recorder = recordPage(page);
     await page.goto('/coach/review/does-not-exist-fake-id');

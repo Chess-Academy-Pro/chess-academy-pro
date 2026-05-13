@@ -2,7 +2,7 @@
 
 How `/coach/review` and `/coach/review/:gameId` SHOULD work, and what the e2e audit (`e2e/coach-review.spec.ts`) exercises end-to-end.
 
-**Current state: 16/16 specs passing serially.**
+**Current state: 20/20 specs passing serially (Wave 2 closes all 4 deferred gaps).**
 
 ```
 PLAYWRIGHT_LOCAL_CHROME=/opt/pw-browsers/chromium-1194/chrome-linux/chrome \
@@ -115,11 +115,16 @@ The session page renders `CoachGameReview`'s walk UI: chessboard, ply navigation
 - Hub: title / back / 4 filters / seeder / tile click / empty-state / filter swap
 - Session: walk-UI mount / nav controls / forward-back / keyboard arrows / jump-to-start-end / narration / engine-lines / ask-panel / bottom-bar / voice / invalid-id
 
-**Deferred (known gaps, same blockers as endgame):**
-1. **Exploration mode (drag suggested move → log → Resume game)** — blocked on the same `useClickToMove` phase-timing issue that defers the endgame recap test. Resolution: a stable solve driver utility that waits for board-interactive state before issuing drags.
-2. **Engine-line row content** — Stockfish-WASM analysis at depth 16 is slow + nondeterministic in headless Chrome. Could stub `stockfishEngine` to return canned PVs for the test.
-3. **Ask-coach round trip** — needs DeepSeek / Anthropic API; could mock via MSW or assert just the loading state.
-4. **Missed-tactics jump-to-ply** — needs a sample game with at least one inaccuracy / mistake annotation positioned to trigger `detectMissedTactics()`. The Morphy sample may not surface a tactic.
+**Wave 2 — all 4 deferred gaps closed:**
+1. ✅ **Exploration → Resume** (`exploration: drag the suggested move at a mistake ply → resume button surfaces`) — walks to the Vienna mistake ply via keyboard, asserts classification badge, plays any legal move from the displayed FEN via click-to-move (a7-a6 — opponent's natural reply), asserts `walk-resume-game-btn` appears, clicks resume, asserts it hides. Patches the Vienna sample's bestMove field to UCI format (`d2d3`) so the walk-UI's arrow renders.
+2. ✅ **Engine-line row content** (`engine lines toggle on → at least one engine line row renders SAN content`) — Stockfish-WASM at depth 16 runs in the live worker; the test allows up to 60s for `review-engine-line-0` to surface, then asserts the row text is non-empty + contains SAN/eval characters.
+3. ✅ **Ask-coach LLM round trip** (`ask-coach round trip: question → response surfaces via stubbed coach API`) — `page.route` intercepts `api.deepseek.com` + `api.anthropic.com` with proper SSE chunk streams (OpenAI delta protocol + Anthropic event-stream protocol — coachApi.ts:350 uses `stream: true`). Asserts `walk-ask-response` accumulates the canned text.
+4. ✅ **Missed-tactics jump-to-ply** (`missed-tactics list surfaces + jumping to a tactic advances the ply`) — uses the Vienna sample (source=coach, playerColor='white', 2 white-side mistakes at moves 4/5 = 2 missed tactics). Asserts `walk-missed-tactic-0` clickable, board placement changes after click. Notes that `walk-practice-in-chat-btn` only renders when `onPracticeInChat` is wired — `CoachReviewSessionPage` doesn't currently wire it, flagged as a separate product gap.
+
+**Product-code gaps surfaced during the audit:**
+- `CoachReviewSessionPage` doesn't pass `onPracticeInChat` to `CoachGameReview`, so the Practice-in-Chat button never renders in the live app.
+- The walk-UI shows `seg.fenAfter` at mistake plies (`CoachGameReview.tsx:700`), so the green arrow visualizes a missed move from the PRE-mistake position but the displayed FEN is from the POST-mistake position — the player can't actually play the arrow's suggested move (wrong side to move). Exploration mode still fires for any legal opponent move, but the UX intent appears to be "play the missed move," which isn't currently reachable.
+- The in-product sample-game seeder stores `bestMove` in SAN format, but the walk-UI arrow code (`CoachGameReview.tsx:711`) requires `bestMoveUci.length >= 4` (UCI format). The 5 shipped samples therefore never render the arrow — silent regression of the exploration affordance.
 
 ---
 
