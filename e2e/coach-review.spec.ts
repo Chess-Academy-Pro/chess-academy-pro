@@ -35,9 +35,30 @@ async function gotoSession(page: Page, gameId: string): Promise<void> {
   // directly to /coach/review/<id> without the seeder having run
   // produces "That game is no longer in your library." Visit the
   // list page first, wait for the seeded tiles, then navigate.
+  //
+  // The seeder write is async + the list re-reads after; under
+  // dev-server contention the tile DOM can lag 20+ seconds even
+  // though the Dexie record is in place. Poll Dexie directly for
+  // the record so the wait is deterministic instead of dependent
+  // on a React re-render race.
   await page.goto('/coach/review');
-  await page.waitForSelector('[data-testid="coach-review-list-page"]', { timeout: 12_000 });
-  await page.waitForSelector(`[data-testid="review-game-card-${gameId}"]`, { timeout: 20_000 });
+  await page.waitForSelector('[data-testid="coach-review-list-page"]', { timeout: 15_000 });
+  await page.waitForFunction(
+    (id) => new Promise<boolean>((resolve) => {
+      const req = indexedDB.open('ChessAcademyDB');
+      req.onerror = () => resolve(false);
+      req.onsuccess = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains('games')) { resolve(false); return; }
+        const tx = db.transaction('games', 'readonly');
+        const get = tx.objectStore('games').get(id);
+        get.onsuccess = () => resolve(!!get.result);
+        get.onerror = () => resolve(false);
+      };
+    }),
+    gameId,
+    { timeout: 30_000, polling: 500 },
+  );
   await page.goto(`/coach/review/${gameId}`);
   await page.waitForSelector('[data-testid="coach-game-review-walk"]', { timeout: 30_000 });
 }
