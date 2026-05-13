@@ -404,14 +404,26 @@ the foundation for piece-mate fundamental drills (K+Q vs K, K+B+B
 vs K, K+Q+B vs K, K+Q+N vs K) where there's no curated line — the
 student drives the lone king to mate against Stockfish defense.
 
-The UI wiring (picker → free-play mode + win detection at mate / 50-
-move draw / position repetition) is a separate follow-up — wants a
-small UX call on:
-- How to time out a stuck student (50-move rule? Stockfish-suggested
-  "I can finish it for you" button?)
-- Where the lone-king starting position lives (random per-attempt,
-  or always the curated `lessonPositions[0]`?)
-- Whether to grade student technique (moves to mate vs optimal)
+### Phase 7d — Piece-mate fundamentals wired [STATUS: shipped]
+
+Picker now routes `category === 'piece-mate'` patterns into
+`CuratedMatingLessonView` in free-play mode when there's no curated
+solution. View takes a `freePlay` prop that forwards
+`stockfishFallback: true` + `extendToObviousWin: true` +
+`fallbackPliesToPlay: 50` to the playout. In-progress narration
+swaps to "Drive the king to mate. / Stockfish defends. Any legal
+move is fine — find mate."
+
+The playout's `playOpponentReply` already detects `isGameOver()`
+and marks phase `complete` on checkmate (line 302-305), so the
+completion screen surfaces naturally when the student delivers
+mate. The 50-ply fallback cap protects against stuck-student
+infinite loops (insufficient material / 50-move rule).
+
+After 7d, no named-pattern or piece-mate-fundamental surfaces as
+Recognition-only. The static recognition-only board path still
+exists but is now unreachable (kept as the safety fallback for
+any future pattern that ships without enough data).
 
 ### Phase 8 — Stockfish crash hygiene [STATUS: shipped in PR #453]
 
