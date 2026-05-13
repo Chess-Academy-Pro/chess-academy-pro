@@ -217,21 +217,45 @@ Patterns currently "Recognition only":
 - Lolli's Mate
 - (others — needs full sweep of the picker)
 
-### Phase 8 — Stockfish worker pooling [STATUS: pending, NEW — added after Phase 1.1 revert]
+### Phase 8 — Stockfish crash hygiene [STATUS: in progress — revised diagnosis]
 
-The Phase 1.1 audit revealed a latent leak in
-`stockfishEngine.ts`: every position eval can spawn a new worker
-without proper termination of the previous one, accumulating WASM
-heap until OOM. Phase 1.1 multiplied eval count per playout, which
-surfaced the leak immediately; reverting 1.1 doesn't fix the
-underlying bug — it just keeps it below the OOM threshold.
+Initial hypothesis (worker-pooling) was wrong. Reading
+`stockfishEngine.ts` end-to-end revealed:
 
-Goal: route all Stockfish requests through a SINGLE pooled
-worker for the lifetime of the tab. Serialize eval requests.
-Properly terminate + respawn on cooldown or crash, with bounded
-retry. Drops worker spawn count from O(plays) to O(1).
+- The engine IS already a singleton (one worker per tab).
+- The OOM cascade is caused by THREE distinct bugs that compound,
+  not by worker leakage:
 
-When that lands, re-enable Phase 1.1's keystone extension.
+**Bug A — Worker error flood.** When the multi-thread bundle
+crashes internally it emits 60+ `ErrorEvent`s. The `worker.onerror`
+handler triggers exactly one early-failure fallback (good) but
+doesn't `event.preventDefault()` (bad), so subsequent errors bubble
+to `window.onerror`, get captured by `installGlobalErrorHooks`, and
+trigger 60+ `logAppAudit` writes to IndexedDB. That's what's
+blocking the main thread.
+
+**Bug B — WASM heap not reclaimed before fallback.**
+`worker.terminate()` is synchronous, but WASM page reclamation is
+async. The single-thread fallback spawns IMMEDIATELY and tries to
+allocate before the browser has freed the multi-thread heap → OOM.
+
+**Bug C — No retry budget on single-thread spawn failure.** When
+single-thread also fails to allocate, the engine marks itself
+permanently unavailable. Most OOMs are transient memory pressure
+that recovers seconds later.
+
+**Fixes (all in `stockfishEngine.ts`):**
+1. `event.preventDefault()` + `return true` in `worker.onerror`.
+2. ~100ms delay between `terminate()` and single-thread spawn.
+3. One retry-with-backoff (~500ms) on single-thread OOM.
+4. Audit-log dedup: collapse multiple worker errors in the same
+   crash window into one summary entry.
+
+Scope: ~30 lines in one file + tests. Single PR.
+
+When that lands, re-enable Phase 1.1's keystone extension as a
+follow-up commit (the OOM cascade was the only reason it had to
+revert).
 
 ---
 
