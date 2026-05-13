@@ -108,4 +108,28 @@ describe('buildEndgameRecap', () => {
       expect(m.accuracy).toBeLessThanOrEqual(100);
     }
   });
+
+  it('falls back to 0 when a single Stockfish call hangs past the timeout (audit cycle ccd0057)', async () => {
+    // First eval hangs forever; second resolves normally. David's
+    // audit showed 6 s/eval on degraded single-thread Stockfish —
+    // without the timeout, ONE stuck eval would freeze the recap
+    // spinner indefinitely. With the timeout, the recap completes
+    // and the stuck move's eval defaults to 0.
+    vi.useFakeTimers();
+    vi.mocked(stockfishEngine.analyzePosition)
+      .mockImplementationOnce(() => new Promise(() => undefined)) // never resolves
+      .mockResolvedValueOnce(evalResult(150));
+
+    const buildPromise = buildEndgameRecap([makeMove()], 'white');
+    // Advance past the 5 s per-call timeout for the first call AND
+    // the second call's mock resolution.
+    await vi.advanceTimersByTimeAsync(6_000);
+    vi.useRealTimers();
+    const r = await buildPromise;
+
+    expect(r).not.toBeNull();
+    // Hung eval → fenBefore eval defaulted to 0; fenAfter eval=150.
+    expect(r!.moves[0].evalBefore).toBe(0);
+    expect(r!.moves[0].evalAfter).toBe(150);
+  });
 });

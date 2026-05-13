@@ -156,6 +156,32 @@ const SINGLE_THREAD_RETRY_DELAY_MS = 500;
  *  bundle emits 60+ ErrorEvents in ~100ms; we want one summary log,
  *  not 60 IndexedDB writes blocking the main thread. */
 const WORKER_ERROR_DEDUP_WINDOW_MS = 500;
+/** localStorage key for the persisted "multi-thread is broken on
+ *  this host" flag. Per audit cycle ccd0057: multi-thread crashes
+ *  reliably on David's machine. Without persistence, every new
+ *  session re-probes multi-thread → crashes → falls back, wasting
+ *  ~2 s of init on every page load. With the flag persisted, we
+ *  skip multi entirely after the first failure on a given device. */
+const MULTI_FALLBACK_LS_KEY = 'sfx.multi-fallback-attempted.v1';
+
+function readPersistedMultiFallback(): boolean {
+  if (typeof localStorage === 'undefined') return false;
+  try {
+    return localStorage.getItem(MULTI_FALLBACK_LS_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function writePersistedMultiFallback(): void {
+  if (typeof localStorage === 'undefined') return;
+  try {
+    localStorage.setItem(MULTI_FALLBACK_LS_KEY, '1');
+  } catch {
+    // localStorage can throw (private browsing, quota, etc.) —
+    // not worth surfacing; we just don't get persistence.
+  }
+}
 
 class StockfishEngine {
   private worker: Worker | null = null;
@@ -186,11 +212,13 @@ class StockfishEngine {
   // an in-flight prefetch).
   private _brainMutex: Promise<void> = Promise.resolve();
   // Sticky once the multi-thread bundle has failed at runtime in
-  // this app session. Capped at one fallback attempt — once true,
-  // every subsequent initialize() call goes straight to the single-
-  // threaded variant without probing multi again. Prevents a
-  // multi → single → multi → single oscillation across crash retries.
-  private _runtimeFallbackAttempted = false;
+  // this app session OR on this device in a previous session. Once
+  // true, every subsequent initialize() call goes straight to the
+  // single-threaded variant. Persisted to localStorage on first
+  // failure so a fresh page load doesn't re-probe a known-broken
+  // multi-thread bundle (saves ~2 s of init on every load on
+  // affected devices).
+  private _runtimeFallbackAttempted = readPersistedMultiFallback();
   // Phase 8 — coalesce worker error spam. Multi-thread crashes can
   // emit 60+ ErrorEvents in ~100ms; we want one audit-log row, not
   // 60. Tracks the first error timestamp + count in the current
@@ -285,6 +313,9 @@ class StockfishEngine {
           if (this.workerVariant !== 'multi') return;
           if (this._runtimeFallbackAttempted) return;
           this._runtimeFallbackAttempted = true;
+          // Persist so a fresh page load on this device doesn't
+          // re-probe the known-broken multi-thread bundle.
+          writePersistedMultiFallback();
           if (earlyFailureTimer !== null) {
             clearTimeout(earlyFailureTimer);
             earlyFailureTimer = null;

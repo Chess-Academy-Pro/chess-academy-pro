@@ -15,6 +15,7 @@ import { emitAppBootAudit } from './services/appBootAudit';
 import { AppLayout } from './components/ui/AppLayout';
 import { LoadingScreen } from './components/ui/LoadingScreen';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
+import { BuildVersionWidget } from './components/Debug/BuildVersionWidget';
 
 // Page-level imports
 import { DashboardPage } from './components/Dashboard/DashboardPage';
@@ -105,7 +106,40 @@ export function App(): JSX.Element {
     // per tab session so production reports name the build, the
     // standalone mode, the SW state, and the network status at boot.
     emitAppBootAudit();
-    return uninstall;
+
+    // Audit-tool: periodic memory pressure snapshot. Chrome exposes
+    // `performance.memory` (non-standard but widely available). When
+    // a tab crashes, the audit log usually has nothing in the last
+    // seconds before the crash because nothing happened to log. A
+    // 30 s heartbeat with heap stats means the next crash-report
+    // dump CAN show the memory ramp leading up to the crash, not
+    // just the silence right before it. ~120 rows per hour of use,
+    // negligible IndexedDB load.
+    const memInterval = window.setInterval(() => {
+      const perf = performance as Performance & {
+        memory?: {
+          jsHeapSizeLimit: number;
+          totalJSHeapSize: number;
+          usedJSHeapSize: number;
+        };
+      };
+      const mem = perf.memory;
+      if (!mem) return;
+      const usedMb = Math.round(mem.usedJSHeapSize / (1024 * 1024));
+      const totalMb = Math.round(mem.totalJSHeapSize / (1024 * 1024));
+      const limitMb = Math.round(mem.jsHeapSizeLimit / (1024 * 1024));
+      void logAppAudit({
+        kind: 'memory-snapshot',
+        category: 'subsystem',
+        source: 'App.memoryAuditInterval',
+        summary: `heap used=${usedMb}MB total=${totalMb}MB limit=${limitMb}MB (${Math.round((usedMb / limitMb) * 100)}% of cap)`,
+      });
+    }, 30_000);
+
+    return () => {
+      window.clearInterval(memInterval);
+      uninstall();
+    };
   }, []);
 
   useEffect(() => {
@@ -279,6 +313,7 @@ export function App(): JSX.Element {
           <Route path="/kid/:piece" element={<ErrorBoundary><KidPiecePage /></ErrorBoundary>} />
         </Route>
       </Routes>
+      <BuildVersionWidget />
     </BrowserRouter>
   );
 }

@@ -57,11 +57,28 @@ export interface EndgameRecap {
   narration: string;
 }
 
-/** Stockfish depth for recap analysis. We use a lower depth than
- *  game review (~12 vs 18) because a recap fires every time a
- *  short endgame playout completes — keep the wait under a second
- *  or two on a typical position. */
-const RECAP_DEPTH = 12;
+/** Stockfish depth for recap analysis. Lowered from 12 → 8 because
+ *  David's audit showed 6 s/eval on degraded single-thread (the
+ *  10-eval recap took 60 s to complete). Depth 8 is ~4x faster and
+ *  the win-percent drop thresholds we classify against are coarse
+ *  enough that the rougher eval doesn't change the verdict. */
+const RECAP_DEPTH = 8;
+/** Per-call timeout. If a single Stockfish eval hangs (worker in
+ *  recovery, multi-thread crash mid-flight, etc.), the recap falls
+ *  back to 0 for that move and CONTINUES instead of freezing the
+ *  spinner forever. Audit cycle ccd0057 showed evals taking
+ *  6 s each on degraded single-thread; 5 s catches genuine hangs
+ *  without false-positive-ing slow-but-completing evals. */
+const RECAP_EVAL_TIMEOUT_MS = 5_000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error('recap-eval-timeout')), ms),
+    ),
+  ]);
+}
 
 /** Win-percent drop thresholds for classification. Match the
  *  thresholds used elsewhere (gameAnalysisService) so the same move
@@ -135,14 +152,20 @@ export async function buildEndgameRecap(
     let evalBefore = 0;
     let evalAfter = 0;
     try {
-      const before = await stockfishEngine.analyzePosition(move.fenBefore, RECAP_DEPTH);
+      const before = await withTimeout(
+        stockfishEngine.analyzePosition(move.fenBefore, RECAP_DEPTH),
+        RECAP_EVAL_TIMEOUT_MS,
+      );
       evalBefore = before.evaluation;
     } catch {
       // Engine error — fall back to 0 (treat as neutral). Better to
       // surface a partial recap than crash the UI.
     }
     try {
-      const after = await stockfishEngine.analyzePosition(move.fenAfter, RECAP_DEPTH);
+      const after = await withTimeout(
+        stockfishEngine.analyzePosition(move.fenAfter, RECAP_DEPTH),
+        RECAP_EVAL_TIMEOUT_MS,
+      );
       evalAfter = after.evaluation;
     } catch {
       // see above

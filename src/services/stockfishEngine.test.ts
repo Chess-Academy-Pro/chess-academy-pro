@@ -79,6 +79,14 @@ beforeEach(() => {
   // it between tests so a previous test's analysis result doesn't
   // short-circuit the worker dispatch under test.
   stockfishCache.clear();
+  // Clear the persisted multi-thread fallback flag so each test
+  // starts from a clean slate — a previous test that wrote the flag
+  // would otherwise force every subsequent test straight to single.
+  try {
+    localStorage.removeItem('sfx.multi-fallback-attempted.v1');
+  } catch {
+    /* no localStorage in some test envs */
+  }
 
   // Use a class so `new Worker(...)` works properly
   vi.stubGlobal(
@@ -1477,6 +1485,37 @@ describe('runtime fallback (multi → single)', () => {
 
       // One additional worker spawned by the retry path.
       expect(workerConstructorCallCount).toBe(afterFallbackCount + 1);
+    });
+
+    it('persists the multi-thread fallback flag to localStorage on first failure', async () => {
+      installMultiCapableEnv();
+      const { stockfishEngine } = await getEngine();
+      const initPromise = stockfishEngine.initialize();
+      initPromise.catch(() => undefined);
+      await Promise.resolve();
+
+      // Multi crashes. Phase 9 should write the persisted flag.
+      vi.useFakeTimers();
+      mockWorker.emitError('multi crash');
+      vi.advanceTimersByTime(200);
+      vi.useRealTimers();
+      await Promise.resolve();
+
+      expect(localStorage.getItem('sfx.multi-fallback-attempted.v1')).toBe('1');
+    });
+
+    it('skips multi-thread on init when localStorage flag is set', async () => {
+      installMultiCapableEnv();
+      // Pre-seed the persisted flag — simulates a returning user
+      // whose previous session already discovered multi is broken.
+      localStorage.setItem('sfx.multi-fallback-attempted.v1', '1');
+
+      const { stockfishEngine } = await getEngine();
+      completeInit();
+      await stockfishEngine.initialize();
+
+      // Should go STRAIGHT to single — no multi-thread spawn.
+      expect(workerConstructorCallCount).toBe(1);
     });
 
     it('does NOT retry a second time after the retry budget is spent', async () => {

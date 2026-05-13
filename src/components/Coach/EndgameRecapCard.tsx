@@ -1,17 +1,19 @@
 /**
  * EndgameRecapCard — Stockfish-driven post-playout accuracy recap.
  *
- * David's Photo 3 audit: a short recap of move accuracy, written
- * AND narrated, with no LLM authorship. Stockfish provides the eval
- * deltas per move, the existing winPercent + accuracyFromWinDelta
- * + harmonic-mean pipeline (ship-2) does the math, and a small bank
- * of templated narration stems renders the spoken summary.
+ * David's audit cycle (ccd0057): the auto-run recap was firing 10
+ * Stockfish evals on every playout completion, taking ~60 s on
+ * degraded single-thread Stockfish to render the breakdown. That's
+ * unacceptable UX for what is curiosity-grade detail.
  *
- * The card mounts on playout completion, kicks off the async
- * Stockfish analysis, and speaks the narration once the data lands.
+ * Reworked: don't auto-run. Show a "Show accuracy breakdown" button.
+ * Only kick off the analysis when the user explicitly opts in.
+ * The "Played perfectly / Line played out" signal that's already on
+ * the parent PlayoutStatus is the meaningful feedback most users
+ * need; the per-move breakdown is opt-in.
  */
 import { useEffect, useRef, useState } from 'react';
-import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Loader2, BarChart3 } from 'lucide-react';
 import type { StudentMoveRecord } from '../../hooks/useEndgamePlayout';
 import {
   buildEndgameRecap,
@@ -39,31 +41,41 @@ const CLASSIFICATION_LABEL: Record<RecapClassification, string> = {
   blunder: 'Blunder',
 };
 
+type RecapPhase =
+  | { kind: 'idle' }      // initial — show the opt-in button
+  | { kind: 'loading' }   // user tapped, evals in flight
+  | { kind: 'ready'; recap: EndgameRecap }
+  | { kind: 'error'; message: string };
+
 export function EndgameRecapCard({
   studentMoves,
   studentSide,
 }: EndgameRecapCardProps): JSX.Element | null {
-  const [recap, setRecap] = useState<EndgameRecap | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [phase, setPhase] = useState<RecapPhase>({ kind: 'idle' });
   // De-dupe the spoken narration so React StrictMode's double-effect
   // and ordinary re-renders don't trigger a second speak() — each
   // fresh recap build (different narration text) speaks once.
   const lastSpokenRef = useRef<string | null>(null);
 
+  // Reset to idle when the student-move log changes (new playout /
+  // reset / different position).
   useEffect(() => {
-    let cancelled = false;
-    setRecap(null);
-    setError(null);
-    if (studentMoves.length === 0) {
-      lastSpokenRef.current = null;
-      return;
-    }
+    setPhase({ kind: 'idle' });
+    lastSpokenRef.current = null;
+  }, [studentMoves]);
 
+  const runRecap = (): void => {
+    if (studentMoves.length === 0) return;
+    setPhase({ kind: 'loading' });
+    let cancelled = false;
     buildEndgameRecap(studentMoves, studentSide)
       .then((r) => {
         if (cancelled) return;
-        if (!r) return;
-        setRecap(r);
+        if (!r) {
+          setPhase({ kind: 'idle' });
+          return;
+        }
+        setPhase({ kind: 'ready', recap: r });
         if (lastSpokenRef.current !== r.narration) {
           lastSpokenRef.current = r.narration;
           void voiceService.speak(r.narration);
@@ -71,34 +83,55 @@ export function EndgameRecapCard({
       })
       .catch((e: unknown) => {
         if (cancelled) return;
-        setError(e instanceof Error ? e.message : 'Recap failed');
+        setPhase({
+          kind: 'error',
+          message: e instanceof Error ? e.message : 'Recap failed',
+        });
       });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [studentMoves, studentSide]);
+    return; // cancel signal handled by the inner closure
+  };
 
   if (studentMoves.length === 0) return null;
 
-  if (error) {
+  if (phase.kind === 'idle') {
     return (
-      <div className="flex items-center gap-2 text-[11px] text-amber-400 mt-1">
-        <AlertCircle size={12} />
-        <span>Recap unavailable: {error}</span>
-      </div>
+      <button
+        type="button"
+        onClick={runRecap}
+        className="mt-1 inline-flex items-center gap-1.5 text-[11px] text-cyan-400 hover:text-cyan-300 self-start"
+        data-testid="endgame-recap-show"
+      >
+        <BarChart3 size={12} />
+        Show accuracy breakdown
+      </button>
     );
   }
 
-  if (!recap) {
+  if (phase.kind === 'loading') {
     return (
-      <div className="flex items-center gap-2 text-[11px] text-theme-text-muted mt-1">
+      <div
+        className="flex items-center gap-2 text-[11px] text-theme-text-muted mt-1"
+        data-testid="endgame-recap-loading"
+      >
         <Loader2 size={12} className="animate-spin" />
         <span>Analyzing your moves…</span>
       </div>
     );
   }
 
+  if (phase.kind === 'error') {
+    return (
+      <div
+        className="flex items-center gap-2 text-[11px] text-amber-400 mt-1"
+        data-testid="endgame-recap-error"
+      >
+        <AlertCircle size={12} />
+        <span>Recap unavailable: {phase.message}</span>
+      </div>
+    );
+  }
+
+  const { recap } = phase;
   const acc = Math.round(recap.accuracy);
   const pillCounts: Array<[RecapClassification, number]> = [
     ['best', recap.counts.best],

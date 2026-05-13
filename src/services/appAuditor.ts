@@ -197,6 +197,11 @@ export type AuditKind =
   // App-boot snapshot. Fired once on first mount with: buildId, PWA
   // standalone-mode flag, SW state, navigator.onLine, user-agent.
   | 'app-boot'
+  // Periodic JS-heap pressure snapshot (every 30 s from App.tsx).
+  // Lets a post-crash audit-log dump show memory ramp in the
+  // seconds leading up to a tab kill, not just the silence right
+  // before the renderer died.
+  | 'memory-snapshot'
   // Lichess health probe. Fires from a Settings → debug button OR
   // when fetchLichessExplorer / fetchCloudEval throws — captures the
   // exact error shape (name, message, cause, navigator.onLine, the
@@ -387,8 +392,10 @@ export interface AuditEntry {
 }
 
 /** Build identifier injected at vite-build time. Falls back to
- *  'unknown' in test / SSR contexts where the define isn't applied. */
-function getBuildId(): string {
+ *  'unknown' in test / SSR contexts where the define isn't applied.
+ *  Exported so the BuildVersionWidget (and any debug surface) can
+ *  display the running bundle hash without rummaging in audit rows. */
+export function getBuildId(): string {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     return typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : 'unknown';
