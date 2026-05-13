@@ -25,7 +25,6 @@ import { scaledShadow } from '../../utils/neonColors';
 import { createStreamingSpeaker } from '../../services/streamingSpeaker';
 import { voiceService } from '../../services/voiceService';
 import {
-  getOpeningBlunderPuzzles,
   groupByOpeningFamily,
   familyLabel,
   openingFamily,
@@ -245,11 +244,47 @@ function puzzleGoalSentence(themes: string[]): string {
 
 type ColorTab = 'white' | 'black';
 
+type PhaseFilter = 'opening' | 'transition' | 'middlegame' | 'all';
+
+const PHASE_LABEL: Record<PhaseFilter, string> = {
+  opening: 'Opening',
+  transition: 'Late opening',
+  middlegame: 'Middlegame',
+  all: 'All depths',
+};
+
+function applyPhaseFilter(
+  families: OpeningBlunderFamily[],
+  phase: PhaseFilter,
+): OpeningBlunderFamily[] {
+  if (phase === 'all') return families;
+  return families
+    .map((f) => ({
+      ...f,
+      white: f.white.filter((p) => p.phase === phase),
+      black: f.black.filter((p) => p.phase === phase),
+    }))
+    .filter((f) => f.white.length + f.black.length > 0)
+    .sort((a, b) => b.white.length + b.black.length - (a.white.length + a.black.length));
+}
+
 export function OpeningBlundersPage(): JSX.Element {
   const activeProfile = useAppStore((s) => s.activeProfile);
   const userRating = activeProfile?.puzzleRating ?? 1200;
-  const families = useMemo<OpeningBlunderFamily[]>(() => groupByOpeningFamily(), []);
-  const total = useMemo<number>(() => getOpeningBlunderPuzzles().length, []);
+  const allFamilies = useMemo<OpeningBlunderFamily[]>(() => groupByOpeningFamily(), []);
+  // Default to true opening-phase puzzles. Per user: "lets start with
+  // early opening puzzles. can you sort by that?" — middlegame-deep
+  // positions hide here too and they're a different lesson.
+  const [phaseFilter, setPhaseFilter] = useState<PhaseFilter>('opening');
+  const families = useMemo(
+    () => applyPhaseFilter(allFamilies, phaseFilter),
+    [allFamilies, phaseFilter],
+  );
+  const total = useMemo<number>(
+    () =>
+      families.reduce((acc, f) => acc + f.white.length + f.black.length, 0),
+    [families],
+  );
   const [activeFamily, setActiveFamily] = useState<string | null>(null);
   const [activeColor, setActiveColor] = useState<ColorTab>('white');
   const [activePuzzle, setActivePuzzle] = useState<OpeningBlunderPuzzle | null>(null);
@@ -310,6 +345,8 @@ export function OpeningBlundersPage(): JSX.Element {
       userRating={userRating}
       solved={solved}
       bestStreak={bestStreak}
+      phaseFilter={phaseFilter}
+      onPhaseFilterChange={setPhaseFilter}
       onPick={(fam) => {
         const f = families.find((x) => x.family === fam);
         if (f) setActiveColor(f.white.length >= f.black.length ? 'white' : 'black');
@@ -325,6 +362,8 @@ interface FamilyPickerViewProps {
   userRating: number;
   solved: number;
   bestStreak: number;
+  phaseFilter: PhaseFilter;
+  onPhaseFilterChange: (p: PhaseFilter) => void;
   onPick: (family: string) => void;
 }
 
@@ -334,6 +373,8 @@ function FamilyPickerView({
   userRating,
   solved,
   bestStreak,
+  phaseFilter,
+  onPhaseFilterChange,
   onPick,
 }: FamilyPickerViewProps): JSX.Element {
   const { settings } = useSettings();
@@ -348,8 +389,29 @@ function FamilyPickerView({
     >
       <h1 className="text-xl font-bold text-center mt-2">Opening Traps</h1>
       <p className="text-[11px] text-theme-text-muted text-center -mt-2">
-        {total} tactical refutations · grouped by opening
+        {total} {PHASE_LABEL[phaseFilter].toLowerCase()} traps · grouped by opening
       </p>
+
+      {/* Phase filter — defaults to true opening-phase puzzles so the
+          picker starts on the cleanest shallow set, sorted by depth. */}
+      <div className="max-w-lg mx-auto w-full">
+        <div className="flex gap-1 rounded-lg p-1" style={{ background: 'var(--color-bg-secondary)' }}>
+          {(['opening', 'transition', 'middlegame', 'all'] as const).map((p) => (
+            <button
+              key={p}
+              onClick={() => onPhaseFilterChange(p)}
+              className="flex-1 px-2 py-1.5 rounded-md text-[11px] font-medium transition-colors text-center"
+              style={{
+                background: phaseFilter === p ? 'var(--color-surface)' : 'transparent',
+                color: phaseFilter === p ? 'var(--color-text)' : 'var(--color-text-muted)',
+              }}
+              data-testid={`opening-blunder-phase-${p}`}
+            >
+              {PHASE_LABEL[p]}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Adaptive rating + session-progress chip row. Matches the
           adaptive puzzle surfaces (rating-banded sort + streak counter). */}
@@ -574,6 +636,9 @@ function FamilyDetailView({
                       {chip.label}
                     </span>
                     <span className="text-[11px] text-theme-text-muted font-mono">{p.rating}</span>
+                    <span className="text-[10px] text-theme-text-muted font-mono opacity-70">
+                      m{p.fullmove}
+                    </span>
                   </div>
                   <p className="text-[11px] text-theme-text-muted truncate">
                     {p.themes

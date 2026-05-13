@@ -53,6 +53,16 @@ export interface OpeningBlunderPuzzle {
    *  opponent's setup move (moves[0]) is applied. This is the side
    *  that delivers the punishing tactic. Pre-computed for fast filter. */
   studentColor: 'white' | 'black';
+  /** Fullmove number from the puzzle's FEN. 1 = before white's first
+   *  move. Pre-computed so the picker can filter / sort by depth
+   *  without re-parsing FENs. */
+  fullmove: number;
+  /** Coarse depth classification:
+   *  - 'opening'    : fullmove ≤ 7 (~14 ply). True opening-trap territory.
+   *  - 'transition' : 8-12 (~16-24 ply). Late opening / early middlegame.
+   *  - 'middlegame' : > 12. Position grew well past the opening label.
+   *  Used to default the picker to the cleanest early-opening subset. */
+  phase: 'opening' | 'transition' | 'middlegame';
 }
 
 interface RawPuzzle {
@@ -108,7 +118,21 @@ function deriveStudentColor(
   }
 }
 
-/** All opening blunders in the local corpus, sorted by popularity desc. */
+function fullmoveFromFen(fen: string): number {
+  const parts = fen.split(' ');
+  const n = Number(parts[5]);
+  return Number.isFinite(n) && n > 0 ? n : 1;
+}
+
+function phaseFromFullmove(fullmove: number): 'opening' | 'transition' | 'middlegame' {
+  if (fullmove <= 7) return 'opening';
+  if (fullmove <= 12) return 'transition';
+  return 'middlegame';
+}
+
+/** All opening blunders in the local corpus. Sort default: depth
+ *  ascending (shallow openings first), tie-break popularity. Callers
+ *  filter by `phase === 'opening'` to focus on true opening traps. */
 export function getOpeningBlunderPuzzles(): OpeningBlunderPuzzle[] {
   const out: OpeningBlunderPuzzle[] = [];
   for (const p of puzzles) {
@@ -118,6 +142,7 @@ export function getOpeningBlunderPuzzles(): OpeningBlunderPuzzle[] {
     if (!hasTactic) continue;
     const studentColor = deriveStudentColor(p.fen, p.moves);
     if (!studentColor) continue;
+    const fullmove = fullmoveFromFen(p.fen);
     out.push({
       id: p.id,
       fen: p.fen,
@@ -128,9 +153,14 @@ export function getOpeningBlunderPuzzles(): OpeningBlunderPuzzle[] {
       popularity: p.popularity ?? 0,
       nbPlays: p.nbPlays ?? 0,
       studentColor,
+      fullmove,
+      phase: phaseFromFullmove(fullmove),
     });
   }
-  out.sort((a, b) => b.popularity - a.popularity);
+  out.sort((a, b) => {
+    if (a.fullmove !== b.fullmove) return a.fullmove - b.fullmove;
+    return b.popularity - a.popularity;
+  });
   return out;
 }
 
