@@ -1,23 +1,25 @@
 /**
  * ScrollHintBar
  * -------------
- * A solid gold indicator that sits below (horizontal) or beside
- * (vertical) a scrollable container with an arrow-shaped accent
- * that sweeps across in one direction only. Auto-detects whether
- * the tracked element actually overflows; renders nothing when
- * there's nothing to scroll. Hides itself automatically once the
- * student has scrolled to discover the off-screen content.
+ * A permanent gold visual-signature bar that sits below (horizontal)
+ * or beside (vertical) a related element. The gold track always
+ * renders — it's part of the app's visual identity, not a transient
+ * hint. The comet sweep only animates when the tracked element
+ * actually overflows AND the student hasn't yet scrolled to discover
+ * the off-screen content.
  *
  * Design (David's iterative spec):
  *   - Solid gold track with a layered glow (inner highlight + mid
  *     amber bloom + soft amber halo) so the bar pops on dark bg.
+ *     Renders unconditionally — never hidden.
  *   - Spotlight gradient: when caller passes `spotlightAt`, the
  *     track is brightest at that fractional position [0..1] and
  *     fades toward the edges — visually ties the bar to the active
  *     tab above without needing an explicit connector.
  *   - Accent is a comet, not a shape that moves: bright leading
  *     edge with a long trailing gradient, clipped into the arrow
- *     polygon. Reads as motion.
+ *     polygon. Reads as motion. Gated on actual overflow +
+ *     pre-discovery so the sweep stays meaningful, not perpetual.
  *   - Sweeps in ONE direction only — left → right for x, top →
  *     bottom for y. No bouncing.
  *
@@ -27,6 +29,7 @@
  *   <ScrollHintBar targetRef={ref} axis="x" spotlightAt={0.5} />
  */
 import { useEffect, useRef, useState } from 'react';
+import { logAppAudit } from '../../services/appAuditor';
 
 interface ScrollHintBarProps {
   /** Ref to the scrollable element. The bar reads its
@@ -76,10 +79,11 @@ export function ScrollHintBar({
   axis = 'x',
   spotlightAt,
   className = '',
-}: ScrollHintBarProps): JSX.Element | null {
+}: ScrollHintBarProps): JSX.Element {
   const [overflow, setOverflow] = useState<boolean>(false);
-  // Hide once the user has scrolled past the start — they've
-  // discovered the content; further hinting is noise.
+  // Track whether the user has scrolled to discover the off-screen
+  // content; gates the comet sweep so it stops once it's done its
+  // job. Does NOT hide the gold track — that's a permanent signature.
   const [discovered, setDiscovered] = useState<boolean>(false);
   const initialRef = useRef<{ checked: boolean }>({ checked: false });
 
@@ -111,7 +115,21 @@ export function ScrollHintBar({
     };
   }, [targetRef, axis]);
 
-  if (!overflow || discovered) return null;
+  const showComet = overflow && !discovered;
+
+  // Emit one audit when the comet state flips. Diagnoses
+  // "the gold bar isn't moving" / "the bar shouldn't be there" reports.
+  const lastCometRef = useRef<boolean | null>(null);
+  useEffect(() => {
+    if (lastCometRef.current === showComet) return;
+    lastCometRef.current = showComet;
+    void logAppAudit({
+      kind: 'scroll-hint-state',
+      category: 'subsystem',
+      source: 'ScrollHintBar',
+      summary: `comet=${showComet} overflow=${overflow} discovered=${discovered} axis=${axis}`,
+    });
+  }, [showComet, overflow, discovered, axis]);
 
   if (axis === 'x') {
     return (
@@ -119,24 +137,24 @@ export function ScrollHintBar({
         className={`relative h-1.5 rounded-full ${className}`}
         aria-hidden="true"
         data-testid="scroll-hint-x"
+        data-comet={String(showComet)}
         style={{
           background: buildSpotlightBg('x', spotlightAt),
           boxShadow: TRACK_GLOW,
         }}
       >
-        {/* Comet accent — wider than the old arrow so the sweep
-            reads as motion. overflow-hidden on a child wrapper so
-            the glow on the track itself isn't clipped. */}
-        <div className="absolute inset-0 rounded-full overflow-hidden">
-          <div
-            className="absolute top-0 h-full w-20 animate-scroll-hint-x"
-            style={{
-              background: COMET_GRADIENT_X,
-              clipPath: ARROW_CLIP_X,
-              boxShadow: ACCENT_GLOW,
-            }}
-          />
-        </div>
+        {showComet && (
+          <div className="absolute inset-0 rounded-full overflow-hidden">
+            <div
+              className="absolute top-0 h-full w-20 animate-scroll-hint-x"
+              style={{
+                background: COMET_GRADIENT_X,
+                clipPath: ARROW_CLIP_X,
+                boxShadow: ACCENT_GLOW,
+              }}
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -145,21 +163,24 @@ export function ScrollHintBar({
       className={`relative w-1.5 rounded-full ${className}`}
       aria-hidden="true"
       data-testid="scroll-hint-y"
+      data-comet={String(showComet)}
       style={{
         background: buildSpotlightBg('y', spotlightAt),
         boxShadow: TRACK_GLOW,
       }}
     >
-      <div className="absolute inset-0 rounded-full overflow-hidden">
-        <div
-          className="absolute left-0 w-full h-20 animate-scroll-hint-y"
-          style={{
-            background: COMET_GRADIENT_Y,
-            clipPath: ARROW_CLIP_Y,
-            boxShadow: ACCENT_GLOW,
-          }}
-        />
-      </div>
+      {showComet && (
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div
+            className="absolute left-0 w-full h-20 animate-scroll-hint-y"
+            style={{
+              background: COMET_GRADIENT_Y,
+              clipPath: ARROW_CLIP_Y,
+              boxShadow: ACCENT_GLOW,
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

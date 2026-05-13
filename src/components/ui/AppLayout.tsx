@@ -1,5 +1,5 @@
-import { useCallback, useState, useRef } from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
+import { useCallback, useState, useRef, useEffect } from 'react';
+import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
   BookOpen,
@@ -18,6 +18,7 @@ import { InstallPrompt } from './InstallPrompt';
 import { OfflineBanner } from './OfflineBanner';
 import { GlobalCoachDrawer } from '../Coach/GlobalCoachDrawer';
 import { QuickFeedbackButton } from '../Feedback/QuickFeedbackButton';
+import { logAppAudit } from '../../services/appAuditor';
 
 interface NavItem {
   to: string;
@@ -132,10 +133,25 @@ export function AppLayout(): JSX.Element {
   const setCoachDrawerOpen = useAppStore((s) => s.setCoachDrawerOpen);
   const bgAnalysisRunning = useAppStore((s) => s.backgroundAnalysisRunning);
   const bgAnalysisProgress = useAppStore((s) => s.backgroundAnalysisProgress);
-  // useLocation was used to gate the global chat FAB by route; the
-  // FAB is retired in favor of inline Chat buttons on chessboard
-  // surfaces (and SmartSearchBar handles chat intent on tab pages).
-  // Importing kept commented to avoid a churny line if we re-enable.
+  const location = useLocation();
+
+  // Emit a route-changed audit on every URL change so a session can
+  // reconstruct navigation flow from the audit log alone — joins with
+  // coach-hub-tile-clicked etc. for a "what did the user actually tap?"
+  // story without speculation.
+  const lastRouteRef = useRef<string>('');
+  useEffect(() => {
+    const path = location.pathname + location.search + location.hash;
+    if (path === lastRouteRef.current) return;
+    const from = lastRouteRef.current || '(initial)';
+    lastRouteRef.current = path;
+    void logAppAudit({
+      kind: 'route-changed',
+      category: 'app',
+      source: 'AppLayout',
+      summary: `${from} → ${path}`,
+    });
+  }, [location]);
 
   const closeSidebar = useCallback((): void => {
     setSidebarOpen(false);
@@ -367,29 +383,41 @@ export function AppLayout(): JSX.Element {
           borderColor: 'var(--color-border)',
         }}
       >
-        {MOBILE_NAV_ITEMS.map(({ to, label, icon: Icon, iconColor, glowColor, activeText }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={to === '/'}
-            className={({ isActive }) =>
-              `flex flex-col items-center gap-0.5 px-2 py-1 text-xs font-medium transition-colors min-w-0 ${
-                isActive ? activeText : ''
-              }`
-            }
-            style={({ isActive }) => isActive ? {
-              borderTop: `2px solid ${glowColor}`,
-              filter: `drop-shadow(0 0 6px ${glowColor})`,
-              boxShadow: `0 4px 8px -2px ${glowColor}`,
-            } : {
-              borderTop: '2px solid transparent',
-              color: 'var(--color-text-muted)',
-            }}
-          >
-            <Icon size={22} style={{ color: iconColor }} />
-            <span className="truncate w-full text-center leading-tight">{label}</span>
-          </NavLink>
-        ))}
+        {MOBILE_NAV_ITEMS.map(({ to, label, icon: Icon, iconColor, glowColor, activeText }) => {
+          // Phase 5 (#9): replace the top-line indicator with a left+bottom
+          // corner glow that bleeds into the nav background. Same asymmetric
+          // L-shape Openings tabs use, but with inset shadows so the glow
+          // fades into the surface instead of cutting it.
+          const glowFaint = glowColor.replace('0.6)', '0.08)').replace('0.5)', '0.07)');
+          const glowSoft = glowColor.replace('0.6)', '0.3)').replace('0.5)', '0.25)');
+          const glowStrong = glowColor.replace('0.6)', '0.7)').replace('0.5)', '0.6)');
+          return (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === '/'}
+              className={({ isActive }) =>
+                `flex flex-col items-center gap-0.5 px-2 py-1 text-xs font-medium transition-colors min-w-0 ${
+                  isActive ? activeText : ''
+                }`
+              }
+              style={({ isActive }) => isActive ? {
+                borderLeft: `2px solid ${glowStrong}`,
+                borderBottom: `2px solid ${glowStrong}`,
+                background: `linear-gradient(225deg, ${glowFaint} 0%, transparent 70%)`,
+                boxShadow: `inset 6px 0 14px -4px ${glowSoft}, inset 0 -6px 14px -4px ${glowSoft}, 0 0 10px ${glowSoft}`,
+                filter: `drop-shadow(0 0 4px ${glowSoft})`,
+              } : {
+                borderLeft: '2px solid transparent',
+                borderBottom: '2px solid transparent',
+                color: 'var(--color-text-muted)',
+              }}
+            >
+              <Icon size={22} style={{ color: iconColor }} />
+              <span className="truncate w-full text-center leading-tight">{label}</span>
+            </NavLink>
+          );
+        })}
       </nav>
 
       {/* Coach trigger — draggable on mobile, FAB on desktop */}

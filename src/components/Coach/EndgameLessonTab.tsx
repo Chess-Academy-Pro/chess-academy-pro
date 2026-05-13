@@ -31,6 +31,7 @@ import {
 import type { CSSProperties } from 'react';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
+import { ScrollHintBar } from '../Common/ScrollHintBar';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import { useClickToMove } from '../../hooks/useClickToMove';
 import { useAdaptiveEndgameSession } from '../../hooks/useAdaptiveEndgameSession';
@@ -556,6 +557,10 @@ function PositionRunner({
   // Time-to-solve tracking — starts when the position mounts,
   // captured on completion to feed the adaptive-difficulty hook.
   const startTimeRef = useRef<number>(Date.now());
+  // Refs for the gold-bar spotlight under the Adaptive/Fixed and
+  // tier toggles (Phase 5 visual-signature parity).
+  const drillToggleRef = useRef<HTMLDivElement>(null);
+  const tierToggleRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     startTimeRef.current = Date.now();
   }, [position.fen]);
@@ -624,7 +629,7 @@ function PositionRunner({
       </div>
       {hasDrillPool && (
         <div className="flex flex-col gap-1 mt-2">
-          <div className="flex justify-center gap-1">
+          <div ref={drillToggleRef} className="flex justify-center gap-1">
             <button
               onClick={() => onDrillModeChange('adaptive')}
               className={`flex-1 px-2 py-1 rounded text-[11px] font-medium transition-colors ${
@@ -650,23 +655,35 @@ function PositionRunner({
               Fixed tier
             </button>
           </div>
+          <ScrollHintBar
+            targetRef={drillToggleRef}
+            axis="x"
+            spotlightAt={drillMode === 'adaptive' ? 0.25 : 0.75}
+          />
           {drillMode === 'fixed' && (
-            <div className="flex justify-center gap-1">
-              {TIER_OPTIONS.map((opt) => (
-                <button
-                  key={opt.value}
-                  onClick={() => onTierChange(opt.value)}
-                  className={`flex-1 px-2 py-1 rounded text-[11px] font-medium transition-colors ${
-                    tier === opt.value
-                      ? 'bg-theme-accent text-theme-bg'
-                      : 'bg-theme-surface text-theme-text-muted hover:bg-theme-bg'
-                  }`}
-                  data-testid={`endgame-drill-tier-${opt.value}`}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
+            <>
+              <div ref={tierToggleRef} className="flex justify-center gap-1">
+                {TIER_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => onTierChange(opt.value)}
+                    className={`flex-1 px-2 py-1 rounded text-[11px] font-medium transition-colors ${
+                      tier === opt.value
+                        ? 'bg-theme-accent text-theme-bg'
+                        : 'bg-theme-surface text-theme-text-muted hover:bg-theme-bg'
+                    }`}
+                    data-testid={`endgame-drill-tier-${opt.value}`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+              <ScrollHintBar
+                targetRef={tierToggleRef}
+                axis="x"
+                spotlightAt={(Math.max(0, TIER_OPTIONS.findIndex((o) => o.value === tier)) + 0.5) / TIER_OPTIONS.length}
+              />
+            </>
           )}
         </div>
       )}

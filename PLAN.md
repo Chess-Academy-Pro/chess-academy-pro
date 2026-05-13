@@ -263,18 +263,47 @@ One component, drop-in across three surfaces.
   label override). Existing FromYourGamesTab + GameInsightsPage tests
   still pass.
 
-### Phase 5 — Visual signature consistency (~½ day, 1 PR) [STATUS: pending]
+### Phase 5 — Visual signature consistency [STATUS: shipped this PR]
 The "make-the-app-feel-cohesive" pass.
 
-- [ ] (#7) Gold bar permanent — strip `discovered` + `overflow`
-  guards from `ScrollHintBar` so the gold track always renders.
-  Keep the comet sweep gated to overflow only.
-- [ ] (#8) Gold bar on Adaptive/Fixed tier toggle in keystone
-  subview.
-- [ ] (#9) Bottom-nav active tab glow (left + bottom blend).
-- [ ] (#10) Coach hub tile glow parity with Openings.
+- [x] (#7) **Gold bar permanent** — `ScrollHintBar` no longer
+  returns null on `!overflow || discovered`. The gold track now
+  renders unconditionally; the comet sweep is gated to `overflow &&
+  !discovered` so the motion still earns its keep. Exposed via
+  `data-comet="true|false"` for diagnostics.
+- [x] (#8) **Gold bar on Adaptive/Fixed tier toggle** — added a
+  `<ScrollHintBar>` after the Adaptive/Fixed row in
+  `EndgameLessonTab` (PositionRunner header), spotlit at 0.25 / 0.75
+  to follow the active button. Same for the tier sub-row (4
+  buttons), spotlight follows the active tier.
+- [x] (#9) **Bottom-nav active tab glow** — replaced the
+  `borderTop: 2px solid <color>` top-line with a left+bottom corner
+  glow that bleeds into the nav background. Recipe: 2px L-shape
+  border, soft inset shadows on both lit edges, a 225° linear-
+  gradient background fading from the corner, and a soft outer
+  drop-shadow. Matches the Openings tab's left+bottom 2px signature
+  but with inset shadows so the glow fades into the surface instead
+  of cutting it with a hard line.
+- [-] (#10) **Coach hub tile glow parity with Openings** — audit was
+  misdiagnosed. `CoachHomePage.neonBorderStyle` and
+  `OpeningCard`'s inline border style are byte-for-byte equivalent:
+  same `border-l/b: 2px` + `border-t/r: 1px` asymmetric L-shape, same
+  `scaledShadow(rgb, gB)` triple-stack glow, same `glowBrightness`
+  brightness scaling. If the visual signature still feels off it's
+  per-tile color choice or geometry, not the glow recipe — both call
+  sites already go through the same primitives. Leaving as-is until
+  there's a concrete failing case.
 
-Will likely need David's eye after first attempt to dial magnitudes.
+**Audit instrumentation (David's "add in audit tools" call):**
+- New audit kind `route-changed` — fires on every URL change from
+  `AppLayout`. Joins with `coach-hub-tile-clicked` etc. so navigation
+  flow is reconstructable from the audit log alone.
+- New audit kind `scroll-hint-state` — fires when the gold-bar comet
+  state flips. Diagnoses "the bar isn't moving" reports.
+- New audit kind `asset-load-error` — reserved (will be wired into
+  `ConsistentChessboard`'s overlay path for the Phase 1.3 bishop-
+  sprite trail once we have a place to hook it in without a re-
+  render storm).
 
 ### Phase 6 — Game review hint button (~2 hrs, 1 PR) [STATUS: pending]
 Depends on Phase 2 (narration substrate) so the hint reveal speech

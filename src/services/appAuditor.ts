@@ -366,7 +366,24 @@ export type AuditKind =
   // WO-NARR-POLICY-01 — proactive tactic alert spoken after the coach
   // sets up a threat on the board. Stockfish-driven (no LLM round-trip),
   // fires under verbosity in {'key-moments', 'every-move'}.
-  | 'coach-tactic-alert-spoken';
+  | 'coach-tactic-alert-spoken'
+  // Phase 5 visual-signature audits. Captured so a "this UI feels broken"
+  // report has a concrete trail of what the user saw.
+  // ---
+  // route-changed: fires on every URL change. Lets a session reconstruct
+  // navigation flow from the audit log alone (e.g., "user clicked the
+  // Coach tab and ended up at /weaknesses" — was it a NavLink that
+  // routed wrong, or a programmatic redirect?).
+  | 'route-changed'
+  // scroll-hint-state: fires when the gold-bar comet activates or
+  // deactivates (overflow-detected, scroll-discovered, end-reached).
+  // Diagnoses "the gold bar isn't moving" reports.
+  | 'scroll-hint-state'
+  // asset-load-error: fires when a piece sprite or other static asset
+  // fails to load. Hooked into ConsistentChessboard's overlay path so
+  // the Phase 1.3 bishop-sprite report has a Network-tab-like trail
+  // even from a non-DevTools session.
+  | 'asset-load-error';
 
 export interface AuditEntry {
   timestamp: number;
