@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "Nc3",
-      "annotation": "We start with the Van Geet Opening, an unusual but playable first move that immediately develops a piece and controls key central squares like d5 and e4. Unlike 1.e4 or 1.d4, the knight on c3 prepares f4 while keeping options flexible—we can support a kingside attack or contest the center depending on Black's response. This move has been played by strong players and avoids well-trodden theoretical paths, giving us practical chances."
+      "annotation": "We start with the Van Geet Opening, an unusual but playable first move that immediately develops a piece and controls key central squares like d5 and e4. Unlike 1.e4 or 1.d4, the knight on c3 prepares f4 while keeping options flexible—we can support a kingside attack or contest the center depending on Black's response. This move has been played by strong players and avoids well-trodden theoretical paths, giving us practical chances.",
+      "shortNarration": "The Van Geet Opening's knight on c3 controls d5 and e4, preparing f4 while keeping flexible options for kingside attack or center contest."
     },
     {
       "san": "d5",
-      "annotation": "Black strikes at the center immediately, which is sound chess principle when White hasn't claimed the d4 or e4 squares. This move controls e4 and c4 while opening lines for Black's bishop and queen, giving Black counterplay in the center and on the queenside."
+      "annotation": "Black strikes at the center immediately, which is sound chess principle when White hasn't claimed the d4 or e4 squares. This move controls e4 and c4 while opening lines for Black's bishop and queen, giving Black counterplay in the center and on the queenside.",
+      "shortNarration": "Black strikes the center with ...c5, controlling e4 and c4 while opening lines for the bishop and queen."
     },
     {
       "san": "f4",
-      "annotation": "We launch the Pfeiffer Gambit by pushing our f-pawn forward, attacking d5 and preparing to open the f-file for our rook while supporting an eventual e4 push. This aggressive move commits us to a kingside-oriented strategy and offers a pawn to disrupt Black's center—we're betting that rapid development and open lines will compensate for the material."
+      "annotation": "We launch the Pfeiffer Gambit by pushing our f-pawn forward, attacking d5 and preparing to open the f-file for our rook while supporting an eventual e4 push. This aggressive move commits us to a kingside-oriented strategy and offers a pawn to disrupt Black's center—we're betting that rapid development and open lines will compensate for the material.",
+      "shortNarration": "The f-pawn push sacrifices a pawn to open the f-file and attack d5, betting rapid development compensates for the material."
     },
     {
       "san": "d4",
-      "annotation": "Black captures the pawn and advances their own central pawn, establishing a strong presence on d4. This pawn becomes a key asset and gives Black space; Black is now threatening to consolidate with moves like Nf6 or e5, so White must act decisively."
+      "annotation": "Black captures the pawn and advances their own central pawn, establishing a strong presence on d4. This pawn becomes a key asset and gives Black space; Black is now threatening to consolidate with moves like Nf6 or e5, so White must act decisively.",
+      "shortNarration": "Black's d4 pawn threatens to consolidate with Nf6 or e5 — White must act now."
     },
     {
       "san": "Ne4",
-      "annotation": "We introduce the Sleipnir Countergambit by bringing our knight from c3 to e4, attacking Black's d5 pawn again and centralizing our piece with tempo. The name \"Sleipnir\" refers to this counterattacking knight, which now exerts pressure on multiple squares (d6, f6, g5) and forces Black to make decisions about the pawn structure."
+      "annotation": "We introduce the Sleipnir Countergambit by bringing our knight from c3 to e4, attacking Black's d5 pawn again and centralizing our piece with tempo. The name \"Sleipnir\" refers to this counterattacking knight, which now exerts pressure on multiple squares (d6, f6, g5) and forces Black to make decisions about the pawn structure.",
+      "shortNarration": "The Sleipnir Countergambit centralizes the knight on e4, attacking d5 with tempo and pressuring d6, f6, and g5."
     },
     {
       "san": "e5",
-      "annotation": "Black secures space and support for the d4 pawn by pushing e5, opening the center and preventing our Ne4 from easily retreating via f6 or g5. This creates a dynamic position where Black has central control but has also loosened their kingside slightly."
+      "annotation": "Black secures space and support for the d4 pawn by pushing e5, opening the center and preventing our Ne4 from easily retreating via f6 or g5. This creates a dynamic position where Black has central control but has also loosened their kingside slightly.",
+      "shortNarration": "Black's e5 secures d4 and blocks Ne4 retreats, gaining central control but loosening the kingside."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our kingside knight with tempo, attacking the e5 pawn and preparing to support our position with moves like d3 or Bc4. The knight on f3 is well-placed to reroute toward g5 or e1, depending on how Black responds, while we maintain pressure on Black's center."
+      "annotation": "We develop our kingside knight with tempo, attacking the e5 pawn and preparing to support our position with moves like d3 or Bc4. The knight on f3 is well-placed to reroute toward g5 or e1, depending on how Black responds, while we maintain pressure on Black's center.",
+      "shortNarration": "Knight to f3 attacks e5, prepares d3 or Bc4, and can reroute to g5 or e1."
     }
   ]
 }

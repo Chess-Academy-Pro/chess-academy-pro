@@ -3,19 +3,23 @@
   "moveAnnotations": [
     {
       "san": "f3",
-      "annotation": "We start with an unusual move that immediately signals we're playing the Barnes Opening, a rare first move that doesn't control the center directly. The pawn move f3 prepares to support a potential kingside pawn advance with g4, and it opens the long diagonal for our bishop—but it also has a critical weakness: it removes crucial protection from e2 and creates a serious hole on e3. This move requires respect for opponent alertness; it's playable but demands accurate follow-up to avoid tactical disasters."
+      "annotation": "We start with an unusual move that immediately signals we're playing the Barnes Opening, a rare first move that doesn't control the center directly. The pawn move f3 prepares to support a potential kingside pawn advance with g4, and it opens the long diagonal for our bishop—but it also has a critical weakness: it removes crucial protection from e2 and creates a serious hole on e3. This move requires respect for opponent alertness; it's playable but demands accurate follow-up to avoid tactical disasters.",
+      "shortNarration": "f3 opens the long diagonal for the bishop but removes protection from e2 and creates a hole on e3."
     },
     {
       "san": "e5",
-      "annotation": "Black responds naturally by claiming the center with e5, which is the strongest response to our unconventional opening. This move controls the d4 and f4 squares, preventing us from establishing a strong pawn center, and it immediately threatens our exposed king position by enabling potential queen and bishop attacks along the long diagonal and h4-e1 diagonal. Black's setup is ambitious and exploits our weaknesses perfectly."
+      "annotation": "Black responds naturally by claiming the center with e5, which is the strongest response to our unconventional opening. This move controls the d4 and f4 squares, preventing us from establishing a strong pawn center, and it immediately threatens our exposed king position by enabling potential queen and bishop attacks along the long diagonal and h4-e1 diagonal. Black's setup is ambitious and exploits our weaknesses perfectly.",
+      "shortNarration": "Black's e5 controls d4 and f4, threatening queen and bishop attacks along the long diagonals against White's exposed king."
     },
     {
       "san": "g4",
-      "annotation": "We push forward aggressively with g4, continuing our flank-attacking plan and preparing to launch a kingside assault—but this is the decisive mistake that loses immediately. By advancing the g-pawn, we've now removed the last defender of h3 and created a fatal weakness: our king on e1 is dangerously exposed with only the bishop on f1 controlling the long diagonal. We've essentially invited Black to deliver checkmate."
+      "annotation": "We push forward aggressively with g4, continuing our flank-attacking plan and preparing to launch a kingside assault—but this is the decisive mistake that loses immediately. By advancing the g-pawn, we've now removed the last defender of h3 and created a fatal weakness: our king on e1 is dangerously exposed with only the bishop on f1 controlling the long diagonal. We've essentially invited Black to deliver checkmate.",
+      "shortNarration": "Pushing g4 removes h3's last defender, exposing the king on e1 to a fatal checkmate threat along the long diagonal."
     },
     {
       "san": "Qh4#",
-      "annotation": "Black seizes the opportunity with Qh4#, delivering immediate checkmate! The black queen on h4 gives check to our king on e1, and there is no escape: the king cannot move to d1, d2, e2, or f1 (all controlled by the queen or blocked), and no piece can block or capture the queen. This is Fool's Mate, one of the fastest possible checkmates in chess—it occurs after just two moves and punishes both of White's careless pawn moves that fatally weakened the kingside."
+      "annotation": "Black seizes the opportunity with Qh4#, delivering immediate checkmate! The black queen on h4 gives check to our king on e1, and there is no escape: the king cannot move to d1, d2, e2, or f1 (all controlled by the queen or blocked), and no piece can block or capture the queen. This is Fool's Mate, one of the fastest possible checkmates in chess—it occurs after just two moves and punishes both of White's careless pawn moves that fatally weakened the kingside.",
+      "shortNarration": "Black delivers Qh4# — the king on e1 has no escape squares, no blocks, and no captures."
     }
   ]
 }

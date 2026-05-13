@@ -3,23 +3,28 @@
   "moveAnnotations": [
     {
       "san": "g4",
-      "annotation": "We're playing the Grob Opening, a rare and provocative system where we immediately attack Black's center with a flank pawn instead of fighting for it directly. This move prepares to fianchetto our bishop on g2, where it will bear down the long diagonal toward a7—but we're also accepting that Black can grab space in the center while we set up. The Grob is fundamentally about controlling key squares (especially e4 and d5) indirectly and creating unusual imbalances that catch unprepared opponents off-guard."
+      "annotation": "We're playing the Grob Opening, a rare and provocative system where we immediately attack Black's center with a flank pawn instead of fighting for it directly. This move prepares to fianchetto our bishop on g2, where it will bear down the long diagonal toward a7—but we're also accepting that Black can grab space in the center while we set up. The Grob is fundamentally about controlling key squares (especially e4 and d5) indirectly and creating unusual imbalances that catch unprepared opponents off-guard.",
+      "shortNarration": "1.g4 attacks the center indirectly, fianchettoing the bishop to pressure d5 and e4 while Black grabs space."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately seizes the initiative by planting a pawn in the center—the classical response to flank openings. This move controls e4 and c4, prevents us from easily establishing a strong center, and opens lines for Black's pieces. It's a principled approach that refuses to allow us time to complete our fianchetto setup peacefully."
+      "annotation": "Black immediately seizes the initiative by planting a pawn in the center—the classical response to flank openings. This move controls e4 and c4, prevents us from easily establishing a strong center, and opens lines for Black's pieces. It's a principled approach that refuses to allow us time to complete our fianchetto setup peacefully.",
+      "shortNarration": "Black's pawn on e4 controls key squares, prevents our center, and opens lines—refusing us time to fianchetto."
     },
     {
       "san": "Bg2",
-      "annotation": "We complete the fianchetto by placing our bishop on the long diagonal, where it now exerts pressure on the center and d5-pawn. The bishop on g2 is perfectly placed to support our queenside counterplay and control the critical a1-h8 diagonal. This move maintains our setup plan despite Black's central aggression."
+      "annotation": "We complete the fianchetto by placing our bishop on the long diagonal, where it now exerts pressure on the center and d5-pawn. The bishop on g2 is perfectly placed to support our queenside counterplay and control the critical a1-h8 diagonal. This move maintains our setup plan despite Black's central aggression.",
+      "shortNarration": "The g2 fianchetto bishop pressures d5 and controls the a1-h8 diagonal, supporting queenside counterplay."
     },
     {
       "san": "Bxg4",
-      "annotation": "Black captures our reckless g4-pawn, eliminating a weak outpost and forcing our hand. At this point Black is materially up and has a comfortable center—we need tactical compensation immediately, which is why we entered the Fritz Gambit line. Notice that Black's bishop on g4 is now somewhat out of play on the queenside."
+      "annotation": "Black captures our reckless g4-pawn, eliminating a weak outpost and forcing our hand. At this point Black is materially up and has a comfortable center—we need tactical compensation immediately, which is why we entered the Fritz Gambit line. Notice that Black's bishop on g4 is now somewhat out of play on the queenside.",
+      "shortNarration": "Black's bishop on g4 is out of play on the queenside, but we need immediate tactical compensation for the pawn."
     },
     {
       "san": "c4",
-      "annotation": "Here's our gambit point: we attack the d5-pawn and open the c-file for potential pressure, gambling that our piece activity and spatial control will compensate for the sacrificed pawn. The move controls d4 and b5, supports a future e4 push, and keeps Black's pieces scrambling. We're banking on tactical complications and the awkward placement of Black's bishop on g4 to generate real attacking chances—this is the speculative but thematically consistent way the Fritz Gambit operates."
+      "annotation": "Here's our gambit point: we attack the d5-pawn and open the c-file for potential pressure, gambling that our piece activity and spatial control will compensate for the sacrificed pawn. The move controls d4 and b5, supports a future e4 push, and keeps Black's pieces scrambling. We're banking on tactical complications and the awkward placement of Black's bishop on g4 to generate real attacking chances—this is the speculative but thematically consistent way the Fritz Gambit operates.",
+      "shortNarration": "The gambit sacrifices a pawn to open the c-file and control d4, banking on piece activity and Black's awkward bishop on g4 for compensation."
     }
   ]
 }

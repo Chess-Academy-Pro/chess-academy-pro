@@ -3,75 +3,93 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the center and preparing to support our pawn structure with pieces. This move controls the important e5 and c5 squares while opening lines for our queen and dark-squared bishop. The d4 opening leads to rich positional battles and gives us excellent chances to build a strong pawn center, which is exactly what we'll be trying to do against the upcoming Grünfeld Defense. Unlike 1.e4 openings that often lead to tactical complications early, 1.d4 typically results in more strategic, long-term planning battles."
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the center and preparing to support our pawn structure with pieces. This move controls the important e5 and c5 squares while opening lines for our queen and dark-squared bishop. The d4 opening leads to rich positional battles and gives us excellent chances to build a strong pawn center, which is exactly what we'll be trying to do against the upcoming Grünfeld Defense. Unlike 1.e4 openings that often lead to tactical complications early, 1.d4 typically results in more strategic, long-term planning battles.",
+      "shortNarration": "1.d4 stakes a claim to the center, controls e5 and c5, and opens lines for the queen and dark-squared bishop."
     },
     {
       "san": "Nf6",
-      "annotation": "Black immediately challenges our central pawn with the knight, a hallmark of hypermodern opening philosophy. Rather than occupying the center with pawns right away, our opponent is preparing to attack our center from the flanks with pieces. This knight move also develops a piece toward the center and prepares kingside castling, keeping Black's options flexible. We should be aware that Black is likely heading for either a King's Indian or Grünfeld Defense setup, both of which aim to undermine our pawn center later."
+      "annotation": "Black immediately challenges our central pawn with the knight, a hallmark of hypermodern opening philosophy. Rather than occupying the center with pawns right away, our opponent is preparing to attack our center from the flanks with pieces. This knight move also develops a piece toward the center and prepares kingside castling, keeping Black's options flexible. We should be aware that Black is likely heading for either a King's Indian or Grünfeld Defense setup, both of which aim to undermine our pawn center later.",
+      "shortNarration": "Black's knight challenges e4, preparing to attack the center from the flank in a hypermodern setup like the King's Indian or Grünfeld."
     },
     {
       "san": "c4",
-      "annotation": "We're playing the English Opening move order, supporting our d4 pawn and preparing to build a broad pawn center. This move controls the important d5 and b5 squares, preventing Black from easily establishing pieces there. The c4 pawn also prepares potential expansion with d4-d5 later, when circumstances are right. Most importantly, this move signals our intention to fight for central control and gives us the flexibility to transpose into various systems depending on Black's response."
+      "annotation": "We're playing the English Opening move order, supporting our d4 pawn and preparing to build a broad pawn center. This move controls the important d5 and b5 squares, preventing Black from easily establishing pieces there. The c4 pawn also prepares potential expansion with d4-d5 later, when circumstances are right. Most importantly, this move signals our intention to fight for central control and gives us the flexibility to transpose into various systems depending on Black's response.",
+      "shortNarration": "c4 controls d5 and b5, prepares d4-d5 expansion, and signals flexible central control."
     },
     {
       "san": "g6",
-      "annotation": "Black signals the Grünfeld Defense with this fianchetto move, preparing to place the bishop on the long diagonal where it will eye our center. This setup is one of the most principled ways to challenge a white pawn center - rather than meeting pawns with pawns, Black will use pieces to create pressure. The g6 move also prepares kingside castling and creates a solid pawn shelter for the black king. We should understand that Black's entire strategy revolves around proving that our big pawn center is more of a target than a strength."
+      "annotation": "Black signals the Grünfeld Defense with this fianchetto move, preparing to place the bishop on the long diagonal where it will eye our center. This setup is one of the most principled ways to challenge a white pawn center - rather than meeting pawns with pawns, Black will use pieces to create pressure. The g6 move also prepares kingside castling and creates a solid pawn shelter for the black king. We should understand that Black's entire strategy revolves around proving that our big pawn center is more of a target than a strength.",
+      "shortNarration": "Black's fianchettoed Grünfeld bishop will pressure the white center from the long diagonal, making the pawn center a target."
     },
     {
       "san": "Nc3",
-      "annotation": "We're developing our knight to its ideal square, supporting the d4 pawn and preparing to build our ideal pawn center. This knight controls important central squares like e4 and d5, and later it might support a pawn advance to e4. The knight on c3 is also perfectly placed to recapture on d5 if Black plays the typical Grünfeld exchange. By developing pieces toward the center, we're following the opening principle of rapid development while maintaining pressure on Black's position."
+      "annotation": "We're developing our knight to its ideal square, supporting the d4 pawn and preparing to build our ideal pawn center. This knight controls important central squares like e4 and d5, and later it might support a pawn advance to e4. The knight on c3 is also perfectly placed to recapture on d5 if Black plays the typical Grünfeld exchange. By developing pieces toward the center, we're following the opening principle of rapid development while maintaining pressure on Black's position.",
+      "shortNarration": "Knight to c3 develops toward the center, supports d4, eyes e4 and d5, and is ready to recapture on d5 in the Grünfeld exchange."
     },
     {
       "san": "d5",
-      "annotation": "Here comes the signature Grünfeld strike at our pawn center! Black immediately challenges our c4 pawn, forcing us to make a crucial decision about our pawn structure. This move embodies the hypermodern philosophy - after allowing us to build a big center, Black immediately begins the counterattack. Our opponent is essentially offering a trade that will open the center and activate the pieces, particularly that fianchettoed bishop on g7. We need to decide whether to maintain the tension or accept the challenge with an exchange."
+      "annotation": "Here comes the signature Grünfeld strike at our pawn center! Black immediately challenges our c4 pawn, forcing us to make a crucial decision about our pawn structure. This move embodies the hypermodern philosophy - after allowing us to build a big center, Black immediately begins the counterattack. Our opponent is essentially offering a trade that will open the center and activate the pieces, particularly that fianchettoed bishop on g7. We need to decide whether to maintain the tension or accept the challenge with an exchange.",
+      "shortNarration": "Black's c5 challenges the c4 pawn, opening the center for the g7 bishop if we exchange."
     },
     {
       "san": "cxd5",
-      "annotation": "We're accepting Black's challenge and entering the Exchange Variation of the Grünfeld Defense, one of the most principled and aggressive ways to handle this opening. By capturing on d5, we're opening the c-file for our pieces and preparing to build a massive pawn center with e4. This exchange also forces Black's knight to move, giving us time to consolidate our central advantage. The resulting positions typically feature sharp tactical play where we try to use our space advantage while Black seeks counterplay against our potentially overextended center."
+      "annotation": "We're accepting Black's challenge and entering the Exchange Variation of the Grünfeld Defense, one of the most principled and aggressive ways to handle this opening. By capturing on d5, we're opening the c-file for our pieces and preparing to build a massive pawn center with e4. This exchange also forces Black's knight to move, giving us time to consolidate our central advantage. The resulting positions typically feature sharp tactical play where we try to use our space advantage while Black seeks counterplay against our potentially overextended center.",
+      "shortNarration": "Capturing on d5 opens the c-file, forces Black's knight to move, and builds a massive pawn center with e4."
     },
     {
       "san": "Nxd5",
-      "annotation": "Black recaptures with the knight, immediately centralizing a piece and maintaining the material balance. This recapture is almost automatic in the Grünfeld - the knight lands on an excellent central square where it can influence both sides of the board. From d5, this knight is also eyeing our pieces on c3 and potentially f4, creating immediate tactical possibilities. Our opponent's piece development is proceeding smoothly, and we need to be ready to support our center with concrete moves rather than just maintaining it with pawns."
+      "annotation": "Black recaptures with the knight, immediately centralizing a piece and maintaining the material balance. This recapture is almost automatic in the Grünfeld - the knight lands on an excellent central square where it can influence both sides of the board. From d5, this knight is also eyeing our pieces on c3 and potentially f4, creating immediate tactical possibilities. Our opponent's piece development is proceeding smoothly, and we need to be ready to support our center with concrete moves rather than just maintaining it with pawns.",
+      "shortNarration": "Black's knight recaptures on d5, centralizing and eyeing c3 and f4, creating immediate tactical threats."
     },
     {
       "san": "e4",
-      "annotation": "We're building the dream center that defines the Exchange Variation! This pawn advance creates a massive duo on d4 and e4, controlling key central squares and giving us significant space advantage. The e4 pawn attacks Black's centralized knight, forcing it to make a decision and potentially allowing us to gain time in our development. This move embodies our entire opening strategy - we're accepting that our pawns might become targets in exchange for dominating the center and restricting Black's piece activity. The resulting positions will test whether our space advantage outweighs the potential weaknesses in our pawn structure."
+      "annotation": "We're building the dream center that defines the Exchange Variation! This pawn advance creates a massive duo on d4 and e4, controlling key central squares and giving us significant space advantage. The e4 pawn attacks Black's centralized knight, forcing it to make a decision and potentially allowing us to gain time in our development. This move embodies our entire opening strategy - we're accepting that our pawns might become targets in exchange for dominating the center and restricting Black's piece activity. The resulting positions will test whether our space advantage outweighs the potential weaknesses in our pawn structure.",
+      "shortNarration": "The e4 pawn advance creates a d4-e4 duo, dominating the center and forcing Black's knight to move, trading pawn targets for space and piece activity."
     },
     {
       "san": "Nxc3",
-      "annotation": "Black strikes back immediately, eliminating one of our key defending pieces and forcing us to reconsider our pawn structure. By taking our knight, Black removes an important defender of our e4 pawn and opens up tactical possibilities. This exchange also doubles our c-pawns, which can become a long-term weakness, but it does give us the two bishops and opens the b-file for potential counterplay. Our opponent is following typical Grünfeld strategy - eliminating defenders of our center while preparing to increase the pressure with piece activity."
+      "annotation": "Black strikes back immediately, eliminating one of our key defending pieces and forcing us to reconsider our pawn structure. By taking our knight, Black removes an important defender of our e4 pawn and opens up tactical possibilities. This exchange also doubles our c-pawns, which can become a long-term weakness, but it does give us the two bishops and opens the b-file for potential counterplay. Our opponent is following typical Grünfeld strategy - eliminating defenders of our center while preparing to increase the pressure with piece activity.",
+      "shortNarration": "Black trades knight for bishop, doubling our c-pawns but giving us the two bishops and an open b-file for counterplay."
     },
     {
       "san": "bxc3",
-      "annotation": "We're recapturing toward the center, maintaining our pawn duo while accepting doubled pawns on the c-file. This recapture has several advantages: it supports our d4 pawn, gives us potential expansion with c4 later, and maintains material balance. The doubled c-pawns might look ugly, but they actually control important central squares and can become a source of strength if we can advance them later. Our pawn center remains intact, and we've gained the bishop pair, which should give us good prospects in the middlegame if we can keep the position relatively open."
+      "annotation": "We're recapturing toward the center, maintaining our pawn duo while accepting doubled pawns on the c-file. This recapture has several advantages: it supports our d4 pawn, gives us potential expansion with c4 later, and maintains material balance. The doubled c-pawns might look ugly, but they actually control important central squares and can become a source of strength if we can advance them later. Our pawn center remains intact, and we've gained the bishop pair, which should give us good prospects in the middlegame if we can keep the position relatively open.",
+      "shortNarration": "Recapturing toward the center accepts doubled c-pawns but keeps the pawn duo, gains the bishop pair, and supports d4 for potential c4 expansion."
     },
     {
       "san": "Bg7",
-      "annotation": "Black completes the fianchetto development, placing the bishop on the long diagonal where it becomes a powerful piece aimed directly at our pawn center. This bishop is the cornerstone of Black's counterplay in the Grünfeld - from g7, it exerts constant pressure on our d4 pawn and controls key central squares. The bishop also supports Black's kingside and will coordinate beautifully with other pieces to create threats against our center. We need to be constantly aware of this bishop's influence, as it can quickly become dangerous if we allow our center to become overextended or poorly defended."
+      "annotation": "Black completes the fianchetto development, placing the bishop on the long diagonal where it becomes a powerful piece aimed directly at our pawn center. This bishop is the cornerstone of Black's counterplay in the Grünfeld - from g7, it exerts constant pressure on our d4 pawn and controls key central squares. The bishop also supports Black's kingside and will coordinate beautifully with other pieces to create threats against our center. We need to be constantly aware of this bishop's influence, as it can quickly become dangerous if we allow our center to become overextended or poorly defended.",
+      "shortNarration": "Black's fianchettoed bishop on g7 pressures d4 and controls central squares, supporting counterplay against White's pawn center."
     },
     {
       "san": "Bc4",
-      "annotation": "We're developing our bishop to an active square where it eyes Black's kingside and supports our central ambitions. The bishop on c4 controls the important f7 square and can potentially support tactics involving our advanced pawns. This development also prepares kingside castling while maintaining pressure on Black's position. The bishop placement fits our aggressive approach in this variation - rather than playing defensively, we're developing pieces that support our space advantage and create concrete threats. From c4, our bishop also has the flexibility to redeploy to other squares if needed."
+      "annotation": "We're developing our bishop to an active square where it eyes Black's kingside and supports our central ambitions. The bishop on c4 controls the important f7 square and can potentially support tactics involving our advanced pawns. This development also prepares kingside castling while maintaining pressure on Black's position. The bishop placement fits our aggressive approach in this variation - rather than playing defensively, we're developing pieces that support our space advantage and create concrete threats. From c4, our bishop also has the flexibility to redeploy to other squares if needed.",
+      "shortNarration": "Bishop to c4 eyes f7, supports kingside tactics, and prepares castling while maintaining pressure."
     },
     {
       "san": "O-O",
-      "annotation": "Black gets the king to safety, a necessary and logical choice that completes the basic development while keeping the king secure. Castling also brings the rook into the game on f8, where it can support the kingside and potentially help defend against any tactical threats we might create. This move shows that Black is following sound opening principles - after challenging our center and developing the key pieces, securing the king is the logical next step. Now Black is ready to begin more concrete plans against our pawn center, having completed the essential developmental tasks."
+      "annotation": "Black gets the king to safety, a necessary and logical choice that completes the basic development while keeping the king secure. Castling also brings the rook into the game on f8, where it can support the kingside and potentially help defend against any tactical threats we might create. This move shows that Black is following sound opening principles - after challenging our center and developing the key pieces, securing the king is the logical next step. Now Black is ready to begin more concrete plans against our pawn center, having completed the essential developmental tasks.",
+      "shortNarration": "Black castles kingside, securing the king and activating the rook on f8."
     },
     {
       "san": "Ne2",
-      "annotation": "We're playing a flexible knight development that supports our pawn center while maintaining multiple strategic options. The knight on e2 can later jump to f4, where it would be beautifully placed to support our central pawns and create kingside threats. This knight can also go to g3 or d2 depending on how the position develops, giving us maximum flexibility. The Ne2 move is characteristic of the Larsen Variation - rather than the more committal Nf3, we're keeping our options open while still supporting our center. This approach allows us to adapt our piece placement based on Black's specific plan of counterplay."
+      "annotation": "We're playing a flexible knight development that supports our pawn center while maintaining multiple strategic options. The knight on e2 can later jump to f4, where it would be beautifully placed to support our central pawns and create kingside threats. This knight can also go to g3 or d2 depending on how the position develops, giving us maximum flexibility. The Ne2 move is characteristic of the Larsen Variation - rather than the more committal Nf3, we're keeping our options open while still supporting our center. This approach allows us to adapt our piece placement based on Black's specific plan of counterplay.",
+      "shortNarration": "Ne2 keeps options open — can jump to f4 for kingside threats or reroute to g3 or d2, supporting the center flexibly."
     },
     {
       "san": "Qd7",
-      "annotation": "Continuing Gr Nfeld Defense Exchange Variation Larsen Variation: Qd7 is a known theory move in this line."
+      "annotation": "Continuing Gr Nfeld Defense Exchange Variation Larsen Variation: Qd7 is a known theory move in this line.",
+      "shortNarration": "Qd7 is a known theory move in the Grünfeld Exchange, Larsen Variation."
     },
     {
       "san": "O-O",
-      "annotation": "Continuing Gr Nfeld Defense Exchange Variation Larsen Variation: O-O is a known theory move in this line."
+      "annotation": "Continuing Gr Nfeld Defense Exchange Variation Larsen Variation: O-O is a known theory move in this line.",
+      "shortNarration": "O-O is the theory move in the Grünfeld Exchange, Larsen Variation."
     },
     {
       "san": "b6",
-      "annotation": "Continuing Gr Nfeld Defense Exchange Variation Larsen Variation: b6 is a known theory move in this line."
+      "annotation": "Continuing Gr Nfeld Defense Exchange Variation Larsen Variation: b6 is a known theory move in this line.",
+      "shortNarration": "b6 is a known theory move in the Grünfeld Exchange, Larsen Variation."
     }
   ]
 }

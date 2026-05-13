@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "f4",
-      "annotation": "We're playing the Bird Opening, an unconventional but sound approach where we control the central e5 square with our f-pawn instead of playing the classical e4. This move prepares to support a future e4 advance while keeping our setup flexible—we're not committing to a rigid pawn center yet, which gives us dynamic counterplay."
+      "annotation": "We're playing the Bird Opening, an unconventional but sound approach where we control the central e5 square with our f-pawn instead of playing the classical e4. This move prepares to support a future e4 advance while keeping our setup flexible—we're not committing to a rigid pawn center yet, which gives us dynamic counterplay.",
+      "shortNarration": "The Bird Opening's f-pawn controls e5, preparing a flexible e4 push for dynamic counterplay."
     },
     {
       "san": "d5",
-      "annotation": "Black strikes at the center immediately, which is the principled response to our flank move. By playing d5, your opponent challenges our e5 control and gains space in the center. Now we have the chance to enter the Williams Gambit by advancing e4 ourselves."
+      "annotation": "Black strikes at the center immediately, which is the principled response to our flank move. By playing d5, your opponent challenges our e5 control and gains space in the center. Now we have the chance to enter the Williams Gambit by advancing e4 ourselves.",
+      "shortNarration": "Black's d5 challenges e5 control; White can enter the Williams Gambit by advancing e4."
     },
     {
       "san": "e4",
-      "annotation": "This is the defining move of the Williams Gambit—we offer the e4 pawn as a sacrifice to break Black's center and open lines for rapid piece development. The idea is that after Black captures on e4, we recapture with our knight, achieving a favorable piece placement on c3 with excellent control of the board."
+      "annotation": "This is the defining move of the Williams Gambit—we offer the e4 pawn as a sacrifice to break Black's center and open lines for rapid piece development. The idea is that after Black captures on e4, we recapture with our knight, achieving a favorable piece placement on c3 with excellent control of the board.",
+      "shortNarration": "White sacrifices the e4 pawn in the Williams Gambit, recapturing with the knight to c3 for rapid development and center control."
     },
     {
       "san": "dxe4",
-      "annotation": "Black accepts the gambit, which is reasonable since the pawn is free and material matters. However, this allows us to recapture and activate our pieces with tempo. If Black declines with moves like Qxd1 or Nf6 first, the game takes different paths, but accepting is the most direct try."
+      "annotation": "Black accepts the gambit, which is reasonable since the pawn is free and material matters. However, this allows us to recapture and activate our pieces with tempo. If Black declines with moves like Qxd1 or Nf6 first, the game takes different paths, but accepting is the most direct try.",
+      "shortNarration": "Black accepts the gambit, giving White a tempo to recapture and activate pieces."
     },
     {
       "san": "Nc3",
-      "annotation": "We recapture and simultaneously develop a piece while attacking the e4 pawn, forcing Black to make a decision about its defense. Our knight lands on an excellent square controlling d5, e5, and f5—key squares in this position. The e4 pawn is now pinned to Black's pieces, giving us immediate active pressure."
+      "annotation": "We recapture and simultaneously develop a piece while attacking the e4 pawn, forcing Black to make a decision about its defense. Our knight lands on an excellent square controlling d5, e5, and f5—key squares in this position. The e4 pawn is now pinned to Black's pieces, giving us immediate active pressure.",
+      "shortNarration": "Recapturing with the knight develops to d4, attacks e4, and controls d5, e5, f5 — the e4 pawn is pinned under active pressure."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops naturally while defending the e4 pawn with the knight. This is the most common continuation, preparing to consolidate with moves like e6 or c5. Your opponent is keeping the extra pawn for now while getting pieces out, which is why we need to generate immediate tactical threats."
+      "annotation": "Black develops naturally while defending the e4 pawn with the knight. This is the most common continuation, preparing to consolidate with moves like e6 or c5. Your opponent is keeping the extra pawn for now while getting pieces out, which is why we need to generate immediate tactical threats.",
+      "shortNarration": "Black defends e4 with the knight, keeping the extra pawn while developing — White must generate immediate tactical threats."
     },
     {
       "san": "Qe2",
-      "annotation": "We develop our queen to e2, a flexible square that eyes the e4 pawn while preparing to castle kingside. From e2, our queen supports the center and can quickly transition to attack squares like a6 or c4 depending on Black's setup. This quiet but purposeful move sets up our compensation for the pawn: active piece play and control of the light squares."
+      "annotation": "We develop our queen to e2, a flexible square that eyes the e4 pawn while preparing to castle kingside. From e2, our queen supports the center and can quickly transition to attack squares like a6 or c4 depending on Black's setup. This quiet but purposeful move sets up our compensation for the pawn: active piece play and control of the light squares.",
+      "shortNarration": "Queen to e2 supports the e4 pawn, prepares kingside castling, and eyes light squares a6 and c4 for active piece play."
     }
   ]
 }

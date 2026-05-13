@@ -19,8 +19,20 @@ import type {
   SquareHandlerArgs,
   PieceHandlerArgs,
 } from 'react-chessboard';
-import type { GhostMoveData } from '../../types';
+import type { GhostMoveData, PieceAnimationSpeed } from '../../types';
 import type { MoveQuality } from './ChessBoard';
+
+/** Maps the user's Piece Animation setting to a millisecond duration
+ *  for react-chessboard. The 'none' option fast-forwards animation;
+ *  'slow' gives beginners more time to follow what just moved. */
+export function pieceAnimationSpeedToMs(speed: PieceAnimationSpeed): number {
+  switch (speed) {
+    case 'none': return 0;
+    case 'fast': return 100;
+    case 'medium': return 200;
+    case 'slow': return 400;
+  }
+}
 
 export interface ControlledChessBoardProps {
   /** The game object from useChessGame(), owned by the parent. */
@@ -78,7 +90,10 @@ export function ControlledChessBoard({
   onReset,
   className = '',
   highlightSquares = null,
-  showLastMoveHighlight = true,
+  /** Overrides the user's "Highlight Last Move" setting (Settings →
+   *  Board). Callers that want to force highlights on/off (e.g. demo
+   *  boards) pass an explicit boolean; otherwise the setting wins. */
+  showLastMoveHighlight,
   moveQualityFlash = null,
   arrows,
   annotationHighlights,
@@ -97,6 +112,15 @@ export function ControlledChessBoard({
   const { settings } = useSettings();
   const isMobile = useIsMobile();
 
+  // Resolve the board-display settings here so the rest of the
+  // component can ignore where they came from. Explicit prop overrides
+  // win; otherwise we read the user's Settings → Board preferences.
+  const effectiveShowLastMoveHighlight = showLastMoveHighlight ?? settings.highlightLastMove;
+  const effectiveShowLegalMoves = settings.showLegalMoves;
+  const effectiveShowCoordinates = settings.showCoordinates;
+  const effectiveAnimationMs = pieceAnimationSpeedToMs(settings.pieceAnimationSpeed);
+  const dragAllowed = interactive && settings.moveMethod !== 'click';
+
   // Board color + piece set from settings
   const boardColorScheme = useMemo(() => getBoardColor(settings.boardColor), [settings.boardColor]);
   const pieceFilters = useMemo(() => ({
@@ -113,14 +137,18 @@ export function ControlledChessBoard({
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (!moveQualityFlash) {
+    // Honor the user's Settings → Board → Move Quality Flash toggle.
+    // When the setting is off, ignore the caller's quality classification
+    // and never flash the border. This is the standard chess.com /
+    // Lichess "subtle feedback" toggle.
+    if (!moveQualityFlash || !settings.moveQualityFlash) {
       setFlashColor(null);
       return;
     }
     setFlashColor(FLASH_COLORS[moveQualityFlash] ?? null);
     const timer = setTimeout(() => setFlashColor(null), 900);
     return () => clearTimeout(timer);
-  }, [moveQualityFlash]);
+  }, [moveQualityFlash, settings.moveQualityFlash]);
 
   // Move handlers — delegate to parent-owned game object
   const handlePieceDrop = useCallback(
@@ -144,13 +172,17 @@ export function ControlledChessBoard({
   const handleSquareClick = useCallback(
     ({ square }: SquareHandlerArgs): void => {
       if (!interactive) return;
+      // Drag-only mode: ignore square clicks so the user can't
+      // tap-to-select-then-tap-to-place when they've explicitly
+      // chosen drag-only (Settings → Board → Move Method).
+      if (settings.moveMethod === 'drag') return;
       const result = game.onSquareClick(square);
       if (result) {
         onMove?.(result);
         playMoveSound(result.san);
       }
     },
-    [interactive, game, onMove, playMoveSound],
+    [interactive, game, onMove, playMoveSound, settings.moveMethod],
   );
 
   const handlePieceDrag = useCallback(
@@ -197,7 +229,7 @@ export function ControlledChessBoard({
       styles[sq] = { ...styles[sq], boxShadow: mergeGlow('inset 0 0 8px 2px rgba(0, 229, 255, 0.08)') };
     }
 
-    if (showLastMoveHighlight) {
+    if (effectiveShowLastMoveHighlight) {
       const moveHighlight = lastMove ?? highlightSquares;
       if (moveHighlight) {
         styles[moveHighlight.from] = { ...styles[moveHighlight.from], background: 'rgba(0, 229, 255, 0.2)', boxShadow: mergeGlow('inset 0 0 12px rgba(0, 229, 255, 0.15)') };
@@ -226,26 +258,28 @@ export function ControlledChessBoard({
       styles[selectedSquare] = { ...styles[selectedSquare], background: 'rgba(0, 229, 255, 0.35)', boxShadow: mergeGlow('inset 0 0 8px rgba(0, 229, 255, 0.4)') };
     }
 
-    for (const sq of legalMoves) {
-      const hasPiece = getPiece(sq);
-      if (hasPiece) {
-        styles[sq] = {
-          ...styles[sq],
-          background:
-            'radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0, 229, 255, 0.3) 60%, rgba(0, 229, 255, 0.3) 80%, rgba(0,0,0,0) 80%)',
-          cursor: 'pointer',
-        };
-      } else {
-        styles[sq] = {
-          ...styles[sq],
-          background: 'radial-gradient(circle, rgba(0, 229, 255, 0.3) 25%, transparent 25%)',
-          cursor: 'pointer',
-        };
+    if (effectiveShowLegalMoves) {
+      for (const sq of legalMoves) {
+        const hasPiece = getPiece(sq);
+        if (hasPiece) {
+          styles[sq] = {
+            ...styles[sq],
+            background:
+              'radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0, 229, 255, 0.3) 60%, rgba(0, 229, 255, 0.3) 80%, rgba(0,0,0,0) 80%)',
+            cursor: 'pointer',
+          };
+        } else {
+          styles[sq] = {
+            ...styles[sq],
+            background: 'radial-gradient(circle, rgba(0, 229, 255, 0.3) 25%, transparent 25%)',
+            cursor: 'pointer',
+          };
+        }
       }
     }
 
     return styles;
-  }, [lastMove, highlightSquares, checkSquare, selectedSquare, legalMoves, getPiece, showLastMoveHighlight, annotationHighlights, baseGlowStr, mergeGlow]);
+  }, [lastMove, highlightSquares, checkSquare, selectedSquare, legalMoves, getPiece, effectiveShowLastMoveHighlight, effectiveShowLegalMoves, annotationHighlights, baseGlowStr, mergeGlow]);
 
   const hasControls = showFlipButton || showUndoButton || showResetButton || showVoiceMic;
 
@@ -293,9 +327,10 @@ export function ControlledChessBoard({
               darkSquareStyle: { backgroundColor: boardColorScheme.darkSquare },
               lightSquareStyle: { backgroundColor: boardColorScheme.lightSquare },
               ...(customPieces ? { pieces: customPieces } : {}),
-              allowDragging: interactive,
+              allowDragging: dragAllowed,
               dragActivationDistance: 5,
-              animationDurationInMs: 200,
+              animationDurationInMs: effectiveAnimationMs,
+              showNotation: effectiveShowCoordinates,
               onPieceDrop: handlePieceDrop,
               onSquareClick: handleSquareClick,
               onPieceDrag: handlePieceDrag,

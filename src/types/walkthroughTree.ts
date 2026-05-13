@@ -33,6 +33,15 @@ export interface WalkthroughTreeNode {
    *  Polly; the chat panel renders it as the coach's message.
    *  Used as the FALLBACK narration when `narration` is omitted. */
   idea: string;
+  /** Optional one-sentence variant of `idea` used by the "Brief"
+   *  setting of Coach Narration (Settings → Coach → Coach Narration).
+   *  Keep it ≤ 28 words, preserve the key chess idea (tactical
+   *  pattern, evaluation, threat, action's consequence). When unset,
+   *  Brief mode falls back to silent reading-pace for this node so
+   *  random truncation never lands on the wrong sentence. Generated
+   *  by `scripts/generate-short-narrations.mjs` for annotation JSONs;
+   *  hand-written for static trees (e.g. vienna.ts). */
+  shortIdea?: string;
   /** Optional segmented narration with per-segment arrows and
    *  highlights. When present, the runtime speaks each segment's
    *  text in order via voice service, setting arrows/highlights
@@ -63,6 +72,13 @@ export interface NarrationSegment {
   /** Text spoken in this segment. Combine across segments to form
    *  the full prose. */
   text: string;
+  /** Optional one-sentence variant of `text` used by the Brief
+   *  Coach Narration setting. Same authoring guideline as
+   *  `WalkthroughTreeNode.shortIdea`: ≤ 28 words, preserve the key
+   *  chess idea. When unset on a segment, Brief mode plays it
+   *  silent — never auto-truncates, so the user never hears half a
+   *  setup sentence with the punchline missing. */
+  shortText?: string;
   /** Arrows visible during this segment. Replaces any arrows from
    *  the previous segment. Empty array (or omitted) clears arrows
    *  on this segment. */
@@ -126,6 +142,10 @@ export interface WalkthroughTree {
    *  walkthrough, before any move animates. Sets context for the
    *  opening's character. */
   intro: string;
+  /** Optional Brief-mode variant of `intro`. ≤ 28 words, preserves
+   *  the opening's framing. When unset, Brief mode plays the intro
+   *  silently (reading pace) rather than auto-truncating `intro`. */
+  shortIntro?: string;
   /** Default outro spoken at any leaf that doesn't override it.
    *  Reaches the student at the end of a chosen branch — should
    *  invite backtrack-to-fork or play-it-out. */
@@ -313,12 +333,20 @@ export interface PunishLesson {
   /** Coach's explanation of why the inaccuracy is bad — sets up the
    *  "find the punishment" question. */
   whyBad: string;
+  /** Optional Brief-mode variant of `whyBad`. ≤ 28 words, preserves
+   *  the key tactical/positional reason. Brief-mode trap intros
+   *  splice this into the constructed prompt; when unset, Brief
+   *  silences the intro. */
+  shortWhyBad?: string;
   /** The punishing move (SAN). The student should pick this on the
    *  MC. */
   punishment: string;
   /** Coach's explanation of why the punishment works. Shown after
    *  the student picks (or after they reveal the answer). */
   whyPunish: string;
+  /** Optional Brief-mode variant of `whyPunish`. Same authoring
+   *  guideline as `shortWhyBad`. */
+  shortWhyPunish?: string;
   /** Distractor candidates that don't punish as well. Combined with
    *  the punishment, these become the MC choices (in random order
    *  at runtime). */
@@ -326,7 +354,7 @@ export interface PunishLesson {
   /** Optional follow-up moves to play out so the student sees the
    *  winning continuation. Each move comes with the coach's idea
    *  text, narrated as the move animates. */
-  followup?: { san: string; idea: string }[];
+  followup?: { san: string; idea: string; shortIdea?: string }[];
 }
 
 /** A distractor candidate on a punish-inaccuracy MC question. Looks

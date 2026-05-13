@@ -3,59 +3,73 @@
   "moveAnnotations": [
     {
       "san": "c4",
-      "annotation": "We're opening with the English Opening, a flexible and strategic choice that immediately stakes a claim on the central d5 square while keeping our options open. Unlike 1.e4 or 1.d4, this move allows us to develop our pieces harmoniously before committing to a specific pawn structure in the center. The English Opening often leads to rich positional games where understanding typical pawn breaks and piece coordination matters more than memorizing sharp tactical lines. This opening was famously employed by world champions like Botvinnik and Kasparov, and it's particularly effective for players who enjoy strategic complexity and long-term planning."
+      "annotation": "We're opening with the English Opening, a flexible and strategic choice that immediately stakes a claim on the central d5 square while keeping our options open. Unlike 1.e4 or 1.d4, this move allows us to develop our pieces harmoniously before committing to a specific pawn structure in the center. The English Opening often leads to rich positional games where understanding typical pawn breaks and piece coordination matters more than memorizing sharp tactical lines. This opening was famously employed by world champions like Botvinnik and Kasparov, and it's particularly effective for players who enjoy strategic complexity and long-term planning.",
+      "shortNarration": "1.c4 stakes a claim on d5, keeping options open for flexible development and strategic pawn breaks."
     },
     {
       "san": "c5",
-      "annotation": "Black responds symmetrically, mirroring our central control and creating the Symmetrical Variation of the English Opening. This move contests our influence over d4 while establishing Black's own stake on the d5 square, leading to a balanced but dynamic struggle. The symmetrical approach often appeals to players who want to equalize quickly while maintaining good practical chances for both sides. However, as White, we still retain the first-move advantage and can often use our extra tempo to create subtle imbalances that favor our position."
+      "annotation": "Black responds symmetrically, mirroring our central control and creating the Symmetrical Variation of the English Opening. This move contests our influence over d4 while establishing Black's own stake on the d5 square, leading to a balanced but dynamic struggle. The symmetrical approach often appeals to players who want to equalize quickly while maintaining good practical chances for both sides. However, as White, we still retain the first-move advantage and can often use our extra tempo to create subtle imbalances that favor our position.",
+      "shortNarration": "Black mirrors with c5, contesting d4 and creating the Symmetrical English — balanced but White retains the first-move tempo to create imbalances."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our knight to its ideal square, supporting our c4 pawn and preparing to influence the center from a strong outpost. This knight placement is particularly effective in the English Opening because it can later jump to d5 or b5 to create tactical threats, and it doesn't block our d-pawn like in some other openings. The knight also eyes the important e4 square, which could become a crucial central outpost later in the game. From c3, our knight has maximum flexibility and can adapt to whatever pawn structure emerges from the opening."
+      "annotation": "We develop our knight to its ideal square, supporting our c4 pawn and preparing to influence the center from a strong outpost. This knight placement is particularly effective in the English Opening because it can later jump to d5 or b5 to create tactical threats, and it doesn't block our d-pawn like in some other openings. The knight also eyes the important e4 square, which could become a crucial central outpost later in the game. From c3, our knight has maximum flexibility and can adapt to whatever pawn structure emerges from the opening.",
+      "shortNarration": "Knight to c3 supports the c4 pawn, eyes d5, b5, and e4, and keeps the d-pawn free for flexible English Opening play."
     },
     {
       "san": "Nc6",
-      "annotation": "Black continues the symmetrical development, placing their knight on the mirror square to contest our central influence. This knight supports Black's c5 pawn and prepares to challenge any attempt we might make to occupy the center with d2-d4. While Black maintains the symmetry for now, they're essentially following our lead and allowing us to dictate the character of the position. Our opponent is hoping to equalize through this symmetrical approach, but we can look for subtle ways to create imbalances that favor our extra tempo."
+      "annotation": "Black continues the symmetrical development, placing their knight on the mirror square to contest our central influence. This knight supports Black's c5 pawn and prepares to challenge any attempt we might make to occupy the center with d2-d4. While Black maintains the symmetry for now, they're essentially following our lead and allowing us to dictate the character of the position. Our opponent is hoping to equalize through this symmetrical approach, but we can look for subtle ways to create imbalances that favor our extra tempo.",
+      "shortNarration": "Black mirrors with the knight, contesting the center and supporting c5, but we can exploit the extra tempo to create imbalances."
     },
     {
       "san": "g3",
-      "annotation": "We begin our kingside fianchetto, preparing to develop our light-squared bishop to g2 where it will become a powerful long-range piece. This move is the hallmark of the Botvinnik System, creating a solid pawn structure that supports both our central control and our king's safety. The fianchettoed bishop on g2 will eye the long diagonal toward Black's kingside while supporting our central pawns and potential pawn breaks like d2-d4. This setup also allows our king to castle safely while maintaining maximum flexibility in our pawn structure."
+      "annotation": "We begin our kingside fianchetto, preparing to develop our light-squared bishop to g2 where it will become a powerful long-range piece. This move is the hallmark of the Botvinnik System, creating a solid pawn structure that supports both our central control and our king's safety. The fianchettoed bishop on g2 will eye the long diagonal toward Black's kingside while supporting our central pawns and potential pawn breaks like d2-d4. This setup also allows our king to castle safely while maintaining maximum flexibility in our pawn structure.",
+      "shortNarration": "Fianchettoing the bishop to g2 eyes the long diagonal toward Black's kingside while supporting central pawns and a future d4 break."
     },
     {
       "san": "g6",
-      "annotation": "Black mirrors our fianchetto setup, maintaining the symmetrical character of the position while preparing their own powerful bishop development to g7. This move creates a solid kingside structure that will support Black's king safety and provide good defensive resources. However, by continuing to copy our moves, Black is essentially letting us set the agenda and choose when to break the symmetry in our favor. The double fianchetto structure often leads to rich middlegame positions where both sides have strong bishops eyeing the center and opposite flanks."
+      "annotation": "Black mirrors our fianchetto setup, maintaining the symmetrical character of the position while preparing their own powerful bishop development to g7. This move creates a solid kingside structure that will support Black's king safety and provide good defensive resources. However, by continuing to copy our moves, Black is essentially letting us set the agenda and choose when to break the symmetry in our favor. The double fianchetto structure often leads to rich middlegame positions where both sides have strong bishops eyeing the center and opposite flanks.",
+      "shortNarration": "Black mirrors the fianchetto, but copying lets White choose when to break symmetry for advantage."
     },
     {
       "san": "Bg2",
-      "annotation": "We complete our kingside fianchetto, placing our bishop on the powerful long diagonal where it surveys the entire board from a2 to h8. This bishop becomes a cornerstone of our position, supporting central control, eyeing Black's kingside, and preparing to support future pawn advances like d2-d4. The bishop also adds crucial protection to our king position once we castle, creating a solid defensive shell. From g2, this bishop will remain influential throughout the game, often becoming a key attacking piece in kingside operations or supporting central breakthroughs."
+      "annotation": "We complete our kingside fianchetto, placing our bishop on the powerful long diagonal where it surveys the entire board from a2 to h8. This bishop becomes a cornerstone of our position, supporting central control, eyeing Black's kingside, and preparing to support future pawn advances like d2-d4. The bishop also adds crucial protection to our king position once we castle, creating a solid defensive shell. From g2, this bishop will remain influential throughout the game, often becoming a key attacking piece in kingside operations or supporting central breakthroughs.",
+      "shortNarration": "The fianchettoed bishop on g2 controls the long diagonal from a2 to h8, supporting central pawn breaks and kingside attacks."
     },
     {
       "san": "Bg7",
-      "annotation": "Black completes their fianchetto development, creating a symmetrical bishop setup that contests our influence along the long diagonal. This bishop placement gives Black solid defensive resources and prepares to support their own central ambitions. While the position remains balanced, the tension between the two fianchettoed bishops creates an interesting dynamic where both sides must be careful about weakening their kingside pawn structures. Black's bishop will play a crucial role in defending against our potential kingside attacks while supporting their own counterplay."
+      "annotation": "Black completes their fianchetto development, creating a symmetrical bishop setup that contests our influence along the long diagonal. This bishop placement gives Black solid defensive resources and prepares to support their own central ambitions. While the position remains balanced, the tension between the two fianchettoed bishops creates an interesting dynamic where both sides must be careful about weakening their kingside pawn structures. Black's bishop will play a crucial role in defending against our potential kingside attacks while supporting their own counterplay.",
+      "shortNarration": "Black's fianchettoed bishop contests the long diagonal, balancing the position and guarding the kingside against attacks."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our kingside knight to its ideal square, where it controls the central e5 and d4 squares while preparing to support our kingside castling. This active move also prepares potential central breaks and keeps our options flexible for future pawn advances. The knight on f3 is particularly well-placed in these English Opening structures because it can later support d2-d4 advances or jump to more active squares like e4 or h4 depending on how the position develops. This move completes our basic development and prepares us to castle kingside safely."
+      "annotation": "We develop our kingside knight to its ideal square, where it controls the central e5 and d4 squares while preparing to support our kingside castling. This active move also prepares potential central breaks and keeps our options flexible for future pawn advances. The knight on f3 is particularly well-placed in these English Opening structures because it can later support d2-d4 advances or jump to more active squares like e4 or h4 depending on how the position develops. This move completes our basic development and prepares us to castle kingside safely.",
+      "shortNarration": "Knight to f3 controls e5 and d4, prepares kingside castling, and supports future d2-d4 or jumps to e4 or h4."
     },
     {
       "san": "e5",
-      "annotation": "Black breaks the symmetry with this central advance, staking a claim in the center and signaling more aggressive intentions than the previous symmetrical approach suggested. This move controls the crucial f4 and d4 squares, preventing some of our active moves while preparing Black's own piece activity. However, this pawn advance also creates potential weaknesses, particularly the d6 and f6 squares, which we might exploit later with our pieces. Black is transitioning from symmetrical play to a more independent strategy, which often gives both sides rich middlegame possibilities but requires more precise calculation and positional understanding."
+      "annotation": "Black breaks the symmetry with this central advance, staking a claim in the center and signaling more aggressive intentions than the previous symmetrical approach suggested. This move controls the crucial f4 and d4 squares, preventing some of our active moves while preparing Black's own piece activity. However, this pawn advance also creates potential weaknesses, particularly the d6 and f6 squares, which we might exploit later with our pieces. Black is transitioning from symmetrical play to a more independent strategy, which often gives both sides rich middlegame possibilities but requires more precise calculation and positional understanding.",
+      "shortNarration": "Black's d5 advance stakes a central claim, controlling f4 and d4 but weakening d6 and f6 for future exploitation."
     },
     {
       "san": "O-O",
-      "annotation": "Continuing English Opening Symmetrical Variation Botvinnik System Reversed With Nf3: O-O is a known theory move in this line."
+      "annotation": "Continuing English Opening Symmetrical Variation Botvinnik System Reversed With Nf3: O-O is a known theory move in this line.",
+      "shortNarration": "O-O is the theory move in the English Opening Symmetrical Botvinnik Reversed with Nf3."
     },
     {
       "san": "Nge7",
-      "annotation": "Continuing English Opening Symmetrical Variation Botvinnik System Reversed With Nf3: Nge7 is a known theory move in this line."
+      "annotation": "Continuing English Opening Symmetrical Variation Botvinnik System Reversed With Nf3: Nge7 is a known theory move in this line.",
+      "shortNarration": "Nge7 is theory in the English Symmetrical Botvinnik Reversed with Nf3."
     },
     {
       "san": "d3",
-      "annotation": "Continuing English Opening Symmetrical Variation Botvinnik System Reversed With Nf3: d3 is a known theory move in this line."
+      "annotation": "Continuing English Opening Symmetrical Variation Botvinnik System Reversed With Nf3: d3 is a known theory move in this line.",
+      "shortNarration": "d3 is a theory move in the English Opening Symmetrical Botvinnik System Reversed with Nf3."
     },
     {
       "san": "d6",
-      "annotation": "Continuing English Opening Symmetrical Variation Botvinnik System Reversed With Nf3: d6 is a known theory move in this line."
+      "annotation": "Continuing English Opening Symmetrical Variation Botvinnik System Reversed With Nf3: d6 is a known theory move in this line.",
+      "shortNarration": "d6 is theory in the English Symmetrical Botvinnik Reversed with Nf3."
     }
   ]
 }

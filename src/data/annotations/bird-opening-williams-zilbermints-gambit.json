@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "f4",
-      "annotation": "We're playing the Bird Opening, an unconventional but solid approach where we immediately stake a claim on the e5 square and prepare to control the center with our pawn structure. Unlike 1.e4 or 1.d4, this move is less forcing and gives Black more options, but it fits perfectly into our plan: we'll often follow up with e4, creating a strong pawn duo while keeping our position flexible. Historically favored by players seeking to avoid heavy theory and create unique middlegame positions."
+      "annotation": "We're playing the Bird Opening, an unconventional but solid approach where we immediately stake a claim on the e5 square and prepare to control the center with our pawn structure. Unlike 1.e4 or 1.d4, this move is less forcing and gives Black more options, but it fits perfectly into our plan: we'll often follow up with e4, creating a strong pawn duo while keeping our position flexible. Historically favored by players seeking to avoid heavy theory and create unique middlegame positions.",
+      "shortNarration": "Bird's 1.f4 stakes a claim on e5, aiming for a flexible e4 pawn duo while avoiding heavy theory."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately challenges our center and opens lines for the bishop and queen, which is the most principled response to our setup. This aggressive pawn push prevents us from establishing a comfortable formation and forces us to make concrete decisions about how we'll handle the tension—in fact, this gambit line is precisely designed to meet this challenge."
+      "annotation": "Black immediately challenges our center and opens lines for the bishop and queen, which is the most principled response to our setup. This aggressive pawn push prevents us from establishing a comfortable formation and forces us to make concrete decisions about how we'll handle the tension—in fact, this gambit line is precisely designed to meet this challenge.",
+      "shortNarration": "Black's e5 challenges the center and opens lines for the bishop and queen, forcing concrete decisions on the pawn tension."
     },
     {
       "san": "e4",
-      "annotation": "We accept the challenge and strike in the center with our e-pawn, which will allow us to recapture on e4 with the knight or c-pawn after Black takes. This move prepares our f-pawn to support our center while opening the long diagonal for our bishop on f1. By playing this, we're committing to an aggressive plan where we compensate for the pawn Black will capture by gaining piece activity and central control."
+      "annotation": "We accept the challenge and strike in the center with our e-pawn, which will allow us to recapture on e4 with the knight or c-pawn after Black takes. This move prepares our f-pawn to support our center while opening the long diagonal for our bishop on f1. By playing this, we're committing to an aggressive plan where we compensate for the pawn Black will capture by gaining piece activity and central control.",
+      "shortNarration": "e5 strikes the center, opening lines for the knight or c-pawn recapture and the f1-bishop's long diagonal."
     },
     {
       "san": "dxe4",
-      "annotation": "Black naturally captures our pawn, taking material while keeping the center occupied. This is almost forced—rejecting the capture would leave us with a strong pawn center and active piece play, so Black has little choice but to accept and then deal with our piece coordination."
+      "annotation": "Black naturally captures our pawn, taking material while keeping the center occupied. This is almost forced—rejecting the capture would leave us with a strong pawn center and active piece play, so Black has little choice but to accept and then deal with our piece coordination.",
+      "shortNarration": "Black's capture is forced — refusing leaves White with a strong pawn center and active piece play."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our knight to a natural square where it controls key central squares (d5, e4, e5) and supports our initiative. The knight on c3 is perfectly placed to support tactics on e4, defend our position, and eventually swing to other squares like e2 or d5 depending on how Black continues. This move also opens the possibility of Qh5 or other attacking ideas."
+      "annotation": "We develop our knight to a natural square where it controls key central squares (d5, e4, e5) and supports our initiative. The knight on c3 is perfectly placed to support tactics on e4, defend our position, and eventually swing to other squares like e2 or d5 depending on how Black continues. This move also opens the possibility of Qh5 or other attacking ideas.",
+      "shortNarration": "Knight to c3 controls d5, e4, and e5, supports tactics on e4, and opens Qh5 attacking ideas."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the kingside knight and immediately attacks our e4 pawn, forcing us to make a decision about defending it or letting it go. This is a active move that prepares castling and puts immediate pressure on our center—we need to respond precisely to make our gambit compensation work."
+      "annotation": "Black develops the kingside knight and immediately attacks our e4 pawn, forcing us to make a decision about defending it or letting it go. This is a active move that prepares castling and puts immediate pressure on our center—we need to respond precisely to make our gambit compensation work.",
+      "shortNarration": "Black's knight attacks e4, forcing a decision to defend or sacrifice for gambit compensation."
     },
     {
       "san": "Nge2",
-      "annotation": "Instead of defending e4 with a rook or queen, we develop our kingside knight to e2, which allows it to support our f4 pawn, eye the crucial d4 and g3 squares, and prepare f5 if needed. This unconventional placement keeps our position flexible: we're not rushed to defend everything immediately, and our knight can reroute via g3 or d4 depending on Black's setup. The Williams-Zilbermints approach prioritizes piece activity and coordination over material equality."
+      "annotation": "Instead of defending e4 with a rook or queen, we develop our kingside knight to e2, which allows it to support our f4 pawn, eye the crucial d4 and g3 squares, and prepare f5 if needed. This unconventional placement keeps our position flexible: we're not rushed to defend everything immediately, and our knight can reroute via g3 or d4 depending on Black's setup. The Williams-Zilbermints approach prioritizes piece activity and coordination over material equality.",
+      "shortNarration": "Knight to e2 supports f4, eyes d4 and g3, and keeps flexibility for rerouting to g3 or d4."
     }
   ]
 }

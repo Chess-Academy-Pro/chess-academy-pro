@@ -3,51 +3,63 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn advance, immediately controlling the central d5 and f5 squares while freeing our light-squared bishop and queen for development. This classical first move stakes our claim to the center and signals our intention to play for rapid piece development and central control. The move follows opening principles perfectly by occupying the center with a pawn and creating immediate threats that Black must address."
+      "annotation": "We're opening with the king's pawn advance, immediately controlling the central d5 and f5 squares while freeing our light-squared bishop and queen for development. This classical first move stakes our claim to the center and signals our intention to play for rapid piece development and central control. The move follows opening principles perfectly by occupying the center with a pawn and creating immediate threats that Black must address.",
+      "shortNarration": "1.e4 controls d5 and f5, freeing the bishop and queen for rapid development."
     },
     {
       "san": "c6",
-      "annotation": "Black responds with the characteristic move of the Caro-Kann Defense, supporting a future d5 pawn advance while keeping the e7-square available for the king's knight. This solid defensive system allows Black to challenge our central e4 pawn without blocking in the light-squared bishop like in the French Defense. The Caro-Kann is known for leading to solid, slightly passive but very sound positions for Black, making it a favorite among positional players who prefer strategic battles over tactical melees."
+      "annotation": "Black responds with the characteristic move of the Caro-Kann Defense, supporting a future d5 pawn advance while keeping the e7-square available for the king's knight. This solid defensive system allows Black to challenge our central e4 pawn without blocking in the light-squared bishop like in the French Defense. The Caro-Kann is known for leading to solid, slightly passive but very sound positions for Black, making it a favorite among positional players who prefer strategic battles over tactical melees.",
+      "shortNarration": "Black plays c6, supporting d5 to challenge e4 while keeping the light-squared bishop free."
     },
     {
       "san": "d4",
-      "annotation": "We're establishing a powerful pawn center by placing our second pawn on a central square, now controlling the crucial e5 and c5 squares. This move supports our e4 pawn and prepares to meet Black's inevitable d5 challenge with maximum central control. By occupying both central files with pawns, we're following classical opening principles and setting up potential space advantages in the middlegame."
+      "annotation": "We're establishing a powerful pawn center by placing our second pawn on a central square, now controlling the crucial e5 and c5 squares. This move supports our e4 pawn and prepares to meet Black's inevitable d5 challenge with maximum central control. By occupying both central files with pawns, we're following classical opening principles and setting up potential space advantages in the middlegame.",
+      "shortNarration": "e4-d4 pawn duo controls e5 and c5, preparing to meet d5 with maximum central control."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately challenges our central pawn with the typical Caro-Kann pawn break, striking at the heart of our pawn center. This move opens the c8-h3 diagonal for Black's light-squared bishop and creates immediate tension in the center that must be resolved. Our opponent is following the main strategic idea of the Caro-Kann: to challenge our e4 pawn and achieve comfortable piece development after the central tension is resolved."
+      "annotation": "Black immediately challenges our central pawn with the typical Caro-Kann pawn break, striking at the heart of our pawn center. This move opens the c8-h3 diagonal for Black's light-squared bishop and creates immediate tension in the center that must be resolved. Our opponent is following the main strategic idea of the Caro-Kann: to challenge our e4 pawn and achieve comfortable piece development after the central tension is resolved.",
+      "shortNarration": "Black's c6 challenges e4, opening the c8-h3 diagonal for the bishop and forcing central resolution."
     },
     {
       "san": "exd5",
-      "annotation": "We're capturing toward the center, which is generally the correct recapture in most opening positions since it maintains our central pawn presence. This exchange opens the e-file for our king's rook eventually and keeps a pawn on the important d4 square. The alternative cxd5 would give Black easy equality after Nf6, so this capture maintains more tension and gives us better practical chances for an opening advantage."
+      "annotation": "We're capturing toward the center, which is generally the correct recapture in most opening positions since it maintains our central pawn presence. This exchange opens the e-file for our king's rook eventually and keeps a pawn on the important d4 square. The alternative cxd5 would give Black easy equality after Nf6, so this capture maintains more tension and gives us better practical chances for an opening advantage.",
+      "shortNarration": "Capturing toward the center with exd5 keeps a pawn on d4 and opens the e-file, while cxd5 would let Black equalize after Nf6."
     },
     {
       "san": "cxd5",
-      "annotation": "Black recaptures toward the center, maintaining the symmetrical pawn structure and opening the c-file for potential rook activity later. This recapture follows sound opening principles, but it also allows us to play our next move with tempo. Our opponent has now completed the basic pawn structure characteristic of many Caro-Kann lines, where Black has a solid central pawn on d5 but potentially less active piece development."
+      "annotation": "Black recaptures toward the center, maintaining the symmetrical pawn structure and opening the c-file for potential rook activity later. This recapture follows sound opening principles, but it also allows us to play our next move with tempo. Our opponent has now completed the basic pawn structure characteristic of many Caro-Kann lines, where Black has a solid central pawn on d5 but potentially less active piece development.",
+      "shortNarration": "Black recaptures toward the center, opening the c-file for later rook activity but allowing White a tempo-gaining move."
     },
     {
       "san": "c4",
-      "annotation": "We're playing the defining move of the Panov Attack, immediately challenging Black's central d5 pawn and creating the sharp, dynamic continuation that characterizes this aggressive system against the Caro-Kann. This move leads to an isolated queen's pawn (IQP) structure if Black exchanges on c4, giving us active piece play and attacking chances in exchange for a long-term structural weakness. The Panov Attack transforms the typically solid Caro-Kann into a much more tactical and double-edged opening where both sides get chances for active play."
+      "annotation": "We're playing the defining move of the Panov Attack, immediately challenging Black's central d5 pawn and creating the sharp, dynamic continuation that characterizes this aggressive system against the Caro-Kann. This move leads to an isolated queen's pawn (IQP) structure if Black exchanges on c4, giving us active piece play and attacking chances in exchange for a long-term structural weakness. The Panov Attack transforms the typically solid Caro-Kann into a much more tactical and double-edged opening where both sides get chances for active play.",
+      "shortNarration": "c4 challenges Black's d5 pawn, creating an IQP structure with active piece play and attacking chances for White."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the king's knight to its ideal square, attacking our d4 pawn and preparing to castle kingside. This move also puts pressure on our position by forcing us to defend the d4 pawn or make further commitments in the center. Our opponent is following classical development principles while maintaining the central tension, and this knight placement supports Black's overall strategy of solid development and central control."
+      "annotation": "Black develops the king's knight to its ideal square, attacking our d4 pawn and preparing to castle kingside. This move also puts pressure on our position by forcing us to defend the d4 pawn or make further commitments in the center. Our opponent is following classical development principles while maintaining the central tension, and this knight placement supports Black's overall strategy of solid development and central control.",
+      "shortNarration": "Black's knight to f6 attacks d4, forcing White to defend or advance in the center."
     },
     {
       "san": "Nc3",
-      "annotation": "We're developing our queen's knight to its most active square, defending the d4 pawn while preparing to support our central ambitions. This knight controls important central squares like e4 and b5, and it's perfectly placed to support our typical Panov Attack plans of rapid development and kingside attacking chances. The knight also prepares potential tactical ideas involving the c4 pawn and maintains maximum flexibility for our pieces."
+      "annotation": "We're developing our queen's knight to its most active square, defending the d4 pawn while preparing to support our central ambitions. This knight controls important central squares like e4 and b5, and it's perfectly placed to support our typical Panov Attack plans of rapid development and kingside attacking chances. The knight also prepares potential tactical ideas involving the c4 pawn and maintains maximum flexibility for our pieces.",
+      "shortNarration": "Nc3 defends d4, eyes e4 and b5, and supports the Panov Attack's kingside attacking chances."
     },
     {
       "san": "e6",
-      "annotation": "Black plays this stabilizing move to support the d5 pawn and prepare harmonious piece development, though it does restrict the dark-squared bishop to the c8-h3 diagonal. This move is characteristic of the Main Line of the Panov Attack, where Black chooses solid development over more aggressive alternatives like g6 or Bg4. Our opponent is prioritizing piece coordination and central stability, accepting a somewhat passive but very sound position."
+      "annotation": "Black plays this stabilizing move to support the d5 pawn and prepare harmonious piece development, though it does restrict the dark-squared bishop to the c8-h3 diagonal. This move is characteristic of the Main Line of the Panov Attack, where Black chooses solid development over more aggressive alternatives like g6 or Bg4. Our opponent is prioritizing piece coordination and central stability, accepting a somewhat passive but very sound position.",
+      "shortNarration": "Black's e6 supports d5 and develops solidly, but locks the dark-squared bishop behind the pawn chain."
     },
     {
       "san": "Nf3",
-      "annotation": "We're completing our kingside development by placing the knight on its ideal central square, where it controls the important e5 and d4 squares while preparing to castle. This active move maintains all of our strategic options and supports our central pawn structure perfectly. The knight on f3 also prepares potential attacking ideas on the kingside and keeps Black's pieces under observation, maintaining the dynamic tension that characterizes the Panov Attack."
+      "annotation": "We're completing our kingside development by placing the knight on its ideal central square, where it controls the important e5 and d4 squares while preparing to castle. This active move maintains all of our strategic options and supports our central pawn structure perfectly. The knight on f3 also prepares potential attacking ideas on the kingside and keeps Black's pieces under observation, maintaining the dynamic tension that characterizes the Panov Attack.",
+      "shortNarration": "Knight to f3 controls e5 and d4, prepares kingside castling, and keeps Black's pieces under observation in the Panov Attack."
     },
     {
       "san": "Bb4",
-      "annotation": "Black develops the dark-squared bishop with tempo by pinning our knight to the king, creating immediate tactical pressure and forcing us to make a decision about our knight's placement. This active move is the hallmark of the Main Line, where Black seeks counterplay through piece activity rather than passive defense. Our opponent is following the modern approach to the Panov Attack, using tactical means to equalize rather than simply defending, and this pin creates immediate practical problems we must solve carefully."
+      "annotation": "Black develops the dark-squared bishop with tempo by pinning our knight to the king, creating immediate tactical pressure and forcing us to make a decision about our knight's placement. This active move is the hallmark of the Main Line, where Black seeks counterplay through piece activity rather than passive defense. Our opponent is following the modern approach to the Panov Attack, using tactical means to equalize rather than simply defending, and this pin creates immediate practical problems we must solve carefully.",
+      "shortNarration": "Black pins the knight to the king with the dark-squared bishop, forcing an immediate decision under tactical pressure."
     }
   ]
 }

@@ -36,6 +36,8 @@ import { voiceService } from '../services/voiceService';
 import { logAppAudit } from '../services/appAuditor';
 import { markStageComplete } from '../services/openingProgress';
 import { getCachedOpening } from '../services/openingGenerator';
+import { useAppStore } from '../stores/appStore';
+import { resolveCoachNarration } from '../utils/coachNarration';
 import type {
   WalkthroughTree,
   WalkthroughTreeNode,
@@ -278,6 +280,40 @@ function clampBackupMs(text: string): number {
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
   const base = (wordCount / BACKUP_WPM) * 60_000;
   return Math.max(MIN_BACKUP_MS, Math.min(MAX_BACKUP_MS, base * 3.0));
+}
+
+/**
+ * Policy-gated speak for the Learn walkthrough. Reads the user's
+ * unified `coachNarration` preference on every call so a Settings
+ * change mid-walkthrough takes effect on the very next step.
+ *
+ * - 'full'   → speak `text` via speakForced (current behavior preserved)
+ * - 'brief'  → speak `shortText` when caller passed one; otherwise
+ *              silent-reading-pace fallback. Authors opt into Brief
+ *              narration per node/segment by populating shortIdea /
+ *              shortText (see WalkthroughTreeNode + NarrationSegment).
+ *              We deliberately do NOT auto-truncate `text` — random
+ *              first-sentence cuts can land on a setup instead of
+ *              the punchline, which is worse than silence.
+ * - 'silent' → no audio. Returns a Promise that resolves at the
+ *              same reading-pace voice would have settled, so the
+ *              walkthrough's voice-promise-gated advance pacing is
+ *              preserved.
+ */
+async function speakWalkthroughText(
+  text: string,
+  shortText?: string,
+): Promise<void> {
+  const prefs = useAppStore.getState().activeProfile?.preferences;
+  const verbosity = resolveCoachNarration(prefs);
+  if (verbosity === 'full') {
+    return voiceService.speakForced(text);
+  }
+  if (verbosity === 'brief' && shortText && shortText.trim().length > 0) {
+    return voiceService.speakForced(shortText);
+  }
+  // 'silent', or 'brief' without a short variant on this node.
+  await new Promise<void>((resolve) => setTimeout(resolve, clampBackupMs(text)));
 }
 
 export type WalkthroughPhase =
@@ -754,7 +790,10 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
           setTrapIndex(0);
           const first = matches[0];
           const intro = `Hold on — a common mistake here is ${first.inaccuracy}. ${first.whyBad} Want to see it now, or keep going with the walkthrough?`;
-          void voiceService.speakForced(intro).catch(() => undefined);
+          const shortIntro = first.shortWhyBad
+            ? `Watch out — ${first.inaccuracy} is a mistake. ${first.shortWhyBad}`
+            : undefined;
+          void speakWalkthroughText(intro, shortIntro).catch(() => undefined);
           setPhase('trap-prompt');
           return;
         }
@@ -795,7 +834,7 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
             setNarrationArrows(segment.arrows ?? []);
             setNarrationHighlights(segment.highlights ?? []);
             try {
-              await voiceService.speakForced(segment.text);
+              await speakWalkthroughText(segment.text, segment.shortText);
             } catch {
               // Voice errored — keep going so the narration arc
               // completes; backup timer is a safety net.
@@ -851,8 +890,7 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
       advanceTimerRef.current = backupTimer;
 
       // Primary gate: voice completion.
-      voiceService
-        .speakForced(idea)
+      speakWalkthroughText(idea, node.shortIdea)
         .then(() => {
           if (settled) return;
           settle();
@@ -935,8 +973,7 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
           if (settled) return;
           settle();
         }, backupMs);
-        voiceService
-          .speakForced(newTree.intro)
+        speakWalkthroughText(newTree.intro, newTree.shortIntro)
           .then(() => {
             if (settled) return;
             // Add the post-narration buffer.
@@ -1006,7 +1043,10 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
       if (next < queue.length) {
         const lesson = queue[next];
         const intro = `Another common mistake here is ${lesson.inaccuracy}. ${lesson.whyBad} Want to see this one too?`;
-        void voiceService.speakForced(intro).catch(() => undefined);
+        const shortIntro = lesson.shortWhyBad
+          ? `Also watch out — ${lesson.inaccuracy}. ${lesson.shortWhyBad}`
+          : undefined;
+        void speakWalkthroughText(intro, shortIntro).catch(() => undefined);
         setPhase('trap-prompt');
         return next;
       }
@@ -1056,10 +1096,10 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
           treeRef.current?.startFen,
         );
         const c = new Chess(startFen);
-        const speakAndWait = async (text: string): Promise<void> => {
+        const speakAndWait = async (text: string, shortText?: string): Promise<void> => {
           if (!text.trim()) return;
           try {
-            await voiceService.speakForced(text);
+            await speakWalkthroughText(text, shortText);
           } catch {
             // Voice errors don't block the animation arc.
           }
@@ -1074,7 +1114,10 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
           return;
         }
         setTrapFen(c.fen());
-        await speakAndWait(`${lesson.inaccuracy} — ${lesson.whyBad}`);
+        await speakAndWait(
+          `${lesson.inaccuracy} — ${lesson.whyBad}`,
+          lesson.shortWhyBad ? `${lesson.inaccuracy} — ${lesson.shortWhyBad}` : undefined,
+        );
         // 2. Punishment.
         try {
           c.move(lesson.punishment);
@@ -1084,7 +1127,10 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
           return;
         }
         setTrapFen(c.fen());
-        await speakAndWait(`${lesson.punishment} — ${lesson.whyPunish}`);
+        await speakAndWait(
+          `${lesson.punishment} — ${lesson.whyPunish}`,
+          lesson.shortWhyPunish ? `${lesson.punishment} — ${lesson.shortWhyPunish}` : undefined,
+        );
         // 3. Followup (optional).
         if (lesson.followup && lesson.followup.length > 0) {
           for (const fm of lesson.followup) {
@@ -1094,7 +1140,10 @@ export function useTeachWalkthrough(): UseTeachWalkthroughReturn {
               break;
             }
             setTrapFen(c.fen());
-            await speakAndWait(`${fm.san} — ${fm.idea}`);
+            await speakAndWait(
+              `${fm.san} — ${fm.idea}`,
+              fm.shortIdea ? `${fm.san} — ${fm.shortIdea}` : undefined,
+            );
           }
         }
         // 4. Snap back; advance to next queued trap or fork picker.

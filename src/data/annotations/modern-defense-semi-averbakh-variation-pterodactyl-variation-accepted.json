@@ -3,43 +3,53 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with the Modern Defense, an unconventional opening where Black plays for flexibility and counterplay rather than meeting White's center directly. Nf3 prepares d4 and controls key central squares (e5 and d4), following the principle of developing with purpose while keeping options open."
+      "annotation": "We start with the Modern Defense, an unconventional opening where Black plays for flexibility and counterplay rather than meeting White's center directly. Nf3 prepares d4 and controls key central squares (e5 and d4), following the principle of developing with purpose while keeping options open.",
+      "shortNarration": "Nf3 prepares d4 and controls e5 and d4, developing with purpose in the Modern Defense."
     },
     {
       "san": "g6",
-      "annotation": "Black immediately signals the Modern Defense setup: we're preparing to fianchetto the bishop on g7 and keep our center sparse. This move seems slow, but it controls the long diagonal and prepares a flexible pawn structure that can adapt to White's plans."
+      "annotation": "Black immediately signals the Modern Defense setup: we're preparing to fianchetto the bishop on g7 and keep our center sparse. This move seems slow, but it controls the long diagonal and prepares a flexible pawn structure that can adapt to White's plans.",
+      "shortNarration": "Black fianchettoes the g7 bishop, keeping the center sparse to control the long diagonal and adapt to White's plans."
     },
     {
       "san": "d4",
-      "annotation": "We stake our claim in the center, occupying d4 before Black can contest it effectively. This move completes our setup phase—we have a strong pawn center and developed knight, giving us space and initiative while Black remains undeveloped."
+      "annotation": "We stake our claim in the center, occupying d4 before Black can contest it effectively. This move completes our setup phase—we have a strong pawn center and developed knight, giving us space and initiative while Black remains undeveloped.",
+      "shortNarration": "d4 stakes the center, giving White space and initiative while Black remains undeveloped."
     },
     {
       "san": "Bg7",
-      "annotation": "Black completes the fianchetto, placing the bishop on the powerful long diagonal where it eyes d4 and pressures our center. This is the key Modern Defense idea: Black's pieces will work together to undermine our central control while maintaining a sound position."
+      "annotation": "Black completes the fianchetto, placing the bishop on the powerful long diagonal where it eyes d4 and pressures our center. This is the key Modern Defense idea: Black's pieces will work together to undermine our central control while maintaining a sound position.",
+      "shortNarration": "Black's fianchettoed bishop on g7 eyes d4, pressuring White's center to undermine it."
     },
     {
       "san": "e4",
-      "annotation": "We build our ideal pawn center with pawns on d4 and e4, controlling the crucial central squares and gaining space. This gives us a classical strong position, though we must be careful that Black's pieces can create practical pressure despite the small space—the Pterodactyl Variation tests this aggressive setup."
+      "annotation": "We build our ideal pawn center with pawns on d4 and e4, controlling the crucial central squares and gaining space. This gives us a classical strong position, though we must be careful that Black's pieces can create practical pressure despite the small space—the Pterodactyl Variation tests this aggressive setup.",
+      "shortNarration": "Pawns on d4 and e4 control the center and gain space, but Black's Pterodactyl Variation creates practical pressure against this classical setup."
     },
     {
       "san": "d6",
-      "annotation": "Black supports the bishop and prepares to challenge our center with a potential e5 or ...cxd4 move later. Notice Black isn't rushing; d6 is flexible and solid, allowing the queen and knights to find their best squares while maintaining the fianchettoed bishop's influence."
+      "annotation": "Black supports the bishop and prepares to challenge our center with a potential e5 or ...cxd4 move later. Notice Black isn't rushing; d6 is flexible and solid, allowing the queen and knights to find their best squares while maintaining the fianchettoed bishop's influence.",
+      "shortNarration": "Black's flexible d6 supports the fianchettoed bishop and prepares e5 or cxd4 to challenge the center."
     },
     {
       "san": "c4",
-      "annotation": "We broaden our center control to the queenside, securing d4 and preparing to support our position. c4 also opens lines for our c-pawn and prevents Black from easily playing ...e5; if we maintain this space advantage, we can slowly improve our pieces."
+      "annotation": "We broaden our center control to the queenside, securing d4 and preparing to support our position. c4 also opens lines for our c-pawn and prevents Black from easily playing ...e5; if we maintain this space advantage, we can slowly improve our pieces.",
+      "shortNarration": "c4 secures d4, prevents ...e5, and opens lines for piece development while maintaining a space advantage."
     },
     {
       "san": "c5",
-      "annotation": "Black strikes at our center with the key Modern Defense counterattack! Rather than allowing our imposing center to calcify, Black challenges d4 and opens lines for potential activity. The Semi-Averbakh/Pterodactyl aspect is Black's willingness to play ...c5 immediately, accepting complications."
+      "annotation": "Black strikes at our center with the key Modern Defense counterattack! Rather than allowing our imposing center to calcify, Black challenges d4 and opens lines for potential activity. The Semi-Averbakh/Pterodactyl aspect is Black's willingness to play ...c5 immediately, accepting complications.",
+      "shortNarration": "Black's immediate ...c5 challenges d4, opening lines for counterplay in the Semi-Averbakh/Pterodactyl."
     },
     {
       "san": "dxc5",
-      "annotation": "We capture on c5, removing Black's challenge to our center. We're now up material (the c5 pawn) and should have a comfortable position, though we must be alert: Black's next check (Qa5+) will disrupt our development and we should prepare for active counterplay."
+      "annotation": "We capture on c5, removing Black's challenge to our center. We're now up material (the c5 pawn) and should have a comfortable position, though we must be alert: Black's next check (Qa5+) will disrupt our development and we should prepare for active counterplay.",
+      "shortNarration": "Capturing on c5 wins a pawn, but Black's Qa5+ check will disrupt development — prepare for active counterplay."
     },
     {
       "san": "Qa5+",
-      "annotation": "Black hits us with a check—notice how the Pterodactyl Variation stays sharp and tactical! Qa5+ forces our king to move and pressures our loose pieces (particularly the pawn on c5), illustrating why this variation is \"accepted\" (we took on c5): we get material but must show accurate play to consolidate."
+      "annotation": "Black hits us with a check—notice how the Pterodactyl Variation stays sharp and tactical! Qa5+ forces our king to move and pressures our loose pieces (particularly the pawn on c5), illustrating why this variation is \"accepted\" (we took on c5): we get material but must show accurate play to consolidate.",
+      "shortNarration": "Qa5+ forces the king to move and pressures the loose c5 pawn — White has the extra pawn but must consolidate accurately."
     }
   ]
 }

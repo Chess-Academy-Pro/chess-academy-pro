@@ -27,7 +27,8 @@
           "square": "f5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White's 1.e4 opens lines for queen and bishop, setting up the Scotch Gambit's dynamic play."
     },
     {
       "san": "e5",
@@ -48,7 +49,8 @@
           "square": "e5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's e5 pawn becomes the target of White's d4 advance in the Scotch Gambit."
     },
     {
       "san": "Nf3",
@@ -74,7 +76,8 @@
           "square": "f3",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White's knight on f3 attacks e5 and prepares kingside castling, setting up the Scotch Gambit with d4."
     },
     {
       "san": "Nc6",
@@ -98,7 +101,8 @@
           "square": "c6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's c6 knight blocks the c-pawn, and White can exploit that with the Scotch Gambit."
     },
     {
       "san": "d4",
@@ -126,7 +130,8 @@
           "square": "d4",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White plays d4, and in the Scotch Gambit sacrifices the d4 pawn with Bc4 for rapid development and initiative."
     },
     {
       "san": "exd4",
@@ -148,7 +153,8 @@
           "square": "d4",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White chooses between Nxd4 for the regular Scotch or Bc4 for the sharper Scotch Gambit."
     },
     {
       "san": "Bc4",
@@ -183,7 +189,8 @@
           "square": "c4",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White gambits the d4 pawn for time and activity, with the bishop on c4 targeting f7."
     },
     {
       "san": "Nf6",
@@ -212,7 +219,8 @@
           "square": "f6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's knight on f6 attacks e4, developing while keeping the extra pawn."
     },
     {
       "san": "e5",
@@ -248,7 +256,8 @@
           "square": "d6",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "e5 pushes the knight with tempo, cramping Black's development by controlling d6 and f6."
     },
     {
       "san": "d5",
@@ -284,7 +293,8 @@
           "square": "c4",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black sacrifices a pawn with d5 to seize the initiative after exf6 and Bxc4."
     },
     {
       "san": "exf6",
@@ -311,7 +321,8 @@
           "square": "f6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White recaptures the knight with e5xf6; Black recaptures Qxf6, keeping pawn structure intact but White gains open lines and initiative."
     },
     {
       "san": "dxc4",
@@ -338,7 +349,8 @@
           "square": "d4",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black wins a piece for a pawn, but White's active pieces outweigh the material deficit in the open position."
     },
     {
       "san": "fxg7",
@@ -369,7 +381,8 @@
           "square": "h8",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "g7 pawn attacks the rook on h8, prevents kingside castling, and forces Black to recapture, weakening the kingside pawn structure."
     },
     {
       "san": "Bxg7",
@@ -396,7 +409,8 @@
           "square": "f6",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black recaptures with the bishop, but the g7 bishop leaves dark-square holes and an open g-file if Black castles kingside."
     },
     {
       "san": "Nxd4",
@@ -428,7 +442,8 @@
           "square": "d4",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White recaptures on d4 with the knight, centralizing it on a dominant square, recovering the pawn and gaining a lead in development."
     },
     {
       "san": "Nxd4",
@@ -450,7 +465,8 @@
           "square": "d4",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black trades knights on d4 to reduce White's attacking potential, but White retains compensation after the queen recaptures."
     },
     {
       "san": "Qxd4",
@@ -482,7 +498,8 @@
           "square": "g7",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "White recaptures on d4 with the queen, centralizing it to control the d-file, pressure g7, and support Nc3 or Bg5."
     },
     {
       "san": "Qf6",
@@ -507,7 +524,8 @@
           "square": "f6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White should decline Qf6 to keep attacking pressure and avoid making Black's extra pawn relevant in the endgame."
     },
     {
       "san": "Qd1",
@@ -537,7 +555,8 @@
           "square": "d1",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White declines the queen trade from d1, keeping the queen to redeploy to h5 for the attack."
     },
     {
       "san": "O-O",
@@ -559,7 +578,8 @@
           "square": "g8",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black castles kingside, but the g-pawn exchange leaves the king exposed."
     },
     {
       "san": "O-O",
@@ -590,7 +610,8 @@
           "square": "f1",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White's more harmonious position after castling targets rapid development with Nc3, Bg5, and centralizing rooks."
     },
     {
       "san": "Re8",
@@ -612,7 +633,8 @@
           "square": "e8",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's rook on e8 activates the open file for counterplay."
     },
     {
       "san": "Nc3",
@@ -644,7 +666,8 @@
           "square": "c4",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "White's knight to c3 attacks the c4 pawn and controls d5 and e4, mounting pressure on Black's extra pawn."
     },
     {
       "san": "b5",
@@ -675,7 +698,8 @@
           "square": "a6",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black's b5 holds c4 but weakens a6 and c5, leaving the b5-c4 pawn chain fragile."
     },
     {
       "san": "Bg5",
@@ -706,7 +730,8 @@
           "square": "f6",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Bishop to g5 attacks the queen on f6, gaining a tempo and later targeting h6 against the weakened kingside."
     },
     {
       "san": "Qd6",
@@ -732,7 +757,8 @@
           "square": "d6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's queen on d6 defends the d-file but has moved three times, signaling White's initiative is real."
     },
     {
       "san": "Qf3",
@@ -764,7 +790,8 @@
           "square": "f7",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Queen to f3 targets f7, supports Nd5, and eyes a8 — White's pieces are fully mobilized and coordinated."
     },
     {
       "san": "Bb7",
@@ -791,7 +818,8 @@
           "square": "b7",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black fianchettoes the bishop to b7, controlling the long diagonal and supporting d5, but White's initiative persists."
     },
     {
       "san": "Rad1",
@@ -822,7 +850,8 @@
           "square": "d5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White's rook on d1 targets the queen on d6 and controls the open file, with Nd5 threats making every piece active and dangerous."
     },
     {
       "san": "Qc5",
@@ -844,7 +873,8 @@
           "square": "c5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's queen on c5 guards c4 but has moved four times, costing development for a pawn."
     },
     {
       "san": "Nd5",
@@ -877,7 +907,8 @@
           "square": "d5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Knight leaps to d5 — a dominant outpost attacking multiple squares, supporting Nf6+ or Nc7, and Black's position is under tremendous pressure."
     },
     {
       "san": "Bxd5",
@@ -899,7 +930,8 @@
           "square": "d5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black trades the bishop for the knight on d5 to avoid Nf6+ or Nc7, but White recaptures with the queen, keeping a centralized active position."
     },
     {
       "san": "Qxd5",
@@ -926,7 +958,8 @@
           "square": "d5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Queen on d5 dominates the board, controlling the long diagonal, d-file, and pressuring f7 and c4 — excellent compensation with the g5 bishop and well-placed rooks."
     },
     {
       "san": "Qb6",
@@ -948,7 +981,8 @@
           "square": "b6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's queen retreats to b6 to guard b5 and the b-file, but White still holds all the dynamic chances."
     },
     {
       "san": "Bh6",
@@ -975,7 +1009,8 @@
           "square": "g7",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Bh6! sacrifices the bishop to remove g7's defender, exposing Black's king on the open g-file after Bxg7 Kxg7."
     },
     {
       "san": "Qf6",
@@ -1002,7 +1037,8 @@
           "square": "f6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's queen on f6 defends g7 and dares White to trade — exchanging queens eases Black's defense."
     },
     {
       "san": "Bxg7",
@@ -1024,7 +1060,8 @@
           "square": "g7",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White captures the bishop, opening the kingside and exposing Black's king — the missing dark-squared bishop leaves dark-square weaknesses for White's queen and rooks."
     },
     {
       "san": "Qxg7",
@@ -1051,7 +1088,8 @@
           "square": "h7",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black recaptures with the queen on g7, but a heavy piece defending dark squares leaves the king vulnerable without a pawn shield."
     },
     {
       "san": "Qd6",
@@ -1082,7 +1120,8 @@
           "square": "c7",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "White's queen on d6 pressures c7 and a6, coordinating with rooks on d1 and f1 for a final assault."
     },
     {
       "san": "Re6",
@@ -1109,7 +1148,8 @@
           "square": "e6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's rook activates to e6, defending laterally and threatening g6 or h6, but White's position stays dominant."
     },
     {
       "san": "Qd7",
@@ -1145,7 +1185,8 @@
           "square": "c7",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "White's queen on d7 attacks c7 and a7, creating back-rank threats and a lasting positional bind from the Scotch Gambit."
     },
     {
       "san": "Rf8",
@@ -1167,7 +1208,8 @@
           "square": "f8",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's rook to f8 prevents Rd8+ but White's queen and rooks dominate, recovering the pawn with interest through relentless activity."
     }
   ],
   "subLines": [
@@ -1177,11 +1219,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Scotch Gambit: Main Line with d5 is an important variation of the Scotch Gambit. The main line where Black strikes back with d5. After Bb5, White targets the pinned pawn on c6. After castling and developing with Be3, the position is dynamic — White has better pawn structure and the bishop pair while Black has centralized knights. Active play is essential for both sides. Let's walk through the key ideas."
+          "annotation": "The Scotch Gambit: Main Line with d5 is an important variation of the Scotch Gambit. The main line where Black strikes back with d5. After Bb5, White targets the pinned pawn on c6. After castling and developing with Be3, the position is dynamic — White has better pawn structure and the bishop pair while Black has centralized knights. Active play is essential for both sides. Let's walk through the key ideas.",
+          "shortNarration": "After Bb5 pins the c6-pawn, White gets the bishop pair and better structure while Black's knights centralize — dynamic play demands active moves."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Scotch Gambit: Main Line with d5."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Scotch Gambit: Main Line with d5.",
+          "shortNarration": "Black's e5 contests the center, leading to the Scotch Gambit Main Line with d5."
         },
         {
           "san": "Nf3",
@@ -1193,7 +1237,8 @@
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -1204,7 +1249,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Bc4",
@@ -1216,15 +1262,18 @@
         },
         {
           "san": "e5",
-          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "Bb5",
-          "annotation": "Bb5 improves the bishop's placement. The bishop was less effective on c4 and moves to b5 where it serves the plan better."
+          "annotation": "Bb5 improves the bishop's placement. The bishop was less effective on c4 and moves to b5 where it serves the plan better.",
+          "shortNarration": "Bb5 improves the bishop's placement, pinning the knight and threatening c6."
         },
         {
           "san": "Ne4",
@@ -1239,7 +1288,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxd4 wins a pawn, altering the material balance."
         },
         {
           "san": "Bd7",
@@ -1254,7 +1304,8 @@
               "to": "c6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxc6 wins a knight, altering the pawn structure or material balance."
         },
         {
           "san": "bxc6",
@@ -1265,7 +1316,8 @@
               "to": "c6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "bxc6 captures the bishop, changing the pawn structure or material balance."
         },
         {
           "san": "O-O",
@@ -1288,7 +1340,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxd4 wins a knight, changing the pawn structure or material balance."
         },
         {
           "san": "Bxd4",
@@ -1299,7 +1352,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxd4 captures the bishop, altering the pawn structure or material balance."
         },
         {
           "san": "O-O",
@@ -1307,11 +1361,13 @@
         },
         {
           "san": "f3",
-          "annotation": "f3 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "f3 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f3 gains kingside space and supports a future attack toward the enemy king."
         },
         {
           "san": "Ng5",
-          "annotation": "Ng5 improves the knight's placement. The knight was less effective on e4 and moves to g5 where it serves the plan better."
+          "annotation": "Ng5 improves the knight's placement. The knight was less effective on e4 and moves to g5 where it serves the plan better.",
+          "shortNarration": "Ng5 improves the knight's placement from e4, targeting f7 and supporting the kingside attack."
         },
         {
           "san": "Nc3",
@@ -1319,7 +1375,8 @@
         },
         {
           "san": "f6",
-          "annotation": "f6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "f6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f6 gains kingside space to support a future attack on the enemy king."
         },
         {
           "san": "exf6",
@@ -1330,7 +1387,8 @@
               "to": "f6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exf6 captures the pawn, altering the pawn structure or material balance."
         },
         {
           "san": "Rxf6",
@@ -1374,7 +1432,8 @@
               "to": "e3",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Be3 — typical Scotch Gambit Main Line with d5; key plans are piece placement, pawn breaks, and targets."
         }
       ]
     },
@@ -1384,11 +1443,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Scotch Gambit: Ng4 Retreat Variation is an important variation of the Scotch Gambit. Black plays Ng4 to pressure e5 and f2. White can try the aggressive Bf7+ sacrificing a bishop to expose the king, or simply castle and play Re1. The Bf7+ line leads to a fascinating middlegame where Black's king is displaced but has an extra piece — razor-sharp complications. Let's walk through the key ideas."
+          "annotation": "The Scotch Gambit: Ng4 Retreat Variation is an important variation of the Scotch Gambit. Black plays Ng4 to pressure e5 and f2. White can try the aggressive Bf7+ sacrificing a bishop to expose the king, or simply castle and play Re1. The Bf7+ line leads to a fascinating middlegame where Black's king is displaced but has an extra piece — razor-sharp complications. Let's walk through the key ideas.",
+          "shortNarration": "In the Scotch Gambit's Ng4 Retreat Variation, Bf7+ sacrifices a bishop to expose Black's king, creating razor-sharp complications with material imbalance."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Scotch Gambit: Ng4 Retreat Variation."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Scotch Gambit: Ng4 Retreat Variation.",
+          "shortNarration": "Black's e5 contests the center, defining the Scotch Gambit's Ng4 Retreat line."
         },
         {
           "san": "Nf3",
@@ -1400,7 +1461,8 @@
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -1411,7 +1473,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Bc4",
@@ -1423,11 +1486,13 @@
         },
         {
           "san": "e5",
-          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "Ng4",
-          "annotation": "Ng4 improves the knight's placement. The knight was less effective on f6 and moves to g4 where it serves the plan better."
+          "annotation": "Ng4 improves the knight's placement. The knight was less effective on f6 and moves to g4 where it serves the plan better.",
+          "shortNarration": "Ng4 improves the knight's placement, eyeing f2 and supporting a future Qh4+."
         },
         {
           "san": "Bxf7+",
@@ -1438,11 +1503,13 @@
               "to": "f7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bf7+ wins a pawn, altering the material balance and pawn structure."
         },
         {
           "san": "Ke7",
-          "annotation": "Ke7 improves the king's placement. The king was less effective on e8 and moves to e7 where it serves the plan better."
+          "annotation": "Ke7 improves the king's placement. The king was less effective on e8 and moves to e7 where it serves the plan better.",
+          "shortNarration": "Ke7 improves king safety and supports the plan."
         },
         {
           "san": "O-O",
@@ -1450,7 +1517,8 @@
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "exd6+",
@@ -1461,7 +1529,8 @@
               "to": "d6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd6+ captures the pawn, altering the pawn structure or material balance."
         },
         {
           "san": "Kxf7",
@@ -1472,11 +1541,13 @@
               "to": "f7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Kxf7 captures the bishop, changing the pawn structure or material balance."
         },
         {
           "san": "Re1",
-          "annotation": "Re1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files."
+          "annotation": "Re1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Re1 places the rook on the central file, where it will be most active."
         },
         {
           "san": "Be6",
@@ -1491,7 +1562,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxd4 wins a pawn, altering the material balance and pawn structure."
         },
         {
           "san": "Qxd6",
@@ -1513,7 +1585,8 @@
               "to": "e6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe6 wins a bishop, altering the pawn structure or material balance."
         },
         {
           "san": "Qxe6",
@@ -1524,7 +1597,8 @@
               "to": "e6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxe6 wins a knight, but Black regains material or improves the pawn structure."
         },
         {
           "san": "Nc3",
@@ -1532,7 +1606,8 @@
         },
         {
           "san": "Qd7",
-          "annotation": "Qd7 activates the queen. From d7, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qd7 activates the queen. From d7, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qd7 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Qf3+",
@@ -1554,7 +1629,8 @@
               "to": "f5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qf5 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Qxf5+",
@@ -1565,7 +1641,8 @@
               "to": "f5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxf5+ wins the queen in the Scotch Gambit's Ng4 Retreat Variation."
         },
         {
           "san": "Nf6",
@@ -1576,7 +1653,8 @@
               "to": "f6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "From the Scotch Gambit's Ng4 Retreat, focus on piece placement, pawn breaks, and targets."
         }
       ]
     },
@@ -1586,11 +1664,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Max Lange Attack: Bc5 Line is an important variation of the Scotch Gambit. The Max Lange Attack arises when Black plays 4...Bc5. After O-O Nf6 e5 d5 exf6 dxc4, the position becomes incredibly sharp. White has the initiative with Re1+ and Ng5, while Black counters with O-O-O and piece activity. Both sides must play with extreme precision. Let's walk through the key ideas."
+          "annotation": "The Max Lange Attack: Bc5 Line is an important variation of the Scotch Gambit. The Max Lange Attack arises when Black plays 4...Bc5. After O-O Nf6 e5 d5 exf6 dxc4, the position becomes incredibly sharp. White has the initiative with Re1+ and Ng5, while Black counters with O-O-O and piece activity. Both sides must play with extreme precision. Let's walk through the key ideas.",
+          "shortNarration": "In the Max Lange Attack after 4...Bc5, White's initiative with Re1+ and Ng5 counters Black's O-O-O and piece activity."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Max Lange Attack: Bc5 Line."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Max Lange Attack: Bc5 Line.",
+          "shortNarration": "Black's e5 contests the center, defining the Max Lange Attack: Bc5 Line."
         },
         {
           "san": "Nf3",
@@ -1602,7 +1682,8 @@
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -1613,7 +1694,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Bc4",
@@ -1633,11 +1715,13 @@
         },
         {
           "san": "e5",
-          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "exf6",
@@ -1648,7 +1732,8 @@
               "to": "f6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exf6 captures the knight, winning material and altering the pawn structure."
         },
         {
           "san": "dxc4",
@@ -1659,7 +1744,8 @@
               "to": "c4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc4 captures the bishop, gaining a pawn and restructuring Black's pawns."
         },
         {
           "san": "Re1+",
@@ -1670,7 +1756,8 @@
               "to": "e1",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Re1+ forces the king to move, gaining a tempo to improve White's position."
         },
         {
           "san": "Be6",
@@ -1678,11 +1765,13 @@
         },
         {
           "san": "Ng5",
-          "annotation": "Ng5 improves the knight's placement. The knight was less effective on f3 and moves to g5 where it serves the plan better."
+          "annotation": "Ng5 improves the knight's placement. The knight was less effective on f3 and moves to g5 where it serves the plan better.",
+          "shortNarration": "Ng5 improves the knight's placement, eyeing f7 and supporting the attack."
         },
         {
           "san": "Qd5",
-          "annotation": "Qd5 develops the queen to a strong central post on d5, where it controls key squares and supports the center."
+          "annotation": "Qd5 develops the queen to a strong central post on d5, where it controls key squares and supports the center.",
+          "shortNarration": "Qd5 develops the queen to a strong central post controlling key squares and supporting the center."
         },
         {
           "san": "Nc3",
@@ -1690,7 +1779,8 @@
         },
         {
           "san": "Qf5",
-          "annotation": "Qf5 activates the queen. From f5, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qf5 activates the queen. From f5, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qf5 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Nce4",
@@ -1698,15 +1788,18 @@
         },
         {
           "san": "O-O-O",
-          "annotation": "Black castles queenside — this often signals aggressive intentions, as the kingside pawns can advance for an attack."
+          "annotation": "Black castles queenside — this often signals aggressive intentions, as the kingside pawns can advance for an attack.",
+          "shortNarration": "Black castles queenside, freeing kingside pawns for a direct attack."
         },
         {
           "san": "g4",
-          "annotation": "g4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "g4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "g4 gains kingside space and supports a future attack on the enemy king."
         },
         {
           "san": "Qd5",
-          "annotation": "Qd5 activates the queen. From d5, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qd5 activates the queen. From d5, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qd5 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "fxg7",
@@ -1717,11 +1810,13 @@
               "to": "g7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "fxg7 captures the pawn, winning material and altering the pawn structure."
         },
         {
           "san": "Rhg8",
-          "annotation": "Rhg8 improves the rook's placement. The rook was less effective on h8 and moves to g8 where it serves the plan better."
+          "annotation": "Rhg8 improves the rook's placement. The rook was less effective on h8 and moves to g8 where it serves the plan better.",
+          "shortNarration": "Rhg8 improves the rook's placement, supporting the kingside attack from g8."
         },
         {
           "san": "Nxe6",
@@ -1732,7 +1827,8 @@
               "to": "e6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe6 captures the bishop, changing the pawn structure and material balance."
         },
         {
           "san": "fxe6",
@@ -1743,7 +1839,8 @@
               "to": "e6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "fxe6 captures the knight, defining the Max Lange Attack pawn structure and piece activity."
         },
         {
           "san": "Nxc5",
@@ -1754,7 +1851,8 @@
               "to": "c5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "After Nxc5, White gets clear targets and plans in a common structure."
         }
       ]
     },
@@ -1764,11 +1862,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Scotch Gambit: Dubois-Reti Defense is an important variation of the Scotch Gambit. Black plays 4...Bc5 and 6...dxc3 to grab pawns. White sacrifices the c-pawn for rapid development and open lines. After Bxf7+ forces the king to f8, castling is permanently denied. The open g-file and active pieces give White lasting compensation against the displaced king. Let's walk through the key ideas."
+          "annotation": "The Scotch Gambit: Dubois-Reti Defense is an important variation of the Scotch Gambit. Black plays 4...Bc5 and 6...dxc3 to grab pawns. White sacrifices the c-pawn for rapid development and open lines. After Bxf7+ forces the king to f8, castling is permanently denied. The open g-file and active pieces give White lasting compensation against the displaced king. Let's walk through the key ideas.",
+          "shortNarration": "White sacrifices the c-pawn for rapid development, then Bxf7+ forces the king to f8, denying castling and giving White lasting compensation with the open g-file."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Scotch Gambit: Dubois-Reti Defense."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Scotch Gambit: Dubois-Reti Defense.",
+          "shortNarration": "Black's e5 contests the center, entering the Dubois-Reti Defense of the Scotch Gambit."
         },
         {
           "san": "Nf3",
@@ -1780,7 +1880,8 @@
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -1791,7 +1892,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Bc4",
@@ -1822,7 +1924,8 @@
               "to": "c3",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc3 captures the pawn, changing the pawn structure or material balance."
         },
         {
           "san": "Nxc3",
@@ -1852,7 +1955,8 @@
               "to": "f3",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxf3 captures the knight, winning a piece or altering the pawn structure."
         },
         {
           "san": "Bxf7+",
@@ -1863,11 +1967,13 @@
               "to": "f7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxf7+ wins a pawn and alters the pawn structure."
         },
         {
           "san": "Kf8",
-          "annotation": "Kf8 improves the king's placement. The king was less effective on e8 and moves to f8 where it serves the plan better."
+          "annotation": "Kf8 improves the king's placement. The king was less effective on e8 and moves to f8 where it serves the plan better.",
+          "shortNarration": "Kf8 improves the king's placement, moving from e8 to f8 for a better plan."
         },
         {
           "san": "gxf3",
@@ -1878,7 +1984,8 @@
               "to": "f3",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "gxf3 captures the bishop, altering the pawn structure and material balance."
         },
         {
           "san": "Ne5",
@@ -1886,23 +1993,28 @@
         },
         {
           "san": "Bh5",
-          "annotation": "Bh5 improves the bishop's placement. The bishop was less effective on f7 and moves to h5 where it serves the plan better."
+          "annotation": "Bh5 improves the bishop's placement. The bishop was less effective on f7 and moves to h5 where it serves the plan better.",
+          "shortNarration": "Bh5 improves the bishop's placement, aiming at the kingside."
         },
         {
           "san": "g6",
-          "annotation": "g6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "g6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "g6 gains kingside space to support a future attack toward the enemy king."
         },
         {
           "san": "Ne2",
-          "annotation": "Ne2 improves the knight's placement. The knight was less effective on c3 and moves to e2 where it serves the plan better."
+          "annotation": "Ne2 improves the knight's placement. The knight was less effective on c3 and moves to e2 where it serves the plan better.",
+          "shortNarration": "Ne2 improves the knight from c3 to e2 for better support of the kingside attack."
         },
         {
           "san": "Kg7",
-          "annotation": "Kg7 improves the king's placement. The king was less effective on f8 and moves to g7 where it serves the plan better."
+          "annotation": "Kg7 improves the king's placement. The king was less effective on f8 and moves to g7 where it serves the plan better.",
+          "shortNarration": "Kg7 improves the king's placement, moving from f8 to g7 for better support."
         },
         {
           "san": "f4",
-          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f4 gains kingside space and supports a future attack toward the enemy king."
         },
         {
           "san": "Nc6",
@@ -1924,7 +2036,8 @@
               "to": "f5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "f5 gains kingside space and supports a future attack toward the enemy king."
         },
         {
           "san": "Nf6",
@@ -1935,7 +2048,8 @@
               "to": "f6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nf6 — typical Scotch Gambit Dubois-Reti; key plans are piece placement, pawn breaks, and targets."
         }
       ]
     },
@@ -1945,11 +2059,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Scotch Gambit: Haxo Gambit with c3 is an important variation of the Scotch Gambit. The Haxo Gambit sacrifices the c3 pawn against Black's Bc5. The stunning Bxf7+ followed by Qd5+ recovers the piece and wins the dark-squared bishop. White ends up with superior development and Black's king has lost castling rights. A devastating surprise weapon. Let's walk through the key ideas."
+          "annotation": "The Scotch Gambit: Haxo Gambit with c3 is an important variation of the Scotch Gambit. The Haxo Gambit sacrifices the c3 pawn against Black's Bc5. The stunning Bxf7+ followed by Qd5+ recovers the piece and wins the dark-squared bishop. White ends up with superior development and Black's king has lost castling rights. A devastating surprise weapon. Let's walk through the key ideas.",
+          "shortNarration": "Bxf7+ then Qd5+ recovers the piece, wins Black's dark-squared bishop, and leaves Black's king exposed without castling rights."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Scotch Gambit: Haxo Gambit with c3."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Scotch Gambit: Haxo Gambit with c3.",
+          "shortNarration": "Black's e5 contests the center, entering the Haxo Gambit with c3."
         },
         {
           "san": "Nf3",
@@ -1961,7 +2077,8 @@
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -1972,7 +2089,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Bc4",
@@ -1995,7 +2113,8 @@
               "to": "c3",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc3 captures the pawn, changing the material balance and pawn structure."
         },
         {
           "san": "Bxf7+",
@@ -2006,7 +2125,8 @@
               "to": "f7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxf7+ wins a pawn and alters the pawn structure."
         },
         {
           "san": "Kxf7",
@@ -2017,7 +2137,8 @@
               "to": "f7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Kxf7 wins a bishop, altering the pawn structure or material balance."
         },
         {
           "san": "Qd5+",
@@ -2028,11 +2149,13 @@
               "to": "d5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qd5+ develops the queen to a strong central post, controlling key squares and supporting the center."
         },
         {
           "san": "Ke8",
-          "annotation": "Ke8 improves the king's placement. The king was less effective on f7 and moves to e8 where it serves the plan better."
+          "annotation": "Ke8 improves the king's placement. The king was less effective on f7 and moves to e8 where it serves the plan better.",
+          "shortNarration": "Ke8 improves the king's placement, moving from f7 to e8 for better coordination."
         },
         {
           "san": "Qxc5",
@@ -2043,7 +2166,8 @@
               "to": "c5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxc5 wins a bishop, shifting the material balance in White's favor."
         },
         {
           "san": "d6",
@@ -2058,7 +2182,8 @@
               "to": "c3",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxc3 captures the pawn, changing the material balance or pawn structure."
         },
         {
           "san": "Nf6",
@@ -2081,7 +2206,8 @@
               "to": "c6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxc6+ wins a knight, shifting the material balance in White's favor."
         },
         {
           "san": "bxc6",
@@ -2092,11 +2218,13 @@
               "to": "c6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "bxc6 captures the queen, winning material and restructuring Black's pawns."
         },
         {
           "san": "e5",
-          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "dxe5",
@@ -2107,7 +2235,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Nxe5",
@@ -2118,7 +2247,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance and pawn structure."
         },
         {
           "san": "Bxa2",
@@ -2129,7 +2259,8 @@
               "to": "a2",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxa2 wins a pawn, altering the material balance and pawn structure."
         },
         {
           "san": "Nxc6",
@@ -2140,7 +2271,8 @@
               "to": "c6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxc6 captures the pawn, reconfiguring the pawn structure and gaining material in the critical position."
         },
         {
           "san": "Bxb1",
@@ -2151,7 +2283,8 @@
               "to": "b1",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb1 captures the knight, defining the pawn structure and piece activity in the Haxo Gambit."
         },
         {
           "san": "Re1+",
@@ -2172,7 +2305,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Scotch Gambit, the Pin Trap After e5 is a tactical pattern you should know. After 5...Ne4, White plays the strong Bd5 hitting the knight. If Black stumbles into Ne6 Nxe6, the Bxc6 recapture followed by Qh5+ starts a devastating king hunt. After Ke7, Qf7+ and Bg5+ lead to a discovered attack winning material. Let's walk through how it works."
+          "annotation": "In the Scotch Gambit, the Pin Trap After e5 is a tactical pattern you should know. After 5...Ne4, White plays the strong Bd5 hitting the knight. If Black stumbles into Ne6 Nxe6, the Bxc6 recapture followed by Qh5+ starts a devastating king hunt. After Ke7, Qf7+ and Bg5+ lead to a discovered attack winning material. Let's walk through how it works.",
+          "shortNarration": "After 5...Ne4, Bd5 threatens Ne6; if Black plays Ne6, Nxe6 Bxc6 Qh5+ Ke7 Qf7+ Bg5+ wins material."
         },
         {
           "san": "e5",
@@ -2320,7 +2454,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Scotch Gambit, the Qh4+ Scholar's Mate Trick is a tactical pattern you should know. After 4...Bc5, the sneaky Ng5 targets f7 directly. If Black plays Nh6 to defend, Nxf7 Nxf7 Bxf7+ Kxf7 Qh5+ wins the bishop back with tempo and leaves Black's king exposed. The h5 check creates a permanent problem for Black's king safety. Let's walk through how it works."
+          "annotation": "In the Scotch Gambit, the Qh4+ Scholar's Mate Trick is a tactical pattern you should know. After 4...Bc5, the sneaky Ng5 targets f7 directly. If Black plays Nh6 to defend, Nxf7 Nxf7 Bxf7+ Kxf7 Qh5+ wins the bishop back with tempo and leaves Black's king exposed. The h5 check creates a permanent problem for Black's king safety. Let's walk through how it works.",
+          "shortNarration": "After 4...Bc5, Ng5 threatens f7; if Nh6 defends, Nxf7 Nxf7 Bxf7+ Kxf7 Qh5+ wins the bishop back and leaves Black's king exposed."
         },
         {
           "san": "e5",
@@ -2455,7 +2590,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Scotch Gambit, the d3 Pawn Grab Trap is a tactical pattern you should know. When Black plays Nd7 instead of the more common Ne4, White can recover the pawn cleanly while maintaining pressure. After O-O and Re1+, the e-file pin is annoying for Black. Nc3 and Bg5 complete the development with threats against Black's slightly weakened kingside. Let's walk through how it works."
+          "annotation": "In the Scotch Gambit, the d3 Pawn Grab Trap is a tactical pattern you should know. When Black plays Nd7 instead of the more common Ne4, White can recover the pawn cleanly while maintaining pressure. After O-O and Re1+, the e-file pin is annoying for Black. Nc3 and Bg5 complete the development with threats against Black's slightly weakened kingside. Let's walk through how it works.",
+          "shortNarration": "In the Scotch Gambit, after O-O and Re1+, the e-file pin lets White recover the pawn with Nc3 and Bg5 targeting Black's weakened kingside."
         },
         {
           "san": "e5",
@@ -2591,7 +2727,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Scotch Gambit, the Bc5 Fork on d4 is a tactical pattern you should know. After 4...Bc5 5.c3, the Bb4+ check disrupts White's smooth development. If White plays Bd2, the doubled pawns after Bxd2+ create structural weaknesses. Black's d5 break equalizes the center, and the resulting position offers Black comfortable play with active piece placement. Let's walk through how it works."
+          "annotation": "In the Scotch Gambit, the Bc5 Fork on d4 is a tactical pattern you should know. After 4...Bc5 5.c3, the Bb4+ check disrupts White's smooth development. If White plays Bd2, the doubled pawns after Bxd2+ create structural weaknesses. Black's d5 break equalizes the center, and the resulting position offers Black comfortable play with active piece placement. Let's walk through how it works.",
+          "shortNarration": "In the Scotch Gambit, Black's Bb4+ check forces doubled pawns after Bxd2+, then d5 equalizes with active piece play."
         },
         {
           "san": "e5",
@@ -2752,7 +2889,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Scotch Gambit, the Black Equalizes with Precise d5 and Ne4 is a dangerous line you must be aware of. If Black plays the precise d5 followed by Ne4, Bc5, and Qh4, the position becomes very sharp but Black has excellent counterplay. The queen on h4 creates real threats and the centralized pawn on e4 is a powerful piece. White needs to play very accurately to maintain even a small edge. Let's see why."
+          "annotation": "In the Scotch Gambit, the Black Equalizes with Precise d5 and Ne4 is a dangerous line you must be aware of. If Black plays the precise d5 followed by Ne4, Bc5, and Qh4, the position becomes very sharp but Black has excellent counterplay. The queen on h4 creates real threats and the centralized pawn on e4 is a powerful piece. White needs to play very accurately to maintain even a small edge. Let's see why.",
+          "shortNarration": "In the Scotch Gambit, Black equalizes with d5 and Ne4, creating sharp counterplay with Qh4 and a powerful e4 pawn."
         },
         {
           "san": "e5",
@@ -2779,7 +2917,8 @@
               "to": "d4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 opens the center — now both sides must watch for tactics."
         },
         {
           "san": "Bc4",
@@ -2807,7 +2946,8 @@
         },
         {
           "san": "Nxd4",
-          "annotation": "Nxd4 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxd4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxd4 changes the position — the knight captures on d4, altering the center structure."
         },
         {
           "san": "Bc5",
@@ -2815,7 +2955,8 @@
         },
         {
           "san": "Nxc6",
-          "annotation": "Nxc6 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxc6 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxc6 changes the position — Black's knight is gone, White's knight now sits on c6."
         },
         {
           "san": "bxc6",
@@ -2826,7 +2967,8 @@
               "to": "c6",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "bxc6 opens the b-file and changes the pawn structure."
         },
         {
           "san": "Bd3",
@@ -2905,7 +3047,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Scotch Gambit, the Max Lange Attack: Black Knows Theory is a dangerous line you must be aware of. In the Max Lange Attack, well-prepared Black players know the d5 and Rg8 defense. The rook on g8 recaptures the g7 pawn and the position becomes a double-edged battle. One wrong move from either side is fatal — this is why deep preparation is essential before entering these lines. Let's see why."
+          "annotation": "In the Scotch Gambit, the Max Lange Attack: Black Knows Theory is a dangerous line you must be aware of. In the Max Lange Attack, well-prepared Black players know the d5 and Rg8 defense. The rook on g8 recaptures the g7 pawn and the position becomes a double-edged battle. One wrong move from either side is fatal — this is why deep preparation is essential before entering these lines. Let's see why.",
+          "shortNarration": "In the Max Lange Attack, Black's d5 and Rg8 defense recaptures g7, creating a double-edged battle where one wrong move is fatal."
         },
         {
           "san": "e5",
@@ -2932,7 +3075,8 @@
               "to": "d4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 opens the center — now both sides' pieces come alive."
         },
         {
           "san": "Bc4",
@@ -2967,7 +3111,8 @@
               "to": "f6",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exf6 opens the e-file and changes the pawn structure."
         },
         {
           "san": "dxc4",
@@ -2978,7 +3123,8 @@
               "to": "c4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc4 changes the position — the d-file opens, and the c4-pawn hangs."
         },
         {
           "san": "fxg7",
@@ -2989,7 +3135,8 @@
               "to": "g7",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "fxg7 opens the h-file and threatens a rook lift to h3 for mate."
         },
         {
           "san": "Rg8",
@@ -3025,15 +3172,18 @@
         },
         {
           "san": "Qxe4",
-          "annotation": "Qxe4 — this capture changes the character of the position. Be alert."
+          "annotation": "Qxe4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxe4 changes the position — the queen now targets the kingside."
         },
         {
           "san": "Nxd4",
-          "annotation": "Nxd4 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxd4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxd4 changes the position — White recaptures with the queen, threatening mate on f7."
         },
         {
           "san": "Qxg2+",
-          "annotation": "Qxg2+ — this capture changes the character of the position. Be alert."
+          "annotation": "Qxg2+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxg2+ wins the pawn and forces the king to move."
         },
         {
           "san": "Kxg2",
@@ -3044,15 +3194,18 @@
               "to": "g2",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Kxg2 changes the position — the king is now exposed on g2, and Black's queen can check on h4."
         },
         {
           "san": "Nxd4",
-          "annotation": "Nxd4 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxd4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxd4 changes the position — the knight captures on d4, altering the tactical balance."
         },
         {
           "san": "Rxe6+",
-          "annotation": "Rxe6+ — this capture changes the character of the position. Be alert."
+          "annotation": "Rxe6+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Rxe6+ sacrifices the rook to open the king's cover."
         },
         {
           "san": "fxe6",
@@ -3081,7 +3234,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Scotch Gambit, the 4...Bb4+ System Equalizes is a dangerous line you must be aware of. The Bb4+ check gives Black an easy way to equalize by disrupting White's center. After c3 dxc3 bxc3, White has an open b-file but doubled c-pawns. Black develops naturally with d5 and Nf6, and the position becomes roughly equal. This is the most solid approach for Black. Let's see why."
+          "annotation": "In the Scotch Gambit, the 4...Bb4+ System Equalizes is a dangerous line you must be aware of. The Bb4+ check gives Black an easy way to equalize by disrupting White's center. After c3 dxc3 bxc3, White has an open b-file but doubled c-pawns. Black develops naturally with d5 and Nf6, and the position becomes roughly equal. This is the most solid approach for Black. Let's see why.",
+          "shortNarration": "In the Scotch Gambit, 4...Bb4+ forces c3 dxc3 bxc3, giving White doubled c-pawns and Black easy equality with d5 and Nf6."
         },
         {
           "san": "e5",
@@ -3108,7 +3262,8 @@
               "to": "d4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 opens the center — whoever activates first gains the initiative."
         },
         {
           "san": "Bc4",
@@ -3131,7 +3286,8 @@
               "to": "c3",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc3 changes the position — White's pawn structure is now doubled on the c-file."
         },
         {
           "san": "bxc3",
@@ -3142,7 +3298,8 @@
               "to": "c3",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "bxc3 opens the b-file and weakens White's queenside pawn structure."
         },
         {
           "san": "Ba5",
@@ -3165,11 +3322,13 @@
               "to": "d6",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd6 opens the e-file and changes the pawn structure."
         },
         {
           "san": "Qxd6",
-          "annotation": "Qxd6 — this capture changes the character of the position. Be alert."
+          "annotation": "Qxd6 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxd6 wins a pawn but opens the d-file for Black's rook."
         },
         {
           "san": "O-O",
@@ -3189,15 +3348,18 @@
         },
         {
           "san": "Bxf7+",
-          "annotation": "Bxf7+ — this capture changes the character of the position. Be alert."
+          "annotation": "Bxf7+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf7+ sacrifices a bishop to expose the king and open lines for the attack."
         },
         {
           "san": "Rxf7",
-          "annotation": "Rxf7 — this capture changes the character of the position. Be alert."
+          "annotation": "Rxf7 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Rxf7 sacrifices a rook for a pawn, ripping open Black's king shelter."
         },
         {
           "san": "Qxf7+",
-          "annotation": "Qxf7+ — this capture changes the character of the position. Be alert."
+          "annotation": "Qxf7+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxf7+ wins a pawn and exposes Black's king."
         },
         {
           "san": "Kxf7",
@@ -3208,7 +3370,8 @@
               "to": "f7",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Kxf7 changes the position — White sacrifices a knight to open the king."
         },
         {
           "san": "Ne5+",
@@ -3216,7 +3379,8 @@
         },
         {
           "san": "Nxe5",
-          "annotation": "Nxe5 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 wins a pawn but leaves the knight hanging to ...Qh4+ if f3 is undefended."
         },
         {
           "san": "Be3",

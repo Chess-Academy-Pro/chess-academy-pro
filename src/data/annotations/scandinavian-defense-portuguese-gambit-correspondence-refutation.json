@@ -3,39 +3,48 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn advance, claiming central space and freeing both our light-squared bishop and queen for future development. This move controls the crucial d5 and f5 squares, preventing Black from easily establishing pieces there. The move 1.e4 leads to sharp, tactical games and is a favorite among players who enjoy direct attacking chances. Our plan is to develop quickly and maintain central control while looking for opportunities to launch a kingside attack."
+      "annotation": "We're opening with the king's pawn advance, claiming central space and freeing both our light-squared bishop and queen for future development. This move controls the crucial d5 and f5 squares, preventing Black from easily establishing pieces there. The move 1.e4 leads to sharp, tactical games and is a favorite among players who enjoy direct attacking chances. Our plan is to develop quickly and maintain central control while looking for opportunities to launch a kingside attack.",
+      "shortNarration": "1.e4 claims the center, opens lines for the queen and bishop, and controls d5 and f5 for a kingside attack."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately strikes back at our central pawn with the Scandinavian Defense, one of the most direct responses to 1.e4. Our opponent is willing to sacrifice the center temporarily to disrupt our pawn structure and gain quick piece development. This move forces us to make an immediate decision about the central tension. The Scandinavian leads to unbalanced positions where Black often gets active piece play in exchange for giving up the center early."
+      "annotation": "Black immediately strikes back at our central pawn with the Scandinavian Defense, one of the most direct responses to 1.e4. Our opponent is willing to sacrifice the center temporarily to disrupt our pawn structure and gain quick piece development. This move forces us to make an immediate decision about the central tension. The Scandinavian leads to unbalanced positions where Black often gets active piece play in exchange for giving up the center early.",
+      "shortNarration": "Black's Scandinavian Defense strikes at e4, sacrificing the center for quick piece development and unbalanced play."
     },
     {
       "san": "exd5",
-      "annotation": "We're capturing the pawn to maintain our material balance and open the e-file for potential future use. This exchange gives us a central pawn majority and forces Black to recapture, likely with the queen or knight. By taking on d5, we're following classical opening principles of maintaining material equality while keeping central control. Our pawn on d5 also cramps Black's position slightly and gives us space to develop our pieces actively."
+      "annotation": "We're capturing the pawn to maintain our material balance and open the e-file for potential future use. This exchange gives us a central pawn majority and forces Black to recapture, likely with the queen or knight. By taking on d5, we're following classical opening principles of maintaining material equality while keeping central control. Our pawn on d5 also cramps Black's position slightly and gives us space to develop our pieces actively.",
+      "shortNarration": "Capturing on d5 maintains material equality, opens the e-file, gives a central pawn majority, and cramps Black's position."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the knight with a direct attack on our advanced d5 pawn, following the modern approach to the Scandinavian Defense. This move is more principled than the immediate 2...Qxd5, as it develops a piece while creating pressure rather than bringing the queen out early. Our opponent is preparing to recapture on d5 with the knight, which would give excellent central control. We now need to decide how to support our d5 pawn or whether to allow the recapture."
+      "annotation": "Black develops the knight with a direct attack on our advanced d5 pawn, following the modern approach to the Scandinavian Defense. This move is more principled than the immediate 2...Qxd5, as it develops a piece while creating pressure rather than bringing the queen out early. Our opponent is preparing to recapture on d5 with the knight, which would give excellent central control. We now need to decide how to support our d5 pawn or whether to allow the recapture.",
+      "shortNarration": "Black's knight attacks d5, threatening to recapture with the knight for central control — support or allow the trade."
     },
     {
       "san": "d4",
-      "annotation": "We're reinforcing our center with another pawn move, creating a strong pawn duo on d4 and d5 that controls key central squares. This move prevents Black from immediately recapturing on d5 with the knight, as we'd simply recapture with our d-pawn. Our pawn chain now controls the important e5 and c5 squares, limiting Black's piece placement options. However, we must be aware that this pawn structure can become a target if Black can organize pressure against it."
+      "annotation": "We're reinforcing our center with another pawn move, creating a strong pawn duo on d4 and d5 that controls key central squares. This move prevents Black from immediately recapturing on d5 with the knight, as we'd simply recapture with our d-pawn. Our pawn chain now controls the important e5 and c5 squares, limiting Black's piece placement options. However, we must be aware that this pawn structure can become a target if Black can organize pressure against it.",
+      "shortNarration": "d5 reinforces the center, creating a pawn duo that controls e5 and c5 but risks becoming a target under pressure."
     },
     {
       "san": "Bg4",
-      "annotation": "Black develops the light-squared bishop actively, pinning our f3-knight (once we play Nf3) or preparing to trade off our important defensive pieces. This move is part of the Portuguese Gambit system where Black seeks rapid piece development and tactical complications. Our opponent is creating immediate threats and making our development more difficult by controlling key squares. The bishop on g4 also prepares potential tactical shots involving discoveries or pins against our king."
+      "annotation": "Black develops the light-squared bishop actively, pinning our f3-knight (once we play Nf3) or preparing to trade off our important defensive pieces. This move is part of the Portuguese Gambit system where Black seeks rapid piece development and tactical complications. Our opponent is creating immediate threats and making our development more difficult by controlling key squares. The bishop on g4 also prepares potential tactical shots involving discoveries or pins against our king.",
+      "shortNarration": "Black's bishop pins the f3-knight, threatening trades and tactical shots on the kingside."
     },
     {
       "san": "f3",
-      "annotation": "We're playing this aggressive pawn advance to kick Black's annoying bishop from g4 and prepare to support our center with moves like Bf4 or c4. This move also opens the f1-a6 diagonal for our light-squared bishop and creates potential for a later kingside pawn storm with g4-g5. However, f3 does weaken our kingside, particularly the e3 and g3 squares around our king. We're accepting some positional risk to gain piece activity and maintain our central space advantage."
+      "annotation": "We're playing this aggressive pawn advance to kick Black's annoying bishop from g4 and prepare to support our center with moves like Bf4 or c4. This move also opens the f1-a6 diagonal for our light-squared bishop and creates potential for a later kingside pawn storm with g4-g5. However, f3 does weaken our kingside, particularly the e3 and g3 squares around our king. We're accepting some positional risk to gain piece activity and maintain our central space advantage.",
+      "shortNarration": "f3 kicks the bishop from g4, opens the f1-a6 diagonal, and supports a center push, but weakens e3 and g3 around the king."
     },
     {
       "san": "Bf5",
-      "annotation": "Black retreats the bishop to f5, maintaining the piece's activity while avoiding our pawn advance. From f5, the bishop still influences the center and keeps pressure on our position while preparing to potentially support Black's own central advances. Our opponent is following the Portuguese Gambit's philosophy of quick development and maintaining piece activity even when retreating. The bishop on f5 also guards against our potential e4-e5 advance and prepares to coordinate with other pieces for counterplay."
+      "annotation": "Black retreats the bishop to f5, maintaining the piece's activity while avoiding our pawn advance. From f5, the bishop still influences the center and keeps pressure on our position while preparing to potentially support Black's own central advances. Our opponent is following the Portuguese Gambit's philosophy of quick development and maintaining piece activity even when retreating. The bishop on f5 also guards against our potential e4-e5 advance and prepares to coordinate with other pieces for counterplay.",
+      "shortNarration": "Black's bishop retreats to f5, keeping pressure on the center and preparing to support Black's own central advances."
     },
     {
       "san": "g4",
-      "annotation": "We're launching an aggressive pawn storm to drive Black's bishop further back and gain space on the kingside for a potential attack. This move, known as the Correspondence Refutation, aims to prove that Black's gambit approach is unsound with precise play. By advancing g4, we're also preparing to follow up with h3-h4-h5, creating dangerous attacking chances against Black's king. However, this aggressive approach requires accurate calculation, as our own king safety becomes compromised and we must convert our initiative quickly before Black's active pieces create counterplay."
+      "annotation": "We're launching an aggressive pawn storm to drive Black's bishop further back and gain space on the kingside for a potential attack. This move, known as the Correspondence Refutation, aims to prove that Black's gambit approach is unsound with precise play. By advancing g4, we're also preparing to follow up with h3-h4-h5, creating dangerous attacking chances against Black's king. However, this aggressive approach requires accurate calculation, as our own king safety becomes compromised and we must convert our initiative quickly before Black's active pieces create counterplay.",
+      "shortNarration": "g4 launches a pawn storm to drive back Black's bishop and open lines for attack, but White's king safety is compromised and must convert quickly before Black's counterplay."
     }
   ]
 }

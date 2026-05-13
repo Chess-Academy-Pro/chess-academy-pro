@@ -3,79 +3,98 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, staking our claim to the center and preparing to build a strong pawn structure. This move controls the important e5 and c5 squares, preventing Black from establishing pieces there immediately. The d4 move is the foundation of many strategic openings where we aim for solid development and gradual positional pressure. It also opens lines for our dark-squared bishop and queen, giving us flexible development options."
+      "annotation": "We're opening with the queen's pawn, staking our claim to the center and preparing to build a strong pawn structure. This move controls the important e5 and c5 squares, preventing Black from establishing pieces there immediately. The d4 move is the foundation of many strategic openings where we aim for solid development and gradual positional pressure. It also opens lines for our dark-squared bishop and queen, giving us flexible development options.",
+      "shortNarration": "d4 controls e5 and c5, opens lines for the queen and dark-squared bishop, and builds a solid pawn center."
     },
     {
       "san": "d5",
-      "annotation": "Black responds symmetrically in the center, directly challenging our d4 pawn and establishing their own central presence. This move prevents us from advancing e2-e4 and creates immediate tension in the heart of the board. Black is signaling their intention to fight for central control rather than allowing us free development. The d5 pawn also prepares Black's pieces for active development, particularly supporting a future ...Nf6 and potential ...c6 pawn chain."
+      "annotation": "Black responds symmetrically in the center, directly challenging our d4 pawn and establishing their own central presence. This move prevents us from advancing e2-e4 and creates immediate tension in the heart of the board. Black is signaling their intention to fight for central control rather than allowing us free development. The d5 pawn also prepares Black's pieces for active development, particularly supporting a future ...Nf6 and potential ...c6 pawn chain.",
+      "shortNarration": "Black's d5 challenges the center, blocks e4, and prepares ...Nf6 and ...c6."
     },
     {
       "san": "c4",
-      "annotation": "We strike at Black's central pawn with the Queen's Gambit, one of the most principled ways to handle the d4-d5 pawn structure. This move attacks the d5 pawn and offers to trade our c-pawn for Black's central d-pawn, which would give us a central majority. Even if Black doesn't capture, we've created tension that will influence both sides' development plans. The c4 move also opens the long diagonal for our queen and prepares potential queenside expansion."
+      "annotation": "We strike at Black's central pawn with the Queen's Gambit, one of the most principled ways to handle the d4-d5 pawn structure. This move attacks the d5 pawn and offers to trade our c-pawn for Black's central d-pawn, which would give us a central majority. Even if Black doesn't capture, we've created tension that will influence both sides' development plans. The c4 move also opens the long diagonal for our queen and prepares potential queenside expansion.",
+      "shortNarration": "Queen's Gambit strikes d5, offering a c-pawn trade for central majority and opening the long diagonal for the queen."
     },
     {
       "san": "c6",
-      "annotation": "Black declines the Queen's Gambit and instead supports the d5 pawn with this stabilizing move, entering the Slav Defense family. This approach maintains Black's central pawn and prepares to develop the light-squared bishop to f5 or g4 before playing ...e6. The c6 move also controls the important b5 and d5 squares, preventing our pieces from infiltrating there. Black is choosing a solid, somewhat passive setup that aims for gradual equality rather than immediate counterplay."
+      "annotation": "Black declines the Queen's Gambit and instead supports the d5 pawn with this stabilizing move, entering the Slav Defense family. This approach maintains Black's central pawn and prepares to develop the light-squared bishop to f5 or g4 before playing ...e6. The c6 move also controls the important b5 and d5 squares, preventing our pieces from infiltrating there. Black is choosing a solid, somewhat passive setup that aims for gradual equality rather than immediate counterplay.",
+      "shortNarration": "Black declines the Queen's Gambit with c6, entering the Slav Defense to support d5 and develop the light-squared bishop before e6."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our knight to its ideal square, adding pressure to Black's d5 pawn and supporting our central presence. This piece placement is almost automatic in Queen's Gambit structures, as the knight eyes several important central squares including e4 and b5. The Nc3 also prepares potential tactics involving a future e3-e4 pawn break or supports queenside operations. From c3, our knight maintains flexibility and can later consider jumps to e4, a4, or b5 depending on how the position develops."
+      "annotation": "We develop our knight to its ideal square, adding pressure to Black's d5 pawn and supporting our central presence. This piece placement is almost automatic in Queen's Gambit structures, as the knight eyes several important central squares including e4 and b5. The Nc3 also prepares potential tactics involving a future e3-e4 pawn break or supports queenside operations. From c3, our knight maintains flexibility and can later consider jumps to e4, a4, or b5 depending on how the position develops.",
+      "shortNarration": "Nc3 develops to an ideal square, pressuring d5 and supporting a future e4 break."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops their kingside knight to its most active square, defending the d5 pawn and preparing kingside castling. This active move also attacks our potential e4 advance and gives Black's position more solidity. The Nf6 knight will often be a key defender in Black's setup, and it can later support central breaks like ...e5 or ...c5. Black is following classical development principles while maintaining their solid pawn structure."
+      "annotation": "Black develops their kingside knight to its most active square, defending the d5 pawn and preparing kingside castling. This active move also attacks our potential e4 advance and gives Black's position more solidity. The Nf6 knight will often be a key defender in Black's setup, and it can later support central breaks like ...e5 or ...c5. Black is following classical development principles while maintaining their solid pawn structure.",
+      "shortNarration": "Nf6 defends d5, attacks e4, and prepares kingside castling."
     },
     {
       "san": "e3",
-      "annotation": "We choose the solid approach with e3, supporting the d4 pawn and preparing to develop our light-squared bishop to d3 or e2. This move creates a solid pawn triangle (c4-d4-e3) that gives us excellent central control, though it does limit our dark-squared bishop's scope. The e3 move is characteristic of the Semi-Slav structure, where we prioritize piece coordination over immediate tactical complications. We're setting up for a gradual positional build-up rather than sharp tactical play."
+      "annotation": "We choose the solid approach with e3, supporting the d4 pawn and preparing to develop our light-squared bishop to d3 or e2. This move creates a solid pawn triangle (c4-d4-e3) that gives us excellent central control, though it does limit our dark-squared bishop's scope. The e3 move is characteristic of the Semi-Slav structure, where we prioritize piece coordination over immediate tactical complications. We're setting up for a gradual positional build-up rather than sharp tactical play.",
+      "shortNarration": "e3 solidifies the pawn triangle on c4-d4-e3, limiting the dark-squared bishop but prioritizing piece coordination over sharp tactics."
     },
     {
       "san": "e6",
-      "annotation": "Black plays the defining move of the Semi-Slav Defense, supporting the d5 pawn while preparing to develop the dark-squared bishop. However, this move also blocks in the light-squared bishop on c8, which becomes one of Black's main strategic challenges in this opening. The pawn structure c6-d5-e6 gives Black a solid but somewhat passive setup that requires careful piece coordination. Black is accepting a slight space disadvantage in exchange for a very solid position with no weaknesses."
+      "annotation": "Black plays the defining move of the Semi-Slav Defense, supporting the d5 pawn while preparing to develop the dark-squared bishop. However, this move also blocks in the light-squared bishop on c8, which becomes one of Black's main strategic challenges in this opening. The pawn structure c6-d5-e6 gives Black a solid but somewhat passive setup that requires careful piece coordination. Black is accepting a slight space disadvantage in exchange for a very solid position with no weaknesses.",
+      "shortNarration": "Black's c6-d5-e6 pawn chain supports d5 and blocks the c8 bishop, accepting a solid but passive setup with a slight space disadvantage."
     },
     {
       "san": "Nf3",
-      "annotation": "We complete our basic development with this natural knight move, controlling the important e5 and h4 squares while preparing kingside castling. The Nf3 knight works harmoniously with our central pawns and can support various plans including a future e3-e4 advance or kingside attack. This piece placement is standard in almost all Queen's Gambit systems because it provides such excellent central control. The knight also defends our king position and maintains maximum flexibility for future operations."
+      "annotation": "We complete our basic development with this natural knight move, controlling the important e5 and h4 squares while preparing kingside castling. The Nf3 knight works harmoniously with our central pawns and can support various plans including a future e3-e4 advance or kingside attack. This piece placement is standard in almost all Queen's Gambit systems because it provides such excellent central control. The knight also defends our king position and maintains maximum flexibility for future operations.",
+      "shortNarration": "Nf3 controls e5 and h4, prepares kingside castling, and supports a future e4 push."
     },
     {
       "san": "Nbd7",
-      "annotation": "Black develops their second knight to d7, a somewhat passive but solid square that supports the center and prepares various regrouping ideas. From d7, the knight can later jump to f8 to defend the kingside, or to b6 to eye the c4 pawn and support queenside play. This development avoids blocking the c-pawn and maintains Black's solid structure, though it doesn't immediately solve the problem of the trapped light-squared bishop. The Nbd7 is typical of Semi-Slav setups where Black accepts temporary passivity for long-term solidity."
+      "annotation": "Black develops their second knight to d7, a somewhat passive but solid square that supports the center and prepares various regrouping ideas. From d7, the knight can later jump to f8 to defend the kingside, or to b6 to eye the c4 pawn and support queenside play. This development avoids blocking the c-pawn and maintains Black's solid structure, though it doesn't immediately solve the problem of the trapped light-squared bishop. The Nbd7 is typical of Semi-Slav setups where Black accepts temporary passivity for long-term solidity.",
+      "shortNarration": "Nbd7 supports the center and prepares f8 or b6, but leaves the light-squared bishop trapped."
     },
     {
       "san": "Qc2",
-      "annotation": "We centralize our queen on the c-file, eyeing both the c6 pawn and the long diagonal toward Black's king. This move also removes the queen from the d1-h5 diagonal, preventing potential ...Bg4 pins against our knight. The Qc2 supports our c4 pawn and prepares potential tactics along the c-file or queenside operations. Additionally, this queen placement coordinates well with our bishop development to d3, where both pieces will eye Black's kingside."
+      "annotation": "We centralize our queen on the c-file, eyeing both the c6 pawn and the long diagonal toward Black's king. This move also removes the queen from the d1-h5 diagonal, preventing potential ...Bg4 pins against our knight. The Qc2 supports our c4 pawn and prepares potential tactics along the c-file or queenside operations. Additionally, this queen placement coordinates well with our bishop development to d3, where both pieces will eye Black's kingside.",
+      "shortNarration": "Qc2 centralizes the queen, eyes c6 and the long diagonal, avoids ...Bg4 pins, and coordinates with Bd3 against Black's kingside."
     },
     {
       "san": "b6",
-      "annotation": "Black plays a critical move in the Semi-Slav, preparing to fianchetto the problematic light-squared bishop on the long diagonal. This move finally gives Black's c8 bishop a path to activity via a6 or b7, solving one of the main drawbacks of the ...e6 setup. However, b6 does create some weaknesses around the c6 pawn and a6 square that we might exploit later. Black is accepting these minor weaknesses to activate their pieces and create counterplay along the long diagonal."
+      "annotation": "Black plays a critical move in the Semi-Slav, preparing to fianchetto the problematic light-squared bishop on the long diagonal. This move finally gives Black's c8 bishop a path to activity via a6 or b7, solving one of the main drawbacks of the ...e6 setup. However, b6 does create some weaknesses around the c6 pawn and a6 square that we might exploit later. Black is accepting these minor weaknesses to activate their pieces and create counterplay along the long diagonal.",
+      "shortNarration": "Black fianchettoes the c8 bishop via b6, activating it on the long diagonal but weakening c6 and a6."
     },
     {
       "san": "b3",
-      "annotation": "We mirror Black's fianchetto idea, preparing to develop our dark-squared bishop to b2 where it will dominate the long diagonal. This move also supports our c4 pawn and prepares potential queenside expansion with a2-a4-a5. The b3 move fits perfectly with our positional setup, as the Bb2 will complement our central control beautifully. We're building a harmonious piece coordination where all our pieces work together toward central dominance and kingside pressure."
+      "annotation": "We mirror Black's fianchetto idea, preparing to develop our dark-squared bishop to b2 where it will dominate the long diagonal. This move also supports our c4 pawn and prepares potential queenside expansion with a2-a4-a5. The b3 move fits perfectly with our positional setup, as the Bb2 will complement our central control beautifully. We're building a harmonious piece coordination where all our pieces work together toward central dominance and kingside pressure.",
+      "shortNarration": "b3 prepares Bb2 on the long diagonal, supports c4, and sets up queenside expansion with a4-a5."
     },
     {
       "san": "Bb7",
-      "annotation": "Black completes the fianchetto, activating their light-squared bishop on the long diagonal where it eyes our king position. This bishop on b7 is now Black's most active piece, potentially supporting central breaks like ...c5 or ...e5 in the future. The Bb7 also adds pressure to our e4 square, making it harder for us to advance our central pawns. However, Black must be careful that this bishop doesn't become a target for our advancing pawns or tactical shots."
+      "annotation": "Black completes the fianchetto, activating their light-squared bishop on the long diagonal where it eyes our king position. This bishop on b7 is now Black's most active piece, potentially supporting central breaks like ...c5 or ...e5 in the future. The Bb7 also adds pressure to our e4 square, making it harder for us to advance our central pawns. However, Black must be careful that this bishop doesn't become a target for our advancing pawns or tactical shots.",
+      "shortNarration": "Black's fianchettoed bishop on b7 eyes the long diagonal, pressuring e4 and supporting ...c5 or ...e5 breaks."
     },
     {
       "san": "Bd3",
-      "annotation": "We develop our light-squared bishop to an excellent central square, eyeing Black's kingside and particularly the h7 square near their king. This bishop works beautifully with our queen on c2, creating potential tactical themes along the h7-b1 diagonal. The Bd3 also supports a potential e3-e4 advance and maintains excellent piece coordination in our setup. From d3, the bishop can later consider moves like Bh7+ in tactical sequences or simply maintain long-term pressure on Black's position."
+      "annotation": "We develop our light-squared bishop to an excellent central square, eyeing Black's kingside and particularly the h7 square near their king. This bishop works beautifully with our queen on c2, creating potential tactical themes along the h7-b1 diagonal. The Bd3 also supports a potential e3-e4 advance and maintains excellent piece coordination in our setup. From d3, the bishop can later consider moves like Bh7+ in tactical sequences or simply maintain long-term pressure on Black's position.",
+      "shortNarration": "Bd3 eyes h7 and coordinates with the queen on c2 along the h7-b1 diagonal, supporting e4 and tactical Bh7+ ideas."
     },
     {
       "san": "Be7",
-      "annotation": "Black develops their dark-squared bishop to a safe square, preparing kingside castling while maintaining a solid defensive setup. The Be7 defends against our tactical threats along the h7-b1 diagonal and provides additional support to Black's kingside. This move is somewhat passive but very solid, fitting Black's overall strategy of maintaining a compact position without weaknesses. The bishop on e7 can later consider more active squares like d6 or f6 if the position allows."
+      "annotation": "Black develops their dark-squared bishop to a safe square, preparing kingside castling while maintaining a solid defensive setup. The Be7 defends against our tactical threats along the h7-b1 diagonal and provides additional support to Black's kingside. This move is somewhat passive but very solid, fitting Black's overall strategy of maintaining a compact position without weaknesses. The bishop on e7 can later consider more active squares like d6 or f6 if the position allows.",
+      "shortNarration": "Be7 defends the h7-b1 diagonal and prepares kingside castling, keeping Black's position solid and compact."
     },
     {
       "san": "O-O",
-      "annotation": "We complete our kingside development by castling into safety, connecting our rooks and preparing for the middlegame battle. This move also brings our king's rook into play on the f1 square, where it supports potential central advances or kingside operations. Castling kingside is almost mandatory in these positions, as it gets our king away from the center where tactical complications often arise. With our king safe, we can now focus on executing our strategic plans without worrying about king safety."
+      "annotation": "We complete our kingside development by castling into safety, connecting our rooks and preparing for the middlegame battle. This move also brings our king's rook into play on the f1 square, where it supports potential central advances or kingside operations. Castling kingside is almost mandatory in these positions, as it gets our king away from the center where tactical complications often arise. With our king safe, we can now focus on executing our strategic plans without worrying about king safety.",
+      "shortNarration": "Castle kingside to secure the king, connect rooks, and prepare for central or kingside operations."
     },
     {
       "san": "O-O",
-      "annotation": "Black mirrors our castling decision, getting their king to safety and completing basic development. This move connects Black's rooks and prepares them for the complex middlegame ahead, where piece activity and central control will determine the outcome. Black's kingside castling is necessary to avoid tactical problems, though they must remain vigilant about our bishop on d3 and queen on c2 eyeing their kingside. Now both sides have completed their basic development and the real strategic battle begins."
+      "annotation": "Black mirrors our castling decision, getting their king to safety and completing basic development. This move connects Black's rooks and prepares them for the complex middlegame ahead, where piece activity and central control will determine the outcome. Black's kingside castling is necessary to avoid tactical problems, though they must remain vigilant about our bishop on d3 and queen on c2 eyeing their kingside. Now both sides have completed their basic development and the real strategic battle begins.",
+      "shortNarration": "Black castles kingside to connect rooks and avoid tactics, but the d3-bishop and c2-queen still eye the kingside."
     },
     {
       "san": "Bb2",
-      "annotation": "We complete our fianchetto setup, placing our dark-squared bishop on the long diagonal where it becomes a powerful long-range piece. This bishop now exerts pressure toward Black's kingside and supports our central control, particularly by eyeing the e5 and f6 squares. The Bb2 works in perfect harmony with our other pieces, creating a coordinated setup where every piece contributes to our strategic goals. With all our pieces actively placed, we're ready to pursue typical Semi-Slav plans like central expansion with e3-e4 or queenside pressure with a4-a5."
+      "annotation": "We complete our fianchetto setup, placing our dark-squared bishop on the long diagonal where it becomes a powerful long-range piece. This bishop now exerts pressure toward Black's kingside and supports our central control, particularly by eyeing the e5 and f6 squares. The Bb2 works in perfect harmony with our other pieces, creating a coordinated setup where every piece contributes to our strategic goals. With all our pieces actively placed, we're ready to pursue typical Semi-Slav plans like central expansion with e3-e4 or queenside pressure with a4-a5.",
+      "shortNarration": "Bb2 eyes e5 and f6, coordinating with the fianchetto setup for central expansion or queenside pressure."
     }
   ]
 }

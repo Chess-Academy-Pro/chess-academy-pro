@@ -3,23 +3,28 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn two squares forward, immediately claiming control of the central d5 and f5 squares while opening lines for our bishop and queen. This is the most popular first move in chess because it fights for the center right away and develops our pieces with tempo. Our plan is to build a strong pawn center and develop our pieces quickly toward the opponent's king. The move e4 also prepares us to meet various defenses, though we'll need to be ready for both symmetrical responses like e5 and asymmetrical setups like the Caro-Kann that's coming."
+      "annotation": "We're opening with the king's pawn two squares forward, immediately claiming control of the central d5 and f5 squares while opening lines for our bishop and queen. This is the most popular first move in chess because it fights for the center right away and develops our pieces with tempo. Our plan is to build a strong pawn center and develop our pieces quickly toward the opponent's king. The move e4 also prepares us to meet various defenses, though we'll need to be ready for both symmetrical responses like e5 and asymmetrical setups like the Caro-Kann that's coming.",
+      "shortNarration": "1.e4 claims the center, opens lines for the queen and bishop, and prepares to meet e5 or the Caro-Kann."
     },
     {
       "san": "c6",
-      "annotation": "Our opponent chooses the Caro-Kann Defense, a solid and somewhat passive system that aims to undermine our central pawn on e4 with the upcoming d5 advance. This move prepares d5 while avoiding the tactical complications that arise in openings like the Sicilian Defense or King's Indian. Black is signaling a preference for solid, positional play over sharp tactical battles. The Caro-Kann typically leads to slightly cramped but very secure positions for Black, and our opponent is likely hoping to reach an endgame where the solid pawn structure pays dividends."
+      "annotation": "Our opponent chooses the Caro-Kann Defense, a solid and somewhat passive system that aims to undermine our central pawn on e4 with the upcoming d5 advance. This move prepares d5 while avoiding the tactical complications that arise in openings like the Sicilian Defense or King's Indian. Black is signaling a preference for solid, positional play over sharp tactical battles. The Caro-Kann typically leads to slightly cramped but very secure positions for Black, and our opponent is likely hoping to reach an endgame where the solid pawn structure pays dividends.",
+      "shortNarration": "Caro-Kann aims to undermine e4 with d5, leading to solid, slightly cramped but secure positions for Black."
     },
     {
       "san": "Nc3",
-      "annotation": "Continuing Caro Kann Defense Two Knights Attack: Nc3 is a known theory move in this line."
+      "annotation": "Continuing Caro Kann Defense Two Knights Attack: Nc3 is a known theory move in this line.",
+      "shortNarration": "Nc3 is theory in the Caro-Kann Two Knights Attack."
     },
     {
       "san": "d5",
-      "annotation": "Continuing Caro Kann Defense Two Knights Attack: d5 is a known theory move in this line."
+      "annotation": "Continuing Caro Kann Defense Two Knights Attack: d5 is a known theory move in this line.",
+      "shortNarration": "Caro Kann Two Knights Attack: d5 is the theoretical response."
     },
     {
       "san": "Nf3",
-      "annotation": "Continuing Caro Kann Defense Two Knights Attack: Nf3 is a known theory move in this line."
+      "annotation": "Continuing Caro Kann Defense Two Knights Attack: Nf3 is a known theory move in this line.",
+      "shortNarration": "Nf3 develops and supports the e4 pawn in the Caro-Kann Two Knights Attack."
     }
   ]
 }

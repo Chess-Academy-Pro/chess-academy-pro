@@ -3,35 +3,43 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, establishing control over the central e5 square and preparing to develop our pieces harmoniously. This move begins the Colle System, a solid positional opening that aims for a kingside attack while maintaining a strong pawn center. The Colle is perfect for players who want to avoid heavy theory while still reaching rich, attacking middlegame positions. Our plan revolves around building up with moves like Nf3, e3, Bd3, and eventually launching a kingside pawn storm with h4-h5."
+      "annotation": "We're opening with the queen's pawn, establishing control over the central e5 square and preparing to develop our pieces harmoniously. This move begins the Colle System, a solid positional opening that aims for a kingside attack while maintaining a strong pawn center. The Colle is perfect for players who want to avoid heavy theory while still reaching rich, attacking middlegame positions. Our plan revolves around building up with moves like Nf3, e3, Bd3, and eventually launching a kingside pawn storm with h4-h5.",
+      "shortNarration": "1.d4 controls e5 and starts the Colle System, aiming for a kingside attack with Nf3, e3, Bd3, and a pawn storm."
     },
     {
       "san": "g6",
-      "annotation": "Black immediately signals their intention to fianchetto the king's bishop, creating the foundation for the Pterodactyl Defense setup. This hypermodern approach allows Black to control the long diagonal from g7 while keeping central options flexible. The move prepares Bg7, where the bishop will eye our central pawns and potentially support counterplay on the queenside. While this looks passive, the Pterodactyl can lead to sharp tactical positions if we're not careful about our pawn structure."
+      "annotation": "Black immediately signals their intention to fianchetto the king's bishop, creating the foundation for the Pterodactyl Defense setup. This hypermodern approach allows Black to control the long diagonal from g7 while keeping central options flexible. The move prepares Bg7, where the bishop will eye our central pawns and potentially support counterplay on the queenside. While this looks passive, the Pterodactyl can lead to sharp tactical positions if we're not careful about our pawn structure.",
+      "shortNarration": "Black's fianchettoed bishop on g7 eyes the center and queenside, setting up sharp Pterodactyl counterplay."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its ideal square, supporting our central pawn and preparing to castle kingside. This is a critical move in the Colle System, as the knight on f3 not only guards the h2-b8 diagonal but also supports our future e4 pawn break. From f3, the knight eyes the important e5 square and can later jump to g5 or h4 in attacking variations. The knight development also keeps our options open for different pawn structures depending on how Black continues."
+      "annotation": "We develop our knight to its ideal square, supporting our central pawn and preparing to castle kingside. This is a critical move in the Colle System, as the knight on f3 not only guards the h2-b8 diagonal but also supports our future e4 pawn break. From f3, the knight eyes the important e5 square and can later jump to g5 or h4 in attacking variations. The knight development also keeps our options open for different pawn structures depending on how Black continues.",
+      "shortNarration": "Knight to f3 guards the h2-b8 diagonal, supports the e4 break, and eyes e5 for future jumps."
     },
     {
       "san": "Bg7",
-      "annotation": "Black completes their fianchetto setup, placing the bishop on the long diagonal where it exerts pressure on our center and queenside. This bishop becomes a key defensive piece in Black's camp, often supporting the d4 square and preparing potential counterplay with moves like c5. The fianchettoed bishop also provides additional safety for Black's king once it castles. We need to be mindful that this bishop can become very active if we advance our pawns carelessly, particularly if we push e4 without proper preparation."
+      "annotation": "Black completes their fianchetto setup, placing the bishop on the long diagonal where it exerts pressure on our center and queenside. This bishop becomes a key defensive piece in Black's camp, often supporting the d4 square and preparing potential counterplay with moves like c5. The fianchettoed bishop also provides additional safety for Black's king once it castles. We need to be mindful that this bishop can become very active if we advance our pawns carelessly, particularly if we push e4 without proper preparation.",
+      "shortNarration": "Black's fianchettoed bishop pressures the center and queenside, supports d4, and guards the king after castling."
     },
     {
       "san": "e3",
-      "annotation": "We solidify our pawn center and prepare to develop our light-squared bishop to d3, where it will aim at Black's kingside. This modest-looking pawn move is actually the cornerstone of the Colle System, creating a rock-solid pawn triangle (d4-e3-f2) that's difficult for Black to challenge directly. The move also opens the diagonal for our queen and prepares potential pawn breaks like e4 in the middlegame when the time is right. While e3 looks passive, it gives us a stable foundation from which to launch our characteristic kingside attack."
+      "annotation": "We solidify our pawn center and prepare to develop our light-squared bishop to d3, where it will aim at Black's kingside. This modest-looking pawn move is actually the cornerstone of the Colle System, creating a rock-solid pawn triangle (d4-e3-f2) that's difficult for Black to challenge directly. The move also opens the diagonal for our queen and prepares potential pawn breaks like e4 in the middlegame when the time is right. While e3 looks passive, it gives us a stable foundation from which to launch our characteristic kingside attack.",
+      "shortNarration": "e3 solidifies the pawn triangle and prepares the light-squared bishop to d3, aiming at Black's kingside."
     },
     {
       "san": "c5",
-      "annotation": "Black strikes at our pawn center with the typical Pterodactyl counterplay, aiming to challenge our space advantage and create piece activity. This move attacks our d4 pawn and forces us to make a decision about the center, while also preparing to develop Black's queenside pieces. The advance also opens lines for Black's queen and potentially the a8 rook, fitting perfectly with the hypermodern philosophy of controlling the center from the flanks. We must decide whether to maintain the tension, exchange on c5, or advance d5 to gain space."
+      "annotation": "Black strikes at our pawn center with the typical Pterodactyl counterplay, aiming to challenge our space advantage and create piece activity. This move attacks our d4 pawn and forces us to make a decision about the center, while also preparing to develop Black's queenside pieces. The advance also opens lines for Black's queen and potentially the a8 rook, fitting perfectly with the hypermodern philosophy of controlling the center from the flanks. We must decide whether to maintain the tension, exchange on c5, or advance d5 to gain space.",
+      "shortNarration": "Black's c5 strikes at d4, forcing a decision: maintain tension, exchange, or advance d5 to gain space."
     },
     {
       "san": "Bd3",
-      "annotation": "We develop our light-squared bishop to its ideal square in the Colle System, targeting the vulnerable h7 square next to Black's king. This bishop placement is crucial for our attacking ambitions, as it can support a future kingside pawn storm and creates tactical threats along the b1-h7 diagonal. The bishop also eyes the f5 square, potentially restricting Black's piece mobility and supporting our central control. From d3, the bishop coordinates beautifully with our knight on f3 and prepares us for typical Colle attacking themes like Bxg6 sacrifices in the right circumstances."
+      "annotation": "We develop our light-squared bishop to its ideal square in the Colle System, targeting the vulnerable h7 square next to Black's king. This bishop placement is crucial for our attacking ambitions, as it can support a future kingside pawn storm and creates tactical threats along the b1-h7 diagonal. The bishop also eyes the f5 square, potentially restricting Black's piece mobility and supporting our central control. From d3, the bishop coordinates beautifully with our knight on f3 and prepares us for typical Colle attacking themes like Bxg6 sacrifices in the right circumstances.",
+      "shortNarration": "Bishop to d3 targets h7, supports a kingside pawn storm, and coordinates with the knight on f3 for potential Bxg6 sacrifices."
     },
     {
       "san": "Qa5+",
-      "annotation": "Black delivers a check that forces us to deal with this immediate threat while developing their queen to an active square. This move puts pressure on our position and aims to disrupt our smooth development, particularly targeting our potential weakness on the queenside. The queen on a5 eyes our a2 pawn and puts pressure along the a5-d8 diagonal, while the check forces us to either block with our bishop or move our king. We need to handle this check carefully, as responding incorrectly could give Black time to consolidate their position and neutralize our attacking chances in the Colle System."
+      "annotation": "Black delivers a check that forces us to deal with this immediate threat while developing their queen to an active square. This move puts pressure on our position and aims to disrupt our smooth development, particularly targeting our potential weakness on the queenside. The queen on a5 eyes our a2 pawn and puts pressure along the a5-d8 diagonal, while the check forces us to either block with our bishop or move our king. We need to handle this check carefully, as responding incorrectly could give Black time to consolidate their position and neutralize our attacking chances in the Colle System.",
+      "shortNarration": "Queen checks from a5, forcing a block or king move while eyeing a2 and the a5-d8 diagonal."
     }
   ]
 }

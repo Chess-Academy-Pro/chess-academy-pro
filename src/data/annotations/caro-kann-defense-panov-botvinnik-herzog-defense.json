@@ -3,59 +3,73 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, claiming central space and preparing rapid piece development. This move controls the crucial d5 and f5 squares while opening lines for our queen and light-squared bishop. The move 1.e4 leads to sharp, tactical games where both sides fight for the initiative from the very beginning. Our plan is to build a strong pawn center and develop our pieces harmoniously toward the enemy king."
+      "annotation": "We're opening with the king's pawn, claiming central space and preparing rapid piece development. This move controls the crucial d5 and f5 squares while opening lines for our queen and light-squared bishop. The move 1.e4 leads to sharp, tactical games where both sides fight for the initiative from the very beginning. Our plan is to build a strong pawn center and develop our pieces harmoniously toward the enemy king.",
+      "shortNarration": "1.e4 claims the center, opens lines for queen and bishop, and fights for the initiative from the start."
     },
     {
       "san": "c6",
-      "annotation": "Our opponent chooses the Caro-Kann Defense, a solid and reliable opening that immediately prepares ...d5 to challenge our central pawn. This move supports the advance of the d-pawn while keeping the light-squared bishop's diagonal clear for future development. The Caro-Kann is known for leading to structured positions where Black gets a solid pawn structure and good piece coordination. Unlike 1...e5, this approach avoids some of the sharp tactical complications that can arise in the Italian or Spanish games."
+      "annotation": "Our opponent chooses the Caro-Kann Defense, a solid and reliable opening that immediately prepares ...d5 to challenge our central pawn. This move supports the advance of the d-pawn while keeping the light-squared bishop's diagonal clear for future development. The Caro-Kann is known for leading to structured positions where Black gets a solid pawn structure and good piece coordination. Unlike 1...e5, this approach avoids some of the sharp tactical complications that can arise in the Italian or Spanish games.",
+      "shortNarration": "Caro-Kann Defense: Black prepares ...d5 to challenge the center, keeping the light-squared bishop's diagonal open for solid development."
     },
     {
       "san": "d4",
-      "annotation": "We're establishing a classical pawn center with d4, now controlling both the c5 and e5 squares while supporting our e4 pawn. This creates maximum central influence and opens the diagonal for our light-squared bishop. The move also prepares various development schemes, particularly Nc3 and Nf3, while keeping our options flexible. With both central pawns advanced, we're setting up potential space advantages and piece activity in the middlegame."
+      "annotation": "We're establishing a classical pawn center with d4, now controlling both the c5 and e5 squares while supporting our e4 pawn. This creates maximum central influence and opens the diagonal for our light-squared bishop. The move also prepares various development schemes, particularly Nc3 and Nf3, while keeping our options flexible. With both central pawns advanced, we're setting up potential space advantages and piece activity in the middlegame.",
+      "shortNarration": "d4 establishes a classical pawn center, controls c5 and e5, opens the bishop's diagonal, and prepares Nc3 and Nf3."
     },
     {
       "san": "d5",
-      "annotation": "Black strikes at our pawn center immediately, challenging the e4 pawn and fighting for equal central control. This move is the thematic continuation of the Caro-Kann, creating immediate tension in the center. Our opponent is following the opening's main idea: to achieve a solid pawn structure while avoiding the cramped positions that can occur in the French Defense. Now we must decide how to resolve the central tension, and our choice will determine the character of the resulting position."
+      "annotation": "Black strikes at our pawn center immediately, challenging the e4 pawn and fighting for equal central control. This move is the thematic continuation of the Caro-Kann, creating immediate tension in the center. Our opponent is following the opening's main idea: to achieve a solid pawn structure while avoiding the cramped positions that can occur in the French Defense. Now we must decide how to resolve the central tension, and our choice will determine the character of the resulting position.",
+      "shortNarration": "Black challenges e4 with the Caro-Kann, creating immediate central tension that will shape the position."
     },
     {
       "san": "exd5",
-      "annotation": "We're capturing toward the center, opening the e-file for potential future use and maintaining our d4 pawn's central influence. This exchange leads to the Panov-Botvinnik Attack, one of the most aggressive systems against the Caro-Kann. By trading pawns, we're accepting a more open position where our pieces can become active quickly. The resulting pawn structure will give us long-term pressure against Black's position, particularly if we can establish a strong pawn center with c4."
+      "annotation": "We're capturing toward the center, opening the e-file for potential future use and maintaining our d4 pawn's central influence. This exchange leads to the Panov-Botvinnik Attack, one of the most aggressive systems against the Caro-Kann. By trading pawns, we're accepting a more open position where our pieces can become active quickly. The resulting pawn structure will give us long-term pressure against Black's position, particularly if we can establish a strong pawn center with c4.",
+      "shortNarration": "Capturing toward the center opens the e-file, keeps d4's influence, and enters the aggressive Panov-Botvinnik Attack with long-term pressure via c4."
     },
     {
       "san": "cxd5",
-      "annotation": "Our opponent recaptures toward the center, maintaining material balance while keeping a pawn on the important d5 square. This move opens the c-file for Black's rook and maintains central influence. Black is following sound opening principles by recapturing with the pawn rather than the queen, avoiding premature queen development. However, this pawn on d5 will soon become a target for our aggressive c4 advance, which is the key idea behind the Panov-Botvinnik Attack."
+      "annotation": "Our opponent recaptures toward the center, maintaining material balance while keeping a pawn on the important d5 square. This move opens the c-file for Black's rook and maintains central influence. Black is following sound opening principles by recapturing with the pawn rather than the queen, avoiding premature queen development. However, this pawn on d5 will soon become a target for our aggressive c4 advance, which is the key idea behind the Panov-Botvinnik Attack.",
+      "shortNarration": "Black recaptures with the pawn toward the center, keeping d5 and opening the c-file, but the d5 pawn becomes a target for White's c4 advance in the Panov-Botvinnik Attack."
     },
     {
       "san": "c4",
-      "annotation": "We're launching the characteristic Panov-Botvinnik Attack by immediately challenging Black's central pawn with c4. This aggressive move puts pressure on the d5 pawn and aims to disrupt Black's solid pawn structure. The advance also opens the c-file and prepares rapid piece development with moves like Nc3 and Nf3. This is the critical moment that defines the Panov-Botvinnik system - we're trading positional solidity for dynamic piece play and attacking chances against the black king."
+      "annotation": "We're launching the characteristic Panov-Botvinnik Attack by immediately challenging Black's central pawn with c4. This aggressive move puts pressure on the d5 pawn and aims to disrupt Black's solid pawn structure. The advance also opens the c-file and prepares rapid piece development with moves like Nc3 and Nf3. This is the critical moment that defines the Panov-Botvinnik system - we're trading positional solidity for dynamic piece play and attacking chances against the black king.",
+      "shortNarration": "c4 launches the Panov-Botvinnik Attack, pressuring d5 and opening the c-file for dynamic play against Black's king."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the knight to its ideal square, attacking our d4 pawn while supporting the central d5 pawn. This move follows excellent opening principles by developing toward the center and creating immediate threats. Our opponent is also preparing to castle kingside and bringing a piece into active play. The knight on f6 will be well-placed to support Black's central defenses and potentially jump to active squares like e4 or g4 in the middlegame."
+      "annotation": "Black develops the knight to its ideal square, attacking our d4 pawn while supporting the central d5 pawn. This move follows excellent opening principles by developing toward the center and creating immediate threats. Our opponent is also preparing to castle kingside and bringing a piece into active play. The knight on f6 will be well-placed to support Black's central defenses and potentially jump to active squares like e4 or g4 in the middlegame.",
+      "shortNarration": "Black's knight to f6 attacks d4, supports d5, and eyes e4 or g4."
     },
     {
       "san": "Nc3",
-      "annotation": "We're developing our queen's knight to its most active square, where it supports the d4 pawn and adds pressure to Black's d5 pawn. This move also prepares various attacking ideas, including potential sacrifices on d5 if Black ever captures on c4. The knight on c3 controls important central squares like e4 and b5, and supports our overall plan of rapid piece mobilization. From c3, the knight can also jump to aggressive squares like e4 or b5 depending on how the position develops."
+      "annotation": "We're developing our queen's knight to its most active square, where it supports the d4 pawn and adds pressure to Black's d5 pawn. This move also prepares various attacking ideas, including potential sacrifices on d5 if Black ever captures on c4. The knight on c3 controls important central squares like e4 and b5, and supports our overall plan of rapid piece mobilization. From c3, the knight can also jump to aggressive squares like e4 or b5 depending on how the position develops.",
+      "shortNarration": "Knight to c3 supports d4, pressures d5, and prepares attacks like a sacrifice on d5 if Black captures on c4."
     },
     {
       "san": "Nc6",
-      "annotation": "Our opponent develops the queenside knight to an active central square, defending the d4 pawn while preparing to contest our control of central squares. This move supports Black's solid defensive setup and prepares to meet our attacking attempts with active piece play. The knight on c6 also eyes important squares like e5 and d4, potentially creating counterplay opportunities. However, this development also means the knight might become a target if we can advance d5 with tempo, forcing it to retreat to a less active position."
+      "annotation": "Our opponent develops the queenside knight to an active central square, defending the d4 pawn while preparing to contest our control of central squares. This move supports Black's solid defensive setup and prepares to meet our attacking attempts with active piece play. The knight on c6 also eyes important squares like e5 and d4, potentially creating counterplay opportunities. However, this development also means the knight might become a target if we can advance d5 with tempo, forcing it to retreat to a less active position.",
+      "shortNarration": "The knight on c6 defends d4 and eyes e5, but d5 with tempo can force it back."
     },
     {
       "san": "Bg5",
-      "annotation": "We're developing our dark-squared bishop to an aggressive square where it pins the knight on f6 to the queen, creating immediate tactical pressure. This move is typical of the Panov-Botvinnik Attack, where we prioritize piece activity over slow, positional development. The bishop on g5 also supports potential sacrificial ideas and puts psychological pressure on our opponent. By pinning the knight, we're making it difficult for Black to develop naturally, and we're preparing to meet ...Be7 with increased pressure along the h4-d8 diagonal."
+      "annotation": "We're developing our dark-squared bishop to an aggressive square where it pins the knight on f6 to the queen, creating immediate tactical pressure. This move is typical of the Panov-Botvinnik Attack, where we prioritize piece activity over slow, positional development. The bishop on g5 also supports potential sacrificial ideas and puts psychological pressure on our opponent. By pinning the knight, we're making it difficult for Black to develop naturally, and we're preparing to meet ...Be7 with increased pressure along the h4-d8 diagonal.",
+      "shortNarration": "Bishop to g5 pins the knight to the queen, pressuring Black's development and supporting sacrificial ideas along the h4-d8 diagonal."
     },
     {
       "san": "dxc4",
-      "annotation": "Black decides to capture the c4 pawn, accepting the challenge and temporarily winning material while opening up the position. This capture removes our attacking c-pawn but also opens lines for our pieces and reduces Black's central pawn presence. Our opponent is following the Herzog Defense variation, where Black grabs the pawn and aims to hold onto the extra material while completing development. However, this decision comes with risks as it opens the position when Black's king is still in the center, and we'll have strong compensation through piece activity and attacking chances."
+      "annotation": "Black decides to capture the c4 pawn, accepting the challenge and temporarily winning material while opening up the position. This capture removes our attacking c-pawn but also opens lines for our pieces and reduces Black's central pawn presence. Our opponent is following the Herzog Defense variation, where Black grabs the pawn and aims to hold onto the extra material while completing development. However, this decision comes with risks as it opens the position when Black's king is still in the center, and we'll have strong compensation through piece activity and attacking chances.",
+      "shortNarration": "Black's c4 capture wins a pawn but opens lines for our pieces against their uncastled king."
     },
     {
       "san": "d5",
-      "annotation": "We're advancing our central pawn with tempo, attacking the pawn on c6 and seizing space in the center. This powerful advance is the key to our compensation for the sacrificed pawn - we gain time by forcing Black's knight to move while establishing a far-advanced pawn that cramps Black's position. The d5 pawn also serves as an outpost for our pieces and limits Black's piece coordination. Our opponent must now deal with the immediate threat to the knight while being careful not to fall further behind in development."
+      "annotation": "We're advancing our central pawn with tempo, attacking the pawn on c6 and seizing space in the center. This powerful advance is the key to our compensation for the sacrificed pawn - we gain time by forcing Black's knight to move while establishing a far-advanced pawn that cramps Black's position. The d5 pawn also serves as an outpost for our pieces and limits Black's piece coordination. Our opponent must now deal with the immediate threat to the knight while being careful not to fall further behind in development.",
+      "shortNarration": "Advancing d5 attacks the knight on c6, gains space, and cramps Black's position — the sacrificed pawn's compensation."
     },
     {
       "san": "Na5",
-      "annotation": "Our opponent retreats the knight to the rim, following the principle of moving attacked pieces rather than defending them. The knight on a5 is relatively out of play but does eye important squares like c6 and b3, and it's not completely sidelined. This retreat allows Black to maintain the extra c4 pawn while avoiding further tactical complications. However, the knight on a5 will need several moves to return to active play, giving us a temporary advantage in piece activity and development that we must capitalize on quickly through aggressive piece mobilization and attacking the uncastled black king."
+      "annotation": "Our opponent retreats the knight to the rim, following the principle of moving attacked pieces rather than defending them. The knight on a5 is relatively out of play but does eye important squares like c6 and b3, and it's not completely sidelined. This retreat allows Black to maintain the extra c4 pawn while avoiding further tactical complications. However, the knight on a5 will need several moves to return to active play, giving us a temporary advantage in piece activity and development that we must capitalize on quickly through aggressive piece mobilization and attacking the uncastled black king.",
+      "shortNarration": "Knight retreats to a5, keeping the extra c4 pawn but costing time — exploit the lead in development and attack the uncastled king."
     }
   ]
 }

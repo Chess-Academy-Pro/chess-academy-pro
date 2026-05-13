@@ -3,47 +3,58 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, seizing central space and freeing both our bishop and queen for development. This move stakes an immediate claim to the center, particularly controlling the d5 and f5 squares while opening lines for our pieces. The e4 advance is one of the most principled first moves, as it follows classical opening principles of controlling the center and rapid development. Our opponent will now need to decide how to respond to our central challenge, with options ranging from symmetrical e5 to asymmetrical defenses like the Caro-Kann that we're about to face."
+      "annotation": "We're opening with the king's pawn, seizing central space and freeing both our bishop and queen for development. This move stakes an immediate claim to the center, particularly controlling the d5 and f5 squares while opening lines for our pieces. The e4 advance is one of the most principled first moves, as it follows classical opening principles of controlling the center and rapid development. Our opponent will now need to decide how to respond to our central challenge, with options ranging from symmetrical e5 to asymmetrical defenses like the Caro-Kann that we're about to face.",
+      "shortNarration": "1.e4 controls d5 and f5, opens lines for the queen and bishop, and challenges Black to respond."
     },
     {
       "san": "c6",
-      "annotation": "Our opponent chooses the Caro-Kann Defense, a solid and reliable system that immediately prepares to challenge our central pawn with d5. Unlike 1...e5 which creates immediate central tension, the Caro-Kann takes a more positional approach, supporting the future d5 advance while keeping the kingside flexible. This move also prepares to develop the queen's knight to d7 rather than c6, avoiding the pin that often occurs in the French Defense after Bb5. The Caro-Kann is known for giving Black a solid pawn structure and good piece coordination, though it can be somewhat slower to develop than more aggressive defenses."
+      "annotation": "Our opponent chooses the Caro-Kann Defense, a solid and reliable system that immediately prepares to challenge our central pawn with d5. Unlike 1...e5 which creates immediate central tension, the Caro-Kann takes a more positional approach, supporting the future d5 advance while keeping the kingside flexible. This move also prepares to develop the queen's knight to d7 rather than c6, avoiding the pin that often occurs in the French Defense after Bb5. The Caro-Kann is known for giving Black a solid pawn structure and good piece coordination, though it can be somewhat slower to develop than more aggressive defenses.",
+      "shortNarration": "Caro-Kann: Black prepares d5, supports it with c6, and avoids the French's Bb5 pin by developing the knight to d7."
     },
     {
       "san": "d4",
-      "annotation": "We respond with the natural d4, establishing a classical pawn center and increasing our space advantage in the middle of the board. This move supports our e4 pawn while also opening the diagonal for our dark-squared bishop and giving our queen more scope. By controlling both central squares with pawns, we're following the classical principle of dominating the center before our opponent can establish their own foothold. Now Black will likely challenge our center with d5, leading to the main lines of the Caro-Kann where central tension becomes the key theme."
+      "annotation": "We respond with the natural d4, establishing a classical pawn center and increasing our space advantage in the middle of the board. This move supports our e4 pawn while also opening the diagonal for our dark-squared bishop and giving our queen more scope. By controlling both central squares with pawns, we're following the classical principle of dominating the center before our opponent can establish their own foothold. Now Black will likely challenge our center with d5, leading to the main lines of the Caro-Kann where central tension becomes the key theme.",
+      "shortNarration": "d4 establishes a classical pawn center, supporting e4 and opening lines for the bishop and queen."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately challenges our central pawn with the thematic d5 advance, the defining move of the Caro-Kann Defense. This creates immediate tension in the center and forces us to make a decision about our e4 pawn - we can capture, advance, or support it. The d5 move also opens the diagonal for Black's light-squared bishop and begins to activate their queenside pieces. Our opponent is following the main strategic idea of the Caro-Kann: establishing a solid central presence while preparing to complete development with moves like Nf6, Bf5, and castling kingside."
+      "annotation": "Black immediately challenges our central pawn with the thematic d5 advance, the defining move of the Caro-Kann Defense. This creates immediate tension in the center and forces us to make a decision about our e4 pawn - we can capture, advance, or support it. The d5 move also opens the diagonal for Black's light-squared bishop and begins to activate their queenside pieces. Our opponent is following the main strategic idea of the Caro-Kann: establishing a solid central presence while preparing to complete development with moves like Nf6, Bf5, and castling kingside.",
+      "shortNarration": "Black's d5 challenges e4, opening the diagonal for the light-squared bishop and preparing Nf6, Bf5, and kingside castling."
     },
     {
       "san": "f3",
-      "annotation": "We're playing the Maróczy Variation with f3, an aggressive and somewhat unusual approach that supports our e4 pawn while preparing to recapture with the f-pawn if Black takes on e4. This move weakens our kingside slightly, particularly the e3 and g3 squares, but it maintains our central pawn and can lead to sharp attacking chances. The f3 move also prepares potential pawn storms on the kingside later in the game, as we can advance f4-f5 under certain circumstances. While this isn't the most popular choice against the Caro-Kann, it creates immediate practical problems for Black and can transpose into gambit lines if Black accepts the challenge."
+      "annotation": "We're playing the Maróczy Variation with f3, an aggressive and somewhat unusual approach that supports our e4 pawn while preparing to recapture with the f-pawn if Black takes on e4. This move weakens our kingside slightly, particularly the e3 and g3 squares, but it maintains our central pawn and can lead to sharp attacking chances. The f3 move also prepares potential pawn storms on the kingside later in the game, as we can advance f4-f5 under certain circumstances. While this isn't the most popular choice against the Caro-Kann, it creates immediate practical problems for Black and can transpose into gambit lines if Black accepts the challenge.",
+      "shortNarration": "f3 supports e4 and prepares f4-f5 pawn storms, but weakens e3 and g3 for sharp attacking chances."
     },
     {
       "san": "dxe4",
-      "annotation": "Black decides to capture our central pawn, accepting the challenge and opening up the position immediately. This is the most direct response, eliminating our strong e4 pawn but also opening the e-file and central diagonals for both sides. By taking on e4, Black is essentially saying they're ready for the tactical complications that will follow, rather than maintaining the tension with moves like e6 or Nf6. This capture also brings us into the Maróczy Gambit territory, where we'll sacrifice material for rapid development and attacking chances against Black's potentially exposed king."
+      "annotation": "Black decides to capture our central pawn, accepting the challenge and opening up the position immediately. This is the most direct response, eliminating our strong e4 pawn but also opening the e-file and central diagonals for both sides. By taking on e4, Black is essentially saying they're ready for the tactical complications that will follow, rather than maintaining the tension with moves like e6 or Nf6. This capture also brings us into the Maróczy Gambit territory, where we'll sacrifice material for rapid development and attacking chances against Black's potentially exposed king.",
+      "shortNarration": "Black captures e4, opening the e-file and central diagonals, entering the Maróczy Gambit where we sacrifice a pawn for rapid development and attacking chances."
     },
     {
       "san": "fxe4",
-      "annotation": "We recapture with the f-pawn, maintaining our central presence while opening the f-file for potential future attacks on Black's king. This recapture keeps material balanced but creates a somewhat unusual pawn structure where our e4 pawn is now quite advanced and controlling key central squares. The f-file opening can become significant later, especially if Black castles kingside and we can coordinate our rook and other pieces along this file. Our pawn structure is now slightly compromised with doubled f-pawns potentially, but we maintain central control and have good piece activity compensation."
+      "annotation": "We recapture with the f-pawn, maintaining our central presence while opening the f-file for potential future attacks on Black's king. This recapture keeps material balanced but creates a somewhat unusual pawn structure where our e4 pawn is now quite advanced and controlling key central squares. The f-file opening can become significant later, especially if Black castles kingside and we can coordinate our rook and other pieces along this file. Our pawn structure is now slightly compromised with doubled f-pawns potentially, but we maintain central control and have good piece activity compensation.",
+      "shortNarration": "Recapturing with the f-pawn opens the f-file for attack and keeps central control, despite doubled f-pawns."
     },
     {
       "san": "e5",
-      "annotation": "Black strikes back in the center with e5, challenging our d4 pawn and creating immediate central tension while opening lines for their pieces. This move follows sound opening principles by fighting for central space and activating Black's dark-squared bishop diagonal. The e5 advance also prevents us from easily consolidating our central advantage and forces us to make concrete decisions about the pawn structure. Black is essentially accepting the gambit nature of the position, creating sharp tactical play rather than trying to consolidate material or position quietly."
+      "annotation": "Black strikes back in the center with e5, challenging our d4 pawn and creating immediate central tension while opening lines for their pieces. This move follows sound opening principles by fighting for central space and activating Black's dark-squared bishop diagonal. The e5 advance also prevents us from easily consolidating our central advantage and forces us to make concrete decisions about the pawn structure. Black is essentially accepting the gambit nature of the position, creating sharp tactical play rather than trying to consolidate material or position quietly.",
+      "shortNarration": "Black's e5 challenges d4, opens lines for the bishop, and forces concrete pawn structure decisions."
     },
     {
       "san": "Nf3",
-      "annotation": "Continuing Caro Kann Defense Mar Czy Variation Mar Czy Gambit: Nf3 is a known theory move in this line."
+      "annotation": "Continuing Caro Kann Defense Mar Czy Variation Mar Czy Gambit: Nf3 is a known theory move in this line.",
+      "shortNarration": "Nf3 is theory in the Caro-Kann Maróczy Gambit, developing and eyeing e5."
     },
     {
       "san": "exd4",
-      "annotation": "Continuing Caro Kann Defense Mar Czy Variation Mar Czy Gambit: exd4 is a known theory move in this line."
+      "annotation": "Continuing Caro Kann Defense Mar Czy Variation Mar Czy Gambit: exd4 is a known theory move in this line.",
+      "shortNarration": "exd4 is theory in the Caro-Kann Maróczy Gambit."
     },
     {
       "san": "Bc4",
-      "annotation": "Continuing Caro Kann Defense Mar Czy Variation Mar Czy Gambit: Bc4 is a known theory move in this line."
+      "annotation": "Continuing Caro Kann Defense Mar Czy Variation Mar Czy Gambit: Bc4 is a known theory move in this line.",
+      "shortNarration": "Bc4 is theory in the Caro-Kann Maróczy Gambit, targeting f7."
     }
   ]
 }

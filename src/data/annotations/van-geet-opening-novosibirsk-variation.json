@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "Nc3",
-      "annotation": "We start with an unconventional first move that immediately puts a piece in the center—this is the Van Geet Opening, designed to sidestep main-line theory and play a creative middlegame. By controlling d5 and e4 with our knight before pushing pawns, we keep maximum flexibility and often transpose into positions where we understand the plans better than our opponent. The idea is to play positionally rather than force early tactics, and Nc3 lets us decide our pawn structure after seeing Black's setup."
+      "annotation": "We start with an unconventional first move that immediately puts a piece in the center—this is the Van Geet Opening, designed to sidestep main-line theory and play a creative middlegame. By controlling d5 and e4 with our knight before pushing pawns, we keep maximum flexibility and often transpose into positions where we understand the plans better than our opponent. The idea is to play positionally rather than force early tactics, and Nc3 lets us decide our pawn structure after seeing Black's setup.",
+      "shortNarration": "Nc3 controls d5 and e4, keeping pawn structure flexible to transpose into a favorable positional middlegame."
     },
     {
       "san": "c5",
-      "annotation": "Black plays the thematic Sicilian counterattack, striking at the center and preparing to contest the d4 square. This move fights for space and prevents us from establishing a strong pawn center easily, which is why we meet it with force rather than allowing Black comfortable equality."
+      "annotation": "Black plays the thematic Sicilian counterattack, striking at the center and preparing to contest the d4 square. This move fights for space and prevents us from establishing a strong pawn center easily, which is why we meet it with force rather than allowing Black comfortable equality.",
+      "shortNarration": "Black's Sicilian counterattack fights for d4 — White meets it with force to prevent easy equality."
     },
     {
       "san": "d4",
-      "annotation": "We immediately challenge Black's c5 with a central pawn break, forcing a decision: we want to activate our pieces and recapture with the queen to maintain initiative. By playing d4 right away, we're saying we're willing to go into sharp tactics rather than maneuver slowly, and capturing on d4 will let us develop our attack."
+      "annotation": "We immediately challenge Black's c5 with a central pawn break, forcing a decision: we want to activate our pieces and recapture with the queen to maintain initiative. By playing d4 right away, we're saying we're willing to go into sharp tactics rather than maneuver slowly, and capturing on d4 will let us develop our attack.",
+      "shortNarration": "d4 challenges c5, forcing a capture that opens lines for White's queen recapture and sharp initiative."
     },
     {
       "san": "cxd4",
-      "annotation": "Black recaptures naturally—the c-pawn takes on d4. This is the expected move; by trading the c-pawn for our d-pawn, Black opens the c-file but also removes their defender of the center. We're now set up to recapture with our queen and begin our attacking setup."
+      "annotation": "Black recaptures naturally—the c-pawn takes on d4. This is the expected move; by trading the c-pawn for our d-pawn, Black opens the c-file but also removes their defender of the center. We're now set up to recapture with our queen and begin our attacking setup.",
+      "shortNarration": "Black recaptures with the c-pawn, opening the c-file but removing a center defender — White recaptures with the queen."
     },
     {
       "san": "Qxd4",
-      "annotation": "Our queen recaptures and immediately jumps into the game, centralizing on d4 where it controls important squares like e5 and b6. This move is characteristic of the Novosibirsk—we develop actively with threats rather than making quiet moves, and the queen on d4 already eyes the kingside and supports an aggressive setup."
+      "annotation": "Our queen recaptures and immediately jumps into the game, centralizing on d4 where it controls important squares like e5 and b6. This move is characteristic of the Novosibirsk—we develop actively with threats rather than making quiet moves, and the queen on d4 already eyes the kingside and supports an aggressive setup.",
+      "shortNarration": "Queen recaptures on d4, centralizing to control e5 and b6 while eyeing the kingside."
     },
     {
       "san": "Nc6",
-      "annotation": "Black develops their knight naturally to c6, attacking our queen and preparing to defend the center. This is the normal developing choice, but it also commits Black's piece to a square where it may become a target for our attack, especially since our queen and Nc3 are already aiming at the kingside."
+      "annotation": "Black develops their knight naturally to c6, attacking our queen and preparing to defend the center. This is the normal developing choice, but it also commits Black's piece to a square where it may become a target for our attack, especially since our queen and Nc3 are already aiming at the kingside.",
+      "shortNarration": "Black's knight to c6 attacks the queen and defends the center, but it may become a target as White's queen and Nc3 aim kingside."
     },
     {
       "san": "Qh4",
-      "annotation": "This is the central idea of the Novosibirsk Variation—we move our queen to h4, abandoning the center temporarily but launching an immediate attack on the kingside. The queen on h4 eyes Black's king directly and prepares threats like Nxe4 or tactics involving the weak light squares around Black's king. We're gambling that our active piece play and kingside threats are worth more than the space Black gets in the center—this is a romantic, aggressive approach where we prioritize piece activity and concrete threats over solid positional footing."
+      "annotation": "This is the central idea of the Novosibirsk Variation—we move our queen to h4, abandoning the center temporarily but launching an immediate attack on the kingside. The queen on h4 eyes Black's king directly and prepares threats like Nxe4 or tactics involving the weak light squares around Black's king. We're gambling that our active piece play and kingside threats are worth more than the space Black gets in the center—this is a romantic, aggressive approach where we prioritize piece activity and concrete threats over solid positional footing.",
+      "shortNarration": "In the Novosibirsk Variation, queen to h4 abandons the center for a direct kingside attack targeting weak light squares."
     }
   ]
 }

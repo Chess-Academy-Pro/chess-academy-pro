@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "c4",
-      "annotation": "We're opening with the English Opening, one of the most flexible and positionally rich openings in chess. This move immediately stakes a claim to the central d5 square while keeping our options open for piece development. Unlike 1.e4 or 1.d4, the English doesn't commit to a specific pawn structure right away, allowing us to adapt our setup based on Black's response. The c4 pawn also supports a potential d4 advance later, giving us excellent central control possibilities."
+      "annotation": "We're opening with the English Opening, one of the most flexible and positionally rich openings in chess. This move immediately stakes a claim to the central d5 square while keeping our options open for piece development. Unlike 1.e4 or 1.d4, the English doesn't commit to a specific pawn structure right away, allowing us to adapt our setup based on Black's response. The c4 pawn also supports a potential d4 advance later, giving us excellent central control possibilities.",
+      "shortNarration": "1.c4 stakes a claim to d5 while keeping pawn structure flexible for a later d4 advance."
     },
     {
       "san": "e5",
-      "annotation": "Black responds with the most direct and principled continuation, immediately occupying the center and challenging our control of d5. This move signals that our opponent wants to fight for central space right from the start rather than allowing us to dictate the pawn structure. Black's e5 pawn controls the important d4 and f4 squares, preventing us from advancing our d-pawn immediately. This leads to what's known as the 'Reversed Sicilian' structure, where we'll be playing a Sicilian Defense setup but with an extra tempo."
+      "annotation": "Black responds with the most direct and principled continuation, immediately occupying the center and challenging our control of d5. This move signals that our opponent wants to fight for central space right from the start rather than allowing us to dictate the pawn structure. Black's e5 pawn controls the important d4 and f4 squares, preventing us from advancing our d-pawn immediately. This leads to what's known as the 'Reversed Sicilian' structure, where we'll be playing a Sicilian Defense setup but with an extra tempo.",
+      "shortNarration": "Black's e5 occupies the center, controls d4 and f4, and creates a Reversed Sicilian structure with White up a tempo."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our knight to its ideal square, where it supports the c4 pawn and eyes the central e4 and d5 squares. This move also prepares for potential piece play on the kingside while maintaining flexibility in our pawn structure. The knight on c3 is perfectly placed to support a future d4 advance or to participate in kingside attacks. By developing pieces before committing to further pawn moves, we're following sound opening principles while keeping maximum options available."
+      "annotation": "We develop our knight to its ideal square, where it supports the c4 pawn and eyes the central e4 and d5 squares. This move also prepares for potential piece play on the kingside while maintaining flexibility in our pawn structure. The knight on c3 is perfectly placed to support a future d4 advance or to participate in kingside attacks. By developing pieces before committing to further pawn moves, we're following sound opening principles while keeping maximum options available.",
+      "shortNarration": "Knight to c3 supports c4, eyes e4 and d5, and prepares d4 or kingside attacks."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the kingside knight, attacking our potential e4 advance and preparing for quick kingside castling. This is the most active move, following the principle of developing knights before bishops. Our opponent is also preparing to complete development efficiently while maintaining central pressure. The knight on f6 supports Black's e5 pawn and controls important central squares like d5 and e4, making it harder for us to establish a strong pawn center immediately."
+      "annotation": "Black develops the kingside knight, attacking our potential e4 advance and preparing for quick kingside castling. This is the most active move, following the principle of developing knights before bishops. Our opponent is also preparing to complete development efficiently while maintaining central pressure. The knight on f6 supports Black's e5 pawn and controls important central squares like d5 and e4, making it harder for us to establish a strong pawn center immediately.",
+      "shortNarration": "Black's knight on f6 attacks e4, supports e5, and controls d5, hindering White's central pawn advance."
     },
     {
       "san": "Nf3",
-      "annotation": "We mirror Black's development, bringing our knight to its optimal square where it controls the central e5 and d4 squares. This move also attacks Black's e5 pawn, creating the first tactical tension in the position. The knight on f3 supports our kingside development and prepares for castling, while also keeping the option of playing e4 ourselves. This creates what's known as the Four Knights System, a classical and sound approach that leads to rich middlegame positions with chances for both sides."
+      "annotation": "We mirror Black's development, bringing our knight to its optimal square where it controls the central e5 and d4 squares. This move also attacks Black's e5 pawn, creating the first tactical tension in the position. The knight on f3 supports our kingside development and prepares for castling, while also keeping the option of playing e4 ourselves. This creates what's known as the Four Knights System, a classical and sound approach that leads to rich middlegame positions with chances for both sides.",
+      "shortNarration": "Knight to f3 attacks e5, controls d4, and prepares castling in the Four Knights System."
     },
     {
       "san": "Nc6",
-      "annotation": "Black defends the e5 pawn with the most active move, completing the symmetrical Four Knights setup. This knight supports the central pawn structure while preparing for potential piece activity on the queenside or center. Our opponent is following classical development principles, bringing pieces toward the center while maintaining the pawn tension. The position remains balanced, but both sides are building up pressure in the center and preparing for the critical moment when the pawn structure will be determined."
+      "annotation": "Black defends the e5 pawn with the most active move, completing the symmetrical Four Knights setup. This knight supports the central pawn structure while preparing for potential piece activity on the queenside or center. Our opponent is following classical development principles, bringing pieces toward the center while maintaining the pawn tension. The position remains balanced, but both sides are building up pressure in the center and preparing for the critical moment when the pawn structure will be determined.",
+      "shortNarration": "Black's knight on c6 defends e5 and completes the symmetrical Four Knights, keeping the center balanced but tense."
     },
     {
       "san": "e4",
-      "annotation": "This is the Nimzowitsch Variation, where we boldly advance in the center despite Black's well-defended e5 pawn, creating immediate central tension. We're essentially offering a pawn trade that would open the position and give us excellent piece activity, particularly for our bishops. This move transforms the game from a quiet positional struggle into a more tactical battle, as Black must decide whether to maintain the tension with moves like Bb4 or resolve it with exd4. By playing e4, we're gambling that our superior development and piece coordination will compensate for any structural weaknesses that might arise from the resulting pawn exchanges."
+      "annotation": "This is the Nimzowitsch Variation, where we boldly advance in the center despite Black's well-defended e5 pawn, creating immediate central tension. We're essentially offering a pawn trade that would open the position and give us excellent piece activity, particularly for our bishops. This move transforms the game from a quiet positional struggle into a more tactical battle, as Black must decide whether to maintain the tension with moves like Bb4 or resolve it with exd4. By playing e4, we're gambling that our superior development and piece coordination will compensate for any structural weaknesses that might arise from the resulting pawn exchanges.",
+      "shortNarration": "e4 offers a pawn trade to open lines for White's bishops, gambling on superior development to compensate for structural weaknesses."
     }
   ]
 }

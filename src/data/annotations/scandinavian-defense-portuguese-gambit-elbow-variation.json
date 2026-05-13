@@ -3,35 +3,43 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, claiming central space and preparing rapid development of our pieces. This move controls the critical d5 and f5 squares while opening diagonals for both our bishop and queen. The move 1.e4 leads to sharp, tactical games and is perfect for players who want to seize the initiative from move one. Our plan is to build a strong pawn center and launch a kingside attack, putting immediate pressure on Black to respond accurately."
+      "annotation": "We're opening with the king's pawn, claiming central space and preparing rapid development of our pieces. This move controls the critical d5 and f5 squares while opening diagonals for both our bishop and queen. The move 1.e4 leads to sharp, tactical games and is perfect for players who want to seize the initiative from move one. Our plan is to build a strong pawn center and launch a kingside attack, putting immediate pressure on Black to respond accurately.",
+      "shortNarration": "1.e4 claims the center, controls d5 and f5, and opens lines for the queen and bishop."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately strikes at our central pawn with the Scandinavian Defense, one of the oldest known chess openings. This aggressive counter-thrust challenges our central control right away, forcing us to make a decision about the pawn tension. While this opening can lead to quick development for Black, it also allows us to gain time by attacking the pieces that recapture on d5. Black is signaling they want an unbalanced, fighting game rather than classical development."
+      "annotation": "Black immediately strikes at our central pawn with the Scandinavian Defense, one of the oldest known chess openings. This aggressive counter-thrust challenges our central control right away, forcing us to make a decision about the pawn tension. While this opening can lead to quick development for Black, it also allows us to gain time by attacking the pieces that recapture on d5. Black is signaling they want an unbalanced, fighting game rather than classical development.",
+      "shortNarration": "Black's Scandinavian strikes at e4, forcing a recapture that gives White tempo by attacking the piece on d5."
     },
     {
       "san": "exd5",
-      "annotation": "We capture the pawn, opening the center and forcing Black to recapture, which will bring a piece forward that we can potentially attack with tempo. This exchange has given us a lead in development since Black must now spend time dealing with our central pawn. The capture also opens the e-file for potential future use and clears the way for our pieces to enter the game actively. By taking on d5, we're embracing the tactical nature of the Scandinavian and preparing to exploit Black's early piece activity."
+      "annotation": "We capture the pawn, opening the center and forcing Black to recapture, which will bring a piece forward that we can potentially attack with tempo. This exchange has given us a lead in development since Black must now spend time dealing with our central pawn. The capture also opens the e-file for potential future use and clears the way for our pieces to enter the game actively. By taking on d5, we're embracing the tactical nature of the Scandinavian and preparing to exploit Black's early piece activity.",
+      "shortNarration": "Capturing on d5 opens the e-file, forces Black to recapture, and gives White a lead in development with tempo."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the knight while attacking our advanced d5 pawn, choosing the modern approach to the Scandinavian Defense. This is much more principled than the older 3...Qxd5, as it avoids bringing the queen out early where it can be harassed by our developing pieces. The knight on f6 also controls important central squares like e4 and d5, while supporting Black's kingside development. However, Black is still behind in development and must be careful about our potential tactical shots in the center."
+      "annotation": "Black develops the knight while attacking our advanced d5 pawn, choosing the modern approach to the Scandinavian Defense. This is much more principled than the older 3...Qxd5, as it avoids bringing the queen out early where it can be harassed by our developing pieces. The knight on f6 also controls important central squares like e4 and d5, while supporting Black's kingside development. However, Black is still behind in development and must be careful about our potential tactical shots in the center.",
+      "shortNarration": "Black's knight on f6 attacks d5 and controls e4, but Black is behind in development and vulnerable to central tactics."
     },
     {
       "san": "d4",
-      "annotation": "We advance our queen's pawn to support our pawn on d5 and build a classical pawn center, refusing to allow Black to simply recapture the pawn. This move creates a strong pawn duo in the center and opens lines for our dark-squared bishop while restricting Black's pieces. By playing d4, we're transitioning into what's known as the Portuguese Gambit, offering the d5 pawn in exchange for rapid development and central control. Black now faces a critical decision about whether to capture on d5 or allow us to maintain our space advantage."
+      "annotation": "We advance our queen's pawn to support our pawn on d5 and build a classical pawn center, refusing to allow Black to simply recapture the pawn. This move creates a strong pawn duo in the center and opens lines for our dark-squared bishop while restricting Black's pieces. By playing d4, we're transitioning into what's known as the Portuguese Gambit, offering the d5 pawn in exchange for rapid development and central control. Black now faces a critical decision about whether to capture on d5 or allow us to maintain our space advantage.",
+      "shortNarration": "d4 supports the d5 pawn, builds a classical center, opens the dark-squared bishop, and restricts Black's pieces."
     },
     {
       "san": "Bg4",
-      "annotation": "Black develops the bishop actively, pinning our future knight on f3 and adding pressure to our position while declining the pawn offer. This move is characteristic of the Portuguese Gambit's sharp nature, as Black seeks counterplay rather than material gain. The bishop on g4 eyes our queen and will make it difficult for us to develop normally, potentially disrupting our kingside castling. However, this bishop can become a target for our pawns and pieces, and Black is still lagging in development despite the active piece placement."
+      "annotation": "Black develops the bishop actively, pinning our future knight on f3 and adding pressure to our position while declining the pawn offer. This move is characteristic of the Portuguese Gambit's sharp nature, as Black seeks counterplay rather than material gain. The bishop on g4 eyes our queen and will make it difficult for us to develop normally, potentially disrupting our kingside castling. However, this bishop can become a target for our pawns and pieces, and Black is still lagging in development despite the active piece placement.",
+      "shortNarration": "Black's bishop on g4 pins the knight to the queen, disrupting kingside castling but leaving the bishop a target for pawns."
     },
     {
       "san": "Bb5+",
-      "annotation": "We develop our light-squared bishop with check, forcing Black to respond to the threat while maintaining the initiative in this tactical opening. This move exemplifies the spirit of the Portuguese Gambit—we're prioritizing rapid development and keeping Black under constant pressure rather than defending material. The bishop check forces Black to make a committal decision about their king's safety and pawn structure. By giving check, we're also preventing Black from simply castling kingside and consolidating their position."
+      "annotation": "We develop our light-squared bishop with check, forcing Black to respond to the threat while maintaining the initiative in this tactical opening. This move exemplifies the spirit of the Portuguese Gambit—we're prioritizing rapid development and keeping Black under constant pressure rather than defending material. The bishop check forces Black to make a committal decision about their king's safety and pawn structure. By giving check, we're also preventing Black from simply castling kingside and consolidating their position.",
+      "shortNarration": "Bishop check forces Black to commit to king safety and pawn structure, preventing kingside castling."
     },
     {
       "san": "c6",
-      "annotation": "Black blocks our check while attacking our bishop, forcing us to make a decision about this piece and potentially weakening their own pawn structure. This move creates the characteristic 'elbow' formation that gives this variation its name, as the c6 and d5 pawns form an L-shaped structure. While c6 develops no pieces, it does support Black's potential ...b5 advance and prepares to challenge our center with moves like ...e6. However, the move also slightly weakens Black's queenside pawn structure and allows us to maintain the initiative with our superior development."
+      "annotation": "Black blocks our check while attacking our bishop, forcing us to make a decision about this piece and potentially weakening their own pawn structure. This move creates the characteristic 'elbow' formation that gives this variation its name, as the c6 and d5 pawns form an L-shaped structure. While c6 develops no pieces, it does support Black's potential ...b5 advance and prepares to challenge our center with moves like ...e6. However, the move also slightly weakens Black's queenside pawn structure and allows us to maintain the initiative with our superior development.",
+      "shortNarration": "Black's c6 creates the elbow pawn formation, supports ...b5, and prepares ...e6, but weakens the queenside and cedes the initiative to White's development."
     }
   ]
 }

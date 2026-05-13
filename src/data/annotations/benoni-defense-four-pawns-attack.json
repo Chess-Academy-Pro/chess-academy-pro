@@ -3,67 +3,83 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the center and preparing to develop our pieces with maximum space advantage. This move controls the important e5 and c5 squares, preventing Black from easily establishing central pawns there. The d4 opening leads to rich strategic positions where we often get more space and long-term attacking chances, though Black gets dynamic counterplay. Our plan is to build a strong pawn center and use our space advantage to launch a kingside attack."
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the center and preparing to develop our pieces with maximum space advantage. This move controls the important e5 and c5 squares, preventing Black from easily establishing central pawns there. The d4 opening leads to rich strategic positions where we often get more space and long-term attacking chances, though Black gets dynamic counterplay. Our plan is to build a strong pawn center and use our space advantage to launch a kingside attack.",
+      "shortNarration": "d4 stakes a claim to the center, controls e5 and c5, and prepares a kingside attack with a space advantage."
     },
     {
       "san": "Nf6",
-      "annotation": "Black immediately challenges our central pawn with the knight, a principled response that attacks the d4 pawn and develops a piece toward the center. This move is the starting point of several Indian Defense systems, where Black allows us to build a big pawn center but plans to undermine and attack it later. Our opponent is keeping flexible options - they could transpose into a King's Indian, Nimzo-Indian, or as we'll see, the Benoni Defense. We need to decide how to support our d4 pawn and continue our development."
+      "annotation": "Black immediately challenges our central pawn with the knight, a principled response that attacks the d4 pawn and develops a piece toward the center. This move is the starting point of several Indian Defense systems, where Black allows us to build a big pawn center but plans to undermine and attack it later. Our opponent is keeping flexible options - they could transpose into a King's Indian, Nimzo-Indian, or as we'll see, the Benoni Defense. We need to decide how to support our d4 pawn and continue our development.",
+      "shortNarration": "Black's knight challenges d4, starting an Indian Defense where White builds a big center but must decide how to support d4."
     },
     {
       "san": "c4",
-      "annotation": "We're playing the English Opening move order, supporting our d4 pawn while gaining space on the queenside and preparing to develop our knight to c3. This move controls the important d5 and b5 squares, giving us a strong grip on the center and preventing Black from easily equalizing with moves like d5. The c4 pawn also opens up potential for a future b2-b4 advance to gain even more queenside space. This flexible approach allows us to transpose into various systems depending on Black's response, while maintaining maximum control over the center."
+      "annotation": "We're playing the English Opening move order, supporting our d4 pawn while gaining space on the queenside and preparing to develop our knight to c3. This move controls the important d5 and b5 squares, giving us a strong grip on the center and preventing Black from easily equalizing with moves like d5. The c4 pawn also opens up potential for a future b2-b4 advance to gain even more queenside space. This flexible approach allows us to transpose into various systems depending on Black's response, while maintaining maximum control over the center.",
+      "shortNarration": "c4 controls d5 and b5, gains queenside space, and prepares Nc3 while keeping flexible transposition options."
     },
     {
       "san": "c5",
-      "annotation": "Our opponent strikes back in the center with the Benoni move, immediately challenging our pawn structure and leading to sharp, unbalanced positions. Black is accepting a space disadvantage in exchange for dynamic piece play and counterattacking chances on both flanks. This move characterizes the Benoni Defense - Black allows us to advance in the center with d5 but plans to create pawn breaks with b5 and f5 later. We now have a critical decision: we can capture the pawn, advance with d5, or maintain the tension - each leading to completely different types of positions."
+      "annotation": "Our opponent strikes back in the center with the Benoni move, immediately challenging our pawn structure and leading to sharp, unbalanced positions. Black is accepting a space disadvantage in exchange for dynamic piece play and counterattacking chances on both flanks. This move characterizes the Benoni Defense - Black allows us to advance in the center with d5 but plans to create pawn breaks with b5 and f5 later. We now have a critical decision: we can capture the pawn, advance with d5, or maintain the tension - each leading to completely different types of positions.",
+      "shortNarration": "Black's Benoni accepts a space disadvantage for dynamic counterplay with b5 and f5 breaks."
     },
     {
       "san": "d5",
-      "annotation": "We're advancing our central pawn to gain maximum space advantage and enter the Modern Benoni, one of the sharpest and most theoretical openings in chess. This advance gives us a significant space advantage and restricts Black's pieces, particularly the light-squared bishop which will struggle to find good squares. Our pawn on d5 acts like a dagger pointed at Black's kingside, and we'll often follow up with e4 and f4 to build a massive pawn storm. Black will need to be very precise to avoid getting overwhelmed by our space advantage and attacking potential."
+      "annotation": "We're advancing our central pawn to gain maximum space advantage and enter the Modern Benoni, one of the sharpest and most theoretical openings in chess. This advance gives us a significant space advantage and restricts Black's pieces, particularly the light-squared bishop which will struggle to find good squares. Our pawn on d5 acts like a dagger pointed at Black's kingside, and we'll often follow up with e4 and f4 to build a massive pawn storm. Black will need to be very precise to avoid getting overwhelmed by our space advantage and attacking potential.",
+      "shortNarration": "Advancing d5 gains space, restricts Black's light-squared bishop, and sets up a kingside pawn storm with e4 and f4."
     },
     {
       "san": "e6",
-      "annotation": "Black immediately challenges our advanced pawn, refusing to allow us to maintain the d5 strongpoint without a fight. This move is the hallmark of the Benoni Defense - our opponent is willing to accept a compromised pawn structure in exchange for piece activity and counterplay. After we recapture, Black will have the half-open e-file and potential breaks with f5 and b5 to create dynamic chances. Our opponent is essentially saying 'I'll take a worse structure but I want active pieces and tactical opportunities' - a very double-edged choice that leads to sharp, tactical battles."
+      "annotation": "Black immediately challenges our advanced pawn, refusing to allow us to maintain the d5 strongpoint without a fight. This move is the hallmark of the Benoni Defense - our opponent is willing to accept a compromised pawn structure in exchange for piece activity and counterplay. After we recapture, Black will have the half-open e-file and potential breaks with f5 and b5 to create dynamic chances. Our opponent is essentially saying 'I'll take a worse structure but I want active pieces and tactical opportunities' - a very double-edged choice that leads to sharp, tactical battles.",
+      "shortNarration": "Black accepts a compromised pawn structure for piece activity and counterplay with half-open e-file and f5/b5 breaks."
     },
     {
       "san": "Nc3",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: Nc3 is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: Nc3 is a known theory move in this line.",
+      "shortNarration": "Nc3 is theory in the Four Pawns Attack, reinforcing the center and preparing e5."
     },
     {
       "san": "exd5",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: exd5 is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: exd5 is a known theory move in this line.",
+      "shortNarration": "exd5 is theory in the Four Pawns Attack, opening the center and freeing Black's dark-squared bishop."
     },
     {
       "san": "cxd5",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: cxd5 is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: cxd5 is a known theory move in this line.",
+      "shortNarration": "cxd5 is theory in the Benoni Four Pawns Attack."
     },
     {
       "san": "d6",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: d6 is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: d6 is a known theory move in this line.",
+      "shortNarration": "d6 is theory in the Four Pawns Attack Benoni."
     },
     {
       "san": "e4",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: e4 is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: e4 is a known theory move in this line.",
+      "shortNarration": "e4 is theory in the Four Pawns Attack, pushing the center and opening lines."
     },
     {
       "san": "g6",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: g6 is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: g6 is a known theory move in this line.",
+      "shortNarration": "g6 is theory in the Benoni Four Pawns Attack."
     },
     {
       "san": "f4",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: f4 is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: f4 is a known theory move in this line.",
+      "shortNarration": "f4 is theory in the Benoni Four Pawns Attack, pushing the center."
     },
     {
       "san": "Bg7",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: Bg7 is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: Bg7 is a known theory move in this line.",
+      "shortNarration": "Bg7 is theory in the Four Pawns Attack, Benoni Defense."
     },
     {
       "san": "Nf3",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: Nf3 is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: Nf3 is a known theory move in this line.",
+      "shortNarration": "Nf3 is the theory move in the Four Pawns Attack Benoni."
     },
     {
       "san": "O-O",
-      "annotation": "Continuing Benoni Defense Four Pawns Attack: O-O is a known theory move in this line."
+      "annotation": "Continuing Benoni Defense Four Pawns Attack: O-O is a known theory move in this line.",
+      "shortNarration": "In the Benoni Four Pawns Attack, O-O is the theory move."
     }
   ]
 }

@@ -3,35 +3,43 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the center and freeing both our light-squared bishop and queen for future development. This classical move controls the crucial d5 and f5 squares while preparing rapid piece development. The move follows fundamental opening principles by fighting for central space immediately, and it's the starting point for many of the most popular and theoretically sound openings in chess."
+      "annotation": "We're opening with the king's pawn, staking our claim to the center and freeing both our light-squared bishop and queen for future development. This classical move controls the crucial d5 and f5 squares while preparing rapid piece development. The move follows fundamental opening principles by fighting for central space immediately, and it's the starting point for many of the most popular and theoretically sound openings in chess.",
+      "shortNarration": "1.e4 claims the center, opens lines for the queen and bishop, and controls d5 and f5."
     },
     {
       "san": "d5",
-      "annotation": "Our opponent responds with the Scandinavian Defense, immediately challenging our central pawn and offering a pawn trade that will fundamentally alter the game's character. Black is willing to give up the center temporarily in exchange for rapid development and active piece play, particularly getting the queen into the game early. This is one of the most direct defenses against 1.e4, and while it's not as theoretically respected as 1...e5 or 1...c5, it leads to sharp, tactical positions where Black often gets good practical chances."
+      "annotation": "Our opponent responds with the Scandinavian Defense, immediately challenging our central pawn and offering a pawn trade that will fundamentally alter the game's character. Black is willing to give up the center temporarily in exchange for rapid development and active piece play, particularly getting the queen into the game early. This is one of the most direct defenses against 1.e4, and while it's not as theoretically respected as 1...e5 or 1...c5, it leads to sharp, tactical positions where Black often gets good practical chances.",
+      "shortNarration": "Black's Scandinavian trades the e4 pawn for quick development and an early queen sortie, leading to sharp tactical play."
     },
     {
       "san": "exd5",
-      "annotation": "We're accepting the pawn trade, which is virtually forced since declining would leave us with a passive position and no advantage from the opening. By capturing on d5, we maintain material balance but invite Black's queen to enter the game very early, which goes against traditional opening principles. However, we're confident that we can gain time by attacking the exposed queen with our developing choices, and we'll have better central control with our d-pawn ready to advance."
+      "annotation": "We're accepting the pawn trade, which is virtually forced since declining would leave us with a passive position and no advantage from the opening. By capturing on d5, we maintain material balance but invite Black's queen to enter the game very early, which goes against traditional opening principles. However, we're confident that we can gain time by attacking the exposed queen with our developing choices, and we'll have better central control with our d-pawn ready to advance.",
+      "shortNarration": "Accepting the pawn trade invites Black's queen out early, but we gain time attacking it while advancing the d-pawn for central control."
     },
     {
       "san": "Qxd5",
-      "annotation": "Black recaptures with the queen, bringing her majesty into the center of the board on only the second move - something that would make classical masters cringe. Our opponent is banking on the queen's activity and central presence to compensate for violating the principle of not developing the queen too early. While this looks premature, the Scandinavian Defense has been played successfully at all levels because the queen, while exposed, also controls key central squares and can quickly relocate to safety while maintaining pressure."
+      "annotation": "Black recaptures with the queen, bringing her majesty into the center of the board on only the second move - something that would make classical masters cringe. Our opponent is banking on the queen's activity and central presence to compensate for violating the principle of not developing the queen too early. While this looks premature, the Scandinavian Defense has been played successfully at all levels because the queen, while exposed, also controls key central squares and can quickly relocate to safety while maintaining pressure.",
+      "shortNarration": "Black's early queen to d5 controls central squares but risks tempo losses if White attacks it."
     },
     {
       "san": "Nc3",
-      "annotation": "We're developing our knight with tempo, attacking Black's centralized queen and forcing it to move again. This active move also increases our control over the central d5 and e4 squares while preparing to castle kingside. The knight on c3 will be well-placed for the middlegame, potentially supporting a future d4-d5 advance or helping to control key squares around Black's position. Most importantly, we're gaining time in development since Black must respond to the queen attack."
+      "annotation": "We're developing our knight with tempo, attacking Black's centralized queen and forcing it to move again. This active move also increases our control over the central d5 and e4 squares while preparing to castle kingside. The knight on c3 will be well-placed for the middlegame, potentially supporting a future d4-d5 advance or helping to control key squares around Black's position. Most importantly, we're gaining time in development since Black must respond to the queen attack.",
+      "shortNarration": "Knight to c3 attacks the queen, gains tempo, controls d5 and e4, and prepares kingside castle."
     },
     {
       "san": "Qa5",
-      "annotation": "Our opponent retreats the queen to a5, where it maintains some central influence while getting out of immediate danger. This square allows the queen to eye our knight on c3 and potentially create some tactical threats, while also preparing to support Black's queenside development. The queen on a5 is relatively safe but still somewhat exposed, and we'll want to continue developing with moves that either attack it again or simply improve our position while Black's queen remains slightly out of play on the rim."
+      "annotation": "Our opponent retreats the queen to a5, where it maintains some central influence while getting out of immediate danger. This square allows the queen to eye our knight on c3 and potentially create some tactical threats, while also preparing to support Black's queenside development. The queen on a5 is relatively safe but still somewhat exposed, and we'll want to continue developing with moves that either attack it again or simply improve our position while Black's queen remains slightly out of play on the rim.",
+      "shortNarration": "Queen retreats to a5, eyeing c3 and supporting queenside development, but remains exposed on the rim."
     },
     {
       "san": "d4",
-      "annotation": "We're establishing a strong pawn center by advancing our d-pawn two squares, claiming more space and opening lines for our pieces. This move controls the crucial c5 and e5 squares, making it harder for Black to establish counterplay in the center. Our pawn on d4 also opens the diagonal for our light-squared bishop and gives us a space advantage that we can use to coordinate our pieces more effectively. With this central advance, we're following classical principles by controlling the center with pawns while our opponent's early queen development looks increasingly questionable."
+      "annotation": "We're establishing a strong pawn center by advancing our d-pawn two squares, claiming more space and opening lines for our pieces. This move controls the crucial c5 and e5 squares, making it harder for Black to establish counterplay in the center. Our pawn on d4 also opens the diagonal for our light-squared bishop and gives us a space advantage that we can use to coordinate our pieces more effectively. With this central advance, we're following classical principles by controlling the center with pawns while our opponent's early queen development looks increasingly questionable.",
+      "shortNarration": "d4 claims the center, controls c5 and e5, opens the bishop's diagonal, and challenges Black's early queen development."
     },
     {
       "san": "e5",
-      "annotation": "Black strikes back in the center with this pawn advance, challenging our d4 pawn and opening up the diagonal for the light-squared bishop. This move shows the point behind Black's setup - after getting the queen to relative safety, Black can now fight for central control and create tactical complications. The advance to e5 also prepares rapid piece development, particularly the bishop to c5 or b4, and gives Black some initiative despite the early queen sortie. We'll need to decide whether to maintain the tension, advance with d5, or capture on e5, each leading to different types of positions in this sharp opening system."
+      "annotation": "Black strikes back in the center with this pawn advance, challenging our d4 pawn and opening up the diagonal for the light-squared bishop. This move shows the point behind Black's setup - after getting the queen to relative safety, Black can now fight for central control and create tactical complications. The advance to e5 also prepares rapid piece development, particularly the bishop to c5 or b4, and gives Black some initiative despite the early queen sortie. We'll need to decide whether to maintain the tension, advance with d5, or capture on e5, each leading to different types of positions in this sharp opening system.",
+      "shortNarration": "Black's e5 challenges d4, opens the light-squared bishop's diagonal, and prepares development to c5 or b4 — we must choose between d5, dxe5, or maintaining tension."
     }
   ]
 }

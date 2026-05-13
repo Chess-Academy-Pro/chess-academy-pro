@@ -3,43 +3,53 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with the King's Indian Attack, a flexible system where we develop methodically and avoid early commitments. Nf3 controls the central squares e5 and d4 while preparing to fianchetto our kingside bishop, giving us a solid setup that works against almost any Black defense."
+      "annotation": "We start with the King's Indian Attack, a flexible system where we develop methodically and avoid early commitments. Nf3 controls the central squares e5 and d4 while preparing to fianchetto our kingside bishop, giving us a solid setup that works against almost any Black defense.",
+      "shortNarration": "Nf3 controls e5 and d4, preparing a kingside fianchetto in the flexible King's Indian Attack."
     },
     {
       "san": "d5",
-      "annotation": "Black stakes a claim in the center immediately, which is a natural response to our knight move. This move gives Black space and flexibility, though it also makes Black's light squares (especially e6 and d6) slightly weaker—something to keep in mind as we build our position."
+      "annotation": "Black stakes a claim in the center immediately, which is a natural response to our knight move. This move gives Black space and flexibility, though it also makes Black's light squares (especially e6 and d6) slightly weaker—something to keep in mind as we build our position.",
+      "shortNarration": "Black's 1...c5 stakes a center claim but weakens light squares e6 and d6."
     },
     {
       "san": "g3",
-      "annotation": "This is the signature move of the King's Indian Attack. We're preparing to fianchetto our bishop on g2, where it will exert pressure along the long diagonal toward d5 and beyond. The g3 setup is typically slow but gives us excellent piece coordination and makes our position very hard to attack."
+      "annotation": "This is the signature move of the King's Indian Attack. We're preparing to fianchetto our bishop on g2, where it will exert pressure along the long diagonal toward d5 and beyond. The g3 setup is typically slow but gives us excellent piece coordination and makes our position very hard to attack.",
+      "shortNarration": "g3 fianchetto aims the bishop at d5, building slow but resilient piece coordination."
     },
     {
       "san": "g6",
-      "annotation": "Black mirrors our fianchetto idea, which is actually quite flexible for them. By playing g6, Black prepares Bg7 and keeps options open in the center and queenside, but this move does commit Black to a slightly passive setup where the d5 pawn becomes an important landmark."
+      "annotation": "Black mirrors our fianchetto idea, which is actually quite flexible for them. By playing g6, Black prepares Bg7 and keeps options open in the center and queenside, but this move does commit Black to a slightly passive setup where the d5 pawn becomes an important landmark.",
+      "shortNarration": "Black's g6 fianchetto commits to a passive setup where d5 becomes a key target."
     },
     {
       "san": "Bg2",
-      "annotation": "Our fianchettoed bishop now eyes the long diagonal stretching to a1, pressuring Black's d5 pawn and controlling key central squares. Combined with our knight on f3, we're building a harmonious setup where our pieces work together to support a future e4 break or central pressure."
+      "annotation": "Our fianchettoed bishop now eyes the long diagonal stretching to a1, pressuring Black's d5 pawn and controlling key central squares. Combined with our knight on f3, we're building a harmonious setup where our pieces work together to support a future e4 break or central pressure.",
+      "shortNarration": "Fianchettoed bishop on g2 eyes d5 and the long diagonal, supporting a future e4 break with the knight on f3."
     },
     {
       "san": "Bg7",
-      "annotation": "Black completes the fianchetto and controls the long diagonal from the other direction, creating a tense situation where both bishops face off along this important line. Black's light-squared bishop on g7 will be a key defensive piece, especially once we push e4."
+      "annotation": "Black completes the fianchetto and controls the long diagonal from the other direction, creating a tense situation where both bishops face off along this important line. Black's light-squared bishop on g7 will be a key defensive piece, especially once we push e4.",
+      "shortNarration": "Both bishops face off along the long diagonal after Black's fianchetto — Black's g7 bishop becomes key once e4 is pushed."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside to tuck our king to safety and connect our rooks. In the King's Indian Attack, early castling is typical because we're not rushing to attack—we're building a solid base from which to launch a measured, coordinated advance."
+      "annotation": "We castle kingside to tuck our king to safety and connect our rooks. In the King's Indian Attack, early castling is typical because we're not rushing to attack—we're building a solid base from which to launch a measured, coordinated advance.",
+      "shortNarration": "Castle kingside to tuck the king safe and connect rooks, building a solid base for a measured advance."
     },
     {
       "san": "e5",
-      "annotation": "Black advances in the center, staking space and preventing our ideal e4 break. This move does commit Black to a more concrete pawn structure, and Black's central pawns (especially on d5 and e5) become both strengths and potential targets depending on how we maneuver our pieces."
+      "annotation": "Black advances in the center, staking space and preventing our ideal e4 break. This move does commit Black to a more concrete pawn structure, and Black's central pawns (especially on d5 and e5) become both strengths and potential targets depending on how we maneuver our pieces.",
+      "shortNarration": "Black's central pawns on d5 and e5 gain space but become targets if we maneuver pieces against them."
     },
     {
       "san": "d3",
-      "annotation": "Rather than playing d4 immediately, we keep the center flexible with d3, which also prepares to support e4 if we push there later. This modest pawn advance is characteristically patient: we're not fighting for space aggressively, but rather setting up a secure foundation and keeping our options open."
+      "annotation": "Rather than playing d4 immediately, we keep the center flexible with d3, which also prepares to support e4 if we push there later. This modest pawn advance is characteristically patient: we're not fighting for space aggressively, but rather setting up a secure foundation and keeping our options open.",
+      "shortNarration": "d3 keeps the center flexible, supporting e4 while avoiding immediate confrontation."
     },
     {
       "san": "Ne7",
-      "annotation": "Black develops the knight to e7, a flexible square that defends d5, supports potential f5 or g6-related plans, and keeps Black's position coordinated. This is a solid, unhurried setup where Black isn't committing to early aggression, matching the patient nature of our King's Indian Attack structure."
+      "annotation": "Black develops the knight to e7, a flexible square that defends d5, supports potential f5 or g6-related plans, and keeps Black's position coordinated. This is a solid, unhurried setup where Black isn't committing to early aggression, matching the patient nature of our King's Indian Attack structure.",
+      "shortNarration": "Black's knight to e7 defends d5 and supports f5 or g6, keeping the position solid and unhurried."
     }
   ]
 }

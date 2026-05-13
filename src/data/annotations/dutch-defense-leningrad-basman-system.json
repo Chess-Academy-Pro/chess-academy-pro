@@ -3,43 +3,53 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This is one of the most principled first moves in chess, as it fights for central control from the very beginning. The d4 move also prepares potential pawn advances like e4 or c4, giving us flexibility in how we'll develop our position. By starting with d4, we're inviting our opponent into a wide range of possible defenses, from classical setups like the Queen's Gambit to more aggressive counterattacking systems."
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This is one of the most principled first moves in chess, as it fights for central control from the very beginning. The d4 move also prepares potential pawn advances like e4 or c4, giving us flexibility in how we'll develop our position. By starting with d4, we're inviting our opponent into a wide range of possible defenses, from classical setups like the Queen's Gambit to more aggressive counterattacking systems.",
+      "shortNarration": "d4 stakes a claim to e5 and c5, opens lines for the bishop and queen, and prepares e4 or c4."
     },
     {
       "san": "f5",
-      "annotation": "Our opponent chooses the Dutch Defense, one of the most aggressive and uncompromising responses to 1.d4. Black immediately stakes out the e4 square and signals an intention to launch a kingside attack, often targeting our h2 square and king position. This move violates the opening principle of developing pieces before pawns, but it creates immediate imbalances and fighting chances. The Dutch is a favorite of players who want to avoid mainstream theory and create sharp, tactical positions where both sides have winning chances from the opening."
+      "annotation": "Our opponent chooses the Dutch Defense, one of the most aggressive and uncompromising responses to 1.d4. Black immediately stakes out the e4 square and signals an intention to launch a kingside attack, often targeting our h2 square and king position. This move violates the opening principle of developing pieces before pawns, but it creates immediate imbalances and fighting chances. The Dutch is a favorite of players who want to avoid mainstream theory and create sharp, tactical positions where both sides have winning chances from the opening.",
+      "shortNarration": "Black's Dutch Defense stakes out e4 and targets h2, creating immediate imbalances and sharp tactical chances."
     },
     {
       "san": "g3",
-      "annotation": "We're adopting the King's Indian Attack setup against the Dutch, fianchettoing our light-squared bishop to control the long diagonal and support our central pawn structure. This flexible system allows us to complete our kingside development quickly while keeping our central pawn structure fluid. The g3 move also prepares to castle kingside safely, which is crucial since Black's f5 pawn hints at potential kingside attacking chances. By choosing this setup, we're avoiding the main theoretical lines while maintaining excellent practical chances."
+      "annotation": "We're adopting the King's Indian Attack setup against the Dutch, fianchettoing our light-squared bishop to control the long diagonal and support our central pawn structure. This flexible system allows us to complete our kingside development quickly while keeping our central pawn structure fluid. The g3 move also prepares to castle kingside safely, which is crucial since Black's f5 pawn hints at potential kingside attacking chances. By choosing this setup, we're avoiding the main theoretical lines while maintaining excellent practical chances.",
+      "shortNarration": "Fianchetto the light-squared bishop to g2, castle kingside, and keep the central pawn structure flexible against Black's Dutch setup."
     },
     {
       "san": "c6",
-      "annotation": "Black chooses the Leningrad variation's move order, preparing to support the center with d6 while keeping options open for piece development. This move controls the d5 square and prepares potential expansion with d5, though it's less common than the immediate Nf6 or d6. The c6 move also prepares to develop the queen's knight to d7, which is a key piece in many Dutch formations. This setup, known as the Basman System, aims to create a solid pawn structure while maintaining flexibility in piece placement."
+      "annotation": "Black chooses the Leningrad variation's move order, preparing to support the center with d6 while keeping options open for piece development. This move controls the d5 square and prepares potential expansion with d5, though it's less common than the immediate Nf6 or d6. The c6 move also prepares to develop the queen's knight to d7, which is a key piece in many Dutch formations. This setup, known as the Basman System, aims to create a solid pawn structure while maintaining flexibility in piece placement.",
+      "shortNarration": "c6 prepares d5 or Nd7, supporting the center and keeping flexible piece development in the Leningrad Dutch."
     },
     {
       "san": "Bg2",
-      "annotation": "We complete our kingside fianchetto, placing our bishop on the long diagonal where it eyes Black's central pawns and supports our overall pawn structure. This bishop will become a key piece in our middlegame plans, often supporting central advances or defending against Black's kingside pressure. The fianchettoed bishop also works harmoniously with our planned kingside castling, creating a solid defensive formation. From g2, our bishop can also support future central breaks like e4, which is often a key thematic advance in these positions."
+      "annotation": "We complete our kingside fianchetto, placing our bishop on the long diagonal where it eyes Black's central pawns and supports our overall pawn structure. This bishop will become a key piece in our middlegame plans, often supporting central advances or defending against Black's kingside pressure. The fianchettoed bishop also works harmoniously with our planned kingside castling, creating a solid defensive formation. From g2, our bishop can also support future central breaks like e4, which is often a key thematic advance in these positions.",
+      "shortNarration": "The fianchettoed bishop on g2 eyes Black's center, supports e4 breaks, and defends the castled king."
     },
     {
       "san": "g6",
-      "annotation": "Black commits to the Leningrad Dutch structure, preparing to fianchetto the dark-squared bishop on g7 where it will become a powerful attacking piece. This move supports the f5 pawn and prepares to create a solid kingside pawn chain with pawns on f5, g6, and eventually h6 if needed. The g6 advance also opens up the possibility of kingside castling, though Black will need to be careful about king safety given the advanced f5 pawn. This pawn structure is characteristic of the Leningrad variation and often leads to sharp middlegame battles."
+      "annotation": "Black commits to the Leningrad Dutch structure, preparing to fianchetto the dark-squared bishop on g7 where it will become a powerful attacking piece. This move supports the f5 pawn and prepares to create a solid kingside pawn chain with pawns on f5, g6, and eventually h6 if needed. The g6 advance also opens up the possibility of kingside castling, though Black will need to be careful about king safety given the advanced f5 pawn. This pawn structure is characteristic of the Leningrad variation and often leads to sharp middlegame battles.",
+      "shortNarration": "Black's Leningrad Dutch fianchetto on g7 supports f5 and builds a kingside pawn chain, leading to sharp middlegame battles."
     },
     {
       "san": "Nf3",
-      "annotation": "Continuing Dutch Defense Leningrad Basman System: Nf3 is a known theory move in this line."
+      "annotation": "Continuing Dutch Defense Leningrad Basman System: Nf3 is a known theory move in this line.",
+      "shortNarration": "Nf3 is a key theory move in the Leningrad Basman System."
     },
     {
       "san": "Bg7",
-      "annotation": "Continuing Dutch Defense Leningrad Basman System: Bg7 is a known theory move in this line."
+      "annotation": "Continuing Dutch Defense Leningrad Basman System: Bg7 is a known theory move in this line.",
+      "shortNarration": "Bg7 is theory in the Dutch Leningrad Basman System."
     },
     {
       "san": "O-O",
-      "annotation": "Continuing Dutch Defense Leningrad Basman System: O-O is a known theory move in this line."
+      "annotation": "Continuing Dutch Defense Leningrad Basman System: O-O is a known theory move in this line.",
+      "shortNarration": "Dutch Leningrad Basman: O-O is the theory move."
     },
     {
       "san": "Nh6",
-      "annotation": "Continuing Dutch Defense Leningrad Basman System: Nh6 is a known theory move in this line."
+      "annotation": "Continuing Dutch Defense Leningrad Basman System: Nh6 is a known theory move in this line.",
+      "shortNarration": "Nh6 is theory in the Dutch Leningrad Basman System."
     }
   ]
 }

@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "g3",
-      "annotation": "We start with the Hungarian Opening, an offbeat but solid system where we prepare to fianchetto our kingside bishop on g2. By playing g3, we gain control of the long diagonal (a1-h8) and create a flexible setup that can transpose into various positions depending on Black's response. This move is less forcing than 1.e4 or 1.d4, giving us a quieter game where we can outplay opponents in the middlegame rather than relying on opening theory."
+      "annotation": "We start with the Hungarian Opening, an offbeat but solid system where we prepare to fianchetto our kingside bishop on g2. By playing g3, we gain control of the long diagonal (a1-h8) and create a flexible setup that can transpose into various positions depending on Black's response. This move is less forcing than 1.e4 or 1.d4, giving us a quieter game where we can outplay opponents in the middlegame rather than relying on opening theory.",
+      "shortNarration": "g3 prepares a kingside fianchetto, controlling the long diagonal for a flexible, less theoretical middlegame."
     },
     {
       "san": "f5",
-      "annotation": "Black immediately strikes at the center with this aggressive pawn move, challenging us to demonstrate the viability of our slow setup. By playing f5, Black claims space on e4 and prepares to advance further, but this also weakens the e6 and g6 squares, which we'll be quick to exploit. This aggressive try often leads to the Pachman Gambit complex, where tactical fireworks can erupt quickly."
+      "annotation": "Black immediately strikes at the center with this aggressive pawn move, challenging us to demonstrate the viability of our slow setup. By playing f5, Black claims space on e4 and prepares to advance further, but this also weakens the e6 and g6 squares, which we'll be quick to exploit. This aggressive try often leads to the Pachman Gambit complex, where tactical fireworks can erupt quickly.",
+      "shortNarration": "Black's f5 challenges the center, weakens e6 and g6, and can lead to sharp tactical play in the Pachman Gambit."
     },
     {
       "san": "e4",
-      "annotation": "This is the central idea of the Pachman Gambit—we offer our central pawn to disrupt Black's center and open lines toward the kingside. By capturing on e4 would saddle Black with weak light squares around their king, but we're actually sacrificing the pawn to accelerate our attack along the long diagonal and h-file. The move is both positional (weakening Black's kingside) and tactical (we're aiming for threats like Qh5+)."
+      "annotation": "This is the central idea of the Pachman Gambit—we offer our central pawn to disrupt Black's center and open lines toward the kingside. By capturing on e4 would saddle Black with weak light squares around their king, but we're actually sacrificing the pawn to accelerate our attack along the long diagonal and h-file. The move is both positional (weakening Black's kingside) and tactical (we're aiming for threats like Qh5+).",
+      "shortNarration": "Sacrificing the e-pawn in the Pachman Gambit weakens Black's kingside and opens lines for Qh5+ threats."
     },
     {
       "san": "fxe4",
-      "annotation": "Black's natural response is to capture our pawn, but this further weakens the kingside by opening the f-file and removing the defender of e5. By taking, Black hasn't solved our problems—in fact, they've walked into a dangerous attack where our pieces (particularly the queen and light-squared bishop) coordinate against the vulnerable king. This is exactly what we wanted when we played e4."
+      "annotation": "Black's natural response is to capture our pawn, but this further weakens the kingside by opening the f-file and removing the defender of e5. By taking, Black hasn't solved our problems—in fact, they've walked into a dangerous attack where our pieces (particularly the queen and light-squared bishop) coordinate against the vulnerable king. This is exactly what we wanted when we played e4.",
+      "shortNarration": "Black's capture opens the f-file and removes e5's defender, walking into a coordinated queen-and-bishop attack against the vulnerable king."
     },
     {
       "san": "Qh5+",
-      "annotation": "This forcing check is the point of the whole gambit! By giving check immediately, we force Black's king into an awkward decision while we complete our attack with tempo. The queen on h5 is perfectly placed to support threats against g6 and the kingside weaknesses Black created with their aggressive play. Combined with our fianchettoed bishop coming to g2, this creates a deadly attacking network."
+      "annotation": "This forcing check is the point of the whole gambit! By giving check immediately, we force Black's king into an awkward decision while we complete our attack with tempo. The queen on h5 is perfectly placed to support threats against g6 and the kingside weaknesses Black created with their aggressive play. Combined with our fianchettoed bishop coming to g2, this creates a deadly attacking network.",
+      "shortNarration": "Queen to h5 checks, forcing Black's king to move while White's fianchettoed bishop on g2 targets the weakened kingside."
     },
     {
       "san": "g6",
-      "annotation": "Black is forced to block the check, but playing g6 further compromises the kingside by weakening h6 and allowing our queen to dominate the light squares. After g6, Black's king has no safe haven—the f7, g7, and h7 squares are all compromised. We've successfully sacrificed a pawn to expose Black's king, and now we press forward with our development and attacking chances, relying on our superior piece coordination and Black's passive position to justify the material."
+      "annotation": "Black is forced to block the check, but playing g6 further compromises the kingside by weakening h6 and allowing our queen to dominate the light squares. After g6, Black's king has no safe haven—the f7, g7, and h7 squares are all compromised. We've successfully sacrificed a pawn to expose Black's king, and now we press forward with our development and attacking chances, relying on our superior piece coordination and Black's passive position to justify the material.",
+      "shortNarration": "After g6, Black's king is exposed on f7, g7, and h7 — our queen dominates light squares, justifying the pawn sacrifice with superior piece coordination."
     }
   ]
 }

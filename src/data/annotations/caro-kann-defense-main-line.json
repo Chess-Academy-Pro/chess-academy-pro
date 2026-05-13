@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the center and freeing both our bishop on f1 and our queen for future development. This classical move controls the crucial d5 and f5 squares, preventing Black from easily establishing pieces there. The pawn on e4 also supports a potential d4 advance later, which would give us an ideal pawn center. This is one of the most principled first moves in chess, leading to sharp tactical games and offering White excellent winning chances."
+      "annotation": "We're opening with the king's pawn, staking our claim to the center and freeing both our bishop on f1 and our queen for future development. This classical move controls the crucial d5 and f5 squares, preventing Black from easily establishing pieces there. The pawn on e4 also supports a potential d4 advance later, which would give us an ideal pawn center. This is one of the most principled first moves in chess, leading to sharp tactical games and offering White excellent winning chances.",
+      "shortNarration": "1.e4 controls d5 and f5, opens lines for the queen and bishop, and supports a future d4 advance."
     },
     {
       "san": "c6",
-      "annotation": "Black chooses the Caro-Kann Defense, a solid and strategic opening that's quite different from the more tactical 1...e5. This move prepares to challenge our central pawn with ...d5, but does so in a way that won't block in the light-squared bishop (unlike the French Defense with 1...e6). The Caro-Kann is known for giving Black a solid pawn structure and good piece development, though it can be somewhat passive in the early stages. Black is essentially saying 'I'm willing to develop a bit more slowly in exchange for a rock-solid position.'"
+      "annotation": "Black chooses the Caro-Kann Defense, a solid and strategic opening that's quite different from the more tactical 1...e5. This move prepares to challenge our central pawn with ...d5, but does so in a way that won't block in the light-squared bishop (unlike the French Defense with 1...e6). The Caro-Kann is known for giving Black a solid pawn structure and good piece development, though it can be somewhat passive in the early stages. Black is essentially saying 'I'm willing to develop a bit more slowly in exchange for a rock-solid position.'",
+      "shortNarration": "Black chooses the Caro-Kann, preparing ...d5 to challenge the center without blocking the light-squared bishop."
     },
     {
       "san": "d4",
-      "annotation": "We establish the ideal pawn center, now controlling key central squares on both sides of the board. This pawn works in tandem with our e4 pawn to dominate the center and restrict Black's piece placement. The d4 pawn also opens lines for our queen and dark-squared bishop, while supporting our pieces that will soon enter the game. This is the most principled continuation, as we're not allowing Black to comfortably establish their own central presence without a fight."
+      "annotation": "We establish the ideal pawn center, now controlling key central squares on both sides of the board. This pawn works in tandem with our e4 pawn to dominate the center and restrict Black's piece placement. The d4 pawn also opens lines for our queen and dark-squared bishop, while supporting our pieces that will soon enter the game. This is the most principled continuation, as we're not allowing Black to comfortably establish their own central presence without a fight.",
+      "shortNarration": "The d4 pawn, backed by e4, controls the center, restricts Black's pieces, and opens lines for the queen and dark-squared bishop."
     },
     {
       "san": "d5",
-      "annotation": "Black strikes at our pawn center immediately, which is the whole point of the Caro-Kann setup. This central challenge forces us to make a decision about our e4 pawn and begins the typical tension of this opening. Black is following through on their first move's promise, using the c6 pawn to support this central advance. This move also opens the diagonal for Black's light-squared bishop and begins to free their position, transitioning from the passive setup phase into active piece development."
+      "annotation": "Black strikes at our pawn center immediately, which is the whole point of the Caro-Kann setup. This central challenge forces us to make a decision about our e4 pawn and begins the typical tension of this opening. Black is following through on their first move's promise, using the c6 pawn to support this central advance. This move also opens the diagonal for Black's light-squared bishop and begins to free their position, transitioning from the passive setup phase into active piece development.",
+      "shortNarration": "Black's c5 strikes the center, opening the diagonal for the light-squared bishop and forcing a decision on e4."
     },
     {
       "san": "Nd2",
-      "annotation": "We're playing the Main Line of the Caro-Kann, developing our knight to support the attacked e4 pawn while keeping maximum flexibility. This knight placement is more refined than the immediate Nc3, because it doesn't block our c-pawn and leaves the c3 square available for other pieces later. The knight on d2 can also swing to f3 or even e4 after Black captures, giving us excellent central control. This move shows we're ready to recapture on e4 with a piece rather than a pawn, which will give us more active piece play in the center."
+      "annotation": "We're playing the Main Line of the Caro-Kann, developing our knight to support the attacked e4 pawn while keeping maximum flexibility. This knight placement is more refined than the immediate Nc3, because it doesn't block our c-pawn and leaves the c3 square available for other pieces later. The knight on d2 can also swing to f3 or even e4 after Black captures, giving us excellent central control. This move shows we're ready to recapture on e4 with a piece rather than a pawn, which will give us more active piece play in the center.",
+      "shortNarration": "Knight to d2 supports e4 without blocking the c-pawn, ready to recapture with a piece for active central play."
     },
     {
       "san": "dxe4",
-      "annotation": "Black follows through with the central trade, removing our strong e4 pawn and opening up the position. This capture is almost forced, as leaving the tension would allow us to maintain our space advantage indefinitely. By trading pawns, Black eliminates one source of central pressure and begins to free their position for piece development. However, this also gives us the opportunity to recapture with our knight, which will land beautifully on the central e4 square."
+      "annotation": "Black follows through with the central trade, removing our strong e4 pawn and opening up the position. This capture is almost forced, as leaving the tension would allow us to maintain our space advantage indefinitely. By trading pawns, Black eliminates one source of central pressure and begins to free their position for piece development. However, this also gives us the opportunity to recapture with our knight, which will land beautifully on the central e4 square.",
+      "shortNarration": "Black trades on e4, freeing their position but letting our knight recapture onto the central e4 square."
     },
     {
       "san": "Nxe4",
-      "annotation": "We recapture with the knight, placing it on the excellent central outpost where it radiates influence in all directions. This knight controls key squares like d6, f6, c5, and g5, making it difficult for Black to coordinate their pieces comfortably. From e4, our knight also supports potential pawn advances and can easily relocate to other strong squares as the position develops. This recapture is the defining characteristic of the Main Line - we get active piece play and central control in exchange for the pawn trade, setting up the typical middlegame themes where we'll look to exploit our more active pieces against Black's solid but somewhat passive setup."
+      "annotation": "We recapture with the knight, placing it on the excellent central outpost where it radiates influence in all directions. This knight controls key squares like d6, f6, c5, and g5, making it difficult for Black to coordinate their pieces comfortably. From e4, our knight also supports potential pawn advances and can easily relocate to other strong squares as the position develops. This recapture is the defining characteristic of the Main Line - we get active piece play and central control in exchange for the pawn trade, setting up the typical middlegame themes where we'll look to exploit our more active pieces against Black's solid but somewhat passive setup.",
+      "shortNarration": "Recapturing with the knight on e4 gives central control and active piece play, pressuring d6, f6, c5, and g5."
     }
   ]
 }

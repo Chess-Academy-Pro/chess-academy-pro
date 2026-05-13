@@ -3,47 +3,58 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, immediately seizing control of the central squares d5 and f5 while opening lines for our bishop and queen. This move stakes our claim to the center and gives us excellent piece development opportunities. The e4 pawn also supports a potential future d2-d4 advance, which would create a strong pawn center. Against the Sicilian Defense that's coming, we'll need to be prepared for Black's counterplay on the queenside and in the center."
+      "annotation": "We're opening with the king's pawn, immediately seizing control of the central squares d5 and f5 while opening lines for our bishop and queen. This move stakes our claim to the center and gives us excellent piece development opportunities. The e4 pawn also supports a potential future d2-d4 advance, which would create a strong pawn center. Against the Sicilian Defense that's coming, we'll need to be prepared for Black's counterplay on the queenside and in the center.",
+      "shortNarration": "1.e4 claims the center, opens lines for the queen and bishop, and supports a future d4 advance against the Sicilian."
     },
     {
       "san": "c5",
-      "annotation": "Our opponent responds with the Sicilian Defense, immediately challenging our central control by attacking the d4 square and preventing us from playing d2-d4 easily. Black's plan in the Sicilian is typically to create counterplay on the queenside with moves like ...b5 and ...Bb7, while keeping the center flexible. This asymmetrical pawn structure often leads to sharp, tactical games where both sides attack on opposite flanks. Black is essentially saying 'I'll let you have the center for now, but I'm going to create my own play elsewhere.'"
+      "annotation": "Our opponent responds with the Sicilian Defense, immediately challenging our central control by attacking the d4 square and preventing us from playing d2-d4 easily. Black's plan in the Sicilian is typically to create counterplay on the queenside with moves like ...b5 and ...Bb7, while keeping the center flexible. This asymmetrical pawn structure often leads to sharp, tactical games where both sides attack on opposite flanks. Black is essentially saying 'I'll let you have the center for now, but I'm going to create my own play elsewhere.'",
+      "shortNarration": "Black's Sicilian challenges d4, aiming for queenside counterplay with ...b5 and ...Bb7 while White holds the center."
     },
     {
       "san": "Nc3",
-      "annotation": "We're developing our knight to its ideal square, supporting a future d2-d4 push and maintaining flexibility in our setup. This is the starting point of the Closed Sicilian system, where we avoid the main theoretical lines and instead focus on kingside development and a slower, more positional approach. The knight on c3 also eyes the important e4 square and can later support pawn advances on either flank. By choosing this system, we're signaling that we want to avoid the sharp theoretical battles of the Open Sicilian (2.Nf3 and 3.d4)."
+      "annotation": "We're developing our knight to its ideal square, supporting a future d2-d4 push and maintaining flexibility in our setup. This is the starting point of the Closed Sicilian system, where we avoid the main theoretical lines and instead focus on kingside development and a slower, more positional approach. The knight on c3 also eyes the important e4 square and can later support pawn advances on either flank. By choosing this system, we're signaling that we want to avoid the sharp theoretical battles of the Open Sicilian (2.Nf3 and 3.d4).",
+      "shortNarration": "Knight to c3 eyes e4, supports d4, and starts the Closed Sicilian — positional, avoiding Open Sicilian theory."
     },
     {
       "san": "Nc6",
-      "annotation": "Black develops the knight to its most active square, mirroring our development and preparing to support central operations. This knight puts additional pressure on the d4 square and can later jump to active squares like d4 or b4. The knight also supports Black's typical Sicilian plans of ...f5 (challenging our e4 pawn) or ...Nd4 (occupying the central outpost). Black is keeping maximum flexibility while developing a piece that will be useful in virtually any pawn structure that emerges."
+      "annotation": "Black develops the knight to its most active square, mirroring our development and preparing to support central operations. This knight puts additional pressure on the d4 square and can later jump to active squares like d4 or b4. The knight also supports Black's typical Sicilian plans of ...f5 (challenging our e4 pawn) or ...Nd4 (occupying the central outpost). Black is keeping maximum flexibility while developing a piece that will be useful in virtually any pawn structure that emerges.",
+      "shortNarration": "Black's knight develops to its most active square, pressuring d4 and supporting ...f5 or ...Nd4."
     },
     {
       "san": "g3",
-      "annotation": "We're beginning our kingside fianchetto setup, which is the hallmark of the Closed Sicilian system. This move prepares Bg2, where our bishop will exert long-range pressure on the long diagonal and support our central pawns. The fianchetto setup is particularly effective against Black's kingside pawn structure and gives us excellent control over the light squares. This slower, positional approach allows us to build up our position methodically while keeping Black guessing about our exact plans."
+      "annotation": "We're beginning our kingside fianchetto setup, which is the hallmark of the Closed Sicilian system. This move prepares Bg2, where our bishop will exert long-range pressure on the long diagonal and support our central pawns. The fianchetto setup is particularly effective against Black's kingside pawn structure and gives us excellent control over the light squares. This slower, positional approach allows us to build up our position methodically while keeping Black guessing about our exact plans.",
+      "shortNarration": "Bg2 prepares the fianchetto, controlling the long diagonal and light squares in the Closed Sicilian."
     },
     {
       "san": "g6",
-      "annotation": "Our opponent mirrors our fianchetto setup, preparing ...Bg7 to create their own light-squared bishop powerhouse on the long diagonal. This symmetrical approach is very logical for Black, as the bishop on g7 will be excellently placed to support both defense and attack. Black is also keeping the option of ...f5 open, which could challenge our central pawn and create kingside counterplay. The fianchetto structure gives Black a solid foundation while maintaining the typical Sicilian dynamic tension."
+      "annotation": "Our opponent mirrors our fianchetto setup, preparing ...Bg7 to create their own light-squared bishop powerhouse on the long diagonal. This symmetrical approach is very logical for Black, as the bishop on g7 will be excellently placed to support both defense and attack. Black is also keeping the option of ...f5 open, which could challenge our central pawn and create kingside counterplay. The fianchetto structure gives Black a solid foundation while maintaining the typical Sicilian dynamic tension.",
+      "shortNarration": "Black mirrors the fianchetto with ...Bg7, keeping ...f5 as a central counterplay option."
     },
     {
       "san": "Bg2",
-      "annotation": "We complete our fianchetto setup by placing the bishop on its ideal square, where it surveys the entire long diagonal from a1 to h8. This bishop becomes a key piece in our position, supporting our central pawns, eyeing Black's kingside, and potentially creating tactical opportunities later in the game. The bishop also helps defend our king once we castle kingside and gives us excellent control over the light squares in the center. This is the cornerstone piece of our entire positional setup in the Closed Sicilian."
+      "annotation": "We complete our fianchetto setup by placing the bishop on its ideal square, where it surveys the entire long diagonal from a1 to h8. This bishop becomes a key piece in our position, supporting our central pawns, eyeing Black's kingside, and potentially creating tactical opportunities later in the game. The bishop also helps defend our king once we castle kingside and gives us excellent control over the light squares in the center. This is the cornerstone piece of our entire positional setup in the Closed Sicilian.",
+      "shortNarration": "The fianchettoed bishop on g2 controls the a1–h8 diagonal, supporting the center and eyeing Black's kingside."
     },
     {
       "san": "Bg7",
-      "annotation": "Black completes their own fianchetto, placing the dark-squared bishop on g7 where it mirrors our setup and creates a tense standoff along the long diagonal. This bishop will be crucial for Black's defensive and offensive operations, particularly in supporting the ...f5 advance or defending against our potential e4-e5 pawn break. The symmetrical structure creates a complex positional battle where both sides have similar piece placement but different strategic goals. Black's bishop also adds extra defense to the kingside, making it harder for us to create immediate threats there."
+      "annotation": "Black completes their own fianchetto, placing the dark-squared bishop on g7 where it mirrors our setup and creates a tense standoff along the long diagonal. This bishop will be crucial for Black's defensive and offensive operations, particularly in supporting the ...f5 advance or defending against our potential e4-e5 pawn break. The symmetrical structure creates a complex positional battle where both sides have similar piece placement but different strategic goals. Black's bishop also adds extra defense to the kingside, making it harder for us to create immediate threats there.",
+      "shortNarration": "Black's fianchettoed bishop on g7 eyes the long diagonal, supporting ...f5 and defending against e4-e5."
     },
     {
       "san": "d3",
-      "annotation": "We're solidifying our pawn structure with this modest but important advance, supporting our e4 pawn and preparing to develop our light-squared bishop. This move keeps our center flexible while avoiding the committal d2-d4, which would transpose into different Sicilian lines. The pawn on d3 also controls important central squares like c4 and e4, and gives our king a potential escape square on d2. This quiet approach is typical of the Closed Sicilian, where we build up slowly and keep our options open for various pawn breaks later."
+      "annotation": "We're solidifying our pawn structure with this modest but important advance, supporting our e4 pawn and preparing to develop our light-squared bishop. This move keeps our center flexible while avoiding the committal d2-d4, which would transpose into different Sicilian lines. The pawn on d3 also controls important central squares like c4 and e4, and gives our king a potential escape square on d2. This quiet approach is typical of the Closed Sicilian, where we build up slowly and keep our options open for various pawn breaks later.",
+      "shortNarration": "d3 supports e4, controls c4 and e4, keeps the center flexible, and avoids transposing into open Sicilian lines."
     },
     {
       "san": "d6",
-      "annotation": "Our opponent establishes a solid pawn center, supporting the c5 pawn and preparing to develop the dark-squared bishop. This move also controls the important e5 square and gives Black a solid foundation for their position. Black is maintaining the typical Sicilian pawn structure while keeping options open for ...f5 or ...e6 depending on how the position develops. The pawn on d6 also provides additional protection for the king and creates a potential outpost for pieces on e5."
+      "annotation": "Our opponent establishes a solid pawn center, supporting the c5 pawn and preparing to develop the dark-squared bishop. This move also controls the important e5 square and gives Black a solid foundation for their position. Black is maintaining the typical Sicilian pawn structure while keeping options open for ...f5 or ...e6 depending on how the position develops. The pawn on d6 also provides additional protection for the king and creates a potential outpost for pieces on e5.",
+      "shortNarration": "Black's d6 solidifies the Sicilian center, controls e5, and keeps ...f5 or ...e6 flexible."
     },
     {
       "san": "Be3",
-      "annotation": "We're developing our light-squared bishop to an active square where it supports our queenside operations and maintains central influence. This bishop placement is particularly useful because it can support a potential f2-f4 advance, which is a key thematic idea in the Closed Sicilian. The bishop also eyes the c5 pawn and can potentially create tactical opportunities if Black's pieces become uncoordinated. From e3, the bishop maintains flexibility - it can retreat to d2 if attacked, or potentially advance to h6 to challenge Black's fianchettoed bishop in some variations."
+      "annotation": "We're developing our light-squared bishop to an active square where it supports our queenside operations and maintains central influence. This bishop placement is particularly useful because it can support a potential f2-f4 advance, which is a key thematic idea in the Closed Sicilian. The bishop also eyes the c5 pawn and can potentially create tactical opportunities if Black's pieces become uncoordinated. From e3, the bishop maintains flexibility - it can retreat to d2 if attacked, or potentially advance to h6 to challenge Black's fianchettoed bishop in some variations.",
+      "shortNarration": "Bishop to e3 supports f2-f4, eyes c5, and can challenge Black's fianchettoed bishop via h6."
     }
   ]
 }

@@ -3,23 +3,28 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, immediately staking a claim in the center and freeing both our bishop on f1 and our queen for potential development. This move controls the crucial d5 and f5 squares, preventing Black from easily placing pieces there. The e4 pawn also supports a potential d4 advance later, which would give us a classical two-pawn center. This is one of the most principled first moves, leading to sharp, tactical games where we can often launch quick attacks against Black's king."
+      "annotation": "We're opening with the king's pawn, immediately staking a claim in the center and freeing both our bishop on f1 and our queen for potential development. This move controls the crucial d5 and f5 squares, preventing Black from easily placing pieces there. The e4 pawn also supports a potential d4 advance later, which would give us a classical two-pawn center. This is one of the most principled first moves, leading to sharp, tactical games where we can often launch quick attacks against Black's king.",
+      "shortNarration": "1.e4 claims the center, controls d5 and f5, and opens lines for the queen and bishop."
     },
     {
       "san": "c5",
-      "annotation": "Black responds with the Sicilian Defense, the most popular and combative response to 1.e4 at all levels of chess. Rather than matching us in the center with 1...e5, our opponent immediately challenges our potential d4 advance and stakes out territory on the queenside. This asymmetrical pawn structure typically leads to unbalanced positions where both sides have winning chances - we'll often attack on the kingside while Black seeks counterplay on the queenside. The c5 pawn also prepares to support Black's pieces with moves like ...Nc6 and ...d6."
+      "annotation": "Black responds with the Sicilian Defense, the most popular and combative response to 1.e4 at all levels of chess. Rather than matching us in the center with 1...e5, our opponent immediately challenges our potential d4 advance and stakes out territory on the queenside. This asymmetrical pawn structure typically leads to unbalanced positions where both sides have winning chances - we'll often attack on the kingside while Black seeks counterplay on the queenside. The c5 pawn also prepares to support Black's pieces with moves like ...Nc6 and ...d6.",
+      "shortNarration": "Black's Sicilian Defense challenges d4 and stakes queenside territory, leading to unbalanced play with White attacking kingside and Black counterattacking queenside."
     },
     {
       "san": "d4",
-      "annotation": "We're advancing our d-pawn to establish the ideal two-pawn center, directly challenging Black's c5 pawn and opening lines for our pieces. This move is almost mandatory in most Sicilian systems, as it's our most natural way to fight for central control. By placing our pawns on e4 and d4, we're following classical opening principles of occupying the center with pawns first, then developing pieces to support them. Black will almost certainly capture on d4, after which we'll need to decide how to recapture - this choice will determine which Sicilian variation we enter."
+      "annotation": "We're advancing our d-pawn to establish the ideal two-pawn center, directly challenging Black's c5 pawn and opening lines for our pieces. This move is almost mandatory in most Sicilian systems, as it's our most natural way to fight for central control. By placing our pawns on e4 and d4, we're following classical opening principles of occupying the center with pawns first, then developing pieces to support them. Black will almost certainly capture on d4, after which we'll need to decide how to recapture - this choice will determine which Sicilian variation we enter.",
+      "shortNarration": "Advancing d4 challenges Black's c5 pawn, establishing the ideal two-pawn center and opening lines for pieces."
     },
     {
       "san": "cxd4",
-      "annotation": "Black captures our d4 pawn, which is the natural and almost universal response in the Sicilian Defense. Our opponent is following the principle of trading when ahead in development, as this exchange opens the c-file for potential rook activity later. This capture also eliminates our strong d4 pawn, reducing our central control but opening tactical possibilities. Now we face the critical decision of how to recapture - most players choose 3.Nf3 followed by Nxd4, leading to the Open Sicilian, but we have other options available."
+      "annotation": "Black captures our d4 pawn, which is the natural and almost universal response in the Sicilian Defense. Our opponent is following the principle of trading when ahead in development, as this exchange opens the c-file for potential rook activity later. This capture also eliminates our strong d4 pawn, reducing our central control but opening tactical possibilities. Now we face the critical decision of how to recapture - most players choose 3.Nf3 followed by Nxd4, leading to the Open Sicilian, but we have other options available.",
+      "shortNarration": "Black's d4 capture opens the c-file and reduces White's center, but White can recapture with 3.Nf3 Nxd4 for the Open Sicilian."
     },
     {
       "san": "f4",
-      "annotation": "We're playing the Halasz Gambit, an aggressive and relatively rare attempt to seize the initiative through rapid kingside development rather than the standard recapture on d4. This pawn advance supports a potential e5 push, controls the e5 and g5 squares, and prepares to develop our king's bishop actively to c4 or b5. While this gambit gives up the d4 pawn permanently, we're betting that our lead in development and attacking chances will provide sufficient compensation. The move is somewhat risky as it weakens our king position, but it can lead to sharp tactical battles where Black must be very careful not to fall behind in development."
+      "annotation": "We're playing the Halasz Gambit, an aggressive and relatively rare attempt to seize the initiative through rapid kingside development rather than the standard recapture on d4. This pawn advance supports a potential e5 push, controls the e5 and g5 squares, and prepares to develop our king's bishop actively to c4 or b5. While this gambit gives up the d4 pawn permanently, we're betting that our lead in development and attacking chances will provide sufficient compensation. The move is somewhat risky as it weakens our king position, but it can lead to sharp tactical battles where Black must be very careful not to fall behind in development.",
+      "shortNarration": "The Halasz Gambit sacrifices the d4 pawn permanently for rapid kingside development and attacking chances."
     }
   ]
 }

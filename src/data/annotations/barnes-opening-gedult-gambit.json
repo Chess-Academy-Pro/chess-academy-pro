@@ -3,23 +3,28 @@
   "moveAnnotations": [
     {
       "san": "f3",
-      "annotation": "We begin with the Barnes Opening, an unusual first move that immediately prepares e4 while supporting g4. This flank approach is rare at higher levels but can lead to interesting, off-beat positions where your opponent might be less prepared. By playing f3, we control the e4 and g4 squares, setting up flexible plans to either advance in the center or launch a kingside attack—though we'll need to be careful about weakening our king's position."
+      "annotation": "We begin with the Barnes Opening, an unusual first move that immediately prepares e4 while supporting g4. This flank approach is rare at higher levels but can lead to interesting, off-beat positions where your opponent might be less prepared. By playing f3, we control the e4 and g4 squares, setting up flexible plans to either advance in the center or launch a kingside attack—though we'll need to be careful about weakening our king's position.",
+      "shortNarration": "f3 controls e4 and g4, preparing e4 or a kingside attack but weakening the king."
     },
     {
       "san": "f5",
-      "annotation": "Black mirrors our strategy and immediately challenges the center, taking space on the queenside and counterattacking. This move fits the Gedult Gambit idea: Black offers a pawn on f5 to prevent us from achieving a comfortable e4 setup and to seize the initiative before we consolidate our position."
+      "annotation": "Black mirrors our strategy and immediately challenges the center, taking space on the queenside and counterattacking. This move fits the Gedult Gambit idea: Black offers a pawn on f5 to prevent us from achieving a comfortable e4 setup and to seize the initiative before we consolidate our position.",
+      "shortNarration": "Black's f5 gambit offers a pawn to seize the initiative and prevent White's comfortable e4 setup."
     },
     {
       "san": "e4",
-      "annotation": "Now we strike at the center, accepting the gambit and exploiting Black's loose pawn structure on f5. By playing e4, we challenge Black's f5-pawn immediately and establish a powerful central presence; if Black takes with fxe4, we'll recapture and develop our knight with tempo. This aggressive move defines the gambit: we're willing to allow Black to capture, but we get rapid piece development and open lines in return."
+      "annotation": "Now we strike at the center, accepting the gambit and exploiting Black's loose pawn structure on f5. By playing e4, we challenge Black's f5-pawn immediately and establish a powerful central presence; if Black takes with fxe4, we'll recapture and develop our knight with tempo. This aggressive move defines the gambit: we're willing to allow Black to capture, but we get rapid piece development and open lines in return.",
+      "shortNarration": "e4 strikes the center, accepting the gambit — if fxe4, recapture with the knight and develop with tempo."
     },
     {
       "san": "fxe4",
-      "annotation": "Black takes our pawn, as expected in the gambit line. This move opens the f-file and damages Black's pawn structure, leaving doubled f-pawns is not an issue here since the f-file opens—but more importantly, it allows us to recapture with our knight while developing a piece and attacking Black's center immediately."
+      "annotation": "Black takes our pawn, as expected in the gambit line. This move opens the f-file and damages Black's pawn structure, leaving doubled f-pawns is not an issue here since the f-file opens—but more importantly, it allows us to recapture with our knight while developing a piece and attacking Black's center immediately.",
+      "shortNarration": "Black takes the pawn, opening the f-file and doubling Black's f-pawns, but we recapture with the knight, developing and attacking the center."
     },
     {
       "san": "Nc3",
-      "annotation": "We recapture with the knight, developing a piece while maintaining pressure on the e4-pawn and controlling key central squares like d5 and e2. The knight on c3 supports future central play and opens the possibility of moving our king's bishop, while Black's e4-pawn is now under attack—Black must decide whether to defend it or push forward with it, giving us the initiative in this sharp, tactical opening."
+      "annotation": "We recapture with the knight, developing a piece while maintaining pressure on the e4-pawn and controlling key central squares like d5 and e2. The knight on c3 supports future central play and opens the possibility of moving our king's bishop, while Black's e4-pawn is now under attack—Black must decide whether to defend it or push forward with it, giving us the initiative in this sharp, tactical opening.",
+      "shortNarration": "Recapturing with the knight develops, pressures e4, and controls d5 and e2, forcing Black to defend or push."
     }
   ]
 }

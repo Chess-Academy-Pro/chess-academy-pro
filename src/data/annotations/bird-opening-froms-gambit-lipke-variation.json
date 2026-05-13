@@ -3,39 +3,48 @@
   "moveAnnotations": [
     {
       "san": "f4",
-      "annotation": "We're playing the Bird Opening, an offbeat weapon that immediately stakes a claim to the e5 square and prepares to support the center with our queen later. Rather than the standard e4 or d4, this move gives Black the first opportunity to occupy e5, which is exactly what we want—it allows us to launch the aggressive From's Gambit next move. You'll notice f4 controls e5 and g5, giving us influence over the kingside while keeping our setup flexible."
+      "annotation": "We're playing the Bird Opening, an offbeat weapon that immediately stakes a claim to the e5 square and prepares to support the center with our queen later. Rather than the standard e4 or d4, this move gives Black the first opportunity to occupy e5, which is exactly what we want—it allows us to launch the aggressive From's Gambit next move. You'll notice f4 controls e5 and g5, giving us influence over the kingside while keeping our setup flexible.",
+      "shortNarration": "f4 controls e5 and g5, staking a claim to the center and preparing the From's Gambit."
     },
     {
       "san": "e5",
-      "annotation": "Black logically takes the space we offered, but this is precisely where we wanted them. By playing e5, Black commits to the center with a pawn that will become a target once we recapture. We're happy to let them advance here because our f4 pawn is perfectly placed to strike at this outpost on the next move."
+      "annotation": "Black logically takes the space we offered, but this is precisely where we wanted them. By playing e5, Black commits to the center with a pawn that will become a target once we recapture. We're happy to let them advance here because our f4 pawn is perfectly placed to strike at this outpost on the next move.",
+      "shortNarration": "Black's e5 pawn becomes a target after f4 recapture."
     },
     {
       "san": "fxe5",
-      "annotation": "Now we launch the gambit itself by capturing toward the center with our f-pawn. This is the critical feature of From's Gambit: we temporarily sacrifice the e5 pawn to open the f-file and create a lead in development. Notice that our e5 pawn is defended by our d-pawn, so Black can't simply grab it for free—they must recapture with d6, which forces them into a specific setup."
+      "annotation": "Now we launch the gambit itself by capturing toward the center with our f-pawn. This is the critical feature of From's Gambit: we temporarily sacrifice the e5 pawn to open the f-file and create a lead in development. Notice that our e5 pawn is defended by our d-pawn, so Black can't simply grab it for free—they must recapture with d6, which forces them into a specific setup.",
+      "shortNarration": "Capturing toward the center with fxe5 sacrifices the e5 pawn to open the f-file and gain development, forcing Black to recapture with d6."
     },
     {
       "san": "d6",
-      "annotation": "Black tries to recapture our pawn and open the d-file for their queen and rooks. By playing d6 (rather than capturing with the queen immediately), Black keeps more flexibility but weakens the d5 square significantly. This is the position we're hoping for in the Lipke Variation—the e5 pawn becomes an easy target because Black's pieces are not well-coordinated to defend it."
+      "annotation": "Black tries to recapture our pawn and open the d-file for their queen and rooks. By playing d6 (rather than capturing with the queen immediately), Black keeps more flexibility but weakens the d5 square significantly. This is the position we're hoping for in the Lipke Variation—the e5 pawn becomes an easy target because Black's pieces are not well-coordinated to defend it.",
+      "shortNarration": "Black's d6 weakens d5, leaving the e5 pawn exposed and easy to target in the Lipke Variation."
     },
     {
       "san": "exd6",
-      "annotation": "We recapture with the pawn, and here's the key idea: our d6 pawn is a monster. It's deep in Black's position, it controls c7 and e7 (limiting Black's piece development), and it forces Black to make a decision about how to deal with this advanced passer. Most importantly, leaving the pawn here creates tactical and strategic imbalances that favor our lead in development."
+      "annotation": "We recapture with the pawn, and here's the key idea: our d6 pawn is a monster. It's deep in Black's position, it controls c7 and e7 (limiting Black's piece development), and it forces Black to make a decision about how to deal with this advanced passer. Most importantly, leaving the pawn here creates tactical and strategic imbalances that favor our lead in development.",
+      "shortNarration": "The d6 pawn controls c7 and e7, limiting Black's development and creating tactical imbalances favoring White's lead."
     },
     {
       "san": "Bxd6",
-      "annotation": "Black's bishop captures our advanced pawn, which is natural—they want to eliminate this dangerous intruder and get a piece active on d6. However, this means Black's dark-squared bishop is committed here while we still have flexibility in our development. We've gained time because Black had to respond to our threat, and now we can continue with swift piece development."
+      "annotation": "Black's bishop captures our advanced pawn, which is natural—they want to eliminate this dangerous intruder and get a piece active on d6. However, this means Black's dark-squared bishop is committed here while we still have flexibility in our development. We've gained time because Black had to respond to our threat, and now we can continue with swift piece development.",
+      "shortNarration": "Black's bishop captures on d6, gaining activity but committing early — White now develops with tempo."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its ideal square, controlling d4 and e5 while preparing to support the center. By playing Nf3 before moving our d-pawn, we avoid blocking our d-file and keep our options open—we can still advance d4 soon or play other moves depending on Black's response. The knight also supports our future kingside pressure on the f-file."
+      "annotation": "We develop our knight to its ideal square, controlling d4 and e5 while preparing to support the center. By playing Nf3 before moving our d-pawn, we avoid blocking our d-file and keep our options open—we can still advance d4 soon or play other moves depending on Black's response. The knight also supports our future kingside pressure on the f-file.",
+      "shortNarration": "Nf3 controls d4 and e5, keeps the d-file open, and supports future kingside pressure on the f-file."
     },
     {
       "san": "Nh6",
-      "annotation": "Black brings their knight out to the rim, which is already a sign of difficulty in their position. The h6 square is passive and awkwardly placed; Black likely played this to avoid the more natural f6 (which would block their f-file or obstruct their light-squared bishop's scope). This move tells us Black is struggling to coordinate their pieces in response to our active setup."
+      "annotation": "Black brings their knight out to the rim, which is already a sign of difficulty in their position. The h6 square is passive and awkwardly placed; Black likely played this to avoid the more natural f6 (which would block their f-file or obstruct their light-squared bishop's scope). This move tells us Black is struggling to coordinate their pieces in response to our active setup.",
+      "shortNarration": "Black's knight to h6 is passive and awkward, signaling coordination trouble against White's active setup."
     },
     {
       "san": "d4",
-      "annotation": "We plant our d-pawn firmly in the center, occupying the crucial d4 square that we've been eyeing since the opening. This move consolidates our space advantage and control over the light squares (especially e5 and f5), while preparing to develop our remaining pieces. With a lead in development and central control, we've achieved exactly what the Lipke Variation promises: a dynamic, initiative-driven position where Black is on the defensive despite material equality."
+      "annotation": "We plant our d-pawn firmly in the center, occupying the crucial d4 square that we've been eyeing since the opening. This move consolidates our space advantage and control over the light squares (especially e5 and f5), while preparing to develop our remaining pieces. With a lead in development and central control, we've achieved exactly what the Lipke Variation promises: a dynamic, initiative-driven position where Black is on the defensive despite material equality.",
+      "shortNarration": "d4 occupies the center, controls e5 and f5, and prepares development with a lead in space and initiative."
     }
   ]
 }

@@ -3,43 +3,53 @@
   "moveAnnotations": [
     {
       "san": "c4",
-      "annotation": "We're opening with the English Opening, one of the most flexible and positionally rich systems in chess. This move immediately stakes a claim on the central d5 square while keeping our options open for piece development. Unlike 1.e4 or 1.d4, the English allows us to build our position more gradually, often transposing into various pawn structures based on how our opponent responds. The c4 pawn also prepares potential expansion on the queenside with moves like b2-b4, giving us long-term space advantages."
+      "annotation": "We're opening with the English Opening, one of the most flexible and positionally rich systems in chess. This move immediately stakes a claim on the central d5 square while keeping our options open for piece development. Unlike 1.e4 or 1.d4, the English allows us to build our position more gradually, often transposing into various pawn structures based on how our opponent responds. The c4 pawn also prepares potential expansion on the queenside with moves like b2-b4, giving us long-term space advantages.",
+      "shortNarration": "1.c4 stakes a claim on d5 and prepares queenside expansion with b4."
     },
     {
       "san": "e6",
-      "annotation": "Our opponent chooses a solid, French Defense-style setup that keeps the position flexible while supporting an eventual d7-d5 advance. This move prepares to challenge our c4 pawn directly and maintains the option to develop the dark-squared bishop to d6 or e7. Black is avoiding the more aggressive responses like 1...e5 or 1...c5, instead opting for a patient approach that aims to equalize gradually. We should be prepared for Black to play d5 at some point, potentially leading to French-style pawn structures."
+      "annotation": "Our opponent chooses a solid, French Defense-style setup that keeps the position flexible while supporting an eventual d7-d5 advance. This move prepares to challenge our c4 pawn directly and maintains the option to develop the dark-squared bishop to d6 or e7. Black is avoiding the more aggressive responses like 1...e5 or 1...c5, instead opting for a patient approach that aims to equalize gradually. We should be prepared for Black to play d5 at some point, potentially leading to French-style pawn structures.",
+      "shortNarration": "Black's patient French-style setup prepares d5 to challenge c4, aiming for gradual equality."
     },
     {
       "san": "Nf3",
-      "annotation": "We're developing our knight to its ideal square, controlling the important e5 and d4 central squares while preparing to support our center with pieces. This move also keeps maximum flexibility in our setup, as we haven't committed to any particular pawn structure yet. The knight on f3 works well with almost any English Opening formation, whether we go for a King's Indian Attack setup, a Hedgehog system, or transpose into other openings. Additionally, Nf3 prevents any early ...Qh4+ tricks and prepares us to castle kingside safely."
+      "annotation": "We're developing our knight to its ideal square, controlling the important e5 and d4 central squares while preparing to support our center with pieces. This move also keeps maximum flexibility in our setup, as we haven't committed to any particular pawn structure yet. The knight on f3 works well with almost any English Opening formation, whether we go for a King's Indian Attack setup, a Hedgehog system, or transpose into other openings. Additionally, Nf3 prevents any early ...Qh4+ tricks and prepares us to castle kingside safely.",
+      "shortNarration": "Nf3 controls e5 and d4, prevents ...Qh4+, and prepares kingside castling."
     },
     {
       "san": "Nf6",
-      "annotation": "Black mirrors our development with natural piece play, putting pressure on our potential e4 advance and developing toward the center. This knight placement is extremely flexible, supporting both ...d5 and ...c5 pawn breaks while eyeing the e4 square. Our opponent is maintaining the tension and keeping multiple pawn structures possible - we could see transpositions to Queen's Gambit Declined, Nimzo-Indian, or other systems. Black is also preparing to castle kingside and complete basic development before committing to any particular plan."
+      "annotation": "Black mirrors our development with natural piece play, putting pressure on our potential e4 advance and developing toward the center. This knight placement is extremely flexible, supporting both ...d5 and ...c5 pawn breaks while eyeing the e4 square. Our opponent is maintaining the tension and keeping multiple pawn structures possible - we could see transpositions to Queen's Gambit Declined, Nimzo-Indian, or other systems. Black is also preparing to castle kingside and complete basic development before committing to any particular plan.",
+      "shortNarration": "Black's flexible knight placement supports ...d5 or ...c5 breaks, eyeing e4 while maintaining tension and multiple pawn structure options."
     },
     {
       "san": "Nc3",
-      "annotation": "We're completing our basic piece development while adding more pressure to the d5 square, making Black's natural ...d5 advance more difficult to achieve comfortably. This knight supports our c4 pawn and prepares various central advances, including e2-e4 if the opportunity arises. The knight on c3 is also perfectly placed for many English Opening systems, working well with both kingside and queenside play. We're maintaining maximum flexibility while gradually increasing our central influence and making it harder for Black to achieve easy equality."
+      "annotation": "We're completing our basic piece development while adding more pressure to the d5 square, making Black's natural ...d5 advance more difficult to achieve comfortably. This knight supports our c4 pawn and prepares various central advances, including e2-e4 if the opportunity arises. The knight on c3 is also perfectly placed for many English Opening systems, working well with both kingside and queenside play. We're maintaining maximum flexibility while gradually increasing our central influence and making it harder for Black to achieve easy equality.",
+      "shortNarration": "Knight to c3 pressures d5, supports the c4 pawn, and prepares e2-e4 while maintaining central flexibility."
     },
     {
       "san": "c5",
-      "annotation": "Continuing English Opening Symmetrical Variation Anti Benoni Variation Spielmann Defense: c5 is a known theory move in this line."
+      "annotation": "Continuing English Opening Symmetrical Variation Anti Benoni Variation Spielmann Defense: c5 is a known theory move in this line.",
+      "shortNarration": "c5 is the Symmetrical Variation Anti Benoni Spielmann Defense."
     },
     {
       "san": "d4",
-      "annotation": "We're accepting the challenge and opening up the center immediately, following the principle that when our development is superior, we should open the position to exploit our lead. This move transforms the game into the Anti-Benoni structure, where we're essentially playing a Benoni Defense with colors reversed and an extra tempo. Our d4 advance gains space in the center, activates our pieces, and creates tactical opportunities. This is more aggressive than alternatives like g3 or e3, showing our intention to press for an early advantage rather than play positionally."
+      "annotation": "We're accepting the challenge and opening up the center immediately, following the principle that when our development is superior, we should open the position to exploit our lead. This move transforms the game into the Anti-Benoni structure, where we're essentially playing a Benoni Defense with colors reversed and an extra tempo. Our d4 advance gains space in the center, activates our pieces, and creates tactical opportunities. This is more aggressive than alternatives like g3 or e3, showing our intention to press for an early advantage rather than play positionally.",
+      "shortNarration": "d4 opens the center to exploit White's development lead, gaining space and activating pieces in a reversed Benoni with an extra tempo."
     },
     {
       "san": "cxd4",
-      "annotation": "Black has little choice but to capture, as allowing d4-d5 would give us a huge space advantage and cramp Black's position considerably. By taking on d4, our opponent opens the c-file and eliminates our advanced pawn, but also allows us to recapture with a piece and gain time. This capture is essentially forced, as other moves would lead to very passive positions for Black. The resulting position will feature an IQP (isolated queen's pawn) structure if we recapture with the knight, which typically gives us active piece play in exchange for a long-term weakness."
+      "annotation": "Black has little choice but to capture, as allowing d4-d5 would give us a huge space advantage and cramp Black's position considerably. By taking on d4, our opponent opens the c-file and eliminates our advanced pawn, but also allows us to recapture with a piece and gain time. This capture is essentially forced, as other moves would lead to very passive positions for Black. The resulting position will feature an IQP (isolated queen's pawn) structure if we recapture with the knight, which typically gives us active piece play in exchange for a long-term weakness.",
+      "shortNarration": "Black's forced capture on d4 opens the c-file and yields an IQP structure with active piece play for White."
     },
     {
       "san": "Nxd4",
-      "annotation": "We're recapturing with the knight to maintain central control and keep our pieces actively placed, following the opening principle of developing pieces toward the center when possible. This knight on d4 becomes a powerful outpost, controlling key squares like b5, c6, e6, and f5 while eyeing potential tactical opportunities. Our position now resembles a Sicilian Defense with colors reversed, where we have the initiative and better piece coordination. The knight on d4 also supports our c4 pawn and maintains pressure on Black's position, forcing our opponent to deal with our centralized pieces."
+      "annotation": "We're recapturing with the knight to maintain central control and keep our pieces actively placed, following the opening principle of developing pieces toward the center when possible. This knight on d4 becomes a powerful outpost, controlling key squares like b5, c6, e6, and f5 while eyeing potential tactical opportunities. Our position now resembles a Sicilian Defense with colors reversed, where we have the initiative and better piece coordination. The knight on d4 also supports our c4 pawn and maintains pressure on Black's position, forcing our opponent to deal with our centralized pieces.",
+      "shortNarration": "Recapturing with the knight centralizes it on d4, controlling b5, c6, e6, and f5 — a powerful outpost supporting the c4 pawn and pressuring Black."
     },
     {
       "san": "Nc6",
-      "annotation": "Black develops naturally while immediately challenging our centralized knight, following the principle of attacking pieces that occupy strong central squares. This move also prepares further development with ...Be7 or ...Bc5, and supports potential central breaks like ...d6 and ...e5. Our opponent is trying to trade off our active pieces to reduce our initiative and reach a more balanced position. However, this knight on c6 also blocks the c-file that Black opened with the earlier capture, and we need to decide whether to trade knights or retreat our d4 knight to maintain tension and keep our slight initiative."
+      "annotation": "Black develops naturally while immediately challenging our centralized knight, following the principle of attacking pieces that occupy strong central squares. This move also prepares further development with ...Be7 or ...Bc5, and supports potential central breaks like ...d6 and ...e5. Our opponent is trying to trade off our active pieces to reduce our initiative and reach a more balanced position. However, this knight on c6 also blocks the c-file that Black opened with the earlier capture, and we need to decide whether to trade knights or retreat our d4 knight to maintain tension and keep our slight initiative.",
+      "shortNarration": "Trading knights on c6 opens the c-file for Black, so retreat the d4 knight to maintain tension and keep the initiative."
     }
   ]
 }

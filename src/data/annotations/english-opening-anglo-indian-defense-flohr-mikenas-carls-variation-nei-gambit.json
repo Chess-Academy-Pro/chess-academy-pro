@@ -3,35 +3,43 @@
   "moveAnnotations": [
     {
       "san": "c4",
-      "annotation": "We're opening with the English Opening, one of the most flexible and strategic first moves in chess. This move controls the central d5 square while keeping our options open for various pawn structures and piece development schemes. Unlike 1.e4 or 1.d4, the English allows us to develop pieces first and commit to a pawn center later, often leading to rich positional middlegames. The move also prepares to fianchetto our light-squared bishop on g2, creating long-term pressure along the a1-h8 diagonal."
+      "annotation": "We're opening with the English Opening, one of the most flexible and strategic first moves in chess. This move controls the central d5 square while keeping our options open for various pawn structures and piece development schemes. Unlike 1.e4 or 1.d4, the English allows us to develop pieces first and commit to a pawn center later, often leading to rich positional middlegames. The move also prepares to fianchetto our light-squared bishop on g2, creating long-term pressure along the a1-h8 diagonal.",
+      "shortNarration": "1.c4 controls d5, delays central pawn commitment, and prepares a kingside fianchetto."
     },
     {
       "san": "e6",
-      "annotation": "Black chooses the Anglo-Indian Defense, a solid and flexible response that mirrors our own patient approach. This move supports the central d5 square and prepares to develop the dark-squared bishop, while keeping options open for both ...d5 and ...d6 pawn structures. Our opponent is essentially saying they're willing to play a strategic battle rather than rushing into tactical complications. This setup often leads to positions reminiscent of the French Defense or Queen's Indian, depending on how the center develops."
+      "annotation": "Black chooses the Anglo-Indian Defense, a solid and flexible response that mirrors our own patient approach. This move supports the central d5 square and prepares to develop the dark-squared bishop, while keeping options open for both ...d5 and ...d6 pawn structures. Our opponent is essentially saying they're willing to play a strategic battle rather than rushing into tactical complications. This setup often leads to positions reminiscent of the French Defense or Queen's Indian, depending on how the center develops.",
+      "shortNarration": "Black's Anglo-Indian Defense supports d5, keeps ...d5 and ...d6 options open, and invites a strategic battle."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our knight to its most active square, adding pressure to the central d5 and e4 squares while maintaining maximum flexibility. This move is a hallmark of the English Opening - we're developing pieces before committing our pawns to any particular structure. The knight from c3 can later support advances like d4 or e4, and it doesn't block our d-pawn like Nf3 sometimes can. We're also keeping Black guessing about our exact intentions, which is a key psychological aspect of the English Opening."
+      "annotation": "We develop our knight to its most active square, adding pressure to the central d5 and e4 squares while maintaining maximum flexibility. This move is a hallmark of the English Opening - we're developing pieces before committing our pawns to any particular structure. The knight from c3 can later support advances like d4 or e4, and it doesn't block our d-pawn like Nf3 sometimes can. We're also keeping Black guessing about our exact intentions, which is a key psychological aspect of the English Opening.",
+      "shortNarration": "Nc3 develops to the active square, pressuring d5 and e4 while keeping pawn structure flexible."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops their knight to its ideal square, attacking our potential e4 advance and controlling key central squares. This is a principled response that follows the opening rule of developing knights before bishops while challenging our central ambitions. Our opponent is preparing to meet e4 with either a capture or by retreating the knight, and they're also eyeing the d5 square. This move fits perfectly with Black's flexible setup, maintaining tension in the center while improving their piece coordination."
+      "annotation": "Black develops their knight to its ideal square, attacking our potential e4 advance and controlling key central squares. This is a principled response that follows the opening rule of developing knights before bishops while challenging our central ambitions. Our opponent is preparing to meet e4 with either a capture or by retreating the knight, and they're also eyeing the d5 square. This move fits perfectly with Black's flexible setup, maintaining tension in the center while improving their piece coordination.",
+      "shortNarration": "Black's knight develops to its ideal square, attacking e4 and controlling d5, maintaining central tension."
     },
     {
       "san": "e4",
-      "annotation": "We strike in the center with this thematic advance, transforming the opening into the Flohr-Mikenas-Carls Variation of the English. This move challenges Black's knight immediately and stakes out central space, but it also commits us to a more tactical battle. By playing e4, we're essentially creating a reversed Sicilian Defense structure where we have an extra tempo. The move opens lines for our light-squared bishop and queen while forcing Black to make an immediate decision about their knight."
+      "annotation": "We strike in the center with this thematic advance, transforming the opening into the Flohr-Mikenas-Carls Variation of the English. This move challenges Black's knight immediately and stakes out central space, but it also commits us to a more tactical battle. By playing e4, we're essentially creating a reversed Sicilian Defense structure where we have an extra tempo. The move opens lines for our light-squared bishop and queen while forcing Black to make an immediate decision about their knight.",
+      "shortNarration": "e4 opens lines for the bishop and queen, forcing Black's knight to decide, creating a reversed Sicilian with an extra tempo."
     },
     {
       "san": "c5",
-      "annotation": "Black responds with this counterattack on our c4 pawn, creating immediate tension in the center and fighting for space on the queenside. This move is typical of Sicilian-style play - rather than simply retreating the knight, our opponent chooses to complicate the position and create their own threats. The pawn on c5 controls the important d4 square and prepares potential expansion with ...b5 or ...d6. However, this move also slightly weakens Black's position by creating a backward d-pawn and giving us targets to attack."
+      "annotation": "Black responds with this counterattack on our c4 pawn, creating immediate tension in the center and fighting for space on the queenside. This move is typical of Sicilian-style play - rather than simply retreating the knight, our opponent chooses to complicate the position and create their own threats. The pawn on c5 controls the important d4 square and prepares potential expansion with ...b5 or ...d6. However, this move also slightly weakens Black's position by creating a backward d-pawn and giving us targets to attack.",
+      "shortNarration": "Black's c5 counterattack creates a backward d-pawn and targets d4, but weakens their queenside."
     },
     {
       "san": "e5",
-      "annotation": "We advance our pawn with tempo, attacking the knight and seizing space in the center - this marks the beginning of the Nei Gambit. This aggressive move forces Black's knight to make an immediate decision while giving us a strong pawn center and space advantage. By pushing e5, we're also opening attacking lines toward Black's kingside and potentially preparing a quick kingside attack. The move commits us to sharp tactical play, but in return we get excellent piece activity and long-term positional pressure."
+      "annotation": "We advance our pawn with tempo, attacking the knight and seizing space in the center - this marks the beginning of the Nei Gambit. This aggressive move forces Black's knight to make an immediate decision while giving us a strong pawn center and space advantage. By pushing e5, we're also opening attacking lines toward Black's kingside and potentially preparing a quick kingside attack. The move commits us to sharp tactical play, but in return we get excellent piece activity and long-term positional pressure.",
+      "shortNarration": "e5 attacks the knight with tempo, seizes central space, and opens lines for a kingside attack in the Nei Gambit."
     },
     {
       "san": "Ng8",
-      "annotation": "Black retreats their knight all the way back to g8 in this surprising but theoretically sound move that defines the Nei Gambit. While this looks passive, our opponent is actually setting a clever trap - they're allowing us to build a big pawn center while preparing to undermine it with moves like ...d6, ...f6, or piece pressure. This retreat also keeps the knight flexible for redeployment to h6, e7, or f6 after preparatory moves. We need to be careful not to overextend our pawns, as Black is essentially gambling that our center will become a target rather than a strength."
+      "annotation": "Black retreats their knight all the way back to g8 in this surprising but theoretically sound move that defines the Nei Gambit. While this looks passive, our opponent is actually setting a clever trap - they're allowing us to build a big pawn center while preparing to undermine it with moves like ...d6, ...f6, or piece pressure. This retreat also keeps the knight flexible for redeployment to h6, e7, or f6 after preparatory moves. We need to be careful not to overextend our pawns, as Black is essentially gambling that our center will become a target rather than a strength.",
+      "shortNarration": "Black retreats the knight to g8 in the Nei Gambit, baiting White to overextend the center before undermining it with ...d6 or ...f6."
     }
   ]
 }

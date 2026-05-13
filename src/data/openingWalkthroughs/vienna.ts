@@ -64,6 +64,7 @@ export const VIENNA_GAME: WalkthroughTree = {
   studentSide: 'white',
   intro:
     "The Vienna Game. It's the King's Pawn opening's quieter, sharper cousin — quieter because we develop a knight before the bishop, sharper because we keep the f-pawn free for an attack. Most beginners learn the Italian or the Spanish; the Vienna is what you play when you want the same classical pressure but with a tactical engine humming under the hood. Let me walk you through it.",
+  shortIntro: "In the Vienna Game, develop the knight before the bishop, keeping the f-pawn free for tactical attacks.",
   outro:
     "That's a typical position you'd see in this branch. Want to back up to the last decision and see the other line? Or take this position into a real game against me?",
   leafOutros: {
@@ -463,9 +464,11 @@ export const VIENNA_GAME: WalkthroughTree = {
       inaccuracy: 'Ng4',
       whyBad:
         "Black thinks the knight on g4 is 'active' — eyeing f2, supporting a future Qh4+ check. But Black missed a critical fact: when the f-pawn left f2 (way back on move 3), the d1-queen got an open diagonal pointing right at the kingside. d1 → e2 → f3 → g4 — every square empty. The knight on g4 is just a piece sitting at the end of that diagonal with NO defender. The 'active retreat' is actually an active hang. This is a recurring trap throughout chess: when a pawn move opens a line, immediately recount the attackers and defenders along that newly-opened line. Black neglected to.",
+      shortWhyBad: "Black's knight on g4 hangs because the queen's diagonal to g4 is open and undefended.",
       punishment: 'Qxg4',
       whyPunish:
         "Queen takes knight, end of discussion. Black has no recapture — no Black piece attacks g4 right now. We go from down a pawn (the gambit) to up a clean knight. The recurring chess principle: ALWAYS look for captures first when it's your move. Tactics live ahead of strategy. The lesson Black needs to learn from this game is the diagonal-counting habit.",
+      shortWhyPunish: "Queen takes knight on g4, no recapture, converting gambit pawn deficit into a clean knight advantage.",
       distractors: [
         {
           san: 'Nf3',
@@ -491,6 +494,7 @@ export const VIENNA_GAME: WalkthroughTree = {
           san: 'd5',
           idea:
             "Black's only counter-shot is something desperate like ...d5 trying to open lines. Doesn't matter — you're a piece up.",
+          shortIdea: "Black's desperate ...d5 opens lines, but you're a piece up.",
         },
         {
           san: 'd3',
@@ -506,9 +510,11 @@ export const VIENNA_GAME: WalkthroughTree = {
       inaccuracy: 'Nh5',
       whyBad:
         "Black tries Nh5 with the same idea as Ng4 — defend f4, prepare g6/Bg7 setup. And the same lesson applies, sharper this time: the d1-queen's diagonal extends ALL the way to h5. d1 → e2 → f3 → g4 → h5, four empty squares. The knight on h5 is at the very end of that diagonal, undefended, asking to be taken. The structural lesson is the same as Ng4 but it's worth seeing twice — when an opening pawn move clears a long diagonal, that's the FIRST thing to check before committing pieces nearby.",
+      shortWhyBad: "Black's Nh5 hangs to Bxh5 because the d1-queen's diagonal runs through four empty squares to h5.",
       punishment: 'Qxh5',
       whyPunish:
         "Queen marches all the way to h5 and takes the knight. No recapture. Free piece, same as Ng4. Two examples of the same principle: in any Vienna Gambit accepted, if Black puts a knight on g4 OR h5, the d1-queen wins it. The principle generalizes: open diagonals in YOUR favor are the strongest piece-winning weapons in chess.",
+      shortWhyPunish: "In the Vienna Gambit, a queen on d1 wins any knight that lands on g4 or h5.",
       distractors: [
         {
           san: 'g4',
@@ -534,6 +540,7 @@ export const VIENNA_GAME: WalkthroughTree = {
           san: 'd6',
           idea:
             "Black tries to develop and hope. Doesn't matter — you're up a piece.",
+          shortIdea: "Black is up a piece, so development doesn't matter.",
         },
         {
           san: 'Nf3',
@@ -549,9 +556,11 @@ export const VIENNA_GAME: WalkthroughTree = {
       inaccuracy: 'Nd5',
       whyBad:
         "Different square, different attacker, same loss. Black centralizes the knight on d5 hoping for activity, but Nd5 is attacked by our c3-knight AND has zero defenders (Black's d-pawn is still on d7, blocking the queen from defending vertically). The lesson: when you move a piece to a square, count BOTH the attackers (who can take it) and the defenders (who can recapture). One attacker + zero defenders = lost piece.",
+      shortWhyBad: "Black's knight on d5 has one attacker and zero defenders, so it hangs.",
       punishment: 'Nxd5',
       whyPunish:
         "Knight takes knight cleanly. Black has no recapture: ...Qxd5 is illegal (d7-pawn blocks), no other pieces reach d5. Up a knight, the rest is conversion. The lesson sticks: in the Vienna Gambit accepted line, the f-pawn's departure opened diagonals AND your own c3-knight controls the central squares. Black's knight has nowhere to go.",
+      shortWhyPunish: "Knight takes knight on d5, Black cannot recapture because the d7-pawn blocks, leaving White up a piece.",
       distractors: [
         {
           san: 'Nf3',
@@ -577,6 +586,7 @@ export const VIENNA_GAME: WalkthroughTree = {
           san: 'Qe7',
           idea:
             "Black tries Qe7 hoping to trade some pieces. Whatever — you're a knight up.",
+          shortIdea: "Black's Qe7 aims to trade pieces, but you're up a knight.",
         },
         {
           san: 'Nf3',
@@ -592,9 +602,11 @@ export const VIENNA_GAME: WalkthroughTree = {
       inaccuracy: 'Ne4',
       whyBad:
         "Black moves the knight to e4 hoping to attack our c3-knight. But Black missed: their knight on e4 is itself attacked by our c3-knight, and Black has zero defenders for it. So Black is offering a knight trade where THEY lose the piece, not us. This is the fourth variation of the same lesson: every Black knight square except Ng8 in this position hangs to White's superior piece coordination.",
+      shortWhyBad: "Black's knight to e4 hangs to White's c3-knight with no defenders.",
       punishment: 'Nxe4',
       whyPunish:
         "Knight takes knight, end of story. Black has no recapture (no piece attacks e4). We've now seen four flavors of the same principle in this exact position: Ng4 hangs to the queen, Nh5 hangs to the queen, Nd5 hangs to the c3-knight, Ne4 hangs to the c3-knight. Black's ONLY non-losing move was Ng8 — pure passive retreat. That's why the Vienna Gambit accepted is theoretically refuted at master level.",
+      shortWhyPunish: "Knight takes knight on e4, Black has no recapture, so Vienna Gambit accepted is refuted.",
       distractors: [
         {
           san: 'd3',
@@ -626,9 +638,11 @@ export const VIENNA_GAME: WalkthroughTree = {
       inaccuracy: 'Nxe4',
       whyBad:
         "Black sees the e4-pawn 'unprotected' and grabs it with the f6-knight. Classic amateur blunder, and it teaches the most important counting principle in chess. Black counted ONE attacker on e4 (their own f6-knight) — but missed that e4 has TWO defenders: the c3-knight AND the d3-pawn. With more defenders than attackers, the pawn is poison. This is the universal opening lesson: BEFORE you grab a 'free' pawn, count attackers, count defenders. If defenders ≥ attackers, the pawn isn't free — it's a hook to win YOUR piece.",
+      shortWhyBad: "Black's knight takes e4, but e4 has two defenders to one attacker, so the pawn is poison and Black loses a piece.",
       punishment: 'Nxe4',
       whyPunish:
         "Knight takes knight. Black is now down a piece for a single pawn — a catastrophic trade. The structural lesson: 'Looks free' is not a chess concept. 'Has more attackers than defenders' is. This SAME principle applies in the middlegame, the endgame, and tactical puzzles for the rest of your chess life. Internalize it now.",
+      shortWhyPunish: "Knight takes knight leaves Black down a piece for a pawn, a catastrophic trade.",
       distractors: [
         {
           san: 'dxe4',
@@ -654,6 +668,7 @@ export const VIENNA_GAME: WalkthroughTree = {
           san: 'd6',
           idea:
             "Black tries to develop and pretend nothing happened. Doesn't matter — you're up a piece.",
+          shortIdea: "Up a piece, Black's development attempt doesn't change the material advantage.",
         },
         {
           san: 'Nf3',
@@ -664,6 +679,7 @@ export const VIENNA_GAME: WalkthroughTree = {
           san: 'O-O',
           idea:
             "Black plays it later — castle, exchange pieces if you can, simplify to a winning endgame. A piece up at this stage is a comfortably winning advantage.",
+          shortIdea: "Black castles, exchanges pieces, and simplifies to a winning endgame a piece up.",
         },
       ],
     },
@@ -680,6 +696,7 @@ export const VIENNA_GAME: WalkthroughTree = {
           movedBy: 'white',
           idea:
             "1.e4 — King's pawn forward, claiming the center and opening lines for the bishop on f1 and the queen on d1. Standard fundamentals. The Vienna won't show its colors until move 2, so for now this just looks like every other 1.e4 game.",
+          shortIdea: "1.e4 claims the center and opens lines for the bishop and queen.",
           children: [
             {
               node: {
@@ -687,6 +704,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                 movedBy: 'black',
                 idea:
                   "Black mirrors with 1...e5, contesting the center directly. This is the most principled response — Black says 'I'm not letting you set up shop in the center without a fight.' Other Black moves (the Sicilian, the French, the Caro-Kann) are for a different lesson.",
+                shortIdea: "Black mirrors with 1...e5, contesting the center directly as the most principled response.",
                 children: [
                   {
                     node: {
@@ -694,25 +712,31 @@ export const VIENNA_GAME: WalkthroughTree = {
                       movedBy: 'white',
                       idea:
                         "2.Nc3 — and here's where the Vienna actually starts. The natural move at this point is Nf3 (the Italian and the Spanish both go there), but we play Nc3 instead. Why? Three reasons. One: it develops a piece. Two: it defends e4 in case Black later threatens it. Three — and this is the big one — it leaves the f-pawn FREE. In the Italian, after Nf3, the f-pawn is locked behind the knight forever; you can never push f4 without first moving the knight. In the Vienna, f4 is on the table from move three onward. That's the whole opening: a kingside pawn storm waiting to happen.",
+                      shortIdea: "Nc3 leaves the f-pawn free for an immediate kingside pawn storm with f4.",
                       narration: [
                         {
                           text: "2.Nc3 — and here's where the Vienna actually starts. The natural move at this point is Nf3 — the Italian and the Spanish both go there.",
+                          shortText: "2.Nc3 starts the Vienna, not Nf3 like the Italian or Spanish.",
                           arrows: [{ from: 'g1', to: 'f3', color: 'red' }],
                         },
                         {
                           text: "But we play Nc3 instead. Why? Three reasons. One — it develops a piece.",
+                          shortText: "Nc3 develops a piece.",
                           arrows: [{ from: 'b1', to: 'c3', color: 'green' }],
                         },
                         {
                           text: "Two — it defends e4 in case Black later threatens it.",
+                          shortText: "The knight defends e4 against future threats.",
                           arrows: [{ from: 'c3', to: 'e4', color: 'blue' }],
                         },
                         {
                           text: "Three, and this is the big one — it leaves the f-pawn free. In the Italian, after Nf3, the f-pawn is locked behind the knight forever. You can never push f4 without first moving the knight back.",
+                          shortText: "In the Italian, Nf3 locks the f-pawn, so f4 requires moving the knight first.",
                           highlights: [{ square: 'f2', color: 'yellow' }],
                         },
                         {
                           text: "In the Vienna, f4 is on the table from move three onward. That's the whole opening — a kingside pawn storm waiting to happen.",
+                          shortText: "f4 from move three signals a kingside pawn storm in the Vienna.",
                           arrows: [{ from: 'f2', to: 'f4', color: 'green' }],
                         },
                       ],
@@ -727,6 +751,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                             movedBy: 'black',
                             idea:
                               "2...Nf6 — Black develops a knight AND attacks our e4 pawn at the same time. This is the most theoretically critical response. Black is daring you to either defend e4 or play the gambit. Both choices are real, and they lead to very different games. Pick your appetite.",
+                            shortIdea: "Black's 2...Nf6 attacks e4, forcing a choice between defending or a gambit.",
                             children: [
                               // ─── FORK 2: White's third move ───
                               {
@@ -738,13 +763,16 @@ export const VIENNA_GAME: WalkthroughTree = {
                                   movedBy: 'white',
                                   idea:
                                     "3.f4 — the Vienna Gambit. Right out of the gate, we're offering the f-pawn. The point: if Black takes with exf4, the f-file opens for my rook on f1, my queen can swing to e2 or h5, my dark-squared bishop comes alive, and I get a serious lead in development for the price of one pawn. If Black declines with d5 (the principled refutation attempt), the position gets sharp in a different way. Either way, you're playing for an attack from move three — there's no quiet middlegame in this line.",
+                                  shortIdea: "Vienna Gambit: f4 offers the f-pawn to open the f-file, queen to e2 or h5, and a lead in development for one pawn.",
                                   narration: [
                                     {
                                       text: "3.f4 — the Vienna Gambit. Right out of the gate, we're offering the f-pawn.",
+                                      shortText: "White offers the f-pawn with 3.f4, the Vienna Gambit.",
                                       arrows: [{ from: 'f2', to: 'f4', color: 'green' }],
                                     },
                                     {
                                       text: "The point — if Black takes with exf4, the f-file opens up for our rook.",
+                                      shortText: "If Black takes with exf4, the f-file opens for the rook.",
                                       arrows: [
                                         { from: 'e5', to: 'f4', color: 'red' },
                                         { from: 'f1', to: 'f8', color: 'blue' },
@@ -752,6 +780,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                     },
                                     {
                                       text: "My queen can swing to e2 or h5.",
+                                      shortText: "Queen can swing to e2 or h5.",
                                       arrows: [
                                         { from: 'd1', to: 'e2', color: 'green' },
                                         { from: 'd1', to: 'h5', color: 'green' },
@@ -759,10 +788,12 @@ export const VIENNA_GAME: WalkthroughTree = {
                                     },
                                     {
                                       text: "My dark-squared bishop comes alive on the long diagonal.",
+                                      shortText: "Dark-squared bishop activates on the long diagonal.",
                                       arrows: [{ from: 'c1', to: 'h6', color: 'green' }],
                                     },
                                     {
                                       text: "I get a serious lead in development for the price of one pawn. If Black declines with d5, the principled refutation, the position gets sharp in a different way. Either way, you're playing for an attack from move three — there's no quiet middlegame in this line.",
+                                      shortText: "One-pawn investment buys a serious development lead; d5 sharpens the attack, no quiet middlegame.",
                                     },
                                   ],
                                   children: [
@@ -776,6 +807,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                         movedBy: 'black',
                                         idea:
                                           "3...d5 — the classical refutation attempt. Black ignores my pawn offer and counters in the center. The reasoning: my e4 pawn is defended once (by the knight on c3), but it's now attacked twice (by the f6-knight and the d5-pawn). Something has to give. This is the Falkbeer-style response, and it's Black's most respected try.",
+                                        shortIdea: "Black counters in the center with 3...d5, attacking your e4 pawn twice while it's defended only once.",
                                         children: [
                                           {
                                             node: {
@@ -783,6 +815,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                               movedBy: 'white',
                                               idea:
                                                 "4.fxe5 — I take the e-pawn first. The reason I don't play 4.exd5 is simple: after 4.exd5 Nxd5, Black's knight lands on a strong central square hitting my c3-knight, and I'm playing for nothing. Taking with the f-pawn keeps the tension and forces Black to figure out what to do about the knight that's now attacked.",
+                                              shortIdea: "4.fxe5 keeps tension and attacks the knight, avoiding 4.exd5 Nxd5 giving Black a strong central knight.",
                                               children: [
                                                 {
                                                   node: {
@@ -790,6 +823,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                     movedBy: 'black',
                                                     idea:
                                                       "4...Nxe4 — Black grabs my e4 pawn with the knight. This is the only move; anything else loses material. We're now in the main line of the Vienna Gambit Falkbeer Variation, and theory has been worked out for over a century.",
+                                                    shortIdea: "Black's knight captures on e4, the only move to avoid losing material, entering the Vienna Gambit Falkbeer main line.",
                                                     children: [
                                                       {
                                                         node: {
@@ -797,6 +831,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                           movedBy: 'white',
                                                           idea:
                                                             "5.Qf3 — the modern challenge. Queen straight to f3 — and now Black's e4-knight is staring down the barrel of a queen attack with NO defender. Black's options narrow fast: trade with Nxc3 (cleanest), defend with f5 (creates king-safety problems), retreat with Nc5 (loses tempo). Qf3 is the more challenging line than the older 5.Nf3 because it forces the question on move five — Black has to commit to something concrete instead of developing freely. This is the position to know cold.",
+                                                          shortIdea: "Qf3 attacks the undefended e4-knight, forcing Black into Nxc3, f5, or Nc5.",
                                                           narration: [
                                                             {
                                                               text: '5.Qf3 — the modern challenge.',
@@ -804,11 +839,13 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                             },
                                                             {
                                                               text: "Queen straight to f3, attacking the e4-knight directly.",
+                                                              shortText: "Queen to f3 directly attacks the e4-knight.",
                                                               arrows: [{ from: 'f3', to: 'e4', color: 'red' }],
                                                               highlights: [{ square: 'e4', color: 'red' }],
                                                             },
                                                             {
                                                               text: "Black has no defender for the knight. Their options are narrow — trade with Nxc3, defend with f5 weakening the king, or retreat with Nc5 losing tempo.",
+                                                              shortText: "Black's knight hangs; Nxc3 trades, f5 weakens the king, or Nc5 loses tempo.",
                                                             },
                                                             {
                                                               text: 'This is the more challenging modern line — forces Black to commit on move five instead of developing freely.',
@@ -835,6 +872,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                         movedBy: 'black',
                                         idea:
                                           "3...exf4 — Black takes the bait. Now I'm down a pawn but my plan writes itself: push e5 right now to kick the f6-knight, develop fast with tempo, deal with the Qh4+ threat that's lurking on the open e1-h4 diagonal, and build pressure on the kingside. Black has to spend moves figuring out where to put the knight and how to give back the pawn safely.",
+                                        shortIdea: "Push e5 to kick the f6-knight, develop with tempo, and build kingside pressure while Black struggles to return the pawn safely.",
                                         narration: [
                                           {
                                             text: '3...exf4 — Black takes the bait.',
@@ -842,9 +880,11 @@ export const VIENNA_GAME: WalkthroughTree = {
                                           },
                                           {
                                             text: "I'm down a pawn but my plan writes itself.",
+                                            shortText: "Down a pawn but the plan is clear: activate the bishop pair and target the weak king.",
                                           },
                                           {
                                             text: "And there's something serious to see: with my f-pawn gone, the diagonal from e1 to h4 is wide open. Black is one move from Qh4+ check, and that would split my king from castling rights for the rest of the game.",
+                                            shortText: "Missing f-pawn opens the e1-h4 diagonal, and Black's Qh4+ check will split the king from castling rights.",
                                             arrows: [{ from: 'd8', to: 'h4', color: 'red' }],
                                             highlights: [
                                               { square: 'h4', color: 'red' },
@@ -866,6 +906,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                               movedBy: 'white',
                                               idea:
                                                 "4.e5 — push first to kick the knight. Pawn from e4 to e5 attacks the f6-knight, forcing it to move. The knight has only awkward squares: Ng8 (back home, lost a tempo for nothing), Nh5 (sidelined), Nd5 (gets traded by Nxd5), or Ng4 (the active try, eyeing f2 and supporting a future Qh4+). At club level you'll see Ng4 most often. Note that Qh4+ is still threatened on the next move because the e1-h4 diagonal is still open — that's our problem to solve next.",
+                                              shortIdea: "Push e5 to attack the f6-knight, forcing it to awkward squares like Ng4, which threatens Qh4+.",
                                               narration: [
                                                 {
                                                   text: '4.e5 — push first to kick the knight.',
@@ -878,6 +919,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                 },
                                                 {
                                                   text: "The knight has only awkward squares. Ng8 — back home, lost a tempo for nothing. Nh5 — sidelined. Nd5 — gets traded. Ng4 — the active try, eyeing f2 and supporting a future Qh4+. At club level you will see Ng4 most often.",
+                                                  shortText: "Ng4 is the active try, eyeing f2 and supporting Qh4+.",
                                                   arrows: [{ from: 'f6', to: 'g4', color: 'yellow' }],
                                                 },
                                                 {
@@ -892,6 +934,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                     movedBy: 'black',
                                                     idea:
                                                       "4...Ng8 — Black retreats all the way back to the starting square. This is the cleanest move at amateur level — and Stockfish actually agrees it's the best survival move for Black. Why? Every other knight move loses material to a queen capture along the open diagonal: Ng4 hangs to Qxg4, Nh5 hangs to Qxh5 (along d1-h5), Nd5 hangs to Nxd5 (our knight takes), Ne4 hangs to Nxe4. The d1-queen has a clear shot at the kingside now that the f-pawn is gone. So Black retreats with two tempi spent (Nf6 then Ng8) and we have a huge lead in development. The gambit accepted is honestly bad for Black — this is part of why it's not played at master level.",
+                                                    shortIdea: "Black retreats Ng8, the only move avoiding queen captures along the open diagonal, giving White a huge development lead.",
                                                     narration: [
                                                       {
                                                         text: '4...Ng8 — Black retreats all the way back to the starting square.',
@@ -924,6 +967,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                           movedBy: 'white',
                                                           idea:
                                                             "5.Nf3 — develop and shut the door on Qh4+. Knight from g1 to f3 controls h4, which would otherwise be the only Black counter (Qh4+ would split my king from castling rights). With both knights out, the f-pawn captured but the f-file open for my rook on f1, and Black's pieces still on their starting squares, my plan writes itself: Bc4 next, castle, then attack. The pawn on f4 is a black weakness I'll target with the c1-bishop or recapture later.",
+                                                          shortIdea: "Nf3 blocks Qh4+, develops, and opens the f-file for the rook after fxe4.",
                                                           narration: [
                                                             {
                                                               text: '5.Nf3 — develop and shut the door on Qh4+.',
@@ -936,6 +980,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                             },
                                                             {
                                                               text: "With both knights out and Black's pieces still on the starting rank, my plan writes itself. Bc4 next, castle, then attack. The pawn on f4 is a black weakness I will target later.",
+                                                              shortText: "Bc4, castle, then attack; Black's f4 pawn is a weakness with knights out and pieces undeveloped.",
                                                               arrows: [
                                                                 { from: 'f1', to: 'c4', color: 'yellow' },
                                                                 { from: 'e1', to: 'g1', color: 'blue' },
@@ -966,18 +1011,22 @@ export const VIENNA_GAME: WalkthroughTree = {
                                   movedBy: 'white',
                                   idea:
                                     "3.Bc4 — Italian-style development. The bishop eyes f7, the weakest square in Black's camp. This is the safer, calmer Vienna — but there's a famous trap here, and you need to know it. Watch what Black plays next.",
+                                  shortIdea: "Bc4 eyes f7, the weakest square, setting a famous trap.",
                                   narration: [
                                     {
                                       text: "3.Bc4 — Italian-style development.",
+                                      shortText: "Bc4 develops the bishop to attack f7, a classic Italian setup.",
                                       arrows: [{ from: 'f1', to: 'c4', color: 'green' }],
                                     },
                                     {
                                       text: "The bishop eyes f7, the weakest square in Black's camp.",
+                                      shortText: "The bishop targets f7, Black's weakest square.",
                                       arrows: [{ from: 'c4', to: 'f7', color: 'blue' }],
                                       highlights: [{ square: 'f7', color: 'red' }],
                                     },
                                     {
                                       text: "This is the safer, calmer Vienna — but there's a famous trap here, and you need to know it. Watch what Black plays next.",
+                                      shortText: "In the Vienna, Black's next move springs a famous trap.",
                                     },
                                   ],
                                   children: [
@@ -987,6 +1036,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                         movedBy: 'black',
                                         idea:
                                           "3...Nxe4 — and there it is. The center fork trick. Black sacrifices the knight for the e-pawn, and the moment I recapture, Black plays d5 forking my bishop and my recaptured knight. It looks devastating. It's actually equal — but it forces a precise sequence from me, and if I don't know it, I lose material. This is exactly why most Vienna players prefer 3.d3 in this position; it kills the trick before it starts.",
+                                        shortIdea: "Black's Nxe4 sacrifices a knight for the e-pawn, then d5 forks the bishop and knight, forcing precise play to avoid losing material.",
                                         children: [
                                           {
                                             node: {
@@ -994,6 +1044,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                               movedBy: 'white',
                                               idea:
                                                 "4.Nxe4 — I have to recapture. Letting Black just have the pawn is worse. Now Black plays the punchline.",
+                                              shortIdea: "4.Nxe4 recaptures, as letting Black keep the pawn is worse.",
                                               children: [
                                                 {
                                                   node: {
@@ -1001,6 +1052,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                     movedBy: 'black',
                                                     idea:
                                                       "4...d5 — the fork. The pawn attacks my bishop on c4 AND my knight on e4. Both are hit, only one can move. If I move the bishop, Black takes the knight; if I move the knight, Black takes the bishop. So what do I do?",
+                                                    shortIdea: "Black's d5 fork attacks both the bishop on c4 and knight on e4, winning a piece.",
                                                     children: [
                                                       {
                                                         node: {
@@ -1008,6 +1060,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                           movedBy: 'white',
                                                           idea:
                                                             "5.Bxd5 — I trade. The bishop takes the pawn; Black recovers the piece by taking the bishop with the queen. After 5...Qxd5, I'm even on material — I lost a pawn early, then traded bishop for pawn, then bishop for bishop's worth via the knight trade. Net: equal. But Black walked out of it with the bishop pair, which is a small long-term advantage.",
+                                                          shortIdea: "Black has the bishop pair after 5.Bxd5 Qxd5, a small long-term advantage.",
                                                           children: [
                                                             {
                                                               node: {
@@ -1015,6 +1068,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                 movedBy: 'black',
                                                                 idea:
                                                                   "5...Qxd5 — Black recaptures with the queen. The queen comes out early, which is normally a mistake, but here it can't be hit easily — White doesn't have a knight or bishop ready to attack it for free. From this position both sides develop normally, and the center fork trick has effectively equalized for Black with the bishop pair as a small long-term plus. Let me show you how the typical middlegame unfolds.",
+                                                                shortIdea: "5...Qxd5 recaptures, giving Black the bishop pair as a small long-term plus.",
                                                                 narration: [
                                                                   {
                                                                     text: '5...Qxd5 — Black recaptures with the queen.',
@@ -1022,10 +1076,12 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                   },
                                                                   {
                                                                     text: "The queen comes out early — normally a mistake, but here it can't be hit easily.",
+                                                                    shortText: "Early queen development is safe here because it can't be easily attacked.",
                                                                     highlights: [{ square: 'd5', color: 'yellow' }],
                                                                   },
                                                                   {
                                                                     text: "Both sides develop from here. Let me show you the typical middlegame.",
+                                                                    shortText: "White's knight forks queen and rook on f7, winning material.",
                                                                   },
                                                                 ],
                                                                 children: [
@@ -1035,6 +1091,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                       movedBy: 'white',
                                                                       idea:
                                                                         "6.d3 — defend the knight in place. Pawn from d2 to d3 supports the e4-knight against Black's queen. Crucial: if I had instead retreated with 6.Nc3, the d5-queen would suddenly have a clean diagonal to g2 — Qxg2 wins my pawn AND attacks the rook on h1. So I keep the knight on e4, defend it with d3, and develop normally from here.",
+                                                                      shortIdea: "6.d3 defends the e4-knight, avoiding 6.Nc3 Qxg2 winning a pawn and attacking h1-rook.",
                                                                       narration: [
                                                                         {
                                                                           text: '6.d3 — defend the knight in place.',
@@ -1061,6 +1118,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                             movedBy: 'black',
                                                                             idea:
                                                                               "6...Nc6 — Black develops and defends e5. Knight to c6 supports the e5-pawn (which our pieces will eventually pressure) and prepares queenside castling.",
+                                                                            shortIdea: "Black's knight develops to c6, defending e5 and preparing queenside castling.",
                                                                             narration: [
                                                                               {
                                                                                 text: '6...Nc6 — Black develops and defends e5.',
@@ -1078,6 +1136,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                   movedBy: 'white',
                                                                                   idea:
                                                                                     "7.Nf3 — bring the second knight out. Knight from g1 to f3, preparing to castle. The position is now standard: my e4-knight is defended, my king's knight is developing, and Black is about to develop the queenside bishop and castle.",
+                                                                                  shortIdea: "7.Nf3 develops the knight, defends e4, and prepares to castle.",
                                                                                   narration: [
                                                                                     {
                                                                                       text: '7.Nf3 — bring the second knight out.',
@@ -1095,6 +1154,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                         movedBy: 'black',
                                                                                         idea:
                                                                                           "7...Bf5 — Black develops and pins. Bishop from c8 to f5 attacks our e4-knight along the b1-h7 diagonal. The knight is now attacked by both the bishop AND the queen — defended only by our d3-pawn. We can't move the knight without losing material to Bxe4 or Qxe4. The right move: get out of the way with castling, then deal with the pressure later.",
+                                                                                        shortIdea: "Castle to relieve the pin on the e4-knight, attacked by bishop and queen.",
                                                                                         narration: [
                                                                                           {
                                                                                             text: '7...Bf5 — Black develops and pins.',
@@ -1116,6 +1176,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                               movedBy: 'white',
                                                                                               idea:
                                                                                                 "8.O-O — castle. King to g1, rook to f1. We've reached the typical center fork trick middlegame. Material is even, both sides developed, the e4-knight situation is tense but stable. From here white can play Re1 to add another defender, or Nh4 to kick the f5-bishop, or just continue developing with c3 and Bc1-d2. Black has the bishop pair (a small long-term plus) but White has piece coordination.",
+                                                                                              shortIdea: "White castles kingside, material even, e4-knight tense but stable, Black holds bishop pair.",
                                                                                               narration: [
                                                                                                 {
                                                                                                   text: '8.O-O — castle.',
@@ -1127,6 +1188,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                                 },
                                                                                                 {
                                                                                                   text: "We've reached the typical center fork trick middlegame. Material even, both sides developed, the e4-knight tense but stable.",
+                                                                                                  shortText: "The e4-knight forks the queen and rook on f6 if the pawn on d5 advances.",
                                                                                                   highlights: [
                                                                                                     { square: 'g1', color: 'green' },
                                                                                                   ],
@@ -1146,6 +1208,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                                     movedBy: 'black',
                                                                                                     idea:
                                                                                                       "8...O-O-O — Black castles long. King to c8, rook to d8 — tucked away on the queenside, rook lands on the open d-file with the queen still on d6. Aggressive choice; Black is set up for opposite-side attacks. The middlegame begins.",
+                                                                                                    shortIdea: "Black castles queenside, king to c8, rook to d8, setting up opposite-side attacks.",
                                                                                                     narration: [
                                                                                                       {
                                                                                                         text: '8...O-O-O — Black castles long.',
@@ -1166,6 +1229,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                                           movedBy: 'white',
                                                                                                           idea:
                                                                                                             "9.d4 — challenge the center. Pawn from d3 to d4 (we played d3 on move 6 to defend the knight; now it advances) hits Black's e5-pawn directly. Black has to decide: trade with exd4 (opening the position for the bishop pair, slightly favoring Black), defend with Bd6, or let us take with dxe5. This is the typical middlegame moment in the center fork trick line — open position, bishop pair vs piece coordination, opposite-side castled kings, both sides have plans. From here it's real chess.",
+                                                                                                          shortIdea: "9.d4 challenges the center, hitting e5, forcing Black to choose between exd4, Bd6, or dxe5.",
                                                                                                           narration: [
                                                                                                             {
                                                                                                               text: '9.d4 — challenge the center.',
@@ -1234,6 +1298,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                             movedBy: 'black',
                             idea:
                               "2...Nc6 — the most common move you'll face at amateur level. Black develops naturally and defends e5. The position is calmer than after 2...Nf6 — there's no immediate threat, no gambit on offer. We'll set up Italian-style and choose between a slow positional game or push f4 later.",
+                            shortIdea: "2...Nc6 develops and defends e5, setting up a calm Italian-style game with options for slow play or f4 later.",
                             children: [
                               {
                                 node: {
@@ -1241,6 +1306,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                   movedBy: 'white',
                                   idea:
                                     "3.Bc4 — Italian setup. The bishop slides to its best diagonal, eyeing f7. We're playing a Vienna-Italian hybrid — same bishop placement as the Italian, but with the knight on c3 (not f3) so f4 is still on the table. We're keeping our options open.",
+                                  shortIdea: "Bishop to c4 eyes f7, knight on c3 keeps f4 available in a Vienna-Italian hybrid.",
                                   children: [
                                     {
                                       node: {
@@ -1248,6 +1314,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                         movedBy: 'black',
                                         idea:
                                           "3...Nf6 — Black develops the second knight and threatens our e4 pawn. Now we hit the critical Vienna decision against the 2...Nc6 line: do we play 4.d3 (kill the center fork trick before it starts) or 4.Nf3 (allow the trick and accept equality)? Strong players play d3.",
+                                        shortIdea: "Play 4.d3 to kill the center fork trick, or 4.Nf3 allows equality.",
                                         children: [
                                           {
                                             node: {
@@ -1255,6 +1322,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                               movedBy: 'white',
                                               idea:
                                                 "4.d3 — the move. Defends e4 with a pawn, kills the center fork trick (no Nxe4 because the pawn has it covered), and prepares to push f4 in a few moves once we've castled. The position is quiet but White is comfortable. From here it's classical Italian-style chess — get the king safe, play f4 when the timing's right, point everything at the kingside.",
+                                              shortIdea: "d3 defends e4, prevents Nxe4, and prepares f4 after castling for a kingside attack.",
                                               narration: [
                                                 {
                                                   text: '4.d3 — the move. Defends e4 with a pawn,',
@@ -1274,6 +1342,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                 },
                                                 {
                                                   text: "The position is quiet, White is comfortable. From here it's classical Italian-style chess — get the king safe, play f4 when the timing's right, point everything at the kingside.",
+                                                  shortText: "White castles, prepares f4, and aims for a kingside attack in a comfortable Italian position.",
                                                   arrows: [
                                                     { from: 'e1', to: 'g1', color: 'blue' },
                                                     { from: 'f2', to: 'f4', color: 'green' },
@@ -1287,6 +1356,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                     movedBy: 'black',
                                                     idea:
                                                       "4...Bc5 — Black mirrors our Italian setup. Bishop to c5 hits f2 (the same target our bishop on c4 has on f7) and Black is set up to castle short. Very textbook. But this bishop is also doing something dangerous — it's on the long a7-g1 diagonal, and right now g1 is occupied by our knight and f2 is empty after the d3 push hasn't happened... wait, f2 IS still occupied by our pawn. Good. As long as we don't push f4 with this bishop alive on c5, we're fine. Pushing f4 here would lose to Bxg1 — Black just takes our knight. The fix: trade the bishop FIRST.",
+                                                    shortIdea: "Bishop on c5 threatens Bxg1 if f4 is pushed; trade bishops first.",
                                                     narration: [
                                                       {
                                                         text: '4...Bc5 — Black mirrors our Italian setup.',
@@ -1305,6 +1375,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                       },
                                                       {
                                                         text: "But here's the trap. The bishop is on the long a7-g1 diagonal. If we ever push f4 — clearing f2 — that diagonal opens up to our knight on g1, and Black plays Bxg1 winning the piece.",
+                                                        shortText: "Pushing f4 opens the a7-g1 diagonal, allowing Bxg1 to win the knight.",
                                                         arrows: [
                                                           { from: 'c5', to: 'g1', color: 'red' },
                                                         ],
@@ -1324,6 +1395,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                           movedBy: 'white',
                                                           idea:
                                                             "5.Be3 — challenge the bishop. Bishop from c1 to e3, offering the trade and getting the dangerous c5-bishop off the long diagonal. Black's choice: trade with Bxe3 (most common — keeps it simple) or retreat with Bb6 (keeping the bishop, but losing tempo). Either way our plan is the same — recapture with the f-pawn if there's a trade, or push f4 safely later if the bishop moves.",
+                                                          shortIdea: "5.Be3 offers a trade or forces Black's bishop to retreat, then recapture with the f-pawn or push f4 safely.",
                                                           narration: [
                                                             {
                                                               text: '5.Be3 — challenge the bishop.',
@@ -1331,10 +1403,12 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                             },
                                                             {
                                                               text: "Bishop from c1 to e3, offering the trade and getting Black's c5-bishop off the long diagonal where it threatens our knight.",
+                                                              shortText: "Bishop to e3 offers a trade, removing Black's c5-bishop from the long diagonal threatening the knight.",
                                                               arrows: [{ from: 'e3', to: 'c5', color: 'red' }],
                                                             },
                                                             {
                                                               text: "Black's choice — trade with Bxe3, the most common reply, or retreat with Bb6 keeping the bishop but losing a tempo. Either way our plan is the same.",
+                                                              shortText: "Black trades with Bxe3 or retreats Bb6 losing a tempo; either way, White's plan continues.",
                                                             },
                                                           ],
                                                           children: [
@@ -1344,6 +1418,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                 movedBy: 'black',
                                                                 idea:
                                                                   "5...Bxe3 — Black takes the trade. Bishop from c5 captures on e3. Now I get to choose how to recapture, and the answer is the f-pawn — fxe3 — which opens the f-file for our rook AND removes the danger of Bxg1.",
+                                                                shortIdea: "fxe3 recaptures, opening the f-file for the rook and avoiding Bxg1.",
                                                                 narration: [
                                                                   {
                                                                     text: '5...Bxe3 — Black takes the trade.',
@@ -1360,6 +1435,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                       movedBy: 'white',
                                                                       idea:
                                                                         "6.fxe3 — and there's the move. F-pawn captures back on e3. We've doubled our e-pawns and that's slightly ugly, BUT — and this is the whole point of the recapture — the f-file is now wide open. Our rook on h1 can swing to f1; our queen can use the file; the king will castle short and live behind a still-intact pawn shield on g2-h2. The doubled e-pawns are a minor structural concession; the open f-file is a major attacking asset.",
+                                                                      shortIdea: "fxe3 recaptures, doubling e-pawns but opening the f-file for rook and queen attacks.",
                                                                       narration: [
                                                                         {
                                                                           text: '6.fxe3 — and there is the move. F-pawn captures back on e3.',
@@ -1367,6 +1443,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                         },
                                                                         {
                                                                           text: "We have doubled our e-pawns and that's slightly ugly. But the f-file is now wide open.",
+                                                                          shortText: "Doubled e-pawns are ugly, but the open f-file offers compensation.",
                                                                           highlights: [
                                                                             { square: 'e3', color: 'yellow' },
                                                                             { square: 'e4', color: 'yellow' },
@@ -1384,6 +1461,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                             movedBy: 'black',
                                                                             idea:
                                                                               "6...d6 — Black plays it safe. Pawn to d6 supports e5, opens the c8-bishop's diagonal, and waits to see what we commit to. The center is locked: our pawn on e4 against theirs on e5. From here we develop normally — knight to f3, castle short, prepare the f-file pressure.",
+                                                                            shortIdea: "Black's d6 supports e5, opens the c8-bishop, and waits for White's commitment.",
                                                                             narration: [
                                                                               {
                                                                                 text: '6...d6 — Black plays it safe. Pawn to d6,',
@@ -1404,6 +1482,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                   movedBy: 'white',
                                                                                   idea:
                                                                                     "7.Nf3 — bring the second knight out. Knight from g1 to f3, where it pressures e5 (third attacker on the pawn) and supports a future castle. With both knights, both bishops, and the kingside cleared, we're one move from castling.",
+                                                                                  shortIdea: "Knight to f3 pressures e5 with a third attacker and clears the kingside for castling.",
                                                                                   narration: [
                                                                                     {
                                                                                       text: '7.Nf3 — bring the second knight out.',
@@ -1416,6 +1495,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                     },
                                                                                     {
                                                                                       text: "We're one move from castling.",
+                                                                                      shortText: "White's king is stuck in the center one move from castling.",
                                                                                       arrows: [{ from: 'e1', to: 'g1', color: 'blue' }],
                                                                                     },
                                                                                   ],
@@ -1426,6 +1506,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                         movedBy: 'black',
                                                                                         idea:
                                                                                           "7...O-O — Black castles first. King to g8, rook to f8. Standard procedure; nothing special about it. Our turn to do the same.",
+                                                                                        shortIdea: "Castling kingside, Black secures his king and connects rooks.",
                                                                                         narration: [
                                                                                           {
                                                                                             text: '7...O-O — Black castles first.',
@@ -1442,6 +1523,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                               movedBy: 'white',
                                                                                               idea:
                                                                                                 "8.O-O — and we follow. King to g1, rook to f1. The rook lands directly on the open f-file — every move of this opening has been pointing toward this exact configuration. We're now in the middlegame with a textbook Vienna setup: open f-file, knights on c3 and f3, bishop on c4 eyeing f7, kings safely castled, doubled e-pawns the only structural blemish. Black's only critical decision left is whether to challenge our bishop with Bg4.",
+                                                                                              shortIdea: "O-O castles king and rook onto the open f-file, creating a textbook Vienna setup with knights on c3 and f3, bishop on c4 eyeing f7, and doubled e-pawns.",
                                                                                               narration: [
                                                                                                 {
                                                                                                   text: '8.O-O — and we follow. King to g1,',
@@ -1454,6 +1536,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                                 },
                                                                                                 {
                                                                                                   text: "We're now in the middlegame. Open f-file, knights on c3 and f3, bishop on c4 eyeing f7, both kings castled. Doubled e-pawns the only structural blemish — and worth it.",
+                                                                                                  shortText: "Open f-file, knights on c3 and f3, bishop on c4 eyeing f7, doubled e-pawns worth the structural blemish.",
                                                                                                   highlights: [
                                                                                                     { square: 'g1', color: 'green' },
                                                                                                     { square: 'g8', color: 'green' },
@@ -1467,6 +1550,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                                     movedBy: 'black',
                                                                                                     idea:
                                                                                                       "8...Bg4 — Black pins our knight. Bishop from c8 to g4, pinning Nf3 against our queen on d1. The threat is to play Nxe4 next — since the knight on f3 is pinned, it can't recapture. Our answer is h3 — kick the bishop, force the trade or the retreat.",
+                                                                                                    shortIdea: "h3 kicks the pinned bishop, forcing it to trade or retreat before Black plays Nxe4.",
                                                                                                     narration: [
                                                                                                       {
                                                                                                         text: '8...Bg4 — Black pins our knight.',
@@ -1492,6 +1576,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                                                           movedBy: 'white',
                                                                                                           idea:
                                                                                                             "9.h3 — kick the bishop. Pawn to h3 forces Bxf3 (the trade) or Bh5 (retreat, then we play g4 next to chase it further). If they trade, we recapture with the queen — Qxf3 — and our queen lands on a powerful kingside square pointing at f7 and ready to swing. The middlegame plan from here: queen and rook on the f-file, knight to d5 if Black ever lets us, push the d-pawn or the e-pawn for a central break. This is where opening theory ends and real chess begins.",
+                                                                                                          shortIdea: "9.h3 forces Bxf3 or Bh5; Qxf3 recaptures, aiming at f7 with queen and rook on the f-file.",
                                                                                                           narration: [
                                                                                                             {
                                                                                                               text: '9.h3 — kick the bishop.',
@@ -1570,6 +1655,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                             movedBy: 'black',
                             idea:
                               "2...Bc5 — Black plays Italian-style as Black, developing the bishop to its most active square and aiming at the f2 pawn. This is rarer than the knight moves but solid. We respond with normal development and look for f4 later, same as the other lines.",
+                            shortIdea: "Bc5 develops the bishop to its most active square, targeting f2.",
                             children: [
                               {
                                 node: {
@@ -1577,6 +1663,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                   movedBy: 'white',
                                   idea:
                                     "3.Nf3 — develop the second knight. Yes, this commits the f-pawn behind the knight for now, but after 2...Bc5 the gambit f4 doesn't work anyway: pushing f4 with Black's bishop on c5 opens the long a7-g1 diagonal and the knight on g1 hangs to ...Bxg1. With the bishop already pointed at our king, we develop calmly instead and aim for a normal Italian-style middlegame.",
+                                  shortIdea: "Develop the knight to f3, avoiding the f4 push that hangs the knight to ...Bxg1 with Black's bishop on c5.",
                                   narration: [
                                     {
                                       text: '3.Nf3 — develop the second knight.',
@@ -1584,6 +1671,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                     },
                                     {
                                       text: "Pushing f4 with Black's bishop on c5 doesn't work — clearing f2 opens the long a7-g1 diagonal, and our knight on g1 hangs to Bxg1.",
+                                      shortText: "f4 fails because it opens the a7-g1 diagonal, hanging the knight on g1 to Bxg1.",
                                       arrows: [{ from: 'c5', to: 'g1', color: 'red' }],
                                       highlights: [{ square: 'g1', color: 'red' }],
                                     },
@@ -1598,6 +1686,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                         movedBy: 'black',
                                         idea:
                                           "3...Nf6 — Black develops symmetrically. Knight from g8 to f6, attacking our e4 pawn. Standard reply.",
+                                        shortIdea: "Black's knight from g8 to f6 attacks the e4 pawn, developing symmetrically.",
                                         narration: [
                                           {
                                             text: '3...Nf6 — Black develops symmetrically.',
@@ -1616,6 +1705,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                               movedBy: 'white',
                                               idea:
                                                 "4.Be2 — modest bishop development, and crucially this AVOIDS the center fork trick. If we played Bc4 here instead, Black would play Nxe4! — and after we recapture with our c3-knight, Black plays d5 forking our bishop on c4 and the knight on e4. Same trick we teach against the 2...Nc6 line. By playing Be2 first, no target on c4. We'll defend e4 with d3 next move so any Nxe4 grab loses material outright.",
+                                              shortIdea: "Be2 avoids the center fork trick; Nxe4 is met by d3, winning material.",
                                               narration: [
                                                 {
                                                   text: '4.Be2 — modest bishop development.',
@@ -1641,9 +1731,11 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                     movedBy: 'black',
                                                     idea:
                                                       "4...Nc6 — Black develops the queen's knight. Standard, defends e5, no surprises.",
+                                                    shortIdea: "Black develops the knight to c6, defending e5.",
                                                     narration: [
                                                       {
                                                         text: "4...Nc6 — Black develops the queen's knight.",
+                                                        shortText: "Black develops the knight to c6.",
                                                         arrows: [{ from: 'b8', to: 'c6', color: 'green' }],
                                                       },
                                                       {
@@ -1658,6 +1750,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                           movedBy: 'white',
                                                           idea:
                                                             "5.d3 — defend e4 with the pawn. Now the e4-pawn has TWO defenders (the c3-knight AND this d3-pawn) so any Nxe4 ideas are off the table for good. We can also push d4 later if conditions allow. The position is set up for a calm Italian-Vienna middlegame.",
+                                                          shortIdea: "d3 defends e4 with a pawn, killing Nxe4 threats and setting up a calm Italian-Vienna middlegame.",
                                                           narration: [
                                                             {
                                                               text: '5.d3 — defend e4 with the pawn.',
@@ -1673,6 +1766,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                             },
                                                             {
                                                               text: "Black can't even think about Nxe4 — it just hangs the knight to a recapture.",
+                                                              shortText: "Nxe4 hangs the knight to a recapture.",
                                                             },
                                                           ],
                                                           children: [
@@ -1682,6 +1776,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                 movedBy: 'black',
                                                                 idea:
                                                                   "5...d6 — Black supports e5 and opens the c8-bishop's diagonal. Solid choice. Black wants to castle next.",
+                                                                shortIdea: "5...d6 supports e5 and opens the c8-bishop's diagonal, preparing to castle.",
                                                                 narration: [
                                                                   {
                                                                     text: '5...d6 — Black supports e5,',
@@ -1689,6 +1784,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                   },
                                                                   {
                                                                     text: "and opens the c8-bishop's diagonal.",
+                                                                    shortText: "The c8-bishop's diagonal is opened.",
                                                                     arrows: [{ from: 'c8', to: 'h3', color: 'yellow' }],
                                                                   },
                                                                 ],
@@ -1699,6 +1795,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                       movedBy: 'white',
                                                                       idea:
                                                                         "6.O-O — castle short. King to safety, rook to f1. The bishop on c5 still aims at the long diagonal but our f2-pawn blocks any pressure on g1. We're set up for a calm middlegame from here — what we have over a normal Italian is the knight already on c3, ready for Nd5 or supporting an eventual d4 break.",
+                                                                      shortIdea: "Castle short to safety; knight on c3 preps Nd5 or d4 break in a calm Italian middlegame.",
                                                                       narration: [
                                                                         {
                                                                           text: '6.O-O — castle short.',
@@ -1706,6 +1803,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                         },
                                                                         {
                                                                           text: "The bishop on c5 aims at our king's destination but our f2-pawn blocks any pressure on g1.",
+                                                                          shortText: "The bishop on c5 eyes the king's route, but the f2-pawn blocks pressure on g1.",
                                                                           highlights: [{ square: 'f2', color: 'green' }],
                                                                         },
                                                                         {
@@ -1720,6 +1818,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                             movedBy: 'black',
                                                                             idea:
                                                                               "6...O-O — Black castles too. Both kings safe; we've reached the calm Italian-Vienna middlegame. Symmetrical pawn structure (e4-d3 vs e5-d6), both bishops on c-squares (c4 and c5), both knights developed. The position is balanced and quiet. From here White picks: Be3 (challenge the bishop, lead to the same f-file lesson as the Nc6 line), Nd5 (knight outpost — hits f6 and c7), or h3 (preparing g4 push to attack the kingside). All three are real plans. Want to play it out?",
+                                                                            shortIdea: "Both kings safe in a balanced Italian-Vienna middlegame with symmetrical pawns and bishops on c4 and c5.",
                                                                             narration: [
                                                                               {
                                                                                 text: '6...O-O — Black castles too.',
@@ -1727,6 +1826,7 @@ export const VIENNA_GAME: WalkthroughTree = {
                                                                               },
                                                                               {
                                                                                 text: "Both kings safe — we've reached the calm Italian-Vienna middlegame.",
+                                                                                shortText: "Both kings safe in a calm Italian-Vienna middlegame.",
                                                                                 highlights: [
                                                                                   { square: 'g1', color: 'green' },
                                                                                   { square: 'g8', color: 'green' },

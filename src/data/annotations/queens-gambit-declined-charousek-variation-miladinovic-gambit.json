@@ -3,39 +3,48 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This move signals our intention to play a positional game where we'll gradually build pressure in the center and on the queenside. The d4 opening typically leads to rich middlegame positions where strategic understanding matters more than tactical fireworks. Our plan is to follow up with moves like Nf3, c4, and Nc3 to build a strong pawn center and develop our pieces harmoniously."
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This move signals our intention to play a positional game where we'll gradually build pressure in the center and on the queenside. The d4 opening typically leads to rich middlegame positions where strategic understanding matters more than tactical fireworks. Our plan is to follow up with moves like Nf3, c4, and Nc3 to build a strong pawn center and develop our pieces harmoniously.",
+      "shortNarration": "d4 claims e5 and c5, opens lines for the bishop and queen, and sets up a positional game with Nf3, c4, and Nc3."
     },
     {
       "san": "d5",
-      "annotation": "Black responds with the most principled central counter, immediately challenging our control of the e4 square and establishing their own presence in the center. this stabilizing move is the hallmark of classical opening play - meeting our central advance with an equally strong central response. Our opponent is signaling they want to fight for central control rather than allow us to establish a dominant pawn center unopposed. This sets up the foundation for the Queen's Gambit family of openings, where we'll soon offer our c-pawn to disrupt Black's central stronghold."
+      "annotation": "Black responds with the most principled central counter, immediately challenging our control of the e4 square and establishing their own presence in the center. this stabilizing move is the hallmark of classical opening play - meeting our central advance with an equally strong central response. Our opponent is signaling they want to fight for central control rather than allow us to establish a dominant pawn center unopposed. This sets up the foundation for the Queen's Gambit family of openings, where we'll soon offer our c-pawn to disrupt Black's central stronghold.",
+      "shortNarration": "1.e4 e5 meets central advance with central counter, setting up the Queen's Gambit where White offers the c-pawn to disrupt Black's center."
     },
     {
       "san": "c4",
-      "annotation": "We're playing the famous Queen's Gambit, offering our c-pawn to undermine Black's central d5 pawn and potentially gain a tempo if they capture. This move doesn't actually sacrifice material since after dxc4, we can easily regain the pawn with moves like Qa4+ or e3 followed by Bxc4. More importantly, we're attacking the foundation of Black's central position and forcing them to make a crucial decision about the pawn structure. If Black takes on c4, we get excellent piece development and central control; if they decline, we maintain tension and can build pressure on the d5 pawn."
+      "annotation": "We're playing the famous Queen's Gambit, offering our c-pawn to undermine Black's central d5 pawn and potentially gain a tempo if they capture. This move doesn't actually sacrifice material since after dxc4, we can easily regain the pawn with moves like Qa4+ or e3 followed by Bxc4. More importantly, we're attacking the foundation of Black's central position and forcing them to make a crucial decision about the pawn structure. If Black takes on c4, we get excellent piece development and central control; if they decline, we maintain tension and can build pressure on the d5 pawn.",
+      "shortNarration": "The Queen's Gambit offers the c-pawn to undermine d5, regaining it easily after dxc4 with Qa4+ or e3."
     },
     {
       "san": "e6",
-      "annotation": "Our opponent declines the gambit with this stabilizing move, supporting their d5 pawn while preparing to develop the light-squared bishop to d6, e7, or f5. This is one of the most reliable ways to handle the Queen's Gambit, as Black maintains their central pawn and avoids the complications that can arise from accepting on c4. However, the move does have a downside - it blocks in the dark-squared bishop on c8, which will need to find a way to get into the game later. Black is choosing a more positional approach over the sharper lines that come from taking the gambit pawn."
+      "annotation": "Our opponent declines the gambit with this stabilizing move, supporting their d5 pawn while preparing to develop the light-squared bishop to d6, e7, or f5. This is one of the most reliable ways to handle the Queen's Gambit, as Black maintains their central pawn and avoids the complications that can arise from accepting on c4. However, the move does have a downside - it blocks in the dark-squared bishop on c8, which will need to find a way to get into the game later. Black is choosing a more positional approach over the sharper lines that come from taking the gambit pawn.",
+      "shortNarration": "Black declines the Queen's Gambit, supporting d5 but blocking the c8 bishop."
     },
     {
       "san": "Nc3",
-      "annotation": "We're developing our knight to its ideal square, where it supports our potential e4 advance and adds another attacker to the d5 pawn. This move is practically universal in Queen's Gambit positions because it puts immediate pressure on Black's central stronghold. From c3, our knight can later jump to e4, b5, or even a4 depending on how the position develops. We're also preparing various pawn breaks like e4 or f3-f4, and this knight will be perfectly placed to support those central advances."
+      "annotation": "We're developing our knight to its ideal square, where it supports our potential e4 advance and adds another attacker to the d5 pawn. This move is practically universal in Queen's Gambit positions because it puts immediate pressure on Black's central stronghold. From c3, our knight can later jump to e4, b5, or even a4 depending on how the position develops. We're also preparing various pawn breaks like e4 or f3-f4, and this knight will be perfectly placed to support those central advances.",
+      "shortNarration": "Knight to c3 pressures d5, supports e4 advance, and can later jump to e4, b5, or a4."
     },
     {
       "san": "Be7",
-      "annotation": "Black chooses the most flexible development for their light-squared bishop, keeping the center tense while preparing to castle kingside. This move avoids committing to any particular pawn structure too early, unlike the more forcing Bd6 or the ambitious Bb4. Our opponent is essentially saying 'I want to complete my development safely first, then decide on the best plan.' The bishop on e7 supports the important f6 square and doesn't block any of Black's pieces, making it an excellent choice for players who prefer solid, flexible positions."
+      "annotation": "Black chooses the most flexible development for their light-squared bishop, keeping the center tense while preparing to castle kingside. This move avoids committing to any particular pawn structure too early, unlike the more forcing Bd6 or the ambitious Bb4. Our opponent is essentially saying 'I want to complete my development safely first, then decide on the best plan.' The bishop on e7 supports the important f6 square and doesn't block any of Black's pieces, making it an excellent choice for players who prefer solid, flexible positions.",
+      "shortNarration": "Black's Be7 develops flexibly, supports f6, and delays pawn structure commitments while preparing kingside castling."
     },
     {
       "san": "e4",
-      "annotation": "We're advancing in the center with tempo, attacking Black's d5 pawn and forcing them to make a critical decision about the pawn structure. This aggressive move transforms the position from a typical Queen's Gambit into something much sharper and more tactical. If Black captures our pawn, we'll recapture with our knight and have excellent piece activity; if they push d4, we get space but they establish a strong advanced pawn. This move signals our intention to create immediate central tension rather than slowly building pressure."
+      "annotation": "We're advancing in the center with tempo, attacking Black's d5 pawn and forcing them to make a critical decision about the pawn structure. This aggressive move transforms the position from a typical Queen's Gambit into something much sharper and more tactical. If Black captures our pawn, we'll recapture with our knight and have excellent piece activity; if they push d4, we get space but they establish a strong advanced pawn. This move signals our intention to create immediate central tension rather than slowly building pressure.",
+      "shortNarration": "Advancing in the center attacks d5, forcing Black to choose between capturing (giving us knight activity) or pushing d4 (giving them a strong advanced pawn)."
     },
     {
       "san": "dxe4",
-      "annotation": "Continuing Queens Gambit Declined Charousek Variation Miladinovic Gambit: dxe4 is a known theory move in this line."
+      "annotation": "Continuing Queens Gambit Declined Charousek Variation Miladinovic Gambit: dxe4 is a known theory move in this line.",
+      "shortNarration": "dxe4 is the theory move in the Charousek Variation Miladinovic Gambit."
     },
     {
       "san": "f3",
-      "annotation": "We're launching the Miladinovic Gambit, a sharp and aggressive attempt to blast open the center immediately by offering another pawn. This move attacks Black's e4 pawn and threatens to recapture with a discovered attack from our queen on the d8-h4 diagonal. If Black takes on f3, we'll play Nxf3 with tremendous piece activity and attacking chances against their somewhat exposed king. This gambit is not for the faint of heart - we're sacrificing material for rapid development and attacking chances, typical of the dynamic style that characterizes this variation of the Queen's Gambit Declined."
+      "annotation": "We're launching the Miladinovic Gambit, a sharp and aggressive attempt to blast open the center immediately by offering another pawn. This move attacks Black's e4 pawn and threatens to recapture with a discovered attack from our queen on the d8-h4 diagonal. If Black takes on f3, we'll play Nxf3 with tremendous piece activity and attacking chances against their somewhat exposed king. This gambit is not for the faint of heart - we're sacrificing material for rapid development and attacking chances, typical of the dynamic style that characterizes this variation of the Queen's Gambit Declined.",
+      "shortNarration": "Miladinovic Gambit: sacrifice a pawn to blast open the center, recapturing on f3 with the knight for rapid development and attacking chances against Black's exposed king."
     }
   ]
 }

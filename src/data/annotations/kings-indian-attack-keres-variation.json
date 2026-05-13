@@ -3,35 +3,43 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with this knight move to establish the King's Indian Attack setup, a flexible system that avoids heavy theory while maintaining control of the center. Nf3 supports our plan to fianchetto the kingside bishop and build pressure along the long diagonal—notice how it controls e5 and d4, two critical central squares. This move is popular because it's pragmatic: we prepare g3 and Bg2 without committing pawns to the center, giving us flexibility to adapt to Black's setup."
+      "annotation": "We start with this knight move to establish the King's Indian Attack setup, a flexible system that avoids heavy theory while maintaining control of the center. Nf3 supports our plan to fianchetto the kingside bishop and build pressure along the long diagonal—notice how it controls e5 and d4, two critical central squares. This move is popular because it's pragmatic: we prepare g3 and Bg2 without committing pawns to the center, giving us flexibility to adapt to Black's setup.",
+      "shortNarration": "Nf3 controls e5 and d4, preparing g3 and Bg2 in the flexible King's Indian Attack."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately stakes a claim in the center with this pawn push, which is natural and solid. This move controls c4 and e4, preventing us from easily planting pieces on those squares, and it signals that Black wants to fight for central space. You should recognize this as a typical response when White avoids the immediate d4—Black takes the opportunity to advance their own central pawn."
+      "annotation": "Black immediately stakes a claim in the center with this pawn push, which is natural and solid. This move controls c4 and e4, preventing us from easily planting pieces on those squares, and it signals that Black wants to fight for central space. You should recognize this as a typical response when White avoids the immediate d4—Black takes the opportunity to advance their own central pawn.",
+      "shortNarration": "Black's c5 push controls d4 and e4, fighting for central space after White avoids d4."
     },
     {
       "san": "g3",
-      "annotation": "Now we fianchetto our kingside bishop, a signature move of the KIA that controls the long diagonal (a1-h8) and supports our central play indirectly. By placing the bishop on g2, we'll exert subtle pressure on the center and d5-pawn without deploying pieces aggressively yet. This patient approach is the hallmark of the KIA: we build a solid structure first, then gradually increase pressure when Black has committed their pieces."
+      "annotation": "Now we fianchetto our kingside bishop, a signature move of the KIA that controls the long diagonal (a1-h8) and supports our central play indirectly. By placing the bishop on g2, we'll exert subtle pressure on the center and d5-pawn without deploying pieces aggressively yet. This patient approach is the hallmark of the KIA: we build a solid structure first, then gradually increase pressure when Black has committed their pieces.",
+      "shortNarration": "Fianchettoing the kingside bishop to g2 controls the long diagonal and pressures the d5-pawn without committing pieces."
     },
     {
       "san": "c6",
-      "annotation": "Black plays the Slav Defense structure, preparing to advance the d-pawn securely and supporting a potential b7 bishop development. This move gives Black a solid pawn chain and keeps our light-squared bishop locked outside—a key defensive resource. You'll see that c6 also prepares ...Bf5 or allows for a eventual ...Nf6, as Black builds a flexible setup without weakening the queenside."
+      "annotation": "Black plays the Slav Defense structure, preparing to advance the d-pawn securely and supporting a potential b7 bishop development. This move gives Black a solid pawn chain and keeps our light-squared bishop locked outside—a key defensive resource. You'll see that c6 also prepares ...Bf5 or allows for a eventual ...Nf6, as Black builds a flexible setup without weakening the queenside.",
+      "shortNarration": "c6 locks out White's light-squared bishop, builds a solid pawn chain, and prepares ...Bf5 or ...Nf6."
     },
     {
       "san": "Bg2",
-      "annotation": "We complete the fianchetto setup, positioning our bishop on the long diagonal where it pressures Black's center and the d5 pawn indirectly. This move also prepares castling and prepares to reroute pieces toward the center and kingside when needed. The bishop on g2 is patient but powerful—it's a hallmark of KIA strategy to let it work quietly while you develop other pieces."
+      "annotation": "We complete the fianchetto setup, positioning our bishop on the long diagonal where it pressures Black's center and the d5 pawn indirectly. This move also prepares castling and prepares to reroute pieces toward the center and kingside when needed. The bishop on g2 is patient but powerful—it's a hallmark of KIA strategy to let it work quietly while you develop other pieces.",
+      "shortNarration": "The fianchettoed bishop on g2 pressures d5 and the center while preparing castling and piece rerouting."
     },
     {
       "san": "Bg4",
-      "annotation": "Black develops the light-squared bishop actively, pinning our knight on f3 and preparing to challenge our control of key squares like e2 and d1. This is a active move that forces us to make a decision about our knight's placement. Watch for this pin—it's not immediately dangerous, but it does restrict our knight's mobility and requires us to think carefully about how we'll proceed in the center."
+      "annotation": "Black develops the light-squared bishop actively, pinning our knight on f3 and preparing to challenge our control of key squares like e2 and d1. This is a active move that forces us to make a decision about our knight's placement. Watch for this pin—it's not immediately dangerous, but it does restrict our knight's mobility and requires us to think carefully about how we'll proceed in the center.",
+      "shortNarration": "Black's light-squared bishop pins the knight on f3, restricting its mobility and challenging control of e2 and d1."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside to complete our setup and connect our rooks, moving our king to safety before the position becomes more tactical. Kingside castling is standard in the KIA because it supports the fianchettoed bishop and keeps our king away from potential counterplay in the center. With this move, we've secured a solid foundation and can now think about how to gradually improve our position with moves like c4 or Nbd2."
+      "annotation": "We castle kingside to complete our setup and connect our rooks, moving our king to safety before the position becomes more tactical. Kingside castling is standard in the KIA because it supports the fianchettoed bishop and keeps our king away from potential counterplay in the center. With this move, we've secured a solid foundation and can now think about how to gradually improve our position with moves like c4 or Nbd2.",
+      "shortNarration": "Castle kingside to connect rooks and support the fianchettoed bishop, securing the king before pushing c4 or Nbd2."
     },
     {
       "san": "Nd7",
-      "annotation": "Black develops the knight to d7, avoiding the typical f6 square to keep flexibility and to support a potential ...c5 or ...e6 break later. The knight on d7 is well-placed to reroute to f6 or b6, and it avoids getting pinned again on f6 by our g2 bishop. This flexible development shows Black understands the KIA—they're not rushing to commit to a specific pawn structure and are ready to adapt to our plans."
+      "annotation": "Black develops the knight to d7, avoiding the typical f6 square to keep flexibility and to support a potential ...c5 or ...e6 break later. The knight on d7 is well-placed to reroute to f6 or b6, and it avoids getting pinned again on f6 by our g2 bishop. This flexible development shows Black understands the KIA—they're not rushing to commit to a specific pawn structure and are ready to adapt to our plans.",
+      "shortNarration": "Black's knight on d7 avoids the g2-bishop pin and stays flexible for ...c5 or ...e6 breaks."
     }
   ]
 }

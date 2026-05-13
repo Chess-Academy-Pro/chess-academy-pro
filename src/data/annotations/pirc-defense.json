@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, claiming the central squares e4 and d5 while opening lines for our bishop and queen. This move follows classical opening principles by contesting central control immediately and developing our pieces toward active squares. The e4 pawn also gives us space in the center and potential attacking chances on the kingside later in the game. Most club players are comfortable meeting 1.e4 with either 1...e5 or 1...c5, so we're likely heading into familiar territory where our preparation will serve us well."
+      "annotation": "We're opening with the king's pawn, claiming the central squares e4 and d5 while opening lines for our bishop and queen. This move follows classical opening principles by contesting central control immediately and developing our pieces toward active squares. The e4 pawn also gives us space in the center and potential attacking chances on the kingside later in the game. Most club players are comfortable meeting 1.e4 with either 1...e5 or 1...c5, so we're likely heading into familiar territory where our preparation will serve us well.",
+      "shortNarration": "1.e4 claims the center, opens lines for the bishop and queen, and prepares kingside attacking chances."
     },
     {
       "san": "d6",
-      "annotation": "Our opponent chooses the flexible Pirc Defense setup, immediately signaling a hypermodern approach where they'll allow us to occupy the center with pawns while preparing to strike back later. This move supports the e5 square and prepares to develop the knight to f6, but it's less committal than the immediate 1...e5 or 1...c5. Black is planning to fianchetto the king's bishop on g7 and create a solid, flexible pawn structure that can adapt to various pawn storms we might launch. We should be ready for a game where Black will try to undermine our pawn center from the flanks rather than challenging it head-on immediately."
+      "annotation": "Our opponent chooses the flexible Pirc Defense setup, immediately signaling a hypermodern approach where they'll allow us to occupy the center with pawns while preparing to strike back later. This move supports the e5 square and prepares to develop the knight to f6, but it's less committal than the immediate 1...e5 or 1...c5. Black is planning to fianchetto the king's bishop on g7 and create a solid, flexible pawn structure that can adapt to various pawn storms we might launch. We should be ready for a game where Black will try to undermine our pawn center from the flanks rather than challenging it head-on immediately.",
+      "shortNarration": "Black chooses the Pirc Defense, allowing White's center pawns while preparing to fianchetto and counterattack from the flanks."
     },
     {
       "san": "d4",
-      "annotation": "We're establishing a classical pawn center by placing pawns on both e4 and d4, giving us maximum central control and space advantage. This move attacks the d6 pawn indirectly and opens the diagonal for our light-squared bishop, while also preparing to develop our pieces with tempo. The d4-e4 pawn duo is one of the strongest central formations in chess, restricting Black's pieces and giving us more room to maneuver. Against the Pirc Defense, this aggressive approach makes sense because we want to use our space advantage before Black can complete their hypermodern setup and start counterattacking our center."
+      "annotation": "We're establishing a classical pawn center by placing pawns on both e4 and d4, giving us maximum central control and space advantage. This move attacks the d6 pawn indirectly and opens the diagonal for our light-squared bishop, while also preparing to develop our pieces with tempo. The d4-e4 pawn duo is one of the strongest central formations in chess, restricting Black's pieces and giving us more room to maneuver. Against the Pirc Defense, this aggressive approach makes sense because we want to use our space advantage before Black can complete their hypermodern setup and start counterattacking our center.",
+      "shortNarration": "d4-e4 pawn duo maximizes central control, attacks d6, and opens the bishop's diagonal against Black's Pirc setup."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the knight to its ideal square, attacking our e4 pawn and beginning the typical Pirc Defense piece coordination. This move fits perfectly with Black's hypermodern strategy - instead of occupying the center with pawns, they're using pieces to pressure our central pawns and create tactical opportunities. The knight on f6 also supports a future ...e5 pawn break and prepares to castle kingside after ...g6 and ...Bg7. We need to decide how to handle the attack on our e4 pawn - we can defend it, advance it, or even ignore it temporarily since Black cannot capture it immediately without losing material."
+      "annotation": "Black develops the knight to its ideal square, attacking our e4 pawn and beginning the typical Pirc Defense piece coordination. This move fits perfectly with Black's hypermodern strategy - instead of occupying the center with pawns, they're using pieces to pressure our central pawns and create tactical opportunities. The knight on f6 also supports a future ...e5 pawn break and prepares to castle kingside after ...g6 and ...Bg7. We need to decide how to handle the attack on our e4 pawn - we can defend it, advance it, or even ignore it temporarily since Black cannot capture it immediately without losing material.",
+      "shortNarration": "Black's knight on f6 attacks e4, supporting a future e5 break and kingside castle after g6 and Bg7."
     },
     {
       "san": "Nc3",
-      "annotation": "Continuing Pirc Defense: Nc3 is a known theory move in this line."
+      "annotation": "Continuing Pirc Defense: Nc3 is a known theory move in this line.",
+      "shortNarration": "Nc3 is the standard Pirc move, developing and pressuring d4."
     },
     {
       "san": "g6",
-      "annotation": "Continuing Pirc Defense: g6 is a known theory move in this line."
+      "annotation": "Continuing Pirc Defense: g6 is a known theory move in this line.",
+      "shortNarration": "g6 enters the Pirc Defense, fianchettoing the bishop to pressure the center."
     }
   ]
 }

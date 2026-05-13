@@ -8,6 +8,8 @@ import { getSharedAudioContext } from './audioContextManager';
 import { stripCoachMarkup, formatForSpeech } from './sanitizeCoachText';
 import { db } from '../db/schema';
 import type { CoachPersonality } from '../coach/types';
+import { useAppStore } from '../stores/appStore';
+import { resolveCoachNarration } from '../utils/coachNarration';
 
 // WO-COACH-PERSONALITY-VOICE — voice and personality are orthogonal
 // dials. Each personality has a default voice (the one that matches
@@ -552,6 +554,10 @@ class VoiceService {
    *  Uses cached preferences (from warmup) and goes straight to Web Speech API. */
   async speakFast(text: string): Promise<void> {
     this.logSpeakInvoked('speakFast', text);
+    // Mirror the speakInternal Coach Narration = "silent" gate. speakFast
+    // bypasses speakInternal for low-latency drills, so we re-check the
+    // setting here to keep the Silent promise consistent.
+    if (resolveCoachNarration(useAppStore.getState().activeProfile?.preferences) === 'silent') return;
     if (this.cachedPrefs && !this.cachedPrefs.voiceEnabled) return;
 
     // Stop any in-flight speech without going through the full stop() chain
@@ -594,6 +600,9 @@ class VoiceService {
   /** Queue a sentence without stopping current speech. For streaming voice responses. */
   speakQueuedForced(text: string): void {
     this.logSpeakInvoked('speakQueuedForced', text);
+    // Mirror the speakInternal Coach Narration = "silent" gate. This
+    // path goes straight to speechService.queue, so we re-check here.
+    if (resolveCoachNarration(useAppStore.getState().activeProfile?.preferences) === 'silent') return;
     if (this.cachedPrefs?.systemVoiceURI) {
       speechService.setVoice(this.cachedPrefs.systemVoiceURI);
     }
@@ -608,6 +617,30 @@ class VoiceService {
     force: boolean,
     opts?: { useSecondary?: boolean; noFallback?: boolean },
   ): Promise<void> {
+    // Coach Narration = "silent" is the highest-priority gate: when
+    // the user has explicitly set Settings → Coach → Coach Narration
+    // to Silent, NO coach-driven speech fires anywhere in the app,
+    // regardless of the call site or the `force` flag. This catches
+    // the long tail of speakForced/speakForcedPollyOnly/etc. call
+    // sites that don't go through a per-site policy gate (the
+    // CoachTeachPage welcome line, ack messages, streaming chat
+    // sentences, voice-chat mic responses, etc.). Without this gate,
+    // those 50+ call sites bypass the unified setting and the
+    // "Silent" promise is incomplete. Logged as `voice-speak-silenced`
+    // so audit traces still show the attempt was suppressed by policy.
+    const narrationPrefs = useAppStore.getState().activeProfile?.preferences;
+    if (resolveCoachNarration(narrationPrefs) === 'silent') {
+      void import('./appAuditor').then(({ logAppAudit }) => {
+        void logAppAudit({
+          kind: 'voice-speak-silenced',
+          category: 'subsystem',
+          source: 'voiceService.speakInternal',
+          summary: `silenced by Coach Narration = "silent": "${text.slice(0, 40)}"`,
+          details: `length=${text.length} force=${force}`,
+        });
+      }).catch(() => undefined);
+      return;
+    }
     // Audit-driven (build 6459def+ Findings 5, 7): the streaming
     // sentence dispatchers can split text like "X . . . " into
     // single-period "sentences" (the SENTENCE_END_RE matches ` .` as

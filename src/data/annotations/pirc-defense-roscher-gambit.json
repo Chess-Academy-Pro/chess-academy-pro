@@ -3,23 +3,28 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing for rapid piece development. This move immediately controls the crucial d5 and f5 squares while opening lines for both our bishop on f1 and our queen. The move sets up classical opening principles - fighting for central control and preparing to castle kingside quickly. Against most defenses, this gives us excellent chances for active piece play and attacking opportunities."
+      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing for rapid piece development. This move immediately controls the crucial d5 and f5 squares while opening lines for both our bishop on f1 and our queen. The move sets up classical opening principles - fighting for central control and preparing to castle kingside quickly. Against most defenses, this gives us excellent chances for active piece play and attacking opportunities.",
+      "shortNarration": "1.e4 controls d5 and f5, opens lines for the queen and bishop, and prepares kingside castling."
     },
     {
       "san": "d6",
-      "annotation": "Our opponent chooses the Pirc Defense setup, which is a hypermodern approach that allows us to occupy the center while Black prepares to strike back later. This move supports an eventual ...e5 advance and keeps options open for the light-squared bishop to develop to e7 or potentially fianchetto on g7. Black is essentially saying 'take the center for now, but I'll challenge it when my pieces are better coordinated.' This is a perfectly sound but somewhat passive approach that requires precise timing from Black to avoid falling behind in development."
+      "annotation": "Our opponent chooses the Pirc Defense setup, which is a hypermodern approach that allows us to occupy the center while Black prepares to strike back later. This move supports an eventual ...e5 advance and keeps options open for the light-squared bishop to develop to e7 or potentially fianchetto on g7. Black is essentially saying 'take the center for now, but I'll challenge it when my pieces are better coordinated.' This is a perfectly sound but somewhat passive approach that requires precise timing from Black to avoid falling behind in development.",
+      "shortNarration": "Black's Pirc Defense concedes the center for now, planning ...e5 and a fianchetto, but risks falling behind in development."
     },
     {
       "san": "d4",
-      "annotation": "We're establishing a classical pawn center with our second central pawn, now controlling the key e5 and c5 squares while gaining maximum space. This move completes our initial central occupation and prepares to develop our pieces with tempo, particularly our dark-squared bishop to c4 or e2. The pawn duo on e4-d4 gives us excellent central control and will support our piece activity throughout the opening phase. Our opponent will need to decide soon how to challenge this central dominance, likely with moves like ...Nf6, ...g6, or ...e5."
+      "annotation": "We're establishing a classical pawn center with our second central pawn, now controlling the key e5 and c5 squares while gaining maximum space. This move completes our initial central occupation and prepares to develop our pieces with tempo, particularly our dark-squared bishop to c4 or e2. The pawn duo on e4-d4 gives us excellent central control and will support our piece activity throughout the opening phase. Our opponent will need to decide soon how to challenge this central dominance, likely with moves like ...Nf6, ...g6, or ...e5.",
+      "shortNarration": "2.d4 completes the classical pawn center, controlling e5 and c5 while preparing to develop the bishop to c4 or e2."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the knight to its most active square, immediately pressuring our e4 pawn and preparing to support a future ...e5 break. This is the most principled move in the Pirc Defense, as it develops a piece while creating immediate central tension. Our opponent is following hypermodern principles - developing pieces before committing pawns and keeping maximum flexibility for the pawn structure. However, this knight placement does invite us to consider advancing e4-e5 at some point, which could give us a space advantage if Black isn't careful with the timing of counterplay."
+      "annotation": "Black develops the knight to its most active square, immediately pressuring our e4 pawn and preparing to support a future ...e5 break. This is the most principled move in the Pirc Defense, as it develops a piece while creating immediate central tension. Our opponent is following hypermodern principles - developing pieces before committing pawns and keeping maximum flexibility for the pawn structure. However, this knight placement does invite us to consider advancing e4-e5 at some point, which could give us a space advantage if Black isn't careful with the timing of counterplay.",
+      "shortNarration": "Black's knight to f6 pressures e4 and prepares ...e5, but invites White's e4-e5 space gain if Black's counterplay is mistimed."
     },
     {
       "san": "Nf3",
-      "annotation": "We're developing our knight to its optimal square, defending the e4 pawn while preparing to castle kingside and maintaining all our central options. This active move keeps the tension in the center rather than advancing e5 immediately, which gives us more flexibility and avoids committing to a specific pawn structure too early. The knight on f3 also eyes the important d4 square and can potentially support a future f2-f3 and e4-e5 pawn advance. At this point, we've completed our basic development goals while maintaining central control, and Black will need to show their hand regarding how they plan to challenge our position."
+      "annotation": "We're developing our knight to its optimal square, defending the e4 pawn while preparing to castle kingside and maintaining all our central options. This active move keeps the tension in the center rather than advancing e5 immediately, which gives us more flexibility and avoids committing to a specific pawn structure too early. The knight on f3 also eyes the important d4 square and can potentially support a future f2-f3 and e4-e5 pawn advance. At this point, we've completed our basic development goals while maintaining central control, and Black will need to show their hand regarding how they plan to challenge our position.",
+      "shortNarration": "Knight to f3 defends e4, eyes d4, and keeps central tension flexible while preparing kingside castling."
     }
   ]
 }

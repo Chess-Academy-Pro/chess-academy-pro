@@ -22,7 +22,8 @@
           "to": "e4",
           "color": "rgba(0, 180, 80, 0.8)"
         }
-      ]
+      ],
+      "shortNarration": "1.e4 claims the center and opens lines for queen and bishop in the sharp Two Knights Defence."
     },
     {
       "san": "e5",
@@ -42,7 +43,8 @@
           "to": "e5",
           "color": "rgba(0, 180, 80, 0.8)"
         }
-      ]
+      ],
+      "shortNarration": "In the Two Knights, Black's e5 pawn becomes a tactical target when White plays Ng5 attacking f7."
     },
     {
       "san": "Nf3",
@@ -65,7 +67,8 @@
           "to": "c4",
           "color": "rgba(0, 100, 255, 0.7)"
         }
-      ]
+      ],
+      "shortNarration": "Nf3 attacks e5, controls d4, and prepares Bc4 or Ng5."
     },
     {
       "san": "Nc6",
@@ -85,7 +88,8 @@
           "to": "c6",
           "color": "rgba(0, 180, 80, 0.8)"
         }
-      ]
+      ],
+      "shortNarration": "Black's knight on c6 defends e5 and controls d4, setting up the Two Knights Defence with ...Nf6."
     },
     {
       "san": "Bc4",
@@ -114,7 +118,8 @@
           "square": "f7",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Bc4 targets f7, the weakest square, and supports both the Giuoco Piano and Two Knights Defense."
     },
     {
       "san": "Nf6",
@@ -143,7 +148,8 @@
           "square": "f7",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black's Nf6 counterattacks e4, inviting the sharp Ng5 attack targeting f7."
     },
     {
       "san": "d3",
@@ -168,7 +174,8 @@
           "to": "c3",
           "color": "rgba(0, 100, 255, 0.7)"
         }
-      ]
+      ],
+      "shortNarration": "White plays d3, entering the Giuoco Pianissimo — solid center, prepares c3, keeps long-term pressure."
     },
     {
       "san": "Be7",
@@ -187,7 +194,8 @@
           "to": "e7",
           "color": "rgba(0, 100, 255, 0.7)"
         }
-      ]
+      ],
+      "shortNarration": "Be7 prepares castling and avoids Bc5 tactics, with options to reroute to f6 or d8-c7."
     },
     {
       "san": "O-O",
@@ -202,7 +210,8 @@
           "to": "g1",
           "color": "rgba(0, 100, 255, 0.7)"
         }
-      ]
+      ],
+      "shortNarration": "White castles kingside, moving the king to safety and activating the rook on the f-file."
     },
     {
       "san": "O-O",
@@ -217,7 +226,8 @@
           "to": "d6",
           "color": "rgba(0, 100, 255, 0.7)"
         }
-      ]
+      ],
+      "shortNarration": "Both kings are secure, rooks connected, and the strategic battle hinges on White's c3-d4 central break."
     },
     {
       "san": "Re1",
@@ -241,7 +251,8 @@
           "to": "c3",
           "color": "rgba(0, 100, 255, 0.7)"
         }
-      ]
+      ],
+      "shortNarration": "Re1 bolsters e4, prevents ...Nxe4, and readies the d4 central break."
     },
     {
       "san": "d6",
@@ -265,7 +276,8 @@
           "to": "d6",
           "color": "rgba(0, 100, 255, 0.7)"
         }
-      ]
+      ],
+      "shortNarration": "Black's d6 solidifies e5, opens the c8-bishop's diagonal, and creates a stable e5-d6 pawn chain."
     },
     {
       "san": "a4",
@@ -290,7 +302,8 @@
           "square": "b5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "a4 prevents Black's ...b5 expansion and prepares a5 to lock down the queenside."
     },
     {
       "san": "Na5",
@@ -314,7 +327,8 @@
           "to": "a5",
           "color": "rgba(0, 100, 255, 0.7)"
         }
-      ]
+      ],
+      "shortNarration": "Na5 chases the Bc4 — after Nxc4 dxc4, White loses its best attacking piece for a knight on the rim."
     },
     {
       "san": "Ba2",
@@ -338,7 +352,8 @@
           "square": "a2",
           "color": "rgba(0, 200, 100, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Bishop retreats to a2, safe from harassment, still targeting f7 and supporting d4-d5."
     },
     {
       "san": "c5",
@@ -368,7 +383,8 @@
           "square": "d4",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's c5-d6-e5 pawn chain controls the center, preparing ...Nc6 to bring the knight back."
     },
     {
       "san": "c3",
@@ -396,7 +412,8 @@
           "square": "d4",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "c3 prepares d4, where the c3 pawn recaptures to keep White's central pawn after the exchange."
     },
     {
       "san": "Nc6",
@@ -425,7 +442,8 @@
           "square": "c6",
           "color": "rgba(0, 200, 100, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Knight returns to c6, controlling d4 and e5, after forcing Bc4 to a2 — a strategic gain worth the tempo."
     }
   ],
   "subLines": [
@@ -457,7 +475,8 @@
               "square": "d5",
               "color": "rgba(255, 255, 0, 0.4)"
             }
-          ]
+          ],
+          "shortNarration": "White's e4 claims the center, controls d5 and f5, and opens lines for the queen and bishop."
         },
         {
           "san": "e5",
@@ -483,7 +502,8 @@
               "square": "d4",
               "color": "rgba(255, 255, 0, 0.4)"
             }
-          ]
+          ],
+          "shortNarration": "Black's e5 pawn fights for d4, creating central tension that limits White's pieces and prepares development."
         },
         {
           "san": "Nf3",
@@ -506,7 +526,8 @@
           ],
           "alternatives": [
             "d3 leads to slower, more positional play"
-          ]
+          ],
+          "shortNarration": "White's knight to f3 attacks e5, eyes d4, and prepares castling — classic development."
         },
         {
           "san": "Nc6",
@@ -526,7 +547,8 @@
               "to": "c6",
               "color": "rgba(0, 180, 80, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's knight defends e5, eyes central squares, and keeps ...f5 or ...d6 flexible."
         },
         {
           "san": "Bc4",
@@ -550,7 +572,8 @@
               "square": "f7",
               "color": "rgba(255, 50, 50, 0.3)"
             }
-          ]
+          ],
+          "shortNarration": "The Italian bishop targets f7, creating immediate tactical threats as White castles kingside."
         },
         {
           "san": "Nf6",
@@ -570,7 +593,8 @@
               "to": "f6",
               "color": "rgba(0, 180, 80, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's knight attacks e4, forcing White to decide between holding the center or opening with d4."
         },
         {
           "san": "d4",
@@ -589,7 +613,8 @@
               "to": "d4",
               "color": "rgba(255, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "White's pawn break opens the center for piece activity, creating immediate threats against Black's loose coordination."
         },
         {
           "san": "exd4",
@@ -604,7 +629,8 @@
               "to": "d4",
               "color": "rgba(0, 120, 255, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black accepts the pawn sacrifice, opening the center, but White's e4-e5 attacks f6 and gains space while Black tries to consolidate the extra material."
         },
         {
           "san": "e5",
@@ -625,7 +651,8 @@
               "to": "e5",
               "color": "rgba(0, 180, 80, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "White's advanced pawn on f6 controls d6 and f6, forcing Black's pieces back while becoming both a wedge and a target."
         },
         {
           "san": "d5",
@@ -640,7 +667,8 @@
               "to": "d5",
               "color": "rgba(255, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's d5 attacks the c4 bishop, opens lines for the c8 bishop, and restricts White's pieces."
         },
         {
           "san": "Bb5",
@@ -666,7 +694,8 @@
               "square": "c6",
               "color": "rgba(255, 50, 50, 0.3)"
             }
-          ]
+          ],
+          "shortNarration": "Bishop retreats with tempo, pinning the knight on c6 to the king — knight cannot move without exposing the king."
         },
         {
           "san": "Ne4",
@@ -687,7 +716,8 @@
               "square": "e4",
               "color": "rgba(0, 180, 80, 0.3)"
             }
-          ]
+          ],
+          "shortNarration": "Black's knight on e4 attacks the b5 bishop, breaks the pin, and creates central counterplay from a strong outpost."
         },
         {
           "san": "Nxd4",
@@ -707,7 +737,8 @@
               "to": "d4",
               "color": "rgba(0, 180, 80, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "White captures on d4, removing a defender and centralizing the knight to support the attack."
         },
         {
           "san": "Bd7",
@@ -722,7 +753,8 @@
               "to": "d7",
               "color": "rgba(0, 180, 80, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black develops the bishop to break the pin on the knight, preparing queenside castling or recapture on c6."
         },
         {
           "san": "Bxc6",
@@ -741,7 +773,8 @@
               "to": "c6",
               "color": "rgba(0, 120, 255, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "White trades bishop for knight, doubling Black's c-pawns and weakening the pawn structure, but Black gains the bishop pair."
         },
         {
           "san": "bxc6",
@@ -757,7 +790,8 @@
               "to": "c6",
               "color": "rgba(0, 180, 80, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black recaptures toward the center, opening the b-file and doubling pawns, but keeps central control and piece coordination."
         },
         {
           "san": "O-O",
@@ -772,7 +806,8 @@
               "to": "g1",
               "color": "rgba(0, 120, 255, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "White castles kingside to safety, connects rooks, and prepares to exploit Black's loose pieces."
         },
         {
           "san": "Bc5",
@@ -792,7 +827,8 @@
               "to": "c5",
               "color": "rgba(0, 120, 255, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's bishop to c5 pressures d4, activates the last minor piece, and supports the bishop pair advantage."
         }
       ],
       "type": "variation"
@@ -803,11 +839,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Two Knights: Fried Liver Defence is an important variation of the Two Knights Defence. The modern way to handle the Fried Liver. After 5...Na5, Black avoids the dangerous 5...Nxd5 and gets a lead in development after ...c6 and ...h6. The open b-file and active pieces give Black full compensation. Let's walk through the key ideas."
+          "annotation": "The Two Knights: Fried Liver Defence is an important variation of the Two Knights Defence. The modern way to handle the Fried Liver. After 5...Na5, Black avoids the dangerous 5...Nxd5 and gets a lead in development after ...c6 and ...h6. The open b-file and active pieces give Black full compensation. Let's walk through the key ideas.",
+          "shortNarration": "5...Na5 avoids the Fried Liver, gaining development with ...c6 and ...h6, and the open b-file gives Black full compensation."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Fried Liver Defence."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Fried Liver Defence.",
+          "shortNarration": "Black's e5 contests the center, defining the Two Knights: Fried Liver Defence."
         },
         {
           "san": "Nf3",
@@ -827,11 +865,13 @@
         },
         {
           "san": "Ng5",
-          "annotation": "Ng5 improves the knight's placement. The knight was less effective on f3 and moves to g5 where it serves the plan better."
+          "annotation": "Ng5 improves the knight's placement. The knight was less effective on f3 and moves to g5 where it serves the plan better.",
+          "shortNarration": "Ng5 improves the knight's placement, targeting f7 and supporting the kingside attack."
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "exd5",
@@ -842,11 +882,13 @@
               "to": "d5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd5 stakes the center, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Na5",
-          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better."
+          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better.",
+          "shortNarration": "Na5 improves the knight's placement, shifting from c6 to a5 for a stronger plan."
         },
         {
           "san": "Bb5+",
@@ -857,7 +899,8 @@
               "to": "b5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bb5+ forces the king to move, gaining a tempo to improve White's position."
         },
         {
           "san": "c6",
@@ -872,7 +915,8 @@
               "to": "c6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc6 captures the pawn, changing the balance by reconfiguring the pawn structure or gaining material."
         },
         {
           "san": "bxc6",
@@ -883,15 +927,18 @@
               "to": "c6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "bxc6 captures the pawn, altering the pawn structure and material balance."
         },
         {
           "san": "Be2",
-          "annotation": "Be2 improves the bishop's placement. The bishop was less effective on b5 and moves to e2 where it serves the plan better."
+          "annotation": "Be2 improves the bishop's placement. The bishop was less effective on b5 and moves to e2 where it serves the plan better.",
+          "shortNarration": "Be2 improves the bishop's placement, shifting from b5 to e2 for better support."
         },
         {
           "san": "h6",
-          "annotation": "h6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "h6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "h6 gains kingside space to support a future attack toward the enemy king."
         },
         {
           "san": "Nf3",
@@ -906,7 +953,8 @@
               "to": "e4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "e4 stakes a central claim, controlling space and restricting Black's pieces."
         },
         {
           "san": "Ne5",
@@ -928,7 +976,8 @@
               "to": "d6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bd6, the Fried Liver Defence — Black targets f2 and prepares c6 to boot the knight."
         }
       ]
     },
@@ -938,11 +987,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Two Knights: Traxler Counterattack is an important variation of the Two Knights Defence. The wildest response to 4.Ng5 — Black ignores the f7 threat and counterattacks with 4...Bc5! This leads to incredible complications where Black gives up castling rights but gets a ferocious attack. Let's walk through the key ideas."
+          "annotation": "The Two Knights: Traxler Counterattack is an important variation of the Two Knights Defence. The wildest response to 4.Ng5 — Black ignores the f7 threat and counterattacks with 4...Bc5! This leads to incredible complications where Black gives up castling rights but gets a ferocious attack. Let's walk through the key ideas.",
+          "shortNarration": "Black sacrifices castling rights with 4...Bc5, ignoring f7 to launch a ferocious counterattack."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Traxler Counterattack."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Traxler Counterattack.",
+          "shortNarration": "Black's e5 contests the center, entering the Two Knights: Traxler Counterattack."
         },
         {
           "san": "Nf3",
@@ -962,7 +1013,8 @@
         },
         {
           "san": "Ng5",
-          "annotation": "Ng5 improves the knight's placement. The knight was less effective on f3 and moves to g5 where it serves the plan better."
+          "annotation": "Ng5 improves the knight's placement. The knight was less effective on f3 and moves to g5 where it serves the plan better.",
+          "shortNarration": "Ng5 improves the knight's placement, eyeing f7 and supporting the kingside attack."
         },
         {
           "san": "Bc5",
@@ -977,11 +1029,13 @@
               "to": "f7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxf7+ wins a pawn and reconfigures White's pawn structure."
         },
         {
           "san": "Ke7",
-          "annotation": "Ke7 improves the king's placement. The king was less effective on e8 and moves to e7 where it serves the plan better."
+          "annotation": "Ke7 improves the king's placement. The king was less effective on e8 and moves to e7 where it serves the plan better.",
+          "shortNarration": "Ke7 improves the king's placement, moving from e8 to e7 for better coordination."
         },
         {
           "san": "Bd5",
@@ -989,7 +1043,8 @@
         },
         {
           "san": "Rf8",
-          "annotation": "Rf8 improves the rook's placement. The rook was less effective on h8 and moves to f8 where it serves the plan better."
+          "annotation": "Rf8 improves the rook's placement. The rook was less effective on h8 and moves to f8 where it serves the plan better.",
+          "shortNarration": "Rf8 improves the rook's placement, shifting from h8 to f8 for better service."
         },
         {
           "san": "O-O",
@@ -1023,7 +1078,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -1034,7 +1090,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "After exd4, Black has clear targets and plans in the resulting structure."
         }
       ]
     },
@@ -1044,11 +1101,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Two Knights: Max Lange Attack is an important variation of the Two Knights Defence. The Max Lange Attack is one of the most beautiful tactical lines in chess. After 5.O-O Bc5 6.e5, both sides must play with extreme precision. Black's counterplay with ...d5 and ...Be6 provides enough resources. Let's walk through the key ideas."
+          "annotation": "The Two Knights: Max Lange Attack is an important variation of the Two Knights Defence. The Max Lange Attack is one of the most beautiful tactical lines in chess. After 5.O-O Bc5 6.e5, both sides must play with extreme precision. Black's counterplay with ...d5 and ...Be6 provides enough resources. Let's walk through the key ideas.",
+          "shortNarration": "After 5.O-O Bc5 6.e5, Black counters with ...d5 and ...Be6 in the sharp Max Lange Attack."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Max Lange Attack."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Max Lange Attack.",
+          "shortNarration": "Black's e5 contests the center, defining the Two Knights: Max Lange Attack."
         },
         {
           "san": "Nf3",
@@ -1068,7 +1127,8 @@
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -1079,7 +1139,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "O-O",
@@ -1091,11 +1152,13 @@
         },
         {
           "san": "e5",
-          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "exf6",
@@ -1106,7 +1169,8 @@
               "to": "f6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exf6 wins a knight, altering the pawn structure and material balance."
         },
         {
           "san": "dxc4",
@@ -1117,7 +1181,8 @@
               "to": "c4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc4 captures the bishop, winning a piece and changing the pawn structure."
         },
         {
           "san": "Re1+",
@@ -1128,7 +1193,8 @@
               "to": "e1",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Re1+ forces the king to move, gaining a tempo to improve White's position."
         },
         {
           "san": "Be6",
@@ -1150,7 +1216,8 @@
               "to": "g5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Ng5 improves the knight's placement, coordinating with the queen and bishop for kingside pressure."
         },
         {
           "san": "Qxf6",
@@ -1161,7 +1228,8 @@
               "to": "f6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxf6 gives Black clear targets and plans in the resulting structure."
         }
       ]
     },
@@ -1171,11 +1239,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Two Knights: Quiet Italian d3 is an important variation of the Two Knights Defence. The modern quiet Italian approach. Black develops naturally with ...Be7, ...O-O and ...d6. The position is solid and flexible, with chances for both sides in a long strategic battle. Let's walk through the key ideas."
+          "annotation": "The Two Knights: Quiet Italian d3 is an important variation of the Two Knights Defence. The modern quiet Italian approach. Black develops naturally with ...Be7, ...O-O and ...d6. The position is solid and flexible, with chances for both sides in a long strategic battle. Let's walk through the key ideas.",
+          "shortNarration": "In the Two Knights Quiet Italian, Black's ...Be7, ...O-O, and ...d6 create a solid, flexible position with equal chances in a long strategic battle."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Quiet Italian d3."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Quiet Italian d3.",
+          "shortNarration": "Black's e5 contests the center, entering the Two Knights: Quiet Italian d3."
         },
         {
           "san": "Nf3",
@@ -1211,7 +1281,8 @@
         },
         {
           "san": "Re1",
-          "annotation": "Re1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files."
+          "annotation": "Re1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Re1 activates the rook on the central file, where rooks belong on open or semi-open files."
         },
         {
           "san": "d6",
@@ -1223,11 +1294,13 @@
         },
         {
           "san": "Na5",
-          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better."
+          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better.",
+          "shortNarration": "Na5 improves the knight's placement, moving from c6 to a5 for a better plan."
         },
         {
           "san": "Ba2",
-          "annotation": "Ba2 improves the bishop's placement. The bishop was less effective on c4 and moves to a2 where it serves the plan better."
+          "annotation": "Ba2 improves the bishop's placement. The bishop was less effective on c4 and moves to a2 where it serves the plan better.",
+          "shortNarration": "Ba2 improves the bishop's diagonal, aiming at the weak f7 square."
         },
         {
           "san": "c5",
@@ -1265,7 +1338,8 @@
               "to": "e6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxe6 captures the bishop, defining the pawn structure and piece activity in the Two Knights: Quiet Italian d3."
         },
         {
           "san": "fxe6",
@@ -1276,7 +1350,8 @@
               "to": "e6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "After fxe6, Black gets clear targets and plans in the resulting structure."
         }
       ]
     },
@@ -1286,11 +1361,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Two Knights: Polerio Defence is an important variation of the Two Knights Defence. In the Polerio, White sacrifices a piece with Nxf7. Black accepts and the king goes on a dangerous journey. Black has extra material but must navigate the king to safety. Let's walk through the key ideas."
+          "annotation": "The Two Knights: Polerio Defence is an important variation of the Two Knights Defence. In the Polerio, White sacrifices a piece with Nxf7. Black accepts and the king goes on a dangerous journey. Black has extra material but must navigate the king to safety. Let's walk through the key ideas.",
+          "shortNarration": "White sacrifices a knight on f7, Black accepts, and the exposed king must navigate to safety while up material."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Polerio Defence."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Two Knights: Polerio Defence.",
+          "shortNarration": "Black's e5 contests the center, entering the Two Knights: Polerio Defence."
         },
         {
           "san": "Nf3",
@@ -1310,11 +1387,13 @@
         },
         {
           "san": "Ng5",
-          "annotation": "Ng5 improves the knight's placement. The knight was less effective on f3 and moves to g5 where it serves the plan better."
+          "annotation": "Ng5 improves the knight's placement. The knight was less effective on f3 and moves to g5 where it serves the plan better.",
+          "shortNarration": "Ng5 improves the knight's placement, eyeing f7 and supporting the kingside attack."
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "exd5",
@@ -1325,7 +1404,8 @@
               "to": "d5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd5 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Nxd5",
@@ -1336,7 +1416,8 @@
               "to": "d5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxd5 captures the pawn, changing the balance — Black gains material or reconfigures the pawn structure."
         },
         {
           "san": "Nxf7",
@@ -1347,7 +1428,8 @@
               "to": "f7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxf7 wins a pawn and changes the pawn structure."
         },
         {
           "san": "Kxf7",
@@ -1358,7 +1440,8 @@
               "to": "f7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Kxf7 wins a knight, altering the pawn structure or material balance."
         },
         {
           "san": "Qf3+",
@@ -1373,7 +1456,8 @@
         },
         {
           "san": "Ke6",
-          "annotation": "Ke6 improves the king's placement. The king was less effective on f7 and moves to e6 where it serves the plan better."
+          "annotation": "Ke6 improves the king's placement. The king was less effective on f7 and moves to e6 where it serves the plan better.",
+          "shortNarration": "Ke6 improves the king's placement, moving from f7 to e6 for better activity."
         },
         {
           "san": "Nc3",
@@ -1381,7 +1465,8 @@
         },
         {
           "san": "Nb4",
-          "annotation": "Nb4 improves the knight's placement. The knight was less effective on c6 and moves to b4 where it serves the plan better."
+          "annotation": "Nb4 improves the knight's placement. The knight was less effective on c6 and moves to b4 where it serves the plan better.",
+          "shortNarration": "Nb4 improves the knight's placement, targeting c2 and d3."
         },
         {
           "san": "a3",
@@ -1396,7 +1481,8 @@
               "to": "c2",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxc2+ wins a pawn, shifting the material balance and reaching the variation's critical position."
         },
         {
           "san": "Kd1",
@@ -1407,7 +1493,8 @@
               "to": "d1",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Kd1 improves the king's placement, coordinating pieces for the coming attack."
         },
         {
           "san": "Nxa1",
@@ -1418,7 +1505,8 @@
               "to": "a1",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black captures Nxa1, gaining a rook for a knight with clear attacking targets."
         }
       ]
     },
@@ -1864,7 +1952,8 @@
               "square": "g8",
               "color": "rgba(0, 180, 80, 0.3)"
             }
-          ]
+          ],
+          "shortNarration": "Black castles to safety and activates the rook."
         },
         {
           "san": "d4",
@@ -1950,7 +2039,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Two Knights Defence, the d4 Counter-Sacrifice is a tactical pattern you should know. After 4.d4, Black can play ...Nxe4 grabbing a central pawn. White gets active play with Re1 but Black's solid position with ...d5 and ...Be6 holds comfortably. Let's walk through how it works."
+          "annotation": "In the Two Knights Defence, the d4 Counter-Sacrifice is a tactical pattern you should know. After 4.d4, Black can play ...Nxe4 grabbing a central pawn. White gets active play with Re1 but Black's solid position with ...d5 and ...Be6 holds comfortably. Let's walk through how it works.",
+          "shortNarration": "In the Two Knights Defence, 4.d4 Nxe4 grabs a pawn, but White's Re1 is met by ...d5 and ...Be6 holding comfortably."
         },
         {
           "san": "e5",
@@ -2043,7 +2133,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Two Knights Defence, the Never Play 5...Nxd5 is a dangerous line you must be aware of. The Fried Liver after 5...Nxd5 is extremely dangerous for Black. After 6.Nxf7 Kxf7 7.Qf3+, the king is dragged into the open and White gets a ferocious attack. Always play 5...Na5 instead. Let's see why."
+          "annotation": "In the Two Knights Defence, the Never Play 5...Nxd5 is a dangerous line you must be aware of. The Fried Liver after 5...Nxd5 is extremely dangerous for Black. After 6.Nxf7 Kxf7 7.Qf3+, the king is dragged into the open and White gets a ferocious attack. Always play 5...Na5 instead. Let's see why.",
+          "shortNarration": "In the Two Knights Defence, 5...Nxd5 loses to 6.Nxf7 Kxf7 7.Qf3+ dragging the king into a ferocious attack — play 5...Na5 instead."
         },
         {
           "san": "e5",
@@ -2082,11 +2173,13 @@
               "to": "d5",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd5 opens the center — Black's king is now exposed on the open e-file."
         },
         {
           "san": "Nxd5",
-          "annotation": "Nxd5 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxd5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxd5 changes the position — the recapture opens lines and shifts the tactical balance."
         },
         {
           "san": "d4",
@@ -2106,7 +2199,8 @@
         },
         {
           "san": "Nxf7",
-          "annotation": "Nxf7 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxf7 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxf7 wins a pawn and exposes the king."
         },
         {
           "san": "Kxf7",
@@ -2117,7 +2211,8 @@
               "to": "f7",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Kxf7 wins a pawn and opens the black king to attack."
         },
         {
           "san": "Qf3+",
@@ -2150,7 +2245,8 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Two Knights Defence, the Quiet Italian Passivity is a dangerous line you must be aware of. In the quiet Italian, Black must not play too passively. Active moves like ...Na5, ...c5, and ...Be6 are essential to create counterplay. If Black just defends, White slowly builds up a kingside attack. Let's see why."
+          "annotation": "In the Two Knights Defence, the Quiet Italian Passivity is a dangerous line you must be aware of. In the quiet Italian, Black must not play too passively. Active moves like ...Na5, ...c5, and ...Be6 are essential to create counterplay. If Black just defends, White slowly builds up a kingside attack. Let's see why.",
+          "shortNarration": "In the Quiet Italian, Black must play ...Na5, ...c5, and ...Be6 for counterplay or White builds a kingside attack."
         },
         {
           "san": "e5",
@@ -2302,7 +2398,8 @@
           "plans": [
             "Complete piece development and prepare castling",
             "Fight for central control with pawns and pieces"
-          ]
+          ],
+          "shortNarration": "Knight to f3 improves piece coordination and flexibility."
         },
         {
           "san": "Nc6",
@@ -2323,7 +2420,8 @@
           "plans": [
             "Complete piece development and prepare castling",
             "Fight for central control with pawns and pieces"
-          ]
+          ],
+          "shortNarration": "Black's knight to c6 improves piece coordination and flexibility."
         },
         {
           "san": "Bc4",
@@ -2347,7 +2445,8 @@
           ],
           "alternatives": [
             "The bishop could go to other squares, but c4 maximizes its influence on the key diagonals."
-          ]
+          ],
+          "shortNarration": "Bishop to c4 controls the key diagonal and keeps White's pieces active."
         },
         {
           "san": "Nf6",
@@ -2368,7 +2467,8 @@
           "plans": [
             "Complete piece development and prepare castling",
             "Fight for central control with pawns and pieces"
-          ]
+          ],
+          "shortNarration": "Black's knight on f6 improves piece coordination and flexibility."
         },
         {
           "san": "Ng5",
@@ -2390,7 +2490,8 @@
           "plans": [
             "Complete piece development and prepare castling",
             "Fight for central control with pawns and pieces"
-          ]
+          ],
+          "shortNarration": "Knight to g5 improves coordination and flexibility."
         },
         {
           "san": "d5",
@@ -2458,7 +2559,8 @@
               "square": "f1",
               "color": "rgba(0, 180, 80, 0.3)"
             }
-          ]
+          ],
+          "shortNarration": "White's bishop on f1 controls key diagonal squares and maintains active piece play."
         },
         {
           "san": "Nd4",
@@ -2495,7 +2597,8 @@
           ],
           "alternatives": [
             "Other pawn moves were available, but this advance best fits the strategic requirements of the position."
-          ]
+          ],
+          "shortNarration": "c3 supports d4, a key central advance."
         },
         {
           "san": "Nxd5",
@@ -2512,7 +2615,8 @@
               "square": "d5",
               "color": "rgba(255, 255, 0, 0.4)"
             }
-          ]
+          ],
+          "shortNarration": "Black's knight reaches a powerful central outpost on d5 after taking the pawn."
         },
         {
           "san": "cxd4",
@@ -2551,7 +2655,8 @@
           "plans": [
             "Look for tactical opportunities to exploit the opponent's inaccuracy",
             "Maintain piece pressure while avoiding counter-tactics"
-          ]
+          ],
+          "shortNarration": "Black captures on g5, removing the knight; White's queen now eyes multiple targets from g5."
         },
         {
           "san": "Bxb5+",
@@ -2571,7 +2676,8 @@
           ],
           "alternatives": [
             "The bishop could go to other squares, but b5 maximizes its influence on the key diagonals."
-          ]
+          ],
+          "shortNarration": "White captures on b5 with check, removing a pawn and keeping the bishop active on the long diagonal."
         },
         {
           "san": "Kd8",
@@ -2588,7 +2694,8 @@
               "square": "d8",
               "color": "rgba(255, 255, 0, 0.4)"
             }
-          ]
+          ],
+          "shortNarration": "Black's king moves to d8, improving piece placement before the critical phase."
         },
         {
           "san": "Qf3",
@@ -2627,7 +2734,8 @@
               "square": "b8",
               "color": "rgba(255, 255, 0, 0.4)"
             }
-          ]
+          ],
+          "shortNarration": "Black activates the rook on b8, improving piece coordination."
         },
         {
           "san": "Bc4",
@@ -2647,7 +2755,8 @@
           ],
           "alternatives": [
             "The bishop could go to other squares, but c4 maximizes its influence on the key diagonals."
-          ]
+          ],
+          "shortNarration": "Bishop to c4 controls the key diagonal and keeps active piece play."
         },
         {
           "san": "Nf4",

@@ -3,19 +3,23 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move supports a wide range of systems and gives us flexibility in our setup - we might continue with c4 for the Queen's Gambit, Nf3 for a kingside fianchetto, or as we'll see, Bg5 for the aggressive Trompowsky Attack. The d4 opening typically leads to more positional, strategic battles compared to 1.e4, though the Trompowsky can quickly become quite sharp and tactical."
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move supports a wide range of systems and gives us flexibility in our setup - we might continue with c4 for the Queen's Gambit, Nf3 for a kingside fianchetto, or as we'll see, Bg5 for the aggressive Trompowsky Attack. The d4 opening typically leads to more positional, strategic battles compared to 1.e4, though the Trompowsky can quickly become quite sharp and tactical.",
+      "shortNarration": "1.d4 claims e5 and c5, supporting flexible setups like the Queen's Gambit or sharp Trompowsky Attack."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the kingside knight to its ideal square, attacking our d4 pawn and preparing to castle kingside. This is one of the most common responses to 1.d4, as the knight from f6 controls important central squares like e4 and d5 while supporting potential pawn breaks with ...d6-d5 or ...c7-c5. Our opponent is keeping maximum flexibility - they haven't committed to any particular pawn structure yet and can transpose into many different defenses depending on how we continue."
+      "annotation": "Black develops the kingside knight to its ideal square, attacking our d4 pawn and preparing to castle kingside. This is one of the most common responses to 1.d4, as the knight from f6 controls important central squares like e4 and d5 while supporting potential pawn breaks with ...d6-d5 or ...c7-c5. Our opponent is keeping maximum flexibility - they haven't committed to any particular pawn structure yet and can transpose into many different defenses depending on how we continue.",
+      "shortNarration": "Black's knight to f6 attacks d4, controls e4 and d5, and keeps flexibility for ...d5 or ...c5 breaks."
     },
     {
       "san": "Bg5",
-      "annotation": "We're entering the Trompowsky Attack, a sharp and aggressive system that immediately puts pressure on Black's kingside development. By pinning the knight to the queen, we're creating an uncomfortable situation for our opponent - they can't easily complete their kingside development without addressing this pin first. This bishop move is the defining characteristic of the Trompowsky, named after Brazilian master Octavio Trompowsky, and it often leads to early tactical skirmishes and unbalanced positions. The key idea is to disrupt Black's natural development and force them into less comfortable setups while maintaining our own initiative."
+      "annotation": "We're entering the Trompowsky Attack, a sharp and aggressive system that immediately puts pressure on Black's kingside development. By pinning the knight to the queen, we're creating an uncomfortable situation for our opponent - they can't easily complete their kingside development without addressing this pin first. This bishop move is the defining characteristic of the Trompowsky, named after Brazilian master Octavio Trompowsky, and it often leads to early tactical skirmishes and unbalanced positions. The key idea is to disrupt Black's natural development and force them into less comfortable setups while maintaining our own initiative.",
+      "shortNarration": "The Trompowsky pins the knight to the queen, disrupting Black's kingside development and forcing early tactical skirmishes."
     },
     {
       "san": "e6",
-      "annotation": "Black chooses the Classical Defense, breaking the pin on the knight by preparing ...Be7 to block the bishop's attack on the queen. This solid approach allows Black to complete kingside development normally while maintaining a flexible pawn structure that can support various setups. Our opponent is essentially saying 'I'll deal with your aggressive bishop calmly and then develop naturally,' which is a perfectly reasonable approach against the Trompowsky. However, this does commit to a French Defense-style pawn structure with the pawn on e6, which can sometimes lead to a slightly passive light-squared bishop later in the game."
+      "annotation": "Black chooses the Classical Defense, breaking the pin on the knight by preparing ...Be7 to block the bishop's attack on the queen. This solid approach allows Black to complete kingside development normally while maintaining a flexible pawn structure that can support various setups. Our opponent is essentially saying 'I'll deal with your aggressive bishop calmly and then develop naturally,' which is a perfectly reasonable approach against the Trompowsky. However, this does commit to a French Defense-style pawn structure with the pawn on e6, which can sometimes lead to a slightly passive light-squared bishop later in the game.",
+      "shortNarration": "Black's Classical Defense prepares ...Be7 to break the pin, committing to a French-style pawn structure with a potentially passive light-squared bishop."
     }
   ]
 }

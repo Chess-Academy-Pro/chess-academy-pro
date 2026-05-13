@@ -3,39 +3,48 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn two squares, immediately controlling the central squares d5 and f5 while freeing our kingside pieces for development. This classical move stakes our claim to the center and allows both our bishop on f1 and our queen to enter the game. The e4 pawn also supports a potential future d4 advance, giving us excellent central control. Against the upcoming Caro-Kann Defense, we'll need to be prepared for Black's counterplay against our e4 pawn."
+      "annotation": "We're opening with the king's pawn two squares, immediately controlling the central squares d5 and f5 while freeing our kingside pieces for development. This classical move stakes our claim to the center and allows both our bishop on f1 and our queen to enter the game. The e4 pawn also supports a potential future d4 advance, giving us excellent central control. Against the upcoming Caro-Kann Defense, we'll need to be prepared for Black's counterplay against our e4 pawn.",
+      "shortNarration": "1.e4 controls d5 and f5, frees the f1-bishop and queen, and supports a future d4 advance against the Caro-Kann."
     },
     {
       "san": "c6",
-      "annotation": "Our opponent chooses the Caro-Kann Defense, a solid and reliable system that prepares to challenge our central e4 pawn with ...d5. This move supports the upcoming d-pawn advance while keeping the e8-h5 diagonal clear for Black's dark-squared bishop. The Caro-Kann is known for its sound structure and fewer tactical complications compared to the Sicilian Defense, making it a favorite among positionally-minded players. Black's plan is to achieve central equality while maintaining a solid pawn structure."
+      "annotation": "Our opponent chooses the Caro-Kann Defense, a solid and reliable system that prepares to challenge our central e4 pawn with ...d5. This move supports the upcoming d-pawn advance while keeping the e8-h5 diagonal clear for Black's dark-squared bishop. The Caro-Kann is known for its sound structure and fewer tactical complications compared to the Sicilian Defense, making it a favorite among positionally-minded players. Black's plan is to achieve central equality while maintaining a solid pawn structure.",
+      "shortNarration": "Black plays the Caro-Kann, preparing ...d5 to challenge e4 while keeping the dark-squared bishop's diagonal open."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its ideal square, attacking the central e5 square and supporting our e4 pawn. This flexible move doesn't commit us to any particular pawn structure yet, keeping our options open for how we'll handle Black's upcoming ...d5 challenge. The knight on f3 also prepares castling kingside and can later be repositioned to support various pawn advances like d4. This is more flexible than the immediate d4, which would transpose into the Panov-Botvinnik Attack with its sharper, more tactical character."
+      "annotation": "We develop our knight to its ideal square, attacking the central e5 square and supporting our e4 pawn. This flexible move doesn't commit us to any particular pawn structure yet, keeping our options open for how we'll handle Black's upcoming ...d5 challenge. The knight on f3 also prepares castling kingside and can later be repositioned to support various pawn advances like d4. This is more flexible than the immediate d4, which would transpose into the Panov-Botvinnik Attack with its sharper, more tactical character.",
+      "shortNarration": "Knight to f3 attacks e5, supports e4, and prepares kingside castling without committing to a pawn structure."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately challenges our central e4 pawn, the hallmark move of the Caro-Kann Defense. This advance opens lines for Black's light-squared bishop and queen while fighting for central equality. Our opponent is essentially saying 'I want to trade my d-pawn for your e-pawn and reach a solid, equal position.' This move forces us to make a decision about our pawn structure - we can advance, exchange, or support our e4 pawn in various ways."
+      "annotation": "Black immediately challenges our central e4 pawn, the hallmark move of the Caro-Kann Defense. This advance opens lines for Black's light-squared bishop and queen while fighting for central equality. Our opponent is essentially saying 'I want to trade my d-pawn for your e-pawn and reach a solid, equal position.' This move forces us to make a decision about our pawn structure - we can advance, exchange, or support our e4 pawn in various ways.",
+      "shortNarration": "Black's c6 challenges e4, opening lines for the light-squared bishop and queen to trade d-pawn for e-pawn."
     },
     {
       "san": "d3",
-      "annotation": "We choose a quiet but solid approach, supporting our e4 pawn rather than advancing it to e5 or allowing the immediate exchange. This move prepares to recapture on e4 with the d-pawn if Black takes, maintaining our central presence. The d3 square also opens up the c1-h6 diagonal for our light-squared bishop and doesn't block in our pieces like d4 might. While less aggressive than other options, this leads to the interesting Endgame Variation where queens come off the board early, creating a unique middlegame structure."
+      "annotation": "We choose a quiet but solid approach, supporting our e4 pawn rather than advancing it to e5 or allowing the immediate exchange. This move prepares to recapture on e4 with the d-pawn if Black takes, maintaining our central presence. The d3 square also opens up the c1-h6 diagonal for our light-squared bishop and doesn't block in our pieces like d4 might. While less aggressive than other options, this leads to the interesting Endgame Variation where queens come off the board early, creating a unique middlegame structure.",
+      "shortNarration": "d3 supports e4, recaptures with the d-pawn, and opens the c1-h6 diagonal for the bishop."
     },
     {
       "san": "dxe4",
-      "annotation": "Black captures our e4 pawn, following through on the central challenge that defines the Caro-Kann. This exchange opens up the position and Black is likely expecting us to recapture with the d-pawn, leading to a symmetrical pawn structure. Our opponent has achieved their primary goal of eliminating our central e4 pawn and is now preparing to complete development. This capture also opens the d-file, which will become important after the upcoming queen trade."
+      "annotation": "Black captures our e4 pawn, following through on the central challenge that defines the Caro-Kann. This exchange opens up the position and Black is likely expecting us to recapture with the d-pawn, leading to a symmetrical pawn structure. Our opponent has achieved their primary goal of eliminating our central e4 pawn and is now preparing to complete development. This capture also opens the d-file, which will become important after the upcoming queen trade.",
+      "shortNarration": "Black captures e4, opening the d-file for the queen trade after recapture."
     },
     {
       "san": "dxe4",
-      "annotation": "We recapture with our d-pawn, maintaining a central presence and opening the d-file for our future pieces. This recapture keeps the position roughly balanced in terms of central control, though the pawn structure is now different from the starting position. Our e4 pawn now controls the key central squares d5 and f5, and we've opened lines for our pieces to become more active. The d-file will soon become a highway for major pieces, especially after the upcoming queen exchange."
+      "annotation": "We recapture with our d-pawn, maintaining a central presence and opening the d-file for our future pieces. This recapture keeps the position roughly balanced in terms of central control, though the pawn structure is now different from the starting position. Our e4 pawn now controls the key central squares d5 and f5, and we've opened lines for our pieces to become more active. The d-file will soon become a highway for major pieces, especially after the upcoming queen exchange.",
+      "shortNarration": "Recapturing with the d-pawn opens the d-file for major pieces and keeps control of d5 and f5."
     },
     {
       "san": "Qxd1+",
-      "annotation": "Black initiates the characteristic queen trade of the Endgame Variation, capturing our queen with check and forcing us into an early endgame. This move eliminates the most powerful pieces from both sides, leading to a unique middlegame where piece activity and pawn structure become paramount. Our opponent is betting that the resulting position will be easier to handle without the tactical complications that queens typically bring. The check also forces our hand - we must recapture immediately, and with the king since it's the only legal move."
+      "annotation": "Black initiates the characteristic queen trade of the Endgame Variation, capturing our queen with check and forcing us into an early endgame. This move eliminates the most powerful pieces from both sides, leading to a unique middlegame where piece activity and pawn structure become paramount. Our opponent is betting that the resulting position will be easier to handle without the tactical complications that queens typically bring. The check also forces our hand - we must recapture immediately, and with the king since it's the only legal move.",
+      "shortNarration": "Black trades queens with check, forcing king recapture and an early endgame where piece activity and pawn structure decide."
     },
     {
       "san": "Kxd1",
-      "annotation": "We're forced to recapture with our king, entering the distinctive endgame-like middlegame that gives this variation its name. While it might seem dangerous to move our king so early, the absence of queens makes this relatively safe, and our king can actually become an active piece in the middlegame. This position is quite unique - we have major pieces still on the board but without the tactical fireworks that queens usually provide. Our plan will focus on piece activity, controlling key squares, and potentially advancing our kingside pawn majority, while Black will likely aim for counterplay on the queenside or in the center."
+      "annotation": "We're forced to recapture with our king, entering the distinctive endgame-like middlegame that gives this variation its name. While it might seem dangerous to move our king so early, the absence of queens makes this relatively safe, and our king can actually become an active piece in the middlegame. This position is quite unique - we have major pieces still on the board but without the tactical fireworks that queens usually provide. Our plan will focus on piece activity, controlling key squares, and potentially advancing our kingside pawn majority, while Black will likely aim for counterplay on the queenside or in the center.",
+      "shortNarration": "King recaptures into a queenless middlegame where the king becomes an active piece, controlling key squares and pushing the kingside pawn majority."
     }
   ]
 }

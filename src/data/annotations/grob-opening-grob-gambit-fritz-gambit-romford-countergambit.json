@@ -3,43 +3,53 @@
   "moveAnnotations": [
     {
       "san": "g4",
-      "annotation": "We're playing the Grob Opening, an offbeat but playable first move that immediately stakes a claim on the long diagonal by preparing Bg2. While unconventional compared to 1.e4 or 1.d4, this move has surprised many opponents—we control f3 and h3, and we're ready to fianchetto our bishop to dominate the a1-h8 diagonal. The key is that g4 is flexible: we're not committing to a pawn center yet, which lets us respond to Black's setup dynamically."
+      "annotation": "We're playing the Grob Opening, an offbeat but playable first move that immediately stakes a claim on the long diagonal by preparing Bg2. While unconventional compared to 1.e4 or 1.d4, this move has surprised many opponents—we control f3 and h3, and we're ready to fianchetto our bishop to dominate the a1-h8 diagonal. The key is that g4 is flexible: we're not committing to a pawn center yet, which lets us respond to Black's setup dynamically.",
+      "shortNarration": "1.g4 prepares Bg2 to control the long diagonal, keeping options open against Black's setup."
     },
     {
       "san": "d5",
-      "annotation": "Black claims the center immediately, the principled response to our flank move. By playing d5, Black opens the long diagonal for the c8-bishop and seizes space in the middle—this is why we can't simply ignore the center. Black is testing whether our flank strategy can handle a direct, classical approach."
+      "annotation": "Black claims the center immediately, the principled response to our flank move. By playing d5, Black opens the long diagonal for the c8-bishop and seizes space in the middle—this is why we can't simply ignore the center. Black is testing whether our flank strategy can handle a direct, classical approach.",
+      "shortNarration": "Black's d5 opens the long diagonal for the c8-bishop and seizes central space, testing the flank strategy."
     },
     {
       "san": "Bg2",
-      "annotation": "We complete our fianchetto setup, and our bishop now bears down on the long diagonal toward a8. This is the whole point of g4—we've prepared this in one move, and Bg2 controls the critical long diagonal, putting pressure on Black's d5 pawn and the entire queenside. We're not worried about g4 looking strange; it supports our piece placement and opens lines for our light-squared bishop."
+      "annotation": "We complete our fianchetto setup, and our bishop now bears down on the long diagonal toward a8. This is the whole point of g4—we've prepared this in one move, and Bg2 controls the critical long diagonal, putting pressure on Black's d5 pawn and the entire queenside. We're not worried about g4 looking strange; it supports our piece placement and opens lines for our light-squared bishop.",
+      "shortNarration": "g4 supports Bg2 on the long diagonal, pressuring Black's d5 pawn and queenside."
     },
     {
       "san": "Bxg4",
-      "annotation": "Black snaps off our g4 pawn, which might seem aggressive but is actually part of our plan to enter the Grob Gambit. By removing our g-pawn, Black has weakened the dark squares around the kingside (especially f3 and h3), and we're about to demonstrate that the gambit material gives us dynamic compensation through piece play and the long diagonal."
+      "annotation": "Black snaps off our g4 pawn, which might seem aggressive but is actually part of our plan to enter the Grob Gambit. By removing our g-pawn, Black has weakened the dark squares around the kingside (especially f3 and h3), and we're about to demonstrate that the gambit material gives us dynamic compensation through piece play and the long diagonal.",
+      "shortNarration": "Black takes g4, weakening dark squares f3 and h3 — we get dynamic compensation via piece play and the long diagonal."
     },
     {
       "san": "c4",
-      "annotation": "We strike in the center with c4, directly attacking Black's d5 pawn and establishing a strong d4 outpost for our pieces. This gambit move is the key—we're sacrificing the g4 pawn to open lines and create rapid piece development. The c-pawn also supports a potential d4 advance, and we're already threatening to organize our pieces around the center before Black can consolidate."
+      "annotation": "We strike in the center with c4, directly attacking Black's d5 pawn and establishing a strong d4 outpost for our pieces. This gambit move is the key—we're sacrificing the g4 pawn to open lines and create rapid piece development. The c-pawn also supports a potential d4 advance, and we're already threatening to organize our pieces around the center before Black can consolidate.",
+      "shortNarration": "Sacrificing g4, c4 attacks d5 and opens lines for rapid development, threatening a d4 outpost."
     },
     {
       "san": "d4",
-      "annotation": "Black pushes forward, maintaining the pawn in the center and refusing to trade on c4. By advancing rather than capturing, Black avoids simplification and keeps tension—but this also gives us the initiative because Black's pawn on d4 can become a target, and it blocks Black's own pieces from developing smoothly. We're happy to let Black overextend slightly while we bring our pieces into the attack."
+      "annotation": "Black pushes forward, maintaining the pawn in the center and refusing to trade on c4. By advancing rather than capturing, Black avoids simplification and keeps tension—but this also gives us the initiative because Black's pawn on d4 can become a target, and it blocks Black's own pieces from developing smoothly. We're happy to let Black overextend slightly while we bring our pieces into the attack.",
+      "shortNarration": "Black's refusal to trade on c4 keeps tension but makes d4 a target that blocks Black's development, giving us the initiative."
     },
     {
       "san": "Bxb7",
-      "annotation": "Our Bg2 bishop captures Black's light-squared bishop on b7, removing a key defender of Black's queenside and opening the b-file for potential rook pressure. This isn't just a trade—we're eliminating Black's long-diagonal bishop and exposing the a8-rook, which becomes vulnerable on its starting square. We're building toward concrete threats rather than worrying about material balance."
+      "annotation": "Our Bg2 bishop captures Black's light-squared bishop on b7, removing a key defender of Black's queenside and opening the b-file for potential rook pressure. This isn't just a trade—we're eliminating Black's long-diagonal bishop and exposing the a8-rook, which becomes vulnerable on its starting square. We're building toward concrete threats rather than worrying about material balance.",
+      "shortNarration": "Bg2 takes b7 removes Black's light-squared bishop, opens the b-file, and exposes the a8-rook to pressure."
     },
     {
       "san": "Nd7",
-      "annotation": "Black develops the knight from b8, preparing to reroute it (likely to f6 or c6) and defending the center. However, the knight on d7 is somewhat passive here, and Black is already in an uncomfortable position because the a8-rook remains undefended on the back rank. We're maintaining our initiative and making Black's development awkward while our pieces coordinate around the center and queenside."
+      "annotation": "Black develops the knight from b8, preparing to reroute it (likely to f6 or c6) and defending the center. However, the knight on d7 is somewhat passive here, and Black is already in an uncomfortable position because the a8-rook remains undefended on the back rank. We're maintaining our initiative and making Black's development awkward while our pieces coordinate around the center and queenside.",
+      "shortNarration": "Black's knight on d7 is passive, the a8-rook undefended, and White's initiative keeps Black's development awkward."
     },
     {
       "san": "Bxa8",
-      "annotation": "Our bishop captures the undefended rook on a8—this is why our previous move Bxb7 was so strong! We've won material cleanly: the rook on a8 had no escape square or defender, and our bishop dominated the long diagonal. Black now faces the challenge of being down an exchange (rook for bishop) with weak piece coordination, while we still have active piece play and a strong center."
+      "annotation": "Our bishop captures the undefended rook on a8—this is why our previous move Bxb7 was so strong! We've won material cleanly: the rook on a8 had no escape square or defender, and our bishop dominated the long diagonal. Black now faces the challenge of being down an exchange (rook for bishop) with weak piece coordination, while we still have active piece play and a strong center.",
+      "shortNarration": "Bxb7 wins the exchange: the rook on a8 is undefended, and our bishop dominates the long diagonal with active pieces and a strong center."
     },
     {
       "san": "Qxa8",
-      "annotation": "Black recaptures with the queen from d8, bringing the queen into play while trying to generate counterplay and recover some piece activity. However, Black has sacrificed the rook for just a bishop—we're up material (rook versus bishop), and Black's queen on a8 is somewhat out of play. We've successfully converted our gambit into a tangible advantage: we've opened the position, landed our pieces on key squares like the long diagonal, and emerged with extra material thanks to Black's vulnerable back rank."
+      "annotation": "Black recaptures with the queen from d8, bringing the queen into play while trying to generate counterplay and recover some piece activity. However, Black has sacrificed the rook for just a bishop—we're up material (rook versus bishop), and Black's queen on a8 is somewhat out of play. We've successfully converted our gambit into a tangible advantage: we've opened the position, landed our pieces on key squares like the long diagonal, and emerged with extra material thanks to Black's vulnerable back rank.",
+      "shortNarration": "Black recaptures with the queen, but we're up a rook for a bishop — Black's queen on a8 is out of play, and our pieces dominate the long diagonal."
     }
   ]
 }

@@ -3,39 +3,48 @@
   "moveAnnotations": [
     {
       "san": "g3",
-      "annotation": "We're starting with the Hungarian Opening, an unconventional but solid approach that builds a fianchettoed bishop on g2. This move controls the long diagonal and prepares a kingside fianchetto, which gives us flexible piece placement and a solid pawn structure. Unlike 1.e4 or 1.d4, we're avoiding the center directly but preparing to influence it from the flanks—this appeals to players who prefer positional, patient chess over sharp theoretical battles."
+      "annotation": "We're starting with the Hungarian Opening, an unconventional but solid approach that builds a fianchettoed bishop on g2. This move controls the long diagonal and prepares a kingside fianchetto, which gives us flexible piece placement and a solid pawn structure. Unlike 1.e4 or 1.d4, we're avoiding the center directly but preparing to influence it from the flanks—this appeals to players who prefer positional, patient chess over sharp theoretical battles.",
+      "shortNarration": "Hungarian Opening fianchettoes the bishop to g2, controlling the long diagonal and preparing flank-based central influence."
     },
     {
       "san": "e5",
-      "annotation": "Black strikes immediately in the center, claiming space and developing piece activity. This is a natural response to our flank approach; Black doesn't feel obligated to match our quiet setup and instead plants a pawn on e5, which will support future development and control key central squares like d4 and f4."
+      "annotation": "Black strikes immediately in the center, claiming space and developing piece activity. This is a natural response to our flank approach; Black doesn't feel obligated to match our quiet setup and instead plants a pawn on e5, which will support future development and control key central squares like d4 and f4.",
+      "shortNarration": "Black plants a pawn on e5, controlling d4 and f4, and developing with central space."
     },
     {
       "san": "Nh3",
-      "annotation": "We're rerouting the knight away from f3 toward h3, preparing the Paris Gambit idea of f4. The knight on h3 supports the f4 pawn break (it can recapture on h3 if needed) and avoids blocking our long diagonal. This move is deliberately unusual—we're signaling that we intend f4 as a central break and are willing to play for dynamic compensation rather than solid positional advantage."
+      "annotation": "We're rerouting the knight away from f3 toward h3, preparing the Paris Gambit idea of f4. The knight on h3 supports the f4 pawn break (it can recapture on h3 if needed) and avoids blocking our long diagonal. This move is deliberately unusual—we're signaling that we intend f4 as a central break and are willing to play for dynamic compensation rather than solid positional advantage.",
+      "shortNarration": "Knight reroutes to h3 to support the f4 pawn break, aiming for dynamic compensation over solid positional play."
     },
     {
       "san": "d5",
-      "annotation": "Black doubles down in the center, claiming d5 and asserting central control. With pawns on e5 and d5, Black seizes the initiative and seems to have a strong grip on the board. We should recognize this is exactly the position where we need to execute our plan—our flank setup is only justified if we can find active play."
+      "annotation": "Black doubles down in the center, claiming d5 and asserting central control. With pawns on e5 and d5, Black seizes the initiative and seems to have a strong grip on the board. We should recognize this is exactly the position where we need to execute our plan—our flank setup is only justified if we can find active play.",
+      "shortNarration": "Black's pawns on e5 and d5 seize the center — White must find active play to justify the flank setup."
     },
     {
       "san": "f4",
-      "annotation": "This is the critical Paris Gambit point: we sacrifice the f-pawn to blow open the center and create immediate tactical opportunities. We're betting that our bishop on g2 (once we complete the fianchetto) and our open lines will generate more active piece play than the pawn is worth. The f4 break also controls e5 and opens the f-file—watch for tactical shots involving our bishop and rook."
+      "annotation": "This is the critical Paris Gambit point: we sacrifice the f-pawn to blow open the center and create immediate tactical opportunities. We're betting that our bishop on g2 (once we complete the fianchetto) and our open lines will generate more active piece play than the pawn is worth. The f4 break also controls e5 and opens the f-file—watch for tactical shots involving our bishop and rook.",
+      "shortNarration": "Sacrificing the f-pawn opens the center and f-file, betting the fianchettoed bishop and active pieces outweigh the pawn."
     },
     {
       "san": "Bxh3",
-      "annotation": "Black captures our knight, removing a key defender and solidifying control of the dark squares. This move is natural but commits Black to a plan: the bishop retreats to h3, where it's somewhat out of play but still eyes our kingside. We need to complete our setup and generate threats before Black consolidates."
+      "annotation": "Black captures our knight, removing a key defender and solidifying control of the dark squares. This move is natural but commits Black to a plan: the bishop retreats to h3, where it's somewhat out of play but still eyes our kingside. We need to complete our setup and generate threats before Black consolidates.",
+      "shortNarration": "Black captures the knight, removing a key defender and solidifying dark-square control, but the bishop retreats to h3, half-out of play — we must generate threats before Black consolidates."
     },
     {
       "san": "Bxh3",
-      "annotation": "We recapture with our bishop (the one heading to g2), keeping material equal and controlling the long diagonal. By recapturing rather than allowing the bishop to sit on h3, we keep the bishop pair potential and prepare to develop rapidly. The key is that our g2 bishop will be very active on the long diagonal once we castle and organize our pieces."
+      "annotation": "We recapture with our bishop (the one heading to g2), keeping material equal and controlling the long diagonal. By recapturing rather than allowing the bishop to sit on h3, we keep the bishop pair potential and prepare to develop rapidly. The key is that our g2 bishop will be very active on the long diagonal once we castle and organize our pieces.",
+      "shortNarration": "Recapture with the bishop to g2 keeps material equal, controls the long diagonal, and preserves the bishop pair."
     },
     {
       "san": "exf4",
-      "annotation": "Black captures our f-pawn, but now the e5 square is abandoned and our position opens up. By taking with the e-pawn (rather than d-pawn), Black leaves d5 more exposed and allows us to potentially activate pieces quickly. The gambit has achieved its purpose: we've opened lines and weakened Black's center, even though we've sacrificed a pawn."
+      "annotation": "Black captures our f-pawn, but now the e5 square is abandoned and our position opens up. By taking with the e-pawn (rather than d-pawn), Black leaves d5 more exposed and allows us to potentially activate pieces quickly. The gambit has achieved its purpose: we've opened lines and weakened Black's center, even though we've sacrificed a pawn.",
+      "shortNarration": "Black captures the f-pawn, but recapturing with the e-pawn leaves d5 exposed and opens lines for quick piece activation."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside, getting our king to safety and activating our rook on the f-file—crucial for exploiting the open f-file created by our gambit. With the bishop on g2 controlling the long diagonal and the rook on f1 ready to challenge Black's position, we've developed a cohesive attacking setup. The gambit material will be regained through active play: we threaten ideas like Bxb7 and pressure on the center and f-file, giving us practical compensation despite being down a pawn temporarily."
+      "annotation": "We castle kingside, getting our king to safety and activating our rook on the f-file—crucial for exploiting the open f-file created by our gambit. With the bishop on g2 controlling the long diagonal and the rook on f1 ready to challenge Black's position, we've developed a cohesive attacking setup. The gambit material will be regained through active play: we threaten ideas like Bxb7 and pressure on the center and f-file, giving us practical compensation despite being down a pawn temporarily.",
+      "shortNarration": "Castled kingside, rook on f1 exploits the open f-file, bishop on g2 controls the long diagonal — down a pawn but with practical compensation through threats like Bxb7 and central pressure."
     }
   ]
 }

@@ -3,35 +3,43 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with the flexible Zukertort Opening, one of the most principled alternatives to 1.e4 and 1.d4. By developing our knight first, we keep maximum flexibility—we haven't committed our center yet, and we can adapt to Black's setup. Nf3 controls the key central squares e5 and d4 while preparing to support either e4 or d4 later depending on how Black responds."
+      "annotation": "We start with the flexible Zukertort Opening, one of the most principled alternatives to 1.e4 and 1.d4. By developing our knight first, we keep maximum flexibility—we haven't committed our center yet, and we can adapt to Black's setup. Nf3 controls the key central squares e5 and d4 while preparing to support either e4 or d4 later depending on how Black responds.",
+      "shortNarration": "Nf3 controls e5 and d4, keeping flexibility to support e4 or d4 based on Black's setup."
     },
     {
       "san": "e6",
-      "annotation": "Black immediately stakes a claim on the d5 square and prepares to develop the light-squared bishop actively. This move signals a French Defense-like setup, where Black wants a solid pawn structure and will likely fianchetto or place the bishop on e7. Black is accepting a slightly passive position early but gaining long-term flexibility and solidity."
+      "annotation": "Black immediately stakes a claim on the d5 square and prepares to develop the light-squared bishop actively. This move signals a French Defense-like setup, where Black wants a solid pawn structure and will likely fianchetto or place the bishop on e7. Black is accepting a slightly passive position early but gaining long-term flexibility and solidity.",
+      "shortNarration": "Black stakes a claim on d5, preparing a French-like setup with a solid pawn structure and flexible bishop development."
     },
     {
       "san": "c4",
-      "annotation": "We're now playing the English Opening-style plan: controlling d5 with the c4 pawn and preventing Black from playing d5 freely. This move is classic Zukertort strategy—we're contesting central control indirectly rather than immediately occupying it. The c4 pawn also opens lines for our queen and rook along the c-file later."
+      "annotation": "We're now playing the English Opening-style plan: controlling d5 with the c4 pawn and preventing Black from playing d5 freely. This move is classic Zukertort strategy—we're contesting central control indirectly rather than immediately occupying it. The c4 pawn also opens lines for our queen and rook along the c-file later.",
+      "shortNarration": "c4 controls d5, preventing Black's d5 break while opening the c-file for queen and rook."
     },
     {
       "san": "a6",
-      "annotation": "Black's move is a prophylactic idea that prepares b5, attacking our center-controlling pawn and creating queenside space. The move also prevents Nb5 tricks and gives Black's king a potential escape square on a7. This is characteristic of modern flexible chess—Black isn't rushing to complete development but is setting up a concrete counterattacking plan."
+      "annotation": "Black's move is a prophylactic idea that prepares b5, attacking our center-controlling pawn and creating queenside space. The move also prevents Nb5 tricks and gives Black's king a potential escape square on a7. This is characteristic of modern flexible chess—Black isn't rushing to complete development but is setting up a concrete counterattacking plan.",
+      "shortNarration": "Black's prophylactic move prepares b5 to attack the center pawn, prevents Nb5, and gives the king an escape square on a7."
     },
     {
       "san": "Nc3",
-      "annotation": "We're developing naturally while maintaining flexibility, and the knight on c3 supports the d5 square and prepares to potentially reroute to other squares. Placing the knight here also keeps the option of playing e4 later. We're building a solid setup without committing ourselves too early—patience is key in the Zukertort."
+      "annotation": "We're developing naturally while maintaining flexibility, and the knight on c3 supports the d5 square and prepares to potentially reroute to other squares. Placing the knight here also keeps the option of playing e4 later. We're building a solid setup without committing ourselves too early—patience is key in the Zukertort.",
+      "shortNarration": "Knight to c3 supports d5 and keeps the option of e4 later — flexible development without early commitment."
     },
     {
       "san": "c5",
-      "annotation": "Black plays actively in the center, attacking our potential d4 pawn and taking space in the middle. This move fits Black's Shabalov Gambit idea—by controlling d4 with the pawn, Black discourages our central expansion and creates tension. It also prepares Black's pieces to get active, as pieces can support the c5 pawn's pressure."
+      "annotation": "Black plays actively in the center, attacking our potential d4 pawn and taking space in the middle. This move fits Black's Shabalov Gambit idea—by controlling d4 with the pawn, Black discourages our central expansion and creates tension. It also prepares Black's pieces to get active, as pieces can support the c5 pawn's pressure.",
+      "shortNarration": "Black's c5 pawn controls d4, discourages central expansion, and prepares active piece play."
     },
     {
       "san": "g3",
-      "annotation": "We're setting up a fianchetto on the kingside, which will give us long-term control of the a1-h8 diagonal pointing toward Black's position. This move is flexible and solid; it prepares Bg2 to put pressure on the long diagonal and supports a potential f4 push later if needed. The fianchetto fits perfectly with our Zukertort philosophy of flexible maneuvering."
+      "annotation": "We're setting up a fianchetto on the kingside, which will give us long-term control of the a1-h8 diagonal pointing toward Black's position. This move is flexible and solid; it prepares Bg2 to put pressure on the long diagonal and supports a potential f4 push later if needed. The fianchetto fits perfectly with our Zukertort philosophy of flexible maneuvering.",
+      "shortNarration": "Fianchettoing the kingside bishop controls the a1-h8 diagonal and supports a future f4 push."
     },
     {
       "san": "b5",
-      "annotation": "Black strikes immediately at our c4 pawn, forcing us to make a decision about our pawn structure. This is the Shabalov Gambit in action—Black sacrifices space and accepts a backward pawn on c5, but in return gets activity and counterplay against our queenside. We must now decide whether to capture, defend, or retreat the c4 pawn, each choice leading to different strategic implications."
+      "annotation": "Black strikes immediately at our c4 pawn, forcing us to make a decision about our pawn structure. This is the Shabalov Gambit in action—Black sacrifices space and accepts a backward pawn on c5, but in return gets activity and counterplay against our queenside. We must now decide whether to capture, defend, or retreat the c4 pawn, each choice leading to different strategic implications.",
+      "shortNarration": "Black's c4 strike forces a choice: capture, defend, or retreat, each with different pawn structure and counterplay consequences."
     }
   ]
 }

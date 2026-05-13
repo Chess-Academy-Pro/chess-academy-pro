@@ -3,23 +3,28 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, claiming central space and preparing rapid development. This move controls the key central squares d5 and f5, while opening lines for both our bishop on f1 and our queen. The e4 advance is the most direct way to fight for the center and signals our intention to play actively from the very first move. By occupying e4, we're also preparing to support further central advances like d4, which would give us a classical pawn center."
+      "annotation": "We're opening with the king's pawn, claiming central space and preparing rapid development. This move controls the key central squares d5 and f5, while opening lines for both our bishop on f1 and our queen. The e4 advance is the most direct way to fight for the center and signals our intention to play actively from the very first move. By occupying e4, we're also preparing to support further central advances like d4, which would give us a classical pawn center.",
+      "shortNarration": "1.e4 claims the center, opens lines for the bishop and queen, and prepares d4 for a classical pawn center."
     },
     {
       "san": "e6",
-      "annotation": "Our opponent chooses the French Defense setup, immediately challenging our central pawn and preparing to undermine our pawn center. This move supports a future d5 advance while keeping the position more closed and strategic in nature. Black is signaling they want to avoid the sharp tactical lines that come after 1...e5, instead opting for a more positional struggle. The downside for Black is that this move blocks in their light-squared bishop on c8, which can become a long-term problem if not addressed properly."
+      "annotation": "Our opponent chooses the French Defense setup, immediately challenging our central pawn and preparing to undermine our pawn center. This move supports a future d5 advance while keeping the position more closed and strategic in nature. Black is signaling they want to avoid the sharp tactical lines that come after 1...e5, instead opting for a more positional struggle. The downside for Black is that this move blocks in their light-squared bishop on c8, which can become a long-term problem if not addressed properly.",
+      "shortNarration": "1.e4 e6 blocks the light-squared bishop, signaling a closed, positional French Defense."
     },
     {
       "san": "d4",
-      "annotation": "We're establishing the ideal pawn center by placing pawns on both e4 and d4, controlling crucial central squares like e5, f5, c5, and d5. This move completes our classical pawn center and opens the diagonal for our dark-squared bishop on c1. The d4 advance also prepares rapid development of our pieces while maintaining maximum central control. Now Black must decide how to challenge our impressive pawn center - they could play d5 for immediate counterplay, or look for other ways to undermine our position."
+      "annotation": "We're establishing the ideal pawn center by placing pawns on both e4 and d4, controlling crucial central squares like e5, f5, c5, and d5. This move completes our classical pawn center and opens the diagonal for our dark-squared bishop on c1. The d4 advance also prepares rapid development of our pieces while maintaining maximum central control. Now Black must decide how to challenge our impressive pawn center - they could play d5 for immediate counterplay, or look for other ways to undermine our position.",
+      "shortNarration": "d4 completes the classical pawn center, opening the c1-bishop's diagonal and controlling e5, f5, c5, and d5."
     },
     {
       "san": "c5",
-      "annotation": "Black strikes at our pawn center with the Benoni-style pawn break, immediately challenging our d4 pawn and creating counterplay on the queenside. This move is the defining characteristic of the French Benoni, combining elements of both the French Defense and the Benoni Defense. Our opponent is avoiding the main French lines after 2...d5, instead choosing a more dynamic setup that can lead to unbalanced positions with chances for both sides. The c5 advance also prepares potential piece activity along the c-file and puts pressure on our center."
+      "annotation": "Black strikes at our pawn center with the Benoni-style pawn break, immediately challenging our d4 pawn and creating counterplay on the queenside. This move is the defining characteristic of the French Benoni, combining elements of both the French Defense and the Benoni Defense. Our opponent is avoiding the main French lines after 2...d5, instead choosing a more dynamic setup that can lead to unbalanced positions with chances for both sides. The c5 advance also prepares potential piece activity along the c-file and puts pressure on our center.",
+      "shortNarration": "Black's c5 pawn break challenges d4, creating queenside counterplay and unbalanced Benoni-style positions."
     },
     {
       "san": "d5",
-      "annotation": "We're pushing forward in the center, accepting the Benoni pawn structure and gaining space on the kingside. This advance kicks Black's e6 pawn and forces them to make a critical decision about their pawn structure. The d5 push is thematic in Benoni-type positions, as it gives us more space and potential attacking chances on the kingside while Black gets counterplay on the queenside. By advancing the d-pawn, we're also opening up the possibility of supporting it with c4 later, creating a strong pawn chain and limiting Black's piece mobility."
+      "annotation": "We're pushing forward in the center, accepting the Benoni pawn structure and gaining space on the kingside. This advance kicks Black's e6 pawn and forces them to make a critical decision about their pawn structure. The d5 push is thematic in Benoni-type positions, as it gives us more space and potential attacking chances on the kingside while Black gets counterplay on the queenside. By advancing the d-pawn, we're also opening up the possibility of supporting it with c4 later, creating a strong pawn chain and limiting Black's piece mobility.",
+      "shortNarration": "d5 push forces Black's e6 pawn decision, gaining kingside space and limiting Black's piece mobility in the Benoni structure."
     }
   ]
 }

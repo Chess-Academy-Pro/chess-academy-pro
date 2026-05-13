@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, claiming our share of the center and preparing to develop our pieces harmoniously. This move controls the important d5 and f5 squares while opening diagonals for both our bishop on f1 and our queen. The move 1.e4 leads to sharp, tactical games where both sides fight for the initiative from the very beginning. Our plan is to maintain central control and develop our pieces quickly to create threats against Black's position."
+      "annotation": "We're opening with the king's pawn, claiming our share of the center and preparing to develop our pieces harmoniously. This move controls the important d5 and f5 squares while opening diagonals for both our bishop on f1 and our queen. The move 1.e4 leads to sharp, tactical games where both sides fight for the initiative from the very beginning. Our plan is to maintain central control and develop our pieces quickly to create threats against Black's position.",
+      "shortNarration": "1.e4 claims the center, controls d5 and f5, and opens diagonals for the queen and bishop."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately challenges our central pawn with the Scandinavian Defense, one of the most direct and aggressive responses to 1.e4. Our opponent is willing to sacrifice development time to eliminate our strong central pawn and create immediate counterplay. This move forces us to make a decision about the center right away - we essentially must capture since retreating the pawn would be passive. The Scandinavian leads to sharp, unbalanced positions where Black often gets active piece play in exchange for slightly slower development."
+      "annotation": "Black immediately challenges our central pawn with the Scandinavian Defense, one of the most direct and aggressive responses to 1.e4. Our opponent is willing to sacrifice development time to eliminate our strong central pawn and create immediate counterplay. This move forces us to make a decision about the center right away - we essentially must capture since retreating the pawn would be passive. The Scandinavian leads to sharp, unbalanced positions where Black often gets active piece play in exchange for slightly slower development.",
+      "shortNarration": "Black's Scandinavian challenges e4 — capture or retreat, but retreat is passive."
     },
     {
       "san": "exd5",
-      "annotation": "We capture the pawn, which is virtually forced since any other move would allow Black to simply take our e4 pawn for free. This capture opens up the position immediately and gives us a material advantage, though it's temporary since Black will likely recapture soon. Our pawn on d5 now controls important central squares like c6 and e6, potentially cramping Black's development. However, we need to be prepared for Black's various recapture methods, each leading to different types of positions with their own strategic themes."
+      "annotation": "We capture the pawn, which is virtually forced since any other move would allow Black to simply take our e4 pawn for free. This capture opens up the position immediately and gives us a material advantage, though it's temporary since Black will likely recapture soon. Our pawn on d5 now controls important central squares like c6 and e6, potentially cramping Black's development. However, we need to be prepared for Black's various recapture methods, each leading to different types of positions with their own strategic themes.",
+      "shortNarration": "Capturing the pawn is forced to avoid losing e4 for free, giving a temporary material edge and a d5 pawn controlling c6 and e6."
     },
     {
       "san": "e5",
-      "annotation": "Black plays the ambitious Boehnke Gambit, offering another pawn to accelerate development and create immediate attacking chances. Our opponent is following the principle that in open positions, piece activity and king safety matter more than material count. This move opens the diagonal for Black's dark-squared bishop and prepares rapid development of the kingside pieces. We're now faced with a critical decision - we can capture this second pawn but must be ready for Black's fierce counterplay that will follow."
+      "annotation": "Black plays the ambitious Boehnke Gambit, offering another pawn to accelerate development and create immediate attacking chances. Our opponent is following the principle that in open positions, piece activity and king safety matter more than material count. This move opens the diagonal for Black's dark-squared bishop and prepares rapid development of the kingside pieces. We're now faced with a critical decision - we can capture this second pawn but must be ready for Black's fierce counterplay that will follow.",
+      "shortNarration": "Accepting the second pawn in the Boehnke Gambit invites fierce counterplay as Black's dark-squared bishop and kingside pieces develop rapidly."
     },
     {
       "san": "dxe6",
-      "annotation": "We accept the second pawn, maintaining our material advantage but also opening more lines for Black's pieces to become active. This capture is logical since declining the gambit with moves like 4.d6 or 4.Nf3 would give Black excellent compensation without us gaining the extra material. However, by taking on e6, we're opening the f8-a3 diagonal for Black's dark-squared bishop and the e-file for potential rook activity. We need to complete our development quickly and find a safe haven for our king before Black's pieces coordinate for an attack."
+      "annotation": "We accept the second pawn, maintaining our material advantage but also opening more lines for Black's pieces to become active. This capture is logical since declining the gambit with moves like 4.d6 or 4.Nf3 would give Black excellent compensation without us gaining the extra material. However, by taking on e6, we're opening the f8-a3 diagonal for Black's dark-squared bishop and the e-file for potential rook activity. We need to complete our development quickly and find a safe haven for our king before Black's pieces coordinate for an attack.",
+      "shortNarration": "Taking on e6 opens the f8-a3 diagonal and e-file for Black, so develop quickly and castle before Black's pieces coordinate."
     },
     {
       "san": "Bxe6",
-      "annotation": "Black recaptures with the bishop, developing a piece while maintaining pressure on our position and completing the gambit setup. The bishop on e6 is excellently placed, controlling key central squares like d5 and f5 while supporting Black's future development. Our opponent now has two pieces developed (the bishop and implicitly the queen has more scope) while we haven't developed any pieces yet, which gives Black dangerous initiative despite being two pawns down. We need to focus on rapid development, likely starting with Nf3 and Be2 or Bc4, while being very careful about our king safety since Black's pieces are primed for a quick attack."
+      "annotation": "Black recaptures with the bishop, developing a piece while maintaining pressure on our position and completing the gambit setup. The bishop on e6 is excellently placed, controlling key central squares like d5 and f5 while supporting Black's future development. Our opponent now has two pieces developed (the bishop and implicitly the queen has more scope) while we haven't developed any pieces yet, which gives Black dangerous initiative despite being two pawns down. We need to focus on rapid development, likely starting with Nf3 and Be2 or Bc4, while being very careful about our king safety since Black's pieces are primed for a quick attack.",
+      "shortNarration": "Black recaptures with the bishop on e6, developing and controlling d5 and f5 — we're two pawns up but behind in development with no pieces out."
     }
   ]
 }

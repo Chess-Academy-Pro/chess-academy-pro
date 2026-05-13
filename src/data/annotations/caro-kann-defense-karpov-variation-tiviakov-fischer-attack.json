@@ -3,51 +3,63 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing to develop our pieces actively. This move controls the crucial d5 and f5 squares, preventing Black from establishing pawns there immediately. The e4 pawn also opens diagonals for our bishop and queen, giving us good piece development prospects. Against the Caro-Kann, we're inviting Black into a solid but somewhat passive defensive setup where we'll often enjoy more space and attacking chances."
+      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing to develop our pieces actively. This move controls the crucial d5 and f5 squares, preventing Black from establishing pawns there immediately. The e4 pawn also opens diagonals for our bishop and queen, giving us good piece development prospects. Against the Caro-Kann, we're inviting Black into a solid but somewhat passive defensive setup where we'll often enjoy more space and attacking chances.",
+      "shortNarration": "e4 claims the center, opens lines for the bishop and queen, and invites Black into the Caro-Kann's solid but passive defense."
     },
     {
       "san": "c6",
-      "annotation": "Black chooses the Caro-Kann Defense, one of the most solid responses to 1.e4. This move prepares ...d5 while maintaining flexibility - unlike the French Defense with ...e6, Black keeps the light-squared bishop free to develop. The c6 pawn also supports a potential ...b5 expansion on the queenside later. Black is signaling a preference for solid, positional play rather than the sharp tactical battles that arise from 1...e5 or 1...c5."
+      "annotation": "Black chooses the Caro-Kann Defense, one of the most solid responses to 1.e4. This move prepares ...d5 while maintaining flexibility - unlike the French Defense with ...e6, Black keeps the light-squared bishop free to develop. The c6 pawn also supports a potential ...b5 expansion on the queenside later. Black is signaling a preference for solid, positional play rather than the sharp tactical battles that arise from 1...e5 or 1...c5.",
+      "shortNarration": "Black's Caro-Kann prepares ...d5, keeping the light-squared bishop free and supporting ...b5 expansion."
     },
     {
       "san": "d4",
-      "annotation": "We establish a strong pawn center by occupying the d4 square, which complements our e4 pawn beautifully. This move controls key central squares like c5 and e5, and opens the diagonal for our light-squared bishop. By playing d4, we're also preparing to meet Black's inevitable ...d5 with maximum central tension. The pawn duo on d4 and e4 gives us excellent space advantage and forms the foundation of our opening strategy."
+      "annotation": "We establish a strong pawn center by occupying the d4 square, which complements our e4 pawn beautifully. This move controls key central squares like c5 and e5, and opens the diagonal for our light-squared bishop. By playing d4, we're also preparing to meet Black's inevitable ...d5 with maximum central tension. The pawn duo on d4 and e4 gives us excellent space advantage and forms the foundation of our opening strategy.",
+      "shortNarration": "d4 establishes the pawn duo on e4 and d4, controlling c5 and e5 while opening the bishop's diagonal and preparing to meet ...d5."
     },
     {
       "san": "d5",
-      "annotation": "Black strikes at our e4 pawn immediately, which is the defining move of the Caro-Kann system. This central challenge forces us to make a decision about our pawn structure and piece development. Black is offering to trade off our advanced e4 pawn, which would relieve some central pressure and give Black easier development. Notice how the c6 pawn now supports this d5 advance perfectly, showing the logic behind Black's first move."
+      "annotation": "Black strikes at our e4 pawn immediately, which is the defining move of the Caro-Kann system. This central challenge forces us to make a decision about our pawn structure and piece development. Black is offering to trade off our advanced e4 pawn, which would relieve some central pressure and give Black easier development. Notice how the c6 pawn now supports this d5 advance perfectly, showing the logic behind Black's first move.",
+      "shortNarration": "Black's d5 challenges e4, offering a trade that relieves central pressure and gives Black easy development."
     },
     {
       "san": "Nd2",
-      "annotation": "We develop our knight to d2, supporting the e4 pawn while keeping our options open for piece coordination. This move is more flexible than the immediate 3.Nc3, as it doesn't block the c-pawn and allows for potential pawn breaks like c4 later. The knight on d2 can also reroute to more active squares like f3 or e4 after Black captures on e4. We're avoiding the more forcing 3.exd5, which would release central tension and give Black comfortable equality."
+      "annotation": "We develop our knight to d2, supporting the e4 pawn while keeping our options open for piece coordination. This move is more flexible than the immediate 3.Nc3, as it doesn't block the c-pawn and allows for potential pawn breaks like c4 later. The knight on d2 can also reroute to more active squares like f3 or e4 after Black captures on e4. We're avoiding the more forcing 3.exd5, which would release central tension and give Black comfortable equality.",
+      "shortNarration": "Knight to d2 supports e4, keeps c4 open, and reroutes to f3 or e4 after Black captures on e4."
     },
     {
       "san": "dxe4",
-      "annotation": "Black captures our e4 pawn, following through on the central challenge initiated with 2...d5. This exchange is almost inevitable in the Caro-Kann, as maintaining the tension would be difficult for Black. By taking on e4, Black eliminates our advanced pawn and hopes to achieve comfortable piece development. However, this also opens the e-file for our potential king's rook and gives us the opportunity to recapture with the knight, bringing it to an excellent central square."
+      "annotation": "Black captures our e4 pawn, following through on the central challenge initiated with 2...d5. This exchange is almost inevitable in the Caro-Kann, as maintaining the tension would be difficult for Black. By taking on e4, Black eliminates our advanced pawn and hopes to achieve comfortable piece development. However, this also opens the e-file for our potential king's rook and gives us the opportunity to recapture with the knight, bringing it to an excellent central square.",
+      "shortNarration": "Black captures e4, opening the e-file for our rook and letting the knight recapture onto an excellent central square."
     },
     {
       "san": "Nxe4",
-      "annotation": "We recapture with the knight, placing it on an excellent central outpost where it controls key squares like d6, f6, c5, and g5. This knight recapture is much more active than taking with the d2 knight, as it immediately centralizes our piece and puts pressure on Black's position. From e4, our knight can potentially jump to strong squares or even support a kingside attack later. The centralized knight also makes it harder for Black to achieve comfortable piece coordination."
+      "annotation": "We recapture with the knight, placing it on an excellent central outpost where it controls key squares like d6, f6, c5, and g5. This knight recapture is much more active than taking with the d2 knight, as it immediately centralizes our piece and puts pressure on Black's position. From e4, our knight can potentially jump to strong squares or even support a kingside attack later. The centralized knight also makes it harder for Black to achieve comfortable piece coordination.",
+      "shortNarration": "Recapturing with the knight on e4 centralizes it, controlling d6, f6, c5, and g5 while pressuring Black's coordination."
     },
     {
       "san": "Nd7",
-      "annotation": "Black develops the knight to d7, which is a practical square that connects with the typical Caro-Kann setup. This knight prepares to support the kingside development, particularly the ...Ngf6 move that will challenge our centralized e4 knight. The d7 square keeps Black's options open - the knight can later go to b6, f6, or even support a ...e6 pawn break. However, the knight on d7 is somewhat passive compared to more active alternatives like ...Bf5, which is why this leads to the Karpov Variation."
+      "annotation": "Black develops the knight to d7, which is a practical square that connects with the typical Caro-Kann setup. This knight prepares to support the kingside development, particularly the ...Ngf6 move that will challenge our centralized e4 knight. The d7 square keeps Black's options open - the knight can later go to b6, f6, or even support a ...e6 pawn break. However, the knight on d7 is somewhat passive compared to more active alternatives like ...Bf5, which is why this leads to the Karpov Variation.",
+      "shortNarration": "Black's knight on d7 prepares ...Ngf6 to challenge the e4 knight but is passive compared to ...Bf5."
     },
     {
       "san": "Bc4",
-      "annotation": "We develop our light-squared bishop to c4, targeting the f7 square and preparing to castle kingside. This bishop placement is particularly strong in the Tiviakov-Fischer Attack, as it puts immediate pressure on Black's kingside and controls important central squares. The bishop on c4 also supports potential tactics involving our e4 knight and prepares for aggressive piece coordination. By developing with tempo and purpose, we're building up pressure while Black is still coordinating the pieces defensively."
+      "annotation": "We develop our light-squared bishop to c4, targeting the f7 square and preparing to castle kingside. This bishop placement is particularly strong in the Tiviakov-Fischer Attack, as it puts immediate pressure on Black's kingside and controls important central squares. The bishop on c4 also supports potential tactics involving our e4 knight and prepares for aggressive piece coordination. By developing with tempo and purpose, we're building up pressure while Black is still coordinating the pieces defensively.",
+      "shortNarration": "Bishop to c4 targets f7, supports the e4 knight, and pressures Black's kingside while preparing to castle."
     },
     {
       "san": "Ngf6",
-      "annotation": "Black develops the kingside knight to f6, directly challenging our powerful e4 knight and preparing to castle kingside. This move is natural and necessary, as it's one of the few ways Black can contest our central knight without making positional concessions. The knight on f6 also defends the h5-e8 diagonal and prepares ...Be7 or ...Bd6 development. However, by attacking our e4 knight, Black is also inviting us to make a favorable trade that will damage Black's pawn structure."
+      "annotation": "Black develops the kingside knight to f6, directly challenging our powerful e4 knight and preparing to castle kingside. This move is natural and necessary, as it's one of the few ways Black can contest our central knight without making positional concessions. The knight on f6 also defends the h5-e8 diagonal and prepares ...Be7 or ...Bd6 development. However, by attacking our e4 knight, Black is also inviting us to make a favorable trade that will damage Black's pawn structure.",
+      "shortNarration": "Black's knight to f6 challenges e4, inviting a trade that damages Black's pawn structure."
     },
     {
       "san": "Nxf6+",
-      "annotation": "We capture the knight with check, which is the key tactical point of the Tiviakov-Fischer Attack. This forcing move compels Black to recapture immediately, and since it's check, Black cannot ignore it or play another developing choice. The check also means we're dictating the tempo of the position and forcing Black to respond to our threats. This capture will lead to doubled f-pawns for Black after the recapture, giving us a long-term structural advantage while maintaining our attacking potential."
+      "annotation": "We capture the knight with check, which is the key tactical point of the Tiviakov-Fischer Attack. This forcing move compels Black to recapture immediately, and since it's check, Black cannot ignore it or play another developing choice. The check also means we're dictating the tempo of the position and forcing Black to respond to our threats. This capture will lead to doubled f-pawns for Black after the recapture, giving us a long-term structural advantage while maintaining our attacking potential.",
+      "shortNarration": "Capturing the knight with check forces the recapture, giving Black doubled f-pawns and a long-term structural advantage."
     },
     {
       "san": "Nxf6",
-      "annotation": "Black recaptures with the d7 knight, which is the only legal way to get out of check. This recapture brings Black's knight back to a reasonable square, but it also means Black now has doubled f-pawns (f7 and the eventual f6 pawn after ...f6 or if we had captured on f6). The knight on f6 is well-placed for defense but Black's pawn structure has been compromised. We've successfully completed the main tactical idea of this variation, emerging with a slight but lasting positional advantage due to Black's doubled pawns and our superior pawn structure."
+      "annotation": "Black recaptures with the d7 knight, which is the only legal way to get out of check. This recapture brings Black's knight back to a reasonable square, but it also means Black now has doubled f-pawns (f7 and the eventual f6 pawn after ...f6 or if we had captured on f6). The knight on f6 is well-placed for defense but Black's pawn structure has been compromised. We've successfully completed the main tactical idea of this variation, emerging with a slight but lasting positional advantage due to Black's doubled pawns and our superior pawn structure.",
+      "shortNarration": "Black recaptures with the knight on f6, giving doubled f-pawns and White a lasting positional edge."
     }
   ]
 }

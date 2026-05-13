@@ -3,19 +3,23 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with this quiet, flexible move that immediately controls e5 and d4—the two most important central squares. Unlike 1.e4 or 1.d4, the Zukertort doesn't commit us to a specific pawn structure yet, giving us flexibility to transpose into many different systems based on what Black plays. This move is particularly effective because it supports a later d4 push while keeping our options open."
+      "annotation": "We start with this quiet, flexible move that immediately controls e5 and d4—the two most important central squares. Unlike 1.e4 or 1.d4, the Zukertort doesn't commit us to a specific pawn structure yet, giving us flexibility to transpose into many different systems based on what Black plays. This move is particularly effective because it supports a later d4 push while keeping our options open.",
+      "shortNarration": "1.Nf3 controls e5 and d4 without committing to a pawn structure, supporting a later d4 push while keeping options open."
     },
     {
       "san": "Nh6",
-      "annotation": "Black's response is unusual but logical: the knight heads to f5 to challenge our d4 pawn and influence the center from an unconventional square. By playing Nh6 instead of the more common ...Nf6, Black avoids some mainline theory but also slightly delays piece development. We should be ready for Black's plan of playing ...g6 and ...Bg7 to build a solid kingside fianchetto structure."
+      "annotation": "Black's response is unusual but logical: the knight heads to f5 to challenge our d4 pawn and influence the center from an unconventional square. By playing Nh6 instead of the more common ...Nf6, Black avoids some mainline theory but also slightly delays piece development. We should be ready for Black's plan of playing ...g6 and ...Bg7 to build a solid kingside fianchetto structure.",
+      "shortNarration": "Black's Nh6 delays development but aims for ...g6 and ...Bg7, challenging d4 from f5."
     },
     {
       "san": "d4",
-      "annotation": "Now we push to the center, claiming space and supporting our control of e5. Combined with our Nf3, we've established a classic setup: two pieces controlling the critical e5 square, and we've staked a claim to the center without overcommitting ourselves. This move also opens lines for our light-squared bishop and queen, giving us good developing options on our next moves."
+      "annotation": "Now we push to the center, claiming space and supporting our control of e5. Combined with our Nf3, we've established a classic setup: two pieces controlling the critical e5 square, and we've staked a claim to the center without overcommitting ourselves. This move also opens lines for our light-squared bishop and queen, giving us good developing options on our next moves.",
+      "shortNarration": "Pushing the d-pawn claims space, supports control of e5 alongside Nf3, and opens lines for the light-squared bishop and queen."
     },
     {
       "san": "g6",
-      "annotation": "Black commits to a fianchetto setup, preparing to place the bishop on g7 where it will exert long-term pressure along the long diagonal toward b1. Combined with ...Nh6 heading to f5, Black is building a kingside-focused, hypermodern structure that challenges our center indirectly rather than meeting it head-on. We should continue with normal development, keeping an eye on moves like Bg5 or c4 to expand our space advantage."
+      "annotation": "Black commits to a fianchetto setup, preparing to place the bishop on g7 where it will exert long-term pressure along the long diagonal toward b1. Combined with ...Nh6 heading to f5, Black is building a kingside-focused, hypermodern structure that challenges our center indirectly rather than meeting it head-on. We should continue with normal development, keeping an eye on moves like Bg5 or c4 to expand our space advantage.",
+      "shortNarration": "Black fianchettoes to g7 and Nh6-f5, pressuring the long diagonal; we develop normally with Bg5 or c4 to expand space."
     }
   ]
 }

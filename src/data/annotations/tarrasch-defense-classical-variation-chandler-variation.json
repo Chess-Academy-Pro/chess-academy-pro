@@ -3,99 +3,123 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, staking our claim to the center and preparing to build a classical pawn structure. This move controls the important e5 and c5 squares while opening lines for our dark-squared bishop and queen. The d4 opening typically leads to more positional, strategic battles compared to 1.e4, making it perfect for players who enjoy maneuvering and long-term planning. Our immediate goals are to support this central pawn and develop our pieces harmoniously toward the center."
+      "annotation": "We're opening with the queen's pawn, staking our claim to the center and preparing to build a classical pawn structure. This move controls the important e5 and c5 squares while opening lines for our dark-squared bishop and queen. The d4 opening typically leads to more positional, strategic battles compared to 1.e4, making it perfect for players who enjoy maneuvering and long-term planning. Our immediate goals are to support this central pawn and develop our pieces harmoniously toward the center.",
+      "shortNarration": "1.d4 controls e5 and c5, opens lines for the bishop and queen, and sets up a positional battle."
     },
     {
       "san": "d5",
-      "annotation": "Black responds symmetrically, meeting our central challenge with their own pawn in the center. This classical response contests the e4 square and gives Black equal space in the center for now. Our opponent is setting up the foundation for solid, classical development while keeping multiple pawn structure options open. This move also prepares natural piece development with moves like Nf6, Bf5, or c6 coming next."
+      "annotation": "Black responds symmetrically, meeting our central challenge with their own pawn in the center. This classical response contests the e4 square and gives Black equal space in the center for now. Our opponent is setting up the foundation for solid, classical development while keeping multiple pawn structure options open. This move also prepares natural piece development with moves like Nf6, Bf5, or c6 coming next.",
+      "shortNarration": "Black's symmetrical e5 contests the center, preparing Nf6, Bf5, or c6."
     },
     {
       "san": "c4",
-      "annotation": "We're playing the Queen's Gambit, one of the most respected openings in chess history! This pawn attacks Black's central d5 pawn, forcing them to make an important decision about the center. If Black captures with dxc4, we can recapture and gain central space, while if they maintain the pawn on d5, we create tension that can be resolved favorably later. This move also prepares our queen's knight development to c3 and opens the c-file for potential future use."
+      "annotation": "We're playing the Queen's Gambit, one of the most respected openings in chess history! This pawn attacks Black's central d5 pawn, forcing them to make an important decision about the center. If Black captures with dxc4, we can recapture and gain central space, while if they maintain the pawn on d5, we create tension that can be resolved favorably later. This move also prepares our queen's knight development to c3 and opens the c-file for potential future use.",
+      "shortNarration": "The Queen's Gambit attacks d5, forcing Black to decide: capture dxc4 or maintain tension, while preparing Nc3 and opening the c-file."
     },
     {
       "san": "e6",
-      "annotation": "Our opponent chooses the solid French-style setup, supporting the d5 pawn with the e-pawn rather than capturing on c4. This creates a solid pawn chain but also slightly restricts Black's light-squared bishop on c8. Black is opting for a more positional approach, maintaining central tension while preparing to develop pieces. This move keeps the position closed and suggests our opponent prefers maneuvering over sharp tactical play."
+      "annotation": "Our opponent chooses the solid French-style setup, supporting the d5 pawn with the e-pawn rather than capturing on c4. This creates a solid pawn chain but also slightly restricts Black's light-squared bishop on c8. Black is opting for a more positional approach, maintaining central tension while preparing to develop pieces. This move keeps the position closed and suggests our opponent prefers maneuvering over sharp tactical play.",
+      "shortNarration": "Black's French-style setup with d5 and e6 creates a solid pawn chain but locks in the light-squared bishop on c8."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our queen's knight to its most active square, adding another attacker to Black's d5 pawn and increasing central pressure. This classical development prepares us to potentially capture on d5 if Black ever moves the e6 pawn, and it supports future central advances. The knight from c3 also eyes important squares like e4 and b5, giving us flexible options depending on how Black continues. This move is almost automatic in Queen's Gambit positions and fits perfectly with our opening strategy."
+      "annotation": "We develop our queen's knight to its most active square, adding another attacker to Black's d5 pawn and increasing central pressure. This classical development prepares us to potentially capture on d5 if Black ever moves the e6 pawn, and it supports future central advances. The knight from c3 also eyes important squares like e4 and b5, giving us flexible options depending on how Black continues. This move is almost automatic in Queen's Gambit positions and fits perfectly with our opening strategy.",
+      "shortNarration": "Nc3 attacks d5, eyes e4 and b5, and prepares to recapture if Black takes on d5."
     },
     {
       "san": "c5",
-      "annotation": "Black strikes back in the center with the Tarrasch Defense, one of the most principled responses to the Queen's Gambit! This move challenges our d4 pawn and aims to create counterplay on the queenside. Our opponent is willing to accept an isolated d-pawn after the likely exchanges to get active piece play and central space. This defense was championed by Dr. Siegbert Tarrasch and leads to sharp, tactical positions where both sides have winning chances."
+      "annotation": "Black strikes back in the center with the Tarrasch Defense, one of the most principled responses to the Queen's Gambit! This move challenges our d4 pawn and aims to create counterplay on the queenside. Our opponent is willing to accept an isolated d-pawn after the likely exchanges to get active piece play and central space. This defense was championed by Dr. Siegbert Tarrasch and leads to sharp, tactical positions where both sides have winning chances.",
+      "shortNarration": "Black's Tarrasch Defense challenges d4, accepting an isolated d-pawn for active piece play and central space."
     },
     {
       "san": "cxd5",
-      "annotation": "We capture Black's d-pawn, simplifying the center and forcing our opponent to recapture. This exchange eliminates some central tension but gives us a cleaner pawn structure. After Black recaptures with the e-pawn, they'll have an isolated d-pawn, which can become a long-term weakness we can target. This capture also opens the c-file for our rook and clarifies the pawn structure, making it easier to form concrete plans."
+      "annotation": "We capture Black's d-pawn, simplifying the center and forcing our opponent to recapture. This exchange eliminates some central tension but gives us a cleaner pawn structure. After Black recaptures with the e-pawn, they'll have an isolated d-pawn, which can become a long-term weakness we can target. This capture also opens the c-file for our rook and clarifies the pawn structure, making it easier to form concrete plans.",
+      "shortNarration": "Capturing on d5 gives Black an isolated d-pawn and opens the c-file for our rook."
     },
     {
       "san": "exd5",
-      "annotation": "Our opponent recaptures toward the center, maintaining material equality but accepting the isolated d-pawn that's characteristic of the Tarrasch Defense. This pawn structure gives Black active piece play and potential central breaks with d4, but the isolated pawn can become weak in the endgame. Black's pieces will typically become very active as they compensate for the structural weakness. This recapture also opens the e-file for Black's future rook development."
+      "annotation": "Our opponent recaptures toward the center, maintaining material equality but accepting the isolated d-pawn that's characteristic of the Tarrasch Defense. This pawn structure gives Black active piece play and potential central breaks with d4, but the isolated pawn can become weak in the endgame. Black's pieces will typically become very active as they compensate for the structural weakness. This recapture also opens the e-file for Black's future rook development.",
+      "shortNarration": "Black recaptures toward the center, accepting an isolated d-pawn for active piece play and the open e-file."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our king's knight to its ideal square, controlling important central squares like e5 and d4. This classical development prepares kingside castling while keeping maximum flexibility in our position. The knight from f3 also supports potential central pawn advances and can potentially reroute to better squares later in the game. This move follows opening principles perfectly: develop pieces toward the center, prepare castling, and maintain piece coordination."
+      "annotation": "We develop our king's knight to its ideal square, controlling important central squares like e5 and d4. This classical development prepares kingside castling while keeping maximum flexibility in our position. The knight from f3 also supports potential central pawn advances and can potentially reroute to better squares later in the game. This move follows opening principles perfectly: develop pieces toward the center, prepare castling, and maintain piece coordination.",
+      "shortNarration": "Nf3 develops the knight to control e5 and d4, preparing kingside castling while keeping flexibility."
     },
     {
       "san": "Nc6",
-      "annotation": "Black develops their queen's knight, adding support to the isolated d-pawn and preparing active piece coordination. This knight will typically support central advances or potentially hop to active outposts later in the game. Our opponent is following the Tarrasch Defense blueprint of rapid development to compensate for the structural weakness. The knight also prepares potential tactics involving the d4 square and supports the advance c4 in some variations."
+      "annotation": "Black develops their queen's knight, adding support to the isolated d-pawn and preparing active piece coordination. This knight will typically support central advances or potentially hop to active outposts later in the game. Our opponent is following the Tarrasch Defense blueprint of rapid development to compensate for the structural weakness. The knight also prepares potential tactics involving the d4 square and supports the advance c4 in some variations.",
+      "shortNarration": "Black's queen's knight develops to support the isolated d-pawn and prepare central advances or outposts."
     },
     {
       "san": "g3",
-      "annotation": "We're choosing the fianchetto setup for our light-squared bishop, aiming to control the long diagonal and support our kingside development. This move prepares Bg2, which will eye Black's isolated d-pawn and control key central squares. The fianchetto bishop often becomes a monster in these positions, pressuring Black's queenside and supporting our pieces. This approach gives us long-term positional pressure while maintaining a solid, flexible pawn structure."
+      "annotation": "We're choosing the fianchetto setup for our light-squared bishop, aiming to control the long diagonal and support our kingside development. This move prepares Bg2, which will eye Black's isolated d-pawn and control key central squares. The fianchetto bishop often becomes a monster in these positions, pressuring Black's queenside and supporting our pieces. This approach gives us long-term positional pressure while maintaining a solid, flexible pawn structure.",
+      "shortNarration": "Fianchettoing the bishop to g2 pressures Black's isolated d-pawn and controls key central squares for long-term positional pressure."
     },
     {
       "san": "Nf6",
-      "annotation": "Our opponent completes their classical knight development, placing the piece on its most active square where it attacks our knight and controls central territory. This move prepares kingside castling and adds another defender to the isolated d-pawn. Black is rapidly developing their pieces to generate counterplay against our positional pressure. The knight on f6 also supports potential central advances and keeps Black's position flexible."
+      "annotation": "Our opponent completes their classical knight development, placing the piece on its most active square where it attacks our knight and controls central territory. This move prepares kingside castling and adds another defender to the isolated d-pawn. Black is rapidly developing their pieces to generate counterplay against our positional pressure. The knight on f6 also supports potential central advances and keeps Black's position flexible.",
+      "shortNarration": "Black's knight on f6 attacks your knight, controls the center, and prepares kingside castling while defending the isolated d-pawn."
     },
     {
       "san": "Bg2",
-      "annotation": "We complete our fianchetto setup, placing our light-squared bishop on the long diagonal where it becomes a powerful long-range piece. From g2, this bishop exerts pressure on Black's queenside, particularly eyeing the isolated d-pawn and supporting our central control. This bishop also supports our kingside safety after castling and gives us excellent control over key light squares. The fianchetto bishop is often the star of our position in these structures."
+      "annotation": "We complete our fianchetto setup, placing our light-squared bishop on the long diagonal where it becomes a powerful long-range piece. From g2, this bishop exerts pressure on Black's queenside, particularly eyeing the isolated d-pawn and supporting our central control. This bishop also supports our kingside safety after castling and gives us excellent control over key light squares. The fianchetto bishop is often the star of our position in these structures.",
+      "shortNarration": "The fianchettoed bishop on g2 pressures Black's isolated d-pawn and controls key light squares."
     },
     {
       "san": "Be7",
-      "annotation": "Black develops their dark-squared bishop to a solid square, preparing kingside castling while maintaining flexibility. This bishop placement supports the kingside defense and keeps options open for future repositioning to more active squares like d6 or f6. Our opponent is completing their development efficiently, which is crucial in the Tarrasch Defense where rapid piece coordination compensates for structural disadvantages. The bishop also maintains some control over the f6 square and supports Black's overall piece harmony."
+      "annotation": "Black develops their dark-squared bishop to a solid square, preparing kingside castling while maintaining flexibility. This bishop placement supports the kingside defense and keeps options open for future repositioning to more active squares like d6 or f6. Our opponent is completing their development efficiently, which is crucial in the Tarrasch Defense where rapid piece coordination compensates for structural disadvantages. The bishop also maintains some control over the f6 square and supports Black's overall piece harmony.",
+      "shortNarration": "Black's dark-squared bishop on e7 prepares kingside castling and can later reposition to d6 or f6."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside, bringing our king to safety and connecting our rooks. This move completes our basic development and allows us to focus on exploiting Black's isolated d-pawn and creating long-term pressure. Castling also brings our rook to f1, which can support central advances or kingside attacks later in the game. With our king safe, we can now concentrate on piece coordination and strategic plans without worrying about tactics against our monarch."
+      "annotation": "We castle kingside, bringing our king to safety and connecting our rooks. This move completes our basic development and allows us to focus on exploiting Black's isolated d-pawn and creating long-term pressure. Castling also brings our rook to f1, which can support central advances or kingside attacks later in the game. With our king safe, we can now concentrate on piece coordination and strategic plans without worrying about tactics against our monarch.",
+      "shortNarration": "Castle kingside to connect rooks and target Black's isolated d-pawn with long-term pressure."
     },
     {
       "san": "O-O",
-      "annotation": "Our opponent mirrors our castling, bringing their king to safety and completing their basic development. This practical move allows Black to focus on generating counterplay without worrying about king safety in the center. Black's rook now connects to the kingside defense and can potentially swing to the e-file to support the isolated d-pawn. Both sides have now completed their opening development and are ready to begin the middlegame maneuvering phase."
+      "annotation": "Our opponent mirrors our castling, bringing their king to safety and completing their basic development. This practical move allows Black to focus on generating counterplay without worrying about king safety in the center. Black's rook now connects to the kingside defense and can potentially swing to the e-file to support the isolated d-pawn. Both sides have now completed their opening development and are ready to begin the middlegame maneuvering phase.",
+      "shortNarration": "Black castles kingside, connecting rooks and preparing to support the isolated d-pawn on the e-file."
     },
     {
       "san": "Bg5",
-      "annotation": "We develop our dark-squared bishop actively, pinning Black's knight to the queen and creating immediate tactical pressure. This aggressive bishop placement forces our opponent to deal with the pin and potentially weakens their kingside pawn structure if they play h6. The bishop from g5 also supports potential tactics and puts pressure on Black's position right away. This move exemplifies the classical approach of completing development while creating concrete threats."
+      "annotation": "We develop our dark-squared bishop actively, pinning Black's knight to the queen and creating immediate tactical pressure. This aggressive bishop placement forces our opponent to deal with the pin and potentially weakens their kingside pawn structure if they play h6. The bishop from g5 also supports potential tactics and puts pressure on Black's position right away. This move exemplifies the classical approach of completing development while creating concrete threats.",
+      "shortNarration": "Bishop to g5 pins the knight to the queen, pressuring Black's kingside and creating immediate tactical threats."
     },
     {
       "san": "cxd4",
-      "annotation": "Black eliminates the central tension by capturing our d-pawn, opening the position and seeking active counterplay. This exchange opens lines for Black's pieces and eliminates one of our central pawns, reducing our space advantage. Our opponent is typical of Tarrasch Defense players: willing to trade material to get piece activity and tactical chances. Black must now be ready to deal with our knight recapture, which will centralize our pieces even further."
+      "annotation": "Black eliminates the central tension by capturing our d-pawn, opening the position and seeking active counterplay. This exchange opens lines for Black's pieces and eliminates one of our central pawns, reducing our space advantage. Our opponent is typical of Tarrasch Defense players: willing to trade material to get piece activity and tactical chances. Black must now be ready to deal with our knight recapture, which will centralize our pieces even further.",
+      "shortNarration": "Black captures d4 to open lines and gain activity, but White's knight recapture centralizes and maintains pressure."
     },
     {
       "san": "Nxd4",
-      "annotation": "We recapture with our knight, centralizing it on an excellent outpost where it controls multiple key squares. From d4, our knight eyes important squares like f5, e6, c6, and b5, giving us excellent piece coordination and central control. This knight is beautifully placed and will be difficult for Black to dislodge without making concessions. The recapture also maintains material balance while improving our piece activity significantly."
+      "annotation": "We recapture with our knight, centralizing it on an excellent outpost where it controls multiple key squares. From d4, our knight eyes important squares like f5, e6, c6, and b5, giving us excellent piece coordination and central control. This knight is beautifully placed and will be difficult for Black to dislodge without making concessions. The recapture also maintains material balance while improving our piece activity significantly.",
+      "shortNarration": "Recapturing with the knight centralizes it on d4, controlling f5, e6, c6, and b5 for excellent piece coordination and central control."
     },
     {
       "san": "h6",
-      "annotation": "Our opponent attacks our bishop with this pawn advance, forcing us to make a decision about our dark-squared bishop's future. This move also creates some breathing room for Black's king and prevents potential back-rank tactics. While it weakens Black's kingside slightly, it's a practical move that addresses the immediate pin on the knight. Black is showing they're willing to compromise their pawn structure to eliminate our annoying bishop and reduce tactical pressure."
+      "annotation": "Our opponent attacks our bishop with this pawn advance, forcing us to make a decision about our dark-squared bishop's future. This move also creates some breathing room for Black's king and prevents potential back-rank tactics. While it weakens Black's kingside slightly, it's a practical move that addresses the immediate pin on the knight. Black is showing they're willing to compromise their pawn structure to eliminate our annoying bishop and reduce tactical pressure.",
+      "shortNarration": "Black's pawn advance attacks the bishop, weakens the kingside, but releases the knight from the pin and prevents back-rank threats."
     },
     {
       "san": "Be3",
-      "annotation": "We retreat our bishop to e3, maintaining its activity while avoiding the pawn attack. From e3, the bishop still contributes to our position by supporting the centralized knight on d4 and controlling important squares. This retreat keeps our bishop pair intact and maintains pressure on Black's position without allowing pawn captures. The bishop on e3 also supports potential future central advances and maintains our piece coordination beautifully."
+      "annotation": "We retreat our bishop to e3, maintaining its activity while avoiding the pawn attack. From e3, the bishop still contributes to our position by supporting the centralized knight on d4 and controlling important squares. This retreat keeps our bishop pair intact and maintains pressure on Black's position without allowing pawn captures. The bishop on e3 also supports potential future central advances and maintains our piece coordination beautifully.",
+      "shortNarration": "Bishop retreats to e3, keeping the pair intact while supporting the d4 knight and controlling key squares."
     },
     {
       "san": "Re8",
-      "annotation": "Black activates their rook on the e-file, preparing to support the isolated d-pawn and creating potential tactics down the file. This rook placement also supports Black's pieces and prepares to contest the e-file if we place a rook there. Our opponent is following typical Tarrasch Defense strategy: using active piece play to compensate for structural weaknesses. The rook move also prepares potential central advances and keeps Black's position dynamic."
+      "annotation": "Black activates their rook on the e-file, preparing to support the isolated d-pawn and creating potential tactics down the file. This rook placement also supports Black's pieces and prepares to contest the e-file if we place a rook there. Our opponent is following typical Tarrasch Defense strategy: using active piece play to compensate for structural weaknesses. The rook move also prepares potential central advances and keeps Black's position dynamic.",
+      "shortNarration": "Black's rook on e-file supports the isolated d-pawn and creates tactical threats down the file."
     },
     {
       "san": "Rc1",
-      "annotation": "We place our rook on the c-file, targeting Black's queenside and supporting our pieces with active rook play. This move prepares to contest open files and supports potential tactical ideas involving our centralized pieces. The rook on c1 also eyes Black's knight on c6 and creates pressure down the file. This natural rook development fits perfectly with our strategy of maintaining long-term positional pressure while keeping our pieces coordinated."
+      "annotation": "We place our rook on the c-file, targeting Black's queenside and supporting our pieces with active rook play. This move prepares to contest open files and supports potential tactical ideas involving our centralized pieces. The rook on c1 also eyes Black's knight on c6 and creates pressure down the file. This natural rook development fits perfectly with our strategy of maintaining long-term positional pressure while keeping our pieces coordinated.",
+      "shortNarration": "Rook to c1 targets the c6 knight and pressures the queenside down the open file."
     },
     {
       "san": "Be6",
-      "annotation": "Our opponent develops their light-squared bishop actively, contesting our control of key central squares and supporting their isolated d-pawn. This bishop placement also supports Black's pieces and prepares potential tactical ideas in the center. The bishop on e6 challenges our knight on d4 and gives Black more active piece coordination. This move exemplifies the Tarrasch Defense philosophy: active pieces compensate for structural weaknesses, and both sides are now ready for complex middlegame maneuvering."
+      "annotation": "Our opponent develops their light-squared bishop actively, contesting our control of key central squares and supporting their isolated d-pawn. This bishop placement also supports Black's pieces and prepares potential tactical ideas in the center. The bishop on e6 challenges our knight on d4 and gives Black more active piece coordination. This move exemplifies the Tarrasch Defense philosophy: active pieces compensate for structural weaknesses, and both sides are now ready for complex middlegame maneuvering.",
+      "shortNarration": "Black's bishop on e6 challenges the knight on d4, supporting the isolated d-pawn with active piece coordination."
     }
   ]
 }

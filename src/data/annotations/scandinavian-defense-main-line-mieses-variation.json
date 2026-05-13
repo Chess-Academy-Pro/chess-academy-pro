@@ -3,35 +3,43 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing rapid development. This move controls the crucial d5 and f5 squares while freeing both our light-squared bishop and our queen for future action. The move 1.e4 leads to sharp, tactical games where piece activity often trumps pawn structure considerations. It's the most direct way to fight for central control from the very first move."
+      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing rapid development. This move controls the crucial d5 and f5 squares while freeing both our light-squared bishop and our queen for future action. The move 1.e4 leads to sharp, tactical games where piece activity often trumps pawn structure considerations. It's the most direct way to fight for central control from the very first move.",
+      "shortNarration": "1.e4 controls d5 and f5, opens lines for the queen and bishop, and prioritizes piece activity over pawn structure."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately strikes back at our central pawn with the Scandinavian Defense, one of the most direct and aggressive responses to 1.e4. This move challenges our central control right away rather than allowing us to build a big pawn center. While it might seem premature to bring the queen out early (which will happen next), the Scandinavian offers Black quick development and active piece play. Our opponent is essentially saying 'I don't want to play a slow positional game - let's get the pieces out and fight immediately.'"
+      "annotation": "Black immediately strikes back at our central pawn with the Scandinavian Defense, one of the most direct and aggressive responses to 1.e4. This move challenges our central control right away rather than allowing us to build a big pawn center. While it might seem premature to bring the queen out early (which will happen next), the Scandinavian offers Black quick development and active piece play. Our opponent is essentially saying 'I don't want to play a slow positional game - let's get the pieces out and fight immediately.'",
+      "shortNarration": "Black's Scandinavian strikes back at e4 immediately, bringing the queen out early for quick development and active piece play."
     },
     {
       "san": "exd5",
-      "annotation": "We accept the challenge by capturing the pawn, which is virtually forced since declining would give Black a fantastic central position. This capture opens the e-file for our future rook and removes Black's central pawn, but it also helps Black's development by clearing the d-file. The key point is that Black must now recapture, and since the knight can't reach d5 yet, the queen will have to come out early. We're essentially trading some central control for a lead in development and the chance to harass Black's exposed queen."
+      "annotation": "We accept the challenge by capturing the pawn, which is virtually forced since declining would give Black a fantastic central position. This capture opens the e-file for our future rook and removes Black's central pawn, but it also helps Black's development by clearing the d-file. The key point is that Black must now recapture, and since the knight can't reach d5 yet, the queen will have to come out early. We're essentially trading some central control for a lead in development and the chance to harass Black's exposed queen.",
+      "shortNarration": "Capturing the e5 pawn opens the e-file for White and forces Black's queen out early, trading central control for a development lead."
     },
     {
       "san": "Qxd5",
-      "annotation": "Black recaptures with the queen, which violates the opening principle of not developing the queen too early, but it's the only reasonable way to regain the material. The queen on d5 is actually quite actively placed, controlling many central squares and putting pressure on our position. However, this early queen development gives us targets for our developing pieces - we can attack the queen with tempo-gaining moves. Black is gambling that the active queen placement will compensate for the potential loss of time when we force it to move again."
+      "annotation": "Black recaptures with the queen, which violates the opening principle of not developing the queen too early, but it's the only reasonable way to regain the material. The queen on d5 is actually quite actively placed, controlling many central squares and putting pressure on our position. However, this early queen development gives us targets for our developing pieces - we can attack the queen with tempo-gaining moves. Black is gambling that the active queen placement will compensate for the potential loss of time when we force it to move again.",
+      "shortNarration": "Black's queen recaptures on d5, violating development principles but gaining central control — we can attack it with tempo-gaining moves."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our knight with a logical choice that attacks the centralized black queen, forcing it to find a new square. This knight development is perfect because it serves multiple purposes: it attacks the queen, develops toward the center, and prepares to support our d4 pawn advance. The knight on c3 also eyes important squares like e4 and d5, giving us excellent central control. By attacking the queen immediately, we're starting to make Black pay for the early queen development by forcing it to move again and lose time."
+      "annotation": "We develop our knight with a logical choice that attacks the centralized black queen, forcing it to find a new square. This knight development is perfect because it serves multiple purposes: it attacks the queen, develops toward the center, and prepares to support our d4 pawn advance. The knight on c3 also eyes important squares like e4 and d5, giving us excellent central control. By attacking the queen immediately, we're starting to make Black pay for the early queen development by forcing it to move again and lose time.",
+      "shortNarration": "Knight to c3 attacks the queen, develops toward the center, and supports d4 — Black loses time."
     },
     {
       "san": "Qa5",
-      "annotation": "Black's queen retreats to a5, which is considered the main line of the Scandinavian Defense and leads to the Mieses Variation. From a5, the queen stays active by pinning our knight to the king (though this pin isn't immediately dangerous) and maintaining pressure on our queenside. The queen also supports potential ...c6 ideas to challenge our center. While the queen is somewhat out of play on the rim, it's relatively safe here and Black hopes to prove that the early centralization was worth the time investment."
+      "annotation": "Black's queen retreats to a5, which is considered the main line of the Scandinavian Defense and leads to the Mieses Variation. From a5, the queen stays active by pinning our knight to the king (though this pin isn't immediately dangerous) and maintaining pressure on our queenside. The queen also supports potential ...c6 ideas to challenge our center. While the queen is somewhat out of play on the rim, it's relatively safe here and Black hopes to prove that the early centralization was worth the time investment.",
+      "shortNarration": "Black's queen retreats to a5, pinning the knight to the king and supporting ...c6 to challenge the center."
     },
     {
       "san": "d4",
-      "annotation": "We advance our d-pawn to establish a strong pawn center, gaining space and controlling the crucial e5 and c5 squares. This move is the natural follow-up to our development plan, creating a classical pawn center that restricts Black's pieces and gives us excellent control over key central squares. The d4 pawn also opens lines for our light-squared bishop and supports our pawn on c3. By seizing space in the center, we're putting maximum pressure on Black to find active piece placement despite the early queen sortie."
+      "annotation": "We advance our d-pawn to establish a strong pawn center, gaining space and controlling the crucial e5 and c5 squares. This move is the natural follow-up to our development plan, creating a classical pawn center that restricts Black's pieces and gives us excellent control over key central squares. The d4 pawn also opens lines for our light-squared bishop and supports our pawn on c3. By seizing space in the center, we're putting maximum pressure on Black to find active piece placement despite the early queen sortie.",
+      "shortNarration": "d4 establishes a strong pawn center, controlling e5 and c5 while opening lines for the bishop and supporting c3."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the knight to its ideal square, attacking our d4 pawn and beginning to challenge our central control. This move is essential for Black's development plan, as the knight on f6 controls important central squares like e4 and d5 while preparing kingside castling. The knight also supports potential ...e6 or ...c6 breaks against our pawn center. By developing this knight, Black is finally getting the pieces out after the early queen adventure, though we still maintain a slight initiative due to our better central control and smoother development."
+      "annotation": "Black develops the knight to its ideal square, attacking our d4 pawn and beginning to challenge our central control. This move is essential for Black's development plan, as the knight on f6 controls important central squares like e4 and d5 while preparing kingside castling. The knight also supports potential ...e6 or ...c6 breaks against our pawn center. By developing this knight, Black is finally getting the pieces out after the early queen adventure, though we still maintain a slight initiative due to our better central control and smoother development.",
+      "shortNarration": "Black's knight to f6 attacks d4, eyes e4 and d5, and prepares kingside castling."
     }
   ]
 }

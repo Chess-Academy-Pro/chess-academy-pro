@@ -45,6 +45,7 @@ import { logAppAudit } from './appAuditor';
 import type {
   WalkthroughTree,
   WalkthroughTreeNode,
+  NarrationSegment as NarrationSegmentType,
   ConceptCheckQuestion,
   FindMoveQuestion,
   DrillLine,
@@ -235,12 +236,14 @@ interface WalkthroughTreeNode {
   san: string | null;        // null only for root
   movedBy: 'white' | 'black' | null;
   idea: string;              // 15-25 word coach explanation of THIS move ONLY; mention the SAN played; do NOT forecast future moves (the next node's narration covers them)
+  shortIdea: string;         // REQUIRED 1-sentence ≤28-word compression of idea for the Brief Coach Narration setting; preserve the KEY chess idea (tactical pattern, evaluation, threat, action's consequence); same authoring rules as idea (mention SAN, do NOT forecast future moves)
   narration?: NarrationSegment[];  // STRONGLY PREFERRED: include 1-2 segments per move, each with 1-3 arrows showing strategic intent (what the piece NOW eyes / attacks / pressures), NOT the move itself
   children: { label?: string; forkSubtitle?: string; node: WalkthroughTreeNode }[];
 }
 
 interface NarrationSegment {
   text: string;              // 1-2 short sentences
+  shortText: string;         // REQUIRED 1-sentence ≤28-word compression of text for Brief Coach Narration; preserve the KEY chess idea in this segment
   arrows?: { from: string; to: string; color?: 'green'|'red'|'blue'|'yellow' }[];
   highlights?: { square: string; color?: 'green'|'red'|'blue'|'yellow' }[];
 }
@@ -1216,6 +1219,7 @@ const WALKTHROUGH_TREE_SCHEMA: Record<string, unknown> = {
         san: { type: ['string', 'null'] },
         movedBy: { type: ['string', 'null'], enum: ['white', 'black', null] },
         idea: { type: 'string' },
+        shortIdea: { type: 'string' },
         narration: {
           type: 'array',
           items: {
@@ -1223,6 +1227,7 @@ const WALKTHROUGH_TREE_SCHEMA: Record<string, unknown> = {
             required: ['text'],
             properties: {
               text: { type: 'string' },
+              shortText: { type: 'string' },
               arrows: {
                 type: 'array',
                 items: {
@@ -1615,6 +1620,7 @@ const NARRATION_SCHEMA: Record<string, unknown> = {
   required: ['intro', 'outro', 'ideas'],
   properties: {
     intro: { type: 'string' },
+    shortIntro: { type: 'string' },
     outro: { type: 'string' },
     ideas: {
       type: 'array',
@@ -1623,6 +1629,7 @@ const NARRATION_SCHEMA: Record<string, unknown> = {
         required: ['text'],
         properties: {
           text: { type: 'string' },
+          shortText: { type: 'string' },
           arrows: {
             type: 'array',
             items: {
@@ -1638,6 +1645,7 @@ const NARRATION_SCHEMA: Record<string, unknown> = {
       },
     },
     branchIdeas: { type: 'array', items: { type: 'string' } },
+    shortBranchIdeas: { type: 'array', items: { type: 'string' } },
     // For each fork branch, ideas for the EXTENSION moves that walk
     // the line into middlegame. Outer index matches branches[]; inner
     // index matches branches[i].extensionMoves[]. User: "ALL lines
@@ -1653,6 +1661,7 @@ const NARRATION_SCHEMA: Record<string, unknown> = {
           required: ['text'],
           properties: {
             text: { type: 'string' },
+            shortText: { type: 'string' },
             arrows: {
               type: 'array',
               items: {
@@ -1673,14 +1682,17 @@ const NARRATION_SCHEMA: Record<string, unknown> = {
 
 interface NarrationIdea {
   text: string;
+  shortText?: string;
   arrows?: { from: string; to: string }[];
 }
 
 interface NarrationOutput {
   intro: string;
+  shortIntro?: string;
   outro: string;
   ideas: NarrationIdea[];
   branchIdeas?: string[];
+  shortBranchIdeas?: string[];
   branchExtensionIdeas?: NarrationIdea[][];
 }
 
@@ -1808,6 +1820,10 @@ For each move in the line, return:
   - "1.e4 grabs the center and frees the king's bishop and queen."
   - "1...c5 — Black declines the symmetry and aims for asymmetric play on the queenside."
   - "5.Nc3 develops the knight, defends e4, and prepares Bc4 or Qe2."
+- shortText: ONE sentence (max 18 words) — Brief mode variant of text. Strip the prose, keep the KEY chess idea (the threat / pattern / verdict). Mention the SAN. Same conventions as text but tighter. Examples:
+  - "1.e4 grabs the center and opens lines for the queen and bishop."
+  - "1...c5 — the Sicilian, asymmetric counterplay on the queenside."
+  - "5.Nc3 defends e4 and prepares Bc4."
 - arrows (OPTIONAL, 0-3 per move): the user wants arrows ONLY for two purposes:
   (a) THREATS — squares the moved piece NOW attacks / pressures / eyes (Bc4 → f7, Nf3 → e5, c5 → d4).
   (b) LOOK-AHEAD — the next critical square on the line we're walking (Re1 → e8 because the rook will land there in 2 moves; Nc3 → d5 because the knight is going to d5 next).
@@ -1818,9 +1834,11 @@ The student is playing as ${studentSide}. Frame ideas from that perspective when
 
 Also produce:
 - intro: ONE sentence (max 25 words) framing the OPENING'S CHARACTER — sharp / positional / aggressive / quiet / etc. Name ONE concrete plan or square the student should care about. CRITICAL: do NOT recite the move list (the board will animate it). Do NOT say "after 1.e4 e5 2.Nf3..." or any variant of that — production audit (build 6393c0f) caught the LLM opening with "After 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 — symmetrical opening" before saying anything useful. The student already sees the moves; tell them what the OPENING IS, not what the moves ARE.
+- shortIntro: ONE sentence (max 18 words) — Brief mode variant of intro. Same content rules but tighter.
 - outro: ONE sentence (max 15 words). Action-oriented — what to do next.
 ${branches.length > 0 ? `- branchIdeas: ONE sentence (max 20 words) for EACH branch the student might dive into next. Mention the named line and its strategic flavor (sharp / positional / pawn-storm / quiet etc).
-- branchExtensionIdeas: a 2D array. For EACH branch (in the same order as branches[]), emit an array of EXACTLY ONE idea object per extension move provided. If a branch has 6 extension moves you MUST emit 6 idea objects in its inner array — no fewer. This is the most-undersized field in past gens and the student ends up reading template prose instead of your prose; do not skimp.
+- shortBranchIdeas: ONE sentence (max 15 words) per branch — Brief mode variants of branchIdeas, same order.
+- branchExtensionIdeas: a 2D array. For EACH branch (in the same order as branches[]), emit an array of EXACTLY ONE idea object per extension move provided. Each idea object MUST include both text AND shortText (Brief mode variant). If a branch has 6 extension moves you MUST emit 6 idea objects in its inner array — no fewer. This is the most-undersized field in past gens and the student ends up reading template prose instead of your prose; do not skimp.
   - text rules: same as the spine ideas (max ${pace === 'tour' ? 12 : 25} words, mention the SAN, do NOT forecast future moves).
   - arrow rules (CRITICAL): arrows on the EXTENSION moves should ONLY show:
       (a) THREATS — squares the moved piece NOW attacks/pressures (Bc4 → f7), or
@@ -1835,7 +1853,7 @@ Moves with post-move FENs:
 ${moveLabels}
 ${branches.length > 0 ? `\nBranches available at the end of the spine (the student picks one to dive deeper):\n${branchLabels}\n\nFor each branch, write ONE short sentence describing what kind of line it is.` : ''}
 
-Emit a JSON object with intro (string), outro (string), ideas (array of ${positions.length} objects { text, arrows? }, one per spine move in order)${branches.length > 0 ? `, and branchIdeas (array of ${branches.length} strings, one per branch in order)` : ''}.`;
+Emit a JSON object with intro (string), shortIntro (string), outro (string), ideas (array of ${positions.length} objects { text, shortText, arrows? }, one per spine move in order)${branches.length > 0 ? `, branchIdeas (array of ${branches.length} strings), shortBranchIdeas (array of ${branches.length} strings), and branchExtensionIdeas (2D array of { text, shortText, arrows? } objects)` : ''}.`;
 
   let narration: NarrationOutput;
   try {
@@ -1908,6 +1926,10 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
       const text =
         (typeof ideaEntry === 'object' && ideaEntry?.text?.trim()) ||
         synthesizeIdeaFromSan(extSan, extMovedBy, absolutePly - 1);
+      const shortText =
+        typeof ideaEntry === 'object' && ideaEntry?.shortText?.trim()
+          ? ideaEntry.shortText.trim()
+          : undefined;
       const rawArrows =
         typeof ideaEntry === 'object' && Array.isArray(ideaEntry?.arrows)
           ? ideaEntry.arrows
@@ -1921,18 +1943,26 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
         idea: text,
         children: extChildren,
       };
-      if (arrows.length > 0) node.narration = [{ text, arrows }];
+      if (shortText) node.shortIdea = shortText;
+      if (arrows.length > 0) {
+        const segment: NarrationSegmentType = { text, arrows };
+        if (shortText) segment.shortText = shortText;
+        node.narration = [segment];
+      }
       extChildren = [{ node }];
     }
+    const shortTeaser = narration.shortBranchIdeas?.[idx]?.trim();
+    const branchNode: WalkthroughTreeNode = {
+      san: b.san,
+      movedBy: branchMovedBy,
+      idea: teaser,
+      children: extChildren,
+    };
+    if (shortTeaser) branchNode.shortIdea = shortTeaser;
     return {
       label: b.label,
       forkSubtitle: teaser,
-      node: {
-        san: b.san,
-        movedBy: branchMovedBy,
-        idea: teaser,
-        children: extChildren,
-      },
+      node: branchNode,
     };
   });
   let nextChildren: ChildWrap[] = branchChildren;
@@ -1945,6 +1975,10 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
       // pre-arrows extension might still produce them).
       (typeof ideaEntry === 'string' ? (ideaEntry as string).trim() : '') ||
       synthesizeIdeaFromSan(p.san, p.movedBy, p.ply);
+    const shortText =
+      typeof ideaEntry === 'object' && ideaEntry?.shortText?.trim()
+        ? ideaEntry.shortText.trim()
+        : undefined;
     const rawArrows =
       typeof ideaEntry === 'object' && Array.isArray(ideaEntry?.arrows)
         ? ideaEntry.arrows
@@ -1961,8 +1995,11 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
       idea: text,
       children: nextChildren,
     };
+    if (shortText) node.shortIdea = shortText;
     if (arrows.length > 0) {
-      node.narration = [{ text, arrows }];
+      const segment: NarrationSegmentType = { text, arrows };
+      if (shortText) segment.shortText = shortText;
+      node.narration = [segment];
     }
     nextChildren = [{ node }];
   }
@@ -1973,6 +2010,10 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
   const displayName = faceContext
     ? `${entry.canonicalName} (facing ${faceContext.originalDisplayName})`
     : entry.canonicalName;
+  const shortIntro =
+    narration.shortIntro && narration.shortIntro.trim().length > 0
+      ? stripMoveRecitationLeadIn(narration.shortIntro.trim()) || undefined
+      : undefined;
   const tree: WalkthroughTree = {
     openingName: displayName,
     eco: entry.eco,
@@ -1980,6 +2021,7 @@ Emit a JSON object with intro (string), outro (string), ideas (array of ${positi
     intro:
       stripMoveRecitationLeadIn(narration.intro?.trim() || '') ||
       `${displayName} — let's walk through the main line.`,
+    ...(shortIntro ? { shortIntro } : {}),
     outro: narration.outro?.trim() || `Drill the moves to lock them in.`,
     root: { san: null, movedBy: null, idea: '', children: nextChildren },
   };
@@ -2860,7 +2902,9 @@ const PUNISH_LABEL_SCHEMA: Record<string, unknown> = {
         properties: {
           name: { type: 'string' },
           whyBad: { type: 'string' },
+          shortWhyBad: { type: 'string' },
           whyPunish: { type: 'string' },
+          shortWhyPunish: { type: 'string' },
           distractors: {
             type: 'array',
             items: {
@@ -2876,6 +2920,10 @@ const PUNISH_LABEL_SCHEMA: Record<string, unknown> = {
             type: 'array',
             items: { type: 'string' },
           },
+          shortFollowupIdeas: {
+            type: 'array',
+            items: { type: 'string' },
+          },
         },
       },
     },
@@ -2886,9 +2934,12 @@ interface PunishLabelOutput {
   lessons: {
     name: string;
     whyBad: string;
+    shortWhyBad?: string;
     whyPunish: string;
+    shortWhyPunish?: string;
     distractors: { label: string; explanation: string }[];
     followupIdeas?: string[];
+    shortFollowupIdeas?: string[];
   }[];
 }
 
@@ -3080,9 +3131,12 @@ async function generatePunishFromDb(
   • "Caro-Kann: Careless Ngf6?? — Nd6 is mate"
   • "Sicilian: Loose d6 invites the bishop sack"
 - whyBad: 1-2 sentences on WHY the opponent's move loses. Tie it back to the opening's character (Italian's Bc4-and-Ng5 pressure on f7, Caro-Kann's solid-but-tempo-sensitive structure, Sicilian's tactical density on the queenside, etc.).
+- shortWhyBad: REQUIRED ≤28-word compression of whyBad for the Brief Coach Narration setting. Preserve the KEY tactical / positional reason the move loses.
 - whyPunish: 1-2 sentences on the punishing IDEA — sacrifice for tempo, fork the queen, exploit the loose bishop, etc. Reference the puzzle's themes when natural ("a classic Bxf7+ sac that wins the queen by deflection").
+- shortWhyPunish: REQUIRED ≤28-word compression of whyPunish for Brief mode.
 - distractors: for EACH distractor (in the SAME ORDER given), write a short label (2-5 words) and a 1-sentence explanation of why it doesn't work or doesn't punish as well.
 - followupIdeas: ONE short sentence per followup move (in order) describing the tactical thread — "rook lifts to win the queen", "the king is dragged into the open", etc.
+- shortFollowupIdeas: parallel array — for EACH followup move, a ≤18-word Brief-mode variant of the matching followupIdea.
 
 The SANs and FENs are GIVEN by the puzzle database — DO NOT alter them, do NOT add or reorder distractors, do NOT invent moves. Just write the prose. Output ONLY via the tool.`;
 
@@ -3147,6 +3201,8 @@ Emit a JSON object: { lessons: [ ${prepared.length} entries, in the same order, 
     const lab = labels.lessons?.[i];
     const themePrimary = l.themes.find((t) => PUNISH_PUZZLE_THEMES.has(t)) ?? 'tactical';
     const fallbackName = `${entry.canonicalName} — ${themePrimary} trap`;
+    const shortWhyBad = lab?.shortWhyBad?.trim();
+    const shortWhyPunish = lab?.shortWhyPunish?.trim();
     return {
       name: (lab?.name?.trim()) || fallbackName,
       setupFen: l.setupFen,
@@ -3156,8 +3212,10 @@ Emit a JSON object: { lessons: [ ${prepared.length} entries, in the same order, 
       setupMoves: entry.moves,
       inaccuracy: l.inaccuracy,
       whyBad: (lab?.whyBad?.trim()) || `${l.inaccuracy} drops the thread of the opening — the position now has a tactical hole.`,
+      ...(shortWhyBad ? { shortWhyBad } : {}),
       punishment: l.punishment,
       whyPunish: (lab?.whyPunish?.trim()) || `${l.punishment} exploits the resulting weakness; a classic ${themePrimary} motif.`,
+      ...(shortWhyPunish ? { shortWhyPunish } : {}),
       distractors: l.distractors.map((d, j) => ({
         san: d.san,
         label: (lab?.distractors?.[j]?.label?.trim()) || `${d.san} — alternative`,
@@ -3165,10 +3223,14 @@ Emit a JSON object: { lessons: [ ${prepared.length} entries, in the same order, 
           (lab?.distractors?.[j]?.explanation?.trim()) ||
           `${d.san} is legal but doesn't capitalize on the inaccuracy as sharply as ${l.punishment}.`,
       })),
-      followup: l.followup.map((f, j) => ({
-        san: f.san,
-        idea: (lab?.followupIdeas?.[j]?.trim()) || `${f.san} — continues the winning sequence.`,
-      })),
+      followup: l.followup.map((f, j) => {
+        const shortIdea = lab?.shortFollowupIdeas?.[j]?.trim();
+        return {
+          san: f.san,
+          idea: (lab?.followupIdeas?.[j]?.trim()) || `${f.san} — continues the winning sequence.`,
+          ...(shortIdea ? { shortIdea } : {}),
+        };
+      }),
     } satisfies PunishLesson;
   });
 }

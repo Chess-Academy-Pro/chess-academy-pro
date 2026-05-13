@@ -3,59 +3,73 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing to develop our pieces actively. This move controls the crucial d5 and f5 squares while opening lines for our bishop and queen. The e4 pawn also supports a potential d4 advance later, giving us excellent central control. Most importantly, this move invites our opponent into the Sicilian Defense if they respond with c5, leading to sharp, tactical positions where both sides fight for the initiative."
+      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing to develop our pieces actively. This move controls the crucial d5 and f5 squares while opening lines for our bishop and queen. The e4 pawn also supports a potential d4 advance later, giving us excellent central control. Most importantly, this move invites our opponent into the Sicilian Defense if they respond with c5, leading to sharp, tactical positions where both sides fight for the initiative.",
+      "shortNarration": "1.e4 controls d5 and f5, opens lines for bishop and queen, and invites the sharp Sicilian Defense."
     },
     {
       "san": "c5",
-      "annotation": "Our opponent chooses the Sicilian Defense, immediately challenging our central control by attacking the d4 square. This is Black's most popular and aggressive response to e4, avoiding symmetrical pawn structures and creating imbalanced positions rich in tactical possibilities. Black's c5 pawn prevents our natural d4 advance and signals their intention to fight for counterplay rather than simply equalizing. The Sicilian often leads to positions where Black gets active piece play and kingside attacks while White pursues space and initiative."
+      "annotation": "Our opponent chooses the Sicilian Defense, immediately challenging our central control by attacking the d4 square. This is Black's most popular and aggressive response to e4, avoiding symmetrical pawn structures and creating imbalanced positions rich in tactical possibilities. Black's c5 pawn prevents our natural d4 advance and signals their intention to fight for counterplay rather than simply equalizing. The Sicilian often leads to positions where Black gets active piece play and kingside attacks while White pursues space and initiative.",
+      "shortNarration": "Black's c5 prevents d4, creating an imbalanced tactical fight with Black's kingside attacks versus White's space and initiative."
     },
     {
       "san": "b4",
-      "annotation": "We're launching the Wing Gambit, an aggressive and somewhat speculative approach that sacrifices material for rapid development and attacking chances. This pawn sacrifice aims to disrupt Black's pawn structure while gaining time for piece development, as Black will likely need to spend a tempo capturing. The b4 move also opens the a1-h8 diagonal for our bishop and can lead to sharp tactical play if Black accepts the gambit. While not theoretically sound at the highest level, the Wing Gambit creates practical problems and can catch unprepared opponents off guard."
+      "annotation": "We're launching the Wing Gambit, an aggressive and somewhat speculative approach that sacrifices material for rapid development and attacking chances. This pawn sacrifice aims to disrupt Black's pawn structure while gaining time for piece development, as Black will likely need to spend a tempo capturing. The b4 move also opens the a1-h8 diagonal for our bishop and can lead to sharp tactical play if Black accepts the gambit. While not theoretically sound at the highest level, the Wing Gambit creates practical problems and can catch unprepared opponents off guard.",
+      "shortNarration": "Wing Gambit sacrifices the b4 pawn for rapid development, opening the a1-h8 diagonal and creating sharp tactical chances."
     },
     {
       "san": "cxb4",
-      "annotation": "Black accepts our gambit by capturing the pawn, which is the principled response since declining would leave us with a strong pawn center and space advantage. By taking on b4, our opponent gains material but also opens lines for our pieces and gives us development tempi. This capture also somewhat loosens Black's queenside pawn structure, potentially giving us targets to attack later. Black now has an extra pawn but must be careful not to fall behind in development or allow us to generate a strong initiative."
+      "annotation": "Black accepts our gambit by capturing the pawn, which is the principled response since declining would leave us with a strong pawn center and space advantage. By taking on b4, our opponent gains material but also opens lines for our pieces and gives us development tempi. This capture also somewhat loosens Black's queenside pawn structure, potentially giving us targets to attack later. Black now has an extra pawn but must be careful not to fall behind in development or allow us to generate a strong initiative.",
+      "shortNarration": "Black accepts the gambit on b4, gaining a pawn but opening lines for our pieces and loosening their queenside structure."
     },
     {
       "san": "a3",
-      "annotation": "We immediately challenge Black's extra pawn, forcing them to make a decision about how to maintain their material advantage. This move aims to regain the pawn while continuing to open lines - if Black captures on a3, we can recapture with our rook, activating it on an open file. The a3 advance also prevents Black from simply consolidating with b5 and forces them to either give back the pawn or advance it further up the board. This fits perfectly with our gambit philosophy of maintaining pressure and not allowing Black to consolidate their extra material peacefully."
+      "annotation": "We immediately challenge Black's extra pawn, forcing them to make a decision about how to maintain their material advantage. This move aims to regain the pawn while continuing to open lines - if Black captures on a3, we can recapture with our rook, activating it on an open file. The a3 advance also prevents Black from simply consolidating with b5 and forces them to either give back the pawn or advance it further up the board. This fits perfectly with our gambit philosophy of maintaining pressure and not allowing Black to consolidate their extra material peacefully.",
+      "shortNarration": "a3 pressures Black's extra pawn, forcing either a capture activating White's rook or a weakening advance."
     },
     {
       "san": "d5",
-      "annotation": "Our opponent strikes back in the center with this strong central advance, immediately challenging our e4 pawn and aiming to open up the position for their pieces. This move shows excellent understanding of gambit defense - rather than trying to hold onto the extra b4 pawn, Black creates central counterplay and opens lines for development. The d5 advance also frees Black's light-squared bishop and prepares to develop their pieces actively. Black is essentially counter-sacrificing by allowing us to capture on d5, choosing piece activity over material considerations."
+      "annotation": "Our opponent strikes back in the center with this strong central advance, immediately challenging our e4 pawn and aiming to open up the position for their pieces. This move shows excellent understanding of gambit defense - rather than trying to hold onto the extra b4 pawn, Black creates central counterplay and opens lines for development. The d5 advance also frees Black's light-squared bishop and prepares to develop their pieces actively. Black is essentially counter-sacrificing by allowing us to capture on d5, choosing piece activity over material considerations.",
+      "shortNarration": "Black's d5 advance challenges e4, opens lines, and frees the light-squared bishop, counter-sacrificing for piece activity."
     },
     {
       "san": "exd5",
-      "annotation": "We capture in the center, accepting Black's counter-sacrifice and opening up the position even further. This exchange transforms the game into a tactical battle where both sides will have active pieces and open lines to work with. Our pawn on d5 now controls important central squares like c6 and e6, potentially restricting Black's piece coordination. By accepting this trade, we're embracing the sharp, tactical nature of the position that typically favors the side with better piece coordination and tactical awareness."
+      "annotation": "We capture in the center, accepting Black's counter-sacrifice and opening up the position even further. This exchange transforms the game into a tactical battle where both sides will have active pieces and open lines to work with. Our pawn on d5 now controls important central squares like c6 and e6, potentially restricting Black's piece coordination. By accepting this trade, we're embracing the sharp, tactical nature of the position that typically favors the side with better piece coordination and tactical awareness.",
+      "shortNarration": "Accepting the trade opens lines and gives White a d5 pawn controlling c6 and e6, sharpening the tactical battle."
     },
     {
       "san": "Qxd5",
-      "annotation": "Black recaptures with the queen, centralizing their most powerful piece and immediately putting pressure on our position. While bringing the queen out early violates opening principles, in this sharp tactical position it makes perfect sense as the queen is relatively safe on d5 and exerts maximum influence. The queen on d5 attacks multiple squares and pieces while also defending Black's kingside. This move also completes Black's counter-sacrifice idea, trading the d-pawn for active piece play and central control."
+      "annotation": "Black recaptures with the queen, centralizing their most powerful piece and immediately putting pressure on our position. While bringing the queen out early violates opening principles, in this sharp tactical position it makes perfect sense as the queen is relatively safe on d5 and exerts maximum influence. The queen on d5 attacks multiple squares and pieces while also defending Black's kingside. This move also completes Black's counter-sacrifice idea, trading the d-pawn for active piece play and central control.",
+      "shortNarration": "Black centralizes the queen on d5, pressuring your position and completing the counter-sacrifice for active piece play."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its ideal square, attacking Black's centralized queen and forcing them to make another decision. This move embodies classical development principles while also creating immediate tactical threats that Black must address. The knight on f3 also supports a potential d4 advance later and prepares to castle kingside for safety. By developing with tempo (attacking the queen), we're maintaining the initiative despite being behind in material, which is crucial in gambit play."
+      "annotation": "We develop our knight to its ideal square, attacking Black's centralized queen and forcing them to make another decision. This move embodies classical development principles while also creating immediate tactical threats that Black must address. The knight on f3 also supports a potential d4 advance later and prepares to castle kingside for safety. By developing with tempo (attacking the queen), we're maintaining the initiative despite being behind in material, which is crucial in gambit play.",
+      "shortNarration": "Knight to f3 attacks the queen with tempo, developing and preparing d4 and kingside castling."
     },
     {
       "san": "e5",
-      "annotation": "Black advances their e-pawn, attacking our knight and further expanding in the center while creating space for piece development. This aggressive advance shows that our opponent is embracing the tactical nature of the position rather than retreating passively. The e5 pawn also supports Black's queen on d5 and opens the diagonal for their dark-squared bishop to develop actively. However, this pawn advance also creates some weaknesses, particularly on the light squares around Black's king, which we might exploit later with our light-squared bishop."
+      "annotation": "Black advances their e-pawn, attacking our knight and further expanding in the center while creating space for piece development. This aggressive advance shows that our opponent is embracing the tactical nature of the position rather than retreating passively. The e5 pawn also supports Black's queen on d5 and opens the diagonal for their dark-squared bishop to develop actively. However, this pawn advance also creates some weaknesses, particularly on the light squares around Black's king, which we might exploit later with our light-squared bishop.",
+      "shortNarration": "Black's e5 advance attacks the knight, supports the queen on d5, and opens the dark-squared bishop's diagonal, but weakens light squares around the king."
     },
     {
       "san": "Bb2",
-      "annotation": "We develop our bishop to the long diagonal, where it exerts maximum pressure toward Black's kingside and controls important central squares. This move fits perfectly with our gambit strategy, as the bishop on b2 supports our tactical ambitions and puts pressure on Black's somewhat exposed king position. The bishop also eyes the e5 pawn and potential tactics involving the f6 square. By developing this bishop actively rather than passively, we're maintaining the spirit of the gambit and keeping maximum pressure on our opponent."
+      "annotation": "We develop our bishop to the long diagonal, where it exerts maximum pressure toward Black's kingside and controls important central squares. This move fits perfectly with our gambit strategy, as the bishop on b2 supports our tactical ambitions and puts pressure on Black's somewhat exposed king position. The bishop also eyes the e5 pawn and potential tactics involving the f6 square. By developing this bishop actively rather than passively, we're maintaining the spirit of the gambit and keeping maximum pressure on our opponent.",
+      "shortNarration": "Bishop to b2 pressures Black's kingside, eyes e5 and f6, and supports the gambit's tactical ambitions."
     },
     {
       "san": "Nc6",
-      "annotation": "Black develops their knight to a natural square, defending the e5 pawn and preparing to continue with normal development. This move shows good understanding of the position's requirements - Black needs to complete development while maintaining their central pawns. The knight on c6 also eyes important squares like d4 and e7, giving Black good piece coordination. However, the knight also blocks the c-file somewhat and might become a target for our pieces later if we can generate tactics against Black's somewhat loose position."
+      "annotation": "Black develops their knight to a natural square, defending the e5 pawn and preparing to continue with normal development. This move shows good understanding of the position's requirements - Black needs to complete development while maintaining their central pawns. The knight on c6 also eyes important squares like d4 and e7, giving Black good piece coordination. However, the knight also blocks the c-file somewhat and might become a target for our pieces later if we can generate tactics against Black's somewhat loose position.",
+      "shortNarration": "Black's knight to c6 defends e5, eyes d4 and e7, but blocks the c-file and may become a target."
     },
     {
       "san": "c4",
-      "annotation": "We advance our c-pawn, attacking Black's queen once again and forcing them to move their most powerful piece for the second time in the opening. This move also expands our control of the center, particularly the important d5 and b5 squares, while opening lines for our queen. The c4 advance fits our active playing style and maintains the pressure that's essential in gambit positions. By continuously forcing Black's queen to move, we're gaining valuable development time while our opponent's most powerful piece becomes somewhat of a liability, having to constantly find safe squares."
+      "annotation": "We advance our c-pawn, attacking Black's queen once again and forcing them to move their most powerful piece for the second time in the opening. This move also expands our control of the center, particularly the important d5 and b5 squares, while opening lines for our queen. The c4 advance fits our active playing style and maintains the pressure that's essential in gambit positions. By continuously forcing Black's queen to move, we're gaining valuable development time while our opponent's most powerful piece becomes somewhat of a liability, having to constantly find safe squares.",
+      "shortNarration": "c4 attacks Black's queen again, gains time, and expands control of d5 and b5."
     },
     {
       "san": "Qe6",
-      "annotation": "Continuing Sicilian Defense Wing Gambit Romanian Defense: Qe6 is a known theory move in this line."
+      "annotation": "Continuing Sicilian Defense Wing Gambit Romanian Defense: Qe6 is a known theory move in this line.",
+      "shortNarration": "Qe6 is the theory move in the Sicilian Wing Gambit Romanian Defense."
     }
   ]
 }

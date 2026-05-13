@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with the flexible Zukertort Opening, named after 19th-century grandmaster Johannes Zukertort. Nf3 is perfect for avoiding heavy theory while maintaining strategic control—the knight immediately pressures d4 and e5, the two central squares Black will likely contest. This move invites Black to define the center, after which we'll know whether to support a classical setup or shift toward more dynamic plans."
+      "annotation": "We start with the flexible Zukertort Opening, named after 19th-century grandmaster Johannes Zukertort. Nf3 is perfect for avoiding heavy theory while maintaining strategic control—the knight immediately pressures d4 and e5, the two central squares Black will likely contest. This move invites Black to define the center, after which we'll know whether to support a classical setup or shift toward more dynamic plans.",
+      "shortNarration": "Nf3 pressures d4 and e5, inviting Black to define the center before White commits to a setup."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately stakes a claim in the center, which is exactly what we wanted to provoke. Now we know Black prefers central play, and we can respond with our own central strategy. This move also naturally opens the c8-h3 diagonal for Black's light-squared bishop and prepares piece development."
+      "annotation": "Black immediately stakes a claim in the center, which is exactly what we wanted to provoke. Now we know Black prefers central play, and we can respond with our own central strategy. This move also naturally opens the c8-h3 diagonal for Black's light-squared bishop and prepares piece development.",
+      "shortNarration": "Black's center claim opens the c8-h3 diagonal for the light-squared bishop and prepares development."
     },
     {
       "san": "e3",
-      "annotation": "Rather than matching Black's central tension with 2.d4, we choose the solid e3, preparing to support the center with moves like d4 while keeping our position flexible and avoiding premature central exchanges. This also opens the long diagonal for our light-squared bishop and keeps our structure compact. The quiet approach is characteristic of the Zukertort—we're thinking in terms of long-term positional play, not immediate tactical fireworks."
+      "annotation": "Rather than matching Black's central tension with 2.d4, we choose the solid e3, preparing to support the center with moves like d4 while keeping our position flexible and avoiding premature central exchanges. This also opens the long diagonal for our light-squared bishop and keeps our structure compact. The quiet approach is characteristic of the Zukertort—we're thinking in terms of long-term positional play, not immediate tactical fireworks.",
+      "shortNarration": "e3 prepares d4, opens the light-squared bishop's diagonal, and keeps the center flexible for long-term positional play."
     },
     {
       "san": "c5",
-      "annotation": "Black challenges the center again, aiming to prevent our d4 advance or force us to make a decision about the pawn structure. This is the critical moment where the Pachman Gambit gets its name and its teeth. Black's preparing to either capture on c4 or support the c5 pawn, but we have a clever response prepared."
+      "annotation": "Black challenges the center again, aiming to prevent our d4 advance or force us to make a decision about the pawn structure. This is the critical moment where the Pachman Gambit gets its name and its teeth. Black's preparing to either capture on c4 or support the c5 pawn, but we have a clever response prepared.",
+      "shortNarration": "Black's c5 challenges the center, threatening to capture or support the pawn — the Pachman Gambit's critical moment."
     },
     {
       "san": "c4",
-      "annotation": "Now we strike with the gambit idea! By pushing c4, we attack Black's d5 pawn while opening the c-file and preparing to recapture if Black takes on c4. The move gains space on the queenside and forces Black into a decision: defending d5 becomes awkward, and if Black trades with dxc4, we'll recapture with b3, launching a devastating attack on the long diagonal where our rook and bishop will coordinate beautifully."
+      "annotation": "Now we strike with the gambit idea! By pushing c4, we attack Black's d5 pawn while opening the c-file and preparing to recapture if Black takes on c4. The move gains space on the queenside and forces Black into a decision: defending d5 becomes awkward, and if Black trades with dxc4, we'll recapture with b3, launching a devastating attack on the long diagonal where our rook and bishop will coordinate beautifully.",
+      "shortNarration": "c4 attacks d5, opens the c-file, and if dxc4, b3 recaptures with a devastating attack on the long diagonal."
     },
     {
       "san": "dxc4",
-      "annotation": "Black accepts the gambit material, which is what we're hoping for—the c4 pawn is actually a poisoned gift. By capturing, Black opens lines toward the long diagonal (a1-h8) where our bishop will soon aim, and the c-file becomes a launching point for our play. We're about to demonstrate that the pawn is less valuable than the piece activity we gain."
+      "annotation": "Black accepts the gambit material, which is what we're hoping for—the c4 pawn is actually a poisoned gift. By capturing, Black opens lines toward the long diagonal (a1-h8) where our bishop will soon aim, and the c-file becomes a launching point for our play. We're about to demonstrate that the pawn is less valuable than the piece activity we gain.",
+      "shortNarration": "Black's c4 capture opens the long diagonal for our bishop and the c-file for our play, sacrificing a pawn for piece activity."
     },
     {
       "san": "b3",
-      "annotation": "This move completes the tactical point of the gambit: we recapture the pawn while simultaneously opening the long diagonal for our light-squared bishop on b2, which will become our most powerful piece, aiming directly at Black's kingside via f6. The move also reinforces our queenside and prepares a natural development with Bb2, supporting the center and creating genuine compensation for the pawn we sacrificed. Black will struggle to complete development while defending against the mounting pressure on the long diagonal."
+      "annotation": "This move completes the tactical point of the gambit: we recapture the pawn while simultaneously opening the long diagonal for our light-squared bishop on b2, which will become our most powerful piece, aiming directly at Black's kingside via f6. The move also reinforces our queenside and prepares a natural development with Bb2, supporting the center and creating genuine compensation for the pawn we sacrificed. Black will struggle to complete development while defending against the mounting pressure on the long diagonal.",
+      "shortNarration": "Recapturing the pawn opens the long diagonal for the b2 bishop, aiming at f6 and creating compensation for the sacrificed pawn."
     }
   ]
 }

@@ -3,51 +3,63 @@
   "moveAnnotations": [
     {
       "san": "c4",
-      "annotation": "We're opening with the English Opening, one of the most flexible and positionally rich systems in chess. This move immediately stakes a claim to the central d5 square while avoiding the sharp theoretical battles of 1.e4 or 1.d4. The English allows us to develop our pieces harmoniously while keeping our opponent guessing about our central pawn structure. We can transpose into many different openings depending on how Black responds, giving us excellent practical chances."
+      "annotation": "We're opening with the English Opening, one of the most flexible and positionally rich systems in chess. This move immediately stakes a claim to the central d5 square while avoiding the sharp theoretical battles of 1.e4 or 1.d4. The English allows us to develop our pieces harmoniously while keeping our opponent guessing about our central pawn structure. We can transpose into many different openings depending on how Black responds, giving us excellent practical chances.",
+      "shortNarration": "The English Opening stakes a claim to d5 while avoiding sharp theory, keeping flexible transposition options."
     },
     {
       "san": "c5",
-      "annotation": "Our opponent mirrors our move with the Symmetrical Variation, creating an immediate tension in the position. Black is saying 'anything you can do, I can do too' and aims to achieve equal development and central control. This symmetrical approach often leads to rich middlegame positions where small advantages can be crucial. We need to be ready to break the symmetry at the right moment to seize the initiative."
+      "annotation": "Our opponent mirrors our move with the Symmetrical Variation, creating an immediate tension in the position. Black is saying 'anything you can do, I can do too' and aims to achieve equal development and central control. This symmetrical approach often leads to rich middlegame positions where small advantages can be crucial. We need to be ready to break the symmetry at the right moment to seize the initiative.",
+      "shortNarration": "Symmetrical Variation mirrors your move; break symmetry at the right moment to seize the initiative."
     },
     {
       "san": "Nf3",
-      "annotation": "We're developing our knight to its ideal square, controlling the important e5 and d4 central squares. This move supports our future plans of either d2-d4 or maintaining a more restrained setup with g3 and Bg2. The knight on f3 is perfectly placed to support our kingside development and can later jump to more active squares like e5 or d4. This flexible development keeps all our options open while improving our position."
+      "annotation": "We're developing our knight to its ideal square, controlling the important e5 and d4 central squares. This move supports our future plans of either d2-d4 or maintaining a more restrained setup with g3 and Bg2. The knight on f3 is perfectly placed to support our kingside development and can later jump to more active squares like e5 or d4. This flexible development keeps all our options open while improving our position.",
+      "shortNarration": "Knight to f3 controls e5 and d4, supporting either d4 or g3/Bg2 while keeping kingside development flexible."
     },
     {
       "san": "Nf6",
-      "annotation": "Black continues the symmetrical theme by developing their knight to the mirror square. Our opponent is controlling the e4 and d5 squares while preparing to castle kingside. This knight development is both natural and flexible, allowing Black to maintain the balance while keeping various pawn breaks like ...d6 and ...e6 or ...d5 available. We should note that Black is avoiding committing to any particular pawn structure just yet."
+      "annotation": "Black continues the symmetrical theme by developing their knight to the mirror square. Our opponent is controlling the e4 and d5 squares while preparing to castle kingside. This knight development is both natural and flexible, allowing Black to maintain the balance while keeping various pawn breaks like ...d6 and ...e6 or ...d5 available. We should note that Black is avoiding committing to any particular pawn structure just yet.",
+      "shortNarration": "Black mirrors development with Nf6, controlling e4 and d5 while keeping pawn breaks ...d6, ...e6, or ...d5 flexible."
     },
     {
       "san": "Nc3",
-      "annotation": "We're bringing our second knight into the game, adding more pressure to the d5 square and preparing to support a potential d2-d4 advance. This knight development also keeps our options open for both kingside fianchetto setups and more direct central play. The knight on c3 coordinates beautifully with our other pieces and maintains maximum flexibility in our pawn structure. We're following sound development principles while building up subtle pressure in the center."
+      "annotation": "We're bringing our second knight into the game, adding more pressure to the d5 square and preparing to support a potential d2-d4 advance. This knight development also keeps our options open for both kingside fianchetto setups and more direct central play. The knight on c3 coordinates beautifully with our other pieces and maintains maximum flexibility in our pawn structure. We're following sound development principles while building up subtle pressure in the center.",
+      "shortNarration": "Knight to c3 pressures d5, supports d2-d4, and keeps options open for kingside fianchetto or central play."
     },
     {
       "san": "d5",
-      "annotation": "Our opponent breaks the symmetry with an immediate central strike, challenging our c4 pawn and seizing space in the center. This is the critical moment in the Symmetrical English - Black is trying to equalize quickly by forcing trades and simplifying the position. The d5 advance creates immediate tactical tension since we must decide how to respond to this central challenge. This move shows that Black is willing to enter sharper, more forcing lines rather than continuing the quiet maneuvering."
+      "annotation": "Our opponent breaks the symmetry with an immediate central strike, challenging our c4 pawn and seizing space in the center. This is the critical moment in the Symmetrical English - Black is trying to equalize quickly by forcing trades and simplifying the position. The d5 advance creates immediate tactical tension since we must decide how to respond to this central challenge. This move shows that Black is willing to enter sharper, more forcing lines rather than continuing the quiet maneuvering.",
+      "shortNarration": "Black's d5 challenges the c4 pawn, forcing trades and sharpening the center."
     },
     {
       "san": "cxd5",
-      "annotation": "We're accepting the challenge and capturing on d5, opening up the position and creating immediate tactics. This exchange is almost forced since allowing ...dxc4 would give Black a dangerous space advantage and the initiative. By taking on d5, we're inviting Black's knight to recapture, which will centralize their piece but also allow us to target it later. This capture transforms the game from a quiet positional struggle into a more dynamic battle where piece activity becomes crucial."
+      "annotation": "We're accepting the challenge and capturing on d5, opening up the position and creating immediate tactics. This exchange is almost forced since allowing ...dxc4 would give Black a dangerous space advantage and the initiative. By taking on d5, we're inviting Black's knight to recapture, which will centralize their piece but also allow us to target it later. This capture transforms the game from a quiet positional struggle into a more dynamic battle where piece activity becomes crucial.",
+      "shortNarration": "Capturing on d5 forces open play, inviting Black's knight to centralize but creating tactical targets for piece activity."
     },
     {
       "san": "Nxd5",
-      "annotation": "Black recaptures with the knight, placing it on an excellent central square where it eyes several important squares including f4, e3, and b4. Our opponent's knight is beautifully centralized but also potentially vulnerable to future attacks from our pieces. This recapture maintains material balance while giving Black active piece play in the center. We need to be mindful that this knight can become a strong outpost if we don't challenge it properly with moves like e4 or by targeting it with our pieces."
+      "annotation": "Black recaptures with the knight, placing it on an excellent central square where it eyes several important squares including f4, e3, and b4. Our opponent's knight is beautifully centralized but also potentially vulnerable to future attacks from our pieces. This recapture maintains material balance while giving Black active piece play in the center. We need to be mindful that this knight can become a strong outpost if we don't challenge it properly with moves like e4 or by targeting it with our pieces.",
+      "shortNarration": "Black's knight recaptures on an excellent central square, eyeing f4, e3, and b4, but it's vulnerable to attack from your pieces."
     },
     {
       "san": "g3",
-      "annotation": "We're implementing the fianchetto setup, preparing to develop our light-squared bishop to g2 where it will become a powerful long-range piece. This move also prepares kingside castling and gives our king a safer escape square on g2 if needed. The fianchetto bishop will exert tremendous pressure along the long diagonal, potentially targeting Black's queenside and central pawns. This development scheme is particularly effective in the English Opening because it allows us to maintain pressure without committing to an early d2-d4."
+      "annotation": "We're implementing the fianchetto setup, preparing to develop our light-squared bishop to g2 where it will become a powerful long-range piece. This move also prepares kingside castling and gives our king a safer escape square on g2 if needed. The fianchetto bishop will exert tremendous pressure along the long diagonal, potentially targeting Black's queenside and central pawns. This development scheme is particularly effective in the English Opening because it allows us to maintain pressure without committing to an early d2-d4.",
+      "shortNarration": "Fianchettoing the bishop to g2 pressures the long diagonal and prepares kingside castling, avoiding an early d4."
     },
     {
       "san": "Nc6",
-      "annotation": "Our opponent develops another knight to a natural square, supporting the centralized knight on d5 and preparing to complete their kingside development. Black is following sound development principles while maintaining the strong knight on d5 as a central anchor. This move also prepares potential pawn advances like ...e6 or ...g6, giving Black flexibility in their setup. We should note that Black's pieces are becoming well-coordinated, and we need to find ways to challenge their central dominance."
+      "annotation": "Our opponent develops another knight to a natural square, supporting the centralized knight on d5 and preparing to complete their kingside development. Black is following sound development principles while maintaining the strong knight on d5 as a central anchor. This move also prepares potential pawn advances like ...e6 or ...g6, giving Black flexibility in their setup. We should note that Black's pieces are becoming well-coordinated, and we need to find ways to challenge their central dominance.",
+      "shortNarration": "Black's knight on d5 anchors the center, supporting development and flexible pawn breaks like e6 or g6."
     },
     {
       "san": "Bg2",
-      "annotation": "We're completing our fianchetto setup by placing the bishop on its optimal diagonal, where it will be a long-term strategic asset. This bishop immediately eyes the central d5 knight and controls important squares along the a1-h8 diagonal. The fianchettoed bishop works harmoniously with our knight on f3 and will support future central advances or queenside pressure. This piece will often become the backbone of our position, providing both defensive stability and attacking potential."
+      "annotation": "We're completing our fianchetto setup by placing the bishop on its optimal diagonal, where it will be a long-term strategic asset. This bishop immediately eyes the central d5 knight and controls important squares along the a1-h8 diagonal. The fianchettoed bishop works harmoniously with our knight on f3 and will support future central advances or queenside pressure. This piece will often become the backbone of our position, providing both defensive stability and attacking potential.",
+      "shortNarration": "Fianchettoed bishop on g2 eyes d5 and controls the a1-h8 diagonal, supporting central advances and queenside pressure."
     },
     {
       "san": "Nc7",
-      "annotation": "Black repositions the knight from its central outpost to prepare a more solid setup, likely planning ...e6 and ...Be7 to complete development. This retreat might seem passive, but it's actually quite principled - the knight was becoming a target on d5, and from c7 it can later jump to more active squares like e6 or a6. Our opponent is showing good positional understanding by avoiding doubled pawns and maintaining piece coordination. This move signals that Black is transitioning from the tactical phase into a more strategic middlegame battle where piece coordination and pawn structure will become key factors."
+      "annotation": "Black repositions the knight from its central outpost to prepare a more solid setup, likely planning ...e6 and ...Be7 to complete development. This retreat might seem passive, but it's actually quite principled - the knight was becoming a target on d5, and from c7 it can later jump to more active squares like e6 or a6. Our opponent is showing good positional understanding by avoiding doubled pawns and maintaining piece coordination. This move signals that Black is transitioning from the tactical phase into a more strategic middlegame battle where piece coordination and pawn structure will become key factors.",
+      "shortNarration": "Knight retreats from d5 to c7 to avoid being a target, planning e6 and Be7 for a solid, principled setup."
     }
   ]
 }

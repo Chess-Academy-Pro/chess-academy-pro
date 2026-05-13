@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with the Réti Opening, a subtle yet powerful approach that avoids the main theoretical lines of 1.e4 or 1.d4. The knight immediately controls e5 and d4, preventing Black from establishing a strong pawn center while keeping our options flexible—we can still support a future d4 advance or pursue a kingside-focused strategy. This move exemplifies the modern hypermodern philosophy: rather than occupying the center immediately, we prepare to challenge it from afar."
+      "annotation": "We start with the Réti Opening, a subtle yet powerful approach that avoids the main theoretical lines of 1.e4 or 1.d4. The knight immediately controls e5 and d4, preventing Black from establishing a strong pawn center while keeping our options flexible—we can still support a future d4 advance or pursue a kingside-focused strategy. This move exemplifies the modern hypermodern philosophy: rather than occupying the center immediately, we prepare to challenge it from afar.",
+      "shortNarration": "The knight on f3 controls e5 and d4, preventing a strong pawn center while keeping options open for d4 or a kingside attack."
     },
     {
       "san": "d5",
-      "annotation": "Black stakes a claim in the center with this classical response, immediately fighting for space and preventing us from smoothly playing d4 later. This move also opens lines for Black's c8-bishop and queen, giving Black an active position—but it also commits the d-pawn, which we'll soon target with our c4 push."
+      "annotation": "Black stakes a claim in the center with this classical response, immediately fighting for space and preventing us from smoothly playing d4 later. This move also opens lines for Black's c8-bishop and queen, giving Black an active position—but it also commits the d-pawn, which we'll soon target with our c4 push.",
+      "shortNarration": "Black's classical response fights for the center and opens lines for the queen and bishop, but commits the d-pawn to our c4 push."
     },
     {
       "san": "c4",
-      "annotation": "We challenge Black's central pawn immediately, initiating the gambit concept by offering c4 pawn flexibility. If Black captures with dxc4, we regain the pawn with tempo considerations, while if Black maintains the tension with d4, we've narrowed their center and prepared e3 to support our pieces. This move transitions us toward a Blumenfeld-like structure where we control key squares and can maneuver our pieces dynamically."
+      "annotation": "We challenge Black's central pawn immediately, initiating the gambit concept by offering c4 pawn flexibility. If Black captures with dxc4, we regain the pawn with tempo considerations, while if Black maintains the tension with d4, we've narrowed their center and prepared e3 to support our pieces. This move transitions us toward a Blumenfeld-like structure where we control key squares and can maneuver our pieces dynamically.",
+      "shortNarration": "c4 gambits the pawn to challenge Black's center, regaining with tempo if dxc4 or narrowing it if d4."
     },
     {
       "san": "d4",
-      "annotation": "Black advances the pawn rather than capturing, keeping tension in the center and preparing to challenge our setup. This move stakes space but also fixes the pawn on d4, where it may become vulnerable to our pieces—especially our light-squared bishop, which we can develop via f4 or g5. Black is playing ambitiously, but this commitment gives us concrete targets to attack."
+      "annotation": "Black advances the pawn rather than capturing, keeping tension in the center and preparing to challenge our setup. This move stakes space but also fixes the pawn on d4, where it may become vulnerable to our pieces—especially our light-squared bishop, which we can develop via f4 or g5. Black is playing ambitiously, but this commitment gives us concrete targets to attack.",
+      "shortNarration": "Black's pawn advance fixes d4 as a target for your light-squared bishop, developing to f4 or g5."
     },
     {
       "san": "e3",
-      "annotation": "We support the potential d4 advance (should Black's pawn move) while preparing to develop our light-squared bishop to e2 or f4—two key squares in our plan. The move also keeps our pawn structure flexible and prevents Black from pushing d3 with tempo. Notice we're not trying to recapture on d4 immediately; instead, we're building a solid foundation and preparing a coordinated attack on Black's center once our pieces are developed."
+      "annotation": "We support the potential d4 advance (should Black's pawn move) while preparing to develop our light-squared bishop to e2 or f4—two key squares in our plan. The move also keeps our pawn structure flexible and prevents Black from pushing d3 with tempo. Notice we're not trying to recapture on d4 immediately; instead, we're building a solid foundation and preparing a coordinated attack on Black's center once our pieces are developed.",
+      "shortNarration": "d4 advance is supported, light-squared bishop goes to e2 or f4, and we avoid recapturing on d4 immediately to build a coordinated attack."
     },
     {
       "san": "c5",
-      "annotation": "Black counterattacks in the center and expands queenside space, challenging our d4 plans and keeping the position dynamic. This move is typical of Black's hypermodern resistance—rather than allow us to consolidate, Black creates immediate threats and tactical possibilities. However, we now have the critical move b4, which strikes at Black's queenside expansion and gives this line its distinctive character."
+      "annotation": "Black counterattacks in the center and expands queenside space, challenging our d4 plans and keeping the position dynamic. This move is typical of Black's hypermodern resistance—rather than allow us to consolidate, Black creates immediate threats and tactical possibilities. However, we now have the critical move b4, which strikes at Black's queenside expansion and gives this line its distinctive character.",
+      "shortNarration": "b4 strikes at Black's queenside expansion, challenging the hypermodern counterattack and keeping the position dynamic."
     },
     {
       "san": "b4",
-      "annotation": "This is the critical move defining the Reversed Blumenfeld Gambit! We aggressively expand on the queenside and prepare to contest Black's c5-pawn with a future bxc5 or support our pieces from b3. The move also prevents Black from playing cxd4 comfortably, since we threaten the c5-pawn directly. This dynamic setup—where we're attacking on the flank while maintaining central tension—is the thematic idea of the position, giving us active play and concrete attacking chances against Black's somewhat overextended position."
+      "annotation": "This is the critical move defining the Reversed Blumenfeld Gambit! We aggressively expand on the queenside and prepare to contest Black's c5-pawn with a future bxc5 or support our pieces from b3. The move also prevents Black from playing cxd4 comfortably, since we threaten the c5-pawn directly. This dynamic setup—where we're attacking on the flank while maintaining central tension—is the thematic idea of the position, giving us active play and concrete attacking chances against Black's somewhat overextended position.",
+      "shortNarration": "b4 defines the Reversed Blumenfeld Gambit — queenside expansion threatens c5, prevents cxd4, and creates active attacking chances against Black's overextended setup."
     }
   ]
 }

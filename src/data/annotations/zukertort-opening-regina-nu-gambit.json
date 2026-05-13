@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with the Zukertort Opening, a flexible first move that controls the central e5 and d4 squares while keeping our options open. Unlike 1.e4 or 1.d4, this knight move avoids committing our pawn structure immediately, allowing us to adapt to Black's setup. The Zukertort is popular because it leads to strategic maneuvering games rather than sharp theoretical battles—perfect for players who love positional understanding."
+      "annotation": "We start with the Zukertort Opening, a flexible first move that controls the central e5 and d4 squares while keeping our options open. Unlike 1.e4 or 1.d4, this knight move avoids committing our pawn structure immediately, allowing us to adapt to Black's setup. The Zukertort is popular because it leads to strategic maneuvering games rather than sharp theoretical battles—perfect for players who love positional understanding.",
+      "shortNarration": "1.Nf3 controls e5 and d4 without committing pawn structure, aiming for a strategic maneuvering game."
     },
     {
       "san": "d5",
-      "annotation": "Black stakes a claim in the center immediately, which is a solid response to our flexible opening. By advancing the d-pawn, Black controls e4 and c4, creating tension in the middle of the board. We should note that Black has essentially chosen a Queen's Gambit structure, and we'll need to address this central presence soon."
+      "annotation": "Black stakes a claim in the center immediately, which is a solid response to our flexible opening. By advancing the d-pawn, Black controls e4 and c4, creating tension in the middle of the board. We should note that Black has essentially chosen a Queen's Gambit structure, and we'll need to address this central presence soon.",
+      "shortNarration": "Black's d-pawn controls e4 and c4, creating a Queen's Gambit structure that must be challenged."
     },
     {
       "san": "b3",
-      "annotation": "We prepare the fianchetto setup by supporting a future c4 advance and opening the long diagonal for our bishop on b2. The b3 pawn also prepares to control c4, which is crucial since Black's d5 pawn attacks that square. This quiet move sets up our strategic plan: control the long diagonal and fight for central influence with b2 and c4."
+      "annotation": "We prepare the fianchetto setup by supporting a future c4 advance and opening the long diagonal for our bishop on b2. The b3 pawn also prepares to control c4, which is crucial since Black's d5 pawn attacks that square. This quiet move sets up our strategic plan: control the long diagonal and fight for central influence with b2 and c4.",
+      "shortNarration": "b3 prepares c4 to challenge Black's d5 pawn and opens the long diagonal for the bishop on b2."
     },
     {
       "san": "c5",
-      "annotation": "Black attacks our intended c4 square preemptively and gains space on the queenside. By playing c5, Black prevents us from easily establishing a strong pawn on c4 and keeps the center fluid. This is a natural continuation, as Black avoids passivity and creates immediate tactical considerations."
+      "annotation": "Black attacks our intended c4 square preemptively and gains space on the queenside. By playing c5, Black prevents us from easily establishing a strong pawn on c4 and keeps the center fluid. This is a natural continuation, as Black avoids passivity and creates immediate tactical considerations.",
+      "shortNarration": "Black's c5 prevents c4, gains queenside space, and keeps the center fluid."
     },
     {
       "san": "c4",
-      "annotation": "We sacrifice the c4 pawn to open lines and create immediate tactical pressure—this is the \"Gambit\" aspect of the Regina-Nu. By playing c4, we exchange a pawn for central control, rapid development, and the opening of the c-file and long diagonal for our pieces. We trust that our lead in development and piece coordination will compensate for the pawn."
+      "annotation": "We sacrifice the c4 pawn to open lines and create immediate tactical pressure—this is the \"Gambit\" aspect of the Regina-Nu. By playing c4, we exchange a pawn for central control, rapid development, and the opening of the c-file and long diagonal for our pieces. We trust that our lead in development and piece coordination will compensate for the pawn.",
+      "shortNarration": "Sacrificing c4 opens the c-file and long diagonal for rapid development and tactical pressure, compensating for the pawn."
     },
     {
       "san": "dxc4",
-      "annotation": "Black captures our offered pawn, which was essentially forced since refusing it would give us a strong center and better piece placement anyway. By taking on c4, Black accepts the gambit and we move into the critical phase where our compensation must be concrete. Notice that Black's c4 pawn is now vulnerable and somewhat out of play on the queenside."
+      "annotation": "Black captures our offered pawn, which was essentially forced since refusing it would give us a strong center and better piece placement anyway. By taking on c4, Black accepts the gambit and we move into the critical phase where our compensation must be concrete. Notice that Black's c4 pawn is now vulnerable and somewhat out of play on the queenside.",
+      "shortNarration": "Black's forced capture on c4 accepts the gambit, leaving the pawn vulnerable and out of play on the queenside."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our knight and immediately put pressure on Black's c4 pawn, creating a tactical threat. The knight on c3 supports future piece development, controls key squares like d5 and e4, and prepares moves like Na4 if Black tries to defend the c4 pawn with b5. This move completes our gambit compensation through rapid development and active piece play."
+      "annotation": "We develop our knight and immediately put pressure on Black's c4 pawn, creating a tactical threat. The knight on c3 supports future piece development, controls key squares like d5 and e4, and prepares moves like Na4 if Black tries to defend the c4 pawn with b5. This move completes our gambit compensation through rapid development and active piece play.",
+      "shortNarration": "Knight to c3 pressures the c4 pawn, controls d5 and e4, and threatens Na4 if Black defends with b5."
     }
   ]
 }

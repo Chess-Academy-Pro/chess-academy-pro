@@ -3,71 +3,88 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, claiming the center and freeing both our bishop and queen for development. This classical first move controls the d5 and f5 squares immediately, giving us excellent central influence from the very start. The Ruy Lopez that follows is one of the most respected and deeply analyzed openings in chess, offering rich strategic content and clear plans for both sides. Our pawn on e4 will often become a target later, but for now it gives us excellent space and development prospects."
+      "annotation": "We're opening with the king's pawn, claiming the center and freeing both our bishop and queen for development. This classical first move controls the d5 and f5 squares immediately, giving us excellent central influence from the very start. The Ruy Lopez that follows is one of the most respected and deeply analyzed openings in chess, offering rich strategic content and clear plans for both sides. Our pawn on e4 will often become a target later, but for now it gives us excellent space and development prospects.",
+      "shortNarration": "1.e4 claims the center, controls d5 and f5, and frees the bishop and queen for development."
     },
     {
       "san": "e5",
-      "annotation": "Black mirrors our central pawn thrust, creating a symmetrical pawn structure and claiming their fair share of the center. This move controls the d4 and f4 squares while freeing Black's dark-squared bishop and queen for development. By playing e5, our opponent is choosing to enter theoretical battles rather than more modern defenses like the Caro-Kann or French. This sets up the classical king's pawn games where both sides will fight for central control and piece activity."
+      "annotation": "Black mirrors our central pawn thrust, creating a symmetrical pawn structure and claiming their fair share of the center. This move controls the d4 and f4 squares while freeing Black's dark-squared bishop and queen for development. By playing e5, our opponent is choosing to enter theoretical battles rather than more modern defenses like the Caro-Kann or French. This sets up the classical king's pawn games where both sides will fight for central control and piece activity.",
+      "shortNarration": "Black's e5 mirrors the central pawn thrust, controlling d4 and f4 while freeing the dark-squared bishop and queen."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its ideal square, attacking the black e5 pawn while supporting our own central presence. This move is the hallmark of the Spanish Opening approach - we're not rushing to trade in the center but instead developing with threats. The knight on f3 also prepares kingside castling and controls important central squares like d4 and e5. From f3, our knight can later jump to more active squares like d4 or g5, depending on how the position develops."
+      "annotation": "We develop our knight to its ideal square, attacking the black e5 pawn while supporting our own central presence. This move is the hallmark of the Spanish Opening approach - we're not rushing to trade in the center but instead developing with threats. The knight on f3 also prepares kingside castling and controls important central squares like d4 and e5. From f3, our knight can later jump to more active squares like d4 or g5, depending on how the position develops.",
+      "shortNarration": "Knight to f3 attacks e5, supports the center, and prepares kingside castling."
     },
     {
       "san": "Nc6",
-      "annotation": "Black develops their knight to defend the attacked e5 pawn, completing the most natural response in king's pawn openings. The knight on c6 not only protects e5 but also eyes important central squares like d4 and e4, where it might create tactical opportunities later. This development follows classical principles perfectly - developing toward the center while solving immediate tactical problems. Our opponent is staying in the main theoretical lines, which means we'll need to know our Ruy Lopez theory well."
+      "annotation": "Black develops their knight to defend the attacked e5 pawn, completing the most natural response in king's pawn openings. The knight on c6 not only protects e5 but also eyes important central squares like d4 and e4, where it might create tactical opportunities later. This development follows classical principles perfectly - developing toward the center while solving immediate tactical problems. Our opponent is staying in the main theoretical lines, which means we'll need to know our Ruy Lopez theory well.",
+      "shortNarration": "Black's knight on c6 defends e5 and eyes d4 and e4, keeping play in main-line Ruy Lopez theory."
     },
     {
       "san": "Bb5",
-      "annotation": "We deploy our bishop to attack the knight on c6, creating the signature move of the Ruy Lopez or Spanish Opening. This isn't just a simple attack - we're putting pressure on Black's central pawn structure since the knight defends e5. The bishop on b5 also prepares potential pawn storms on the queenside later and can retreat to maintain pressure if attacked. This move introduces the deep strategic themes of the Spanish: long-term pressure versus immediate central equality."
+      "annotation": "We deploy our bishop to attack the knight on c6, creating the signature move of the Ruy Lopez or Spanish Opening. This isn't just a simple attack - we're putting pressure on Black's central pawn structure since the knight defends e5. The bishop on b5 also prepares potential pawn storms on the queenside later and can retreat to maintain pressure if attacked. This move introduces the deep strategic themes of the Spanish: long-term pressure versus immediate central equality.",
+      "shortNarration": "Bishop to b5 attacks the knight defending e5, pressuring Black's center and preparing queenside expansion."
     },
     {
       "san": "a6",
-      "annotation": "Black challenges our bishop immediately, forcing us to make a decision about where to retreat and how to maintain our opening advantage. This move gains time by attacking our piece while also preparing potential queenside expansion with b5 later. Our opponent is entering the main line Ruy Lopez, accepting that they'll face long-term positional pressure in exchange for solid development. The pawn on a6 also prevents any future knight jumps to b5, giving Black more control over their queenside."
+      "annotation": "Black challenges our bishop immediately, forcing us to make a decision about where to retreat and how to maintain our opening advantage. This move gains time by attacking our piece while also preparing potential queenside expansion with b5 later. Our opponent is entering the main line Ruy Lopez, accepting that they'll face long-term positional pressure in exchange for solid development. The pawn on a6 also prevents any future knight jumps to b5, giving Black more control over their queenside.",
+      "shortNarration": "Black's a6 forces the bishop to retreat, gaining time and preparing b5 while preventing Nb5."
     },
     {
       "san": "Ba4",
-      "annotation": "We retreat our bishop but keep it aimed at the c6 knight, maintaining the pin and the pressure on Black's central structure. This retreat to a4 is more flexible than going back to c4 because it keeps more options open while still threatening the knight. The bishop can later retreat to c2 or b3 depending on how Black continues, and it maintains the possibility of capturing on c6 if circumstances become favorable. By staying on the a4-d1 diagonal, we keep our dark-squared bishop active and ready to support various pawn breaks."
+      "annotation": "We retreat our bishop but keep it aimed at the c6 knight, maintaining the pin and the pressure on Black's central structure. This retreat to a4 is more flexible than going back to c4 because it keeps more options open while still threatening the knight. The bishop can later retreat to c2 or b3 depending on how Black continues, and it maintains the possibility of capturing on c6 if circumstances become favorable. By staying on the a4-d1 diagonal, we keep our dark-squared bishop active and ready to support various pawn breaks.",
+      "shortNarration": "Bishop retreats to a4, keeping the pin on c6 and maintaining flexible options like c2 or b3."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops their knight to its most active square, attacking our e4 pawn and completing their natural development of minor pieces. This move challenges our central pawn immediately while bringing another piece toward the center where it can influence the game. The knight on f6 also supports a potential d6-d5 pawn break in the future and prepares kingside castling. Our opponent is playing principled chess, developing pieces with threats and maintaining the central tension rather than allowing us to consolidate freely."
+      "annotation": "Black develops their knight to its most active square, attacking our e4 pawn and completing their natural development of minor pieces. This move challenges our central pawn immediately while bringing another piece toward the center where it can influence the game. The knight on f6 also supports a potential d6-d5 pawn break in the future and prepares kingside castling. Our opponent is playing principled chess, developing pieces with threats and maintaining the central tension rather than allowing us to consolidate freely.",
+      "shortNarration": "Black's knight to f6 attacks e4, develops, and prepares d5 and kingside castling."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside to bring our king to safety while connecting our rooks, following the fundamental opening principle of king safety. This move also activates our h1 rook, placing it on a file that might become important later in the middlegame. Castling now prevents any potential tactics involving our king and allows us to focus on our middlegame plans without worrying about safety. The rook on f1 will also support the important f2-f4 pawn break that's typical in many Spanish Opening variations."
+      "annotation": "We castle kingside to bring our king to safety while connecting our rooks, following the fundamental opening principle of king safety. This move also activates our h1 rook, placing it on a file that might become important later in the middlegame. Castling now prevents any potential tactics involving our king and allows us to focus on our middlegame plans without worrying about safety. The rook on f1 will also support the important f2-f4 pawn break that's typical in many Spanish Opening variations.",
+      "shortNarration": "Castling kingside secures the king, connects rooks, and prepares the f2-f4 pawn break."
     },
     {
       "san": "Be7",
-      "annotation": "Black develops their light-squared bishop to a solid square, preparing to castle while maintaining flexibility in their pawn structure. This bishop placement supports the f6 knight and keeps options open for future pawn breaks like d6-d5. By choosing Be7 over more active squares like c5 or b4, our opponent prioritizes solid development and king safety over immediate activity. The bishop on e7 also prepares to potentially reroute to better squares later, such as f8-g7 or even d8-a5 in some variations."
+      "annotation": "Black develops their light-squared bishop to a solid square, preparing to castle while maintaining flexibility in their pawn structure. This bishop placement supports the f6 knight and keeps options open for future pawn breaks like d6-d5. By choosing Be7 over more active squares like c5 or b4, our opponent prioritizes solid development and king safety over immediate activity. The bishop on e7 also prepares to potentially reroute to better squares later, such as f8-g7 or even d8-a5 in some variations.",
+      "shortNarration": "Black's Be7 prioritizes solid development and king safety over immediate activity, supporting the knight and keeping d6-d5 flexible."
     },
     {
       "san": "Re1",
-      "annotation": "We place our rook on the same file as the black king (once they castle), creating potential tactical themes while supporting our e4 pawn. This move is characteristic of the Ruy Lopez - we're building pressure gradually rather than seeking immediate confrontation. The rook on e1 supports a potential e4-e5 pawn advance and connects beautifully with our other pieces for middle game coordination. This also prepares various typical Spanish maneuvers like Re1-e2-e3 to support kingside attacks or central advances."
+      "annotation": "We place our rook on the same file as the black king (once they castle), creating potential tactical themes while supporting our e4 pawn. This move is characteristic of the Ruy Lopez - we're building pressure gradually rather than seeking immediate confrontation. The rook on e1 supports a potential e4-e5 pawn advance and connects beautifully with our other pieces for middle game coordination. This also prepares various typical Spanish maneuvers like Re1-e2-e3 to support kingside attacks or central advances.",
+      "shortNarration": "Rook to e1 lines up against the black king, supports the e4 pawn, and prepares e4-e5 or Re2-e3 for a kingside attack."
     },
     {
       "san": "b5",
-      "annotation": "Black strikes at our bishop, forcing it to make another decision while gaining valuable queenside space in the process. This pawn advance is double-edged - it kicks our bishop but also creates some weaknesses in Black's position that we can exploit later. Our opponent is following the main line theory, accepting that this advance might give us targets on the queenside in exchange for piece activity. The b5 pawn also supports a potential c7-c5 advance and gives Black more breathing room on the queenside."
+      "annotation": "Black strikes at our bishop, forcing it to make another decision while gaining valuable queenside space in the process. This pawn advance is double-edged - it kicks our bishop but also creates some weaknesses in Black's position that we can exploit later. Our opponent is following the main line theory, accepting that this advance might give us targets on the queenside in exchange for piece activity. The b5 pawn also supports a potential c7-c5 advance and gives Black more breathing room on the queenside.",
+      "shortNarration": "Black's b5 kicks the bishop, gains queenside space, but creates weaknesses for later exploitation."
     },
     {
       "san": "Bb3",
-      "annotation": "We retreat our bishop to the excellent b3 square, from where it aims at the f7 pawn and maintains long-term pressure on Black's kingside. This retreat is much stronger than it might appear - the bishop on b3 is perfectly placed to support our typical middlegame plans in the Spanish. From b3, our bishop controls important central squares and can never be easily driven away by Black's pawns. This move also completes our minor piece development and prepares us to focus on our central and kingside initiatives."
+      "annotation": "We retreat our bishop to the excellent b3 square, from where it aims at the f7 pawn and maintains long-term pressure on Black's kingside. This retreat is much stronger than it might appear - the bishop on b3 is perfectly placed to support our typical middlegame plans in the Spanish. From b3, our bishop controls important central squares and can never be easily driven away by Black's pawns. This move also completes our minor piece development and prepares us to focus on our central and kingside initiatives.",
+      "shortNarration": "Bishop retreats to b3, aiming at f7 and supporting kingside pressure — a strong, permanent diagonal."
     },
     {
       "san": "d6",
-      "annotation": "Black creates a solid pawn chain and supports their e5 pawn while preparing to complete development with moves like Bb7 or Re8. This central pawn also opens the diagonal for their dark-squared bishop and provides a foundation for potential counterplay. The pawn structure is now becoming characteristic of the Closed Spanish - Black has a solid but somewhat passive position while we maintain pressure and better piece coordination. Our opponent is prioritizing solidity and preparing to gradually improve their position rather than seeking immediate counterplay."
+      "annotation": "Black creates a solid pawn chain and supports their e5 pawn while preparing to complete development with moves like Bb7 or Re8. This central pawn also opens the diagonal for their dark-squared bishop and provides a foundation for potential counterplay. The pawn structure is now becoming characteristic of the Closed Spanish - Black has a solid but somewhat passive position while we maintain pressure and better piece coordination. Our opponent is prioritizing solidity and preparing to gradually improve their position rather than seeking immediate counterplay.",
+      "shortNarration": "Black's solid Closed Spanish pawn chain supports e5 but leaves them passive while White has better piece coordination."
     },
     {
       "san": "c3",
-      "annotation": "We support our center and prepare the important d2-d4 pawn advance, which is one of our key strategic goals in the Spanish Opening. This move also controls the b4 and d4 squares, preventing Black from placing pieces there while building our pawn chain. The c3 pawn supports our long-term plan of achieving d4 and opening the position when it's favorable for our better-placed pieces. this purposeful move exemplifies the Spanish approach - building up pressure gradually rather than forcing immediate tactics."
+      "annotation": "We support our center and prepare the important d2-d4 pawn advance, which is one of our key strategic goals in the Spanish Opening. This move also controls the b4 and d4 squares, preventing Black from placing pieces there while building our pawn chain. The c3 pawn supports our long-term plan of achieving d4 and opening the position when it's favorable for our better-placed pieces. this purposeful move exemplifies the Spanish approach - building up pressure gradually rather than forcing immediate tactics.",
+      "shortNarration": "c3 supports d4, controls b4 and d4, and builds the pawn chain for a favorable opening later."
     },
     {
       "san": "O-O",
-      "annotation": "Black castles kingside, bringing their king to safety while activating the h8 rook and completing their basic development. this move follows opening principles perfectly and prepares Black to focus on improving their piece positions in the middlegame. With the king castled, our opponent can now consider moves like Re8, Bf8, or even h6 to improve their position gradually. The black king is now relatively safe, but our pieces are better coordinated and we maintain pressure on both the center and kingside."
+      "annotation": "Black castles kingside, bringing their king to safety while activating the h8 rook and completing their basic development. this move follows opening principles perfectly and prepares Black to focus on improving their piece positions in the middlegame. With the king castled, our opponent can now consider moves like Re8, Bf8, or even h6 to improve their position gradually. The black king is now relatively safe, but our pieces are better coordinated and we maintain pressure on both the center and kingside.",
+      "shortNarration": "Black castles kingside, but White's better coordination keeps pressure on the center and kingside."
     },
     {
       "san": "h3",
-      "annotation": "We play this important prophylactic move to prevent Black's pieces from reaching the g4 square, particularly their knight or bishop. This modest pawn advance also prepares potential kingside expansion with g2-g4 later and gives our king a flight square on h2 if needed. The move h3 is typical in many Spanish variations - it looks quiet but serves multiple purposes in our long-term plans. By controlling g4, we ensure that our f3 knight won't be pinned or harassed, allowing us to maintain our central control and prepare for more active operations."
+      "annotation": "We play this important prophylactic move to prevent Black's pieces from reaching the g4 square, particularly their knight or bishop. This modest pawn advance also prepares potential kingside expansion with g2-g4 later and gives our king a flight square on h2 if needed. The move h3 is typical in many Spanish variations - it looks quiet but serves multiple purposes in our long-term plans. By controlling g4, we ensure that our f3 knight won't be pinned or harassed, allowing us to maintain our central control and prepare for more active operations.",
+      "shortNarration": "h3 prevents Black's knight or bishop from reaching g4, prepares g2-g4 expansion, and gives the king a flight square on h2."
     }
   ]
 }

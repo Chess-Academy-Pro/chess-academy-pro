@@ -3,19 +3,23 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with the Zukertort, one of the most flexible opening systems in chess. By developing our knight before committing our center, we keep maximum options—we can transpose to many different openings depending on Black's response. Nf3 controls the key central squares e5 and d4, and prepares to support a future e4 advance. This move embodies the principle of 'move the knight before the bishop' and gives us tremendous strategic flexibility."
+      "annotation": "We start with the Zukertort, one of the most flexible opening systems in chess. By developing our knight before committing our center, we keep maximum options—we can transpose to many different openings depending on Black's response. Nf3 controls the key central squares e5 and d4, and prepares to support a future e4 advance. This move embodies the principle of 'move the knight before the bishop' and gives us tremendous strategic flexibility.",
+      "shortNarration": "Nf3 controls e5 and d4, preparing e4 while keeping transpositional flexibility."
     },
     {
       "san": "Na6",
-      "annotation": "Black makes an unusual choice with Na6, which you'll rarely see at master level because it moves the knight away from its ideal squares (f6 and c6). This move does control the b4 and c5 squares, but it awkwardly places the knight on the rim where it can be poorly placed. Black is likely hoping to reach a Sicilian structure, but we haven't committed to e4 yet, so Black's setup is premature and uncoordinated."
+      "annotation": "Black makes an unusual choice with Na6, which you'll rarely see at master level because it moves the knight away from its ideal squares (f6 and c6). This move does control the b4 and c5 squares, but it awkwardly places the knight on the rim where it can be poorly placed. Black is likely hoping to reach a Sicilian structure, but we haven't committed to e4 yet, so Black's setup is premature and uncoordinated.",
+      "shortNarration": "Na6 controls b4 and c5 but leaves the knight poorly placed on the rim, uncoordinated against White's center."
     },
     {
       "san": "e4",
-      "annotation": "Now we establish the strong center we've been threatening. Playing e4 claims the most important central square and opens lines for our queen and light-squared bishop. Since Black played Na6 without developing properly, we have the initiative—we control the center while Black's knight sits awkwardly on the rim. This move prepares to support our d4 break or maintain a strong center depending on how Black develops."
+      "annotation": "Now we establish the strong center we've been threatening. Playing e4 claims the most important central square and opens lines for our queen and light-squared bishop. Since Black played Na6 without developing properly, we have the initiative—we control the center while Black's knight sits awkwardly on the rim. This move prepares to support our d4 break or maintain a strong center depending on how Black develops.",
+      "shortNarration": "e4 claims the center, opens lines for queen and bishop, and exploits Black's Na6 to seize the initiative."
     },
     {
       "san": "c5",
-      "annotation": "Black plays the typical Sicilian counter-strike against our e4 center, attacking the d4 square and preventing us from easily installing a strong pawn duo. However, after Na6, this move feels disjointed—Black's knight isn't on its ideal squares (f6 or c6) to support the Sicilian structure. We should recognize that while c5 is thematic for the Sicilian, Black's piece placement is awkward, giving us excellent prospects to exploit the misplaced pawn on a6 in our coming moves."
+      "annotation": "Black plays the typical Sicilian counter-strike against our e4 center, attacking the d4 square and preventing us from easily installing a strong pawn duo. However, after Na6, this move feels disjointed—Black's knight isn't on its ideal squares (f6 or c6) to support the Sicilian structure. We should recognize that while c5 is thematic for the Sicilian, Black's piece placement is awkward, giving us excellent prospects to exploit the misplaced pawn on a6 in our coming moves.",
+      "shortNarration": "Black's Sicilian c5 attacks d4, but Na6 leaves the knight misplaced, giving us chances to exploit the a6 pawn."
     }
   ]
 }

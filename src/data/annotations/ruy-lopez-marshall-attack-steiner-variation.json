@@ -3,75 +3,93 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn two squares forward, immediately staking a claim to the center and preparing rapid development. This move controls the crucial d5 and f5 squares while opening lines for both our bishop and queen. The move 1.e4 leads to open, tactical games where piece activity and king safety become paramount - perfect for players who enjoy sharp, dynamic positions. Our plan is to develop quickly, castle early, and look for attacking chances against the enemy king."
+      "annotation": "We're opening with the king's pawn two squares forward, immediately staking a claim to the center and preparing rapid development. This move controls the crucial d5 and f5 squares while opening lines for both our bishop and queen. The move 1.e4 leads to open, tactical games where piece activity and king safety become paramount - perfect for players who enjoy sharp, dynamic positions. Our plan is to develop quickly, castle early, and look for attacking chances against the enemy king.",
+      "shortNarration": "1.e4 stakes a claim to the center, controls d5 and f5, and opens lines for the bishop and queen."
     },
     {
       "san": "e5",
-      "annotation": "Our opponent responds symmetrically, matching our central pawn and controlling the d4 and f4 squares. Black is following classical opening principles by occupying the center and preparing to develop the kingside pieces. This move signals that we're heading into one of the main lines of 1.e4, likely a Spanish Opening or Italian Game. We should continue with our development plan, keeping in mind that Black has equalized the central tension for now."
+      "annotation": "Our opponent responds symmetrically, matching our central pawn and controlling the d4 and f4 squares. Black is following classical opening principles by occupying the center and preparing to develop the kingside pieces. This move signals that we're heading into one of the main lines of 1.e4, likely a Spanish Opening or Italian Game. We should continue with our development plan, keeping in mind that Black has equalized the central tension for now.",
+      "shortNarration": "Black mirrors e5, controlling d4 and f4, heading toward a Spanish or Italian main line with equalized central tension."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its most active square, attacking Black's e5 pawn and preparing to support our central control. This knight on f3 is perfectly placed - it can later jump to g5 for kingside attacks, support a d4 advance, or retreat to defend if needed. The move also prepares kingside castling by clearing the back rank. By attacking e5 immediately, we're putting pressure on Black to make a decision about how to defend this central stronghold."
+      "annotation": "We develop our knight to its most active square, attacking Black's e5 pawn and preparing to support our central control. This knight on f3 is perfectly placed - it can later jump to g5 for kingside attacks, support a d4 advance, or retreat to defend if needed. The move also prepares kingside castling by clearing the back rank. By attacking e5 immediately, we're putting pressure on Black to make a decision about how to defend this central stronghold.",
+      "shortNarration": "Nf3 attacks e5, prepares kingside castling, and supports d4 or g5."
     },
     {
       "san": "Nc6",
-      "annotation": "Black develops the queenside knight to its natural square, defending the e5 pawn and preparing further development. Our opponent is following sound opening principles by bringing pieces into the game while maintaining the central pawn. This knight on c6 also eyes the important d4 and b4 squares, giving Black some central influence. We should continue developing while looking for ways to increase the pressure on Black's position."
+      "annotation": "Black develops the queenside knight to its natural square, defending the e5 pawn and preparing further development. Our opponent is following sound opening principles by bringing pieces into the game while maintaining the central pawn. This knight on c6 also eyes the important d4 and b4 squares, giving Black some central influence. We should continue developing while looking for ways to increase the pressure on Black's position.",
+      "shortNarration": "Black's knight on c6 defends e5 and eyes d4 and b4 — develop while increasing pressure on Black's center."
     },
     {
       "san": "Bb5",
-      "annotation": "We're entering the Ruy Lopez (Spanish Opening) by developing our bishop to attack the knight that defends Black's e5 pawn. This isn't an immediate threat since the knight is defended by the a-pawn, but we're creating long-term pressure and preparing to potentially exchange on c6 to damage Black's pawn structure. The bishop on b5 also supports a future d4 advance and keeps Black's king from castling queenside safely. This is one of the most respected openings in chess, leading to rich middlegame positions with chances for both sides."
+      "annotation": "We're entering the Ruy Lopez (Spanish Opening) by developing our bishop to attack the knight that defends Black's e5 pawn. This isn't an immediate threat since the knight is defended by the a-pawn, but we're creating long-term pressure and preparing to potentially exchange on c6 to damage Black's pawn structure. The bishop on b5 also supports a future d4 advance and keeps Black's king from castling queenside safely. This is one of the most respected openings in chess, leading to rich middlegame positions with chances for both sides.",
+      "shortNarration": "Bishop to b5 attacks the knight defending e5, preparing d4 and threatening to damage Black's pawn structure with Bxc6."
     },
     {
       "san": "a6",
-      "annotation": "Our opponent challenges our bishop with the typical Morphy Defense, forcing us to make a decision about where to retreat. Black is following the most popular continuation against the Ruy Lopez, accepting slightly weakened queenside pawns in exchange for clarifying the bishop's intentions. This move also prepares b5 to gain space on the queenside and potentially chase our bishop further. The slight weakness of the b6 square is a small price to pay for the active counterplay Black will achieve."
+      "annotation": "Our opponent challenges our bishop with the typical Morphy Defense, forcing us to make a decision about where to retreat. Black is following the most popular continuation against the Ruy Lopez, accepting slightly weakened queenside pawns in exchange for clarifying the bishop's intentions. This move also prepares b5 to gain space on the queenside and potentially chase our bishop further. The slight weakness of the b6 square is a small price to pay for the active counterplay Black will achieve.",
+      "shortNarration": "Black's Morphy Defense clarifies the bishop's intentions and prepares b5, accepting a weak b6 square for active queenside counterplay."
     },
     {
       "san": "Ba4",
-      "annotation": "We retreat the bishop to a4, maintaining pressure on the c6 knight and keeping our options open. From a4, our bishop still pins the knight to some degree and supports central operations, while avoiding the immediate expulsion that would come from 4.Bxc6. This retreat is more flexible than 4.Bc4 or 4.Bd3, as we can later decide whether to exchange on c6 or retreat to b3. The bishop also keeps an eye on the important b5 square, discouraging Black's queenside expansion for the moment."
+      "annotation": "We retreat the bishop to a4, maintaining pressure on the c6 knight and keeping our options open. From a4, our bishop still pins the knight to some degree and supports central operations, while avoiding the immediate expulsion that would come from 4.Bxc6. This retreat is more flexible than 4.Bc4 or 4.Bd3, as we can later decide whether to exchange on c6 or retreat to b3. The bishop also keeps an eye on the important b5 square, discouraging Black's queenside expansion for the moment.",
+      "shortNarration": "Retreating the bishop to a4 maintains the pin on c6, eyes b5, and keeps the exchange option open."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the kingside knight, attacking our e4 pawn and preparing to castle. Our opponent is following the main line of the Morphy Defense, bringing pieces into active play while creating counterplay against our center. This knight on f6 is excellently placed, supporting Black's central control and preparing to jump to more active squares like d5 or g4. The move also opens the path for the dark-squared bishop to develop and adds another defender to Black's kingside."
+      "annotation": "Black develops the kingside knight, attacking our e4 pawn and preparing to castle. Our opponent is following the main line of the Morphy Defense, bringing pieces into active play while creating counterplay against our center. This knight on f6 is excellently placed, supporting Black's central control and preparing to jump to more active squares like d5 or g4. The move also opens the path for the dark-squared bishop to develop and adds another defender to Black's kingside.",
+      "shortNarration": "Black's knight on f6 attacks e4, supports d5 or g4, and opens the dark-squared bishop's path."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside, securing our king's safety and bringing the rook into the game on the e-file. This is almost always the right decision in the Ruy Lopez, as king safety is paramount and the rook will soon prove useful on the central file. Castling also completes our kingside development and allows us to focus on central operations without worrying about our king's vulnerability. The rook on f1 now eyes the e-file and can support a future Re1, putting pressure on Black's e5 pawn."
+      "annotation": "We castle kingside, securing our king's safety and bringing the rook into the game on the e-file. This is almost always the right decision in the Ruy Lopez, as king safety is paramount and the rook will soon prove useful on the central file. Castling also completes our kingside development and allows us to focus on central operations without worrying about our king's vulnerability. The rook on f1 now eyes the e-file and can support a future Re1, putting pressure on Black's e5 pawn.",
+      "shortNarration": "Castle kingside to secure the king, activate the rook on the e-file, and pressure Black's e5 pawn."
     },
     {
       "san": "Be7",
-      "annotation": "Our opponent develops the dark-squared bishop to its most flexible square, preparing to castle while keeping options open for future piece placement. Black is wisely completing kingside development before committing to any specific pawn breaks or piece maneuvers. The bishop on e7 supports the f6 knight and can later redeploy to d6 or f8 if needed. This solid developing choice maintains the balance and prepares Black for the complex middlegame battles ahead."
+      "annotation": "Our opponent develops the dark-squared bishop to its most flexible square, preparing to castle while keeping options open for future piece placement. Black is wisely completing kingside development before committing to any specific pawn breaks or piece maneuvers. The bishop on e7 supports the f6 knight and can later redeploy to d6 or f8 if needed. This solid developing choice maintains the balance and prepares Black for the complex middlegame battles ahead.",
+      "shortNarration": "Black's bishop to e7 develops, supports the knight, and keeps options open for d6 or f8."
     },
     {
       "san": "Re1",
-      "annotation": "We centralize our rook, putting immediate pressure on Black's e5 pawn and preparing for the critical central battle to come. This move supports our strategic plan of challenging Black's central control while completing our piece development. The rook on e1 also supports potential pawn advances like d4 and prepares tactical shots involving the e-file. By increasing the pressure on e5, we're forcing Black to be more precise in maintaining the central balance."
+      "annotation": "We centralize our rook, putting immediate pressure on Black's e5 pawn and preparing for the critical central battle to come. This move supports our strategic plan of challenging Black's central control while completing our piece development. The rook on e1 also supports potential pawn advances like d4 and prepares tactical shots involving the e-file. By increasing the pressure on e5, we're forcing Black to be more precise in maintaining the central balance.",
+      "shortNarration": "Rook to e1 pressures e5, supports d4, and prepares tactical shots along the e-file."
     },
     {
       "san": "b5",
-      "annotation": "Black strikes back with the characteristic counterattack of the Morphy Defense, gaining space on the queenside and attacking our bishop. Our opponent is implementing the typical plan of queenside expansion while challenging our light-squared bishop's active placement. This move also prepares Bb7 and gives Black some initiative on the queenside to balance our central and kingside pressure. The advance creates some weaknesses around a6 and c6, but Black gains valuable space and piece activity in return."
+      "annotation": "Black strikes back with the characteristic counterattack of the Morphy Defense, gaining space on the queenside and attacking our bishop. Our opponent is implementing the typical plan of queenside expansion while challenging our light-squared bishop's active placement. This move also prepares Bb7 and gives Black some initiative on the queenside to balance our central and kingside pressure. The advance creates some weaknesses around a6 and c6, but Black gains valuable space and piece activity in return.",
+      "shortNarration": "Black's queenside expansion gains space and attacks the bishop, preparing Bb7 while creating weaknesses on a6 and c6."
     },
     {
       "san": "Bb3",
-      "annotation": "We retreat our bishop to the excellent b3 square, where it aims at the f7 weakness and supports our central operations. From b3, our bishop is perfectly placed to support kingside attacks and can never be challenged by Black's pawns. This retreat also prepares for the critical central advance d4, as our bishop will support this key breakthrough. The bishop on b3 is one of White's most important pieces in the Ruy Lopez, often playing a crucial role in both attack and defense."
+      "annotation": "We retreat our bishop to the excellent b3 square, where it aims at the f7 weakness and supports our central operations. From b3, our bishop is perfectly placed to support kingside attacks and can never be challenged by Black's pawns. This retreat also prepares for the critical central advance d4, as our bishop will support this key breakthrough. The bishop on b3 is one of White's most important pieces in the Ruy Lopez, often playing a crucial role in both attack and defense.",
+      "shortNarration": "Bishop retreats to b3, aiming at f7 and supporting the d4 breakthrough."
     },
     {
       "san": "O-O",
-      "annotation": "Our opponent castles kingside, completing development and preparing for the intense middlegame struggle ahead. Black has achieved a solid setup with all pieces developed and the king safely tucked away. This move also brings the rook to f8, where it can support the f7 square and participate in central or kingside operations. With both sides now developed and castled, the real strategic battle is about to begin, centering around control of the center and piece activity."
+      "annotation": "Our opponent castles kingside, completing development and preparing for the intense middlegame struggle ahead. Black has achieved a solid setup with all pieces developed and the king safely tucked away. This move also brings the rook to f8, where it can support the f7 square and participate in central or kingside operations. With both sides now developed and castled, the real strategic battle is about to begin, centering around control of the center and piece activity.",
+      "shortNarration": "Both sides castled, Black's rook eyes f7 — the battle now centers on control of the center and piece activity."
     },
     {
       "san": "c3",
-      "annotation": "We prepare the critical d4 advance by supporting this central break with our c-pawn. This is one of the critical moves in the Ruy Lopez, as d4 will challenge Black's central control and open lines for our pieces. The move also prepares Bc2 if needed and gives our bishop on b3 additional support for central operations. By preparing d4, we're building toward the main strategic goal of the opening: challenging Black's e5 strongpoint and gaining central control."
+      "annotation": "We prepare the critical d4 advance by supporting this central break with our c-pawn. This is one of the critical moves in the Ruy Lopez, as d4 will challenge Black's central control and open lines for our pieces. The move also prepares Bc2 if needed and gives our bishop on b3 additional support for central operations. By preparing d4, we're building toward the main strategic goal of the opening: challenging Black's e5 strongpoint and gaining central control.",
+      "shortNarration": "Preparing d4 with c3 challenges Black's e5 strongpoint and opens lines for the bishop on b3."
     },
     {
       "san": "d5",
-      "annotation": "Black strikes dramatically in the center with the Marshall Attack, one of the most forcing and analyzed systems in all of chess! Our opponent is sacrificing a pawn for tremendous piece activity and attacking chances against our king. This move opens the position immediately, bringing Black's pieces to life and creating concrete threats that we must handle carefully. The Marshall Attack leads to sharp, tactical play where Black gets excellent compensation for the material investment through piece activity and attacking potential."
+      "annotation": "Black strikes dramatically in the center with the Marshall Attack, one of the most forcing and analyzed systems in all of chess! Our opponent is sacrificing a pawn for tremendous piece activity and attacking chances against our king. This move opens the position immediately, bringing Black's pieces to life and creating concrete threats that we must handle carefully. The Marshall Attack leads to sharp, tactical play where Black gets excellent compensation for the material investment through piece activity and attacking potential.",
+      "shortNarration": "Black sacrifices a pawn in the Marshall Attack for piece activity and attacking chances against your king."
     },
     {
       "san": "exd5",
-      "annotation": "We accept the pawn sacrifice, opening the center and preparing to face Black's aggressive piece development. This is the critical moment where we must prove that we can handle Black's compensation while maintaining our extra material. By capturing on d5, we've opened the e-file for our rook and prepared to meet Black's counterplay with accurate defense. Our plan is to consolidate our extra pawn while keeping our king safe from Black's attacking pieces."
+      "annotation": "We accept the pawn sacrifice, opening the center and preparing to face Black's aggressive piece development. This is the critical moment where we must prove that we can handle Black's compensation while maintaining our extra material. By capturing on d5, we've opened the e-file for our rook and prepared to meet Black's counterplay with accurate defense. Our plan is to consolidate our extra pawn while keeping our king safe from Black's attacking pieces.",
+      "shortNarration": "Accepting the pawn sacrifice opens the center and e-file, but White must consolidate the extra pawn while defending against Black's aggressive piece play."
     },
     {
       "san": "e4",
-      "annotation": "Black continues the Marshall Attack with this aggressive pawn advance, driving away our knight and opening attacking lines toward our king. Our opponent is following the main line of this famous gambit, using the pawn as a battering ram to displace our pieces and create weaknesses in our position. This pawn advance opens the e-file for Black's rook and prepares to bring pieces like the bishop to active squares. We must respond carefully, as Black's initiative is becoming very dangerous and our king position needs attention."
+      "annotation": "Black continues the Marshall Attack with this aggressive pawn advance, driving away our knight and opening attacking lines toward our king. Our opponent is following the main line of this famous gambit, using the pawn as a battering ram to displace our pieces and create weaknesses in our position. This pawn advance opens the e-file for Black's rook and prepares to bring pieces like the bishop to active squares. We must respond carefully, as Black's initiative is becoming very dangerous and our king position needs attention.",
+      "shortNarration": "Black's pawn advance opens the e-file and attacking lines toward our king — the Marshall Attack's initiative grows dangerous."
     }
   ]
 }

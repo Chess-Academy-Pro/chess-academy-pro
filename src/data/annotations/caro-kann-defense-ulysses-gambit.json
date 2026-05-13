@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking an immediate claim to the center and freeing both our bishop and queen for future development. This move controls the crucial d5 and f5 squares, preventing Black from easily establishing pawns there. The e4 pawn also supports a potential d4 advance later, giving us excellent central control. Against the Caro-Kann, this move invites Black into a solid but somewhat passive defensive setup where we'll typically enjoy more space and attacking chances."
+      "annotation": "We're opening with the king's pawn, staking an immediate claim to the center and freeing both our bishop and queen for future development. This move controls the crucial d5 and f5 squares, preventing Black from easily establishing pawns there. The e4 pawn also supports a potential d4 advance later, giving us excellent central control. Against the Caro-Kann, this move invites Black into a solid but somewhat passive defensive setup where we'll typically enjoy more space and attacking chances.",
+      "shortNarration": "e4 claims the center, opens lines for the queen and bishop, and supports a future d4 advance against the Caro-Kann."
     },
     {
       "san": "c6",
-      "annotation": "Black announces the Caro-Kann Defense, one of the most solid responses to 1.e4. This move prepares ...d5 while supporting that advance with the c-pawn rather than the e-pawn (as in the French Defense). The Caro-Kann aims to challenge our central pawn immediately while keeping Black's kingside pieces free to develop naturally. This is a favorite of positional players who want to avoid the tactical complications of the Sicilian while still fighting for equality from move one."
+      "annotation": "Black announces the Caro-Kann Defense, one of the most solid responses to 1.e4. This move prepares ...d5 while supporting that advance with the c-pawn rather than the e-pawn (as in the French Defense). The Caro-Kann aims to challenge our central pawn immediately while keeping Black's kingside pieces free to develop naturally. This is a favorite of positional players who want to avoid the tactical complications of the Sicilian while still fighting for equality from move one.",
+      "shortNarration": "Black's Caro-Kann challenges e4 with ...d5, keeping kingside pieces free for natural development."
     },
     {
       "san": "d4",
-      "annotation": "We establish a classical pawn center, creating the ideal two-pawn formation that controls crucial central squares like e5 and f5. This move supports our e4 pawn and prepares to meet Black's coming ...d5 with maximum central tension. The d4 pawn also opens lines for our dark-squared bishop and potentially our queen. In the Caro-Kann, this leads to the main line where Black will soon challenge our center directly with ...d5, leading to sharp tactical play."
+      "annotation": "We establish a classical pawn center, creating the ideal two-pawn formation that controls crucial central squares like e5 and f5. This move supports our e4 pawn and prepares to meet Black's coming ...d5 with maximum central tension. The d4 pawn also opens lines for our dark-squared bishop and potentially our queen. In the Caro-Kann, this leads to the main line where Black will soon challenge our center directly with ...d5, leading to sharp tactical play.",
+      "shortNarration": "d4 supports e4, opens lines for the bishop and queen, and sets up central tension against Black's ...d5 in the Caro-Kann."
     },
     {
       "san": "d5",
-      "annotation": "Black strikes at the heart of our position, immediately challenging our e4 pawn and fighting for central equality. This move is the point of the Caro-Kann - Black gets this central break in without blocking the c8-bishop (unlike in the French Defense). Our opponent is forcing us to make a decision about our e4 pawn: defend it, exchange it, or advance it. This creates immediate tension in the center and sets up the critical defining moment of the opening."
+      "annotation": "Black strikes at the heart of our position, immediately challenging our e4 pawn and fighting for central equality. This move is the point of the Caro-Kann - Black gets this central break in without blocking the c8-bishop (unlike in the French Defense). Our opponent is forcing us to make a decision about our e4 pawn: defend it, exchange it, or advance it. This creates immediate tension in the center and sets up the critical defining moment of the opening.",
+      "shortNarration": "Black's c5 challenges e4, forcing a decision to defend, exchange, or advance — the Caro-Kann's central break without blocking the c8-bishop."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its ideal square, defending the e4 pawn while preparing for flexible piece play. This move keeps our options open - we can still recapture on e4 with the knight if Black takes, or we might consider other pawn moves like e5 or f3 depending on Black's response. The knight on f3 also eyes the important e5 and g5 squares and supports a potential kingside attack later. This is more flexible than immediately recapturing on d5 or pushing e5, allowing us to see what Black intends before committing to a specific pawn structure."
+      "annotation": "We develop our knight to its ideal square, defending the e4 pawn while preparing for flexible piece play. This move keeps our options open - we can still recapture on e4 with the knight if Black takes, or we might consider other pawn moves like e5 or f3 depending on Black's response. The knight on f3 also eyes the important e5 and g5 squares and supports a potential kingside attack later. This is more flexible than immediately recapturing on d5 or pushing e5, allowing us to see what Black intends before committing to a specific pawn structure.",
+      "shortNarration": "Knight to f3 defends e4, eyes e5 and g5, and keeps pawn structure flexible."
     },
     {
       "san": "dxe4",
-      "annotation": "Black captures our central pawn, eliminating the tension and gaining material temporarily. This move opens the position and gives Black's pieces more freedom, particularly the light-squared bishop which now has access to the a1-h8 diagonal. By taking on e4, Black is betting that the temporary material gain and piece activity will compensate for giving us the initiative. This capture also removes Black's main central pawn, so our opponent will need to be careful not to fall behind in the center."
+      "annotation": "Black captures our central pawn, eliminating the tension and gaining material temporarily. This move opens the position and gives Black's pieces more freedom, particularly the light-squared bishop which now has access to the a1-h8 diagonal. By taking on e4, Black is betting that the temporary material gain and piece activity will compensate for giving us the initiative. This capture also removes Black's main central pawn, so our opponent will need to be careful not to fall behind in the center.",
+      "shortNarration": "Black captures on e4, gaining a pawn and freeing the light-squared bishop along a1–h8, but cedes the center and gives White the initiative."
     },
     {
       "san": "Ng5",
-      "annotation": "We're launching the aggressive Ulysses Gambit, sacrificing our knight for a dangerous attack against Black's weakened kingside! This move attacks the e4 pawn while simultaneously eyeing the f7 square - Black's weak point that's only defended by the king. The knight on g5 also prepares devastating tactics like Nxf7 or even Qh5+ in some lines, creating immediate threats that Black must address carefully. This gambit transforms the solid Caro-Kann into a sharp tactical battle where precise calculation becomes essential for both sides, and Black's extra pawn means nothing if the king comes under fire."
+      "annotation": "We're launching the aggressive Ulysses Gambit, sacrificing our knight for a dangerous attack against Black's weakened kingside! This move attacks the e4 pawn while simultaneously eyeing the f7 square - Black's weak point that's only defended by the king. The knight on g5 also prepares devastating tactics like Nxf7 or even Qh5+ in some lines, creating immediate threats that Black must address carefully. This gambit transforms the solid Caro-Kann into a sharp tactical battle where precise calculation becomes essential for both sides, and Black's extra pawn means nothing if the king comes under fire.",
+      "shortNarration": "Knight to g5 sacrifices for attack on f7, threatening Nxf7 or Qh5+ against Black's weakened kingside."
     }
   ]
 }

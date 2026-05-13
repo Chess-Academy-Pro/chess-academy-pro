@@ -21,7 +21,8 @@
           "color": "rgba(255, 255, 0, 0.4)"
         }
       ],
-      "pawnStructure": "White's d4 pawn controls c5 and e5, the foundation of Queen's Pawn openings."
+      "pawnStructure": "White's d4 pawn controls c5 and e5, the foundation of Queen's Pawn openings.",
+      "shortNarration": "1.d4 e5 gambits a pawn to disrupt White's solid setup and seize immediate initiative."
     },
     {
       "san": "e5",
@@ -57,7 +58,8 @@
           "square": "d4",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black offers a pawn with e5 in the Englund Gambit, a surprise weapon that pulls d4 players into unfamiliar territory."
     },
     {
       "san": "dxe5",
@@ -81,7 +83,8 @@
           "square": "e5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White accepts the gambit, up a pawn, but the advanced e5 pawn becomes a target under immediate pressure."
     },
     {
       "san": "Nc6",
@@ -116,7 +119,8 @@
           "square": "c6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's knight on c6 pressures e5 and prepares Qe7, already outdeveloping White."
     },
     {
       "san": "Nf3",
@@ -143,7 +147,8 @@
           "color": "rgba(255, 255, 0, 0.4)"
         }
       ],
-      "pawnStructure": "White's e5 pawn is advanced but becomes a target. The asymmetric pawn structure creates the tension the Englund seeks."
+      "pawnStructure": "White's e5 pawn is advanced but becomes a target. The asymmetric pawn structure creates the tension the Englund seeks.",
+      "shortNarration": "White's knight on f3 defends e5 and prepares to castle, but playing reactively suits Black's Englund Gambit."
     },
     {
       "san": "Qe7",
@@ -175,7 +180,8 @@
           "square": "e1",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Queen on e7 pins the e5 pawn against the king, pressuring e5 and setting tactical traps for White."
     },
     {
       "san": "Bf4",
@@ -209,7 +215,8 @@
           "square": "b4",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Bishop to f4 leaves b4 unguarded, and Black's queen check there wins material."
     },
     {
       "san": "Qb4+",
@@ -249,7 +256,8 @@
           "square": "e1",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Qb4+ forks the king and b2 pawn, winning the pawn and threatening the a1 rook after Bd2."
     },
     {
       "san": "Bd2",
@@ -278,7 +286,8 @@
           "square": "b2",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Bd2 blocks the check but loses a tempo, leaving b2 undefended for Black's queen to capture."
     },
     {
       "san": "Qxb2",
@@ -310,7 +319,8 @@
           "color": "rgba(255, 80, 80, 0.3)"
         }
       ],
-      "pawnStructure": "Black has regained the pawn on b2 and the material is equal. White's pawn structure is weakened with doubled pawns potential."
+      "pawnStructure": "Black has regained the pawn on b2 and the material is equal. White's pawn structure is weakened with doubled pawns potential.",
+      "shortNarration": "Black's queen on b2 threatens the a1 rook, controls the second rank, and forces White to waste time saving it."
     },
     {
       "san": "Nc3",
@@ -332,7 +342,8 @@
           "square": "c3",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White's knight to c3 blocks the queen's access to c2 and protects d1, but White is down a pawn and behind in development."
     },
     {
       "san": "Bb4",
@@ -363,7 +374,8 @@
           "square": "c3",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Bishop to b4 pins the knight on c3 to the king, restricting White's pieces and threatening queen invasion on c2 or c3."
     },
     {
       "san": "Rb1",
@@ -389,7 +401,8 @@
           "square": "b1",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Rook attacks the queen on b2, but Black retreats to a3, keeping pressure."
     },
     {
       "san": "Qa3",
@@ -411,7 +424,8 @@
           "square": "a3",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Queen to a3 keeps pressure on e3, d3, and the a-file while supporting the b4 bishop, but White remains tangled."
     },
     {
       "san": "Nd5",
@@ -439,7 +453,8 @@
           "color": "rgba(255, 255, 0, 0.4)"
         }
       ],
-      "pawnStructure": "After Nd5, the central pawn structure is tense. White's e5 pawn is defended but Nd5 puts enormous pressure on the entire formation."
+      "pawnStructure": "After Nd5, the central pawn structure is tense. White's e5 pawn is defended but Nd5 puts enormous pressure on the entire formation.",
+      "shortNarration": "Nd5 centralizes, attacks b4, and radiates influence — White's best try to seize the initiative."
     },
     {
       "san": "Nxe5",
@@ -462,7 +477,8 @@
           "square": "e5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's knight captures e5, regains the pawn, and centralizes with better activity and initiative."
     },
     {
       "san": "Nxe5",
@@ -483,7 +499,8 @@
           "square": "e5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White trades the centralized knight on d5, opening the position and handing Black the initiative with better-coordinated pieces."
     },
     {
       "san": "Bxd2+",
@@ -509,7 +526,8 @@
           "square": "e1",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black's in-between capture on d2 wins the bishop with check, gaining a tempo and leaving White down a piece."
     },
     {
       "san": "Qxd2",
@@ -530,7 +548,8 @@
           "square": "d2",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White recaptures with the queen on d2, losing the bishop pair and time, as Black challenges e5 for active development and attacking chances."
     },
     {
       "san": "Qa5",
@@ -561,7 +580,8 @@
           "square": "e5",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black's queen on a5 eyes the e5 knight and a2 pawn, threatening Qxe5 to win the knight for free."
     },
     {
       "san": "Nxc7+",
@@ -597,7 +617,8 @@
           "color": "rgba(255, 80, 80, 0.3)"
         }
       ],
-      "pawnStructure": "After Nxc7+ and Nxa8, White has won the exchange but the knight on a8 is trapped far from the action. Black's central pawn majority compensates."
+      "pawnStructure": "After Nxc7+ and Nxa8, White has won the exchange but the knight on a8 is trapped far from the action. Black's central pawn majority compensates.",
+      "shortNarration": "Nxc7+ forks king and rook, but Black's compensation is active piece play for the temporary material loss."
     },
     {
       "san": "Kd8",
@@ -619,7 +640,8 @@
           "square": "d8",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "King moves to d8, safe for now, allowing White to take the rook with compensation from the queen on a5 and rapid development."
     },
     {
       "san": "Nxa8",
@@ -640,7 +662,8 @@
           "square": "a8",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White wins the exchange, but the knight on a8 is trapped, giving Black time to develop and create threats."
     },
     {
       "san": "Qxe5",
@@ -671,7 +694,8 @@
           "square": "e2",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black's queen on e5 threatens Qxe2# or Qb2, controlling the center while White's knight on a8 is offside — activity compensates the exchange."
     },
     {
       "san": "e3",
@@ -694,7 +718,8 @@
           "color": "rgba(255, 255, 0, 0.4)"
         }
       ],
-      "pawnStructure": "Black's d5 pawn gives a strong central stake. Combined with the Nf6 and active queen, the center belongs to Black despite the material deficit."
+      "pawnStructure": "Black's d5 pawn gives a strong central stake. Combined with the Nf6 and active queen, the center belongs to Black despite the material deficit.",
+      "shortNarration": "White's e3 blocks the queen's diagonal but the a8 pawn remains trapped."
     },
     {
       "san": "Nf6",
@@ -721,7 +746,8 @@
           "square": "f6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's knight on f6 and queen on e5 create a dangerous attacking setup targeting the kingside."
     },
     {
       "san": "Bd3",
@@ -749,7 +775,8 @@
           "square": "d3",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Bishop to d3 guards e4 and light squares, supports the e3 pawn chain, but the knight on a8 remains a liability."
     },
     {
       "san": "d5",
@@ -776,7 +803,8 @@
           "square": "d5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Black's d5 push gains space, opens lines for the bishops, and leaves White's knight stranded on a8."
     },
     {
       "san": "O-O",
@@ -797,7 +825,8 @@
           "square": "g1",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "White castles kingside to safety, but Black's active pieces and the trapped Na8 still pose problems."
     },
     {
       "san": "Bg4",
@@ -834,7 +863,8 @@
           "color": "rgba(255, 80, 80, 0.3)"
         }
       ],
-      "pawnStructure": "White's f3 push weakens the e3 pawn and the king's pawn cover. The g1-a7 diagonal is slightly weakened."
+      "pawnStructure": "White's f3 push weakens the e3 pawn and the king's pawn cover. The g1-a7 diagonal is slightly weakened.",
+      "shortNarration": "Black's bishop on g4 pins the knight on f3 to the queen — if the knight moves, the queen on d2 falls."
     },
     {
       "san": "Rb5",
@@ -861,7 +891,8 @@
           "square": "b5",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Rb5 activates the rook on the fifth rank, attacking d5 and threatening a kingside swing, but allows Black to centralize the queen and increase pressure."
     },
     {
       "san": "Qd6",
@@ -883,7 +914,8 @@
           "square": "d6",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Queen to d6 defends d5, eyes e4, and coordinates with the knight and bishop for central dominance."
     },
     {
       "san": "f3",
@@ -910,7 +942,8 @@
           "square": "g4",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "f3 breaks the pin on the knight but weakens the kingside, forcing the bishop to retreat and freeing White's pieces."
     },
     {
       "san": "Bh5",
@@ -933,7 +966,8 @@
           "color": "rgba(255, 255, 0, 0.4)"
         }
       ],
-      "pawnStructure": "White's knight returns via c7, but the time spent rescuing it has given Black free development. The position is dynamically balanced."
+      "pawnStructure": "White's knight returns via c7, but the time spent rescuing it has given Black free development. The position is dynamically balanced.",
+      "shortNarration": "Bishop retreats to h5, keeping pressure on f3 and threatening g6 to attack the white king."
     },
     {
       "san": "Nc7",
@@ -960,7 +994,8 @@
           "square": "c7",
           "color": "rgba(255, 255, 0, 0.4)"
         }
-      ]
+      ],
+      "shortNarration": "Nc7 begins the knight's rescue from a8, but White lost many tempos while Black developed freely."
     },
     {
       "san": "Ne4",
@@ -1000,7 +1035,8 @@
           "square": "f2",
           "color": "rgba(255, 80, 80, 0.3)"
         }
-      ]
+      ],
+      "shortNarration": "Black's Ne4, supported by d5, attacks d2, f2, c3, and g3 — dominating the board despite White being up the exchange."
     }
   ],
   "subLines": [
@@ -1010,11 +1046,13 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "The Englund Gambit: Qb4+ Main Trap Line is an important variation of the Englund Gambit. The infamous Qb4+ trick — Black threatens Qxb2 winning the rook. Even after White defends with Bd2 and Nc3, the queen invades to b2. After Rb1 Qa3 Nd5, the position is chaotic and full of tricks. Black has real practical chances despite the objective assessment. Let's walk through the key ideas."
+          "annotation": "The Englund Gambit: Qb4+ Main Trap Line is an important variation of the Englund Gambit. The infamous Qb4+ trick — Black threatens Qxb2 winning the rook. Even after White defends with Bd2 and Nc3, the queen invades to b2. After Rb1 Qa3 Nd5, the position is chaotic and full of tricks. Black has real practical chances despite the objective assessment. Let's walk through the key ideas.",
+          "shortNarration": "After 1.d4 e5 2.dxe5 Nc6 3.Nf3 Qe7 4.Bf4 Qb4+ 5.Bd2 Qxb2 6.Nc3 Qb4 7.Rb1 Qa3 8.Nd5, Black's queen invades with practical chances despite White's objective advantage."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: Qb4+ Main Trap Line."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: Qb4+ Main Trap Line.",
+          "shortNarration": "Black's e5 defines the Englund Gambit's Qb4+ Main Trap Line, contesting the center."
         },
         {
           "san": "dxe5",
@@ -1025,7 +1063,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Nc6",
@@ -1052,11 +1091,13 @@
               "to": "b4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qb4+ forces the king to move, gaining a tempo to improve Black's position."
         },
         {
           "san": "Bd2",
-          "annotation": "Bd2 improves the bishop's placement. The bishop was less effective on f4 and moves to d2 where it serves the plan better."
+          "annotation": "Bd2 improves the bishop's placement. The bishop was less effective on f4 and moves to d2 where it serves the plan better.",
+          "shortNarration": "Bd2 improves the bishop's placement, now supporting the queenside advance."
         },
         {
           "san": "Qxb2",
@@ -1067,7 +1108,8 @@
               "to": "b2",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxb2 wins a pawn, shifting the material balance."
         },
         {
           "san": "Nc3",
@@ -1079,11 +1121,13 @@
         },
         {
           "san": "Rb1",
-          "annotation": "Rb1 improves the rook's placement. The rook was less effective on a1 and moves to b1 where it serves the plan better."
+          "annotation": "Rb1 improves the rook's placement. The rook was less effective on a1 and moves to b1 where it serves the plan better.",
+          "shortNarration": "Rb1 improves the rook's placement, shifting from a1 to b1 to support the queenside plan."
         },
         {
           "san": "Qa3",
-          "annotation": "Qa3 activates the queen. From a3, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qa3 activates the queen. From a3, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qa3 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Nd5",
@@ -1098,7 +1142,8 @@
               "to": "d2",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxd2+ wins a bishop and changes the pawn structure or material balance."
         },
         {
           "san": "Qxd2",
@@ -1113,7 +1158,8 @@
         },
         {
           "san": "Kd8",
-          "annotation": "Kd8 improves the king's placement. The king was less effective on e8 and moves to d8 where it serves the plan better."
+          "annotation": "Kd8 improves the king's placement. The king was less effective on e8 and moves to d8 where it serves the plan better.",
+          "shortNarration": "Kd8 improves the king's placement, moving from e8 to d8 for a better defensive plan."
         },
         {
           "san": "Rb3",
@@ -1121,11 +1167,13 @@
         },
         {
           "san": "Qa5",
-          "annotation": "Qa5 activates the queen. From a5, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qa5 activates the queen. From a5, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qa5 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "e4",
-          "annotation": "e4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "e4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Nxe5",
@@ -1136,7 +1184,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance."
         },
         {
           "san": "Nxe5",
@@ -1147,7 +1196,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe5 wins a pawn and recaptures the knight, altering the material balance."
         },
         {
           "san": "Qxd2+",
@@ -1158,7 +1208,8 @@
               "to": "d2",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxd2+ wins the queen, shifting material or pawn structure in Black's favor."
         },
         {
           "san": "Kxd2",
@@ -1169,7 +1220,8 @@
               "to": "d2",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Kxd2 captures the queen, altering the material balance and pawn structure."
         },
         {
           "san": "Nf6",
@@ -1184,7 +1236,8 @@
               "to": "f7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxf7+ wins a pawn, altering the material balance."
         },
         {
           "san": "Ke8",
@@ -1195,7 +1248,8 @@
               "to": "e8",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Ke8 improves the king's placement, reaching the critical position of this variation."
         },
         {
           "san": "Nxf6+",
@@ -1206,7 +1260,8 @@
               "to": "f6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxf6+ captures the knight, defining the pawn structure and piece activity in the Englund Gambit's Qb4+ Main Trap Line."
         },
         {
           "san": "gxf6",
@@ -1217,7 +1272,8 @@
               "to": "f6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "After gxf6, Black gets clear targets and plans in the resulting structure."
         }
       ]
     },
@@ -1227,11 +1283,13 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "The Englund Gambit: Soller Variation (f6 Regain) is an important variation of the Englund Gambit. Black plays f6 to regain the pawn immediately. After exf6 Nxf6, Black has decent development and an open f-file. The Bf5 exchange simplifies into a playable middlegame. This is the most respectable line of the Englund and the one you should aim for against stronger opponents. Let's walk through the key ideas."
+          "annotation": "The Englund Gambit: Soller Variation (f6 Regain) is an important variation of the Englund Gambit. Black plays f6 to regain the pawn immediately. After exf6 Nxf6, Black has decent development and an open f-file. The Bf5 exchange simplifies into a playable middlegame. This is the most respectable line of the Englund and the one you should aim for against stronger opponents. Let's walk through the key ideas.",
+          "shortNarration": "Black plays f6 to regain the pawn, then Bf5 exchange simplifies into a playable middlegame with an open f-file."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: Soller Variation (f6 Regain)."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: Soller Variation (f6 Regain).",
+          "shortNarration": "Black's e5 contests the center, defining the Englund Gambit's Soller Variation with f6 to regain the pawn."
         },
         {
           "san": "dxe5",
@@ -1242,7 +1300,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxe5 stakes a central pawn claim, controlling space and restricting piece activity."
         },
         {
           "san": "Nc6",
@@ -1262,7 +1321,8 @@
         },
         {
           "san": "f6",
-          "annotation": "f6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "f6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f6 gains kingside space and supports a future attack toward the enemy king."
         },
         {
           "san": "exf6",
@@ -1273,7 +1333,8 @@
               "to": "f6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exf6 captures the pawn, altering the pawn structure or material balance."
         },
         {
           "san": "Nxf6",
@@ -1292,7 +1353,8 @@
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "e3",
@@ -1315,7 +1377,8 @@
               "to": "d3",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxd3 wins a piece or alters the pawn structure."
         },
         {
           "san": "Qxd3",
@@ -1330,7 +1393,8 @@
         },
         {
           "san": "O-O-O",
-          "annotation": "Black castles queenside — this often signals aggressive intentions, as the kingside pawns can advance for an attack."
+          "annotation": "Black castles queenside — this often signals aggressive intentions, as the kingside pawns can advance for an attack.",
+          "shortNarration": "Black castles queenside, freeing the kingside pawns to storm White's castled king."
         },
         {
           "san": "O-O",
@@ -1338,7 +1402,8 @@
         },
         {
           "san": "Kb8",
-          "annotation": "Kb8 improves the king's placement. The king was less effective on c8 and moves to b8 where it serves the plan better."
+          "annotation": "Kb8 improves the king's placement. The king was less effective on c8 and moves to b8 where it serves the plan better.",
+          "shortNarration": "Kb8 improves the king's placement, moving from c8 to b8 for better safety."
         },
         {
           "san": "Nd4",
@@ -1353,7 +1418,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxd4 captures the knight, altering the pawn structure or material balance."
         },
         {
           "san": "exd4",
@@ -1364,7 +1430,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Rd6",
@@ -1372,15 +1439,18 @@
         },
         {
           "san": "f4",
-          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f4 gains kingside space and supports a future attack on the enemy king."
         },
         {
           "san": "Qe8",
-          "annotation": "Qe8 activates the queen. From e8, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qe8 activates the queen. From e8, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qe8 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Rae1",
-          "annotation": "Rae1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files."
+          "annotation": "Rae1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Rae1 places the rook on the central semi-open file for maximum activity."
         },
         {
           "san": "Qd7",
@@ -1388,7 +1458,8 @@
         },
         {
           "san": "Re5",
-          "annotation": "Re5 develops the rook to a strong central post on e5, where it controls key squares and supports the center."
+          "annotation": "Re5 develops the rook to a strong central post on e5, where it controls key squares and supports the center.",
+          "shortNarration": "Re5 develops the rook to a strong central post, controlling key squares and supporting the center."
         },
         {
           "san": "Ng4",
@@ -1399,7 +1470,8 @@
               "to": "g4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Ng4 improves the knight's placement, targeting f2 and supporting Qh4+ in the critical position."
         },
         {
           "san": "Re8+",
@@ -1410,7 +1482,8 @@
               "to": "e8",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Re8+ check forces the king to move, a key tactical resource in the Englund Gambit Soller Variation."
         },
         {
           "san": "Qxe8",
@@ -1421,7 +1494,8 @@
               "to": "e8",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxe8 leaves Black with clear targets and plans in the resulting structure."
         }
       ]
     },
@@ -1431,11 +1505,13 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "The Englund Gambit: Zilbermints with Nge7 is an important variation of the Englund Gambit. The Zilbermints Variation with Nge7-Ng6 recovers the pawn more slowly but with better piece placement. The pawn on g6 targets e5 and Black can recapture without weakening the pawn structure. This is a more positional approach that avoids the worst tactical pitfalls. Let's walk through the key ideas."
+          "annotation": "The Englund Gambit: Zilbermints with Nge7 is an important variation of the Englund Gambit. The Zilbermints Variation with Nge7-Ng6 recovers the pawn more slowly but with better piece placement. The pawn on g6 targets e5 and Black can recapture without weakening the pawn structure. This is a more positional approach that avoids the worst tactical pitfalls. Let's walk through the key ideas.",
+          "shortNarration": "Zilbermints Variation Nge7-Ng6 recovers the pawn slowly, targeting e5 with better piece placement and no structural weakness."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: Zilbermints with Nge7."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: Zilbermints with Nge7.",
+          "shortNarration": "Black's e5 contests the center, defining the Englund Gambit with Nge7."
         },
         {
           "san": "dxe5",
@@ -1446,7 +1522,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxe5 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Nc6",
@@ -1466,7 +1543,8 @@
         },
         {
           "san": "Ng6",
-          "annotation": "Ng6 improves the knight's placement. The knight was less effective on e7 and moves to g6 where it serves the plan better."
+          "annotation": "Ng6 improves the knight's placement. The knight was less effective on e7 and moves to g6 where it serves the plan better.",
+          "shortNarration": "Ng6 improves the knight from e7, better supporting the kingside attack."
         },
         {
           "san": "Bg5",
@@ -1485,7 +1563,8 @@
               "to": "e7",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxe7 wins a bishop, altering the pawn structure or material balance."
         },
         {
           "san": "Qxe7",
@@ -1511,7 +1590,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Ncxe5 wins a pawn, altering the material balance."
         },
         {
           "san": "Nxe5",
@@ -1522,7 +1602,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe5 wins a pawn and recaptures with the knight, altering the pawn structure."
         },
         {
           "san": "Nxe5",
@@ -1533,7 +1614,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe5 wins a pawn, forcing Black to recapture or lose material."
         },
         {
           "san": "Be2",
@@ -1553,7 +1635,8 @@
         },
         {
           "san": "f4",
-          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f4 gains kingside space and supports a future attack toward the enemy king."
         },
         {
           "san": "Nc6",
@@ -1573,7 +1656,8 @@
         },
         {
           "san": "Qd7",
-          "annotation": "Qd7 activates the queen. From d7, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qd7 activates the queen. From d7, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qd7 activates the queen, maximizing influence across multiple diagonals and files."
         },
         {
           "san": "Qd2",
@@ -1581,11 +1665,13 @@
         },
         {
           "san": "Rae8",
-          "annotation": "Rae8 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files."
+          "annotation": "Rae8 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Rae8 places the rook on the central semi-open file for maximum activity."
         },
         {
           "san": "Rae1",
-          "annotation": "Rae1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files."
+          "annotation": "Rae1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Rae1 places the rook on the central semi-open file for maximum activity."
         },
         {
           "san": "Re6",
@@ -1618,7 +1704,8 @@
               "to": "e8",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Rfe8 in the Englund Gambit — Black targets e4 and prepares Nge7, with key pawn breaks and piece placement."
         }
       ]
     },
@@ -1628,11 +1715,13 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "The Englund Gambit: Hartlaub-Charlick Gambit is an important variation of the Englund Gambit. An alternative move order where Black plays d6 to recover the pawn on d6 instead of Nc6. This leads to a position where Black has good piece activity and rapid development. After Bxd6 and O-O, Black has natural squares for every piece and the open e-file provides counterplay. Let's walk through the key ideas."
+          "annotation": "The Englund Gambit: Hartlaub-Charlick Gambit is an important variation of the Englund Gambit. An alternative move order where Black plays d6 to recover the pawn on d6 instead of Nc6. This leads to a position where Black has good piece activity and rapid development. After Bxd6 and O-O, Black has natural squares for every piece and the open e-file provides counterplay. Let's walk through the key ideas.",
+          "shortNarration": "In the Hartlaub-Charlick Gambit, Black plays d6 to recover the pawn, gaining piece activity and open e-file counterplay after Bxd6 and O-O."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: Hartlaub-Charlick Gambit."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: Hartlaub-Charlick Gambit.",
+          "shortNarration": "Black contests the center with e5, the defining move of the Hartlaub-Charlick Gambit."
         },
         {
           "san": "dxe5",
@@ -1643,7 +1732,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxe5 stakes a central pawn claim, controlling space and restricting piece activity."
         },
         {
           "san": "d6",
@@ -1658,7 +1748,8 @@
               "to": "d6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd6 captures the pawn, altering the pawn structure or material balance."
         },
         {
           "san": "Bxd6",
@@ -1701,7 +1792,8 @@
         },
         {
           "san": "Re8",
-          "annotation": "Re8 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files."
+          "annotation": "Re8 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Re8 places the rook on the central semi-open file for maximum activity."
         },
         {
           "san": "Nc3",
@@ -1724,7 +1816,8 @@
               "to": "e2",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxe2 captures the bishop, altering the pawn structure or material balance."
         },
         {
           "san": "Qxe2",
@@ -1746,7 +1839,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxd4 captures the knight, reconfiguring the pawn structure or gaining material."
         },
         {
           "san": "exd4",
@@ -1757,7 +1851,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Rxe2",
@@ -1779,7 +1874,8 @@
               "to": "e2",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe2 captures the rook, winning material and altering the pawn structure."
         },
         {
           "san": "Qe7",
@@ -1787,11 +1883,13 @@
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "Re8",
-          "annotation": "Re8 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files."
+          "annotation": "Re8 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Re8 places the rook on the central semi-open file for maximum activity."
         },
         {
           "san": "Nc3",
@@ -1814,7 +1912,8 @@
               "to": "g4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Ng4 improves the knight, heading to the critical position of this variation."
         },
         {
           "san": "Bxc5",
@@ -1825,7 +1924,8 @@
               "to": "c5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxc5 captures the bishop, defining the Englund Gambit's pawn structure and piece activity."
         },
         {
           "san": "Qxc5",
@@ -1836,7 +1936,8 @@
               "to": "c5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxc5 gives Black clear targets and plans in a common structure."
         }
       ]
     },
@@ -1846,11 +1947,13 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "The Englund Gambit: d6 Trick with Bg4 is an important variation of the Englund Gambit. The d6 trick involves Black delaying development to recover the pawn through piece exchanges. After Nxe5 Qxe5, Black has regained material equality. The Bg4 pin creates tactical ideas and after the complex sequence, Black reaches a roughly equal endgame. Not the most ambitious but practical. Let's walk through the key ideas."
+          "annotation": "The Englund Gambit: d6 Trick with Bg4 is an important variation of the Englund Gambit. The d6 trick involves Black delaying development to recover the pawn through piece exchanges. After Nxe5 Qxe5, Black has regained material equality. The Bg4 pin creates tactical ideas and after the complex sequence, Black reaches a roughly equal endgame. Not the most ambitious but practical. Let's walk through the key ideas.",
+          "shortNarration": "After Nxe5 Qxe5, Black regains material equality, and the Bg4 pin leads to a roughly equal endgame."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: d6 Trick with Bg4."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Englund Gambit: d6 Trick with Bg4.",
+          "shortNarration": "Black's e5 contests the center, setting up the Englund Gambit's d6 trick with Bg4."
         },
         {
           "san": "dxe5",
@@ -1861,7 +1964,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Nc6",
@@ -1888,7 +1992,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe5 captures the pawn, altering the balance by changing the pawn structure or winning material."
         },
         {
           "san": "Nxe5",
@@ -1899,7 +2004,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe5 wins a pawn and recaptures with the knight, altering the pawn structure."
         },
         {
           "san": "Qxe5",
@@ -1910,7 +2016,8 @@
               "to": "e5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxe5 wins a knight, forcing Black to recapture or lose material."
         },
         {
           "san": "e3",
@@ -1926,7 +2033,8 @@
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "O-O",
@@ -1938,15 +2046,18 @@
         },
         {
           "san": "f3",
-          "annotation": "f3 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "f3 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f3 gains kingside space and supports a future attack on the enemy king."
         },
         {
           "san": "Bh5",
-          "annotation": "Bh5 improves the bishop's placement. The bishop was less effective on g4 and moves to h5 where it serves the plan better."
+          "annotation": "Bh5 improves the bishop's placement. The bishop was less effective on g4 and moves to h5 where it serves the plan better.",
+          "shortNarration": "Bh5 improves the bishop's placement, shifting from g4 to a more effective diagonal."
         },
         {
           "san": "e4",
-          "annotation": "e4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "e4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "dxe4",
@@ -1957,7 +2068,8 @@
               "to": "e4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxe4 stakes a central claim, controlling space and restricting piece activity."
         },
         {
           "san": "fxe4",
@@ -1968,11 +2080,13 @@
               "to": "e4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "fxe4 stakes a central pawn claim, controlling space and restricting piece activity."
         },
         {
           "san": "Bg6",
-          "annotation": "Bg6 improves the bishop's placement. The bishop was less effective on h5 and moves to g6 where it serves the plan better."
+          "annotation": "Bg6 improves the bishop's placement. The bishop was less effective on h5 and moves to g6 where it serves the plan better.",
+          "shortNarration": "Bg6 improves the bishop's placement, shifting from h5 to g6 for a stronger role."
         },
         {
           "san": "Bg5",
@@ -1987,7 +2101,8 @@
               "to": "e4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxe4 wins a pawn, altering the pawn structure or material balance."
         },
         {
           "san": "Bxe4",
@@ -1998,7 +2113,8 @@
               "to": "e4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxe4 wins a pawn and recaptures the bishop, altering the pawn structure."
         },
         {
           "san": "Nxe4",
@@ -2009,7 +2125,8 @@
               "to": "e4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe4 captures the bishop, changing the pawn structure or material balance."
         },
         {
           "san": "Nxe4",
@@ -2020,7 +2137,8 @@
               "to": "e4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe4 wins a pawn or reconfigures the structure."
         },
         {
           "san": "Qxe4",
@@ -2031,7 +2149,8 @@
               "to": "e4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxe4 captures the knight, altering the pawn structure and material balance."
         },
         {
           "san": "Bd8",
@@ -2042,7 +2161,8 @@
               "to": "d8",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bd8 improves the bishop's placement, now coordinating with the knight and rook for the attack."
         },
         {
           "san": "Rxd8",
@@ -2053,7 +2173,8 @@
               "to": "d8",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Rxd8 leaves Black with clear targets and plans in a common endgame structure."
         }
       ]
     },
@@ -2063,7 +2184,8 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "In the Englund Gambit, the Rook Heist (Queen Wins Rook) is a tactical pattern you should know. The ultimate Englund trap — after Qb4+ and Qxb2, if White plays Bc3 trying to trap the queen, Bb4 pins it. Then Qc1+ forces Qd1 and Qxd1+ wins the queen exchange favorably. Black has recovered the pawn and reached a reasonable endgame from a dubious opening. Let's walk through how it works."
+          "annotation": "In the Englund Gambit, the Rook Heist (Queen Wins Rook) is a tactical pattern you should know. The ultimate Englund trap — after Qb4+ and Qxb2, if White plays Bc3 trying to trap the queen, Bb4 pins it. Then Qc1+ forces Qd1 and Qxd1+ wins the queen exchange favorably. Black has recovered the pawn and reached a reasonable endgame from a dubious opening. Let's walk through how it works.",
+          "shortNarration": "After Qb4+ and Qxb2, White's Bc3 is refuted by Bb4 pinning the bishop, then Qc1+ forces Qd1 and Qxd1+ wins the queen exchange."
         },
         {
           "san": "e5",
@@ -2140,7 +2262,8 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "In the Englund Gambit, the Qb4+ Fork Pattern is a tactical pattern you should know. If White blocks the check with Nd2 instead of Bd2, Black can grab the bishop on f4 for free. After Qxf4, Black has won a piece for a pawn. While White can try to recover with e3 and development, Black is objectively better and can play for a win with careful technique. Let's walk through how it works."
+          "annotation": "In the Englund Gambit, the Qb4+ Fork Pattern is a tactical pattern you should know. If White blocks the check with Nd2 instead of Bd2, Black can grab the bishop on f4 for free. After Qxf4, Black has won a piece for a pawn. While White can try to recover with e3 and development, Black is objectively better and can play for a win with careful technique. Let's walk through how it works.",
+          "shortNarration": "After 1.d4 e5 2.dxe5 Nc6 3.Nf3 Qe7, if White blocks with 4.Nd2, Black takes the bishop on f4 for free, winning a piece for a pawn."
         },
         {
           "san": "e5",
@@ -2304,7 +2427,8 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "In the Englund Gambit, the Englund Gambit Trap: Bishop Wins Queen is a tactical pattern you should know. After the Nd5 jump, if Black retreats to c5, White plays Rb1 and Qa3. The Nxc7+ fork wins the rook, but Black has won the b2 pawn and created chaos. The resulting position is complex with both sides having chances — exactly what the Englund player wants. Let's walk through how it works."
+          "annotation": "In the Englund Gambit, the Englund Gambit Trap: Bishop Wins Queen is a tactical pattern you should know. After the Nd5 jump, if Black retreats to c5, White plays Rb1 and Qa3. The Nxc7+ fork wins the rook, but Black has won the b2 pawn and created chaos. The resulting position is complex with both sides having chances — exactly what the Englund player wants. Let's walk through how it works.",
+          "shortNarration": "After Nd5, Black's c5 retreat allows Rb1 and Qa3, where Nxc7+ wins the rook but Black takes b2, creating chaotic equal chances."
         },
         {
           "san": "e5",
@@ -2458,7 +2582,8 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "In the Englund Gambit, the d6 Queen Retreat Trick is a tactical pattern you should know. After Bg5 f6, Black regains the pawn while opening the f-file. The Bg4 pin adds pressure, and after O-O-O, Black has an active position with open lines on the kingside. The bishop pair and half-open g-file provide real attacking chances despite the dubious opening. Let's walk through how it works."
+          "annotation": "In the Englund Gambit, the d6 Queen Retreat Trick is a tactical pattern you should know. After Bg5 f6, Black regains the pawn while opening the f-file. The Bg4 pin adds pressure, and after O-O-O, Black has an active position with open lines on the kingside. The bishop pair and half-open g-file provide real attacking chances despite the dubious opening. Let's walk through how it works.",
+          "shortNarration": "After Bg5 f6, Black regains the pawn, opens the f-file, and gains the bishop pair with active kingside pressure."
         },
         {
           "san": "e5",
@@ -2626,7 +2751,8 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "In the Englund Gambit, the Simple Refutation: e4 Center is a dangerous line you must be aware of. White simply plays e4, grabbing the center with two pawns. After Nc3 and Bd3, White has a huge space advantage and full development. Black has zero compensation — this is the clearest illustration of why the Englund is considered unsound at higher levels. Let's see why."
+          "annotation": "In the Englund Gambit, the Simple Refutation: e4 Center is a dangerous line you must be aware of. White simply plays e4, grabbing the center with two pawns. After Nc3 and Bd3, White has a huge space advantage and full development. Black has zero compensation — this is the clearest illustration of why the Englund is considered unsound at higher levels. Let's see why.",
+          "shortNarration": "e4 grabs the center with two pawns, then Nc3 and Bd3 give White huge space and full development with zero compensation for Black."
         },
         {
           "san": "e5",
@@ -2661,15 +2787,18 @@
         },
         {
           "san": "Nxe5",
-          "annotation": "Nxe5 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 wins a pawn but leaves the knight hanging to d6."
         },
         {
           "san": "Nxe5",
-          "annotation": "Nxe5 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 changes the position — a piece sacrifice for attack, not a simple trade."
         },
         {
           "san": "Qxe5",
-          "annotation": "Qxe5 — this capture changes the character of the position. Be alert."
+          "annotation": "Qxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxe5 wins a pawn but opens the e-file for Black's rook."
         },
         {
           "san": "Nc3",
@@ -2759,7 +2888,8 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "In the Englund Gambit, the White Keeps It Simple: Nc3 Development is a dangerous line you must be aware of. White develops naturally with Nc3, e4, and Bd3. The position is simple and strong — White has a dominant center and better pieces. Without any tactical tricks available, Black's position is passive and the missing pawn is a permanent disadvantage. Let's see why."
+          "annotation": "In the Englund Gambit, the White Keeps It Simple: Nc3 Development is a dangerous line you must be aware of. White develops naturally with Nc3, e4, and Bd3. The position is simple and strong — White has a dominant center and better pieces. Without any tactical tricks available, Black's position is passive and the missing pawn is a permanent disadvantage. Let's see why.",
+          "shortNarration": "White's natural Nc3, e4, Bd3 development yields a dominant center and better pieces, leaving Black's missing pawn a permanent disadvantage with no tactical tricks."
         },
         {
           "san": "e5",
@@ -2794,7 +2924,8 @@
         },
         {
           "san": "Nxe5",
-          "annotation": "Nxe5 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 wins a pawn but hangs the knight to f6."
         },
         {
           "san": "e4",
@@ -2802,11 +2933,13 @@
         },
         {
           "san": "Nxf3+",
-          "annotation": "Nxf3+ — this capture changes the character of the position. Be alert."
+          "annotation": "Nxf3+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxf3+ recaptures the knight, altering the position's dynamics."
         },
         {
           "san": "Qxf3",
-          "annotation": "Qxf3 — this capture changes the character of the position. Be alert."
+          "annotation": "Qxf3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxf3 changes the position — the queen recaptures, altering the material balance and piece activity."
         },
         {
           "san": "Nf6",
@@ -2842,7 +2975,8 @@
         },
         {
           "san": "Bxd5",
-          "annotation": "Bxd5 — this capture changes the character of the position. Be alert."
+          "annotation": "Bxd5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxd5 changes the position — the bishop captures on d5, altering the pawn structure and piece activity."
         },
         {
           "san": "exd5",
@@ -2853,7 +2987,8 @@
               "to": "d5",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd5 opens the center — now Black's queen and bishop aim at the kingside."
         },
         {
           "san": "h6",
@@ -2907,7 +3042,8 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "In the Englund Gambit, the Bf4 Refutation: White Holds Easily is a dangerous line you must be aware of. When White plays Bd2 on the second try and then develops with Nc3 and Nd5, the position becomes very comfortable for White. The pawn on d5 combined with Bc3 creates a powerful center. Black's queen is overworked and the position is clearly better for White. Let's see why."
+          "annotation": "In the Englund Gambit, the Bf4 Refutation: White Holds Easily is a dangerous line you must be aware of. When White plays Bd2 on the second try and then develops with Nc3 and Nd5, the position becomes very comfortable for White. The pawn on d5 combined with Bc3 creates a powerful center. Black's queen is overworked and the position is clearly better for White. Let's see why.",
+          "shortNarration": "Bd2, Nc3, and Nd5 give White a powerful center with the d5 pawn and Bc3, while Black's queen is overworked."
         },
         {
           "san": "e5",
@@ -2958,7 +3094,8 @@
         },
         {
           "san": "Nxe5",
-          "annotation": "Nxe5 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 changes the position — the e5-pawn is gone, opening lines and altering the tactical balance."
         },
         {
           "san": "Nd5",
@@ -2970,11 +3107,13 @@
         },
         {
           "san": "Nxe5",
-          "annotation": "Nxe5 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 wins a pawn and opens the e-file, threatening the undefended e7-bishop."
         },
         {
           "san": "Qxe5",
-          "annotation": "Qxe5 — this capture changes the character of the position. Be alert."
+          "annotation": "Qxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxe5 wins a pawn but opens the e-file, exposing the queen to attack."
         },
         {
           "san": "Bc3",
@@ -3018,15 +3157,18 @@
         },
         {
           "san": "Nxg6",
-          "annotation": "Nxg6 — this capture changes the character of the position. Be alert."
+          "annotation": "Nxg6 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxg6 wins a pawn and opens the h-file for a kingside attack."
         },
         {
           "san": "Qxg6",
-          "annotation": "Qxg6 — this capture changes the character of the position. Be alert."
+          "annotation": "Qxg6 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxg6 wins a pawn, but opens the f-file for Black's rook and weakens White's kingside."
         },
         {
           "san": "Qxg6",
-          "annotation": "Qxg6+ — this capture changes the character of the position. Be alert."
+          "annotation": "Qxg6+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxg6+ sacrifices the queen for a check, changing the position's character."
         },
         {
           "san": "hxg6",
@@ -3037,7 +3179,8 @@
               "to": "g6",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "hxg6 opens the h-file, exposing the king to a potential rook invasion."
         },
         {
           "san": "e5",

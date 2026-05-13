@@ -440,6 +440,20 @@ export type CoachVerbosity = 'none' | 'fast' | 'medium' | 'slow' | 'unlimited';
  *  per game; in-game commentary can fire every move. Added by
  *  WO-PHASE-NARRATION-01. */
 export type PhaseNarrationVerbosity = 'off' | 'brief' | 'standard' | 'full';
+
+/** Unified narration setting — controls when and how much the coach
+ *  speaks across every surface (per-move during play, phase
+ *  transitions, Learn-with-Coach walkthroughs, tactic alerts).
+ *  Replaces the previous three overlapping controls.
+ *    - 'silent' → no spoken narration anywhere
+ *    - 'brief'  → short narration only (key moments per move; first
+ *                 sentence on phase transitions; `shortNarration` on
+ *                 walkthrough steps)
+ *    - 'full'   → full narration (legacy behavior — coach talks freely)
+ *  Defaults to 'full' for users who haven't touched the setting. Older
+ *  per-surface preferences are still read by `resolveCoachNarration`
+ *  so existing user profiles keep their effective verbosity. */
+export type CoachNarration = 'silent' | 'brief' | 'full';
 export type MoveMethod = 'drag' | 'click' | 'both';
 export type AiProvider = 'deepseek' | 'anthropic';
 
@@ -587,6 +601,12 @@ export interface UserPreferences {
    * the setting automatically benefit from the cost reduction.
    */
   coachCommentaryVerbosity?: 'key-moments' | 'every-move' | 'off';
+  /** Unified narration verbosity — see CoachNarration. Replaces the
+   *  three legacy controls (coachVerbosity, phaseNarrationVerbosity,
+   *  coachCommentaryVerbosity) with one Silent/Brief/Full choice
+   *  honored across every narration path. The legacy fields are still
+   *  read by resolveCoachNarration as a migration fallback. */
+  coachNarration?: CoachNarration;
   /** How much the coach says PER TURN when it does talk. Wired through
    *  to the brain's TEACH_MODE_ADDITION + OPERATOR_BASE_BODY teaching
    *  block to clamp response length. (Distinct from the older

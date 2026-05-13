@@ -3,47 +3,58 @@
   "moveAnnotations": [
     {
       "san": "Nc3",
-      "annotation": "We start with an unusual first move that immediately challenges Black's center-building plans! The Van Geet Opening (1.Nc3) puts the knight on an active square before establishing a pawn center, which can confuse players expecting 1.e4 or 1.d4. This move controls d5 and e4, giving us flexible options to support either e4 or d4 depending on Black's response. It's a fighting choice favored by aggressive club players who know the resulting positions well."
+      "annotation": "We start with an unusual first move that immediately challenges Black's center-building plans! The Van Geet Opening (1.Nc3) puts the knight on an active square before establishing a pawn center, which can confuse players expecting 1.e4 or 1.d4. This move controls d5 and e4, giving us flexible options to support either e4 or d4 depending on Black's response. It's a fighting choice favored by aggressive club players who know the resulting positions well.",
+      "shortNarration": "1.Nc3 controls d5 and e4, keeping flexible options for a pawn center while sidestepping mainline theory."
     },
     {
       "san": "d5",
-      "annotation": "Black stakes an immediate claim in the center, which is the natural response to our knight move. By playing d5, Black prevents us from easily playing d4 and establishes a strong pawn presence. However, this also commits the pawn early, which can sometimes become a target. Black is playing for space and central control."
+      "annotation": "Black stakes an immediate claim in the center, which is the natural response to our knight move. By playing d5, Black prevents us from easily playing d4 and establishes a strong pawn presence. However, this also commits the pawn early, which can sometimes become a target. Black is playing for space and central control.",
+      "shortNarration": "Black's d5 stakes a central claim, preventing d4 and creating a targetable pawn for space."
     },
     {
       "san": "f4",
-      "annotation": "We launch the Jendrossek Gambit by attacking Black's d5 pawn with our f-pawn! This gambit move is the thematic continuation—we're willing to sacrifice material for rapid piece development and central control. By playing f4, we open lines for our bishop on c1 and queen, and we prepare to launch a kingside attack. The move controls e5 and g5, giving us aggressive options."
+      "annotation": "We launch the Jendrossek Gambit by attacking Black's d5 pawn with our f-pawn! This gambit move is the thematic continuation—we're willing to sacrifice material for rapid piece development and central control. By playing f4, we open lines for our bishop on c1 and queen, and we prepare to launch a kingside attack. The move controls e5 and g5, giving us aggressive options.",
+      "shortNarration": "f4 gambits the d5 pawn to open lines for the queen and bishop, preparing a kingside attack."
     },
     {
       "san": "d4",
-      "annotation": "Black captures our f4 pawn, accepting the gambit and maintaining central material. By keeping the d-pawn advanced and taking on f4, Black grabs material but allows us to continue our aggressive setup. This is a principled capture that should give Black reasonable chances if they defend accurately."
+      "annotation": "Black captures our f4 pawn, accepting the gambit and maintaining central material. By keeping the d-pawn advanced and taking on f4, Black grabs material but allows us to continue our aggressive setup. This is a principled capture that should give Black reasonable chances if they defend accurately.",
+      "shortNarration": "Black takes on f4, grabbing material but ceding White an aggressive setup with attacking chances."
     },
     {
       "san": "Ne4",
-      "annotation": "We develop actively by attacking Black's d5 pawn again—now our knight on e4 adds pressure to a key central square. The knight on e4 is beautifully centralized, controlling many important squares (d6, f6, g5, c5, d2) and supporting potential tactics. We're building pressure while developing pieces, which is the gambit's main compensation for the sacrificed pawn."
+      "annotation": "We develop actively by attacking Black's d5 pawn again—now our knight on e4 adds pressure to a key central square. The knight on e4 is beautifully centralized, controlling many important squares (d6, f6, g5, c5, d2) and supporting potential tactics. We're building pressure while developing pieces, which is the gambit's main compensation for the sacrificed pawn.",
+      "shortNarration": "The knight on e4 pressures d5 and controls key squares d6, f6, g5, c5, and d2, building compensation for the pawn."
     },
     {
       "san": "f5",
-      "annotation": "Black attacks our knight and gains space on the kingside, but this move weakens their king's position dangerously! By advancing the f-pawn two squares forward, Black opens the e6 square as a potential outpost and exposes the e5 square. While the move prevents our knight from remaining on e4, it creates tactical weaknesses we'll exploit—notice how the long diagonal toward a1 is now more vulnerable."
+      "annotation": "Black attacks our knight and gains space on the kingside, but this move weakens their king's position dangerously! By advancing the f-pawn two squares forward, Black opens the e6 square as a potential outpost and exposes the e5 square. While the move prevents our knight from remaining on e4, it creates tactical weaknesses we'll exploit—notice how the long diagonal toward a1 is now more vulnerable.",
+      "shortNarration": "Black's f5 advance weakens the king, opens e6 as an outpost, and exposes the long a1 diagonal."
     },
     {
       "san": "Nf2",
-      "annotation": "We tactically retreat our knight from e4, which might seem passive but it's actually strong positioning! By moving to f2, the knight supports our kingside while maintaining flexibility—we can later reroute it to g4 or h3 to attack Black's weakened kingside. The knight also prepares to support our g-pawn's advance or defend along the e-file. This is patient but purposeful play."
+      "annotation": "We tactically retreat our knight from e4, which might seem passive but it's actually strong positioning! By moving to f2, the knight supports our kingside while maintaining flexibility—we can later reroute it to g4 or h3 to attack Black's weakened kingside. The knight also prepares to support our g-pawn's advance or defend along the e-file. This is patient but purposeful play.",
+      "shortNarration": "Knight retreats from e4 to f2, supporting the kingside and preparing to reroute to g4 or h3 to attack Black's weakened king."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops their kingside knight toward the center, which is natural and active. By playing Nf6, Black attacks our e4 square (preventing us from playing Nxd4 easily) and improves piece coordination. The knight on f6 also supports Black's central and kingside structure, but it doesn't immediately address the weakening caused by f5."
+      "annotation": "Black develops their kingside knight toward the center, which is natural and active. By playing Nf6, Black attacks our e4 square (preventing us from playing Nxd4 easily) and improves piece coordination. The knight on f6 also supports Black's central and kingside structure, but it doesn't immediately address the weakening caused by f5.",
+      "shortNarration": "Black's Nf6 attacks e4 and supports the center, but doesn't address the weakening from f5."
     },
     {
       "san": "Nf3",
-      "annotation": "We complete our knight development on the ideal square, attacking d4 and eyeing e5 and h4 as future jump points. The knight on f3 is perfectly placed to support a kingside attack while keeping pressure on Black's center. This solid developing choice prepares our remaining development and maintains the initiative we've built through the gambit."
+      "annotation": "We complete our knight development on the ideal square, attacking d4 and eyeing e5 and h4 as future jump points. The knight on f3 is perfectly placed to support a kingside attack while keeping pressure on Black's center. This solid developing choice prepares our remaining development and maintains the initiative we've built through the gambit.",
+      "shortNarration": "Knight to f3 attacks d4, eyes e5 and h4, and supports the kingside attack while keeping pressure on Black's center."
     },
     {
       "san": "c5",
-      "annotation": "Black counterattacks our center and fights for space with this queenside pawn advance. By playing c5, Black attacks d4 and gains queenside territory, which is an important try to create their own counterplay. However, Black's king safety remains a concern with the kingside weakened by the f5 advance—we need to maintain pressure."
+      "annotation": "Black counterattacks our center and fights for space with this queenside pawn advance. By playing c5, Black attacks d4 and gains queenside territory, which is an important try to create their own counterplay. However, Black's king safety remains a concern with the kingside weakened by the f5 advance—we need to maintain pressure.",
+      "shortNarration": "Black's c5 attacks d4 and gains queenside space, but their king remains weak after f5."
     },
     {
       "san": "b4",
-      "annotation": "We seize space on the queenside with a supporting pawn move that restricts Black's c5 pawn and prepares to support a future b5 advance! The b4 pawn also opens the b-file for potential rook activity and prevents Black from easily playing c4. This move maintains tension in the position and shows we're not solely focused on the kingside—we're building a comprehensive attacking position across the board."
+      "annotation": "We seize space on the queenside with a supporting pawn move that restricts Black's c5 pawn and prepares to support a future b5 advance! The b4 pawn also opens the b-file for potential rook activity and prevents Black from easily playing c4. This move maintains tension in the position and shows we're not solely focused on the kingside—we're building a comprehensive attacking position across the board.",
+      "shortNarration": "b4 restricts Black's c5 pawn, prepares b5, opens the b-file, and prevents c4 while building queenside pressure."
     }
   ]
 }

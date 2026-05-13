@@ -3,39 +3,48 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn advance, immediately staking a claim to the central squares d5 and f5 while opening lines for our bishop and queen. This is one of the most direct and aggressive first moves in chess, aiming to control the center and develop our pieces quickly. The move creates immediate tension in the center and puts pressure on Black to respond to our central presence. Most opening systems after 1.e4 will revolve around how both sides handle this central pawn and the space it controls."
+      "annotation": "We're opening with the king's pawn advance, immediately staking a claim to the central squares d5 and f5 while opening lines for our bishop and queen. This is one of the most direct and aggressive first moves in chess, aiming to control the center and develop our pieces quickly. The move creates immediate tension in the center and puts pressure on Black to respond to our central presence. Most opening systems after 1.e4 will revolve around how both sides handle this central pawn and the space it controls.",
+      "shortNarration": "1.e4 stakes a claim to d5 and f5, opening lines for the bishop and queen."
     },
     {
       "san": "d6",
-      "annotation": "Black chooses the Pirc Defense setup, which is a hypermodern approach that doesn't immediately challenge our central pawn. Instead of the more direct 1...e5, Black is preparing to fianchetto the king's bishop on g7 and attack our center from the flanks. This move supports a future ...e5 advance while keeping options open for piece development. The Pirc is a flexible defense that often leads to complex middlegame positions where Black's pieces coordinate to pressure White's center from unusual angles."
+      "annotation": "Black chooses the Pirc Defense setup, which is a hypermodern approach that doesn't immediately challenge our central pawn. Instead of the more direct 1...e5, Black is preparing to fianchetto the king's bishop on g7 and attack our center from the flanks. This move supports a future ...e5 advance while keeping options open for piece development. The Pirc is a flexible defense that often leads to complex middlegame positions where Black's pieces coordinate to pressure White's center from unusual angles.",
+      "shortNarration": "Black's Pirc fianchettoes the king's bishop to g7, pressuring e4 from the flank without directly challenging the center."
     },
     {
       "san": "d4",
-      "annotation": "We establish a powerful pawn center with our second central pawn, creating what's known as the 'classical center' with pawns on both e4 and d4. This move controls crucial squares like c5, e5, f5, and c5, giving us maximum space in the center. Our pawn duo restricts Black's pieces and gives us a natural space advantage that we can use to launch attacks on either flank. The move also opens the c1-h6 diagonal for our light-squared bishop and creates potential for quick piece development."
+      "annotation": "We establish a powerful pawn center with our second central pawn, creating what's known as the 'classical center' with pawns on both e4 and d4. This move controls crucial squares like c5, e5, f5, and c5, giving us maximum space in the center. Our pawn duo restricts Black's pieces and gives us a natural space advantage that we can use to launch attacks on either flank. The move also opens the c1-h6 diagonal for our light-squared bishop and creates potential for quick piece development.",
+      "shortNarration": "Pawns on e4 and d4 control c5, d5, e5, and f5, giving space and opening the c1-h6 diagonal for the bishop."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the knight to its most active square, where it attacks our e4 pawn and prepares to support the central break ...e5. This is a critical move in the Pirc Defense system, as the knight on f6 will often serve as an anchor point for Black's counterplay. From f6, the knight controls important central squares like d5 and e4, while also preparing to support Black's kingside development. Black is following the hypermodern principle of attacking our center with pieces rather than occupying it immediately with pawns."
+      "annotation": "Black develops the knight to its most active square, where it attacks our e4 pawn and prepares to support the central break ...e5. This is a critical move in the Pirc Defense system, as the knight on f6 will often serve as an anchor point for Black's counterplay. From f6, the knight controls important central squares like d5 and e4, while also preparing to support Black's kingside development. Black is following the hypermodern principle of attacking our center with pieces rather than occupying it immediately with pawns.",
+      "shortNarration": "Black's knight on f6 attacks e4 and prepares ...e5, anchoring counterplay in the Pirc Defense."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our knight to its ideal square, defending the e4 pawn and preparing to support our central advance. The knight on c3 eyes important squares like d5 and e4, while also keeping options open for future expansion with moves like f4-f5. This move is flexible and allows us to maintain our space advantage while developing harmoniously. From c3, our knight can potentially jump to d5 or support a kingside attack, depending on how the position develops."
+      "annotation": "We develop our knight to its ideal square, defending the e4 pawn and preparing to support our central advance. The knight on c3 eyes important squares like d5 and e4, while also keeping options open for future expansion with moves like f4-f5. This move is flexible and allows us to maintain our space advantage while developing harmoniously. From c3, our knight can potentially jump to d5 or support a kingside attack, depending on how the position develops.",
+      "shortNarration": "Knight to c3 defends e4, eyes d5, and supports a future f4–f5 kingside push."
     },
     {
       "san": "g6",
-      "annotation": "Black continues with the characteristic Pirc fianchetto, preparing to place the dark-squared bishop on the long diagonal where it will eye our center. This move creates a solid kingside structure and prepares castling, while the future bishop on g7 will become a key piece in Black's counterplay. The fianchetto setup allows Black to maintain flexibility in the center while building pressure against our pawn chain from the flank. However, this also slightly weakens Black's kingside, particularly the dark squares around the king, which we can potentially exploit later."
+      "annotation": "Black continues with the characteristic Pirc fianchetto, preparing to place the dark-squared bishop on the long diagonal where it will eye our center. This move creates a solid kingside structure and prepares castling, while the future bishop on g7 will become a key piece in Black's counterplay. The fianchetto setup allows Black to maintain flexibility in the center while building pressure against our pawn chain from the flank. However, this also slightly weakens Black's kingside, particularly the dark squares around the king, which we can potentially exploit later.",
+      "shortNarration": "Black's fianchetto eyes the center from g7 but weakens the dark squares around the king."
     },
     {
       "san": "Be2",
-      "annotation": "We develop our bishop to a solid, flexible square where it supports our central pawns and prepares castling. While Be2 might look passive compared to more aggressive options like Bc4 or Bb5, it's actually a critical move in many anti-Pirc systems because it prepares the aggressive h4-h5 pawn storm. The bishop on e2 also keeps the f1-a6 diagonal clear for potential tactical ideas and maintains connection between our rooks. This modest-looking development actually sets up one of the most dangerous attacking formations against the Pirc Defense."
+      "annotation": "We develop our bishop to a solid, flexible square where it supports our central pawns and prepares castling. While Be2 might look passive compared to more aggressive options like Bc4 or Bb5, it's actually a critical move in many anti-Pirc systems because it prepares the aggressive h4-h5 pawn storm. The bishop on e2 also keeps the f1-a6 diagonal clear for potential tactical ideas and maintains connection between our rooks. This modest-looking development actually sets up one of the most dangerous attacking formations against the Pirc Defense.",
+      "shortNarration": "Be2 prepares the h4-h5 pawn storm and keeps the f1-a6 diagonal clear for tactical ideas."
     },
     {
       "san": "Bg7",
-      "annotation": "Black completes the fianchetto setup, placing the dark-squared bishop on its ideal square where it pressures our central pawns and controls the long diagonal. From g7, the bishop becomes Black's most important piece, serving both defensive and offensive functions by eyeing our center while also protecting the kingside. This bishop will be crucial in Black's counterplay, often supporting central breaks like ...e5 or ...c5. The completion of this setup means Black is nearly ready to castle and begin active operations against our center."
+      "annotation": "Black completes the fianchetto setup, placing the dark-squared bishop on its ideal square where it pressures our central pawns and controls the long diagonal. From g7, the bishop becomes Black's most important piece, serving both defensive and offensive functions by eyeing our center while also protecting the kingside. This bishop will be crucial in Black's counterplay, often supporting central breaks like ...e5 or ...c5. The completion of this setup means Black is nearly ready to castle and begin active operations against our center.",
+      "shortNarration": "Black's fianchettoed bishop on g7 pressures the center and controls the long diagonal, supporting breaks like ...e5 or ...c5."
     },
     {
       "san": "h4",
-      "annotation": "We launch the signature move of the Bayonet Attack, beginning an immediate and aggressive pawn storm against Black's fianchettoed kingside! This move is the key idea that makes this system so dangerous - we're not waiting for slow maneuvering but immediately creating threats against Black's king position. The h-pawn advance prepares h4-h5, which will open lines and create weaknesses in Black's kingside structure, particularly targeting the g6 pawn. This aggressive approach often catches Pirc players off guard, as they expect a slower positional game, but instead face immediate tactical threats that require precise defense."
+      "annotation": "We launch the signature move of the Bayonet Attack, beginning an immediate and aggressive pawn storm against Black's fianchettoed kingside! This move is the key idea that makes this system so dangerous - we're not waiting for slow maneuvering but immediately creating threats against Black's king position. The h-pawn advance prepares h4-h5, which will open lines and create weaknesses in Black's kingside structure, particularly targeting the g6 pawn. This aggressive approach often catches Pirc players off guard, as they expect a slower positional game, but instead face immediate tactical threats that require precise defense.",
+      "shortNarration": "The Bayonet Attack's h4-h5 pawn storm targets Black's fianchettoed kingside, threatening to open lines against g6."
     }
   ]
 }

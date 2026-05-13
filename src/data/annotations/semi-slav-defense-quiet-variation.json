@@ -3,43 +3,53 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the center and controlling the important e5 and c5 squares. This move prepares to support a future pawn center with c4, aiming for classical central control that's characteristic of many 1.d4 openings. Unlike 1.e4 which often leads to sharper tactical play, 1.d4 typically produces more strategic, positional games where we can gradually build up our position. Our long-term plan involves establishing a strong pawn center and then using it as a springboard for piece activity and kingside or queenside operations."
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the center and controlling the important e5 and c5 squares. This move prepares to support a future pawn center with c4, aiming for classical central control that's characteristic of many 1.d4 openings. Unlike 1.e4 which often leads to sharper tactical play, 1.d4 typically produces more strategic, positional games where we can gradually build up our position. Our long-term plan involves establishing a strong pawn center and then using it as a springboard for piece activity and kingside or queenside operations.",
+      "shortNarration": "1.d4 stakes a claim to the center, controlling e5 and c5, aiming for a classical pawn center with c4."
     },
     {
       "san": "d5",
-      "annotation": "Black responds symmetrically in the center, immediately challenging our control of the e4 square and establishing their own central foothold. This move is the most principled response, as it prevents us from simply advancing e4 on the next move and taking over the center completely. Our opponent is signaling their intention to fight for central equality rather than allowing us to dominate the center unopposed. Black's pawn on d5 will become a key strategic element - they'll want to maintain it while we'll look for ways to undermine or exchange it to gain central superiority."
+      "annotation": "Black responds symmetrically in the center, immediately challenging our control of the e4 square and establishing their own central foothold. This move is the most principled response, as it prevents us from simply advancing e4 on the next move and taking over the center completely. Our opponent is signaling their intention to fight for central equality rather than allowing us to dominate the center unopposed. Black's pawn on d5 will become a key strategic element - they'll want to maintain it while we'll look for ways to undermine or exchange it to gain central superiority.",
+      "shortNarration": "Black's d5 challenges e4, fighting for central equality and establishing a key pawn to maintain or undermine."
     },
     {
       "san": "c4",
-      "annotation": "We're playing the Queen's Gambit, attacking Black's central d5 pawn and offering to trade our c-pawn for it. This isn't actually a true gambit since after dxc4, we can easily recapture the pawn, but the move serves multiple strategic purposes. By challenging the d5 pawn, we're trying to either win control of the center outright or force Black into making concessions in their pawn structure. The c4 move also opens lines for our pieces, particularly preparing to develop our queen's bishop and potentially our queen along the c-file later in the game."
+      "annotation": "We're playing the Queen's Gambit, attacking Black's central d5 pawn and offering to trade our c-pawn for it. This isn't actually a true gambit since after dxc4, we can easily recapture the pawn, but the move serves multiple strategic purposes. By challenging the d5 pawn, we're trying to either win control of the center outright or force Black into making concessions in their pawn structure. The c4 move also opens lines for our pieces, particularly preparing to develop our queen's bishop and potentially our queen along the c-file later in the game.",
+      "shortNarration": "The Queen's Gambit challenges d5 to win the center or force structural concessions, opening lines for the queen's bishop and queen."
     },
     {
       "san": "c6",
-      "annotation": "Black chooses the Slav Defense, supporting the d5 pawn with the c-pawn rather than accepting or declining the queen's gambit with other moves. This is a very solid choice that maintains the central pawn while keeping options open for piece development, particularly allowing the light-squared bishop to eventually come out to f5 or g4. Our opponent is prioritizing central stability over rapid piece development, which often leads to rich middlegame positions with complex pawn structures. The move also prepares potential queenside expansion with b7-b5 later in the game, challenging our c4 pawn."
+      "annotation": "Black chooses the Slav Defense, supporting the d5 pawn with the c-pawn rather than accepting or declining the queen's gambit with other moves. This is a very solid choice that maintains the central pawn while keeping options open for piece development, particularly allowing the light-squared bishop to eventually come out to f5 or g4. Our opponent is prioritizing central stability over rapid piece development, which often leads to rich middlegame positions with complex pawn structures. The move also prepares potential queenside expansion with b7-b5 later in the game, challenging our c4 pawn.",
+      "shortNarration": "Slav Defense supports d5 with c6, keeping the center solid and freeing the light-squared bishop for f5 or g4."
     },
     {
       "san": "Nf3",
-      "annotation": "We're developing our kingside knight to its ideal square, where it controls the important central squares e5 and d4 while supporting our center. This move is completely principled - we're following opening fundamentals by developing pieces toward the center and preparing to castle kingside. The knight on f3 also prevents any potential tactics involving Black's queen coming to h4, and it doesn't commit us to any particular pawn structure yet. From f3, our knight maintains flexibility and can later jump to e5, g5, or even retreat to support other plans depending on how the position develops."
+      "annotation": "We're developing our kingside knight to its ideal square, where it controls the important central squares e5 and d4 while supporting our center. This move is completely principled - we're following opening fundamentals by developing pieces toward the center and preparing to castle kingside. The knight on f3 also prevents any potential tactics involving Black's queen coming to h4, and it doesn't commit us to any particular pawn structure yet. From f3, our knight maintains flexibility and can later jump to e5, g5, or even retreat to support other plans depending on how the position develops.",
+      "shortNarration": "Knight to f3 develops toward the center, eyes e5 and d4, blocks Qh4, and keeps flexible options."
     },
     {
       "san": "Nf6",
-      "annotation": "Black mirrors our development by bringing their kingside knight to f6, where it performs similar functions - controlling central squares (particularly e4 and d5) and preparing to castle. This is the most active move that also puts additional pressure on our c4 pawn, creating a subtle tactical point that we need to be aware of. Our opponent is following sound opening principles while maintaining the tension in the center, not rushing to resolve the pawn structure immediately. The knight on f6 also supports potential central breaks like e6-e5 later in the game."
+      "annotation": "Black mirrors our development by bringing their kingside knight to f6, where it performs similar functions - controlling central squares (particularly e4 and d5) and preparing to castle. This is the most active move that also puts additional pressure on our c4 pawn, creating a subtle tactical point that we need to be aware of. Our opponent is following sound opening principles while maintaining the tension in the center, not rushing to resolve the pawn structure immediately. The knight on f6 also supports potential central breaks like e6-e5 later in the game.",
+      "shortNarration": "Black's knight to f6 pressures the c4 pawn and eyes e4 and d5, keeping central tension."
     },
     {
       "san": "e3",
-      "annotation": "We're playing the Quiet Variation of the Semi-Slav, choosing a more positional approach rather than the sharper alternatives like Nc3 or cxd5. This move supports our d4 pawn, prepares to develop our light-squared bishop to d3 or e2, and maintains a solid pawn chain while keeping the center flexible. The downside is that we're somewhat blocking in our light-squared bishop, but this setup often leads to rich strategic middlegames where understanding pawn structures and piece coordination matters more than tactical fireworks. This variation is particularly appealing for players who prefer gradual position building over forcing immediate tactical complications."
+      "annotation": "We're playing the Quiet Variation of the Semi-Slav, choosing a more positional approach rather than the sharper alternatives like Nc3 or cxd5. This move supports our d4 pawn, prepares to develop our light-squared bishop to d3 or e2, and maintains a solid pawn chain while keeping the center flexible. The downside is that we're somewhat blocking in our light-squared bishop, but this setup often leads to rich strategic middlegames where understanding pawn structures and piece coordination matters more than tactical fireworks. This variation is particularly appealing for players who prefer gradual position building over forcing immediate tactical complications.",
+      "shortNarration": "d3 supports the d4 pawn, prepares the light-squared bishop to d3 or e2, and keeps the center flexible while blocking the bishop in for a strategic middlegame."
     },
     {
       "san": "e6",
-      "annotation": "Continuing Semi Slav Defense Quiet Variation: e6 is a known theory move in this line."
+      "annotation": "Continuing Semi Slav Defense Quiet Variation: e6 is a known theory move in this line.",
+      "shortNarration": "e6 is the standard Semi-Slav Quiet Variation move."
     },
     {
       "san": "Nbd2",
-      "annotation": "We're developing our queen's knight to d2, which is the characteristic move of the Quiet Variation, supporting our c4 pawn and preparing to reroute the knight via e4 or f1-e3-d5. This development is more flexible than the immediate Nc3, as it doesn't block the c-file and allows us to maintain more options in the center. The knight on d2 can later spring to e4 where it would be very actively placed, or support a future e3-e4 pawn break if the center opens up. While this knight development looks less active initially, it's part of a deeper strategic plan that often gives us excellent piece coordination in the middlegame."
+      "annotation": "We're developing our queen's knight to d2, which is the characteristic move of the Quiet Variation, supporting our c4 pawn and preparing to reroute the knight via e4 or f1-e3-d5. This development is more flexible than the immediate Nc3, as it doesn't block the c-file and allows us to maintain more options in the center. The knight on d2 can later spring to e4 where it would be very actively placed, or support a future e3-e4 pawn break if the center opens up. While this knight development looks less active initially, it's part of a deeper strategic plan that often gives us excellent piece coordination in the middlegame.",
+      "shortNarration": "Nd2 supports c4 and prepares to reroute to e4 or f1-e3-d5, keeping the c-file open for flexible center play."
     },
     {
       "san": "Nbd7",
-      "annotation": "Continuing Semi Slav Defense Quiet Variation: Nbd7 is a known theory move in this line."
+      "annotation": "Continuing Semi Slav Defense Quiet Variation: Nbd7 is a known theory move in this line.",
+      "shortNarration": "Nbd7 is the theory move in the Semi-Slav Quiet Variation."
     }
   ]
 }

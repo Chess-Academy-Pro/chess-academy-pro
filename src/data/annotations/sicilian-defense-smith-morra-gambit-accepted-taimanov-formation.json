@@ -3,51 +3,63 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing to develop our pieces rapidly. This move controls the crucial d5 and f5 squares while freeing our light-squared bishop and queen for future development. The Smith-Morra Gambit that follows is a sharp tactical opening where we sacrifice a pawn for rapid development and attacking chances against Black's king. This gambit is particularly effective against intermediate players who might struggle with the resulting tactical complications and time pressure."
+      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing to develop our pieces rapidly. This move controls the crucial d5 and f5 squares while freeing our light-squared bishop and queen for future development. The Smith-Morra Gambit that follows is a sharp tactical opening where we sacrifice a pawn for rapid development and attacking chances against Black's king. This gambit is particularly effective against intermediate players who might struggle with the resulting tactical complications and time pressure.",
+      "shortNarration": "1.e4 controls d5 and f5, freeing the bishop and queen for the Smith-Morra Gambit's pawn sacrifice for rapid development and attacking chances."
     },
     {
       "san": "c5",
-      "annotation": "Black responds with the Sicilian Defense, immediately challenging our central pawn and avoiding the symmetrical 1...e5. This move controls the d4 square and prevents us from establishing a classical pawn center with d2-d4. The Sicilian is Black's most ambitious response to 1.e4, aiming for an unbalanced position with winning chances for both sides. Our opponent is signaling their willingness to enter complex middlegame positions rather than seeking early equality."
+      "annotation": "Black responds with the Sicilian Defense, immediately challenging our central pawn and avoiding the symmetrical 1...e5. This move controls the d4 square and prevents us from establishing a classical pawn center with d2-d4. The Sicilian is Black's most ambitious response to 1.e4, aiming for an unbalanced position with winning chances for both sides. Our opponent is signaling their willingness to enter complex middlegame positions rather than seeking early equality.",
+      "shortNarration": "Black's Sicilian Defense challenges e4, controls d4, and avoids symmetry, aiming for an unbalanced fight."
     },
     {
       "san": "d4",
-      "annotation": "We immediately offer the Smith-Morra Gambit by advancing our queen's pawn, directly attacking Black's c5 pawn. This aggressive move shows we're willing to sacrifice material for rapid development and attacking chances. The gambit leads to open lines, active piece play, and practical chances against unprepared opponents. If Black accepts with cxd4, we'll continue with c3, and if they decline, we can often transpose to favorable variations of the Alapin Sicilian."
+      "annotation": "We immediately offer the Smith-Morra Gambit by advancing our queen's pawn, directly attacking Black's c5 pawn. This aggressive move shows we're willing to sacrifice material for rapid development and attacking chances. The gambit leads to open lines, active piece play, and practical chances against unprepared opponents. If Black accepts with cxd4, we'll continue with c3, and if they decline, we can often transpose to favorable variations of the Alapin Sicilian.",
+      "shortNarration": "Advancing the queen's pawn offers the Smith-Morra Gambit, sacrificing a pawn for rapid development and open attacking lines."
     },
     {
       "san": "cxd4",
-      "annotation": "Black accepts our gambit offer by capturing the d4 pawn, taking the material but allowing us to gain time and space in development. This is the most principled response, as declining the gambit with moves like d6 or Nc6 often gives us a comfortable advantage. Now our opponent has won a pawn but must be careful about falling behind in development. Black's next few moves will be critical in determining whether they can consolidate their extra material or fall victim to our attacking initiative."
+      "annotation": "Black accepts our gambit offer by capturing the d4 pawn, taking the material but allowing us to gain time and space in development. This is the most principled response, as declining the gambit with moves like d6 or Nc6 often gives us a comfortable advantage. Now our opponent has won a pawn but must be careful about falling behind in development. Black's next few moves will be critical in determining whether they can consolidate their extra material or fall victim to our attacking initiative.",
+      "shortNarration": "Black takes the d4 pawn, gaining material but ceding time and space for White's development and initiative."
     },
     {
       "san": "c3",
-      "annotation": "We continue the gambit by offering another pawn, this time targeting Black's newly acquired d4 pawn. This move opens the c-file for our rook and prepares to recapture with our knight, bringing it to an excellent central square. The c3 advance is the central idea of the Smith-Morra Gambit, as it allows us to develop with tempo while maintaining pressure on Black's position. If Black takes on c3, our knight will land on c3 with a powerful grip on the center and excellent development prospects."
+      "annotation": "We continue the gambit by offering another pawn, this time targeting Black's newly acquired d4 pawn. This move opens the c-file for our rook and prepares to recapture with our knight, bringing it to an excellent central square. The c3 advance is the central idea of the Smith-Morra Gambit, as it allows us to develop with tempo while maintaining pressure on Black's position. If Black takes on c3, our knight will land on c3 with a powerful grip on the center and excellent development prospects.",
+      "shortNarration": "c3 offers a pawn to open the c-file and recapture with the knight on c3, gaining central control and development tempo."
     },
     {
       "san": "dxc3",
-      "annotation": "Black accepts the second pawn, now being up two pawns in material but significantly behind in development. This capture opens the b-file for our potential rook activity and allows our knight to occupy the strong c3 square. Our opponent must now be extremely careful about king safety, as we'll have multiple pieces pointing toward their kingside. The extra pawns will only matter if Black can survive the opening phase and reach a simplified endgame, which is our job to prevent."
+      "annotation": "Black accepts the second pawn, now being up two pawns in material but significantly behind in development. This capture opens the b-file for our potential rook activity and allows our knight to occupy the strong c3 square. Our opponent must now be extremely careful about king safety, as we'll have multiple pieces pointing toward their kingside. The extra pawns will only matter if Black can survive the opening phase and reach a simplified endgame, which is our job to prevent.",
+      "shortNarration": "Black is up two pawns but far behind in development — the open b-file and knight to c3 target their king before the extra pawns matter."
     },
     {
       "san": "Nxc3",
-      "annotation": "We recapture with our knight, placing it on an ideal central square where it controls important squares like d5, e4, b5, and a4. This knight is perfectly placed for our attacking setup and supports potential advances in the center or on the queenside. The knight on c3 is one of the key pieces in our gambit compensation, providing both defensive and offensive capabilities. From here, our knight can potentially jump to d5 or b5 to create further pressure, and it supports our central pawn structure beautifully."
+      "annotation": "We recapture with our knight, placing it on an ideal central square where it controls important squares like d5, e4, b5, and a4. This knight is perfectly placed for our attacking setup and supports potential advances in the center or on the queenside. The knight on c3 is one of the key pieces in our gambit compensation, providing both defensive and offensive capabilities. From here, our knight can potentially jump to d5 or b5 to create further pressure, and it supports our central pawn structure beautifully.",
+      "shortNarration": "Knight recaptures on c3, controlling d5 and b5 — a key piece for gambit compensation."
     },
     {
       "san": "e6",
-      "annotation": "Black chooses a constructive move that supports the d5 square and prepares to develop their light-squared bishop, likely to e7 or d6. This move also opens a path for Black's dark-squared bishop to develop, though it does block the bishop on c8 temporarily. The e6 advance is typical of French Defense-style setups and shows Black is prioritizing solid development over immediate counterplay. However, this slightly passive approach may allow us to build our attack more comfortably than if Black had played more active moves like d6 and Nf6."
+      "annotation": "Black chooses a constructive move that supports the d5 square and prepares to develop their light-squared bishop, likely to e7 or d6. This move also opens a path for Black's dark-squared bishop to develop, though it does block the bishop on c8 temporarily. The e6 advance is typical of French Defense-style setups and shows Black is prioritizing solid development over immediate counterplay. However, this slightly passive approach may allow us to build our attack more comfortably than if Black had played more active moves like d6 and Nf6.",
+      "shortNarration": "e6 supports d5, develops the dark-squared bishop, and blocks the c8 bishop — a solid but passive French-style setup."
     },
     {
       "san": "Bc4",
-      "annotation": "We develop our light-squared bishop to its most active square, directly targeting Black's vulnerable f7 pawn and controlling the important d5 square. This bishop placement is crucial to our attacking setup, as f7 is often the weakest point in Black's position when they haven't castled kingside yet. The bishop on c4 also supports potential central advances and works harmoniously with our knight on c3. This development gains time since Black must be constantly aware of threats against f7, limiting their piece placement options."
+      "annotation": "We develop our light-squared bishop to its most active square, directly targeting Black's vulnerable f7 pawn and controlling the important d5 square. This bishop placement is crucial to our attacking setup, as f7 is often the weakest point in Black's position when they haven't castled kingside yet. The bishop on c4 also supports potential central advances and works harmoniously with our knight on c3. This development gains time since Black must be constantly aware of threats against f7, limiting their piece placement options.",
+      "shortNarration": "Bishop to c4 targets f7 and controls d5, pressuring Black's weakest square."
     },
     {
       "san": "a6",
-      "annotation": "Black plays a preventive move to stop our knight from jumping to b5, where it would create immediate threats and control important central squares. This move also prepares a potential b7-b5 advance to challenge our bishop on c4, showing Black understands the importance of fighting for central control. While a6 is useful, it doesn't contribute directly to Black's development or king safety, giving us more time to build our attack. Our opponent is walking a fine line between preventing our threats and falling further behind in development."
+      "annotation": "Black plays a preventive move to stop our knight from jumping to b5, where it would create immediate threats and control important central squares. This move also prepares a potential b7-b5 advance to challenge our bishop on c4, showing Black understands the importance of fighting for central control. While a6 is useful, it doesn't contribute directly to Black's development or king safety, giving us more time to build our attack. Our opponent is walking a fine line between preventing our threats and falling further behind in development.",
+      "shortNarration": "a6 prevents Nb5 and prepares b5 to challenge the c4-bishop, but it doesn't develop or improve king safety."
     },
     {
       "san": "Nf3",
-      "annotation": "We complete our kingside development by bringing our knight to its optimal square, where it controls the central e5 and d4 squares while supporting our kingside attack. This knight move also prepares potential castling and connects well with our other pieces for tactical combinations. The knight on f3 is perfectly placed to support advances like e4-e5 or to participate in kingside attacks via moves like Ng5 or Ne5. With this development, we're nearly ready to castle and have excellent piece coordination for our attacking ambitions."
+      "annotation": "We complete our kingside development by bringing our knight to its optimal square, where it controls the central e5 and d4 squares while supporting our kingside attack. This knight move also prepares potential castling and connects well with our other pieces for tactical combinations. The knight on f3 is perfectly placed to support advances like e4-e5 or to participate in kingside attacks via moves like Ng5 or Ne5. With this development, we're nearly ready to castle and have excellent piece coordination for our attacking ambitions.",
+      "shortNarration": "Knight to f3 controls e5 and d4, supports e4-e5 or Ng5, and prepares castling for the kingside attack."
     },
     {
       "san": "Ne7",
-      "annotation": "Black develops their knight to e7, a somewhat awkward square that nevertheless prepares to support the critical d5 square and potentially relocate to better positions later. This knight placement is characteristic of the Taimanov formation, where Black often delays normal development in favor of flexible piece placement. While the knight is less active on e7 than it would be on f6, it doesn't block the f7 square and keeps options open for both ...Ng6 and ...Nd5. However, this slow development gives us even more time to build our initiative, and Black's king remains in the center longer than ideal."
+      "annotation": "Black develops their knight to e7, a somewhat awkward square that nevertheless prepares to support the critical d5 square and potentially relocate to better positions later. This knight placement is characteristic of the Taimanov formation, where Black often delays normal development in favor of flexible piece placement. While the knight is less active on e7 than it would be on f6, it doesn't block the f7 square and keeps options open for both ...Ng6 and ...Nd5. However, this slow development gives us even more time to build our initiative, and Black's king remains in the center longer than ideal.",
+      "shortNarration": "Black's knight on e7 prepares d5 and keeps options open, but delays development and leaves the king in the center."
     }
   ]
 }

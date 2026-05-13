@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "c4",
-      "annotation": "We launch the English Opening, a flexible and sophisticated choice that avoids the classical 1.e4 battlegrounds. The c4 move controls the central d5 square and prepares to build a space advantage on the queenside, while keeping our options open—we can support the center later with moves like e3 and d4, or pursue a kingside attack. This move has been a favorite of positional masters like Capablanca and Kasparov because it gives us the flexibility to adapt to Black's setup."
+      "annotation": "We launch the English Opening, a flexible and sophisticated choice that avoids the classical 1.e4 battlegrounds. The c4 move controls the central d5 square and prepares to build a space advantage on the queenside, while keeping our options open—we can support the center later with moves like e3 and d4, or pursue a kingside attack. This move has been a favorite of positional masters like Capablanca and Kasparov because it gives us the flexibility to adapt to Black's setup.",
+      "shortNarration": "1.c4 controls d5, prepares queenside space, and keeps options open for e3/d4 or a kingside attack."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately challenges our c4 pawn and stakes a claim in the center, which is a natural fighting response in the Anglo-Scandinavian Defense. By playing this move, Black wants to occupy space and provoke us into making a decision about how to handle the center—most importantly, Black prevents us from smoothly establishing control with e3 and d4."
+      "annotation": "Black immediately challenges our c4 pawn and stakes a claim in the center, which is a natural fighting response in the Anglo-Scandinavian Defense. By playing this move, Black wants to occupy space and provoke us into making a decision about how to handle the center—most importantly, Black prevents us from smoothly establishing control with e3 and d4.",
+      "shortNarration": "Black challenges the c4 pawn to stake a center claim, blocking e3 and d4."
     },
     {
       "san": "cxd5",
-      "annotation": "We capture on d5, recapturing toward the center and eliminating Black's central presence while opening the c-file for future use. Taking here is natural because we maintain a strong pawn on d5, gain time by forcing Black to respond to the capture, and keep a slight space advantage—the d5 pawn becomes a strong outpost that controls important squares like c6 and e6."
+      "annotation": "We capture on d5, recapturing toward the center and eliminating Black's central presence while opening the c-file for future use. Taking here is natural because we maintain a strong pawn on d5, gain time by forcing Black to respond to the capture, and keep a slight space advantage—the d5 pawn becomes a strong outpost that controls important squares like c6 and e6.",
+      "shortNarration": "Capturing on d5 recaptures toward the center, opens the c-file, and leaves a strong d5 pawn controlling c6 and e6."
     },
     {
       "san": "Qxd5",
-      "annotation": "Black recaptures with the queen, which is the principled move in this line and characterizes the Anglo-Scandinavian Defense. The queen on d5 is centralized and attacks undefended pieces like our a2 pawn, so Black gets immediate activity; however, this also means the queen will likely need to move again soon when we develop with Nc3, and we'll gain time by attacking it."
+      "annotation": "Black recaptures with the queen, which is the principled move in this line and characterizes the Anglo-Scandinavian Defense. The queen on d5 is centralized and attacks undefended pieces like our a2 pawn, so Black gets immediate activity; however, this also means the queen will likely need to move again soon when we develop with Nc3, and we'll gain time by attacking it.",
+      "shortNarration": "Black's queen recaptures on d5, centralizing and hitting a2, but White gains time with Nc3."
     },
     {
       "san": "Nc3",
-      "annotation": "Our knight development attacks the queen on d5 and forces it to make another move, giving us a valuable tempo while bringing a piece toward the center. The knight controls key squares like d5, e4, and f5, and it supports our potential central or kingside plans; moving with a threat like this is efficient and typical of solid English Opening play."
+      "annotation": "Our knight development attacks the queen on d5 and forces it to make another move, giving us a valuable tempo while bringing a piece toward the center. The knight controls key squares like d5, e4, and f5, and it supports our potential central or kingside plans; moving with a threat like this is efficient and typical of solid English Opening play.",
+      "shortNarration": "Knight to c3 attacks the queen on d5, gaining a tempo while controlling d5, e4, and f5."
     },
     {
       "san": "Qa5",
-      "annotation": "Black's queen retreats to a5, maintaining some activity by eyeing our a2 pawn and the c3 knight, while also avoiding further attacks. However, by placing the queen on the rim, Black loses some of the centrality we forced it to surrender; meanwhile, we've gained time and can now develop smoothly with moves like d4, Bf4, or e3, building a solid position with good long-term chances."
+      "annotation": "Black's queen retreats to a5, maintaining some activity by eyeing our a2 pawn and the c3 knight, while also avoiding further attacks. However, by placing the queen on the rim, Black loses some of the centrality we forced it to surrender; meanwhile, we've gained time and can now develop smoothly with moves like d4, Bf4, or e3, building a solid position with good long-term chances.",
+      "shortNarration": "Black's queen retreats to a5, eyeing a2 and c3, but loses centrality while White gains time to develop with d4, Bf4, or e3."
     }
   ]
 }

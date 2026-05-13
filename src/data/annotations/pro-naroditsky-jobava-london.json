@@ -17,11 +17,13 @@
           "color": "green",
           "delay": 0
         }
-      ]
+      ],
+      "shortNarration": "d4 starts the Jobava London, claiming the center and creating immediate tactical threats while avoiding heavy theory."
     },
     {
       "san": "d5",
-      "annotation": "Black's most natural response, fighting for central control. By playing d5, Black mirrors our central pawn and prevents an immediate e4."
+      "annotation": "Black's most natural response, fighting for central control. By playing d5, Black mirrors our central pawn and prevents an immediate e4.",
+      "shortNarration": "d5 fights for central control and blocks e4."
     },
     {
       "san": "Nc3",
@@ -44,7 +46,8 @@
           "color": "green",
           "delay": 500
         }
-      ]
+      ],
+      "shortNarration": "Jobava London: Nc3 pressures d5, prepares Nb5 targeting c7, and supports e4."
     },
     {
       "san": "Nf6",
@@ -55,7 +58,8 @@
         "g6 — fianchetto with sharp play",
         "Bf5 — develops the bishop but allows the f3-g4 bishop hunt",
         "c6 — Slav-like setup"
-      ]
+      ],
+      "shortNarration": "Black's knight defends d5 and prepares to castle, branching into critical variations."
     },
     {
       "san": "Bf4",
@@ -79,7 +83,8 @@
           "color": "red",
           "delay": 500
         }
-      ]
+      ],
+      "shortNarration": "Bf4 before e3 keeps the bishop active outside the pawn chain, and with Nc3, both pieces target c7."
     },
     {
       "san": "e6",
@@ -90,7 +95,8 @@
         "c5 — challenges the center directly",
         "c6 — Slav setup, solid but passive",
         "a6 — prevents Nb5 but wastes tempo"
-      ]
+      ],
+      "shortNarration": "Black's e6 bolsters d5 but blocks the light-squared bishop and does nothing to stop Nb5."
     },
     {
       "san": "Nb5",
@@ -109,7 +115,8 @@
           "color": "red",
           "delay": 0
         }
-      ]
+      ],
+      "shortNarration": "Knight jumps to b5 threatening Nc7+ fork, forcing Black's knight to the awkward a6 square, costing tempi."
     }
   ],
   "subLines": [
@@ -119,91 +126,113 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4, staking our claim in the center and preparing to build the Jobava London setup."
+          "annotation": "We open with d4, staking our claim in the center and preparing to build the Jobava London setup.",
+          "shortNarration": "d4 stakes the center and prepares the Jobava London setup."
         },
         {
           "san": "d5",
-          "annotation": "Black mirrors us in the center with d5, contesting the space directly."
+          "annotation": "Black mirrors us in the center with d5, contesting the space directly.",
+          "shortNarration": "Black contests the center directly with d5."
         },
         {
           "san": "Nc3",
-          "annotation": "We develop the knight to c3 early — the signature Jobava move that sets us apart from the classical London."
+          "annotation": "We develop the knight to c3 early — the signature Jobava move that sets us apart from the classical London.",
+          "shortNarration": "Knight to c3 early — the Jobava signature, deviating from the classical London setup."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the kingside knight, the most natural response."
+          "annotation": "Black develops the kingside knight, the most natural response.",
+          "shortNarration": "Black develops the kingside knight to f6, attacking e4."
         },
         {
           "san": "Bf4",
-          "annotation": "We bring out our dark-squared bishop before playing e3, ensuring it gets active placement outside the pawn chain."
+          "annotation": "We bring out our dark-squared bishop before playing e3, ensuring it gets active placement outside the pawn chain.",
+          "shortNarration": "Dark-squared bishop develops outside the pawn chain before e3."
         },
         {
           "san": "e6",
-          "annotation": "Black solidifies the center with e6, preparing to develop the kingside bishop."
+          "annotation": "Black solidifies the center with e6, preparing to develop the kingside bishop.",
+          "shortNarration": "e6 solidifies the center and prepares to develop the kingside bishop."
         },
         {
           "san": "Nb5",
-          "annotation": "This is the key Jobava idea — we lunge with Nb5, threatening Nc7+ and immediately disrupting Black's coordination."
+          "annotation": "This is the key Jobava idea — we lunge with Nb5, threatening Nc7+ and immediately disrupting Black's coordination.",
+          "shortNarration": "Nb5 threatens Nc7+, disrupting Black's coordination."
         },
         {
           "san": "Na6",
-          "annotation": "Black is forced into this awkward square with Na6, as it is the only way to defend c7."
+          "annotation": "Black is forced into this awkward square with Na6, as it is the only way to defend c7.",
+          "shortNarration": "Black's Na6 is forced to defend c7."
         },
         {
           "san": "e3",
-          "annotation": "We play e3 to solidify our center and prepare to develop our bishop to d3."
+          "annotation": "We play e3 to solidify our center and prepare to develop our bishop to d3.",
+          "shortNarration": "e3 solidifies the center and prepares to develop the bishop to d3."
         },
         {
           "san": "Be7",
-          "annotation": "Black develops the bishop and prepares to castle."
+          "annotation": "Black develops the bishop and prepares to castle.",
+          "shortNarration": "Black develops the bishop and prepares to castle."
         },
         {
           "san": "Nf3",
-          "annotation": "We complete our minor piece development with Nf3, keeping a flexible and harmonious setup."
+          "annotation": "We complete our minor piece development with Nf3, keeping a flexible and harmonious setup.",
+          "shortNarration": "Nf3 develops the knight, keeping a flexible and harmonious setup."
         },
         {
           "san": "O-O",
-          "annotation": "Black castles kingside, seeking safety."
+          "annotation": "Black castles kingside, seeking safety.",
+          "shortNarration": "Black castles kingside, seeking safety."
         },
         {
           "san": "Bd3",
-          "annotation": "We place our bishop on d3, pointing aggressively at the kingside and preparing to castle."
+          "annotation": "We place our bishop on d3, pointing aggressively at the kingside and preparing to castle.",
+          "shortNarration": "Bishop to d3 aims at the kingside and prepares to castle."
         },
         {
           "san": "c6",
-          "annotation": "Black plays c6 to support d5 and give the misplaced Na6 a route back via c7."
+          "annotation": "Black plays c6 to support d5 and give the misplaced Na6 a route back via c7.",
+          "shortNarration": "Black plays c6 to support d5 and give the misplaced Na6 a route back via c7."
         },
         {
           "san": "Nc3",
-          "annotation": "We retreat the knight back to c3, having achieved our goal of forcing the awkward Na6."
+          "annotation": "We retreat the knight back to c3, having achieved our goal of forcing the awkward Na6.",
+          "shortNarration": "Retreating the knight to c3 forces Black's knight to the awkward a6 square."
         },
         {
           "san": "Nc7",
-          "annotation": "Black's knight finally reroutes to c7, completing the regrouping."
+          "annotation": "Black's knight finally reroutes to c7, completing the regrouping.",
+          "shortNarration": "Black's knight reroutes to c7, completing the regrouping."
         },
         {
           "san": "O-O",
-          "annotation": "We castle kingside, bringing our king to safety and connecting our rooks."
+          "annotation": "We castle kingside, bringing our king to safety and connecting our rooks.",
+          "shortNarration": "Castling kingside brings the king to safety and connects the rooks."
         },
         {
           "san": "b6",
-          "annotation": "Black prepares to develop the queenside bishop to b7."
+          "annotation": "Black prepares to develop the queenside bishop to b7.",
+          "shortNarration": "Black develops the queenside bishop to b7."
         },
         {
           "san": "e4",
-          "annotation": "We strike in the center with e4 — this is our key break, leveraging our lead in development."
+          "annotation": "We strike in the center with e4 — this is our key break, leveraging our lead in development.",
+          "shortNarration": "e4 strike opens the center, leveraging White's development lead."
         },
         {
           "san": "dxe4",
-          "annotation": "Black captures, accepting the central trade."
+          "annotation": "Black captures, accepting the central trade.",
+          "shortNarration": "Black captures, accepting the central trade."
         },
         {
           "san": "Nxe4",
-          "annotation": "We recapture with the knight, centralizing it powerfully."
+          "annotation": "We recapture with the knight, centralizing it powerfully.",
+          "shortNarration": "Recapturing with the knight centralizes it powerfully."
         },
         {
           "san": "Bb7",
-          "annotation": "Black activates the bishop to b7, but we have already achieved a dynamic, active position."
+          "annotation": "Black activates the bishop to b7, but we have already achieved a dynamic, active position.",
+          "shortNarration": "Black's bishop to b7 activates it, but White already has a dynamic, active position."
         }
       ]
     },
@@ -213,83 +242,103 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4, initiating the Jobava London system."
+          "annotation": "We open with d4, initiating the Jobava London system.",
+          "shortNarration": "d4 opens the Jobava London, targeting rapid development and early pressure."
         },
         {
           "san": "d5",
-          "annotation": "Black takes central space with d5."
+          "annotation": "Black takes central space with d5.",
+          "shortNarration": "Black contests the center with d5."
         },
         {
           "san": "Nc3",
-          "annotation": "We play our signature Nc3, immediately putting the Nb5 threat on the table."
+          "annotation": "We play our signature Nc3, immediately putting the Nb5 threat on the table.",
+          "shortNarration": "Nc3 threatens Nb5, attacking the c7 weakness."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the knight to f6."
+          "annotation": "Black develops the knight to f6.",
+          "shortNarration": "Black develops the knight to f6, attacking e4."
         },
         {
           "san": "Bf4",
-          "annotation": "We develop our bishop actively to f4 before closing in the pawn chain."
+          "annotation": "We develop our bishop actively to f4 before closing in the pawn chain.",
+          "shortNarration": "Develop bishop to f4 before closing the pawn chain."
         },
         {
           "san": "a6",
-          "annotation": "Black preemptively plays a6 to prevent our Nb5 idea. While this stops the immediate threat, it is a tempo spent on a purely prophylactic pawn move."
+          "annotation": "Black preemptively plays a6 to prevent our Nb5 idea. While this stops the immediate threat, it is a tempo spent on a purely prophylactic pawn move.",
+          "shortNarration": "Black's a6 prevents Nb5 but costs a tempo on a purely defensive pawn move."
         },
         {
           "san": "e3",
-          "annotation": "We simply continue our development with e3, untroubled by Black's sidestep."
+          "annotation": "We simply continue our development with e3, untroubled by Black's sidestep.",
+          "shortNarration": "e3 develops while ignoring Black's sidestep."
         },
         {
           "san": "e6",
-          "annotation": "Black plays e6 to develop the kingside and solidify the center."
+          "annotation": "Black plays e6 to develop the kingside and solidify the center.",
+          "shortNarration": "Black plays e6 to develop the kingside and solidify the center."
         },
         {
           "san": "Bd3",
-          "annotation": "We place the bishop on d3, targeting the kingside. We are already a tempo ahead in meaningful development."
+          "annotation": "We place the bishop on d3, targeting the kingside. We are already a tempo ahead in meaningful development.",
+          "shortNarration": "Bishop to d3 targets the kingside, and White is a tempo ahead in development."
         },
         {
           "san": "c5",
-          "annotation": "Black challenges our center with c5, the most ambitious try."
+          "annotation": "Black challenges our center with c5, the most ambitious try.",
+          "shortNarration": "Black's c5 challenges the center — the most ambitious try."
         },
         {
           "san": "dxc5",
-          "annotation": "We capture with dxc5, inviting Black to spend more time recapturing while we continue developing."
+          "annotation": "We capture with dxc5, inviting Black to spend more time recapturing while we continue developing.",
+          "shortNarration": "dxc5 invites Black to waste time recapturing while White develops."
         },
         {
           "san": "Bxc5",
-          "annotation": "Black recaptures the pawn with the bishop, restoring material balance."
+          "annotation": "Black recaptures the pawn with the bishop, restoring material balance.",
+          "shortNarration": "Black recaptures with the bishop, restoring material balance."
         },
         {
           "san": "Nf3",
-          "annotation": "We develop our final minor piece with Nf3, completing our setup."
+          "annotation": "We develop our final minor piece with Nf3, completing our setup.",
+          "shortNarration": "Nf3 develops the final minor piece, completing the setup."
         },
         {
           "san": "O-O",
-          "annotation": "Black castles kingside."
+          "annotation": "Black castles kingside.",
+          "shortNarration": "Black castles kingside."
         },
         {
           "san": "O-O",
-          "annotation": "We castle as well, bringing our king to safety and connecting our rooks."
+          "annotation": "We castle as well, bringing our king to safety and connecting our rooks.",
+          "shortNarration": "Castle to safety and connect rooks."
         },
         {
           "san": "Nc6",
-          "annotation": "Black develops the queenside knight."
+          "annotation": "Black develops the queenside knight.",
+          "shortNarration": "Black develops the queenside knight to c6."
         },
         {
           "san": "a3",
-          "annotation": "We play a3 to prevent Nb4 and prepare b4 to gain space on the queenside."
+          "annotation": "We play a3 to prevent Nb4 and prepare b4 to gain space on the queenside.",
+          "shortNarration": "a3 prevents Nb4 and prepares b4 to gain queenside space."
         },
         {
           "san": "b5",
-          "annotation": "Black advances with b5, supporting the bishop and staking queenside space."
+          "annotation": "Black advances with b5, supporting the bishop and staking queenside space.",
+          "shortNarration": "Black's b5 stakes queenside space and supports the bishop."
         },
         {
           "san": "Qe2",
-          "annotation": "We centralize the queen with Qe2, connecting our rooks and preparing e4."
+          "annotation": "We centralize the queen with Qe2, connecting our rooks and preparing e4.",
+          "shortNarration": "Qe2 centralizes the queen, connects rooks, and prepares e4."
         },
         {
           "san": "Bb7",
-          "annotation": "Black develops the bishop to b7. We have a harmonious position with a slight lead in development."
+          "annotation": "Black develops the bishop to b7. We have a harmonious position with a slight lead in development.",
+          "shortNarration": "Black develops the bishop to b7 with a slight lead in development."
         }
       ]
     },
@@ -299,95 +348,118 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4, beginning the Jobava London."
+          "annotation": "We open with d4, beginning the Jobava London.",
+          "shortNarration": "d4 opens the Jobava London."
         },
         {
           "san": "d5",
-          "annotation": "Black plays d5 to contest the center."
+          "annotation": "Black plays d5 to contest the center.",
+          "shortNarration": "Black plays d5 to contest the center."
         },
         {
           "san": "Nc3",
-          "annotation": "Our signature Nc3, keeping multiple threats and options in play."
+          "annotation": "Our signature Nc3, keeping multiple threats and options in play.",
+          "shortNarration": "Nc3 keeps multiple threats and options in play."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the knight to f6."
+          "annotation": "Black develops the knight to f6.",
+          "shortNarration": "Black develops the knight to f6, attacking e4."
         },
         {
           "san": "Bf4",
-          "annotation": "We develop the bishop actively to f4."
+          "annotation": "We develop the bishop actively to f4.",
+          "shortNarration": "Bishop develops actively to f4."
         },
         {
           "san": "g6",
-          "annotation": "Black opts for the fianchetto setup with g6. This creates a subtle weakness on the kingside that we will exploit."
+          "annotation": "Black opts for the fianchetto setup with g6. This creates a subtle weakness on the kingside that we will exploit.",
+          "shortNarration": "Black's g6 fianchetto weakens the kingside dark squares for White to exploit."
         },
         {
           "san": "e3",
-          "annotation": "We play e3, solidifying our center before launching our plan."
+          "annotation": "We play e3, solidifying our center before launching our plan.",
+          "shortNarration": "e3 solidifies the center before launching the plan."
         },
         {
           "san": "Bg7",
-          "annotation": "Black completes the fianchetto."
+          "annotation": "Black completes the fianchetto.",
+          "shortNarration": "Black fianchettoes the bishop."
         },
         {
           "san": "h4",
-          "annotation": "This is our key idea against the fianchetto — we immediately advance h4 to exploit the weakened kingside."
+          "annotation": "This is our key idea against the fianchetto — we immediately advance h4 to exploit the weakened kingside.",
+          "shortNarration": "Advance h4 immediately to exploit the weakened kingside against the fianchetto."
         },
         {
           "san": "h5",
-          "annotation": "Black plays h5 to stop our h5 push, but this hands us control of the g5 square permanently."
+          "annotation": "Black plays h5 to stop our h5 push, but this hands us control of the g5 square permanently.",
+          "shortNarration": "Black's h5 cedes permanent control of g5 to White."
         },
         {
           "san": "Nf3",
-          "annotation": "We develop the knight to f3, preparing to reroute it to the e5 outpost."
+          "annotation": "We develop the knight to f3, preparing to reroute it to the e5 outpost.",
+          "shortNarration": "Knight to f3 prepares rerouting to the e5 outpost."
         },
         {
           "san": "Bg4",
-          "annotation": "Black pins our knight with Bg4, trying to neutralize our activity."
+          "annotation": "Black pins our knight with Bg4, trying to neutralize our activity.",
+          "shortNarration": "Black pins our knight on f3 with Bg4, neutralizing our activity."
         },
         {
           "san": "Be2",
-          "annotation": "We play Be2, offering to trade bishops and remove the pin."
+          "annotation": "We play Be2, offering to trade bishops and remove the pin.",
+          "shortNarration": "Be2 offers to trade bishops and remove the pin."
         },
         {
           "san": "O-O",
-          "annotation": "Black castles kingside."
+          "annotation": "Black castles kingside.",
+          "shortNarration": "Black castles kingside."
         },
         {
           "san": "Ne5",
-          "annotation": "We plant our knight on the powerful e5 outpost, dominating the center."
+          "annotation": "We plant our knight on the powerful e5 outpost, dominating the center.",
+          "shortNarration": "Knight on e5 outpost dominates the center."
         },
         {
           "san": "Bxe2",
-          "annotation": "Black takes the bishop on e2 to relieve the pressure."
+          "annotation": "Black takes the bishop on e2 to relieve the pressure.",
+          "shortNarration": "Black takes the bishop on e2 to relieve the pressure."
         },
         {
           "san": "Qxe2",
-          "annotation": "We recapture with the queen, keeping the e5 knight firmly in place."
+          "annotation": "We recapture with the queen, keeping the e5 knight firmly in place.",
+          "shortNarration": "Recapturing with the queen keeps the knight on e5 anchored."
         },
         {
           "san": "Nbd7",
-          "annotation": "Black develops the queenside knight, trying to challenge our Ne5."
+          "annotation": "Black develops the queenside knight, trying to challenge our Ne5.",
+          "shortNarration": "Black's queenside knight challenges Ne5, threatening to trade off your active piece."
         },
         {
           "san": "Qd2",
-          "annotation": "We reposition the queen to d2, eyeing h6 and preparing to castle queenside."
+          "annotation": "We reposition the queen to d2, eyeing h6 and preparing to castle queenside.",
+          "shortNarration": "Queen to d2 eyes h6 and prepares queenside castling."
         },
         {
           "san": "c5",
-          "annotation": "Black strikes in the center with c5, fighting back for counterplay."
+          "annotation": "Black strikes in the center with c5, fighting back for counterplay.",
+          "shortNarration": "Black fights back with c5, striking the center for counterplay."
         },
         {
           "san": "dxc5",
-          "annotation": "We capture with dxc5, opening lines."
+          "annotation": "We capture with dxc5, opening lines.",
+          "shortNarration": "dxc5 opens lines."
         },
         {
           "san": "Nxc5",
-          "annotation": "Black recaptures with the knight."
+          "annotation": "Black recaptures with the knight.",
+          "shortNarration": "Black recaptures with the knight."
         },
         {
           "san": "O-O-O",
-          "annotation": "We castle queenside, completing our setup for a powerful kingside attack."
+          "annotation": "We castle queenside, completing our setup for a powerful kingside attack.",
+          "shortNarration": "Castling queenside completes the setup for a kingside attack."
         }
       ]
     },
@@ -397,95 +469,118 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4, initiating the Jobava London."
+          "annotation": "We open with d4, initiating the Jobava London.",
+          "shortNarration": "d4 opens the Jobava London."
         },
         {
           "san": "d5",
-          "annotation": "Black claims central space with d5."
+          "annotation": "Black claims central space with d5.",
+          "shortNarration": "Black claims central space with d5."
         },
         {
           "san": "Nc3",
-          "annotation": "We play our characteristic Nc3 on move two."
+          "annotation": "We play our characteristic Nc3 on move two.",
+          "shortNarration": "Nc3 develops the knight and defends e4."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the knight to f6."
+          "annotation": "Black develops the knight to f6.",
+          "shortNarration": "Black develops the knight to f6, attacking e4."
         },
         {
           "san": "Bf4",
-          "annotation": "We develop the bishop to f4, completing our Jobava triangle."
+          "annotation": "We develop the bishop to f4, completing our Jobava triangle.",
+          "shortNarration": "Bishop to f4 completes the Jobava triangle."
         },
         {
           "san": "g6",
-          "annotation": "Black goes for the fianchetto. If they castle into it, we have a devastating sacrifice."
+          "annotation": "Black goes for the fianchetto. If they castle into it, we have a devastating sacrifice.",
+          "shortNarration": "Black's fianchetto sets up a devastating sacrifice if they castle into it."
         },
         {
           "san": "e3",
-          "annotation": "We play e3 to shore up our center."
+          "annotation": "We play e3 to shore up our center.",
+          "shortNarration": "e3 shores up the center."
         },
         {
           "san": "Bg7",
-          "annotation": "Black fianchettoes the bishop."
+          "annotation": "Black fianchettoes the bishop.",
+          "shortNarration": "Black fianchettoes the bishop, aiming at the center and kingside."
         },
         {
           "san": "h4",
-          "annotation": "We launch the h-pawn immediately, signaling aggressive intentions."
+          "annotation": "We launch the h-pawn immediately, signaling aggressive intentions.",
+          "shortNarration": "h-pawn push signals immediate aggression."
         },
         {
           "san": "O-O",
-          "annotation": "Black castles kingside — walking directly into our attack."
+          "annotation": "Black castles kingside — walking directly into our attack.",
+          "shortNarration": "Black castles kingside, walking into White's attack."
         },
         {
           "san": "h5",
-          "annotation": "We push h5, a pawn sacrifice that forces open the h-file and begins a decisive kingside assault."
+          "annotation": "We push h5, a pawn sacrifice that forces open the h-file and begins a decisive kingside assault.",
+          "shortNarration": "h5 sacrifices a pawn to open the h-file for a decisive kingside attack."
         },
         {
           "san": "Nxh5",
-          "annotation": "Black captures the pawn with the knight."
+          "annotation": "Black captures the pawn with the knight.",
+          "shortNarration": "Black recaptures the pawn with the knight."
         },
         {
           "san": "Rxh5",
-          "annotation": "We sacrifice the rook on h5 to rip open the h-file!"
+          "annotation": "We sacrifice the rook on h5 to rip open the h-file!",
+          "shortNarration": "Sacrificing the rook on h5 rips open the h-file for a mating attack."
         },
         {
           "san": "gxh5",
-          "annotation": "Black must take, but now the h-file is completely open and the king is exposed."
+          "annotation": "Black must take, but now the h-file is completely open and the king is exposed.",
+          "shortNarration": "Black must take, opening the h-file and exposing the king to mate threats."
         },
         {
           "san": "Qxh5",
-          "annotation": "We recapture with the queen on h5 with tremendous attacking energy. Qxf7 and mate ideas are already real."
+          "annotation": "We recapture with the queen on h5 with tremendous attacking energy. Qxf7 and mate ideas are already real.",
+          "shortNarration": "Recapturing with the queen on h5 threatens Qxf7 and mate."
         },
         {
           "san": "f5",
-          "annotation": "Black desperately tries to close lines with f5."
+          "annotation": "Black desperately tries to close lines with f5.",
+          "shortNarration": "Black's f5 tries to close lines but weakens the kingside."
         },
         {
           "san": "O-O-O",
-          "annotation": "We castle queenside, bringing our king to safety and activating the remaining rook."
+          "annotation": "We castle queenside, bringing our king to safety and activating the remaining rook.",
+          "shortNarration": "Castling queenside brings the king to safety and activates the rook."
         },
         {
           "san": "Nc6",
-          "annotation": "Black develops, trying to generate counterplay."
+          "annotation": "Black develops, trying to generate counterplay.",
+          "shortNarration": "Black develops to generate counterplay."
         },
         {
           "san": "Bd3",
-          "annotation": "We develop the bishop to d3, pointing menacingly toward the kingside."
+          "annotation": "We develop the bishop to d3, pointing menacingly toward the kingside.",
+          "shortNarration": "Bishop to d3 points toward the kingside."
         },
         {
           "san": "e5",
-          "annotation": "Black lashes out with e5, attempting a central counterattack."
+          "annotation": "Black lashes out with e5, attempting a central counterattack.",
+          "shortNarration": "Black counters with e5, challenging the center."
         },
         {
           "san": "dxe5",
-          "annotation": "We capture, opening further lines and maintaining our initiative."
+          "annotation": "We capture, opening further lines and maintaining our initiative.",
+          "shortNarration": "Capture opens lines and keeps the initiative."
         },
         {
           "san": "Nxe5",
-          "annotation": "Black recaptures with the knight."
+          "annotation": "Black recaptures with the knight.",
+          "shortNarration": "Black recaptures with the knight."
         },
         {
           "san": "Nf3",
-          "annotation": "We develop the final knight. Our queen on h5, bishop on d3, and open h-file create an overwhelming attack."
+          "annotation": "We develop the final knight. Our queen on h5, bishop on d3, and open h-file create an overwhelming attack.",
+          "shortNarration": "Queen on h5, bishop on d3, and open h-file deliver an overwhelming attack."
         }
       ]
     },
@@ -495,95 +590,118 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4, establishing our central presence for the Jobava London."
+          "annotation": "We open with d4, establishing our central presence for the Jobava London.",
+          "shortNarration": "d4 opens the Jobava London, establishing central presence."
         },
         {
           "san": "d5",
-          "annotation": "Black mirrors us in the center with d5."
+          "annotation": "Black mirrors us in the center with d5.",
+          "shortNarration": "Black mirrors with d5, challenging the center."
         },
         {
           "san": "Nc3",
-          "annotation": "We develop the knight to c3, a key Jobava move that eyes e4."
+          "annotation": "We develop the knight to c3, a key Jobava move that eyes e4.",
+          "shortNarration": "Knight to c3 eyes e4, a key Jobava move."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the kingside knight naturally."
+          "annotation": "Black develops the kingside knight naturally.",
+          "shortNarration": "Black develops the kingside knight to f6."
         },
         {
           "san": "Bf4",
-          "annotation": "We bring out the bishop to f4, completing the Jobava triangle."
+          "annotation": "We bring out the bishop to f4, completing the Jobava triangle.",
+          "shortNarration": "Bishop to f4 completes the Jobava triangle."
         },
         {
           "san": "Bf5",
-          "annotation": "Black mirrors our bishop development — this actually walks into our aggressive plan. We are going to hunt this bishop."
+          "annotation": "Black mirrors our bishop development — this actually walks into our aggressive plan. We are going to hunt this bishop.",
+          "shortNarration": "Black's mirrored bishop development walks into our plan to hunt it."
         },
         {
           "san": "f3",
-          "annotation": "We play f3 to prepare the aggressive e4 advance and the pawn storm."
+          "annotation": "We play f3 to prepare the aggressive e4 advance and the pawn storm.",
+          "shortNarration": "f3 prepares e4 and the kingside pawn storm."
         },
         {
           "san": "e6",
-          "annotation": "Black solidifies the center and opens lines for the dark-squared bishop."
+          "annotation": "Black solidifies the center and opens lines for the dark-squared bishop.",
+          "shortNarration": "Black solidifies the center and opens lines for the dark-squared bishop."
         },
         {
           "san": "g4",
-          "annotation": "We launch the bishop hunt with g4, attacking the Bf5 and forcing it to move."
+          "annotation": "We launch the bishop hunt with g4, attacking the Bf5 and forcing it to move.",
+          "shortNarration": "g4 attacks the Bf5, forcing it to move."
         },
         {
           "san": "Bg6",
-          "annotation": "The bishop retreats to g6, but we continue the chase."
+          "annotation": "The bishop retreats to g6, but we continue the chase.",
+          "shortNarration": "The bishop retreats to g6, but the chase continues."
         },
         {
           "san": "h4",
-          "annotation": "We push h4, continuing to harass the bishop and preparing h5."
+          "annotation": "We push h4, continuing to harass the bishop and preparing h5.",
+          "shortNarration": "h4 harasses the bishop and prepares h5."
         },
         {
           "san": "h5",
-          "annotation": "Black plays h5 to block our pawn advance."
+          "annotation": "Black plays h5 to block our pawn advance.",
+          "shortNarration": "Black's h5 blocks your pawn advance, but it weakens the g5 square."
         },
         {
           "san": "g5",
-          "annotation": "We push g5, chasing the Nf6 and disrupting Black's coordination."
+          "annotation": "We push g5, chasing the Nf6 and disrupting Black's coordination.",
+          "shortNarration": "Pushing g5 chases the knight on f6 and disrupts Black's coordination."
         },
         {
           "san": "Nfd7",
-          "annotation": "The knight is forced back to d7, dramatically reducing Black's piece activity."
+          "annotation": "The knight is forced back to d7, dramatically reducing Black's piece activity.",
+          "shortNarration": "Knight retreats to d7, drastically reducing Black's piece activity."
         },
         {
           "san": "e4",
-          "annotation": "Now we detonate the center with e4 — the culmination of our preparation with f3 and g4."
+          "annotation": "Now we detonate the center with e4 — the culmination of our preparation with f3 and g4.",
+          "shortNarration": "e4 detonates the center, opening lines after f3 and g4 preparation."
         },
         {
           "san": "dxe4",
-          "annotation": "Black captures, but has little choice."
+          "annotation": "Black captures, but has little choice.",
+          "shortNarration": "Black captures with no better option."
         },
         {
           "san": "fxe4",
-          "annotation": "We recapture with the f-pawn, maintaining a powerful pawn center."
+          "annotation": "We recapture with the f-pawn, maintaining a powerful pawn center.",
+          "shortNarration": "Recapturing with the f-pawn maintains a powerful pawn center."
         },
         {
           "san": "Bb4",
-          "annotation": "Black pins the Nc3, trying to create counterplay against our center."
+          "annotation": "Black pins the Nc3, trying to create counterplay against our center.",
+          "shortNarration": "Black pins the Nc3 to attack the center, threatening doubled pawns or piece loss."
         },
         {
           "san": "Bd3",
-          "annotation": "We develop the bishop to d3, reinforcing the center and preparing to castle."
+          "annotation": "We develop the bishop to d3, reinforcing the center and preparing to castle.",
+          "shortNarration": "Bishop to d3 reinforces the center and prepares to castle."
         },
         {
           "san": "Nf8",
-          "annotation": "Black reroutes the knight, trying to find activity in a cramped position."
+          "annotation": "Black reroutes the knight, trying to find activity in a cramped position.",
+          "shortNarration": "Black reroutes the knight to find activity in a cramped position."
         },
         {
           "san": "Nf3",
-          "annotation": "We complete development with Nf3, connecting our rooks."
+          "annotation": "We complete development with Nf3, connecting our rooks.",
+          "shortNarration": "Nf3 completes development and connects the rooks."
         },
         {
           "san": "Bxc3+",
-          "annotation": "Black trades the bishop for the knight, hoping to damage our pawn structure."
+          "annotation": "Black trades the bishop for the knight, hoping to damage our pawn structure.",
+          "shortNarration": "Black trades bishop for knight to damage White's pawn structure."
         },
         {
           "san": "bxc3",
-          "annotation": "We recapture with the b-pawn. We accept doubled pawns in exchange for the open b-file and a dominant pawn center."
+          "annotation": "We recapture with the b-pawn. We accept doubled pawns in exchange for the open b-file and a dominant pawn center.",
+          "shortNarration": "Recapturing with the b-pawn accepts doubled pawns for the open b-file and a dominant center."
         }
       ]
     },
@@ -593,103 +711,128 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4, beginning the Jobava London."
+          "annotation": "We open with d4, beginning the Jobava London.",
+          "shortNarration": "d4 opens the Jobava London."
         },
         {
           "san": "d5",
-          "annotation": "Black plays d5, claiming central space."
+          "annotation": "Black plays d5, claiming central space.",
+          "shortNarration": "Black plays d5, claiming central space."
         },
         {
           "san": "Nc3",
-          "annotation": "Our signature Nc3, signaling the Jobava system."
+          "annotation": "Our signature Nc3, signaling the Jobava system.",
+          "shortNarration": "Nc3 signals the Jobava system."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the kingside knight."
+          "annotation": "Black develops the kingside knight.",
+          "shortNarration": "Black develops the knight to f6."
         },
         {
           "san": "Bf4",
-          "annotation": "We complete the Jobava triangle with Bf4."
+          "annotation": "We complete the Jobava triangle with Bf4.",
+          "shortNarration": "Bf4 completes the Jobava triangle."
         },
         {
           "san": "c6",
-          "annotation": "Black opts for the Slav-like c6 setup, bolstering d5 and preparing Bf5. This transposes into a bishop hunt structure."
+          "annotation": "Black opts for the Slav-like c6 setup, bolstering d5 and preparing Bf5. This transposes into a bishop hunt structure.",
+          "shortNarration": "Black's c6 bolsters d5 and prepares Bf5, transposing into a bishop hunt structure."
         },
         {
           "san": "e3",
-          "annotation": "We play e3, shoring up the center before launching our kingside plan."
+          "annotation": "We play e3, shoring up the center before launching our kingside plan.",
+          "shortNarration": "e3 shores up the center before launching the kingside plan."
         },
         {
           "san": "Bf5",
-          "annotation": "Black develops the bishop outside the pawn chain — exactly what we want to punish."
+          "annotation": "Black develops the bishop outside the pawn chain — exactly what we want to punish.",
+          "shortNarration": "Black's bishop outside the pawn chain is a target for White's tempo-gaining attacks."
         },
         {
           "san": "f3",
-          "annotation": "We play f3, preparing the g4-h4 bishop hunt just like the 3...Bf5 line."
+          "annotation": "We play f3, preparing the g4-h4 bishop hunt just like the 3...Bf5 line.",
+          "shortNarration": "f3 prepares g4-h4 to hunt the bishop, mirroring the 3...Bf5 line."
         },
         {
           "san": "e6",
-          "annotation": "Black plays e6, solidifying the center."
+          "annotation": "Black plays e6, solidifying the center.",
+          "shortNarration": "Black's e6 solidifies the center, preparing d5."
         },
         {
           "san": "g4",
-          "annotation": "We launch g4, attacking the bishop and gaining kingside space."
+          "annotation": "We launch g4, attacking the bishop and gaining kingside space.",
+          "shortNarration": "g4 attacks the bishop and gains kingside space."
         },
         {
           "san": "Bg6",
-          "annotation": "The bishop retreats to g6, but we keep chasing."
+          "annotation": "The bishop retreats to g6, but we keep chasing.",
+          "shortNarration": "The bishop retreats to g6, but we keep chasing."
         },
         {
           "san": "h4",
-          "annotation": "We push h4, continuing the kingside expansion."
+          "annotation": "We push h4, continuing the kingside expansion.",
+          "shortNarration": "h4 continues the kingside expansion."
         },
         {
           "san": "h5",
-          "annotation": "Black plays h5 to halt our pawn advance."
+          "annotation": "Black plays h5 to halt our pawn advance.",
+          "shortNarration": "Black's h5 stops your pawn push, but weakens the g5 square."
         },
         {
           "san": "g5",
-          "annotation": "We push g5, chasing the knight from f6 and clamping down on the kingside."
+          "annotation": "We push g5, chasing the knight from f6 and clamping down on the kingside.",
+          "shortNarration": "g5 chases the knight from f6 and clamps down on the kingside."
         },
         {
           "san": "Nfd7",
-          "annotation": "The knight retreats to d7, losing time and activity."
+          "annotation": "The knight retreats to d7, losing time and activity.",
+          "shortNarration": "Knight retreats to d7, losing time and activity."
         },
         {
           "san": "e4",
-          "annotation": "We strike in the center with e4, opening lines while our kingside space advantage is huge."
+          "annotation": "We strike in the center with e4, opening lines while our kingside space advantage is huge.",
+          "shortNarration": "e4 strikes the center, opening lines while White's kingside space advantage is huge."
         },
         {
           "san": "dxe4",
-          "annotation": "Black captures in the center."
+          "annotation": "Black captures in the center.",
+          "shortNarration": "Black captures in the center."
         },
         {
           "san": "fxe4",
-          "annotation": "We recapture with the f-pawn, maintaining a dominant pawn center."
+          "annotation": "We recapture with the f-pawn, maintaining a dominant pawn center.",
+          "shortNarration": "Recapturing with the f-pawn maintains a dominant pawn center."
         },
         {
           "san": "Bb4",
-          "annotation": "Black pins the knight, trying to generate counterplay."
+          "annotation": "Black pins the knight, trying to generate counterplay.",
+          "shortNarration": "Black pins the knight to generate counterplay."
         },
         {
           "san": "Bd2",
-          "annotation": "We play Bd2, breaking the pin and keeping our structure intact."
+          "annotation": "We play Bd2, breaking the pin and keeping our structure intact.",
+          "shortNarration": "Bd2 breaks the pin and keeps the structure intact."
         },
         {
           "san": "Qa5",
-          "annotation": "Black brings the queen to a5, maintaining pressure on the pin."
+          "annotation": "Black brings the queen to a5, maintaining pressure on the pin.",
+          "shortNarration": "Black's queen to a5 keeps the pin on the knight."
         },
         {
           "san": "Nf3",
-          "annotation": "We develop the knight to f3, completing our setup."
+          "annotation": "We develop the knight to f3, completing our setup.",
+          "shortNarration": "Knight to f3 completes development."
         },
         {
           "san": "e5",
-          "annotation": "Black lashes out with e5, seeking counterplay in the center."
+          "annotation": "Black lashes out with e5, seeking counterplay in the center.",
+          "shortNarration": "Black plays e5 to fight for central counterplay."
         },
         {
           "san": "dxe5",
-          "annotation": "We capture, maintaining our space advantage and a strong position."
+          "annotation": "We capture, maintaining our space advantage and a strong position.",
+          "shortNarration": "Capturing maintains the space advantage and a strong position."
         }
       ]
     },
@@ -699,95 +842,118 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4, beginning the Jobava."
+          "annotation": "We open with d4, beginning the Jobava.",
+          "shortNarration": "d4 opens the Jobava."
         },
         {
           "san": "d5",
-          "annotation": "Black plays d5 in the center."
+          "annotation": "Black plays d5 in the center.",
+          "shortNarration": "Black's d5 challenges the center, opening lines for both sides."
         },
         {
           "san": "Nc3",
-          "annotation": "We play Nc3, our Jobava signature move."
+          "annotation": "We play Nc3, our Jobava signature move.",
+          "shortNarration": "Nc3 is the Jobava signature move, preparing d4 and a quick kingside attack."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the knight to f6."
+          "annotation": "Black develops the knight to f6.",
+          "shortNarration": "Black develops the knight to f6, attacking e4."
         },
         {
           "san": "Bf4",
-          "annotation": "We complete the Jobava setup with Bf4."
+          "annotation": "We complete the Jobava setup with Bf4.",
+          "shortNarration": "Bf4 completes the Jobava setup."
         },
         {
           "san": "c5",
-          "annotation": "Black immediately challenges our center with c5. We welcome the tension."
+          "annotation": "Black immediately challenges our center with c5. We welcome the tension.",
+          "shortNarration": "Black challenges the center with c5, and White welcomes the tension."
         },
         {
           "san": "e3",
-          "annotation": "We play e3, solidifying d4 and preparing to develop the bishop."
+          "annotation": "We play e3, solidifying d4 and preparing to develop the bishop.",
+          "shortNarration": "e3 solidifies d4 and clears the bishop's path."
         },
         {
           "san": "cxd4",
-          "annotation": "Black captures on d4, releasing the central tension."
+          "annotation": "Black captures on d4, releasing the central tension.",
+          "shortNarration": "Black captures on d4, releasing the central tension."
         },
         {
           "san": "exd4",
-          "annotation": "We recapture with the e-pawn, establishing a strong isolated queen pawn (IQP) that gives us active piece play."
+          "annotation": "We recapture with the e-pawn, establishing a strong isolated queen pawn (IQP) that gives us active piece play.",
+          "shortNarration": "Recapturing with the e-pawn creates an IQP, giving active piece play."
         },
         {
           "san": "a6",
-          "annotation": "Black plays a6 to prevent Nb5 ideas."
+          "annotation": "Black plays a6 to prevent Nb5 ideas.",
+          "shortNarration": "Black plays a6 to prevent Nb5."
         },
         {
           "san": "Nf3",
-          "annotation": "We develop the knight to f3, supporting d4 and preparing to castle."
+          "annotation": "We develop the knight to f3, supporting d4 and preparing to castle.",
+          "shortNarration": "Knight to f3 supports d4 and prepares to castle."
         },
         {
           "san": "Nc6",
-          "annotation": "Black develops the queenside knight."
+          "annotation": "Black develops the queenside knight.",
+          "shortNarration": "Black develops the queenside knight to c6."
         },
         {
           "san": "Bd3",
-          "annotation": "We place the bishop on d3, pointing at the kingside."
+          "annotation": "We place the bishop on d3, pointing at the kingside.",
+          "shortNarration": "Bishop on d3 aims at the kingside."
         },
         {
           "san": "Bg4",
-          "annotation": "Black pins our knight with Bg4."
+          "annotation": "Black pins our knight with Bg4.",
+          "shortNarration": "Bg4 pins the knight to the queen."
         },
         {
           "san": "O-O",
-          "annotation": "We castle kingside, ignoring the pin for now."
+          "annotation": "We castle kingside, ignoring the pin for now.",
+          "shortNarration": "Castle kingside, ignoring the pin for now."
         },
         {
           "san": "e6",
-          "annotation": "Black plays e6, solidifying the center."
+          "annotation": "Black plays e6, solidifying the center.",
+          "shortNarration": "Black's e6 solidifies the center and prepares to develop the kingside."
         },
         {
           "san": "h3",
-          "annotation": "We play h3 to challenge the bishop and gain tempo."
+          "annotation": "We play h3 to challenge the bishop and gain tempo.",
+          "shortNarration": "h3 challenges the bishop and gains tempo."
         },
         {
           "san": "Bh5",
-          "annotation": "The bishop retreats to h5, maintaining the pin."
+          "annotation": "The bishop retreats to h5, maintaining the pin.",
+          "shortNarration": "Bishop retreats to h5, maintaining the pin on the knight."
         },
         {
           "san": "Re1",
-          "annotation": "We centralize the rook on e1, supporting the e-file and our central pawns."
+          "annotation": "We centralize the rook on e1, supporting the e-file and our central pawns.",
+          "shortNarration": "Rook to e1 centralizes, supporting the e-file and central pawns."
         },
         {
           "san": "Be7",
-          "annotation": "Black develops the bishop and prepares to castle."
+          "annotation": "Black develops the bishop and prepares to castle.",
+          "shortNarration": "Black develops the bishop and prepares to castle."
         },
         {
           "san": "a3",
-          "annotation": "We play a3, preventing any Nb4 jumps and preparing queenside expansion."
+          "annotation": "We play a3, preventing any Nb4 jumps and preparing queenside expansion.",
+          "shortNarration": "a3 prevents Nb4 and prepares queenside expansion."
         },
         {
           "san": "O-O",
-          "annotation": "Black castles kingside."
+          "annotation": "Black castles kingside.",
+          "shortNarration": "Black castles kingside."
         },
         {
           "san": "Ne5",
-          "annotation": "We plant the knight on the powerful e5 outpost, leveraging our IQP position for active piece play."
+          "annotation": "We plant the knight on the powerful e5 outpost, leveraging our IQP position for active piece play.",
+          "shortNarration": "Knight on e5 outpost leverages the IQP for active piece play."
         }
       ]
     },
@@ -797,91 +963,113 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4, beginning the Jobava London."
+          "annotation": "We open with d4, beginning the Jobava London.",
+          "shortNarration": "d4 starts the Jobava London."
         },
         {
           "san": "d5",
-          "annotation": "Black plays d5, contesting the center."
+          "annotation": "Black plays d5, contesting the center.",
+          "shortNarration": "Black plays d5, contesting the center."
         },
         {
           "san": "Nc3",
-          "annotation": "We play Nc3, the Jobava hallmark."
+          "annotation": "We play Nc3, the Jobava hallmark.",
+          "shortNarration": "Nc3 is the Jobava hallmark, preparing d4 and a quick kingside attack."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the knight to f6."
+          "annotation": "Black develops the knight to f6.",
+          "shortNarration": "Black develops the knight to f6."
         },
         {
           "san": "Bf4",
-          "annotation": "We complete the Jobava triangle."
+          "annotation": "We complete the Jobava triangle.",
+          "shortNarration": "Jobava triangle completed."
         },
         {
           "san": "c5",
-          "annotation": "Black challenges our center with c5."
+          "annotation": "Black challenges our center with c5.",
+          "shortNarration": "Black challenges the center with c5."
         },
         {
           "san": "dxc5",
-          "annotation": "Instead of e3, we capture with dxc5! This forces Black to spend time recapturing while we develop rapidly."
+          "annotation": "Instead of e3, we capture with dxc5! This forces Black to spend time recapturing while we develop rapidly.",
+          "shortNarration": "dxc5 forces Black to recapture, giving White a lead in development."
         },
         {
           "san": "e6",
-          "annotation": "Black plays e6, preparing to recapture the pawn with the bishop."
+          "annotation": "Black plays e6, preparing to recapture the pawn with the bishop.",
+          "shortNarration": "Black plays e6 to recapture the pawn with the bishop."
         },
         {
           "san": "e3",
-          "annotation": "We play e3, solidifying our structure."
+          "annotation": "We play e3, solidifying our structure.",
+          "shortNarration": "e3 solidifies the structure."
         },
         {
           "san": "Bxc5",
-          "annotation": "Black recaptures the pawn with the bishop."
+          "annotation": "Black recaptures the pawn with the bishop.",
+          "shortNarration": "Black recaptures the pawn with the bishop."
         },
         {
           "san": "Nf3",
-          "annotation": "We develop the knight to f3, completing our minor piece development."
+          "annotation": "We develop the knight to f3, completing our minor piece development.",
+          "shortNarration": "Knight to f3 completes minor piece development."
         },
         {
           "san": "O-O",
-          "annotation": "Black castles kingside."
+          "annotation": "Black castles kingside.",
+          "shortNarration": "Black castles kingside."
         },
         {
           "san": "Bd3",
-          "annotation": "We place the bishop on d3, aiming at the kingside."
+          "annotation": "We place the bishop on d3, aiming at the kingside.",
+          "shortNarration": "Bishop on d3 aims at the kingside."
         },
         {
           "san": "Nc6",
-          "annotation": "Black develops the queenside knight."
+          "annotation": "Black develops the queenside knight.",
+          "shortNarration": "Black develops the queenside knight to c6."
         },
         {
           "san": "O-O",
-          "annotation": "We castle kingside, bringing our king to safety."
+          "annotation": "We castle kingside, bringing our king to safety.",
+          "shortNarration": "Castle kingside to bring the king to safety."
         },
         {
           "san": "a6",
-          "annotation": "Black plays a6, preparing b5 for queenside expansion."
+          "annotation": "Black plays a6, preparing b5 for queenside expansion.",
+          "shortNarration": "Black plays a6 to prepare b5 for queenside expansion."
         },
         {
           "san": "a3",
-          "annotation": "We play a3, preventing Nb4 and preparing b4 to contest the queenside."
+          "annotation": "We play a3, preventing Nb4 and preparing b4 to contest the queenside.",
+          "shortNarration": "a3 prevents Nb4 and prepares b4 to contest the queenside."
         },
         {
           "san": "b5",
-          "annotation": "Black advances b5, gaining queenside space."
+          "annotation": "Black advances b5, gaining queenside space.",
+          "shortNarration": "Black's b5 gains queenside space."
         },
         {
           "san": "Qe2",
-          "annotation": "We centralize the queen on e2, connecting rooks and eyeing both flanks."
+          "annotation": "We centralize the queen on e2, connecting rooks and eyeing both flanks.",
+          "shortNarration": "Queen centralizes on e2, connecting rooks and eyeing both flanks."
         },
         {
           "san": "Bb7",
-          "annotation": "Black develops the bishop to b7."
+          "annotation": "Black develops the bishop to b7.",
+          "shortNarration": "Black develops the bishop to b7, fianchettoing on the queenside."
         },
         {
           "san": "Rad1",
-          "annotation": "We bring the rook to d1, centralizing on the open file."
+          "annotation": "We bring the rook to d1, centralizing on the open file.",
+          "shortNarration": "Rook to d1 centralizes on the open file."
         },
         {
           "san": "Qe7",
-          "annotation": "Black centralizes the queen. We have achieved a harmonious position with superior development and easy play."
+          "annotation": "Black centralizes the queen. We have achieved a harmonious position with superior development and easy play.",
+          "shortNarration": "Black's centralized queen faces White's superior development and harmonious position."
         }
       ]
     },
@@ -891,47 +1079,58 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4."
+          "annotation": "We open with d4.",
+          "shortNarration": "d4 opens the center and frees the queen and c1-bishop."
         },
         {
           "san": "d5",
-          "annotation": "Black plays d5."
+          "annotation": "Black plays d5.",
+          "shortNarration": "Black's d5 challenges the center and opens lines for the queen and c8-bishop."
         },
         {
           "san": "Nc3",
-          "annotation": "We play Nc3, setting up the Jobava."
+          "annotation": "We play Nc3, setting up the Jobava.",
+          "shortNarration": "Nc3 sets up the Jobava London."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the knight."
+          "annotation": "Black develops the knight.",
+          "shortNarration": "Black develops the knight to c6 or f6."
         },
         {
           "san": "Bf4",
-          "annotation": "We play Bf4, completing the setup."
+          "annotation": "We play Bf4, completing the setup.",
+          "shortNarration": "Bf4 completes the setup, developing the bishop and eyeing c7."
         },
         {
           "san": "e6",
-          "annotation": "Black plays e6 — but this allows our key tactical idea."
+          "annotation": "Black plays e6 — but this allows our key tactical idea.",
+          "shortNarration": "Black's e6 allows our key tactical idea."
         },
         {
           "san": "Nb5",
-          "annotation": "We jump to b5, threatening Nc7+ forking king and rook!"
+          "annotation": "We jump to b5, threatening Nc7+ forking king and rook!",
+          "shortNarration": "b5 threatens Nc7+ forking king and rook."
         },
         {
           "san": "c6",
-          "annotation": "Black tries to chase the knight with c6, but it's too late..."
+          "annotation": "Black tries to chase the knight with c6, but it's too late...",
+          "shortNarration": "Black's c6 comes too late — the knight is already entrenched."
         },
         {
           "san": "Nc7+",
-          "annotation": "The devastating fork! Our knight lands on c7 with check, attacking both the king and the rook on a8. This is the trap that punishes Black for ignoring the Nb5 threat."
+          "annotation": "The devastating fork! Our knight lands on c7 with check, attacking both the king and the rook on a8. This is the trap that punishes Black for ignoring the Nb5 threat.",
+          "shortNarration": "Knight forks king and rook on c7 with check, punishing Black for ignoring the Nb5 threat."
         },
         {
           "san": "Qxc7",
-          "annotation": "Black is forced to take with the queen, losing the right to castle."
+          "annotation": "Black is forced to take with the queen, losing the right to castle.",
+          "shortNarration": "Black must recapture with the queen, forfeiting castling rights."
         },
         {
           "san": "Bxc7",
-          "annotation": "We recapture with the bishop, winning material and leaving Black's position in shambles."
+          "annotation": "We recapture with the bishop, winning material and leaving Black's position in shambles.",
+          "shortNarration": "Recapturing with the bishop wins material and leaves Black's position in shambles."
         }
       ]
     },
@@ -941,71 +1140,88 @@
       "moveAnnotations": [
         {
           "san": "d4",
-          "annotation": "We open with d4."
+          "annotation": "We open with d4.",
+          "shortNarration": "d4 opens lines for the queen and bishop."
         },
         {
           "san": "d5",
-          "annotation": "Black plays d5."
+          "annotation": "Black plays d5.",
+          "shortNarration": "Black's d5 challenges the center and opens lines for the queen and bishop."
         },
         {
           "san": "Nc3",
-          "annotation": "We play Nc3."
+          "annotation": "We play Nc3.",
+          "shortNarration": "Nc3 develops the knight and defends e4."
         },
         {
           "san": "Nf6",
-          "annotation": "Black develops the knight."
+          "annotation": "Black develops the knight.",
+          "shortNarration": "Black develops the knight to f6."
         },
         {
           "san": "Bf4",
-          "annotation": "We play Bf4."
+          "annotation": "We play Bf4.",
+          "shortNarration": "Bf4 develops the bishop, eyes the c7 pawn, and pressures Black's kingside."
         },
         {
           "san": "g6",
-          "annotation": "Black fianchettoes — setting up for our kingside attack."
+          "annotation": "Black fianchettoes — setting up for our kingside attack.",
+          "shortNarration": "Black's fianchetto sets up for White's kingside attack."
         },
         {
           "san": "e3",
-          "annotation": "We play e3, preparing our assault."
+          "annotation": "We play e3, preparing our assault.",
+          "shortNarration": "e3 prepares the assault."
         },
         {
           "san": "Bg7",
-          "annotation": "Black completes the fianchetto."
+          "annotation": "Black completes the fianchetto.",
+          "shortNarration": "Black fianchettoes the bishop, eyeing the long diagonal."
         },
         {
           "san": "h4",
-          "annotation": "We launch the h-pawn forward aggressively."
+          "annotation": "We launch the h-pawn forward aggressively.",
+          "shortNarration": "Push the h-pawn forward to open lines against the enemy king."
         },
         {
           "san": "O-O",
-          "annotation": "Black castles into our attack — a critical mistake."
+          "annotation": "Black castles into our attack — a critical mistake.",
+          "shortNarration": "Black castles into our attack — a critical mistake."
         },
         {
           "san": "h5",
-          "annotation": "We sacrifice the h-pawn to rip open the kingside!"
+          "annotation": "We sacrifice the h-pawn to rip open the kingside!",
+          "shortNarration": "Sacrificing the h-pawn rips open the kingside for a mating attack."
         },
         {
           "san": "Nxh5",
-          "annotation": "Black takes the bait."
+          "annotation": "Black takes the bait.",
+          "shortNarration": "Black takes the bait."
         },
         {
           "san": "Rxh5",
-          "annotation": "We sacrifice the rook! The h-file is now wide open."
+          "annotation": "We sacrifice the rook! The h-file is now wide open.",
+          "shortNarration": "Sacrifice the rook to open the h-file for mate."
         },
         {
           "san": "gxh5",
-          "annotation": "Black captures, but the king is completely exposed."
+          "annotation": "Black captures, but the king is completely exposed.",
+          "shortNarration": "Black's capture exposes the king, leaving it vulnerable to attack."
         },
         {
           "san": "Qxh5",
-          "annotation": "The queen arrives with devastating threats. Qxf7 and mating ideas are everywhere."
+          "annotation": "The queen arrives with devastating threats. Qxf7 and mating ideas are everywhere.",
+          "shortNarration": "Qxf7 threatens mate, with the queen delivering devastating threats."
         },
         {
           "san": "Bf6",
-          "annotation": "Black tries to block with the bishop."
+          "annotation": "Black tries to block with the bishop.",
+          "shortNarration": "Black blocks with the bishop, but it hangs to the pawn push."
         },
         {
           "san": "Nf3",
-          "annotation": "We develop with tempo, preparing to bring more pieces into the attack."
+          "annotation": "We develop with tempo, preparing to bring more pieces into the attack.",
+          "shortNarration": "Developing with tempo brings more pieces into the attack."
         },
         {
           "san": "Bg7",
@@ -1013,23 +1229,28 @@
         },
         {
           "san": "Bd3",
-          "annotation": "We point the bishop at the kingside, adding to the pressure."
+          "annotation": "We point the bishop at the kingside, adding to the pressure.",
+          "shortNarration": "Bishop aims at the kingside, increasing the pressure."
         },
         {
           "san": "f5",
-          "annotation": "Black desperately tries to block diagonal lines."
+          "annotation": "Black desperately tries to block diagonal lines.",
+          "shortNarration": "Black blocks diagonal lines to stop the queen's attack."
         },
         {
           "san": "Ng5",
-          "annotation": "The knight jumps to g5, threatening Qxh7# and other mating patterns."
+          "annotation": "The knight jumps to g5, threatening Qxh7# and other mating patterns.",
+          "shortNarration": "Knight to g5 threatens Qxh7# and other mating patterns."
         },
         {
           "san": "Qe8",
-          "annotation": "Black tries to defend, but there is no escape."
+          "annotation": "Black tries to defend, but there is no escape.",
+          "shortNarration": "Black's defense fails — no escape from the threat."
         },
         {
           "san": "Qxh7#",
-          "annotation": "Checkmate! The queen delivers the final blow on h7. This is the ultimate punishment for castling into the h4-h5 attack."
+          "annotation": "Checkmate! The queen delivers the final blow on h7. This is the ultimate punishment for castling into the h4-h5 attack.",
+          "shortNarration": "Queen mates on h7 — the punishment for castling into the h4-h5 attack."
         }
       ]
     }

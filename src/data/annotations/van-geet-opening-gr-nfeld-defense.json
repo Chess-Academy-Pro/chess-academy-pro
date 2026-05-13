@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing rapid development. This move controls the crucial d5 and f5 squares, preventing Black from establishing pieces there early. By advancing e4, we're also clearing the diagonal for our light-squared bishop and creating potential for quick castling. This is one of the most principled first moves, following the classical opening principles of center control and piece development."
+      "annotation": "We're opening with the king's pawn, staking our claim to the center and preparing rapid development. This move controls the crucial d5 and f5 squares, preventing Black from establishing pieces there early. By advancing e4, we're also clearing the diagonal for our light-squared bishop and creating potential for quick castling. This is one of the most principled first moves, following the classical opening principles of center control and piece development.",
+      "shortNarration": "1.e4 controls d5 and f5, clears the bishop's diagonal, and prepares rapid development."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately challenges our central pawn with a direct counter-attack, offering a pawn trade that would simplify the center. This is the Scandinavian Defense approach, where Black seeks quick development of the queen after recapturing on d5, though it comes at the cost of bringing the queen out early. Our opponent is essentially saying 'I'll trade my d-pawn for your e-pawn and accept some tempo loss for active piece play.' This move leads to sharp, tactical positions where both sides need to be precise with their development."
+      "annotation": "Black immediately challenges our central pawn with a direct counter-attack, offering a pawn trade that would simplify the center. This is the Scandinavian Defense approach, where Black seeks quick development of the queen after recapturing on d5, though it comes at the cost of bringing the queen out early. Our opponent is essentially saying 'I'll trade my d-pawn for your e-pawn and accept some tempo loss for active piece play.' This move leads to sharp, tactical positions where both sides need to be precise with their development.",
+      "shortNarration": "Black trades d-pawn for e-pawn, bringing the queen out early in the Scandinavian Defense for active piece play."
     },
     {
       "san": "Nc3",
-      "annotation": "We're declining the pawn capture and instead developing our knight to an active square, which is the signature move of the Van Geet Opening. This knight move supports a future d4 advance and keeps more tension in the center rather than simplifying immediately. By playing Nc3, we're also preparing to potentially recapture on e4 with the knight if Black takes, maintaining our central presence. This approach is less common than 2.exd5, but it leads to rich middlegame positions where piece activity often matters more than material balance."
+      "annotation": "We're declining the pawn capture and instead developing our knight to an active square, which is the signature move of the Van Geet Opening. This knight move supports a future d4 advance and keeps more tension in the center rather than simplifying immediately. By playing Nc3, we're also preparing to potentially recapture on e4 with the knight if Black takes, maintaining our central presence. This approach is less common than 2.exd5, but it leads to rich middlegame positions where piece activity often matters more than material balance.",
+      "shortNarration": "Declining the pawn capture with Nc3 develops the knight, supports d4, and keeps central tension for piece activity over material."
     },
     {
       "san": "dxe4",
-      "annotation": "Black follows through with the capture, winning our e4 pawn and creating an immediate material advantage. Our opponent is likely confident that the extra pawn will be significant, but they're also opening up the position and allowing us active piece play. This capture forces us to make a decision about recapturing, and Black is betting that our piece activity won't fully compensate for the material deficit. The position is now entering tactical territory where both sides need to calculate carefully."
+      "annotation": "Black follows through with the capture, winning our e4 pawn and creating an immediate material advantage. Our opponent is likely confident that the extra pawn will be significant, but they're also opening up the position and allowing us active piece play. This capture forces us to make a decision about recapturing, and Black is betting that our piece activity won't fully compensate for the material deficit. The position is now entering tactical territory where both sides need to calculate carefully.",
+      "shortNarration": "Black wins the e4 pawn but opens the position for White's active piece play to compensate."
     },
     {
       "san": "Nxe4",
-      "annotation": "We immediately recapture with our knight, restoring material equality and placing our knight on an excellent central square. From e4, our knight controls key squares like d6, f6, c5, and g5, giving us significant influence over Black's position. This recapture also opens up tactical possibilities, as our centralized knight often becomes a strong attacking piece in the middlegame. We're following the principle of recapturing toward the center, and our knight is now more actively placed than it was on c3."
+      "annotation": "We immediately recapture with our knight, restoring material equality and placing our knight on an excellent central square. From e4, our knight controls key squares like d6, f6, c5, and g5, giving us significant influence over Black's position. This recapture also opens up tactical possibilities, as our centralized knight often becomes a strong attacking piece in the middlegame. We're following the principle of recapturing toward the center, and our knight is now more actively placed than it was on c3.",
+      "shortNarration": "Recapturing with the knight on e4 centralizes it, controlling d6, f6, c5, and g5."
     },
     {
       "san": "e5",
-      "annotation": "Black strikes back in the center, attacking our well-placed knight and trying to gain space with tempo. This advance gives Black control over the d4 and f4 squares while forcing our knight to make a decision about where to retreat. Our opponent is following classical principles by advancing in the center with tempo, but they're also potentially weakening the d5 and f5 squares around their position. We need to choose our knight retreat carefully, as squares like Ng3, Nf6+, Nc5, or Nd6+ all offer different strategic possibilities for continuing our development with initiative."
+      "annotation": "Black strikes back in the center, attacking our well-placed knight and trying to gain space with tempo. This advance gives Black control over the d4 and f4 squares while forcing our knight to make a decision about where to retreat. Our opponent is following classical principles by advancing in the center with tempo, but they're also potentially weakening the d5 and f5 squares around their position. We need to choose our knight retreat carefully, as squares like Ng3, Nf6+, Nc5, or Nd6+ all offer different strategic possibilities for continuing our development with initiative.",
+      "shortNarration": "Black's c5 advance attacks the knight with tempo, gaining space but weakening d5 and f5 — retreat to g3, f6, c5, or d6."
     }
   ]
 }

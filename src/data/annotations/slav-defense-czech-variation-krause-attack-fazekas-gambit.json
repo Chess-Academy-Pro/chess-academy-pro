@@ -3,55 +3,68 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, staking an immediate claim to the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move begins what will become the Slav Defense complex, one of the most reliable and principled defenses against 1.d4. Our plan revolves around controlling the center and creating a solid pawn structure that will give us excellent piece coordination in the middlegame. The d4 pawn also opens up the diagonal for our light-squared bishop and gives our queen more scope along the d-file."
+      "annotation": "We're opening with the queen's pawn, staking an immediate claim to the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move begins what will become the Slav Defense complex, one of the most reliable and principled defenses against 1.d4. Our plan revolves around controlling the center and creating a solid pawn structure that will give us excellent piece coordination in the middlegame. The d4 pawn also opens up the diagonal for our light-squared bishop and gives our queen more scope along the d-file.",
+      "shortNarration": "1.d4 stakes a claim to e5 and c5, opens the diagonal for the light-squared bishop, and prepares the Slav Defense."
     },
     {
       "san": "d5",
-      "annotation": "Our opponent responds with the most direct challenge to our central control, immediately contesting the e4 and c4 squares with their own pawn. This symmetrical response is the hallmark of classical chess - Black mirrors White's central strategy while maintaining perfect balance in the position. The d5 pawn not only fights for space but also prepares to support a potential ...c6 setup that characterizes the Slav Defense family. Black is signaling their intention to create a solid, flexible pawn structure that can adapt to various middlegame plans."
+      "annotation": "Our opponent responds with the most direct challenge to our central control, immediately contesting the e4 and c4 squares with their own pawn. This symmetrical response is the hallmark of classical chess - Black mirrors White's central strategy while maintaining perfect balance in the position. The d5 pawn not only fights for space but also prepares to support a potential ...c6 setup that characterizes the Slav Defense family. Black is signaling their intention to create a solid, flexible pawn structure that can adapt to various middlegame plans.",
+      "shortNarration": "Black's d5 contests e4 and c4, preparing a solid Slav-style setup with ...c6."
     },
     {
       "san": "c4",
-      "annotation": "We're launching the Queen's Gambit, offering our c-pawn to gain superior central control and accelerate our development. This aggressive move attacks Black's d5 pawn directly, forcing them to make an important strategic decision about their pawn structure. If Black captures on c4, we'll gain time and space by recapturing, while if they maintain the tension, we can continue developing with moves like Nc3 and Nf3. The c4 advance also opens up the a1-h8 diagonal for our light-squared bishop and gives our queen additional influence over the center."
+      "annotation": "We're launching the Queen's Gambit, offering our c-pawn to gain superior central control and accelerate our development. This aggressive move attacks Black's d5 pawn directly, forcing them to make an important strategic decision about their pawn structure. If Black captures on c4, we'll gain time and space by recapturing, while if they maintain the tension, we can continue developing with moves like Nc3 and Nf3. The c4 advance also opens up the a1-h8 diagonal for our light-squared bishop and gives our queen additional influence over the center.",
+      "shortNarration": "The Queen's Gambit offers the c-pawn to attack d5, gaining central control and development if Black captures on c4."
     },
     {
       "san": "c6",
-      "annotation": "Black chooses the Slav Defense, one of the most solid and reliable responses to the Queen's Gambit, supporting their d5 pawn while maintaining maximum flexibility. This move prepares to recapture on d5 with the c-pawn if we exchange there, keeping Black's pawn structure intact and avoiding the isolated queen's pawn that would result from ...dxc4 followed by ...e6. The c6 pawn also prepares potential queenside expansion with ...b5 and gives the pawn on b8 the option to develop to d7 rather than c6. Black is following one of the key principles of the Slav: maintain the pawn chain and keep options open for piece development."
+      "annotation": "Black chooses the Slav Defense, one of the most solid and reliable responses to the Queen's Gambit, supporting their d5 pawn while maintaining maximum flexibility. This move prepares to recapture on d5 with the c-pawn if we exchange there, keeping Black's pawn structure intact and avoiding the isolated queen's pawn that would result from ...dxc4 followed by ...e6. The c6 pawn also prepares potential queenside expansion with ...b5 and gives the pawn on b8 the option to develop to d7 rather than c6. Black is following one of the key principles of the Slav: maintain the pawn chain and keep options open for piece development.",
+      "shortNarration": "In the Slav, c6 supports d5, avoids an isolated queen's pawn, and keeps queenside expansion and flexible development open."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our king's knight to its ideal square, attacking Black's e5 square and preparing to support our central pawn structure. This move is more flexible than the immediate Nc3 because it doesn't block our c-pawn's potential advance and keeps our options open regarding how to handle the central tension. The knight on f3 also prepares to support a potential e4 advance later, which could give us a strong pawn center. Additionally, this development move brings us closer to castling kingside and puts pressure on Black to make concrete decisions about their pawn structure."
+      "annotation": "We develop our king's knight to its ideal square, attacking Black's e5 square and preparing to support our central pawn structure. This move is more flexible than the immediate Nc3 because it doesn't block our c-pawn's potential advance and keeps our options open regarding how to handle the central tension. The knight on f3 also prepares to support a potential e4 advance later, which could give us a strong pawn center. Additionally, this development move brings us closer to castling kingside and puts pressure on Black to make concrete decisions about their pawn structure.",
+      "shortNarration": "Nf3 develops the knight to its ideal square, attacks e5, and keeps the c-pawn flexible for central tension."
     },
     {
       "san": "Nf6",
-      "annotation": "Black mirrors our development with the most natural and flexible knight move, attacking our e4 square and preparing their own kingside development. This is the hallmark of the Slav Defense - Black develops pieces actively while maintaining the central tension, refusing to commit to any particular pawn structure prematurely. The knight on f6 also supports a potential ...e6 advance later and keeps the option of ...g6 and ...Bg7 open for a more aggressive setup. Our opponent is following sound opening principles: develop pieces toward the center and maintain maximum flexibility in the position."
+      "annotation": "Black mirrors our development with the most natural and flexible knight move, attacking our e4 square and preparing their own kingside development. This is the hallmark of the Slav Defense - Black develops pieces actively while maintaining the central tension, refusing to commit to any particular pawn structure prematurely. The knight on f6 also supports a potential ...e6 advance later and keeps the option of ...g6 and ...Bg7 open for a more aggressive setup. Our opponent is following sound opening principles: develop pieces toward the center and maintain maximum flexibility in the position.",
+      "shortNarration": "Black's knight on f6 attacks e4 and keeps options open for ...e6 or ...g6 in the Slav Defense."
     },
     {
       "san": "Nc3",
-      "annotation": "We bring our queen's knight into the game, adding another defender to our d4 pawn and increasing the pressure on Black's d5 pawn. This natural development move also prepares potential tactics involving the c4 pawn and gives us more influence over the central light squares. The knight on c3 supports our strategic plan of maintaining central tension while developing pieces harmoniously. By developing this knight, we're also keeping our options open for various pawn breaks like e4 or b3, depending on how Black chooses to resolve the central tension."
+      "annotation": "We bring our queen's knight into the game, adding another defender to our d4 pawn and increasing the pressure on Black's d5 pawn. This natural development move also prepares potential tactics involving the c4 pawn and gives us more influence over the central light squares. The knight on c3 supports our strategic plan of maintaining central tension while developing pieces harmoniously. By developing this knight, we're also keeping our options open for various pawn breaks like e4 or b3, depending on how Black chooses to resolve the central tension.",
+      "shortNarration": "Nc3 defends d4, pressures d5, and supports central tension while keeping pawn breaks like e4 or b3 open."
     },
     {
       "san": "dxc4",
-      "annotation": "Black finally releases the central tension by capturing our c-pawn, entering the true Slav Defense where they temporarily win material but allow us superior central control. This capture is the defining moment of the Slav - Black gets a temporary extra pawn but must be prepared to return it under favorable circumstances. Our opponent is banking on their solid piece development and the fact that we'll need several moves to regain the pawn, giving them time to complete their development. The capture also opens the d-file for Black's queen and prepares to challenge our center with moves like ...b5 and ...Bf5."
+      "annotation": "Black finally releases the central tension by capturing our c-pawn, entering the true Slav Defense where they temporarily win material but allow us superior central control. This capture is the defining moment of the Slav - Black gets a temporary extra pawn but must be prepared to return it under favorable circumstances. Our opponent is banking on their solid piece development and the fact that we'll need several moves to regain the pawn, giving them time to complete their development. The capture also opens the d-file for Black's queen and prepares to challenge our center with moves like ...b5 and ...Bf5.",
+      "shortNarration": "Black captures on c4 for a temporary pawn, opening the d-file and preparing ...b5 and ...Bf5, but we gain superior central control."
     },
     {
       "san": "a4",
-      "annotation": "We immediately prevent Black's liberating ...b5 advance, which would have allowed them to maintain their extra pawn while challenging our center effectively. This prophylactic move is crucial in the Slav because ...b5 followed by ...Bb7 would give Black excellent counterplay and make it difficult for us to regain our pawn. The a4 advance also prepares our own expansion on the queenside and gives us the option of playing a5 later to further restrict Black's pawn breaks. While this move might seem slow, it's actually a key part of our strategic plan to maintain pressure on Black's position while they hold the extra material."
+      "annotation": "We immediately prevent Black's liberating ...b5 advance, which would have allowed them to maintain their extra pawn while challenging our center effectively. This prophylactic move is crucial in the Slav because ...b5 followed by ...Bb7 would give Black excellent counterplay and make it difficult for us to regain our pawn. The a4 advance also prepares our own expansion on the queenside and gives us the option of playing a5 later to further restrict Black's pawn breaks. While this move might seem slow, it's actually a key part of our strategic plan to maintain pressure on Black's position while they hold the extra material.",
+      "shortNarration": "a4 prevents Black's liberating ...b5, keeping the extra pawn weak and preparing queenside expansion."
     },
     {
       "san": "Bf5",
-      "annotation": "Black develops their light-squared bishop to an active square, putting pressure on our e4 square and preparing to contest our central ambitions. This is one of the most principled responses in the Slav Defense because the bishop develops actively before we can play e3 and block it in. The bishop on f5 also supports Black's plan to hold onto the c4 pawn temporarily while completing their development safely. However, this bishop placement does have a drawback - it can become a target for our pieces, and we might be able to exploit this with moves like Nh4 or g3 followed by Bg2."
+      "annotation": "Black develops their light-squared bishop to an active square, putting pressure on our e4 square and preparing to contest our central ambitions. This is one of the most principled responses in the Slav Defense because the bishop develops actively before we can play e3 and block it in. The bishop on f5 also supports Black's plan to hold onto the c4 pawn temporarily while completing their development safely. However, this bishop placement does have a drawback - it can become a target for our pieces, and we might be able to exploit this with moves like Nh4 or g3 followed by Bg2.",
+      "shortNarration": "Black's bishop on f5 pressures e4 and supports the c4 pawn, but becomes a target for Nh4 or g3–Bg2."
     },
     {
       "san": "Ne5",
-      "annotation": "Continuing Slav Defense Czech Variation Krause Attack Fazekas Gambit: Ne5 is a known theory move in this line."
+      "annotation": "Continuing Slav Defense Czech Variation Krause Attack Fazekas Gambit: Ne5 is a known theory move in this line.",
+      "shortNarration": "Ne5 is a known theory move in the Slav Defense Czech Variation Krause Attack Fazekas Gambit."
     },
     {
       "san": "Na6",
-      "annotation": "Continuing Slav Defense Czech Variation Krause Attack Fazekas Gambit: Na6 is a known theory move in this line."
+      "annotation": "Continuing Slav Defense Czech Variation Krause Attack Fazekas Gambit: Na6 is a known theory move in this line.",
+      "shortNarration": "Na6 is theory in the Slav Czech Variation Krause Attack Fazekas Gambit."
     },
     {
       "san": "e4",
-      "annotation": "Continuing Slav Defense Czech Variation Krause Attack Fazekas Gambit: e4 is a known theory move in this line."
+      "annotation": "Continuing Slav Defense Czech Variation Krause Attack Fazekas Gambit: e4 is a known theory move in this line.",
+      "shortNarration": "e4 is the main line in the Slav Czech Variation Krause Attack Fazekas Gambit."
     }
   ]
 }

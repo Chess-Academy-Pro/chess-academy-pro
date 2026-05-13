@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "Nf3",
-      "annotation": "We start with the Zukertort Opening, a flexible first move that controls the key central squares e5 and d4 while keeping our options open—we can later support a center with e4, or play quietly on the queenside. Unlike 1.e4, this knight move doesn't commit us immediately to a pawn center, giving us maximum strategic flexibility. You'll often see this move in games by classical players who liked to outmaneuver opponents rather than force tactical complications early."
+      "annotation": "We start with the Zukertort Opening, a flexible first move that controls the key central squares e5 and d4 while keeping our options open—we can later support a center with e4, or play quietly on the queenside. Unlike 1.e4, this knight move doesn't commit us immediately to a pawn center, giving us maximum strategic flexibility. You'll often see this move in games by classical players who liked to outmaneuver opponents rather than force tactical complications early.",
+      "shortNarration": "1.Nf3 controls e5 and d4 without committing to a pawn center, keeping flexible options for e4 or queenside play."
     },
     {
       "san": "e5",
-      "annotation": "Black seizes space in the center, but this move is also somewhat committal—Black is now giving us a chance to capture and enter the interesting Walrus variation. Black probably hopes we'll play quietly, but we have a tactical opportunity that leads to a unique pawn structure with chances for both sides."
+      "annotation": "Black seizes space in the center, but this move is also somewhat committal—Black is now giving us a chance to capture and enter the interesting Walrus variation. Black probably hopes we'll play quietly, but we have a tactical opportunity that leads to a unique pawn structure with chances for both sides.",
+      "shortNarration": "Black's central pawn push allows White to capture into the Walrus variation, creating a unique pawn structure with mutual chances."
     },
     {
       "san": "Nxe5",
-      "annotation": "We capture the pawn and enter the Walrus, a rare but sound tactical sequence where we'll sacrifice our knight to damage Black's pawn structure. Our knight on e5 is somewhat exposed, but it's attacking the undefended c6 knight, so Black almost has to capture us. This move starts a forcing sequence where we accept doubled pawns for Black in exchange for piece activity and long-term positional advantages."
+      "annotation": "We capture the pawn and enter the Walrus, a rare but sound tactical sequence where we'll sacrifice our knight to damage Black's pawn structure. Our knight on e5 is somewhat exposed, but it's attacking the undefended c6 knight, so Black almost has to capture us. This move starts a forcing sequence where we accept doubled pawns for Black in exchange for piece activity and long-term positional advantages.",
+      "shortNarration": "Sacrifice the knight on e5 to force Black's capture, giving them doubled pawns in exchange for piece activity and long-term positional compensation."
     },
     {
       "san": "Nc6",
-      "annotation": "Black brings another piece into the game while attacking our knight on e5, forcing our hand. This active move is Black's most common response, since abandoning the center with a move like ...a5 would be too passive. We're now forced to make a critical decision about whether to capture."
+      "annotation": "Black brings another piece into the game while attacking our knight on e5, forcing our hand. This active move is Black's most common response, since abandoning the center with a move like ...a5 would be too passive. We're now forced to make a critical decision about whether to capture.",
+      "shortNarration": "Black attacks the knight on e5, forcing a critical capture decision."
     },
     {
       "san": "Nxc6",
-      "annotation": "We take the knight, knowing that Black will recapture with the d-pawn and create doubled c-pawns—a structural weakness that gives us a long-term advantage. By forcing this exchange early, we eliminate Black's most active minor piece and grab space. White's idea is to exploit the weakened dark squares around c6 and d5 in the endgame or middlegame ahead."
+      "annotation": "We take the knight, knowing that Black will recapture with the d-pawn and create doubled c-pawns—a structural weakness that gives us a long-term advantage. By forcing this exchange early, we eliminate Black's most active minor piece and grab space. White's idea is to exploit the weakened dark squares around c6 and d5 in the endgame or middlegame ahead.",
+      "shortNarration": "Taking the knight forces Black to recapture with the d-pawn, creating doubled c-pawns and a long-term dark-square weakness around c6 and d5."
     },
     {
       "san": "dxc6",
-      "annotation": "Black recaptures as expected, but now the doubled c-pawns on c6 and c7 are a permanent liability—they control fewer squares and can become targets for our rooks and queen later. Black's position is solid and not lost, but this pawn structure means Black must play carefully to avoid a grinding positional disadvantage. The Walrus has completed its job: we've traded pieces to reach an endgame-like position where our superior pawn structure favors White's long-term chances."
+      "annotation": "Black recaptures as expected, but now the doubled c-pawns on c6 and c7 are a permanent liability—they control fewer squares and can become targets for our rooks and queen later. Black's position is solid and not lost, but this pawn structure means Black must play carefully to avoid a grinding positional disadvantage. The Walrus has completed its job: we've traded pieces to reach an endgame-like position where our superior pawn structure favors White's long-term chances.",
+      "shortNarration": "Doubled c-pawns on c6 and c7 are a permanent liability, giving White a long-term positional edge in the endgame."
     }
   ]
 }

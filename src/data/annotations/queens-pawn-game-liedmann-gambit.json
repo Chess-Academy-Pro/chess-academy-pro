@@ -3,23 +3,28 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, establishing immediate control over the central e5 square and opening lines for both our queen and dark-squared bishop. This is the second most popular first move after 1.e4, leading to rich positional play where we typically build a strong pawn center and develop our pieces harmoniously. The d4 opening often leads to more strategic, long-term games compared to the tactical nature of 1.e4, making it a favorite among positional players. Our plan is to follow up with moves like Nf3, c4, and Nc3 to create maximum pressure in the center."
+      "annotation": "We're opening with the queen's pawn, establishing immediate control over the central e5 square and opening lines for both our queen and dark-squared bishop. This is the second most popular first move after 1.e4, leading to rich positional play where we typically build a strong pawn center and develop our pieces harmoniously. The d4 opening often leads to more strategic, long-term games compared to the tactical nature of 1.e4, making it a favorite among positional players. Our plan is to follow up with moves like Nf3, c4, and Nc3 to create maximum pressure in the center.",
+      "shortNarration": "1.d4 controls e5, opens lines for queen and bishop, and aims for a strong pawn center with Nf3, c4, and Nc3."
     },
     {
       "san": "c5",
-      "annotation": "Black immediately challenges our central pawn with the Benoni Defense setup, refusing to allow us a free hand in the center. This move stakes a claim to the d4 square and prepares to create an asymmetrical pawn structure that can lead to sharp, double-edged positions. Our opponent is essentially saying 'I'm not going to let you build a classical pawn center without a fight' and is willing to accept some structural compromises for active piece play. This is a more aggressive response than the solid 1...d5 or 1...Nf6, showing Black wants to create immediate tension."
+      "annotation": "Black immediately challenges our central pawn with the Benoni Defense setup, refusing to allow us a free hand in the center. This move stakes a claim to the d4 square and prepares to create an asymmetrical pawn structure that can lead to sharp, double-edged positions. Our opponent is essentially saying 'I'm not going to let you build a classical pawn center without a fight' and is willing to accept some structural compromises for active piece play. This is a more aggressive response than the solid 1...d5 or 1...Nf6, showing Black wants to create immediate tension.",
+      "shortNarration": "Black's 1...c5 challenges the center, stakes d4, and invites sharp asymmetrical play with active piece compensation for structural weaknesses."
     },
     {
       "san": "c4",
-      "annotation": "We respond with the English Opening move order, expanding our influence over the central dark squares d5 and b5 while supporting our d4 pawn. This creates the potential for a Maróczy Bind formation if Black isn't careful, where our pawns on c4 and d4 severely restrict Black's central pawn breaks. The move also opens the c-file for potential future rook activity and prepares to fianchetto our light-squared bishop if needed. By playing c4, we're transposing into a Symmetrical English or potentially a Sicilian Defense with colors reversed, depending on how the game develops."
+      "annotation": "We respond with the English Opening move order, expanding our influence over the central dark squares d5 and b5 while supporting our d4 pawn. This creates the potential for a Maróczy Bind formation if Black isn't careful, where our pawns on c4 and d4 severely restrict Black's central pawn breaks. The move also opens the c-file for potential future rook activity and prepares to fianchetto our light-squared bishop if needed. By playing c4, we're transposing into a Symmetrical English or potentially a Sicilian Defense with colors reversed, depending on how the game develops.",
+      "shortNarration": "c4 expands influence over d5 and b5, opens the c-file, and prepares a Maróczy Bind if Black allows."
     },
     {
       "san": "cxd4",
-      "annotation": "Black captures in the center, eliminating our d4 pawn and creating an open d-file that could benefit either side later in the game. This exchange transforms the position into something resembling a Sicilian Defense with colors reversed, where Black has given up central control for piece activity. Our opponent is banking on quick development and active piece play to compensate for the loss of central presence. The capture also means Black will likely struggle to create the ...d5 pawn break that's so important in many Queen's Pawn structures, giving us long-term positional advantages."
+      "annotation": "Black captures in the center, eliminating our d4 pawn and creating an open d-file that could benefit either side later in the game. This exchange transforms the position into something resembling a Sicilian Defense with colors reversed, where Black has given up central control for piece activity. Our opponent is banking on quick development and active piece play to compensate for the loss of central presence. The capture also means Black will likely struggle to create the ...d5 pawn break that's so important in many Queen's Pawn structures, giving us long-term positional advantages.",
+      "shortNarration": "Black captures on d4, opening the d-file and trading central control for piece activity in a reversed Sicilian, but Black's ...d5 break becomes harder to achieve."
     },
     {
       "san": "e3",
-      "annotation": "Continuing Queens Pawn Game Liedmann Gambit: e3 is a known theory move in this line."
+      "annotation": "Continuing Queens Pawn Game Liedmann Gambit: e3 is a known theory move in this line.",
+      "shortNarration": "e3 is a known theory move in the Liedmann Gambit."
     }
   ]
 }

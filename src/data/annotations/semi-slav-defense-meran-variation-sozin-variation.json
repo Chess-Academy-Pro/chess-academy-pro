@@ -3,103 +3,128 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This solid choice leads to rich, strategic middlegames where understanding pawn structures and piece coordination becomes crucial. The d4 opening typically leads to less tactical, more positional games compared to 1.e4, making it a favorite among players who prefer strategic complexity over sharp tactics."
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This solid choice leads to rich, strategic middlegames where understanding pawn structures and piece coordination becomes crucial. The d4 opening typically leads to less tactical, more positional games compared to 1.e4, making it a favorite among players who prefer strategic complexity over sharp tactics.",
+      "shortNarration": "d4 stakes a claim to e5 and c5, opening lines for the dark-squared bishop and queen."
     },
     {
       "san": "d5",
-      "annotation": "Black responds symmetrically in the center, immediately challenging our control of e4 and creating a balanced pawn structure. This classical response shows that our opponent wants to fight for their fair share of central space rather than allow us to dominate with a big pawn center. Black's pawn on d5 also prepares potential development schemes for the light-squared bishop via the c8-h3 diagonal."
+      "annotation": "Black responds symmetrically in the center, immediately challenging our control of e4 and creating a balanced pawn structure. This classical response shows that our opponent wants to fight for their fair share of central space rather than allow us to dominate with a big pawn center. Black's pawn on d5 also prepares potential development schemes for the light-squared bishop via the c8-h3 diagonal.",
+      "shortNarration": "Black's symmetrical d5 challenges e4, freeing the light-squared bishop on the c8-h3 diagonal."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our kingside knight to its ideal square, where it controls the important central squares e5 and d4 while supporting our d-pawn. This flexible move keeps multiple opening systems available - we could transpose into a Queen's Gambit, King's Indian Attack, or various other setups depending on how Black continues. The knight on f3 also prepares kingside castling and doesn't commit us to any particular pawn structure yet."
+      "annotation": "We develop our kingside knight to its ideal square, where it controls the important central squares e5 and d4 while supporting our d-pawn. This flexible move keeps multiple opening systems available - we could transpose into a Queen's Gambit, King's Indian Attack, or various other setups depending on how Black continues. The knight on f3 also prepares kingside castling and doesn't commit us to any particular pawn structure yet.",
+      "shortNarration": "Knight to f3 controls e5 and d4, supports the d-pawn, and keeps options open for multiple openings."
     },
     {
       "san": "Nf6",
-      "annotation": "Black mirrors our knight development, developing with tempo by attacking our d4 pawn and controlling the key central squares e4 and d5. This active move is the hallmark of many solid defensive systems and shows that Black wants to maintain central tension rather than resolve it immediately. Our opponent is following classical opening principles: develop pieces toward the center and create threats while improving the position."
+      "annotation": "Black mirrors our knight development, developing with tempo by attacking our d4 pawn and controlling the key central squares e4 and d5. This active move is the hallmark of many solid defensive systems and shows that Black wants to maintain central tension rather than resolve it immediately. Our opponent is following classical opening principles: develop pieces toward the center and create threats while improving the position.",
+      "shortNarration": "Black develops the knight to attack d4, controlling e4 and d5 while maintaining central tension."
     },
     {
       "san": "c4",
-      "annotation": "We're playing the Queen's Gambit, offering our c-pawn to deflect Black's central d5 pawn and potentially gain a strong pawn center with d4-e4. This aggressive approach in the center is one of White's most principled tries for an opening advantage. Even if Black doesn't capture immediately, we've increased our control over the important d5 square and opened the c-file for potential pressure later in the game. The move also prepares development of our queenside pieces, particularly the bishop to c4 or d3."
+      "annotation": "We're playing the Queen's Gambit, offering our c-pawn to deflect Black's central d5 pawn and potentially gain a strong pawn center with d4-e4. This aggressive approach in the center is one of White's most principled tries for an opening advantage. Even if Black doesn't capture immediately, we've increased our control over the important d5 square and opened the c-file for potential pressure later in the game. The move also prepares development of our queenside pieces, particularly the bishop to c4 or d3.",
+      "shortNarration": "White offers the c-pawn in the Queen's Gambit to deflect Black's d5 pawn, aiming for a strong d4-e4 center and control of d5."
     },
     {
       "san": "c6",
-      "annotation": "Black declines the gambit and instead reinforces the d5 pawn with this solid Slav Defense setup. This move shows our opponent prefers to maintain the central pawn rather than accept material that might lead to a strong White center. The c6 pawn also prepares ...b5 in some lines and controls the important b5 and d7 squares. This leads us into the Semi-Slav complex, known for its rich strategic and tactical possibilities."
+      "annotation": "Black declines the gambit and instead reinforces the d5 pawn with this solid Slav Defense setup. This move shows our opponent prefers to maintain the central pawn rather than accept material that might lead to a strong White center. The c6 pawn also prepares ...b5 in some lines and controls the important b5 and d7 squares. This leads us into the Semi-Slav complex, known for its rich strategic and tactical possibilities.",
+      "shortNarration": "Black declines the gambit, reinforcing d5 with c6 to maintain the central pawn and prepare b5, entering the Semi-Slav."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop our queenside knight to its most active square, adding another attacker to the d5 pawn and preparing to recapture on c4 with the knight if needed. This active move maintains pressure in the center while keeping our options open for various pawn breaks like e2-e4. The knight on c3 also supports potential advances like d4-d5 or controls important squares like e4 and b5. By increasing the pressure on d5, we're forcing Black to make concrete decisions about the pawn structure."
+      "annotation": "We develop our queenside knight to its most active square, adding another attacker to the d5 pawn and preparing to recapture on c4 with the knight if needed. This active move maintains pressure in the center while keeping our options open for various pawn breaks like e2-e4. The knight on c3 also supports potential advances like d4-d5 or controls important squares like e4 and b5. By increasing the pressure on d5, we're forcing Black to make concrete decisions about the pawn structure.",
+      "shortNarration": "Nc3 attacks d5, prepares to recapture on c4 with the knight, and supports d4-d5 or e2-e4 breaks."
     },
     {
       "san": "e6",
-      "annotation": "Our opponent creates the Semi-Slav formation by supporting the d5 pawn from another angle while opening a diagonal for the dark-squared bishop. this stabilizing move gives Black's position great flexibility - the light-squared bishop can potentially develop via d6, e7, or even b4 in some lines. However, the downside is that the light-squared bishop on c8 becomes somewhat restricted, which is a key strategic theme in Semi-Slav positions. Black is building a solid but slightly passive setup that can become very dynamic with proper piece coordination."
+      "annotation": "Our opponent creates the Semi-Slav formation by supporting the d5 pawn from another angle while opening a diagonal for the dark-squared bishop. this stabilizing move gives Black's position great flexibility - the light-squared bishop can potentially develop via d6, e7, or even b4 in some lines. However, the downside is that the light-squared bishop on c8 becomes somewhat restricted, which is a key strategic theme in Semi-Slav positions. Black is building a solid but slightly passive setup that can become very dynamic with proper piece coordination.",
+      "shortNarration": "Black's Semi-Slav supports d5 and opens the dark-squared bishop's diagonal, but the c8-bishop remains restricted."
     },
     {
       "san": "e3",
-      "annotation": "We're choosing the solid Meran system approach, supporting our d4 pawn and preparing to develop our light-squared bishop to d3. This modest-looking move actually sets up some of the most complex and tactical variations in chess theory. The e3 pawn also controls the important f4 and d4 squares while keeping the option of e3-e4 available under the right circumstances. By avoiding more aggressive tries like Bg5 or Qc2, we're inviting Black into the rich tactical complications of the Meran Variation."
+      "annotation": "We're choosing the solid Meran system approach, supporting our d4 pawn and preparing to develop our light-squared bishop to d3. This modest-looking move actually sets up some of the most complex and tactical variations in chess theory. The e3 pawn also controls the important f4 and d4 squares while keeping the option of e3-e4 available under the right circumstances. By avoiding more aggressive tries like Bg5 or Qc2, we're inviting Black into the rich tactical complications of the Meran Variation.",
+      "shortNarration": "e3 supports d4, develops the bishop to d3, and keeps e3-e4 as a future option."
     },
     {
       "san": "Nbd7",
-      "annotation": "Black develops the queenside knight to its most flexible square, from where it can support various pawn breaks and piece maneuvers typical of Semi-Slav positions. The knight on d7 prepares the freeing ...e6-e5 advance and can later relocate to more active squares like f8-g6 or b8-c6. This move also maintains maximum flexibility in the position - Black isn't committing to any particular setup yet and keeps options for both solid and dynamic play. The knight development also prepares the key ...dxc4 capture, which is coming soon."
+      "annotation": "Black develops the queenside knight to its most flexible square, from where it can support various pawn breaks and piece maneuvers typical of Semi-Slav positions. The knight on d7 prepares the freeing ...e6-e5 advance and can later relocate to more active squares like f8-g6 or b8-c6. This move also maintains maximum flexibility in the position - Black isn't committing to any particular setup yet and keeps options for both solid and dynamic play. The knight development also prepares the key ...dxc4 capture, which is coming soon.",
+      "shortNarration": "Black's knight on d7 prepares ...e5 and ...dxc4, keeping flexible options for solid or dynamic play."
     },
     {
       "san": "Bd3",
-      "annotation": "We place our light-squared bishop on its most active diagonal, eyeing the enemy kingside and particularly the h7 square where Black's king will likely reside. This bishop placement is crucial for our attacking chances in the Meran Variation, as it often participates in kingside attacks after Black castles. The bishop on d3 also supports the central e4 advance and can create tactical opportunities with moves like Bxh7+ in the right circumstances. By developing this piece actively, we're setting the stage for the complex middlegame battles that characterize this opening."
+      "annotation": "We place our light-squared bishop on its most active diagonal, eyeing the enemy kingside and particularly the h7 square where Black's king will likely reside. This bishop placement is crucial for our attacking chances in the Meran Variation, as it often participates in kingside attacks after Black castles. The bishop on d3 also supports the central e4 advance and can create tactical opportunities with moves like Bxh7+ in the right circumstances. By developing this piece actively, we're setting the stage for the complex middlegame battles that characterize this opening.",
+      "shortNarration": "Bishop to d3 eyes h7 for a potential Bxh7+ sacrifice after Black castles kingside."
     },
     {
       "san": "dxc4",
-      "annotation": "Black finally captures the gambit pawn, accepting the challenge and leading us into the main lines of the Meran Variation. This capture opens the position and gives Black temporary material equality while creating tactical opportunities for both sides. Our opponent is essentially saying 'I'm ready for the complications' because this move leads to some of the sharpest positions in opening theory. The capture also opens the d-file and prepares Black's next moves in the typical Meran sequence."
+      "annotation": "Black finally captures the gambit pawn, accepting the challenge and leading us into the main lines of the Meran Variation. This capture opens the position and gives Black temporary material equality while creating tactical opportunities for both sides. Our opponent is essentially saying 'I'm ready for the complications' because this move leads to some of the sharpest positions in opening theory. The capture also opens the d-file and prepares Black's next moves in the typical Meran sequence.",
+      "shortNarration": "Black captures the gambit pawn, opening the d-file and entering the sharp Meran Variation."
     },
     {
       "san": "Bxc4",
-      "annotation": "We recapture naturally, maintaining our piece activity and keeping the bishop on a strong diagonal. The bishop on c4 now eyes the f7 square and maintains pressure on Black's kingside while supporting potential central advances. This is the normal recapture in the Meran - while we could also recapture with the knight, the bishop recapture keeps more pressure and tactical possibilities alive. From c4, our bishop is well-placed to support the upcoming complications and can quickly redeploy if needed."
+      "annotation": "We recapture naturally, maintaining our piece activity and keeping the bishop on a strong diagonal. The bishop on c4 now eyes the f7 square and maintains pressure on Black's kingside while supporting potential central advances. This is the normal recapture in the Meran - while we could also recapture with the knight, the bishop recapture keeps more pressure and tactical possibilities alive. From c4, our bishop is well-placed to support the upcoming complications and can quickly redeploy if needed.",
+      "shortNarration": "Bishop recaptures on c4, keeping pressure on f7 and supporting central advances in the Meran."
     },
     {
       "san": "b5",
-      "annotation": "Our opponent strikes with the key Meran counterattack, forcing our bishop to move while gaining space on the queenside and preparing further expansion. This aggressive pawn advance is the point behind Black's previous moves - creating counterplay before we can consolidate our central advantage. The b5 pawn also supports the future ...c6-c5 break and gives Black important space on the queenside. This move transforms the position from a quiet development phase into sharp tactical play where both sides must calculate accurately."
+      "annotation": "Our opponent strikes with the key Meran counterattack, forcing our bishop to move while gaining space on the queenside and preparing further expansion. This aggressive pawn advance is the point behind Black's previous moves - creating counterplay before we can consolidate our central advantage. The b5 pawn also supports the future ...c6-c5 break and gives Black important space on the queenside. This move transforms the position from a quiet development phase into sharp tactical play where both sides must calculate accurately.",
+      "shortNarration": "Black's b5 counterattack forces the bishop to move, gains queenside space, and prepares the c5 break, sharpening the game."
     },
     {
       "san": "Bd3",
-      "annotation": "We retreat our bishop to safety while maintaining its strong position on the long diagonal toward Black's kingside. This retreat is forced, but the bishop remains well-placed to support our central and kingside ambitions. From d3, the bishop still controls key squares and can participate in future attacking ideas. The retreat also prepares our next phase of development and maintains the tension in the center, keeping multiple strategic options available for the coming middlegame battle."
+      "annotation": "We retreat our bishop to safety while maintaining its strong position on the long diagonal toward Black's kingside. This retreat is forced, but the bishop remains well-placed to support our central and kingside ambitions. From d3, the bishop still controls key squares and can participate in future attacking ideas. The retreat also prepares our next phase of development and maintains the tension in the center, keeping multiple strategic options available for the coming middlegame battle.",
+      "shortNarration": "Bishop retreats to d3, keeping the long diagonal toward Black's kingside while maintaining central tension."
     },
     {
       "san": "a6",
-      "annotation": "Black continues the typical Meran plan, preparing to support the advanced b5 pawn and potentially expand further with ...c6-c5. This seemingly quiet move actually prepares some of the most forcing continuations in the opening, as it sets up tactical sequences involving pawn advances and piece sacrifices. The a6 pawn also prevents any White pieces from landing on b5 and gives Black's queenside expansion more stability. Our opponent is methodically preparing the central break that will define the character of the middlegame."
+      "annotation": "Black continues the typical Meran plan, preparing to support the advanced b5 pawn and potentially expand further with ...c6-c5. This seemingly quiet move actually prepares some of the most forcing continuations in the opening, as it sets up tactical sequences involving pawn advances and piece sacrifices. The a6 pawn also prevents any White pieces from landing on b5 and gives Black's queenside expansion more stability. Our opponent is methodically preparing the central break that will define the character of the middlegame.",
+      "shortNarration": "Black's a6 supports b5 expansion and the c6-c5 break, setting up forcing tactical sequences."
     },
     {
       "san": "e4",
-      "annotation": "We strike in the center with this thematic advance, opening up the position and creating immediate tactical complications. This move is the point of our opening setup - by advancing e3-e4, we're challenging Black's central knight and opening lines for our pieces. The pawn advance also gains space and forces Black to make concrete decisions about piece placement. However, this advance also opens up our king position slightly and requires accurate calculation of the resulting tactical sequences."
+      "annotation": "We strike in the center with this thematic advance, opening up the position and creating immediate tactical complications. This move is the point of our opening setup - by advancing e3-e4, we're challenging Black's central knight and opening lines for our pieces. The pawn advance also gains space and forces Black to make concrete decisions about piece placement. However, this advance also opens up our king position slightly and requires accurate calculation of the resulting tactical sequences.",
+      "shortNarration": "e3-e4 challenges the knight, opens lines, gains space, but slightly exposes the king and demands precise calculation."
     },
     {
       "san": "c5",
-      "annotation": "Black immediately counter-strikes in the center, creating maximum tension and leading to forcing variations that both sides must have studied deeply. This pawn break challenges our d4 pawn and opens lines for Black's pieces while creating tactical opportunities. Our opponent is following the main theoretical path of the Meran Variation, where both sides create threats simultaneously. The position is now reaching critical complexity where precise calculation and opening knowledge become essential for both players."
+      "annotation": "Black immediately counter-strikes in the center, creating maximum tension and leading to forcing variations that both sides must have studied deeply. This pawn break challenges our d4 pawn and opens lines for Black's pieces while creating tactical opportunities. Our opponent is following the main theoretical path of the Meran Variation, where both sides create threats simultaneously. The position is now reaching critical complexity where precise calculation and opening knowledge become essential for both players.",
+      "shortNarration": "Black's center counter-strike challenges d4, opening lines and creating tactical threats in the Meran Variation."
     },
     {
       "san": "e5",
-      "annotation": "We continue our central advance aggressively, attacking Black's pawn on f6 and creating a strong pawn wedge in the center. This move opens up attacking lines toward Black's kingside while forcing the enemy knight to make a decision about where to retreat. Our pawn on e5 also controls key squares like d6 and f6, potentially restricting Black's piece coordination. This aggressive continuation is typical of the sharp Sozin Variation, where we're willing to accept some risk for attacking chances."
+      "annotation": "We continue our central advance aggressively, attacking Black's pawn on f6 and creating a strong pawn wedge in the center. This move opens up attacking lines toward Black's kingside while forcing the enemy knight to make a decision about where to retreat. Our pawn on e5 also controls key squares like d6 and f6, potentially restricting Black's piece coordination. This aggressive continuation is typical of the sharp Sozin Variation, where we're willing to accept some risk for attacking chances.",
+      "shortNarration": "e5 advances the pawn wedge, attacks f6, and opens lines toward Black's kingside while restricting d6 and f6."
     },
     {
       "san": "cxd4",
-      "annotation": "Black captures our central pawn, opening the position further and creating immediate tactical threats that we must address. This capture eliminates one of our central pawns but also opens lines that can benefit both sides - Black gets the d-file and central squares, while we maintain our advanced e5 pawn. Our opponent is continuing the principled approach of creating counterplay in the center rather than retreating passively. The position is now extremely sharp and requires precise calculation from both players."
+      "annotation": "Black captures our central pawn, opening the position further and creating immediate tactical threats that we must address. This capture eliminates one of our central pawns but also opens lines that can benefit both sides - Black gets the d-file and central squares, while we maintain our advanced e5 pawn. Our opponent is continuing the principled approach of creating counterplay in the center rather than retreating passively. The position is now extremely sharp and requires precise calculation from both players.",
+      "shortNarration": "Black captures the central pawn, opening the d-file and central squares, but White keeps the advanced e5 pawn in a sharp tactical fight."
     },
     {
       "san": "Nxb5",
-      "annotation": "We capture Black's advanced pawn with our knight, creating multiple threats and maintaining the tactical initiative in this complex position. This capture not only wins material temporarily but also attacks the a6 pawn and creates threats against Black's somewhat exposed king position. Our knight on b5 is powerfully placed, controlling important central squares and creating coordination with our other pieces. However, we must be prepared for Black's forcing continuations, as our opponent will have tactical resources to create counterplay."
+      "annotation": "We capture Black's advanced pawn with our knight, creating multiple threats and maintaining the tactical initiative in this complex position. This capture not only wins material temporarily but also attacks the a6 pawn and creates threats against Black's somewhat exposed king position. Our knight on b5 is powerfully placed, controlling important central squares and creating coordination with our other pieces. However, we must be prepared for Black's forcing continuations, as our opponent will have tactical resources to create counterplay.",
+      "shortNarration": "Knight captures the advanced pawn on b5, winning material while threatening a6 and the exposed king."
     },
     {
       "san": "Nxe5",
-      "annotation": "Black eliminates our strong central pawn by capturing with the knight, creating material balance while removing a key element of our pawn structure. This capture makes sense because our e5 pawn was controlling important squares and supporting our attack - by removing it, Black reduces our central pressure. Our opponent's knight is now actively placed on e5, from where it can create threats and support Black's counterplay. The position remains highly tactical with both sides having active pieces and attacking chances."
+      "annotation": "Black eliminates our strong central pawn by capturing with the knight, creating material balance while removing a key element of our pawn structure. This capture makes sense because our e5 pawn was controlling important squares and supporting our attack - by removing it, Black reduces our central pressure. Our opponent's knight is now actively placed on e5, from where it can create threats and support Black's counterplay. The position remains highly tactical with both sides having active pieces and attacking chances.",
+      "shortNarration": "Black's knight captures on e5, removing your central pawn and gaining an active outpost with tactical threats."
     },
     {
       "san": "Nxe5",
-      "annotation": "We recapture the knight immediately, maintaining material balance while keeping our pieces active in the center. Our knight on e5 is powerfully centralized, controlling key squares and supporting potential attacking ideas against Black's position. This recapture also maintains the pressure and doesn't allow Black to consolidate easily - we're keeping the position sharp and tactical. From e5, our knight coordinates well with our other pieces and maintains threats that Black must constantly consider."
+      "annotation": "We recapture the knight immediately, maintaining material balance while keeping our pieces active in the center. Our knight on e5 is powerfully centralized, controlling key squares and supporting potential attacking ideas against Black's position. This recapture also maintains the pressure and doesn't allow Black to consolidate easily - we're keeping the position sharp and tactical. From e5, our knight coordinates well with our other pieces and maintains threats that Black must constantly consider.",
+      "shortNarration": "Recapturing the knight keeps material equal and the e5 knight centralized, pressuring Black's position."
     },
     {
       "san": "axb5",
-      "annotation": "Black recaptures our knight with the a-pawn, maintaining material equality while creating a passed pawn on the queenside. This recapture is natural and keeps the material balance, but it also slightly weakens Black's queenside pawn structure. Our opponent now has a potential asset in the passed b-pawn, but it's currently blockaded and not immediately dangerous. The recapture also opens the a-file, which could become important for rook activity later in the game, giving both sides new strategic considerations for the emerging middlegame."
+      "annotation": "Black recaptures our knight with the a-pawn, maintaining material equality while creating a passed pawn on the queenside. This recapture is natural and keeps the material balance, but it also slightly weakens Black's queenside pawn structure. Our opponent now has a potential asset in the passed b-pawn, but it's currently blockaded and not immediately dangerous. The recapture also opens the a-file, which could become important for rook activity later in the game, giving both sides new strategic considerations for the emerging middlegame.",
+      "shortNarration": "Black recaptures with the a-pawn, keeping material equal but creating a passed b-pawn and opening the a-file for rook play."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside to ensure our king's safety in this sharp position where tactics are flying and material is roughly equal. this move gets our king away from the center where tactics are most dangerous and connects our rooks for better coordination. Castling also brings our rook to f1, where it can potentially support attacks on the f-file or defend our position as needed. Given the tactical nature of the position, king safety becomes paramount, and this move allows us to focus on our attacking chances without worrying about our own king's security."
+      "annotation": "We castle kingside to ensure our king's safety in this sharp position where tactics are flying and material is roughly equal. this move gets our king away from the center where tactics are most dangerous and connects our rooks for better coordination. Castling also brings our rook to f1, where it can potentially support attacks on the f-file or defend our position as needed. Given the tactical nature of the position, king safety becomes paramount, and this move allows us to focus on our attacking chances without worrying about our own king's security.",
+      "shortNarration": "Castles kingside for safety, connects rooks, and supports f-file play in this sharp tactical position."
     }
   ]
 }

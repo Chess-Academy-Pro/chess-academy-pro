@@ -2,149 +2,200 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "The Evans Gambit is an important variation of the Evans Gambit. Understanding this line will strengthen your repertoire. Let's walk through the key ideas."
+      "annotation": "This is the Evans Gambit, one of the most romantic and aggressive openings in chess history — Capablanca called it 'the gem of openings.' White plays 1.e4, claiming the center and preparing for a pawn sacrifice that yields rapid development and a dangerous attack.",
+      "narration": "This is the Evans Gambit, one of the most romantic and aggressive openings in chess history — Capablanca called it 'the gem of openings.' White plays 1.e4, claiming the center and preparing for a pawn sacrifice that yields rapid development and a dangerous attack.",
+      "shortNarration": "1.e4 claims the center and prepares a pawn sacrifice for rapid development and attack."
     },
     {
       "san": "e5",
-      "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit."
+      "annotation": "Black responds with e5, claiming central space and entering the classical Italian and Open Game complex.",
+      "narration": "Black responds with e5, claiming central space and entering the classical Italian and Open Game complex.",
+      "shortNarration": "Black's e5 claims central space, entering the Open Game."
     },
     {
       "san": "Nf3",
-      "annotation": "Continuing Gambit Evans Gambit: Nf3 is a known theory move in this line."
+      "annotation": "Nf3 develops with attack on e5 and prepares the Italian setup. The knight will be a key attacking piece if Black accepts the gambit.",
+      "narration": "Nf3 develops with attack on e5 and prepares the Italian setup. The knight will be a key attacking piece if Black accepts the gambit.",
+      "shortNarration": "Nf3 attacks e5 and prepares the Italian setup, key for attacking if Black accepts the gambit."
     },
     {
       "san": "Nc6",
-      "annotation": "Continuing Gambit Evans Gambit: Nc6 is a known theory move in this line."
+      "annotation": "Nc6 defends e5 and develops with tempo — the classical answer to the Italian.",
+      "shortNarration": "Nc6 defends e5 and develops with tempo against the Italian."
     },
     {
       "san": "Bc4",
-      "annotation": "Continuing Gambit Evans Gambit: Bc4 is a known theory move in this line."
+      "annotation": "Bc4 — the Italian Game's defining move. The bishop targets the eternally weak f7 square and joins the kingside attack the Evans Gambit will soon unleash.",
+      "narration": "Bc4 — the Italian Game's defining move. The bishop targets the eternally weak f7 square and joins the kingside attack the Evans Gambit will soon unleash.",
+      "shortNarration": "Bc4 targets f7 and joins the kingside attack in the Evans Gambit."
     },
     {
       "san": "Bc5",
-      "annotation": "Continuing Gambit Evans Gambit: Bc5 is a known theory move in this line."
+      "annotation": "Bc5 mirrors White's development and challenges the central squares. Black is in the Giuoco Piano — and walking right into the Evans Gambit's setup.",
+      "narration": "Bc5 mirrors White's development and challenges the central squares. Black is in the Giuoco Piano — and walking right into the Evans Gambit's setup.",
+      "shortNarration": "Bc5 mirrors development and challenges the center, walking into the Evans Gambit."
     },
     {
       "san": "b4",
-      "annotation": "Continuing Gambit Evans Gambit: b4 is a known theory move in this line."
+      "annotation": "b4 — the Evans Gambit pawn sacrifice. White offers the b-pawn to gain a tempo on the c5 bishop and prepare c3-d4 with a powerful pawn center. Captain Evans's idea from 1827 still ranks among the most ambitious gambits ever conceived.",
+      "narration": "b4 — the Evans Gambit pawn sacrifice. White offers the b-pawn to gain a tempo on the c5 bishop and prepare c3-d4 with a powerful pawn center. Captain Evans's idea from 1827 still ranks among the most ambitious gambits ever conceived.",
+      "shortNarration": "White sacrifices the b-pawn with the Evans Gambit to gain a tempo on the c5 bishop and build a powerful c3-d4 pawn center."
     },
     {
       "san": "Bxb4",
-      "annotation": "Bxb4 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+      "annotation": "Bxb4 accepts the gambit. Black is up a pawn but White will spend the next several moves extracting maximum compensation — central pawns, development tempo, and attacking chances.",
       "arrows": [
         {
           "from": "c5",
           "to": "b4",
           "color": "rgba(50, 150, 220, 0.8)"
         }
-      ]
+      ],
+      "narration": "Bxb4 accepts the gambit. Black is up a pawn but White will spend the next several moves extracting maximum compensation — central pawns, development tempo, and attacking chances.",
+      "shortNarration": "Bxb4 accepts the gambit — Black is up a pawn but White gets central pawns, development tempo, and attacking compensation."
     },
     {
       "san": "c3",
-      "annotation": "Continuing Gambit Evans Gambit: c3 is a known theory move in this line."
+      "annotation": "c3 attacks the b4 bishop and prepares the all-important d4 advance. White is building the dream Evans pawn center while Black scrambles for safe bishop placement.",
+      "narration": "c3 attacks the b4 bishop and prepares the all-important d4 advance. White is building the dream Evans pawn center while Black scrambles for safe bishop placement.",
+      "shortNarration": "c3 attacks the b4 bishop and prepares d4, building the Evans pawn center."
     },
     {
       "san": "Ba5",
-      "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better."
+      "annotation": "Ba5 — the main-line Evans response. The bishop maintains pressure on the a5-e1 diagonal (pinning the c3 pawn against potential checks) and refuses to give White's center an easy ride.",
+      "narration": "Ba5 — the main-line Evans response. The bishop maintains pressure on the a5-e1 diagonal (pinning the c3 pawn against potential checks) and refuses to give White's center an easy ride.",
+      "shortNarration": "Ba5 pins the c3 pawn against the king, refusing White easy central development."
     },
     {
       "san": "d4",
-      "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+      "annotation": "d4 — the central thrust. White builds the powerful e4-d4 pawn duo, attacks the e5 pawn, and threatens to roll the center forward with overwhelming force.",
+      "narration": "d4 — the central thrust. White builds the powerful e4-d4 pawn duo, attacks the e5 pawn, and threatens to roll the center forward with overwhelming force.",
+      "shortNarration": "d4 attacks e5, threatening to push the e4-d4 pawn duo forward with overwhelming force."
     },
     {
       "san": "exd4",
-      "annotation": "exd4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+      "annotation": "exd4 captures the pawn. Black accepts material but White will recapture with the c-pawn and emerge with a massive center plus a development lead.",
       "arrows": [
         {
           "from": "e5",
           "to": "d4",
           "color": "rgba(50, 150, 220, 0.8)"
         }
-      ]
+      ],
+      "narration": "exd4 captures the pawn. Black accepts material but White will recapture with the c-pawn and emerge with a massive center plus a development lead.",
+      "shortNarration": "Black accepts the pawn trade, but White recaptures with the c-pawn for a massive center and development lead."
     },
     {
       "san": "O-O",
-      "annotation": "Continuing Gambit Evans Gambit: O-O is a known theory move in this line."
+      "annotation": "O-O brings the king to safety before the central tension resolves. White is happy to let exd4 sit on the board for a moment — castling first is more important than recapturing.",
+      "narration": "O-O brings the king to safety before the central tension resolves. White is happy to let exd4 sit on the board for a moment — castling first is more important than recapturing.",
+      "shortNarration": "O-O brings the king to safety before resolving the central tension with exd4."
     },
     {
       "san": "d6",
-      "annotation": "Continuing Gambit Evans Gambit: d6 is a known theory move in this line."
+      "annotation": "d6 supports the d4 pawn and prepares ...Nf6 development. Black is trying to consolidate the extra pawn before White's center steamrolls.",
+      "narration": "d6 supports the d4 pawn and prepares ...Nf6 development. Black is trying to consolidate the extra pawn before White's center steamrolls.",
+      "shortNarration": "d6 supports the d4 pawn and prepares ...Nf6 to consolidate the extra pawn before White's center steamrolls."
     },
     {
       "san": "cxd4",
-      "annotation": "cxd4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+      "annotation": "cxd4 — White recaptures, and the classical Evans Gambit pawn center is born: e4 and d4 pawns side by side, controlling every key central square.",
       "arrows": [
         {
           "from": "c3",
           "to": "d4",
           "color": "rgba(50, 150, 220, 0.8)"
         }
-      ]
+      ],
+      "narration": "cxd4 — White recaptures, and the classical Evans Gambit pawn center is born: e4 and d4 pawns side by side, controlling every key central square.",
+      "shortNarration": "White's e4 and d4 pawns side by side control every key central square."
     },
     {
       "san": "Bb6",
-      "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on a5 and moves to b6 where it serves the plan better."
+      "annotation": "Bb6 retreats the bishop to a safer square and adds pressure on d4. Black's bishop is now eyeing f2, the eternal weak spot in White's castled position.",
+      "narration": "Bb6 retreats the bishop to a safer square and adds pressure on d4. Black's bishop is now eyeing f2, the eternal weak spot in White's castled position.",
+      "shortNarration": "Bb6 retreats, adding pressure on d4 and eyeing f2, White's weak spot after castling."
     },
     {
       "san": "d5",
-      "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+      "annotation": "d5 — the central pawn lever. White pushes the c-knight back to a5 (a passive square) and gains crushing central space.",
+      "narration": "d5 — the central pawn lever. White pushes the c-knight back to a5 (a passive square) and gains crushing central space.",
+      "shortNarration": "d5 pushes the c-knight back to a5, gaining crushing central space."
     },
     {
       "san": "Na5",
-      "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better."
+      "annotation": "Na5 — the c6 knight is forced to the rim where it's poorly placed. Black accepts the awkward retreat to dodge worse alternatives like ...Nb8.",
+      "narration": "Na5 — the c6 knight is forced to the rim where it's poorly placed. Black accepts the awkward retreat to dodge worse alternatives like ...Nb8.",
+      "shortNarration": "Na5 forces the c6 knight to the rim, poorly placed but avoiding worse alternatives like ...Nb8."
     },
     {
       "san": "Bb2",
-      "annotation": "Bb2 — White fianchettoes the bishop, placing it on the long diagonal where it controls the center from a distance. This is a key positional idea."
+      "annotation": "Bb2 — the long-diagonal bishop. The Bb2 stares directly at Black's king on g8 along the a1-h8 diagonal, building the classic Evans attack on the dark squares.",
+      "narration": "Bb2 — the long-diagonal bishop. The Bb2 stares directly at Black's king on g8 along the a1-h8 diagonal, building the classic Evans attack on the dark squares.",
+      "shortNarration": "Bb2 pins the a1-h8 diagonal at Black's king, setting up the Evans attack on dark squares."
     },
     {
       "san": "Ne7",
-      "annotation": "Continuing Gambit Evans Gambit: Ne7 is a known theory move in this line."
+      "annotation": "Ne7 develops the kingside knight while sidestepping the d5 pawn's pressure. Black is desperately trying to complete development.",
+      "narration": "Ne7 develops the kingside knight while sidestepping the d5 pawn's pressure. Black is desperately trying to complete development.",
+      "shortNarration": "Ne7 develops the knight, dodging d5's pressure as Black rushes to complete development."
     },
     {
       "san": "Bd3",
-      "annotation": "Continuing Gambit Evans Gambit: Bd3 is a known theory move in this line."
+      "annotation": "Bd3 redeploys the bishop where it can support the kingside attack and avoid being kicked by ...c6 or ...c5. The Bd3 lines up with Bb2 to form the classic Evans attacking battery.",
+      "narration": "Bd3 redeploys the bishop where it can support the kingside attack and avoid being kicked by ...c6 or ...c5. The Bd3 lines up with Bb2 to form the classic Evans attacking battery.",
+      "shortNarration": "Bd3 redeploys to support the kingside attack, forming the classic Evans battery with Bb2."
     },
     {
       "san": "O-O",
-      "annotation": "Continuing Gambit Evans Gambit: O-O is a known theory move in this line."
+      "annotation": "O-O — Black finally gets the king to safety, but the kingside is under siege. White's pieces are coordinated for an attack; Black's are scrambling to defend.",
+      "narration": "O-O — Black finally gets the king to safety, but the kingside is under siege. White's pieces are coordinated for an attack; Black's are scrambling to defend.",
+      "shortNarration": "Black castles but the kingside is under siege — White's coordinated pieces attack while Black's scramble to defend."
     },
     {
       "san": "Nc3",
-      "annotation": "Continuing Gambit Evans Gambit: Nc3 is a known theory move in this line."
+      "annotation": "Nc3 develops the queenside knight and joins the central pressure. White's army is now fully mobilized for the attack on Black's king.",
+      "narration": "Nc3 develops the queenside knight and joins the central pressure. White's army is now fully mobilized for the attack on Black's king.",
+      "shortNarration": "Nc3 develops the knight, fully mobilizing White's army for the attack on Black's king."
     },
     {
       "san": "Ng6",
-      "annotation": "Ng6 improves the knight's placement. The knight was less effective on e7 and moves to g6 where it serves the plan better. We're reaching the critical position of this variation.",
+      "annotation": "Ng6 redeploys the e7 knight to a more active square, defending the kingside and preparing ...f5 if needed.",
       "arrows": [
         {
           "from": "e7",
           "to": "g6",
           "color": "rgba(50, 150, 220, 0.8)"
         }
-      ]
+      ],
+      "narration": "Ng6 redeploys the e7 knight to a more active square, defending the kingside and preparing ...f5 if needed.",
+      "shortNarration": "Ng6 redeploys the knight to defend the kingside and prepare f5."
     },
     {
       "san": "Ne2",
-      "annotation": "Ne2 improves the knight's placement. The knight was less effective on c3 and moves to e2 where it serves the plan better. Notice how the pieces coordinate in this position.",
+      "annotation": "Ne2 — the queen knight reroutes toward the kingside. White is patient: every piece must be on its optimal attacking square before the assault begins.",
       "arrows": [
         {
           "from": "c3",
           "to": "e2",
           "color": "rgba(50, 150, 220, 0.8)"
         }
-      ]
+      ],
+      "narration": "Ne2 — the queen knight reroutes toward the kingside. White is patient: every piece must be on its optimal attacking square before the assault begins.",
+      "shortNarration": "Ne2 reroutes the knight toward the kingside, preparing the assault."
     },
     {
       "san": "c5",
-      "annotation": "c5. This is the typical position arising from the Evans Gambit. From here, understanding the strategic plans — piece placement, pawn breaks, and targets — is essential.",
+      "annotation": "c5 — Black strikes back at White's center, looking for counterplay and trying to relieve the queenside pressure. The position is now a complex strategic battle, the gambit pawn long since transformed into something else.",
       "arrows": [
         {
           "from": "c7",
           "to": "c5",
           "color": "rgba(50, 150, 220, 0.8)"
         }
-      ]
+      ],
+      "narration": "c5 — Black strikes back at White's center, looking for counterplay and trying to relieve the queenside pressure. The position is now a complex strategic battle, the gambit pawn long since transformed into something else.",
+      "shortNarration": "c5 strikes at White's center, seeking counterplay and relieving queenside pressure."
     }
   ],
   "subLines": [
@@ -154,11 +205,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Evans Gambit: Normal Variation with d5 Push is an important variation of the Evans Gambit. The main line where Black retreats to a5 and plays d6 to hold the center. White gets a powerful d4-d5 pawn chain, develops the dark-squared bishop to b2, and prepares a kingside attack with f4. Black is cramped and must find a way to break free before White's attack crashes through. Let's walk through the key ideas."
+          "annotation": "The Evans Gambit: Normal Variation with d5 Push is an important variation of the Evans Gambit. The main line where Black retreats to a5 and plays d6 to hold the center. White gets a powerful d4-d5 pawn chain, develops the dark-squared bishop to b2, and prepares a kingside attack with f4. Black is cramped and must find a way to break free before White's attack crashes through. Let's walk through the key ideas.",
+          "shortNarration": "White's d4-d5 pawn chain, bishop on b2, and f4 prepare a kingside attack while Black is cramped and must break free."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit: Normal Variation with d5 Push."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit: Normal Variation with d5 Push.",
+          "shortNarration": "Black's e5 contests the center, reaching the Evans Gambit Normal Variation with d5 push."
         },
         {
           "san": "Nf3",
@@ -189,7 +242,8 @@
               "to": "b4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 captures the pawn, winning material and altering the pawn structure."
         },
         {
           "san": "c3",
@@ -197,11 +251,13 @@
         },
         {
           "san": "Ba5",
-          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better."
+          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better.",
+          "shortNarration": "Ba5 improves the bishop's placement for the plan."
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -212,7 +268,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "O-O",
@@ -231,23 +288,28 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "cxd4 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Bb6",
-          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on a5 and moves to b6 where it serves the plan better."
+          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on a5 and moves to b6 where it serves the plan better.",
+          "shortNarration": "Bb6 improves the bishop's placement, aiming at the kingside from b6."
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "Na5",
-          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better."
+          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better.",
+          "shortNarration": "Na5 improves the knight's placement, eyeing b3 and supporting queenside play."
         },
         {
           "san": "Bb2",
-          "annotation": "Bb2 — White fianchettoes the bishop, placing it on the long diagonal where it controls the center from a distance. This is a key positional idea."
+          "annotation": "Bb2 — White fianchettoes the bishop, placing it on the long diagonal where it controls the center from a distance. This is a key positional idea.",
+          "shortNarration": "Bb2 fianchettoes the bishop, controlling the long diagonal and pressuring the center."
         },
         {
           "san": "Ne7",
@@ -267,11 +329,13 @@
         },
         {
           "san": "Ng6",
-          "annotation": "Ng6 improves the knight's placement. The knight was less effective on e7 and moves to g6 where it serves the plan better."
+          "annotation": "Ng6 improves the knight's placement. The knight was less effective on e7 and moves to g6 where it serves the plan better.",
+          "shortNarration": "Ng6 improves the knight's placement, shifting from e7 to support the attack."
         },
         {
           "san": "Ne2",
-          "annotation": "Ne2 improves the knight's placement. The knight was less effective on c3 and moves to e2 where it serves the plan better."
+          "annotation": "Ne2 improves the knight's placement. The knight was less effective on c3 and moves to e2 where it serves the plan better.",
+          "shortNarration": "Ne2 improves the knight from c3 to e2, better supporting the plan."
         },
         {
           "san": "c5",
@@ -283,7 +347,8 @@
         },
         {
           "san": "f6",
-          "annotation": "f6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king."
+          "annotation": "f6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f6 gains kingside space to support a future attack on the enemy king."
         },
         {
           "san": "Kh1",
@@ -294,7 +359,8 @@
               "to": "h1",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Kh1 improves the king's placement, reaching the critical position of this variation."
         },
         {
           "san": "Bd7",
@@ -316,7 +382,8 @@
               "to": "f4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "In the Evans Gambit Normal Variation with d5 push, Qf4 targets f7 and pressures Black's kingside."
         }
       ]
     },
@@ -326,11 +393,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Evans Gambit: Slow Variation with Be7 Retreat is an important variation of the Evans Gambit. Black retreats the bishop to e7 — a conservative choice avoiding the sharpest lines. White plays d4 and builds up gradually. After Qxd4 and e5, the central space advantage and open lines provide excellent compensation. The queen on g3 eyes both the kingside and the g7 pawn. Let's walk through the key ideas."
+          "annotation": "The Evans Gambit: Slow Variation with Be7 Retreat is an important variation of the Evans Gambit. Black retreats the bishop to e7 — a conservative choice avoiding the sharpest lines. White plays d4 and builds up gradually. After Qxd4 and e5, the central space advantage and open lines provide excellent compensation. The queen on g3 eyes both the kingside and the g7 pawn. Let's walk through the key ideas.",
+          "shortNarration": "In the Evans Gambit Slow Variation, Black's Be7 retreat lets White build a central space advantage and open lines, with the queen on g3 eyeing both the kingside and g7."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit: Slow Variation with Be7 Retreat."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit: Slow Variation with Be7 Retreat.",
+          "shortNarration": "Black's e5 contests the center, defining the Evans Gambit Slow Variation with Be7 retreat."
         },
         {
           "san": "Nf3",
@@ -361,7 +430,8 @@
               "to": "b4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 captures the pawn, changing the balance by reconfiguring the pawn structure or gaining material."
         },
         {
           "san": "c3",
@@ -369,19 +439,23 @@
         },
         {
           "san": "Be7",
-          "annotation": "Be7 improves the bishop's placement. The bishop was less effective on b4 and moves to e7 where it serves the plan better."
+          "annotation": "Be7 improves the bishop's placement. The bishop was less effective on b4 and moves to e7 where it serves the plan better.",
+          "shortNarration": "Be7 improves the bishop's placement, moving from b4 to e7 for a better plan."
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Na5",
-          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better."
+          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better.",
+          "shortNarration": "Na5 improves the knight's placement, targeting b3 and c4 from a5."
         },
         {
           "san": "Be2",
-          "annotation": "Be2 improves the bishop's placement. The bishop was less effective on c4 and moves to e2 where it serves the plan better."
+          "annotation": "Be2 improves the bishop's placement. The bishop was less effective on c4 and moves to e2 where it serves the plan better.",
+          "shortNarration": "Be2 improves the bishop's placement, shifting from c4 to e2 for a better plan."
         },
         {
           "san": "exd4",
@@ -392,7 +466,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Qxd4",
@@ -403,7 +478,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxd4 develops the queen to a strong central post controlling key squares and supporting the center."
         },
         {
           "san": "Nf6",
@@ -411,7 +487,8 @@
         },
         {
           "san": "e5",
-          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "Nc6",
@@ -419,7 +496,8 @@
         },
         {
           "san": "Qh4",
-          "annotation": "Qh4 activates the queen. From h4, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qh4 activates the queen. From h4, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qh4 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Nd5",
@@ -427,7 +505,8 @@
         },
         {
           "san": "Qg3",
-          "annotation": "Qg3 activates the queen. From g3, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qg3 activates the queen. From g3, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qg3 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "d6",
@@ -439,11 +518,13 @@
         },
         {
           "san": "Nb6",
-          "annotation": "Nb6 improves the knight's placement. The knight was less effective on d5 and moves to b6 where it serves the plan better."
+          "annotation": "Nb6 improves the knight's placement. The knight was less effective on d5 and moves to b6 where it serves the plan better.",
+          "shortNarration": "Nb6 improves the knight from d5, better serving the plan."
         },
         {
           "san": "Rd1",
-          "annotation": "Rd1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files."
+          "annotation": "Rd1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Rd1 places the rook on the open d-file, maximizing its activity."
         },
         {
           "san": "Be6",
@@ -458,7 +539,8 @@
               "to": "d6",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd6 captures the pawn, reconfiguring the pawn structure and gaining material in the critical position."
         },
         {
           "san": "O-O",
@@ -490,11 +572,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Evans Gambit Declined: Bb6 System is an important variation of the Evans Gambit. Black declines with Bb6 — a sensible choice avoiding the sharpest play. White pushes a4-a5 to gain queenside space and plays Nd5 for a central grip. The game becomes less tactical but White retains a dynamic initiative with active pieces and space advantage. Let's walk through the key ideas."
+          "annotation": "The Evans Gambit Declined: Bb6 System is an important variation of the Evans Gambit. Black declines with Bb6 — a sensible choice avoiding the sharpest play. White pushes a4-a5 to gain queenside space and plays Nd5 for a central grip. The game becomes less tactical but White retains a dynamic initiative with active pieces and space advantage. Let's walk through the key ideas.",
+          "shortNarration": "White pushes a4-a5 for queenside space and Nd5 for central grip, retaining a dynamic initiative with active pieces."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit Declined: Bb6 System."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit Declined: Bb6 System.",
+          "shortNarration": "Black's e5 contests the center, defining the Evans Gambit Declined: Bb6 System."
         },
         {
           "san": "Nf3",
@@ -518,7 +602,8 @@
         },
         {
           "san": "Bb6",
-          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on c5 and moves to b6 where it serves the plan better."
+          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on c5 and moves to b6 where it serves the plan better.",
+          "shortNarration": "Bb6 relocates the bishop from c5 to b6, improving its diagonal for the attack."
         },
         {
           "san": "a4",
@@ -549,7 +634,8 @@
               "to": "d5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxd5 wins a knight, altering the pawn structure or material balance."
         },
         {
           "san": "exd5",
@@ -560,7 +646,8 @@
               "to": "d5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd5 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "Nd4",
@@ -572,7 +659,8 @@
         },
         {
           "san": "Ba7",
-          "annotation": "Ba7 improves the bishop's placement. The bishop was less effective on b6 and moves to a7 where it serves the plan better."
+          "annotation": "Ba7 improves the bishop's placement. The bishop was less effective on b6 and moves to a7 where it serves the plan better.",
+          "shortNarration": "Ba7 improves the bishop's placement from b6 to a7, better serving the plan."
         },
         {
           "san": "Nxd4",
@@ -583,7 +671,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxd4 captures the knight, winning a pawn and leaving Black's pawns doubled on the c-file."
         },
         {
           "san": "Bxd4",
@@ -594,7 +683,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxd4 captures the knight, altering the pawn structure or material balance."
         },
         {
           "san": "c3",
@@ -602,11 +692,13 @@
         },
         {
           "san": "Bb6",
-          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on d4 and moves to b6 where it serves the plan better."
+          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on d4 and moves to b6 where it serves the plan better.",
+          "shortNarration": "Bb6 improves the bishop's placement, targeting the kingside from b6."
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -617,7 +709,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "O-O",
@@ -632,7 +725,8 @@
               "to": "c3",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc3 captures the pawn, changing the material balance and pawn structure."
         },
         {
           "san": "Qg4",
@@ -665,7 +759,8 @@
               "to": "g5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bg5 pins the knight on f6, targeting d5 and pressuring Black's kingside in the Evans Gambit Declined Bb6 System."
         }
       ]
     },
@@ -675,11 +770,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Evans Gambit: Compromised Defense (dxc3) is an important variation of the Evans Gambit. The sharpest line where Black grabs the c3 pawn. White plays Qb3 targeting f7, and e5 gains space with tempo. After Nxc3, Ba3 prevents Black from developing normally. The Nd5 jump creates multiple threats and White's piece activity is overwhelming despite being down two pawns. Let's walk through the key ideas."
+          "annotation": "The Evans Gambit: Compromised Defense (dxc3) is an important variation of the Evans Gambit. The sharpest line where Black grabs the c3 pawn. White plays Qb3 targeting f7, and e5 gains space with tempo. After Nxc3, Ba3 prevents Black from developing normally. The Nd5 jump creates multiple threats and White's piece activity is overwhelming despite being down two pawns. Let's walk through the key ideas.",
+          "shortNarration": "Down two pawns, White's overwhelming piece activity with Qb3, e5, Ba3, and Nd5 creates multiple threats in the Evans Gambit Compromised Defense."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit: Compromised Defense (dxc3)."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit: Compromised Defense (dxc3).",
+          "shortNarration": "Black's e5 contests the center, defining the Evans Gambit's Compromised Defense with dxc3."
         },
         {
           "san": "Nf3",
@@ -710,7 +807,8 @@
               "to": "b4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 captures the pawn, winning material or altering the pawn structure."
         },
         {
           "san": "c3",
@@ -718,11 +816,13 @@
         },
         {
           "san": "Ba5",
-          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better."
+          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better.",
+          "shortNarration": "Ba5 improves the bishop's placement from b4, eyeing the queenside and supporting the attack."
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -733,7 +833,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "O-O",
@@ -748,7 +849,8 @@
               "to": "c3",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc3 captures the pawn, changing the pawn structure or material balance."
         },
         {
           "san": "Qb3",
@@ -760,11 +862,13 @@
         },
         {
           "san": "e5",
-          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
         },
         {
           "san": "Qg6",
-          "annotation": "Qg6 activates the queen. From g6, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qg6 activates the queen. From g6, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qg6 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Nxc3",
@@ -791,11 +895,13 @@
         },
         {
           "san": "Rac1",
-          "annotation": "Rac1 improves the rook's placement. The rook was less effective on a1 and moves to c1 where it serves the plan better."
+          "annotation": "Rac1 improves the rook's placement. The rook was less effective on a1 and moves to c1 where it serves the plan better.",
+          "shortNarration": "Rac1 improves the rook's placement by shifting it from a1 to c1 for better service."
         },
         {
           "san": "Bb6",
-          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on a5 and moves to b6 where it serves the plan better."
+          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on a5 and moves to b6 where it serves the plan better.",
+          "shortNarration": "Bb6 improves the bishop's placement from a5 to b6 for better effectiveness."
         },
         {
           "san": "Nd5",
@@ -803,7 +909,8 @@
         },
         {
           "san": "Na5",
-          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better."
+          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better.",
+          "shortNarration": "Na5 improves the knight's placement, targeting b3 and supporting queenside play."
         },
         {
           "san": "Qb4",
@@ -814,7 +921,8 @@
               "to": "b4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qb4 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Nxc4",
@@ -825,7 +933,8 @@
               "to": "c4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxc4 captures the bishop, defining the Evans Gambit's compromised defense pawn structure."
         },
         {
           "san": "Rxc4",
@@ -836,7 +945,8 @@
               "to": "c4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Rxc4 leaves White with clear targets and plans in the resulting structure."
         }
       ]
     },
@@ -846,11 +956,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "The Evans Gambit: Waller Attack with Qb3 is an important variation of the Evans Gambit. The Waller Attack features Qa4 and Qb3 to create constant pressure on the queenside while aiming at f7. After Nd5, the knight is a monster controlling key squares. Combined with a4 and Bg5, White's pieces coordinate beautifully for a crushing middlegame attack. Let's walk through the key ideas."
+          "annotation": "The Evans Gambit: Waller Attack with Qb3 is an important variation of the Evans Gambit. The Waller Attack features Qa4 and Qb3 to create constant pressure on the queenside while aiming at f7. After Nd5, the knight is a monster controlling key squares. Combined with a4 and Bg5, White's pieces coordinate beautifully for a crushing middlegame attack. Let's walk through the key ideas.",
+          "shortNarration": "In the Evans Gambit Waller Attack, Qb3 pressures f7 while Nd5 dominates key squares, and a4 with Bg5 coordinates for a crushing attack."
         },
         {
           "san": "e5",
-          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit: Waller Attack with Qb3."
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Evans Gambit: Waller Attack with Qb3.",
+          "shortNarration": "Black's e5 contests the center in the Evans Gambit: Waller Attack with Qb3."
         },
         {
           "san": "Nf3",
@@ -881,7 +993,8 @@
               "to": "b4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 captures the pawn, winning material and altering the pawn structure."
         },
         {
           "san": "c3",
@@ -893,7 +1006,8 @@
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "exd4",
@@ -904,7 +1018,8 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 stakes a central pawn claim, controlling space and restricting Black's piece activity."
         },
         {
           "san": "O-O",
@@ -923,11 +1038,13 @@
               "to": "d4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "cxd4 stakes a central pawn claim, controlling space and restricting piece activity."
         },
         {
           "san": "Bb6",
-          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on c5 and moves to b6 where it serves the plan better."
+          "annotation": "Bb6 improves the bishop's placement. The bishop was less effective on c5 and moves to b6 where it serves the plan better.",
+          "shortNarration": "Bb6 improves the bishop's placement from c5 to b6, better serving the plan."
         },
         {
           "san": "Nc3",
@@ -943,11 +1060,13 @@
         },
         {
           "san": "Bd7",
-          "annotation": "Bd7 improves the bishop's placement. The bishop was less effective on g4 and moves to d7 where it serves the plan better."
+          "annotation": "Bd7 improves the bishop's placement. The bishop was less effective on g4 and moves to d7 where it serves the plan better.",
+          "shortNarration": "Bd7 improves the bishop's placement, shifting from g4 to d7 for a better plan."
         },
         {
           "san": "Qb3",
-          "annotation": "Qb3 activates the queen. From b3, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qb3 activates the queen. From b3, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qb3 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Qe7",
@@ -959,7 +1078,8 @@
         },
         {
           "san": "Qd8",
-          "annotation": "Qd8 activates the queen. From d8, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qd8 activates the queen. From d8, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qd8 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "a4",
@@ -967,11 +1087,13 @@
         },
         {
           "san": "Na5",
-          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better."
+          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better.",
+          "shortNarration": "Na5 improves the knight's placement from c6 to a5 for a better plan."
         },
         {
           "san": "Qa2",
-          "annotation": "Qa2 activates the queen. From a2, the queen has maximum influence across multiple diagonals and files."
+          "annotation": "Qa2 activates the queen. From a2, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qa2 activates the queen with maximum influence across multiple diagonals and files."
         },
         {
           "san": "Nxc4",
@@ -982,7 +1104,8 @@
               "to": "c4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxc4 wins the bishop, altering the pawn structure or material balance."
         },
         {
           "san": "Qxc4",
@@ -993,7 +1116,8 @@
               "to": "c4",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxc4 wins a knight, altering the pawn structure and material balance."
         },
         {
           "san": "a6",
@@ -1015,7 +1139,8 @@
               "to": "g5",
               "color": "rgba(50, 150, 220, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bg5 pins the knight, targeting f6 in the Evans Gambit Waller Attack with Qb3."
         }
       ]
     },
@@ -1025,11 +1150,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Evans Gambit, the Anderssen's Attacking Pattern is a tactical pattern you should know. After Black grabs the c3 pawn, White plays Qb3 targeting f7. The Nd5 jump combined with Ba3 creates an avalanche of threats. After Nxe7+ and Nxg6+, the double check destroys Black's kingside. Most club players simply cannot survive this onslaught. Let's walk through how it works."
+          "annotation": "In the Evans Gambit, the Anderssen's Attacking Pattern is a tactical pattern you should know. After Black grabs the c3 pawn, White plays Qb3 targeting f7. The Nd5 jump combined with Ba3 creates an avalanche of threats. After Nxe7+ and Nxg6+, the double check destroys Black's kingside. Most club players simply cannot survive this onslaught. Let's walk through how it works.",
+          "shortNarration": "In the Evans Gambit, after Black takes c3, Qb3 targets f7, then Nd5 and Ba3 create threats, and Nxe7+ followed by Nxg6+ double check destroys Black's kingside."
         },
         {
           "san": "e5",
-          "annotation": "Black plays e5, building the position. The trap is already in motion."
+          "annotation": "Black plays e5, building the position. The trap is already in motion.",
+          "shortNarration": "Black's e5 sets the trap: the f-pawn's advance leaves the queen's diagonal open to g4."
         },
         {
           "san": "Nf3",
@@ -1060,7 +1187,8 @@
               "to": "b4",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 walks into the trap — the bishop hangs to a discovered attack after c3."
         },
         {
           "san": "c3",
@@ -1083,11 +1211,13 @@
               "to": "d4",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's exd4 walks into the trap — White recaptures with a discovered attack."
         },
         {
           "san": "O-O",
-          "annotation": "White castles, thinking the position is safe. But danger is lurking."
+          "annotation": "White castles, thinking the position is safe. But danger is lurking.",
+          "shortNarration": "White castles into danger — Black's bishop pair and open lines target the king."
         },
         {
           "san": "dxc3",
@@ -1098,7 +1228,8 @@
               "to": "c3",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's dxc3 recapture walks into a trap — White wins material with a discovered attack."
         },
         {
           "san": "Qb3",
@@ -1125,7 +1256,8 @@
               "to": "c3",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxc3 walks into the trap — Black wins with Bxf2+ and Qh4+ mate threat."
         },
         {
           "san": "Nge7",
@@ -1137,7 +1269,8 @@
         },
         {
           "san": "O-O",
-          "annotation": "Black castles, thinking the position is safe. But danger is lurking."
+          "annotation": "Black castles, thinking the position is safe. But danger is lurking.",
+          "shortNarration": "Black castles into a position where danger lurks — the king is exposed to a potential attack."
         },
         {
           "san": "Rac1",
@@ -1164,7 +1297,8 @@
               "to": "e7",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe7+ walks into Black's trap — the knight hangs to a discovered check."
         },
         {
           "san": "Kh8",
@@ -1190,7 +1324,8 @@
               "to": "g6",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "hxg6 wins the knight — Black has no good way to avoid material loss."
         },
         {
           "san": "Bxf7",
@@ -1211,11 +1346,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Evans Gambit, the Quick d5 Double Attack is a tactical pattern you should know. If Black greedily plays Nxe4 instead of retreating, White plays the stunning Qd5 with a double attack on f7 and the knight. After Qxf7+ Kd8, the king is stuck in the center and Bg5+ creates a discovered attack. Black loses massive material in all lines. Let's walk through how it works."
+          "annotation": "In the Evans Gambit, the Quick d5 Double Attack is a tactical pattern you should know. If Black greedily plays Nxe4 instead of retreating, White plays the stunning Qd5 with a double attack on f7 and the knight. After Qxf7+ Kd8, the king is stuck in the center and Bg5+ creates a discovered attack. Black loses massive material in all lines. Let's walk through how it works.",
+          "shortNarration": "In the Evans Gambit, Qd5 double attacks f7 and the knight, forcing Kd8, then Bg5+ wins material."
         },
         {
           "san": "e5",
-          "annotation": "Black plays e5, building the position. The trap is already in motion."
+          "annotation": "Black plays e5, building the position. The trap is already in motion.",
+          "shortNarration": "Black's e5 sets a trap: White's f-pawn push leaves the king exposed along the e1–h4 diagonal."
         },
         {
           "san": "Nf3",
@@ -1246,7 +1383,8 @@
               "to": "b4",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 walks into the trap — White wins a piece with a discovered attack."
         },
         {
           "san": "c3",
@@ -1273,7 +1411,8 @@
               "to": "e5",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxe5 walks into a trap — Black's knight fork on f3 wins the queen."
         },
         {
           "san": "Nxe4",
@@ -1284,7 +1423,8 @@
               "to": "e4",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe4 walks into the trap — White wins a piece with d3."
         },
         {
           "san": "Qd5",
@@ -1306,7 +1446,8 @@
               "to": "c3",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxc3 wins a pawn — Black has no good way to avoid material loss."
         },
         {
           "san": "Qxf7#",
@@ -1327,11 +1468,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Evans Gambit, the Stone-Ware Trap (d3 Grab Punishment) is a tactical pattern you should know. Black tries to hold the extra pawn with d3 but this move blocks development fatally. White plays Qb3 and e5 to build overwhelming pressure. The Ba3 move pins down Black's position, preventing normal development. The d3 pawn falls eventually and Black is left with a wrecked position. Let's walk through how it works."
+          "annotation": "In the Evans Gambit, the Stone-Ware Trap (d3 Grab Punishment) is a tactical pattern you should know. Black tries to hold the extra pawn with d3 but this move blocks development fatally. White plays Qb3 and e5 to build overwhelming pressure. The Ba3 move pins down Black's position, preventing normal development. The d3 pawn falls eventually and Black is left with a wrecked position. Let's walk through how it works.",
+          "shortNarration": "In the Evans Gambit, Black's d3 grab blocks development, allowing White's Qb3, e5, and Ba3 to crush Black's position."
         },
         {
           "san": "e5",
-          "annotation": "Black plays e5, building the position. The trap is already in motion."
+          "annotation": "Black plays e5, building the position. The trap is already in motion.",
+          "shortNarration": "Black's e5 sets the trap: the f-pawn leaves f2, opening the d1–g4 diagonal for White's queen."
         },
         {
           "san": "Nf3",
@@ -1362,7 +1505,8 @@
               "to": "b4",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 walks into a trap — the bishop hangs to a discovered attack after a knight move."
         },
         {
           "san": "c3",
@@ -1385,11 +1529,13 @@
               "to": "d4",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's exd4 recapture walks into a trap — the queen or bishop can exploit the open diagonal."
         },
         {
           "san": "O-O",
-          "annotation": "White castles, thinking the position is safe. But danger is lurking."
+          "annotation": "White castles, thinking the position is safe. But danger is lurking.",
+          "shortNarration": "White castles into danger — Black's pieces target the king."
         },
         {
           "san": "d3",
@@ -1428,7 +1574,8 @@
               "to": "d2",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxd2 walks into the trap — Black's knight forks queen and rook on e4."
         },
         {
           "san": "Nge7",
@@ -1440,7 +1587,8 @@
         },
         {
           "san": "O-O",
-          "annotation": "Black castles, thinking the position is safe. But danger is lurking."
+          "annotation": "Black castles, thinking the position is safe. But danger is lurking.",
+          "shortNarration": "Black castles into danger — White's attack is already set."
         },
         {
           "san": "Bxf7+",
@@ -1451,7 +1599,8 @@
               "to": "f7",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxf7+ walks into a trap — Black recaptures with the king, winning the bishop."
         },
         {
           "san": "Rxf7",
@@ -1462,7 +1611,8 @@
               "to": "f7",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Rxf7 walks into a trap — the rook hangs to a discovered attack along the f-file."
         },
         {
           "san": "Qxa5",
@@ -1473,7 +1623,8 @@
               "to": "a5",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxa5 walks into a trap — the queen hangs to a discovered attack."
         },
         {
           "san": "Qxg2+",
@@ -1484,7 +1635,8 @@
               "to": "g2",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's Qxg2+ walks into a trap — the queen hangs after the king moves."
         },
         {
           "san": "Kxg2",
@@ -1506,7 +1658,8 @@
               "to": "e5",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxe5 wins a pawn — no good way to avoid material loss."
         },
         {
           "san": "Qxe5",
@@ -1527,11 +1680,13 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Evans Gambit, the Lasker Defense Counter-Trap is a tactical pattern you should know. The Lasker Defense looks strong for Black but White has a powerful counter. After O-O and dxc6, the passed b-pawn becomes a monster. Even after queens are traded, Nd5 combined with Bg5+ creates serious problems. White's initiative persists deep into the endgame. Let's walk through how it works."
+          "annotation": "In the Evans Gambit, the Lasker Defense Counter-Trap is a tactical pattern you should know. The Lasker Defense looks strong for Black but White has a powerful counter. After O-O and dxc6, the passed b-pawn becomes a monster. Even after queens are traded, Nd5 combined with Bg5+ creates serious problems. White's initiative persists deep into the endgame. Let's walk through how it works.",
+          "shortNarration": "In the Evans Gambit Lasker Defense, after O-O and dxc6, White's passed b-pawn and Nd5 with Bg5+ keep the initiative even into the endgame."
         },
         {
           "san": "e5",
-          "annotation": "Black plays e5, building the position. The trap is already in motion."
+          "annotation": "Black plays e5, building the position. The trap is already in motion.",
+          "shortNarration": "Black's e5 walks into the Philidor's mate trap after Nxe5 Qh5+ g6 Nxg6."
         },
         {
           "san": "Nf3",
@@ -1562,7 +1717,8 @@
               "to": "b4",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 walks into the trap — the bishop hangs to a discovered attack after c3."
         },
         {
           "san": "c3",
@@ -1589,7 +1745,8 @@
               "to": "d5",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd5 walks into the trap — Black recaptures with the e-pawn, opening the e-file and pinning the knight on e4."
         },
         {
           "san": "exd4",
@@ -1600,11 +1757,13 @@
               "to": "d4",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's exd4 walks into a trap — White recaptures with a discovered attack."
         },
         {
           "san": "O-O",
-          "annotation": "White castles, thinking the position is safe. But danger is lurking."
+          "annotation": "White castles, thinking the position is safe. But danger is lurking.",
+          "shortNarration": "White castles into danger — the open g-file and queen on h5 threaten mate on g7."
         },
         {
           "san": "Be6",
@@ -1619,7 +1778,8 @@
               "to": "c6",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc6 walks into a trap — Black recaptures with the bishop, pinning the knight on f3 to the queen."
         },
         {
           "san": "dxc3",
@@ -1630,7 +1790,8 @@
               "to": "c3",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's dxc3 recapture walks into a trap — the knight hangs or mate follows."
         },
         {
           "san": "Qxd8+",
@@ -1641,7 +1802,8 @@
               "to": "d8",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qxd8+ walks into the trap — Black recaptures with the rook, pinning the knight to the king."
         },
         {
           "san": "Kxd8",
@@ -1652,7 +1814,8 @@
               "to": "d8",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Black's Kxd8 walks into the trap — White wins with Bg5+ skewering the king to the queen."
         },
         {
           "san": "Nxc3",
@@ -1663,7 +1826,8 @@
               "to": "c3",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nxc3 walks into the trap — Black wins with Bxf2+ followed by Qh4+ and mate."
         },
         {
           "san": "Bxc4",
@@ -1674,7 +1838,8 @@
               "to": "c4",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxc4 walks into the trap — the bishop hangs to a discovered attack after White's knight moves."
         },
         {
           "san": "cxb7",
@@ -1685,7 +1850,8 @@
               "to": "b7",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "cxb7 walks into the trap — Black recaptures with the rook, pinning the b7-pawn to the queen."
         },
         {
           "san": "Rb8",
@@ -1704,7 +1870,8 @@
               "to": "d5",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxd5 walks into a trap — the bishop hangs to a discovered attack."
         },
         {
           "san": "Bg5+",
@@ -1726,7 +1893,8 @@
               "to": "f6",
               "color": "rgba(220, 50, 50, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Nf6 springs the trap — the opponent's position collapses."
         },
         {
           "san": "Bxf6+",
@@ -1747,15 +1915,18 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Evans Gambit, the Lasker Defense: Black Equalizes is a dangerous line you must be aware of. Lasker's Defense is considered the strongest reply — Black returns the pawn with d5 to simplify and neutralize White's initiative. After accurate play with Be6 and O-O, Black reaches a comfortable position where the bishop pair provides adequate compensation. White must play very precisely to maintain even a small edge. Let's see why."
+          "annotation": "In the Evans Gambit, the Lasker Defense: Black Equalizes is a dangerous line you must be aware of. Lasker's Defense is considered the strongest reply — Black returns the pawn with d5 to simplify and neutralize White's initiative. After accurate play with Be6 and O-O, Black reaches a comfortable position where the bishop pair provides adequate compensation. White must play very precisely to maintain even a small edge. Let's see why.",
+          "shortNarration": "In the Evans Gambit Lasker Defense, Black returns the pawn with d5, then Be6 and O-O equalizes with the bishop pair."
         },
         {
           "san": "e5",
-          "annotation": "Black plays e5. This is the natural continuation that leads into the problematic position."
+          "annotation": "Black plays e5. This is the natural continuation that leads into the problematic position.",
+          "shortNarration": "Black's e5 leads into a position where White's d4 push refutes the center."
         },
         {
           "san": "Nf3",
-          "annotation": "Nf3 develops the knight. The natural continuation, but it leads toward the warning line."
+          "annotation": "Nf3 develops the knight. The natural continuation, but it leads toward the warning line.",
+          "shortNarration": "Nf3 develops the knight, heading toward the warning line."
         },
         {
           "san": "Nc6",
@@ -1782,7 +1953,8 @@
               "to": "b4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 captures the pawn, increasing the danger in the position."
         },
         {
           "san": "c3",
@@ -1790,15 +1962,18 @@
         },
         {
           "san": "Ba5",
-          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better. Be alert — a mistake in this position would be very costly."
+          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Ba5 improves the bishop's placement — a mistake here would be very costly."
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's pieces."
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "d5 stakes a central claim — one mistake here can cost the game."
         },
         {
           "san": "exd5",
@@ -1809,7 +1984,8 @@
               "to": "d5",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd5 captures the pawn, opening the center and increasing danger."
         },
         {
           "san": "exd4",
@@ -1820,11 +1996,13 @@
               "to": "d4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 captures the pawn, opening the center and heightening tactical danger."
         },
         {
           "san": "O-O",
-          "annotation": "White castles, but the position already requires very careful play."
+          "annotation": "White castles, but the position already requires very careful play.",
+          "shortNarration": "White castles but the position demands precise play."
         },
         {
           "san": "Be6",
@@ -1832,7 +2010,8 @@
         },
         {
           "san": "Bb5",
-          "annotation": "Bb5 improves the bishop's placement. The bishop was less effective on c4 and moves to b5 where it serves the plan better. Be alert — a mistake in this position would be very costly."
+          "annotation": "Bb5 improves the bishop's placement. The bishop was less effective on c4 and moves to b5 where it serves the plan better. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Bb5 improves the bishop's placement — a mistake here would be costly."
         },
         {
           "san": "Ne7",
@@ -1847,11 +2026,13 @@
               "to": "d4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "cxd4 opens the c-file and exposes Black's king to a discovered attack."
         },
         {
           "san": "O-O",
-          "annotation": "Black castles, but the position already requires very careful play."
+          "annotation": "Black castles, but the position already requires very careful play.",
+          "shortNarration": "Black castles into a position requiring careful play."
         },
         {
           "san": "Nc3",
@@ -1863,23 +2044,28 @@
         },
         {
           "san": "Ba4",
-          "annotation": "Ba4 improves the bishop's placement. The bishop was less effective on b5 and moves to a4 where it serves the plan better. Be alert — a mistake in this position would be very costly."
+          "annotation": "Ba4 improves the bishop's placement. The bishop was less effective on b5 and moves to a4 where it serves the plan better. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Ba4 improves the bishop's placement — a mistake here would be costly."
         },
         {
           "san": "Bg4",
-          "annotation": "Bg4 improves the bishop's placement. The bishop was less effective on e6 and moves to g4 where it serves the plan better. Be alert — a mistake in this position would be very costly."
+          "annotation": "Bg4 improves the bishop's placement. The bishop was less effective on e6 and moves to g4 where it serves the plan better. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Bg4 pins the knight on f3, improving the bishop's placement from e6."
         },
         {
           "san": "h3",
-          "annotation": "h3 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king. Be alert — a mistake in this position would be very costly."
+          "annotation": "h3 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "h3 gains kingside space to support an attack, but any mistake here is costly."
         },
         {
           "san": "Bh5",
-          "annotation": "Bh5 improves the bishop's placement. The bishop was less effective on g4 and moves to h5 where it serves the plan better. Be alert — a mistake in this position would be very costly."
+          "annotation": "Bh5 improves the bishop's placement. The bishop was less effective on g4 and moves to h5 where it serves the plan better. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Bh5 improves the bishop's placement — a mistake here would be very costly."
         },
         {
           "san": "g4",
-          "annotation": "g4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king. Be alert — a mistake in this position would be very costly."
+          "annotation": "g4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "g4 gains space for a kingside attack, and any mistake here is costly."
         },
         {
           "san": "Bg6",
@@ -1922,15 +2108,18 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Evans Gambit, the Compromised Defense: Black Consolidates is a dangerous line you must be aware of. If Black manages to castle safely and hold the extra d3 pawn, White's initiative can fizzle out. After Nge7, b5, and O-O, Black consolidates and the extra pawn becomes a real asset. This is why tempo is everything in the Evans — delay means death for the attack. Let's see why."
+          "annotation": "In the Evans Gambit, the Compromised Defense: Black Consolidates is a dangerous line you must be aware of. If Black manages to castle safely and hold the extra d3 pawn, White's initiative can fizzle out. After Nge7, b5, and O-O, Black consolidates and the extra pawn becomes a real asset. This is why tempo is everything in the Evans — delay means death for the attack. Let's see why.",
+          "shortNarration": "In the Evans Gambit's Compromised Defense, Black consolidates with Nge7, b5, and O-O, turning the extra d3 pawn into a real asset if White's initiative fizzles."
         },
         {
           "san": "e5",
-          "annotation": "Black plays e5. This is the natural continuation that leads into the problematic position."
+          "annotation": "Black plays e5. This is the natural continuation that leads into the problematic position.",
+          "shortNarration": "Black's e5 enters the problematic position."
         },
         {
           "san": "Nf3",
-          "annotation": "Nf3 develops the knight. The natural continuation, but it leads toward the warning line."
+          "annotation": "Nf3 develops the knight. The natural continuation, but it leads toward the warning line.",
+          "shortNarration": "Nf3 develops the knight, heading toward the warning line."
         },
         {
           "san": "Nc6",
@@ -1957,7 +2146,8 @@
               "to": "b4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 wins a pawn but opens the a-file and exposes Black's king to White's rook."
         },
         {
           "san": "c3",
@@ -1965,11 +2155,13 @@
         },
         {
           "san": "Ba5",
-          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better. Be alert — a mistake in this position would be very costly."
+          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Ba5 improves the bishop's placement — a mistake here would be costly."
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's pieces."
         },
         {
           "san": "exd4",
@@ -1980,11 +2172,13 @@
               "to": "d4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 opens the center, increasing danger for both kings."
         },
         {
           "san": "O-O",
-          "annotation": "White castles, but the position already requires very careful play."
+          "annotation": "White castles, but the position already requires very careful play.",
+          "shortNarration": "White castles, but the position already demands precise play."
         },
         {
           "san": "d3",
@@ -2000,15 +2194,18 @@
         },
         {
           "san": "e5",
-          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly."
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting piece activity."
         },
         {
           "san": "Qg6",
-          "annotation": "Qg6 activates the queen. From g6, the queen has maximum influence across multiple diagonals and files. Be alert — a mistake in this position would be very costly."
+          "annotation": "Qg6 activates the queen. From g6, the queen has maximum influence across multiple diagonals and files. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Qg6 activates the queen with maximum influence across diagonals and files — one mistake here is costly."
         },
         {
           "san": "Re1",
-          "annotation": "Re1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files. Be alert — a mistake in this position would be very costly."
+          "annotation": "Re1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Re1 activates the rook on the central file, where a mistake would be costly."
         },
         {
           "san": "Nge7",
@@ -2031,19 +2228,23 @@
               "to": "b5",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb5 wins a pawn but opens lines, increasing danger for both sides."
         },
         {
           "san": "Rb8",
-          "annotation": "Rb8 improves the rook's placement. The rook was less effective on a8 and moves to b8 where it serves the plan better. Be alert — a mistake in this position would be very costly."
+          "annotation": "Rb8 improves the rook's placement. The rook was less effective on a8 and moves to b8 where it serves the plan better. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Rb8 improves the rook's placement for the plan — a mistake here would be costly."
         },
         {
           "san": "Qa4",
-          "annotation": "Qa4 activates the queen. From a4, the queen has maximum influence across multiple diagonals and files. Be alert — a mistake in this position would be very costly."
+          "annotation": "Qa4 activates the queen. From a4, the queen has maximum influence across multiple diagonals and files. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Qa4 activates the queen with maximum diagonal and file influence — one mistake here is costly."
         },
         {
           "san": "O-O",
-          "annotation": "Black castles, but the position already requires very careful play."
+          "annotation": "Black castles, but the position already requires very careful play.",
+          "shortNarration": "Black castles into a position demanding precise play."
         },
         {
           "san": "Bxd3",
@@ -2054,7 +2255,8 @@
               "to": "d3",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bd3 captures the pawn, increasing the danger as the position sharpens."
         },
         {
           "san": "Qf5",
@@ -2097,15 +2299,18 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Evans Gambit, the Central Counter with d5 exd5 Nxd5 is a dangerous line you must be aware of. Black's precise central counter with d5 and Nf6 challenges White's center directly. After exf6 dxc4, Black has won the key light-squared bishop and has good piece activity. The resulting position is sharp but Black has equalized the material and has real chances. Let's see why."
+          "annotation": "In the Evans Gambit, the Central Counter with d5 exd5 Nxd5 is a dangerous line you must be aware of. Black's precise central counter with d5 and Nf6 challenges White's center directly. After exf6 dxc4, Black has won the key light-squared bishop and has good piece activity. The resulting position is sharp but Black has equalized the material and has real chances. Let's see why.",
+          "shortNarration": "In the Evans Gambit, Black's d5 exd5 Nxd5 wins the light-squared bishop after exf6 dxc4, equalizing material with active play."
         },
         {
           "san": "e5",
-          "annotation": "Black plays e5. This is the natural continuation that leads into the problematic position."
+          "annotation": "Black plays e5. This is the natural continuation that leads into the problematic position.",
+          "shortNarration": "Black's e5 leads into the problematic position."
         },
         {
           "san": "Nf3",
-          "annotation": "Nf3 develops the knight. The natural continuation, but it leads toward the warning line."
+          "annotation": "Nf3 develops the knight. The natural continuation, but it leads toward the warning line.",
+          "shortNarration": "Nf3 develops the knight toward the warning line."
         },
         {
           "san": "Nc6",
@@ -2132,7 +2337,8 @@
               "to": "b4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxb4 wins a pawn but opens lines, increasing danger for both sides."
         },
         {
           "san": "c3",
@@ -2140,11 +2346,13 @@
         },
         {
           "san": "Ba5",
-          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better. Be alert — a mistake in this position would be very costly."
+          "annotation": "Ba5 improves the bishop's placement. The bishop was less effective on b4 and moves to a5 where it serves the plan better. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Ba5 improves the bishop's placement, but any mistake here is costly."
         },
         {
           "san": "d4",
-          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly."
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's pieces — a mistake here is costly."
         },
         {
           "san": "exd4",
@@ -2155,11 +2363,13 @@
               "to": "d4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exd4 captures the pawn, opening lines and increasing danger."
         },
         {
           "san": "O-O",
-          "annotation": "White castles, but the position already requires very careful play."
+          "annotation": "White castles, but the position already requires very careful play.",
+          "shortNarration": "White castles but the position demands precise play."
         },
         {
           "san": "Nf6",
@@ -2167,11 +2377,13 @@
         },
         {
           "san": "e5",
-          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly."
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting piece activity."
         },
         {
           "san": "d5",
-          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly."
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting piece activity — any mistake here is costly."
         },
         {
           "san": "exf6",
@@ -2182,7 +2394,8 @@
               "to": "f6",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "exf6 captures the knight, opening lines and increasing danger."
         },
         {
           "san": "dxc4",
@@ -2193,7 +2406,8 @@
               "to": "c4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "dxc4 captures the bishop; the position sharpens with increased danger."
         },
         {
           "san": "Qe2+",
@@ -2204,7 +2418,8 @@
               "to": "e2",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Qe2+ forces a response, accelerating the threat."
         },
         {
           "san": "Be6",
@@ -2219,11 +2434,13 @@
               "to": "g7",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "fxg7 captures the pawn, opening the g-file and increasing danger."
         },
         {
           "san": "Rg8",
-          "annotation": "Rg8 improves the rook's placement. The rook was less effective on h8 and moves to g8 where it serves the plan better. Be alert — a mistake in this position would be very costly."
+          "annotation": "Rg8 improves the rook's placement. The rook was less effective on h8 and moves to g8 where it serves the plan better. Be alert — a mistake in this position would be very costly.",
+          "shortNarration": "Rg8 improves the rook's placement for the attack — a mistake here is costly."
         },
         {
           "san": "cxd4",
@@ -2234,7 +2451,8 @@
               "to": "d4",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "cxd4 captures the pawn, opening the c-file and increasing danger."
         },
         {
           "san": "Rxg7",
@@ -2245,7 +2463,8 @@
               "to": "g7",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Rxg7 captures the pawn, increasing the danger and changing the position's character."
         },
         {
           "san": "Bg5",
@@ -2264,7 +2483,8 @@
               "to": "e7",
               "color": "rgba(230, 170, 30, 0.8)"
             }
-          ]
+          ],
+          "shortNarration": "Bxe7 captures the queen, increasing the danger in the position."
         },
         {
           "san": "Kxe7",

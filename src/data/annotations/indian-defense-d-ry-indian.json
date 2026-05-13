@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the Queen's Pawn, staking an immediate claim to the center and preparing to build a strong pawn foundation. This move controls the central e5 square while opening lines for our dark-squared bishop and queen. The d4 opening leads to rich, strategic middlegames where central control and piece development are paramount. Unlike 1.e4 which often leads to sharp tactical battles, 1.d4 typically results in more positional struggles where understanding pawn structures and long-term planning become crucial."
+      "annotation": "We're opening with the Queen's Pawn, staking an immediate claim to the center and preparing to build a strong pawn foundation. This move controls the central e5 square while opening lines for our dark-squared bishop and queen. The d4 opening leads to rich, strategic middlegames where central control and piece development are paramount. Unlike 1.e4 which often leads to sharp tactical battles, 1.d4 typically results in more positional struggles where understanding pawn structures and long-term planning become crucial.",
+      "shortNarration": "1.d4 claims the center, controls e5, and opens lines for the queen and dark-squared bishop, leading to positional middlegames focused on pawn structure and long-term planning."
     },
     {
       "san": "Nf6",
-      "annotation": "Our opponent responds with the Indian Defense setup, developing the knight to its ideal square while immediately putting pressure on our central d4 pawn. This flexible approach allows Black to delay committing to a specific pawn structure in the center, keeping options open for both ...e6 and ...g6 setups. The knight on f6 also prepares to support a potential ...e5 advance later, challenging our central dominance. This is a hallmark of modern opening theory - developing pieces before committing pawns to fixed positions."
+      "annotation": "Our opponent responds with the Indian Defense setup, developing the knight to its ideal square while immediately putting pressure on our central d4 pawn. This flexible approach allows Black to delay committing to a specific pawn structure in the center, keeping options open for both ...e6 and ...g6 setups. The knight on f6 also prepares to support a potential ...e5 advance later, challenging our central dominance. This is a hallmark of modern opening theory - developing pieces before committing pawns to fixed positions.",
+      "shortNarration": "Black's knight on f6 pressures d4, keeping options open for ...e6 or ...g6 setups and a later ...e5 break."
     },
     {
       "san": "c4",
-      "annotation": "We're playing the English Opening move order, grabbing space on the queenside and preparing to establish a broad pawn center. This advance controls the crucial d5 square, preventing Black from easily establishing a knight there, while also supporting a potential d4-d5 advance later. The c4 pawn works in tandem with our d4 pawn to create what's known as the 'Maróczy Bind' setup if Black plays ...e6. We're also preparing to develop our knight to c3, where it will have maximum influence over the center."
+      "annotation": "We're playing the English Opening move order, grabbing space on the queenside and preparing to establish a broad pawn center. This advance controls the crucial d5 square, preventing Black from easily establishing a knight there, while also supporting a potential d4-d5 advance later. The c4 pawn works in tandem with our d4 pawn to create what's known as the 'Maróczy Bind' setup if Black plays ...e6. We're also preparing to develop our knight to c3, where it will have maximum influence over the center.",
+      "shortNarration": "c4 controls d5, supports d4, and prepares a Maróczy Bind if Black plays ...e6, with the knight developing to c3."
     },
     {
       "san": "e6",
-      "annotation": "Black adopts the Queen's Indian Defense structure, supporting the eventual ...d5 advance while keeping the position flexible. This pawn move opens a diagonal for the light-squared bishop, which will likely fianchetto on b7 to pressure our long diagonal. Our opponent is also preparing to challenge our pawn center with ...d5, though they're not committing to it immediately. The e6 pawn provides solid support for potential central breaks while maintaining multiple strategic options for piece development."
+      "annotation": "Black adopts the Queen's Indian Defense structure, supporting the eventual ...d5 advance while keeping the position flexible. This pawn move opens a diagonal for the light-squared bishop, which will likely fianchetto on b7 to pressure our long diagonal. Our opponent is also preparing to challenge our pawn center with ...d5, though they're not committing to it immediately. The e6 pawn provides solid support for potential central breaks while maintaining multiple strategic options for piece development.",
+      "shortNarration": "Black's e6 supports ...d5 and opens the diagonal for a fianchettoed bishop on b7, keeping the center flexible."
     },
     {
       "san": "Nf3",
-      "annotation": "We're developing our knight to its most active square, supporting our d4 pawn while preparing to castle kingside for safety. This knight controls important central squares like e5 and d4, and from f3 it can potentially reroute to more aggressive posts like g5 or h4 depending on how the position develops. The knight development also keeps our options open - we haven't yet committed to whether we'll fianchetto our light-squared bishop or develop it more actively. This active move maintains maximum flexibility while solidifying our grip on the center."
+      "annotation": "We're developing our knight to its most active square, supporting our d4 pawn while preparing to castle kingside for safety. This knight controls important central squares like e5 and d4, and from f3 it can potentially reroute to more aggressive posts like g5 or h4 depending on how the position develops. The knight development also keeps our options open - we haven't yet committed to whether we'll fianchetto our light-squared bishop or develop it more actively. This active move maintains maximum flexibility while solidifying our grip on the center.",
+      "shortNarration": "Knight to f3 supports d4, eyes e5 and g5, and keeps the bishop's development flexible."
     },
     {
       "san": "Ne4",
-      "annotation": "Black plays the characteristic Döry Indian maneuver, immediately centralizing the knight and creating tactical threats in the center. This aggressive knight placement attacks our c4 pawn while occupying the strong e4 outpost, from where it can potentially jump to disruptive squares like d2, f2, or g5. Our opponent is also eyeing potential tactics involving ...Bb4+ or ...Qh4+, putting immediate pressure on our position before we can complete development. While this knight looks impressive on e4, it can also become a target, and we need to decide whether to exchange it, attack it, or simply continue with our development while monitoring Black's tactical ideas."
+      "annotation": "Black plays the characteristic Döry Indian maneuver, immediately centralizing the knight and creating tactical threats in the center. This aggressive knight placement attacks our c4 pawn while occupying the strong e4 outpost, from where it can potentially jump to disruptive squares like d2, f2, or g5. Our opponent is also eyeing potential tactics involving ...Bb4+ or ...Qh4+, putting immediate pressure on our position before we can complete development. While this knight looks impressive on e4, it can also become a target, and we need to decide whether to exchange it, attack it, or simply continue with our development while monitoring Black's tactical ideas.",
+      "shortNarration": "Black's knight on e4 attacks c4 and eyes d2, f2, or g5, with threats like ...Bb4+ or ...Qh4+ before White completes development."
     }
   ]
 }

@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the center and freeing both our bishop and queen for development. This move controls the important d5 and f5 squares, giving us excellent central influence from the very first move. The pawn on e4 also supports a potential d2-d4 advance later, which would give us a classical pawn center. This is one of the most principled first moves in chess, immediately fighting for space and rapid piece development."
+      "annotation": "We're opening with the king's pawn, staking our claim to the center and freeing both our bishop and queen for development. This move controls the important d5 and f5 squares, giving us excellent central influence from the very first move. The pawn on e4 also supports a potential d2-d4 advance later, which would give us a classical pawn center. This is one of the most principled first moves in chess, immediately fighting for space and rapid piece development.",
+      "shortNarration": "1.e4 claims the center, controls d5 and f5, and frees the queen and bishop for development."
     },
     {
       "san": "c5",
-      "annotation": "Black responds with the Sicilian Defense, immediately challenging our central pawn from the side rather than meeting it head-on with e5. This move controls the important d4 square, preventing us from easily establishing a classical pawn center with d2-d4. The Sicilian is Black's most combative response to e4, leading to sharp, unbalanced positions where both sides have excellent winning chances. Black's plan involves counterplay on the queenside and often a later d7-d6 and e7-e6 pawn structure."
+      "annotation": "Black responds with the Sicilian Defense, immediately challenging our central pawn from the side rather than meeting it head-on with e5. This move controls the important d4 square, preventing us from easily establishing a classical pawn center with d2-d4. The Sicilian is Black's most combative response to e4, leading to sharp, unbalanced positions where both sides have excellent winning chances. Black's plan involves counterplay on the queenside and often a later d7-d6 and e7-e6 pawn structure.",
+      "shortNarration": "Black's Sicilian challenges e4 from the side, controls d4, and aims for queenside counterplay with a d6/e6 pawn structure."
     },
     {
       "san": "c3",
-      "annotation": "We're playing the Alapin Variation, preparing to support a d2-d4 advance with our c-pawn rather than developing pieces first. This move is less common than the popular Open Sicilian with Nf3 and d4, but it leads to completely different types of positions with unique strategic themes. The c3 pawn will support d4, helping us establish a strong pawn center, though it does slow down our queenside development slightly. This system often leads to positions where we get a space advantage in the center, while Black seeks counterplay on the wings."
+      "annotation": "We're playing the Alapin Variation, preparing to support a d2-d4 advance with our c-pawn rather than developing pieces first. This move is less common than the popular Open Sicilian with Nf3 and d4, but it leads to completely different types of positions with unique strategic themes. The c3 pawn will support d4, helping us establish a strong pawn center, though it does slow down our queenside development slightly. This system often leads to positions where we get a space advantage in the center, while Black seeks counterplay on the wings.",
+      "shortNarration": "The Alapin's c3 supports d4 for a strong center, trading queenside development speed for central space."
     },
     {
       "san": "d5",
-      "annotation": "Black strikes back in the center with the Barmen Defense, immediately challenging our e4 pawn and creating central tension. This is a principled response that fights for space in the center rather than allowing us to comfortably build up with d4. The move opens lines for Black's light-squared bishop and creates immediate tactical complications, as we must decide how to deal with the attack on our central pawn. This approach leads to sharp, tactical play where both sides need to be well-prepared in the opening theory."
+      "annotation": "Black strikes back in the center with the Barmen Defense, immediately challenging our e4 pawn and creating central tension. This is a principled response that fights for space in the center rather than allowing us to comfortably build up with d4. The move opens lines for Black's light-squared bishop and creates immediate tactical complications, as we must decide how to deal with the attack on our central pawn. This approach leads to sharp, tactical play where both sides need to be well-prepared in the opening theory.",
+      "shortNarration": "Black's Barmen Defense challenges e4, opening lines for the light-squared bishop and forcing immediate central tension."
     },
     {
       "san": "exd5",
-      "annotation": "We're capturing the pawn and opening up the center, which is generally the most principled approach when challenged directly like this. This exchange removes Black's advanced pawn but also eliminates our own central pawn, changing the pawn structure significantly. The capture opens the e-file for our potential rook development later and creates space for our pieces to become more active. We're essentially accepting that the position will become more open and tactical, which can favor the side with better piece coordination."
+      "annotation": "We're capturing the pawn and opening up the center, which is generally the most principled approach when challenged directly like this. This exchange removes Black's advanced pawn but also eliminates our own central pawn, changing the pawn structure significantly. The capture opens the e-file for our potential rook development later and creates space for our pieces to become more active. We're essentially accepting that the position will become more open and tactical, which can favor the side with better piece coordination.",
+      "shortNarration": "Capturing the pawn opens the e-file and creates a more tactical, open position favoring better piece coordination."
     },
     {
       "san": "Qxd5",
-      "annotation": "Black recaptures with the queen, bringing this powerful piece into the center very early in the game, which goes against traditional opening principles but is necessary here. The queen on d5 is quite active, controlling important central squares and putting pressure on our position, but it's also potentially vulnerable to attack by our developing pieces. This early queen development is a characteristic feature of this line, and we'll need to look for ways to harass the queen while developing our pieces with tempo. Black's plan is to use the centralized queen actively while completing development, but they must be careful not to let the queen become a target for our piece attacks."
+      "annotation": "Black recaptures with the queen, bringing this powerful piece into the center very early in the game, which goes against traditional opening principles but is necessary here. The queen on d5 is quite active, controlling important central squares and putting pressure on our position, but it's also potentially vulnerable to attack by our developing pieces. This early queen development is a characteristic feature of this line, and we'll need to look for ways to harass the queen while developing our pieces with tempo. Black's plan is to use the centralized queen actively while completing development, but they must be careful not to let the queen become a target for our piece attacks.",
+      "shortNarration": "Black's queen recaptures on d5, active but vulnerable to attack by White's developing pieces."
     }
   ]
 }

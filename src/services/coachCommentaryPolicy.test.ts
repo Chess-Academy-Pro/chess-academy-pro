@@ -24,6 +24,23 @@ describe('resolveVerbosity', () => {
     off.preferences.coachCommentaryVerbosity = 'off';
     expect(resolveVerbosity(off)).toBe('off');
   });
+
+  it('coachNarration overrides the legacy coachCommentaryVerbosity', () => {
+    const silent = buildUserProfile();
+    silent.preferences.coachNarration = 'silent';
+    silent.preferences.coachCommentaryVerbosity = 'every-move';
+    expect(resolveVerbosity(silent)).toBe('off');
+
+    const brief = buildUserProfile();
+    brief.preferences.coachNarration = 'brief';
+    brief.preferences.coachCommentaryVerbosity = 'every-move';
+    expect(resolveVerbosity(brief)).toBe('key-moments');
+
+    const full = buildUserProfile();
+    full.preferences.coachNarration = 'full';
+    full.preferences.coachCommentaryVerbosity = 'off';
+    expect(resolveVerbosity(full)).toBe('every-move');
+  });
 });
 
 describe('shouldCallLlmForMove', () => {

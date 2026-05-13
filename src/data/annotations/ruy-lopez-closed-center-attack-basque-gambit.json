@@ -3,67 +3,83 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "Continuing Ruy Lopez Closed Center Attack Basque Gambit: e4 is a known theory move in this line."
+      "annotation": "Continuing Ruy Lopez Closed Center Attack Basque Gambit: e4 is a known theory move in this line.",
+      "shortNarration": "e4 opens lines for the queen and bishop in the Ruy Lopez Closed Center Attack Basque Gambit."
     },
     {
       "san": "e5",
-      "annotation": "Black responds symmetrically, matching our central pawn and controlling the d4 and f4 squares to maintain the balance. This is the most principled response, leading to the rich world of open games where both sides will fight for central control and quick development. Our opponent is essentially saying 'I'm ready for a tactical battle' rather than choosing more positional setups like the French or Caro-Kann defenses."
+      "annotation": "Black responds symmetrically, matching our central pawn and controlling the d4 and f4 squares to maintain the balance. This is the most principled response, leading to the rich world of open games where both sides will fight for central control and quick development. Our opponent is essentially saying 'I'm ready for a tactical battle' rather than choosing more positional setups like the French or Caro-Kann defenses.",
+      "shortNarration": "Black's symmetrical e5 mirrors the pawn center, keeping d4 and f4 contested for an open tactical fight."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our kingside knight to its ideal square, attacking the black e5 pawn while supporting our own central presence. This move is far superior to premature attacks like 2.f4 or 2.Bc4, as it develops with tempo and maintains maximum flexibility for our setup. The knight on f3 also prepares castling kingside and keeps options open for various pawn structures, whether we play d3 for a solid setup or d4 for immediate central confrontation."
+      "annotation": "We develop our kingside knight to its ideal square, attacking the black e5 pawn while supporting our own central presence. This move is far superior to premature attacks like 2.f4 or 2.Bc4, as it develops with tempo and maintains maximum flexibility for our setup. The knight on f3 also prepares castling kingside and keeps options open for various pawn structures, whether we play d3 for a solid setup or d4 for immediate central confrontation.",
+      "shortNarration": "Knight to f3 develops with tempo, attacks e5, and prepares kingside castling while keeping d3 or d4 options open."
     },
     {
       "san": "Nc6",
-      "annotation": "Black defends the e5 pawn with the most active move, bringing the knight toward the center where it influences important squares like d4 and b4. This move is virtually forced, as alternatives like 2...d6 or 2...f5 would either be too passive or create serious weaknesses. Our opponent is following sound opening principles by developing pieces while maintaining the central tension, setting the stage for the classical Ruy Lopez if we continue with 3.Bb5."
+      "annotation": "Black defends the e5 pawn with the most active move, bringing the knight toward the center where it influences important squares like d4 and b4. This move is virtually forced, as alternatives like 2...d6 or 2...f5 would either be too passive or create serious weaknesses. Our opponent is following sound opening principles by developing pieces while maintaining the central tension, setting the stage for the classical Ruy Lopez if we continue with 3.Bb5.",
+      "shortNarration": "Black's 2...Nc6 defends e5 and eyes d4 and b4, setting up a Ruy Lopez after 3.Bb5."
     },
     {
       "san": "Bb5",
-      "annotation": "We play the defining move of the Ruy Lopez, pinning the knight to the black king and creating subtle pressure on the e5 pawn. While the pin isn't absolute since the black king can still move, this bishop placement is incredibly annoying for Black and often forces weakening moves like ...a6. The Ruy Lopez is considered one of the most positionally sophisticated openings, where we're not seeking immediate tactical gains but rather long-term positional pressure and better piece coordination."
+      "annotation": "We play the defining move of the Ruy Lopez, pinning the knight to the black king and creating subtle pressure on the e5 pawn. While the pin isn't absolute since the black king can still move, this bishop placement is incredibly annoying for Black and often forces weakening moves like ...a6. The Ruy Lopez is considered one of the most positionally sophisticated openings, where we're not seeking immediate tactical gains but rather long-term positional pressure and better piece coordination.",
+      "shortNarration": "Bishop to b5 pins the knight to the king, pressuring e5 and forcing Black into weakening moves like a6."
     },
     {
       "san": "a6",
-      "annotation": "Black immediately challenges our bishop, forcing us to make a decision about where to retreat while gaining space on the queenside. This is by far the most popular response, as it prevents us from maintaining the pin indefinitely and gives Black some breathing room. However, the move does weaken the b6 square and costs valuable time that we can use to continue our development, which is why the Ruy Lopez remains dangerous for Black despite this natural defensive resource."
+      "annotation": "Black immediately challenges our bishop, forcing us to make a decision about where to retreat while gaining space on the queenside. This is by far the most popular response, as it prevents us from maintaining the pin indefinitely and gives Black some breathing room. However, the move does weaken the b6 square and costs valuable time that we can use to continue our development, which is why the Ruy Lopez remains dangerous for Black despite this natural defensive resource.",
+      "shortNarration": "Black's ...a6 forces the bishop to retreat, weakening b6 and costing time for White to develop."
     },
     {
       "san": "Ba4",
-      "annotation": "We retreat the bishop to a4, maintaining the pin along the a4-e8 diagonal and keeping maximum pressure on Black's position. This square allows our bishop to potentially retreat further to c2 or even swing back to b3 in some lines, maintaining excellent flexibility. The key point is that we're not allowing Black to immediately equalize with ...Nxe4, as the knight would still be pinned to the king, giving us time to build up a powerful center."
+      "annotation": "We retreat the bishop to a4, maintaining the pin along the a4-e8 diagonal and keeping maximum pressure on Black's position. This square allows our bishop to potentially retreat further to c2 or even swing back to b3 in some lines, maintaining excellent flexibility. The key point is that we're not allowing Black to immediately equalize with ...Nxe4, as the knight would still be pinned to the king, giving us time to build up a powerful center.",
+      "shortNarration": "Bishop retreats to a4, maintaining the pin on the e4-knight and keeping pressure on Black's position."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops the kingside knight, attacking our e4 pawn and preparing to castle kingside for safety. This active move also supports the e5 pawn from another angle and prepares potential counterplay in the center. Our opponent is following the most classical approach to the Ruy Lopez, prioritizing piece development and king safety before committing to any particular pawn structure."
+      "annotation": "Black develops the kingside knight, attacking our e4 pawn and preparing to castle kingside for safety. This active move also supports the e5 pawn from another angle and prepares potential counterplay in the center. Our opponent is following the most classical approach to the Ruy Lopez, prioritizing piece development and king safety before committing to any particular pawn structure.",
+      "shortNarration": "Black develops the knight to attack e4, preparing kingside castling and supporting the e5 pawn."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside, securing our king's safety while bringing the rook to f1 where it supports potential central advances. This move is almost automatic in the Ruy Lopez, as king safety is paramount before launching any serious attacks. Castling also completes our basic development tasks and allows us to focus on the coming central battle, where we'll soon play d4 to challenge Black's pawn structure."
+      "annotation": "We castle kingside, securing our king's safety while bringing the rook to f1 where it supports potential central advances. This move is almost automatic in the Ruy Lopez, as king safety is paramount before launching any serious attacks. Castling also completes our basic development tasks and allows us to focus on the coming central battle, where we'll soon play d4 to challenge Black's pawn structure.",
+      "shortNarration": "Castle kingside to secure the king, activate the rook, and prepare the central break d4."
     },
     {
       "san": "Be7",
-      "annotation": "Black develops the light-squared bishop to its ideal square, preparing to castle while maintaining flexibility in the center. this stabilizing move breaks the pin on the knight and allows Black to complete kingside development safely. The bishop on e7 also supports the important f6 knight and can potentially be redeployed to f6 or g5 later depending on how the center develops."
+      "annotation": "Black develops the light-squared bishop to its ideal square, preparing to castle while maintaining flexibility in the center. this stabilizing move breaks the pin on the knight and allows Black to complete kingside development safely. The bishop on e7 also supports the important f6 knight and can potentially be redeployed to f6 or g5 later depending on how the center develops.",
+      "shortNarration": "Black's Be7 breaks the pin, prepares castling, and supports the f6 knight with future flexibility to f6 or g5."
     },
     {
       "san": "d4",
-      "annotation": "We strike in the center with the thematic pawn advance, immediately challenging Black's e5 stronghold and opening lines for our pieces. This move transforms the position from a quiet maneuvering game into sharp tactical combat, as Black must decide how to handle the central tension. The pawn break is so fundamental to the Ruy Lopez that most of our previous moves have been building toward this moment, and now Black faces the critical decision of whether to maintain the center or release the tension."
+      "annotation": "We strike in the center with the thematic pawn advance, immediately challenging Black's e5 stronghold and opening lines for our pieces. This move transforms the position from a quiet maneuvering game into sharp tactical combat, as Black must decide how to handle the central tension. The pawn break is so fundamental to the Ruy Lopez that most of our previous moves have been building toward this moment, and now Black faces the critical decision of whether to maintain the center or release the tension.",
+      "shortNarration": "The thematic pawn break in the center challenges Black's e5 stronghold, opening lines and sharpening the position."
     },
     {
       "san": "exd4",
-      "annotation": "Black captures the pawn, releasing the central tension and opening the e-file for potential counterplay against our king. This is the most direct approach, though it does allow us to advance our e-pawn with tempo and gain space in the center. Our opponent is essentially accepting that we'll get a strong pawn center in exchange for eliminating some of the tension and opening lines for piece activity."
+      "annotation": "Black captures the pawn, releasing the central tension and opening the e-file for potential counterplay against our king. This is the most direct approach, though it does allow us to advance our e-pawn with tempo and gain space in the center. Our opponent is essentially accepting that we'll get a strong pawn center in exchange for eliminating some of the tension and opening lines for piece activity.",
+      "shortNarration": "Black captures the pawn, opening the e-file for counterplay, but White gains a strong pawn center with tempo."
     },
     {
       "san": "e5",
-      "annotation": "We advance the pawn with check, gaining crucial tempo while driving the black knight away from its excellent central post. This powerful move gives us a space advantage and opens attacking lines toward the black king, embodying the aggressive spirit of the Center Attack. The pawn on e5 also cramps Black's position significantly, limiting the mobility of the f6 knight and potentially preparing devastating attacks if we can bring more pieces into the assault."
+      "annotation": "We advance the pawn with check, gaining crucial tempo while driving the black knight away from its excellent central post. This powerful move gives us a space advantage and opens attacking lines toward the black king, embodying the aggressive spirit of the Center Attack. The pawn on e5 also cramps Black's position significantly, limiting the mobility of the f6 knight and potentially preparing devastating attacks if we can bring more pieces into the assault.",
+      "shortNarration": "e5+ gains tempo, drives the knight from f6, opens lines toward Black's king, and cramps Black's position."
     },
     {
       "san": "Ne4",
-      "annotation": "Black centralizes the knight aggressively, occupying the strong e4 square and preparing to challenge our growing initiative. This is a critical practical try, as the knight from e4 can potentially jump to d6, f6, or even c5 depending on circumstances. Our opponent is correctly seeking active piece play to compensate for the spatial disadvantage, but this knight will become a target for our advancing pawns and pieces."
+      "annotation": "Black centralizes the knight aggressively, occupying the strong e4 square and preparing to challenge our growing initiative. This is a critical practical try, as the knight from e4 can potentially jump to d6, f6, or even c5 depending on circumstances. Our opponent is correctly seeking active piece play to compensate for the spatial disadvantage, but this knight will become a target for our advancing pawns and pieces.",
+      "shortNarration": "Black's knight on e4 is a target for advancing pawns and pieces, but it threatens jumps to d6, f6, or c5."
     },
     {
       "san": "c3",
-      "annotation": "We offer the Basque Gambit by advancing the c-pawn, inviting Black to capture our d4 pawn while preparing to open the c-file and activate our pieces. This aggressive continuation shows we're willing to sacrifice material for rapid development and attacking chances against the black king. The gambit is particularly dangerous because Black's king is still in the center, and every tempo counts in converting our lead in development into a crushing attack."
+      "annotation": "We offer the Basque Gambit by advancing the c-pawn, inviting Black to capture our d4 pawn while preparing to open the c-file and activate our pieces. This aggressive continuation shows we're willing to sacrifice material for rapid development and attacking chances against the black king. The gambit is particularly dangerous because Black's king is still in the center, and every tempo counts in converting our lead in development into a crushing attack.",
+      "shortNarration": "Advancing c4 offers the Basque Gambit, sacrificing the d4 pawn to open the c-file and attack Black's uncastled king."
     },
     {
       "san": "dxc3",
-      "annotation": "Black accepts the gambit, capturing our c-pawn and winning material while challenging us to prove compensation for the sacrificed pawn. This is the most principled response, as declining the gambit with moves like 8...d6 would allow us to simply recapture on d4 with a superior position. However, by accepting, our opponent must now face our rapid piece development and attacking chances with the black king still uncastled, making this a critical test of both sides' tactical abilities."
+      "annotation": "Black accepts the gambit, capturing our c-pawn and winning material while challenging us to prove compensation for the sacrificed pawn. This is the most principled response, as declining the gambit with moves like 8...d6 would allow us to simply recapture on d4 with a superior position. However, by accepting, our opponent must now face our rapid piece development and attacking chances with the black king still uncastled, making this a critical test of both sides' tactical abilities.",
+      "shortNarration": "Black accepts the gambit, winning a pawn but facing rapid piece development and an uncastled king."
     }
   ]
 }

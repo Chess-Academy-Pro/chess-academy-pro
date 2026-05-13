@@ -3,35 +3,43 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This flexible move allows us to transpose into many different opening systems depending on how Black responds. The d4 opening is particularly effective against players who prefer unorthodox or hypermodern setups, as we can often build a strong classical center before they're ready to challenge it effectively."
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This flexible move allows us to transpose into many different opening systems depending on how Black responds. The d4 opening is particularly effective against players who prefer unorthodox or hypermodern setups, as we can often build a strong classical center before they're ready to challenge it effectively.",
+      "shortNarration": "d4 stakes a claim to e5 and c5, opening lines for the dark-squared bishop and queen."
     },
     {
       "san": "g6",
-      "annotation": "Our opponent is signaling their intention to play the Modern Defense, a hypermodern opening where Black allows us to occupy the center with pawns while preparing to challenge it later with pieces. This fianchetto move prepares to develop the dark-squared bishop to g7, where it will exert pressure along the long diagonal toward our queenside. Black is essentially saying 'go ahead and build your center, I'll attack it when I'm ready' - a risky but potentially rewarding strategy that can lead to sharp, tactical games."
+      "annotation": "Our opponent is signaling their intention to play the Modern Defense, a hypermodern opening where Black allows us to occupy the center with pawns while preparing to challenge it later with pieces. This fianchetto move prepares to develop the dark-squared bishop to g7, where it will exert pressure along the long diagonal toward our queenside. Black is essentially saying 'go ahead and build your center, I'll attack it when I'm ready' - a risky but potentially rewarding strategy that can lead to sharp, tactical games.",
+      "shortNarration": "Black fianchettoes to g7, pressuring the long diagonal and inviting White to build a center before counterattacking."
     },
     {
       "san": "c4",
-      "annotation": "We're establishing the English Setup within our d4 framework, controlling the crucial d5 and b5 squares while preparing to build an impressive pawn center. This move supports our plan to play e4 next, after which we'll have a classical two-pawn center that Black will struggle to challenge immediately. The c4 pawn also opens up possibilities for our knight to develop to c3, supporting our central ambitions and preparing potential queenside expansion later in the game."
+      "annotation": "We're establishing the English Setup within our d4 framework, controlling the crucial d5 and b5 squares while preparing to build an impressive pawn center. This move supports our plan to play e4 next, after which we'll have a classical two-pawn center that Black will struggle to challenge immediately. The c4 pawn also opens up possibilities for our knight to develop to c3, supporting our central ambitions and preparing potential queenside expansion later in the game.",
+      "shortNarration": "c4 controls d5 and b5, preparing e4 for a classical two-pawn center with knight development to c3."
     },
     {
       "san": "Bg7",
-      "annotation": "Black completes their kingside fianchetto, placing the dark-squared bishop on its most active square where it eyes our entire queenside and puts pressure on the long diagonal. This bishop will become a key piece in Black's counterplay, potentially supporting central breaks with moves like ...c5 or ...e5 later in the game. We need to be mindful that this bishop is now monitoring our king position and could become very dangerous if we castle kingside carelessly."
+      "annotation": "Black completes their kingside fianchetto, placing the dark-squared bishop on its most active square where it eyes our entire queenside and puts pressure on the long diagonal. This bishop will become a key piece in Black's counterplay, potentially supporting central breaks with moves like ...c5 or ...e5 later in the game. We need to be mindful that this bishop is now monitoring our king position and could become very dangerous if we castle kingside carelessly.",
+      "shortNarration": "Black's fianchettoed bishop on g7 eyes the long diagonal, pressuring your queenside and threatening central breaks with ...c5 or ...e5."
     },
     {
       "san": "Nc3",
-      "annotation": "We're developing our knight to its ideal square, where it supports our planned e4 advance and adds another defender to the d5 square. This knight placement is part of our systematic buildup - we're preparing to complete our ideal pawn center while keeping our pieces actively placed to support it. The knight on c3 also keeps options open for different pawn structures, as we could potentially support a d5 advance later or maintain tension in the center depending on how Black continues."
+      "annotation": "We're developing our knight to its ideal square, where it supports our planned e4 advance and adds another defender to the d5 square. This knight placement is part of our systematic buildup - we're preparing to complete our ideal pawn center while keeping our pieces actively placed to support it. The knight on c3 also keeps options open for different pawn structures, as we could potentially support a d5 advance later or maintain tension in the center depending on how Black continues.",
+      "shortNarration": "Knight to c3 supports the e4 advance, defends d5, and keeps central pawn tension flexible."
     },
     {
       "san": "d6",
-      "annotation": "Our opponent establishes a solid pawn chain and prepares to challenge our center, while also opening up the possibility of ...e5 to directly attack our d4 pawn. This move shows Black is transitioning from pure hypermodern play to a more direct approach, as the d6 pawn supports potential central breaks. Black is also preparing to complete development with moves like ...Nf6 and ...0-0, but we should note that this somewhat passive setup gives us time to complete our ideal center formation."
+      "annotation": "Our opponent establishes a solid pawn chain and prepares to challenge our center, while also opening up the possibility of ...e5 to directly attack our d4 pawn. This move shows Black is transitioning from pure hypermodern play to a more direct approach, as the d6 pawn supports potential central breaks. Black is also preparing to complete development with moves like ...Nf6 and ...0-0, but we should note that this somewhat passive setup gives us time to complete our ideal center formation.",
+      "shortNarration": "Black's d6 supports a future ...e5 break against d4, but the passive setup gives White time to complete the ideal center."
     },
     {
       "san": "e4",
-      "annotation": "We've achieved our strategic goal of establishing the ideal two-pawn center, controlling crucial central squares like d5, e5, f5, and c5 while gaining space and opening lines for our pieces. This powerful pawn duo gives us a significant space advantage and restricts Black's piece activity, particularly limiting where their knights can develop effectively. Now Black faces the typical Modern Defense dilemma: how to generate sufficient counterplay against our impressive central formation before we consolidate our advantage and launch an attack."
+      "annotation": "We've achieved our strategic goal of establishing the ideal two-pawn center, controlling crucial central squares like d5, e5, f5, and c5 while gaining space and opening lines for our pieces. This powerful pawn duo gives us a significant space advantage and restricts Black's piece activity, particularly limiting where their knights can develop effectively. Now Black faces the typical Modern Defense dilemma: how to generate sufficient counterplay against our impressive central formation before we consolidate our advantage and launch an attack.",
+      "shortNarration": "The ideal two-pawn center controls d5, e5, f5, and c5, restricting Black's knights and giving White a space advantage."
     },
     {
       "san": "f5",
-      "annotation": "Continuing Modern Defense Randspringer Variation: f5 is a known theory move in this line."
+      "annotation": "Continuing Modern Defense Randspringer Variation: f5 is a known theory move in this line.",
+      "shortNarration": "f5 is theory in the Modern Defense Randspringer Variation."
     }
   ]
 }

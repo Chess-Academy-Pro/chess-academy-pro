@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, immediately staking a claim in the center and controlling the crucial d5 and f5 squares. This classical first move develops our position with maximum energy, freeing both our light-squared bishop on the kingside and preparing to castle short. The e4 pawn also supports a future d4 advance, which would give us a powerful pawn center. Most importantly, we're putting immediate pressure on Black to respond to our central challenge, forcing them to make critical decisions about their pawn structure early in the game."
+      "annotation": "We're opening with the king's pawn, immediately staking a claim in the center and controlling the crucial d5 and f5 squares. This classical first move develops our position with maximum energy, freeing both our light-squared bishop on the kingside and preparing to castle short. The e4 pawn also supports a future d4 advance, which would give us a powerful pawn center. Most importantly, we're putting immediate pressure on Black to respond to our central challenge, forcing them to make critical decisions about their pawn structure early in the game.",
+      "shortNarration": "1.e4 claims the center, controls d5 and f5, frees the light-squared bishop, and prepares d4."
     },
     {
       "san": "c5",
-      "annotation": "Our opponent has chosen the Sicilian Defense, one of the most popular and complex responses to 1.e4, immediately signaling their intention to fight for an unbalanced, tactical game. Rather than matching our central pawn with 1...e5, Black attacks our potential d4 square from the side, preventing us from establishing a classical pawn center with d2-d4. This asymmetrical pawn structure typically leads to opposite-side castling, pawn storms, and sharp tactical battles where both sides have winning chances. The c5 pawn also prepares to support Black's own central expansion with moves like d6 and later d5, while potentially opening the c-file for Black's rook after we play d4 and Black recaptures."
+      "annotation": "Our opponent has chosen the Sicilian Defense, one of the most popular and complex responses to 1.e4, immediately signaling their intention to fight for an unbalanced, tactical game. Rather than matching our central pawn with 1...e5, Black attacks our potential d4 square from the side, preventing us from establishing a classical pawn center with d2-d4. This asymmetrical pawn structure typically leads to opposite-side castling, pawn storms, and sharp tactical battles where both sides have winning chances. The c5 pawn also prepares to support Black's own central expansion with moves like d6 and later d5, while potentially opening the c-file for Black's rook after we play d4 and Black recaptures.",
+      "shortNarration": "Black's 1...c5 attacks d4 to prevent a classical pawn center, leading to opposite-side castling and sharp tactical battles."
     },
     {
       "san": "Nf3",
-      "annotation": "Continuing Sicilian Defense: Nf3 is a known theory move in this line."
+      "annotation": "Continuing Sicilian Defense: Nf3 is a known theory move in this line.",
+      "shortNarration": "Nf3 develops and attacks d4, a key Sicilian move."
     },
     {
       "san": "d6",
-      "annotation": "Continuing Sicilian Defense: d6 is a known theory move in this line."
+      "annotation": "Continuing Sicilian Defense: d6 is a known theory move in this line.",
+      "shortNarration": "d6 is a standard Sicilian move, preparing a kingside fianchetto or e5 break."
     },
     {
       "san": "d4",
-      "annotation": "Continuing Sicilian Defense: d4 is a known theory move in this line."
+      "annotation": "Continuing Sicilian Defense: d4 is a known theory move in this line.",
+      "shortNarration": "d4 is the standard Sicilian break, opening the center for piece play."
     },
     {
       "san": "cxd4",
-      "annotation": "Continuing Sicilian Defense: cxd4 is a known theory move in this line."
+      "annotation": "Continuing Sicilian Defense: cxd4 is a known theory move in this line.",
+      "shortNarration": "cxd4 is the theoretical recapture in this Sicilian line."
     }
   ]
 }

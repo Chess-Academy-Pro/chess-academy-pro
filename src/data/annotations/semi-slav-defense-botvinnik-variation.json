@@ -3,71 +3,88 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the queen's pawn, establishing control over the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move is the foundation of many classical openings and gives us excellent chances for a rich middlegame with both tactical and positional possibilities. The d4 opening often leads to more strategic, maneuvering games compared to 1.e4, making it a favorite among players who enjoy building long-term advantages. Our immediate plan is to continue with moves like Nf3, c4, and Nc3 to build a strong pawn center and develop our pieces to active squares."
+      "annotation": "We're opening with the queen's pawn, establishing control over the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move is the foundation of many classical openings and gives us excellent chances for a rich middlegame with both tactical and positional possibilities. The d4 opening often leads to more strategic, maneuvering games compared to 1.e4, making it a favorite among players who enjoy building long-term advantages. Our immediate plan is to continue with moves like Nf3, c4, and Nc3 to build a strong pawn center and develop our pieces to active squares.",
+      "shortNarration": "1.d4 controls e5 and c5, setting up a strategic game with plans for Nf3, c4, and Nc3."
     },
     {
       "san": "d5",
-      "annotation": "Black immediately challenges our central pawn, staking an equal claim to the center and preventing us from establishing a dominant pawn duo with e4. This symmetrical response is one of the most principled ways to meet 1.d4, as it fights for central control right from the start. Our opponent is preparing to develop pieces to natural squares while maintaining the tension in the center. This move signals that Black is ready for a complex strategic battle rather than allowing us to build an unchallenged pawn center."
+      "annotation": "Black immediately challenges our central pawn, staking an equal claim to the center and preventing us from establishing a dominant pawn duo with e4. This symmetrical response is one of the most principled ways to meet 1.d4, as it fights for central control right from the start. Our opponent is preparing to develop pieces to natural squares while maintaining the tension in the center. This move signals that Black is ready for a complex strategic battle rather than allowing us to build an unchallenged pawn center.",
+      "shortNarration": "Black's 1...d5 challenges the center, preventing a dominant pawn duo and signaling a complex strategic fight."
     },
     {
       "san": "c4",
-      "annotation": "We're launching the Queen's Gambit, one of the oldest and most respected openings in chess history! This move attacks Black's central d5 pawn and offers to trade our c-pawn for it, which would give us a central majority and more space. The key point is that this isn't really a 'gambit' since Black cannot hold the pawn safely after capturing on c4. Our move also opens the long diagonal for our light-squared bishop and prepares to develop our pieces with maximum effectiveness. This flexible approach allows us to adapt our pawn structure based on how Black responds."
+      "annotation": "We're launching the Queen's Gambit, one of the oldest and most respected openings in chess history! This move attacks Black's central d5 pawn and offers to trade our c-pawn for it, which would give us a central majority and more space. The key point is that this isn't really a 'gambit' since Black cannot hold the pawn safely after capturing on c4. Our move also opens the long diagonal for our light-squared bishop and prepares to develop our pieces with maximum effectiveness. This flexible approach allows us to adapt our pawn structure based on how Black responds.",
+      "shortNarration": "The Queen's Gambit attacks d5, offering the c-pawn for central space and a light-squared bishop diagonal, but Black cannot safely hold the pawn after capturing on c4."
     },
     {
       "san": "c6",
-      "annotation": "Our opponent chooses the Slav Defense, supporting the d5 pawn with the c-pawn rather than accepting our Queen's Gambit. This solid approach keeps Black's pawn structure intact and prepares to eventually challenge our center with moves like dxc4 followed by b5. The Slav is particularly attractive because it doesn't block in the light-squared bishop on c8, unlike defenses with ...e6. Black's setup is slightly passive but extremely sound, aiming for a solid position with good long-term prospects."
+      "annotation": "Our opponent chooses the Slav Defense, supporting the d5 pawn with the c-pawn rather than accepting our Queen's Gambit. This solid approach keeps Black's pawn structure intact and prepares to eventually challenge our center with moves like dxc4 followed by b5. The Slav is particularly attractive because it doesn't block in the light-squared bishop on c8, unlike defenses with ...e6. Black's setup is slightly passive but extremely sound, aiming for a solid position with good long-term prospects.",
+      "shortNarration": "Black's Slav Defense supports d5 with c6, keeping the c8-bishop free and aiming for a solid, slightly passive but sound position with long-term prospects."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its ideal square, attacking the e5 square and supporting our central ambitions. This move is virtually automatic in most d4 openings because the knight on f3 controls key central squares and prepares for kingside castling. From f3, our knight can later jump to e5 for an outpost or support pawn advances in the center. The knight development also keeps our options open for various pawn structures, whether we maintain the tension with d4-c4 or allow some pawn trades."
+      "annotation": "We develop our knight to its ideal square, attacking the e5 square and supporting our central ambitions. This move is virtually automatic in most d4 openings because the knight on f3 controls key central squares and prepares for kingside castling. From f3, our knight can later jump to e5 for an outpost or support pawn advances in the center. The knight development also keeps our options open for various pawn structures, whether we maintain the tension with d4-c4 or allow some pawn trades.",
+      "shortNarration": "Nf3 develops to its ideal square, controlling e5 and preparing kingside castling."
     },
     {
       "san": "Nf6",
-      "annotation": "Black mirrors our development with the most natural knight move, attacking our e4 square and preparing kingside development. This is the starting move of the Semi-Slav Defense when combined with the previous ...c6 and the upcoming ...e6. Our opponent is following classical development principles while keeping the position flexible. The knight on f6 will be an important piece in Black's setup, potentially supporting central breaks or tactical operations later in the game."
+      "annotation": "Black mirrors our development with the most natural knight move, attacking our e4 square and preparing kingside development. This is the starting move of the Semi-Slav Defense when combined with the previous ...c6 and the upcoming ...e6. Our opponent is following classical development principles while keeping the position flexible. The knight on f6 will be an important piece in Black's setup, potentially supporting central breaks or tactical operations later in the game.",
+      "shortNarration": "Black's knight to f6 attacks e4 and prepares the Semi-Slav Defense with ...c6 and ...e6."
     },
     {
       "san": "Nc3",
-      "annotation": "We complete our basic development trinity by bringing the queenside knight to its most active square, adding additional pressure to Black's d5 pawn. This move is essential preparation for our central strategy, as the knight supports potential e4 advances and controls important squares like e4 and b5. With both knights developed, we're ready to intensify the pressure on Black's position and can consider more aggressive continuations. The knight on c3 also supports our queen and rook along the c-file should the position open up later."
+      "annotation": "We complete our basic development trinity by bringing the queenside knight to its most active square, adding additional pressure to Black's d5 pawn. This move is essential preparation for our central strategy, as the knight supports potential e4 advances and controls important squares like e4 and b5. With both knights developed, we're ready to intensify the pressure on Black's position and can consider more aggressive continuations. The knight on c3 also supports our queen and rook along the c-file should the position open up later.",
+      "shortNarration": "Nc3 develops the knight to its most active square, pressuring d5 and supporting e4 advances."
     },
     {
       "san": "e6",
-      "annotation": "Continuing Semi Slav Defense Botvinnik Variation: e6 is a known theory move in this line."
+      "annotation": "Continuing Semi Slav Defense Botvinnik Variation: e6 is a known theory move in this line.",
+      "shortNarration": "e6 is theory in the Botvinnik Variation of the Semi-Slav Defense."
     },
     {
       "san": "Bg5",
-      "annotation": "We develop our dark-squared bishop to an aggressive square, pinning the knight on f6 against Black's queen and increasing the pressure on Black's position. This move is particularly strong in the Semi-Slav because Black's light-squared bishop is still trapped behind the e6 pawn and cannot easily challenge our bishop. The pin creates immediate tactical threats and forces Black to make difficult decisions about how to handle the pressure. Our bishop on g5 also supports potential central advances and puts psychological pressure on our opponent from the very early stages."
+      "annotation": "We develop our dark-squared bishop to an aggressive square, pinning the knight on f6 against Black's queen and increasing the pressure on Black's position. This move is particularly strong in the Semi-Slav because Black's light-squared bishop is still trapped behind the e6 pawn and cannot easily challenge our bishop. The pin creates immediate tactical threats and forces Black to make difficult decisions about how to handle the pressure. Our bishop on g5 also supports potential central advances and puts psychological pressure on our opponent from the very early stages.",
+      "shortNarration": "Bishop to g5 pins the knight on f6 to Black's queen, exploiting the trapped light-squared bishop behind e6."
     },
     {
       "san": "dxc4",
-      "annotation": "Black finally captures our c-pawn, beginning the critical phase of the Semi-Slav Defense where both sides must play with great precision. This capture is almost forced because the pressure from our pieces (especially the Bg5 pin) was becoming too much to bear. Our opponent is now committed to supporting this pawn with ...b5, which will create sharp tactical complications. Black's plan is to hold onto the extra pawn and use the advanced pawn mass to create counterplay, but this requires very accurate play to avoid tactical disasters."
+      "annotation": "Black finally captures our c-pawn, beginning the critical phase of the Semi-Slav Defense where both sides must play with great precision. This capture is almost forced because the pressure from our pieces (especially the Bg5 pin) was becoming too much to bear. Our opponent is now committed to supporting this pawn with ...b5, which will create sharp tactical complications. Black's plan is to hold onto the extra pawn and use the advanced pawn mass to create counterplay, but this requires very accurate play to avoid tactical disasters.",
+      "shortNarration": "Black captures the c-pawn, committing to ...b5 to hold it, creating sharp tactical complications where accurate play is critical to avoid disaster."
     },
     {
       "san": "e4",
-      "annotation": "We strike in the center with tremendous force, opening up the position and exposing the weaknesses in Black's pawn structure! This central advance is the point of our opening play, as we gain space and activate our pieces dramatically. The e4 push also threatens to continue with e5, driving away Black's knight and creating a powerful pawn center. Our opponent must now deal with the immediate tactical threats while trying to complete the plan of supporting the c4 pawn - a very difficult balancing act that requires precise calculation."
+      "annotation": "We strike in the center with tremendous force, opening up the position and exposing the weaknesses in Black's pawn structure! This central advance is the point of our opening play, as we gain space and activate our pieces dramatically. The e4 push also threatens to continue with e5, driving away Black's knight and creating a powerful pawn center. Our opponent must now deal with the immediate tactical threats while trying to complete the plan of supporting the c4 pawn - a very difficult balancing act that requires precise calculation.",
+      "shortNarration": "e4 opens the center, threatens e5 to drive away the knight, and activates pieces against Black's weakened pawn structure."
     },
     {
       "san": "b5",
-      "annotation": "Our opponent courageously advances the b-pawn to support the captured pawn on c4, entering the razor-sharp Botvinnik Variation! This is Black's most ambitious try, creating a dangerous advanced pawn duo that can become very strong if properly supported. However, this move also weakens Black's queenside and creates tactical vulnerabilities that we must exploit immediately. Black is essentially playing for maximum complications, betting that the advanced pawns will create enough counterplay to offset the positional concessions."
+      "annotation": "Our opponent courageously advances the b-pawn to support the captured pawn on c4, entering the razor-sharp Botvinnik Variation! This is Black's most ambitious try, creating a dangerous advanced pawn duo that can become very strong if properly supported. However, this move also weakens Black's queenside and creates tactical vulnerabilities that we must exploit immediately. Black is essentially playing for maximum complications, betting that the advanced pawns will create enough counterplay to offset the positional concessions.",
+      "shortNarration": "Black's b-pawn advance supports c4 but weakens the queenside, creating tactical vulnerabilities we must exploit immediately."
     },
     {
       "san": "e5",
-      "annotation": "We advance our central pawn with devastating effect, driving away the knight from f6 and seizing a huge space advantage in the center! This move is the logical follow-up to our previous e4, creating a powerful pawn wedge that restricts Black's pieces and opens attacking lines. The advanced e-pawn also supports potential piece sacrifices and tactical operations against Black's somewhat exposed king. Our space advantage gives us excellent attacking prospects, while Black must find a way to organize the pieces around the cramped position."
+      "annotation": "We advance our central pawn with devastating effect, driving away the knight from f6 and seizing a huge space advantage in the center! This move is the logical follow-up to our previous e4, creating a powerful pawn wedge that restricts Black's pieces and opens attacking lines. The advanced e-pawn also supports potential piece sacrifices and tactical operations against Black's somewhat exposed king. Our space advantage gives us excellent attacking prospects, while Black must find a way to organize the pieces around the cramped position.",
+      "shortNarration": "e5 drives the knight from f6, seizing a central space wedge that restricts Black's pieces and supports attacking lines against the exposed king."
     },
     {
       "san": "h6",
-      "annotation": "Black attacks our bishop on g5, forcing us to make an important decision about where to retreat this key piece. This move also creates luft for Black's king by providing an escape square on h7, which can be important given the sharp nature of the position. However, the advance of the h-pawn also weakens Black's kingside pawn structure and potentially creates targets for our attack. Our opponent is trying to solve immediate tactical problems while preparing to complete development, but each pawn move further compromises the king's safety."
+      "annotation": "Black attacks our bishop on g5, forcing us to make an important decision about where to retreat this key piece. This move also creates luft for Black's king by providing an escape square on h7, which can be important given the sharp nature of the position. However, the advance of the h-pawn also weakens Black's kingside pawn structure and potentially creates targets for our attack. Our opponent is trying to solve immediate tactical problems while preparing to complete development, but each pawn move further compromises the king's safety.",
+      "shortNarration": "Black's h6 attacks our bishop on g5, creating luft on h7 but weakening the kingside pawn structure."
     },
     {
       "san": "Bh4",
-      "annotation": "We retreat our bishop to h4, maintaining the pin on the knight and keeping maximum pressure on Black's position. This square allows our bishop to stay active while avoiding the immediate threat to be captured. From h4, our bishop continues to create tactical threats and supports our attacking ambitions against Black's increasingly weakened kingside. The bishop retreat also prepares for potential discoveries if the g5 square becomes available for our knight or other pieces."
+      "annotation": "We retreat our bishop to h4, maintaining the pin on the knight and keeping maximum pressure on Black's position. This square allows our bishop to stay active while avoiding the immediate threat to be captured. From h4, our bishop continues to create tactical threats and supports our attacking ambitions against Black's increasingly weakened kingside. The bishop retreat also prepares for potential discoveries if the g5 square becomes available for our knight or other pieces.",
+      "shortNarration": "Bishop retreats to h4, maintaining the pin on the knight and keeping pressure on Black's weakened kingside."
     },
     {
       "san": "g5",
-      "annotation": "Our opponent plays an extremely committal and risky move, advancing the g-pawn to drive away our bishop but severely weakening the kingside in the process! This move creates serious dark-square weaknesses around Black's king and gives us multiple targets for our attack. Black is essentially sacrificing king safety for piece activity, hoping to complete development quickly enough to survive the coming storm. The advance to g5 also opens the g-file and creates tactical opportunities involving the exposed king position."
+      "annotation": "Our opponent plays an extremely committal and risky move, advancing the g-pawn to drive away our bishop but severely weakening the kingside in the process! This move creates serious dark-square weaknesses around Black's king and gives us multiple targets for our attack. Black is essentially sacrificing king safety for piece activity, hoping to complete development quickly enough to survive the coming storm. The advance to g5 also opens the g-file and creates tactical opportunities involving the exposed king position.",
+      "shortNarration": "g5 weakens the dark squares around Black's king, opens the g-file, and trades king safety for piece activity."
     },
     {
       "san": "Nxg5",
-      "annotation": "We accept the invitation and capture the g5 pawn with our knight, launching a ferocious attack against Black's exposed king! This knight sacrifice is the beginning of a forced tactical sequence that demonstrates the power of our space advantage and superior development. By taking on g5, we open multiple lines of attack and create immediate threats that Black will struggle to defend against. This move exemplifies the tactical nature of the Botvinnik Variation, where precise calculation and courage are rewarded with devastating attacks against the opponent's king."
+      "annotation": "We accept the invitation and capture the g5 pawn with our knight, launching a ferocious attack against Black's exposed king! This knight sacrifice is the beginning of a forced tactical sequence that demonstrates the power of our space advantage and superior development. By taking on g5, we open multiple lines of attack and create immediate threats that Black will struggle to defend against. This move exemplifies the tactical nature of the Botvinnik Variation, where precise calculation and courage are rewarded with devastating attacks against the opponent's king.",
+      "shortNarration": "Knight takes g5 sacrifices to open lines against Black's exposed king, exploiting White's space and development advantage."
     }
   ]
 }

@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn two squares forward, staking our claim to the center and preparing for rapid development. This move controls the crucial d5 and f5 squares, preventing Black from easily establishing pieces there. The e4 pawn also opens diagonals for our bishop and queen, setting the stage for aggressive piece play. This is one of the most principled opening moves, following the classical opening principles of controlling the center and preparing quick development."
+      "annotation": "We're opening with the king's pawn two squares forward, staking our claim to the center and preparing for rapid development. This move controls the crucial d5 and f5 squares, preventing Black from easily establishing pieces there. The e4 pawn also opens diagonals for our bishop and queen, setting the stage for aggressive piece play. This is one of the most principled opening moves, following the classical opening principles of controlling the center and preparing quick development.",
+      "shortNarration": "e4 claims the center, controls d5 and f5, and opens diagonals for the bishop and queen."
     },
     {
       "san": "g6",
-      "annotation": "Black plays the characteristic move of the Modern Defense, preparing to fianchetto the dark-squared bishop on g7. This hypermodern approach allows Black to control the center from a distance rather than occupying it immediately with pawns. The g6 move also prepares kingside castling and gives Black flexibility to respond to our central advances. While this looks passive, the Modern Defense can lead to sharp counterplay once Black's pieces are coordinated."
+      "annotation": "Black plays the characteristic move of the Modern Defense, preparing to fianchetto the dark-squared bishop on g7. This hypermodern approach allows Black to control the center from a distance rather than occupying it immediately with pawns. The g6 move also prepares kingside castling and gives Black flexibility to respond to our central advances. While this looks passive, the Modern Defense can lead to sharp counterplay once Black's pieces are coordinated.",
+      "shortNarration": "Black fianchettoes the dark-squared bishop on g7, controlling the center from a distance and preparing kingside castling with sharp counterplay potential."
     },
     {
       "san": "d4",
-      "annotation": "We establish a powerful pawn center by advancing our queen's pawn, now controlling both e5 and c5 squares. This two-pawn center gives us a significant space advantage and restricts Black's piece mobility in the center. The d4 pawn also opens lines for our queen and dark-squared bishop, while supporting potential advances like e5 or c5 later. Against the Modern Defense, this central dominance is exactly what we're aiming for - forcing Black to prove their hypermodern setup can generate sufficient counterplay."
+      "annotation": "We establish a powerful pawn center by advancing our queen's pawn, now controlling both e5 and c5 squares. This two-pawn center gives us a significant space advantage and restricts Black's piece mobility in the center. The d4 pawn also opens lines for our queen and dark-squared bishop, while supporting potential advances like e5 or c5 later. Against the Modern Defense, this central dominance is exactly what we're aiming for - forcing Black to prove their hypermodern setup can generate sufficient counterplay.",
+      "shortNarration": "d4 establishes a two-pawn center controlling e5 and c5, restricting Black's mobility and opening lines for queen and bishop."
     },
     {
       "san": "Bg7",
-      "annotation": "Black completes the fianchetto setup, placing the dark-squared bishop on its most active diagonal where it eyes our e4 pawn and controls key central squares. This bishop becomes a cornerstone of Black's position, often supporting central breaks like d6-d5 or f7-f5 later in the game. The fianchettoed bishop also provides additional security for Black's king once castled kingside. However, we should note that this bishop can become a target for our pieces, particularly if we can advance our pawns to restrict its scope."
+      "annotation": "Black completes the fianchetto setup, placing the dark-squared bishop on its most active diagonal where it eyes our e4 pawn and controls key central squares. This bishop becomes a cornerstone of Black's position, often supporting central breaks like d6-d5 or f7-f5 later in the game. The fianchettoed bishop also provides additional security for Black's king once castled kingside. However, we should note that this bishop can become a target for our pieces, particularly if we can advance our pawns to restrict its scope.",
+      "shortNarration": "Black's fianchettoed bishop on g7 eyes e4 and supports d6-d5 or f7-f5, but can become a target if we restrict its diagonal."
     },
     {
       "san": "Bc4",
-      "annotation": "We develop our light-squared bishop to its most aggressive square, targeting the weak f7 point and controlling the important d5 square. This move fits perfectly with our plan of rapid development and central control, while keeping maximum pressure on Black's position. The bishop on c4 also supports potential tactics involving our queen and knights, and maintains flexibility to retreat to b3 or d3 if needed. In positions where Black hasn't castled yet, this bishop placement can be especially dangerous as it eyes the f7 weakness."
+      "annotation": "We develop our light-squared bishop to its most aggressive square, targeting the weak f7 point and controlling the important d5 square. This move fits perfectly with our plan of rapid development and central control, while keeping maximum pressure on Black's position. The bishop on c4 also supports potential tactics involving our queen and knights, and maintains flexibility to retreat to b3 or d3 if needed. In positions where Black hasn't castled yet, this bishop placement can be especially dangerous as it eyes the f7 weakness.",
+      "shortNarration": "Bishop to c4 targets f7 and controls d5, pressuring Black's uncastled king."
     },
     {
       "san": "b5",
-      "annotation": "Black launches the provocative Bücker Gambit, immediately challenging our centralized bishop and offering a pawn sacrifice for rapid development and counterplay. This aggressive move gains tempo by attacking our bishop while opening the a8-h1 diagonal for Black's pieces to create threats. If we capture with Bxb5+, Black gets excellent compensation through quick development and pressure on our somewhat exposed king position. This gambit embodies the fighting spirit of the Modern Defense, where Black seeks dynamic play rather than passive defense, though it requires precise calculation to avoid falling into a worse position."
+      "annotation": "Black launches the provocative Bücker Gambit, immediately challenging our centralized bishop and offering a pawn sacrifice for rapid development and counterplay. This aggressive move gains tempo by attacking our bishop while opening the a8-h1 diagonal for Black's pieces to create threats. If we capture with Bxb5+, Black gets excellent compensation through quick development and pressure on our somewhat exposed king position. This gambit embodies the fighting spirit of the Modern Defense, where Black seeks dynamic play rather than passive defense, though it requires precise calculation to avoid falling into a worse position.",
+      "shortNarration": "Bücker Gambit: Black sacrifices the b-pawn to attack the bishop on b5 and open the a8-h1 diagonal for rapid counterplay."
     }
   ]
 }

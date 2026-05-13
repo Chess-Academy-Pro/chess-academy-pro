@@ -134,6 +134,7 @@ async function evaluateExplorerCandidates(
   return results.filter((r): r is MoveEvaluation => r !== null);
 }
 import { resolveVerbosity, shouldCallLlmForMove } from '../../services/coachCommentaryPolicy';
+import { resolvePhaseNarrationVerbosity } from '../../utils/coachNarration';
 import { BLUNDER_ALERT_ADDITION, EXPLORE_REACTION_ADDITION } from '../../services/coachPrompts';
 import { stockfishEngine } from '../../services/stockfishEngine';
 import { resolveConfig as resolvePlayConfig } from '../../services/coachPlaySession';
@@ -1491,8 +1492,9 @@ export function CoachGamePage({ surfaceMode = 'play' }: CoachGamePageProps = {})
       status: gameState.status,
       blunderPauseActive: gameState.status === 'blunder_pause' || blunderPause !== null,
       positionNarrating: positionNarration.isNarrating,
-      phaseNarrationVerbosity:
-        useAppStore.getState().activeProfile?.preferences.phaseNarrationVerbosity ?? 'standard',
+      phaseNarrationVerbosity: resolvePhaseNarrationVerbosity(
+        useAppStore.getState().activeProfile?.preferences,
+      ),
       ledger: { ...phaseStateRef.current },
       lastMove: lastMove
         ? { san: lastMove.san, moveNumber: lastMove.moveNumber, isCoachMove: lastMove.isCoachMove }
@@ -1540,8 +1542,9 @@ export function CoachGamePage({ surfaceMode = 'play' }: CoachGamePageProps = {})
       return;
     }
 
-    const verbosity: PhaseNarrationVerbosity =
-      useAppStore.getState().activeProfile?.preferences.phaseNarrationVerbosity ?? 'standard';
+    const verbosity: PhaseNarrationVerbosity = resolvePhaseNarrationVerbosity(
+      useAppStore.getState().activeProfile?.preferences,
+    );
     const blunderActive =
       gameState.status === 'blunder_pause' || blunderPause !== null;
 

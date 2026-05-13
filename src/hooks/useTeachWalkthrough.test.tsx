@@ -21,6 +21,7 @@ vi.mock('../services/appAuditor', () => ({
 }));
 
 import { useTeachWalkthrough } from './useTeachWalkthrough';
+import { useAppStore } from '../stores/appStore';
 
 // Synthetic tree:
 //   root → 1.e4 → 1...e5 → FORK { 2.Nc3 → leaf , 2.Nf3 → leaf }
@@ -69,6 +70,11 @@ const SMOKE_TREE: WalkthroughTree = {
 describe('useTeachWalkthrough', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // Ensure speakWalkthroughText hits the mocked voiceService.speakForced
+    // path. resolveCoachNarration(undefined) returns 'full', so a null
+    // profile is sufficient. Reset here in case a previous test file
+    // left a profile in the Zustand store.
+    useAppStore.setState({ activeProfile: null });
   });
 
   it('starts idle', () => {
@@ -232,6 +238,50 @@ describe('useTeachWalkthrough', () => {
       },
       { timeout: 3000 },
     );
+  });
+
+  it('Brief mode speaks shortIdea instead of idea when present', async () => {
+    const { voiceService } = await import('../services/voiceService');
+    // Seed a profile with coachNarration='brief' so resolveCoachNarration
+    // returns 'brief' and the helper picks shortIdea when available.
+    useAppStore.setState({
+      activeProfile: {
+        id: 'test',
+        name: 'test',
+        preferences: { coachNarration: 'brief' } as never,
+      } as never,
+    });
+    const tree: WalkthroughTree = {
+      openingName: 'Brief Smoke',
+      eco: 'Z00',
+      intro: 'long intro that should not be spoken in brief',
+      shortIntro: 'short intro spoken in brief',
+      outro: 'done',
+      root: {
+        san: null,
+        movedBy: null,
+        idea: '',
+        children: [
+          {
+            node: {
+              san: 'e4',
+              movedBy: 'white',
+              idea: 'long idea about e4 controlling central squares',
+              shortIdea: 'e4 controls the center',
+              children: [],
+            },
+          },
+        ],
+      },
+    };
+    const { result } = renderHook(() => useTeachWalkthrough());
+    act(() => result.current.start(tree));
+    await waitFor(() => expect(result.current.phase).toBe('leaf'), { timeout: 5000 });
+    const calls = vi.mocked(voiceService.speakForced).mock.calls.map((c) => c[0]);
+    expect(calls).toContain('short intro spoken in brief');
+    expect(calls).toContain('e4 controls the center');
+    expect(calls).not.toContain('long intro that should not be spoken in brief');
+    expect(calls).not.toContain('long idea about e4 controlling central squares');
   });
 
   it('pause stops voice and freezes phase at "paused"; resume re-narrates', async () => {

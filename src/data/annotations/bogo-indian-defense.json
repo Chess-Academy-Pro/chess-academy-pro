@@ -3,27 +3,33 @@
   "moveAnnotations": [
     {
       "san": "d4",
-      "annotation": "We're opening with the Queen's Pawn, immediately staking a claim to the central e5 square and preparing to build a classical pawn center. This move allows our dark-squared bishop to develop along the a1-h8 diagonal and gives us excellent control over the center compared to 1.e4. The d4 opening typically leads to more positional, strategic games where we can gradually build pressure and improve our piece coordination. Our main plan revolves around supporting this central pawn with moves like c4, creating what's known as the 'ideal pawn center' with pawns on d4 and c4."
+      "annotation": "We're opening with the Queen's Pawn, immediately staking a claim to the central e5 square and preparing to build a classical pawn center. This move allows our dark-squared bishop to develop along the a1-h8 diagonal and gives us excellent control over the center compared to 1.e4. The d4 opening typically leads to more positional, strategic games where we can gradually build pressure and improve our piece coordination. Our main plan revolves around supporting this central pawn with moves like c4, creating what's known as the 'ideal pawn center' with pawns on d4 and c4.",
+      "shortNarration": "1.d4 stakes a claim to e5, opens the dark-squared bishop's diagonal, and prepares a classical pawn center with c4."
     },
     {
       "san": "Nf6",
-      "annotation": "Black immediately challenges our central pawn with the knight, attacking d4 and preparing to contest our control of the center. This is one of the most principled responses to 1.d4, as the knight develops to its ideal square while simultaneously putting pressure on our position. Black's strategy here is to avoid allowing us to establish an unchallenged pawn center, and the knight on f6 can later support moves like ...d5 or ...e5 depending on how the position develops. This move also prepares kingside castling and keeps Black's options open for various defensive setups."
+      "annotation": "Black immediately challenges our central pawn with the knight, attacking d4 and preparing to contest our control of the center. This is one of the most principled responses to 1.d4, as the knight develops to its ideal square while simultaneously putting pressure on our position. Black's strategy here is to avoid allowing us to establish an unchallenged pawn center, and the knight on f6 can later support moves like ...d5 or ...e5 depending on how the position develops. This move also prepares kingside castling and keeps Black's options open for various defensive setups.",
+      "shortNarration": "Black's knight on f6 attacks d4, challenging the center and preparing ...d5 or ...e5."
     },
     {
       "san": "c4",
-      "annotation": "We're expanding in the center with the English Opening move, creating what's called the 'Queen's Gambit complex' and controlling the crucial d5 and b5 squares. This pawn advance supports our d4 pawn while simultaneously preventing Black from easily playing ...d5, which would give them equal central control. The c4 move also prepares the development of our queen's knight to c3 and opens lines for our queen and dark-squared bishop. By playing c4, we're committing to a more aggressive, space-gaining approach rather than the quieter systems that might arise after moves like Nf3 or e3."
+      "annotation": "We're expanding in the center with the English Opening move, creating what's called the 'Queen's Gambit complex' and controlling the crucial d5 and b5 squares. This pawn advance supports our d4 pawn while simultaneously preventing Black from easily playing ...d5, which would give them equal central control. The c4 move also prepares the development of our queen's knight to c3 and opens lines for our queen and dark-squared bishop. By playing c4, we're committing to a more aggressive, space-gaining approach rather than the quieter systems that might arise after moves like Nf3 or e3.",
+      "shortNarration": "c4 expands in the center, controls d5 and b5, supports d4, and prepares Nc3 while opening lines for queen and bishop."
     },
     {
       "san": "e6",
-      "annotation": "Black chooses a solid, flexible move that prepares ...d5 while supporting the pawn on f6 and opening a diagonal for the light-squared bishop. This is the hallmark of the Queen's Indian and Nimzo-Indian defense systems, where Black maintains central tension while keeping piece development options open. The e6 move also prevents our pieces from occupying the d5 and f5 squares, creating a more controlled pawn structure that Black can build upon. While this move doesn't immediately challenge our center like ...d5 would, it's strategically sound and allows Black to see how we continue before committing to a specific pawn structure."
+      "annotation": "Black chooses a solid, flexible move that prepares ...d5 while supporting the pawn on f6 and opening a diagonal for the light-squared bishop. This is the hallmark of the Queen's Indian and Nimzo-Indian defense systems, where Black maintains central tension while keeping piece development options open. The e6 move also prevents our pieces from occupying the d5 and f5 squares, creating a more controlled pawn structure that Black can build upon. While this move doesn't immediately challenge our center like ...d5 would, it's strategically sound and allows Black to see how we continue before committing to a specific pawn structure.",
+      "shortNarration": "Black's e6 prepares ...d5, supports f6, opens the bishop's diagonal, and prevents White from occupying d5 or f5."
     },
     {
       "san": "Nf3",
-      "annotation": "We're developing our king's knight to its ideal square, where it controls the important e5 and h4 squares while preparing kingside castling. This move also adds extra support to our d4 pawn and prevents Black from playing ...e5, which would give them excellent central control. The knight on f3 is perfectly placed for most opening systems and keeps our options open for various setups, whether we want to fianchetto our king's bishop with g3 or develop it more actively to d3 or e2. This flexible development move is almost always the right choice in these positions, as it improves our position without committing to any specific plan too early."
+      "annotation": "We're developing our king's knight to its ideal square, where it controls the important e5 and h4 squares while preparing kingside castling. This move also adds extra support to our d4 pawn and prevents Black from playing ...e5, which would give them excellent central control. The knight on f3 is perfectly placed for most opening systems and keeps our options open for various setups, whether we want to fianchetto our king's bishop with g3 or develop it more actively to d3 or e2. This flexible development move is almost always the right choice in these positions, as it improves our position without committing to any specific plan too early.",
+      "shortNarration": "Nf3 develops the knight to its ideal square, controlling e5 and h4, supporting d4, and preventing ...e5."
     },
     {
       "san": "Bb4+",
-      "annotation": "Continuing Bogo Indian Defense: Bb4+ is a known theory move in this line."
+      "annotation": "Continuing Bogo Indian Defense: Bb4+ is a known theory move in this line.",
+      "shortNarration": "Bb4+ pins the knight, pressuring White's center and preparing to trade bishop for knight."
     }
   ]
 }

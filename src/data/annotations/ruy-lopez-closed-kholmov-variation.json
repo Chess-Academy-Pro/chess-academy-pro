@@ -3,75 +3,93 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, immediately staking a claim to the center and freeing both our bishop and queen for development. This classical move controls the crucial d5 and f5 squares, giving us excellent prospects for rapid piece development. The e4 advance is the starting point of many aggressive openings, and we're setting the stage for either the Italian Game, Spanish (Ruy Lopez), or other sharp tactical systems. Our pawn on e4 also supports a potential d2-d4 advance later, which would give us a strong pawn center."
+      "annotation": "We're opening with the king's pawn, immediately staking a claim to the center and freeing both our bishop and queen for development. This classical move controls the crucial d5 and f5 squares, giving us excellent prospects for rapid piece development. The e4 advance is the starting point of many aggressive openings, and we're setting the stage for either the Italian Game, Spanish (Ruy Lopez), or other sharp tactical systems. Our pawn on e4 also supports a potential d2-d4 advance later, which would give us a strong pawn center.",
+      "shortNarration": "1.e4 claims the center, opens lines for the queen and bishop, and supports a future d2-d4 advance."
     },
     {
       "san": "e5",
-      "annotation": "Our opponent mirrors our central occupation with the classical response, controlling d4 and f4 while freeing their own light-squared bishop. This symmetrical reply leads us into the realm of the open games, where both sides will compete for rapid development and central control. Black is choosing to meet our aggression head-on rather than playing more positional setups like the French or Caro-Kann. This move signals that we're heading toward tactical, double-edged positions where both players will have active piece play."
+      "annotation": "Our opponent mirrors our central occupation with the classical response, controlling d4 and f4 while freeing their own light-squared bishop. This symmetrical reply leads us into the realm of the open games, where both sides will compete for rapid development and central control. Black is choosing to meet our aggression head-on rather than playing more positional setups like the French or Caro-Kann. This move signals that we're heading toward tactical, double-edged positions where both players will have active piece play.",
+      "shortNarration": "Black mirrors with e5, opening lines for the light-squared bishop and heading toward tactical open-game play."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its ideal square, attacking the e5 pawn and preparing to castle kingside. This move supports our central pawn while developing toward the center, and the knight on f3 will often play a key role in supporting d2-d4 breaks later. From f3, our knight controls important central squares like e5, d4, g5, and h4, giving us flexibility in our middlegame plans. We're also preparing to transpose into either the Italian Game with Bc4 or the Spanish Opening with Bb5, keeping our options open."
+      "annotation": "We develop our knight to its ideal square, attacking the e5 pawn and preparing to castle kingside. This move supports our central pawn while developing toward the center, and the knight on f3 will often play a key role in supporting d2-d4 breaks later. From f3, our knight controls important central squares like e5, d4, g5, and h4, giving us flexibility in our middlegame plans. We're also preparing to transpose into either the Italian Game with Bc4 or the Spanish Opening with Bb5, keeping our options open.",
+      "shortNarration": "Nf3 attacks e5, prepares kingside castling, and supports a future d2-d4 break."
     },
     {
       "san": "Nc6",
-      "annotation": "Black develops their knight to defend the e5 pawn, which is the most principled response to our attack. This active move also prepares counterplay in the center and supports potential d7-d5 breaks later in the game. The knight on c6 will often be a key piece in Black's counterplay, potentially jumping to d4 or supporting b7-b5 advances. Our opponent is following classical opening principles by developing pieces toward the center while solving immediate tactical problems."
+      "annotation": "Black develops their knight to defend the e5 pawn, which is the most principled response to our attack. This active move also prepares counterplay in the center and supports potential d7-d5 breaks later in the game. The knight on c6 will often be a key piece in Black's counterplay, potentially jumping to d4 or supporting b7-b5 advances. Our opponent is following classical opening principles by developing pieces toward the center while solving immediate tactical problems.",
+      "shortNarration": "Black's knight to c6 defends e5 and prepares d7-d5 or b7-b5 counterplay."
     },
     {
       "san": "Bb5",
-      "annotation": "We're entering the Ruy Lopez (Spanish Opening), one of the most respected and deeply analyzed openings in chess history. This bishop move puts immediate pressure on the c6 knight, which is the defender of Black's central e5 pawn. While we're not directly threatening to capture on c6 yet (since Black could simply recapture with the b-pawn), we're creating long-term positional pressure. The Spanish Opening is known for its rich strategic complexity, where we often aim for central breakthroughs with d2-d4 while maintaining pressure on Black's position."
+      "annotation": "We're entering the Ruy Lopez (Spanish Opening), one of the most respected and deeply analyzed openings in chess history. This bishop move puts immediate pressure on the c6 knight, which is the defender of Black's central e5 pawn. While we're not directly threatening to capture on c6 yet (since Black could simply recapture with the b-pawn), we're creating long-term positional pressure. The Spanish Opening is known for its rich strategic complexity, where we often aim for central breakthroughs with d2-d4 while maintaining pressure on Black's position.",
+      "shortNarration": "The Ruy Lopez bishop pins the c6 knight to e5, creating long-term pressure for a central d4 break."
     },
     {
       "san": "a6",
-      "annotation": "Our opponent plays the most popular response, immediately challenging our light-squared bishop and forcing us to make a decision. This move prevents any immediate Bxc6+ ideas and gives Black control over the b5 square, which will be important for their queenside expansion later. While this looks like a 'tempo loss' since it doesn't develop a piece, it's actually a crucial part of Black's setup in the Spanish Opening. Black is preparing to expand on the queenside with b7-b5, and this move also opens up potential escape squares for their king along the a-file in some variations."
+      "annotation": "Our opponent plays the most popular response, immediately challenging our light-squared bishop and forcing us to make a decision. This move prevents any immediate Bxc6+ ideas and gives Black control over the b5 square, which will be important for their queenside expansion later. While this looks like a 'tempo loss' since it doesn't develop a piece, it's actually a crucial part of Black's setup in the Spanish Opening. Black is preparing to expand on the queenside with b7-b5, and this move also opens up potential escape squares for their king along the a-file in some variations.",
+      "shortNarration": "Black's a7-a6 prevents Bxc6+, controls b5 for queenside expansion, and opens king escape squares on the a-file."
     },
     {
       "san": "Ba4",
-      "annotation": "We maintain pressure on the c6 knight by retreating to a4, keeping the tension rather than releasing it with Bxc6+. This move preserves our bishop and maintains the strategic pressure that characterizes the Spanish Opening. From a4, our bishop still eyes the c6 knight and controls the important b5 square, potentially supporting our own b2-b4 advance later. We're also keeping the option of Bb3 available, where our bishop would eye the f7 square and support central operations."
+      "annotation": "We maintain pressure on the c6 knight by retreating to a4, keeping the tension rather than releasing it with Bxc6+. This move preserves our bishop and maintains the strategic pressure that characterizes the Spanish Opening. From a4, our bishop still eyes the c6 knight and controls the important b5 square, potentially supporting our own b2-b4 advance later. We're also keeping the option of Bb3 available, where our bishop would eye the f7 square and support central operations.",
+      "shortNarration": "Retreating to a4 keeps pressure on the c6 knight, eyes b5, and preserves the option of Bb3 targeting f7."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops their knight to its most active square, attacking our e4 pawn and completing their kingside development. This move is part of Black's classical setup in the Spanish, aiming to challenge our central pawn and prepare kingside castling. The knight on f6 also supports potential d6-d5 breaks and controls important central squares like e4, d5, g4, and h5. Our opponent is following the time-tested principle of developing knights before bishops while maintaining central pressure."
+      "annotation": "Black develops their knight to its most active square, attacking our e4 pawn and completing their kingside development. This move is part of Black's classical setup in the Spanish, aiming to challenge our central pawn and prepare kingside castling. The knight on f6 also supports potential d6-d5 breaks and controls important central squares like e4, d5, g4, and h5. Our opponent is following the time-tested principle of developing knights before bishops while maintaining central pressure.",
+      "shortNarration": "Black's knight to f6 attacks e4, supports d5 breaks, and controls key central squares."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside, getting our king to safety while connecting our rooks and preparing for the middlegame battle. Castling is almost mandatory in the Spanish Opening, as the center will soon become very tactical and our king needs to be secure. This move also brings our kingside rook toward the center via the e-file, where it will support the crucial Re1 move that's coming. With our king castled, we're now ready to begin our central operations and start building pressure in the position."
+      "annotation": "We castle kingside, getting our king to safety while connecting our rooks and preparing for the middlegame battle. Castling is almost mandatory in the Spanish Opening, as the center will soon become very tactical and our king needs to be secure. This move also brings our kingside rook toward the center via the e-file, where it will support the crucial Re1 move that's coming. With our king castled, we're now ready to begin our central operations and start building pressure in the position.",
+      "shortNarration": "Castle kingside to secure the king, connect rooks, and prepare Re1 for central pressure."
     },
     {
       "san": "Be7",
-      "annotation": "Our opponent completes their kingside development with this stabilizing move, preparing to castle while maintaining flexibility in the position. The bishop on e7 doesn't create immediate threats but supports Black's defensive setup and keeps options open for future piece coordination. This move also clears the d8 square for potential queen maneuvers and maintains the option of playing d6-d5 without blocking the bishop. Black is following a classical development scheme that has been tested in thousands of master games."
+      "annotation": "Our opponent completes their kingside development with this stabilizing move, preparing to castle while maintaining flexibility in the position. The bishop on e7 doesn't create immediate threats but supports Black's defensive setup and keeps options open for future piece coordination. This move also clears the d8 square for potential queen maneuvers and maintains the option of playing d6-d5 without blocking the bishop. Black is following a classical development scheme that has been tested in thousands of master games.",
+      "shortNarration": "Bishop to e7 prepares kingside castling, clears d8 for the queen, and keeps the d6-d5 break open."
     },
     {
       "san": "Re1",
-      "annotation": "We place our rook on the e-file, pinning the e5 pawn to Black's king and creating immediate tactical pressure. This is one of the critical moves of the Spanish Opening, as it supports our eventual d2-d4 break by adding pressure to the e5 pawn. The rook on e1 also coordinates beautifully with our other pieces, particularly if we can arrange Bb3 and d2-d4. This move exemplifies the Spanish strategy of building pressure gradually while maintaining excellent piece coordination."
+      "annotation": "We place our rook on the e-file, pinning the e5 pawn to Black's king and creating immediate tactical pressure. This is one of the critical moves of the Spanish Opening, as it supports our eventual d2-d4 break by adding pressure to the e5 pawn. The rook on e1 also coordinates beautifully with our other pieces, particularly if we can arrange Bb3 and d2-d4. This move exemplifies the Spanish strategy of building pressure gradually while maintaining excellent piece coordination.",
+      "shortNarration": "Rook to e1 pins the e5 pawn to the king, supporting the d2-d4 break."
     },
     {
       "san": "b5",
-      "annotation": "Black strikes back on the queenside with this thematic pawn advance, attacking our bishop and beginning their counterplay. This move is a key part of Black's plan in the Spanish, aiming to gain space on the queenside while forcing our bishop to make a decision. The b5 advance also prepares the fianchetto of Black's light-squared bishop via Bb7, where it will pressure our long diagonal. Our opponent is following the classical Spanish strategy of meeting our central pressure with queenside counterplay."
+      "annotation": "Black strikes back on the queenside with this thematic pawn advance, attacking our bishop and beginning their counterplay. This move is a key part of Black's plan in the Spanish, aiming to gain space on the queenside while forcing our bishop to make a decision. The b5 advance also prepares the fianchetto of Black's light-squared bishop via Bb7, where it will pressure our long diagonal. Our opponent is following the classical Spanish strategy of meeting our central pressure with queenside counterplay.",
+      "shortNarration": "Black's b5 attacks the bishop, gains queenside space, and prepares Bb7 to pressure the long diagonal."
     },
     {
       "san": "Bb3",
-      "annotation": "We retreat our bishop to this excellent square, where it eyes the f7 square and supports our central ambitions. From b3, our bishop is perfectly placed to support the crucial d2-d4 break, and it can never be kicked around by Black's pawns. This square is often called the 'Spanish bishop's dream square' because it combines safety with maximum activity. The bishop on b3 also keeps pressure on Black's kingside, particularly the f7 point which is often a target in Spanish middlegames."
+      "annotation": "We retreat our bishop to this excellent square, where it eyes the f7 square and supports our central ambitions. From b3, our bishop is perfectly placed to support the crucial d2-d4 break, and it can never be kicked around by Black's pawns. This square is often called the 'Spanish bishop's dream square' because it combines safety with maximum activity. The bishop on b3 also keeps pressure on Black's kingside, particularly the f7 point which is often a target in Spanish middlegames.",
+      "shortNarration": "The bishop retreats to b3, safe from pawns and eyeing f7 while supporting the d4 break."
     },
     {
       "san": "d6",
-      "annotation": "Our opponent solidifies their central pawn chain and prepares to complete development, while also opening lines for their pieces. This move supports the e5 pawn, prepares Bb7 or Be6, and gives Black's pieces more breathing room. The d6 move is part of Black's solid, defensive setup in the Closed Spanish, where they aim to maintain their central pawn while organizing counterplay. This pawn structure often leads to rich positional battles where both sides maneuver for the optimal moment to strike."
+      "annotation": "Our opponent solidifies their central pawn chain and prepares to complete development, while also opening lines for their pieces. This move supports the e5 pawn, prepares Bb7 or Be6, and gives Black's pieces more breathing room. The d6 move is part of Black's solid, defensive setup in the Closed Spanish, where they aim to maintain their central pawn while organizing counterplay. This pawn structure often leads to rich positional battles where both sides maneuver for the optimal moment to strike.",
+      "shortNarration": "d6 supports e5, prepares Bb7 or Be6, and solidifies Black's central pawn chain in the Closed Spanish."
     },
     {
       "san": "c3",
-      "annotation": "We prepare the central breakthrough d2-d4, which is the key strategic goal in most Spanish Opening variations. This move supports our d-pawn advance and also prevents any Nd4 jumps that could disrupt our coordination. The c3 move is sometimes called the 'Spanish pawn move' because it's so fundamental to our plans in this opening. We're building up pressure systematically, and once we achieve d2-d4, we'll have excellent central control and attacking chances against Black's king."
+      "annotation": "We prepare the central breakthrough d2-d4, which is the key strategic goal in most Spanish Opening variations. This move supports our d-pawn advance and also prevents any Nd4 jumps that could disrupt our coordination. The c3 move is sometimes called the 'Spanish pawn move' because it's so fundamental to our plans in this opening. We're building up pressure systematically, and once we achieve d2-d4, we'll have excellent central control and attacking chances against Black's king.",
+      "shortNarration": "d2-d4 is the key strategic goal, supporting the d-pawn and preventing Nd4 jumps for central control and attacking chances."
     },
     {
       "san": "O-O",
-      "annotation": "Black castles kingside, getting their king to safety before the position becomes more tactical. this move completes Black's basic development and prepares for the middlegame struggle that's about to unfold. With both kings castled, the real battle can begin, and Black is now ready to organize their pieces for either defensive duties or counterplay. Our opponent has reached a solid position, but we still maintain the initiative and better central prospects."
+      "annotation": "Black castles kingside, getting their king to safety before the position becomes more tactical. this move completes Black's basic development and prepares for the middlegame struggle that's about to unfold. With both kings castled, the real battle can begin, and Black is now ready to organize their pieces for either defensive duties or counterplay. Our opponent has reached a solid position, but we still maintain the initiative and better central prospects.",
+      "shortNarration": "Black castles kingside, completing development, but White keeps the initiative and better central prospects."
     },
     {
       "san": "h3",
-      "annotation": "We make a crucial prophylactic move, preventing Black's pieces from occupying the g4 square and preparing to support our central advance. This seemingly quiet move stops any Bg4 pins on our knight and also prepares g2-g4 advances in some variations if we want to launch a kingside attack. The h3 move is typical of the Spanish Opening's patient, strategic approach – we're improving our position incrementally while maintaining all our advantages. This move also gives our king a flight square on h2, which can be important in tactical sequences."
+      "annotation": "We make a crucial prophylactic move, preventing Black's pieces from occupying the g4 square and preparing to support our central advance. This seemingly quiet move stops any Bg4 pins on our knight and also prepares g2-g4 advances in some variations if we want to launch a kingside attack. The h3 move is typical of the Spanish Opening's patient, strategic approach – we're improving our position incrementally while maintaining all our advantages. This move also gives our king a flight square on h2, which can be important in tactical sequences.",
+      "shortNarration": "h3 prevents Bg4 pins on the knight, prepares g4 advances, and gives the king a flight square on h2."
     },
     {
       "san": "Be6",
-      "annotation": "Our opponent develops their light-squared bishop to an active square, challenging our bishop on b3 and preparing to contest the center. This move is characteristic of the Kholmov Variation, where Black aims for active piece play rather than the more passive setups with Bb7. The bishop on e6 supports potential d6-d5 breaks and also eyes our kingside, particularly if Black can arrange moves like Qd7 and Bh3. Black is showing that they're ready to fight for the initiative rather than simply defending passively."
+      "annotation": "Our opponent develops their light-squared bishop to an active square, challenging our bishop on b3 and preparing to contest the center. This move is characteristic of the Kholmov Variation, where Black aims for active piece play rather than the more passive setups with Bb7. The bishop on e6 supports potential d6-d5 breaks and also eyes our kingside, particularly if Black can arrange moves like Qd7 and Bh3. Black is showing that they're ready to fight for the initiative rather than simply defending passively.",
+      "shortNarration": "Black's Be6 challenges your b3-bishop, eyes the kingside, and supports a d5 break — Black fights for the initiative."
     }
   ]
 }

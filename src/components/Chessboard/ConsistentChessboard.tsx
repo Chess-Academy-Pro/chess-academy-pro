@@ -24,11 +24,12 @@ import type {
   SquareHandlerArgs,
   PieceHandlerArgs,
 } from 'react-chessboard';
-import { ControlledChessBoard, type ControlledChessBoardProps } from '../Board/ControlledChessBoard';
+import { ControlledChessBoard, type ControlledChessBoardProps, pieceAnimationSpeedToMs } from '../Board/ControlledChessBoard';
 import { useBoardTheme, BOARD_ANIMATION_MS } from '../../hooks/useBoardTheme';
 import { buildGlowSquareStyles } from '../../hooks/useBoardGlow';
 import { usePieceSound } from '../../hooks/usePieceSound';
 import { detectMoveFromFen } from '../../utils/boardMoveDetect';
+import { useSettings } from '../../hooks/useSettings';
 
 export type BoardArrow = { startSquare: string; endSquare: string; color: string };
 export type BoardHighlight = { square: string; color: string };
@@ -125,7 +126,7 @@ function StaticBoard({
   onPieceDrop,
   onSquareClick,
   onPieceDrag,
-  animationDurationInMs = BOARD_ANIMATION_MS,
+  animationDurationInMs,
   className = '',
   overlay,
   enableMoveSound = true,
@@ -133,7 +134,14 @@ function StaticBoard({
   showCheckHighlight = true,
 }: StaticModeProps): JSX.Element {
   const theme = useBoardTheme();
+  const { settings } = useSettings();
   const { playMoveSound } = usePieceSound();
+
+  // Explicit prop > user setting > BOARD_ANIMATION_MS default. Static
+  // boards can still override (e.g. demo boards at 400ms for clarity).
+  const effectiveAnimationMs =
+    animationDurationInMs ?? pieceAnimationSpeedToMs(settings.pieceAnimationSpeed) ?? BOARD_ANIMATION_MS;
+  const dragAllowed = interactive && settings.moveMethod !== 'click';
 
   const fenString = typeof position === 'string' ? position : null;
   const prevFenRef = useRef<string | null>(fenString);
@@ -197,9 +205,10 @@ function StaticBoard({
         options={{
           position,
           boardOrientation,
-          allowDragging: interactive,
+          allowDragging: dragAllowed,
           dragActivationDistance: 5,
-          animationDurationInMs,
+          animationDurationInMs: effectiveAnimationMs,
+          showNotation: settings.showCoordinates,
           darkSquareStyle: theme.darkSquareStyle,
           lightSquareStyle: theme.lightSquareStyle,
           squareStyles: mergedSquareStyles,

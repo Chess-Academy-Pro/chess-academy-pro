@@ -32,8 +32,17 @@ export type CommentaryVerbosity = NonNullable<UserProfile['preferences']['coachC
  * Resolve the effective verbosity, defaulting to 'key-moments' for
  * any user who hasn't explicitly picked a mode. This is the setting
  * that protects our unit economics at launch.
+ *
+ * The unified `coachNarration` preference takes precedence: when set
+ * to 'silent' → 'off', 'brief' → 'key-moments', 'full' → 'every-move'.
+ * Falls back to the legacy `coachCommentaryVerbosity` for older
+ * profiles, then 'key-moments' as the safe default.
  */
 export function resolveVerbosity(profile: UserProfile | null | undefined): CommentaryVerbosity {
+  const unified = profile?.preferences.coachNarration;
+  if (unified === 'silent') return 'off';
+  if (unified === 'brief') return 'key-moments';
+  if (unified === 'full') return 'every-move';
   return profile?.preferences.coachCommentaryVerbosity ?? 'key-moments';
 }
 

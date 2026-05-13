@@ -4,7 +4,6 @@ import { db } from '../../db/schema';
 import { POLLY_VOICES, getTtsUrl, voiceService, sanitizeForTTS, type VoiceTier } from '../../services/voiceService';
 import { speechService } from '../../services/speechService';
 import type { SystemVoice } from '../../services/speechService';
-import type { PhaseNarrationVerbosity } from '../../types';
 import { Volume2, Play, Mic, Sparkles, AlertCircle } from 'lucide-react';
 import { PersonalityPanel } from './PersonalityPanel';
 
@@ -55,11 +54,6 @@ export function VoiceSettingsPanel(): JSX.Element {
   const [pollyEnabled, setPollyEnabled] = useState(() => activeProfile?.preferences.pollyEnabled ?? true);
   const [pollyVoice, setPollyVoice] = useState(() => activeProfile?.preferences.pollyVoice ?? 'ruth');
   const [pollyPreviewPlaying, setPollyPreviewPlaying] = useState(false);
-
-  // Phase-transition narration verbosity (WO-PHASE-NARRATION-01)
-  const [phaseNarrationVerbosity, setPhaseNarrationVerbosity] = useState<PhaseNarrationVerbosity>(
-    () => activeProfile?.preferences.phaseNarrationVerbosity ?? 'standard',
-  );
 
   // System voice state
   const [systemVoices, setSystemVoices] = useState<SystemVoice[]>([]);
@@ -113,14 +107,6 @@ export function VoiceSettingsPanel(): JSX.Element {
     await db.profiles.update(activeProfile.id, { preferences: updatedPrefs });
     setActiveProfile({ ...activeProfile, preferences: updatedPrefs });
     voiceService.clearCache();
-  };
-
-  const handlePhaseNarrationVerbosityChange = async (verbosity: PhaseNarrationVerbosity): Promise<void> => {
-    setPhaseNarrationVerbosity(verbosity);
-    if (!activeProfile) return;
-    const updatedPrefs = { ...activeProfile.preferences, phaseNarrationVerbosity: verbosity };
-    await db.profiles.update(activeProfile.id, { preferences: updatedPrefs });
-    setActiveProfile({ ...activeProfile, preferences: updatedPrefs });
   };
 
   const handlePollyPreview = (): void => {
@@ -362,32 +348,11 @@ export function VoiceSettingsPanel(): JSX.Element {
         </div>
       </div>
 
-      {/* ── Phase-Transition Narration (WO-PHASE-NARRATION-01) ──── */}
-      <div>
-        <label
-          htmlFor="phase-narration-verbosity-select"
-          className="text-xs font-medium block mb-1"
-          style={{ color: 'var(--color-text-muted)' }}
-        >
-          Phase narration
-        </label>
-        <p className="text-xs mb-2" style={{ color: 'var(--color-text-muted)' }}>
-          Coach speaks briefly at the opening → middlegame and middlegame → endgame transitions.
-        </p>
-        <select
-          id="phase-narration-verbosity-select"
-          value={phaseNarrationVerbosity}
-          onChange={(e) => void handlePhaseNarrationVerbosityChange(e.target.value as PhaseNarrationVerbosity)}
-          className="w-full px-3 py-2 rounded-lg border text-sm appearance-none"
-          style={{ background: 'var(--color-bg)', borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
-          data-testid="phase-narration-verbosity-select"
-        >
-          <option value="off">Off — silent at transitions</option>
-          <option value="brief">Brief — one sentence</option>
-          <option value="standard">Standard — short recap (default)</option>
-          <option value="full">Full — in-depth recap</option>
-        </select>
-      </div>
+      {/* Phase-transition narration UI removed. The unified
+          "Coach Narration" control in Settings → Coach now governs
+          phase narration via resolvePhaseNarrationVerbosity(). The
+          `phaseNarrationVerbosity` field stays on UserPreferences as
+          a migration fallback for legacy profiles. */}
 
       {/* ── System Voices (Free) ─────────────────────────────── */}
       <div className="space-y-3">

@@ -19,7 +19,8 @@ import { BoardGlowButton, BoardGlowSettings } from './BoardGlowSettings';
 import { NarrationAuditPanel } from './NarrationAuditPanel';
 import { APP_VERSION, BETA_MODE } from '../../utils/constants';
 import { hardRefresh } from '../../utils/hardRefresh';
-import type { UserProfile, PieceAnimationSpeed, CoachVerbosity, MoveMethod } from '../../types';
+import type { UserProfile, PieceAnimationSpeed, CoachNarration, MoveMethod } from '../../types';
+import { resolveCoachNarration } from '../../utils/coachNarration';
 
 type SettingsTab = 'profile' | 'board' | 'coach' | 'appearance' | 'about';
 
@@ -394,13 +395,10 @@ function BoardGameplayTab({ profile, setProfile }: TabProps): JSX.Element {
         testId="animation-speed-select"
         disabled={affectedByMaster}
       />
-      <ToggleRow
-        label="White on Bottom"
-        tooltip="Always show the board with white pieces on the bottom"
-        checked={boardOrientation}
-        onChange={setBoardOrientation}
-        testId="board-orientation-toggle"
-      />
+      {/* "White on Bottom" toggle removed — board orientation is
+          already correctly driven per-game by the active opening's
+          studentSide (Black-defender openings flip the board, etc.).
+          The field stays on UserPreferences for migration; no UI. */}
 
       {/* Board Appearance */}
       <SectionHeader title="Board Appearance" />
@@ -533,20 +531,14 @@ function BoardGameplayTab({ profile, setProfile }: TabProps): JSX.Element {
         onChange={(v) => setMoveMethod(v as MoveMethod)}
         testId="move-method-select"
       />
-      <ToggleRow
-        label="Move Confirmation"
-        tooltip="Require confirmation before each move is committed"
-        checked={moveConfirmation}
-        onChange={setMoveConfirmation}
-        testId="move-confirmation-toggle"
-      />
-      <ToggleRow
-        label="Auto-Promote to Queen"
-        tooltip="Automatically promote pawns to queen without asking"
-        checked={autoPromoteQueen}
-        onChange={setAutoPromoteQueen}
-        testId="auto-promote-queen-toggle"
-      />
+      {/* "Move Confirmation" and "Auto-Promote to Queen" toggles
+          removed pending feature work:
+            - Move Confirmation needs a confirm/cancel overlay flow
+              wired through useChessGame (delay commit until confirm).
+            - Auto-Promote to Queen needs a promotion picker UI (modal
+              with N/B/R/Q choices). Today every promotion is queen.
+          Fields stay on UserPreferences for migration. Re-expose the
+          toggles when the supporting UI ships. */}
 
       {boardSaveStatus && (
         <p className="text-sm font-medium mt-2" style={{ color: 'var(--color-accent)' }} data-testid="board-save-status">
@@ -774,22 +766,14 @@ function CoachTab({ profile, setProfile }: TabProps): JSX.Element {
   // Live summaries on each modal row so the user sees the actual
   // current selection without having to open the modal. WO-AUTOSAVE-01.
   const aiSummary = `${isAnthropic ? 'Anthropic' : 'DeepSeek'}${hasExistingKey ? ' · key saved' : ''}`;
-  const verbosityLabels: Record<string, string> = {
-    none: 'None',
-    fast: 'Fast',
-    medium: 'Medium',
-    slow: 'Slow',
-    unlimited: 'Unlimited',
+  const coachNarrationLabels: Record<string, string> = {
+    silent: 'Silent',
+    brief: 'Brief',
+    full: 'Full',
   };
-  const commentaryFreqLabels: Record<string, string> = {
-    'off': 'Off',
-    'key-moments': 'Key moments',
-    'every-move': 'Every move',
-  };
-  const verbosityValue = profile.preferences.coachVerbosity ?? 'unlimited';
-  const commentaryFreq = profile.preferences.coachCommentaryVerbosity ?? 'key-moments';
+  const narrationValue = resolveCoachNarration(profile.preferences);
   const tacticAlerts = profile.preferences.coachTacticAlerts !== false ? 'Tactic alerts on' : 'Tactic alerts off';
-  const gameplaySummary = `${verbosityLabels[verbosityValue] ?? verbosityValue} · ${commentaryFreqLabels[commentaryFreq] ?? commentaryFreq} · ${tacticAlerts}`;
+  const gameplaySummary = `${coachNarrationLabels[narrationValue]} narration · ${tacticAlerts}`;
 
   return (
     <div className="space-y-3" data-testid="coach-tab">
@@ -928,16 +912,8 @@ function CoachGameplaySection({ profile, setProfile }: TabProps): JSX.Element {
     setProfile({ ...profile, preferences: updatedPrefs });
   };
 
-  const handleVerbosityChange = async (value: CoachVerbosity): Promise<void> => {
-    const updatedPrefs = { ...profile.preferences, coachVerbosity: value };
-    await db.profiles.update(profile.id, { preferences: updatedPrefs });
-    setProfile({ ...profile, preferences: updatedPrefs });
-  };
-
-  const handleCommentaryVerbosityChange = async (
-    value: 'key-moments' | 'every-move' | 'off',
-  ): Promise<void> => {
-    const updatedPrefs = { ...profile.preferences, coachCommentaryVerbosity: value };
+  const handleCoachNarrationChange = async (value: CoachNarration): Promise<void> => {
+    const updatedPrefs = { ...profile.preferences, coachNarration: value };
     await db.profiles.update(profile.id, { preferences: updatedPrefs });
     setProfile({ ...profile, preferences: updatedPrefs });
   };
@@ -946,31 +922,21 @@ function CoachGameplaySection({ profile, setProfile }: TabProps): JSX.Element {
     <div className="pt-4 border-t space-y-1" style={{ borderColor: 'var(--color-border)' }}>
       <SectionHeader title="Gameplay Coaching" />
       <SelectRow
-        label="Speech Pace"
-        tooltip="How quickly the coach speaks per turn. Pick None to fully silence the coach — that's the single switch for stopping all coach voice. (Distinct from Response Length below, which controls how MUCH the coach says per turn, and from Commentary Frequency, which controls HOW OFTEN it speaks.)"
-        value={profile.preferences.coachVerbosity ?? 'unlimited'}
+        label="Coach Narration"
+        tooltip="One setting for how much the coach speaks across every surface — per-move during play, phase transitions, Learn-with-Coach walkthroughs, and tactic alerts. Silent: no spoken narration anywhere. Brief: short narration only (key moments + first-sentence summaries on walkthroughs). Full: legacy behavior — coach talks freely."
+        value={resolveCoachNarration(profile.preferences)}
         options={[
-          { value: 'none', label: 'None — Silent, no commentary' },
-          { value: 'fast', label: 'Fast — Brief, just the key point' },
-          { value: 'medium', label: 'Medium — Balanced pace' },
-          { value: 'slow', label: 'Slow — Unhurried delivery' },
-          { value: 'unlimited', label: 'Unlimited — Full personal-trainer mode, no cap' },
+          { value: 'silent', label: 'Silent — No spoken narration anywhere' },
+          { value: 'brief', label: 'Brief — Short narration only' },
+          { value: 'full', label: 'Full — Coach talks freely (default)' },
         ]}
-        onChange={(v) => void handleVerbosityChange(v as CoachVerbosity)}
-        testId="coach-verbosity-select"
+        onChange={(v) => void handleCoachNarrationChange(v as CoachNarration)}
+        testId="coach-narration-select"
       />
-      <SelectRow
-        label="Commentary Frequency"
-        tooltip="How often the coach narrates during a game. Smart introduces the opening once, reacts to blunders / brilliants with short personality-laden zingers, and announces phase transitions — so you can play without waiting between every move. Every move keeps the old chatty cadence (long narration on every move, more tokens). Off is silent except for deterministic tactic alerts."
-        value={profile.preferences.coachCommentaryVerbosity ?? 'key-moments'}
-        options={[
-          { value: 'key-moments', label: 'Smart — Opening intro + key moments + phase transitions (recommended)' },
-          { value: 'every-move', label: 'Every move — Long narration after every move (chatty, more tokens)' },
-          { value: 'off', label: 'Off — Silent (deterministic tactic alerts only)' },
-        ]}
-        onChange={(v) => void handleCommentaryVerbosityChange(v as 'key-moments' | 'every-move' | 'off')}
-        testId="coach-commentary-verbosity-select"
-      />
+      {/* Legacy coachVerbosity + coachCommentaryVerbosity UIs removed.
+          The fields stay on UserPreferences and are read by
+          resolveCoachNarration() and resolveVerbosity() as a migration
+          fallback for profiles that predate the unified setting. */}
       <ToggleRow
         label="Blunder Alerts"
         tooltip="Coach alerts you when your opponent makes a big mistake"

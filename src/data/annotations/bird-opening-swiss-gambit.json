@@ -3,31 +3,38 @@
   "moveAnnotations": [
     {
       "san": "f4",
-      "annotation": "We're playing the Bird Opening, an uncommon but principled approach where we control the e5 square and prepare to build in the center. Unlike 1.e4 or 1.d4, this move signals we're not fighting for immediate central dominance but rather staking a claim on the long diagonal and kingside. The move supports e4 advancement and opens lines for our light-squared bishop."
+      "annotation": "We're playing the Bird Opening, an uncommon but principled approach where we control the e5 square and prepare to build in the center. Unlike 1.e4 or 1.d4, this move signals we're not fighting for immediate central dominance but rather staking a claim on the long diagonal and kingside. The move supports e4 advancement and opens lines for our light-squared bishop.",
+      "shortNarration": "Bird's 1.f4 controls e5, prepares e4, and opens lines for the light-squared bishop."
     },
     {
       "san": "f5",
-      "annotation": "Black mirrors our setup, immediately challenging our f4 pawn and staking a claim on e4. This is natural and symmetric, creating tension in the center right away. Black is essentially saying we'll fight for control of e4 and the central squares together."
+      "annotation": "Black mirrors our setup, immediately challenging our f4 pawn and staking a claim on e4. This is natural and symmetric, creating tension in the center right away. Black is essentially saying we'll fight for control of e4 and the central squares together.",
+      "shortNarration": "Black mirrors the setup, challenging f4 and staking a claim on e4, creating immediate central tension."
     },
     {
       "san": "e4",
-      "annotation": "Now we strike at the heart of Black's setup—if Black recaptures with the pawn (fxe4), we activate our knight with tempo, and if they don't, we've broken through in the center. This is why the Bird can be so sharp: by delaying e4 one move, we set up this tactical moment where e4 carries extra force. We're willing to sacrifice a pawn for rapid piece activity and open lines."
+      "annotation": "Now we strike at the heart of Black's setup—if Black recaptures with the pawn (fxe4), we activate our knight with tempo, and if they don't, we've broken through in the center. This is why the Bird can be so sharp: by delaying e4 one move, we set up this tactical moment where e4 carries extra force. We're willing to sacrifice a pawn for rapid piece activity and open lines.",
+      "shortNarration": "Sacrificing a pawn with e4 to open lines and activate the knight with tempo, breaking through the center."
     },
     {
       "san": "fxe4",
-      "annotation": "Black accepts the pawn (this is essentially forced; refusing leaves us up material with a great position). They capture toward the center, but this opens up their kingside and allows us to develop with immediate threats. Black has accepted the gambit and must now deal with our active play."
+      "annotation": "Black accepts the pawn (this is essentially forced; refusing leaves us up material with a great position). They capture toward the center, but this opens up their kingside and allows us to develop with immediate threats. Black has accepted the gambit and must now deal with our active play.",
+      "shortNarration": "Black captures toward the center, opening the kingside and letting White develop with threats."
     },
     {
       "san": "Nc3",
-      "annotation": "We develop naturally while attacking the e4 pawn, forcing Black to make a decision about defending it. The knight on c3 is ideally placed—it pressures e4, supports future f5 or e5 advances, and sits on a classic outpost. This move combines development with concrete threats, which is typical of gambit play where quick piece activity compensates for material."
+      "annotation": "We develop naturally while attacking the e4 pawn, forcing Black to make a decision about defending it. The knight on c3 is ideally placed—it pressures e4, supports future f5 or e5 advances, and sits on a classic outpost. This move combines development with concrete threats, which is typical of gambit play where quick piece activity compensates for material.",
+      "shortNarration": "Knight to c3 pressures e4, supports f5 or e5, and combines development with a concrete threat."
     },
     {
       "san": "Nf6",
-      "annotation": "Black develops their kingside knight, which can support the e4 pawn and prepare to contest our f-file and center. The knight from f6 is actively placed and maintains flexibility—Black isn't committing to any particular plan yet, keeping options open while completing basic development."
+      "annotation": "Black develops their kingside knight, which can support the e4 pawn and prepare to contest our f-file and center. The knight from f6 is actively placed and maintains flexibility—Black isn't committing to any particular plan yet, keeping options open while completing basic development.",
+      "shortNarration": "Black's knight on f6 supports e4, contests the f-file, and keeps flexible development."
     },
     {
       "san": "g4",
-      "annotation": "Here's where the gambit shows its aggressive face: we push forward on the kingside, gaining space and supporting an eventual f5 push, while also preventing Black's bishop from developing to g6 (a natural square). This move is provocative and requires us to accept that our king safety will be compromised, but the idea is that our attacking chances and open lines compensate. We're telling Black that we're going for all-out kingside play, and they must either defend passively or counterattack in the center."
+      "annotation": "Here's where the gambit shows its aggressive face: we push forward on the kingside, gaining space and supporting an eventual f5 push, while also preventing Black's bishop from developing to g6 (a natural square). This move is provocative and requires us to accept that our king safety will be compromised, but the idea is that our attacking chances and open lines compensate. We're telling Black that we're going for all-out kingside play, and they must either defend passively or counterattack in the center.",
+      "shortNarration": "Pushing the kingside pawn gains space, supports f5, and blocks Black's bishop from g6, but compromises king safety for attacking chances."
     }
   ]
 }
