@@ -144,22 +144,53 @@ phase, this file gets ticked.
   bishop file, bad cache, or react-chessboard renderer override.
   Will pick up when we can get a Network-tab dump from David.
 
-### Phase 2 — Narration substrate (~½ day, 1 PR) [STATUS: pending]
-Pipe endgame surfaces through `useStrictNarration` (the substrate
-the openings walkthrough already uses).
+### Phase 2 — Narration substrate [STATUS: shipped this PR]
 
-Drops in one move:
-- (#2) Endgame-mating delayed narration → streaming.
-- (#2) Doesn't-stop-on-route-change → useStrictNarration owns
-  lifecycle.
-- (#2) Eval Lab missing outro → wire result text through
-  `pickNarrationText()`.
-- (#2) "Why is narration coded differently per tab" → one
-  substrate, one set of rules.
+Initial plan was "route endgame through `useStrictNarration`."
+Reading that hook end-to-end revealed it's a STEP-RUNNER for
+walkthroughs (N discrete steps, auto-advance gated on voice
+promise) — endgame surfaces are user-driven (play a move → see
+explanation → move on, one narration per landing, no auto-advance).
+Wrong substrate.
 
-Risk: `useStrictNarration` may have prereqs endgame doesn't meet.
-Read it end-to-end first; if incompatible, extract the streaming +
-lifecycle pieces into a shared hook.
+**Built instead:** `src/hooks/useNarration.ts` — minimal
+lifecycle-disciplined hook. Takes a `text` string and optional
+`enabled` flag; speaks via `speakForced` whenever text changes;
+stops on text-empty or unmount (which means route changes cancel
+narration for free). Returns `{ replay, stop }` for manual control.
+Same supersession-token pattern as `useStrictNarration` so stale
+`.then()` callbacks from a superseded call can't re-trigger speak.
+
+**Migrated:**
+- `EndgameLessonTab.tsx` keystone narration — was hand-rolling the
+  useEffect + speakForced + cleanup. Now one hook call.
+- `CoachEndgamePage.tsx` `CuratedMatingLessonView` — pattern intro
+  narration. Same simplification. Switched from `speak()` to the
+  hook's `speakForced` semantics so pattern narration matches
+  keystone narration (both are opt-in lesson content).
+- `EvalLabQuiz.tsx` `Summary` — ADDED outro narration. Previously
+  silent (David's audit: "no outro narration"). Now speaks a
+  concrete short line — "{perfect} of {total}. {percent} percent
+  perfect. {grade}." — when the summary lands.
+
+**What this fixes vs. the original plan:**
+- ✅ Narration doesn't stop on route change → hook's unmount
+  cleanup is the single source of truth.
+- ✅ Eval Lab missing outro → new useNarration call in `Summary`.
+- ✅ "Why is narration coded differently per tab" → three surfaces
+  now share the hook.
+- ⚠️ "Streaming" / "delayed narration" — NOT addressed here. The
+  60-second delay David saw was the Stockfish recap monopolizing
+  the engine, not narration. Already fixed by Phase 9's recap
+  opt-in (PR #454). This phase doesn't add streaming-sentence
+  playback; the speakForced underlying still fetches whole-text
+  from Polly. Streaming would require a different `voiceService`
+  path and isn't part of Phase 2's scope.
+
+Tests: 10 new in `useNarration.test.tsx` (mount-speak, text-change
+re-speak, stop on empty, stop on unmount, enabled=false inert,
+replay/stop manual control, stale-token supersession). All
+existing tests in EndgameLessonTab + EvalLabQuiz still pass.
 
 ### Phase 3 — Board substrate parity (~½ day, 1 PR) [STATUS: pending]
 Migrate endgame surfaces off the static `ConsistentChessboard` path

@@ -31,7 +31,7 @@ import { useTeachWalkthrough } from '../../hooks/useTeachWalkthrough';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import { useClickToMove } from '../../hooks/useClickToMove';
 import { useAdaptiveEndgameSession } from '../../hooks/useAdaptiveEndgameSession';
-import { voiceService } from '../../services/voiceService';
+import { useNarration } from '../../hooks/useNarration';
 import { getMasteredCount } from '../../services/endgameProgressService';
 import {
   getAllPatterns,
@@ -977,19 +977,20 @@ function CuratedMatingLessonView({
   });
 
   // Voice-first: read the pattern intro + recognition cue aloud
-  // when the lesson opens, then stop on unmount. Same pattern as
-  // EndgameLessonTab's position narration.
-  useEffect(() => {
-    const text = [
-      `${pattern.name}.`,
-      pattern.narration.intro,
-      pattern.narration.recognition,
-    ].filter(Boolean).join(' ');
-    void voiceService.speak(text);
-    return () => {
-      voiceService.stop();
-    };
-  }, [pattern.id, pattern.name, pattern.narration.intro, pattern.narration.recognition]);
+  // when the lesson opens. Phase 2 routes this through the shared
+  // useNarration hook so lifecycle (stop on unmount / route change /
+  // pattern change) is handled in one place. Note: switched from
+  // `speak()` to the hook's internal `speakForced` semantics so
+  // pattern narration matches EndgameLessonTab's keystone narration
+  // (both are opt-in lesson content, pref gate should not mute).
+  const matingNarrationText = useMemo<string>(
+    () =>
+      [`${pattern.name}.`, pattern.narration.intro, pattern.narration.recognition]
+        .filter(Boolean)
+        .join(' '),
+    [pattern.name, pattern.narration.intro, pattern.narration.recognition],
+  );
+  useNarration({ text: matingNarrationText });
   const wrongFlashStyles = useMemo<Record<string, React.CSSProperties>>(() => {
     if (!playout.wrongSquare) return {};
     return {

@@ -49,6 +49,7 @@ import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import { useClickToMove } from '../../hooks/useClickToMove';
+import { useNarration } from '../../hooks/useNarration';
 import { getAllEndgameLessons } from '../../services/endgameLessonsService';
 import { lookupTablebase, type TablebaseLookupResult } from '../../services/lichessTablebaseService';
 import {
@@ -678,6 +679,21 @@ function Summary({
           : percent >= 40
             ? 'Building up'
             : 'Just starting';
+
+  // Phase 2: Eval Lab outro narration. Previously the result card
+  // appeared silently (David's audit: "no outro narration"). The
+  // short spoken line concretely names the score + grade so the
+  // user gets audible closure without staring at numbers.
+  // Narration text is memoized on the values so React StrictMode's
+  // double-effect doesn't double-speak.
+  const outroText = useMemo<string>(
+    () =>
+      total === 0
+        ? ''
+        : `${perfect} of ${total}. ${percent} percent perfect. ${grade}.`,
+    [perfect, total, percent, grade],
+  );
+  useNarration({ text: outroText });
 
   return (
     <div

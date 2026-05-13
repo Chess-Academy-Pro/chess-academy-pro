@@ -40,6 +40,7 @@ import {
   type DrillTier,
 } from '../../services/endgameDrillService';
 import { voiceService } from '../../services/voiceService';
+import { useNarration } from '../../hooks/useNarration';
 import {
   getLessonProgress,
   recordPlay,
@@ -538,28 +539,12 @@ function PositionRunner({
     [position.explanation],
   );
 
-  useEffect(() => {
-    if (!narrationText) {
-      voiceService.stop();
-      return;
-    }
-    // speakForced bypasses the user's voiceEnabled pref — keystone
-    // narration is authored content the student opted in to by
-    // entering the lesson, not a coach side-channel they can mute.
-    // (David's audit: "still not hearing voice narrations" — the
-    // most likely silent-fail is a stale prefs.voiceEnabled = false
-    // from a previous Master-Off toggle. Forced makes the prefs
-    // gate irrelevant.)
-    void voiceService.speakForced(narrationText);
-    return () => {
-      voiceService.stop();
-    };
-  }, [narrationText, position.fen]);
-
-  const onReplayNarration = useCallback(() => {
-    if (!narrationText) return;
-    void voiceService.speakForced(narrationText);
-  }, [narrationText]);
+  // Phase 2: route through the shared useNarration hook so route-
+  // change cleanup, supersession tokens, and stop-on-empty are all
+  // handled in one place instead of being re-implemented per
+  // surface. Same `speakForced` semantics (bypasses voiceEnabled
+  // pref) preserved by the hook internals.
+  const { replay: onReplayNarration } = useNarration({ text: narrationText });
 
   // Persistence: write a progress record when the student completes
   // the playout. Guard against double-recording per position via
