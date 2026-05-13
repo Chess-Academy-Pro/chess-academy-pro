@@ -235,9 +235,19 @@ describe('useTeachWalkthrough', () => {
   });
 
   it('pause stops voice and freezes phase at "paused"; resume re-narrates', async () => {
+    // Re-apply the speakForced promise implementation. The prior
+    // 'segmented narration' test installed a custom mockImplementation
+    // that returns a pending promise (vi.mocked(...).mockImplementation
+    // on line 180). vi.clearAllMocks in beforeEach clears call history
+    // but NOT custom implementations — so this test inherited that
+    // pending-promise mock, the start()→narrate() chain never resolved,
+    // and the waitFor for phase='fork' timed out at 5s.
+    const { voiceService } = await import('../services/voiceService');
+    vi.mocked(voiceService.speakForced).mockResolvedValue(undefined);
+
     const { result } = renderHook(() => useTeachWalkthrough());
     act(() => result.current.start(SMOKE_TREE));
-    await waitFor(() => expect(result.current.phase).toBe('fork'), { timeout: 5000 });
+    await waitFor(() => expect(result.current.phase).toBe('fork'), { timeout: 10000 });
     act(() => result.current.pickFork(1));
     // We may be in 'narrating' or already 'leaf' depending on timing —
     // pause from either state should land on 'paused'.
@@ -248,7 +258,7 @@ describe('useTeachWalkthrough', () => {
     // either 'leaf' (since Nf3 has no children).
     await waitFor(
       () => expect(['narrating', 'leaf']).toContain(result.current.phase),
-      { timeout: 5000 },
+      { timeout: 10000 },
     );
-  });
+  }, 15000);
 });
