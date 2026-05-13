@@ -26,7 +26,17 @@ const PIECE_MAP: Record<string, string> = {
   bP: 'bP', bN: 'bN', bB: 'bB', bR: 'bR', bQ: 'bQ', bK: 'bK',
 };
 
-export const LICHESS_CDN = 'https://lichess1.org/assets/piece';
+/** CC0 piece SVGs hosted by Lichess in their public lila repo. The
+ *  legacy `https://lichess1.org/assets/piece/<set>/<piece>.svg` path
+ *  stopped serving without a content-hash prefix (Lichess switched
+ *  to webpack-hashed asset paths), which broke every set in our
+ *  picker — confirmed in the prod audit log (100+
+ *  asset-load-error rows). jsdelivr serves the GitHub source
+ *  directly with proper Content-Type + CORS, identical directory
+ *  layout, and no auth. Pinned to a commit so this URL never silently
+ *  regresses. */
+export const LICHESS_CDN =
+  'https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/piece';
 
 export interface PieceFilterOptions {
   whitePieceFilter?: string;
