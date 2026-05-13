@@ -249,6 +249,10 @@ function PatternPicker({ onPick, onBack, activeTab, onTabChange }: PickerProps):
   // Drives the ScrollHintBar below the strip — the gold arrow sweep
   // tells the user the tabs scroll horizontally when they overflow.
   const tabStripRef = useRef<HTMLDivElement>(null);
+  // Index of the currently-selected tab — drives the spotlight
+  // position on the ScrollHintBar so the gold pools under the
+  // active tab label.
+  const activeTabIndex = Math.max(0, TAB_OPTIONS.findIndex((opt) => opt.value === activeTab));
 
   // Cumulative mastery across every endgame lesson tab. Cheap
   // Dexie aggregate; re-runs whenever the picker mounts so the
@@ -298,34 +302,39 @@ function PatternPicker({ onPick, onBack, activeTab, onTabChange }: PickerProps):
       {/* Top-level endgame surface tabs. Mating Patterns is the
           populated tab; the others surface "coming soon" so the
           user can see the surface scope without us shipping
-          half-built content. ScrollHintBar below the strip
-          animates a gold arrow accent when the row overflows the
-          viewport (8 tabs on a narrow phone), telling the user
-          they can swipe horizontally. */}
-      <div
-        ref={tabStripRef}
-        className="flex gap-1 max-w-lg mx-auto w-full border-b border-theme-border pb-0.5 overflow-x-auto"
-      >
-        {TAB_OPTIONS.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => opt.ready && onTabChange(opt.value)}
-            disabled={!opt.ready}
-            className={`flex-1 min-w-[68px] px-2 py-2 text-xs font-medium transition-colors border-b-2 whitespace-nowrap ${
-              activeTab === opt.value
-                ? 'border-theme-accent text-theme-text'
-                : opt.ready
-                  ? 'border-transparent text-theme-text-muted hover:text-theme-text'
-                  : 'border-transparent text-theme-text-muted/40 cursor-not-allowed'
-            }`}
-            data-testid={`endgame-tab-${opt.value}`}
-          >
-            {opt.label}
-            {!opt.ready && <span className="text-[9px] block opacity-70">soon</span>}
-          </button>
-        ))}
+          half-built content. ScrollHintBar below the strip is
+          spotlit under the active tab — the gold extends visually
+          from the selected label into the bar. */}
+      <div className="flex flex-col gap-0 max-w-lg mx-auto w-full">
+        <div
+          ref={tabStripRef}
+          className="flex gap-1 w-full overflow-x-auto"
+        >
+          {TAB_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => opt.ready && onTabChange(opt.value)}
+              disabled={!opt.ready}
+              className={`flex-1 min-w-[68px] px-2 py-2 text-xs font-medium transition-colors border-b-2 whitespace-nowrap ${
+                activeTab === opt.value
+                  ? 'border-theme-accent text-theme-text'
+                  : opt.ready
+                    ? 'border-transparent text-theme-text-muted hover:text-theme-text'
+                    : 'border-transparent text-theme-text-muted/40 cursor-not-allowed'
+              }`}
+              data-testid={`endgame-tab-${opt.value}`}
+            >
+              {opt.label}
+              {!opt.ready && <span className="text-[9px] block opacity-70">soon</span>}
+            </button>
+          ))}
+        </div>
+        <ScrollHintBar
+          targetRef={tabStripRef}
+          axis="x"
+          spotlightAt={(activeTabIndex + 0.5) / TAB_OPTIONS.length}
+        />
       </div>
-      <ScrollHintBar targetRef={tabStripRef} axis="x" className="max-w-lg mx-auto w-full" />
 
       {activeTab === 'mating-patterns' && (
         <>
