@@ -96,13 +96,24 @@ the phase plan below.
 Each phase = one PR. PRs ship independently to main. After each
 phase, this file gets ticked.
 
-### Phase 1 — Quick wins [STATUS: partial — 1.1 + 1.2 done, 1.3 deferred]
+### Phase 1 — Quick wins [STATUS: 1.1 REVERTED, 1.2 done, 1.3 deferred]
 
-- [x] (#1) **Activate-the-King keystone extension** —
-  `extendToObviousWin: isDrill` widened to
-  `isDrill || positionHasPlayableLine`. Keystones with a curated
-  `solution` / `bestMove` now extend past the curated end-of-line
-  until the engine reaches mate / promotion / decisive material.
+- [x] **REVERTED** (#1) **Activate-the-King keystone extension** —
+  shipped in PR #451 (`extendToObviousWin: isDrill ||
+  positionHasPlayableLine`), then **rolled back** within hours
+  because the audit log on build `dbaee3b` showed it triggered a
+  cascade of Stockfish WASM OOM crashes:
+    - 64 `Uncaught [object ErrorEvent]` events fired in ~100ms.
+    - `WebAssembly.instantiate(): Out of memory` thrown twice.
+    - Sticky single-thread fallback locked in for the session.
+    - Polly TTS fetch timed out (signal cooldown collateral).
+    - David's tab eventually crashed.
+  Disease (not symptom): Stockfish workers aren't pooled —
+  every position eval spawns a new worker, WASM heap leaks per
+  worker. The keystone extension multiplied the eval load 4–8x
+  per playout, which surfaced the underlying leak. Until the
+  pooling refactor (new Phase 8 below) lands, keystones end at
+  the last curated move (the pre-Phase-1 behaviour).
 - [x] (#5) **Back button on Endgame** — verified already routes to
   `/coach/home` (the Coach hub). Locked in with a new regression
   test (`CoachEndgamePage.test.tsx`). If the user still reports
@@ -205,6 +216,22 @@ Patterns currently "Recognition only":
 - Damiano's Mate
 - Lolli's Mate
 - (others — needs full sweep of the picker)
+
+### Phase 8 — Stockfish worker pooling [STATUS: pending, NEW — added after Phase 1.1 revert]
+
+The Phase 1.1 audit revealed a latent leak in
+`stockfishEngine.ts`: every position eval can spawn a new worker
+without proper termination of the previous one, accumulating WASM
+heap until OOM. Phase 1.1 multiplied eval count per playout, which
+surfaced the leak immediately; reverting 1.1 doesn't fix the
+underlying bug — it just keeps it below the OOM threshold.
+
+Goal: route all Stockfish requests through a SINGLE pooled
+worker for the lifetime of the tab. Serialize eval requests.
+Properly terminate + respawn on cooldown or crash, with bounded
+retry. Drops worker spawn count from O(plays) to O(1).
+
+When that lands, re-enable Phase 1.1's keystone extension.
 
 ---
 
