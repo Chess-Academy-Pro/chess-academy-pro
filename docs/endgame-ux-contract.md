@@ -4,6 +4,9 @@ How `/coach/endgame` SHOULD work, and what the e2e audit (`e2e/coach-endgame.spe
 
 The hub is at **`/coach/endgame`** (component: `src/components/Coach/CoachEndgamePage.tsx`). It exposes 8 sub-tabs through a single horizontally-scrollable strip. Every sub-tab below is reachable by clicking `[data-testid="endgame-tab-<value>"]`.
 
+**Current state: 24 specs passing, 2 skipped.**
+Run: `PLAYWRIGHT_LOCAL_CHROME=/opt/pw-browsers/chromium-1194/chrome-linux/chrome npx playwright test e2e/coach-endgame.spec.ts --project=chromium`
+
 | Sub-tab | Value | Component | Substrate |
 |---|---|---|---|
 | Mating | `mating-patterns` | `PatternPicker` / `LessonView` / `CuratedMatingLessonView` | `useEndgamePlayout` + `useClickToMove` + walkthrough adapter |
@@ -155,20 +158,36 @@ These four tabs share the same component — the only difference is the lesson s
 
 ---
 
-## Side-by-side: SHOULD-WORK vs AUDIT-COVERAGE
+## Side-by-side: SHOULD-WORK vs AUDIT-COVERAGE (updated)
 
-| Surface | SHOULD-WORK count | AUDIT-COVERED | Gaps |
+| Surface | SHOULD-WORK count | AUDIT-COVERED | Remaining gaps |
 |---|---|---|---|
-| Hub | 5 contracts | 3 ✅ | none material |
-| Mating | 5 contracts | 2 ✅ | fork-choice MC, practice-more advance |
-| Principles | 8 contracts | 4 ✅ | mastered toggle persist, reshuffle, play-it-out recap |
-| Pawn / Rook / Drawing | inherits Principles | smoke only | full deep-test on each corpus |
-| Eval Lab | 5 contracts | 1 ✅ | stage 2 playout, reveal, rating delta |
-| Calculation | 5 contracts | 2 ✅ | full solve, recap, reshuffle |
-| Your Games | 4 contracts | 1 ✅ | populated-corpus path |
-| Shared substrate | 4 contracts | 2 ✅ | recap testid, firstTryPerfect tracking |
+| Hub | 7 contracts | 5 ✅ (load, 8 tabs, mastery badge, scroll, back→/coach/home) | subtitle-per-tab, ScrollHintBar spotlight |
+| Mating | 12 contracts | 7 ✅ (picker, tile copy, dispatch paths, fork-choice MC, practice-more, exit-lesson, voice probe) | hint highlight pixels, reshuffle path |
+| Principles | 16 contracts | 11 ✅ (picker, tile copy, board, hint, concept-hint, drill-mode toggle, tier picker, mastery persistence, Done CTA, reshuffle-drills, back-to-list) | play-it-out recap (deferred — needs solve driver), reset-progress button |
+| Pawn / Rook / Drawing | 16 each | 6 ✅ (parameterized deep tests + smoke sweep) | per-corpus mastery / drill-mode (covered structurally) |
+| Eval Lab | 11 contracts | 4 ✅ (tab renders, stage-0 buttons, stage-0 → stage-1 transition, hint surface) | stage 1→2 transition (engine playout), reveal verdict, rating delta, played-ids exclusion |
+| Calculation | 11 contracts | 6 ✅ (skill picker, start drill, board, skip→reveal, next enables, next loads new drill) | calc-hint timing, calc-concept-hint text, reshuffle |
+| From Your Games | 8 contracts | 4 ✅ (empty path, populated path with seeded blunder, lesson mount, hint surface) | full solve via engine, recap rendering |
+| Shared substrate | 7 contracts | 3 ✅ (ConsistentChessboard, voice→audit pipeline, Dexie persistence) | recap card integration (deferred), pixel-level square styles, Elo update math |
 
-**Bottom line**: 13 specs cover the surface skeleton end-to-end (every tab reachable, every lesson view substrate mounts, voice + ConsistentChessboard wiring verified). The remaining gaps are all *deeper* contracts on the same substrate — fork-choice MC after wrong tries, mastery persistence, Stockfish recap surface verification, and per-corpus deep tests for pawn/rook/drawing.
+**Wave 1 delivered (this PR — 11 new specs):**
+1. ✅ Mating fork-choice MC flow
+2. ✅ Practice-more advance to fresh drill
+3. ✅ Mastery persistence (Dexie write → badge surfaces)
+4. ✅ Reshuffle drills produces fresh positions
+5. ✅ Hub back routes to /coach/home
+6. ✅ Concept-hint surfaces non-empty narration (skip when not surfaced)
+7. ✅ Tile copy includes corpus-aware breakdown
+8. ✅ Eval-lab stage-0 → stage-1 transition
+9. ✅ Calculation skip → next-button enables → new drill loads
+10. ✅ From-your-games populated path (seeded Dexie blunder)
+11. ✅ Pawn / Rook / Drawing per-corpus deep smoke
+
+**Wave 2 (deferred — known gaps):**
+- **Stockfish recap card integration**: testid `endgame-recap-card` exists in product code but rendering requires a logged student move. Driving a deterministic solve in headless Chrome is blocked on phase-timing in `useClickToMove` (clicks during opponent setup are silent no-ops; the lesson view doesn't expose a clean "interactive=true" signal). Same blocker for calc & your-games recap surfaces.
+- **Eval-lab full cycle (stage 2 + reveal + rating delta)**: needs same solve driver as recap.
+- **Pixel-level hint highlight & square style**: requires deeper DOM scraping; not high value vs effort.
 
 ---
 
