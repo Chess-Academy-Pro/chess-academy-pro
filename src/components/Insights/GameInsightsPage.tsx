@@ -9,6 +9,7 @@ import {
   getTacticInsights,
 } from '../../services/gameInsightsService';
 import { runBackgroundAnalysis } from '../../services/gameAnalysisService';
+import { ImportGamesButton } from '../Games/ImportGamesButton';
 import { useAppStore } from '../../stores/appStore';
 import { routeChatIntent } from '../../services/coachSessionRouter';
 import { OverviewTab } from './OverviewTab';
@@ -154,14 +155,17 @@ export function GameInsightsPage(): JSX.Element {
               </span>
             </div>
           </div>
-          <button
-            onClick={() => void handleRefresh()}
-            disabled={refreshing}
-            className="p-2 rounded-lg hover:opacity-80 disabled:opacity-40"
-            data-testid="refresh-btn"
-          >
-            <RefreshCw size={18} className={refreshing ? 'animate-spin' : ''} style={{ color: 'var(--color-text-muted)' }} />
-          </button>
+          <div className="flex items-center gap-1.5">
+            <ImportGamesButton variant="compact" />
+            <button
+              onClick={() => void handleRefresh()}
+              disabled={refreshing}
+              className="p-2 rounded-lg hover:opacity-80 disabled:opacity-40"
+              data-testid="refresh-btn"
+            >
+              <RefreshCw size={18} className={refreshing ? 'animate-spin' : ''} style={{ color: 'var(--color-text-muted)' }} />
+            </button>
+          </div>
         </div>
 
         {/* Search bar */}
@@ -189,6 +193,22 @@ export function GameInsightsPage(): JSX.Element {
             </div>
           </div>
         </form>
+
+        {/* Empty-state CTA — no games imported yet. Drops a prominent
+            import button right under the search bar so the user has
+            a one-tap path forward instead of staring at zeros. */}
+        {overview !== null && overview.totalGames === 0 && (
+          <div
+            className="flex flex-col items-center gap-2 py-4 border-b text-center"
+            style={{ borderColor: 'var(--color-border)' }}
+          >
+            <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+              No games analysed yet. Import some games to see stats, mistakes,
+              and weaknesses.
+            </p>
+            <ImportGamesButton variant="primary" />
+          </div>
+        )}
 
         {/* Summary stats */}
         {overview && overview.totalGames > 0 && (

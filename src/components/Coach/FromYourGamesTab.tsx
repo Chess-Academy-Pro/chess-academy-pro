@@ -26,6 +26,7 @@ import {
 import type { CSSProperties } from 'react';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
+import { ImportGamesButton } from '../Games/ImportGamesButton';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
 import { useClickToMove } from '../../hooks/useClickToMove';
 import {
@@ -97,9 +98,10 @@ export function FromYourGamesTab({ onExit }: FromYourGamesTabProps): JSX.Element
         <AlertCircle size={32} className="text-cyan-400" />
         <h2 className="text-base font-semibold text-theme-text">From Your Games</h2>
         <p className="text-sm text-theme-text-muted leading-relaxed">{state.reason}</p>
+        <ImportGamesButton variant="primary" />
         <button
           onClick={onExit}
-          className="mt-2 px-4 py-2 rounded-lg bg-theme-surface hover:bg-theme-bg text-sm text-theme-text"
+          className="mt-1 px-4 py-2 rounded-lg bg-theme-surface hover:bg-theme-bg text-sm text-theme-text"
         >
           Back to endgames
         </button>

@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import { render } from '../../test/utils';
 import { FromYourGamesTab } from './FromYourGamesTab';
 import { db } from '../../db/schema';
 

@@ -4,6 +4,7 @@ import { ArrowLeft, Filter, Bot, Globe } from 'lucide-react';
 import { db } from '../../db/schema';
 import type { GameRecord, GameSource } from '../../types';
 import { ReviewGameCard } from './ReviewGameCard';
+import { ImportGamesButton } from '../Games/ImportGamesButton';
 import { logAppAudit } from '../../services/appAuditor';
 import { seedReviewSamplesIfNeeded } from '../../services/reviewSampleGames';
 
@@ -74,7 +75,7 @@ export function CoachReviewListPage(): JSX.Element {
           <ArrowLeft size={20} />
         </button>
         <h1 className="text-xl font-bold flex-1 text-center">Review with Coach</h1>
-        <div className="w-9" aria-hidden />
+        <ImportGamesButton variant="compact" />
       </div>
 
       <p className="text-center text-sm text-theme-text-muted max-w-lg mx-auto w-full -mt-2">

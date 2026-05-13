@@ -162,15 +162,20 @@ via a stash drop. Go surgical this time: just swap the chessboard
 rendering primitive at the call sites; leave `useEndgamePlayout`
 intact.
 
-### Phase 4 — Upload Games affordance (~2 hrs, 1 PR) [STATUS: pending]
+### Phase 4 — Upload Games affordance [STATUS: done]
 One component, drop-in across three surfaces.
 
-- [ ] Build `<ImportGamesButton>` that routes to the existing
-  import flow.
-- [ ] (#11) Weaknesses (Game Insights) — inline empty-state CTA +
-  header action.
-- [ ] (#11) Review tab — inline empty-state CTA + header action.
-- [ ] (#11) "From Your Games" sub-tab — same treatment.
+- [x] Built `<ImportGamesButton>` (`src/components/Games/ImportGamesButton.tsx`).
+  Compact + primary variants; both route to `/games/import`.
+- [x] (#11) Game Insights (`/weaknesses`) — compact button in header +
+  primary CTA on the empty state (when `overview.totalGames === 0`).
+- [x] (#11) Review list (`/coach/review`) — compact button added to
+  header. Empty-state already had an Import-games link from prior work.
+- [x] (#11) "From Your Games" sub-tab — primary CTA added to the
+  empty-state stack alongside the existing "Back to endgames" button.
+- [x] Test coverage: ImportGamesButton.test.tsx (navigate, variants,
+  label override). Existing FromYourGamesTab + GameInsightsPage tests
+  still pass.
 
 ### Phase 5 — Visual signature consistency (~½ day, 1 PR) [STATUS: pending]
 The "make-the-app-feel-cohesive" pass.
