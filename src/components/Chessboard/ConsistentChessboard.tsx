@@ -10,8 +10,14 @@
 // In both modes the board's piece set, square colors, glow, animation duration, and
 // promotion behavior are pinned to the values from useBoardTheme(). Callers cannot
 // override appearance — that is the point.
+//
+// Static mode also auto-derives the controlled-mode chrome (move sound, last-move
+// highlight, check-square red) from FEN deltas so endgame / openings / kid surfaces
+// pick up the same visual signature as teach/play. Opt out per board via
+// `enableMoveSound={false}` / `showLastMoveHighlight={false}`.
 
-import { useMemo, type ReactNode, type CSSProperties } from 'react';
+import { useMemo, useEffect, useRef, useState, type ReactNode, type CSSProperties } from 'react';
+import { Chess } from 'chess.js';
 import { Chessboard } from 'react-chessboard';
 import type {
   PieceDropHandlerArgs,
@@ -21,6 +27,8 @@ import type {
 import { ControlledChessBoard, type ControlledChessBoardProps } from '../Board/ControlledChessBoard';
 import { useBoardTheme, BOARD_ANIMATION_MS } from '../../hooks/useBoardTheme';
 import { buildGlowSquareStyles } from '../../hooks/useBoardGlow';
+import { usePieceSound } from '../../hooks/usePieceSound';
+import { detectMoveFromFen } from '../../utils/boardMoveDetect';
 
 export type BoardArrow = { startSquare: string; endSquare: string; color: string };
 export type BoardHighlight = { square: string; color: string };
@@ -53,6 +61,13 @@ interface StaticModeProps {
   className?: string;
   /** Content rendered on top of the board (flash overlays, hint badges, etc.). */
   overlay?: ReactNode;
+  /** Auto-play piece sound on detected FEN moves. Default true. Set false when the
+   *  parent already pumps `usePieceSound().playMoveSound(san)` to avoid doubling up. */
+  enableMoveSound?: boolean;
+  /** Apply the cyan last-move highlight on detected from/to squares. Default true. */
+  showLastMoveHighlight?: boolean;
+  /** Highlight the king square red when the side-to-move is in check. Default true. */
+  showCheckHighlight?: boolean;
 }
 
 export type ConsistentChessboardProps = ControlledModeProps | StaticModeProps;
@@ -68,6 +83,39 @@ export function ConsistentChessboard(props: ConsistentChessboardProps): JSX.Elem
   return <StaticBoard {...props} />;
 }
 
+const LAST_MOVE_FROM_STYLE: CSSProperties = {
+  background: 'rgba(0, 229, 255, 0.2)',
+  boxShadow: 'inset 0 0 12px rgba(0, 229, 255, 0.15)',
+};
+const LAST_MOVE_TO_STYLE: CSSProperties = {
+  background: 'rgba(0, 229, 255, 0.25)',
+  boxShadow: 'inset 0 0 12px rgba(0, 229, 255, 0.2)',
+};
+const CHECK_SQUARE_STYLE: CSSProperties = {
+  background:
+    'radial-gradient(circle, rgba(255,48,48,0.85) 40%, rgba(255,48,48,0.3) 100%)',
+};
+
+function findCheckSquare(fen: string | undefined): string | null {
+  if (!fen) return null;
+  try {
+    const chess = new Chess(fen);
+    if (!chess.inCheck()) return null;
+    const board = chess.board();
+    const turn = chess.turn();
+    for (const row of board) {
+      for (const piece of row) {
+        if (piece?.type === 'k' && piece.color === turn) {
+          return piece.square;
+        }
+      }
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
 function StaticBoard({
   fen: position,
   boardOrientation = 'white',
@@ -80,20 +128,64 @@ function StaticBoard({
   animationDurationInMs = BOARD_ANIMATION_MS,
   className = '',
   overlay,
+  enableMoveSound = true,
+  showLastMoveHighlight = true,
+  showCheckHighlight = true,
 }: StaticModeProps): JSX.Element {
   const theme = useBoardTheme();
+  const { playMoveSound } = usePieceSound();
 
-  // Always start with the base glow styles so every square has the same outline,
-  // then layer caller styles on top.
+  const fenString = typeof position === 'string' ? position : null;
+  const prevFenRef = useRef<string | null>(fenString);
+  const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(null);
+
+  useEffect(() => {
+    const prev = prevFenRef.current;
+    const next = fenString;
+    if (next === prev) return;
+    const detected = detectMoveFromFen(prev, next);
+    if (detected) {
+      if (enableMoveSound) {
+        const sanShape =
+          detected.sound === 'castle'
+            ? 'O-O'
+            : detected.sound === 'capture'
+              ? `${detected.from[0]}x${detected.to}`
+              : detected.sound === 'check'
+                ? `${detected.to}+`
+                : detected.to;
+        playMoveSound(sanShape);
+      }
+      if (showLastMoveHighlight) {
+        setLastMove({ from: detected.from, to: detected.to });
+      }
+    } else {
+      setLastMove(null);
+    }
+    prevFenRef.current = next;
+  }, [fenString, enableMoveSound, showLastMoveHighlight, playMoveSound]);
+
+  const checkSquare = useMemo(
+    () => (showCheckHighlight ? findCheckSquare(fenString ?? undefined) : null),
+    [fenString, showCheckHighlight],
+  );
+
   const mergedSquareStyles = useMemo((): Record<string, CSSProperties> => {
     const base = buildGlowSquareStyles(theme.baseGlow);
-    if (!squareStyles) return base;
-    const out = { ...base };
-    for (const [square, style] of Object.entries(squareStyles)) {
-      out[square] = { ...base[square], ...style };
+    if (lastMove) {
+      base[lastMove.from] = { ...base[lastMove.from], ...LAST_MOVE_FROM_STYLE };
+      base[lastMove.to] = { ...base[lastMove.to], ...LAST_MOVE_TO_STYLE };
     }
-    return out;
-  }, [theme.baseGlow, squareStyles]);
+    if (squareStyles) {
+      for (const [square, style] of Object.entries(squareStyles)) {
+        base[square] = { ...base[square], ...style };
+      }
+    }
+    if (checkSquare) {
+      base[checkSquare] = { ...base[checkSquare], ...CHECK_SQUARE_STYLE };
+    }
+    return base;
+  }, [theme.baseGlow, squareStyles, lastMove, checkSquare]);
 
   return (
     <div

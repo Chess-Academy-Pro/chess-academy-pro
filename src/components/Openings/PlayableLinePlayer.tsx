@@ -464,6 +464,7 @@ export function PlayableLinePlayer({
               boardOrientation={boardOrientation}
               arrows={currentDemoArrows}
               animationDurationInMs={BOARD_DEMO_ANIMATION_MS}
+              enableMoveSound={false}
             />
           </div>
         </div>
@@ -545,6 +546,7 @@ export function PlayableLinePlayer({
             squareStyles={memorySquareStyles}
             onPieceDrop={handlePieceDrop}
             onSquareClick={handleSquareClick}
+            enableMoveSound={false}
             className={shakeBoard ? 'animate-[boardFlashError_400ms]' : ''}
             overlay={
               <>

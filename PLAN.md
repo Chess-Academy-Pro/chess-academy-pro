@@ -192,21 +192,61 @@ re-speak, stop on empty, stop on unmount, enabled=false inert,
 replay/stop manual control, stale-token supersession). All
 existing tests in EndgameLessonTab + EvalLabQuiz still pass.
 
-### Phase 3 — Board substrate parity (~½ day, 1 PR) [STATUS: pending]
-Migrate endgame surfaces off the static `ConsistentChessboard` path
-to the same primitive teach/play uses.
+### Phase 3 — Board substrate parity [STATUS: shipped this PR]
 
-Drops:
-- (#3) Animation pacing — pieces slide visibly between moves.
-- (#3) Side-to-move visual distinction inherited from teach/play.
-- (#3) Same-side-moves-at-once visual cue.
-- (#4) May fix bishop sprite as side effect if it's a piece-set
-  config divergence.
+Original framing was "migrate endgame surfaces to the controlled-mode
+primitive teach/play uses." Auditing the call sites showed the real
+divergence is narrower than that: endgame surfaces drive their own
+chess state via `useEndgamePlayout` and pass FEN strings into static-
+mode `ConsistentChessboard`. The static path was missing three pieces
+of chrome the controlled path gets for free: move sound, last-move
+highlight, and check-square red.
 
-Risk: tried earlier in a previous session and the rewrite was lost
-via a stash drop. Go surgical this time: just swap the chessboard
-rendering primitive at the call sites; leave `useEndgamePlayout`
-intact.
+A full rewire (lift endgame state into `useChessGame`) would touch
+`useEndgamePlayout` (the path the PLAN explicitly says to leave
+intact) and risks a repeat of the earlier stash-drop. Inverted the
+approach: enriched the static board itself so every static-mode
+caller picks up the same chrome from FEN deltas alone. No data-flow
+rewiring at call sites — the parity comes "for free."
+
+**Built:** `src/utils/boardMoveDetect.ts` — `detectMoveFromFen(prev,
+next)` returns `{ from, to, sound }` by piece-map diff. Recognises
+quiet moves, captures, castling, en passant, and promotions; returns
+null for position resets so a "load next puzzle" doesn't trigger a
+move sound. 11 unit tests.
+
+**Enriched `ConsistentChessboard` (static mode):**
+- On FEN change, calls `detectMoveFromFen` and (if a move is detected)
+  plays the right `usePieceSound().playMoveSound(...)` and sets the
+  cyan last-move highlight on from/to squares.
+- Derives the in-check king square from the new FEN and applies the
+  red radial gradient — same recipe `ControlledChessBoard` uses.
+- Three new opt-out props: `enableMoveSound`, `showLastMoveHighlight`,
+  `showCheckHighlight` (all default true).
+
+**Opt-outs:** `PlayableLinePlayer` (demo + memory phase) — it already
+pumps its own `playMoveSound(san)` calls. Set `enableMoveSound={false}`
+on both boards to avoid doubling up.
+
+**What this fixes from the audit:**
+- ✅ (#3) Piece-move sound when the student drops a piece on an
+  endgame board — was missing; now matches teach/play.
+- ✅ (#3) Last-move cyan highlight on endgame surfaces — was missing.
+- ✅ (#3) Check-square red signal — was missing on endgame and on
+  kid-mode boards (now uniform everywhere).
+- ⚠️ (#3) Animation pacing — both static and controlled use
+  `BOARD_ANIMATION_MS = 200`. If pieces still appear to "snap" it's
+  almost certainly the parent remounting the board on tab switch,
+  not a duration difference; out of scope for Phase 3.
+- ⚠️ (#4) Bishop sprite — still deferred (needs a DevTools Network
+  dump). Both modes already use the same `buildPieceRenderer` path,
+  so the bug isn't a static/controlled divergence.
+
+Other static-mode callers (Kid games, ModelGameViewer, CheckpointQuiz,
+all endgame surfaces) now inherit move sound + last-move highlight +
+check red automatically. Tests cover sound firing on detected moves,
+suppression on position resets, opt-out flags, and check-highlight
+behavior (17 ConsistentChessboard tests).
 
 ### Phase 4 — Upload Games affordance [STATUS: done]
 One component, drop-in across three surfaces.
