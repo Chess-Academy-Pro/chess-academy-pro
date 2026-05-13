@@ -98,4 +98,34 @@ describe('endgameDrillService', () => {
     // should equal the mixed count.
     expect(beg + int + adv).toBe(mixed);
   });
+
+  it('different seeds yield different first puzzles (audit fix)', () => {
+    // David's audit: same 3 puzzles every visit. Disease was the
+    // sort: rating-asc with seed only as within-bucket tie-break,
+    // so the lowest-rated bucket always surfaced first regardless
+    // of seed. Fix: pure seed-shuffle across the whole pool.
+    // Lock the new behavior here.
+    const principles = getEndgamePrinciples();
+    const lesson = principles.find((l) => (l.practiceThemes?.length ?? 0) > 100);
+    if (!lesson) return; // Need a sizable pool for the test to be meaningful
+    const seeds = [101, 202, 303, 404, 505];
+    const firsts = seeds.map((s) => {
+      const drills = getDrillPositionsForLesson(lesson, { limit: 1, seed: s });
+      return drills[0]?.fen;
+    });
+    // At least 3 of 5 seeds should land on different puzzles.
+    const unique = new Set(firsts);
+    expect(unique.size).toBeGreaterThanOrEqual(3);
+  });
+
+  it('default limit returns way more than the old 3-puzzle cap (audit fix)', () => {
+    // David's audit: "remove the three puzzles limit. I want users
+    // to play as many as they want." The default is now generous
+    // enough that a single session can't burn through it.
+    const principles = getEndgamePrinciples();
+    const lesson = principles.find((l) => (l.practiceThemes?.length ?? 0) > 100);
+    if (!lesson) return;
+    const all = getDrillPositionsForLesson(lesson, { seed: 1 });
+    expect(all.length).toBeGreaterThan(50);
+  });
 });

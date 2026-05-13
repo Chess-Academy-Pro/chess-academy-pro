@@ -20,9 +20,9 @@ import {
 
 describe('calculationDrillService', () => {
   describe('skill catalog', () => {
-    it('exposes the 6 calculation skills', () => {
+    it('exposes the 7 calculation skills', () => {
       const skills = getCalculationSkills();
-      expect(skills.length).toBe(6);
+      expect(skills.length).toBe(7);
       const ids = skills.map((s) => s.id);
       expect(ids).toEqual([
         'find-the-mate',
@@ -31,6 +31,7 @@ describe('calculationDrillService', () => {
         'defensive-calc',
         'race-calculation',
         'tactical-pattern',
+        'adaptive-mixed',
       ]);
     });
 

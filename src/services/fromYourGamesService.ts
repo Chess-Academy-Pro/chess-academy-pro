@@ -72,7 +72,12 @@ interface MineOptions {
 export async function mineEndgamePositions(
   options: MineOptions = {},
 ): Promise<MinedEndgamePosition[]> {
-  const limit = options.limit ?? 30;
+  // Default 200 — a practical "more than any session can use"
+  // ceiling. David's audit removed the old 30-row cap. Mining
+  // every position from every imported game can run thousands of
+  // chess.js replays, so we keep a finite ceiling for performance
+  // even though it's high enough to feel unlimited in practice.
+  const limit = options.limit ?? 200;
   const requireFullAnalysis = options.requireFullAnalysis ?? true;
   const games = await db.games.toArray();
   const positions: MinedEndgamePosition[] = [];

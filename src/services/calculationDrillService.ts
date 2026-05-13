@@ -151,7 +151,12 @@ export function getDrillPuzzles(
 ): RawPuzzle[] {
   const skill = getCalculationSkillById(skillId);
   if (!skill) return [];
-  const limit = options.limit ?? 5;
+  // Default 200 — a practical "more than any session can use"
+  // ceiling. David's audit removed the old 5-puzzle cap; the new
+  // adaptive infinite stream uses a different selector path
+  // (useAdaptiveEndgameSession) and isn't bounded here. Surface
+  // code can pass an explicit smaller cap when needed.
+  const limit = options.limit ?? 200;
   const minPopularity = options.minPopularity ?? 50;
   const minPlays = options.minPlays ?? 80;
   const seed = options.seed ?? Date.now();

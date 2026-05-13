@@ -26,6 +26,7 @@ import {
   CheckCircle,
   RotateCw,
   Eye,
+  Volume2,
 } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
@@ -264,8 +265,13 @@ function LessonView({ lesson, onExit }: LessonViewProps): JSX.Element {
   // drills get pushed into adaptiveHistory on recordOutcome.
   const [adaptiveHistory, setAdaptiveHistory] = useState<EndgameLessonPosition[]>([]);
 
+  // No `limit` — David's audit: "I want users to play as many as
+  // they want." The full matching pool is returned, seed-shuffled.
+  // Difficulty progression in fixed mode is handled by the tier
+  // band (beginner / intermediate / advanced); adaptive mode uses
+  // the rating-stepping picker instead.
   const fixedDrills = useMemo(
-    () => getDrillPositionsForLesson(lesson, { limit: 3, seed: drillSeed, tier }),
+    () => getDrillPositionsForLesson(lesson, { seed: drillSeed, tier }),
     [lesson, drillSeed, tier],
   );
   const drillPositions = useMemo<EndgameLessonPosition[]>(() => {
@@ -516,23 +522,40 @@ function PositionRunner({
   // teaches the principle; DB-sourced drills are practice (the
   // position IS the lesson at that point) and stay silent so we
   // don't repeat templated phrases across hundreds of puzzles.
-  useEffect(() => {
-    // Drill positions have an empty explanation by design — speak
-    // nothing.
-    if (!position.explanation) {
-      voiceService.stop();
-      return;
-    }
+  //
+  // Build the spoken text once per position so both the auto-effect
+  // and the manual Replay button render identical narration.
+  const narrationText = useMemo<string>(() => {
+    if (!position.explanation) return '';
     const isFirstPosition = posIndex === 0 && !isDrill;
     const prefix = isFirstPosition
       ? `${lesson.narration.rule} ${lesson.narration.intro} `
       : '';
-    const text = `${prefix}${position.title}. ${position.explanation}`;
-    void voiceService.speak(text);
+    return `${prefix}${position.title}. ${position.explanation}`;
+  }, [position.title, position.explanation, posIndex, isDrill, lesson.narration.rule, lesson.narration.intro]);
+
+  useEffect(() => {
+    if (!narrationText) {
+      voiceService.stop();
+      return;
+    }
+    // speakForced bypasses the user's voiceEnabled pref — keystone
+    // narration is authored content the student opted in to by
+    // entering the lesson, not a coach side-channel they can mute.
+    // (David's audit: "still not hearing voice narrations" — the
+    // most likely silent-fail is a stale prefs.voiceEnabled = false
+    // from a previous Master-Off toggle. Forced makes the prefs
+    // gate irrelevant.)
+    void voiceService.speakForced(narrationText);
     return () => {
       voiceService.stop();
     };
-  }, [position.fen, position.title, position.explanation, posIndex, isDrill, lesson.narration.rule, lesson.narration.intro]);
+  }, [narrationText, position.fen]);
+
+  const onReplayNarration = useCallback(() => {
+    if (!narrationText) return;
+    void voiceService.speakForced(narrationText);
+  }, [narrationText]);
 
   // Persistence: write a progress record when the student completes
   // the playout. Guard against double-recording per position via
@@ -599,7 +622,7 @@ function PositionRunner({
             {isDrill
               ? drillMode === 'adaptive'
                 ? `Drill #${adaptiveCompletedCount + 1} · target ${adaptiveTargetRating}${adaptiveLastAdjustment === 'up' ? ' ↑' : adaptiveLastAdjustment === 'down' ? ' ↓' : ''} · you ${adaptiveUserRating}`
-                : `Drill ${posIndex - keystoneCount + 1} of ${drillCount} · ${tier} tier`
+                : `Drill ${posIndex - keystoneCount + 1}${drillCount < 1000 ? ` of ${drillCount}` : ''} · ${tier} tier`
               : `Keystone ${posIndex + 1} of ${keystoneCount}`}
             {isPlayable && playout.curatedStudentMoves > 1
               ? playout.studentMovesPlayed < playout.curatedStudentMoves
@@ -633,7 +656,7 @@ function PositionRunner({
                   : 'bg-theme-surface text-theme-text-muted hover:bg-theme-bg'
               }`}
               data-testid="endgame-drill-mode-fixed"
-              title="3 fixed puzzles at the selected tier"
+              title="Full puzzle pool at the selected tier"
             >
               Fixed tier
             </button>
@@ -723,6 +746,7 @@ function PositionRunner({
         offerPlayItOut={offerPlayItOut}
         playItOutEngaged={playItOut}
         onEngagePlayItOut={() => setPlayItOut(true)}
+        onReplayNarration={narrationText ? onReplayNarration : undefined}
       />
       {posIndex === 0 && <NarrationPanel lesson={lesson} />}
       <div className="flex items-center justify-between gap-2">
@@ -787,6 +811,10 @@ interface PositionCardProps {
   offerPlayItOut: boolean;
   playItOutEngaged: boolean;
   onEngagePlayItOut: () => void;
+  /** Manual replay button — when present, renders a small speaker
+   *  affordance next to the title so the user can re-trigger the
+   *  narration if it failed to play (or just wants it again). */
+  onReplayNarration?: () => void;
 }
 
 function PositionCard({
@@ -801,6 +829,7 @@ function PositionCard({
   offerPlayItOut,
   playItOutEngaged,
   onEngagePlayItOut,
+  onReplayNarration,
 }: PositionCardProps): JSX.Element {
   return (
     <div className="rounded-xl border border-theme-border bg-theme-surface p-3 flex flex-col gap-2">
@@ -816,6 +845,18 @@ function PositionCard({
             </span>
           )}
           {position.title}
+          {onReplayNarration && (
+            <button
+              type="button"
+              onClick={onReplayNarration}
+              className="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-md text-amber-400 hover:bg-amber-500/15 transition-colors"
+              aria-label="Replay narration"
+              title="Replay narration"
+              data-testid="endgame-replay-narration"
+            >
+              <Volume2 size={14} />
+            </button>
+          )}
         </h3>
         <span className={`text-[11px] font-mono font-semibold ${resultColor} flex-shrink-0`}>
           {resultLabel}

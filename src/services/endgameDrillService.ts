@@ -51,9 +51,12 @@ const TIER_BANDS: Record<Exclude<DrillTier, 'mixed'>, [number, number]> = {
 };
 
 interface DrillOptions {
-  /** Max drill positions to return per lesson. Default 3 — gives
-   *  each lesson a 4-6 position depth (1-2 keystones + 3 drills)
-   *  without overwhelming the picker. */
+  /** Max drill positions to return per lesson. Default 200 — a
+   *  practical "more than any session can use" ceiling, kept finite
+   *  so the per-puzzle chess.js replay cost doesn't explode on
+   *  popular themes (pool can hit 7K+ puzzles). David's audit
+   *  removed the old hard cap of 3; pass an explicit smaller
+   *  number only when a surface genuinely needs it. */
   limit?: number;
   /** Minimum popularity — filters out novelty puzzles. */
   minPopularity?: number;
@@ -64,8 +67,9 @@ interface DrillOptions {
   tier?: DrillTier;
   /** Direct rating-band override. Takes precedence over `tier`. */
   ratingBand?: [number, number];
-  /** Deterministic shuffle seed for within-rating-band ordering.
-   *  Same seed = same drill order. */
+  /** Deterministic shuffle seed. Different seeds → different
+   *  puzzle ordering across the entire matching pool (not just
+   *  within rating buckets). Same seed → same order. */
   seed?: number;
 }
 
@@ -146,7 +150,11 @@ export function getDrillPositionsForLesson(
 ): EndgameLessonPosition[] {
   const themes = lesson.practiceThemes ?? [];
   if (themes.length === 0) return [];
-  const limit = options.limit ?? 3;
+  // Default 200 — high enough that a single session can't realistically
+  // burn through it, low enough that the chess.js per-puzzle replay
+  // cost stays under a frame budget. The UI exits / re-enters with a
+  // fresh seed for a totally new shuffle when the user wants more.
+  const limit = options.limit ?? 200;
   const minPopularity = options.minPopularity ?? 50;
   const minPlays = options.minPlays ?? 80;
   const seed = options.seed ?? 0;
@@ -168,12 +176,16 @@ export function getDrillPositionsForLesson(
     return p.themes.some((t) => themeSet.has(t));
   });
 
-  // Sort: rating ascending so the easiest drill comes first.
-  // Within a 100-rating bucket, deterministic-shuffle by seed.
+  // Pure seed shuffle across the WHOLE matching pool — no
+  // rating-bucket bias. Previously the sort was rating-ascending
+  // with seed only as a within-bucket tie-break, which meant the
+  // same handful of lowest-rated puzzles always surfaced first
+  // and fresh seeds only permuted that small set. David's audit:
+  // every visit was the "same three puzzles." A pure seed shuffle
+  // gives a genuinely fresh ordering for every fresh seed across
+  // the full pool. Difficulty progression now belongs to the
+  // adaptive session (useAdaptiveEndgameSession), not this picker.
   matching.sort((a, b) => {
-    const bucketA = Math.floor(a.rating / 100);
-    const bucketB = Math.floor(b.rating / 100);
-    if (bucketA !== bucketB) return bucketA - bucketB;
     const ha = mulberryHash(seed, a.id);
     const hb = mulberryHash(seed, b.id);
     return ha - hb;

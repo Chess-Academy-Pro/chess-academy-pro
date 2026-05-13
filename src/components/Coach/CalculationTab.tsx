@@ -6,10 +6,12 @@
  *   1. Skill picker — grid of 6 tiles (one per skill)
  *   2. Skill rationale screen — shows the "why this matters"
  *      narration before the drill starts
- *   3. Drill view — 5 puzzles in sequence, interactive board, the
+ *   3. Drill view — adaptive puzzle stream (no per-session cap;
+ *      the user plays until they exit). Interactive board, the
  *      student drags pieces to attempt the first move of each
  *      puzzle's solution; right move → green + advance, wrong →
- *      red flash + retry
+ *      red flash + retry. Difficulty steps via
+ *      useAdaptiveEndgameSession.
  *
  * Architectural contract: positions and moves come from the
  * puzzle DB (already on disk, 15K curated). The UI verifies user
@@ -179,7 +181,7 @@ function RationaleScreen({ skill, onStart, onBack }: RationaleScreenProps): JSX.
         className="w-full px-4 py-3 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold"
         data-testid="calculation-start-drill"
       >
-        Start drill (5 puzzles)
+        Start drill
       </button>
     </div>
   );
