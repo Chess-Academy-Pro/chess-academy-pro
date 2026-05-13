@@ -23,7 +23,7 @@ export default defineConfig({
         // when set. Local runs (where `npx playwright install` works)
         // ignore this and use the bundled binary.
         // Accept the legacy `PLAYWRIGHT_LOCAL_CHROME` name as a
-        // fallback — earlier review-audit branches use it.
+        // fallback — earlier audit branches use it.
         ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || process.env.PLAYWRIGHT_LOCAL_CHROME
           ? { launchOptions: { executablePath: (process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || process.env.PLAYWRIGHT_LOCAL_CHROME) as string } }
           : {}),
