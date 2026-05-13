@@ -21,6 +21,7 @@
     "audit:voice": "node scripts/audit-voice-coverage.js",
     "audit:openings": "tsx src/data/openingWalkthroughs/auditMoveQuality.ts",
     "audit:endgame": "node scripts/audit-endgame-results.mjs",
+    "audit:smoke": "node scripts/audit-smoke.mjs",
     "data:audit": "node scripts/audit-structural.mjs",
     "data:fix": "node scripts/fix-data-quality.mjs --write",
     "audit:ci": "node scripts/audit-structural.mjs && node -e \"const r=JSON.parse(require('fs').readFileSync('audit-reports/structural.json','utf-8'));const c=r.summary.counts;if(c.illegalMoves>10||c.sanDrift>10){console.error('DATA GATE FAILED:',c);process.exit(1);}console.log('DATA GATE PASSED:',c);\"",

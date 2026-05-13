@@ -101,6 +101,35 @@ chess structure when the DB already has it. Concretely:
   they don't exist. We don't make stuff up and we certainly don't
   break what we have just built!"
 
+**Audit stream — pull live runtime events on demand.** When David is
+debugging a reproducible runtime issue on the live build (Vercel
+production), the app can stream audit events to `/api/audit-stream`
+and Claude can pull them with `GET /api/audit-stream?since=<ms>` +
+`x-audit-secret` header. Use it like this:
+
+- **Default to proactive.** The whole point of this feature is to
+  close the loop without David copy-pasting. After any push that
+  touches a runtime path that emits audits — coach brain, walkthrough
+  runtime, voice, navigation, tool calls, stage gen, uncaught errors
+  — pull the recent events automatically once enough time has passed
+  that David would have exercised it. Don't ask permission every time.
+- **Pull immediately when David says:** "test it", "I just reproduced
+  X", "check the live build", "what just happened", or names a runtime
+  symptom — fetch first, ask questions after.
+- **Empty pulls are fine.** Just say "no events since `<timestamp>`,
+  app probably not open" and move on. Cheap and non-noisy.
+- **Skip pulling only for:** pure content / data-JSON / CSS / test /
+  docs / build-config changes that can't emit any audits. Before-push
+  gating is still tests + typecheck + lint, not audit stream.
+- **What you'll see:** every `logAppAudit()` call. ~58 source files
+  emit them. Stream carries the same payload as the local Dexie log.
+- **Limits:** 24h TTL on the server, newest 1000 entries kept, only
+  fires while the app is open. It's a live-watch buffer, not a durable
+  log — the Dexie log on-device is still the source of truth.
+- **Endpoint:** `GET /api/audit-stream?since=<ms>` with
+  `x-audit-secret` header. Save the secret to memory so you don't have
+  to re-ask each session.
+
 **iOS AVAudioSession patch — DONE.** Lives in
 `ios-patches/App/AppDelegate.swift` and is copied over the Capacitor
 default by `npm run setup:ios`. Sets category `.playAndRecord` with

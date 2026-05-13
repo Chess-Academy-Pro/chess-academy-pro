@@ -22,3 +22,9 @@ src/data/annotations-all.json
 voice_packs/
 missing_clips.txt
 .supabase/
+.vercel
+.env*.local
+audit-reports/smoke-*/
+audit-reports/settings-behavior-*.json
+audit-reports/settings-check*.png
+audit-reports/settings-coach-tab*.png
