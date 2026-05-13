@@ -124,10 +124,21 @@ export function TacticsPage(): JSX.Element {
         {THEME_CARDS.map((card) => {
           const shadow = scaledShadow(card.rgb, gB);
           const shadowHover = scaledShadow(card.rgb, Math.min(200, gB * 1.4));
+          // 'Opening Traps' was a stale theme-filter pipe into the
+          // generic drill page — wiped per the user's morning request:
+          // "Wipe that tab clean / hide the data. Organize by opening.
+          // Separate white and black." Now routes to the dedicated
+          // /tactics/opening-traps surface (family-grouped + W/B split,
+          // mined from the 625 opening + tactical puzzles in the local
+          // Lichess corpus).
+          const onClick =
+            card.label === 'Opening Traps'
+              ? () => void navigate('/tactics/opening-traps')
+              : () => void navigate('/tactics/drill', { state: { filterThemes: card.themes } });
           return (
             <button
               key={card.label}
-              onClick={() => void navigate('/tactics/drill', { state: { filterThemes: card.themes } })}
+              onClick={onClick}
               className={`${card.bgColor} rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-200 aspect-square`}
               style={{ ...neonBorderStyle(card.rgb, gS), boxShadow: shadow }}
               onMouseEnter={(e) => { applyHoverBorder(e.currentTarget, card.rgb, gS); e.currentTarget.style.boxShadow = shadowHover; }}
