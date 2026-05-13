@@ -1219,33 +1219,47 @@ test.describe('Coach-Teach FULL PLAY audit', () => {
         deepDiveCount > 0 ? 'PASS' : 'WARN',
         `${deepDiveCount} deep-dive tile(s) at fork.`);
 
-      // R35/R36: trap-prompt / trap-playing — fires when a fork node's
-      // pathSans matches a punish-lesson key exactly. Look opportunistically.
-      const trapPrompt = page.getByTestId('walkthrough-trap-prompt');
-      if (await safeBool(() => trapPrompt.isVisible({ timeout: 500 }), false)) {
-        audit('R35', 'Phase: trap-prompt', 'PASS',
-          'walkthrough-trap-prompt panel visible at this fork.');
-        // Accept the trap so trap-playing renders.
-        const accept = page.getByTestId('walkthrough-trap-accept');
-        if (await safeBool(() => accept.isVisible({ timeout: 800 }), false)) {
-          await accept.click();
-          await page.waitForTimeout(800);
-          const trapPlaying = page.getByTestId('walkthrough-trap-playing');
-          audit('R36', 'Phase: trap-playing',
-            await safeBool(() => trapPlaying.isVisible({ timeout: 2000 }), false) ? 'PASS' : 'WARN',
-            'walkthrough-trap-playing transitions in after accept.');
-        }
-      } else {
-        audit('R35', 'Phase: trap-prompt', 'SKIP',
-          'No trap-prompt at first fork — pathSans did not match a punish lesson on this branch.');
-        audit('R36', 'Phase: trap-playing', 'SKIP', 'No trap-prompt to accept.');
-      }
-
-      // Pick first fork option.
+      // Pick first fork option. trap-prompt fires AFTER the pick (the
+      // runtime narrates the picked move, then `transitionAfter` checks
+      // sansSoFar against punish.setupMoves). R35/R36 are checked
+      // immediately after the click + narration buffer.
       if (forkCount > 0) {
         logEvent('Clicking first fork option…');
         await forkOpts.first().click();
-        await page.waitForTimeout(1500);
+        // Race for trap-prompt for up to 4s — narration of the picked
+        // node has to complete (voice promise resolves) before the
+        // transition check fires.
+        const trapPrompt = page.getByTestId('walkthrough-trap-prompt');
+        let trapPromptSeen = false;
+        const trapPromptStart = Date.now();
+        while (Date.now() - trapPromptStart < 4000) {
+          if (await safeBool(() => trapPrompt.isVisible({ timeout: 200 }), false)) {
+            trapPromptSeen = true;
+            break;
+          }
+          await page.waitForTimeout(200);
+        }
+        if (trapPromptSeen) {
+          audit('R35', 'Phase: trap-prompt', 'PASS',
+            'walkthrough-trap-prompt panel visible after fork pick (pathSans matched punish.setupMoves).');
+          // Accept the trap so trap-playing renders.
+          const accept = page.getByTestId('walkthrough-trap-accept');
+          if (await safeBool(() => accept.isVisible({ timeout: 800 }), false)) {
+            await accept.click();
+            await page.waitForTimeout(800);
+            const trapPlaying = page.getByTestId('walkthrough-trap-playing');
+            audit('R36', 'Phase: trap-playing',
+              await safeBool(() => trapPlaying.isVisible({ timeout: 2500 }), false) ? 'PASS' : 'WARN',
+              'walkthrough-trap-playing transitions in after accept.');
+          } else {
+            audit('R36', 'Phase: trap-playing', 'WARN', 'trap-accept button never visible — cannot exercise trap-playing.');
+          }
+        } else {
+          audit('R35', 'Phase: trap-prompt', 'SKIP',
+            'No trap-prompt within 4s after fork pick — pathSans did not match a punish lesson on this branch.');
+          audit('R36', 'Phase: trap-playing', 'SKIP', 'No trap-prompt to accept.');
+        }
+        await page.waitForTimeout(1000);
       }
     } else {
       audit('R32', 'Phase: fork', 'SKIP', 'Did not reach fork (lesson may be linear / direct to leaf).');
