@@ -14,6 +14,21 @@ import {
 import { buildGameRecord, buildMistakePuzzle, resetFactoryCounter } from '../test/factories';
 import type { MoveAnnotation } from '../types';
 
+// Mock detectTacticType — the production filter skips tactical_sequence
+// (generic positional better-move) puzzles. Test fixtures use quiet
+// developing-move bestMoves which would otherwise classify as
+// tactical_sequence and be filtered out. Force a tactical type so the
+// fixtures land as puzzles.
+vi.mock('./missedTacticService', async () => {
+  const actual = await vi.importActual<typeof import('./missedTacticService')>(
+    './missedTacticService',
+  );
+  return {
+    ...actual,
+    detectTacticType: vi.fn(() => 'fork'),
+  };
+});
+
 // Mock stockfishEngine for imported game analysis
 vi.mock('./stockfishEngine', () => ({
   stockfishEngine: {
@@ -185,6 +200,27 @@ describe('mistakePuzzleService', () => {
     });
 
     it('generates puzzles from imported lichess game with username', async () => {
+      // detectTacticType (added after this test was written) returns
+      // 'tactical_sequence' when the bestMove UCI doesn't have a piece on
+      // its from-square in the current FEN — and tactical_sequence
+      // puzzles are filtered out. The shared file-level Stockfish mock
+      // returns 'e2e4' regardless of position, which is illegal from the
+      // post-1.e4 e5 FEN this test's blunder fires on (no piece on e2).
+      // Override per-test with a position-valid bestMove.
+      const { stockfishEngine } = await import('./stockfishEngine');
+      const analyzePosition = vi.mocked(stockfishEngine.analyzePosition);
+      analyzePosition.mockResolvedValue({
+        bestMove: 'g1f3',
+        evaluation: 50,
+        isMate: false,
+        mateIn: null,
+        depth: 18,
+        topLines: [
+          { rank: 1, evaluation: 50, moves: ['g1f3'], mate: null },
+        ],
+        nodesPerSecond: 0,
+      });
+
       const annotations: MoveAnnotation[] = [
         { moveNumber: 1, color: 'white', san: 'e4', evaluation: 30, bestMove: null, bestMoveEval: 0, classification: 'good', comment: null },
         { moveNumber: 1, color: 'black', san: 'e5', evaluation: 20, bestMove: null, bestMoveEval: 30, classification: 'good', comment: null },
@@ -206,11 +242,28 @@ describe('mistakePuzzleService', () => {
       const puzzles = await db.mistakePuzzles.toArray();
       expect(puzzles[0].sourceMode).toBe('lichess');
       expect(puzzles[0].playerColor).toBe('white');
-      // bestMove comes from mocked stockfishEngine
-      expect(puzzles[0].bestMove).toBe('e2e4');
+      expect(puzzles[0].bestMove).toBe('g1f3');
     });
 
     it('generates puzzles from chess.com imports', async () => {
+      // Same reason as the lichess test above: detectTacticType skips
+      // 'tactical_sequence' puzzles when the bestMove's from-square is
+      // empty in the current FEN. Override the shared mock with a
+      // position-valid move for the post-1.e4 FEN (black to move).
+      const { stockfishEngine } = await import('./stockfishEngine');
+      const analyzePosition = vi.mocked(stockfishEngine.analyzePosition);
+      analyzePosition.mockResolvedValue({
+        bestMove: 'e7e5',
+        evaluation: 30,
+        isMate: false,
+        mateIn: null,
+        depth: 18,
+        topLines: [
+          { rank: 1, evaluation: 30, moves: ['e7e5'], mate: null },
+        ],
+        nodesPerSecond: 0,
+      });
+
       const annotations: MoveAnnotation[] = [
         { moveNumber: 1, color: 'white', san: 'e4', evaluation: 30, bestMove: null, bestMoveEval: 0, classification: 'good', comment: null },
         { moveNumber: 1, color: 'black', san: 'f6', evaluation: 180, bestMove: null, bestMoveEval: 30, classification: 'mistake', comment: null },
