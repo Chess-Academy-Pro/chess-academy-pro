@@ -470,17 +470,133 @@ export async function logAppAudit(
   void streamAuditEntry(filled);
 }
 
-async function streamAuditEntry(entry: AuditEntry): Promise<void> {
-  if (typeof window === 'undefined' || typeof localStorage === 'undefined') return;
-  const url = localStorage.getItem('auditStreamUrl');
-  const secret = localStorage.getItem('auditStreamSecret');
-  if (!url || !secret) return;
+// ─── Audit-stream config (Dexie-backed, was localStorage) ────────────
+//
+// CLAUDE.md "Do NOT — Use localStorage for anything (use Dexie)" rule.
+// The audit-stream URL + secret moved from localStorage to
+// `profile.preferences.auditStreamUrl` / `auditStreamSecret`. To keep
+// `streamAuditEntry` cheap on the hot path (it runs on every
+// `logAppAudit` call), we cache the values in a module-level variable.
+// `NarrationAuditPanel` writes via `setAuditStreamConfig` which updates
+// both Dexie AND the cache atomically; `App.init()` hydrates the cache
+// once at boot via `loadAuditStreamConfig()`. Until that resolves,
+// `streamAuditEntry` is a no-op — same effective behavior as
+// "localStorage was empty," which is the default state.
+
+interface AuditStreamConfig {
+  url: string;
+  secret: string;
+}
+
+let cachedStreamConfig: AuditStreamConfig | null = null;
+let streamConfigHydrated = false;
+
+/** Read the config from Dexie + populate the in-memory cache. Also
+ *  performs a one-time migration of any existing `localStorage`
+ *  values from the pre-Dexie era — if both keys are present in
+ *  localStorage AND the Dexie profile has no values yet, copy them
+ *  over and clear the localStorage entries. Idempotent: re-runs on
+ *  boot are safe. */
+export async function loadAuditStreamConfig(): Promise<AuditStreamConfig | null> {
   try {
-    await fetch(url, {
+    const profile = await db.profiles.get('main');
+    let url = profile?.preferences.auditStreamUrl ?? null;
+    let secret = profile?.preferences.auditStreamSecret ?? null;
+
+    // One-time migration from localStorage. The old code stashed the
+    // values under bare keys; copy them across, clear the originals,
+    // never touch localStorage again.
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const legacyUrl = localStorage.getItem('auditStreamUrl');
+      const legacySecret = localStorage.getItem('auditStreamSecret');
+      if (legacyUrl || legacySecret) {
+        if (!url && legacyUrl) url = legacyUrl;
+        if (!secret && legacySecret) secret = legacySecret;
+        if (profile && (legacyUrl || legacySecret)) {
+          try {
+            profile.preferences.auditStreamUrl = url;
+            profile.preferences.auditStreamSecret = secret;
+            await db.profiles.put(profile);
+          } catch {
+            /* swallow — migration failure must not affect boot */
+          }
+        }
+        try {
+          localStorage.removeItem('auditStreamUrl');
+          localStorage.removeItem('auditStreamSecret');
+        } catch {
+          /* swallow — localStorage may throw in private browsing */
+        }
+      }
+    }
+
+    streamConfigHydrated = true;
+    cachedStreamConfig = url && secret ? { url, secret } : null;
+    return cachedStreamConfig;
+  } catch {
+    streamConfigHydrated = true;
+    cachedStreamConfig = null;
+    return null;
+  }
+}
+
+/** Update both Dexie + the in-memory cache. The only writer is the
+ *  NarrationAuditPanel; we expose this rather than letting the panel
+ *  reach into the cache directly. */
+export async function setAuditStreamConfig(url: string, secret: string): Promise<void> {
+  cachedStreamConfig = url && secret ? { url, secret } : null;
+  streamConfigHydrated = true;
+  try {
+    const profile = await db.profiles.get('main');
+    if (!profile) return;
+    profile.preferences.auditStreamUrl = url || null;
+    profile.preferences.auditStreamSecret = secret || null;
+    await db.profiles.put(profile);
+  } catch {
+    /* swallow — config write failures must not affect the panel */
+  }
+}
+
+/** Clear the audit-stream config from both Dexie + the in-memory cache. */
+export async function clearAuditStreamConfig(): Promise<void> {
+  cachedStreamConfig = null;
+  streamConfigHydrated = true;
+  try {
+    const profile = await db.profiles.get('main');
+    if (!profile) return;
+    profile.preferences.auditStreamUrl = null;
+    profile.preferences.auditStreamSecret = null;
+    await db.profiles.put(profile);
+  } catch {
+    /* swallow */
+  }
+}
+
+/** Synchronous read of the cached config. Used by `streamAuditEntry`
+ *  on the hot audit-log path. Returns null until `loadAuditStreamConfig`
+ *  has resolved at least once (same as the legacy "localStorage was
+ *  empty" state — streaming is opt-in and best-effort). */
+export function getAuditStreamConfig(): AuditStreamConfig | null {
+  return cachedStreamConfig;
+}
+
+/** Whether the cache has been hydrated from Dexie at least once.
+ *  Exposed for tests; production callers shouldn't need to gate on
+ *  this. */
+export function isAuditStreamConfigHydrated(): boolean {
+  return streamConfigHydrated;
+}
+
+async function streamAuditEntry(entry: AuditEntry): Promise<void> {
+  if (typeof window === 'undefined') return;
+  const cfg = cachedStreamConfig;
+  if (!cfg) return;
+  try {
+    await fetch(cfg.url, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'x-audit-secret': secret,
+        'x-audit-secret': cfg.secret,
       },
       body: JSON.stringify(entry),
       // Best-effort: don't block on slow networks.

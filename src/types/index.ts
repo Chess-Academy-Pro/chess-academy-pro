@@ -615,6 +615,16 @@ export interface UserPreferences {
   // Lichess API token (encrypted, for puzzle activity/dashboard)
   lichessTokenEncrypted?: string | null;
   lichessTokenIv?: string | null;
+  // Audit-stream dev tooling — when both are set, every audit log
+  // entry POSTs to `auditStreamUrl` with `x-audit-secret:
+  // auditStreamSecret` so Claude (or any external watcher) can poll
+  // the stream in near real time. Off by default. Previously stored
+  // in localStorage; migrated to Dexie per the CLAUDE.md "no
+  // localStorage" rule. Owner: `appAuditor.streamAuditEntry` reads
+  // a module-level cache that mirrors these; `NarrationAuditPanel`
+  // is the only writer.
+  auditStreamUrl?: string | null;
+  auditStreamSecret?: string | null;
   /**
    * Persistent "what the coach has learned about this student" notes.
    * Short natural-language observations emitted by the coach (via the

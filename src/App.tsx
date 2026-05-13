@@ -10,7 +10,7 @@ import { getSharedAudioContext } from './services/audioContextManager';
 import { speechService } from './services/speechService';
 import { voiceService } from './services/voiceService';
 import { db } from './db/schema';
-import { installGlobalErrorHooks, installConsoleBackdoor, logAppAudit } from './services/appAuditor';
+import { installGlobalErrorHooks, installConsoleBackdoor, logAppAudit, loadAuditStreamConfig } from './services/appAuditor';
 import { emitAppBootAudit } from './services/appBootAudit';
 import { AppLayout } from './components/ui/AppLayout';
 import { LoadingScreen } from './components/ui/LoadingScreen';
@@ -156,6 +156,13 @@ export function App(): JSX.Element {
         applyTheme(theme);
         setActiveTheme(theme);
         setActiveProfile(profile);
+
+        // Hydrate the audit-stream config cache from Dexie (with
+        // one-time localStorage migration if any pre-Dexie values
+        // are still present). `appAuditor.streamAuditEntry` reads
+        // the cache synchronously on every audit log — until this
+        // resolves, streaming is a no-op (same as default-off state).
+        void loadAuditStreamConfig();
 
         // Restore saved voice preferences so they're applied from the first speak() call
         if (profile.preferences.systemVoiceURI) {

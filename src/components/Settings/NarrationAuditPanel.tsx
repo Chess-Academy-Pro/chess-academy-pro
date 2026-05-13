@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getAppAuditLog, clearAppAuditLog } from '../../services/appAuditor';
+import {
+  getAppAuditLog,
+  clearAppAuditLog,
+  loadAuditStreamConfig,
+  setAuditStreamConfig,
+  clearAuditStreamConfig,
+} from '../../services/appAuditor';
 import type { AuditCategory, AuditEntry } from '../../services/appAuditor';
 import { runLichessHealthProbe } from '../../services/lichessHealthProbe';
 import { voiceService } from '../../services/voiceService';
@@ -49,14 +55,23 @@ export function NarrationAuditPanel(): JSX.Element {
   }, []);
   // Audit-stream toggle — when enabled, every logAppAudit also POSTs
   // to /api/audit-stream so Claude can poll for new entries in near
-  // real time. Reads/writes localStorage 'auditStreamUrl' +
-  // 'auditStreamSecret'. Default off; nothing leaves the device.
-  const [streamUrl, setStreamUrl] = useState<string>(() =>
-    typeof window !== 'undefined' ? window.localStorage.getItem('auditStreamUrl') ?? '' : '',
-  );
-  const [streamSecret, setStreamSecret] = useState<string>(() =>
-    typeof window !== 'undefined' ? window.localStorage.getItem('auditStreamSecret') ?? '' : '',
-  );
+  // real time. Persisted to `profile.preferences.auditStreamUrl` +
+  // `auditStreamSecret` via `appAuditor.{set,clear}AuditStreamConfig`.
+  // (Moved off localStorage per CLAUDE.md "no localStorage" rule —
+  // `loadAuditStreamConfig` in `App.init` performs a one-time
+  // migration of any pre-Dexie localStorage values.) Default off;
+  // nothing leaves the device.
+  const [streamUrl, setStreamUrl] = useState<string>('');
+  const [streamSecret, setStreamSecret] = useState<string>('');
+  useEffect(() => {
+    void (async () => {
+      const cfg = await loadAuditStreamConfig();
+      if (cfg) {
+        setStreamUrl(cfg.url);
+        setStreamSecret(cfg.secret);
+      }
+    })();
+  }, []);
   const streamEnabled = !!streamUrl && !!streamSecret;
   const handleEnableStream = (): void => {
     const defaultUrl = `${window.location.origin}/api/audit-stream`;
@@ -65,14 +80,12 @@ export function NarrationAuditPanel(): JSX.Element {
       window.prompt('Audit-stream secret (must match AUDIT_STREAM_SECRET on the server):') ||
       '';
     if (!secret) return;
-    window.localStorage.setItem('auditStreamUrl', url);
-    window.localStorage.setItem('auditStreamSecret', secret);
+    void setAuditStreamConfig(url, secret);
     setStreamUrl(url);
     setStreamSecret(secret);
   };
   const handleDisableStream = (): void => {
-    window.localStorage.removeItem('auditStreamUrl');
-    window.localStorage.removeItem('auditStreamSecret');
+    void clearAuditStreamConfig();
     setStreamUrl('');
     setStreamSecret('');
   };
