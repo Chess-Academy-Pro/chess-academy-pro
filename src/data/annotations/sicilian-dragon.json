@@ -97,7 +97,7 @@
     },
     {
       "san": "d4",
-      "annotation": "White plays d4, opening the center — the defining move of the Open Sicilian. White accepts a structural concession (exchanging the d-pawn) for rapid development, a centralized knight on d4, and open lines for all pieces.",
+      "annotation": "White plays d4, opening the center — the defining move of the Open Sicilian. White accepts a structural concession (exchanging the d-pawn) for rapid development, a centralized pawn on d4, and open lines for all pieces.",
       "plans": [
         "Recapture with Nxd4 for central dominance",
         "Use the tempo advantage to build an attack"
@@ -208,7 +208,7 @@
     },
     {
       "san": "g6",
-      "annotation": "Black plays g6, the defining move of the Sicilian Dragon. The fianchettoed bishop on g7 will become the most powerful piece on the board — controlling the long a1-h8 diagonal, defending the kingside, and supporting the ...d5 break. The Dragon is named after the constellation-like pawn formation.",
+      "annotation": "Black plays g6, the defining move of the Sicilian Dragon. The fianchettoed piece on g7 will become the most powerful piece on the board — controlling the long a1-h8 diagonal, defending the kingside, and supporting the ...d5 break. The Dragon is named after the constellation-like pawn formation.",
       "pawnStructure": "The g6+d6 setup creates a 'small center' with the bishop controlling key dark squares from the fla.",
       "plans": [
         "Fianchetto with ...Bg7 next",
@@ -710,7 +710,7 @@
         },
         {
           "san": "g6",
-          "annotation": "Black initiates the Dragon formation by preparing to fianchetto the bishop on g7. This move creates a strong diagonal for the dark-squared bishop and prepares kingside castling.",
+          "annotation": "Black initiates the Dragon formation by preparing to fianchetto the piece on g7. This move creates a strong diagonal for the dark-squared bishop and prepares kingside castling.",
           "pawnStructure": "The Dragon pawn structure begins to emerge with the fianchetto formation on the kingside.",
           "plans": [
             "Develop the bishop to g7",
@@ -996,7 +996,7 @@
         },
         {
           "san": "Ne5",
-          "annotation": "Black advances the knight to a powerful central outpost, attacking the bishop on c4 (now on b3) and controlling key squares.",
+          "annotation": "Black advances the knight to a powerful central outpost, attacking the piece on c4 (now on b3) and controlling key squares.",
           "plans": [
             "Use the centralized knight for tactics",
             "Support counterplay against White's attack"
@@ -2078,7 +2078,7 @@
       "moveAnnotations": [
         {
           "san": "e4",
-          "annotation": "In the Sicilian: Dragon, the Dragon: Exchange Sacrifice is a tactical pattern you should know. The legendary exchange sacrifice — Black gives up the rook on c3 to destroy White's pawn structure."
+          "annotation": "In the Sicilian: Dragon, the Dragon: Exchange Sacrifice is a tactical pattern you should know. The legendary exchange sacrifice — Black gives up the piece on c3 to destroy White's pawn structure."
         },
         {
           "san": "c5",
@@ -5524,7 +5524,7 @@
         },
         {
           "san": "bxc6",
-          "annotation": "Black captures the knight on c6. This pawn move supports a future d-pawn advance, a key central plan.",
+          "annotation": "Black captures the pawn on c6. This pawn move supports a future d-pawn advance, a key central plan.",
           "arrows": [
             {
               "from": "b7",
@@ -8649,7 +8649,7 @@
         },
         {
           "san": "gxf5",
-          "annotation": "Black captures the knight on f5. White must be careful here — the position contains hidden dangers.",
+          "annotation": "Black captures the pawn on f5. White must be careful here — the position contains hidden dangers.",
           "arrows": [
             {
               "from": "g6",
@@ -9375,7 +9375,7 @@
         },
         {
           "san": "bxc3",
-          "annotation": "White captures the rook on c3. Black must be careful here — the position contains hidden dangers.",
+          "annotation": "White captures the pawn on c3. Black must be careful here — the position contains hidden dangers.",
           "arrows": [
             {
               "from": "b2",
