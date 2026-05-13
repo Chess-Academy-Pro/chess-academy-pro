@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor, fireEvent } from '../../test/utils';
+import { render, screen, waitFor, fireEvent, act } from '../../test/utils';
 import type { CoachGameMove, KeyMoment } from '../../types';
 
 // ─── Mocks ──────────────────────────────────────────────────────────────────
@@ -402,12 +402,24 @@ describe('CoachGameReview', () => {
     // signal: forward advanced past 0.
     await renderWalk();
 
-    expect(screen.getByTestId('review-back-btn')).toBeDisabled();
-    fireEvent.click(screen.getByTestId('review-forward-btn'));
+    // The first forward-click after a fresh renderWalk lands during
+    // the cold-cache jsdom render — a dummy await yields enough event-
+    // loop time for React's commit/effect cycle to settle before we
+    // dispatch the real click. Without this the click sometimes fails
+    // to commit the ply state, leaving the back button disabled.
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
-    await waitFor(() => {
-      expect(screen.getByTestId('review-back-btn')).toBeEnabled();
+    expect(screen.getByTestId('review-back-btn')).toBeDisabled();
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('review-forward-btn'));
     });
+
+    await waitFor(
+      () => {
+        expect(screen.getByTestId('review-back-btn')).toBeEnabled();
+      },
+      { timeout: 3000 },
+    );
   });
 
   it('back button re-disables after returning to ply 0', async () => {
