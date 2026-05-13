@@ -13,7 +13,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Chess } from 'chess.js';
 import { ArrowLeft, Lightbulb, SkipBack, RefreshCw, Flag, Loader2, ChevronRight, X, Check, MessageCircle, Zap } from 'lucide-react';
-import { ControlledChessBoard } from '../Board/ControlledChessBoard';
+import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessBoard } from '../Board/ChessBoard';
 import { NarrationArrowOverlay } from './NarrationArrowOverlay';
 import { AnalysisToggles } from '../Board/AnalysisToggles';
@@ -52,7 +52,6 @@ import { DifficultyToggle } from './DifficultyToggle';
 import type { CoachDifficulty } from '../../types';
 import { PlayerInfoBar } from './PlayerInfoBar';
 import { coachService } from '../../coach/coachService';
-import { anthropicProvider } from '../../coach/providers/anthropic';
 import { logAppAudit } from '../../services/appAuditor';
 import { sanitizeCoachText, sanitizeCoachStream, formatForSpeech, SENTENCE_END_RE } from '../../services/sanitizeCoachText';
 import { parseBoardTags } from '../../services/boardAnnotationService';
@@ -1405,11 +1404,15 @@ export function CoachTeachPage(): JSX.Element {
       const result = await coachService.ask(
         { surface: 'teach', ask: text, liveState },
         {
-          // /coach/teach is the ONLY surface that uses Anthropic. Every
-          // other surface stays on DeepSeek (the brain default). Anthropic
-          // gives Sonnet/Haiku for the teaching content; DeepSeek stays
-          // cost-effective for play, chat, hints, etc.
-          providerOverride: anthropicProvider,
+          // Provider routing: spine default (DeepSeek). The Anthropic
+          // balance is exhausted as of 2026-05, so pinning Anthropic
+          // here guaranteed an empty-budget 401 on every turn before
+          // the fallback layer could fire. DeepSeek tool-use handles
+          // the same teach surface — the DB anchors moves/FENs and
+          // the LLM only writes narration, which `deepseek-chat`
+          // produces fine at a fraction of the cost. Anthropic
+          // remains wired in `coachApi.getCoachStructuredResponse`
+          // as a best-effort fallback if DeepSeek errors.
           // 4 trips is enough: trip 1 thinks + tools (lichess /
           // stockfish), trip 2 emits play_move + teach text, trip 3-4
           // closes the prose. 6 was costing 18–30s of Opus latency
@@ -1998,7 +2001,7 @@ export function CoachTeachPage(): JSX.Element {
                 />
               </div>
             ) : (
-              <ControlledChessBoard
+              <ConsistentChessboard
                 game={game}
                 interactive={!busy}
                 showFlipButton={false}

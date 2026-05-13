@@ -117,16 +117,37 @@ inversions to get here. Each item below is a contract that another
 session might inadvertently break — when you touch this code, verify
 each is still satisfied.
 
+**`/coach/teach` (Learn with Coach) is the standard.** Every
+lesson-shaped surface in the app — middlegame studies, endgame
+modules, opening drills, kid puzzles when they grow up — should
+match its patterns: two-column flex (board + inline chat at md+,
+stacked on mobile), DB-anchored generation, voice-promise gated
+auto-advance, inline Chat + Tips buttons (no global FAB), and
+the 11-phase walkthrough state machine in `useTeachWalkthrough`.
+When you build a new lesson surface, copy `CoachTeachPage`'s
+spine; don't reinvent it.
+
 **Architecture spine:**
 - **DB-narration is the only generation path** for walkthroughs.
   `generateOpeningFromDbNarration` is the entry point. The LLM never
   emits move sequences, FENs, or schema structure — only prose.
   `chess.js` computes FENs from DB-sourced SANs deterministically.
-- **Provider fallback chain**: DeepSeek tool-use → Anthropic tool-use
-  → text-mode → DB-only synthesis. Every layer is required.
-  DeepSeek is the cost-default; Anthropic catches schema misses;
-  text-mode handles transient tool-use bugs; DB-only-synth ships a
-  walkthrough even when both LLMs fail. Don't remove a layer.
+- **Provider routing: DeepSeek-first, always.** As of 2026-05,
+  the Anthropic balance is exhausted — Sonnet/Haiku/Opus calls
+  will 401/429. DeepSeek is the primary on every surface,
+  including `/coach/teach`. Anthropic remains wired as a
+  best-effort fallback when its key is present AND the call
+  succeeds, but no surface should `providerOverride:
+  anthropicProvider` or otherwise pin Anthropic as primary —
+  doing so guarantees an empty-budget primary failure before the
+  fallback even fires. The spine's `resolveProviderName()`
+  defaults to `'deepseek'`; let it.
+- **Tool-use fallback chain stays intact**: DeepSeek tool-use →
+  Anthropic tool-use → text-mode → DB-only synthesis. Every
+  layer is required. DeepSeek does the heavy lifting now;
+  Anthropic catches schema misses when its budget permits;
+  text-mode handles transient tool-use bugs; DB-only-synth ships
+  a walkthrough even when both LLMs fail. Don't remove a layer.
 - **Lichess DB is canonical.** No fabricated sidelines. If a name
   isn't in `openings-lichess.json`, it doesn't exist for our app.
 
@@ -168,8 +189,18 @@ each is still satisfied.
   to Tips). NO global FAB — `showCoachFab = false` in `AppLayout`.
 - **`ConsistentChessboard` is the only board** in lesson views.
   Never render `react-chessboard` or `ControlledChessBoard` directly.
-- **`ChessLessonLayout` wraps every lesson page.** Caps board height
-  on short viewports, reserves bottom-nav + safe-area inset.
+- **`ChessLessonLayout` for single-column lesson surfaces.**
+  Caps board height on short viewports, reserves bottom-nav +
+  safe-area inset. `/coach/teach` itself uses a **two-column
+  flex** (board left, chat panel right at `md:` and up; stacked
+  on mobile) — this is the STANDARD shape for lesson surfaces
+  that bundle a live chat alongside the board. New surfaces that
+  match Learn-with-Coach's shape (board + chat) should copy the
+  same two-column flex with `pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))]`
+  mobile padding. New surfaces without inline chat (walkthrough-
+  only / middlegame study / opening drill) should use
+  `ChessLessonLayout`. Either way, the board goes through
+  `ConsistentChessboard`.
 - **Hub tile labels**: "Learn with Coach" / "Play with Coach". Don't
   rename to legacy "Teach" / "Play".
 
@@ -322,13 +353,40 @@ src/
 **When "clean up" or "make it match" is requested, match BOTH structure AND visual.** Don't just reorganize information flow — replicate the actual layout, grid, card style, spacing, and interaction patterns of the reference page. Study the reference's exact JSX, Tailwind classes, and component hierarchy before writing new code.
 
 ### Boards and Lesson Layouts (IMPORTANT)
-Every board in the app must go through `ConsistentChessboard` (`src/components/Chessboard/ConsistentChessboard.tsx`). Two modes:
-- **Controlled:** `<ConsistentChessboard game={useChessGame()} ... />` — for interactive lesson/coach/play screens.
-- **Static:** `<ConsistentChessboard fen={fenStringOrPositionMap} ... />` — for inline boards that own their own chess instance (Kid games, model-game viewers).
+Three primitives, three jobs:
+
+- **`ConsistentChessboard`** (`src/components/Chessboard/ConsistentChessboard.tsx`)
+  — the single facade for live interactive boards and static
+  inline boards.
+  - Controlled mode: `<ConsistentChessboard game={useChessGame()} ... />`
+    forwards to `ControlledChessBoard`. Used by `/coach/teach` and
+    `/coach/play` for the free-play board.
+  - Static mode: `<ConsistentChessboard fen={fen | piecePositionMap} ... />`
+    for inline display-only boards (kid games, model-game viewers,
+    endgame previews, search-result thumbnails).
+- **`Board/ChessBoard`** (`src/components/Board/ChessBoard.tsx`)
+  — the chess.js-validating wrapper used inside walkthroughs.
+  Owns its own `Chess` instance built from `initialFen` and
+  emits `onMove(MoveResult)` with a parsed SAN. Required for
+  the walkthrough's `drill` and `findMove` phases where the
+  student plays a move on the board and the runtime needs the
+  SAN back. Do NOT use this outside walkthrough / lesson
+  surfaces — for static display use `ConsistentChessboard`.
+- **`react-chessboard`** — never imported directly outside the
+  two primitives above.
 
 Theming (piece set, square colors, glow, animation duration, border) is centralized in `useBoardTheme()` (`src/hooks/useBoardTheme.ts`). Do NOT pass piece set / square color / animation overrides at the call site — they are pinned by the hook for visual consistency.
 
-Any "lesson with a board" screen (walkthrough, dynamic coach session, middlegame study) should use `ChessLessonLayout` (`src/components/Layout/ChessLessonLayout.tsx`). It guarantees: fixed gap above controls, board-height cap on short viewports, and mobile bottom-nav clearance via `env(safe-area-inset-bottom)`.
+`/coach/teach` is the canonical lesson surface (see "Learn-with-Coach
+is the standard" above). It uses a **two-column flex** (board left,
+chat panel right at md+, stacked on mobile) with
+`pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))]` for mobile
+bottom-nav clearance. New lesson surfaces with inline chat copy
+this shape directly. New lesson surfaces WITHOUT inline chat
+(pure walkthrough, middlegame study, opening drill) use
+`ChessLessonLayout` (`src/components/Layout/ChessLessonLayout.tsx`)
+for single-column rhythm: fixed gap above controls, board-height
+cap on short viewports, mobile bottom-nav clearance.
 
 ### Strict Narration Timing (IMPORTANT)
 Lesson playback (TTS + auto-advance) must use `useStrictNarration` (`src/hooks/useStrictNarration.ts`) for low-level control, or `useWalkthroughRunner` (`src/hooks/useWalkthroughRunner.ts`) for full-session orchestration over a `WalkthroughSession`. Voice-promise resolution is the single source of truth for advance — do NOT add fallback timers that race with `voiceService.speak()`. Manual navigation cancels in-flight speech and supersedes pending callbacks via the hook's token counter.
@@ -489,17 +547,24 @@ coach-run drills, play-against sessions — share the same substrate.
 When you add a new lesson flow, reuse these primitives:
 
 ### Shared components
-- **`src/components/Chessboard/ConsistentChessboard.tsx`** — the only
-  board wrapper for lesson views. Narrow API (`fen`, `arrows`,
-  `highlights`, `interactive`, `onMove`, `maxWidth`) over the existing
-  `ControlledChessBoard`. Keeps piece style / colors / arrow colors /
-  animation timing identical everywhere. Do not render
-  `ControlledChessBoard` or `react-chessboard` directly in new lesson
-  screens.
-- **`src/components/Layout/ChessLessonLayout.tsx`** — header / board /
-  controls / footer slots with safe-area and thumb-zone spacing. Caps
-  the board height so the control row never scrolls off-screen on
-  mobile. Wrap every lesson page with this.
+- **`src/components/Chessboard/ConsistentChessboard.tsx`** — the
+  board facade for live-game interactive surfaces (controlled
+  mode) AND static inline display boards (static mode). Pins
+  piece set / square colors / arrow colors / animation timing
+  via `useBoardTheme`. Use this on `/coach/teach`'s free-play
+  state, `/coach/play`'s live board, and every static thumbnail.
+- **`src/components/Board/ChessBoard.tsx`** — the chess.js-
+  validating walkthrough board. Owns its `Chess` instance,
+  emits `onMove(MoveResult)` with parsed SAN. Required for the
+  walkthrough runtime's `drill` and `findMove` phases (student
+  plays a move on the board, runtime needs the SAN back).
+- **`src/components/Layout/ChessLessonLayout.tsx`** — single-
+  column lesson wrapper with safe-area and thumb-zone spacing.
+  Caps the board height so the control row never scrolls
+  off-screen on mobile. Use for lesson surfaces WITHOUT inline
+  chat. Lesson surfaces WITH inline chat (the `/coach/teach`
+  shape) use a two-column flex instead — see the Boards and
+  Lesson Layouts section above.
 
 ### Shared types / services
 - **`src/types/walkthrough.ts`** — `WalkthroughStep` (narration

@@ -194,16 +194,19 @@ async function getProviderConfig(): Promise<ProviderConfig | null> {
     const deepseekEnvKey = getDeepseekKey();
 
     const profile = await db.profiles.get('main');
-    // WO-PLAN-B: prefer Anthropic whenever the embedded/env key is
-    // available, regardless of any prior `aiProvider` preference
-    // stored on the profile. The user explicitly asked NOT to manage
-    // keys via Settings — both providers' keys live in coachApi.ts
-    // already, and Anthropic Haiku is the faster + cheaper-in-aggregate
-    // path now that the spine bypasses the LLM for routine coach moves.
-    // DeepSeek remains the auto-fallback if the Anthropic call errors.
-    const provider: AiProvider = anthropicEnvKey
-      ? 'anthropic'
-      : (profile?.preferences.aiProvider ?? 'deepseek');
+    // DeepSeek is the cost-default everywhere as of 2026-05 — the
+    // Anthropic balance is exhausted, so preferring Anthropic
+    // whenever its key exists (the prior WO-PLAN-B behavior)
+    // guaranteed an empty-budget 401 on the primary call before the
+    // fallback could fire. Now: DeepSeek-primary when its key is
+    // available, Anthropic only as a best-effort fallback via
+    // `getFallbackConfig`. A user with ONLY an Anthropic key still
+    // gets Anthropic (no key = no calls).
+    const provider: AiProvider = deepseekEnvKey
+      ? 'deepseek'
+      : (anthropicEnvKey
+          ? 'anthropic'
+          : (profile?.preferences.aiProvider ?? 'deepseek'));
 
     const preferredModel = profile?.preferences.preferredModel;
 
