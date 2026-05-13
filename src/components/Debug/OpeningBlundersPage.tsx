@@ -26,7 +26,7 @@ import { createStreamingSpeaker } from '../../services/streamingSpeaker';
 import { voiceService } from '../../services/voiceService';
 import { ScrollHintBar } from '../Common/ScrollHintBar';
 import { updatePuzzleRating } from '../../services/puzzleService';
-import { reconstructPathToFen } from '../../services/openingWalkthroughService';
+import { reconstructPathForPuzzle } from '../../services/openingWalkthroughService';
 import {
   groupByOpeningFamily,
   familyLabel,
@@ -764,24 +764,44 @@ function PuzzleView({ puzzle, onExit, onResult, onNext }: PuzzleViewProps): JSX.
 
   const studentSide = puzzle.studentColor;
 
+  // 'puzzle' = curated solution mode (default).
+  // 'playing-out' = free-play vs Stockfish from the end of the
+  // puzzle. User opts in via the "Play it out" button after solving.
+  const [mode, setMode] = useState<'puzzle' | 'playing-out'>('puzzle');
+  // Capture the FEN at the moment the user opts into play-out so the
+  // free-play hook re-mounts with a stable startFen instead of
+  // tracking the curated playout's mutating fen.
+  const [playOutStartFen, setPlayOutStartFen] = useState<string | null>(null);
+
   const playout = useEndgamePlayout({
-    startFen,
-    solution: solutionSan,
+    startFen: mode === 'playing-out' && playOutStartFen ? playOutStartFen : startFen,
+    solution: mode === 'playing-out' ? [] : solutionSan,
+    stockfishFallback: mode === 'playing-out',
+    extendToObviousWin: mode === 'playing-out',
+    fallbackPliesToPlay: mode === 'playing-out' ? 50 : undefined,
+    fallbackDifficulty: 'hard',
     replyDelayMs: 450,
   });
   const clickToMove = useClickToMove(playout);
 
-  // Fire onResult once when the puzzle reaches a terminal state and
-  // then auto-advance to the next puzzle after a brief beat so the
-  // user has time to see "Solved" before the board flips.
+  // Fire onResult once when the puzzle reaches a terminal state.
+  // Auto-advance is button-driven now ("Auto-advance" CTA below) —
+  // the user explicitly opts in so they can dwell on the position,
+  // play it out vs Stockfish, or tap "Show the opening" before
+  // moving on.
   const [reported, setReported] = useState(false);
   useEffect(() => {
+    // Only score the curated puzzle solve, not the free-play continuation.
+    if (mode !== 'puzzle') return;
     if (!playout.isComplete || reported) return;
     setReported(true);
     onResult?.(playout.firstTryPerfect);
-    const t = window.setTimeout(() => onNext(), 1400);
-    return () => window.clearTimeout(t);
-  }, [playout.isComplete, playout.firstTryPerfect, reported, onResult, onNext]);
+  }, [mode, playout.isComplete, playout.firstTryPerfect, reported, onResult]);
+
+  const startPlayOut = (): void => {
+    setPlayOutStartFen(playout.fen);
+    setMode('playing-out');
+  };
 
   // ─── Walkthrough state — optional "Show the opening" affordance ──
   // Reconstructs the move sequence from the chess start position to
@@ -798,9 +818,9 @@ function PuzzleView({ puzzle, onExit, onResult, onNext }: PuzzleViewProps): JSX.
     setWalkthroughLoading(true);
     setWalkthroughError(null);
     try {
-      const result = await reconstructPathToFen(puzzle.fen);
-      if (!result.found) {
-        setWalkthroughError("Couldn't find a popular path to this position. Skipping straight to the puzzle.");
+      const result = await reconstructPathForPuzzle(puzzle.id, puzzle.fen);
+      if (!result.found || result.sans.length === 0) {
+        setWalkthroughError("Couldn't find this puzzle's source game. Skipping straight to the puzzle.");
         setWalkthroughLoading(false);
         return;
       }
@@ -914,10 +934,28 @@ function PuzzleView({ puzzle, onExit, onResult, onNext }: PuzzleViewProps): JSX.
             {studentSide === 'white' ? 'White' : 'Black'} to play. {puzzleGoalSentence(puzzle.themes)}.
           </p>
         )}
-        {playout.isComplete && (
+        {playout.isComplete && mode === 'puzzle' && (
           <p className="text-sm text-green-400 font-semibold">
             Solved — that&apos;s the punishing line.
           </p>
+        )}
+        {playout.isComplete && mode === 'playing-out' && (
+          <p className="text-sm text-cyan-300">
+            Free play — Stockfish is defending. Keep going.
+          </p>
+        )}
+        {/* Play-it-out CTA: when the curated puzzle has just been
+            solved, give the user the option to keep playing the
+            position against Stockfish instead of moving on. Same
+            free-play substrate the piece-mate fundamentals use. */}
+        {playout.isComplete && mode === 'puzzle' && (
+          <button
+            onClick={startPlayOut}
+            className="px-3 py-2 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-sm font-medium hover:bg-emerald-500/25"
+            data-testid="opening-blunder-play-out"
+          >
+            Play it out vs Stockfish
+          </button>
         )}
         {playout.wrongAttempts > 0 && !playout.isComplete && (
           <p className="text-[11px] text-amber-400">
