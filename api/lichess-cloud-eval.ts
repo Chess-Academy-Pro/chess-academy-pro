@@ -57,12 +57,17 @@ export default async function handler(req: Request): Promise<Response> {
   for (const [k, v] of url.searchParams) upstreamParams.set(k, v);
   const upstreamUrl = `${UPSTREAM}?${upstreamParams.toString()}`;
 
+  // Optional LICHESS_TOKEN — see lichess-explorer.ts.
+  const token = process.env.LICHESS_TOKEN;
+  const upstreamHeaders: Record<string, string> = {
+    Accept: 'application/json',
+    'User-Agent': UPSTREAM_USER_AGENT,
+  };
+  if (token) upstreamHeaders.Authorization = `Bearer ${token}`;
+
   try {
     const upstream = await fetch(upstreamUrl, {
-      headers: {
-        Accept: 'application/json',
-        'User-Agent': UPSTREAM_USER_AGENT,
-      },
+      headers: upstreamHeaders,
       signal: AbortSignal.timeout(PROXY_TIMEOUT_MS),
     });
     const body = await upstream.text();

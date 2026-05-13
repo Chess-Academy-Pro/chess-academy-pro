@@ -44,11 +44,20 @@ async function attemptUpstream(
   userAgent: string,
   signal: AbortSignal,
 ): Promise<{ status: number; body: string; ok: boolean }> {
+  // LICHESS_TOKEN — optional personal access token from
+  // https://lichess.org/account/oauth/token. When set, authenticated
+  // requests bypass the nginx IP-block that hits Vercel's edge
+  // function range and get higher rate limits. Audit (build 23b9b15)
+  // showed all three UA fallbacks 401'd anonymously; auth fixes it.
+  const token = process.env.LICHESS_TOKEN;
+  const headers: Record<string, string> = {
+    Accept: 'application/json',
+    'User-Agent': userAgent,
+  };
+  if (token) headers.Authorization = `Bearer ${token}`;
+
   const upstream = await fetch(upstreamUrl, {
-    headers: {
-      Accept: 'application/json',
-      'User-Agent': userAgent,
-    },
+    headers,
     signal,
   });
   const body = await upstream.text();
