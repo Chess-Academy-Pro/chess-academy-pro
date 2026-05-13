@@ -23,6 +23,21 @@ As of the last update, main has shipped:
   memory snapshots.
 - PR #455: Phase 4 — ImportGamesButton on Insights, Review,
   From-Your-Games.
+- PR #458: Phase 2 — useNarration hook + 3 surface migrations.
+- PR #459: Phase 3 — static-board chrome parity (sound + last-move + check).
+- PR #460: Phase 5 — visual signature parity + audit hooks.
+- PR #461: Phase 6 — eval-tolerant gate on From-Your-Games.
+- PR #462: asset-load-error audit wired on piece sprites.
+- PR #463: integration tests for acceptableSans gate.
+- PR #464: Phase 7 — hand-author solutions for 10 mating patterns.
+- PR #465: Phase 7b — multi-position nav in CuratedMatingLessonView.
+- PR #466: Phase 7c — free-play mode foundations.
+- PR #467: Phase 7d — piece-mate fundamentals wired into free-play.
+- PR #468–481: stale-test sweep (Settings a11y, Dashboard label, hint
+  race, walkthrough mock target, weakness analyzer fixture, mistake
+  puzzle tactic mock, teach-walkthrough cross-test contamination,
+  coach-review forward-click warmup, calculation react-chessboard
+  jsdom mock, endgame-data illegal moves repair).
 
 ---
 
