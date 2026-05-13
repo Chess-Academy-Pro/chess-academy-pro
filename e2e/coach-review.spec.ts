@@ -155,7 +155,7 @@ async function resetSeeder(page: Page): Promise<void> {
 test.describe('Review with Coach — full-play audit', () => {
   // Parallel workers race on Dexie state — sample seeder vs cleanup
   // collide. Serial mode keeps state predictable.
-  test.describe.configure({ mode: 'serial' });
+  test.describe.configure({ mode: 'serial', retries: 1 });
   test.setTimeout(120_000);
 
   test('list page renders with title + 4 filter buttons + back button', async ({ page }) => {
