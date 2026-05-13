@@ -68,6 +68,11 @@ function createGameWithAnnotations(
     blackElo: 1400,
     source: 'coach',
     annotations,
+    // analyzeGames skips games without fullyAnalyzed=true because sparse
+    // detectBlunders annotations produce false weakness signals (most
+    // moves unclassified). The test fixtures are fully annotated by
+    // construction, so flag them as such.
+    fullyAnalyzed: true,
     coachAnalysis: null,
     isMasterGame: false,
     openingId: null,
