@@ -388,6 +388,31 @@ solution that didn't mate (`Qxf3+ Bxf3`). Restored the third ply
 fundamentals are tracked separately — they want a different surface
 (open-board play vs Stockfish), not a 1-2 move puzzle.
 
+### Phase 7b — Multi-position nav [STATUS: shipped]
+
+Picker now sorts solved positions shallow→deep and passes them all
+into `CuratedMatingLessonView`, which walks them with a Prev/Next
+strip + a "Try the mate-in-N" CTA on the completion screen. Filled
+three suppressed shorter-mate references that the deeper positions
+were shadowing.
+
+### Phase 7c — Free-play foundations [STATUS: infra shipped]
+
+`useEndgamePlayout` now starts in `student-to-move` (not `complete`)
+when `solution` is empty AND `stockfishFallback === true`. This is
+the foundation for piece-mate fundamental drills (K+Q vs K, K+B+B
+vs K, K+Q+B vs K, K+Q+N vs K) where there's no curated line — the
+student drives the lone king to mate against Stockfish defense.
+
+The UI wiring (picker → free-play mode + win detection at mate / 50-
+move draw / position repetition) is a separate follow-up — wants a
+small UX call on:
+- How to time out a stuck student (50-move rule? Stockfish-suggested
+  "I can finish it for you" button?)
+- Where the lone-king starting position lives (random per-attempt,
+  or always the curated `lessonPositions[0]`?)
+- Whether to grade student technique (moves to mate vs optimal)
+
 ### Phase 8 — Stockfish crash hygiene [STATUS: shipped in PR #453]
 
 Initial hypothesis (worker-pooling) was wrong. Reading

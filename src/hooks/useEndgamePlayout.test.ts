@@ -363,4 +363,62 @@ describe('useEndgamePlayout', () => {
       });
     });
   });
+
+  describe('free-play (Phase 7c — piece-mate fundamentals)', () => {
+    // K+Q vs K, white to move, free play: no curated line.
+    const KQ_VS_K = '8/8/8/8/8/3k4/8/3K3Q w - - 0 1';
+
+    it('starts in student-to-move when solution is empty AND stockfishFallback is true', () => {
+      const { result } = renderHook(() =>
+        useEndgamePlayout({
+          startFen: KQ_VS_K,
+          solution: [],
+          stockfishFallback: true,
+          fallbackPliesToPlay: 30,
+          replyDelayMs: 0,
+        }),
+      );
+      expect(result.current.phase).toBe('student-to-move');
+      expect(result.current.curatedStudentMoves).toBe(0);
+    });
+
+    it('keeps the legacy "complete on empty solution" behavior when stockfishFallback is off', () => {
+      const { result } = renderHook(() =>
+        useEndgamePlayout({
+          startFen: KQ_VS_K,
+          solution: [],
+          stockfishFallback: false,
+          replyDelayMs: 0,
+        }),
+      );
+      expect(result.current.phase).toBe('complete');
+    });
+
+    it('accepts any legal student move and requests a Stockfish reply', async () => {
+      vi.mocked(getCoachMove).mockResolvedValueOnce({
+        uci: 'd3c3',
+        from: 'd3',
+        to: 'c3',
+      });
+      const { result } = renderHook(() =>
+        useEndgamePlayout({
+          startFen: KQ_VS_K,
+          solution: [],
+          stockfishFallback: true,
+          fallbackPliesToPlay: 30,
+          replyDelayMs: 0,
+        }),
+      );
+      // Free play: any legal queen move is acceptable.
+      let accepted = false;
+      act(() => {
+        accepted = result.current.onPieceDrop(drop('h1', 'h3'));
+      });
+      expect(accepted).toBe(true);
+      expect(result.current.wrongAttempts).toBe(0);
+      await waitFor(() => {
+        expect(getCoachMove).toHaveBeenCalled();
+      });
+    });
+  });
 });

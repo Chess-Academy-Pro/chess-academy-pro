@@ -241,8 +241,16 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
   const [wrongAttempts, setWrongAttempts] = useState<number>(0);
   const [wrongSquare, setWrongSquare] = useState<string | null>(null);
   const [firstTryPerfect, setFirstTryPerfect] = useState<boolean>(true);
+  // Phase 7c (free-play piece-mates): when there's no curated line but
+  // stockfishFallback is on, the student starts in 'student-to-move' so
+  // they can drive the lone king around. Without this the playout
+  // would mark itself complete on mount.
   const [phase, setPhase] = useState<PlayoutPhase>(
-    effectiveLine.length > 0 ? 'student-to-move' : 'complete',
+    effectiveLine.length > 0
+      ? 'student-to-move'
+      : stockfishFallback
+        ? 'student-to-move'
+        : 'complete',
   );
   const [fallbackPliesPlayed, setFallbackPliesPlayed] = useState<number>(0);
   const [fallbackOutcome, setFallbackOutcome] =
@@ -261,9 +269,15 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     setFallbackPliesPlayed(0);
     setFallbackOutcome(effectiveLine.length > 0 ? 'curated' : 'survived');
     setHintRevealed(false);
-    setPhase(effectiveLine.length > 0 ? 'student-to-move' : 'complete');
+    setPhase(
+      effectiveLine.length > 0
+        ? 'student-to-move'
+        : stockfishFallback
+          ? 'student-to-move'
+          : 'complete',
+    );
     setStudentMoveLog([]);
-  }, [startFen, effectiveLine.length]);
+  }, [startFen, effectiveLine.length, stockfishFallback]);
 
   // Auto-clear the wrong-square red flash after 600ms.
   useEffect(() => {
@@ -467,9 +481,15 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     setFallbackPliesPlayed(0);
     setFallbackOutcome(effectiveLine.length > 0 ? 'curated' : 'survived');
     setHintRevealed(false);
-    setPhase(effectiveLine.length > 0 ? 'student-to-move' : 'complete');
+    setPhase(
+      effectiveLine.length > 0
+        ? 'student-to-move'
+        : stockfishFallback
+          ? 'student-to-move'
+          : 'complete',
+    );
     setStudentMoveLog([]);
-  }, [startFen, effectiveLine.length]);
+  }, [startFen, effectiveLine.length, stockfishFallback]);
 
   const reveal = useCallback((): void => {
     // Auto-play the entire remaining curated line and mark complete
