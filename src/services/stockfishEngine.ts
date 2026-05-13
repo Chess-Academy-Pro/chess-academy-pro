@@ -137,6 +137,26 @@ export function resolveWorkerUrl(): ResolvedWorker {
   };
 }
 
+/** Phase 8 — Stockfish crash hygiene constants. */
+/** Delay between `worker.terminate()` and the single-thread fallback
+ *  spawn, in milliseconds. `terminate()` is synchronous but the
+ *  browser's WASM page reclamation is async; spawning the fallback
+ *  immediately can OOM because the multi-thread heap hasn't been
+ *  freed yet. 100ms is enough on Chrome 120 in the wild (audit cycle
+ *  dbaee3b confirmed the OOM came ~95ms after the multi crash). */
+const WASM_RECLAIM_DELAY_MS = 100;
+/** Backoff delay before retrying a single-thread spawn that OOM'd.
+ *  Most WASM OOMs are transient memory pressure that recovers
+ *  within a second; one retry after this delay clears the majority
+ *  of cases without making the user wait too long if the retry
+ *  also fails. */
+const SINGLE_THREAD_RETRY_DELAY_MS = 500;
+/** How long after the FIRST worker error we keep coalescing further
+ *  errors into the same audit-log entry. A crashing multi-thread
+ *  bundle emits 60+ ErrorEvents in ~100ms; we want one summary log,
+ *  not 60 IndexedDB writes blocking the main thread. */
+const WORKER_ERROR_DEDUP_WINDOW_MS = 500;
+
 class StockfishEngine {
   private worker: Worker | null = null;
   private isReady = false;
@@ -171,6 +191,15 @@ class StockfishEngine {
   // threaded variant without probing multi again. Prevents a
   // multi → single → multi → single oscillation across crash retries.
   private _runtimeFallbackAttempted = false;
+  // Phase 8 — coalesce worker error spam. Multi-thread crashes can
+  // emit 60+ ErrorEvents in ~100ms; we want one audit-log row, not
+  // 60. Tracks the first error timestamp + count in the current
+  // dedup window.
+  private _workerErrorWindow: { startedAt: number; count: number } | null = null;
+  // Phase 8 — single-thread OOM retry budget. Capped at one retry
+  // per session to avoid a tight spin if the host is genuinely out
+  // of memory. Reset on successful init.
+  private _singleThreadOomRetryUsed = false;
 
   get status(): StockfishStatus {
     return this._status;
@@ -260,18 +289,29 @@ class StockfishEngine {
             clearTimeout(earlyFailureTimer);
             earlyFailureTimer = null;
           }
+          const totalErrors = this._workerErrorWindow?.count ?? 1;
           console.warn(
-            '[Stockfish] Multi-thread variant failed at runtime, falling back to single-threaded',
+            `[Stockfish] Multi-thread variant failed at runtime (${totalErrors} error event${
+              totalErrors === 1 ? '' : 's'
+            }), falling back to single-threaded`,
           );
           void logAppAudit({
             kind: 'stockfish-variant-fallback',
             category: 'subsystem',
             source: 'stockfishEngine.initialize',
-            summary: `multi failed at runtime, fell back to single (reason: ${reason})`,
+            summary: `multi failed at runtime, fell back to single (reason: ${reason}; ${totalErrors} error event${
+              totalErrors === 1 ? '' : 's'
+            } coalesced)`,
           });
           this.worker?.terminate();
           this.worker = null;
-          tryStart(true);
+          // Phase 8 Bug B — give the browser time to reclaim the
+          // multi-thread WASM heap BEFORE spawning the single-thread
+          // worker. Without this delay, the single-thread spawn OOMs
+          // because the multi-thread pages haven't been freed yet.
+          // ~100ms is enough on Chrome 120 (audit confirmed the
+          // single-thread OOM came ~95ms after the multi crash).
+          setTimeout(() => tryStart(true), WASM_RECLAIM_DELAY_MS);
         };
 
         try {
@@ -290,6 +330,26 @@ class StockfishEngine {
             const msg =
               error.message ||
               'Uncaught RuntimeError or worker load failure';
+            // Phase 8 Bug A — suppress the bubble to window.onerror.
+            // A crashing multi-thread bundle emits 60+ ErrorEvents
+            // in ~100ms; if any of those reach the global error
+            // handler, installGlobalErrorHooks logs each one to
+            // IndexedDB and blocks the main thread for hundreds of
+            // ms. preventDefault() + the dedup window below cap
+            // worker-crash audit volume at 1 row per ~500ms.
+            error.preventDefault?.();
+            // Coalesce console + audit logging within the dedup
+            // window so we don't spam either.
+            const now = Date.now();
+            const inWindow =
+              this._workerErrorWindow !== null &&
+              now - this._workerErrorWindow.startedAt <
+                WORKER_ERROR_DEDUP_WINDOW_MS;
+            if (inWindow && this._workerErrorWindow) {
+              this._workerErrorWindow.count += 1;
+              return true;
+            }
+            this._workerErrorWindow = { startedAt: now, count: 1 };
             console.error('[Stockfish] worker.onerror:', msg);
             // Multi-thread bundle failed early — try the runtime
             // fallback before treating this as a fatal init error.
@@ -298,7 +358,38 @@ class StockfishEngine {
               !this._runtimeFallbackAttempted
             ) {
               handleEarlyMultiFailure(msg);
-              return;
+              return true;
+            }
+            // Phase 8 Bug C — single-thread also OOM'd. Retry once
+            // after a backoff so a transient memory-pressure event
+            // doesn't leave the engine permanently unavailable.
+            // Detect OOM by message content (WebAssembly.instantiate
+            // throws "Out of memory: Cannot allocate Wasm memory").
+            const isOom =
+              /out of memory|cannot allocate wasm memory/i.test(msg);
+            if (
+              this.workerVariant === 'single' &&
+              isOom &&
+              !this._singleThreadOomRetryUsed
+            ) {
+              this._singleThreadOomRetryUsed = true;
+              console.warn(
+                `[Stockfish] Single-thread spawn OOM; retrying after ${SINGLE_THREAD_RETRY_DELAY_MS}ms`,
+              );
+              void logAppAudit({
+                kind: 'stockfish-variant-fallback',
+                category: 'subsystem',
+                source: 'stockfishEngine.initialize',
+                summary: `single-thread OOM; retry-with-backoff (${SINGLE_THREAD_RETRY_DELAY_MS}ms)`,
+              });
+              this.worker?.terminate();
+              this.worker = null;
+              if (earlyFailureTimer !== null) {
+                clearTimeout(earlyFailureTimer);
+                earlyFailureTimer = null;
+              }
+              setTimeout(() => tryStart(true), SINGLE_THREAD_RETRY_DELAY_MS);
+              return true;
             }
             clearTimeout(overallTimeoutId);
             if (earlyFailureTimer !== null) {
@@ -308,6 +399,7 @@ class StockfishEngine {
             this.setStatus('error', msg);
             this.initPromise = null;
             reject(new Error(msg));
+            return true;
           };
 
           // 5-second early-failure window. If multi-thread doesn't
@@ -348,6 +440,9 @@ class StockfishEngine {
               this.worker?.removeEventListener('message', initHandler);
               this.isReady = true;
               this._crashRetries = 0;
+              // Reset Phase 8 retry budgets on successful ready.
+              this._singleThreadOomRetryUsed = false;
+              this._workerErrorWindow = null;
               console.log(
                 `[Stockfish] Engine ready (${this.workerVariant}-threaded WASM)`,
               );

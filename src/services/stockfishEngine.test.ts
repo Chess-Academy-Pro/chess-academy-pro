@@ -1281,8 +1281,16 @@ describe('runtime fallback (multi → single)', () => {
     await Promise.resolve();
     expect(workerUrls).toEqual(['/stockfish/stockfish-18-lite.js']);
 
+    // Phase 8 — the engine now waits ~100ms after terminate() for
+    // the browser to reclaim the multi-thread WASM heap before
+    // spawning the single-thread fallback. Fake timers MUST be
+    // active before the error fires so the setTimeout call is
+    // captured.
+    vi.useFakeTimers();
     // Multi-thread bundle throws before responding with uciok.
     mockWorker.emitError('runtime crash in pthread spawn');
+    vi.advanceTimersByTime(150);
+    vi.useRealTimers();
 
     // Microtasks settle, fallback kicks off, second worker is spawned.
     await Promise.resolve();
@@ -1315,7 +1323,12 @@ describe('runtime fallback (multi → single)', () => {
     const first = stockfishEngine.initialize();
     await Promise.resolve();
     await Promise.resolve();
+    // Phase 8 reclaim delay: fake timers must be active BEFORE the
+    // error fires so the setTimeout call is captured.
+    vi.useFakeTimers();
     mockWorker.emitError('runtime crash');
+    vi.advanceTimersByTime(150);
+    vi.useRealTimers();
     await Promise.resolve();
     await Promise.resolve();
     queueMicrotask(() => {
@@ -1353,14 +1366,152 @@ describe('runtime fallback (multi → single)', () => {
     const initPromise = stockfishEngine.initialize();
     await Promise.resolve();
     await Promise.resolve();
+    // Phase 8 added a reclaim delay before the single-thread spawn.
+    // Fake timers must be active BEFORE the error fires.
+    vi.useFakeTimers();
     mockWorker.emitError('multi crash');
-    await Promise.resolve();
-    await Promise.resolve();
-
-    // Now simulate the SINGLE-thread worker also failing.
+    vi.advanceTimersByTime(200);
+    // Advance past the 500ms dedup window so the next error is
+    // processed as a fresh event, not coalesced with the multi crash.
+    vi.advanceTimersByTime(600);
+    // Now simulate the SINGLE-thread worker also failing — with a
+    // non-OOM message so the OOM-retry path doesn't intercept it.
     mockWorker.emitError('single crash too');
+    vi.useRealTimers();
+    await Promise.resolve();
+    await Promise.resolve();
 
     // Init should reject; no further worker constructions.
     await expect(initPromise).rejects.toThrow();
+  });
+
+  // -----------------------------------------------------------------------
+  // Phase 8 — crash hygiene (dedup, reclaim delay, OOM retry)
+  // -----------------------------------------------------------------------
+  describe('crash hygiene (Phase 8)', () => {
+    /** Build a single ErrorEvent-like object that records whether
+     *  preventDefault was called. The engine's onerror handler is
+     *  expected to call .preventDefault() so worker errors don't
+     *  bubble to window.onerror. */
+    function makeErrorEvent(message: string): ErrorEvent & { defaultPrevented: boolean } {
+      let prevented = false;
+      const ev = {
+        message,
+        preventDefault: () => {
+          prevented = true;
+        },
+      } as unknown as ErrorEvent & { defaultPrevented: boolean };
+      Object.defineProperty(ev, 'defaultPrevented', {
+        get: () => prevented,
+      });
+      return ev;
+    }
+
+    it('calls preventDefault on worker.onerror to stop bubbling to window.onerror', async () => {
+      const { stockfishEngine } = await getEngine();
+      const initPromise = stockfishEngine.initialize();
+      initPromise.catch(() => undefined); // attach catcher before any reject
+      await Promise.resolve();
+      const ev = makeErrorEvent('worker boom');
+      vi.useFakeTimers();
+      mockWorker.instance.onerror?.(ev);
+      vi.advanceTimersByTime(200);
+      vi.useRealTimers();
+      expect(ev.defaultPrevented).toBe(true);
+    });
+
+    it('coalesces a burst of worker errors into a single fallback path', async () => {
+      const { stockfishEngine } = await getEngine();
+      const initPromise = stockfishEngine.initialize();
+      initPromise.catch(() => undefined);
+      await Promise.resolve();
+
+      const beforeBurst = workerConstructorCallCount;
+      // Burst of 60 ErrorEvents in the same crash window — same shape
+      // as the audit-cycle dbaee3b finding cluster.
+      vi.useFakeTimers();
+      for (let i = 0; i < 60; i += 1) {
+        mockWorker.instance.onerror?.(makeErrorEvent(`burst-${i}`));
+      }
+      // Drive the reclaim delay so the (single) single-thread spawn
+      // actually happens.
+      vi.advanceTimersByTime(200);
+      vi.useRealTimers();
+      await Promise.resolve();
+
+      // Exactly one new worker construction — the single-thread
+      // fallback. NOT 60.
+      expect(workerConstructorCallCount - beforeBurst).toBeLessThanOrEqual(1);
+    });
+
+    it('retries single-thread spawn once on OOM with a backoff', async () => {
+      const { stockfishEngine } = await getEngine();
+      const initPromise = stockfishEngine.initialize();
+      initPromise.catch(() => undefined);
+      await Promise.resolve();
+
+      // Multi crashes → fall back to single.
+      vi.useFakeTimers();
+      mockWorker.instance.onerror?.(makeErrorEvent('multi crash'));
+      vi.advanceTimersByTime(200); // reclaim delay
+      vi.useRealTimers();
+      await Promise.resolve();
+
+      const afterFallbackCount = workerConstructorCallCount;
+      // Single-thread spawn ALSO OOMs. Reset the dedup window so the
+      // OOM error isn't coalesced with the prior multi error — in
+      // production they'd be in different windows naturally.
+      vi.useFakeTimers();
+      // advance past the dedup window first
+      vi.advanceTimersByTime(600);
+      mockWorker.instance.onerror?.(
+        makeErrorEvent(
+          'Uncaught RuntimeError: Aborted(RangeError: WebAssembly.instantiate(): Out of memory: Cannot allocate Wasm memory for new instance)',
+        ),
+      );
+      // Phase 8 Bug C — engine should retry once after the backoff
+      // window. Advance timers past the retry delay.
+      vi.advanceTimersByTime(600);
+      vi.useRealTimers();
+      await Promise.resolve();
+
+      // One additional worker spawned by the retry path.
+      expect(workerConstructorCallCount).toBe(afterFallbackCount + 1);
+    });
+
+    it('does NOT retry a second time after the retry budget is spent', async () => {
+      const { stockfishEngine } = await getEngine();
+      const initPromise = stockfishEngine.initialize();
+      initPromise.catch(() => undefined);
+      await Promise.resolve();
+
+      // Multi crashes → fall back to single.
+      vi.useFakeTimers();
+      mockWorker.instance.onerror?.(makeErrorEvent('multi crash'));
+      vi.advanceTimersByTime(200);
+
+      // Single OOMs → first retry (advance past dedup window first).
+      vi.advanceTimersByTime(600);
+      mockWorker.instance.onerror?.(
+        makeErrorEvent('WebAssembly.instantiate(): Out of memory'),
+      );
+      vi.advanceTimersByTime(600);
+      await Promise.resolve();
+
+      const afterRetryCount = workerConstructorCallCount;
+      // Retry ALSO OOMs — budget exhausted. Engine should reject the
+      // init promise and NOT spawn another worker. Advance past
+      // dedup window before emitting so the error is processed.
+      vi.advanceTimersByTime(600);
+      mockWorker.instance.onerror?.(
+        makeErrorEvent('WebAssembly.instantiate(): Out of memory'),
+      );
+      vi.advanceTimersByTime(600);
+      vi.useRealTimers();
+      await Promise.resolve();
+
+      expect(workerConstructorCallCount).toBe(afterRetryCount);
+      await expect(initPromise).rejects.toThrow();
+    });
   });
 });
