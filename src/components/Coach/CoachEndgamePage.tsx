@@ -22,7 +22,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Chess, type Square } from 'chess.js';
-import { ArrowLeft, Crown, ChevronRight, RotateCw, Lightbulb, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Crown, ChevronLeft, ChevronRight, RotateCw, Lightbulb, MessageCircle } from 'lucide-react';
 import type { PieceDropHandlerArgs } from 'react-chessboard';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
@@ -737,15 +737,22 @@ function LessonView({
   // Lichess theme tag NOR a curated playable position render as
   // recognition-only (the final fallback).
   if (!hasPractice) {
-    const curatedPlayable = pattern.lessonPositions.find(
-      (lp) => lp.solution && lp.solution.length > 0,
-    );
-    if (curatedPlayable && curatedPlayable.solution) {
+    // Phase 7b: surface every curated playable position, sorted shallow→deep,
+    // so a pattern's mate-in-1 reference and its longer game-citation
+    // setups both get airtime. The CuratedMatingLessonView walks them
+    // with Prev/Next.
+    const curatedPlayables = pattern.lessonPositions
+      .filter((lp) => lp.solution && lp.solution.length > 0)
+      .sort(
+        (a, b) =>
+          (a.movesToMate ?? Number.MAX_SAFE_INTEGER) -
+          (b.movesToMate ?? Number.MAX_SAFE_INTEGER),
+      );
+    if (curatedPlayables.length > 0) {
       return (
         <CuratedMatingLessonView
           pattern={pattern}
-          startFen={curatedPlayable.fen}
-          solution={curatedPlayable.solution}
+          positions={curatedPlayables}
           header={header}
           onExit={onExit}
         />
@@ -954,27 +961,45 @@ function LessonView({
 // guarantee as the tagged-pattern path, sourced from the same
 // curated DB.
 
+interface CuratedMatingLessonPosition {
+  fen: string;
+  solution?: string[];
+  movesToMate: number | null;
+}
+
 interface CuratedMatingLessonViewProps {
   pattern: MatingPattern;
-  startFen: string;
-  solution: string[];
+  positions: CuratedMatingLessonPosition[];
   header: React.ReactNode;
   onExit: () => void;
 }
 
 function CuratedMatingLessonView({
   pattern,
-  startFen,
-  solution,
+  positions,
   header,
   onExit,
 }: CuratedMatingLessonViewProps): JSX.Element {
+  const [posIndex, setPosIndex] = useState(0);
+  const safeIndex = Math.min(posIndex, positions.length - 1);
+  const current = positions[safeIndex];
+  const solution = useMemo(() => current.solution ?? [], [current]);
+
   const playout = useEndgamePlayout({
-    startFen,
+    startFen: current.fen,
     solution,
     stockfishFallback: false,
     replyDelayMs: 450,
   });
+
+  const canPrev = safeIndex > 0;
+  const canNext = safeIndex < positions.length - 1;
+  const goPrev = useCallback(() => {
+    if (canPrev) setPosIndex((n) => n - 1);
+  }, [canPrev]);
+  const goNext = useCallback(() => {
+    if (canNext) setPosIndex((n) => n + 1);
+  }, [canNext]);
 
   // Voice-first: read the pattern intro + recognition cue aloud
   // when the lesson opens. Phase 2 routes this through the shared
@@ -1038,10 +1063,21 @@ function CuratedMatingLessonView({
           {playout.firstTryPerfect ? 'Played perfectly.' : 'Line completed.'} The geometry is the same
           every time you spot this pattern in your own games.
         </div>
+        {canNext ? (
+          <button
+            onClick={goNext}
+            className="px-4 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold"
+            data-testid="curated-mating-next-position"
+          >
+            Try the {positions[safeIndex + 1].movesToMate
+              ? `mate-in-${positions[safeIndex + 1].movesToMate}`
+              : 'next position'}
+          </button>
+        ) : null}
         <div className="flex gap-2">
           <button
             onClick={playout.reset}
-            className="flex-1 px-4 py-2 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold"
+            className="flex-1 px-4 py-2 rounded-lg bg-theme-surface text-sm font-medium text-theme-text hover:bg-theme-bg"
           >
             Play it again
           </button>
@@ -1065,6 +1101,33 @@ function CuratedMatingLessonView({
   } else {
     controls = (
       <div className="flex flex-col gap-2 px-2">
+        {positions.length > 1 && (
+          <div
+            className="flex items-center justify-between text-[11px] text-theme-text-muted px-1"
+            data-testid="curated-mating-position-strip"
+          >
+            <button
+              onClick={goPrev}
+              disabled={!canPrev}
+              className="px-2 py-1 rounded hover:bg-theme-surface disabled:opacity-30"
+              aria-label="Previous position"
+            >
+              <ChevronLeft size={12} />
+            </button>
+            <span className="font-mono">
+              {safeIndex + 1}/{positions.length}
+              {current.movesToMate ? ` · M${current.movesToMate}` : ''}
+            </span>
+            <button
+              onClick={goNext}
+              disabled={!canNext}
+              className="px-2 py-1 rounded hover:bg-theme-surface disabled:opacity-30"
+              aria-label="Next position"
+            >
+              <ChevronRight size={12} />
+            </button>
+          </div>
+        )}
         <div className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-2.5 flex items-start gap-2">
           <Lightbulb size={14} className="text-cyan-400 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
