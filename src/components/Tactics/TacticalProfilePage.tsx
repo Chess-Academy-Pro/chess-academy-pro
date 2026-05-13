@@ -90,10 +90,34 @@ export function TacticalProfilePage(): JSX.Element {
       ? unattempted[0].themes
       : ['fork'];
 
+  const header = (
+    <div className="flex items-center gap-3">
+      <button onClick={() => void navigate('/tactics')} className="p-2 rounded-lg hover:opacity-80" data-testid="back-btn">
+        <ArrowLeft size={20} style={{ color: 'var(--color-text)' }} />
+      </button>
+      <Eye size={24} style={{ color: 'var(--color-accent)' }} />
+      <h1 className="text-xl font-bold flex-1" style={{ color: 'var(--color-text)' }}>Tactical Profile</h1>
+      <button
+        onClick={() => void handleRefresh()}
+        disabled={refreshing || loading}
+        className="p-2 rounded-lg hover:opacity-80 disabled:opacity-40"
+        data-testid="refresh-btn"
+      >
+        <RefreshCw size={18} className={refreshing ? 'animate-spin' : ''} style={{ color: 'var(--color-text-muted)' }} />
+      </button>
+    </div>
+  );
+
   if (loading) {
     return (
-      <div className="max-w-2xl mx-auto w-full p-6 flex items-center justify-center min-h-[60vh]">
-        <p style={{ color: 'var(--color-text-muted)' }}>Loading tactical profile...</p>
+      <div
+        className="max-w-2xl mx-auto w-full p-6 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-5"
+        data-testid="tactical-profile-page"
+      >
+        {header}
+        <div className="flex items-center justify-center flex-1 min-h-[40vh]" data-testid="loading">
+          <p style={{ color: 'var(--color-text-muted)' }}>Loading tactical profile...</p>
+        </div>
       </div>
     );
   }
@@ -103,23 +127,9 @@ export function TacticalProfilePage(): JSX.Element {
       className="max-w-2xl mx-auto w-full p-6 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-5"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      data-testid="tactical-profile-page"
     >
-      {/* Header */}
-      <div className="flex items-center gap-3">
-        <button onClick={() => void navigate('/tactics')} className="p-2 rounded-lg hover:opacity-80" data-testid="back-btn">
-          <ArrowLeft size={20} style={{ color: 'var(--color-text)' }} />
-        </button>
-        <Eye size={24} style={{ color: 'var(--color-accent)' }} />
-        <h1 className="text-xl font-bold flex-1" style={{ color: 'var(--color-text)' }}>Tactical Profile</h1>
-        <button
-          onClick={() => void handleRefresh()}
-          disabled={refreshing}
-          className="p-2 rounded-lg hover:opacity-80 disabled:opacity-40"
-          data-testid="refresh-btn"
-        >
-          <RefreshCw size={18} className={refreshing ? 'animate-spin' : ''} style={{ color: 'var(--color-text-muted)' }} />
-        </button>
-      </div>
+      {header}
 
       {/* Begin Training CTA */}
       <button
