@@ -1,7 +1,7 @@
 # Featured-Narrations Audit Report
 
-Generated: 2026-05-13T21:08:19.381Z
-Elapsed: 39384ms
+Generated: 2026-05-13T21:38:17.180Z
+Elapsed: 38681ms
 
 Scope: 40 openings from `repertoire.json` + 80 pro entries from
 `pro-repertoires.json`. Empty subline annotations are skipped per
@@ -41,17 +41,15 @@ user request — this audit covers content-only records.
 | Kind | Count |
 |---|---:|
 | templated-filler | 4534 |
-| piece-on-square | 3 |
-| mate-claim | 1 |
-| **TOTAL** | **4538** |
+| **TOTAL** | **4534** |
 
 ## Findings by source
 
 | Source | Count |
 |---|---:|
-| rep-subline | 3426 |
+| rep-subline | 3423 |
 | pro-subline | 1110 |
-| repertoire-variation | 2 |
+| repertoire-variation | 1 |
 
 ## Top openings by finding count
 
@@ -78,24 +76,10 @@ user request — this audit covers content-only records.
 | london-system | 103 |
 | nimzo-indian | 100 |
 | kings-gambit | 99 |
-| sicilian-dragon | 99 |
 | caro-kann | 99 |
 | pro-gothamchess-caro-kann | 99 |
 | pro-chesswithakeem-kings-gambit | 99 |
-
-## piece-on-square (3)
-
-| Source | Opening | Subline / Variation | Move# | SAN | Detail |
-|---|---|---|---:|---|---|
-| rep-subline | benoni-defence | Dubov: Modern Benoni (e4 System) | 12 | g6 | claims bishop on g7, square is empty |
-| rep-subline | birds-opening | From's Gambit Refutation | 15 | Bg3 | claims bishop on h4, square is empty |
-| rep-subline | birds-opening | Stonewall Kingside Attack | 19 | exd4 | claims pawn on e3, square is empty |
-
-## mate-claim (1)
-
-| Source | Opening | Subline / Variation | Move# | SAN | Detail |
-|---|---|---|---:|---|---|
-| repertoire-variation | sicilian-dragon | Yugoslav Attack Main Line | 36 | Rxc3 | narration claims checkmate, position is not mate |
+| sicilian-dragon | 98 |
 
 ## templated-filler (4534)
 

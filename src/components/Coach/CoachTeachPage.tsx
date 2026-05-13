@@ -2182,6 +2182,7 @@ export function CoachTeachPage(): JSX.Element {
                       boxShadow: scaledShadow(neon.rgb, 70),
                     }}
                     data-testid={`line-picker-${opt.eco}`}
+                    data-fullname={opt.fullName}
                   >
                     <div className="flex items-center gap-1.5 text-[10px] font-mono text-theme-text-muted">
                       <span

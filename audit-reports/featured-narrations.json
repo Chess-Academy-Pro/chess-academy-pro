@@ -1,17 +1,15 @@
 {
   "summary": {
-    "generatedAt": "2026-05-13T21:08:19.381Z",
-    "elapsedMs": 39384,
+    "generatedAt": "2026-05-13T21:38:17.180Z",
+    "elapsedMs": 38681,
     "totalRecords": 15020,
-    "totalFindings": 4538,
+    "totalFindings": 4534,
     "kindCounts": {
-      "templated-filler": 4534,
-      "mate-claim": 1,
-      "piece-on-square": 3
+      "templated-filler": 4534
     },
     "bySource": {
-      "rep-subline": 3426,
-      "repertoire-variation": 2,
+      "rep-subline": 3423,
+      "repertoire-variation": 1,
       "pro-subline": 1110
     },
     "collectionStats": {
@@ -19297,21 +19295,6 @@
       "flag": {
         "kind": "templated-filler",
         "detail": "matches a runtime-suppressed generic pattern"
-      }
-    },
-    {
-      "source": "repertoire-variation",
-      "openingId": "sicilian-dragon",
-      "sublineName": "Yugoslav Attack Main Line",
-      "moveIndex": 35,
-      "san": "Rxc3",
-      "text": "The ultimate Dragon tabiya and the most critical test of the entire opening. White deploys the Yugoslav setup with Be3, f3, Qd2, Bc4, and O-O-O, then launches the kingside pawn storm with h4 and g4. Black counters with the ...Ne5-c4 maneuver to exchange White's light-squared bishop, followed by the thematic exchange sacrifice ...Rxc3 to shatter White's queenside pawns. The race to deliver checkmate first defines every tempo of this razor-sharp line, where both sides must calculate the interaction between White's h-file attack and Black's pressure down the c-file against the exposed white king.",
-      "fenBefore": null,
-      "fenAfter": "3q1rk1/pp1bpp2/3p2pQ/7n/3NP1p1/2r2P2/PPP5/1K1R3R w - - 0 19",
-      "arrows": null,
-      "flag": {
-        "kind": "mate-claim",
-        "detail": "narration claims checkmate, position is not mate"
       }
     },
     {
@@ -59991,22 +59974,6 @@
     {
       "source": "rep-subline",
       "openingId": "benoni-defence",
-      "sublineName": "Dubov: Modern Benoni (e4 System)",
-      "moveIndex": 11,
-      "san": "g6",
-      "text": "Black prepares to fianchetto the piece on g7, where it will exert powerful pressure along the long diagonal. The bishop on g7 is Black's best piece in the Benoni, controlling key dark squares and supporting both ...e5 and ...b5 breaks.",
-      "fenBefore": "rnbqkb1r/pp3ppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKBNR b KQkq - 0 6",
-      "fenAfter": "rnbqkb1r/pp3p1p/3p1np1/2pP4/4P3/2N5/PP3PPP/R1BQKBNR w KQkq - 0 7",
-      "arrows": null,
-      "flag": {
-        "kind": "piece-on-square",
-        "detail": "claims bishop on g7, square is empty",
-        "excerpt": "The bishop on g7"
-      }
-    },
-    {
-      "source": "rep-subline",
-      "openingId": "benoni-defence",
       "sublineName": "Kingside f5 Breakthrough",
       "moveIndex": 1,
       "san": "Nf6",
@@ -68801,44 +68768,6 @@
       "flag": {
         "kind": "templated-filler",
         "detail": "matches a runtime-suppressed generic pattern"
-      }
-    },
-    {
-      "source": "rep-subline",
-      "openingId": "birds-opening",
-      "sublineName": "From's Gambit Refutation",
-      "moveIndex": 14,
-      "san": "Bg3",
-      "text": "White's bishop steps back from h4 to g3, a quiet but purposeful retreat that keeps the piece safe and well-placed on the long diagonal. With Black's pawn already advanced to g5, the bishop on h4 was at risk of being harassed by a further g4 push, so withdrawing to g3 sidesteps that threat while maintaining the bishop's influence across the center. The light-squared bishop now stands comfortably, supporting White's solid pawn structure anchored by the pawn on d4.",
-      "fenBefore": "r1bqk2r/ppp2p2/2nb1n1p/6p1/3P3B/5N2/PPP1P1PP/RN1QKB1R w KQkq - 0 8",
-      "fenAfter": "r1bqk2r/ppp2p2/2nb1n1p/6p1/3P4/5NB1/PPP1P1PP/RN1QKB1R b KQkq - 1 8",
-      "arrows": null,
-      "flag": {
-        "kind": "piece-on-square",
-        "detail": "claims bishop on h4, square is empty",
-        "excerpt": "the bishop on h4"
-      }
-    },
-    {
-      "source": "rep-subline",
-      "openingId": "birds-opening",
-      "sublineName": "Stonewall Kingside Attack",
-      "moveIndex": 18,
-      "san": "exd4",
-      "text": "The white pawn on e3 captures the pawn on d4, anchoring itself firmly in the center between the c3 and f4 pawns. This recapture solidifies White's central formation and opens the diagonal for the bishop already posted on d3. Together with the knight entrenched on e5, the newly placed pawn on d4 gives White a commanding grip on the middle of the board.",
-      "fenBefore": "r1b2rk1/ppq2ppp/2nbpn2/3pN3/3p1P2/2PBP3/PP1N2PP/R1BQ1RK1 w - - 0 10",
-      "fenAfter": "r1b2rk1/ppq2ppp/2nbpn2/3pN3/3P1P2/2PB4/PP1N2PP/R1BQ1RK1 b - - 0 10",
-      "arrows": [
-        {
-          "from": "e3",
-          "to": "d4",
-          "color": "rgba(255, 50, 50, 0.8)"
-        }
-      ],
-      "flag": {
-        "kind": "piece-on-square",
-        "detail": "claims pawn on e3, square is empty",
-        "excerpt": "The white pawn on e3"
       }
     },
     {

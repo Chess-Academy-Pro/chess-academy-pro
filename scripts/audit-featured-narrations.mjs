@@ -230,12 +230,67 @@ function auditProse(text, fenAfter) {
   if (!chess) return flags;
 
   // 1. Piece-on-square claims
+  //
+  // Skip when surrounding context shows the prose is referencing a
+  // PRIOR or FUTURE piece position rather than the current board state:
+  //   - past tense: "was on X", "was at X", "had been on X" — describes
+  //     the position BEFORE the move that just landed.
+  //   - future / intent: "fianchetto to X", "prepares to fianchetto",
+  //     "will move to X", "to X where", "heading to X" — describes
+  //     where a piece WILL be, not where it is now.
+  //   - capture origin: "captures the pawn on X" where X is the
+  //     square being CAPTURED on (the SAN's destination); the piece
+  //     was on that square before being captured.
   const seenSqClaim = new Set();
   for (const m of text.matchAll(PIECE_ON_SQUARE_RE)) {
     const [full, pieceName, square] = m;
     const key = `${pieceName.toLowerCase()}::${square.toLowerCase()}`;
     if (seenSqClaim.has(key)) continue;
     seenSqClaim.add(key);
+
+    // Temporal-context skip: scan a 150-char window BEFORE and AFTER
+    // the match for tense / move-description markers that explain a
+    // non-current claim. The audit checks `chess.get(square)` against
+    // the post-move FEN; many narration patterns reference the
+    // square's PRIOR or FUTURE state in service of describing the
+    // move itself, which makes the literal post-move check a false
+    // positive.
+    const matchIdx = m.index ?? 0;
+    const lead = text.slice(Math.max(0, matchIdx - 150), matchIdx).toLowerCase();
+    const tail = text.slice(matchIdx + full.length, matchIdx + full.length + 150).toLowerCase();
+
+    // Past tense — "was on/at", "was harassed", "was at risk",
+    // "had been on", "previously on". Often appears AFTER the
+    // piece-on-square phrase ("the bishop on h4 was at risk").
+    const pastInTail = /^\s*(?:was|were|had\s+been|previously)\b/.test(tail);
+    const pastInLead = /\b(?:was|were|had\s+been|previously|before\s+(?:the\s+move|this))\b[^.]{0,80}$/.test(lead);
+
+    // Future / intent — "fianchetto" anywhere in the 200-char window
+    // means forward-looking bishop placement (the fianchettoed-square
+    // mention always describes WHERE the bishop will land); "prepares
+    // to ...", "will (move|land|bring|develop)", "heading to", "going
+    // to" within the closer 80-char window also indicate forward-
+    // looking prose. We allow periods between fianchetto and the
+    // piece-on-square claim because a single description often spans
+    // two short sentences ("…prepares to fianchetto to g7. The
+    // bishop on g7…").
+    const widerLead = text.slice(Math.max(0, matchIdx - 200), matchIdx).toLowerCase();
+    const futureInLead =
+      /\bfianchetto\b/.test(widerLead)
+      || /\b(?:prepares?\s+to|will\s+(?:move|land|bring|reach|be|develop|place|exert)|heading\s+to(?:wards?)?|going\s+to)\b[^.]{0,150}$/.test(lead);
+    const futureInTail =
+      /^\s*(?:will\s+(?:move|land|bring|reach|be|develop|place|exert))\b/.test(tail);
+
+    // Move-description: "the X on Y captures/moves/advances/steps/
+    // retreats/develops/lands/recaptures" — the piece-on-square phrase
+    // is the SUBJECT of a verb describing the move. Common when the
+    // narration says "The pawn on e3 captures the pawn on d4" (the e3
+    // pawn IS the actor; after the move it's on d4, not e3).
+    const moveSubjectInTail =
+      /^\s+(?:captures|recaptures|takes|moves|advances|steps|retreats|develops|lands|jumps|hops|swings|slides|maneuvers|relocates|repositions|deploys|drops|withdraws)\b/.test(tail);
+
+    if (pastInTail || pastInLead || futureInLead || futureInTail || moveSubjectInTail) continue;
+
     const expected = PIECE_NAME_TO_LETTER[pieceName.toLowerCase()];
     const actual = chess.get(square);
     if (!actual || actual.type !== expected) {
@@ -274,8 +329,26 @@ function auditProse(text, fenAfter) {
   }
 
   // 4. Mate claim (checkmate / forced mate)
-  if (MATE_CLAIM_RE.test(text) && !chess.isCheckmate()) {
-    flags.push({ kind: 'mate-claim', detail: 'narration claims checkmate, position is not mate' });
+  //
+  // Skip when the prose describes mate as a thematic GOAL or as a
+  // characteristic of the opening, not an assertion about the current
+  // position. Markers:
+  //   - "race to (deliver) (check)mate" — describes a race, not a state
+  //   - "approaching (check)mate" — descriptive of trajectory
+  //   - "threatening (check)mate" — a threat, not an assertion
+  //   - "leading to (check)mate" — a consequence, not now
+  //   - "after (check)mate" / "before (check)mate" — temporal
+  //   - "delivering / deliver (check)mate" — describes the action of
+  //     mating, often in a thematic context
+  const mateMatch = MATE_CLAIM_RE.exec(text);
+  if (mateMatch && !chess.isCheckmate()) {
+    const start = Math.max(0, mateMatch.index - 60);
+    const lead = text.slice(start, mateMatch.index).toLowerCase();
+    const isThematic =
+      /\b(?:race\s+to(?:\s+deliver)?|approaching|threatening|leading\s+to|after|before|toward(?:s)?|deliver(?:ing|s)?|defines?\s+every\s+tempo)\b[^.]{0,40}$/.test(lead);
+    if (!isThematic) {
+      flags.push({ kind: 'mate-claim', detail: 'narration claims checkmate, position is not mate' });
+    }
   }
 
   return flags;
