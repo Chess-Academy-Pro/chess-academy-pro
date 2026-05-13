@@ -12,7 +12,7 @@
 
 import { useMemo, useState } from 'react';
 import { Chess } from 'chess.js';
-import { ArrowLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronRight, Target, Flame } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
@@ -21,6 +21,7 @@ import { useClickToMove } from '../../hooks/useClickToMove';
 import { useNarration } from '../../hooks/useNarration';
 import { SmartSearchBar } from '../Search/SmartSearchBar';
 import { useSettings } from '../../hooks/useSettings';
+import { useAppStore } from '../../stores/appStore';
 import { scaledShadow } from '../../utils/neonColors';
 import {
   getOpeningBlunderPuzzles,
@@ -28,6 +29,23 @@ import {
   type OpeningBlunderPuzzle,
   type OpeningBlunderFamily,
 } from '../../services/openingBlunderService';
+
+/** Difficulty band around the user's puzzle rating. Puzzles inside this
+ *  band surface first; the rest are still reachable below the fold. */
+const ADAPTIVE_BAND = 400;
+
+/** Sort by closeness to the user's rating, then by popularity. */
+function adaptiveSort(
+  list: OpeningBlunderPuzzle[],
+  userRating: number,
+): OpeningBlunderPuzzle[] {
+  return [...list].sort((a, b) => {
+    const da = Math.abs(a.rating - userRating);
+    const db = Math.abs(b.rating - userRating);
+    if (da !== db) return da - db;
+    return b.popularity - a.popularity;
+  });
+}
 
 // ─── Per-opening palette ─────────────────────────────────────────────────────
 // Colour-code each family slug. Substring match so sub-variations
@@ -225,14 +243,42 @@ function puzzleGoalSentence(themes: string[]): string {
 type ColorTab = 'white' | 'black';
 
 export function OpeningBlundersPage(): JSX.Element {
+  const activeProfile = useAppStore((s) => s.activeProfile);
+  const userRating = activeProfile?.puzzleRating ?? 1200;
   const families = useMemo<OpeningBlunderFamily[]>(() => groupByOpeningFamily(), []);
   const total = useMemo<number>(() => getOpeningBlunderPuzzles().length, []);
   const [activeFamily, setActiveFamily] = useState<string | null>(null);
   const [activeColor, setActiveColor] = useState<ColorTab>('white');
   const [activePuzzle, setActivePuzzle] = useState<OpeningBlunderPuzzle | null>(null);
+  // Lightweight session counters — solved / attempted across the
+  // current family browse, mirroring the adaptive-drill UX so the user
+  // sees forward progress without persisting to Dexie. Resets when
+  // they leave the page.
+  const [solved, setSolved] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [bestStreak, setBestStreak] = useState(0);
+
+  const handlePuzzleResult = (correct: boolean): void => {
+    if (correct) {
+      setSolved((n) => n + 1);
+      setStreak((n) => {
+        const next = n + 1;
+        setBestStreak((b) => Math.max(b, next));
+        return next;
+      });
+    } else {
+      setStreak(0);
+    }
+  };
 
   if (activePuzzle) {
-    return <PuzzleView puzzle={activePuzzle} onExit={() => setActivePuzzle(null)} />;
+    return (
+      <PuzzleView
+        puzzle={activePuzzle}
+        onExit={() => setActivePuzzle(null)}
+        onResult={handlePuzzleResult}
+      />
+    );
   }
   if (activeFamily) {
     const family = families.find((f) => f.family === activeFamily);
@@ -247,6 +293,10 @@ export function OpeningBlundersPage(): JSX.Element {
         onColorChange={setActiveColor}
         onPickPuzzle={setActivePuzzle}
         onBack={() => setActiveFamily(null)}
+        userRating={userRating}
+        solved={solved}
+        streak={streak}
+        bestStreak={bestStreak}
       />
     );
   }
@@ -254,6 +304,9 @@ export function OpeningBlundersPage(): JSX.Element {
     <FamilyPickerView
       families={families}
       total={total}
+      userRating={userRating}
+      solved={solved}
+      bestStreak={bestStreak}
       onPick={(fam) => {
         const f = families.find((x) => x.family === fam);
         if (f) setActiveColor(f.white.length >= f.black.length ? 'white' : 'black');
@@ -266,10 +319,20 @@ export function OpeningBlundersPage(): JSX.Element {
 interface FamilyPickerViewProps {
   families: OpeningBlunderFamily[];
   total: number;
+  userRating: number;
+  solved: number;
+  bestStreak: number;
   onPick: (family: string) => void;
 }
 
-function FamilyPickerView({ families, total, onPick }: FamilyPickerViewProps): JSX.Element {
+function FamilyPickerView({
+  families,
+  total,
+  userRating,
+  solved,
+  bestStreak,
+  onPick,
+}: FamilyPickerViewProps): JSX.Element {
   const { settings } = useSettings();
   const gB = settings.glowBrightness;
   const gS = gB / 100;
@@ -285,11 +348,37 @@ function FamilyPickerView({ families, total, onPick }: FamilyPickerViewProps): J
         {total} tactical refutations · grouped by opening
       </p>
 
+      {/* Adaptive rating + session-progress chip row. Matches the
+          adaptive puzzle surfaces (rating-banded sort + streak counter). */}
+      <div className="flex items-center justify-center gap-2 max-w-lg mx-auto w-full">
+        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-theme-surface border border-theme-border text-[11px]">
+          <Target size={11} className="text-theme-accent" />
+          <span className="text-theme-text-muted">Rating</span>
+          <span className="font-mono text-theme-text font-semibold">{userRating}</span>
+        </span>
+        {solved > 0 && (
+          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-theme-surface border border-theme-border text-[11px]">
+            <span className="text-theme-text-muted">Solved</span>
+            <span className="font-mono text-theme-text font-semibold">{solved}</span>
+          </span>
+        )}
+        {bestStreak > 0 && (
+          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-[11px]">
+            <Flame size={11} className="text-amber-400" />
+            <span className="font-mono text-amber-300 font-semibold">{bestStreak}</span>
+          </span>
+        )}
+      </div>
+
       <div className="max-w-lg mx-auto w-full">
         <SmartSearchBar scope="opening" placeholder="Search openings…" />
       </div>
 
-      <div className="grid grid-cols-2 gap-3 flex-1 content-start max-w-lg mx-auto w-full">
+      {/* Vertical row list — matches the Openings tab's OpeningCard
+          picker shape (left/bottom accent border, bg-theme-surface,
+          p-3.5 rounded-xl, space-y-2). User: "squares too big. needed
+          to match opening tab style pickers." */}
+      <div className="flex flex-col gap-2 max-w-lg mx-auto w-full">
         {families.map((f) => {
           const palette = paletteFor(f.family);
           const total = f.white.length + f.black.length;
@@ -299,7 +388,7 @@ function FamilyPickerView({ families, total, onPick }: FamilyPickerViewProps): J
             <button
               key={f.family}
               onClick={() => onPick(f.family)}
-              className={`${palette.bgColor} rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-all duration-200 aspect-square px-3`}
+              className="w-full bg-theme-surface rounded-xl p-3.5 text-left transition-all duration-200"
               style={{ ...neonBorderStyle(palette.rgb, gS), boxShadow: shadow }}
               onMouseEnter={(e) => {
                 applyHoverBorder(e.currentTarget, palette.rgb, gS);
@@ -311,17 +400,21 @@ function FamilyPickerView({ families, total, onPick }: FamilyPickerViewProps): J
               }}
               data-testid={`opening-blunder-family-${f.family}`}
             >
-              <span className={`text-sm font-bold ${palette.color} text-center leading-tight`}>
-                {f.label}
-              </span>
-              <div className="flex items-center gap-1.5 text-[10px] text-theme-text-muted font-mono">
-                <span aria-hidden>♙ {f.white.length}</span>
-                <span aria-hidden>·</span>
-                <span aria-hidden>♟ {f.black.length}</span>
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex flex-col gap-1 min-w-0">
+                  <span className={`text-sm font-semibold ${palette.color} truncate`}>
+                    {f.label}
+                  </span>
+                  <div className="flex items-center gap-2 text-[11px] text-theme-text-muted">
+                    <span>{total} trap{total === 1 ? '' : 's'}</span>
+                    <span aria-hidden>·</span>
+                    <span><span aria-hidden>♙</span> {f.white.length}</span>
+                    <span aria-hidden>·</span>
+                    <span><span aria-hidden>♟</span> {f.black.length}</span>
+                  </div>
+                </div>
+                <ChevronRight size={16} className={`${palette.color} opacity-70 flex-shrink-0`} />
               </div>
-              <span className="text-[10px] text-theme-text-muted opacity-70">
-                {total} trap{total === 1 ? '' : 's'}
-              </span>
             </button>
           );
         })}
@@ -336,6 +429,10 @@ interface FamilyDetailViewProps {
   onColorChange: (c: ColorTab) => void;
   onPickPuzzle: (p: OpeningBlunderPuzzle) => void;
   onBack: () => void;
+  userRating: number;
+  solved: number;
+  streak: number;
+  bestStreak: number;
 }
 
 function FamilyDetailView({
@@ -344,12 +441,23 @@ function FamilyDetailView({
   onColorChange,
   onPickPuzzle,
   onBack,
+  userRating,
+  solved,
+  streak,
+  bestStreak,
 }: FamilyDetailViewProps): JSX.Element {
   const { settings } = useSettings();
   const gB = settings.glowBrightness;
   const gS = gB / 100;
   const palette = paletteFor(family.family);
-  const list = activeColor === 'white' ? family.white : family.black;
+  // Adaptive sort: prefer puzzles closest to the user's rating; tie-break
+  // by popularity. Then split into in-band (userRating ± 400) vs the rest.
+  const rawList = activeColor === 'white' ? family.white : family.black;
+  const list = useMemo(() => adaptiveSort(rawList, userRating), [rawList, userRating]);
+  const inBandCount = useMemo(
+    () => list.filter((p) => Math.abs(p.rating - userRating) <= ADAPTIVE_BAND).length,
+    [list, userRating],
+  );
   const shadow = scaledShadow(palette.rgb, gB);
   const shadowHover = scaledShadow(palette.rgb, Math.min(200, gB * 1.4));
 
@@ -369,9 +477,32 @@ function FamilyDetailView({
         <div className="flex-1 min-w-0 text-center pr-[44px]">
           <h1 className={`text-lg font-bold ${palette.color}`}>{family.label}</h1>
           <p className="text-[11px] text-theme-text-muted">
-            {family.white.length + family.black.length} traps to punish
+            {family.white.length + family.black.length} traps · {inBandCount} at your rating
           </p>
         </div>
+      </div>
+
+      {/* Rating + session counters */}
+      <div className="flex items-center justify-center gap-2 max-w-lg mx-auto w-full">
+        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-theme-surface border border-theme-border text-[11px]">
+          <Target size={11} className="text-theme-accent" />
+          <span className="font-mono text-theme-text font-semibold">{userRating}</span>
+        </span>
+        {solved > 0 && (
+          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-theme-surface border border-theme-border text-[11px]">
+            <span className="text-theme-text-muted">Solved</span>
+            <span className="font-mono text-theme-text font-semibold">{solved}</span>
+          </span>
+        )}
+        {streak > 0 && (
+          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-[11px]">
+            <Flame size={11} className="text-amber-400" />
+            <span className="font-mono text-amber-300 font-semibold">{streak}</span>
+            {bestStreak > streak && (
+              <span className="text-[10px] text-theme-text-muted">/ best {bestStreak}</span>
+            )}
+          </span>
+        )}
       </div>
 
       <div className="max-w-lg mx-auto w-full">
@@ -463,9 +594,10 @@ function FamilyDetailView({
 interface PuzzleViewProps {
   puzzle: OpeningBlunderPuzzle;
   onExit: () => void;
+  onResult?: (correct: boolean) => void;
 }
 
-function PuzzleView({ puzzle, onExit }: PuzzleViewProps): JSX.Element {
+function PuzzleView({ puzzle, onExit, onResult }: PuzzleViewProps): JSX.Element {
   const navigate = useNavigate();
   void navigate; // reserved for future "next puzzle" navigation
   const startFen = useMemo<string>(() => {
@@ -486,6 +618,14 @@ function PuzzleView({ puzzle, onExit }: PuzzleViewProps): JSX.Element {
     replyDelayMs: 450,
   });
   const clickToMove = useClickToMove(playout);
+
+  // Fire onResult once when the puzzle reaches a terminal state.
+  // first-try-perfect counts as correct; otherwise wrong.
+  const [reported, setReported] = useState(false);
+  if (playout.isComplete && !reported) {
+    setReported(true);
+    onResult?.(playout.firstTryPerfect);
+  }
 
   const introText = useMemo<string>(
     () =>
@@ -569,8 +709,21 @@ function PuzzleView({ puzzle, onExit }: PuzzleViewProps): JSX.Element {
           <button
             onClick={() => playout.revealHint()}
             className="flex-1 px-3 py-2 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-400 text-sm font-medium"
+            data-testid="opening-blunder-hint"
           >
             Hint
+          </button>
+        )}
+        {/* Reveal-on-wrong: after 2 wrong attempts the student can
+            ask the playout to auto-play the rest of the line. Same
+            affordance as CuratedMatingLessonView. */}
+        {playout.wrongAttempts >= 2 && !playout.isComplete && (
+          <button
+            onClick={() => playout.reveal()}
+            className="flex-1 px-3 py-2 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 text-sm font-medium"
+            data-testid="opening-blunder-reveal"
+          >
+            Reveal line
           </button>
         )}
         <button
