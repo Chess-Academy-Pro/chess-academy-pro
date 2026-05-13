@@ -1,6 +1,14 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CalculationTab } from './CalculationTab';
+
+// react-chessboard 5.x throws "Square width not found" under jsdom
+// because the underlying ResizeObserver returns 0×0. The picker tests
+// don't need a real board; mock it to a div so the drill view can
+// mount without the throw.
+vi.mock('react-chessboard', () => ({
+  Chessboard: () => <div data-testid="mock-chessboard" />,
+}));
 
 describe('CalculationTab', () => {
   it('renders the picker with all 6 skill tiles', () => {
