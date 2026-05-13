@@ -96,7 +96,11 @@ describe('mistakePuzzleService', () => {
       expect(blunder?.sourceMode).toBe('coach');
       expect(blunder?.playerColor).toBe('white');
       expect(blunder?.status).toBe('unsolved');
-      expect(blunder?.promptText).toBe('Oops — this was a serious mistake. Find the best move.');
+      // The product now prefixes the tactical theme (e.g. "Skewer — ")
+      // when one is detected. Match the contained sentence rather than
+      // strict equality so theme-detection growth doesn't keep
+      // breaking the assertion.
+      expect(blunder?.promptText).toContain('Oops — this was a serious mistake. Find the best move.');
       expect(blunder?.playerMoveSan).toBe('Ng5');
       expect(blunder?.narration).toBeDefined();
       expect(blunder?.narration.intro).toBeTruthy();
