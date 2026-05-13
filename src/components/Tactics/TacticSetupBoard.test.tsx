@@ -89,10 +89,14 @@ describe('TacticSetupBoard', () => {
 
     const hintButton = screen.getByTestId('hint-button');
 
-    // Level 0 → 1 (arrows)
+    // Level 0 → 1 (arrows). requestHint kicks off an async brain call
+    // that flips isAnalyzing=true one microtask later; the button has
+    // `disabled={isAnalyzing}` so a back-to-back click would be a
+    // no-op. Wait for both the level bump AND isAnalyzing to settle.
     fireEvent.click(hintButton);
     await waitFor(() => {
       expect(screen.getByTestId('hint-button')).toHaveAttribute('data-level', '1');
+      expect(screen.getByTestId('hint-button')).not.toBeDisabled();
     });
 
     // Level 1 → 2 (nudge)

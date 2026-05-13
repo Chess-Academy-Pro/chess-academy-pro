@@ -37,7 +37,9 @@ describe('DashboardPage a11y', () => {
     render(<DashboardPage />);
     await waitFor(() => {
       expect(screen.getByText('Openings')).toBeInTheDocument();
-      expect(screen.getByText('Play with Coach')).toBeInTheDocument();
+      // The Coach tile label was simplified from "Play with Coach" to
+      // just "Coach" — see DashboardPage SECTIONS list.
+      expect(screen.getByText('Coach')).toBeInTheDocument();
       expect(screen.getByText('Tactics')).toBeInTheDocument();
       expect(screen.getByText('Weaknesses')).toBeInTheDocument();
     });
