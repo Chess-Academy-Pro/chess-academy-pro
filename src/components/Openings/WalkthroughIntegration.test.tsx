@@ -9,6 +9,7 @@ import { WalkthroughMode } from './WalkthroughMode';
 import { buildOpeningRecord } from '../../test/factories';
 import { clearAnnotationCache } from '../../services/annotationService';
 import { speechService } from '../../services/speechService';
+import { voiceService } from '../../services/voiceService';
 import type { OpeningRecord } from '../../types';
 
 // ── Mocks (everything except annotationService) ────────────────────────────
@@ -35,6 +36,20 @@ vi.mock('../../services/speechService', () => ({
     stop: vi.fn(),
     warmupInGestureContext: vi.fn(),
     isKokoroActive: vi.fn().mockReturnValue(false),
+  },
+}));
+
+// Walkthrough narration goes through useStrictNarration → voiceService.speak
+// (not speechService.speak). Mock the actual call site.
+vi.mock('../../services/voiceService', () => ({
+  voiceService: {
+    speak: vi.fn().mockResolvedValue(undefined),
+    speakForced: vi.fn().mockResolvedValue(undefined),
+    speakIfFree: vi.fn().mockResolvedValue(undefined),
+    stop: vi.fn(),
+    isPlaying: vi.fn().mockReturnValue(false),
+    warmup: vi.fn().mockResolvedValue(undefined),
+    clearCache: vi.fn(),
   },
 }));
 
@@ -273,8 +288,12 @@ describe('WalkthroughMode integration — real annotation data', () => {
     }
   });
 
-  it('speechService.speak is called with annotation text on move advance', async () => {
-    const mockSpeak = vi.mocked(speechService.speak);
+  it('voiceService.speak is called with annotation text on move advance', async () => {
+    // Walkthrough narration now goes through useStrictNarration which
+    // calls voiceService.speak — was speechService.speak before the
+    // narration substrate migration.
+    const mockSpeak = vi.mocked(voiceService.speak);
+    mockSpeak.mockClear();
 
     render(<WalkthroughMode opening={london} onExit={vi.fn()} />);
 
@@ -283,13 +302,11 @@ describe('WalkthroughMode integration — real annotation data', () => {
     const nextBtn = screen.getByRole('button', { name: /next/i });
     act(() => { fireEvent.click(nextBtn); });
 
-    // Wait for the TTS useEffect to fire (reads DB, then calls speak)
     await waitFor(() => {
       expect(mockSpeak).toHaveBeenCalled();
     }, { timeout: 3000 });
 
-    const firstCallText = mockSpeak.mock.calls[0][0];
-    console.log(`speak() called with: "${firstCallText.substring(0, 80)}..."`);
+    const firstCallText = mockSpeak.mock.calls[0][0] as string;
     expect(typeof firstCallText).toBe('string');
     expect(firstCallText.length).toBeGreaterThan(20);
   });
