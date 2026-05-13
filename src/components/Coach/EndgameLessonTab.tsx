@@ -533,16 +533,15 @@ function PositionRunner({
   // position IS the lesson at that point) and stay silent so we
   // don't repeat templated phrases across hundreds of puzzles.
   //
-  // Build the spoken text once per position so both the auto-effect
-  // and the manual Replay button render identical narration.
-  const narrationText = useMemo<string>(() => {
-    if (!position.explanation) return '';
-    const isFirstPosition = posIndex === 0 && !isDrill;
-    const prefix = isFirstPosition
-      ? `${lesson.narration.rule} ${lesson.narration.intro} `
-      : '';
-    return `${prefix}${position.title}. ${position.explanation}`;
-  }, [position.title, position.explanation, posIndex, isDrill, lesson.narration.rule, lesson.narration.intro]);
+  // David's audit: speak ONLY the position's `explanation`. The
+  // lesson rule/intro lives on screen in the NarrationPanel and
+  // shouldn't be re-read aloud as a prefix; the position title is
+  // also visible on the card and reading it sounds clipped.
+  // Drills stay silent (empty explanation → empty narration).
+  const narrationText = useMemo<string>(
+    () => position.explanation ?? '',
+    [position.explanation],
+  );
 
   useEffect(() => {
     if (!narrationText) {

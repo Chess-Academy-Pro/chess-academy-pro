@@ -42,6 +42,11 @@ the phase plan below.
    - Black and white visually move at the same time (no separation
      between student move and opponent reply).
    - No "whose turn" visual cue during opponent reply.
+   - **No click / piece-move sound** when the student drops a
+     piece on an endgame board. The legacy ChessBoard pipes through
+     `usePieceSound()`; ConsistentChessboard static mode doesn't.
+     David: "this wouldn't be an issue if the same board was being
+     used."
    - Possibly the bishop sprite bug below.
 4. **Bishop sprite broken** — `bB` / `wB` alt text shows where the
    bishop image should render. Confirmed on teach, play, mating,
