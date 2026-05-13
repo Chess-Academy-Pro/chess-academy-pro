@@ -35,7 +35,7 @@
         "bestMove": "Kb8"
       },
       {
-        "fen": "k7/8/PK6/8/8/8/8/1B6 b - - 0 1",
+        "fen": "k7/8/PK6/8/8/8/8/1B6 w - - 0 1",
         "title": "Same position, RIGHT-color bishop — winning",
         "explanation": "Identical pawn structure but with Bb1 (light-squared bishop). a8 is a light square, so the bishop CAN attack it — and that's the difference between win and draw. White's plan: bring the bishop to the a8-h1 diagonal, deliver Ba8 forcing Kxa8 (no, defended) or evict via Bb7+ pattern. Compare against the wrong-color version above: same king and pawn placement, same defensive try by Black, but the bishop's color flips win to draw or back. This is the cleanest demonstration of how a single piece's color decides an entire endgame.",
         "result": "white-wins",

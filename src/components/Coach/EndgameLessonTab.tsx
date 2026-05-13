@@ -44,6 +44,7 @@ import {
   recordPlay,
   resetLessonProgress,
 } from '../../services/endgameProgressService';
+import { EndgameRecapCard } from './EndgameRecapCard';
 import type { EndgameLesson, EndgameLessonPosition } from '../../types/endgameLesson';
 import type { EndgameProgressRecord } from '../../types';
 
@@ -601,7 +602,9 @@ function PositionRunner({
                 : `Drill ${posIndex - keystoneCount + 1} of ${drillCount} · ${tier} tier`
               : `Keystone ${posIndex + 1} of ${keystoneCount}`}
             {isPlayable && playout.curatedStudentMoves > 1
-              ? ` · ${playout.studentMovesPlayed}/${playout.curatedStudentMoves} moves`
+              ? playout.studentMovesPlayed < playout.curatedStudentMoves
+                ? ` · ${playout.studentMovesPlayed}/${playout.curatedStudentMoves} moves`
+                : ' · playing it out'
               : ''}
           </p>
         </div>
@@ -894,6 +897,10 @@ function PlayoutStatus({
             </button>
           )}
         </div>
+        <EndgameRecapCard
+          studentMoves={playout.studentMoveLog}
+          studentSide={studentSide}
+        />
       </div>
     );
   }

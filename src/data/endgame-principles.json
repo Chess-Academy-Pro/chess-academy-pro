@@ -35,7 +35,7 @@
         ]
       },
       {
-        "fen": "8/p4kpp/1pK5/8/8/PP6/6PP/8 b - - 0 4",
+        "fen": "8/p4kpp/1pK5/8/8/PP6/6PP/8 w - - 0 4",
         "title": "Three moves later — White has invaded",
         "explanation": "After 1.Kd5 Kf7 2.Kc6 Ke7 3.Kxb6, the white king has eaten a pawn and dominates the queenside. Black's king has covered three squares; the white king has covered four AND captured material. This is what 'king activity' looks like in concrete numbers.",
         "result": "white-wins",
@@ -292,7 +292,7 @@
     },
     "positions": [
       {
-        "fen": "4k3/p7/4P3/4K3/8/8/8/8 b - - 0 1",
+        "fen": "4k3/p7/4P3/4K3/8/8/8/8 w - - 0 1",
         "title": "Pieces gone, the extra pawn decides",
         "explanation": "From a position with one pawn advantage and minor pieces, trading down to this K+P endgame ends the game. The white king is on a key square (e5), the pawn is escorted, Black has no counterplay. The original eval (+1 pawn with pieces on) becomes a clean win once pieces are off. This is what 'trade pieces when ahead' looks like at the end of the rainbow.",
         "result": "white-wins",

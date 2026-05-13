@@ -60,7 +60,11 @@ export interface EndgamePlayoutOptions {
   fallbackPlayerElo?: number;
   /** How many extra plies of student play to require in the
    *  fallback. After this many student moves, the playout is
-   *  marked complete (won the holding test). Default 4. */
+   *  marked complete (won the holding test). Default 8 — enough
+   *  to play past the critical move into an obvious-win position
+   *  (David's Photo 1 audit: "should have played out a few more
+   *  moves until it was an obvious win"). Stockfish-side moves
+   *  in between are NOT counted toward this cap. */
   fallbackPliesToPlay?: number;
   /** When true, after the curated line ends the playout enters
    *  engine fallback automatically AND completes the moment the
@@ -130,6 +134,21 @@ export interface EndgamePlayoutState {
   /** Number of opponent moves left in the curated line after the
    *  student's next correct move. Used for "X moves to go" UX. */
   curatedRepliesRemaining: number;
+  /** Every correct student move played in this playout — drives the
+   *  post-playout Stockfish accuracy recap (David's Photo 3 audit).
+   *  Resets on `reset()`. */
+  studentMoveLog: StudentMoveRecord[];
+}
+
+/** A single correct student move, with the position before and
+ *  after — enough for Stockfish to compute cp loss for each move. */
+export interface StudentMoveRecord {
+  san: string;
+  fenBefore: string;
+  fenAfter: string;
+  /** True if the move was inside the curated line, false if it was
+   *  played in the Stockfish-fallback continuation. */
+  curated: boolean;
 }
 
 export interface EndgamePlayoutControls {
@@ -220,6 +239,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
   const [fallbackOutcome, setFallbackOutcome] =
     useState<'curated' | 'survived' | 'unknown'>('curated');
   const [hintRevealed, setHintRevealed] = useState<boolean>(false);
+  const [studentMoveLog, setStudentMoveLog] = useState<StudentMoveRecord[]>([]);
 
   // Reset state + chess.js whenever startFen changes (lesson navigation).
   useEffect(() => {
@@ -233,6 +253,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     setFallbackOutcome(effectiveLine.length > 0 ? 'curated' : 'survived');
     setHintRevealed(false);
     setPhase(effectiveLine.length > 0 ? 'student-to-move' : 'complete');
+    setStudentMoveLog([]);
   }, [startFen, effectiveLine.length]);
 
   // Auto-clear the wrong-square red flash after 600ms.
@@ -252,6 +273,24 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
   /** Play the opponent's curated reply (or engine move) and advance
    *  the phase. Called after the student's correct move lands. */
   const playOpponentReply = useCallback(async (): Promise<void> => {
+    // If the student's last move already ended the game (mate,
+    // stalemate, insufficient material, …), there is no reply to
+    // play — surface the outcome immediately.
+    if (chessRef.current.isGameOver()) {
+      if (chessRef.current.isCheckmate()) setFallbackOutcome('survived');
+      setPhase('complete');
+      return;
+    }
+    // Promotion is an obvious-win signal — David's Photo 1 audit
+    // wanted the playout to keep going past the critical move
+    // "until it was an obvious win." Once the student queens a
+    // pawn the lesson is over regardless of whose turn comes next.
+    const lastMove = chessRef.current.history({ verbose: true }).slice(-1)[0];
+    if (lastMove.flags.includes('p')) {
+      setFallbackOutcome('survived');
+      setPhase('complete');
+      return;
+    }
     const curatedIdx = studentMovesPlayed * 2 + 1;
     // Curated reply available — play it after the animation delay.
     if (curatedIdx < effectiveLine.length) {
@@ -267,6 +306,11 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
         // Curated line is broken — surface as complete rather than
         // hanging the UI. The build-time audit should have caught
         // this, but defensive in case a hand-edit slipped through.
+        setPhase('complete');
+        return;
+      }
+      // Opponent's reply ended the game — stop here.
+      if (chessRef.current.isGameOver()) {
         setPhase('complete');
         return;
       }
@@ -357,20 +401,33 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
           setFirstTryPerfect(false);
           return false;
         }
+        // Correct curated move.
+        const fenBefore = chessRef.current.fen();
         chessRef.current.move(played.san);
-        setFen(chessRef.current.fen());
+        const fenAfter = chessRef.current.fen();
+        setFen(fenAfter);
         setStudentMovesPlayed((n) => n + 1);
+        setStudentMoveLog((log) => [
+          ...log,
+          { san: played.san, fenBefore, fenAfter, curated: true },
+        ]);
         setWrongAttempts(0);
         setHintRevealed(false);
         void playOpponentReply();
         return true;
       }
       // Fallback (Stockfish) territory — any legal move is accepted.
+      const fenBefore = chessRef.current.fen();
       chessRef.current.move(played.san);
-      setFen(chessRef.current.fen());
+      const fenAfter = chessRef.current.fen();
+      setFen(fenAfter);
       setStudentMovesPlayed((n) => n + 1);
       setFallbackPliesPlayed((n) => n + 1);
       setHintRevealed(false);
+      setStudentMoveLog((log) => [
+        ...log,
+        { san: played.san, fenBefore, fenAfter, curated: false },
+      ]);
       void playOpponentReply();
       return true;
     },
@@ -396,6 +453,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     setFallbackOutcome(effectiveLine.length > 0 ? 'curated' : 'survived');
     setHintRevealed(false);
     setPhase(effectiveLine.length > 0 ? 'student-to-move' : 'complete');
+    setStudentMoveLog([]);
   }, [startFen, effectiveLine.length]);
 
   const reveal = useCallback((): void => {
@@ -460,6 +518,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     hintMove,
     hintRevealed,
     curatedRepliesRemaining,
+    studentMoveLog,
     onPieceDrop,
     playMove,
     reset,

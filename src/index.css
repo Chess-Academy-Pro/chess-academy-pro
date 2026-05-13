@@ -98,28 +98,27 @@ body {
 }
 
 /* ─── Scroll-hint indicator ───────────────────────────────────────────────── */
-/* A thin amber line with a moving accent — sits below horizontally
-   scrollable tab strips (or beside vertically scrollable lists) to
-   tell the user there's more content outside the viewport. The
-   accent slides corner-to-corner on a 2-second loop. */
-@keyframes scrollHintSlideX {
-  0%   { transform: translateX(0%);   opacity: 0.7; }
-  50%  { opacity: 1; }
-  100% { transform: translateX(calc(100% - 100%)); opacity: 0.7; }
-}
-@keyframes scrollHintBounceX {
-  0%, 100% { left: 0%; opacity: 0.7; }
-  50%      { left: calc(100% - 2.5rem); opacity: 1; }
+/* A solid gold bar with a bright arrow-shaped accent that sweeps in
+   ONE direction (left→right for x, top→bottom for y) and resets.
+   Hints "there's more content this way" without the visual ambiguity
+   of a bouncing accent. */
+@keyframes scrollHintSweepX {
+  0%   { left: -10%;  opacity: 0;   }
+  12%  { opacity: 1;                }
+  88%  { opacity: 1;                }
+  100% { left: 100%;  opacity: 0;   }
 }
 .animate-scroll-hint-x {
-  animation: scrollHintBounceX 2.2s ease-in-out infinite;
+  animation: scrollHintSweepX 2.4s ease-in-out infinite;
 }
-@keyframes scrollHintBounceY {
-  0%, 100% { top: 0%; opacity: 0.7; }
-  50%      { top: calc(100% - 2.5rem); opacity: 1; }
+@keyframes scrollHintSweepY {
+  0%   { top: -10%;   opacity: 0;   }
+  12%  { opacity: 1;                }
+  88%  { opacity: 1;                }
+  100% { top: 100%;   opacity: 0;   }
 }
 .animate-scroll-hint-y {
-  animation: scrollHintBounceY 2.2s ease-in-out infinite;
+  animation: scrollHintSweepY 2.4s ease-in-out infinite;
 }
 
 /* ─── Puzzle board flash animations ──────────────────────────────────────── */

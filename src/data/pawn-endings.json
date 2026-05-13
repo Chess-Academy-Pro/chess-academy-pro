@@ -35,12 +35,11 @@
         ]
       },
       {
-        "fen": "8/4k3/8/4K3/4P3/8/8/8 b - - 0 1",
+        "fen": "8/3k4/8/4K3/4P3/8/8/8 w - - 1 2",
         "title": "White has the opposition — wins",
-        "explanation": "Same position, Black to move. Now WHITE has the opposition; Black must give way. 1...Kd7 2.Kf6! Kd6 3.e5+ Kd5 4.Kf5 — white king reaches the 6th rank and escorts the pawn home. The single move difference (whose turn it is) flips the eval from drawn to winning.",
+        "explanation": "Black has just played 1...Kd7 — the forced yield after losing the opposition. White cashes in with 2.Kf6 (outflanking around the black king), then 2...Kd6 3.e5+ Kd5 4.Kf5 — the white king reaches the 6th rank and escorts the pawn home. The single move difference (whose turn it is in the kings-facing position) flips the eval from drawn to winning.",
         "result": "white-wins",
         "solution": [
-          "Kd7",
           "Kf6",
           "Kd6",
           "e5+",
@@ -50,14 +49,13 @@
         "source": "The opposition flipped — same FEN, different mover"
       },
       {
-        "fen": "4k3/8/4K3/4P3/8/8/8/8 b - - 0 1",
+        "fen": "3k4/8/4K3/4P3/8/8/8/8 w - - 1 2",
         "title": "White king on the 6th rank — wins regardless",
-        "explanation": "White king already on e6, ahead of the pawn. This is a key square (see next lesson). Whoever has the move, white wins: 1...Kd8 2.Kf7 Kd7 3.e5 — pawn marches with king escort. The opposition no longer matters once the white king is established on the 6th rank.",
+        "explanation": "White king already on e6, ahead of the pawn. This is a key square (see next lesson). Black has yielded with 1...Kd8; now 2.Kf7 outflanks and the e-pawn marches with full escort: 2...Kd7 3.e6+ Kd6 4.e7 Ke5 5.e8=Q+. The opposition no longer matters once the white king is established on the 6th rank.",
         "result": "white-wins",
-        "bestMove": "Kd8",
+        "bestMove": "Kf7",
         "source": "King on key square — opposition irrelevant",
         "solution": [
-          "Kd8",
           "Kf7",
           "Kd7",
           "e6+",
@@ -308,20 +306,22 @@
     },
     "positions": [
       {
-        "fen": "4k3/8/8/3KP3/8/8/8/8 b - - 0 1",
+        "fen": "3k4/8/8/3KP3/8/8/8/8 w - - 1 2",
         "title": "Outflank to the left",
-        "explanation": "White king on d5 next to its e5 pawn — wait, the pawn is e5 not e4 in this setup. Let me recast: the position is white K on d5, pawn on e5, black king on e8. Black to move. The pawn can't push (e7 first attacks it then king to chase). White's plan: outflank. After 1...Kd8 2.Ke6! Black's king has been shouldered aside, the white king takes a key square (e6 + e5 pawn = winning structure), and 3.Kf6/2...Kc8/etc all lose. Outflanking turned a stalled position into a winning one.",
+        "explanation": "White king on d5 with the e5 pawn, Black king has just yielded with 1...Kd8. The pawn can't push safely yet (Black would chase). White's plan: outflank. 2.Kc6! shoulders Black's king aside and takes a key square on the c-file. After 2...Kc8 3.Kd6 the white king is now ahead of the pawn AND Black has lost the opposition again — the pawn marches home. Outflanking turns a stalled opposition into a winning structure.",
         "result": "white-wins",
-        "bestMove": "Kd8",
+        "bestMove": "Kc6",
         "source": "Teaching position — outflanking from a stalled opposition",
         "solution": [
-          "Kd7",
-          "Kd4",
-          "Ke7",
-          "Ke4",
-          "Ke6",
-          "Kf4",
-          "Ke7"
+          "Kc6",
+          "Kc8",
+          "Kd6",
+          "Kd8",
+          "e6",
+          "Ke8",
+          "e7",
+          "Kf7",
+          "e8=Q+"
         ]
       }
     ],

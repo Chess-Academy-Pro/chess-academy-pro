@@ -246,9 +246,8 @@ function PatternPicker({ onPick, onBack, activeTab, onTabChange }: PickerProps):
   const patterns = useMemo(() => getAllPatterns(), []);
   const named = patterns.filter((p) => p.category === 'named-pattern');
   const piece = patterns.filter((p) => p.category === 'piece-mate');
-  // Ref on the horizontally-scrollable tab strip below — drives the
-  // animated amber scroll-hint that hints "swipe for more tabs"
-  // when the row overflows on narrow viewports.
+  // Drives the ScrollHintBar below the strip — the gold arrow sweep
+  // tells the user the tabs scroll horizontally when they overflow.
   const tabStripRef = useRef<HTMLDivElement>(null);
 
   // Cumulative mastery across every endgame lesson tab. Cheap
@@ -300,7 +299,7 @@ function PatternPicker({ onPick, onBack, activeTab, onTabChange }: PickerProps):
           populated tab; the others surface "coming soon" so the
           user can see the surface scope without us shipping
           half-built content. ScrollHintBar below the strip
-          animates an amber accent when the row overflows the
+          animates a gold arrow accent when the row overflows the
           viewport (8 tabs on a narrow phone), telling the user
           they can swipe horizontally. */}
       <div
