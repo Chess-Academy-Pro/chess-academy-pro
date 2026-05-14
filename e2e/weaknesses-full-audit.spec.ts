@@ -397,9 +397,14 @@ test.describe('/weaknesses full audit', () => {
       await back.click();
       await page.waitForTimeout(600);
       const url = page.url();
-      audit('E4', 'Back button → /coach',
-        /\/coach(\?|$)/.test(url) ? 'PASS' : 'WARN',
-        `URL after click: ${new URL(url).pathname}`);
+      // Header back btn navigates to /coach, which App.tsx redirects
+      // to /coach/home (CoachPage). Both URLs satisfy the contract
+      // "back button leaves /weaknesses for the coach hub."
+      const pathname = new URL(url).pathname;
+      const landedOnCoach = pathname === '/coach' || pathname === '/coach/home';
+      audit('E4', 'Back button → coach hub',
+        landedOnCoach ? 'PASS' : 'WARN',
+        `URL after click: ${pathname}`);
     } else {
       audit('E4', 'Back button → /coach', 'SKIP', 'back-btn not visible.');
     }
