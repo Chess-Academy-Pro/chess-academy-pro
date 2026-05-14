@@ -861,8 +861,14 @@ export function CoachTeachPage(): JSX.Element {
         useCoachMemoryStore.getState().appendConversationMessage({
           surface: 'chat-teach',
           role: 'user',
-          text,
-          fen: gameRef.current.fen,
+          // Self-audit (2026-05-15): use the override FEN when the
+          // caller provides one (board onMove callback). Without this
+          // the first append stores the PRE-move position — and the
+          // dedup flag below blocks the second append that would have
+          // had the correct POST-move FEN. Audit log finding 33 (pre-
+          // move state) vs finding 28 (post-move) confirmed the FEN
+          // skew before this fix.
+          fen: opts?.fenOverride ?? gameRef.current.fen,
           trigger: null,
         });
         userMessageAppended = true;

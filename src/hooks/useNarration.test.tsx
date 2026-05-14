@@ -89,6 +89,60 @@ describe('useNarration', () => {
     expect(voiceService.stop).toHaveBeenCalled();
   });
 
+  it('dedups identical text within the 6s window (re-render with same text)', () => {
+    // Live audit (build 7eca7c3) caught the same /coach/endgame
+    // narration spoken 5× in 21s. The hook now blocks identical-text
+    // re-fires within 6 s. Simulate a re-render loop by re-passing
+    // the same text via rerender(); previously this fired multiple
+    // speaks even though React's useEffect dep array would also have
+    // blocked them — the dedup is a defensive double-guard against
+    // upstream remounts / hot-reload edge cases.
+    const { rerender } = renderHook(
+      ({ t }: { t: string }) => useNarration({ text: t }),
+      { initialProps: { t: 'rule of the square' } },
+    );
+    expect(voiceService.speakForced).toHaveBeenCalledTimes(1);
+    // Same text re-passed (simulates parent re-render with stable text);
+    // useEffect dep array would also block this, but the dedup is a
+    // belt-and-suspenders guard against any caller bug.
+    rerender({ t: 'rule of the square' });
+    rerender({ t: 'rule of the square' });
+    expect(voiceService.speakForced).toHaveBeenCalledTimes(1);
+  });
+
+  it('replay() bypasses the dedup window — user-triggered re-fire works', () => {
+    const { result } = renderHook(() =>
+      useNarration({ text: 'narrate me' }),
+    );
+    expect(voiceService.speakForced).toHaveBeenCalledTimes(1);
+    // Immediate replay (well within 6s) must still speak — user
+    // clicked the replay button and EXPECTS to hear it again.
+    act(() => {
+      result.current.replay();
+    });
+    expect(voiceService.speakForced).toHaveBeenCalledTimes(2);
+    expect(voiceService.speakForced).toHaveBeenLastCalledWith('narrate me');
+  });
+
+  it('dedup only blocks immediate-identical fires — A → B → A still speaks A', () => {
+    // The dedup is intentionally narrow: it tracks the LAST spoken
+    // text only, not an arbitrary recent-history set. So A → B → A
+    // speaks all three times because by the time the second A fires,
+    // the last-spoken value is B (different). This matches the audit-
+    // fix intent — the bug was the SAME narration firing N times in
+    // rapid succession (re-render loop), not the user legitimately
+    // navigating between distinct lessons.
+    const { rerender } = renderHook(
+      ({ t }: { t: string }) => useNarration({ text: t }),
+      { initialProps: { t: 'first' } },
+    );
+    expect(voiceService.speakForced).toHaveBeenCalledTimes(1);
+    rerender({ t: 'second' });
+    expect(voiceService.speakForced).toHaveBeenCalledTimes(2);
+    rerender({ t: 'first' });
+    expect(voiceService.speakForced).toHaveBeenCalledTimes(3);
+  });
+
   it('bumps token so a stale promise resolution does not re-trigger speak', async () => {
     // Build a controllable speakForced — the first call's promise
     // stays pending forever; we then change text, and assert the
