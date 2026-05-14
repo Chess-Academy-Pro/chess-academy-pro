@@ -89,6 +89,37 @@ DO NOT:
 
 After 10+ moves, if asked for a summary, give a brief assessment of how well they executed the plan.`;
 
+/** Strip a leading move-notation citation from text destined for TTS.
+ *  The system prompt instructs the LLM not to repeat the move
+ *  notation back ("DO NOT … Repeat the move notation back to them"),
+ *  but it sometimes leads with "Rf8...d8:" or "**Nxf7** —" anyway.
+ *  sanitizeForTTS expands SAN to plain English ("knight takes f7"),
+ *  which the student then hears as the first thing on every reply.
+ *  Strip it here so the spoken version cuts straight to the
+ *  conceptual feedback. The displayed text bubble keeps the prefix
+ *  as visual context. */
+const LEADING_CITATION_RE = new RegExp(
+  // optional whitespace + optional **bold** open
+  '^[\\s*]*' +
+  // SAN token (piece + optional file/rank/capture + dest + check/promo) OR castle
+  '(?:O-O-?O?|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](?:=[QRBN])?[+#]?)' +
+  // optional repeats joined by ellipsis / arrow / hyphen / em-dash
+  // (chess citations use any of: "Rf8...d8", "Nf3-d2", "Rf8…d8",
+  // "Nf3 → d2"). Single hyphen between two SAN-shaped tokens is
+  // safe here because the SAN pattern requires "[a-h][1-8]" — plain
+  // English words won't match the join target.
+  '(?:\\s*(?:\\.{2,}|…|→|–|—|-)\\s*' +
+    '(?:O-O-?O?|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](?:=[QRBN])?[+#]?))*' +
+  // optional **bold** close + whitespace
+  '[\\s*]*' +
+  // separator that confirms this was a CITATION, not the start of a
+  // legitimate sentence: colon, em/en-dash, hyphen, newline
+  '(?:[:—–\\-\\n])\\s*',
+);
+function stripLeadingMoveCitation(text: string): string {
+  return text.replace(LEADING_CITATION_RE, '');
+}
+
 function buildEngineArrows(analysis: StockfishAnalysis): BoardArrow[] {
   const arrows: BoardArrow[] = [];
   const colors = [BEST_MOVE_COLOR, ALT_MOVE_COLOR_2, ALT_MOVE_COLOR_3];
@@ -246,9 +277,15 @@ export function MiddlegamePractice({
       setCoachText(response);
 
       if (isNarrating) {
-        // LLM response may include chess notation; sanitize before TTS
-        // so the student hears plain English instead of "Nxf7".
-        speechService.speak(sanitizeForTTS(response));
+        // LLM response sometimes leads with a move citation
+        // ("Rf8...d8:" or "**Nxf7** —") despite the prompt's
+        // explicit "Do not repeat the move notation back."
+        // stripLeadingMoveCitation drops the SAN prefix so the
+        // student hears the conceptual feedback first instead of
+        // "rook to f8 dot dot dot d8" at the start of every reply.
+        // sanitizeForTTS still expands any inline SAN inside the
+        // body to plain English.
+        void speechService.speak(sanitizeForTTS(stripLeadingMoveCitation(response)));
       }
     } catch {
       if (isMountedRef.current) {
@@ -348,22 +385,26 @@ export function MiddlegamePractice({
             {isEngineMoving ? ' — Engine thinking...' : ''}
           </p>
         </div>
-        <button
-          onClick={toggleNarration}
-          className={`p-2 rounded-lg transition-colors ${
-            isNarrating
-              ? 'bg-theme-accent text-white'
-              : 'text-theme-text-muted hover:bg-theme-border/50'
-          }`}
-          aria-label={isNarrating ? 'Stop narration' : 'Read aloud'}
-        >
-          {isNarrating ? <VolumeX size={18} /> : <Volume2 size={18} />}
-        </button>
       </div>
 
       {/* Board */}
       <div className="flex-1 flex flex-col items-center justify-center px-4 py-2 overflow-hidden">
-        <div className="w-full max-w-lg">
+        <div className="relative w-full max-w-lg">
+          {/* Narration toggle — overlaid on the board so it sits at
+              the user's natural focal point. Backdrop-blur + surface
+              fill keeps it readable over light or dark squares. */}
+          <button
+            onClick={toggleNarration}
+            className={`absolute top-2 right-2 z-10 p-2 rounded-lg border border-theme-border/60 backdrop-blur-sm transition-colors shadow-md ${
+              isNarrating
+                ? 'bg-theme-accent text-white'
+                : 'bg-theme-surface/90 text-theme-text-muted hover:text-theme-text hover:bg-theme-surface'
+            }`}
+            aria-label={isNarrating ? 'Stop narration' : 'Read aloud'}
+            data-testid="narration-toggle"
+          >
+            {isNarrating ? <VolumeX size={18} /> : <Volume2 size={18} />}
+          </button>
           <ControlledChessBoard
             game={game}
             interactive={isPlayerTurn}
