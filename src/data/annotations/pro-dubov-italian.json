@@ -1,0 +1,152 @@
+{
+  "openingId": "pro-dubov-italian",
+  "moveAnnotations": [
+    {
+      "san": "e4",
+      "annotation": "Standard Italian opening — but with Dubov, the standard is bait. Every classical setup the next ten moves builds toward one move that breaks the rules.",
+      "plans": [
+        "Develop Nf3 + Bc4 like a normal Italian; the surprise comes later",
+        "Avoid early simplifications — keep pieces on the board for the gambit"
+      ],
+      "shortNarration": "1.e4 — Italian setup with a hidden weapon coming."
+    },
+    {
+      "san": "e5",
+      "annotation": "Black has to mirror to stay in the Open Game. Anything else and the Loud Italian never gets its chance.",
+      "shortNarration": ""
+    },
+    {
+      "san": "Nf3",
+      "annotation": "",
+      "shortNarration": ""
+    },
+    {
+      "san": "Nc6",
+      "annotation": "",
+      "shortNarration": ""
+    },
+    {
+      "san": "Bc4",
+      "annotation": "Italian Game proper. The bishop on c4 will eventually trade itself for the central pawn after the b4 break — Dubov's point is that the bishop's job here is OPENING LINES, not defending f7.",
+      "plans": [
+        "c3 next to prepare d4",
+        "Don't castle yet — the king stays in the center until the gambit lands"
+      ],
+      "shortNarration": "Bishop to c4. Standard Italian, sharper purpose."
+    },
+    {
+      "san": "Bc5",
+      "annotation": "Giuoco Piano. Black takes the classical bait. This is the EXACT move order Dubov wants — the Bb6 retreat square that opens after b4 only works because Black is on c5.",
+      "shortNarration": ""
+    },
+    {
+      "san": "c3",
+      "annotation": "Telegraphs d4 next move. Black knows this. What Black doesn't know is that c3 also props up the b4 break two moves later — c3 supports the d-pawn AND covers d4 if Black declines.",
+      "plans": [
+        "d4 next — central break opens lines for b4",
+        "Keep the king on e1 for one more move"
+      ],
+      "shortNarration": "c3 prepares both d4 and b4."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Attacks e4. Black plays naturally — this is the modern Italian move order. Dubov is counting on it.",
+      "shortNarration": ""
+    },
+    {
+      "san": "d4",
+      "annotation": "Central break. The standard Giuoco Piano move. Nothing surprising yet — every Italian player has reached this position.",
+      "shortNarration": "d4 — central break, standard Italian."
+    },
+    {
+      "san": "exd4",
+      "annotation": "Black takes — the only critical try. If Black declines (...d6 or ...Bb6) the center collapses in White's favor with cxd4 or d5.",
+      "shortNarration": ""
+    },
+    {
+      "san": "b4",
+      "annotation": "The Loud Italian. The Dubov Gambit. Most Italian players reach this position 100 times and play cxd4 every time — Dubov plays b4 and the engine doesn't know what to do. The bishop on c5 has to retreat (b6 or a5) or accept the gambit with Bxb4. Both lines have been Dubov's territory since the 2020 Russian Championship.",
+      "plans": [
+        "If 6...Bxb4 — Evans Gambit accepted, transposes to classical Evans themes (Ba3, e5, attack)",
+        "If 6...Bb6 — the position from Dubov's immortal win: e5 chases the knight, Bd5 attacks both knight and rook"
+      ],
+      "alternatives": [
+        "6.cxd4 — normal Giuoco Piano main line. Solid, equal, boring. The point of 6.b4 is to AVOID this."
+      ],
+      "arrows": [
+        { "from": "b2", "to": "b4", "color": "rgba(220, 38, 38, 0.85)" }
+      ],
+      "highlights": [
+        { "square": "c5", "color": "rgba(255, 215, 0, 0.45)" }
+      ],
+      "shortNarration": "b4. The Dubov Gambit — the move that broke Karjakin."
+    },
+    {
+      "san": "Bb6",
+      "annotation": "Refuses the gambit and retreats. This is the most common response — taking the pawn (Bxb4) transposes to a sharp Evans where White is well-prepped. Black thinks safety on b6 dodges the sacrifice. It doesn't.",
+      "shortNarration": ""
+    },
+    {
+      "san": "e5",
+      "annotation": "Chases the knight off f6. The pawn wedge on e5 is the engine of the whole attack — it shuts off Black's f-pawn defense and clears the e-file for White's rook.",
+      "plans": [
+        "Knight retreats are limited: Ne4 (only safe square), Nd5 (dies to a follow-up), Ng4 (drives to the rim)",
+        "Ne4 is forced — and Dubov is ready for it"
+      ],
+      "shortNarration": "Pawn pushes e5 to chase the f6-knight. Ne4 is the only square."
+    },
+    {
+      "san": "Ne4",
+      "annotation": "The only safe knight retreat. Black has been forced down the line Dubov wants — every other square loses material or surrenders the center entirely.",
+      "shortNarration": ""
+    },
+    {
+      "san": "Bd5",
+      "annotation": "DOUBLE ATTACK. The bishop swings to d5 hitting the knight on e4 AND lining up against the rook on a8 along the long diagonal. Black has to defend two pieces in one move — and can't.",
+      "plans": [
+        "Nxc3 is forced — the only way to save the knight while attacking back",
+        "The follow-up Nxc3 dxc3 trades the knight off but White's bishops are already screaming down the board"
+      ],
+      "arrows": [
+        { "from": "c4", "to": "d5", "color": "rgba(220, 38, 38, 0.85)" },
+        { "from": "d5", "to": "e4", "color": "rgba(220, 38, 38, 0.6)" },
+        { "from": "d5", "to": "a8", "color": "rgba(220, 38, 38, 0.4)" }
+      ],
+      "shortNarration": "Bishop to d5 — double attack on the knight and the rook."
+    },
+    {
+      "san": "Nxc3",
+      "annotation": "Forced — Black trades the knight for the c-pawn to save material. But the trade opens the b-file AND drops a pawn on c3 that's about to be Black's biggest problem.",
+      "shortNarration": ""
+    },
+    {
+      "san": "Nxc3",
+      "annotation": "Recapture. White's knight reaches c3 — the most aggressive minor-piece square in the position. Pointed straight at Black's queenside.",
+      "shortNarration": ""
+    },
+    {
+      "san": "dxc3",
+      "annotation": "Black takes the c-pawn. Up a pawn nominally — but those two doubled c-pawns are weak, the b6-bishop is buried, the f6-knight is gone, and White hasn't even castled yet. Material-wise it's still a gambit; positionally Black is already lost.",
+      "shortNarration": "Black is up a pawn but the position is collapsing."
+    },
+    {
+      "san": "Bg5",
+      "annotation": "Pin against the queen. Black's only developed minor piece (the knight on f6 is gone — there's nothing to pin). The bishop on g5 here pressures e7 and prepares the rook lift to e1 + Bxe7 ideas.",
+      "shortNarration": "Bishop to g5 — pressure on the e-file."
+    },
+    {
+      "san": "Ne7",
+      "annotation": "Black scrambles for development. The knight blocks the e-file and tries to cover f5, but it's also blocking Black's own bishop on c8 and queen — every defensive move costs more activity.",
+      "shortNarration": ""
+    },
+    {
+      "san": "O-O",
+      "annotation": "Castle and connect rooks. White's pieces are now coordinating for the kingside attack while Black is still trying to finish development. From this position the Karjakin game ended in Dubov's queen sacrifice and forced mate — see the trap-line for the actual sequence.",
+      "plans": [
+        "Re1 to pile on the e-file",
+        "Qd3 + Bxe7 + queenside avalanche all loom"
+      ],
+      "shortNarration": "Castled. The attack is loaded — see the immortal trap line."
+    }
+  ]
+}

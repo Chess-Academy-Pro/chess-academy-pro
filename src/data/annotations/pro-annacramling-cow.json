@@ -1,0 +1,82 @@
+{
+  "openingId": "pro-annacramling-cow",
+  "moveAnnotations": [
+    {
+      "san": "e4",
+      "annotation": "White claims the center. The Cow doesn't fight for the center directly — it lets White have it for now, builds behind the pawns, and waits for the strike.",
+      "shortNarration": ""
+    },
+    {
+      "san": "e6",
+      "annotation": "First Cow move. Black declines to contest e4 directly. The pawn on e6 keeps the d5 break in reserve while leaving the light-squared bishop's diagonal closed for now — that bishop will route to b7 later.",
+      "plans": [
+        "Pawns stay on e6 and d6 — the Cow's signature low-profile",
+        "Knights will cow-horn to b6 and g6 over the next 4-5 moves"
+      ],
+      "shortNarration": "Black plays e6 — Cow setup begins."
+    },
+    {
+      "san": "d4",
+      "annotation": "",
+      "shortNarration": ""
+    },
+    {
+      "san": "d6",
+      "annotation": "Second Cow pawn. The e6/d6 wall makes the position look like a French — but the Cow's knights won't go to f6 or c6 like a French. They route via d7 and e7 to b6 and g6, the cow horns.",
+      "shortNarration": "d6 — the second Cow pawn. Knights route next."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "",
+      "shortNarration": ""
+    },
+    {
+      "san": "Nd7",
+      "annotation": "First horn move. Nd7 here, not the usual Nc6 or Nf6, because the knight is en route to b6 via d7 — that's where the cow horn lives. From b6 the knight covers c4, d5, a4, and supports a future ...c5 break.",
+      "plans": [
+        "Next: Ne7 (the other horn route) and Nb6 (completing the first horn)",
+        "Don't push pawns yet — let White overextend"
+      ],
+      "shortNarration": "Knight to d7 — first horn route. b6 next."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "",
+      "shortNarration": ""
+    },
+    {
+      "san": "Ne7",
+      "annotation": "Second horn route. The knight will swing to g6 — covering f4, h4, e5, and the king position. Looks slow, but the resulting structure is the most flexible Black can build.",
+      "shortNarration": "Knight to e7 — second horn route, g6 next."
+    },
+    {
+      "san": "Bd3",
+      "annotation": "",
+      "shortNarration": ""
+    },
+    {
+      "san": "Nb6",
+      "annotation": "First horn LANDED. The knight on b6 looks passive but pressures c4 and d5, supports a future ...c5 strike, and chains with the eventual ...Bb7. White's bishop on d3 has to watch out for ...Na4 ideas if c2-c3 isn't played.",
+      "plans": [
+        "...Ng6 next completes the horn formation",
+        "After both horns are in place, look for the ...c5 or ...e5 break"
+      ],
+      "shortNarration": "First horn lands on b6 — covers c4 and d5."
+    },
+    {
+      "san": "O-O",
+      "annotation": "",
+      "shortNarration": ""
+    },
+    {
+      "san": "Ng6",
+      "annotation": "Second horn LANDED. Both knights are on the cow's horns. Black's piece structure is fully built — every minor piece has a clear job, the pawns are still uncommitted, and the king will castle next. The Cow setup is COMPLETE. Now Black waits — White has to commit FIRST.",
+      "plans": [
+        "Castle next (...Bg7 then ...O-O if the bishop fianchettos, otherwise direct ...Be7 + ...O-O)",
+        "Watch for the ...e5 break if White over-commits to the kingside",
+        "Watch for the ...c5 break against White's central pawns"
+      ],
+      "shortNarration": "Both horns are home. The Cow waits — White has to swing first."
+    }
+  ]
+}
