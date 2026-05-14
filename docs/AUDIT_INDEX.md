@@ -33,11 +33,12 @@ Status legend: ✅ shipped · 🟡 partial · 🚧 in flight (another session) �
 | Coach Chat — sister surfaces (memory-mirror class sweep) | ✅ | [`docs/coach-chat-ux-contract.md` §Bug Log 2026-05-14 (sister surfaces)](coach-chat-ux-contract.md) | reuses `audit-coach-chat.mjs` pattern; per-surface drives pending | each surface's own `.test.tsx` | 2026-05-14. Same class fixed across `GameChatPanel.tsx` (10 sites), `VoiceChatMic.tsx` (4), `CoachTeachPage.tsx` (5), `CoachGamePage.tsx` (2). 21 total. |
 | Weaknesses (`/weaknesses`) | 🟡 | — | — | — | PR #508 partial — review-link surface + ECO names in mistake/tactic rows. Full audit pending. |
 | Openings explorer (`/openings`) | 🚧 | — | — | — | In flight on another session (artefacts at `audit-reports/openings-ui-*`). Coordinate before driving. |
-| Coach Analyse | ❌ | — | — | — | LLM surface, position-explain intent. Smaller scope. |
-| Coach Plan | ❌ | — | — | — | LLM surface. |
-| Coach Train (`/coach/train`) | ❌ | — | — | — | Review-route entry, drives `/coach/play?review=...`. |
-| Dashboard + SmartSearchBar (`/`) | ❌ | — | — | — | Single hub + voice-trigger entry point. Small effort, high traffic. |
-| Kid Mode (`/kid`) | ❌ | — | — | — | Separate simplified surface. |
+| Coach Analyse (`/coach/analyse`) | 🟡 | — | [`scripts/audit-untouched-surfaces.mjs`](../scripts/audit-untouched-surfaces.mjs) | `CoachAnalysePage.test.tsx` | 2026-05-14. Smoke pass — FEN input + Load button visible, no pageerrors on mount. Deep flow (paste FEN, get explanation streamed) still pending. |
+| Coach Plan (`/coach/plan`) | 🟡 | — | [`scripts/audit-untouched-surfaces.mjs`](../scripts/audit-untouched-surfaces.mjs) | `CoachSessionPlanPage.test.tsx` | 2026-05-14. Smoke pass — page mounts cleanly. Plan-load + start-session click-through still pending. |
+| Coach Train (`/coach/train`) | 🟡 | — | [`scripts/audit-untouched-surfaces.mjs`](../scripts/audit-untouched-surfaces.mjs) | `CoachTrainPage.test.tsx` | 2026-05-14. Smoke pass — training heading + one of loading / no-recs / recommendations state. Recommendation click-through pending. |
+| Coach Hub (`/coach/home`) | 🟡 | — | [`scripts/audit-untouched-surfaces.mjs`](../scripts/audit-untouched-surfaces.mjs) | `e2e/coach-full-audit.spec.ts` (14 tests) | 2026-05-14. Smoke pass added — 14 tiles render. Per-tile interactive drives still pending. |
+| Dashboard + SmartSearchBar (`/`) | ✅ | — | [`scripts/audit-dashboard.mjs`](../scripts/audit-dashboard.mjs) | `DashboardPage.test.tsx`, `DashboardPage.a11y.test.tsx` | 2026-05-14. 17/17 prod audit: root mount, 4 tiles + Import Games, SmartSearchBar typing → dropdown, ask-coach option, all 5 tile nav routes, clear-input. |
+| Kid Mode (`/kid`) | 🟡 | — | [`scripts/audit-untouched-surfaces.mjs`](../scripts/audit-untouched-surfaces.mjs) | — | 2026-05-14. Smoke pass — 4 main cards render + Journey card nav works. Fairy-tale / Puzzle Quest / Play Games / Mini-Games sub-flows pending. |
 | iOS-specific (AVAudioSession, Bluetooth, mic) | — | — | — | — | Device-only, can't headless audit. |
 
 ---
