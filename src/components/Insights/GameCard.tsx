@@ -33,14 +33,12 @@ export function GameCard({
 }: GameCardProps): JSX.Element {
   const rs = RESULT_STYLES[result];
 
-  return (
-    <div
-      className="rounded-xl border p-3.5 mt-2.5"
-      style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface)' }}
-      data-testid="game-card"
-      onClick={onClick}
-      role={onClick ? 'button' : undefined}
-    >
+  // When the card is interactive, render it as a real <button> so the
+  // keyboard activates it (Enter / Space) and screen readers announce
+  // it as a button. The non-interactive form stays a <div> so it
+  // doesn't pretend to be tappable when it isn't.
+  const inner = (
+    <>
       <div className="flex justify-between items-center mb-2">
         <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>
           {opponentName}
@@ -66,6 +64,31 @@ export function GameCard({
         {cpLoss !== null && <StatRow label="Avg CP loss" value={`${cpLoss} cp`} />}
       </div>
       <div className="text-[10px] mt-2" style={{ color: 'var(--color-text-muted)' }}>{date}</div>
+    </>
+  );
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className="rounded-xl border p-3.5 mt-2.5 w-full text-left hover:opacity-80 transition-opacity"
+        style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface)' }}
+        data-testid="game-card"
+        aria-label={`Review ${result} vs ${opponentName}${opponentElo ? ` (${opponentElo})` : ''} on ${date}`}
+      >
+        {inner}
+      </button>
+    );
+  }
+
+  return (
+    <div
+      className="rounded-xl border p-3.5 mt-2.5"
+      style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface)' }}
+      data-testid="game-card"
+    >
+      {inner}
     </div>
   );
 }

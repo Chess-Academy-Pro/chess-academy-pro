@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { getGamesByOpening } from '../../services/gameInsightsService';
 import { reconstructMovesFromGame } from '../../services/gameReconstructionService';
 import { calculateAccuracy, getClassificationCounts } from '../../services/accuracyService';
+import { logAppAudit } from '../../services/appAuditor';
 import { InsightsDonutChart } from './InsightsDonutChart';
 import { GameCard } from './GameCard';
 import type { OpeningAggregateStats, GameRecord } from '../../types';
@@ -165,7 +166,16 @@ export function OpeningDrilldown({ opening, onBack }: OpeningDrilldownProps): JS
             moves={g.moves}
             cpLoss={null}
             date={g.game.date}
-            onClick={() => void navigate(`/coach/play?review=${g.game.id}`)}
+            onClick={() => {
+              void logAppAudit({
+                kind: 'coach-surface-migrated',
+                category: 'subsystem',
+                source: 'OpeningDrilldown.tapGame',
+                summary: `open review for ${g.game.id} (eco=${opening.eco ?? 'unknown'})`,
+                details: JSON.stringify({ gameId: g.game.id, eco: opening.eco, openingName: opening.name }),
+              });
+              void navigate(`/coach/review/${encodeURIComponent(g.game.id)}`);
+            }}
           />
         );
       })}

@@ -105,10 +105,10 @@ export function MistakesTab({ data }: MistakesTabProps): JSX.Element {
           <div className="text-[10px] py-1.5" style={{ color: 'var(--color-text-muted)' }}>
             Tap to review on the board
           </div>
-          {data.costliestMistakes.map((m, i) => (
-            <div key={i}>
+          {data.costliestMistakes.map((m) => (
+            <div key={`${m.gameId}:${m.moveNumber}`}>
               <button
-                onClick={() => void navigate(`/coach/play?review=${m.gameId}&move=${m.moveNumber}`)}
+                onClick={() => void navigate(`/coach/review/${encodeURIComponent(m.gameId)}?move=${m.moveNumber}`)}
                 className="flex items-center justify-between w-full py-2 border-b text-sm hover:opacity-80 transition-opacity"
                 style={{ borderColor: 'color-mix(in srgb, var(--color-border) 50%, transparent)' }}
                 data-testid="mistake-row"

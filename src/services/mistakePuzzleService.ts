@@ -5,6 +5,7 @@ import { stockfishEngine } from './stockfishEngine';
 import { generateMistakeNarration } from './mistakeNarration';
 import { detectTacticType } from './missedTacticService';
 import { tacticTypeLabel } from './tacticAlertService';
+import { getOpeningNameByEco } from './openingDetectionService';
 import { useAppStore } from '../stores/appStore';
 import type {
   MistakePuzzle,
@@ -31,10 +32,19 @@ async function resolveGameContext(
 ): Promise<GameContext> {
   const opponentName = playerColor === 'white' ? game.black : game.white;
 
+  // 3-tier fallback to match the OpeningsTab fix (PR #505): user's
+  // repertoire wins → Lichess DB ECO→name lookup → null. Without the
+  // ECO lookup, imported games with no repertoire-linked openingId
+  // show "Unknown" on every costliest-mistake row even when game.eco
+  // is set, because the user has to manually link the opening to
+  // their repertoire to get a readable name.
   let openingName: string | null = null;
   if (game.openingId) {
     const opening = await db.openings.get(game.openingId);
     if (opening) openingName = opening.name;
+  }
+  if (!openingName && game.eco) {
+    openingName = getOpeningNameByEco(game.eco);
   }
 
   return {

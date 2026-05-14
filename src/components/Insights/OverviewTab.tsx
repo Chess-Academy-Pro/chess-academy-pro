@@ -228,9 +228,9 @@ function AccuracyRing({ value, label }: { value: number; label: string }): JSX.E
   const offset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="text-center">
+    <div className="text-center" role="img" aria-label={`${label}: ${value}% accuracy`}>
       <div className="relative w-16 h-16">
-        <svg viewBox="0 0 36 36" className="w-16 h-16 -rotate-90">
+        <svg viewBox="0 0 36 36" className="w-16 h-16 -rotate-90" aria-hidden>
           <circle cx="18" cy="18" r="14" fill="none" stroke="var(--color-border)" strokeWidth="3" />
           <circle
             cx="18" cy="18" r="14" fill="none"
