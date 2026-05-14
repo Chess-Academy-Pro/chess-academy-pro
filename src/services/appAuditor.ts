@@ -626,10 +626,15 @@ export async function loadAuditStreamConfig(): Promise<AuditStreamConfig | null>
 
     streamConfigHydrated = true;
     cachedStreamConfig = url && secret ? { url, secret } : null;
+    flushPreHydrationQueue();
     return cachedStreamConfig;
   } catch {
     streamConfigHydrated = true;
     cachedStreamConfig = null;
+    // Even with no config the boot-window audits still need to be
+    // dropped (not held forever), so flush the queue — the flush
+    // routine itself short-circuits on null cfg.
+    flushPreHydrationQueue();
     return null;
   }
 }
@@ -640,6 +645,9 @@ export async function loadAuditStreamConfig(): Promise<AuditStreamConfig | null>
 export async function setAuditStreamConfig(url: string, secret: string): Promise<void> {
   cachedStreamConfig = url && secret ? { url, secret } : null;
   streamConfigHydrated = true;
+  // Late config-set after boot also triggers a flush in case any
+  // audits queued before this point (rare but possible).
+  flushPreHydrationQueue();
   try {
     const profile = await db.profiles.get('main');
     if (!profile) return;
@@ -681,10 +689,32 @@ export function isAuditStreamConfigHydrated(): boolean {
   return streamConfigHydrated;
 }
 
+/** Pre-hydration replay queue. Audits emitted before
+ *  `loadAuditStreamConfig()` finishes hydrating `cachedStreamConfig`
+ *  used to be dropped silently — that meant every audit fired during
+ *  the boot window (the first ~5–10s of TacticsPage mount, route
+ *  changes, etc.) was invisible to the audit-stream live-watch.
+ *  Surfaced by the tactics audit run: scenarios 02-hub-render and
+ *  03-hub-search-typing showed 0 captured events while later
+ *  scenarios all worked. Queue up to N pre-hydration emits and
+ *  flush them once the config lands.
+ */
+const PREHYDRATE_QUEUE_LIMIT = 100;
+const preHydrationQueue: AuditEntry[] = [];
+
 async function streamAuditEntry(entry: AuditEntry): Promise<void> {
   if (typeof window === 'undefined') return;
   const cfg = cachedStreamConfig;
-  if (!cfg) return;
+  if (!cfg) {
+    // Boot window: hydration hasn't completed yet. Queue for replay
+    // unless we've already hit the cap (defends against an
+    // unbounded backlog when audit-stream is opt-out for this
+    // session).
+    if (!streamConfigHydrated && preHydrationQueue.length < PREHYDRATE_QUEUE_LIMIT) {
+      preHydrationQueue.push(entry);
+    }
+    return;
+  }
   try {
     await fetch(cfg.url, {
       method: 'POST',
@@ -698,6 +728,17 @@ async function streamAuditEntry(entry: AuditEntry): Promise<void> {
     });
   } catch {
     /* silent — the local Dexie log is still the source of truth */
+  }
+}
+
+/** Flush any audits queued during the boot window. Called from
+ *  `loadAuditStreamConfig` (and `setAuditStreamConfig`) once the
+ *  in-memory cache lands. Idempotent. */
+function flushPreHydrationQueue(): void {
+  if (preHydrationQueue.length === 0) return;
+  const drained = preHydrationQueue.splice(0, preHydrationQueue.length);
+  for (const entry of drained) {
+    void streamAuditEntry(entry);
   }
 }
 
