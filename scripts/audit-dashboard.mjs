@@ -243,9 +243,22 @@ async function main() {
   for (const tile of tiles) {
     await record(`nav-${tile.testid}`, async () => {
       await page.goto(`${BASE_URL}/`, { waitUntil: 'domcontentloaded', timeout: BOOT_TIMEOUT_MS });
-      await page.locator(`[data-testid="${tile.testid}"]`).waitFor({ timeout: 8000 });
-      await page.locator(`[data-testid="${tile.testid}"]`).click();
-      await page.waitForTimeout(1200);
+      const btn = page.locator(`[data-testid="${tile.testid}"]`);
+      await btn.waitFor({ timeout: 8000 });
+      await btn.scrollIntoViewIfNeeded().catch(() => undefined);
+      // Click, poll for URL change. If URL doesn't change in 6s,
+      // retry the click once — Vercel sometimes drops the chunk fetch
+      // on first attempt and the lazy-loaded route handler never
+      // resolves. Audit observed 2026-05-14: same tile passes or
+      // fails 50/50 across runs depending on network state.
+      for (let attempt = 0; attempt < 2; attempt++) {
+        await btn.click().catch(() => undefined);
+        const t0 = Date.now();
+        while (Date.now() - t0 < 6000) {
+          if (tile.route.test(page.url())) return;
+          await page.waitForTimeout(200);
+        }
+      }
     }, NAV_SETTLE_MS, [
       { kind: 'url-matches', value: tile.route, label: tile.label },
     ]);
