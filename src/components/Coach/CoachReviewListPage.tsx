@@ -5,6 +5,7 @@ import { db } from '../../db/schema';
 import type { GameRecord, GameSource } from '../../types';
 import { ReviewGameCard } from './ReviewGameCard';
 import { ImportGamesButton } from '../Games/ImportGamesButton';
+import { AnalyzeGamesButton } from '../Games/AnalyzeGamesButton';
 import { logAppAudit } from '../../services/appAuditor';
 import { seedReviewSamplesIfNeeded } from '../../services/reviewSampleGames';
 
@@ -75,7 +76,13 @@ export function CoachReviewListPage(): JSX.Element {
           <ArrowLeft size={20} />
         </button>
         <h1 className="text-xl font-bold flex-1 text-center">Review with Coach</h1>
-        <ImportGamesButton variant="compact" />
+        {/* Import + Analyze stacked in the header (per UX ask):
+            ImportGamesButton on top, AnalyzeGamesButton directly
+            below. Analyze self-hides when there's nothing to do. */}
+        <div className="flex flex-col gap-1.5 items-end">
+          <ImportGamesButton variant="compact" />
+          <AnalyzeGamesButton variant="compact" source="CoachReviewListPage" />
+        </div>
       </div>
 
       <p className="text-center text-sm text-theme-text-muted max-w-lg mx-auto w-full -mt-2">

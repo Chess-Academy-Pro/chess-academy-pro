@@ -10,6 +10,7 @@ import {
 } from '../../services/gameInsightsService';
 import { runBackgroundAnalysis } from '../../services/gameAnalysisService';
 import { ImportGamesButton } from '../Games/ImportGamesButton';
+import { AnalyzeGamesButton } from '../Games/AnalyzeGamesButton';
 import { useAppStore } from '../../stores/appStore';
 import { routeChatIntent } from '../../services/coachSessionRouter';
 import { logAppAudit } from '../../services/appAuditor';
@@ -182,16 +183,24 @@ export function GameInsightsPage(): JSX.Element {
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <ImportGamesButton variant="compact" />
-            <button
-              onClick={() => void handleRefresh()}
-              disabled={refreshing}
-              className="p-2 rounded-lg hover:opacity-80 disabled:opacity-40"
-              data-testid="refresh-btn"
-            >
-              <RefreshCw size={18} className={refreshing ? 'animate-spin' : ''} style={{ color: 'var(--color-text-muted)' }} />
-            </button>
+          <div className="flex flex-col gap-1.5 items-end">
+            <div className="flex items-center gap-1.5">
+              <ImportGamesButton variant="compact" />
+              <button
+                onClick={() => void handleRefresh()}
+                disabled={refreshing}
+                className="p-2 rounded-lg hover:opacity-80 disabled:opacity-40"
+                data-testid="refresh-btn"
+              >
+                <RefreshCw size={18} className={refreshing ? 'animate-spin' : ''} style={{ color: 'var(--color-text-muted)' }} />
+              </button>
+            </div>
+            {/* Analyze CTA right under the Import button — same
+                position contract per David's UX ask. The button
+                self-hides when there's nothing to analyze (no
+                unanalyzed games and no in-flight run), so it never
+                shows a dead state in the compact header layout. */}
+            <AnalyzeGamesButton variant="compact" source="GameInsightsPage" />
           </div>
         </div>
 
