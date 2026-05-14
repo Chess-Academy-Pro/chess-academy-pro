@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { importLichessGames, importLichessStats } from '../../services/lichessService';
 import { importChessComGames, importChessComStats } from '../../services/chesscomService';
@@ -33,7 +33,23 @@ export function ImportPage(): JSX.Element {
   const setActiveProfile = useAppStore((s) => s.setActiveProfile);
 
   const [platform, setPlatform] = useState<Platform>('chesscom');
-  const [username, setUsername] = useState('');
+  // Pre-populate the username from the user's profile so they don't
+  // re-type it every time. Each platform has its own saved value;
+  // switching platforms swaps the input contents below via the
+  // `useEffect` that watches platform changes.
+  const [username, setUsername] = useState(
+    () => activeProfile?.preferences.chessComUsername ?? '',
+  );
+  // Swap the input when the user toggles platforms — chess.com /
+  // lichess usernames are independent fields on the profile, so
+  // toggling should reveal the right saved value (or empty if
+  // they've never imported from that platform).
+  useEffect(() => {
+    const saved = platform === 'chesscom'
+      ? activeProfile?.preferences.chessComUsername ?? ''
+      : activeProfile?.preferences.lichessUsername ?? '';
+    setUsername(saved);
+  }, [platform, activeProfile?.preferences.chessComUsername, activeProfile?.preferences.lichessUsername]);
   const [importing, setImporting] = useState(false);
   const [progressCount, setProgressCount] = useState(0);
   const [progressStatus, setProgressStatus] = useState('');

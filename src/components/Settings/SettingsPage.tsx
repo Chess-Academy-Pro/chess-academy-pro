@@ -9,6 +9,8 @@ import { db } from '../../db/schema';
 import { exportUserData } from '../../services/dbService';
 import { ThemePickerPanel } from '../ui/ThemePickerPanel';
 import { SyncSettingsPanel } from './SyncSettingsPanel';
+import { ImportGamesButton } from '../Games/ImportGamesButton';
+import { AnalyzeGamesButton } from '../Games/AnalyzeGamesButton';
 import { VoiceSettingsPanel } from './VoiceSettingsPanel';
 import { PieceSoundPanel } from './PieceSoundPanel';
 import { FeedbackForm } from '../Feedback/FeedbackForm';
@@ -654,6 +656,16 @@ function ProfileTab({ profile, setProfile }: TabProps): JSX.Element {
         Export Data
       </button>
 
+      {/* Game-import accounts — the chess.com / lichess usernames the
+          user imports games from. Stored on profile.preferences so
+          /games/import can pre-populate the input instead of forcing
+          a retype every time. Pairs the saved-usernames editor with
+          the Import + Analyze CTAs so this is the one-stop section
+          for "manage how my game data flows in." */}
+      <div className="pt-4 border-t" style={{ borderColor: 'var(--color-border)' }}>
+        <GameImportAccountsPanel profile={profile} setProfile={setProfile} />
+      </div>
+
       <div className="pt-4 border-t" style={{ borderColor: 'var(--color-border)' }}>
         <SyncSettingsPanel />
       </div>
@@ -986,6 +998,102 @@ function AppearanceTab(): JSX.Element {
   return (
     <div className="space-y-4" data-testid="appearance-tab">
       <ThemePickerPanel />
+    </div>
+  );
+}
+
+// ─── Game Import Accounts Panel ──────────────────────────────────────────────
+//
+// The chess.com / lichess usernames the user imports games from, persisted
+// to profile.preferences so /games/import can pre-populate the input on
+// every visit. Pairs the saved-usernames editor with the Import + Analyze
+// CTAs so this is the one-stop section for "manage how my game data
+// flows in." Debounced 300ms autosave like every other panel on this
+// tab — David's standing ask: "If user selected it, then save it."
+
+function GameImportAccountsPanel({ profile, setProfile }: TabProps): JSX.Element {
+  const [chessComUsername, setChessComUsername] = useState(profile.preferences.chessComUsername ?? '');
+  const [lichessUsername, setLichessUsername] = useState(profile.preferences.lichessUsername ?? '');
+  const [status, setStatus] = useState<string | null>(null);
+
+  const skipFirstSaveRef = useRef(true);
+  useEffect(() => {
+    if (skipFirstSaveRef.current) {
+      skipFirstSaveRef.current = false;
+      return;
+    }
+    const handle = setTimeout(() => {
+      const updatedPrefs = {
+        ...profile.preferences,
+        chessComUsername: chessComUsername.trim() || undefined,
+        lichessUsername: lichessUsername.trim() || undefined,
+      };
+      void db.profiles.update(profile.id, { preferences: updatedPrefs }).then(() => {
+        setProfile({ ...profile, preferences: updatedPrefs });
+        setStatus('Saved ✓');
+        setTimeout(() => setStatus(null), 1500);
+      });
+    }, 300);
+    return () => clearTimeout(handle);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chessComUsername, lichessUsername]);
+
+  return (
+    <div className="space-y-3" data-testid="game-import-accounts-panel">
+      <h3 className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--color-text-muted)' }}>
+        Game Import Accounts
+      </h3>
+      <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+        Save your usernames so you don't have to retype them every time you
+        import. Imports also stamp these automatically.
+      </p>
+
+      <div>
+        <label className="text-xs font-medium block mb-1" style={{ color: 'var(--color-text-muted)' }}>
+          chess.com username
+        </label>
+        <input
+          type="text"
+          value={chessComUsername}
+          onChange={(e) => setChessComUsername(e.target.value)}
+          placeholder="e.g. magnuscarlsen"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          className="w-full px-3 py-2 rounded-lg border text-sm"
+          style={{ background: 'var(--color-bg)', borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
+          data-testid="settings-chesscom-username"
+        />
+      </div>
+
+      <div>
+        <label className="text-xs font-medium block mb-1" style={{ color: 'var(--color-text-muted)' }}>
+          lichess username
+        </label>
+        <input
+          type="text"
+          value={lichessUsername}
+          onChange={(e) => setLichessUsername(e.target.value)}
+          placeholder="e.g. DrNykterstein"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          className="w-full px-3 py-2 rounded-lg border text-sm"
+          style={{ background: 'var(--color-bg)', borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
+          data-testid="settings-lichess-username"
+        />
+      </div>
+
+      <div className="flex flex-col gap-2 pt-1">
+        <ImportGamesButton variant="primary" />
+        <AnalyzeGamesButton variant="primary" source="SettingsPage" />
+      </div>
+
+      {status && (
+        <p className="text-xs font-medium" style={{ color: 'var(--color-accent)' }} data-testid="game-import-accounts-status">
+          {status}
+        </p>
+      )}
     </div>
   );
 }
