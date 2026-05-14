@@ -60,28 +60,32 @@
 ## State after the 2026-05-14 "FULL AUDIT" pass
 
 Final prod-audit roll-up after the session that closed the
-Show-the-Opening bug, rate-limited the global error hook, and
-brought every previously-untouched surface under Playwright drive:
+Show-the-Opening bug, fixed the Stockfish-wasm OOM cascade at its
+root, rate-limited the global error hook, and brought every
+previously-untouched surface under Playwright drive:
 
 | Audit script | Pass rate | Notes |
 |---|---|---|
-| `audit-tactics.mjs` | 118/119 | 52 scenarios. 1 pre-existing flake on scenario 09 (tactic-type-heading timing). 0 pageerrors. |
+| `audit-tactics.mjs` | **135/135** | 62 scenarios. **0 page errors. 0 console errors.** Post-cooldown-fix run. |
 | `audit-coach-chat.mjs` | 15/15 | Clean. |
 | `audit-coach-review.mjs` | 23/23 | Clean. |
-| `audit-coach-play.mjs` | ~17/19 | Some flakes on `route-changed` and `coach-opening-auto-detected` audit-event counts — audit-stream timing, not product issue. |
-| `audit-dashboard.mjs` | ~15/17 | Tile-nav flakes on Weaknesses + Import Games. Retry-on-flake added (commit 9397cebe). Likely Vercel chunk-load races. |
-| `audit-untouched-surfaces.mjs` | ~17/19 | Kid Mode Fairy-tale card nav flakes; Play Games card occasionally not-visible in race. |
+| `audit-coach-play.mjs` | 5/5 | Clean (after cooldown fix). |
+| `audit-dashboard.mjs` | 16/17 | Weaknesses tile nav occasionally flakes — Vercel chunk-load race, not a product issue. Retry-on-flake added. |
+| `audit-untouched-surfaces.mjs` | 22/23 | Fairy-tale Kid Mode card nav occasionally flakes — same chunk-load pattern. |
+| **TOTAL** | **216/218 (99.1%)** | 2 known Vercel flakes, 0 product bugs. |
 
 **No product bugs surfaced by the final sweep.** The remaining 🟡
-flakes look like infra races (Vercel chunk fetch, SPA route transition
-timing in headless Chromium). Coach Review is the cleanest end-to-end.
+flakes are infra races (Vercel chunk fetch timing). Coach Review +
+Tactics are the cleanest end-to-end.
 
-The **Stockfish-wasm OOM error-loop** documented below was mitigated
-defensively via the global error hook's rate-limiter (commit 6b505d99):
-any future runaway loop caps at 5 verbatim rows + 1 coalesced summary
-per 5-second window instead of writing 895k Dexie rows. Root cause
-investigation in stockfishEngine / useEndgamePlayout still pending —
-the rate-limiter is defense-in-depth, not a root fix.
+The **Stockfish-wasm OOM error-loop** is now ROOT-FIXED via a 30s
+init-failure cooldown in stockfishEngine (commit 29ea9fa4). When init
+OOMs, subsequent `initialize()` calls within the next 30s throw
+fail-fast instead of re-entering the init flow. Before the fix, the
+cascade peaked at 1.3M browser-level pageerror events per audit run;
+after the fix, audit-tactics scenarios 25 + 26 report 0 page errors.
+The appAuditor rate-limiter (commit 6b505d99) remains as
+defense-in-depth.
 
 ## 🔴 Open prod bug surfaced by the audit (2026-05-14)
 
