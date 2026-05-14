@@ -1,0 +1,40 @@
+{
+  "openingId": "queen-s-gambit-accepted-showalter-variation",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 square and preparing to build a strong pawn center. This move also opens lines for our dark-squared bishop on c1 and our queen, giving us flexible development options. The d4 opening leads to more positional, strategic games compared to 1.e4, often involving pawn structure battles and long-term maneuvering. Our plan is to follow up with moves like c4 to create the famous 'queen's pawn opening' complex, where we'll try to dominate the center and create space for our pieces.",
+      "shortNarration": "1.d4 stakes a claim to e5, opens lines for the queen and dark-squared bishop, and sets up a positional pawn center battle."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds symmetrically in the center, immediately challenging our control of the e4 square and establishing their own central foothold. This is the most principled response, following the opening principle of meeting central advances with central counter-advances. Our opponent is preparing to develop their pieces harmoniously while maintaining equality in the center. This move also opens lines for Black's light-squared bishop and queen, giving them good development prospects.",
+      "shortNarration": "Black's symmetrical e5 challenges e4, opens lines for the queen and bishop, and maintains central equality."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're playing the famous Queen's Gambit, offering our c-pawn in exchange for Black's central d5 pawn. This isn't a true gambit since we can usually regain the pawn easily, but it serves important strategic purposes: we're trying to deflect Black's d-pawn from the center and gain space with our pawns. If Black captures, we'll have a central pawn majority and better piece activity, while if they decline, we maintain tension and can build up pressure. This move also prepares Nc3 and supports a potential e2-e4 advance later.",
+      "shortNarration": "Queen's Gambit offers the c-pawn to deflect Black's d-pawn, gaining central space and piece activity whether captured or declined."
+    },
+    {
+      "san": "dxc4",
+      "annotation": "Black decides to accept the Queen's Gambit, capturing our c-pawn and temporarily winning material. By taking this pawn, our opponent is testing whether we can actually regain it effectively while also clearing the d5 square for potential piece occupation later. This leads to sharper, more tactical play compared to declining the gambit, and Black will need to be careful not to fall behind in development while trying to hold onto the extra pawn. The main downside for Black is that they've helped us achieve our goal of removing their central d-pawn.",
+      "shortNarration": "Black accepts the Queen's Gambit, temporarily winning a pawn but clearing d5 for White's pieces and weakening their center."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're developing our knight to its most active square, where it controls the important central squares e5 and d4 while also eyeing the Black king's position. This move begins our piece development and prepares to castle kingside for safety. The knight on f3 also supports a potential e2-e4 advance, which would give us a strong pawn center and excellent piece activity. Additionally, this development move increases the pressure on Black to solve the problem of their extra c4 pawn, as we're threatening to regain it with moves like Bxc4 or e3 followed by Bxc4.",
+      "shortNarration": "Knight to f3 controls e5 and d4, eyes the Black king, and threatens to regain the c4 pawn with Bxc4."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops their knight to its natural square, controlling the central e4 and d5 squares while also defending against potential back-rank threats. This is Black's most active development choice, bringing a piece into the game and preparing to castle kingside. Our opponent is following sound opening principles by developing pieces before worrying too much about the extra pawn, though they'll still need to address how to keep it. The knight on f6 also supports Black's kingside and prepares to contest our control of the center with moves like ...e6 or ...c6.",
+      "shortNarration": "Black's knight to f6 controls e4 and d5, prepares kingside castling, and supports ...e6 or ...c6."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We're developing our queenside knight and entering the Showalter Variation of the Queen's Gambit Accepted, where we prioritize rapid piece development over immediate pawn regain. This knight eyes the d5 and e4 squares while also putting indirect pressure on the c4 pawn, since we're building up for an eventual e2-e4 advance. The move allows us to develop quickly and maintain the initiative, even though Black temporarily holds the extra pawn. From c3, our knight supports various pawn breaks and can potentially reroute to more active squares like e4 or d5 later in the game, making this a flexible and principled development choice.",
+      "shortNarration": "Nc3 develops, eyes d5 and e4, pressures c4, and supports e2-e4 despite Black's extra pawn."
+    }
+  ]
+}

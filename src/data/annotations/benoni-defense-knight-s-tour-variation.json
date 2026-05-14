@@ -1,0 +1,70 @@
+{
+  "openingId": "benoni-defense-knight-s-tour-variation",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, staking our claim to the center and preparing to build a strong pawn structure. This move controls the important e5 and c5 squares while freeing our dark-squared bishop for development. The d4 opening leads to more positional, strategic games compared to 1.e4, and we're signaling our intention to fight for central control from the very first move. This is the starting point for many classical openings where we'll aim to establish a space advantage in the center.",
+      "shortNarration": "1.d4 controls e5 and c5, frees the dark-squared bishop, and signals a positional fight for central space."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black immediately challenges our central pawn with this active move, attacking the d4 pawn and preparing to contest the center. This is one of the most flexible responses to 1.d4, as the knight on f6 supports both ...e6 and ...g6 setups while keeping Black's options open. Our opponent is following the classical principle of developing pieces toward the center while creating immediate pressure on our pawn structure. The knight on f6 also prepares potential ...e5 or ...c5 breaks depending on how we continue.",
+      "shortNarration": "Black's knight on f6 attacks d4, preparing ...e6 or ...g6 setups and potential ...e5 or ...c5 breaks."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're playing the English Opening move order, supporting our d4 pawn while expanding our influence over the central light squares, particularly e5 and d5. This move prepares to meet Black's potential ...d5 with strong central control, and it also opens lines for our queen and light-squared bishop. The c4 advance is part of our broader strategy to dominate the center and restrict Black's pawn breaks. By combining d4 and c4, we're creating a powerful pawn duo that controls key central squares and gives us excellent piece coordination possibilities.",
+      "shortNarration": "c4 supports d4, controls e5 and d5, and opens lines for queen and light-squared bishop."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black adopts a solid, classical approach by supporting the potential ...d5 break and preparing to develop the light-squared bishop, likely to e7 or d6. This move creates a small pawn chain and prepares to challenge our central dominance with ...d5 at the right moment. Our opponent is keeping the position flexible while ensuring solid development - the e6 pawn also supports the knight on f6 indirectly. However, this does slightly restrict Black's dark-squared bishop, which is a typical trade-off in these classical setups.",
+      "shortNarration": "Black's e6 supports a future ...d5 break and develops the light-squared bishop, but it restricts the dark-squared bishop."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're developing our knight to its ideal square, attacking Black's e5 square and preparing to support our central pawn structure. This move completes our basic development while keeping maximum flexibility - we can still castle kingside, support our center with moves like e3, or even transpose to various systems. The knight on f3 also prepares potential e4 advances and works harmoniously with our c4-d4 pawn center. This is classical development at its finest, following the principle of developing knights before bishops while maintaining central control.",
+      "shortNarration": "Nf3 attacks e5, supports the center, and keeps flexible options like e3 or castling kingside."
+    },
+    {
+      "san": "c5",
+      "annotation": "Black strikes at our pawn center with this thematic break, immediately challenging our space advantage and creating the characteristic Benoni pawn structure. This move leads to sharp, dynamic play where Black accepts a space disadvantage in exchange for active piece play and counterattacking chances. Our opponent is embracing an aggressive approach rather than the more solid ...d5, signaling intentions for an unbalanced, fighting game. The c5 move also opens the c-file for potential pressure and prepares ...cxd4 or allows us to advance d5, leading to the typical Benoni formations.",
+      "shortNarration": "Black's c5 break creates the Benoni pawn structure, trading space for active piece play and counterattacking chances."
+    },
+    {
+      "san": "d5",
+      "annotation": "We're accepting Black's challenge and advancing our pawn to gain maximum space advantage, creating the classic Benoni structure where we control more central territory. This advance forces Black's hand and commits both sides to a specific pawn structure with clear strategic themes - we'll have more space while Black gets piece activity. Our d5 pawn becomes a powerful wedge that restricts Black's pieces and gives us excellent squares for our own pieces, particularly on c4, e4, and f4. This move transforms the game into a typical Benoni where we'll aim for a kingside attack while Black seeks counterplay on the queenside.",
+      "shortNarration": "Advancing d5 creates a Benoni wedge, giving White more space and kingside attacking chances while Black seeks queenside counterplay."
+    },
+    {
+      "san": "exd5",
+      "annotation": "Black immediately recaptures to avoid falling further behind in space, and this is practically the only reasonable response to maintain any fighting chances. Our opponent is accepting the trade of the e-pawn for our d-pawn, which helps open lines for piece development but also concedes us the space advantage. This capture is essential because allowing us to maintain both c4 and d5 pawns would give us an overwhelming central dominance. The recapture also opens the e-file and prepares Black's pieces for more active deployment, which is crucial in Benoni structures.",
+      "shortNarration": "Black recaptures on d5 to avoid c4-d5 central dominance, opening the e-file for active piece play."
+    },
+    {
+      "san": "cxd5",
+      "annotation": "We recapture with the c-pawn to maintain our central pawn and restore material balance, while keeping our strong space advantage intact. The d5 pawn now becomes the cornerstone of our position - a powerful wedge that controls key squares and restricts Black's piece mobility. This pawn structure gives us natural attacking chances on the kingside since our pieces will have more space to maneuver. Our next goals will include developing our pieces actively, typically with Nc3, e4, and preparing f4 to build a kingside assault while the d5 pawn anchors our central control.",
+      "shortNarration": "Recapturing with the c-pawn restores material balance, keeps the d5 wedge controlling key squares, and sets up kingside attacking chances with Nc3, e4, and f4."
+    },
+    {
+      "san": "d6",
+      "annotation": "Black establishes a solid pawn chain and prepares to develop the light-squared bishop, while also supporting the potential ...f5 break that's thematic in many Benoni positions. This move creates a defensive structure that helps Black weather our space advantage while preparing counterplay. Our opponent is following classical Benoni principles - building a solid foundation before launching counterattacks on the flanks. The d6 pawn also prepares ...Nbd7 development and keeps the position solid, though it does concede us lasting space superiority in the center.",
+      "shortNarration": "Black's d6 pawn chain supports ...f5 counterplay and ...Nbd7, conceding White lasting central space."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We're developing our knight to its optimal square, supporting the d5 pawn while preparing to build our ideal piece coordination for a kingside attack. This knight controls important central squares and prepares moves like e4 and f4, which are typical in our attacking setup. The Nc3 development is perfectly in line with our strategic goals - we're building up pressure while maintaining our space advantage. From c3, our knight can also potentially reroute to more aggressive squares like e4 or b5 depending on how the position develops.",
+      "shortNarration": "Nc3 supports d5, controls central squares, and prepares e4/f4 for a kingside attack."
+    },
+    {
+      "san": "g6",
+      "annotation": "Black adopts the King's Indian setup with this fianchetto, preparing to develop the dark-squared bishop to g7 where it will become a powerful attacking piece along the long diagonal. This move signals Black's intention to create counterplay against our position, particularly targeting our kingside if we castle there. Our opponent is following a typical Benoni plan - the bishop on g7 will be a key defensive and offensive piece, supporting both ...f5 breaks and providing long-term pressure. The g6 move also prepares castling kingside while keeping the position dynamic and full of tactical possibilities.",
+      "shortNarration": "Black fianchettoes the bishop to g7, preparing kingside castling and counterplay against White's kingside with ...f5 breaks."
+    },
+    {
+      "san": "Nd2",
+      "annotation": "We're playing the Knight's Tour Variation, rerouting our knight from f3 to prepare a more aggressive setup with f3 and e4, while avoiding some of Black's tactical tricks. This slightly unusual move aims to support our central advance e4 without allowing Black's typical ...Nh5 or ...Ng4 counterplay that could occur with the knight still on f3. The knight from d2 can also support our queenside and potentially go to c4 or e4, giving us excellent flexibility in our piece coordination. This move shows we're committed to a slow buildup rather than immediate tactics, preparing to overwhelm Black with superior piece coordination and space advantage.",
+      "shortNarration": "Knight reroutes to d2 to support e4 without allowing ...Nh5 or ...Ng4, building slow piece coordination and space advantage."
+    }
+  ]
+}

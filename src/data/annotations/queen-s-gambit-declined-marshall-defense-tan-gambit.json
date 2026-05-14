@@ -1,0 +1,35 @@
+{
+  "openingId": "queen-s-gambit-declined-marshall-defense-tan-gambit",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 square and preparing to build a classical pawn center. This move opens lines for our dark-squared bishop and queen while giving us excellent control over the light squares in the center. The d4 opening leads to more positional, strategic games compared to 1.e4, often involving pawn structures that persist well into the endgame. Our immediate plan is to follow up with moves like Nf3, c4, or e3 to further develop our pieces and increase our central influence.",
+      "shortNarration": "1.d4 stakes a claim to e5, opens lines for the queen and dark-squared bishop, and leads to positional games with lasting pawn structures."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds symmetrically, meeting our central challenge with their own central pawn and ensuring they won't be pushed around in the center without a fight. This move controls the important c4 and e4 squares, preventing us from easily establishing a broad pawn center with e4. Black's setup suggests they're comfortable with a more solid, positional approach rather than seeking immediate tactical complications. This is the starting point for many classical defenses including the Queen's Gambit Declined and various Slav setups.",
+      "shortNarration": "Black's d5 controls c4 and e4, preventing a broad pawn center and signaling a solid positional approach."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're launching the Queen's Gambit, offering to trade our c-pawn for Black's central d5 pawn in what's one of the most fundamental pawn trades in chess. This move attacks the d5 pawn directly and forces Black to make an important decision about the central tension. If Black captures with dxc4, we'll recapture and gain a lead in development, while if they maintain the pawn with moves like e6 or c6, we get to keep the central pressure. The Queen's Gambit has been a weapon of choice for world champions because it combines immediate central pressure with excellent piece development prospects.",
+      "shortNarration": "The Queen's Gambit attacks d5, forcing Black to either capture on c4 or defend the center."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops their knight to its ideal square, attacking our e4 square and preparing to support their central pawn with moves like e6 or c6. This is the Marshall Defense, a solid and practical approach that delays the decision about whether to accept or decline our gambit. The knight on f6 also prepares kingside castling and keeps Black's options open for various pawn structures. By developing a piece instead of immediately dealing with the pawn tension, Black is following the principle of improving their position before making commitments.",
+      "shortNarration": "Black's knight to f6 attacks e4 and prepares e6 or c6, delaying the gambit decision while developing."
+    },
+    {
+      "san": "cxd5",
+      "annotation": "We're capturing the central pawn, forcing Black to make a critical recapture decision that will determine the character of the entire game. This exchange opens the c-file for our rook and removes the central tension, but it also allows Black to potentially equalize with accurate play. Our calculation is that by forcing Black's hand now, we can get a slight initiative and better piece coordination in the resulting positions. The key question is whether Black will recapture with the knight (leading to sharp, tactical play) or with a pawn (maintaining central presence but potentially creating weaknesses).",
+      "shortNarration": "Capturing the central pawn opens the c-file for your rook and forces Black to choose between recapturing with the knight for sharp play or with the pawn for central presence."
+    },
+    {
+      "san": "c6",
+      "annotation": "Black plays the Tan Gambit, a provocative and relatively rare continuation that offers to sacrifice the d5 pawn for rapid development and attacking chances. Instead of the obvious Nxd5, Black supports an eventual ...b5 advance and prepares to quickly mobilize their queenside pieces with moves like Qa5+ or b5. This gambit is based on the idea that our d5 pawn might become a target and that Black's lead in development will compensate for the material deficit. While objectively this may not be best, it's a practical choice that immediately puts us in unfamiliar territory and forces us to find accurate moves to maintain our advantage.",
+      "shortNarration": "Black gambits the d5 pawn for rapid development and queenside play with ...b5 and Qa5+, forcing accurate moves to hold the advantage."
+    }
+  ]
+}

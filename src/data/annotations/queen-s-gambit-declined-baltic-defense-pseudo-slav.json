@@ -1,0 +1,45 @@
+{
+  "openingId": "queen-s-gambit-declined-baltic-defense-pseudo-slav",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our queen and dark-squared bishop. This move signals our intention to fight for central control and potentially transpose into various systems like the Queen's Gambit, London System, or other d4 openings. The d4 pawn also supports a future e4 advance, giving us flexibility in our central pawn structure. This is one of the most principled first moves, as it develops our position harmoniously while keeping maximum options open for the middlegame.",
+      "shortNarration": "1.d4 stakes a claim to e5 and c5, opens lines for queen and dark-squared bishop, and supports a future e4 advance."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black mirrors our central approach by occupying d5, immediately challenging our control of the center and preparing to meet any c4 advance with solid pawn tension. This move is completely sound and follows classical opening principles by fighting for space in the center. Our opponent is likely preparing to develop pieces harmoniously while maintaining a solid pawn structure. The d5 pawn also helps control the important e4 and c4 squares, making it harder for us to establish a powerful pawn center.",
+      "shortNarration": "Black's d5 challenges the center, controls e4 and c4, and prepares to meet c4 with solid pawn tension."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We develop our king's knight to its ideal square, where it controls the central e5 and d4 squares while supporting our d4 pawn. This flexible move keeps all our options open - we can still play c4 for a Queen's Gambit, or transpose into other systems like the London or Colle. The knight on f3 also prepares kingside castling and prevents any early ...e5 breaks from Black. From f3, our knight can potentially jump to e5 later for active play, or support various pawn advances in the center.",
+      "shortNarration": "Nf3 controls e5 and d4, supports d4, prepares kingside castling, and prevents ...e5 breaks."
+    },
+    {
+      "san": "Bf5",
+      "annotation": "Black develops the light-squared bishop outside the pawn chain before playing ...e6, which is a key idea in several solid defensive systems. This early bishop development prevents the piece from being locked in by Black's own pawns, as would happen after ...e6 and ...c6. Our opponent is essentially playing a hybrid system that borrows ideas from both the Baltic Defense and Slav structures. While this looks natural, the bishop on f5 can become a target for our pieces, and we should consider how to challenge it or use its early development to gain time.",
+      "shortNarration": "Black's early bishop to f5 avoids being locked in by e6, but it can become a target for White's pieces to gain time."
+    },
+    {
+      "san": "c4",
+      "annotation": "We strike at Black's central d5 pawn with the classic Queen's Gambit move, forcing our opponent to make a critical decision about the center. This pawn advance fights for control of the d5 square and opens lines for our queen and light-squared bishop. If Black captures with ...dxc4, we get active piece play and central control; if Black maintains the pawn on d5, we create productive tension in the center. The move also prepares potential expansion with moves like cxd5 or c5, giving us multiple strategic options depending on how Black responds.",
+      "shortNarration": "The Queen's Gambit strikes d5, forcing Black to choose between ceding central control or facing active piece play after ...dxc4."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black chooses to maintain the central pawn on d5 by supporting it with the e-pawn, declining our gambit and opting for a solid, French Defense-style pawn structure. This move does lock in the light-squared bishop that was developed to f5, creating some awkwardness in Black's position since the bishop is now somewhat out of play. Our opponent is prioritizing central stability over piece activity, which gives us chances to seize the initiative through active piece development. The e6 pawn also prepares ...Nf6 and eventual kingside castling, showing Black's intention to complete development safely.",
+      "shortNarration": "Black's e6 supports d5 but locks the f5-bishop out of play, giving White active piece play."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We develop our queen's knight to its most active square, adding more pressure to Black's d5 pawn while preparing potential advances like e4 or f4. The knight on c3 also eyes important central squares like e4 and d5, and supports various tactical ideas in the center. This active move keeps the pressure on Black's position while maintaining our flexibility - we can still consider moves like Qb3 to intensify the attack on Black's queenside, or focus on kingside development. With both knights developed, we're building a solid foundation for the middlegame while keeping maximum pressure on our opponent's somewhat awkward piece coordination.",
+      "shortNarration": "Nc3 pressures d5, eyes e4 and d5, and keeps flexibility for Qb3 or kingside development."
+    },
+    {
+      "san": "c6",
+      "annotation": "Black adopts a Pseudo-Slav setup by supporting the d5 pawn from another angle, creating a solid but somewhat passive pawn triangle on c6-d5-e6. This move prepares ...b5 to challenge our c4 pawn, or simply maintains central stability while completing development with ...Nf6 and ...Be7. However, this pawn structure does limit Black's piece activity, particularly making it harder to develop the queen's knight naturally to c6. We should look to exploit Black's slight lack of coordination by continuing with active development, possibly Bg5 or e3 followed by rapid kingside castling to maintain our initiative against Black's solid but passive setup.",
+      "shortNarration": "Black's passive pawn triangle on c6-d5-e6 limits piece activity; exploit with active development like Bg5 or e3 and rapid kingside castling."
+    }
+  ]
+}

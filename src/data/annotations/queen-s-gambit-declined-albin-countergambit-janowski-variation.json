@@ -1,0 +1,55 @@
+{
+  "openingId": "queen-s-gambit-declined-albin-countergambit-janowski-variation",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately controlling the central e5 square and preparing to develop our pieces with maximum central influence. This move gives us excellent flexibility – we can transpose into many different openings depending on how Black responds. The d4 opening typically leads to more positional, strategic games compared to 1.e4, though tactical opportunities certainly arise. Our main plan is to establish a strong pawn center and develop our pieces harmoniously while keeping multiple opening options available.",
+      "shortNarration": "1.d4 controls e5, prepares development, and keeps flexible transpositional options open."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds by directly challenging our central control and staking an equal claim in the center. This classical move prevents us from simply advancing d4-d5 and gives Black good piece development prospects. Our opponent is following sound opening principles by fighting for central space immediately rather than allowing us to dominate the center unchallenged. This move prepares natural development of the dark-squared bishop and keeps the position relatively symmetrical for now.",
+      "shortNarration": "Black challenges the center with e5, preventing d4-d5 and preparing natural development."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're launching the famous Queen's Gambit, offering our c-pawn to deflect Black's central d5 pawn and gain superior central control. This move attacks the d5 pawn directly, forcing Black to make a critical decision about the center. If Black captures with dxc4, we'll recapture and gain a strong pawn center with pawns on d4 and e4 potentially. The Queen's Gambit is one of the most principled ways to fight for central advantage and has been trusted by world champions for over a century.",
+      "shortNarration": "The Queen's Gambit offers the c-pawn to deflect Black's d5 pawn, aiming for a strong pawn center with d4 and e4."
+    },
+    {
+      "san": "e5",
+      "annotation": "Our opponent strikes back with the Albin Countergambit, a sharp and aggressive response that immediately challenges our entire setup! Black is refusing the gambit pawn and instead advancing in the center, creating immediate tactical complications. This move attacks our d4 pawn and aims to seize the initiative rather than defend passively. The Albin is less common than accepting the Queen's Gambit, but it's a legitimate attempt to create imbalanced positions and catch unprepared opponents off guard.",
+      "shortNarration": "Black's Albin Countergambit attacks d4, refusing the gambit pawn to create immediate tactical complications and seize the initiative."
+    },
+    {
+      "san": "dxe5",
+      "annotation": "We're practically forced to capture the pawn since allowing ...exd4 would give Black a powerful central wedge and excellent piece activity. This capture opens the d-file for our queen and maintains material equality, though it does concede some central space to Black. Our pawn on e5 now controls important dark squares like d6 and f6, potentially cramping Black's development. However, we must be prepared for Black's likely follow-up ...d4, which will challenge our position and create sharp tactical play.",
+      "shortNarration": "Capturing exd5 opens the d-file for the queen and maintains equality, but Black's ...d4 will challenge the center and create sharp tactical play."
+    },
+    {
+      "san": "d4",
+      "annotation": "Black immediately advances the d-pawn, creating a dangerous central wedge that splits our position and gains significant space advantage. This powerful pawn move attacks our knight's natural development square on c3 and creates potential outposts for Black's pieces on c3 and e3. Our opponent is following the main idea of the Albin Countergambit – sacrificing a pawn for rapid development and attacking chances. We need to be very careful here as Black's pawn on d4 can become a long-term strategic asset if we don't handle the position precisely.",
+      "shortNarration": "Black's d-pawn wedge splits your position, attacks c3, and creates outposts on c3 and e3 — handle it precisely or it becomes a long-term asset."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're developing our knight to its most active square, where it controls important central squares like e5 and d4, and prepares to support our advanced e5 pawn. This natural development move also prepares potential kingside castling and keeps our options flexible for dealing with Black's central pawn. From f3, our knight can potentially jump to more active squares like g5 or e1-d3 if needed. However, we must be aware that Black's d4 pawn somewhat restricts this knight's mobility and we'll need to find active roles for our pieces despite the space disadvantage.",
+      "shortNarration": "Knight to f3 controls e5 and d4, supports the e5 pawn, and prepares kingside castling despite Black's d4 pawn restricting its mobility."
+    },
+    {
+      "san": "Nc6",
+      "annotation": "Black develops the knight to its ideal square, attacking our advanced e5 pawn and preparing to increase pressure on our position. This move follows excellent opening principles by developing with tempo (attacking our pawn) and preparing further piece activity. Our opponent's knight on c6 also supports potential advances like ...f6 to challenge our e5 pawn or ...Bf5 to develop the light-squared bishop actively. We need to decide how to defend our e5 pawn – whether to support it further or potentially consider strategic pawn sacrifices for piece activity.",
+      "shortNarration": "Black's knight to c6 attacks e5, threatening ...f6 or ...Bf5 — we must defend or sacrifice the pawn."
+    },
+    {
+      "san": "Nbd2",
+      "annotation": "We're developing our queen's knight to d2 rather than c3, where it would be attacked by Black's powerful d4 pawn. From d2, our knight can potentially reroute to more active squares like e4 or f3 if our original knight moves, and it doesn't block our c-pawn's future advance. This move also prepares to support our e5 pawn with moves like Nb3 or Ne4, depending on how the position develops. The knight on d2 is somewhat passive for now, but it's a practical solution that avoids immediate tactical problems while maintaining our structural integrity.",
+      "shortNarration": "Knight to d2 avoids the d4 pawn's attack, keeps the c-pawn free, and can reroute to e4 or f3."
+    },
+    {
+      "san": "f6",
+      "annotation": "Black launches the Janowski Variation with this direct assault on our e5 pawn, creating immediate tactical complications and opening the f-file for potential attacking chances. This aggressive move challenges us to make a critical decision – do we maintain the pawn on e5 with moves like exf6, trade it off, or potentially sacrifice it for piece activity? Our opponent is following the most forcing continuation of the Albin Countergambit, creating sharp tactical play where both sides must calculate precisely. The move ...f6 also weakens Black's kingside pawn structure somewhat, particularly the e6 and g6 squares, but the immediate tactical pressure often compensates for these long-term weaknesses.",
+      "shortNarration": "Black's ...f6 attacks e5, opening the f-file and weakening e6 and g6, but the tactical pressure compensates."
+    }
+  ]
+}

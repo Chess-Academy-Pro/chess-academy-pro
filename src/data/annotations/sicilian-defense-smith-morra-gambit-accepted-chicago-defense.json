@@ -3,93 +3,2796 @@
   "moveAnnotations": [
     {
       "san": "e4",
-      "annotation": "We're opening with the king's pawn, staking our claim to the central squares d5 and f5 while opening lines for our bishop and queen. This is one of the most direct and aggressive first moves, immediately putting pressure on Black and signaling our intention to fight for the center. The move follows classical opening principles by occupying the center with a pawn and developing our pieces quickly. Against the Sicilian Defense that's coming, this sets up tactical complications where we'll often sacrifice material for rapid development and attacking chances.",
-      "shortNarration": "1.e4 claims the center, opens lines for the queen and bishop, and sets up tactical complications against the Sicilian."
+      "annotation": "White opens with the king's pawn, the most popular first move in chess. Against the Sicilian Defense, White has a special surprise weapon: the Smith-Morra Gambit. Instead of the mainline Open Sicilian with Nf3 and d4, White will sacrifice a pawn immediately for rapid development and attacking chances.",
+      "plans": [
+        "Prepare the Smith-Morra Gambit with d4 and c3",
+        "Sacrifice a pawn for fast development and open lines"
+      ],
+      "arrows": [
+        {
+          "from": "e2",
+          "to": "e4",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e4",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "pawnStructure": "The starting position of the e4 opening. White aims for central control which will transform into the Smith-Morra's IQP structure.",
+      "shortNarration": "White sacrifices a pawn with the Smith-Morra Gambit for rapid development and attacking chances."
     },
     {
       "san": "c5",
-      "annotation": "Black responds with the Sicilian Defense, the most popular and combative response to 1.e4 at all levels of chess. Rather than mirroring our central pawn with 1...e5, our opponent strikes at our e4 pawn from the side, creating an asymmetrical pawn structure that leads to sharp, tactical play. The c5 pawn controls the important d4 square and prepares Black's queenside expansion, while keeping options open for piece development. This move signals that Black is ready for a complex fight rather than seeking the more symmetrical positions that arise from 1...e5.",
-      "shortNarration": "Black plays the Sicilian, attacking e4 from c5 to control d4 and create asymmetrical, tactical play."
+      "annotation": "The Sicilian Defense — Black's most popular and aggressive response to e4. The c5 pawn challenges White's control of d4 and creates an asymmetrical position. Black fights for the center from the flank, and the resulting positions are typically sharp and combative.",
+      "pawnStructure": "Black's c5 pawn fights for d4 control without committing to a central pawn structure yet. This creates the imbalanced positions that make the Sicilian so popular at all levels.",
+      "plans": [
+        "Challenge White's center from the flank",
+        "Create an asymmetrical, fighting position",
+        "Aim for counterplay on the queenside"
+      ],
+      "arrows": [
+        {
+          "from": "c7",
+          "to": "c5",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "c7",
+          "to": "c5",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "c5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black's c5 challenges d4, creating asymmetrical, sharp positions where both sides fight for central control."
     },
     {
       "san": "d4",
-      "annotation": "We're launching the Smith-Morra Gambit, one of the most aggressive weapons against the Sicilian Defense! This pawn sacrifice aims to blast open the center immediately, offering material in exchange for rapid development and attacking chances. By striking at Black's c5 pawn, we're forcing a decision - Black can either capture and accept our gambit, or decline it with moves like 2...d6. The Smith-Morra is particularly effective at club level because it creates the kind of sharp, tactical positions where a well-prepared player can overwhelm opponents who aren't familiar with the resulting attacking patterns.",
-      "shortNarration": "The Smith-Morra Gambit sacrifices a pawn for rapid development and open attacking lines against the Sicilian."
+      "annotation": "White strikes in the center immediately with d4! This is the hallmark of the Smith-Morra Gambit. Instead of the normal Nf3 followed by d4 (the Open Sicilian), White pushes d4 right away, offering a pawn sacrifice. The idea is simple but powerful: after cxd4 c3, White gets the c-file and rapid development in exchange for the pawn.",
+      "plans": [
+        "Sacrifice the d4 pawn to open the center",
+        "Follow up with c3 to offer the gambit pawn",
+        "Develop quickly on the open lines"
+      ],
+      "alternatives": [
+        "Nf3 — the normal Open Sicilian approach",
+        "Nc3 — the Closed Sicilian"
+      ],
+      "arrows": [
+        {
+          "from": "d2",
+          "to": "d4",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "d2",
+          "to": "d4",
+          "color": "rgba(220, 50, 50, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "d4",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "White gambits a pawn with d4, aiming for the c-file and rapid development after cxd4 c3."
     },
     {
       "san": "cxd4",
-      "annotation": "Black accepts our gambit by capturing the d4 pawn, which is the critical test of our opening concept. Our opponent is essentially saying 'I'll take your material and try to defend against your attack,' which requires precise defensive technique. This capture opens the c-file for Black's pieces and eliminates our central d-pawn, but it also allows us to continue with our aggressive development plan. Many players accept the gambit because they believe an extra pawn should be winning in the long run, but they often underestimate the power of White's initiative and attacking chances.",
-      "shortNarration": "Black captures d4, accepting the gambit — opens the c-file but gives White the initiative and attacking chances."
+      "annotation": "Black captures the d4 pawn — the natural response. Declining the gambit gives White a favorable transposition. By taking, Black wins a pawn but opens the center, which is exactly what the Smith-Morra player wants. The critical question is whether Black can hold the extra pawn or White's development advantage will prove decisive.",
+      "plans": [
+        "Win a pawn and try to hold it",
+        "Develop carefully to neutralize White's initiative"
+      ],
+      "arrows": [
+        {
+          "from": "c5",
+          "to": "d4",
+          "color": "rgba(220, 50, 50, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "d4",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "pawnStructure": "Black captures on d4, creating an open center. The pawn exchange opens lines that White will exploit with rapid development.",
+      "shortNarration": "Black takes d4, winning a pawn but opening the center for White's development advantage."
     },
     {
       "san": "c3",
-      "annotation": "We continue with our gambit theme, offering another pawn to accelerate our development and open lines for our pieces. This move attacks Black's d4 pawn and threatens to recapture with our knight after Black takes, which would give us excellent central control and rapid piece development. The c3 pawn also supports a potential d4 pawn break in the future and prevents Black's pieces from using the b4 and d4 squares. This is the defining move of the Smith-Morra Gambit - we're willing to sacrifice material to get our pieces into active, attacking positions quickly.",
-      "shortNarration": "c3 offers a pawn to accelerate development, open lines, and support a future d4 break — the Smith-Morra Gambit's core sacrifice for active piece play."
+      "annotation": "The Smith-Morra Gambit! White offers a second pawn with c3, inviting Black to capture again. This is the defining move of the opening. If Black takes on c3, White recaptures with the knight and gets a dream setup: rapid development, open c-file, active pieces, and an isolated queen pawn (IQP) structure that provides dynamic chances.",
+      "pawnStructure": "After dxc3 Nxc3, White will have an IQP on e4 with open c and d-files. This structure gives White dynamic piece play and attacking chances in exchange for a slight structural weakness.",
+      "plans": [
+        "After dxc3 Nxc3, develop rapidly with Bc4, Nf3, O-O",
+        "Use the open c-file and active pieces to attack",
+        "The IQP provides dynamic play and central control"
+      ],
+      "alternatives": [
+        "Nf3 — transposes to other Sicilian lines"
+      ],
+      "arrows": [
+        {
+          "from": "c2",
+          "to": "c3",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "c2",
+          "to": "c3",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "c3",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "d4",
+          "color": "rgba(255, 80, 80, 0.3)"
+        }
+      ],
+      "shortNarration": "White gambits a second pawn with c3; if Black takes, White recaptures with the knight for rapid development, open c-file, and dynamic IQP chances."
     },
     {
       "san": "dxc3",
-      "annotation": "Black continues to accept our material offerings, taking the second pawn and maintaining a two-pawn advantage. Our opponent is being consistent with the decision to accept the gambit, but each capture also helps our development by opening files and diagonals for our pieces. The capture on c3 specifically opens the b-file for our potential rook activity and allows our knight to develop to c3 with tempo. Black must now be very careful about piece coordination and king safety, as we're about to unleash a powerful development advantage that can quickly become overwhelming if not handled precisely.",
-      "shortNarration": "Black's two-pawn lead is risky as each capture opens lines for our pieces — the b-file and knight to c3 with tempo, threatening overwhelming development."
+      "annotation": "Black accepts the gambit, capturing the second pawn. Black is now up a full pawn, but White's compensation is about to become apparent. The knight recapture on c3 gives White a developed piece, and the open c-file will become a highway for White's rooks. The battle between material and initiative begins.",
+      "plans": [
+        "Win a second pawn and try to consolidate",
+        "Develop carefully and return the pawn if necessary"
+      ],
+      "alternatives": [
+        "Nf6 — the Declined Variation, keeping the extra pawn on d4",
+        "d3 — another way to decline, giving back the pawn for solid play"
+      ],
+      "arrows": [
+        {
+          "from": "d4",
+          "to": "c3",
+          "color": "rgba(220, 50, 50, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "c3",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black is up a pawn after accepting the gambit, but White's pawn on c3 and open c-file trade material for initiative."
     },
     {
       "san": "Nxc3",
-      "annotation": "We recapture with our knight, immediately developing a piece to an excellent central square while regaining some of our sacrificed material. The knight on c3 controls important central squares like d5, e4, b5, and a4, while also eyeing potential tactical motifs involving forks and attacks on Black's pieces. This move exemplifies the Smith-Morra philosophy: every piece develops with maximum activity and purpose. Our knight is perfectly placed to support our coming kingside attack while also maintaining pressure on Black's queenside, and we're already ahead in development despite being down a pawn.",
-      "shortNarration": "Recapturing with the knight on c3 develops to a central square, controls d5, e4, b5, and a4, and supports the kingside attack while ahead in development down a pawn."
+      "annotation": "White recaptures with the knight, completing the gambit. The knight on c3 is beautifully placed — it controls d5, e4, and supports future piece development. White has sacrificed a pawn but now has a significant lead in development, open central files, and natural attacking chances. This is the starting position of the Smith-Morra Gambit proper.",
+      "plans": [
+        "Develop Bc4 to target f7 and control d5",
+        "Play Nf3 and O-O for rapid castling",
+        "Use the c-file and central development for attacking play"
+      ],
+      "arrows": [
+        {
+          "from": "b1",
+          "to": "c3",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "b1",
+          "to": "c3",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "c3",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "d5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "pawnStructure": "After Nxc3, White has an isolated queen pawn (IQP) on e4. This structure gives dynamic piece play and central control in exchange for the structural weakness.",
+      "shortNarration": "White sacrifices a pawn for a lead in development, open central files, and attacking chances from the Smith-Morra Gambit."
     },
     {
       "san": "Nc6",
-      "annotation": "Black develops the knight to its ideal square, defending against potential tactics while preparing to contest the center and develop the kingside pieces. This is solid development that follows opening principles, though our opponent must be careful not to allow our pieces to coordinate too powerfully. The knight on c6 does block the c-file temporarily, which can be important in some Smith-Morra lines where rook activity becomes crucial. Black's plan is likely to complete kingside development quickly with moves like Nf6, Be7, and castling, while keeping the extra pawns and trying to neutralize our attacking chances.",
-      "shortNarration": "Black's knight on c6 blocks the c-file but solidly defends e5 and prepares kingside development with Nf6, Be7, and castling."
+      "annotation": "Black develops the knight to c6, the ideal square. The knight controls d4, e5, and helps prepare the kingside development. This is the most common response — Black develops normally while keeping the extra pawn.",
+      "plans": [
+        "Control d4 and e5 with the knight",
+        "Develop the kingside with e6, Nf6, Be7",
+        "Castle and consolidate the extra pawn"
+      ],
+      "arrows": [
+        {
+          "from": "b8",
+          "to": "c6",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "b8",
+          "to": "c6",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "c6",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black's knight on c6 controls d4 and e5, developing normally while keeping the extra pawn."
     },
     {
       "san": "Bc4",
-      "annotation": "We develop our bishop to its most aggressive square, eyeing the weak f7 point and controlling the important central diagonal. The bishop on c4 is a key piece in many Smith-Morra attacks, as it can support tactical motifs involving Nd5, putting pressure on Black's position and potentially creating mating nets around the black king. This move also prepares castling kingside while maintaining maximum pressure on Black's position. The bishop coordinates beautifully with our knight on c3 and prepares for the kind of sacrificial attacks that make the Smith-Morra so dangerous - often we'll have tactics involving Bxf7+ or supporting knight sacrifices on d5 or f7.",
-      "shortNarration": "Bishop to c4 eyes f7, controls the central diagonal, and coordinates with the knight on c3 for potential sacrifices on d5 or f7."
+      "annotation": "White develops the bishop to the aggressive c4 square, targeting the vulnerable f7 pawn and controlling the d5 square. The bishop on c4 is a key piece in the Smith-Morra — it creates threats along the a2-g8 diagonal and works beautifully with the knight on c3 to control the center.",
+      "plans": [
+        "Target f7 and control d5",
+        "Develop Nf3 next and castle quickly",
+        "Create pressure on the light-square diagonal"
+      ],
+      "arrows": [
+        {
+          "from": "f1",
+          "to": "c4",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "f1",
+          "to": "c4",
+          "color": "rgba(220, 50, 50, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "c4",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "f7",
+          "color": "rgba(255, 80, 80, 0.3)"
+        }
+      ],
+      "shortNarration": "Bishop to c4 targets f7 and d5, key piece in the Smith-Morra controlling the a2-g8 diagonal with the knight on c3."
     },
     {
       "san": "e6",
-      "annotation": "Black plays a constructive move that supports the center and prepares to develop the dark-squared bishop, likely to e7 or d6. This move blocks our bishop's attack on f7 temporarily, which is an important defensive resource, while also controlling the d5 and f5 squares to limit our knight's mobility. However, this pawn move also slightly weakens Black's kingside, particularly the f6 and d6 squares, which we might be able to exploit later. Black is following a reasonable defensive plan by prioritizing piece development and king safety, but must remain vigilant about our attacking possibilities as we continue to improve our pieces' coordination.",
-      "shortNarration": "Black's pawn move blocks the bishop's attack on f7, controls d5 and f5, but weakens f6 and d6 squares for future exploitation."
+      "annotation": "Black plays e6, reinforcing the d5 square and preparing to develop the dark-squared bishop. This is the solid approach — the e6 pawn blocks the Bc4 diagonal and creates a strong pawn chain. However, the light-squared bishop is now somewhat restricted behind the pawns.",
+      "pawnStructure": "Black's e6-d6 pawn chain is solid but slightly passive. The light-squared bishop will need to find a good square, often via d7 or b7 after b6.",
+      "plans": [
+        "Block the Bc4 diagonal with e6",
+        "Prepare d6 and Nf6 development",
+        "Castle kingside and consolidate"
+      ],
+      "alternatives": [
+        "d6 — another solid option, keeping e7 open for the bishop"
+      ],
+      "arrows": [
+        {
+          "from": "e7",
+          "to": "e6",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e6",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "d5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black's e6 reinforces d5 and blocks the Bc4 diagonal, but the light-squared bishop is now hemmed in."
     },
     {
       "san": "Nf3",
-      "annotation": "We develop our knight to its ideal square, attacking the e5 square and preparing to castle kingside while maintaining our development advantage. The knight on f3 is perfectly placed to support our attacking ambitions - it can jump to g5 to attack f7, retreat to e1-d3 to support central breaks, or advance to d4 or e5 to increase our central pressure. This move also prepares our king to castle, which is crucial since we need to get our king safe before launching our full-scale attack. Our development is proceeding smoothly, and we're building up all the classic Smith-Morra attacking pieces: bishop on c4, knight on c3, knight on f3, and soon our queen will join the party from e2.",
-      "shortNarration": "Knight to f3 develops, eyes g5 and e5, and prepares kingside castling in the Smith-Morra attack."
+      "annotation": "White develops the knight to f3, completing the development of both minor pieces. The knight controls d4, e5, and g5 — all important squares. White is now ready to castle and begin the middlegame attack. The development advantage is striking: White has three pieces developed to Black's one.",
+      "plans": [
+        "Castle kingside next move",
+        "Complete development with maximum efficiency",
+        "Prepare Qe2 and Rd1 for central pressure"
+      ],
+      "arrows": [
+        {
+          "from": "g1",
+          "to": "f3",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "g1",
+          "to": "f3",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "f3",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "White has three pieces developed to Black's one, ready to castle and attack."
     },
     {
       "san": "d6",
-      "annotation": "Black reinforces the center and prepares to develop the light-squared bishop, following solid defensive principles by securing the e5 and c5 squares. This pawn move also prevents our knight from advancing to e5, which could be a strong outpost in many positions. However, the d6 pawn does slightly restrict Black's pieces, particularly making it harder to develop the light-squared bishop actively. Our opponent is building a solid but somewhat passive defensive setup, which is exactly what we want to see in the Smith-Morra - the more passive Black becomes, the more time we have to coordinate our pieces for a decisive attack.",
-      "shortNarration": "Black's d6 secures e5 and c5 but restricts the light-squared bishop, giving White time to coordinate for a decisive attack."
+      "annotation": "Black plays d6, creating a solid pawn center with e6 and d6. This is the standard Sicilian pawn structure. The d6 pawn supports e5 advances and gives the dark-squared bishop room to develop. However, it also creates the d5 square as a potential outpost for White's pieces.",
+      "plans": [
+        "Create a solid pawn center",
+        "Prepare Nf6 and Be7 development",
+        "Maintain the defensive pawn chain"
+      ],
+      "arrows": [
+        {
+          "from": "d7",
+          "to": "d6",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "d6",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "d5",
+          "color": "rgba(255, 80, 80, 0.3)"
+        }
+      ],
+      "pawnStructure": "Black's e6-d6 pawn chain is solid but creates a backward pawn on d6. The d-file will be a key battleground.",
+      "shortNarration": "Black's d6 solidifies the Sicilian center but leaves d5 as a potential outpost for White's pieces."
     },
     {
       "san": "O-O",
-      "annotation": "We castle kingside, getting our king to safety while connecting our rooks and completing the basic requirements for launching our attack. King safety is crucial in the Smith-Morra because our attacks often involve piece sacrifices and tactical complications where having a safe king can be the difference between winning and losing. This move also brings our rook closer to the center, potentially supporting f2-f4-f5 pawn advances or participating in kingside attacks via the f-file. Now that our king is safe and our development is nearly complete, we can start looking for concrete tactical opportunities to justify our pawn sacrifices and create threats against Black's somewhat cramped position.",
-      "shortNarration": "Castling kingside secures the king, connects rooks, and sets up f2-f4-f5 pawn advances for the attack."
+      "annotation": "White castles kingside, getting the king to safety and connecting the rooks. In just 7 moves, White has completed development of both knights, the bishop, and castled. This is the power of the Smith-Morra — the pawn sacrifice buys incredible development speed. Now White can focus entirely on attacking.",
+      "plans": [
+        "Complete king safety and connect rooks",
+        "Prepare Qe2 and Rd1 for central pressure",
+        "Launch the middlegame attack with full development"
+      ],
+      "arrows": [
+        {
+          "from": "e1",
+          "to": "g1",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "g1",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "White castles kingside, connects rooks, and after 7 moves has full development — the Smith-Morra pawn sacrifice buys attacking speed."
     },
     {
-      "san": "a6",
-      "annotation": "Black plays a useful waiting move that prevents our pieces from using the b5 square while preparing potential queenside expansion with b7-b5. This move is part of a typical Sicilian defensive setup where Black gradually improves the pawn structure while completing development. However, this pawn move doesn't directly address our developing attack, and in gambit positions, every tempo can be crucial. Our opponent may be underestimating the immediate danger of our piece coordination, as moves like a6 are more suited to quiet positional games rather than sharp tactical battles where development and piece activity are paramount.",
-      "shortNarration": "a6 prevents b5 but wastes a tempo in a sharp gambit where development and piece activity are critical."
+      "san": "Nf6",
+      "annotation": "Black develops the knight to f6, a natural and well-grounded move. The knight defends d5, attacks e4, and prepares to castle. Black is catching up in development but is still behind White. The knight on f6 is well-placed but can become a target if White plays e5 at the right moment.",
+      "plans": [
+        "Develop the knight to its natural square",
+        "Prepare to castle kingside",
+        "Defend the center"
+      ],
+      "arrows": [
+        {
+          "from": "g8",
+          "to": "f6",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "f6",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "pawnStructure": "Black's e6-d6-Nf6 setup is the standard Sicilian defensive formation. The pawns control d5 and create a solid but slightly passive structure.",
+      "shortNarration": "Black's knight on f6 defends d5, attacks e4, and prepares to castle, but e5 could target it."
     },
     {
       "san": "Qe2",
-      "annotation": "We bring our queen into the game, eyeing the e-file and preparing to support our pieces in various attacking schemes. The queen on e2 connects our rooks while maintaining flexibility - it can support a kingside attack via moves like Qh5 or Qe4, or it can help control central squares and support tactical motifs involving our bishops and knights. This move also prepares potential tactical ideas like Nd5, as our queen would be well-placed to support such central breaks. The queen's development to e2 is a key component of many Smith-Morra attacking setups, as it provides the kind of flexible, powerful piece coordination that can quickly turn into a mating attack if Black isn't careful.",
-      "shortNarration": "Queen to e2 connects rooks, supports Nd5, and eyes kingside attacks via Qh5 or Qe4."
+      "annotation": "White places the queen on e2, supporting the e4 pawn and preparing to swing to the kingside. The queen on e2 is a flexible placement — it connects the rooks, supports e4, and can later go to e4 or even h5 for attacking purposes. This is a key setup move in the Smith-Morra.",
+      "plans": [
+        "Support e4 and prepare central action",
+        "Connect the rooks and prepare Rd1",
+        "Keep options open for Qe4 or kingside attacks"
+      ],
+      "arrows": [
+        {
+          "from": "d1",
+          "to": "e2",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "d1",
+          "to": "e2",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e2",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Queen to e2 supports e4, connects rooks, and prepares to swing to the kingside via e4 or h5."
     },
     {
-      "san": "b5",
-      "annotation": "Black strikes back on the queenside with a typical Sicilian counterplay move, attacking our bishop and gaining space on the queenside. This advance shows that our opponent understands the need to create counterplay rather than remain purely passive, which is generally the right approach in defending against gambits. The b5 pawn attacks our well-placed bishop and prepares further queenside expansion, potentially creating long-term compensation for Black's positional difficulties. However, this pawn advance also creates some weaknesses, particularly on the dark squares like a5 and c5, and it takes another tempo away from piece development when Black's king is still uncastled and somewhat vulnerable.",
-      "shortNarration": "Black's b5 attacks the bishop, gains queenside space, but weakens dark squares a5 and c5 while delaying castling."
+      "san": "Be7",
+      "annotation": "Black develops the bishop to e7, a solid but somewhat passive square. The bishop on e7 prepares to castle and defends the kingside. In many Smith-Morra lines, Black wishes this bishop were on a more active diagonal, but e7 is the safest option.",
+      "plans": [
+        "Prepare to castle kingside",
+        "Maintain a solid defensive setup",
+        "Keep the position closed to neutralize White's initiative"
+      ],
+      "arrows": [
+        {
+          "from": "f8",
+          "to": "e7",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e7",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black's bishop to e7 is solid, preparing to castle and defend the kingside, but passive for Smith-Morra."
     },
     {
-      "san": "Bb3",
-      "annotation": "We retreat our bishop to maintain its influence on the long diagonal while staying out of Black's pawn attacks. The bishop on b3 still eyes the f7 square and maintains pressure on Black's kingside, while also preparing potential tactical motifs involving the a2-g8 diagonal. This retreat is much better than allowing Black to capture our bishop or trading it off, as the bishop is one of our key attacking pieces in the Smith-Morra. From b3, the bishop also supports potential central advances like d4 (if we can arrange it) and maintains maximum flexibility for our attacking plans, whether they involve kingside pressure or central tactical strikes.",
-      "shortNarration": "Retreating the bishop to b3 keeps pressure on f7 and the a2-g8 diagonal, supporting kingside attacks and central d4 advances."
+      "san": "Rd1",
+      "annotation": "White places the rook on the open d-file, targeting the d6 pawn. The rook on d1 is perfectly placed — it pressures d6 and controls the d-file. Combined with the queen on e2 and the pieces already in play, White has a formidable attacking setup. The development advantage is now fully realized.",
+      "pawnStructure": "White's rook on d1 pressures d6, the key weakness in Black's camp. The IQP on e4 supports pieces but can become a target in the endgame.",
+      "plans": [
+        "Pressure the d6 pawn along the d-file",
+        "Double rooks on the d-file with Rac1-Rcd1",
+        "Create threats on the d6 weakness"
+      ],
+      "arrows": [
+        {
+          "from": "f1",
+          "to": "d1",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "f1",
+          "to": "d1",
+          "color": "rgba(220, 50, 50, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "d1",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "d6",
+          "color": "rgba(255, 80, 80, 0.3)"
+        }
+      ],
+      "shortNarration": "White's rook on d1 pressures d6 and controls the open file, completing a formidable attacking setup."
     },
     {
-      "san": "Ra7",
-      "annotation": "Black plays the characteristic Chicago Defense move, lifting the rook to the seventh rank to defend along the second rank and prepare counterplay. This rook lift is a key defensive resource that allows Black to defend the b7 and f7 squares while potentially creating threats along the seventh rank. The move is somewhat unusual but quite logical - the rook on a7 can swing to defend the kingside if needed, or support queenside operations, while getting off the a-file where it might be vulnerable to our pieces. However, this rook maneuver does take time and keeps Black's pieces somewhat uncoordinated, which gives us continued opportunities to build our attack and look for tactical breakthroughs before Black can fully consolidate the extra material.",
-      "shortNarration": "Black's rook lift to a7 defends b7 and f7 but costs time, leaving pieces uncoordinated and giving White attack chances before consolidation."
+      "san": "O-O",
+      "annotation": "Black castles kingside, getting the king to safety. Both kings are now castled, and the middlegame battle begins in earnest. Black has an extra pawn but White has superior piece activity, open files, and a natural attacking setup. The critical question is whether White can break through before Black consolidates.",
+      "plans": [
+        "Get the king to safety",
+        "Prepare to activate the remaining pieces",
+        "Try to consolidate the extra pawn"
+      ],
+      "arrows": [
+        {
+          "from": "e8",
+          "to": "g8",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "g8",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black castles kingside with an extra pawn, but White's superior piece activity and open files threaten a breakthrough before Black consolidates."
+    }
+  ],
+  "subLines": [
+    {
+      "name": "Smith-Morra: Classical Setup",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Smith-Morra: Classical Setup is an important variation of the Smith-Morra Gambit. The main line where Black plays a standard Sicilian setup. White develops naturally with Bc4, O-O, Qe2, and Rd1. The e5 push opens the position and creates immediate threats. After Nxe5, White's pieces dominate the center and the bishop pair rakes across the board. Let's walk through the key ideas.",
+          "shortNarration": "After e5 push and Nxe5, White's pieces dominate the center with the bishop pair raking the board."
+        },
+        {
+          "san": "c5",
+          "annotation": "Black replies with c5. This is the defining move of the Smith-Morra: Classical Setup — it shapes the pawn structure and determines the resulting plans.",
+          "shortNarration": "Black's c5 defines the Smith-Morra Gambit pawn structure and dictates the plans."
+        },
+        {
+          "san": "d4",
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "cxd4",
+          "annotation": "cxd4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd4 stakes a central pawn claim, controlling space and restricting piece activity."
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "dxc3 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc3 captures the pawn, changing the pawn structure or material balance."
+        },
+        {
+          "san": "Nxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "b1",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Rd1",
+          "annotation": "Rd1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Rd1 places the rook on the open d-file, maximizing its activity."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 stakes a central pawn claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "c6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, Black recaptures with the d-pawn to open lines."
+        },
+        {
+          "san": "Qxe5",
+          "annotation": "Qxe5 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe5 wins a knight, altering the material balance and pawn structure."
+        },
+        {
+          "san": "Qc7",
+          "annotation": ""
+        },
+        {
+          "san": "Qg3",
+          "annotation": "Qg3 activates the queen. From g3, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qg3 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "Bd6",
+          "annotation": ""
+        },
+        {
+          "san": "Qg5",
+          "annotation": "Qg5 activates the queen. From g5, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qg5 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "Be7",
+          "annotation": "Be7 improves the bishop's placement. The bishop was less effective on d6 and moves to e7 where it serves the plan better.",
+          "shortNarration": "Be7 improves the bishop's placement, moving from d6 to e7 for better coordination."
+        },
+        {
+          "san": "Bf4",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxd5",
+          "annotation": "Nxd5 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "c3",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxd5 captures the knight, reconfiguring the pawn structure and gaining material in the critical position."
+        },
+        {
+          "san": "exd5",
+          "annotation": "exd5 captures the knight. This exchange is thematic in the Smith-Morra: Classical Setup — it defines the resulting pawn structure and piece activity.",
+          "arrows": [
+            {
+              "from": "e6",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "exd5 captures the knight, defining the pawn structure and piece activity in the Smith-Morra Classical Setup."
+        },
+        {
+          "san": "Bxd5",
+          "annotation": "Bxd5 completes the variation. The resulting position after this capture offers White clear targets and plans. Study this structure — you'll see it often.",
+          "arrows": [
+            {
+              "from": "c4",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxd5 gives White clear targets and plans in this common structure."
+        }
+      ]
+    },
+    {
+      "name": "Smith-Morra: Fianchetto Defense",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Smith-Morra: Fianchetto Defense is an important variation of the Smith-Morra Gambit. Black fianchettos with g6 and Bg7. White pushes e5 to cramp Black's position and prevent d5. The Bf4 development combined with O-O creates a harmonious setup. After Nb5 and Nc7, White's knight creates chaos on the queenside while maintaining central control. Let's walk through the key ideas.",
+          "shortNarration": "White pushes e5 to cramp Black's position, then Nb5 and Nc7 create queenside chaos while maintaining central control."
+        },
+        {
+          "san": "c5",
+          "annotation": "Black replies with c5. This is the defining move of the Smith-Morra: Fianchetto Defense — it shapes the pawn structure and determines the resulting plans.",
+          "shortNarration": "Black's c5 defines the Smith-Morra Gambit pawn structure and the resulting plans."
+        },
+        {
+          "san": "d4",
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "cxd4",
+          "annotation": "cxd4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd4 stakes a central claim, controlling space and restricting piece activity."
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "dxc3 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc3 captures the pawn, changing the material balance or pawn structure."
+        },
+        {
+          "san": "Nxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "b1",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "g6",
+          "annotation": "g6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "g6 gains kingside space and supports a future attack toward the enemy king."
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "Bg7",
+          "annotation": "Bg7 — Black fianchettoes the bishop, placing it on the long diagonal where it controls the center from a distance. This is a key positional idea.",
+          "shortNarration": "Bg7 fianchettoes the bishop onto the long diagonal, controlling the center from a distance."
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Bf4",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "d5",
+          "annotation": "d5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "exd6",
+          "annotation": "exd6 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "d6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "exd6 captures the pawn, changing the balance by reconfiguring the pawn structure or gaining material."
+        },
+        {
+          "san": "Qxd6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d8",
+              "to": "d6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nb5",
+          "annotation": "Nb5 improves the knight's placement. The knight was less effective on c3 and moves to b5 where it serves the plan better.",
+          "shortNarration": "Nb5 improves the knight's placement, eyeing c7 and d6."
+        },
+        {
+          "san": "Qd7",
+          "annotation": "Qd7 activates the queen. From d7, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qd7 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "Qxd7",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d1",
+              "to": "d7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxd7",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c8",
+              "to": "d7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc7",
+          "annotation": "Nc7 improves the knight's placement. The knight was less effective on b5 and moves to c7 where it serves the plan better.",
+          "shortNarration": "Nc7 improves the knight from b5, better supporting the attack."
+        },
+        {
+          "san": "Rac8",
+          "annotation": "Rac8 improves the rook's placement. The rook was less effective on a8 and moves to c8 where it serves the plan better.",
+          "shortNarration": "Rac8 improves the rook's placement, shifting from a8 to c8 to better serve the plan."
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxd5",
+          "annotation": "Nxd5 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f6",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxd5 wins a knight, altering the pawn structure or material balance."
+        },
+        {
+          "san": "Bxd5",
+          "annotation": "Bxd5 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "c4",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxd5 captures the knight, changing the pawn structure or material balance into the critical position of the variation."
+        },
+        {
+          "san": "a6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "a7",
+              "to": "a6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Rac1",
+          "annotation": "Rac1. This is the typical position arising from the Smith-Morra: Fianchetto Defense. From here, understanding the strategic plans — piece placement, pawn breaks, and targets — is essential.",
+          "arrows": [
+            {
+              "from": "a1",
+              "to": "c1",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Rac1 — typical Smith-Morra Fianchetto: piece placement, pawn breaks, and targets decide the game."
+        }
+      ]
+    },
+    {
+      "name": "Smith-Morra Declined: d3 Push",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Smith-Morra Declined: d3 Push is an important variation of the Smith-Morra Gambit. Black declines by pushing d3 instead of taking on c3. This avoids the gambit but gives White a free developing choice with Bxd3. The resulting position is like a Maroczy Bind where White has a comfortable space advantage. The Nc4 and a4-a5 plan creates queenside pressure. Let's walk through the key ideas.",
+          "shortNarration": "In the Smith-Morra Declined, Black's d3 push avoids the gambit but gives White a free Bxd3, a Maroczy-like space advantage, and queenside pressure with Nc4 and a4-a5."
+        },
+        {
+          "san": "c5",
+          "annotation": "Black replies with c5. This is the defining move of the Smith-Morra Declined: d3 Push — it shapes the pawn structure and determines the resulting plans.",
+          "shortNarration": "Black's c5 defines the Smith-Morra Declined: d3 push shapes the pawn structure and plans."
+        },
+        {
+          "san": "d4",
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "cxd4",
+          "annotation": "cxd4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd4 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bxd3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "f1",
+              "to": "d3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nbd2",
+          "annotation": ""
+        },
+        {
+          "san": "g6",
+          "annotation": "g6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "g6 gains kingside space to support a future attack toward the enemy king."
+        },
+        {
+          "san": "Bc2",
+          "annotation": "Bc2 improves the bishop's placement. The bishop was less effective on d3 and moves to c2 where it serves the plan better.",
+          "shortNarration": "Bc2 improves the bishop's placement from d3 to c2 for a better diagonal."
+        },
+        {
+          "san": "Bg7",
+          "annotation": "Bg7 — Black fianchettoes the bishop, placing it on the long diagonal where it controls the center from a distance. This is a key positional idea.",
+          "shortNarration": "Bg7 fianchettoes the bishop to control the center along the long diagonal."
+        },
+        {
+          "san": "Re1",
+          "annotation": "Re1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Re1 places the rook on the central e-file, an open or semi-open file for maximum activity."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "b3",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "Bb2",
+          "annotation": "Bb2 — White fianchettoes the bishop, placing it on the long diagonal where it controls the center from a distance. This is a key positional idea.",
+          "shortNarration": "Bb2 fianchettoes the bishop to control the center along the long diagonal."
+        },
+        {
+          "san": "Be6",
+          "annotation": ""
+        },
+        {
+          "san": "Nc4",
+          "annotation": ""
+        },
+        {
+          "san": "Rc8",
+          "annotation": "Rc8 improves the rook's placement. The rook was less effective on a8 and moves to c8 where it serves the plan better.",
+          "shortNarration": "Rc8 improves the rook's placement for the plan on the c-file."
+        },
+        {
+          "san": "a4",
+          "annotation": ""
+        },
+        {
+          "san": "Nd7",
+          "annotation": "Nd7 improves the knight's placement. The knight was less effective on f6 and moves to d7 where it serves the plan better. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "f6",
+              "to": "d7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nd7 improves the knight from f6, reaching the critical position of this variation."
+        },
+        {
+          "san": "a5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "a4",
+              "to": "a5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "f5",
+          "annotation": "f5. This is the typical position arising from the Smith-Morra Declined: d3 Push. From here, understanding the strategic plans — piece placement, pawn breaks, and targets — is essential.",
+          "arrows": [
+            {
+              "from": "f7",
+              "to": "f5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "f5 — the Smith-Morra Declined d3 Push, where piece placement and pawn breaks decide the target."
+        }
+      ]
+    },
+    {
+      "name": "Smith-Morra: Siberian Trap",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Smith-Morra: Siberian Trap is an important variation of the Smith-Morra Gambit. The Siberian Trap is the Smith-Morra's most famous tactical idea. After Qa5 and e5, the position becomes razor-sharp. The Nd5 jump is the critical move — it forks multiple pieces and creates discovered threats along the e-file. Even if Black defends accurately, White emerges with excellent compensation. Let's walk through the key ideas.",
+          "shortNarration": "After Qa5 and e5, Nd5 forks pieces and creates discovered threats along the e-file for excellent compensation."
+        },
+        {
+          "san": "c5",
+          "annotation": "Black replies with c5. This is the defining move of the Smith-Morra: Siberian Trap — it shapes the pawn structure and determines the resulting plans.",
+          "shortNarration": "c5 defines the Smith-Morra Gambit's pawn structure and traps."
+        },
+        {
+          "san": "d4",
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "cxd4",
+          "annotation": "cxd4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd4 stakes a central pawn claim, controlling space and restricting piece activity."
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "dxc3 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc3 captures the pawn, changing the material balance or pawn structure."
+        },
+        {
+          "san": "Nxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "b1",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Rd1",
+          "annotation": "Rd1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Rd1 places the rook on the central open file, maximizing activity."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Bf4",
+          "annotation": ""
+        },
+        {
+          "san": "Qa5",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance and pawn structure."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "c6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, forcing Black to recapture or lose material."
+        },
+        {
+          "san": "Bxe5",
+          "annotation": "Bxe5 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f4",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxe5 wins a knight, altering the pawn structure or material balance."
+        },
+        {
+          "san": "Qxe5",
+          "annotation": "Qxe5 captures the bishop. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "a5",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe5 captures the bishop, altering the material balance and reshaping the pawn structure."
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Qd6",
+          "annotation": "Qd6 activates the queen. From d6, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qd6 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "Nxe7+",
+          "annotation": "Nxe7+ captures the bishop. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d5",
+              "to": "e7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe7+ wins a bishop, altering the pawn structure or material balance."
+        },
+        {
+          "san": "Qxe7",
+          "annotation": "Qxe7 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe7 wins a knight, altering the material balance."
+        },
+        {
+          "san": "Bxe6",
+          "annotation": "Bxe6 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "c4",
+              "to": "e6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxe6 wins a pawn, altering the pawn structure and material balance."
+        },
+        {
+          "san": "Bxe6",
+          "annotation": "Bxe6 captures the bishop. This exchange is thematic in the Smith-Morra: Siberian Trap — it defines the resulting pawn structure and piece activity.",
+          "arrows": [
+            {
+              "from": "c8",
+              "to": "e6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxe6 captures the bishop, a Smith-Morra Siberian Trap theme defining pawn structure and piece activity."
+        },
+        {
+          "san": "Qxe6",
+          "annotation": "Qxe6 completes the variation. The resulting position after this capture offers White clear targets and plans. Study this structure — you'll see it often.",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "e6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe6 gives White clear targets and plans in a common structure."
+        }
+      ]
+    },
+    {
+      "name": "Smith-Morra: Taylor Defense",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Smith-Morra: Taylor Defense is an important variation of the Smith-Morra Gambit. The Taylor Defense with a6 and Nge7 is a common amateur setup. White plays Bg5 to create a pin and then Nd5 is devastating. After exd5 and d6, the passed pawn cramps Black's entire position. The Re1+ pin and Nd4 centralization create a winning attack. Let's walk through the key ideas.",
+          "shortNarration": "In the Smith-Morra Taylor Defense, Bg5 pins the knight, then Nd5 forces exd5, and the passed d6-pawn with Re1+ and Nd4 creates a winning attack."
+        },
+        {
+          "san": "c5",
+          "annotation": "Black replies with c5. This is the defining move of the Smith-Morra: Taylor Defense — it shapes the pawn structure and determines the resulting plans.",
+          "shortNarration": "c5 defines the Smith-Morra Gambit: Taylor Defense, shaping pawn structure and plans."
+        },
+        {
+          "san": "d4",
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "cxd4",
+          "annotation": "cxd4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd4 stakes a central pawn claim, controlling space and restricting opponent piece activity."
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "dxc3 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc3 captures the pawn, changing the pawn structure or material balance."
+        },
+        {
+          "san": "Nxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "b1",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "a6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nge7",
+          "annotation": ""
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "h6",
+          "annotation": "h6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "h6 gains space on the kingside to support a future attack."
+        },
+        {
+          "san": "Bh4",
+          "annotation": "Bh4 improves the bishop's placement. The bishop was less effective on g5 and moves to h4 where it serves the plan better.",
+          "shortNarration": "Bh4 improves the bishop's placement, targeting f2 and supporting the kingside attack."
+        },
+        {
+          "san": "b5",
+          "annotation": ""
+        },
+        {
+          "san": "Bb3",
+          "annotation": "Bb3 improves the bishop's placement. The bishop was less effective on c4 and moves to b3 where it serves the plan better.",
+          "shortNarration": "Bb3 improves the bishop's placement, targeting f7 and supporting the center."
+        },
+        {
+          "san": "Ng6",
+          "annotation": "Ng6 improves the knight's placement. The knight was less effective on e7 and moves to g6 where it serves the plan better.",
+          "shortNarration": "Ng6 improves the knight's placement, targeting f4 and supporting the kingside attack."
+        },
+        {
+          "san": "Bg3",
+          "annotation": "Bg3 improves the bishop's placement. The bishop was less effective on h4 and moves to g3 where it serves the plan better.",
+          "shortNarration": "Bg3 improves the bishop's placement for the plan ahead."
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "exd5",
+          "annotation": "exd5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "e6",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "exd5 stakes a central pawn claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "exd5",
+          "annotation": "exd5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "e4",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "exd5 stakes a central pawn claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Na5",
+          "annotation": "Na5 improves the knight's placement. The knight was less effective on c6 and moves to a5 where it serves the plan better.",
+          "shortNarration": "Na5 improves the knight from c6 to a5, better serving the plan."
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bf6",
+          "annotation": ""
+        },
+        {
+          "san": "Re1+",
+          "annotation": "Re1+! Check — White forces the king to respond, gaining tempo to improve the position. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "f1",
+              "to": "e1",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Re1+ forces the king to move, gaining tempo to reach the critical position."
+        },
+        {
+          "san": "Kf8",
+          "annotation": "Kf8 improves the king's placement. The king was less effective on e8 and moves to f8 where it serves the plan better. Notice how the pieces coordinate in this position.",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "f8",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Kf8 improves the king's placement, coordinating with the pieces for the plan ahead."
+        },
+        {
+          "san": "Nd4",
+          "annotation": "Nd4. This is the typical position arising from the Smith-Morra: Taylor Defense. From here, understanding the strategic plans — piece placement, pawn breaks, and targets — is essential.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "d4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nd4 — typical Smith-Morra Taylor Defense; key plans are piece placement, pawn breaks, and targets."
+        }
+      ]
+    },
+    {
+      "name": "Siberian Trap (Qa5-Qe5)",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Smith-Morra Gambit, the Siberian Trap (Qa5-Qe5) is a tactical pattern you should know. A devastating variation of the Siberian Trap. After White's Rd1 and Bf4, the pin on the d-file sets up multiple tactical motifs. The Nd5 sacrifice blows open the position — after exd5 Bxf6, the discovered attack on the queen combined with the bishop invasion is fatal. Let's walk through how it works.",
+          "shortNarration": "After Nd5 sacrifice exd5 Bxf6, the discovered attack on the queen and bishop invasion are fatal."
+        },
+        {
+          "san": "c5",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "cxd4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nxc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "a6",
+          "annotation": ""
+        },
+        {
+          "san": "Rd1",
+          "annotation": ""
+        },
+        {
+          "san": "Qc7",
+          "annotation": ""
+        },
+        {
+          "san": "Bf4",
+          "annotation": ""
+        },
+        {
+          "san": "Ne5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Rd8+",
+          "annotation": ""
+        },
+        {
+          "san": "Kxd8",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "d8",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "exd5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e6",
+              "to": "d5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxf6",
+          "annotation": ""
+        },
+        {
+          "san": "dxc4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d5",
+              "to": "c4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxe7+",
+          "annotation": ""
+        },
+        {
+          "san": "Ke8",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d8",
+              "to": "e8",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Qxc4",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Nd5 Tactical Bomb",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Smith-Morra Gambit, the Nd5 Tactical Bomb is a tactical pattern you should know. The thematic Nd5 jump is the signature move of the Smith-Morra. When it lands, the position explodes. After Nxd5 exd5, the passed d-pawn races forward to d6, cutting Black's position in half. Combined with Nxe5 and Bxe5, White's pieces converge with devastating force. Let's walk through how it works.",
+          "shortNarration": "Nd5 jump in the Smith-Morra Gambit forces Nxd5 exd5, then the passed d-pawn races to d6, splitting Black's position."
+        },
+        {
+          "san": "c5",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "cxd4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nxc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Rd1",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Bf4",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxd5",
+          "annotation": ""
+        },
+        {
+          "san": "exd5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e4",
+              "to": "d5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nb8",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bf6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Bxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Qxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Qg3",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Pin Trick on d-file (Nd4)",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Smith-Morra Gambit, the Pin Trick on d-file (Nd4) is a tactical pattern you should know. The pin trick along the d-file is a common motif in the Smith-Morra. After e5 opens the position, Nd5 combines with the rook on d1 to create a deadly pin. Black's queen is under constant pressure, and even if material is traded, White's initiative continues into the endgame. Let's walk through how it works.",
+          "shortNarration": "In the Smith-Morra Gambit, Nd5 pins Black's queen to the rook on d1, maintaining White's initiative even into the endgame."
+        },
+        {
+          "san": "c5",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "cxd4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nxc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Rd1",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "a6",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "exd5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e6",
+              "to": "d5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxd5",
+          "annotation": ""
+        },
+        {
+          "san": "Qxd5",
+          "annotation": ""
+        },
+        {
+          "san": "Rxd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Qxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Bf6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe8",
+          "annotation": ""
+        },
+        {
+          "san": "Bxb2",
+          "annotation": ""
+        },
+        {
+          "san": "Rb1",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Development Trap: Passive Play Punished",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Smith-Morra Gambit, the Development Trap: Passive Play Punished is a tactical pattern you should know. When Black plays passively with a6 and delays castling, the e5 push combined with Bg5 creates a nasty pin. After Nd5, the threats multiply — Nxe7 combined with various discovered attacks make the position unplayable for Black. The extra development tempo decides the game. Let's walk through how it works.",
+          "shortNarration": "In the Smith-Morra, passive play with a6 lets e5 and Bg5 pin the knight, then Nd5 threatens Nxe7 with discovered attacks."
+        },
+        {
+          "san": "c5",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "cxd4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nxc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "a6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Rd1",
+          "annotation": ""
+        },
+        {
+          "san": "Qc7",
+          "annotation": ""
+        },
+        {
+          "san": "Bf4",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxd5",
+          "annotation": ""
+        },
+        {
+          "san": "Bxe7",
+          "annotation": ""
+        },
+        {
+          "san": "Ncxe7",
+          "annotation": ""
+        },
+        {
+          "san": "exd5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e4",
+              "to": "d5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Qxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Qxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Bxa6",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Chicago Defense: Black Neutralizes",
+      "type": "warning",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Smith-Morra Gambit, the Chicago Defense: Black Neutralizes is a dangerous line you must be aware of. Black's most solid setup with ...e6, ...a6, ...b5, and ...Bb7 neutralizes a lot of White's initiative. The bishop on b7 covers d5 and Black slowly untangles. Against this precise defense, White's compensation is at its thinnest — active play is essential to justify the pawn sacrifice. Let's see why.",
+          "shortNarration": "In the Chicago Defense, Black's ...e6, ...a6, ...b5, and ...Bb7 neutralizes White's initiative, so White must play actively to justify the pawn sacrifice."
+        },
+        {
+          "san": "c5",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "cxd4",
+          "annotation": "cxd4 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd4 opens the c-file and shifts the game from closed to open."
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "dxc3 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc3 opens the d-file and gives Black a passed c-pawn."
+        },
+        {
+          "san": "Nxc3",
+          "annotation": "Nxc3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxc3 changes the position — Black recaptures with the b-pawn, doubling White's queenside pawns."
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "a6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "b5",
+          "annotation": ""
+        },
+        {
+          "san": "Bb3",
+          "annotation": ""
+        },
+        {
+          "san": "Bb7",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Nd7",
+          "annotation": ""
+        },
+        {
+          "san": "Rd1",
+          "annotation": ""
+        },
+        {
+          "san": "Ngf6",
+          "annotation": ""
+        },
+        {
+          "san": "Bf4",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Rac1",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 opens the d-file and changes the center structure."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 wins a pawn, but Black can recapture with the knight, opening lines for the queen."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 changes the position — the knight captures on e5."
+        },
+        {
+          "san": "Bxe5",
+          "annotation": "Bxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxe5 changes the position — the e5 pawn is gone, opening the d-file and e-file."
+        },
+        {
+          "san": "Nd7",
+          "annotation": ""
+        },
+        {
+          "san": "Bf4",
+          "annotation": ""
+        },
+        {
+          "san": "Bf6",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Endgame Danger: Black Simplifies",
+      "type": "warning",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Smith-Morra Gambit, the Endgame Danger: Black Simplifies is a dangerous line you must be aware of. If Black trades pieces carefully and reaches an endgame, the extra pawn becomes the dominant factor. This is the fundamental weakness of the Smith-Morra — it's built for the middlegame. If you let the position simplify, you're fighting for a draw at best. Let's see why.",
+          "shortNarration": "In the Smith-Morra Gambit, if Black trades into an endgame, the extra pawn becomes dominant — the gambit's middlegame edge vanishes."
+        },
+        {
+          "san": "c5",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "cxd4",
+          "annotation": "cxd4 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd4 opens the c-file and changes the center structure."
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "dxc3 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc3 opens the d-file and changes the pawn structure."
+        },
+        {
+          "san": "Nxc3",
+          "annotation": "Nxc3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxc3 changes the position — Black recaptures and now has the bishop pair."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Rd1",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Be3",
+          "annotation": ""
+        },
+        {
+          "san": "a6",
+          "annotation": ""
+        },
+        {
+          "san": "Rac1",
+          "annotation": ""
+        },
+        {
+          "san": "Qa5",
+          "annotation": ""
+        },
+        {
+          "san": "Bb3",
+          "annotation": ""
+        },
+        {
+          "san": "Bd7",
+          "annotation": ""
+        },
+        {
+          "san": "Nd4",
+          "annotation": ""
+        },
+        {
+          "san": "Nxd4",
+          "annotation": "Nxd4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxd4 changes the position — the knight captures on d4, altering the central tension."
+        },
+        {
+          "san": "Bxd4",
+          "annotation": "Bxd4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxd4 captures the pawn, changing the position's character."
+        },
+        {
+          "san": "Bc6",
+          "annotation": ""
+        },
+        {
+          "san": "f3",
+          "annotation": ""
+        },
+        {
+          "san": "Nd7",
+          "annotation": ""
+        },
+        {
+          "san": "Be3",
+          "annotation": ""
+        },
+        {
+          "san": "Bf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Bxd5",
+          "annotation": ""
+        },
+        {
+          "san": "Rxd5",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e6",
+              "to": "e5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Black Plays d5 Counterstrike",
+      "type": "warning",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Smith-Morra Gambit, the Black Plays d5 Counterstrike is a dangerous line you must be aware of. When Black plays the accurate d5 counterstrike at the right moment, the position simplifies favorably. Black's central control and bishop pair provide adequate compensation for any initiative White might claim. This is why precise timing of e5 is critical for White. Let's see why.",
+          "shortNarration": "In the Smith-Morra, Black's d5 counterstrike simplifies favorably, giving central control and the bishop pair — White must time e5 precisely."
+        },
+        {
+          "san": "c5",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "cxd4",
+          "annotation": "cxd4 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "d4",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd4 opens the c-file and the d5 square, changing the pawn structure."
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "dxc3 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "c3",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc3 changes the position — White's center collapses, Black gains a pawn."
+        },
+        {
+          "san": "Nxc3",
+          "annotation": "Nxc3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxc3 changes the position — Black recaptures and White must recapture."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "e6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Rd1",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "a6",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 opens the center and changes the tactical character of the position."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 changes the position — the knight captures on e5."
+        },
+        {
+          "san": "Qc7",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "Nxc6 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxc6 trades a knight for a bishop, altering the pawn structure and piece dynamics."
+        },
+        {
+          "san": "bxc6",
+          "annotation": "bxc6 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "b7",
+              "to": "c6",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "bxc6 opens the b-file and weakens Black's queenside pawn structure."
+        },
+        {
+          "san": "Be3",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxd5",
+          "annotation": "Nxd5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxd5 changes the position — the knight captures on d5, altering the pawn structure and piece activity."
+        },
+        {
+          "san": "cxd5",
+          "annotation": "cxd5 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "c6",
+              "to": "d5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd5 opens the c-file and the d4 square, changing the position's character."
+        },
+        {
+          "san": "Bd3",
+          "annotation": ""
+        },
+        {
+          "san": "Bb7",
+          "annotation": ""
+        },
+        {
+          "san": "Rac1",
+          "annotation": ""
+        },
+        {
+          "san": "Qd7",
+          "annotation": ""
+        }
+      ]
     }
   ]
 }

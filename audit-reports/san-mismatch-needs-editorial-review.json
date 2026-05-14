@@ -1,0 +1,674 @@
+{
+  "count": 26,
+  "items": [
+    {
+      "file": "benoni-defense-classical-variation-main-line.json",
+      "currentOpeningId": "benoni-defense-classical-variation-main-line",
+      "currentCanonicalPgn": "d4 Nf6 c4 c5 d5 e6 Nc3 exd5 cxd5 d6 e4 g6 Nf3 Bg7 Be2 O-O O-O",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "c5",
+        "d5",
+        "e6",
+        "dxe6"
+      ],
+      "suggestedRename": {
+        "name": "Benoni Defense: Classical Variation, Czerniak Defense",
+        "slug": "benoni-defense-classical-variation-czerniak-defense",
+        "eco": "A79",
+        "pgn": "d4 Nf6 c4 c5 d5 e6 Nc3 exd5 cxd5 d6 e4 g6 Nf3 Bg7 Be2 O-O O-O Re8 Nd2 Na6 f3",
+        "matchLen": 6,
+        "fullLen": 7
+      }
+    },
+    {
+      "file": "benoni-defense-king-s-pawn-line-with-be3.json",
+      "currentOpeningId": "benoni-defense-king-s-pawn-line-with-be3",
+      "currentCanonicalPgn": "d4 Nf6 c4 c5 d5 e6 Nc3 exd5 cxd5 d6 e4 g6 f3 Bg7 Be3",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "c5",
+        "d5",
+        "e6",
+        "dxe6",
+        "d6",
+        "e4",
+        "g6",
+        "f3",
+        "Bg7",
+        "Be3"
+      ],
+      "suggestedRename": {
+        "name": "Benoni Defense: Classical Variation, Czerniak Defense",
+        "slug": "benoni-defense-classical-variation-czerniak-defense",
+        "eco": "A79",
+        "pgn": "d4 Nf6 c4 c5 d5 e6 Nc3 exd5 cxd5 d6 e4 g6 Nf3 Bg7 Be2 O-O O-O Re8 Nd2 Na6 f3",
+        "matchLen": 6,
+        "fullLen": 13
+      }
+    },
+    {
+      "file": "benoni-defense-king-s-pawn-line-with-bg5.json",
+      "currentOpeningId": "benoni-defense-king-s-pawn-line-with-bg5",
+      "currentCanonicalPgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Bg5 c5 d5",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "g6",
+        "Nc3",
+        "Bg7",
+        "e4",
+        "d6",
+        "f3",
+        "O-O",
+        "Bg5",
+        "c5",
+        "d5",
+        "e6",
+        "dxe6"
+      ],
+      "suggestedRename": {
+        "name": "Benoni Defense: King's Pawn Line, with Bg5",
+        "slug": "benoni-defense-king-s-pawn-line-with-bg5",
+        "eco": "A65",
+        "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Bg5 c5 d5 e6 Qd2 exd5 exd5",
+        "matchLen": 14,
+        "fullLen": 15
+      }
+    },
+    {
+      "file": "benoni-defense-pawn-storm-variation.json",
+      "currentOpeningId": "benoni-defense-pawn-storm-variation",
+      "currentCanonicalPgn": "d4 Nf6 c4 c5 d5 e6 Nc3 exd5 cxd5 d6 e4 g6 f4",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "c5",
+        "d5",
+        "e6",
+        "dxe6"
+      ],
+      "suggestedRename": {
+        "name": "Benoni Defense: Classical Variation, Czerniak Defense",
+        "slug": "benoni-defense-classical-variation-czerniak-defense",
+        "eco": "A79",
+        "pgn": "d4 Nf6 c4 c5 d5 e6 Nc3 exd5 cxd5 d6 e4 g6 Nf3 Bg7 Be2 O-O O-O Re8 Nd2 Na6 f3",
+        "matchLen": 6,
+        "fullLen": 7
+      }
+    },
+    {
+      "file": "caro-kann-defense-classical-variation-seirawan-variation.json",
+      "currentOpeningId": "caro-kann-defense-classical-variation-seirawan-variation",
+      "currentCanonicalPgn": "e4 c6 d4 d5 Nd2 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3 Bxd3 Qxd3 Ngf6 Bd2 e6 O-O-O Bd6",
+      "annotationSans": [
+        "e4",
+        "c6",
+        "d4",
+        "d5",
+        "Nd2",
+        "dxe4",
+        "Nxe4",
+        "Bf5",
+        "Ng3",
+        "Bg6",
+        "h4",
+        "h6",
+        "h5",
+        "Bh7",
+        "Nf3",
+        "Nd7",
+        "Bd3",
+        "Bxd3",
+        "Qxd3",
+        "Ngf6",
+        "Bd2",
+        "e6",
+        "O-O-O",
+        "Bd6"
+      ],
+      "suggestedRename": {
+        "name": "Caro-Kann Defense: Classical Variation, Lobron System",
+        "slug": "caro-kann-defense-classical-variation-lobron-system",
+        "eco": "B19",
+        "pgn": "e4 c6 d4 d5 Nd2 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3 Bxd3 Qxd3 e6 Bd2 Ngf6 O-O-O Be7",
+        "matchLen": 12,
+        "fullLen": 24
+      }
+    },
+    {
+      "file": "catalan-opening-closed-zagoryansky-variation.json",
+      "currentOpeningId": "catalan-opening-closed-zagoryansky-variation",
+      "currentCanonicalPgn": "d4 e6 c4 Nf6 Nf3 d5 g3 Be7 Bg2 O-O O-O Nbd7 Qc2 c6 Rd1 b6 a4",
+      "annotationSans": [
+        "d4",
+        "e6",
+        "c4",
+        "Nf6",
+        "d5"
+      ],
+      "suggestedRename": {
+        "name": "Catalan Opening: Closed, Zagoryansky Variation",
+        "slug": "catalan-opening-closed-zagoryansky-variation",
+        "eco": "E08",
+        "pgn": "d4 e6 c4 Nf6 Nf3 d5 g3 Be7 Bg2 O-O O-O Nbd7 Qc2 c6 Rd1 b6 a4",
+        "matchLen": 4,
+        "fullLen": 5
+      }
+    },
+    {
+      "file": "english-opening-symmetrical-variation-anti-benoni-variation-geller-variation.json",
+      "currentOpeningId": "english-opening-symmetrical-variation-anti-benoni-variation-geller-variation",
+      "currentCanonicalPgn": "c4 e6 Nf3 Nf6 Nc3 c5 d4 Nc6 g3 cxd4 Nxd4 Qb6",
+      "annotationSans": [
+        "c4",
+        "e6",
+        "Nf3",
+        "Nf6",
+        "Nc3",
+        "c5",
+        "d4",
+        "cxd4",
+        "Nxd4",
+        "Nc6",
+        "g3",
+        "Qb6"
+      ],
+      "suggestedRename": {
+        "name": "English Opening: Symmetrical Variation, Anti-Benoni Variation, Spielmann Defense",
+        "slug": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense",
+        "eco": "A33",
+        "pgn": "c4 e6 Nf3 Nf6 Nc3 c5 d4 cxd4 Nxd4 Nc6",
+        "matchLen": 10,
+        "fullLen": 12
+      }
+    },
+    {
+      "file": "gr-nfeld-defense-brinckmann-attack-gr-nfeld-gambit.json",
+      "currentOpeningId": "gr-nfeld-defense-brinckmann-attack-gr-nfeld-gambit",
+      "currentCanonicalPgn": "d4 Nf6 c4 g6 Nc3 d5 Bf4 Bg7 e3 O-O",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "g6",
+        "d5"
+      ],
+      "suggestedRename": {
+        "name": "Indian Defense: Anti-Grünfeld, Adorjan Gambit",
+        "slug": "indian-defense-anti-gr-nfeld-adorjan-gambit",
+        "eco": "E60",
+        "pgn": "d4 Nf6 c4 g6 d5 b5",
+        "matchLen": 5,
+        "fullLen": 5
+      }
+    },
+    {
+      "file": "gr-nfeld-defense-three-knights-variation-hungarian-attack.json",
+      "currentOpeningId": "gr-nfeld-defense-three-knights-variation-hungarian-attack",
+      "currentCanonicalPgn": "d4 Nf6 c4 g6 Nc3 d5 Nf3 Bg7 Bf4",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "g6",
+        "d5"
+      ],
+      "suggestedRename": {
+        "name": "Indian Defense: Anti-Grünfeld, Adorjan Gambit",
+        "slug": "indian-defense-anti-gr-nfeld-adorjan-gambit",
+        "eco": "E60",
+        "pgn": "d4 Nf6 c4 g6 d5 b5",
+        "matchLen": 5,
+        "fullLen": 5
+      }
+    },
+    {
+      "file": "gr-nfeld-defense-three-knights-variation-hungarian-variation.json",
+      "currentOpeningId": "gr-nfeld-defense-three-knights-variation-hungarian-variation",
+      "currentCanonicalPgn": "d4 Nf6 c4 g6 Nc3 d5 Nf3 Bg7 Bf4 O-O e3",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "g6",
+        "d5"
+      ],
+      "suggestedRename": {
+        "name": "Indian Defense: Anti-Grünfeld, Adorjan Gambit",
+        "slug": "indian-defense-anti-gr-nfeld-adorjan-gambit",
+        "eco": "E60",
+        "pgn": "d4 Nf6 c4 g6 d5 b5",
+        "matchLen": 5,
+        "fullLen": 5
+      }
+    },
+    {
+      "file": "italian-game-evans-gambit-morphy-attack.json",
+      "currentOpeningId": "italian-game-evans-gambit-morphy-attack",
+      "currentCanonicalPgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O d6 cxd4 Bb6 Nc3",
+      "annotationSans": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "Bc5",
+        "b4",
+        "Bxb4",
+        "c3",
+        "Ba5",
+        "d4",
+        "exd4",
+        "O-O",
+        "d6",
+        "cxd4",
+        "Bb6",
+        "d5"
+      ],
+      "suggestedRename": {
+        "name": "Italian Game: Evans Gambit, Morphy Attack",
+        "slug": "italian-game-evans-gambit-morphy-attack",
+        "eco": "C51",
+        "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O d6 cxd4 Bb6 Nc3",
+        "matchLen": 16,
+        "fullLen": 17
+      }
+    },
+    {
+      "file": "italian-game-evans-gambit.json",
+      "currentOpeningId": "italian-game-evans-gambit",
+      "currentCanonicalPgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4",
+      "annotationSans": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "Bc5",
+        "b4",
+        "Bxb4",
+        "c3",
+        "Ba5",
+        "d4",
+        "exd4"
+      ],
+      "suggestedRename": {
+        "name": "Italian Game: Evans Gambit, Compromised Defense, Main Line",
+        "slug": "italian-game-evans-gambit-compromised-defense-main-line",
+        "eco": "C52",
+        "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O dxc3 Qb3 Qf6 e5 Qg6 Nxc3 Nge7 Ba3",
+        "matchLen": 12,
+        "fullLen": 12
+      }
+    },
+    {
+      "file": "king-s-gambit-accepted-greco-gambit.json",
+      "currentOpeningId": "king-s-gambit-accepted-greco-gambit",
+      "currentCanonicalPgn": "e4 e5 f4 exf4 Nf3 d6 Bc4 h6 d4 g5 h4 Bg7",
+      "annotationSans": [
+        "e4",
+        "e5",
+        "f4",
+        "exf4",
+        "Nf3",
+        "g5",
+        "Bc4",
+        "Bg7",
+        "h4",
+        "g4",
+        "Ne5",
+        "Qe7",
+        "d4",
+        "d6",
+        "Nd3",
+        "Nf6",
+        "Nxf4",
+        "Nxe4",
+        "O-O"
+      ],
+      "suggestedRename": {
+        "name": "King's Gambit Accepted: Greco Gambit",
+        "slug": "king-s-gambit-accepted-greco-gambit",
+        "eco": "C38",
+        "pgn": "e4 e5 f4 exf4 Nf3 g5 Bc4 Bg7 h4 h6 d4 d6 Nc3 c6 hxg5 hxg5 Rxh8 Bxh8 Ne5",
+        "matchLen": 9,
+        "fullLen": 19
+      }
+    },
+    {
+      "file": "king-s-indian-attack-sicilian-variation.json",
+      "currentOpeningId": "king-s-indian-attack-sicilian-variation",
+      "currentCanonicalPgn": "Nf3 d5 g3 c5",
+      "annotationSans": [
+        "Nf3",
+        "d5",
+        "g3",
+        "Nf6"
+      ],
+      "suggestedRename": {
+        "name": "English Opening: Agincourt Defense, Neo-Catalan Declined",
+        "slug": "english-opening-agincourt-defense-neo-catalan-declined",
+        "eco": "A14",
+        "pgn": "Nf3 d5 g3 Nf6 Bg2 e6 O-O Be7 c4 O-O b3 c5 e3 d4",
+        "matchLen": 4,
+        "fullLen": 4
+      }
+    },
+    {
+      "file": "king-s-indian-defense-four-pawns-attack-fluid-attack.json",
+      "currentOpeningId": "king-s-indian-defense-four-pawns-attack-fluid-attack",
+      "currentCanonicalPgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "g6",
+        "Nc3",
+        "Bg7",
+        "e4",
+        "d6",
+        "f4",
+        "O-O",
+        "c5"
+      ],
+      "suggestedRename": {
+        "name": "King's Indian Defense: Six Pawns Attack",
+        "slug": "king-s-indian-defense-six-pawns-attack",
+        "eco": "E77",
+        "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Be2 c5 d5 e6 dxe6 fxe6 g4 Nc6 h4",
+        "matchLen": 10,
+        "fullLen": 11
+      }
+    },
+    {
+      "file": "king-s-indian-defense-orthodox-variation-classical-system-benko-attack.json",
+      "currentOpeningId": "king-s-indian-defense-orthodox-variation-classical-system-benko-attack",
+      "currentCanonicalPgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 g4",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "g6",
+        "Nc3",
+        "Bg7",
+        "e4",
+        "d6",
+        "Nf3",
+        "O-O",
+        "Be2",
+        "e5",
+        "d5",
+        "Nc6"
+      ],
+      "suggestedRename": {
+        "name": "King's Indian Defense: Petrosian Variation, Keres Defense",
+        "slug": "king-s-indian-defense-petrosian-variation-keres-defense",
+        "eco": "E93",
+        "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 Nbd7 Bg5 h6 Bh4 g5 Bg3 Nh5 h4",
+        "matchLen": 13,
+        "fullLen": 14
+      }
+    },
+    {
+      "file": "london-system.json",
+      "currentOpeningId": "london-system",
+      "currentCanonicalPgn": "d4 Nf6 Nf3 g6 Bf4",
+      "annotationSans": [
+        "d4",
+        "d5",
+        "Bf4",
+        "Nf6",
+        "e3"
+      ],
+      "suggestedRename": {
+        "name": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit, Morris Countergambit Accepted",
+        "slug": "queen-s-pawn-game-accelerated-london-system-steinitz-countergambit-morris-countergambit-accepted",
+        "eco": "D00",
+        "pgn": "d4 d5 Bf4 c5 e4 dxe4",
+        "matchLen": 3,
+        "fullLen": 5
+      }
+    },
+    {
+      "file": "queen-s-gambit-declined-harrwitz-attack-two-knights-defense-blockade-line.json",
+      "currentOpeningId": "queen-s-gambit-declined-harrwitz-attack-two-knights-defense-blockade-line",
+      "currentCanonicalPgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bf4 O-O e3 Nbd7 c5",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "e6",
+        "d5"
+      ],
+      "suggestedRename": {
+        "name": "Queen's Gambit Declined: Orthodox Defense, Classical Variation",
+        "slug": "queen-s-gambit-declined-orthodox-defense-classical-variation",
+        "eco": "D68",
+        "pgn": "d4 Nf6 c4 e6 Nf3 d5 Nc3 Be7 Bg5 O-O e3 Nbd7 Rc1 c6 Bd3 dxc4 Bxc4 Nd5 Bxe7 Qxe7 O-O Nxc3 Rxc3 e5 Qc2",
+        "matchLen": 4,
+        "fullLen": 5
+      }
+    },
+    {
+      "file": "queen-s-indian-defense-buerger-variation.json",
+      "currentOpeningId": "queen-s-indian-defense-buerger-variation",
+      "currentCanonicalPgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 c5 d5 exd5 Ng5",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "e6",
+        "Nf3",
+        "b6",
+        "g3",
+        "Bb7",
+        "c5",
+        "d5"
+      ],
+      "suggestedRename": {
+        "name": "Bogo-Indian Defense: Monticelli Trap",
+        "slug": "bogo-indian-defense-monticelli-trap",
+        "eco": "E11",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Bb4+ Bd2 Bxd2+ Qxd2 O-O Nc3 Ne4 Qc2 Nxc3 Ng5",
+        "matchLen": 8,
+        "fullLen": 10
+      }
+    },
+    {
+      "file": "queen-s-indian-defense-kasparov-petrosian-variation-kasparov-attack.json",
+      "currentOpeningId": "queen-s-indian-defense-kasparov-petrosian-variation-kasparov-attack",
+      "currentCanonicalPgn": "d4 Nf6 c4 e6 Nf3 b6 a3 Bb7 Nc3 d5 cxd5 Nxd5 Qc2",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "e6",
+        "Nf3",
+        "b6",
+        "a3",
+        "Bb7",
+        "d5"
+      ],
+      "suggestedRename": {
+        "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Kasparov Attack",
+        "slug": "queen-s-indian-defense-kasparov-petrosian-variation-kasparov-attack",
+        "eco": "E12",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 a3 Bb7 Nc3 d5 cxd5 Nxd5 Qc2",
+        "matchLen": 8,
+        "fullLen": 9
+      }
+    },
+    {
+      "file": "r-ti-opening-anglo-slav-variation-gurevich-system.json",
+      "currentOpeningId": "r-ti-opening-anglo-slav-variation-gurevich-system",
+      "currentCanonicalPgn": "c4 c6 Nf3 d5 e3",
+      "annotationSans": [
+        "c4",
+        "c6",
+        "Nf3",
+        "d5",
+        "e3",
+        "Nf6",
+        "b3"
+      ],
+      "suggestedRename": {
+        "name": "Réti Opening: Anglo-Slav Variation, Gurevich System",
+        "slug": "r-ti-opening-anglo-slav-variation-gurevich-system",
+        "eco": "A11",
+        "pgn": "c4 c6 Nf3 d5 e3 Nf6 Nc3 Nbd7 b3 e5",
+        "matchLen": 6,
+        "fullLen": 7
+      }
+    },
+    {
+      "file": "rubinstein-opening-classical-defense.json",
+      "currentOpeningId": "rubinstein-opening-classical-defense",
+      "currentCanonicalPgn": "d4 Nf6 Nf3 e6 e3 c5 Bd3 d5 b3 Nc6 O-O Be7 Bb2 O-O",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "Nf3",
+        "e6",
+        "e3",
+        "c5",
+        "dxc5",
+        "Bxc5",
+        "Bd3",
+        "d5",
+        "b3",
+        "Nc6",
+        "O-O",
+        "Be7"
+      ],
+      "suggestedRename": {
+        "name": "Rubinstein Opening: Bogoljubow Defense",
+        "slug": "rubinstein-opening-bogoljubow-defense",
+        "eco": "D05",
+        "pgn": "d4 Nf6 Nf3 e6 e3 c5 Bd3 d5 b3 Nc6 O-O Bd6 Bb2 O-O",
+        "matchLen": 6,
+        "fullLen": 14
+      }
+    },
+    {
+      "file": "semi-slav-defense-botvinnik-variation-alatortsev-system.json",
+      "currentOpeningId": "semi-slav-defense-botvinnik-variation-alatortsev-system",
+      "currentCanonicalPgn": "d4 Nf6 c4 e6 Nf3 d5 Nc3 c6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 Nd5",
+      "annotationSans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "e6",
+        "Nf3",
+        "d5",
+        "Nc3",
+        "c6",
+        "Bg5",
+        "dxc4",
+        "e4",
+        "b5",
+        "e5",
+        "h6",
+        "Bh4",
+        "g5",
+        "Nxg5",
+        "hxg5"
+      ],
+      "suggestedRename": {
+        "name": "Semi-Slav Defense: Botvinnik Variation, Szabo Variation",
+        "slug": "semi-slav-defense-botvinnik-variation-szabo-variation",
+        "eco": "D44",
+        "pgn": "d4 Nf6 c4 e6 Nf3 d5 Nc3 c6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 Qf3",
+        "matchLen": 18,
+        "fullLen": 18
+      }
+    },
+    {
+      "file": "sicilian-defense-smith-morra-gambit-accepted-chicago-defense.json",
+      "currentOpeningId": "sicilian-defense-smith-morra-gambit-accepted-chicago-defense",
+      "currentCanonicalPgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Bc4 e6 Nf3 d6 O-O a6 Qe2 b5 Bb3 Ra7",
+      "annotationSans": [
+        "e4",
+        "c5",
+        "d4",
+        "cxd4",
+        "c3",
+        "dxc3",
+        "Nxc3",
+        "Nc6",
+        "Bc4",
+        "e6",
+        "Nf3",
+        "d6",
+        "O-O",
+        "Nf6",
+        "Qe2",
+        "Be7",
+        "Rd1",
+        "O-O"
+      ],
+      "suggestedRename": {
+        "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Chicago Defense",
+        "slug": "sicilian-defense-smith-morra-gambit-accepted-chicago-defense",
+        "eco": "B21",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Bc4 e6 Nf3 d6 O-O a6 Qe2 b5 Bb3 Ra7",
+        "matchLen": 13,
+        "fullLen": 18
+      }
+    },
+    {
+      "file": "zukertort-opening-double-fianchetto-attack.json",
+      "currentOpeningId": "zukertort-opening-double-fianchetto-attack",
+      "currentCanonicalPgn": "Nf3 Nf6 g3 g6 b3 Bg7 Bb2 O-O Bg2 d6 O-O",
+      "annotationSans": [
+        "Nf3",
+        "Nf6",
+        "g3",
+        "g6",
+        "b3",
+        "Bg7",
+        "Bg2",
+        "O-O",
+        "Bb2",
+        "d6",
+        "O-O"
+      ],
+      "suggestedRename": {
+        "name": "Zukertort Opening: Double Fianchetto Attack",
+        "slug": "zukertort-opening-double-fianchetto-attack",
+        "eco": "A05",
+        "pgn": "Nf3 Nf6 g3 g6 b3 Bg7 Bb2 O-O Bg2 d6 O-O",
+        "matchLen": 6,
+        "fullLen": 11
+      }
+    },
+    {
+      "file": "zukertort-opening-reversed-gr-nfeld.json",
+      "currentOpeningId": "zukertort-opening-reversed-gr-nfeld",
+      "currentCanonicalPgn": "Nf3 d5 g3 c5 Bg2 Nc6 d4",
+      "annotationSans": [
+        "Nf3",
+        "d5",
+        "g3",
+        "c5",
+        "Bg2",
+        "e6",
+        "O-O"
+      ],
+      "suggestedRename": {
+        "name": "King's Indian Attack: Sicilian Variation",
+        "slug": "king-s-indian-attack-sicilian-variation",
+        "eco": "A08",
+        "pgn": "Nf3 d5 g3 c5 Bg2 Nf6 O-O e6 d3",
+        "matchLen": 5,
+        "fullLen": 7
+      }
+    }
+  ]
+}

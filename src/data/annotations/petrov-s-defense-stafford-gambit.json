@@ -1,0 +1,2700 @@
+{
+  "openingId": "petrov-s-defense-stafford-gambit",
+  "moveAnnotations": [
+    {
+      "san": "e4",
+      "annotation": "White opens with the king's pawn — the most popular first move in chess. Little does White know, they may be walking into one of the trickiest gambits in modern online chess. The Stafford Gambit, popularized by Eric Rosen, is lurking just a few moves away.",
+      "plans": [
+        "Control the center and develop rapidly",
+        "Head toward an Open Game"
+      ],
+      "alternatives": [
+        "d4 — Queen's Pawn, avoiding Stafford territory"
+      ],
+      "arrows": [
+        {
+          "from": "e2",
+          "to": "e4",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "d5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "f5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "pawnStructure": "Symmetric e4/e5 pawn center typical of Open Games. Both sides have equal central control.",
+      "shortNarration": "White's 1.e4 walks into the Stafford Gambit, a tricky online trap."
+    },
+    {
+      "san": "e5",
+      "annotation": "Black mirrors with e5, entering the Open Game. This symmetrical setup is the gateway to the Stafford Gambit. Black is already planning to meet Nf3 with Nf6, steering toward the Petrov's Defense structure where the Stafford surprise lives.",
+      "plans": [
+        "Play Nf6 after Nf3 to enter Stafford territory",
+        "Keep the position open for tactical tricks"
+      ],
+      "arrows": [
+        {
+          "from": "e7",
+          "to": "e5",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "g8",
+          "to": "f6",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black mirrors e5, entering the Open Game, and will meet Nf3 with Nf6 to steer into the Stafford Gambit."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "White develops the knight to its natural square, attacking the e5 pawn and preparing to castle. This is the most common second move. Black's response here separates the Stafford Gambit from the normal Petrov's Defense.",
+      "plans": [
+        "Attack e5 and gain central control",
+        "Develop naturally with Bc4 or Bb5"
+      ],
+      "arrows": [
+        {
+          "from": "g1",
+          "to": "f3",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "g1",
+          "to": "f3",
+          "color": "rgba(220, 50, 50, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e5",
+          "color": "rgba(255, 80, 80, 0.3)"
+        }
+      ],
+      "shortNarration": "White's knight to f3 attacks e5 and prepares to castle; Black's response diverges from the Petrov into the Stafford Gambit."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black plays Nf6, entering the Petrov's Defense. But Black has no intention of playing a quiet Petrov! This knight attacks e4, and when White captures on e5, Black's devastating reply Nc6 will turn the tables.",
+      "plans": [
+        "After Nxe5, play Nc6 — the Stafford Gambit move",
+        "Sacrifice the e5 pawn for rapid development and tricks"
+      ],
+      "alternatives": [
+        "Nc6 — normal development, defending e5"
+      ],
+      "arrows": [
+        {
+          "from": "g8",
+          "to": "f6",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "g8",
+          "to": "f6",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "b8",
+          "to": "c6",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e4",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black's Nf6 attacks e4, and after White captures on e5, Nc6 refutes the pawn grab."
+    },
+    {
+      "san": "Nxe5",
+      "annotation": "White grabs the free pawn — this looks great, and in normal Petrov's play Black would respond with d6 or Nxe4. But the Stafford Gambit diverges here. White's knight on e5 is seemingly dominant, but it's actually a target.",
+      "plans": [
+        "Consolidate the extra pawn",
+        "Maintain the strong knight on e5"
+      ],
+      "arrows": [
+        {
+          "from": "f3",
+          "to": "e5",
+          "color": "rgba(220, 50, 50, 0.7)"
+        },
+        {
+          "from": "f3",
+          "to": "e5",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "pawnStructure": "White captures the e5 pawn, gaining a material advantage. The center is now asymmetric with only White having a central pawn.",
+      "shortNarration": "White grabs the free pawn, but the knight on e5 is a target, not dominant."
+    },
+    {
+      "san": "Nc6",
+      "annotation": "THIS is the Stafford Gambit! Instead of the normal d6 or Nxe4, Black plays Nc6, immediately attacking White's knight on e5. Eric Rosen has made this move famous — it's objectively dubious, but absolutely LOADED with traps. Black sacrifices a pawn for rapid piece development, open lines, and a web of tactical tricks.",
+      "pawnStructure": "Black has sacrificed the e5 pawn for nothing material, but the knight on c6 attacks e5 while developing. If White plays Nxc6, Black gets dxc6 with open lines and the bishop pair.",
+      "plans": [
+        "After Nxc6 dxc6, get open d-file and bishop pair",
+        "Set traps involving Bc5, Ng4, Qd4 ideas",
+        "Play for rapid development and king-hunting"
+      ],
+      "alternatives": [
+        "d6 — normal Petrov's, safe but boring",
+        "Nxe4 — Petrov's main line, solid equality"
+      ],
+      "arrows": [
+        {
+          "from": "b8",
+          "to": "c6",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "b8",
+          "to": "c6",
+          "color": "rgba(220, 50, 50, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e5",
+          "color": "rgba(255, 80, 80, 0.3)"
+        },
+        {
+          "square": "c6",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black sacrifices a pawn with Nc6, attacking the knight on e5 for rapid development and tactical traps."
+    },
+    {
+      "san": "Nxc6",
+      "annotation": "White captures the knight — the most natural response. White is now up a clean pawn. But this is exactly what Black wanted! The d-file is about to blow open, and Black's pieces will pour out with terrifying speed.",
+      "plans": [
+        "Simplify and hold the extra pawn",
+        "Develop calmly with d3, Be2, O-O"
+      ],
+      "alternatives": [
+        "Nf3 — retreating, but Black gets Nxe4 with tempo"
+      ],
+      "arrows": [
+        {
+          "from": "e5",
+          "to": "c6",
+          "color": "rgba(220, 50, 50, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "c6",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "White captures the knight, up a pawn, but the d-file opens and Black's pieces pour out with speed."
+    },
+    {
+      "san": "dxc6",
+      "annotation": "Black recaptures with the d-pawn, and suddenly the position is ALIVE. The d-file is wide open, the queen can swing to d4 or d6, the c8 bishop is free, and Black's pieces coordinate beautifully. White is up a pawn, but Black has open lines, the bishop pair, and tactical ideas everywhere. Welcome to trap city!",
+      "pawnStructure": "Black has doubled c-pawns but a wide-open d-file and free piece play. The pawn structure favors dynamic play, which is exactly what Black wants.",
+      "plans": [
+        "Develop Bc5 to target f2",
+        "Play Ng4 to create threats on f2 and h2",
+        "Use the open d-file for queen and rook pressure"
+      ],
+      "arrows": [
+        {
+          "from": "d7",
+          "to": "c6",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "f8",
+          "to": "c5",
+          "color": "rgba(0, 100, 255, 0.7)"
+        },
+        {
+          "from": "f6",
+          "to": "g4",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "f2",
+          "color": "rgba(255, 80, 80, 0.3)"
+        },
+        {
+          "square": "d8",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black recaptures with the d-pawn, opening the d-file and freeing the queen and c8 bishop for active play."
+    }
+  ],
+  "subLines": [
+    {
+      "name": "Stafford Gambit: Bg5 Main Trap Line",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Stafford Gambit: Bg5 Main Trap Line is an important variation of the Stafford Gambit. The signature Stafford trap — Black sacrifices the queen with Nxe4, then plays Bxf2+ Ke2 Bg4+ and initiates a devastating king hunt. White's king gets dragged across the entire board with a series of checks. The checkmate pattern is one of the most beautiful in chess. Let's walk through the key ideas.",
+          "shortNarration": "Black sacrifices the queen with Nxe4, then Bxf2+ Ke2 Bg4+ drags the king into a devastating checkmating hunt."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Stafford Gambit: Bg5 Main Trap Line.",
+          "shortNarration": "Black's e5 contests the center, entering the Stafford Gambit's Bg5 Main Trap Line."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "Nxc6 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxc6 wins a knight, reconfiguring the pawn structure."
+        },
+        {
+          "san": "dxc6",
+          "annotation": "dxc6 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc6 captures the knight, winning material or altering the pawn structure."
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe4",
+          "annotation": "Nxe4 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f6",
+              "to": "e4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe4 wins a pawn, altering the material balance and Black's pawn structure."
+        },
+        {
+          "san": "Bxd8",
+          "annotation": "Bxd8 captures the queen. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "g5",
+              "to": "d8",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxd8 wins the queen, shifting material and structure in White's favor."
+        },
+        {
+          "san": "Bxf2+",
+          "annotation": "Bxf2+ captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "f2",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxf2+ wins a pawn and shifts the pawn structure, reaching the critical position of the variation."
+        },
+        {
+          "san": "Ke2",
+          "annotation": "Ke2 improves the king's placement. The king was less effective on e1 and moves to e2 where it serves the plan better. Notice how the pieces coordinate in this position.",
+          "arrows": [
+            {
+              "from": "e1",
+              "to": "e2",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Ke2 improves king safety and piece coordination, moving from e1 to e2."
+        },
+        {
+          "san": "Bg4#",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c8",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stafford Gambit: Ng4 Direct Attack",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Stafford Gambit: Ng4 Direct Attack is an important variation of the Stafford Gambit. The Ng4 attack is another tricky line where Black sacrifices the knight directly. After Bxg4 Bxf2+, the king is dragged out and Qd4 creates multiple threats. Even if White defends the immediate tactics, the practical complications are enormous and very hard to navigate. Let's walk through the key ideas.",
+          "shortNarration": "After Bxg4 Bxf2+ the king is exposed and Qd4 creates multiple threats, making the practical complications enormous."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Stafford Gambit: Ng4 Direct Attack.",
+          "shortNarration": "Black's e5 contests the center, defining the Stafford Gambit's Ng4 Direct Attack."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "Nxc6 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxc6 wins a knight, altering the pawn structure or material balance."
+        },
+        {
+          "san": "dxc6",
+          "annotation": "dxc6 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc6 captures the knight, changing the pawn structure or material balance."
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "Ng4",
+          "annotation": "Ng4 improves the knight's placement. The knight was less effective on f6 and moves to g4 where it serves the plan better.",
+          "shortNarration": "Ng4 improves the knight's placement, eyeing f2 and supporting a future Qh4+."
+        },
+        {
+          "san": "Bxg4",
+          "annotation": "Bxg4 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxg4 captures the knight, winning a piece and changing the pawn structure."
+        },
+        {
+          "san": "Bxg4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c8",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Qxg4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d1",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxf2+",
+          "annotation": "Bxf2+ captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "f2",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxf2+ wins a pawn and alters the pawn structure."
+        },
+        {
+          "san": "Kd1",
+          "annotation": "Kd1 improves the king's placement. The king was less effective on e1 and moves to d1 where it serves the plan better.",
+          "shortNarration": "Kd1 improves the king's placement, moving from e1 to d1 to better support the plan."
+        },
+        {
+          "san": "Qd4",
+          "annotation": "Qd4 develops the queen to a strong central post on d4, where it controls key squares and supports the center.",
+          "shortNarration": "Qd4 develops the queen to a strong central post controlling key squares and supporting the center."
+        },
+        {
+          "san": "Qe2",
+          "annotation": "Qe2 activates the queen. From e2, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qe2 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "Qxd3+",
+          "annotation": "Qxd3+ captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "d3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxd3+ wins a pawn and changes the material balance."
+        },
+        {
+          "san": "cxd3",
+          "annotation": "cxd3 captures the queen. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "c2",
+              "to": "d3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd3 captures the queen, shifting the balance as White gains material or reconfigures the pawn structure."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "Bd4",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Bxe5",
+          "annotation": "Bxe5 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxe5 captures the pawn, altering the pawn structure and material balance in the critical position."
+        },
+        {
+          "san": "Qxe5",
+          "annotation": "Qxe5 captures the bishop. This exchange is thematic in the Stafford Gambit: Ng4 Direct Attack — it defines the resulting pawn structure and piece activity.",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe5 captures the bishop, defining the pawn structure and piece activity in the Stafford Gambit's Ng4 Direct Attack."
+        },
+        {
+          "san": "f6",
+          "annotation": "f6. This is the typical position arising from the Stafford Gambit: Ng4 Direct Attack. From here, understanding the strategic plans — piece placement, pawn breaks, and targets — is essential.",
+          "arrows": [
+            {
+              "from": "f7",
+              "to": "f6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "f6 — the Stafford Gambit's Ng4 Direct Attack, where piece placement and pawn breaks decide the game."
+        }
+      ]
+    },
+    {
+      "name": "Stafford Gambit: h5 Pawn Storm",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Stafford Gambit: h5 Pawn Storm is an important variation of the Stafford Gambit. The h5 variation prepares to crack open the h-file against White's castled king. After Ng4 and hxg4, the open h-file becomes a highway for the rook. The queen on d6 repositions to d4 with maximum attacking potential. Even engines struggle to find clean defensive paths for White. Let's walk through the key ideas.",
+          "shortNarration": "After Ng4 and hxg4, the open h-file lets the rook attack White's castled king, with the queen re-routing to d4 for maximum pressure."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Stafford Gambit: h5 Pawn Storm.",
+          "shortNarration": "Black's e5 contests the center, defining the Stafford Gambit's h5 pawn storm."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance or pawn structure."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "Nxc6 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxc6 captures the knight, reconfiguring the pawn structure or gaining material."
+        },
+        {
+          "san": "dxc6",
+          "annotation": "dxc6 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc6 captures the knight, altering the pawn structure or material balance."
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "h5",
+          "annotation": "h5 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "h5 gains kingside space and supports a future attack on the enemy king."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Ng4",
+          "annotation": "Ng4 improves the knight's placement. The knight was less effective on f6 and moves to g4 where it serves the plan better.",
+          "shortNarration": "Ng4 improves the knight's placement, eyeing f2 and supporting a future Qh4+."
+        },
+        {
+          "san": "h3",
+          "annotation": "h3 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "h3 gains kingside space and supports a future attack toward the enemy king."
+        },
+        {
+          "san": "Qd6",
+          "annotation": ""
+        },
+        {
+          "san": "hxg4",
+          "annotation": "hxg4 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "h3",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "hxg4 captures the knight, winning material and changing the pawn structure."
+        },
+        {
+          "san": "hxg4",
+          "annotation": "hxg4 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "h5",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "hxg4 captures the pawn, changing the material balance."
+        },
+        {
+          "san": "g3",
+          "annotation": "g3 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "g3 gains kingside space and supports a future attack on the enemy king."
+        },
+        {
+          "san": "Qd4",
+          "annotation": "Qd4 activates the queen. From d4, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qd4 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "Kg2",
+          "annotation": "Kg2 improves the king's placement. The king was less effective on g1 and moves to g2 where it serves the plan better.",
+          "shortNarration": "Kg2 improves king safety and supports the plan."
+        },
+        {
+          "san": "Qxe4+",
+          "annotation": "Qxe4+ captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "e4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe4+ wins a pawn, altering the material balance."
+        },
+        {
+          "san": "dxe4",
+          "annotation": "dxe4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d3",
+              "to": "e4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe4 stakes a central claim, controlling space and restricting piece activity."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "Be6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxg4",
+          "annotation": "Bxg4 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxg4 captures the pawn, winning material or improving White's pawn structure."
+        },
+        {
+          "san": "Bd5+",
+          "annotation": "Bd5+! Check — Black forces the king to respond, gaining tempo to improve the position. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "e6",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bd5+ check forces the king to move, gaining tempo to reach the critical position."
+        },
+        {
+          "san": "Qxd5",
+          "annotation": "Qxd5 captures the bishop. This exchange is thematic in the Stafford Gambit: h5 Pawn Storm — it defines the resulting pawn structure and piece activity.",
+          "arrows": [
+            {
+              "from": "d1",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxd5 captures the bishop, triggering the h5 Pawn Storm structure and piece activity."
+        },
+        {
+          "san": "cxd5",
+          "annotation": "cxd5 completes the variation. The resulting position after this capture offers Black clear targets and plans. Study this structure — you'll see it often.",
+          "arrows": [
+            {
+              "from": "c6",
+              "to": "d5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd5 gives Black clear targets and plans in this common structure."
+        }
+      ]
+    },
+    {
+      "name": "Stafford Gambit: Nc3 Variation",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Stafford Gambit: Nc3 Variation is an important variation of the Stafford Gambit. When White plays Nc3 instead of d3, Black still has the Bc5 and Ng4 battery. After Qd4 threatens Qxf2 mate, White must be extremely careful. The sequence of captures starting with Qf2+ drags the king out and leads to a decisive material advantage for Black. Let's walk through the key ideas.",
+          "shortNarration": "After Qd4 threatens Qxf2 mate, Qf2+ drags the king out and wins decisive material."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Stafford Gambit: Nc3 Variation.",
+          "shortNarration": "Black's e5 contests the center, entering the Stafford Gambit: Nc3 Variation."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance and pawn structure."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "Nxc6 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxc6 captures the knight, reconfiguring the pawn structure or gaining material."
+        },
+        {
+          "san": "dxc6",
+          "annotation": "dxc6 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc6 captures the knight, winning material and altering the pawn structure."
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Ng4",
+          "annotation": "Ng4 improves the knight's placement. The knight was less effective on f6 and moves to g4 where it serves the plan better.",
+          "shortNarration": "Ng4 improves the knight's placement, now eyeing f2 and supporting Qh4+."
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "Qd4",
+          "annotation": "Qd4 develops the queen to a strong central post on d4, where it controls key squares and supports the center.",
+          "shortNarration": "Qd4 posts the queen centrally, controlling key squares and supporting the center."
+        },
+        {
+          "san": "Bxg4",
+          "annotation": "Bxg4 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxg4 captures the knight, winning a piece and changing the pawn structure."
+        },
+        {
+          "san": "Bxg4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c8",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "f3",
+          "annotation": "f3 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f3 gains kingside space and supports a future attack toward the enemy king."
+        },
+        {
+          "san": "O-O-O",
+          "annotation": "Black castles queenside — this often signals aggressive intentions, as the kingside pawns can advance for an attack. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "c8",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Black castles queenside, freeing kingside pawns to attack — the critical position of this variation."
+        },
+        {
+          "san": "fxg4",
+          "annotation": "fxg4 captures the bishop. This exchange is thematic in the Stafford Gambit: Nc3 Variation — it defines the resulting pawn structure and piece activity.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "fxg4 captures the bishop, defining the pawn structure and piece activity in the Stafford Gambit's Nc3 line."
+        },
+        {
+          "san": "Qf2#",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "f2",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stafford Gambit: e5 Push Line",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Stafford Gambit: e5 Push Line is an important variation of the Stafford Gambit. After 5.e5, Black plays Ne4 and the Bxf2+ sacrifice begins a devastating tactical sequence. Even after queens are traded, Black's pieces are much more active and the resulting endgame is better for Black despite being a pawn down earlier. The initiative compensates for everything. Let's walk through the key ideas.",
+          "shortNarration": "After 5.e5 Ne4, Black's Bxf2+ sacrifice initiates a tactical sequence where the initiative compensates for the pawn deficit."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Stafford Gambit: e5 Push Line.",
+          "shortNarration": "Black's e5 contests the center, defining the Stafford Gambit's e5 Push Line."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance and pawn structure."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "Nxc6 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxc6 wins a knight, altering the pawn structure or material balance."
+        },
+        {
+          "san": "dxc6",
+          "annotation": "dxc6 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc6 wins a knight, leaving Black to recapture or accept a damaged pawn structure."
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "Ne4",
+          "annotation": ""
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "dxe4",
+          "annotation": "dxe4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d3",
+              "to": "e4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe4 stakes a central claim, controlling space and restricting opponent piece activity."
+        },
+        {
+          "san": "Bxf2+",
+          "annotation": "Bxf2+ captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "c5",
+              "to": "f2",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxf2+ wins a pawn and changes the pawn structure."
+        },
+        {
+          "san": "Ke2",
+          "annotation": "Ke2 improves the king's placement. The king was less effective on e1 and moves to e2 where it serves the plan better.",
+          "shortNarration": "Ke2 improves king safety and supports central play better than e1."
+        },
+        {
+          "san": "Bg4+",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c8",
+              "to": "g4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Kxf2",
+          "annotation": "Kxf2 captures the bishop. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "f2",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Kxf2 wins a bishop, altering the pawn structure and material balance."
+        },
+        {
+          "san": "Qd4+",
+          "annotation": "Qd4+ develops the queen to a strong central post on d4, where it controls key squares and supports the center.",
+          "arrows": [
+            {
+              "from": "d8",
+              "to": "d4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qd4+ develops the queen to a strong central post controlling key squares and supporting the center."
+        },
+        {
+          "san": "Be3",
+          "annotation": ""
+        },
+        {
+          "san": "Qxe4",
+          "annotation": "Qxe4 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "e4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe4 captures the pawn, altering the balance by changing Black's pawn structure or gaining material."
+        },
+        {
+          "san": "Qd3",
+          "annotation": ""
+        },
+        {
+          "san": "Qxe3+",
+          "annotation": "Qxe3+ captures the bishop. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e4",
+              "to": "e3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe3+ wins the bishop, shifting the material balance."
+        },
+        {
+          "san": "Qxe3",
+          "annotation": "Qxe3 captures the queen. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d3",
+              "to": "e3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe3 captures the queen, altering the material balance and pawn structure."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Qxa7",
+          "annotation": "Qxa7 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e3",
+              "to": "a7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxa7 wins a pawn, shifting the material balance."
+        },
+        {
+          "san": "Rxa7",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "a8",
+              "to": "a7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Rxa2",
+          "annotation": "Rxa2 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "a7",
+              "to": "a2",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Rxa2 wins a pawn, shifting the material balance and reaching the critical position of this variation."
+        },
+        {
+          "san": "Nxa2",
+          "annotation": "Nxa2 captures the rook. This exchange is thematic in the Stafford Gambit: e5 Push Line — it defines the resulting pawn structure and piece activity.",
+          "arrows": [
+            {
+              "from": "c3",
+              "to": "a2",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxa2 wins the rook, defining the Stafford Gambit's pawn structure and piece activity."
+        },
+        {
+          "san": "f6",
+          "annotation": "f6. This is the typical position arising from the Stafford Gambit: e5 Push Line. From here, understanding the strategic plans — piece placement, pawn breaks, and targets — is essential.",
+          "arrows": [
+            {
+              "from": "f7",
+              "to": "f6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "In the Stafford Gambit e5 Push Line, White's key plan is to target f6 with pieces while Black seeks counterplay on the kingside."
+        }
+      ]
+    },
+    {
+      "name": "Oh No My Queen",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Stafford Gambit, the Oh No My Queen is a tactical pattern you should know. The most iconic Stafford trap. White plays Bg5 and thinks they've won a queen. But Bxf2+ Ke2 Bg4+ starts a king hunt that cannot be stopped. The checks keep coming and White loses massive material or gets checkmated. This trap has won thousands of online games. Let's walk through how it works.",
+          "shortNarration": "White's Bg5 falls into the Oh No My Queen trap: Bxf2+ Ke2 Bg4+ starts a winning king hunt."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": ""
+        },
+        {
+          "san": "dxc6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxd8",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf2+",
+          "annotation": ""
+        },
+        {
+          "san": "Ke2",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e1",
+              "to": "e2",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bg4#",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Nc2 Fork Trap",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Stafford Gambit, the Nc2 Fork Trap is a tactical pattern you should know. In this variation, Black sacrifices the pawn on g4 to open the h-file. After hxg4 and Qf6, Black's pieces are aimed directly at White's kingside. The Bf5 development combined with O-O-O creates devastating threats on the d-file. White's center collapses under the pressure. Let's walk through how it works.",
+          "shortNarration": "In the Stafford Gambit, Black sacrifices g4 to open the h-file, then Qf6 and Bf5 with O-O-O create crushing threats on the d-file and kingside."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": ""
+        },
+        {
+          "san": "dxc6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "h5",
+          "annotation": ""
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "Ng4",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "Bb6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxg4",
+          "annotation": ""
+        },
+        {
+          "san": "hxg4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "h5",
+              "to": "g4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Qxg4",
+          "annotation": ""
+        },
+        {
+          "san": "Qf6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Bf5",
+          "annotation": ""
+        },
+        {
+          "san": "g4",
+          "annotation": ""
+        },
+        {
+          "san": "O-O-O",
+          "annotation": ""
+        },
+        {
+          "san": "gxf5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "g4",
+              "to": "f5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Rxd4",
+          "annotation": ""
+        },
+        {
+          "san": "cxd4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c3",
+              "to": "d4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxd4",
+          "annotation": ""
+        },
+        {
+          "san": "Be3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc3+",
+          "annotation": ""
+        },
+        {
+          "san": "Nd2",
+          "annotation": ""
+        },
+        {
+          "san": "Re8",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Qh4 Discovered Attack",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Stafford Gambit, the Qh4 Discovered Attack is a tactical pattern you should know. A variation of the Oh No My Queen trap where after Bg5, the knight and bishops coordinate to trap White's king. The discovered attack pattern with Ne4+ and Bxd1 wins decisive material. Even if White avoids the worst, Black emerges with a winning position in every line. Let's walk through how it works.",
+          "shortNarration": "Ne4+ discovers Qh4's attack on the king, forcing Bxd1 and winning decisive material."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": ""
+        },
+        {
+          "san": "dxc6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxd8",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf2+",
+          "annotation": ""
+        },
+        {
+          "san": "Ke2",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e1",
+              "to": "e2",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bg4#",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Ng4 f2 Assault",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Stafford Gambit, the Ng4 f2 Assault is a tactical pattern you should know. After Be2 and O-O, Black plays Ng4 and Qh4 to create a deadly battery against f2. The Nxf2 sacrifice tears open the king position. After Rxf2 Bxf2+ Kh1 Bg3, the bishop dominates the dark squares and White's kingside is permanently weakened. Material recovery follows naturally. Let's walk through how it works.",
+          "shortNarration": "In the Stafford Gambit, Ng4 and Qh4 create a deadly battery against f2, the Nxf2 sacrifice tears open the king, and after Bg3 the dark-square bishop dominates a permanently weakened kingside."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": ""
+        },
+        {
+          "san": "dxc6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "Ng4",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Qh4",
+          "annotation": ""
+        },
+        {
+          "san": "h3",
+          "annotation": ""
+        },
+        {
+          "san": "Nxf2",
+          "annotation": ""
+        },
+        {
+          "san": "Rxf2",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf2+",
+          "annotation": ""
+        },
+        {
+          "san": "Kh1",
+          "annotation": ""
+        },
+        {
+          "san": "Bg3",
+          "annotation": ""
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "Bf2",
+          "annotation": ""
+        },
+        {
+          "san": "Qe1",
+          "annotation": ""
+        },
+        {
+          "san": "Bxh3",
+          "annotation": ""
+        },
+        {
+          "san": "Qxf2",
+          "annotation": ""
+        },
+        {
+          "san": "Qxf2",
+          "annotation": ""
+        },
+        {
+          "san": "gxh3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "g2",
+              "to": "h3",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "O-O",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "g8",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bishop Sacrifice on f2",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Stafford Gambit, the Bishop Sacrifice on f2 is a tactical pattern you should know. When White plays Nc3 and O-O, the Nxf2 sacrifice still works beautifully. After Rxf2 Bxf2+ Kh1, Black's queen invades to d4 with threats everywhere. The bishop retreats to b6 maintaining the pressure, and Bf5 develops with tempo. White's position crumbles under the weight of Black's activity. Let's walk through how it works.",
+          "shortNarration": "In the Stafford Gambit, Nxf2 sacrifices the knight, then Bxf2+ forces Kh1, and Qd4 invades with threats while Bf5 develops with tempo."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": ""
+        },
+        {
+          "san": "dxc6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "Re8",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Ng4",
+          "annotation": ""
+        },
+        {
+          "san": "h3",
+          "annotation": ""
+        },
+        {
+          "san": "Nxf2",
+          "annotation": ""
+        },
+        {
+          "san": "Rxf2",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf2+",
+          "annotation": ""
+        },
+        {
+          "san": "Kh1",
+          "annotation": ""
+        },
+        {
+          "san": "Qd4",
+          "annotation": ""
+        },
+        {
+          "san": "Qe1",
+          "annotation": ""
+        },
+        {
+          "san": "b6",
+          "annotation": ""
+        },
+        {
+          "san": "Bf3",
+          "annotation": ""
+        },
+        {
+          "san": "Bf5",
+          "annotation": ""
+        },
+        {
+          "san": "Ne2",
+          "annotation": ""
+        },
+        {
+          "san": "Qe3",
+          "annotation": ""
+        },
+        {
+          "san": "Qd1",
+          "annotation": ""
+        },
+        {
+          "san": "Rxe4",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "d4 Counter Trap",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Stafford Gambit, the d4 Counter Trap is a tactical pattern you should know. An alternative approach where Black captures on d4 instead of the standard Bxf2+. After Qxd4+ and Bxf2+, the king is displaced and Black recovers material with interest. The double bishop attack on the exposed king creates problems that persist deep into the endgame. Let's walk through how it works.",
+          "shortNarration": "In the Stafford Gambit's d4 Counter Trap, Black captures on d4, then Bxf2+ displaces the king, recovering material with a double bishop attack that persists into the endgame."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": ""
+        },
+        {
+          "san": "dxc6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "Ng4",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxd4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxg4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxg4",
+          "annotation": ""
+        },
+        {
+          "san": "Qxg4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf2+",
+          "annotation": ""
+        },
+        {
+          "san": "Kxf2",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e1",
+              "to": "f2",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Qd4+",
+          "annotation": ""
+        },
+        {
+          "san": "Be3",
+          "annotation": ""
+        },
+        {
+          "san": "Qxe3+",
+          "annotation": ""
+        },
+        {
+          "san": "Kxe3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "f2",
+              "to": "e3",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Qxg7+",
+          "annotation": ""
+        },
+        {
+          "san": "Kxg7",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "g8",
+              "to": "g7",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "f6",
+          "annotation": ""
+        },
+        {
+          "san": "exf6+",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f6",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Rxf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Rf3+",
+          "annotation": ""
+        },
+        {
+          "san": "Kxf3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e3",
+              "to": "f3",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "White Plays d3-Be2-O-O Accurately",
+      "type": "warning",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Stafford Gambit, the White Plays d3-Be2-O-O Accurately is a dangerous line you must be aware of. When White knows the theory — d3, Be2, c3, d4 — the Stafford's tricks are defused systematically. White returns the extra pawn to consolidate and reaches a stable position where Black's initiative has evaporated completely. This is the honest truth about the Stafford. Let's see why.",
+          "shortNarration": "White's d3, Be2, c3, d4 defuses the Stafford Gambit, returning the pawn for a stable position with no Black initiative."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 changes the position — the knight now threatens a fork on f7."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "Nxc6 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxc6 wins a pawn and leaves Black with doubled c-pawns."
+        },
+        {
+          "san": "dxc6",
+          "annotation": "dxc6 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc6 opens the d-file and changes the pawn structure."
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "h5",
+          "annotation": ""
+        },
+        {
+          "san": "c3",
+          "annotation": ""
+        },
+        {
+          "san": "Ng4",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "Bb6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxg4",
+          "annotation": "Bxg4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxg4 sacrifices the bishop to open the h-file for a mating attack."
+        },
+        {
+          "san": "hxg4",
+          "annotation": "hxg4 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "h5",
+              "to": "g4",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "hxg4 opens the h-file and exposes the black king."
+        },
+        {
+          "san": "Qxg4",
+          "annotation": "Qxg4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxg4 wins the knight, changing the position's character."
+        },
+        {
+          "san": "Bxg4",
+          "annotation": "Bxg4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxg4 changes the position — the bishop pair is gone, and Black's king is now exposed."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Qf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nd2",
+          "annotation": ""
+        },
+        {
+          "san": "O-O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nc4",
+          "annotation": ""
+        },
+        {
+          "san": "Rd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nxb6+",
+          "annotation": ""
+        },
+        {
+          "san": "axb6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "a7",
+              "to": "b6",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Be3",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Endgame Collapse: Black Has Nothing",
+      "type": "warning",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Stafford Gambit, the Endgame Collapse: Black Has Nothing is a dangerous line you must be aware of. If White develops sensibly with d3, Be2, O-O, and Nc3 without falling for tricks, Black is simply down a pawn with no compensation. The Stafford is a one-trick pony, and if the tricks don't work, you're left with a worse endgame and a long suffering defense. Let's see why.",
+          "shortNarration": "In the Stafford Gambit, if White plays d3, Be2, O-O, and Nc3, Black is down a pawn with no compensation."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 changes the position — White wins a pawn but opens lines for Black's pieces."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "Nxc6 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxc6 changes the position — White trades a knight for a pawn, opening the b-file and leaving Black's queenside pawns doubled."
+        },
+        {
+          "san": "dxc6",
+          "annotation": "dxc6 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc6 opens the d-file and changes the pawn structure."
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Re8",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Bf5",
+          "annotation": ""
+        },
+        {
+          "san": "Bg5",
+          "annotation": ""
+        },
+        {
+          "san": "h6",
+          "annotation": ""
+        },
+        {
+          "san": "Bh4",
+          "annotation": ""
+        },
+        {
+          "san": "Nd7",
+          "annotation": ""
+        },
+        {
+          "san": "Bg3",
+          "annotation": ""
+        },
+        {
+          "san": "Ne5",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf2+",
+          "annotation": "Bxf2+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf2+ sacrifices the bishop to expose the king and open lines."
+        },
+        {
+          "san": "Bxf2",
+          "annotation": "Bxf2 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf2 wins a pawn and threatens the rook, forcing a recapture."
+        },
+        {
+          "san": "cxd5",
+          "annotation": "cxd5 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "c6",
+              "to": "d5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "cxd5 opens the c-file and changes the pawn structure."
+        },
+        {
+          "san": "exd5",
+          "annotation": "exd5 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "e4",
+              "to": "d5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "exd5 opens the e-file and changes the center structure."
+        },
+        {
+          "san": "Nf3+",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf3",
+          "annotation": "Bxf3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf3 trades a bishop for a knight, altering the pawn structure and piece dynamics."
+        },
+        {
+          "san": "Qxd5",
+          "annotation": "Qxd5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxd5 wins a pawn."
+        },
+        {
+          "san": "Bxd5",
+          "annotation": ""
+        },
+        {
+          "san": "Bxd3",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf7+",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Aggressive e5 Refutation",
+      "type": "warning",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Stafford Gambit, the Aggressive e5 Refutation is a dangerous line you must be aware of. White's aggressive 5.e5 pushes Black back immediately. After d3-d4, the center is firmly in White's control. The Bc4 development combined with Bf4 creates a powerful setup. Black has no counterplay and is simply worse — this is the clearest refutation of the Stafford. Let's see why.",
+          "shortNarration": "5.e5 refutes the Stafford Gambit — White's center and Bc4/Bf4 leave Black with no counterplay."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 changes the position — the knight now attacks f7 and threatens the queen."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "Nxc6 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxc6 trades a knight for a pawn, changing the position's character."
+        },
+        {
+          "san": "dxc6",
+          "annotation": "dxc6 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "c6",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc6 opens the d-file and changes the pawn structure."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Ne4",
+          "annotation": ""
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Nc5",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "Ne6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "c5",
+          "annotation": ""
+        },
+        {
+          "san": "d5",
+          "annotation": ""
+        },
+        {
+          "san": "Qxd5",
+          "annotation": "Qxd5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxd5 wins a pawn but opens the d-file for Black's rook."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Qxg2+",
+          "annotation": "Qxg2+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxg2+ wins a pawn and forces the king to move."
+        },
+        {
+          "san": "Kxg2",
+          "annotation": "Kxg2 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "g1",
+              "to": "g2",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "Kxg2 changes the position — the king is now exposed on g2."
+        },
+        {
+          "san": "Nf4+",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf4",
+          "annotation": "Bxf4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf4 captures the pawn, altering the position's dynamics."
+        },
+        {
+          "san": "Bh3+",
+          "annotation": ""
+        },
+        {
+          "san": "Kxh3",
+          "annotation": "Kxh3 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "g2",
+              "to": "h3",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "Kxh3 sacrifices the rook — White's attack now threatens mate on h7."
+        },
+        {
+          "san": "Bd6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf7+",
+          "annotation": "Bxf7+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf7+ sacrifices a bishop for a pawn, exposing the black king and opening lines for White's attack."
+        },
+        {
+          "san": "Kxf7",
+          "annotation": "Kxf7 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "f7",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "Kxf7 wins a pawn but exposes the king — White's initiative compensates."
+        },
+        {
+          "san": "Qd5+",
+          "annotation": ""
+        },
+        {
+          "san": "Ke8",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "f7",
+              "to": "e8",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Qc6+",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "GothamChess: Stafford Refutation (Nd2)",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "White opens with the king's pawn, the standard starting move for the Stafford Gambit to arise.",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "e4",
+              "color": "rgba(0, 180, 80, 0.8)"
+            }
+          ],
+          "shortNarration": "1.e4 opens lines for the queen and bishop, setting up the Stafford Gambit."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds symmetrically, establishing a pawn in the center. The stage is set for the Italian or Petrov — or the Stafford Gambit.",
+          "shortNarration": "Black's symmetrical center pawn sets up the Italian, Petrov, or Stafford Gambit."
+        },
+        {
+          "san": "Nf3",
+          "annotation": "White develops the knight, attacking the e5 pawn. This is the most principled response.",
+          "arrows": [
+            {
+              "from": "g1",
+              "to": "f3",
+              "color": "rgba(0, 180, 80, 0.8)"
+            }
+          ],
+          "shortNarration": "White develops the knight, attacking the e5 pawn."
+        },
+        {
+          "san": "Nf6",
+          "annotation": "The Petrov Defence setup. Black counterattacks e4 instead of defending e5. This move order leads to the Stafford Gambit if White takes on e5.",
+          "shortNarration": "Black counters e4 instead of defending e5, leading to the Stafford Gambit if White captures."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "White accepts the pawn, entering the Stafford Gambit territory. This is objectively fine but requires precise play to avoid Black's tricks.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(0, 180, 80, 0.8)"
+            }
+          ],
+          "shortNarration": "White accepts the pawn into the Stafford Gambit — precise play needed to avoid Black's traps."
+        },
+        {
+          "san": "Nc6",
+          "annotation": "The Stafford Gambit! Instead of the normal 3...d6, Black sacrifices the pawn and develops with tempo, attacking the knight on e5. Black is betting on tricks and rapid development.",
+          "shortNarration": "Black sacrifices a pawn with the Stafford Gambit, attacking the knight on e5 for rapid development and tactical threats."
+        },
+        {
+          "san": "Nxc6",
+          "annotation": "White takes the knight, the most principled response. White is now up a full pawn and has traded off a key attacking piece for Black.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "c6",
+              "color": "rgba(0, 180, 80, 0.8)"
+            }
+          ],
+          "shortNarration": "White takes the knight, up a pawn and removing Black's key attacker."
+        },
+        {
+          "san": "dxc6",
+          "annotation": "Black recaptures, opening the d-file for the queen and the diagonal for the dark-squared bishop. Black's compensation lies in rapid piece development and tactical threats.",
+          "shortNarration": "Black recaptures, opening the d-file and the dark-squared bishop's diagonal for rapid development and tactical threats."
+        },
+        {
+          "san": "d3",
+          "annotation": "GothamChess's recommended refutation begins with this stabilizing move. White avoids d4 which allows more tactical complications, and instead develops modestly but safely. The pawn on d3 supports e4 and prepares Be2.",
+          "arrows": [
+            {
+              "from": "d2",
+              "to": "d3",
+              "color": "rgba(0, 180, 80, 0.8)"
+            }
+          ],
+          "shortNarration": "White stabilizes with d3, supporting e4 and preparing Be2, avoiding d4's tactical complications."
+        },
+        {
+          "san": "Bc5",
+          "annotation": "Black develops the bishop aggressively, targeting f2. This is Black's most natural and dangerous-looking move.",
+          "shortNarration": "Black's bishop pins the knight to f2, threatening the weak square."
+        },
+        {
+          "san": "Be2",
+          "annotation": "White develops the bishop to a solid square, preparing to castle. Be2 is modest but effective — it avoids any tactical tricks along the a7-g1 diagonal and prepares O-O quickly.",
+          "arrows": [
+            {
+              "from": "f1",
+              "to": "e2",
+              "color": "rgba(0, 180, 80, 0.8)"
+            }
+          ],
+          "shortNarration": "Be2 avoids the a7-g1 diagonal and prepares quick castling."
+        },
+        {
+          "san": "h5",
+          "annotation": "Black pushes the h-pawn, trying to create kingside threats and open the h-file after ...h4-h3. This is an aggressive attempt to generate counterplay.",
+          "shortNarration": "Black pushes h-pawn to open the h-file with ...h4-h3, creating kingside threats."
+        },
+        {
+          "san": "O-O",
+          "annotation": "White castles, getting the king to safety. The h5 push looks scary but White's solid structure with d3+Be2 neutralizes the threats.",
+          "arrows": [
+            {
+              "from": "e1",
+              "to": "g1",
+              "color": "rgba(0, 180, 80, 0.8)"
+            }
+          ],
+          "shortNarration": "White castles to safety; h5 is neutralized by d3 and Be2."
+        },
+        {
+          "san": "Ng4",
+          "annotation": "Black brings the knight to g4, threatening Qh4 and attacking h2 and f2. This looks very dangerous but White has a clean answer.",
+          "shortNarration": "Black's knight on g4 threatens Qh4+ and attacks h2 and f2, but White refutes it with a clean tactical answer."
+        },
+        {
+          "san": "h3",
+          "annotation": "White challenges the knight immediately. The knight must be dealt with — either it retreats or gets captured. White is not afraid of opening the h-file because the position is solid.",
+          "arrows": [
+            {
+              "from": "h2",
+              "to": "h3",
+              "color": "rgba(220, 50, 50, 0.7)"
+            }
+          ],
+          "shortNarration": "White challenges the knight; retreat or capture — opening the h-file is safe here."
+        },
+        {
+          "san": "Qd6",
+          "annotation": "Black brings the queen into the attack, threatening Qh2 mate and maintaining pressure on the kingside.",
+          "shortNarration": "Black's queen threatens Qh2 mate while maintaining kingside pressure."
+        },
+        {
+          "san": "hxg4",
+          "annotation": "White captures the knight, winning a full piece. The h-file opens but White has everything under control.",
+          "arrows": [
+            {
+              "from": "h3",
+              "to": "g4",
+              "color": "rgba(0, 180, 80, 0.8)"
+            }
+          ],
+          "shortNarration": "White wins a full piece by capturing the knight; the h-file opens but White controls it."
+        },
+        {
+          "san": "hxg4",
+          "annotation": "Black recaptures, opening the h-file toward White's king. The h-file looks dangerous but White's next move neutralizes everything.",
+          "shortNarration": "Black recaptures to open the h-file, but White's next move neutralizes the threat."
+        },
+        {
+          "san": "Nd2",
+          "annotation": "the critical move in GothamChess's refutation! Nd2 blocks the d-file, defends f1, and prepares to reroute the knight to f3 to cover h2. White is up a full piece with a solid position. The Stafford is completely refuted — Black has no real compensation for the sacrificed material.",
+          "arrows": [
+            {
+              "from": "b1",
+              "to": "d2",
+              "color": "rgba(0, 180, 80, 0.8)"
+            },
+            {
+              "from": "b1",
+              "to": "d2",
+              "color": "rgba(0, 100, 255, 0.7)"
+            }
+          ],
+          "shortNarration": "Nd2 blocks the d-file, defends f1, and reroutes to f3 covering h2 — White is up a piece with no compensation, refuting the Stafford."
+        }
+      ]
+    }
+  ]
+}

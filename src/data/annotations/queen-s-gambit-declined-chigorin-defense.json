@@ -1,0 +1,35 @@
+{
+  "openingId": "queen-s-gambit-declined-chigorin-defense",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 square and preparing to build a strong pawn center. This move also opens diagonal lines for our dark-squared bishop on c1 and our queen, while preparing to support a future c4 advance. The d4 opening typically leads to more positional, strategic games compared to 1.e4, as we're aiming to gradually build pressure and control key central squares rather than launching immediate tactical attacks. Our main plan revolves around establishing central control and then using that foundation to create long-term advantages in the middlegame.",
+      "shortNarration": "1.d4 stakes a claim to e5, opens the c1-bishop and queen, and prepares c4 for a strategic pawn center."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black mirrors our central pawn move, immediately challenging our control of the e4 square and establishing their own presence in the center. This is the most principled response, as it prevents us from simply advancing e2-e4 next move and creating an ideal pawn center. By placing the pawn on d5, our opponent also opens up their own dark-squared bishop and prepares to develop their pieces harmoniously. This move signals that Black wants to fight for central equality rather than allow us to dominate the center unchallenged.",
+      "shortNarration": "Black's d5 challenges e4, opens the dark-squared bishop, and fights for central equality."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're launching the famous Queen's Gambit, offering our c-pawn to deflect Black's central d5 pawn and potentially gain a tempo in the center. This move attacks the d5 pawn directly and gives Black a critical choice: accept the gambit with dxc4, decline it with moves like e6 or c6, or choose the more aggressive Chigorin Defense that's coming. The c4 advance also opens the long diagonal for our queen and prepares to support our central control with moves like Nc3 and e3. Even if Black captures on c4, we usually regain the pawn quickly while achieving better piece development and central influence.",
+      "shortNarration": "c4 attacks d5, offering a pawn to deflect Black's center and gain tempo for development."
+    },
+    {
+      "san": "Nc6",
+      "annotation": "Our opponent chooses the Chigorin Defense, one of the most aggressive and uncompromising responses to the Queen's Gambit. Instead of the typical e6 or c6 moves that support the d5 pawn, Black develops the knight to an active square where it supports the central pawn from the side. This knight on c6 eyes important central squares like e5 and d4, and the Chigorin Defense often leads to sharp, tactical middlegames where Black seeks active piece play in compensation for potentially surrendering the center. Black is essentially saying 'I'll fight for the center with pieces rather than just pawns,' which can lead to very dynamic positions.",
+      "shortNarration": "Black's Chigorin Defense develops the knight to c6, fighting for the center with pieces rather than pawns, leading to sharp tactical play."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We develop our knight to its ideal square, where it supports our d4 pawn and adds pressure to Black's d5 pawn, which is now attacked twice. This move also prepares us to recapture on c4 if Black takes our gambit pawn, as our knight will have a natural square on c3 to support the center. The knight on c3 eyes important squares like e4 and b5, and we're building up our central influence systematically. Additionally, this development move keeps our options open for how to continue - we might play e3 and Be2, or perhaps go for more aggressive setups depending on how Black continues.",
+      "shortNarration": "Knight to c3 supports d4, pressures d5, and prepares to recapture on c4 while eyeing e4 and b5."
+    },
+    {
+      "san": "dxc4",
+      "annotation": "Black finally accepts the Queen's Gambit, capturing our c4 pawn and temporarily winning material while freeing up the d5 square for potential piece activity. This capture is often delayed in the Chigorin Defense as Black first wanted to place the knight actively on c6, and now they're ready to grab the pawn and challenge us to prove our compensation. By taking on c4, Black also opens the d-file and gives their pieces more breathing room, particularly allowing their light-squared bishop potential access to the long diagonal. However, we now get to demonstrate the point of our gambit - we can quickly recapture the pawn while gaining time for development and maintaining our central influence with moves like e4 potentially coming soon.",
+      "shortNarration": "Black takes on c4, freeing d5 and opening the d-file, but we recapture with tempo and push e4 to maintain central control."
+    }
+  ]
+}

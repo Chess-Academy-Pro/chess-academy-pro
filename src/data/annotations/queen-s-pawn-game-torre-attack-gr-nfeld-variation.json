@@ -1,0 +1,35 @@
+{
+  "openingId": "queen-s-pawn-game-torre-attack-gr-nfeld-variation",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This move is the foundation of many classical openings and leads to rich middlegame positions where we can build a strong pawn center or transpose into various systems. The d4 opening tends to lead to more positional, strategic games compared to 1.e4, giving us excellent control over the center and flexible piece development options. Our plan will often involve supporting this pawn with moves like c3 or e3, while developing our pieces harmoniously to create long-term pressure.",
+      "shortNarration": "1.d4 stakes a claim to e5 and c5, opening lines for the dark-squared bishop and queen."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black mirrors our central pawn move, establishing an equal stake in the center and preventing us from advancing to d5 ourselves. This classical response shows our opponent wants to maintain central tension and avoid giving us a free hand in the center. The d5 pawn controls the important c4 and e4 squares, ensuring that Black will have a say in the central struggle. This symmetrical pawn structure often leads to balanced positions where both sides have equal chances, and the outcome will depend on superior piece coordination and tactical awareness.",
+      "shortNarration": "Black's e5 mirrors White's e4, controlling d4 and preventing d5, keeping central tension balanced."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're developing our knight to its ideal square, where it controls the central e5 and d4 squares while supporting our d4 pawn. This move also opens up the possibility of castling kingside and keeps our options flexible for future development. The knight on f3 is particularly well-placed because it can later support advances in the center or jump to more active squares like e5 or d2-e4. This development move also prevents Black from playing an early ...e5, which would challenge our central pawn immediately and give Black more space.",
+      "shortNarration": "Knight to f3 controls e5 and d4, supports d4, and prevents Black's e5."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Our opponent develops their knight symmetrically, mirroring our development while putting pressure on our d4 pawn and controlling the central e4 square. This active move follows classical opening principles and prepares to castle kingside. Black's knight also eyes our d4 pawn, creating some central tension and forcing us to consider how we want to support our center. The knight on f6 is flexible and can later reroute to d7, e4, or support pawn breaks like ...c5 or ...e6 depending on how the position develops.",
+      "shortNarration": "Black's knight on f6 pressures d4 and eyes e4, flexible to reroute to d7 or support ...c5 or ...e6."
+    },
+    {
+      "san": "Bg5",
+      "annotation": "We're entering the Torre Attack, a system that aims to control the dark squares and put immediate pressure on Black's kingside development. This bishop move pins the f6 knight to the queen, creating tactical tension and potentially disrupting Black's natural development plan. The Torre Attack is an excellent choice for players who want to avoid heavy theory while still reaching rich, strategic middlegames with clear plans. Our dark-squared bishop will often become a powerful piece, either maintaining the pin or later retreating to h4 to keep pressure on Black's kingside, and this system often leads to kingside attacking chances.",
+      "shortNarration": "The Torre Attack's dark-squared bishop pins the f6 knight to the queen, pressuring Black's kingside development and creating attacking chances."
+    },
+    {
+      "san": "g6",
+      "annotation": "Black chooses the Grünfeld Variation, immediately challenging our dark-squared bishop and preparing to fianchetto the king's bishop on g7. This move shows our opponent's intention to create a solid kingside structure while potentially offering the bishop pair in exchange for quick development and central control. The g6 move also prepares ...Bg7, where the bishop will eye our d4 pawn and control the long diagonal, giving Black good central influence. We now need to decide whether to maintain our bishop on the kingside with Bh4 or trade it off, and this decision will significantly influence the character of the resulting middlegame.",
+      "shortNarration": "Black fianchettoes the king's bishop on g7 to pressure d4 — White must choose between Bh4 or trading off the dark-squared bishop."
+    }
+  ]
+}

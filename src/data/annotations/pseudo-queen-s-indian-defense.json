@@ -1,0 +1,25 @@
+{
+  "openingId": "pseudo-queen-s-indian-defense",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our queen and dark-squared bishop. This move signals our intention to build a strong pawn center and develop our pieces with maximum flexibility. The d4 opening leads to more positional, strategic games compared to 1.e4, giving us excellent control over the center and numerous transpositional possibilities. Our plan is to follow up with moves like Nf3, c4, or Nc3 to continue our development while maintaining central pressure.",
+      "shortNarration": "1.d4 stakes a claim to e5 and c5, opens lines for the queen and dark-squared bishop, and sets up a flexible, positional center."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops the knight to its ideal square, immediately putting pressure on our central d4 pawn and controlling the important e4 square. This move is incredibly flexible since the knight on f6 can support various pawn breaks like ...d5, ...e6, or ...c5 depending on how we continue. Our opponent is keeping their options open, avoiding early commitments like ...d5 or ...e6 that would signal specific opening systems. We need to be prepared for Black to transpose into numerous defenses including the King's Indian, Nimzo-Indian, or Queen's Indian depending on our next moves.",
+      "shortNarration": "Nf6 pressures d4, controls e4, and keeps options open for transpositions into King's Indian, Nimzo-Indian, or Queen's Indian."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're developing our knight to its optimal square, supporting our d4 pawn while controlling the central e5 square and preparing for kingside castling. This active move keeps maximum flexibility in our position since we haven't yet committed to a specific pawn structure with c4. The knight on f3 also prevents Black from playing ...e5, which would challenge our center immediately. By choosing Nf3 over alternatives like Nc3 or c4, we're allowing Black to show their intentions first while maintaining all our strategic options for the middlegame.",
+      "shortNarration": "Nf3 develops the knight, supports d4, controls e5, and prevents ...e5 while keeping flexibility."
+    },
+    {
+      "san": "b6",
+      "annotation": "Black plays the characteristic move of the Queen's Indian Defense setup, preparing to fianchetto the light-squared bishop on b7 where it will exert long-range pressure on our center and kingside. This hypermodern approach allows Black to control central squares from a distance rather than occupying them directly with pawns. Our opponent is signaling their intention to play ...Bb7, ...e6, and possibly ...Be7, creating a solid but flexible position that can transpose into various Queen's Indian formations. We should consider continuing with c4 to complete our ideal pawn center, though Black's setup will provide excellent counterplay against our central pawns once the bishop reaches b7.",
+      "shortNarration": "Black fianchettoes the light-squared bishop to b7, pressuring the center and kingside from a distance."
+    }
+  ]
+}

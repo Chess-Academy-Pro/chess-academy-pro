@@ -1,0 +1,35 @@
+{
+  "openingId": "queen-s-indian-defense",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This move signals our intention to build a strong pawn center and control key central territory from the very first move. The d4 opening typically leads to more positional, strategic games compared to 1.e4, as we're prioritizing long-term structural advantages and piece coordination. Our plan revolves around supporting this central pawn with moves like c4, Nf3, and potentially e3, creating a solid foundation for our pieces.",
+      "shortNarration": "d4 claims the center, opens lines for the bishop and queen, and aims for a positional game with a strong pawn center."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black immediately challenges our central pawn with the knight, attacking d4 and preparing to contest the center from a safe square. This is one of the most principled responses to 1.d4, as the knight develops with tempo by putting pressure on our center while maintaining flexibility for various defensive setups. From f6, the knight also supports potential central breaks like ...e5 or ...c5, and doesn't commit Black to any particular pawn structure yet. We need to be aware that this knight will be a constant thorn in our side, so we'll want to consider how to either exchange it or limit its influence as the game progresses.",
+      "shortNarration": "Black's knight on f6 attacks d4, pressures the center, and supports breaks like ...e5 or ...c5."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're playing the English Attack formation, supporting our d4 pawn while taking control of the crucial b5 and d5 squares and preparing to build a powerful pawn duo in the center. This move is the hallmark of the Queen's Gambit complex, where we're willing to potentially sacrifice the c4 pawn temporarily to gain superior central control and rapid piece development. The c4 pawn also restricts Black's ...d5 advance, forcing their pieces to find alternative ways to challenge our center. By combining d4 and c4, we're creating maximum pressure on the center and setting up potential pawn storms on either flank depending on how Black responds.",
+      "shortNarration": "c4 supports d4, restricts ...d5, and may temporarily sacrifice the c4 pawn for central control and rapid development."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black opts for a solid, classical setup by supporting an eventual ...d5 break while developing the light-squared bishop's diagonal and maintaining a flexible pawn structure. This move is less committal than alternatives like ...g6 or ...c5, keeping options open for various defensive systems including the Queen's Gambit Declined, Nimzo-Indian, or Queen's Indian Defense. The e6 pawn also provides crucial support for central operations and prevents any early tactical shots involving our pieces jumping to d5. However, this move does slightly restrict Black's own light-squared bishop, which will need to find an active role either via ...b6 and ...Bb7, or through ...Be7 and potential repositioning later.",
+      "shortNarration": "e6 supports ...d5 and keeps flexible defenses, but slightly restricts the light-squared bishop."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're developing our knight to its ideal square, where it controls the central e5 and d4 squares while supporting our d4 pawn and preparing for rapid kingside castling. This move also prevents Black from playing ...e5, which would give them excellent central control and piece activity. From f3, our knight is perfectly placed to support various middlegame plans, whether we choose to advance e4 at some point, reroute via e1-d3, or simply maintain the central tension. The knight development also keeps maximum flexibility in our setup, as we haven't yet committed to any particular pawn structure or piece arrangement.",
+      "shortNarration": "Knight to f3 controls e5 and d4, supports d4, prevents ...e5, and keeps flexible setup for e4 advance or rerouting."
+    },
+    {
+      "san": "b6",
+      "annotation": "Black chooses the Queen's Indian Defense, a hypermodern approach that prepares to fianchetto the light-squared bishop on b7 where it will exert long-range pressure against our central pawns and kingside. This setup is incredibly solid and popular at all levels because it avoids the main theoretical battles of the Nimzo-Indian while still creating active piece play and central pressure. The b6 move also supports a potential ...c5 break and gives Black's queen access to the queenside via ...Qc7 or ...Qb8-a8. We need to be particularly careful about Black's long-term pressure against our d4 and g2 squares, and should consider moves like g3 and Bg2 to complete our own fianchetto or Be2 to maintain more traditional development.",
+      "shortNarration": "Black fianchettoes the bishop to b7, pressuring d4 and g2, so consider g3/Bg2 or Be2 to counter."
+    }
+  ]
+}

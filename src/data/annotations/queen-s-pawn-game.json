@@ -1,0 +1,25 @@
+{
+  "openingId": "queen-s-pawn-game",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, staking an immediate claim to the central e5 square and preparing to develop our pieces with maximum control over the center. This move is more positional than 1.e4, often leading to slower, more strategic games where we build our advantage through superior piece coordination and pawn structure. The d4 pawn supports a future e4 advance and opens the diagonal for our dark-squared bishop on c1. Unlike 1.e4 openings that often feature tactical fireworks, the Queen's Pawn Game typically rewards players who understand long-term strategic concepts like weak squares, pawn chains, and piece activity.",
+      "shortNarration": "1.d4 claims the center, prepares e4, and opens the c1-bishop's diagonal for a strategic game."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black mirrors our central occupation with the most natural and principled response, immediately contesting the center and preventing us from playing e4 on the next move. This symmetrical pawn structure in the center creates a stable foundation that will likely persist into the middlegame, unlike the more volatile pawn exchanges we see in many e4-e5 openings. Our opponent is signaling their intention to fight for equal space and piece development rather than allowing us to dominate the center unchallenged. The d5 pawn also opens lines for Black's dark-squared bishop and queen, giving them good developmental prospects.",
+      "shortNarration": "Black contests the center with e5, creating a symmetrical pawn structure that opens lines for the dark-squared bishop and queen."
+    },
+    {
+      "san": "e3",
+      "annotation": "We're choosing a quiet, solid approach with this modest pawn advance that supports our d4 pawn and prepares to develop our light-squared bishop to d3 or e2. While less ambitious than alternatives like c4 (leading to the Queen's Gambit) or Nc3 (heading toward more aggressive setups), e3 creates a small but stable pawn center that's difficult for Black to challenge directly. This move also keeps our options open for various piece deployments - we might follow with Bd3, Nf3, and castle kingside, or even consider a later c4 push depending on how Black develops. The e3 pawn does restrict our dark-squared bishop temporarily, but in many Queen's Pawn structures, this bishop finds good squares on d2 or b2 after we advance c4.",
+      "shortNarration": "e3 supports the d4 pawn, prepares Bd3 or Be2, and keeps options open for c4 or kingside castling."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops their knight to its most active square, where it eyes our central d4 pawn and prepares to contest the important e4 square that we might want to occupy later. This active move also supports a potential ...e6 or ...c6 pawn advance, leading to solid pawn structures like the French or Caro-Kann formations respectively. Our opponent is following classical opening principles by developing pieces toward the center while maintaining flexibility in their pawn structure - they haven't yet committed to ...e6, ...c6, or ...Bf5 and can choose based on our next moves. We should be thinking about how to complete our own development with moves like Nf3, Bd3, and Nbd2, while keeping an eye on potential central breaks like c4 to challenge Black's solid but somewhat passive setup.",
+      "shortNarration": "Black's knight eyes d4 and e4, supporting flexible pawn advances to e6 or c6."
+    }
+  ]
+}

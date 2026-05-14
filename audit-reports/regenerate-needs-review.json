@@ -1,0 +1,20 @@
+{
+  "count": 3,
+  "items": [
+    {
+      "key": "alekhine-defense-exchange-variation-karpov-variation.json::6::annotation",
+      "error": "DeepSeek 403: Host not in allowlist",
+      "prompt": "Opening: alekhine-defense-exchange-variation-karpov-variation\nPly: 7 (c4)\nPosition after c4:\nFEN: rnbqkb1r/ppp1pppp/3p4/3nP3/2PP4/8/PP3PPP/RNBQKBNR b KQkq - 0 4\n\nCorrect facts:\n- d5 has black's knight (you wrote \"pawn on d5\")\n\nOriginal sentence (rewrite ONLY this):\n\"We're continuing to expand in the center and attack Black's pawn on d5, forcing it to move again and gaining more tempo.\"\n\nReply with the corrected sentence — same tone, same length, just fix the piece-square claim(s) using the facts above."
+    },
+    {
+      "key": "alekhine-defense-exchange-variation-karpov-variation.json::11::annotation",
+      "error": "DeepSeek 403: Host not in allowlist",
+      "prompt": "Opening: alekhine-defense-exchange-variation-karpov-variation\nPly: 12 (g6)\nPosition after g6:\nFEN: rnbqkb1r/pp2pp1p/1n1p2p1/8/2PP4/2N5/PP3PPP/R1BQKBNR w KQkq - 0 7\n\nCorrect facts:\n- g7 is EMPTY (you wrote \"bishop on g7\")\n\nOriginal sentence (rewrite ONLY this):\n\"This setup is thematic in the Alekhine Defense, as the bishop on g7 will eye our central pawns and potentially support counterplay.\"\n\nReply with the corrected sentence — same tone, same length, just fix the piece-square claim(s) using the facts above."
+    },
+    {
+      "key": "alekhine-defense-exchange-variation-karpov-variation.json::12::shortNarration",
+      "error": "DeepSeek 403: Host not in allowlist",
+      "prompt": "Opening: alekhine-defense-exchange-variation-karpov-variation\nPly: 13 (h3)\nPosition after h3:\nFEN: rnbqkb1r/pp2pp1p/1n1p2p1/8/2PP4/2N4P/PP3PP1/R1BQKBNR b KQkq - 0 7\n\nCorrect facts:\n- f3 is EMPTY (you wrote \"knight on f3\")\n\nOriginal sentence (rewrite ONLY this):\n\"h3 prevents ...Bg4 pinning the knight on f3, gives the king a flight square, and prepares a future g4 expansion.\"\n\nReply with the corrected sentence — same tone, same length, just fix the piece-square claim(s) using the facts above."
+    }
+  ]
+}

@@ -1,0 +1,2306 @@
+{
+  "openingId": "vienna-game-vienna-gambit",
+  "moveAnnotations": [
+    {
+      "san": "e4",
+      "annotation": "White opens with the king's pawn, the starting move of the Vienna Game and its gambit variation. The Vienna Gambit is like a delayed King's Gambit — White will play Nc3 first before pushing f4, getting an extra developing choice before the fireworks begin.",
+      "plans": [
+        "Follow up with Nc3 for the Vienna Game",
+        "Prepare f4 — the Vienna Gambit pawn sacrifice"
+      ],
+      "alternatives": [
+        "d4 — Queen's Pawn, completely different character"
+      ],
+      "arrows": [
+        {
+          "from": "e2",
+          "to": "e4",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "b1",
+          "to": "c3",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "d5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "f5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "White plays 1.e4, then Nc3 before f4 — a delayed King's Gambit with extra development."
+    },
+    {
+      "san": "e5",
+      "annotation": "Black mirrors with e5, entering the Open Game. This is the response the Vienna Gambit is designed to punish. Black occupies the center naturally, but the e5 pawn is about to become a target — except White will be even better prepared than in the King's Gambit.",
+      "plans": [
+        "Hold the center and develop normally",
+        "Prepare to meet White's plans"
+      ],
+      "arrows": [
+        {
+          "from": "e7",
+          "to": "e5",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "Black's e5 pawn becomes a target in the Vienna Gambit, where White's setup punishes it more effectively than the King's Gambit."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "White develops the knight to c3 — this is the Vienna Game. The knight supports e4 and controls d5. The real point is what comes next: f4! Unlike the King's Gambit where f4 comes on move 2, the Vienna gets the knight developed first for a tempo advantage.",
+      "plans": [
+        "Play f4 next — the Vienna Gambit",
+        "Control d5 and support the center"
+      ],
+      "alternatives": [
+        "Nf3 — normal development toward Italian or Scotch"
+      ],
+      "arrows": [
+        {
+          "from": "b1",
+          "to": "c3",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "f2",
+          "to": "f4",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "d5",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "c3",
+          "color": "rgba(255, 255, 0, 0.4)"
+        }
+      ],
+      "shortNarration": "White's knight on c3 supports e4 and controls d5, setting up f4 with a tempo advantage over the King's Gambit."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops the knight to f6, the most natural response. The knight attacks e4 and prepares to castle. This walks right into the Vienna Gambit — after f4, the knight on f6 will need to deal with the opened f-file and White's aggressive intentions.",
+      "plans": [
+        "Attack e4 and develop toward kingside castling",
+        "Prepare to meet White's f4 push"
+      ],
+      "alternatives": [
+        "Nc6 — also natural, supports e5",
+        "Bc5 — develops the bishop early"
+      ],
+      "arrows": [
+        {
+          "from": "g8",
+          "to": "f6",
+          "color": "rgba(0, 180, 80, 0.8)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "e4",
+          "color": "rgba(255, 80, 80, 0.3)"
+        }
+      ],
+      "shortNarration": "After 1.e4 e5 2.Nc3 Nf6, White's f4 opens the f-file, pressuring the knight and preparing the Vienna Gambit."
+    },
+    {
+      "san": "f4",
+      "annotation": "The Vienna Gambit! White pushes f4, challenging Black's e5 pawn just like the King's Gambit — but with Nc3 already developed, a full tempo ahead. The f-file is about to open, and White's king can still maneuver to safety. Black must decide: accept with exf4, or counterstrike with d5.",
+      "pawnStructure": "White strikes at e5, threatening to open the f-file. If Black takes, it mirrors the King's Gambit Accepted but White has Nc3 already — a significant bonus.",
+      "plans": [
+        "Open the f-file for the rook after castling",
+        "If exf4, play e5 to chase the knight with tempo",
+        "Build a massive center and attack the kingside"
+      ],
+      "alternatives": [
+        "Bc4 — the Vienna Game without the gambit, quieter"
+      ],
+      "arrows": [
+        {
+          "from": "f2",
+          "to": "f4",
+          "color": "rgba(0, 180, 80, 0.8)"
+        },
+        {
+          "from": "f2",
+          "to": "f4",
+          "color": "rgba(0, 100, 255, 0.7)"
+        }
+      ],
+      "highlights": [
+        {
+          "square": "f4",
+          "color": "rgba(255, 255, 0, 0.4)"
+        },
+        {
+          "square": "e5",
+          "color": "rgba(255, 80, 80, 0.3)"
+        }
+      ],
+      "shortNarration": "Vienna Gambit: f4 challenges e5 with Nc3 developed a tempo ahead — Black chooses exf4 or d5."
+    }
+  ],
+  "subLines": [
+    {
+      "name": "Vienna Gambit: Main Line with Ng8 Retreat",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Vienna Gambit: Main Line with Ng8 Retreat is an important variation of the Vienna Gambit. In the main line, Black retreats the knight and White pushes d4 to dominate the center. Even after queens are exchanged, White's lead in development and active pieces give excellent compensation. The endgame is surprisingly dangerous for Black — White's rooks on the open files create lasting pressure. Let's walk through the key ideas.",
+          "shortNarration": "After queens are exchanged, White's lead in development and active pieces on open files create lasting endgame pressure."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Vienna Gambit: Main Line with Ng8 Retreat.",
+          "shortNarration": "Black's e5 contests the center, defining the Vienna Gambit Main Line with Ng8 retreat."
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f4 gains kingside space and supports a future attack on the enemy king."
+        },
+        {
+          "san": "exf4",
+          "annotation": "exf4 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "exf4 captures the pawn, changing the pawn structure or material balance."
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "Ng8",
+          "annotation": "Ng8 improves the knight's placement. The knight was less effective on f6 and moves to g8 where it serves the plan better.",
+          "shortNarration": "Ng8 repositions the knight from f6 to g8, improving its defensive role."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, altering the material balance and pawn structure."
+        },
+        {
+          "san": "Bd6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxe5",
+          "annotation": "Bxe5 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxe5 wins a knight, altering the pawn structure or material balance."
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 stakes a central pawn claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Qxd1+",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d8",
+              "to": "d1",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Kxd1",
+          "annotation": "Kxd1 captures the queen. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e1",
+              "to": "d1",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Kxd1 captures the queen, leaving White with a pawn structure advantage or material gain."
+        },
+        {
+          "san": "Be6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxe6",
+          "annotation": "Bxe6 captures the bishop. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "c4",
+              "to": "e6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxe6 wins a bishop and alters the pawn structure."
+        },
+        {
+          "san": "fxe6",
+          "annotation": "fxe6 captures the bishop. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f7",
+              "to": "e6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "fxe6 captures the bishop, changing the pawn structure or material balance."
+        },
+        {
+          "san": "Bxf4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c1",
+              "to": "f4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Ke2",
+          "annotation": "Ke2 improves the king's placement. The king was less effective on d1 and moves to e2 where it serves the plan better.",
+          "shortNarration": "Ke2 improves the king's placement, moving from d1 to e2 for better coordination."
+        },
+        {
+          "san": "Nge7",
+          "annotation": ""
+        },
+        {
+          "san": "Rad1",
+          "annotation": "Rad1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "a1",
+              "to": "d1",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Rad1 activates the rook on the central file, reaching the critical position of the variation."
+        },
+        {
+          "san": "Nd4+",
+          "annotation": "Nd4+! Check — this tactical motif is worth remembering. It's a key resource in the Vienna Gambit: Main Line with Ng8 Retreat.",
+          "arrows": [
+            {
+              "from": "c6",
+              "to": "d4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nd4+ forks the king and queen, a key tactical resource in the Vienna Gambit."
+        },
+        {
+          "san": "Rxd4",
+          "annotation": "Rxd4 completes the variation. The resulting position after this capture offers White clear targets and plans. Study this structure — you'll see it often.",
+          "arrows": [
+            {
+              "from": "d1",
+              "to": "d4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Rxd4 leaves White with clear targets on the open d-file and kingside."
+        }
+      ]
+    },
+    {
+      "name": "Vienna Gambit: Qe7 Variation",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Vienna Gambit: Qe7 Variation is an important variation of the Vienna Gambit. Black pins the e5 pawn with Qe7. White plays Qe2 to support the pawn and continues developing. After d4, Bxf4, and O-O-O, White has a strong attacking setup with open lines against Black's king. The Nd5 jump is a powerful thematic shot that disrupts Black's coordination. Let's walk through the key ideas.",
+          "shortNarration": "In the Vienna Gambit Qe7 Variation, White's Qe2 supports e5, then d4, Bxf4, O-O-O, and Nd5 disrupts Black's coordination."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Vienna Gambit: Qe7 Variation.",
+          "shortNarration": "Black's e5 contests the center, defining the Vienna Gambit's Qe7 line."
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f4 gains kingside space and supports a future attack toward the enemy king."
+        },
+        {
+          "san": "exf4",
+          "annotation": "exf4 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "exf4 captures the pawn, altering the pawn structure or material balance."
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "Qe7",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Ng8",
+          "annotation": "Ng8 improves the knight's placement. The knight was less effective on f6 and moves to g8 where it serves the plan better.",
+          "shortNarration": "Ng8 improves the knight's placement from f6 to support the kingside attack."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Bg4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c1",
+              "to": "f4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "O-O-O",
+          "annotation": "White castles queenside — this often signals aggressive intentions, as the kingside pawns can advance for an attack.",
+          "shortNarration": "White castles queenside, freeing kingside pawns to storm Black's king."
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Bxf3",
+          "annotation": "Bxf3 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "g4",
+              "to": "f3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxf3 captures the knight, winning material or altering the pawn structure."
+        },
+        {
+          "san": "Qxf3",
+          "annotation": "Qxf3 captures the bishop. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "f3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxf3 captures the bishop, winning material and altering the pawn structure."
+        },
+        {
+          "san": "Qxe5",
+          "annotation": "Qxe5 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e7",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Qxe5 captures the pawn, shifting the balance as Black reconfigures or gains material."
+        },
+        {
+          "san": "Bd3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Rhe1",
+          "annotation": "Rhe1 places the rook on a central file where it will be most active. Rooks belong on open or semi-open files.",
+          "shortNarration": "Rhe1 places the rook on the central file, targeting the semi-open e-file."
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "Bf5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d3",
+              "to": "f5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "O-O",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "g8",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxh7+",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "f5",
+              "to": "h7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Frankenstein-Dracula Variation",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Frankenstein-Dracula Variation is an important variation of the Vienna Gambit. The wildly named Frankenstein-Dracula arises after 3.Bc4 Nxe4. This is one of the sharpest positions in all of chess — both sides are throwing punches from move 4. White plays Qh5 threatening Qxf7 mate. Knowing this line is essential if you play the Vienna — one wrong move and the game is over for either side. Let's walk through the key ideas.",
+          "shortNarration": "After 3.Bc4 Nxe4, White's Qh5 threatens Qxf7 mate in the sharp Frankenstein-Dracula Variation."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Frankenstein-Dracula Variation.",
+          "shortNarration": "Black's e5 contests the center, entering the Frankenstein-Dracula Variation."
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe4",
+          "annotation": "Nxe4 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f6",
+              "to": "e4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe4 wins a pawn, altering the material balance and pawn structure."
+        },
+        {
+          "san": "Qh5",
+          "annotation": ""
+        },
+        {
+          "san": "Nd6",
+          "annotation": ""
+        },
+        {
+          "san": "Bb3",
+          "annotation": "Bb3 improves the bishop's placement. The bishop was less effective on c4 and moves to b3 where it serves the plan better.",
+          "shortNarration": "Bb3 improves the bishop's placement from c4 to b3, better serving the plan."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nb5",
+          "annotation": "Nb5 improves the knight's placement. The knight was less effective on c3 and moves to b5 where it serves the plan better.",
+          "shortNarration": "Nb5 improves the knight's placement from c3, targeting c7 and pressuring Black's queenside."
+        },
+        {
+          "san": "g6",
+          "annotation": "g6 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "g6 gains kingside space and supports a future attack toward the enemy king."
+        },
+        {
+          "san": "Qf3",
+          "annotation": "Qf3 activates the queen. From f3, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qf3 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "f5",
+          "annotation": "f5 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f5 gains kingside space and supports a future attack on the enemy king."
+        },
+        {
+          "san": "Qd5",
+          "annotation": "Qd5 activates the queen. From d5, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qd5 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "Qe7",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc7+",
+          "annotation": "Nxc7+ captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "b5",
+              "to": "c7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxc7+ wins a pawn, altering the material balance."
+        },
+        {
+          "san": "Kd8",
+          "annotation": "Kd8 improves the king's placement. The king was less effective on e8 and moves to d8 where it serves the plan better.",
+          "shortNarration": "Kd8 improves the king's placement, moving from e8 to d8 for better support."
+        },
+        {
+          "san": "Nxa8",
+          "annotation": "Nxa8 captures the rook. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "c7",
+              "to": "a8",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxa8 wins the rook, shifting material balance in White's favor."
+        },
+        {
+          "san": "b6",
+          "annotation": ""
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bb7",
+          "annotation": "Bb7 — Black fianchettoes the bishop, placing it on the long diagonal where it controls the center from a distance. This is a key positional idea.",
+          "shortNarration": "Bb7 fianchettoes the bishop on the long diagonal, controlling the center from a distance."
+        },
+        {
+          "san": "Qf3",
+          "annotation": "Qf3 activates the queen. From f3, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qf3 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "Nd4",
+          "annotation": ""
+        },
+        {
+          "san": "Qg3",
+          "annotation": "Qg3 activates the queen. From g3, the queen has maximum influence across multiple diagonals and files.",
+          "shortNarration": "Qg3 activates the queen with maximum influence across multiple diagonals and files."
+        },
+        {
+          "san": "Bxa8",
+          "annotation": "Bxa8 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "b7",
+              "to": "a8",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxa8 captures the knight, altering the pawn structure and material balance toward the critical position."
+        },
+        {
+          "san": "Bg5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c1",
+              "to": "g5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Ne6",
+          "annotation": "Ne6. This is the typical position arising from the Frankenstein-Dracula Variation. From here, understanding the strategic plans — piece placement, pawn breaks, and targets — is essential.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "e6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Ne6 — typical Frankenstein-Dracula position; key plans involve piece placement, pawn breaks, and targets."
+        }
+      ]
+    },
+    {
+      "name": "Vienna Gambit: Nd5 Variation",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Vienna Gambit: Nd5 Variation is an important variation of the Vienna Gambit. Black places the pawn on d5 instead of retreating. White recaptures on c3 with the d-pawn, opening the d-file. After rapid development with Bxf4, Bd3, and Qe2, the Greek Gift sacrifice Bxh7+ followed by Qe4+ is a classic attacking pattern that demolishes Black's kingside when they castle into it. Let's walk through the key ideas.",
+          "shortNarration": "In the Vienna Gambit Nd5 Variation, White's Greek Gift sacrifice Bxh7+ followed by Qe4+ demolishes Black's kingside after castling."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Vienna Gambit: Nd5 Variation.",
+          "shortNarration": "Black's e5 contests the center, entering the Vienna Gambit: Nd5 Variation."
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f4 gains kingside space and supports a future attack toward the enemy king."
+        },
+        {
+          "san": "exf4",
+          "annotation": "exf4 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "exf4 captures the pawn, altering the pawn structure or material balance."
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc3",
+          "annotation": "Nxc3 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d5",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxc3 captures the knight, changing the pawn structure or gaining material."
+        },
+        {
+          "san": "dxc3",
+          "annotation": "dxc3 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d2",
+              "to": "c3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxc3 captures the knight, changing the pawn structure and material balance."
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c1",
+              "to": "f4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Bd3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f3",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 captures the pawn, changing the balance by reconfiguring the pawn structure or gaining material."
+        },
+        {
+          "san": "Nd7",
+          "annotation": ""
+        },
+        {
+          "san": "O-O-O",
+          "annotation": "White castles queenside — this often signals aggressive intentions, as the kingside pawns can advance for an attack.",
+          "shortNarration": "White castles queenside to free kingside pawns for a direct attack."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "d7",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn and forces Black to recapture or lose material."
+        },
+        {
+          "san": "Bxe5",
+          "annotation": "Bxe5 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f4",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxe5 wins a knight, altering the pawn structure or material balance."
+        },
+        {
+          "san": "Bf6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf6",
+          "annotation": "Bxf6 captures the bishop. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxf6 wins a piece or alters the pawn structure."
+        },
+        {
+          "san": "Qxf6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d8",
+              "to": "f6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxh7+",
+          "annotation": "Bxh7+ captures the pawn. This exchange changes the balance — White reconfigures the pawn structure or gains material. We're reaching the critical position of this variation.",
+          "arrows": [
+            {
+              "from": "d3",
+              "to": "h7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxh7+ wins a pawn and shifts the pawn structure, reaching the variation's critical position."
+        },
+        {
+          "san": "Kxh7",
+          "annotation": "Kxh7 captures the bishop. This exchange is thematic in the Vienna Gambit: Nd5 Variation — it defines the resulting pawn structure and piece activity.",
+          "arrows": [
+            {
+              "from": "g8",
+              "to": "h7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Kxh7 captures the bishop, defining the Vienna Gambit Nd5 pawn structure and piece activity."
+        },
+        {
+          "san": "Qe4+",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e2",
+              "to": "e4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Vienna Gambit: Pierce Gambit",
+      "type": "variation",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "The Vienna Gambit: Pierce Gambit is an important variation of the Vienna Gambit. The Pierce Gambit features a sharp queenless middlegame. After the queen trade, White's king walks to e2 and the position is deceptively dangerous. White's bishop pair and open files provide excellent compensation. Black must be very careful not to allow a devastating pin on the d-file. Let's walk through the key ideas.",
+          "shortNarration": "After the queen trade in the Pierce Gambit, White's king walks to e2 with bishop pair and open files compensating for the pawn, but Black must avoid a pin on the d-file."
+        },
+        {
+          "san": "e5",
+          "annotation": "Black responds with e5, contesting the center. This is the move that defines the Vienna Gambit: Pierce Gambit.",
+          "shortNarration": "Black's e5 contests the center, entering the Vienna Gambit: Pierce Gambit."
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": "f4 pushes on the kingside. This pawn advance gains space and can support a future attack toward the enemy king.",
+          "shortNarration": "f4 gains kingside space and supports a future attack toward the enemy king."
+        },
+        {
+          "san": "exf4",
+          "annotation": "exf4 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "exf4 captures the pawn, changing the material balance or pawn structure."
+        },
+        {
+          "san": "e5",
+          "annotation": "e5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "e5 stakes a central claim, controlling space and restricting White's piece activity."
+        },
+        {
+          "san": "Ng8",
+          "annotation": "Ng8 improves the knight's placement. The knight was less effective on f6 and moves to g8 where it serves the plan better.",
+          "shortNarration": "Ng8 improves the knight's placement from f6 to support the kingside plan."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": "d4 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "shortNarration": "d4 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Bg4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "c1",
+              "to": "f4",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 stakes a claim in the center. Central pawns control space and restrict the opponent's piece activity.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 stakes a central claim, controlling space and restricting Black's piece activity."
+        },
+        {
+          "san": "Qxd1+",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d8",
+              "to": "d1",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Kxd1",
+          "annotation": "Kxd1 captures the queen. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "e1",
+              "to": "d1",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Kxd1 captures the queen, shifting the balance as White reconfigures pawns or gains material."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Bb5",
+          "annotation": ""
+        },
+        {
+          "san": "O-O-O+",
+          "annotation": "O-O-O+! Check — Black forces the king to respond, gaining tempo to improve the position.",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "c8",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "O-O-O+ forces the king to move, gaining a tempo to improve Black's position."
+        },
+        {
+          "san": "Ke2",
+          "annotation": "Ke2 improves the king's placement. The king was less effective on d1 and moves to e2 where it serves the plan better.",
+          "shortNarration": "Ke2 improves king safety and activates it for the endgame."
+        },
+        {
+          "san": "Bxf3+",
+          "annotation": "Bxf3+ captures the knight. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "g4",
+              "to": "f3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxf3+ captures the knight, winning material or altering the pawn structure."
+        },
+        {
+          "san": "gxf3",
+          "annotation": "gxf3 captures the bishop. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "g2",
+              "to": "f3",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "gxf3 captures the bishop, changing the pawn structure and material balance."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 captures the pawn. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "c6",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Nxe5 wins a pawn, forcing Black to recapture or lose material."
+        },
+        {
+          "san": "Bd7+",
+          "annotation": "Bd7+! Check — White forces the king to respond, gaining tempo to improve the position.",
+          "arrows": [
+            {
+              "from": "b5",
+              "to": "d7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bd7+ forces the king to move, gaining tempo to improve White's position."
+        },
+        {
+          "san": "Kxd7",
+          "annotation": "Kxd7 captures the bishop. This exchange changes the balance — Black reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "c8",
+              "to": "d7",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Kxd7 captures the bishop, altering the pawn structure or material balance."
+        },
+        {
+          "san": "Bxe5",
+          "annotation": "Bxe5 captures the knight. This exchange changes the balance — White reconfigures the pawn structure or gains material.",
+          "arrows": [
+            {
+              "from": "f4",
+              "to": "e5",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxe5 wins a knight, altering the pawn structure or material balance."
+        },
+        {
+          "san": "Bd6",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "f8",
+              "to": "d6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxd6",
+          "annotation": "Bxd6 captures the bishop. This exchange is thematic in the Vienna Gambit: Pierce Gambit — it defines the resulting pawn structure and piece activity.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "d6",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ],
+          "shortNarration": "Bxd6 captures the bishop, defining the pawn structure and piece activity in the Pierce Gambit."
+        },
+        {
+          "san": "Re8+",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d8",
+              "to": "e8",
+              "color": "rgba(50, 150, 220, 0.8)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Knight Retreat Punishment",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Vienna Gambit, the Knight Retreat Punishment is a tactical pattern you should know. When Black's knight retreats to g8, White plays d4 and Bxf4 recovering the pawn while maintaining a massive development lead. Black has wasted three tempi on knight moves while White has a powerful center and active pieces. The Nd5 jump followed by Nxc7 wins the exchange. Let's walk through how it works.",
+          "shortNarration": "In the Vienna Gambit, Black's knight retreat to g8 lets White play d4, Bxf4, then Nd5 and Nxc7 wins the exchange."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": ""
+        },
+        {
+          "san": "exf4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Ng8",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf4",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "dxe5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "e5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Qxd1+",
+          "annotation": ""
+        },
+        {
+          "san": "Kxd1",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e1",
+              "to": "d1",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Bg4",
+          "annotation": ""
+        },
+        {
+          "san": "Bb5",
+          "annotation": ""
+        },
+        {
+          "san": "O-O-O+",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "c8",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Ke1",
+          "annotation": ""
+        },
+        {
+          "san": "Nge7",
+          "annotation": ""
+        },
+        {
+          "san": "Bxc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc6",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Be6",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc7",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Greek Gift Sacrifice",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Vienna Gambit, the Greek Gift Sacrifice is a tactical pattern you should know. If Black places the pawn on d5 and castles kingside, the classic Greek Gift sacrifice Bxh7+ followed by Ng5+ tears open the kingside. After Kg6 Qd3+ f5 Qg3, the king is caught in a deadly mating net. This pattern wins countless games at the club level. Let's walk through how it works.",
+          "shortNarration": "In the Vienna Gambit, Bxh7+ sacrifices the bishop to expose the king, followed by Ng5+ and Qd3+ f5 Qg3 for a mating net."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": ""
+        },
+        {
+          "san": "exf4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nd5",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc3",
+          "annotation": ""
+        },
+        {
+          "san": "dxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d2",
+              "to": "c3",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf4",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Bd3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bxh7+",
+          "annotation": ""
+        },
+        {
+          "san": "Kxh7",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "g8",
+              "to": "h7",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Ng5+",
+          "annotation": ""
+        },
+        {
+          "san": "Kg6",
+          "annotation": ""
+        },
+        {
+          "san": "Qd3+",
+          "annotation": ""
+        },
+        {
+          "san": "f5",
+          "annotation": ""
+        },
+        {
+          "san": "Qg3",
+          "annotation": ""
+        },
+        {
+          "san": "Qd5",
+          "annotation": ""
+        },
+        {
+          "san": "Ne4+",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Frankenstein-Dracula: Qxf7 Mate Threat",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Vienna Gambit, the Frankenstein-Dracula: Qxf7 Mate Threat is a tactical pattern you should know. In the Frankenstein-Dracula, after Qh5, if Black plays Be7 instead of the critical Nc6, the knight lands on g5 with devastating effect. Qf3 threatens Qf7 mate, and after f5, Qd5 creates multiple threats. The Nf7-Nd5 combination tears Black's position apart. Let's walk through how it works.",
+          "shortNarration": "After Qh5, Black's Be7 allows Ng5, then Qf3 threatens Qf7 mate, and Qd5 after f5 creates multiple threats."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "Nxe4",
+          "annotation": ""
+        },
+        {
+          "san": "Qh5",
+          "annotation": ""
+        },
+        {
+          "san": "Nd6",
+          "annotation": ""
+        },
+        {
+          "san": "Bb3",
+          "annotation": ""
+        },
+        {
+          "san": "Be7",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Ng5",
+          "annotation": ""
+        },
+        {
+          "san": "g6",
+          "annotation": ""
+        },
+        {
+          "san": "Qf3",
+          "annotation": ""
+        },
+        {
+          "san": "f5",
+          "annotation": ""
+        },
+        {
+          "san": "Qd5",
+          "annotation": ""
+        },
+        {
+          "san": "e4",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Bxg5",
+          "annotation": ""
+        },
+        {
+          "san": "Qxe4+",
+          "annotation": ""
+        },
+        {
+          "san": "fxe4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "f5",
+              "to": "e4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Bf7+",
+          "annotation": ""
+        },
+        {
+          "san": "Kxf7",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "f7",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nxe4",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "f5 Push Trap",
+      "type": "trap",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Vienna Gambit, the f5 Push Trap is a tactical pattern you should know. After Black retreats Ng8 and plays dxe5, White recaptures with Nxe5 maintaining the initiative. If Black trades on c4, the resulting position has White with active rooks on the open e-file and f-file. The Bxf4 recapture restores material equality while keeping all the positional advantages. Let's walk through how it works.",
+          "shortNarration": "After Black retreats Ng8 and dxe5, White recaptures Nxe5, then Bxf4 restores material equality with active rooks on the open e- and f-files."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": ""
+        },
+        {
+          "san": "exf4",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f4",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Ng8",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nxe5",
+          "annotation": ""
+        },
+        {
+          "san": "Be6",
+          "annotation": ""
+        },
+        {
+          "san": "Bc4",
+          "annotation": ""
+        },
+        {
+          "san": "Bxc4",
+          "annotation": ""
+        },
+        {
+          "san": "Nxc4",
+          "annotation": ""
+        },
+        {
+          "san": "Qxd4",
+          "annotation": ""
+        },
+        {
+          "san": "Qxd4",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Be3",
+          "annotation": ""
+        },
+        {
+          "san": "Bb4",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Bxc3",
+          "annotation": ""
+        },
+        {
+          "san": "bxc3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "b2",
+              "to": "c3",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Nge7",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf4",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "g8",
+              "color": "rgba(220, 50, 50, 0.8)"
+            }
+          ]
+        },
+        {
+          "san": "Rfe1",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Black Plays d5 Early: Best Defense",
+      "type": "warning",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Vienna Gambit, the Black Plays d5 Early: Best Defense is a dangerous line you must be aware of. If Black plays the strong 3...d5, the center opens up and Black gets active piece play immediately. After fxe5 Nxe4, Black's knight is powerfully centralized. White must play carefully through a series of exchanges to avoid ending up in an inferior position. Let's see why.",
+          "shortNarration": "After 3...d5 fxe5 Nxe4, Black's knight is powerfully centralized, and White must navigate exchanges carefully to avoid an inferior position."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": ""
+        },
+        {
+          "san": "d5",
+          "annotation": ""
+        },
+        {
+          "san": "fxe5",
+          "annotation": "fxe5 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "f4",
+              "to": "e5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "fxe5 opens the f-file and changes the center structure."
+        },
+        {
+          "san": "Nxe4",
+          "annotation": "Nxe4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe4 wins a pawn but leaves the knight hanging on e4."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Bc5",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "Bb4",
+          "annotation": ""
+        },
+        {
+          "san": "Bd2",
+          "annotation": ""
+        },
+        {
+          "san": "Nxd2",
+          "annotation": "Nxd2 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxd2 trades knights, opening the d-file and changing the position's character."
+        },
+        {
+          "san": "Qxd2",
+          "annotation": "Qxd2 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxd2 changes the position — now Black's queen is off the board, altering threats and piece activity."
+        },
+        {
+          "san": "Bxc3",
+          "annotation": "Bxc3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxc3 trades the bishop for the knight, altering the pawn structure."
+        },
+        {
+          "san": "Qxc3",
+          "annotation": "Qxc3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxc3 changes the position — White now has a queenside majority and Black's king is exposed."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Bd3",
+          "annotation": ""
+        },
+        {
+          "san": "f6",
+          "annotation": ""
+        },
+        {
+          "san": "exf6",
+          "annotation": "exf6 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f6",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "exf6 opens the g-file and exposes Black's king to attack."
+        },
+        {
+          "san": "Rxf6",
+          "annotation": "Rxf6 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Rxf6 changes the position — Black's king is now exposed."
+        },
+        {
+          "san": "O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Rae1",
+          "annotation": ""
+        },
+        {
+          "san": "Bg4",
+          "annotation": ""
+        },
+        {
+          "san": "h3",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf3",
+          "annotation": "Bxf3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf3 trades a bishop for a knight, altering the pawn structure and piece dynamics."
+        },
+        {
+          "san": "Rxf3",
+          "annotation": ""
+        },
+        {
+          "san": "Rxf3",
+          "annotation": ""
+        },
+        {
+          "san": "gxf3",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "g2",
+              "to": "f3",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hamppe-Allgaier: Black Gets Counterplay",
+      "type": "warning",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Vienna Gambit, the Hamppe-Allgaier: Black Gets Counterplay is a dangerous line you must be aware of. When Black plays Qe7 and develops solidly, the resulting position offers Black real counterplay. After O-O-O opposite-side castling, both players attack each other's kings. Black's centralized pieces and open f-file provide adequate compensation for the pawn. Let's see why.",
+          "shortNarration": "In the Hamppe-Allgaier, Black's Qe7 and O-O-O give centralized pieces and an open f-file for pawn compensation."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": ""
+        },
+        {
+          "san": "exf4",
+          "annotation": "exf4 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "e5",
+              "to": "f4",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "exf4 opens the e-file and threatens to recapture with the queen."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Qe7",
+          "annotation": ""
+        },
+        {
+          "san": "Qe2",
+          "annotation": ""
+        },
+        {
+          "san": "Ng8",
+          "annotation": ""
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "d6",
+          "annotation": ""
+        },
+        {
+          "san": "d4",
+          "annotation": ""
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d6",
+              "to": "e5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 opens the d-file and shifts the game's tactical focus."
+        },
+        {
+          "san": "dxe5",
+          "annotation": "dxe5 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d4",
+              "to": "e5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe5 opens the d-file and changes the center structure."
+        },
+        {
+          "san": "Nc6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf4",
+          "annotation": "Bxf4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf4 changes the position — the bishop pair is gone, and Black's king is now exposed."
+        },
+        {
+          "san": "Bg4",
+          "annotation": ""
+        },
+        {
+          "san": "O-O-O",
+          "annotation": ""
+        },
+        {
+          "san": "Qxe5",
+          "annotation": "Qxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxe5 captures the pawn, changing the position's character."
+        },
+        {
+          "san": "Qxe5+",
+          "annotation": "Qxe5+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxe5+ wins a pawn and forces the king to move."
+        },
+        {
+          "san": "Nxe5",
+          "annotation": "Nxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe5 changes the position — the e5 pawn is gone, opening lines and tactics."
+        },
+        {
+          "san": "Bb5+",
+          "annotation": ""
+        },
+        {
+          "san": "c6",
+          "annotation": ""
+        },
+        {
+          "san": "Bxc6+",
+          "annotation": "Bxc6+ — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxc6+ trades bishop for knight, doubling Black's c-pawns and weakening the queenside structure."
+        },
+        {
+          "san": "bxc6",
+          "annotation": "bxc6 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "b7",
+              "to": "c6",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "bxc6 opens the b-file and gives Black a queenside majority."
+        },
+        {
+          "san": "Bxe5",
+          "annotation": "Bxe5 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxe5 changes the position — Black now threatens Qh4+ and the knight on f3 hangs."
+        },
+        {
+          "san": "Bxf3",
+          "annotation": ""
+        },
+        {
+          "san": "Rd8+",
+          "annotation": "Rd8+! Check — and the position is very dangerous for the defending side.",
+          "shortNarration": "Rd8+ check forces the king to a dangerous square, threatening immediate mate."
+        },
+        {
+          "san": "Rxd8",
+          "annotation": ""
+        }
+      ]
+    },
+    {
+      "name": "Vienna Game: Black Avoids f4 with d5",
+      "type": "warning",
+      "moveAnnotations": [
+        {
+          "san": "e4",
+          "annotation": "In the Vienna Gambit, the Vienna Game: Black Avoids f4 with d5 is a dangerous line you must be aware of. The immediate 3...d5 counter strike is one of Black's most dangerous options. After exd5 e4, the pawn on e4 cramps White's position and disrupts development. If White is not careful, Black's initiative in the center can become overwhelming. This line requires specific preparation. Let's see why.",
+          "shortNarration": "In the Vienna Gambit, Black's 3...d5 counterstrike with exd5 e4 cramps White and demands specific preparation."
+        },
+        {
+          "san": "e5",
+          "annotation": ""
+        },
+        {
+          "san": "Nc3",
+          "annotation": ""
+        },
+        {
+          "san": "Nf6",
+          "annotation": ""
+        },
+        {
+          "san": "f4",
+          "annotation": ""
+        },
+        {
+          "san": "d5",
+          "annotation": ""
+        },
+        {
+          "san": "exd5",
+          "annotation": "exd5 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "e4",
+              "to": "d5",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "exd5 opens the center — watch for tactics on the newly cleared files."
+        },
+        {
+          "san": "e4",
+          "annotation": ""
+        },
+        {
+          "san": "d3",
+          "annotation": ""
+        },
+        {
+          "san": "Bb4",
+          "annotation": ""
+        },
+        {
+          "san": "dxe4",
+          "annotation": "dxe4 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "d3",
+              "to": "e4",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "dxe4 opens the d-file and changes the center's character."
+        },
+        {
+          "san": "Nxe4",
+          "annotation": "Nxe4 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxe4 changes the position — the knight now threatens to fork on f2 or g3."
+        },
+        {
+          "san": "Bd2",
+          "annotation": ""
+        },
+        {
+          "san": "Qh4+",
+          "annotation": ""
+        },
+        {
+          "san": "g3",
+          "annotation": ""
+        },
+        {
+          "san": "Nxg3",
+          "annotation": "Nxg3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Nxg3 changes the position — White recaptures with the h-pawn, opening the h-file against Black's king."
+        },
+        {
+          "san": "Nf3",
+          "annotation": ""
+        },
+        {
+          "san": "Qh5",
+          "annotation": ""
+        },
+        {
+          "san": "hxg3",
+          "annotation": "hxg3 — this capture changes the character of the position. Be alert.",
+          "arrows": [
+            {
+              "from": "h2",
+              "to": "g3",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ],
+          "shortNarration": "hxg3 opens the h-file and weakens White's king shelter."
+        },
+        {
+          "san": "Bg4",
+          "annotation": ""
+        },
+        {
+          "san": "Be2",
+          "annotation": ""
+        },
+        {
+          "san": "Bxf3",
+          "annotation": "Bxf3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf3 trades the bishop pair for doubled f-pawns and opens the g-file."
+        },
+        {
+          "san": "Bxf3",
+          "annotation": "Bxf3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Bxf3 trades off a bishop, altering the pawn structure and piece dynamics."
+        },
+        {
+          "san": "Qxf3",
+          "annotation": "Qxf3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxf3 changes the position — the queen recaptures, altering the material balance and piece activity."
+        },
+        {
+          "san": "Qxf3",
+          "annotation": "Qxf3 — this capture changes the character of the position. Be alert.",
+          "shortNarration": "Qxf3 changes the position — the queen recaptures on f3, altering piece activity and threats."
+        },
+        {
+          "san": "Bxc3",
+          "annotation": ""
+        },
+        {
+          "san": "Bxc3",
+          "annotation": ""
+        },
+        {
+          "san": "O-O",
+          "annotation": "",
+          "arrows": [
+            {
+              "from": "e8",
+              "to": "g8",
+              "color": "rgba(230, 170, 30, 0.8)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "openingId": "queen-s-pawn-game-chigorin-variation",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the Queen's Pawn, which immediately stakes a claim to the central e5 square and opens lines for our dark-squared bishop and queen. This move is the foundation of classical positional chess, leading to rich middlegame positions where central control and piece development are paramount. Unlike 1.e4 which often leads to tactical fireworks, 1.d4 typically produces slower, more strategic battles where understanding pawn structures and long-term planning become crucial. The Queen's Pawn also keeps our options open for various setups - we might transpose into a Queen's Gambit, an Indian Defense system, or other classical openings depending on how Black responds.",
+      "shortNarration": "1.d4 claims e5, opens lines for the queen and dark-squared bishop, and leads to strategic pawn-structure battles."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops the kingside knight to its ideal square, where it attacks our central d4 pawn and controls key central squares like e4 and d5. This move is incredibly flexible and doesn't commit Black to any particular pawn structure yet - they're keeping their options open for Indian Defense setups, classical central advances, or even hypermodern approaches. The knight on f6 also prepares kingside castling and puts immediate pressure on our center, forcing us to make a decision about how to support the d4 pawn. This is one of the most popular and sound responses to 1.d4, as it develops with tempo while maintaining maximum flexibility for Black's setup.",
+      "shortNarration": "Black's knight to f6 attacks d4, pressures e4, and prepares kingside castling without committing to a pawn structure."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We're developing our knight to c3, which defends the d4 pawn and prepares for aggressive central play, particularly the advance e2-e4 to seize maximum space in the center. This move characterizes the Chigorin Variation, named after the great 19th-century Russian master Mikhail Chigorin, who favored piece play over rigid pawn structures. By placing our knight on c3 rather than supporting d4 with c2-c3 or Nf3, we're signaling our intention to play dynamically and fight for central control with pieces rather than pawns. However, this does come with a trade-off - the knight on c3 blocks the c-pawn, which means we can't easily support our center with c2-c3 later, and we're somewhat committed to maintaining the d4 pawn with pieces.",
+      "shortNarration": "Knight to c3 defends d4 and prepares e2-e4, blocking the c-pawn but fighting for the center with pieces."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black strikes back in the center with this classical pawn advance, directly challenging our central control and creating immediate tension in the position. This move transforms the game into a more traditional Queen's Pawn structure where both sides have established central pawns, leading to typical middlegame themes of piece maneuvering and pawn structure battles. By playing d5, Black is essentially saying they're ready for a direct central confrontation rather than the more flexible Indian Defense approaches that Nf6 initially suggested. Now we'll need to decide whether to maintain the tension with moves like Bf4 or e3, capture on d5 to simplify the center, or advance with e4 to create a pawn chain - each choice leads to completely different types of positions with distinct strategic and tactical themes.",
+      "shortNarration": "Black's d5 challenges the center, creating tension; choose between maintaining, capturing, or advancing."
+    }
+  ]
+}

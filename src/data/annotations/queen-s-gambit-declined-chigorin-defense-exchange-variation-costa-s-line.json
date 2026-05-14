@@ -1,0 +1,80 @@
+{
+  "openingId": "queen-s-gambit-declined-chigorin-defense-exchange-variation-costa-s-line",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, staking our claim to the center and beginning one of chess's most classical and positionally sound openings. This move immediately controls the important e5 and c5 squares while opening lines for our dark-squared bishop and queen. The d4 opening typically leads to rich, strategic middlegames where understanding pawn structures and piece coordination becomes crucial. Our plan is to establish a strong pawn center and develop our pieces harmoniously.",
+      "shortNarration": "1.d4 controls e5 and c5, opening lines for the dark-squared bishop and queen."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds symmetrically in the center, immediately challenging our central pawn and establishing equality in the fight for key squares. This classical response shows Black wants to maintain central tension rather than allow us to dominate the center unopposed. The d5 pawn controls important squares like c4 and e4, preventing us from expanding further with moves like e4. Black is setting up for either a Queen's Gambit Declined structure or potentially accepting our coming gambit.",
+      "shortNarration": "Black's symmetrical d5 challenges the center, controlling c4 and e4 to prevent our expansion."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're playing the famous Queen's Gambit, offering our c-pawn to deflect Black's central d5 pawn and gain superior central control. This isn't a true gambit since the pawn can't be held safely, but it puts immediate pressure on Black's position and forces a critical decision. If Black takes with dxc4, we'll recapture and gain a strong pawn center with d4-e4, while if Black declines, we maintain tension and can later support our center with moves like Nc3 and e3. The Queen's Gambit has been a cornerstone of positional play for over a century because it combines central pressure with rapid development.",
+      "shortNarration": "The Queen's Gambit offers the c-pawn to deflect d5, gaining central control with d4-e4 if Black takes."
+    },
+    {
+      "san": "Nc6",
+      "annotation": "Our opponent chooses the provocative Chigorin Defense, developing the knight to an unusual square that blocks the c-pawn but supports the center in an unorthodox way. This move is less popular than classical defenses like Nf6 or e6, but it has its own logic - the knight supports the d5 pawn and prepares to create counterplay with moves like e5. Black is essentially saying 'I'll develop actively and create complications rather than play passively.' We need to be prepared for sharp, tactical positions where Black will try to generate piece activity to compensate for potential structural weaknesses.",
+      "shortNarration": "Chigorin Defense's knight on c6 blocks the c-pawn but supports d5 and prepares e5 counterplay, leading to sharp tactical positions."
+    },
+    {
+      "san": "cxd5",
+      "annotation": "We're capturing on d5 immediately, which is the most direct way to handle the Chigorin Defense and leads to forcing variations. By taking the pawn, we're forcing Black to recapture and opening up the center, which typically favors the side with better development. This exchange also eliminates Black's central pawn, potentially giving us better control over key squares like e4 and c4 later. The immediate capture avoids some of the complex theory that arises from moves like Nc3 or Nf3, leading us into the Exchange Variation where tactics and piece activity become paramount.",
+      "shortNarration": "Capturing on d5 forces Black to recapture, opens the center, and enters the Exchange Variation where piece activity decides."
+    },
+    {
+      "san": "Qxd5",
+      "annotation": "Black recaptures with the queen, which might look premature since we can attack it with developing choices, but this is actually the most principled recapture in the Chigorin system. The queen centralized on d5 controls many important squares and puts pressure on our position, while Black's knight on c6 provides adequate support. Our opponent is accepting that the queen may be harassed but believes the central activity and rapid piece coordination will provide sufficient compensation. This early queen development is characteristic of the Chigorin Defense - Black embraces sharp, tactical play over classical developmental principles.",
+      "shortNarration": "Black's queen recaptures on d5, centralizing with pressure and knight support, accepting harassment for activity in the Chigorin."
+    },
+    {
+      "san": "e3",
+      "annotation": "We're developing our kingside while preparing to challenge Black's centralized queen with moves like Nc3. The e3 pawn supports our d4 pawn, creates a solid pawn chain, and opens a diagonal for our light-squared bishop to eventually reach d3 or c4. This modest but well-grounded move also prepares castling kingside and avoids the more committal Nc3 immediately, which would allow Black's queen to become even more active with checks. Our plan is to complete development smoothly while gradually increasing pressure on Black's somewhat exposed pieces.",
+      "shortNarration": "e3 supports d4, opens the bishop's diagonal to d3 or c4, and prepares kingside castling while avoiding Nc3's immediate queen checks."
+    },
+    {
+      "san": "e5",
+      "annotation": "Black strikes back in the center with this thematic pawn advance, immediately attacking our d4 pawn and gaining space on the kingside. This move is the point of Black's setup - the queen on d5 and knight on c6 both support this central break, creating immediate threats and opening lines for piece development. Our opponent is refusing to retreat passively and instead chooses to create maximum complications in the center. We'll need to handle this central tension carefully, as Black is generating real counterplay and piece activity.",
+      "shortNarration": "Black's c5 advance attacks d4, supported by queen on d5 and knight on c6, creating central tension and piece activity."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We're developing our knight with tempo, attacking Black's centralized queen while simultaneously supporting our d4 pawn that's under pressure from the e5 pawn. This active move forces Black to make a decision about the queen while we continue our piece development. The knight on c3 also eyes important squares like e4 and d5, and prepares potential tactics involving the pinned e5 pawn if Black's king remains uncastled. Our development is proceeding smoothly while Black faces the first serious test of the queen's early activity.",
+      "shortNarration": "Knight to c3 attacks the queen and supports d4, eyeing e4 and d5 while pressuring the pinned e5 pawn."
+    },
+    {
+      "san": "Bb4",
+      "annotation": "Our opponent plays an excellent developing choice that creates a pin on our knight and maintains the tension in the center beautifully. The bishop on b4 pins our knight to the king, making it difficult for us to capture the e5 pawn immediately, while also preparing to potentially exchange on c3 to damage our pawn structure. This move shows the dynamic nature of the Chigorin Defense - Black is willing to give up the bishop pair to create structural damage and maintain piece activity. The pin also supports Black's central pawn on e5 indirectly by making our knight less mobile.",
+      "shortNarration": "The bishop on b4 pins the knight to the king, threatening to exchange on c3 to damage White's pawn structure while supporting e5."
+    },
+    {
+      "san": "Bd2",
+      "annotation": "We're breaking the pin with a constructive move that prepares to potentially exchange bishops on our terms. The bishop on d2 not only unpins our knight but also prepares to support our queenside development and potentially create threats along the a5-d8 diagonal if Black's king remains in the center. This move avoids the more committal a3, which would weaken our queenside pawn structure, and instead opts for harmonious piece development. Our plan remains focused on solid development while letting Black decide whether to maintain the tension or exchange pieces.",
+      "shortNarration": "Bd2 unpins the knight, prepares to exchange bishops on our terms, and keeps queenside pawns solid."
+    },
+    {
+      "san": "Bxc3",
+      "annotation": "Black exchanges the bishop for our knight, a critical decision that eliminates our defender of d4 but also gives up the valuable dark-squared bishop. This exchange is typical in Chigorin structures - Black damages our pawn structure by forcing us to recapture with the b-pawn, creating doubled pawns and opening the b-file. However, Black also gives us the bishop pair and removes a key piece that was supporting the e5 pawn. Our opponent is betting that the structural damage and piece activity will provide sufficient compensation for the bishop.",
+      "shortNarration": "Black trades the dark-squared bishop for the bishop on c3, doubling our b-pawns but giving us the bishop pair and opening the b-file."
+    },
+    {
+      "san": "Bxc3",
+      "annotation": "We recapture with the bishop rather than the pawn, maintaining our pawn structure and keeping our pieces active. This recapture keeps our bishop on an excellent diagonal where it eyes both the e5 pawn and the g7 square, while also supporting potential advances like d5. By avoiding bxc3, we prevent doubled pawns and maintain more flexible pawn structure, though we do surrender some control over the queenside. The bishop on c3 is perfectly placed to support our central strategy and creates tactical possibilities in the center.",
+      "shortNarration": "Recapturing with the bishop on c3 avoids doubled pawns, keeps the diagonal to e5 and g7, and supports a future d5 break."
+    },
+    {
+      "san": "exd4",
+      "annotation": "Black captures our central pawn, opening the center completely and transforming the position into a tactical battle. This exchange eliminates the central tension and opens lines for both sides' pieces, particularly favoring rapid development and piece activity over long-term structural considerations. Our opponent is consistent with the Chigorin philosophy - creating immediate complications and piece play rather than worrying about positional factors. The open center means both kings may face danger if they remain uncastled, making rapid development and king safety crucial priorities.",
+      "shortNarration": "Black captures the central pawn, opening lines for a tactical battle where rapid development and king safety are critical."
+    },
+    {
+      "san": "Ne2",
+      "annotation": "We're developing our knight to an flexible square that supports the recapture of our d4 pawn while maintaining excellent piece coordination. The knight on e2 can jump to multiple strong squares like f4, d4, or g3, depending on how the position develops, and it doesn't block our f-pawn like Nf3 would. This move also prepares to recapture on d4 with the knight, maintaining central control and piece activity. Costa's Line with Ne2 is considered one of the most reliable ways to handle this sharp variation, prioritizing piece flexibility and central control over immediate tactical threats.",
+      "shortNarration": "Ne2 supports the d4 recapture, keeps the f-pawn free, and allows flexible jumps to f4, d4, or g3."
+    }
+  ]
+}

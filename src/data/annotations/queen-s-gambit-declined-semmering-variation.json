@@ -1,0 +1,65 @@
+{
+  "openingId": "queen-s-gambit-declined-semmering-variation",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central squares and preparing to develop our pieces with maximum control over the board's heart. This move controls the important e5 and c5 squares while opening lines for our dark-squared bishop and queen. The d4 opening leads to more positional, strategic games compared to 1.e4, and we're signaling our intention to fight for long-term advantages rather than quick tactical shots. This is the starting move of the Queen's Gambit family, one of the most respected and theoretically sound opening systems in chess.",
+      "shortNarration": "1.d4 stakes claim to e5 and c5, opens lines for the queen and dark-squared bishop, and signals a positional, strategic fight."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds by occupying the center with their own pawn, creating immediate tension in the heart of the board. this stabilizing move prevents us from advancing to e4 and establishes Black's own central presence, leading to the classical pawn structure we see in Queen's Pawn games. Our opponent is choosing a principled defense, meeting our central challenge head-on rather than allowing us free rein in the center. This sets up the fundamental tension that will define the opening - we'll soon offer the c4 gambit to try to deflect this central pawn.",
+      "shortNarration": "Black's d5 pawn occupies the center, blocking e4 and setting up the classical Queen's Pawn tension — White will offer the c4 gambit to deflect it."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're playing the famous Queen's Gambit, offering our c-pawn to deflect Black's central d5 pawn and potentially gain superior central control. This isn't a true gambit since Black can't really hold the pawn safely, but it puts immediate pressure on Black's central setup. By attacking the d5 pawn, we're forcing our opponent to make a fundamental decision about their pawn structure - whether to maintain the tension, capture, or reinforce. This move also opens the c-file for our rook and prepares to develop our queenside pieces with maximum activity.",
+      "shortNarration": "The Queen's Gambit offers the c-pawn to pressure d5, opening the c-file and developing queenside pieces."
+    },
+    {
+      "san": "c6",
+      "annotation": "Black chooses the solid Slav Defense setup, supporting the d5 pawn and preparing to potentially develop the queen's bishop to f5 or g4 before it gets blocked in. This move keeps the central tension while avoiding the main lines of the Queen's Gambit Declined where the bishop gets trapped behind the pawn chain. Our opponent is prioritizing solid development and maintaining their central pawn rather than accepting our gambit or playing the more common ...e6. This leads to sharp, tactical play where both sides fight for piece activity and central control.",
+      "shortNarration": "Black's Slav setup keeps the d5 pawn solid, develops the queen's bishop to f5 or g4, and avoids the Queen's Gambit Declined's trapped bishop."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're developing our kingside knight to its most active square, attacking Black's d5 pawn and preparing to castle kingside quickly. This active move increases the pressure on the center while preparing to support our central pawn breaks or piece development. The knight on f3 also controls important central squares like e5 and g5, and works well with our planned piece coordination. We're following opening principles by developing pieces toward the center and creating multiple threats that Black must address.",
+      "shortNarration": "Knight to f3 attacks d5, controls e5 and g5, and prepares kingside castling."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Our opponent develops their kingside knight, defending the attacked d5 pawn while bringing another piece into the center. This is the most natural response, as the knight not only protects the central pawn but also stakes its own claim to important squares like e4 and g4. Black is maintaining the symmetrical tension while preparing their own kingside development. This move keeps all options open for Black - they can still decide whether to maintain tension with the d5 pawn or eventually play moves like ...dxc4.",
+      "shortNarration": "Black's knight defends d5 and eyes e4 and g4, keeping tension in the center."
+    },
+    {
+      "san": "e3",
+      "annotation": "We're playing the solid English Wall setup, supporting our d4 pawn and preparing to develop our light-squared bishop to d3 or e2. This move prioritizes piece coordination and rapid development over more aggressive alternatives like Nc3 or Bg5. By playing e3, we're creating a secure pawn structure that supports our center while opening the diagonal for our bishop development. This approach leads to more positional play where we'll seek long-term advantages through superior piece activity and pawn structure rather than immediate tactical complications.",
+      "shortNarration": "e3 solidifies the center, opens the bishop's diagonal, and prioritizes piece coordination over immediate tactics."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black adopts a French Defense-style pawn structure, supporting their center and preparing to develop the light-squared bishop, though it will be somewhat restricted. This move creates a solid pawn chain with d5-e6 but also potentially limits Black's dark-squared bishop and creates some structural commitments. Our opponent is choosing solidity over piece activity, which is a common theme in the Queen's Gambit Declined family. This setup typically leads to maneuvering games where both sides improve their pieces while looking for the right moment to create central breaks.",
+      "shortNarration": "Black's French-style d5-e6 pawn chain solidifies the center but restricts the light-squared bishop, leading to a maneuvering game."
+    },
+    {
+      "san": "Nbd2",
+      "annotation": "We're developing our queen's knight to d2, supporting our central structure while keeping our options flexible for piece coordination. This move prepares to potentially reroute the knight to e4 or c4 via the b3 square, and avoids blocking our c-pawn which might want to advance later. The knight on d2 also supports a potential e4 advance in the center, giving us additional central control. This development is more flexible than Nc3, which would block our c-pawn and commit to a specific pawn structure too early in the position.",
+      "shortNarration": "Nd2 supports the center, keeps the c-pawn free, and allows rerouting to e4 or c4 via b3."
+    },
+    {
+      "san": "Nbd7",
+      "annotation": "Our opponent develops their queenside knight, preparing to support central operations and potentially reroute to more active squares. This knight placement supports the e5 advance and can later jump to b6 or f6 (after the other knight moves) to increase pressure on our position. Black is maintaining their solid structure while improving their piece coordination and preparing for middlegame maneuvering. The knight on d7 also supports potential pawn breaks and provides additional defense to the kingside structure.",
+      "shortNarration": "Black's knight on d7 supports e5, can jump to b6 or f6, and reinforces the kingside."
+    },
+    {
+      "san": "Bd3",
+      "annotation": "We're developing our light-squared bishop to an excellent central square, pointing toward Black's kingside and controlling important central squares. This bishop development completes our kingside piece coordination and prepares for castling while maintaining pressure on the center. The bishop on d3 supports potential central advances and creates tactical possibilities involving sacrifices on h7 if Black castles kingside. This active move follows the opening principle of developing pieces toward the center while keeping maximum flexibility for our pawn structure and piece placement.",
+      "shortNarration": "Bishop to d3 develops toward the center, eyes the kingside, and prepares castling with potential h7 sacrifices."
+    },
+    {
+      "san": "c5",
+      "annotation": "Black strikes back in the center with this thematic pawn break, challenging our d4 pawn and opening lines for piece activity. This is the characteristic move of the Semmering Variation, creating immediate central tension and forcing us to make important decisions about our pawn structure. Our opponent is following the principle of striking back in the center when possible, and this move opens the c-file and creates tactical complications. We now must decide whether to maintain the tension, advance with d5, or capture on c5, each leading to different types of positions with distinct strategic themes.",
+      "shortNarration": "Black's d5 break challenges d4, opening the c-file and forcing a decision between d5, dxc5, or maintaining tension."
+    }
+  ]
+}

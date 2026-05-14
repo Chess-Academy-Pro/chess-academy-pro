@@ -1,0 +1,50 @@
+{
+  "openingId": "queen-s-gambit-declined-semi-tarrasch-defense",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, staking an immediate claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This move embodies classical opening principles by controlling the center with a pawn and preparing rapid piece development. The d4 opening leads to rich, strategic middlegames where positional understanding often trumps tactical fireworks. Unlike 1.e4 openings that often lead to sharp tactical battles, 1.d4 typically results in slower, more maneuvering games where we can gradually build pressure and improve our piece coordination.",
+      "shortNarration": "1.d4 stakes a central claim on e5 and c5, opening lines for the bishop and queen for a slow, positional buildup."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black responds with the most active move, bringing the knight to its best central square while immediately attacking our d4 pawn. This forces us to make a decision about how to defend the center, and it's the starting move of many solid defensive systems for Black. The knight on f6 also prepares kingside castling and keeps Black's options open for various pawn structures. By developing this knight first rather than playing d5 immediately, Black maintains flexibility in choosing between different defensive setups like the Queen's Gambit Declined, Nimzo-Indian, or King's Indian Defense.",
+      "shortNarration": "Black's knight to f6 attacks d4, forcing a decision on center defense while keeping options open for QGD, Nimzo, or KID."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're playing the English Opening move order that will likely transpose into a Queen's Gambit, immediately challenging Black's potential central pawn on d5 before it's even played. This move controls the crucial d5 and b5 squares while preparing to support our d4 pawn with the queen's bishop once it develops to d3 or e2. The c4 advance also opens the c-file for our rook in the future and gives us space advantage on the queenside. By playing c4 now rather than supporting d4 with e3 or Nbd2, we're aiming for more active piece play and maintaining maximum pressure on Black's position from the very beginning.",
+      "shortNarration": "c4 challenges d5 before it's played, controls b5, and opens the c-file for queenside pressure."
+    },
+    {
+      "san": "e6",
+      "annotation": "Our opponent chooses the solid French Defense pawn structure, supporting an eventual d5 advance while keeping the position closed and strategic. This move prepares Black to establish a pawn on d5 that will be firmly supported, leading to the Queen's Gambit Declined family of openings. The e6 pawn does restrict Black's light-squared bishop temporarily, but it creates a solid pawn chain and prevents any immediate tactics involving our pieces landing on d5 or f5. Black is clearly signaling an intention to play a classical, positional game rather than seeking immediate tactical complications, and we should prepare for a long, strategic battle where small advantages gradually accumulate.",
+      "shortNarration": "Black's e6 prepares a solid French Defense pawn chain, restricting the light-squared bishop but preventing immediate tactics on d5 or f5."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We develop our kingside knight to its most active square, where it supports our d4 pawn while preparing kingside castling and maintaining flexibility for future plans. The knight on f3 also prevents Black from playing an early Bg4 pin, which could become annoying if we're not careful about our move order. This active move keeps all our options open for how we want to structure our position - we could still transpose to various systems depending on how Black responds. By developing pieces before committing to a specific pawn structure, we're following classical opening principles while keeping maximum pressure on Black to show their hand first.",
+      "shortNarration": "Nf3 develops the knight, supports d4, prepares kingside castling, and prevents Bg4 pin."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black strikes back in the center with the thematic d5 advance, directly challenging our c4 pawn and establishing the Queen's Gambit Declined pawn structure. This central pawn break equalizes space in the center and gives Black a solid foundation to build their position around. The d5 pawn is well-supported by the e6 pawn and attacks our c4 pawn, forcing us to make a decision about the central tension. With this move, Black has achieved one of their main opening goals - establishing a strong point in the center while maintaining a solid, classical pawn structure that's been trusted by generations of strong players.",
+      "shortNarration": "Black's d5 advance challenges the c4 pawn, establishing a solid Queen's Gambit Declined structure with the d5 pawn supported by e6."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We complete our initial development phase by bringing the queenside knight to its most active square, where it supports our d4 pawn and adds pressure to Black's d5 pawn. This knight placement is crucial because it maintains the central tension while preparing several possible continuations - we could play Bg5 to pin the knight, or e3 to support our center, or even consider more aggressive moves like Qb3. The knight on c3 also prepares potential pawn breaks like e4 in some variations, giving us dynamic possibilities in the center. By developing both knights before deciding how to resolve the central tension, we're keeping maximum flexibility while maintaining strong pressure on Black's position.",
+      "shortNarration": "Knight to c3 supports d4, pressures d5, and keeps central tension flexible for Bg5, e3, or Qb3."
+    },
+    {
+      "san": "c5",
+      "annotation": "Our opponent plays the central idea of the Semi-Tarrasch Defense, immediately striking at our d4 pawn and creating counterplay in the center rather than passively maintaining the tension. This bold pawn break transforms the position from a traditional Queen's Gambit Declined into a more dynamic struggle where both sides have central pawn majorities to work with. Black is accepting some structural weakness (the isolated d5 pawn after exchanges) in exchange for active piece play and central counterplay. The c5 advance also opens lines for Black's pieces, particularly the queen and dark-squared bishop, and creates immediate tactical threats that we must address carefully.",
+      "shortNarration": "Black's c5 break in the Semi-Tarrasch accepts an isolated d5 pawn for active piece play and immediate tactical threats."
+    },
+    {
+      "san": "cxd5",
+      "annotation": "We capture on d5, accepting the pawn trade that transforms the position into the characteristic Semi-Tarrasch structure where Black will have an isolated d-pawn but active piece play in return. This exchange is practically forced since allowing Black to capture on d4 would give them an excellent position with a strong pawn center and active pieces. After this capture, Black will likely recapture with the e6 pawn, creating an isolated d5 pawn that becomes both a strength (controlling key central squares) and a potential weakness (a target for our pieces to attack). We're entering a well-known theoretical position where our plan will be to blockade and attack the isolated pawn while Black seeks active piece play and kingside attacking chances to compensate for their structural deficit.",
+      "shortNarration": "Capturing on d5 forces the Semi-Tarrasch structure where Black's isolated d-pawn offers active piece play but becomes a target to blockade and attack."
+    }
+  ]
+}

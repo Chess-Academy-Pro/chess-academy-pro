@@ -1,0 +1,60 @@
+{
+  "openingId": "king-s-indian-defense-semi-averbakh-system",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately controlling the central e5 square and preparing to build a strong pawn center. This move gives us excellent flexibility - we can transpose into many different opening systems depending on Black's response. The d4 move also opens lines for our dark-squared bishop and queen, while supporting an eventual c4 advance to control more central territory. Against the King's Indian Defense setup that's coming, this central pawn will become a key asset in our space advantage.",
+      "shortNarration": "d4 controls e5, opens lines for the bishop and queen, and supports c4 for a space advantage against the King's Indian."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops the knight to its most active square, immediately putting pressure on our central e4 square (which we haven't occupied yet) and preparing the characteristic King's Indian setup. This knight on f6 is a cornerstone piece in Black's defensive system - it guards the kingside, supports central counterplay, and can potentially reroute to more active squares later. Black is signaling an intention to fianchetto the king's pawn on g7, creating a powerful long diagonal battery. We need to be aware that this seemingly quiet development is actually quite aggressive - Black is preparing dynamic counterplay against our center.",
+      "shortNarration": "Black's knight on f6 pressures e4 and prepares a King's Indian fianchetto, setting up dynamic counterplay against White's center."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're expanding in the center with the English Opening move, controlling the crucial d5 and b5 squares while preparing to support our d4 pawn with a potential e3 or e4 advance. This move also opens up possibilities for our queen's bishop and gives us more space on the queenside. The c4 pawn is particularly effective against Black's King's Indian setup because it prevents the freeing move d6-d5 and gives us long-term pressure on Black's position. By playing c4, we're committing to a more positional, space-gaining approach rather than immediate tactical complications.",
+      "shortNarration": "c4 controls d5 and b5, blocks Black's d6-d5 freeing break, and gains queenside space in the King's Indian."
+    },
+    {
+      "san": "g6",
+      "annotation": "Black continues with the characteristic King's Indian fianchetto, preparing to place the dark-squared bishop on the powerful long diagonal from g7. This pawn move also provides luft (breathing room) for the black king and supports an eventual f5 advance - a key strategic idea in the King's Indian Defense. While g6 might look like a weakening move, in the King's Indian it's actually the foundation of Black's counterattacking chances, as the bishop on g7 will exert tremendous pressure against our center. We should recognize that Black is setting up one of the most dynamic and double-edged defensive systems in chess.",
+      "shortNarration": "Black fianchettoes the bishop to g7, supporting f5 and pressuring the center — a dynamic King's Indian setup."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We're developing our knight to its ideal square, supporting the d4 pawn and preparing to advance e4 to build our ideal pawn center. The knight on c3 also eyes the important e4 and d5 squares, which will become crucial battlegrounds in the middlegame. This development fits perfectly with our positional strategy - we're methodically building up our position while maintaining maximum flexibility. From c3, our knight can potentially reroute to e2 (supporting f4 advances) or jump to d5 in some lines, making it a key piece in our setup.",
+      "shortNarration": "Knight to c3 supports d4, eyes e4 and d5, and can reroute to e2 for f4 advances."
+    },
+    {
+      "san": "Bg7",
+      "annotation": "Black completes the fianchetto development, placing the dark-squared bishop on its dream square where it commands the entire long diagonal from a1 to h8. This bishop will be Black's most important piece throughout the game, putting constant pressure on our center and supporting kingside counterplay with moves like f5. The Bg7 also connects Black's rooks and prepares castling, while maintaining the option to trade off our dark-squared bishop if it becomes too active. We need to be very careful about this bishop - it's the engine that powers many of Black's tactical and strategic ideas in the King's Indian.",
+      "shortNarration": "Black's fianchettoed Bg7 commands the long diagonal, pressuring the center and supporting kingside counterplay with f5."
+    },
+    {
+      "san": "e4",
+      "annotation": "We're establishing our ideal pawn center, creating the classical setup that gives us significant space advantage and controls key central squares like d5 and f5. This advance also opens up our light-squared bishop and allows our pieces to coordinate more actively in the center. The e4-d4 pawn duo is the cornerstone of White's strategy in this system - it cramps Black's position and makes it harder for Black to achieve the liberating d6-d5 break. However, we must be aware that this pawn center also becomes a target for Black's pieces, particularly that dangerous bishop on g7.",
+      "shortNarration": "The e4-d4 pawn duo cramps Black and controls d5 and f5, but the g7 bishop targets the center."
+    },
+    {
+      "san": "d6",
+      "annotation": "Black establishes a solid pawn structure while preparing to complete development with moves like Nbd7 and potentially c5 to challenge our center. This pawn on d6 supports the crucial e5 advance and maintains flexibility for Black's pieces, though it does create a slightly passive position in the short term. The d6 move is typical of the King's Indian - Black accepts a somewhat cramped position initially in exchange for dynamic counterplay later. We should note that Black is now ready to castle and then begin the characteristic King's Indian counterattack with moves like e5, f5, or c5 depending on how we continue.",
+      "shortNarration": "Black's d6 solidifies the King's Indian setup, accepting short-term passivity for later counterplay with e5, f5, or c5."
+    },
+    {
+      "san": "Be2",
+      "annotation": "We're developing our light-squared bishop to a solid square that supports our kingside and prepares castling, while keeping our options open for various pawn advances. The bishop on e2 doesn't block our f-pawn (unlike Bd3), which means we can potentially play f4-f5 in some lines to support a kingside attack. This move also prepares to meet any e5 advance by Black with f3, maintaining our central control. While Be2 might seem less active than Bd3, it's actually more flexible and fits well with the semi-positional approach we're taking in this system.",
+      "shortNarration": "Be2 keeps the f-pawn free for f4-f5 or f3, supporting a kingside attack while maintaining central control."
+    },
+    {
+      "san": "O-O",
+      "annotation": "Black safely tucks the king away and connects the rooks, completing the essential part of development before beginning more active operations. Castling is particularly important in the King's Indian because Black often launches kingside counterplay with f5, and having the king safe is crucial before such commitments. This move also brings the rook to f8, where it can support the typical f7-f5 advance that's coming in many lines. Now Black has completed the basic setup and is ready to start the characteristic King's Indian counterplay - we need to be prepared for active moves like e5, c5, or f5 in the coming moves.",
+      "shortNarration": "Black castles, connecting rooks and preparing f5 for the King's Indian counterplay."
+    },
+    {
+      "san": "Be3",
+      "annotation": "We're completing our development while introducing the Semi-Averbakh System, where this bishop on e3 serves multiple important functions in our setup. The Be3 supports our d4 pawn, controls the important f4 square (preventing Black's f5 advance temporarily), and prepares potential queenside play with Qd2 and long castling. This move also keeps our king in the center longer, maintaining flexibility about whether to castle short or long depending on how the position develops. The bishop on e3 is particularly well-placed because it can support both f4-f5 advances for a kingside attack or help with central control - it's the hallmark move that defines this variation of the King's Indian Attack.",
+      "shortNarration": "Be3 supports d4, controls f4, prepares Qd2 and long castling, and keeps king flexible for short or long castle."
+    }
+  ]
+}

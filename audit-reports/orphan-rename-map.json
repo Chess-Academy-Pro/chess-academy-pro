@@ -1,0 +1,582 @@
+{
+  "totals": {
+    "high": 11,
+    "medium": 3,
+    "none": 22,
+    "total": 36
+  },
+  "report": [
+    {
+      "orphanId": "albin-countergambit",
+      "file": "albin-countergambit.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "alekhine-defence",
+      "file": "alekhine-defence.json",
+      "verdict": "high-confidence",
+      "bestScore": 100,
+      "suggested": "alekhine-defense",
+      "suggestedName": "Alekhine Defense",
+      "candidates": [
+        {
+          "score": 100,
+          "nameSlug": "alekhine-defense",
+          "name": "Alekhine Defense",
+          "eco": "B02"
+        },
+        {
+          "score": 100,
+          "nameSlug": "alekhine-defense",
+          "name": "Alekhine Defense",
+          "eco": "B03"
+        },
+        {
+          "score": 100,
+          "nameSlug": "alekhine-defense",
+          "name": "Alekhine Defense",
+          "eco": "B03"
+        }
+      ]
+    },
+    {
+      "orphanId": "gambit-benko-gambit",
+      "file": "benko-gambit.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "benoni-defence",
+      "file": "benoni-defence.json",
+      "verdict": "high-confidence",
+      "bestScore": 100,
+      "suggested": "benoni-defense",
+      "suggestedName": "Benoni Defense",
+      "candidates": [
+        {
+          "score": 100,
+          "nameSlug": "benoni-defense",
+          "name": "Benoni Defense",
+          "eco": "A56"
+        },
+        {
+          "score": 100,
+          "nameSlug": "benoni-defense",
+          "name": "Benoni Defense",
+          "eco": "A61"
+        },
+        {
+          "score": 73,
+          "nameSlug": "borg-defense",
+          "name": "Borg Defense",
+          "eco": "B00"
+        }
+      ]
+    },
+    {
+      "orphanId": "birds-opening",
+      "file": "birds-opening.json",
+      "verdict": "high-confidence",
+      "bestScore": 90,
+      "suggested": "bird-opening",
+      "suggestedName": "Bird Opening",
+      "candidates": [
+        {
+          "score": 90,
+          "nameSlug": "bird-opening",
+          "name": "Bird Opening",
+          "eco": "A02"
+        },
+        {
+          "score": 76,
+          "nameSlug": "barnes-opening",
+          "name": "Barnes Opening",
+          "eco": "A00"
+        },
+        {
+          "score": 73,
+          "nameSlug": "grob-opening",
+          "name": "Grob Opening",
+          "eco": "A00"
+        }
+      ]
+    },
+    {
+      "orphanId": "budapest-gambit",
+      "file": "budapest-gambit.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "caro-kann",
+      "file": "caro-kann.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "dutch-defence",
+      "file": "dutch-defence.json",
+      "verdict": "high-confidence",
+      "bestScore": 100,
+      "suggested": "dutch-defense",
+      "suggestedName": "Dutch Defense",
+      "candidates": [
+        {
+          "score": 100,
+          "nameSlug": "dutch-defense",
+          "name": "Dutch Defense",
+          "eco": "A80"
+        },
+        {
+          "score": 100,
+          "nameSlug": "dutch-defense",
+          "name": "Dutch Defense",
+          "eco": "A84"
+        },
+        {
+          "score": 76,
+          "nameSlug": "czech-defense",
+          "name": "Czech Defense",
+          "eco": "B07"
+        }
+      ]
+    },
+    {
+      "orphanId": "evans-gambit",
+      "file": "evans-gambit.json",
+      "verdict": "review-candidate",
+      "bestScore": 73,
+      "suggested": "duras-gambit",
+      "suggestedName": "Duras Gambit",
+      "candidates": [
+        {
+          "score": 73,
+          "nameSlug": "duras-gambit",
+          "name": "Duras Gambit",
+          "eco": "B00"
+        },
+        {
+          "score": 73,
+          "nameSlug": "danish-gambit",
+          "name": "Danish Gambit",
+          "eco": "C21"
+        },
+        {
+          "score": 73,
+          "nameSlug": "king-s-gambit",
+          "name": "King's Gambit",
+          "eco": "C30"
+        }
+      ]
+    },
+    {
+      "orphanId": "gambit-benko-gambit",
+      "file": "gambit-benko-gambit.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "gambit-budapest-gambit",
+      "file": "gambit-budapest-gambit.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "gambit-evans-gambit",
+      "file": "gambit-evans-gambit.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "gambit-kings-gambit",
+      "file": "gambit-kings-gambit.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "grunfeld-defence",
+      "file": "grunfeld-defence.json",
+      "verdict": "high-confidence",
+      "bestScore": 90,
+      "suggested": "gr-nfeld-defense",
+      "suggestedName": "Grünfeld Defense",
+      "candidates": [
+        {
+          "score": 90,
+          "nameSlug": "gr-nfeld-defense",
+          "name": "Grünfeld Defense",
+          "eco": "D80"
+        }
+      ]
+    },
+    {
+      "orphanId": "kings-indian-defense",
+      "file": "kings-indian-defense.json",
+      "verdict": "high-confidence",
+      "bestScore": 90,
+      "suggested": "king-s-indian-defense",
+      "suggestedName": "King's Indian Defense",
+      "candidates": [
+        {
+          "score": 90,
+          "nameSlug": "king-s-indian-defense",
+          "name": "King's Indian Defense",
+          "eco": "E61"
+        },
+        {
+          "score": 73,
+          "nameSlug": "bogo-indian-defense",
+          "name": "Bogo-Indian Defense",
+          "eco": "E11"
+        },
+        {
+          "score": 73,
+          "nameSlug": "nimzo-indian-defense",
+          "name": "Nimzo-Indian Defense",
+          "eco": "E20"
+        }
+      ]
+    },
+    {
+      "orphanId": "marshall-attack",
+      "file": "marshall-attack.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "nimzo-indian",
+      "file": "nimzo-indian.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "old-indian-defence",
+      "file": "old-indian-defence.json",
+      "verdict": "high-confidence",
+      "bestScore": 100,
+      "suggested": "old-indian-defense",
+      "suggestedName": "Old Indian Defense",
+      "candidates": [
+        {
+          "score": 100,
+          "nameSlug": "old-indian-defense",
+          "name": "Old Indian Defense",
+          "eco": "A41"
+        },
+        {
+          "score": 100,
+          "nameSlug": "old-indian-defense",
+          "name": "Old Indian Defense",
+          "eco": "A53"
+        },
+        {
+          "score": 76,
+          "nameSlug": "indian-defense",
+          "name": "Indian Defense",
+          "eco": "A45"
+        }
+      ]
+    },
+    {
+      "orphanId": "pirc-defence",
+      "file": "pirc-defence.json",
+      "verdict": "high-confidence",
+      "bestScore": 100,
+      "suggested": "pirc-defense",
+      "suggestedName": "Pirc Defense",
+      "candidates": [
+        {
+          "score": 100,
+          "nameSlug": "pirc-defense",
+          "name": "Pirc Defense",
+          "eco": "B00"
+        },
+        {
+          "score": 100,
+          "nameSlug": "pirc-defense",
+          "name": "Pirc Defense",
+          "eco": "B00"
+        },
+        {
+          "score": 100,
+          "nameSlug": "pirc-defense",
+          "name": "Pirc Defense",
+          "eco": "B00"
+        }
+      ]
+    },
+    {
+      "orphanId": "pro-naroditsky-jobava-london",
+      "file": "pro-naroditsky-jobava-london.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "qga",
+      "file": "qga.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "qgd",
+      "file": "qgd.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "queens-indian",
+      "file": "queens-indian.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "reti-opening",
+      "file": "reti-opening.json",
+      "verdict": "high-confidence",
+      "bestScore": 90,
+      "suggested": "r-ti-opening",
+      "suggestedName": "Réti Opening",
+      "candidates": [
+        {
+          "score": 90,
+          "nameSlug": "r-ti-opening",
+          "name": "Réti Opening",
+          "eco": "A09"
+        },
+        {
+          "score": 73,
+          "nameSlug": "amar-opening",
+          "name": "Amar Opening",
+          "eco": "A00"
+        },
+        {
+          "score": 73,
+          "nameSlug": "grob-opening",
+          "name": "Grob Opening",
+          "eco": "A00"
+        }
+      ]
+    },
+    {
+      "orphanId": "scandinavian-defence",
+      "file": "scandinavian-defence.json",
+      "verdict": "high-confidence",
+      "bestScore": 100,
+      "suggested": "scandinavian-defense",
+      "suggestedName": "Scandinavian Defense",
+      "candidates": [
+        {
+          "score": 100,
+          "nameSlug": "scandinavian-defense",
+          "name": "Scandinavian Defense",
+          "eco": "B01"
+        },
+        {
+          "score": 100,
+          "nameSlug": "scandinavian-defense",
+          "name": "Scandinavian Defense",
+          "eco": "B01"
+        }
+      ]
+    },
+    {
+      "orphanId": "scotch-gambit",
+      "file": "scotch-gambit.json",
+      "verdict": "review-candidate",
+      "bestScore": 76,
+      "suggested": "scotch-game",
+      "suggestedName": "Scotch Game",
+      "candidates": [
+        {
+          "score": 76,
+          "nameSlug": "scotch-game",
+          "name": "Scotch Game",
+          "eco": "C44"
+        },
+        {
+          "score": 76,
+          "nameSlug": "scotch-game",
+          "name": "Scotch Game",
+          "eco": "C44"
+        },
+        {
+          "score": 76,
+          "nameSlug": "scotch-game",
+          "name": "Scotch Game",
+          "eco": "C45"
+        }
+      ]
+    },
+    {
+      "orphanId": "semi-slav",
+      "file": "semi-slav.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "sicilian-alapin",
+      "file": "sicilian-alapin.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "sicilian-dragon",
+      "file": "sicilian-dragon.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "sicilian-najdorf",
+      "file": "sicilian-najdorf.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "sicilian-sveshnikov",
+      "file": "sicilian-sveshnikov.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "slav-defence",
+      "file": "slav-defence.json",
+      "verdict": "high-confidence",
+      "bestScore": 100,
+      "suggested": "slav-defense",
+      "suggestedName": "Slav Defense",
+      "candidates": [
+        {
+          "score": 100,
+          "nameSlug": "slav-defense",
+          "name": "Slav Defense",
+          "eco": "D10"
+        },
+        {
+          "score": 100,
+          "nameSlug": "slav-defense",
+          "name": "Slav Defense",
+          "eco": "D10"
+        },
+        {
+          "score": 100,
+          "nameSlug": "slav-defense",
+          "name": "Slav Defense",
+          "eco": "D10"
+        }
+      ]
+    },
+    {
+      "orphanId": "smith-morra-gambit",
+      "file": "smith-morra-gambit.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "stafford-gambit",
+      "file": "stafford-gambit.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "two-knights-defence",
+      "file": "two-knights-defence.json",
+      "verdict": "no-match",
+      "bestScore": 0,
+      "suggested": null,
+      "suggestedName": null,
+      "candidates": []
+    },
+    {
+      "orphanId": "vienna-gambit",
+      "file": "vienna-gambit.json",
+      "verdict": "review-candidate",
+      "bestScore": 76,
+      "suggested": "vienna-game",
+      "suggestedName": "Vienna Game",
+      "candidates": [
+        {
+          "score": 76,
+          "nameSlug": "vienna-game",
+          "name": "Vienna Game",
+          "eco": "C25"
+        },
+        {
+          "score": 73,
+          "nameSlug": "benko-gambit",
+          "name": "Benko Gambit",
+          "eco": "A57"
+        },
+        {
+          "score": 73,
+          "nameSlug": "benko-gambit",
+          "name": "Benko Gambit",
+          "eco": "A59"
+        }
+      ]
+    }
+  ]
+}

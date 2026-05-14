@@ -1,0 +1,35 @@
+{
+  "openingId": "queen-s-gambit-accepted-gunsberg-defense",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move begins one of the most classical and principled openings in chess, where we're offering to trade our c-pawn for Black's central d-pawn in the next move. The Queen's Gambit isn't actually a true gambit since we can usually regain the pawn easily, but it allows us to gain central control and faster development. Our long-term plan revolves around controlling the center with pawns and pieces, then launching an attack on either the kingside or queenside depending on how the position develops.",
+      "shortNarration": "1.d4 claims e5 and c5, preparing the Queen's Gambit where the c-pawn trades for Black's d-pawn to gain central control and faster development."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds by occupying the center with their own pawn, directly challenging our control of the e4 square and establishing a solid foothold in the middle of the board. This is the most natural and principled response, as it prevents us from simply advancing e2-e4 and dominating the center with two pawns. Black's move also opens up development paths for both the dark-squared bishop on c8 and the queen, giving them good piece coordination potential. We should expect Black to either maintain this central tension or potentially exchange on c4 if we offer the Queen's Gambit on the next move.",
+      "shortNarration": "Black's e5 challenges e4, opens lines for the queen and dark-squared bishop, and prevents White from dominating the center with two pawns."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're offering the famous Queen's Gambit, attacking Black's central d5 pawn and trying to deflect it from the center to gain superior central control. If Black captures with dxc4, we'll recapture and have achieved our goal of removing their central pawn while maintaining our d4 stronghold. This move also opens up the long diagonal for our dark-squared bishop and prepares natural development with moves like Nc3, Nf3, and eventually e3. The beauty of the Queen's Gambit is that we're not actually sacrificing material permanently - we can usually regain the pawn while achieving better piece coordination and central dominance.",
+      "shortNarration": "Queen's Gambit offers the c-pawn to deflect Black's d5 pawn, aiming for central control and open diagonals."
+    },
+    {
+      "san": "dxc4",
+      "annotation": "Our opponent accepts the gambit by capturing our c-pawn, temporarily winning material but allowing us to achieve superior central control with our d4 pawn. This is a perfectly legitimate choice - Black is saying 'I'll take your pawn and try to hold onto it while developing my pieces quickly.' The Queen's Gambit Accepted leads to sharp, tactical positions where both sides need to play accurately. Black's main challenge now will be defending the extra pawn on c4 while still developing their pieces harmoniously and not falling behind in development.",
+      "shortNarration": "Black accepts the gambit, winning a pawn but ceding central control with d4."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We develop our knight to its ideal square, attacking the e5 square and supporting our central d4 pawn while preparing to recapture on c4 if needed. This move is more flexible than the immediate 3.e3 or 3.e4 because it doesn't commit our pawn structure yet and allows us to see how Black continues. Our knight on f3 also eyes the important e5 and g5 squares, potentially supporting a future e2-e4 advance or kingside attacking chances. From f3, the knight can also reroute to e5 or g5 in many variations, giving us excellent piece activity and central control.",
+      "shortNarration": "Knight to f3 attacks e5, supports d4, and keeps pawn structure flexible while eyeing g5 for kingside play."
+    },
+    {
+      "san": "c5",
+      "annotation": "Black plays the Gunsberg Defense, immediately counterattacking our d4 pawn and trying to create central tension rather than simply defending the extra c4 pawn. This is an ambitious and somewhat risky approach - Black is saying 'instead of passively defending my extra pawn, I'll create counterplay in the center and force you to deal with threats to your own pawn structure.' The move challenges our central dominance but potentially weakens Black's kingside and delays their development. We now need to decide whether to maintain the tension, advance d4-d5, or exchange pawns, each leading to very different types of positions with distinct strategic themes.",
+      "shortNarration": "Black's Gunsberg Defense counterattacks d4, creating central tension at the cost of kingside weakness and delayed development."
+    }
+  ]
+}

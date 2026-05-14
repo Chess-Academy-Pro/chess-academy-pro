@@ -1,0 +1,40 @@
+{
+  "openingId": "queen-s-gambit-declined-baltic-defense-queen-attack-deferred",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, staking our claim to the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move is the foundation of many classical openings and gives us excellent control over the center without committing to any particular pawn structure yet. The d4 move also opens a diagonal for our light-squared bishop and prepares potential support for a later c4 advance. Unlike 1.e4 which leads to more tactical, open games, 1.d4 typically produces more positional, strategic battles where understanding pawn structures and piece coordination becomes crucial.",
+      "shortNarration": "1.d4 claims the center, opens the bishop's diagonal, and prepares c4 for a strategic, positional game."
+    },
+    {
+      "san": "d5",
+      "annotation": "Our opponent responds symmetrically in the center, immediately challenging our control of the e4 square and establishing their own space. this stabilizing move is the most principled response to 1.d4, as Black mirrors our central control and prepares to develop their pieces to natural squares. By playing d5, Black also opens lines for their light-squared bishop and queen, while maintaining the option to support their center with moves like c6 or e6. This symmetrical approach often leads to rich middlegame positions where both sides have equal chances.",
+      "shortNarration": "Black's d5 mirrors central control, opens lines for queen and bishop, and prepares c6 or e6 support."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're launching the famous Queen's Gambit, offering our c-pawn to deflect Black's central d5 pawn and potentially gain a strong pawn center. This move attacks the d5 pawn directly and forces our opponent to make an important decision: accept the gambit, decline it, or try some other approach. The c4 advance also opens the c-file for potential future use and gives our pieces more breathing room on the queenside. Most importantly, if Black captures with dxc4, we can often recapture and establish pawns on both d4 and e4, creating an ideal pawn center.",
+      "shortNarration": "c4 offers the c-pawn to deflect d5, aiming for a strong d4-e4 pawn center and opening the c-file."
+    },
+    {
+      "san": "Bf5",
+      "annotation": "Our opponent chooses the Baltic Defense, an interesting but somewhat offbeat approach that develops the bishop to an active square before it gets blocked in by e6. This move supports the d5 pawn indirectly and puts the bishop on a diagonal where it eyes our b1 knight's future home and controls some central dark squares. While this looks natural, the bishop can become a target for our pieces later, and Black hasn't yet decided how to handle our c4 pawn. The Baltic Defense is less popular than main lines like the Orthodox or Tarrasch variations, but it can lead to interesting unbalanced positions if we're not careful with our response.",
+      "shortNarration": "The Baltic Defense's early bishop on f5 eyes d3 and supports d5, but becomes a target for White's c4 advance."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We're developing our knight to its ideal square, adding another attacker to the d5 pawn and preparing to increase the pressure on Black's position. This move is extremely logical because it develops a piece toward the center, supports our d4 pawn, and keeps all our options open regarding how to continue the attack on d5. The knight on c3 also prepares potential advances like e4 (if the d5 pawn moves) and supports the idea of playing f3 and e4 in some variations. From c3, our knight controls important central squares like e4 and d5, and can potentially reroute to more aggressive posts like e4 or b5 later in the game.",
+      "shortNarration": "Knight to c3 develops toward the center, supports d4, and pressures d5 while keeping options open for e4 or f3."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black solidifies their pawn structure with this classical move, supporting the d5 pawn and preparing to complete kingside development. This creates the typical Queen's Gambit Declined structure where Black maintains their central pawn but accepts a somewhat cramped position in exchange for solidity. The e6 move also opens a diagonal for Black's dark-squared bishop, though it does shut in the light-squared bishop that's already developed to f5. Now Black has created a solid but passive setup, and we need to think about how to exploit our space advantage and better piece coordination.",
+      "shortNarration": "Black's e6 solidifies the center and opens the dark-squared bishop's diagonal, but locks in the light-squared bishop on f5, giving White a space advantage and better piece coordination."
+    },
+    {
+      "san": "Qb3",
+      "annotation": "We're bringing our queen into the attack early, targeting both the b7 pawn and the d5 pawn simultaneously, which creates immediate tactical pressure. This aggressive move is particularly effective against the Baltic Defense because Black's light-squared bishop on f5 is not defending the b7 square, making it a vulnerable target. The queen on b3 also supports the idea of capturing on d5 and then targeting Black's kingside, as it controls the important b7-h1 diagonal. However, we must be careful not to overextend our queen too early, and we should be prepared to retreat it if Black consolidates with moves like Nd7 or c6, though the immediate pressure often forces Black into uncomfortable defensive moves.",
+      "shortNarration": "Queen to b3 targets b7 and d5, exploiting Black's light-squared bishop's absence from b7's defense."
+    }
+  ]
+}

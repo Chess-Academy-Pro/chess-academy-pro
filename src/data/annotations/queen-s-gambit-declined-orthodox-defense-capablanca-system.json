@@ -1,0 +1,95 @@
+{
+  "openingId": "queen-s-gambit-declined-orthodox-defense-capablanca-system",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move exemplifies classical opening principles by controlling the center and creating space for our pieces to develop. The d4 move is the foundation of many strong positional systems, including the Queen's Gambit, where we'll soon challenge Black's central presence with c2-c4. Unlike 1.e4 which leads to more tactical, open games, 1.d4 typically produces slower, more strategic battles where understanding pawn structures and piece coordination becomes crucial.",
+      "shortNarration": "1.d4 claims e5 and c5, preparing c4 for the Queen's Gambit — a strategic, positional opening."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds symmetrically in the center, immediately challenging our control of the e4 square and establishing their own central foothold. this stabilizing move prevents us from simply expanding with e2-e4 next move, forcing us to make concrete decisions about how to proceed. Black's d5 is the hallmark of classical defensive systems - rather than allowing White a free hand in the center, Black contests it immediately. This move sets up the potential for various pawn structures depending on whether and how the central tension gets resolved, making it a principled and flexible choice.",
+      "shortNarration": "Black's d5 challenges e4, forcing concrete decisions and setting up flexible pawn structures from the central tension."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're launching the famous Queen's Gambit, offering our c-pawn to deflect Black's strong central d5 pawn and gain superior central control. This move attacks the d5 pawn directly, forcing Black to make an important decision: capture and give us the center, or maintain the tension with a solid defense. The Queen's Gambit isn't a true gambit since Black can't hold the extra pawn safely, but it's one of the most principled ways to fight for central superiority. By playing c4, we're also preparing to develop our pieces actively, with the knight coming to c3 and potentially recapturing on c4 with a piece rather than a pawn.",
+      "shortNarration": "c4 attacks d5, forcing Black to decide between capturing and ceding central control or defending — the Queen's Gambit isn't a true gambit since the extra pawn can't be held."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black declines the gambit with a solid, classical move that supports the d5 pawn while preparing kingside development. This creates the characteristic pawn chain e6-d5 that defines the Queen's Gambit Declined, giving Black a solid but somewhat passive position. The e6 move also opens a diagonal for the light-squared bishop, though it will need to find an active square like b7 or a6 since c8-h3 is blocked by Black's own pawns. While this is more solid than accepting the gambit, it does concede some space in the center and commits Black to a slightly cramped but resilient setup.",
+      "shortNarration": "Black declines the gambit with e6, supporting d5 and creating a solid but slightly cramped pawn chain."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We're developing our knight to its ideal square, where it supports our central advance while adding pressure to Black's d5 pawn. This knight perfectly complements our Queen's Gambit strategy - it attacks d5 again, potentially allowing us to recapture with the knight if Black exchanges on c4. The knight from c3 also controls important central squares like e4 and can later support advances like d4-d5 or participate in kingside attacks. This development follows classical principles while maintaining maximum flexibility in our pawn structure, as we haven't yet committed to any particular formation.",
+      "shortNarration": "Knight to c3 attacks d5, supports central advance, and keeps pawn structure flexible."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops their knight to the most active square, where it controls the central e4 and d5 squares while preparing for kingside castling. This knight development is almost automatic in the Queen's Gambit Declined - it defends against potential e4 advances, supports Black's central presence, and clears the path for the king to castle safely. The knight on f6 also prepares various defensive setups, including the possibility of ...Ne4 to exchange pieces and ease the slight cramping that Black faces in this opening. From f6, the knight can also retreat to d7 or e8 if needed, maintaining flexibility in Black's defensive scheme.",
+      "shortNarration": "Knight to f6 controls e4 and d5, defends against e4, and prepares kingside castling."
+    },
+    {
+      "san": "Bg5",
+      "annotation": "We're developing our dark-squared bishop to an active square where it pins Black's knight to the queen, creating immediate tactical pressure. This bishop move is characteristic of the Orthodox Defense variation, where we develop actively before committing to our central pawn structure. The pin on f6 restricts Black's options significantly - they can't easily move the knight without losing material, and they must deal with this pressure before completing development. This move also prepares potential tactical shots and puts psychological pressure on Black, who must carefully navigate the pin while trying to complete their development safely.",
+      "shortNarration": "Bf4 pins the knight on f6 to the queen, restricting Black's development and threatening immediate material gain."
+    },
+    {
+      "san": "Be7",
+      "annotation": "Black breaks the annoying pin with the most active move, preparing to castle kingside while keeping their position solid and flexible. This bishop development is the defining move of the Orthodox Defense - Black doesn't challenge our bishop with ...h6 or create complications with ...Nbd7, but instead develops calmly and maintains their structural integrity. The bishop on e7 also prepares potential ...Nd5 ideas, where the knight can centralize while being protected by the bishop. This calm approach shows Black is willing to accept a slightly passive position in return for solid piece coordination and no structural weaknesses.",
+      "shortNarration": "Black develops the bishop to e7, preparing to castle and keeping the position solid without structural weaknesses."
+    },
+    {
+      "san": "e3",
+      "annotation": "We're solidifying our central control and preparing to complete our kingside development, while also supporting our d4 pawn and opening the diagonal for our light-squared bishop. This modest but effective move creates a solid pawn chain and eliminates any potential ...Ng4 ideas that could harass our bishop on g5. The e3 move also prepares Bd3, where our bishop will eye Black's kingside and support potential attacks later in the game. While not as aggressive as some alternatives, e3 maintains our central advantage while ensuring our position remains rock-solid and free from tactical complications.",
+      "shortNarration": "e3 solidifies the center, prepares Bd3, and blocks ...Ng4 harassing the g5 bishop."
+    },
+    {
+      "san": "O-O",
+      "annotation": "Black wisely prioritizes king safety by castling kingside, removing their king from potential central tactics while connecting the rooks. This move is practically forced in most Queen's Gambit Declined positions - with the center still tense and pieces developing actively, Black needs to secure their king before any complications arise. Castling also improves Black's rook coordination and prepares for potential central exchanges where rook activity becomes important. By castling now, Black maintains flexibility in their piece development while ensuring their king won't become a target in the emerging middlegame positions.",
+      "shortNarration": "Black castles kingside to secure the king, connect rooks, and stay flexible in the tense center."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're completing our basic development by bringing our knight to its most effective square, where it controls key central squares and supports our kingside while preparing to castle. This knight development maintains our slight initiative and prepares various middlegame plans, including potential e3-e4 advances or kingside attacks. The knight on f3 also supports our bishop on g5, making it harder for Black to challenge the pin effectively. With this move, we've developed three pieces harmoniously and maintained our central pressure while keeping all our options open for the middlegame phase.",
+      "shortNarration": "Knight to f3 develops, eyes central squares, supports the g5 bishop's pin, and keeps options open for e3-e4 or kingside attacks."
+    },
+    {
+      "san": "Nbd7",
+      "annotation": "Black develops their second knight to a natural square where it supports the center and prepares to challenge our bishop pair while maintaining solid coordination. This knight development is typical of the Orthodox Defense - Black isn't rushing to create counterplay but instead completes development methodically. From d7, the knight can later jump to b6 or f6 (after the other knight moves), and it also supports potential ...c5 advances to challenge our center. The knight also prepares ...Re8 and ...Nf8-g6 maneuvers in some variations, showing Black's strategic flexibility within their solid framework.",
+      "shortNarration": "Black's knight to d7 supports the center, prepares ...c5, and keeps options for ...b6 or ...f6."
+    },
+    {
+      "san": "Rc1",
+      "annotation": "We're placing our rook on the half-open c-file, anticipating the likely central exchanges while also supporting our c4 pawn and preparing potential pressure against Black's c7 pawn. This rook placement is standard in Queen's Gambit positions because the c-file often becomes important after Black plays ...dxc4 or ...c5. The rook from c1 also supports our queenside development and can quickly shift to support central operations. This move demonstrates good positional understanding - we're improving our worst-placed piece while preparing for the typical pawn structures that arise in this opening system.",
+      "shortNarration": "Rook to c1 supports the c4 pawn and pressures c7 along the half-open file."
+    },
+    {
+      "san": "c6",
+      "annotation": "Black solidifies their queenside with a move that supports their d5 pawn, prepares ...b5 advances, and restricts our pieces from infiltrating via b5 or d5 squares. This move is characteristic of solid Queen's Gambit Declined systems - Black creates a secure pawn chain while preparing potential queenside counterplay with ...b5. The c6 pawn also supports a potential ...Qb6 attack on our b2 pawn and gives Black's pieces more coordination on the queenside. While this move slightly weakens the d6 square, it's a small price to pay for the increased solidity and potential for active play that c6 provides.",
+      "shortNarration": "c6 solidifies the d5 pawn, prepares ...b5 and ...Qb6, and restricts White's pieces from b5 and d5."
+    },
+    {
+      "san": "Bd3",
+      "annotation": "We're developing our light-squared bishop to an excellent central square where it eyes Black's kingside and supports potential attacking ideas while maintaining our development advantage. This bishop placement is a key component of our setup - from d3, it controls important squares like e4 and h7, while supporting potential f2-f4-f5 advances or e3-e4 central breaks. The bishop also coordinates well with our other pieces, particularly if we castle kingside and later consider kingside attacking chances. This natural development keeps our pieces harmoniously placed while maintaining the slight pressure that's characteristic of White's opening advantage.",
+      "shortNarration": "Bishop to d3 eyes h7 and e4, supporting f2-f4 or e3-e4 breaks while keeping White's development advantage."
+    },
+    {
+      "san": "dxc4",
+      "annotation": "Black finally resolves the central tension by capturing our c-pawn, accepting a slightly more active position in return for allowing us central superiority with our d4 pawn. This exchange is thematic in many Queen's Gambit Declined lines - Black eliminates our advanced c4 pawn while preparing to challenge our center with moves like ...c5 or ...e5. By taking on c4, Black also opens the position slightly and improves their piece activity, particularly for their light-squared bishop and queen. However, this does concede us a central space advantage and the bishop pair, which we'll need to exploit carefully in the resulting middlegame positions.",
+      "shortNarration": "Black captures c4, gaining activity and freeing the light-squared bishop, but concedes central space and the bishop pair."
+    },
+    {
+      "san": "Bxc4",
+      "annotation": "We're recapturing with our bishop, maintaining our piece activity while placing the bishop on an excellent central square that controls key diagonals and supports our middlegame plans. This recapture is superior to Nxc4 because it keeps our knight on c3 where it supports central advances and kingside operations. The bishop on c4 also eyes Black's f7 pawn and controls the important e6 square, while supporting potential d4-d5 advances. From c4, our bishop coordinates beautifully with our other pieces and maintains the dynamic potential that's crucial for converting our slight opening advantage into something more concrete.",
+      "shortNarration": "Recapturing with the bishop on c4 keeps the knight on c3, eyes f7 and e6, and supports d4-d5 advances."
+    },
+    {
+      "san": "Nd5",
+      "annotation": "Black centralizes their knight with a strong move that challenges our bishop pair, creates tactical complications, and fights for equality in the center. This knight jump is a key defensive resource in the Capablanca System - the knight from d5 attacks our bishop on g5 and bishop on c4, forcing us to make decisions about our piece placement. The centralized knight also controls important squares and can potentially be exchanged for one of our bishops, which would ease Black's slightly cramped position. This active move demonstrates that even in solid defensive systems, Black must look for opportunities to create counterplay and challenge White's slight advantage through precise piece play.",
+      "shortNarration": "Knight to d5 attacks both bishops on g5 and c4, threatening to trade for one and ease Black's cramped position."
+    }
+  ]
+}

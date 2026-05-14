@@ -1,0 +1,60 @@
+{
+  "openingId": "queen-s-gambit-declined-alekhine-variation",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, staking our claim to the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move immediately puts pressure on Black's position by controlling key central territory and opens lines for our queen and dark-squared bishop. The Queen's Gambit complex that often follows from this move has been a favorite of positional players for over a century because it leads to rich, strategic middlegames where understanding pawn structures and piece coordination matters more than tactical fireworks. Our plan is to follow up with c4, offering the gambit that gives this opening system its name.",
+      "shortNarration": "1.d4 stakes central claim to e5 and c5, opening lines for queen and bishop, with c4 to follow."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds by occupying the center with their own pawn, directly contesting our control of the e4 square and establishing a solid foundation in the middle of the board. This classical response shows that our opponent wants to meet our central challenge head-on rather than allowing us free rein in the center. By playing d5, Black also opens the diagonal for their light-squared bishop and prepares to develop their pieces actively. This move sets up the fundamental tension that will define much of the opening - we'll soon offer to trade our c-pawn for Black's central d-pawn with c4.",
+      "shortNarration": "Black's d5 contests e4, opens the bishop's diagonal, and sets up the c4 pawn trade for central tension."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're now offering the famous Queen's Gambit, attacking Black's central d5 pawn and trying to deflect it from the center to gain a spatial advantage. This isn't a true gambit since if Black captures with dxc4, we can easily regain the pawn later while gaining time and space. The move also develops our queenside by preparing Nc3 and puts immediate pressure on Black to make a key decision about the pawn structure. Our strategic goal is to either win the center outright if Black moves the d-pawn, or to prove that accepting the gambit gives us excellent compensation in development and central control.",
+      "shortNarration": "Queen's Gambit attacks d5 — if Black captures, White regains the pawn with time and space, gaining central control."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black declines the Queen's Gambit with this stabilizing move, choosing to defend the d5 pawn rather than capture on c4. This creates the characteristic pawn chain formation of the Queen's Gambit Declined, where Black's e6 pawn supports d5 but also somewhat restricts the development of their light-squared bishop. Our opponent is signaling a preference for solid, positional play over the sharper lines that can arise from accepting the gambit. While this move is very sound, it does give us a slight space advantage in the center and makes Black's kingside development a bit more constrained since the e6 pawn blocks the natural f8-bishop's diagonal.",
+      "shortNarration": "Black defends d5 with e6, creating a solid pawn chain but blocking the f8-bishop and giving White a slight space advantage."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We're developing our knight to its ideal square, where it attacks the d5 pawn again and increases the pressure in the center. This move is part of our systematic approach to the Queen's Gambit - we want to force Black to constantly think about defending their central pawn while we improve our piece coordination. The knight on c3 also eyes important squares like e4 and b5, giving us flexibility in our future plans. Additionally, this development move prepares us to potentially recapture on c4 with the knight if Black ever decides to take our gambit pawn, maintaining our influence over the center.",
+      "shortNarration": "Nc3 attacks d5, eyes e4 and b5, and prepares to recapture on c4 with the knight."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops their knight to an excellent square, where it defends the d5 pawn for the third time and also controls the important e4 and h5 squares. This active move is one of the key ideas in the Queen's Gambit Declined - Black wants to bring pieces into the game while maintaining their central pawn structure. The knight on f6 also prepares castling kingside and can potentially jump to more active squares like e4 or g4 in the future. Our opponent is following classical opening principles by developing pieces toward the center while keeping their position solid and flexible.",
+      "shortNarration": "Knight to f6 defends d5, eyes e4 and h5, and prepares kingside castling."
+    },
+    {
+      "san": "Bg5",
+      "annotation": "We're pinning Black's knight to their queen, creating immediate tactical pressure and making it difficult for our opponent to maintain their comfortable development. This bishop move is a key element of many Queen's Gambit systems because it not only develops a piece actively but also creates concrete threats that Black must address. The pin means that if Black moves their knight from f6, they'll lose their queen, so this forces them to either break the pin with a move like Be7 or h6, or accept the pin and work around it. This move also prepares us for potential discoveries if the knight moves, and it puts pressure on Black's kingside before they can castle safely.",
+      "shortNarration": "Bishop pins knight to knight on f6, forcing Black to break the pin with Be7 or h6 before castling."
+    },
+    {
+      "san": "Nbd7",
+      "annotation": "Black develops their second knight to d7, choosing a somewhat passive but solid square that avoids the more active but potentially problematic Nc6. From d7, the knight doesn't block the c-pawn's advance and can potentially reroute to better squares like f8-e6 or b6 in the future. This move also prepares to break the pin on the f6 knight with a future ...h6, since the d7 knight can support the kingside. While this development is less active than Nc6 would be, it's a hallmark of the Queen's Gambit Declined's solid but slightly cramped character - Black prioritizes safety and structural integrity over immediate piece activity.",
+      "shortNarration": "Black's Nd7 avoids Nc6's activity, prepares ...h6 to break the pin, and keeps the c-pawn free — solid but cramped."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're completing our kingside development with this move that develops the knight to its best square and prepares castling. The knight on f3 controls key central squares like e5 and d4, and it supports our potential e4 pawn advance that could give us a strong pawn center. This move also adds another attacker to Black's d5 pawn, keeping the pressure on their central structure. Additionally, Nf3 prevents any annoying checks from Black's queen along the a5-d8 diagonal and maintains our solid position while keeping all our strategic options open for the next phase of the game.",
+      "shortNarration": "Nf3 develops the knight, controls e5 and d4, pressures d5, and prevents queen checks."
+    },
+    {
+      "san": "c6",
+      "annotation": "Black plays this purposeful move to support their d5 pawn and prepare to challenge our pieces, particularly by potentially driving away our knight from c3 with ...dxc4 and ...b5. This move is characteristic of the Slav-like setups within the Queen's Gambit Declined, where Black prioritizes pawn structure solidity over rapid piece development. The c6 pawn also prepares ...Qc7 or ...Qb6, putting pressure on our c4 pawn and potentially our b2 pawn as well. While this move doesn't directly develop a piece, it's an important structural decision that gives Black's position more resilience and prepares counterplay on the queenside.",
+      "shortNarration": "c6 supports the d5 pawn and prepares ...dxc4 and ...b5 to challenge the knight on c3, while also eyeing Qc7 or Qb6 against c4 and b2."
+    },
+    {
+      "san": "e4",
+      "annotation": "We're striking in the center with this powerful advance, the defining move of the Alekhine Variation of the Queen's Gambit Declined. This pawn thrust attacks Black's d5 pawn and aims to open up the position in our favor, since we have better piece coordination and development. The move creates immediate tactical complications because Black's d5 pawn is now under severe pressure, and capturing it would give us a strong pawn center and open lines for our pieces. This advance represents a shift from the purely positional nature of the Queen's Gambit toward sharper, more tactical play where our superior development and piece activity should give us excellent practical chances.",
+      "shortNarration": "The d4 pawn advance attacks Black's d5, opening lines for White's superior piece coordination and threatening a strong center."
+    }
+  ]
+}
