@@ -147,6 +147,22 @@ export function CoachGameReview(props: CoachGameReviewProps): JSX.Element {
   // instead of the canonical `seg.fenAfter`. Resets when the
   // student steps to a different ply.
   const [walkExploreToggleOn, setWalkExploreToggleOn] = useState<boolean>(false);
+  // "Show me" playout: when active, Stockfish auto-plays the
+  // punishment line from `seg.fenAfter` so the student can SEE
+  // why their move was a mistake/blunder. Each engine ply updates
+  // `walkExplorationFen` so the board animates the slide. Board
+  // is non-interactive while this is true. Cleared on Resume,
+  // ply change, or when the playout reaches its stop condition
+  // (4 plies, mate, or game over).
+  const [walkShowMeActive, setWalkShowMeActive] = useState<boolean>(false);
+  // Mirror walkShowMeActive in a ref so the async playout loop can
+  // detect cancellation (Resume tap, ply nav) AFTER awaiting a
+  // Stockfish round-trip. Reading state directly inside the loop
+  // would close over the stale value at loop-entry.
+  const walkShowMeActiveRef = useRef<boolean>(false);
+  useEffect(() => {
+    walkShowMeActiveRef.current = walkShowMeActive;
+  }, [walkShowMeActive]);
 
   // ship-4: auto-review state machine + guided-lesson state machine
   // both removed. The walk-phase UI driven by `useReviewPlayback` is
@@ -412,6 +428,10 @@ export function CoachGameReview(props: CoachGameReviewProps): JSX.Element {
   // playback path animating cleanly when they just press Next.
   useEffect(() => {
     setWalkExploreToggleOn(false);
+    // Show-me playout is also ply-anchored — if the student nav's
+    // away mid-playout we cancel it. The async loop checks this
+    // flag every iteration and bails when it flips false.
+    setWalkShowMeActive(false);
   }, [walkPlayback.currentPly]);
 
   // WO-REVIEW-02b — Engine lines panel. Off by default. Analyzes every
@@ -791,9 +811,15 @@ export function CoachGameReview(props: CoachGameReviewProps): JSX.Element {
       //   (b) they're already in exploration mode and want to play
       //       further continuation moves (engine replies handled
       //       separately via the onMove handler).
-      const walkBoardInteractive =
-        (walkExploreToggleOn && hasArrow && walkExplorationFen === null) ||
-        walkExplorationFen !== null;
+      // Show-me playout drives the board itself — the student must
+      // not be able to interrupt by dragging a piece mid-animation.
+      // We gate explicitly off `walkShowMeActive` even though it
+      // sets `walkExplorationFen` on the first tick (which would
+      // otherwise flip this true via the second clause below).
+      const walkBoardInteractive = walkShowMeActive
+        ? false
+        : (walkExploreToggleOn && hasArrow && walkExplorationFen === null) ||
+          walkExplorationFen !== null;
       const walkDisplayFen = walkExplorationFen ?? displayFen;
       const badge = seg?.classification ?? null;
       // Authoritative nav ceiling = the full game length, not the
@@ -810,6 +836,95 @@ export function CoachGameReview(props: CoachGameReviewProps): JSX.Element {
 
       // ship-4: `enterAnalysisAnd` wrapper removed alongside the
       // Drill All / Show / Try It buttons that consumed it.
+
+      // "Show me" playout — when the student taps the button at an
+      // inaccuracy / mistake / blunder ply, Stockfish auto-plays the
+      // punishment line from `seg.fenAfter` so the student SEES why
+      // their move was wrong. Silent (no narration), standard board
+      // animation cadence (200ms slide + 600ms pause ≈ 800ms/ply),
+      // and capped at 4 plies or game-over (whichever comes first).
+      //
+      // Why silent in v1: the chat/voice surface around it is already
+      // narrating the position; the playout is a visual demonstration,
+      // not a teaching moment. If we later want narration on each ply
+      // it goes through voiceService.speak() with the same density
+      // gating the rest of the review uses.
+      const runShowMePlayout = async (): Promise<void> => {
+        if (!seg || !hasArrow) return;
+        if (walkShowMeActive) return;
+        setWalkShowMeActive(true);
+        const startedAtPly = walkPlayback.currentPly;
+        walkExplorationPlyRef.current = startedAtPly;
+        void logAppAudit({
+          kind: 'review-show-me-started',
+          category: 'subsystem',
+          source: 'CoachGameReview.runShowMePlayout',
+          summary: `ply ${startedAtPly} show-me playout begin (${seg.classification})`,
+          fen: seg.fenAfter,
+          details: JSON.stringify({
+            ply: startedAtPly,
+            classification: seg.classification,
+            playedSan: seg.san,
+            bestMoveUci: seg.bestMoveUci ?? null,
+          }),
+        });
+        let currentFen = seg.fenAfter;
+        // Surface the starting position immediately so the Resume
+        // button shows and the badge stays oriented to "exploration".
+        setWalkExplorationFen(currentFen);
+        setWalkExplorationSan(null);
+        let pliesPlayed = 0;
+        const MAX_PLIES = 4;
+        try {
+          while (pliesPlayed < MAX_PLIES && walkMountedRef.current) {
+            const probe = new Chess(currentFen);
+            if (probe.isGameOver()) break;
+            const config = resolveConfig('hard', playerRating);
+            let coachMove;
+            try {
+              coachMove = await getCoachMove(currentFen, config);
+            } catch {
+              break; // Stockfish unreachable — bail silently
+            }
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- ref can flip during the await above
+            if (!walkMountedRef.current) break;
+            // Re-check the active flag AFTER the await — the student
+            // may have hit Resume or navigated away while Stockfish
+            // was thinking. Without this guard the loop overwrites
+            // their fresh state with a stale engine ply.
+            // We read the latest state via a ref to dodge the
+            // closure-staleness — see walkShowMeActiveRef below.
+            if (!walkShowMeActiveRef.current) break;
+            const applied = probe.move({
+              from: coachMove.from,
+              to: coachMove.to,
+              promotion: coachMove.promotion,
+            });
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- chess.js types claim non-null but returns null for illegal moves at runtime
+            if (!applied) break;
+            currentFen = probe.fen();
+            setWalkExplorationFen(currentFen);
+            playMoveSound(applied.san);
+            pliesPlayed++;
+            if (probe.isCheckmate()) break;
+            // Standard board cadence: 200ms slide + 600ms beat so the
+            // student's eye catches each move before the next fires.
+            await new Promise((r) => setTimeout(r, 600));
+          }
+        } finally {
+          if (walkMountedRef.current) setWalkShowMeActive(false);
+          void logAppAudit({
+            kind: 'review-show-me-finished',
+            category: 'subsystem',
+            source: 'CoachGameReview.runShowMePlayout',
+            summary: `ply ${startedAtPly} show-me played ${pliesPlayed} plies`,
+            details: JSON.stringify({
+              startedAtPly,
+              pliesPlayed,
+            }),
+          });
+        }
+      };
 
       // WO-REVIEW-02b — Engine lines panel helpers.
       const currentPlyLines = engineLines.linesForPly(walkPlayback.currentPly);
@@ -1016,13 +1131,18 @@ export function CoachGameReview(props: CoachGameReviewProps): JSX.Element {
                         kind: 'review-walk-resumed',
                         category: 'subsystem',
                         source: 'CoachGameReview.walkResume',
-                        summary: `ply ${walkPlayback.currentPly} resumed (was exploring ${walkExplorationSan ?? '?'})`,
+                        summary: `ply ${walkPlayback.currentPly} resumed (was ${walkShowMeActive ? 'show-me playing' : `exploring ${walkExplorationSan ?? '?'}`})`,
                         fen: displayFen,
                         details: JSON.stringify({
                           ply: walkPlayback.currentPly,
                           exploredSan: walkExplorationSan,
+                          showMeActive: walkShowMeActive,
                         }),
                       });
+                      // Cancel any in-flight show-me playout. The async
+                      // loop reads walkShowMeActiveRef every iteration
+                      // and bails when it flips false.
+                      setWalkShowMeActive(false);
                       setWalkExplorationFen(null);
                       setWalkExplorationSan(null);
                       walkExplorationPlyRef.current = null;
@@ -1040,25 +1160,46 @@ export function CoachGameReview(props: CoachGameReviewProps): JSX.Element {
                     Resume game
                   </button>
                 )}
-                {/* "Explore this position" — only shows on arrow-bearing
-                    plies when the student hasn't already explored. Tapping
-                    flips the board to seg.fenBefore so the missed move is
-                    playable (canonical playback stays on seg.fenAfter so
-                    Next ↔ Prev animates as a single move). */}
-                {hasArrow && walkExplorationFen === null && !walkExploreToggleOn && (
-                  <button
-                    onClick={() => setWalkExploreToggleOn(true)}
-                    className="absolute bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg"
-                    style={{
-                      background: '#22c55e',
-                      color: 'white',
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
-                    }}
-                    data-testid="walk-explore-toggle-btn"
-                    aria-label="Try the missed move yourself"
-                  >
-                    Explore this position
-                  </button>
+                {/* Pre-exploration action row at the bottom of the
+                    board on inaccuracy/mistake/blunder plies. Two CTAs:
+                    - "Explore this position" — flips the board to
+                      `seg.fenBefore` so the student can play the
+                      missed move themselves (existing behavior).
+                    - "Show me" — Stockfish auto-plays the punishment
+                      line from `seg.fenAfter` so the student sees
+                      WHY their move was bad. Silent v1, standard
+                      board cadence, capped at 4 plies / game-over.
+                    Both hidden once exploration or playout starts;
+                    the Resume button takes over. */}
+                {hasArrow && walkExplorationFen === null && !walkExploreToggleOn && !walkShowMeActive && (
+                  <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                    <button
+                      onClick={() => setWalkExploreToggleOn(true)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg"
+                      style={{
+                        background: '#22c55e',
+                        color: 'white',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+                      }}
+                      data-testid="walk-explore-toggle-btn"
+                      aria-label="Try the missed move yourself"
+                    >
+                      Explore this position
+                    </button>
+                    <button
+                      onClick={() => { void runShowMePlayout(); }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg"
+                      style={{
+                        background: '#ef4444',
+                        color: 'white',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+                      }}
+                      data-testid="walk-show-me-btn"
+                      aria-label="Show me the punishment line"
+                    >
+                      Show me
+                    </button>
+                  </div>
                 )}
               </div>
             </div>

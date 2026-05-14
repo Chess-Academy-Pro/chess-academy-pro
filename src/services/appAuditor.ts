@@ -83,6 +83,11 @@ export type AuditKind =
   // navigate away → auto-resume).
   | 'review-walk-explored'
   | 'review-walk-resumed'
+  // "Show me" punishment-line playout on review screen — Stockfish
+  // auto-plays 1-4 plies from seg.fenAfter so the student sees why
+  // their move was a mistake/blunder. Silent v1, standard cadence.
+  | 'review-show-me-started'
+  | 'review-show-me-finished'
   // Engine lines on the review screen (WO-REVIEW-02b)
   | 'review-engine-lines-analysis-started'
   | 'review-engine-lines-analysis-complete'
