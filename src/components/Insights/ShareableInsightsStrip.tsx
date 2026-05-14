@@ -25,6 +25,19 @@ export function ShareableInsightsStrip(): JSX.Element | null {
   const [insights, setInsights] = useState<ShareableInsight[] | null>(null);
   const [index, setIndex] = useState(0);
 
+  // Swipe-to-navigate refs — captures touch + pointer drags on the
+  // card container. Records the start X on touchstart/pointerdown,
+  // then on release computes the horizontal delta and advances/
+  // retreats if it crosses SWIPE_THRESHOLD_PX. Vertical-dominant
+  // gestures fall through to the native scroll handler so the user
+  // can still scroll the page through this section.
+  // Hoisted ABOVE the early returns so the hook count is stable
+  // across renders — fixes React error #310 reported by David on
+  // mobile (the loading-state render only called 3 hooks; the
+  // loaded-state render called 5).
+  const swipeStartXRef = useRef<number | null>(null);
+  const swipeStartYRef = useRef<number | null>(null);
+
   useEffect(() => {
     let cancelled = false;
     void computeShareableInsights()
@@ -53,15 +66,6 @@ export function ShareableInsightsStrip(): JSX.Element | null {
   const insightCount = insights.length;
   const hasPrev = index > 0;
   const hasNext = index < insightCount - 1;
-
-  // Swipe-to-navigate — captures touch + pointer drags on the card
-  // container. Records the start X on touchstart/pointerdown, then on
-  // release computes the horizontal delta and advances/retreats if it
-  // crosses SWIPE_THRESHOLD_PX. Vertical-dominant gestures fall
-  // through to the native scroll handler so the user can still scroll
-  // the page through this section.
-  const swipeStartXRef = useRef<number | null>(null);
-  const swipeStartYRef = useRef<number | null>(null);
   function onSwipeStart(x: number, y: number): void {
     swipeStartXRef.current = x;
     swipeStartYRef.current = y;
