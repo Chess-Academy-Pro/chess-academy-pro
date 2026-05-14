@@ -388,6 +388,218 @@ async function main() {
   await backToHub();
 
   // ───────────────────────────────────────────────────────────────────
+  // 9b. Opening Traps — DEEP flow: hub tile → puzzle → reveal →
+  //     Play-it-out. Catches the Play-it-out side-flip bug: ODD-length
+  //     curated solutions land in the playout with the OPPONENT to
+  //     move; pre-fix the hook re-derived studentSide from the FEN and
+  //     Stockfish then played the student's actual color when it
+  //     kicked in. Audit clicks through and verifies orientation +
+  //     whose-color-moved after Stockfish responds.
+  // ───────────────────────────────────────────────────────────────────
+
+  // Helper: read each rendered piece into a square→piece map. Uses
+  // the chessboard's `data-square` + `data-piece` (set by react-
+  // chessboard for every visible piece). Returns null if the board
+  // hasn't rendered pieces yet.
+  async function readBoardState() {
+    return await page.evaluate(() => {
+      const squares = document.querySelectorAll('[data-square]');
+      const out = {};
+      for (const sq of squares) {
+        const square = sq.getAttribute('data-square');
+        if (!square) continue;
+        const piece = sq.querySelector('[data-piece]');
+        out[square] = piece?.getAttribute('data-piece') ?? null;
+      }
+      return out;
+    });
+  }
+
+  // Read whether a1 is in the bottom half of the board (white at
+  // bottom) or the top half (black at bottom).
+  async function readOrientation() {
+    return await page.evaluate(() => {
+      const a1 = document.querySelector('[data-square="a1"]');
+      const h8 = document.querySelector('[data-square="h8"]');
+      if (!a1 || !h8) return null;
+      const a = a1.getBoundingClientRect();
+      const h = h8.getBoundingClientRect();
+      // If a1.top > h8.top, a1 is BELOW h8 → white at bottom (normal).
+      // If a1.top < h8.top, a1 is ABOVE h8 → black at bottom (flipped).
+      if (a.top > h.top) return 'white-bottom';
+      if (a.top < h.top) return 'black-bottom';
+      return 'unknown';
+    });
+  }
+
+  await record(
+    'tactics-opening-traps-hub',
+    async () => {
+      await page.locator('[data-testid="section-opening traps"]').click();
+      await page.locator('[data-testid="opening-blunders-page"]').waitFor({ timeout: 15_000 });
+    },
+    3500,
+    [
+      { label: 'route is /tactics/opening-traps', fn: () => page.url().endsWith('/tactics/opening-traps') },
+      { label: 'opening-blunders-page mounts', fn: () => visible('opening-blunders-page') },
+      { label: 'phase tabs render', fn: async () => (await page.locator('[data-testid^="opening-blunder-phase-"]').count()) >= 4 },
+      { label: 'at least one family tile renders', fn: async () => (await page.locator('[data-testid^="opening-blunder-family-"]').count()) > 0 },
+    ],
+  );
+
+  // Click first family → first color → first puzzle
+  await record(
+    'tactics-opening-traps-puzzle',
+    async () => {
+      const firstFamily = page.locator('[data-testid^="opening-blunder-family-"]').first();
+      await firstFamily.click({ timeout: 5_000 });
+      await page.waitForTimeout(800);
+      const firstColor = page.locator('[data-testid^="opening-blunder-color-"]').first();
+      if (await firstColor.isVisible({ timeout: 3000 }).catch(() => false)) {
+        await firstColor.click();
+        await page.waitForTimeout(600);
+      }
+      const puzzleTile = page
+        .locator('[data-testid^="opening-blunder-"]')
+        .filter({ hasNotText: 'Opening' })
+        .filter({ hasNotText: 'Transition' })
+        .filter({ hasNotText: 'Middlegame' });
+      // Skip phase/family/color tiles by data-testid prefix exclusion
+      const puzzles = await page.evaluate(() => {
+        const all = Array.from(document.querySelectorAll('[data-testid^="opening-blunder-"]'));
+        return all
+          .map((el) => el.getAttribute('data-testid'))
+          .filter((tid) =>
+            tid &&
+            !tid.startsWith('opening-blunder-phase-') &&
+            !tid.startsWith('opening-blunder-family-') &&
+            !tid.startsWith('opening-blunder-color-') &&
+            tid !== 'opening-blunder-play-out' &&
+            tid !== 'opening-blunder-show-opening' &&
+            tid !== 'opening-blunder-hint' &&
+            tid !== 'opening-blunder-reveal' &&
+            tid !== 'opening-blunder-next' &&
+            tid !== 'opening-blunders-page',
+          );
+      });
+      if (puzzles.length === 0) throw new Error('no puzzle tiles found under family/color');
+      await page.locator(`[data-testid="${puzzles[0]}"]`).click({ timeout: 5_000 });
+      await page.waitForTimeout(2500); // wait for board to mount
+    },
+    3500,
+    [
+      { label: 'board pieces rendered', fn: async () => (await page.locator('[data-piece]').count()) > 0 },
+      {
+        label: 'orientation is recognized (white-bottom OR black-bottom)',
+        fn: async () => {
+          const o = await readOrientation();
+          return o === 'white-bottom' || o === 'black-bottom';
+        },
+      },
+    ],
+  );
+
+  // Snapshot board state BEFORE we touch anything
+  const orientationBefore = await readOrientation();
+  const studentBottom = orientationBefore === 'white-bottom' ? 'white' : 'black';
+
+  // Make wrong moves until the reveal button appears (or we give up).
+  // Cycle through harmless pawn pushes so we hit a legal-but-wrong
+  // move regardless of whose turn it is.
+  await record(
+    'tactics-opening-traps-reveal',
+    async () => {
+      const tries = [
+        ['a2', 'a3'],
+        ['a7', 'a6'],
+        ['h2', 'h3'],
+        ['h7', 'h6'],
+        ['b2', 'b3'],
+        ['b7', 'b6'],
+        ['g2', 'g3'],
+        ['g7', 'g6'],
+      ];
+      for (let i = 0; i < tries.length; i++) {
+        const reveal = page.locator('[data-testid="opening-blunder-reveal"]');
+        if (await reveal.isVisible().catch(() => false)) break;
+        const [from, to] = tries[i];
+        const fromSq = page.locator(`[data-square="${from}"]`);
+        const toSq = page.locator(`[data-square="${to}"]`);
+        if (!(await fromSq.isVisible().catch(() => false))) continue;
+        await fromSq.click({ timeout: 1500 }).catch(() => {});
+        await page.waitForTimeout(150);
+        await toSq.click({ timeout: 1500 }).catch(() => {});
+        await page.waitForTimeout(400);
+      }
+      const reveal = page.locator('[data-testid="opening-blunder-reveal"]');
+      if (await reveal.isVisible().catch(() => false)) await reveal.click();
+      await page.waitForTimeout(2000); // curated line auto-plays
+    },
+    1500,
+    [
+      {
+        label: 'play-out button appears after reveal',
+        fn: async () => await visible('opening-blunder-play-out'),
+      },
+      {
+        label: 'orientation unchanged after curated reveal',
+        fn: async () => (await readOrientation()) === orientationBefore,
+      },
+    ],
+  );
+
+  // Capture state right before Play-it-out, engage, wait for engine
+  const stateBeforePlayOut = await readBoardState();
+  await record(
+    'tactics-opening-traps-play-out',
+    async () => {
+      const btn = page.locator('[data-testid="opening-blunder-play-out"]');
+      if (!(await btn.isVisible().catch(() => false))) {
+        throw new Error('play-out button not present (puzzle did not complete)');
+      }
+      await btn.click();
+      // Give Stockfish time to fire its first move
+      await page.waitForTimeout(6500);
+    },
+    1500,
+    [
+      {
+        label: 'orientation unchanged after Play-it-out engages',
+        fn: async () => (await readOrientation()) === orientationBefore,
+      },
+      {
+        // Core check for the side-flip bug: after Play-it-out engages,
+        // the engine's first move is OPPONENT's color. We detect by
+        // diffing piece positions between before-engine-moved and now,
+        // looking at the new-piece destination's color suffix.
+        // Piece codes from react-chessboard are 'wP','wN',...,'bK'.
+        label: 'engine first move is OPPONENT color (not student color)',
+        fn: async () => {
+          const after = await readBoardState();
+          // Find squares that changed: new piece appeared OR piece colour changed
+          const colorsMoved = new Set();
+          for (const sq of Object.keys(after)) {
+            const was = stateBeforePlayOut[sq];
+            const now = after[sq];
+            if (was !== now && now) {
+              // A piece now occupies a square it didn't before
+              const c = now[0]; // 'w' or 'b'
+              if (c === 'w') colorsMoved.add('white');
+              else if (c === 'b') colorsMoved.add('black');
+            }
+          }
+          if (colorsMoved.size === 0) return false; // engine didn't move at all
+          const opponent = studentBottom === 'white' ? 'black' : 'white';
+          // Stockfish should have moved opponent's color exclusively
+          return colorsMoved.has(opponent) && !colorsMoved.has(studentBottom);
+        },
+      },
+    ],
+  );
+
+  await backToHub();
+
+  // ───────────────────────────────────────────────────────────────────
   // 10. My Weaknesses (theme detection)
   // ───────────────────────────────────────────────────────────────────
   await record(
