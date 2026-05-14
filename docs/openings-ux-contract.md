@@ -3,8 +3,8 @@
 How `/openings` SHOULD work, and what the e2e audit
 (`e2e/openings.spec.ts`) currently exercises.
 
-**Current state: 28/28 specs passing** (full-suite run on commit
-`42681623`, ~22.5 min wall-clock against system Chromium via
+**Current state: 34/34 specs passing** (full-suite run on commit
+`9d9368d7`, ~27.2 min wall-clock against system Chromium via
 `PLAYWRIGHT_LOCAL_CHROME` in serial mode).
 
 The hub is at **`/openings`** (component:
@@ -128,20 +128,24 @@ Detail surfaces:
 - ✅ `Woodpecker stats panel hidden when reps = 0 (fresh profile)`
   — confirms the gate-on-`> 0` logic. (Mount-after-completion is
   still not covered — would need a full drill cycle.)
+- ✅ `MiddlegamePlan play-plan button launches MiddlegamePractice`
+  — verifies the practice surface mounts (chessboard appears,
+  `opening-detail` testid is gone) when a `play-plan-<id>` is
+  clicked.
+- ✅ `CommonMistakesSection toggle expands the miniboard preview`
+  — verifies the `[data-square]` descendant count of the toggled
+  `mistake-<i>` row climbs above its pre-click value (proves the
+  expanded miniboard rendered).
 - ⚠️ Not yet covered: `CheckpointQuiz` plan-quiz full happy-path
   (choice → correct → advance → completion). Italian Game's
   first quiz is a move-quiz that navigates away to
   `/coach/session/practice`; reaching the plan-quiz at quizIndex
   2 from Playwright requires completing two move-quizzes round-
   trip, which is brittle in a smoke run.
-- ⚠️ Not yet covered: `MiddlegamePlansSection.play-plan-<id>`
-  click launches `MiddlegamePractice` (would need to verify the
-  practice surface mounts).
 - ⚠️ Not yet covered: `WoodpeckerStats` mount after completing a
-  drill cycle (would need a full DrillMode happy-path).
-- ⚠️ Not yet covered: `CommonMistakesSection` chip-toggle expands
-  the miniboard preview (currently only the toggle-click is
-  exercised; the expanded-state assertion isn't).
+  drill cycle (the DrillMode happy-path runs to `learn-complete`
+  but doesn't navigate back to the detail page to verify the
+  `wp-reps` panel surfaces).
 
 ---
 
@@ -210,16 +214,29 @@ component. They all share board substrate but their controls differ:
 - ✅ `OpeningPlayMode mounts on play-btn (smoke)` — verifies the
   chessboard mounts at `play-btn` destination (the play view
   doesn't carry a root testid).
+- ✅ `DrillMode happy-path — play through Italian Game variation 0`
+  — clicks all 10 student moves through the 20-ply Giuoco Piano
+  main line (chess.js computes from/to per SAN; opponent moves
+  auto-play between); asserts `learn-complete` testid mounts.
+- ✅ `PracticeMode happy-path — play through Italian Game variation 0`
+  — same flow against PracticeMode; asserts `practice-complete`.
+- ✅ `TrainMode happy-path — play through Italian Game trap line 0`
+  — 14-ply Blackburne Shilling Refutation; asserts
+  `train-complete`.
+- ✅ `OpeningPlayMode initializes Stockfish and renders an
+  evaluation` — verifies the engine produces a depth-12 eval
+  readout (`aria-label^="Evaluation:"`) within 30s of board
+  mount. Equivalent signal for "engine is wired up" without the
+  flake risk of driving a click→engine-reply roundtrip in
+  headless Chrome.
 - ⚠️ Not yet covered: full walkthrough playout to the leaf step
-  (would need a real TTS or a Web Speech mock).
-- ⚠️ Not yet covered: `DrillMode` happy-path (guess all moves, hit
-  `learn-complete`).
-- ⚠️ Not yet covered: `PracticeMode` prompt → answer → next-prompt
-  cycle.
-- ⚠️ Not yet covered: `TrainMode` for traps full completion.
-- ⚠️ Not yet covered: `OpeningPlayMode` Stockfish reply against a
-  student move (would need Stockfish initialization wait + a
-  predictable opening).
+  (voice-promise-gated; would need a real TTS or Web Speech
+  mock to drive auto-advance reliably).
+- ⚠️ Not yet covered: `OpeningPlayMode` student-move → Stockfish-
+  reply roundtrip. The DrillMode / PracticeMode / TrainMode
+  happy-paths already prove the click→move pipeline end-to-end
+  against the same `ControlledChessBoard` substrate; the
+  Stockfish-init spec proves the engine layer above it.
 
 ---
 
