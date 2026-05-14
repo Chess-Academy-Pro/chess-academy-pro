@@ -12,7 +12,7 @@ import {
 } from './coachPrompts';
 import { getThemeSkills } from './puzzleService';
 import { logAppAudit } from './appAuditor';
-import { unwrapSpineError } from './sanitizeCoachText';
+import { sanitizeCoachStream, sanitizeCoachText, unwrapSpineError } from './sanitizeCoachText';
 import type { BadHabit, CoachContext, UserProfile } from '../types';
 
 // ─── Bad Habit Detection ────────────────────────────────────────────────────
@@ -284,6 +284,22 @@ export async function generateNarrativeSummary(
       return undefined;
     }
   })();
+  // Defense-in-depth: even with suppressSurfaceMode the brain occasionally
+  // emits `[[ACTION:...]]` / `[BOARD:...]` markers (seen in prod on the
+  // Review summary card — chesscom-971406909 leaked a raw
+  // `[[ACTION:record_blunder ...]]` into the rendered bubble). Wrap the
+  // stream callback with `sanitizeCoachStream` so partial markers buffer
+  // until they close, and run `sanitizeCoachText` over the final text.
+  let markupBuffer = '';
+  const wrappedOnStream = onStream
+    ? (chunk: string) => {
+        markupBuffer += chunk;
+        const { safe, pending } = sanitizeCoachStream(markupBuffer);
+        markupBuffer = pending;
+        if (safe) onStream(safe);
+      }
+    : undefined;
+
   const spineAnswer = await coachService.ask(
     {
       surface: 'review',
@@ -307,10 +323,19 @@ export async function generateNarrativeSummary(
       // [VOICE:] / [BOARD:] marker mandate would leak markers into the
       // streamed summary card. Memory + live-state still inject.
       suppressSurfaceMode: true,
-      onChunk: onStream,
+      onChunk: wrappedOnStream,
     },
   );
-  return unwrapSpineError(spineAnswer.text);
+
+  // Flush any text still held in the streaming buffer (a half-arrived
+  // marker that never closed, or trailing prose).
+  if (onStream && markupBuffer) {
+    const tail = sanitizeCoachText(markupBuffer);
+    if (tail) onStream(tail);
+    markupBuffer = '';
+  }
+
+  return sanitizeCoachText(unwrapSpineError(spineAnswer.text));
 }
 
 // ─── Review Narration Segments ─────────────────────────────────────────────
