@@ -27,7 +27,7 @@ const SCRIPT = join(REPO, 'scripts/audit-openings-narration.mjs');
 const BASELINE: Record<string, number> = {
   'piece-on-square-mismatch': 1100,
   'san-mismatch': 80,
-  'opening-id-pgn-drift': 5,
+  'opening-id-pgn-drift': 0,
   'annotation-overflow': 0,
   'unparseable': 0,
 };

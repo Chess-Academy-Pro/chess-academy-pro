@@ -162,7 +162,7 @@ export const CURATED_NARRATIONS: OpeningNarration[] = [
   // ─── French Defence (1.e4 e6 2.d4 d5) ──────────────────────────────────
   {
     id: 'french-e6',
-    openingName: 'French Defence',
+    openingName: 'French Defense',
     variation: '',
     moveSan: 'e6',
     fen: 'rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2',
@@ -174,7 +174,7 @@ export const CURATED_NARRATIONS: OpeningNarration[] = [
   },
   {
     id: 'french-d5',
-    openingName: 'French Defence',
+    openingName: 'French Defense',
     variation: '',
     moveSan: 'd5',
     fen: 'rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3',
@@ -188,7 +188,7 @@ export const CURATED_NARRATIONS: OpeningNarration[] = [
   // ─── Caro-Kann (1.e4 c6 2.d4 d5) ───────────────────────────────────────
   {
     id: 'caro-c6',
-    openingName: 'Caro-Kann Defence',
+    openingName: 'Caro-Kann Defense',
     variation: '',
     moveSan: 'c6',
     fen: 'rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2',
@@ -200,7 +200,7 @@ export const CURATED_NARRATIONS: OpeningNarration[] = [
   },
   {
     id: 'caro-d5',
-    openingName: 'Caro-Kann Defence',
+    openingName: 'Caro-Kann Defense',
     variation: '',
     moveSan: 'd5',
     fen: 'rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3',
@@ -254,10 +254,10 @@ export const CURATED_NARRATIONS: OpeningNarration[] = [
   // ─── King's Indian Defence (1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6) ──────
   {
     id: 'kid-bg7',
-    openingName: "King's Indian Defence",
+    openingName: "King's Indian Defense",
     variation: '',
     moveSan: 'Bg7',
-    fen: 'rnbqk2r/ppppppbp/5np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR b KQkq - 1 4',
+    fen: 'rnbqk2r/ppppppbp/5np1/8/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq - 1 4',
     narrations: [
       'This is the King\'s Indian Defence. Bg7 fianchettoes the bishop, aiming it at the center along the long a1-h8 diagonal. Black concedes space in the center but builds a springboard for a kingside attack with ...e5 and ...f5. Plan to play ...d6 next, then ...O-O and ...e5 to strike at White\'s center.',
       'We\'re developing the King\'s Indian Defence — Bg7 puts the bishop on its most powerful diagonal, where it pressures d4 and controls the long diagonal. Black\'s strategy is to let White build a big center, then blow it up with ...e5 or ...c5 later.',
@@ -266,7 +266,7 @@ export const CURATED_NARRATIONS: OpeningNarration[] = [
   },
   {
     id: 'kid-d6',
-    openingName: "King's Indian Defence",
+    openingName: "King's Indian Defense",
     variation: '',
     moveSan: 'd6',
     fen: 'rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR w KQkq - 0 5',

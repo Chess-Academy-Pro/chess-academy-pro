@@ -288,6 +288,12 @@ function main() {
 
     const variants = byId.get(ann.openingId);
     if (!variants || variants.length === 0) {
+      // pro-* annotation files are runtime-resolved by
+      // annotationService.ts's resolveAnnotationId (strips pro-<player>-
+      // prefix + maps the suffix via PRO_SUFFIX_TO_BASE). They're
+      // not standalone DB entries; skip rather than flagging as
+      // orphan drift.
+      if (ann.openingId.startsWith('pro-')) continue;
       errors.push({
         file, openingId: ann.openingId,
         class: 'opening-id-pgn-drift',
