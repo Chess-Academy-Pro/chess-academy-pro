@@ -840,17 +840,26 @@ function PuzzleView({ puzzle, onExit, onResult, onNext }: PuzzleViewProps): JSX.
   };
 
   // Step the walkthrough one ply per ~600 ms so the user can follow.
+  // Advance through all N moves PLUS one extra dwell tick so the
+  // final position (after the Nth move) is rendered via
+  // walkthroughFen for one beat before the board hands off to
+  // playout.fen. Without this extra tick the Nth move was never
+  // animated visually — the board snapped from position-after-(N-1)
+  // straight to playout.fen, which David reported as "runs most of
+  // the opening and then jumps to the puzzle layout."
   useEffect(() => {
     if (!walkthroughMoves) return;
-    if (walkthroughPly >= walkthroughMoves.length) return;
+    if (walkthroughPly > walkthroughMoves.length) return;
     const t = window.setTimeout(() => setWalkthroughPly((n) => n + 1), 600);
     return () => window.clearTimeout(t);
   }, [walkthroughMoves, walkthroughPly]);
 
   // While the walkthrough plays, derive the position from the
-  // start-of-game plus the moves so far. After it finishes, fall back
-  // to the playout's normal fen.
-  const walkthroughActive = walkthroughMoves !== null && walkthroughPly < walkthroughMoves.length;
+  // start-of-game plus the moves so far. Keep rendering the final
+  // walkthrough frame for the extra dwell tick (walkthroughPly ===
+  // walkthroughMoves.length) so the last move is visible before the
+  // board switches to playout.fen.
+  const walkthroughActive = walkthroughMoves !== null && walkthroughPly <= walkthroughMoves.length;
   const walkthroughFen = useMemo<string | null>(() => {
     if (!walkthroughMoves) return null;
     const c = new Chess();
