@@ -339,9 +339,9 @@
           "explanation": "Against the aggressive Bg5, Black plays e6 and prepares the thematic b5 push. The position is razor-sharp with attacks on opposite wings."
         },
         {
-          "name": "6.Be3 Modern Treatment",
-          "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be6 f3 Be7 Qd2 O-O O-O-O Nbd7",
-          "explanation": "White plays the English Attack setup. Black castles kingside and aims for counterplay with b5 and Rc8 while White attacks on the kingside with g4-g5."
+          "name": "6.Be3 English Attack (Danya's ...a5)",
+          "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be6 f3 a5 Qd2 Nbd7 O-O-O Be7",
+          "explanation": "Naroditsky's signature concept against the English Attack. Instead of the standard ...Be7/...O-O/...Nbd7 setup, Black plays the offbeat ...a5! to gain queenside space, push the Nb3 back to a stationary square (a5 cramps Nb3), and prepare ...Nb6 + ...b5. Engines historically dislike ...a5 — but Danya wins almost all his games in this line because the practical chances are excellent. After O-O-O, the queenside attack races against White's kingside g4-g5 storm. Source: Naroditsky's Top Theory Speedrun (YouTube)."
         },
         {
           "name": "6.f3 English Attack",
@@ -762,9 +762,9 @@
           "explanation": "The standard London setup. White builds a fortress and then looks for e4 to open the position. Very reliable at all levels."
         },
         {
-          "name": "vs King's Indian Setup",
-          "pgn": "d4 Nf6 Nf3 g6 Bf4 Bg7 e3 O-O Be2 d6 h3 Nbd7 O-O c5 c3 b6 Nbd2 Bb7",
-          "explanation": "Against the fianchetto, White plays the same system. The h3 move prevents Bg4 pins and White aims for a central break with e4."
+          "name": "vs King's Indian (Bh6 + Opposite-Side Castle Attack)",
+          "pgn": "d4 Nf6 Bf4 g6 Nc3 Bg7 Qd2 O-O Bh6 Bxh6 Qxh6 c5 O-O-O Qa5 h4 cxd4 Nb5",
+          "explanation": "Levy's actual recommendation against the King's Indian setup — NOT the quiet Nf3/e3/Be2 line. The key idea is Nc3 (claiming e4) + Qd2 + Bh6 to trade Black's dark-squared fianchetto bishop, then O-O-O so the h4-h5 pawn storm doesn't expose White's own king. e3 is delayed so the d2-h6 diagonal stays open for Qxh6 after the bishop trade. The resulting position resembles a Pirc or Sicilian Dragon with reversed-color attacks: opposite-side castling, White rolls the h-pawn, Black tries ...b5/...b4. Source: Levy's 'London System vs King's Indian/Grünfeld Complete Guide' (YouTube/Lichess)."
         },
         {
           "name": "Aggressive Jobava-London Hybrid",
@@ -2836,6 +2836,54 @@
       ]
     },
     {
+      "id": "pro-dubov-italian",
+      "playerId": "dubov",
+      "eco": "C54",
+      "name": "The Loud Italian / Dubov Gambit",
+      "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 b4 Bb6 e5 Ne4 Bd5 Nxc3 Nxc3 dxc3 Bg5 Ne7 O-O",
+      "color": "white",
+      "style": "Romantic, Sacrificial",
+      "overview": "Dubov's signature opening — a delayed Evans Gambit in the Italian Game introduced via his immortal win over Karjakin at the Russian Championship Superfinal 2020. The move 6.b4!? (after the standard Italian Giuoco Piano move order) sacrifices a pawn for explosive piece play, and the position becomes so complex that even strong engines struggle to evaluate it. Dubov's Chessable course 'Dubov's Explosive Italian' walks through the gambit and the romantic attacking ideas it unleashes. This is old-school chess for the 21st century: trade material for activity, attack the king, and trust your calculation. Source: Dubov-Karjakin, Russian Championship 2020 R11.",
+      "keyIdeas": [
+        "Play c3 + d4 in the Giuoco Piano first to lull Black into a normal Italian, THEN drop the b4 bomb on move 6 — the surprise factor is half the gambit's power",
+        "After 6.b4 Bb6, 7.e5 chases the f6-knight while gaining a huge centre — the central pawn wedge becomes the engine of the attack",
+        "The d-pawn that Black wins is a long-term liability sitting on d4/c3 — White's pieces use the open lines to whip up a kingside attack while Black tries to consolidate the gambit pawn",
+        "Look for sacrificial queen ideas (Qxg6, Bxg6, Bxf7+) once Black's pieces are tied to defending the king — Dubov's immortal game ended with a Queen sacrifice followed by a forced mating net"
+      ],
+      "traps": [
+        "If Black declines the gambit and tries to develop normally with ...d6, White still gets a huge centre with e5 + d-pawn pressure",
+        "Watch for ...d5 counter-thrusts — Black's only real way to disrupt the attack is a timely central break"
+      ],
+      "warnings": [
+        "This is a SHARP gambit — only play it if you're ready to calculate concrete tactical lines deeply. Engines DO criticise it objectively",
+        "Don't play it in classical time controls against well-prepared opponents — they'll find the safe routes. It thrives in rapid/blitz and against the unprepared"
+      ],
+      "variations": [
+        {
+          "name": "Main Line (Dubov vs Karjakin 2020)",
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 b4 Bb6 e5 Ne4 Bd5 Nxc3 Nxc3 dxc3 Bg5 Ne7 O-O",
+          "explanation": "The exact opening from Dubov's immortal win over Karjakin. After 6.b4 Bb6 7.e5, the f6-knight has no safe square except e4 (where it gets traded). Bd5 attacks both knight and rook simultaneously; after the forced trade Black is up a pawn on c3 but White's piece activity is overwhelming. Dubov went on to sacrifice his queen at move 19 for a winning attack."
+        },
+        {
+          "name": "Black Declines Gambit with ...Bb6",
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 b4 Bb6 cxd4 d6 e5 dxe5 Nxe5 Nxe5 dxe5 Nd7",
+          "explanation": "If Black retreats with 6...Bb6 and refuses to take on b4, White recaptures on d4 with the c-pawn, getting a big centre. Black's bishop on b6 is misplaced and Black has nothing to show for the loss of tempo."
+        },
+        {
+          "name": "Bc5xb4 (Pure Evans Gambit transposition)",
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 b4 Bxb4 cxb4 Nxb4 Ba3 Nc6 O-O d6 Re1",
+          "explanation": "If Black accepts the pawn and re-takes on b4 with the bishop, White's c3 takes back and we transpose to a pure Evans Gambit accepted. Ba3 immediately targets the king's-side dark squares, and after the knight retreats, O-O + Re1 gives White overwhelming central pressure — classic Evans Gambit themes."
+        }
+      ],
+      "trapLines": [
+        {
+          "name": "Dubov's Queen Sacrifice",
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 b4 Bb6 e5 Ne4 Bd5 Nxc3 Nxc3 dxc3 Bg5 Ne7 O-O h6 Bh4 O-O Re1 Qe8 Bb3 a5 Bf6 a4 Bc4 Ng6 Qd3 d5 exd6 Be6 Qxg6",
+          "explanation": "The famous Qxg6!! queen sacrifice from Dubov-Karjakin 2020. After Black blocked the bishop with Ng6 and ...d5 challenging the centre, Dubov played the immortal Qxg6 — White's pieces dominate the e-file and after fxg6 Rxe6, Black's position collapses. One of the greatest games of the 21st century."
+        }
+      ]
+    },
+    {
       "id": "pro-dubov-catalan",
       "playerId": "dubov",
       "eco": "E06",
@@ -3709,50 +3757,50 @@
       ]
     },
     {
-      "id": "pro-ericrosen-italian",
+      "id": "pro-ericrosen-london",
       "playerId": "ericrosen",
-      "eco": "C50",
-      "name": "Italian Game (Rosen)",
-      "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5",
+      "eco": "D02",
+      "name": "London System (Rosen)",
+      "pgn": "d4 d5 Bf4 Nf6 Nf3 e6 e3 c5 c3 Nc6 Nbd2 Bd6 Bg3 O-O Bd3 b6 O-O Bb7",
       "color": "white",
-      "style": "Classical, Trappy",
-      "overview": "Eric Rosen's Italian Game is all about setting traps that look natural. While the Italian is one of the oldest openings in chess, Rosen transforms it into a minefield. He develops classically but always with an eye toward sneaky tactical tricks. His opponents often think they are playing a quiet game — until they walk into a devastating combination.",
+      "style": "Solid, System-Based",
+      "overview": "Alongside the Stafford Gambit, the London System is Eric Rosen's other signature opening — a calm, principled foundation he leans on when he wants positional chess rather than tactical fireworks. The London is a complete system that plays itself: Bf4 + e3 + c3 + Nbd2 + Bd3 every game, regardless of what Black does. Rosen teaches it as the perfect first opening for club players because it lets you focus on middlegame plans instead of memorising theory.",
       "keyIdeas": [
-        "Develop classically with Bc4 targeting f7 — the weakest square in Black's camp — a key strategic concept in Italian Game",
-        "Set up positions where natural-looking moves lead to tactical disasters — a key strategic concept in Italian Game",
-        "Use c3 and d4 to open the center when Black least expects it — this central control is the foundation for all middlegame operations",
-        "Watch for tactical sacrifices on f7 (Bxf7+ or Nxf7) and e5 (Nxe5) — these thematic blows are the Italian Game's most dangerous weapons and can lead to brilliant attacks"
+        "Build the exact same setup every game: Bf4 (before e3 so the bishop isn't hemmed in), then e3 + c3 + Bd3 + Nbd2 + O-O — this consistency lets you focus on middlegame plans rather than opening prep",
+        "Bf4 controls the e5 square — preventing Black from establishing a strong central pawn or knight outpost there is the London's core positional theme",
+        "Look for the central e4 break once development is complete — this transforms the quiet London setup into an open game where White's piece coordination tells",
+        "When Black trades the dark-squared bishop on f4, recapture with the e-pawn (exf4) to open lines for the rook on e1 and create a kingside pawn lever"
       ],
       "traps": [
-        "The Fried Liver Attack after Ng5 is always lurking if Black plays carelessly",
-        "After Bc4 Bc5, the Evans Gambit (b4) is a surprise weapon that Eric loves"
+        "If Black plays an early ...Nh5 to chase the Bf4, retreat to g3 (or h2 in some lines) rather than e5 — the bishop is worth more than the tempo lost",
+        "Don't allow ...Qb6 to fork b2 and the f2-pawn — meet it with Qb3 (or Nbd2 first then Qb3) to defend and offer a queen trade"
       ],
       "warnings": [
-        "Do not play on autopilot — always look for tactical tricks in the Italian",
-        "If Black plays the Giuoco Pianissimo with d6, be ready for a longer game"
+        "Be patient — the London is a slow build. Trying to force a quick attack abandons the system's strengths",
+        "Watch for early ...c5 / ...Nc6 / ...Qb6 setups that pressure your queenside before you've finished development"
       ],
       "variations": [
         {
-          "name": "Giuoco Piano c3 d4",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Nxc3 bxc3 Bxc3 Qb3 Bxa1 Bxf7+ Kf8 Bg5 Ne7 Re1",
-          "explanation": "The aggressive Giuoco Piano main line. White sacrifices material for a devastating attack. Rosen loves this line because Black faces a barrage of tactical threats that are very hard to defend."
+          "name": "Standard Setup vs ...d5",
+          "pgn": "d4 d5 Bf4 Nf6 Nf3 e6 e3 c5 c3 Nc6 Nbd2 Bd6 Bg3 O-O Bd3 b6 O-O Bb7",
+          "explanation": "The bread-and-butter London. White builds the standard pawn triangle e3-d4-c3 and develops minor pieces to natural squares. Black's ...c5 is the most common challenge; White meets it with c3 to maintain the d4 outpost."
         },
         {
-          "name": "Evans Gambit",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O Nf6 Ba3 d6 cxd4 Bb6 Nc3 O-O Nd5 Nxd5 exd5 Na5 Re1",
-          "explanation": "Rosen's favorite surprise — the Evans Gambit sacrifices a pawn for rapid development and open lines. The resulting positions are tactical nightmares for unprepared opponents."
+          "name": "vs King's Indian Setup",
+          "pgn": "d4 Nf6 Nf3 g6 Bf4 Bg7 e3 d6 h3 O-O Be2 Nbd7 O-O c5 c3 Qb6 Qb3",
+          "explanation": "When Black plays the KID fianchetto, Rosen keeps the system simple — h3 to prevent ...Nh5 chasing the bishop, then standard development. If Black plays ...Qb6 to attack b2, Qb3 defends and offers a queen trade that simplifies into a comfortable Carlsbad-like endgame."
         },
         {
-          "name": "Two Knights 4.Ng5",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5+ c6 dxc6 bxc6 Be2 h6 Nf3 e4 Ne5 Bd6 d4 Qc7 Bf4 O-O",
-          "explanation": "When Black plays Nf6 instead of Bc5, Rosen goes for the aggressive Ng5. The resulting complications are exactly the kind of chess Rosen thrives in — sharp, tactical, and full of traps."
+          "name": "Jobava-Style Aggressive Hybrid",
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 a6 e3 e6 Nf3 c5 dxc5 Bxc5 Bd3 Nc6 O-O O-O",
+          "explanation": "When Rosen wants more bite, he plays the Jobava setup with Nc3 before Nf3. The knight on c3 hits e4 and supports later e4-d5 pawn breaks. This line resembles Naroditsky's Jobava London teaching."
         }
       ],
       "trapLines": [
         {
-          "name": "Blackburne Shilling Gambit Refutation",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 Qg5 Nf3 Qxg2 Rg1 Qh3 Bxf7+ Ke7 d3 Kd8 Bg5",
-          "explanation": "If Black tries the tricky Nd4, White plays Nxd4 and after Qg5, Nf3 defends everything. The queen on g5 is misplaced and White develops with tempo."
+          "name": "Premature ...e5 Refuted",
+          "pgn": "d4 d5 Bf4 Nf6 Nf3 e5 dxe5 Nh5 Bg5 Be7 Bxe7 Qxe7 Nc3 Nf4 e3 Ng6 Bd3",
+          "explanation": "If Black tries an early ...e5 hoping to disrupt the London setup, White simply takes (dxe5) and unwinds. The h5/f4 knight tour wastes time — White develops cleanly with c4 ideas to come."
         }
       ]
     },
@@ -3858,55 +3906,55 @@
       ]
     },
     {
-      "id": "pro-annacramling-italian",
+      "id": "pro-annacramling-qgd",
       "playerId": "annacramling",
-      "eco": "C50",
-      "name": "Italian Game (Cramling)",
-      "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5",
+      "eco": "D37",
+      "name": "Queen's Gambit (Cramling)",
+      "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7 Rc1 c6 Bd3 dxc4 Bxc4 Nd5",
       "color": "white",
-      "style": "Classical, Solid",
-      "overview": "Anna Cramling grew up watching her mother, GM Pia Cramling, play the Italian Game at the highest level. Anna's Italian is solid and classical — she develops naturally, builds a strong center, and looks for the right moment to strike. Her approach combines her mother's positional understanding with an instinct for creating content-worthy moments.",
+      "style": "Positional, Classical",
+      "overview": "Anna Cramling's flagship opening, taught alongside her mother GM Pia Cramling in her Chessable course 'Anna Cramling's 1.d4' (Parts 1 & 2). The Queen's Gambit is the heart of her published repertoire — she covers the main Queen's Gambit Declined when Black answers 1...d5, plus weapons against the Slav, Albin Countergambit, and Indian setups (Nimzo, KID) in Part 2. Anna's approach is the same positional, principle-first chess her mother is known for.",
       "keyIdeas": [
-        "Develop classically with Bc4 and Nf3 — target f7 from the start — a key strategic concept in Italian Game",
-        "Build a strong center with c3 and d4 at the right moment — this central control is the foundation for all middlegame operations",
-        "Keep the position solid and wait for the opponent to overextend — a key strategic concept in Italian Game",
-        "Use the bishop pair as a long-term asset in open positions — piece placement and activity are more important than material in these positions"
+        "Pressure d5 with c4 immediately — the Queen's Gambit's whole purpose is to give Black an awkward choice: hold d5 with ...e6 (locking the c8-bishop in) or release central tension early",
+        "Build the classical pawn triangle d4/c4/e3 + develop pieces to natural squares (Nc3, Nf3, Bg5, Bd3) — the Cramling-style 1.d4 is about consistent piece placement, not memorising sharp tactics",
+        "After Black resolves the central tension with ...dxc4 or commits to a setup, look for the e3-e4 break — opening the center activates White's bishops and exposes Black's still-passive light-squared bishop",
+        "Trade pieces patiently when Black plays solidly — the resulting endgames favour the side with better pawn structure, which is usually White after a successful Queen's Gambit"
       ],
       "traps": [
-        "After Bc4 Bc5, if Black plays d6 too early, d4 opens the center favorably for White",
-        "The Fried Liver (Ng5) is always in the back pocket if Black plays Nf6 carelessly"
+        "If Black plays ...dxc4 too early (Queen's Gambit Accepted), White plays e4 immediately with a massive centre — Black can't easily hold the gambit pawn",
+        "Watch for the Albin Countergambit (1.d4 d5 2.c4 e5) — Black sacrifices a pawn for active piece play. Best met with 3.dxe5 d4 4.Nf3, returning the pawn only if forced"
       ],
       "warnings": [
-        "Do not rush — the Italian is about slow preparation, not quick attacks",
-        "Watch for the Two Knights Defense which can lead to sharp play"
+        "Don't rush to win the d-pawn back in the QGA — restore central control first with e3 + Bxc4, then look for an e4 break",
+        "Against the Slav (1...c6) and Semi-Slav (1...c6 + 2...e6), prepare carefully — these are Black's most resilient defences"
       ],
       "variations": [
         {
-          "name": "Giuoco Piano c3 d4",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Bd2 Bxd2+ Nbxd2 d5 exd5 Nxd5 O-O O-O Qb3 Nce7 Rfe1 c6 a4 Nf4 Ne4",
-          "explanation": "The main Giuoco Piano. White gets a slight edge with the IQP but active pieces. Anna plays this patiently, building pressure until the position breaks in her favor."
+          "name": "Queen's Gambit Declined (Main Line)",
+          "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7 Rc1 c6 Bd3 dxc4 Bxc4 Nd5",
+          "explanation": "The classical QGD with Bg5. Black solidly defends d5 with ...e6 and develops naturally. After the Capablanca-style ...dxc4 + ...Nd5, the position is balanced but White retains a small edge with Bxd5 or quiet development."
         },
         {
-          "name": "Quiet Italian d3",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 O-O O-O c3 d6 Re1 a6 Bb3 Ba7 Nbd2 Be6 Bxe6 fxe6 Nf1 d5 Bg5 dxe4 dxe4",
-          "explanation": "The quieter d3 approach. White builds slowly and avoids early confrontation. This is Anna's preferred line — solid, safe, and with long-term potential. Very hard for Black to create counterplay."
+          "name": "Queen's Gambit Accepted",
+          "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 Qe2 b5 Bb3 Bb7",
+          "explanation": "If Black takes the c-pawn immediately, White restores material with Bxc4 and gets the standard QGA centre. Black's ...b5 expansion is met with Bb3 retreating the bishop to a safer diagonal."
         },
         {
-          "name": "Evans Gambit Surprise",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O Nf6 Ba3 d6 cxd4 Bb6 Nc3 O-O Nd5 Nxd5 exd5 Na5 Re1",
-          "explanation": "Anna occasionally pulls out the Evans Gambit for content. The sacrifice creates immediate attacking chances and is great for creating exciting games."
+          "name": "Slav Defence",
+          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 e3 e6 Bxc4 Bb4 O-O",
+          "explanation": "The Slav (1...c6 instead of ...e6) avoids hemming in the c8-bishop. Anna's recommendation: a4 to prevent ...b5 holding the c4-pawn, then standard development. The resulting positions are calm and instructive."
+        },
+        {
+          "name": "Albin Countergambit",
+          "pgn": "d4 d5 c4 e5 dxe5 d4 Nf3 Nc6 g3 Bg4 Bg2 Qd7 O-O O-O-O Nbd2",
+          "explanation": "Black tries the tricky 2...e5 gambit. White takes (dxe5) and then plays g3/Bg2 to neutralise Black's d-pawn and pressure the long diagonal."
         }
       ],
       "trapLines": [
         {
-          "name": "Nxe4 Grab Refuted",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 e5 Ne4 Bd5 Nxf2 Kxf2 dxc3+ Kg3 cxb2 Bxb2",
-          "explanation": "If Black grabs the e4 pawn with Nxe4, White pushes e5 with tempo and develops aggressively. After Bd5 the knight is trapped in the center and White gets a powerful attack."
-        },
-        {
-          "name": "d4 Center Catch",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4 Bb6 d5 Na5 Bd3 c6 dxc6 bxc6 O-O Nf6 Nc3 O-O Bg5",
-          "explanation": "White pushes d4 to open the center and after exd4 cxd4, the bishop on c5 must retreat. White gains a strong center and piece activity while Black's bishop is passive on b6."
+          "name": "Premature ...Qxd4 Punished",
+          "pgn": "d4 d5 c4 dxc4 e4 Qxd4 Qxd4",
+          "explanation": "If Black grabs the d-pawn after ...dxc4 + e4, White simply trades queens and emerges with a better centre and structure. This is one of the simplest QGA punishments."
         }
       ]
     },
@@ -3964,55 +4012,50 @@
       ]
     },
     {
-      "id": "pro-annacramling-sicilian",
+      "id": "pro-annacramling-cow",
       "playerId": "annacramling",
-      "eco": "B20",
-      "name": "Sicilian Defense (Cramling)",
-      "pgn": "e4 c5",
+      "eco": "B06",
+      "name": "The Cow (Cramling)",
+      "pgn": "e4 e6 d4 d6 Nf3 Nd7 Nc3 Ne7 Bd3 Nb6 O-O Ng6",
       "color": "black",
-      "style": "Dynamic, Fighting",
-      "overview": "Anna's Sicilian Defense shows her fighting side. The Sicilian creates the asymmetric positions that make for exciting content and competitive games. Anna plays it because it gives Black active counterplay from move one — c5 challenges White's center and leads to the kind of dynamic positions where anything can happen.",
+      "style": "System-Based, Hypermodern",
+      "overview": "'The Cow' is Anna Cramling's own opening invention (2023) — a variation of Van 't Kruijs reminiscent of the Hippopotamus Defence, playable with either colour. The signature is the cow-horns knight setup: knights routed to b6 and g6 (or b3/g3 with White), creating a flexible pawn structure that lets Black react to whatever White builds. Anna popularised it through her YouTube videos and uses it specifically to dodge the heavy theory of mainline openings. It's deliberately offbeat — the goal is to reach a playable middlegame where understanding beats memorisation.",
       "keyIdeas": [
-        "Challenge White's center with c5 — the most popular response to e4 — a key strategic concept in Sicilian Defense",
-        "Use the semi-open c-file for counterplay after d4 cxd4 — a key strategic concept in Sicilian Defense",
-        "Aim for an asymmetric pawn structure that creates winning chances for both sides",
-        "Play actively and look for tactical opportunities in the middlegame — a key strategic concept in Sicilian Defense"
+        "Build the Cow setup methodically: Nd7→Nb6 and Ne7→Ng6 give Black two flexible knights ready to swing to c4/d5/f4/e5 depending on White's plan",
+        "Don't commit central pawns early — by keeping pawns on e6 and d6, Black retains maximum flexibility on which pawn break to play later (e5, f5, b5, or c5)",
+        "Use the knight on g6 to defend the king AND threaten Nf4 jumps — this dual purpose is what makes the Cow's piece routing distinctive vs the Hippopotamus",
+        "Wait for White to over-commit, then strike with a central pawn break (...e5 or ...c5) where Black's piece harmony pays off — the system rewards patience over force"
       ],
       "traps": [
-        "After e4 c5 Nf3 d6, if White plays Bc4, Be6 challenges the bishop and equalizes quickly",
-        "In the Alapin (c3), after d5 exd5 Qxd5, Black's queen is active and develops with tempo"
+        "If White rushes a kingside attack (h4, Bh6, etc.) before completing development, Black hits back with the central e5 break — opening lines for the active pieces",
+        "Watch for White's e5 push: Anna's response is the standard ...d5 or ...Nfd5 to challenge the wedge and keep central tension"
       ],
       "warnings": [
-        "The Sicilian can be sharp — know the main lines against popular White setups",
-        "Against the Grand Prix Attack (f4), play d5 early to challenge the center"
+        "The Cow is a SETUP, not a forced sequence — these PGN moves are Anna's typical move order but Black should adapt to whatever White plays",
+        "Don't get too passive — at some point Black MUST strike with a central or wing pawn break, or White's space advantage becomes overwhelming"
       ],
       "variations": [
         {
-          "name": "Sicilian Najdorf Setup",
-          "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Qd2 Nbd7 a4 Qc7 f3 Rac8",
-          "explanation": "The Najdorf-style setup. Black develops solidly with a6, d6, and Nf6. Anna likes this because it gives a clear plan — develop, castle, and fight for the center."
+          "name": "Standard Cow vs 1.e4",
+          "pgn": "e4 e6 d4 d6 Nf3 Nd7 Nc3 Ne7 Bd3 Nb6 O-O Ng6",
+          "explanation": "The textbook Cow against 1.e4. Black builds the cow-horns knight setup while White develops normally. By move 6 Black has a flexible position with no committed pawn breaks — ideal for outplaying lower-rated opponents."
         },
         {
-          "name": "Accelerated Dragon",
-          "pgn": "e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 g6 Nc3 Bg7 Be3 Nf6 Bc4 O-O Bb3 d6 f3 Bd7 Qd2 Na5 O-O-O Rc8",
-          "explanation": "The Accelerated Dragon with g6. The bishop on g7 is a powerful piece and Black gets active play. Anna enjoys the creative middlegame positions this variation produces."
+          "name": "Cow vs 1.d4",
+          "pgn": "d4 e6 c4 d6 Nc3 Nd7 Nf3 Ne7 e4 Nb6 Be2 Ng6 O-O Be7",
+          "explanation": "Against 1.d4 the Cow setup transposes naturally — same knight tour to b6/g6, same pawn structure on e6/d6. White's c4 gets met with a slow Black setup that's nothing like the Indian defences White is prepped for."
         },
         {
-          "name": "Anti-Sicilian Prep",
-          "pgn": "e4 c5 Nc3 Nc6 f4 g6 Nf3 Bg7 Bb5 Nd4 O-O Nxb5 Nxb5 d5 exd5 a6 Nc3 Nf6 d4 cxd4 Nxd4 Nxd5 Nxd5 Qxd5 c3 O-O",
-          "explanation": "Against anti-Sicilian setups like the Grand Prix, Anna plays solidly with g6 and Bg7. The fianchettoed bishop provides excellent defense and counterattacking potential."
+          "name": "Aggressive Cow with ...g6",
+          "pgn": "e4 e6 d4 d6 Nf3 Nd7 Nc3 g6 Bd3 Bg7 O-O Ne7 Re1 O-O",
+          "explanation": "A sharper Cow variant where Black fianchettos to g7 instead of routing the knight to g6 immediately. The bishop on g7 supplements the structure with attacking potential along the long diagonal."
         }
       ],
       "trapLines": [
         {
-          "name": "Premature d4 Punished",
-          "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e5 Nf3 Be7 O-O O-O Re1 b5 Bf1 Bb7",
-          "explanation": "If White pushes d4 and Black captures with cxd4, Black gets active play on the semi-open c-file. The pawn exchange opens lines that favor Black's piece activity."
-        },
-        {
-          "name": "Open Sicilian d4 Pressure",
-          "pgn": "e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 e5 Nb5 d6 N1c3 a6 Na3 b5 Nd5 Nf6 c4 b4 Nc2 Nxd5 exd5 Ne7",
-          "explanation": "In the Open Sicilian, Black applies constant pressure on d4 with pieces. After e5, White's knight must retreat and Black gets a strong central position with active piece play."
+          "name": "Premature White Attack Punished by ...e5",
+          "pgn": "e4 e6 d4 d6 f4 Nd7 Nf3 Ne7 Bd3 Nb6 O-O Ng6 c3 e5",
+          "explanation": "If White over-commits with f4 (King's Indian Attack style aggression), Black strikes back in the centre with ...e5 — undermining White's f4 pawn and freeing the f8-bishop. The cow setup's flexibility is its biggest strength here."
         }
       ]
     },
@@ -4172,6 +4215,59 @@
           "name": "d5 Knight Catch",
           "pgn": "e4 e5 f4 d5 exd5 e4 Nc3 Nf6 d3 Bb4 Bd2 exd3 Bxd3 O-O Nge2 Nxd5 Nxd5 Qxd5 O-O Bxd2 Qxd2 Nc6 Qe3",
           "explanation": "If Black declines with d5, White captures and opens the center. After exd5 e4, White plays Nc3 and d3 to undermine Black's advanced pawn. White gets active piece play and open lines."
+        }
+      ]
+    },
+    {
+      "id": "pro-chesswithakeem-caro-kann",
+      "playerId": "chesswithakeem",
+      "eco": "B12",
+      "name": "Caro-Kann Defense (Akeem)",
+      "pgn": "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3 Bxd3 Qxd3 e6 Bd2 Ngf6 O-O-O Be7",
+      "color": "black",
+      "style": "Solid, Universal",
+      "overview": "Akeem's Black workhorse — the Caro-Kann is his go-to defence across rapid and blitz formats, with strong results in both. The Caro keeps the pawn structure rock-solid while letting Black develop the light-squared bishop ACTIVELY to f5/g6 (unlike the French, where it stays hemmed in). Akeem teaches it as the perfect anti-1.e4 weapon for club players: minimal theory, maximum reliability, and a structure that's hard to break. Source: ChessWithAkeem player profile (Chess.com Insights confirm Caro-Kann is his most-played Black response to 1.e4 in blitz and rapid).",
+      "keyIdeas": [
+        "After 1.e4 c6, prepare ...d5 to challenge White's centre with PAWN support (the c6-pawn backs up d5) — this is the Caro-Kann's structural advantage over the French",
+        "Develop the light-squared bishop ACTIVELY to f5 or g4 BEFORE playing ...e6 — Black's bishop must escape the pawn chain or it gets buried like the French bishop",
+        "After ...Bf5 and the bishop trade with Bd3, the resulting structure favours Black's solid pawns (c6, e6, plus a kingside pawn majority) — patient maneuvering wins these endgames",
+        "Watch for the c5 break later — when White has committed to e5 push or kingside attack, ...c5 strikes back at the d4 pawn and frees Black's position"
+      ],
+      "traps": [
+        "Against the Advance Variation (3.e5), don't immediately play ...Bf5 — first ensure h3 or h4 doesn't trap the bishop. The careful move order is ...Bf5 + ...e6 + ...Nd7 + ...c5",
+        "If White plays the Fantasy Variation (3.f3), respond with ...dxe4 + ...e5 to challenge the centre — Akeem teaches this as the most active response"
+      ],
+      "warnings": [
+        "Don't get TOO passive — the Caro-Kann's reputation as a 'safe' opening can lull you into letting White seize space without counterplay",
+        "Watch for kingside pawn storms (h4-h5) by White after castling queenside — be ready to counter with queenside attacks or central breaks"
+      ],
+      "variations": [
+        {
+          "name": "Classical Caro-Kann (Main Line)",
+          "pgn": "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3 Bxd3 Qxd3 e6 Bd2 Ngf6 O-O-O Be7",
+          "explanation": "The classical Bf5 development — Black trades the light-squared bishop for White's Bd3, simplifying into a solid endgame structure. The resulting position favours patient play and good technique."
+        },
+        {
+          "name": "Advance Variation (3.e5)",
+          "pgn": "e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 Nd7 O-O Bg6 Nbd2 Ne7 Nb3 a5 c4 dxc4 Bxc4",
+          "explanation": "If White plays the Advance, Black develops the bishop to f5/g6 first (BEFORE ...e6) so it doesn't get hemmed in. The ...a5 expansion + ...Ne7 maneuvering creates active piece play."
+        },
+        {
+          "name": "Exchange Variation (3.exd5)",
+          "pgn": "e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6 Bf4 Bg4 Qb3 Qd7 Nd2 e6 Ngf3 Bd6",
+          "explanation": "The Exchange Variation: White swaps pawns and tries to play a quiet positional game with the IQP. Black develops normally and plays for symmetric simplicity — both sides have roughly equal chances."
+        },
+        {
+          "name": "Fantasy Variation (3.f3)",
+          "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 Bg4 Bc4 Nd7 O-O Ngf6 Nc3 Be7 Bg5",
+          "explanation": "Against the rare 3.f3 (Fantasy), Black takes the pawn (...dxe4) and then strikes the centre with ...e5. The resulting open position favours Black's better-developed pieces."
+        }
+      ],
+      "trapLines": [
+        {
+          "name": "Premature h4 by White Punished",
+          "pgn": "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h5 Nf3 Nd7 Bd3 Bxd3 Qxd3 Ngf6",
+          "explanation": "If White plays h4 too aggressively without proper preparation, Black responds with ...h5 freezing the h-pawn — then the standard development gives Black a perfectly safe position with the threat of ...h5 always weakening White's kingside."
         }
       ]
     },
