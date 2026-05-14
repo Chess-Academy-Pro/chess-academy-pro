@@ -253,6 +253,19 @@ async function main() {
     async () => {
       await page.goto(`${BASE_URL}/`, { waitUntil: 'domcontentloaded', timeout: BOOT_TIMEOUT_MS });
       await page.getByText('Chess Academy Pro', { exact: true }).first().waitFor({ timeout: BOOT_TIMEOUT_MS });
+      // Wait for the audit-stream config to hydrate before moving on
+      // to the next scenario. Without this, early TacticsPage.mount
+      // events fire before `loadAuditStreamConfig()` completes and
+      // get queued — they DO replay later (see appAuditor's pre-
+      // hydration queue), but the POSTs land in a later scenario's
+      // capture window. Waiting here ensures the stream is live
+      // before scenario 02 navigates to /tactics. The `app-boot`
+      // event is the canonical signal that hydration finished —
+      // wait until it shows up in `captured`.
+      const deadline = Date.now() + 8000;
+      while (Date.now() < deadline && !captured.some((e) => e?.kind === 'app-boot')) {
+        await page.waitForTimeout(200);
+      }
     },
     4000,
     [
