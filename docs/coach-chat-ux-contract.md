@@ -120,3 +120,38 @@ script).
 
 **Commits:** `1f96dcd0` (fix + audit script + unit tests),
 `de084738` (audit-script tightening).
+
+### 2026-05-14 — Same class of bug at 21 sites across sister chat surfaces
+
+After fixing `/coach/chat`, swept the codebase for every other
+chat-style surface using David's "sweep, don't spot-fix" rule. Found
+the identical violation at 21 more sites:
+
+| File | Sites | Why it mattered |
+|---|---:|---|
+| `GameChatPanel.tsx` | 10 | Mounted globally via `GlobalCoachDrawer` AND on `/coach/play` — every route in the app exposed the bug. |
+| `VoiceChatMic.tsx` | 4 | Voice users hit this hardest — STT-routed phrases mostly hit the deterministic intent router, not the LLM path. |
+| `CoachTeachPage.tsx` | 5 | Cached-lesson ack, generation progress ack, success ack, failure ack, catch-all error — none mirrored. |
+| `CoachGamePage.tsx` | 2 | The in-game coach's actual move narration + tactic alerts were invisible to the brain. |
+
+Probe pre-fix: a chip-driven turn on any of these surfaces left
+`useCoachMemoryStore.conversationHistory.length === 0` even though the
+chat UI clearly showed both user + assistant bubbles. The disease was
+universal because the contract was implicit ("you should write to both
+stores") rather than enforced by a shared helper.
+
+Fix shape (same pattern per surface): introduce a small local
+`recordCoachAck(text)` or `recordMemory(role, text)` helper at the top
+of the chat handler that wraps `appendConversationMessage`, then call
+it at every previously-unpaired site. Surface label varies per file:
+`chat-coach-tab` / `chat-in-game` / `chat-home` / `chat-teach`.
+
+Prior audits caught zero of these — only this session's audits
+(audit-coach-chat.mjs + Wave 4 spec 2.16) inspected the memory store
+at all. Every prior surface-level audit asserted at the chat-bubble
+level, which is exactly where this bug is invisible.
+
+**Commit:** `2ff6227a` — single sweep commit across 5 files (4 product
++ 1 audit script wipe-strictness fix + 1 stale CLAUDE.md-policy test
+update).
+
