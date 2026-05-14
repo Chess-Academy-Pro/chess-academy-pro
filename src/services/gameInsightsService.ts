@@ -94,6 +94,44 @@ interface AnnotatedGame {
   playerColor: 'white' | 'black';
 }
 
+/** Classify an opening NAME by which color named it. Black-named
+ *  openings (Defense, Defence, Indian, Sicilian, etc.) reflect
+ *  Black's choice — they should never appear in a user's "Most
+ *  played as White" bucket even when the user happened to be
+ *  White in the game (which would just mean the user FACED that
+ *  defense, not that they played it). Returns 'black' when the
+ *  name clearly tags a Black-side opening; 'white' when clearly
+ *  White-named; null when ambiguous / joint (Italian Game,
+ *  Queen's Gambit Declined, King's Pawn Game) — those get
+ *  bucketed by player color as before. */
+function openingChoosingColor(name: string | null): 'white' | 'black' | null {
+  if (!name) return null;
+  const n = name.toLowerCase();
+  // Black-named: "Defense"/"Defence", "Indian", and specific Black-
+  // defense families. The keyword set covers every B0-B99 + most
+  // E00-E99 + Black sidelines in D70-D99 and C00-C19. Reported by
+  // David: Scandinavian + Caro-Kann showing up in his "Most played
+  // as White" bucket.
+  const blackKeywords = [
+    'defense', 'defence',
+    'indian',
+    'sicilian', 'scandinavian', 'caro-kann', 'caro kann',
+    'french', 'pirc', 'modern', 'alekhine', 'nimzowitsch',
+    'benoni', 'benko', 'budapest', 'slav', 'semi-slav', 'dutch',
+    'grunfeld', 'grünfeld',
+    'centre counter', 'center counter',
+    'counter-gambit', 'countergambit', 'counter gambit',
+    'tarrasch defense', 'tarrasch defence',
+    'philidor', 'petrov', "petroff",
+    'two knights',
+    'englund',
+  ];
+  for (const kw of blackKeywords) {
+    if (n.includes(kw)) return 'black';
+  }
+  return null;
+}
+
 async function getPlayerGames(): Promise<AnnotatedGame[]> {
   const allGames = await db.games
     .filter((g) => !g.isMasterGame && g.result !== '*')
@@ -374,15 +412,27 @@ export async function getOpeningInsights(): Promise<OpeningInsights> {
 
   for (const { game, playerColor } of playerGames) {
     const key = game.eco ?? 'unknown';
+    // Same 3-tier name fallback as the combined-opening pass above.
+    const repOpening = repertoire.find((o) => o.eco === game.eco);
+    const canonical = repOpening?.name ?? getOpeningNameByEco(game.eco) ?? game.eco ?? 'Unknown';
+
+    // Skip openings that are explicitly named for the OTHER color.
+    // A user playing White who faced a Scandinavian (B01) shouldn't
+    // see "Scandinavian Defence" listed as their "most played as
+    // White" — they didn't choose it, their opponent did. Black-
+    // named openings (Defenses, Indian Defenses, Sicilian, etc.) are
+    // filtered out of the White bucket; the reverse filter is not
+    // applied because there's no clean equivalent set of explicitly
+    // "White-named" openings (joint names like Italian Game / Queen's
+    // Gambit are still bucketed by player color as before).
+    const choosingColor = openingChoosingColor(canonical);
+    if (playerColor === 'white' && choosingColor === 'black') continue;
+    if (playerColor === 'black' && choosingColor === 'white') continue;
+
     const map = playerColor === 'white' ? whiteMap : blackMap;
 
     let entry = map.get(key);
     if (!entry) {
-      // Same 3-tier name fallback as above so the white/black-split
-      // win-rate-by-opening blocks also render readable names instead
-      // of bare ECOs.
-      const repOpening = repertoire.find((o) => o.eco === game.eco);
-      const canonical = repOpening?.name ?? getOpeningNameByEco(game.eco) ?? game.eco ?? 'Unknown';
       entry = {
         name: canonical,
         eco: game.eco,
@@ -417,6 +467,15 @@ export async function getOpeningInsights(): Promise<OpeningInsights> {
     .filter((o) => o.games >= 3)
     .sort((a, b) => b.winRate - a.winRate);
 
+  // Best / worst results-by-opening — explicit "which openings treat
+  // you well vs. badly" report David asked for. Reuses the same ≥3-
+  // games threshold as winRateByOpening so we don't surface lucky-
+  // streak noise. Top-5 each end of the sorted list. Same list of
+  // openings may show in both if there's a tight cluster — display
+  // dedupes by ECO at the UI level.
+  const bestResults = winRateByOpening.slice(0, 5);
+  const worstResults = [...winRateByOpening].reverse().slice(0, 5);
+
   // Drill accuracy from repertoire
   const drillAccuracyByOpening = repertoire
     .filter((o) => o.drillAttempts > 0)
@@ -445,6 +504,8 @@ export async function getOpeningInsights(): Promise<OpeningInsights> {
     mostPlayedWhite: whiteOpenings.slice(0, 5),
     mostPlayedBlack: blackOpenings.slice(0, 5),
     winRateByOpening,
+    bestResults,
+    worstResults,
     drillAccuracyByOpening: drillAccuracyByOpening.slice(0, 10),
     strengths,
   };

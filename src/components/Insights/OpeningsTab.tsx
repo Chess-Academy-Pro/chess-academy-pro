@@ -91,6 +91,26 @@ export function OpeningsTab({ data }: OpeningsTabProps): JSX.Element {
         </Section>
       )}
 
+      {/* Best / worst results vs. opening — explicit callouts so the
+          user sees "you crush the French" and "you fold to the Caro"
+          at a glance. Tappable rows drop the user into the
+          OpeningDrilldown for that opening. */}
+      {data.bestResults.length > 0 && (
+        <Section title="Best results against (3+ games)">
+          {data.bestResults.map((o) => (
+            <OpeningRow key={`best-${o.eco ?? o.name}`} opening={o} onClick={() => setDrilldownOpening(o)} />
+          ))}
+        </Section>
+      )}
+
+      {data.worstResults.length > 0 && (
+        <Section title="Worst results against (3+ games)">
+          {data.worstResults.map((o) => (
+            <OpeningRow key={`worst-${o.eco ?? o.name}`} opening={o} onClick={() => setDrilldownOpening(o)} />
+          ))}
+        </Section>
+      )}
+
       {/* Drill Accuracy */}
       {data.drillAccuracyByOpening.length > 0 && (
         <Section title="Drill Accuracy">

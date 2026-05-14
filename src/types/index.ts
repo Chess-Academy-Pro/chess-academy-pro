@@ -1086,6 +1086,13 @@ export interface OpeningInsights {
   mostPlayedWhite: OpeningAggregateStats[];
   mostPlayedBlack: OpeningAggregateStats[];
   winRateByOpening: OpeningAggregateStats[];
+  /** Top-5 openings (≥3 games) by best win-rate — surfaces "which
+   *  openings treat you well" as a standalone report. Same data as
+   *  winRateByOpening but pre-trimmed for the UI section. */
+  bestResults: OpeningAggregateStats[];
+  /** Top-5 openings (≥3 games) by worst win-rate — surfaces "which
+   *  openings you struggle most against." */
+  worstResults: OpeningAggregateStats[];
   drillAccuracyByOpening: { name: string; accuracy: number; attempts: number }[];
   strengths: string[];
 }
