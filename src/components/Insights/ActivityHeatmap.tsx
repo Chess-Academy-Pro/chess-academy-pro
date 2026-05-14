@@ -13,6 +13,11 @@ import type { ActivityHeatmapData } from '../../services/analyticsService';
 
 interface ActivityHeatmapProps {
   data: ActivityHeatmapData;
+  /** Fired when the user taps a populated cell. The drilldown
+   *  panel listens via the parent component. Empty-count cells
+   *  are still tappable but the handler can early-return on
+   *  count === 0 to skip empty-state navigations. */
+  onCellClick?: (date: string, count: number) => void;
 }
 
 const CELL_PX = 11;
@@ -29,7 +34,7 @@ function colorForCount(count: number, max: number): string {
   return 'rgba(34, 197, 94, 0.3)';
 }
 
-export function ActivityHeatmap({ data }: ActivityHeatmapProps): JSX.Element {
+export function ActivityHeatmap({ data, onCellClick }: ActivityHeatmapProps): JSX.Element {
   if (data.cells.length === 0) {
     return (
       <div className="text-xs py-3 text-center" style={{ color: 'var(--color-text-muted)' }} data-testid="activity-heatmap-empty">
@@ -122,10 +127,21 @@ export function ActivityHeatmap({ data }: ActivityHeatmapProps): JSX.Element {
                         />
                       );
                     }
+                    const clickable = onCellClick && day.count > 0;
                     return (
                       <div
                         key={day.date}
-                        title={`${day.date}: ${day.count} game${day.count === 1 ? '' : 's'}`}
+                        role={clickable ? 'button' : undefined}
+                        tabIndex={clickable ? 0 : -1}
+                        onClick={() => { if (clickable) onCellClick(day.date, day.count); }}
+                        onKeyDown={(e) => {
+                          if (!clickable) return;
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            onCellClick(day.date, day.count);
+                          }
+                        }}
+                        title={`${day.date}: ${day.count} game${day.count === 1 ? '' : 's'}${clickable ? ' (click to view)' : ''}`}
                         style={{
                           width: CELL_PX,
                           height: CELL_PX,
@@ -133,6 +149,7 @@ export function ActivityHeatmap({ data }: ActivityHeatmapProps): JSX.Element {
                           marginRight: GAP_PX,
                           background: colorForCount(day.count, data.maxCount),
                           borderRadius: 2,
+                          cursor: clickable ? 'pointer' : 'default',
                         }}
                         data-testid={day.count > 0 ? 'activity-cell-played' : 'activity-cell-empty'}
                       />

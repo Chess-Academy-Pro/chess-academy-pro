@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Loader2, Sparkles, Calendar, Timer, Target } from 'lucide-react';
 import { InsightsDonutChart } from './InsightsDonutChart';
 import { InsightsBarChart } from './InsightsBarChart';
@@ -14,7 +15,12 @@ import {
   type CriticalMomentsStats,
   type TimeControlBucket,
 } from '../../services/analyticsService';
+import { encodeFilters, type StatFilter } from '../../services/gameFilterService';
 import type { OverviewInsights } from '../../types';
+
+function openDrilldown(navigate: ReturnType<typeof useNavigate>, filters: StatFilter[]): void {
+  void navigate(`/weaknesses/games?f=${encodeFilters(filters)}`);
+}
 
 const TIME_CONTROL_LABEL: Record<TimeControlBucket, string> = {
   bullet: 'Bullet',
@@ -51,6 +57,7 @@ interface OverviewTabProps {
 }
 
 export function OverviewTab({ data, onAnalyze, isAnalyzing, analysisLabel }: OverviewTabProps): JSX.Element {
+  const navigate = useNavigate();
   // Lazy-load the analytics views — they're additive and shouldn't
   // block the existing tab's first paint. Each renders once its
   // shape resolves; null until then so the section is hidden.
@@ -181,7 +188,14 @@ export function OverviewTab({ data, onAnalyze, isAnalyzing, analysisLabel }: Ove
             <Calendar size={11} />
             Last year of chess
           </div>
-          <ActivityHeatmap data={activity} />
+          <ActivityHeatmap
+            data={activity}
+            onCellClick={(date, count) => {
+              openDrilldown(navigate, [
+                { source: 'activity-day', date, label: `${date} (${count})` },
+              ]);
+            }}
+          />
         </Section>
       )}
 
@@ -195,10 +209,15 @@ export function OverviewTab({ data, onAnalyze, isAnalyzing, analysisLabel }: Ove
             Where you play and where you win
           </div>
           {timeControls.map((row) => (
-            <div
+            <button
               key={row.bucket}
-              className="flex items-center justify-between py-2 border-b text-sm"
+              type="button"
+              onClick={() => openDrilldown(navigate, [
+                { source: 'time-control', bucket: row.bucket, label: `${TIME_CONTROL_LABEL[row.bucket]} (${row.games})` },
+              ])}
+              className="w-full flex items-center justify-between py-2 border-b text-sm hover:opacity-80 transition-opacity"
               style={{ borderColor: 'color-mix(in srgb, var(--color-border) 50%, transparent)' }}
+              data-testid={`time-control-row-${row.bucket}`}
             >
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{ background: TIME_CONTROL_COLOR[row.bucket] }} />
@@ -214,7 +233,7 @@ export function OverviewTab({ data, onAnalyze, isAnalyzing, analysisLabel }: Ove
                   </>
                 )}
               </div>
-            </div>
+            </button>
           ))}
         </Section>
       )}
@@ -232,7 +251,14 @@ export function OverviewTab({ data, onAnalyze, isAnalyzing, analysisLabel }: Ove
             style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
             data-testid="critical-moments-card"
           >
-            <div className="flex flex-col">
+            <button
+              type="button"
+              onClick={() => openDrilldown(navigate, [
+                { source: 'critical-moments', missed: true, label: `Critical moments missed (${criticals.total - criticals.found})` },
+              ])}
+              className="flex flex-col text-left hover:opacity-80 transition-opacity"
+              aria-label="View games with missed critical moments"
+            >
               <div className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--color-text-muted)' }}>
                 Decision quality
               </div>
@@ -242,15 +268,23 @@ export function OverviewTab({ data, onAnalyze, isAnalyzing, analysisLabel }: Ove
               <div className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
                 {criticals.found} of {criticals.total} critical positions solved
               </div>
-            </div>
+            </button>
             <div className="grid grid-cols-3 gap-2 text-[10px]">
               {criticals.byPhase.map((p) => (
-                <div key={p.phase} className="text-center">
+                <button
+                  key={p.phase}
+                  type="button"
+                  disabled={p.total === 0}
+                  onClick={() => openDrilldown(navigate, [
+                    { source: 'critical-moments', phase: p.phase, missed: true, label: `Missed in ${p.phase}` },
+                  ])}
+                  className="text-center hover:opacity-80 transition-opacity disabled:cursor-default disabled:opacity-50"
+                >
                   <div className="capitalize" style={{ color: 'var(--color-text-muted)' }}>{p.phase}</div>
                   <div className="text-sm font-semibold tabular-nums" style={{ color: 'var(--color-text)' }}>
                     {p.total > 0 ? `${p.accuracyPct}%` : '—'}
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>

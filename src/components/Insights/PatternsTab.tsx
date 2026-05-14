@@ -15,8 +15,10 @@
  * honest.
  */
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Flame, TrendingUp, Layers, ArrowDownUp, RotateCw, Star, Repeat, Sparkles, Trophy, Crown, Zap, Clock } from 'lucide-react';
 import { engagementSummary, type EngagementSummary } from '../../services/analyticsService';
+import { encodeFilters, type StatFilter } from '../../services/gameFilterService';
 import { StrengthsCard } from './StrengthsCard';
 import { HeatmapGrid, type HeatmapRow } from './HeatmapGrid';
 import { accuracyColor, gapColor } from './heatmapScales';
@@ -30,8 +32,13 @@ interface PatternsTabProps {
 const MIN_GAMES_FOR_SIGNAL = 5;
 
 export function PatternsTab({ data: provided }: PatternsTabProps = {}): JSX.Element {
+  const navigate = useNavigate();
   const [data, setData] = useState<EngagementSummary | null>(provided ?? null);
   const [loading, setLoading] = useState(provided === undefined || provided === null);
+
+  const goToDrilldown = (filters: StatFilter[]): void => {
+    void navigate(`/weaknesses/games?f=${encodeFilters(filters)}`);
+  };
 
   useEffect(() => {
     if (provided !== undefined && provided !== null) {
@@ -71,10 +78,10 @@ export function PatternsTab({ data: provided }: PatternsTabProps = {}): JSX.Elem
 
   return (
     <div data-testid="patterns-tab" className="flex flex-col gap-4 pt-2">
-      <PersonalRecordsCard records={data.records} />
+      <PersonalRecordsCard records={data.records} onDrillRecord={goToDrilldown} />
       <StreaksRow streak={data.streak} />
-      <PhaseStrengthHeatmap matrix={data.phaseStrength} />
-      <TacticRecognitionHeatmap rows={data.tacticRecognition} />
+      <PhaseStrengthHeatmap matrix={data.phaseStrength} onDrillCell={goToDrilldown} />
+      <TacticRecognitionHeatmap rows={data.tacticRecognition} onDrillRow={goToDrilldown} />
       <FirstTryCard firstTry={data.firstTry} />
       <ColorMismatchCard mismatch={data.colorMismatch} />
       <ComebackCard comeback={data.comeback} winShape={data.winShape} />
@@ -91,7 +98,7 @@ export function PatternsTab({ data: provided }: PatternsTabProps = {}): JSX.Elem
 
 // ─── New cards / heatmaps ──────────────────────────────────────────────
 
-function PersonalRecordsCard({ records }: { records: EngagementSummary['records'] }): JSX.Element {
+function PersonalRecordsCard({ records, onDrillRecord }: { records: EngagementSummary['records']; onDrillRecord: (filters: StatFilter[]) => void }): JSX.Element {
   const hasAny =
     records.highestBeaten ||
     records.fastestWin ||
@@ -112,55 +119,88 @@ function PersonalRecordsCard({ records }: { records: EngagementSummary['records'
         </h3>
       </div>
       <div className="grid grid-cols-2 gap-2">
-        {records.highestBeaten && (
-          <RecordTile
-            label="Highest beaten"
-            value={`${records.highestBeaten.elo}`}
-            sub={records.highestBeaten.name}
-            color="var(--color-success)"
-            icon={<Crown size={11} />}
-          />
-        )}
-        {records.fastestWin && (
-          <RecordTile
-            label="Fastest win"
-            value={`${records.fastestWin.moves} moves`}
-            sub={`vs ${records.fastestWin.opponent}`}
-            color="#22d3ee"
-            icon={<Zap size={11} />}
-          />
-        )}
-        {records.longestGame && (
-          <RecordTile
-            label="Longest game"
-            value={`${records.longestGame.moves} moves`}
-            sub={records.longestGame.result.toUpperCase()}
-            color="#a855f7"
-            icon={<Clock size={11} />}
-          />
-        )}
-        {records.bestAccuracyGame && (
-          <RecordTile
-            label="Best accuracy"
-            value={`${records.bestAccuracyGame.accuracyPct}%`}
-            sub={`vs ${records.bestAccuracyGame.opponent}`}
-            color="var(--color-warning)"
-            icon={<Sparkles size={11} />}
-          />
-        )}
+        {(() => {
+          const r = records.highestBeaten;
+          if (!r) return null;
+          return (
+            <RecordTile
+              label="Highest beaten"
+              value={`${r.elo}`}
+              sub={r.name}
+              color="var(--color-success)"
+              onClick={() => onDrillRecord([{
+                source: 'game-ids',
+                ids: [r.gameId],
+                label: `Highest beaten: ${r.name} (${r.elo})`,
+              }])}
+              icon={<Crown size={11} />}
+            />
+          );
+        })()}
+        {(() => {
+          const r = records.fastestWin;
+          if (!r) return null;
+          return (
+            <RecordTile
+              label="Fastest win"
+              value={`${r.moves} moves`}
+              sub={`vs ${r.opponent}`}
+              color="#22d3ee"
+              onClick={() => onDrillRecord([{
+                source: 'game-ids',
+                ids: [r.gameId],
+                label: `Fastest win: ${r.moves} moves vs ${r.opponent}`,
+              }])}
+              icon={<Zap size={11} />}
+            />
+          );
+        })()}
+        {(() => {
+          const r = records.longestGame;
+          if (!r) return null;
+          return (
+            <RecordTile
+              label="Longest game"
+              value={`${r.moves} moves`}
+              sub={r.result.toUpperCase()}
+              color="#a855f7"
+              onClick={() => onDrillRecord([{
+                source: 'game-ids',
+                ids: [r.gameId],
+                label: `Longest game: ${r.moves} moves`,
+              }])}
+              icon={<Clock size={11} />}
+            />
+          );
+        })()}
+        {(() => {
+          const r = records.bestAccuracyGame;
+          if (!r) return null;
+          return (
+            <RecordTile
+              label="Best accuracy"
+              value={`${r.accuracyPct}%`}
+              sub={`vs ${r.opponent}`}
+              color="var(--color-warning)"
+              onClick={() => onDrillRecord([{
+                source: 'game-ids',
+                ids: [r.gameId],
+                label: `Best accuracy: ${r.accuracyPct}% vs ${r.opponent}`,
+              }])}
+              icon={<Sparkles size={11} />}
+            />
+          );
+        })()}
       </div>
     </div>
   );
 }
 
-function RecordTile({ label, value, sub, color, icon }: {
-  label: string; value: string; sub: string; color: string; icon?: React.ReactNode;
+function RecordTile({ label, value, sub, color, icon, onClick }: {
+  label: string; value: string; sub: string; color: string; icon?: React.ReactNode; onClick?: () => void;
 }): JSX.Element {
-  return (
-    <div
-      className="rounded-xl border p-3"
-      style={{ borderColor: 'var(--color-border)' }}
-    >
+  const content = (
+    <>
       <div className="flex items-center gap-1 text-[10px] uppercase tracking-wide" style={{ color: 'var(--color-text-muted)' }}>
         {icon}
         {label}
@@ -171,11 +211,28 @@ function RecordTile({ label, value, sub, color, icon }: {
       <div className="text-[10px] truncate" style={{ color: 'var(--color-text-muted)' }} title={sub}>
         {sub}
       </div>
+    </>
+  );
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className="rounded-xl border p-3 text-left hover:opacity-80 transition-opacity"
+        style={{ borderColor: 'var(--color-border)' }}
+      >
+        {content}
+      </button>
+    );
+  }
+  return (
+    <div className="rounded-xl border p-3" style={{ borderColor: 'var(--color-border)' }}>
+      {content}
     </div>
   );
 }
 
-function PhaseStrengthHeatmap({ matrix }: { matrix: EngagementSummary['phaseStrength'] }): JSX.Element {
+function PhaseStrengthHeatmap({ matrix, onDrillCell }: { matrix: EngagementSummary['phaseStrength']; onDrillCell: (filters: StatFilter[]) => void }): JSX.Element {
   // Hide when no row has more than one populated cell — the trend
   // isn't there yet.
   const hasTrendData = matrix.rows.some((r) => r.cells.filter((c) => c.accuracyPct !== null).length >= 2);
@@ -207,12 +264,24 @@ function PhaseStrengthHeatmap({ matrix }: { matrix: EngagementSummary['phaseStre
         caption="Accuracy % per phase, by month. Darker green = sharper."
         legend={<span>Red &lt; 55% · Amber 55-85% · Green &gt; 85%</span>}
         testId="patterns-phase-strength-heatmap"
+        onCellClick={(rowIndex, colIndex, value) => {
+          if (value === null) return;
+          const phaseRow = matrix.rows[rowIndex];
+          const monthKey = matrix.monthsAsc[colIndex];
+          const monthLabel = matrix.monthLabels[colIndex];
+          onDrillCell([{
+            source: 'phase-month',
+            phase: phaseRow.phase,
+            monthKey,
+            label: `${phaseRow.phase} · ${monthLabel} (${value}%)`,
+          }]);
+        }}
       />
     </div>
   );
 }
 
-function TacticRecognitionHeatmap({ rows }: { rows: EngagementSummary['tacticRecognition'] }): JSX.Element {
+function TacticRecognitionHeatmap({ rows, onDrillRow }: { rows: EngagementSummary['tacticRecognition']; onDrillRow: (filters: StatFilter[]) => void }): JSX.Element {
   const significant = rows.filter(
     (r) => r.puzzleAccuracyPct !== null || r.inGameRecognitionPct !== null,
   );
@@ -254,6 +323,14 @@ function TacticRecognitionHeatmap({ rows }: { rows: EngagementSummary['tacticRec
         caption="How you handle each tactic type. Gap column uses a separate scale: positive = puzzle-strong/game-weak."
         testId="patterns-tactic-recognition-heatmap"
         labelColumnWidth="140px"
+        onCellClick={(rowIndex) => {
+          const tacticRow = significant[rowIndex];
+          onDrillRow([{
+            source: 'tactic-type',
+            tacticType: tacticRow.tacticType,
+            label: tacticRow.tacticType.replace(/_/g, ' '),
+          }]);
+        }}
       />
     </div>
   );

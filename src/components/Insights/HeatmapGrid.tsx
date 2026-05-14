@@ -43,6 +43,11 @@ export interface HeatmapGridProps {
   labelColumnWidth?: string;
   /** Min cell height — keep cells thumb-friendly on mobile. */
   cellMinHeight?: string;
+  /** Optional cell-click handler. Receives the row index, column
+   *  index, and the cell value. Cells become buttons when this is
+   *  set; null-value cells are still clickable so callers can
+   *  decide whether to early-return on empty data. */
+  onCellClick?: (rowIndex: number, columnIndex: number, value: number | null) => void;
   testId?: string;
 }
 
@@ -54,6 +59,7 @@ export function HeatmapGrid({
   legend,
   labelColumnWidth = '110px',
   cellMinHeight = '36px',
+  onCellClick,
   testId,
 }: HeatmapGridProps): JSX.Element {
   return (
@@ -80,7 +86,7 @@ export function HeatmapGrid({
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
+            {rows.map((row, rowIndex) => (
               <tr key={row.label}>
                 <td
                   className="text-[11px] font-medium pr-2 align-middle"
@@ -93,22 +99,40 @@ export function HeatmapGrid({
                     </div>
                   )}
                 </td>
-                {row.cells.map((cell, i) => (
-                  <td
-                    key={`${row.label}-${i}`}
-                    title={cell.hint}
-                    className="text-center font-semibold rounded-md tabular-nums"
-                    style={{
-                      background: cellColor(cell.value),
-                      color: cell.value === null ? 'var(--color-text-muted)' : '#0a0a0a',
-                      minHeight: cellMinHeight,
-                      height: cellMinHeight,
-                      padding: '4px 6px',
-                    }}
-                  >
-                    {cell.display}
-                  </td>
-                ))}
+                {row.cells.map((cell, i) => {
+                  const sharedStyle = {
+                    background: cellColor(cell.value),
+                    color: cell.value === null ? 'var(--color-text-muted)' : '#0a0a0a',
+                    minHeight: cellMinHeight,
+                    height: cellMinHeight,
+                    padding: '4px 6px',
+                  } as const;
+                  if (onCellClick) {
+                    return (
+                      <td key={`${row.label}-${i}`} style={{ padding: 0 }}>
+                        <button
+                          type="button"
+                          onClick={() => onCellClick(rowIndex, i, cell.value)}
+                          title={cell.hint}
+                          className="w-full h-full text-center font-semibold rounded-md tabular-nums hover:opacity-80 transition-opacity"
+                          style={sharedStyle}
+                        >
+                          {cell.display}
+                        </button>
+                      </td>
+                    );
+                  }
+                  return (
+                    <td
+                      key={`${row.label}-${i}`}
+                      title={cell.hint}
+                      className="text-center font-semibold rounded-md tabular-nums"
+                      style={sharedStyle}
+                    >
+                      {cell.display}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>

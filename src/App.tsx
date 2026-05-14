@@ -34,6 +34,7 @@ import { CoachSessionPage } from './components/Coach/CoachSessionPage';
 import { CoachAnalysePage } from './components/Coach/CoachAnalysePage';
 import { CoachSessionPlanPage } from './components/Coach/CoachSessionPlanPage';
 import { GameInsightsPage } from './components/Insights/GameInsightsPage';
+import { GamesDrilldownPage } from './components/Insights/GamesDrilldownPage';
 import { CoachTrainPage } from './components/Coach/CoachTrainPage';
 import { CoachTeachPage } from './components/Coach/CoachTeachPage';
 import { CoachEndgamePage } from './components/Coach/CoachEndgamePage';
@@ -271,6 +272,7 @@ export function App(): JSX.Element {
           <Route path="/puzzles/weakness" element={<Navigate to="/tactics/weakness" replace />} />
           <Route path="/puzzles/lichess-dashboard" element={<Navigate to="/tactics/lichess" replace />} />
           <Route path="/weaknesses" element={<ErrorBoundary><GameInsightsPage /></ErrorBoundary>} />
+          <Route path="/weaknesses/games" element={<ErrorBoundary><GamesDrilldownPage /></ErrorBoundary>} />
           <Route path="/coach/report" element={<Navigate to="/weaknesses" replace />} />
           <Route path="/weaknesses/puzzles" element={<Navigate to="/tactics/weakness" replace />} />
           <Route path="/weaknesses/adaptive" element={<Navigate to="/tactics/adaptive" replace />} />

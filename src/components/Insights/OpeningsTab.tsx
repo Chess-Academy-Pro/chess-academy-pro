@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { InsightsDonutChart } from './InsightsDonutChart';
 import { InsightsBarChart } from './InsightsBarChart';
 import { StrengthsCard } from './StrengthsCard';
@@ -6,6 +7,7 @@ import { OpeningDrilldown } from './OpeningDrilldown';
 import { HeatmapGrid, type HeatmapRow } from './HeatmapGrid';
 import { winRateColor } from './heatmapScales';
 import { openingProficiencyMatrix, type OpeningProficiencyRow } from '../../services/analyticsService';
+import { encodeFilters, type StatFilter } from '../../services/gameFilterService';
 import type { OpeningInsights, OpeningAggregateStats } from '../../types';
 
 interface OpeningsTabProps {
@@ -13,6 +15,7 @@ interface OpeningsTabProps {
 }
 
 export function OpeningsTab({ data }: OpeningsTabProps): JSX.Element {
+  const navigate = useNavigate();
   const [drilldownOpening, setDrilldownOpening] = useState<OpeningAggregateStats | null>(null);
   const [matrix, setMatrix] = useState<OpeningProficiencyRow[] | null>(null);
 
@@ -161,6 +164,20 @@ export function OpeningsTab({ data }: OpeningsTabProps): JSX.Element {
             cellColor={winRateColor}
             labelColumnWidth="160px"
             testId="opening-proficiency-matrix"
+            onCellClick={(rowIndex, colIndex, value) => {
+              if (value === null) return;
+              const row = matrix[rowIndex];
+              const playerColor: 'white' | 'black' | undefined =
+                colIndex === 0 ? 'white' : colIndex === 1 ? 'black' : undefined;
+              const colLabel = colIndex === 0 ? 'as White' : colIndex === 1 ? 'as Black' : 'combined';
+              const filters: StatFilter[] = [{
+                source: 'opening',
+                eco: row.eco,
+                playerColor,
+                label: `${row.name} ${colLabel} (${value}%)`,
+              }];
+              void navigate(`/weaknesses/games?f=${encodeFilters(filters)}`);
+            }}
           />
         </Section>
       )}
