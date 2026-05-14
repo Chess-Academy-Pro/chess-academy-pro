@@ -17,8 +17,33 @@
  *   AUDIT_SMOKE_HEADED=1 node scripts/audit-tactics.mjs
  */
 import { chromium } from 'playwright';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
+
+// Sandbox/CI environments often have a Chromium build pre-installed
+// at /opt/pw-browsers but at a different build number than the npm
+// `playwright` package expects. Probing the installed path lets the
+// audit run without a fresh `npx playwright install`, which is
+// frequently blocked by network policy. Same path the previous
+// session's runs used (the sandbox image carries
+// chromium_headless_shell-1194 + chromium-1194). When the binary is
+// absent (developer's laptop with a normal install), `playwright`
+// uses its own resolved path — we only override if the file exists.
+async function resolveExecutablePath(headed) {
+  const candidates = headed
+    ? ['/opt/pw-browsers/chromium-1194/chrome-linux/chrome']
+    : [
+        '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell',
+        '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
+      ];
+  for (const p of candidates) {
+    try {
+      await access(p);
+      return p;
+    } catch {}
+  }
+  return undefined;
+}
 
 const BASE_URL = process.env.AUDIT_SMOKE_URL ?? 'https://chess-academy-pro.vercel.app';
 const SECRET =
@@ -42,7 +67,9 @@ async function main() {
   console.log(`[tactics] outDir  = ${OUT_DIR}`);
   console.log(`[tactics] headed  = ${HEADED}`);
 
-  const browser = await chromium.launch({ headless: !HEADED });
+  const executablePath = await resolveExecutablePath(HEADED);
+  if (executablePath) console.log(`[tactics] chromium  = ${executablePath}`);
+  const browser = await chromium.launch({ headless: !HEADED, executablePath });
   const ctx = await browser.newContext({
     viewport: { width: 414, height: 896 },
     deviceScaleFactor: 2,
