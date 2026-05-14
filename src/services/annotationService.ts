@@ -114,6 +114,7 @@ const PRO_SUFFIX_TO_BASE: Record<string, string> = {
   'nimzo': 'nimzo-indian-defense',
   // ─── Closed games (Queen's pawn) ─
   'catalan': 'catalan-opening',
+  'cow': 'formation-hippopotamus-attack',
   'jobava-london': 'london-system',
   'london': 'london-system',
   'london-d4': 'london-system',
