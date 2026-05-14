@@ -323,6 +323,15 @@ export async function generateNarrativeSummary(
       // [VOICE:] / [BOARD:] marker mandate would leak markers into the
       // streamed summary card. Memory + live-state still inject.
       suppressSurfaceMode: true,
+      // Drop the toolbelt entirely — this is pure narrative over the
+      // pre-computed `moveData`. The brain has no live board to mutate
+      // and no reason to call `record_blunder` / `stockfish_eval` /
+      // `lichess_*`. Removing the toolbelt block removes the
+      // `[[ACTION:...]]` preamble that the brain was honoring (audit:
+      // chesscom-971406909 streamed `[[ACTION:record_blunder ...]]`
+      // into the rendered bubble — display-layer strip catches the
+      // leak, this stops the brain from emitting it in the first place).
+      suppressToolbelt: true,
       onChunk: wrappedOnStream,
     },
   );
@@ -423,6 +432,11 @@ Do not include any other text outside the JSON.${analysisContext}`,
         // mandate fights that. Skip the surface block so the JSON
         // contract wins; memory + live-state still load.
         suppressSurfaceMode: true,
+        // JSON-only response — no tools needed. Skip the toolbelt
+        // block so the brain doesn't pad the JSON with `[[ACTION:...]]`
+        // tags that fight the parser (same disease as the narrative-
+        // summary leak in chesscom-971406909).
+        suppressToolbelt: true,
       },
     );
     raw = unwrapSpineError(spineAnswer.text);
@@ -847,6 +861,10 @@ export async function generateReviewNarration(params: {
         // Keep memory + live-state injection via surface='review', but
         // skip the surface mode block so the prose-only contract wins.
         suppressSurfaceMode: true,
+        // Intro prose has no use for tools — drop the toolbelt to
+        // remove the `[[ACTION:...]]` temptation (audit:
+        // chesscom-971406909).
+        suppressToolbelt: true,
       },
     ).then((a) => unwrapSpineError(a.text)).catch(() => '');
 

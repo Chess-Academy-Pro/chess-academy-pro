@@ -351,6 +351,18 @@ export interface AssembleEnvelopeArgs {
    *  per-ply JSON) so the [VOICE: ...] / [BOARD: ...] marker mandate
    *  doesn't fight the JSON-only / prose-only prompt. */
   suppressSurfaceMode?: boolean;
+  /** When true, drop the entire [Toolbelt] block from the system prompt.
+   *  Production audit (build 30654ce / chesscom-971406909): the Review
+   *  summary card streamed `[[ACTION:record_blunder ...]]` into the
+   *  rendered bubble — the brain saw `record_blunder` in the toolbelt
+   *  and the "call tools via [[ACTION:name {args}]]" preamble, then
+   *  decided to "log" the blunders it was narrating. The narrative-
+   *  summary path is pure prose generation over pre-computed engine
+   *  analysis (the surface already passes `moveData`); it has NO live
+   *  board to mutate and NO need for cerebellum lookups. Skipping the
+   *  toolbelt entirely removes the temptation. Pair with the display-
+   *  layer strip in `sanitizeCoachStream` for defense-in-depth. */
+  suppressToolbelt?: boolean;
   toolbelt: ToolDefinition[];
   input: CoachAskInput;
 }
@@ -440,7 +452,13 @@ export function assembleEnvelope(args: AssembleEnvelopeArgs): AssembledEnvelope 
   const memory = readMemorySnapshot();
   const appMap = loadRoutesManifest();
   const liveState = prepareLiveState(args.input.liveState);
-  const toolbelt = args.toolbelt;
+  // When the caller suppresses the toolbelt, the assembled envelope
+  // carries an empty toolbelt; the system-prompt formatter then drops
+  // the `[Toolbelt]` block entirely. The Tool dispatcher still resolves
+  // against the full registry on the response side, so a hallucinated
+  // `[[ACTION:...]]` from the brain is still safely rejected — it just
+  // can't be enticed by the prompt to emit one.
+  const toolbelt = args.suppressToolbelt ? [] : args.toolbelt;
   const ask = args.input.ask;
 
   // Constitution-mandated belt-and-suspenders: every envelope MUST
@@ -453,7 +471,9 @@ export function assembleEnvelope(args: AssembleEnvelopeArgs): AssembledEnvelope 
   if (!memory) throw new Error('envelope: memory missing');
   if (!appMap || appMap.length === 0) throw new Error('envelope: appMap missing or empty');
   if (!liveState) throw new Error('envelope: liveState missing');
-  if (!toolbelt || toolbelt.length === 0) throw new Error('envelope: toolbelt missing or empty');
+  if (!args.suppressToolbelt && (!toolbelt || toolbelt.length === 0)) {
+    throw new Error('envelope: toolbelt missing or empty');
+  }
   if (!ask || !ask.trim()) throw new Error('envelope: ask missing');
   /* eslint-enable @typescript-eslint/no-unnecessary-condition */
 
@@ -636,6 +656,10 @@ function formatLiveStateBlock(state: LiveState): string {
 }
 
 function formatToolbeltBlock(toolbelt: ToolDefinition[]): string {
+  // Empty toolbelt → no block at all. The `[[ACTION:...]]` preamble
+  // below is what entices the brain to emit tool tags; suppressing the
+  // block removes the temptation cleanly for prose-only calls.
+  if (toolbelt.length === 0) return '';
   const parts: string[] = ['[Toolbelt]'];
   parts.push('You can call tools by emitting a tag in your response: [[ACTION:tool_name {"arg1":"val1"}]]');
   parts.push('Tags are parsed out before the user sees the response. Call multiple tools in one turn if needed.');
@@ -656,13 +680,14 @@ function formatToolbeltBlock(toolbelt: ToolDefinition[]): string {
  *  a system prompt. Memory + live state + ask go in the user message
  *  so they don't bloat the system-prompt cache. */
 export function formatEnvelopeAsSystemPrompt(envelope: AssembledEnvelope): string {
+  // Filter out empty blocks (e.g. the toolbelt block is dropped for
+  // prose-only calls via `suppressToolbelt`) so the system prompt
+  // doesn't end with a dangling blank line.
   return [
     envelope.identity,
-    '',
     formatAppMapBlock(envelope.appMap),
-    '',
     formatToolbeltBlock(envelope.toolbelt),
-  ].join('\n');
+  ].filter((block) => block.length > 0).join('\n\n');
 }
 
 /** Render the envelope's per-call parts (memory, live state, ask) as

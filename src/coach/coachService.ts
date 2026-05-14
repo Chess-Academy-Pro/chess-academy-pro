@@ -164,6 +164,17 @@ export interface CoachServiceOptions {
    *  prompts at once and emitted markdown markers wrapped around the
    *  JSON. Memory + live-state injection still happens regardless. */
   suppressSurfaceMode?: boolean;
+  /** When true, drop the entire `[Toolbelt]` block from the envelope's
+   *  system prompt. The brain still has identity + app map + memory +
+   *  live state, but loses the tool list and the
+   *  "call tools via `[[ACTION:name {args}]]`" preamble. Use for
+   *  pure-prose / JSON-only calls (Review summary card, intro/closing
+   *  narration prep) where no tool is needed and the temptation to
+   *  emit `[[ACTION:record_blunder ...]]` leaks raw tags into the
+   *  rendered output (production audit, chesscom-971406909). The
+   *  spine's response-side dispatcher still rejects hallucinated tool
+   *  calls, so this is safe defense-in-depth, not behavior change. */
+  suppressToolbelt?: boolean;
   /** Optional getter the spine calls between trips to refresh
    *  `ctx.liveFen`. Without this, the FEN snapshotted at handleSubmit
    *  time stays frozen across all round-trips — so when the brain
@@ -314,6 +325,7 @@ async function ask(input: CoachAskInput, options: CoachServiceOptions = {}): Pro
     verbosity: options.verbosity,
     systemPromptAddition: options.systemPromptAddition,
     suppressSurfaceMode: options.suppressSurfaceMode,
+    suppressToolbelt: options.suppressToolbelt,
     toolbelt: getToolDefinitions({ exclude: options.excludeTools }),
     input,
   });
@@ -447,6 +459,20 @@ async function ask(input: CoachAskInput, options: CoachServiceOptions = {}): Pro
       ? new Set(options.excludeTools)
       : null;
     for (const call of lastResponse.toolCalls) {
+      // suppressToolbelt = "this call has no tools." Any tool call the
+      // brain emits despite that is a hallucination — refuse to
+      // dispatch. The display-strip + sanitizeCoachStream still hides
+      // the leaked `[[ACTION:...]]` text from the user.
+      if (options.suppressToolbelt) {
+        void logAppAudit({
+          kind: 'coach-brain-tool-skipped',
+          category: 'subsystem',
+          source: 'coachService.ask',
+          summary: `dropped ${call.name} (toolbelt suppressed)`,
+          details: JSON.stringify({ id: call.id, name: call.name, reason: 'toolbelt-suppressed', args: call.args }),
+        });
+        continue;
+      }
       if (excludeSet?.has(call.name)) {
         void logAppAudit({
           kind: 'coach-brain-tool-skipped',

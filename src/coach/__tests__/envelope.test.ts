@@ -111,6 +111,32 @@ describe('assembleEnvelope', () => {
     // PHASE_NARRATION_ADDITION's distinctive header.
     expect(env.identity).not.toMatch(/ACTION-FIRST RULE/);
   });
+
+  it('suppressToolbelt=true assembles an envelope with an empty toolbelt', () => {
+    // Root-cause fix for chesscom-971406909: the Review summary card
+    // leaked `[[ACTION:record_blunder ...]]` because the toolbelt
+    // preamble told the brain to emit tool tags. Prose-only callers
+    // can now opt out of the toolbelt entirely.
+    const env = assembleEnvelope({
+      toolbelt: getToolDefinitions(),
+      suppressToolbelt: true,
+      input: { surface: 'review', ask: 'q', liveState: { surface: 'review' } },
+    });
+    expect(env.toolbelt).toHaveLength(0);
+  });
+
+  it('suppressToolbelt=true relaxes the empty-toolbelt constitution check', () => {
+    // The constitution normally throws on an empty toolbelt; with
+    // suppressToolbelt the caller is explicitly opting out, so the
+    // assembly succeeds with no tools.
+    expect(() =>
+      assembleEnvelope({
+        toolbelt: [],
+        suppressToolbelt: true,
+        input: { surface: 'review', ask: 'q', liveState: { surface: 'review' } },
+      }),
+    ).not.toThrow();
+  });
 });
 
 describe('formatEnvelopeAsSystemPrompt', () => {
@@ -148,6 +174,26 @@ describe('formatEnvelopeAsSystemPrompt', () => {
     expect(prompt).toMatch(/PROFANITY DIAL: HARD/);
     expect(prompt).toMatch(/MOCKERY DIAL: HARD/);
     expect(prompt).toMatch(/FLIRT DIAL: NONE/);
+  });
+
+  it('suppressToolbelt=true drops the [Toolbelt] block from the system prompt', () => {
+    const env = assembleEnvelope({
+      toolbelt: getToolDefinitions(),
+      suppressToolbelt: true,
+      input: { surface: 'review', ask: 'q', liveState: { surface: 'review' } },
+    });
+    const prompt = formatEnvelopeAsSystemPrompt(env);
+    // The Toolbelt heading, its preamble, and the descriptive tool
+    // listings should all be gone. (The OPERATOR_CLOSING identity
+    // block still mentions the `[[ACTION:...]]` syntax for legacy
+    // operator-mode surfaces — that's independent of the toolbelt
+    // block and outside this fix's scope.)
+    expect(prompt).not.toMatch(/\[Toolbelt\]/);
+    expect(prompt).not.toMatch(/You can call tools by emitting a tag/);
+    expect(prompt).not.toMatch(/Log a blunder pattern/);
+    // Identity and app map still ship.
+    expect(prompt).toMatch(/OPERATOR MODE/);
+    expect(prompt).toMatch(/\[App map\]/);
   });
 
   it('omitted personality settings produce the same prompt as the legacy default path', () => {
