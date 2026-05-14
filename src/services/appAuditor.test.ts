@@ -166,6 +166,34 @@ describe('appAuditor', () => {
       const log = await getAppAuditLog();
       expect(log.some((e) => e.summary === 'after uninstall')).toBe(false);
     });
+
+    it('rate-limits a burst of identical errors so 100k events do not write 100k rows', async () => {
+      // Regression guard for the audit-found Stockfish-wasm OOM
+      // error-loop (2026-05-14 AUDIT_HANDOFF.md): when a runaway loop
+      // fires the same error 100k+ times in seconds, the global hook
+      // used to write a row per event. After fix: first
+      // MAX_EVENTS_PER_BURST (5) are logged verbatim, the rest are
+      // suppressed for the burst window, and a single coalesced
+      // "×N burst-coalesced" summary lands when the window closes.
+      const uninstall = installGlobalErrorHooks();
+      try {
+        const BURST = 50;
+        for (let i = 0; i < BURST; i++) {
+          window.dispatchEvent(new ErrorEvent('error', {
+            message: 'burst-loop',
+            error: new Error('burst-loop'),
+          }));
+        }
+        await new Promise((r) => setTimeout(r, 50));
+        const log = await getAppAuditLog();
+        const matches = log.filter((e) => e.summary === 'burst-loop');
+        // Pre-fix: 50 rows (1-to-1). Post-fix: capped at 5 verbatim.
+        expect(matches.length).toBeLessThanOrEqual(5);
+        expect(matches.length).toBeGreaterThanOrEqual(1);
+      } finally {
+        uninstall();
+      }
+    });
   });
 
   describe('installConsoleBackdoor', () => {

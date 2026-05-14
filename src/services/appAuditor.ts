@@ -848,10 +848,69 @@ function formatAuditLogAsMarkdown(log: AuditEntry[]): string {
 export function installGlobalErrorHooks(): () => void {
   if (typeof window === 'undefined') return () => undefined;
 
+  // Per-source rate limiter. When the same error message repeats from
+  // the same source within ERROR_BURST_WINDOW_MS, only the first one
+  // is fully logged + a single "burst" summary at the end. Without
+  // this, an error-loop (Stockfish-wasm OOM caught 895k pageerrors in
+  // a single audit run on 2026-05-14, AUDIT_HANDOFF.md §"Open prod
+  // bug") would write a million Dexie rows + audit-stream POSTs in
+  // seconds, blocking the main thread.
+  const ERROR_BURST_WINDOW_MS = 5_000;
+  const MAX_EVENTS_PER_BURST = 5; // first 5 verbatim, then coalesce
+  type BurstState = { firstAt: number; count: number; lastLoggedAt: number };
+  const bursts = new Map<string, BurstState>();
+
+  const burstKey = (kind: string, summary: string): string => `${kind}::${summary.slice(0, 120)}`;
+
+  function emitWithRateLimit(payload: {
+    kind: AuditEntry['kind'];
+    category: AuditEntry['category'];
+    source: string;
+    summary: string;
+    details?: string;
+  }): void {
+    const now = Date.now();
+    const key = burstKey(payload.kind, payload.summary);
+    const state = bursts.get(key);
+    if (!state || now - state.firstAt > ERROR_BURST_WINDOW_MS) {
+      // Fresh burst window — log + reset counter.
+      bursts.set(key, { firstAt: now, count: 1, lastLoggedAt: now });
+      void logAppAudit(payload);
+      return;
+    }
+    state.count += 1;
+    // Within burst: log the first MAX_EVENTS_PER_BURST verbatim, then
+    // suppress until the window closes. When it closes, emit ONE
+    // coalesced summary so we don't lose the signal entirely.
+    if (state.count <= MAX_EVENTS_PER_BURST) {
+      state.lastLoggedAt = now;
+      void logAppAudit(payload);
+    } else if (state.count === MAX_EVENTS_PER_BURST + 1) {
+      // First time we suppress in this burst — schedule the coalesced
+      // summary for when the window closes. setTimeout is scheduled
+      // ONCE per burst (because state.count crosses the threshold
+      // exactly once).
+      const burstStart = state.firstAt;
+      setTimeout(() => {
+        const final = bursts.get(key);
+        if (!final || final.firstAt !== burstStart) return;
+        const suppressed = final.count - MAX_EVENTS_PER_BURST;
+        bursts.delete(key);
+        if (suppressed <= 0) return;
+        void logAppAudit({
+          ...payload,
+          summary: `${payload.summary} (×${final.count}, burst-coalesced)`,
+          details: `${suppressed} additional ${payload.kind} events suppressed within ${ERROR_BURST_WINDOW_MS}ms window. ${payload.details ? `\n${payload.details}` : ''}`.trim(),
+        });
+      }, ERROR_BURST_WINDOW_MS - (now - state.firstAt));
+    }
+    // Else: silently drop — the coalesced summary is already scheduled.
+  }
+
   const onError = (event: ErrorEvent): void => {
     const message = event.error instanceof Error ? event.error.message : String(event.message);
     const stack = event.error instanceof Error ? event.error.stack : undefined;
-    void logAppAudit({
+    emitWithRateLimit({
       kind: 'uncaught-error',
       category: 'runtime',
       source: event.filename ?? 'window.onerror',
@@ -867,7 +926,7 @@ export function installGlobalErrorHooks(): () => void {
     const reason = event.reason as unknown;
     const message = reason instanceof Error ? reason.message : String(reason);
     const stack = reason instanceof Error ? reason.stack : undefined;
-    void logAppAudit({
+    emitWithRateLimit({
       kind: 'unhandled-rejection',
       category: 'runtime',
       source: 'window.onunhandledrejection',
@@ -882,5 +941,6 @@ export function installGlobalErrorHooks(): () => void {
   return () => {
     window.removeEventListener('error', onError);
     window.removeEventListener('unhandledrejection', onRejection);
+    bursts.clear();
   };
 }
