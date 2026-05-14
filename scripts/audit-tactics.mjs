@@ -1039,14 +1039,27 @@ async function main() {
   // URL (covers same-surface re-entries / on-page interactions
   // where the mount audit fired once on first arrival).
   const TACTICS_URL_RX = /\/tactics(\/|$|\?)/;
-  const urlCoverage = new Map();  // url → boolean (has seen a tactics-surface-event)
+  // Two-pass classification: pass 1 collects every URL that EVER saw
+  // a `tactics-surface-event` across the whole run; pass 2 marks each
+  // scenario as 'this-scenario' / 'covered-elsewhere' / 'none'. Single-
+  // pass-in-order missed legit coverage when events fired in a LATER
+  // scenario at the same URL (audit-stream POSTs lag behind navigation
+  // by a few hundred ms — see appAuditor's auditWriteChain).
+  const seenUrls = new Set();
+  for (const s of report.scenarios) {
+    if (!s.url || !TACTICS_URL_RX.test(s.url)) continue;
+    if (s.kindCounts && s.kindCounts['tactics-surface-event'] >= 1) {
+      seenUrls.add(s.url);
+    }
+  }
   for (const s of report.scenarios) {
     if (!s.url || !TACTICS_URL_RX.test(s.url)) continue;
     const seenHere = s.kindCounts && s.kindCounts['tactics-surface-event'] >= 1;
-    const seenBefore = urlCoverage.get(s.url) === true;
-    if (seenHere) urlCoverage.set(s.url, true);
-    // Mark s with its coverage source for the gap diagnostic.
-    s.tacticsEventCoverage = seenHere ? 'this-scenario' : (seenBefore ? 'prior-scenario' : 'none');
+    s.tacticsEventCoverage = seenHere
+      ? 'this-scenario'
+      : seenUrls.has(s.url)
+        ? 'covered-elsewhere'
+        : 'none';
   }
   const auditCoverageGaps = report.scenarios
     .filter((s) => s.url && TACTICS_URL_RX.test(s.url))
@@ -1054,7 +1067,7 @@ async function main() {
     .map((s) => ({
       scenario: s.name,
       url: s.url,
-      reason: 'no tactics-surface-event seen here or in any prior scenario at this URL',
+      reason: 'this URL never emitted a tactics-surface-event during the entire run',
     }));
   report.auditCoverageGaps = auditCoverageGaps;
   for (const g of auditCoverageGaps) {
