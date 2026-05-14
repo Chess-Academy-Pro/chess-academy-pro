@@ -248,9 +248,24 @@ class StockfishEngine {
     return () => this.statusHandlers.delete(handler);
   }
 
+  // Init-failure cooldown. When the worker init throws (commonly:
+  // `WebAssembly.Memory(): could not allocate memory` on a memory-
+  // pressured device), subsequent callers should fail-fast for a
+  // window instead of re-entering the init flow and re-OOMing. The
+  // audit (2026-05-14 scenario 25 + 26) captured 1.3M browser-level
+  // pageerror events when consumer-side useEffects re-called
+  // analyzePosition in a tight loop after each OOM. The 30s window
+  // bounds the cascade to "a few errors then silent fail-fast" and
+  // recovers on its own when the memory pressure clears.
+  private _initFailedAt: number | null = null;
+  private static readonly INIT_COOLDOWN_MS = 30_000;
+
   async initialize(): Promise<void> {
     if (this._permanentlyUnavailable) {
       throw new Error('Stockfish engine unavailable (exhausted crash retries)');
+    }
+    if (this._initFailedAt !== null && Date.now() - this._initFailedAt < StockfishEngine.INIT_COOLDOWN_MS) {
+      throw new Error('Stockfish init cooldown — try again in a few seconds');
     }
     if (this.initPromise) return this.initPromise;
 
@@ -471,6 +486,7 @@ class StockfishEngine {
               this.worker?.removeEventListener('message', initHandler);
               this.isReady = true;
               this._crashRetries = 0;
+              this._initFailedAt = null; // clear cooldown on success
               // Reset Phase 8 retry budgets on successful ready.
               this._singleThreadOomRetryUsed = false;
               this._workerErrorWindow = null;
@@ -515,6 +531,9 @@ class StockfishEngine {
 
     return this.initPromise.catch((err) => {
       // Surface init failures as crash events so the retry path can run.
+      // ALSO record the failure timestamp so subsequent initialize()
+      // calls in the next 30s fail-fast instead of re-OOMing.
+      this._initFailedAt = Date.now();
       this.handleWorkerCrash(err instanceof Error ? err.message : String(err));
       throw err;
     });
@@ -526,6 +545,9 @@ class StockfishEngine {
    * (the brain, post-game review, hint system) can degrade gracefully.
    */
   private handleWorkerCrash(reason: string): void {
+    // Record the failure for the init cooldown gate (idempotent —
+    // initialize()'s own catch sets this too; covering both paths).
+    this._initFailedAt = Date.now();
     this._crashRetries += 1;
     console.error(
       `[Stockfish] Worker crashed (attempt ${this._crashRetries}/${MAX_CRASH_RETRIES}): ${reason}`,

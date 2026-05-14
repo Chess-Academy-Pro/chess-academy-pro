@@ -115,10 +115,33 @@ prior run minutes earlier. The OOM likely fires only when:
   from prior Show-the-Opening replay?)
 - and/or the prior scenario left Stockfish workers undisposed
 
+Update 2026-05-14 (later): re-ran with batch 3 → cascade hit AGAIN
+on scenario 25 (play-it-out) PLUS scenario 26 (weakness-themes-mount,
+73k errors). Scenario 26 has NO direct Stockfish calls — it just
+mounts WeaknessThemesPage. So the errors in 26 are likely
+**residual draining of scenario 25's error queue** + possibly a
+consumer-side init-retry loop where `stockfishEngine.initialize()`
+keeps getting called after a failed init, each call re-triggering
+the OOM.
+
+Hypothesis for the root fix:
+- `stockfishEngine.initialize()` should memoize the failure state
+  (count + last-failure-timestamp). After N init failures within a
+  window, refuse retries for ~30s.
+- Or: when a consumer calls `analyzePosition` on a known-broken
+  engine, fail-fast with a cached rejection instead of re-entering
+  the init flow.
+
+The appAuditor rate-limit (commit 6b505d99) is still doing its job:
+it caps Dexie writes + audit-stream POSTs at 5 verbatim + 1
+coalesced per 5-sec window, so users don't see IndexedDB hammering.
+But browser-level pageerror events still fire at full rate (~2400/sec
+during the cascade) — visible only via dev-tools or audit harness.
+
 NOT investigated in this session. Logged here for the next session
 to drive directly. Reproduce by running
 `node scripts/audit-tactics.mjs` and inspecting
-`audit-reports/tactics-*/report.md` for scenario 25.
+`audit-reports/tactics-*/report.md` for scenarios 25 + 26.
 
 ## ⚠️ Gaps within the Tactics tab still to cover
 
