@@ -205,6 +205,11 @@ async function main() {
       await page.getByRole('button', { name: /review/i }).first().click();
     }
     await page.locator('[data-testid="coach-review-list-page"]').waitFor({ timeout: 15000 });
+    // Wait for the seeder + Dexie schema migration to finish; tiles
+    // appear AFTER the seed + db.games.toArray() resolves (~8–15s on
+    // a fresh headless browser). Without this explicit wait the
+    // subsequent tile-click expectation flakes.
+    await page.locator('[data-testid^="review-game-card-"]').first().waitFor({ timeout: 25000 }).catch(() => undefined);
   }, SHORT_SETTLE_MS, [
     { kind: 'visible', selector: '[data-testid="coach-review-list-page"]', label: '2.1 list page renders' },
     { kind: 'visible', selector: 'h1, h2', label: 'header rendered (Review with Coach)' },
