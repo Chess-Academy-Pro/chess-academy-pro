@@ -48,7 +48,10 @@ async function resolveExecutablePath(headed) {
 const BASE_URL = process.env.AUDIT_SMOKE_URL ?? 'https://chess-academy-pro.vercel.app';
 const SECRET =
   process.env.AUDIT_STREAM_SECRET ??
-  '06fe5f2383534090df8b6ba11e79088eb665ec780175df4f032befc02a530782';
+  // Updated 2026-05-14: secret rotated to the 3-word passphrase
+  // format. The old 64-hex value is preserved in git history if a
+  // legacy session needs it.
+  'tutMem-vutho0-deqfep';
 const STREAM_URL = `${BASE_URL}/api/audit-stream`;
 const HEADED = process.env.AUDIT_SMOKE_HEADED === '1';
 const stamp = new Date().toISOString().replace(/[:.]/g, '-');
