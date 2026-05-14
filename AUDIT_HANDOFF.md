@@ -57,6 +57,43 @@
 
 ---
 
+## 🔴 Open prod bug surfaced by the audit (2026-05-14)
+
+`audit-tactics.mjs` scenario `25-play-it-out-engine-color` hit
+**895,101 page errors in a single scenario** on a fresh prod run.
+Root error (fires once, then ~895k cascading ErrorEvents from the
+handler):
+
+```
+WebAssembly.Memory(): could not allocate memory
+```
+
+Stockfish-wasm fails to allocate memory after the puzzle is revealed
+and the user clicks "Play it out vs Stockfish." The subsequent error
+path appears to loop (each retry re-triggers the OOM, which re-fires
+the error handler, ad infinitum). On a fresh-Chromium audit run the
+error count climbed past 800k inside ~30 seconds — clearly an
+unbounded loop, not just one OOM.
+
+Likely places to investigate:
+- `src/services/stockfishEngine.ts` — wasm init + retry behavior
+- `src/hooks/usePuzzlePlayout.ts` (or similar) — engine-defending
+  effect; check if a useEffect cleanup is missing so the worker
+  doesn't get re-instantiated on every render
+- The OpeningBlundersPage play-out branch — after the reveal +
+  Stockfish kick, what state transitions fire?
+
+Flaky reproducer: the same scenario passed 0 page errors on the
+prior run minutes earlier. The OOM likely fires only when:
+- the randomly-picked puzzle has long PGN history (memory pressure
+  from prior Show-the-Opening replay?)
+- and/or the prior scenario left Stockfish workers undisposed
+
+NOT investigated in this session. Logged here for the next session
+to drive directly. Reproduce by running
+`node scripts/audit-tactics.mjs` and inspecting
+`audit-reports/tactics-*/report.md` for scenario 25.
+
 ## ⚠️ Gaps within the Tactics tab still to cover
 
 The current audit verifies **navigation, route flow, state transitions, and the two David-reported bugs**. It does NOT yet drive these deeper interactive flows. Each is its own scenario for the next session:
