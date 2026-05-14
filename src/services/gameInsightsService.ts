@@ -626,7 +626,7 @@ export async function getTacticInsights(): Promise<TacticInsights> {
           explanation: `${move.classification === 'brilliant' ? 'Brilliant' : 'Great'} move`,
           opponentName: getOpponentName(game, playerColor),
           date: game.date,
-          openingName: game.eco,
+          openingName: getOpeningNameByEco(game.eco) ?? game.eco,
         });
       }
     }
@@ -662,7 +662,7 @@ export async function getTacticInsights(): Promise<TacticInsights> {
         explanation: m.explanation,
         opponentName: getOpponentName(game, playerColor),
         date: game.date,
-        openingName: game.eco,
+        openingName: getOpeningNameByEco(game.eco) ?? game.eco,
       });
     }
   }

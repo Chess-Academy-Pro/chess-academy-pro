@@ -63,8 +63,8 @@ export function TacticsTab({ data }: TacticsTabProps): JSX.Element {
           <div className="text-[10px] py-1.5" style={{ color: 'var(--color-text-muted)' }}>
             Tap to replay on the board
           </div>
-          {data.bestSequences.map((m, i) => (
-            <TacticRow key={i} moment={m} navigate={navigate} positive />
+          {data.bestSequences.map((m) => (
+            <TacticRow key={`${m.gameId}:${m.moveNumber}`} moment={m} navigate={navigate} positive />
           ))}
         </Section>
       )}
@@ -75,8 +75,8 @@ export function TacticsTab({ data }: TacticsTabProps): JSX.Element {
           <div className="text-[10px] py-1.5" style={{ color: 'var(--color-text-muted)' }}>
             Tap to play the position
           </div>
-          {data.worstMisses.map((m, i) => (
-            <TacticRow key={i} moment={m} navigate={navigate} positive={false} />
+          {data.worstMisses.map((m) => (
+            <TacticRow key={`${m.gameId}:${m.moveNumber}`} moment={m} navigate={navigate} positive={false} />
           ))}
         </Section>
       )}
@@ -170,7 +170,7 @@ function TacticRow({
   return (
     <div>
       <button
-        onClick={() => void navigate(`/coach/play?review=${moment.gameId}&move=${moment.moveNumber}`)}
+        onClick={() => void navigate(`/coach/review/${encodeURIComponent(moment.gameId)}?move=${moment.moveNumber}`)}
         className="flex items-center justify-between w-full py-2 border-b text-sm hover:opacity-80 transition-opacity"
         style={{ borderColor: 'color-mix(in srgb, var(--color-border) 50%, transparent)' }}
         data-testid="tactic-row"

@@ -16,7 +16,7 @@
  * Stockfish-grounded, [VOICE: ...]-marker pedagogy automatically.
  */
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { Chess } from 'chess.js';
 import { CoachGameReview } from './CoachGameReview';
@@ -166,6 +166,19 @@ function adaptGameRecord(
 export function CoachReviewSessionPage(): JSX.Element {
   const navigate = useNavigate();
   const { gameId } = useParams<{ gameId: string }>();
+  // Deep-link support: `/coach/review/:gameId?move=N` jumps the
+  // review to ply N on first paint. Used by Insights tab rows
+  // (costliest-mistake / worst-miss / best-sequence) so tapping a
+  // specific move lands the user at that exact ply instead of the
+  // start of the game. `move` is a 1-indexed ply number — we
+  // normalize to the 0-indexed `initialMoveIndex` contract that
+  // CoachGameReview already accepts.
+  const [searchParams] = useSearchParams();
+  const moveParam = searchParams.get('move');
+  const parsedMove = moveParam !== null ? Number(moveParam) : NaN;
+  const initialMoveIndex = Number.isFinite(parsedMove) && parsedMove >= 1
+    ? Math.floor(parsedMove) - 1
+    : -1;
   const { activeProfile } = useAppStore();
   const [game, setGame] = useState<GameRecord | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -306,13 +319,17 @@ export function CoachReviewSessionPage(): JSX.Element {
           /coach/review/game-* loads. Removing the prop lets walk
           phase render and the prep scan fire on mount. */}
       <CoachGameReview
-        // key={gameId} forces a fresh mount when the user navigates
+        // key forces a fresh mount when the user navigates
         // from /coach/review/A → /coach/review/B. Without it, walk
         // narration state, aiCommentaryCache, and other refs from
         // game A leak into game B until the prep effect overwrites
         // (and the cache stays game-A-keyed against game-B's move
         // indices). Audit-driven (Coach-tab full audit, item #9).
-        key={gameId}
+        // The move-param suffix forces a remount when the user taps
+        // a different deep-linked ply on the same game (e.g. moving
+        // from one costliest-mistake row to another) so
+        // `initialMoveIndex` re-applies on mount.
+        key={`${gameId}:${initialMoveIndex}`}
         // ship-5: forward gameId so `useReviewPlayback` can scope hint
         // callouts to this specific game (no cross-game leakage via
         // useCoachMemoryStore.hintRequests).
@@ -335,7 +352,7 @@ export function CoachReviewSessionPage(): JSX.Element {
           void navigate(`/coach/chat?q=${encodeURIComponent(prompt)}`);
         }}
         pgn={adapted.pgn}
-        initialMoveIndex={-1}
+        initialMoveIndex={initialMoveIndex}
       />
     </div>
   );
