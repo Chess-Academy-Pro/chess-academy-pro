@@ -187,19 +187,22 @@ describe('CoachTeachPage — Polly dispatch (regression for speakQueuedForced bu
     });
   });
 
-  it('does NOT pin Anthropic as the provider override (DeepSeek-first per CLAUDE.md)', async () => {
+  it('does NOT set providerOverride at the surface (let the spine pick + fall back)', async () => {
     // Test history: this used to assert `providerOverride.name === 'anthropic'`
-    // because Learn-with-Coach pinned the Anthropic provider. CLAUDE.md
-    // 2026-05 reversed that — the Anthropic budget is exhausted, so
-    // every surface must default to DeepSeek and let Anthropic act as
-    // a best-effort fallback. Pinning Anthropic guarantees an empty-
-    // budget primary failure before the fallback even fires.
+    // because Learn-with-Coach pinned Anthropic. CLAUDE.md 2026-05-14
+    // changed the policy — Anthropic is the spine's default primary
+    // and the coachApi layer auto-falls-back to DeepSeek on 401/429.
+    // Surfaces must NOT pin either provider; pinning defeats the
+    // auto-fallback. This test enforces the policy at the surface
+    // contract level: regardless of which provider ends up serving the
+    // call, /coach/teach should hand the spine a clean options bag
+    // with no providerOverride.
     vi.mocked(coachService.ask).mockImplementation(async (_input, options) => {
       options?.onChunk?.('[VOICE: Pulling the position.] Detailed analysis follows.');
       return {
         text: '[VOICE: Pulling the position.] Detailed analysis follows.',
         toolCallIds: [],
-        provider: 'deepseek',
+        provider: 'anthropic',
       };
     });
 
@@ -212,9 +215,7 @@ describe('CoachTeachPage — Polly dispatch (regression for speakQueuedForced bu
 
     for (const call of vi.mocked(coachService.ask).mock.calls) {
       const opts = call[1] as { providerOverride?: { name: string } } | undefined;
-      // No surface should pin Anthropic. The spine's resolveProviderName
-      // defaults to 'deepseek'; leave it alone.
-      expect(opts?.providerOverride?.name).not.toBe('anthropic');
+      expect(opts?.providerOverride).toBeUndefined();
     }
   });
 });

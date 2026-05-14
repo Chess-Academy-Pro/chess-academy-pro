@@ -46,7 +46,10 @@ import type {
 
 /** Read provider name from `import.meta.env.COACH_PROVIDER`, falling
  *  back to `process.env.COACH_PROVIDER` (Node test envs), default
- *  'deepseek'. The constitution requires this be a one-line flip. */
+ *  'anthropic'. Anthropic is the primary; on auth/quota error the
+ *  coachApi layer transparently retries on DeepSeek via the existing
+ *  fallback chain at `coachApi.ts:782` (`getFallbackConfig`). The
+ *  constitution requires this be a one-line flip. */
 function resolveProviderName(): ProviderName {
   // Vite-style env (browser builds).
   const viteEnv = (typeof import.meta !== 'undefined'
@@ -58,8 +61,8 @@ function resolveProviderName(): ProviderName {
   const fromProcess = typeof process !== 'undefined' && process.env
     ? process.env.COACH_PROVIDER
     : undefined;
-  const raw = (fromVite ?? fromProcess ?? 'deepseek').toLowerCase();
-  return raw === 'anthropic' ? 'anthropic' : 'deepseek';
+  const raw = (fromVite ?? fromProcess ?? 'anthropic').toLowerCase();
+  return raw === 'deepseek' ? 'deepseek' : 'anthropic';
 }
 
 function pickProvider(name: ProviderName): Provider {

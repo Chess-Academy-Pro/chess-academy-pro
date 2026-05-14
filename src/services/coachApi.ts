@@ -194,19 +194,21 @@ async function getProviderConfig(): Promise<ProviderConfig | null> {
     const deepseekEnvKey = getDeepseekKey();
 
     const profile = await db.profiles.get('main');
-    // DeepSeek is the cost-default everywhere as of 2026-05 — the
-    // Anthropic balance is exhausted, so preferring Anthropic
-    // whenever its key exists (the prior WO-PLAN-B behavior)
-    // guaranteed an empty-budget 401 on the primary call before the
-    // fallback could fire. Now: DeepSeek-primary when its key is
-    // available, Anthropic only as a best-effort fallback via
-    // `getFallbackConfig`. A user with ONLY an Anthropic key still
-    // gets Anthropic (no key = no calls).
-    const provider: AiProvider = deepseekEnvKey
-      ? 'deepseek'
-      : (anthropicEnvKey
-          ? 'anthropic'
-          : (profile?.preferences.aiProvider ?? 'deepseek'));
+    // Anthropic is the cost-default everywhere as of 2026-05-14 (David's
+    // call) — Sonnet/Haiku produce noticeably better chess pedagogy
+    // than DeepSeek, and the budget situation has changed enough that
+    // we want to use what's available. On 401/429/quota errors the
+    // call below auto-retries against DeepSeek via getFallbackConfig
+    // at line ~782 of this file. Per-call latency cost when Anthropic
+    // is dead is one round-trip + the fallback; user-visible behaviour
+    // is "first reply takes longer until Anthropic comes back."
+    // A user with ONLY a DeepSeek key still gets DeepSeek (no key =
+    // no calls).
+    const provider: AiProvider = anthropicEnvKey
+      ? 'anthropic'
+      : (deepseekEnvKey
+          ? 'deepseek'
+          : (profile?.preferences.aiProvider ?? 'anthropic'));
 
     const preferredModel = profile?.preferences.preferredModel;
 

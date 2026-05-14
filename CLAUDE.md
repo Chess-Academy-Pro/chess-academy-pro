@@ -161,22 +161,25 @@ spine; don't reinvent it.
   `generateOpeningFromDbNarration` is the entry point. The LLM never
   emits move sequences, FENs, or schema structure — only prose.
   `chess.js` computes FENs from DB-sourced SANs deterministically.
-- **Provider routing: DeepSeek-first, always.** As of 2026-05,
-  the Anthropic balance is exhausted — Sonnet/Haiku/Opus calls
-  will 401/429. DeepSeek is the primary on every surface,
-  including `/coach/teach`. Anthropic remains wired as a
-  best-effort fallback when its key is present AND the call
-  succeeds, but no surface should `providerOverride:
-  anthropicProvider` or otherwise pin Anthropic as primary —
-  doing so guarantees an empty-budget primary failure before the
-  fallback even fires. The spine's `resolveProviderName()`
-  defaults to `'deepseek'`; let it.
-- **Tool-use fallback chain stays intact**: DeepSeek tool-use →
-  Anthropic tool-use → text-mode → DB-only synthesis. Every
-  layer is required. DeepSeek does the heavy lifting now;
-  Anthropic catches schema misses when its budget permits;
-  text-mode handles transient tool-use bugs; DB-only-synth ships
-  a walkthrough even when both LLMs fail. Don't remove a layer.
+- **Provider routing: Anthropic-first, DeepSeek fallback.** As of
+  2026-05-14 (David's call) Anthropic (Sonnet/Haiku) is the primary
+  on every surface because the pedagogy quality is noticeably better
+  than DeepSeek. The spine's `resolveProviderName()` defaults to
+  `'anthropic'`; `getProviderConfig()` in `coachApi.ts` prefers the
+  Anthropic env key when present. On 401/429/quota errors the
+  existing fallback chain at `coachApi.ts:782`
+  (`getFallbackConfig`) transparently retries the request on
+  DeepSeek — no surface code needs to handle this. A user with ONLY
+  a DeepSeek key still gets DeepSeek. Surfaces should NOT pin
+  either provider via `providerOverride` — let the spine pick and
+  the coachApi layer handle the fallback. Pinning either provider
+  defeats the auto-fallback.
+- **Tool-use fallback chain stays intact**: Anthropic tool-use →
+  DeepSeek tool-use → text-mode → DB-only synthesis. Every layer
+  is required. Anthropic does the heavy lifting now; DeepSeek
+  catches Anthropic-quota / schema misses; text-mode handles
+  transient tool-use bugs; DB-only-synth ships a walkthrough even
+  when both LLMs fail. Don't remove a layer.
 - **Lichess DB is canonical.** No fabricated sidelines. If a name
   isn't in `openings-lichess.json`, it doesn't exist for our app.
 

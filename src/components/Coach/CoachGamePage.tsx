@@ -45,7 +45,6 @@ import { narrateMove } from '../../services/coachAgentRunner';
 import { useSettings } from '../../hooks/useSettings';
 import { getRandomLegalMove, getTargetStrength } from '../../services/coachGameEngine';
 import { coachService } from '../../coach/coachService';
-import { anthropicProvider } from '../../coach/providers/anthropic';
 import { withTimeout } from '../../coach/withTimeout';
 import { emergencyPickMove } from '../../coach/coachTurnFallback';
 import type { LiveState } from '../../coach/types';
@@ -323,21 +322,9 @@ function enforceMateFloor(rating: number): boolean {
   return rating >= 1000;
 }
 
-export interface CoachGamePageProps {
-  /** Which surface this render is for. Same UI for both — every button,
-   *  every info bar, every chrome element renders identically. The
-   *  ONLY difference is the coach brain:
-   *    - 'play'  → DeepSeek default + live commentary on key moments
-   *    - 'teach' → Anthropic Sonnet + teaching-mode prompt that
-   *                explains every move in depth, suggests with arrows,
-   *                cites master games, etc.
-   *  Stockfish stays as the opponent in both modes — it's still a
-   *  real game; the coach just teaches more in teach mode.
-   *  Default: 'play'. */
-  surfaceMode?: 'play' | 'teach';
-}
+export interface CoachGamePageProps {}
 
-export function CoachGamePage({ surfaceMode = 'play' }: CoachGamePageProps = {}): JSX.Element {
+export function CoachGamePage(_props: CoachGamePageProps = {}): JSX.Element {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const reviewGameId = searchParams.get('review');
@@ -1966,12 +1953,13 @@ export function CoachGamePage({ surfaceMode = 'play' }: CoachGamePageProps = {})
           mockery: prefs?.coachMockery,
           flirt: prefs?.coachFlirt,
           verbosity: prefs?.coachResponseLength,
-          // Teach mode: route the same coach-turn ask through Sonnet
-          // instead of DeepSeek for richer commentary + deeper line
-          // explanations. Stockfish stays as the opponent; only the
-          // narration brain swaps. Play mode keeps the cheaper
-          // DeepSeek default.
-          ...(surfaceMode === 'teach' ? { providerOverride: anthropicProvider } : {}),
+          // CLAUDE.md 2026-05-14: Anthropic is now the spine's default
+          // primary on every surface (including play mode), with
+          // DeepSeek as the auto-fallback at coachApi.ts:782. The
+          // previous `surfaceMode === 'teach' → providerOverride:
+          // anthropicProvider` block was both redundant under the new
+          // policy AND actively harmful — pinning the provider here
+          // defeats the auto-fallback when Anthropic 401s.
         };
 
         if (!brainPickSan) try {
