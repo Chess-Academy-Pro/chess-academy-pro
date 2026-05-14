@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { Chess } from 'chess.js';
 
 /**
  * /openings — full-tab audit.
@@ -76,6 +77,82 @@ async function gotoOpeningDetail(page: Page, openingId: string): Promise<void> {
   await card.waitFor({ timeout: 15_000 });
   await card.click();
   await page.waitForSelector('[data-testid="opening-detail"]', { timeout: 15_000 });
+}
+
+interface PlayMove {
+  san: string;
+  from: string;
+  to: string;
+  promotion?: string;
+}
+
+function pgnToMoves(pgn: string): PlayMove[] {
+  // Use chess.js (same library the runtime uses) to derive from→to for
+  // every SAN in the PGN. Test stays in lockstep with how DrillMode /
+  // PracticeMode / TrainMode interpret the line.
+  const chess = new Chess();
+  return pgn
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((san) => {
+      const m = chess.move(san);
+      return { san, from: m.from, to: m.to, promotion: m.promotion };
+    });
+}
+
+async function clickBoardMove(page: Page, from: string, to: string): Promise<void> {
+  await page.locator(`[data-square="${from}"]`).first().click({ force: true });
+  await page.locator(`[data-square="${to}"]`).first().click({ force: true });
+}
+
+async function playOpeningHappyPath(
+  page: Page,
+  pgn: string,
+  playerColor: 'white' | 'black',
+  completionTestId: string,
+): Promise<void> {
+  // Walk the PGN; click only the student's moves. Opponent moves
+  // auto-play 500ms after the position is reached (DrillMode +
+  // PracticeMode + TrainMode all share this substrate). After each
+  // student click, wait until the `from` square is empty (the move
+  // was accepted and the board re-rendered). The 750ms cushion after
+  // each move covers the opponent's 500ms auto-play + render.
+  const moves = pgnToMoves(pgn);
+  for (let i = 0; i < moves.length; i++) {
+    const isPlayerTurn =
+      playerColor === 'white' ? i % 2 === 0 : i % 2 === 1;
+    if (!isPlayerTurn) {
+      // Opponent's move auto-plays — give the runtime a beat to
+      // execute it before we look at the next student move.
+      await page.waitForTimeout(700);
+      continue;
+    }
+    await clickBoardMove(page, moves[i].from, moves[i].to);
+    // Confirm the click landed: the `from` square should clear once
+    // the move resolves. Bail out (and let the assertion below fail)
+    // if the runtime rejected the click — the test should fail loudly
+    // with a screenshot, not stall the whole suite.
+    await page
+      .waitForFunction(
+        (from) => {
+          const sq = document.querySelector(`[data-square="${from}"]`);
+          if (!sq) return false;
+          return !sq.querySelector('img');
+        },
+        moves[i].from,
+        { timeout: 5_000 },
+      )
+      .catch(() => {
+        // fall through — completion testid check below will fail
+        // if the line never advanced
+      });
+    // If the next ply is the opponent's, wait for auto-play.
+    if (i + 1 < moves.length) {
+      await page.waitForTimeout(700);
+    }
+  }
+  await expect(page.getByTestId(completionTestId)).toBeVisible({ timeout: 8_000 });
 }
 
 test.describe('Openings Hub — full-tab audit', () => {
@@ -624,6 +701,136 @@ test.describe('Openings Hub — full-tab audit', () => {
       await page.waitForSelector('[data-testid="opening-explorer"]');
     }
     expect(found).toBe(true);
+    expect(rec.pageErrors).toEqual([]);
+  });
+
+  // ─── Gap closure — happy-path mode completions ───────────────────
+
+  test('MiddlegamePlan play-plan button launches MiddlegamePractice', async ({ page }) => {
+    const rec = recordPage(page);
+    await gotoOpeningDetail(page, 'italian-game');
+    await expect(page.getByTestId('middlegame-plans-section')).toBeVisible();
+    // Click the first play-plan button — the practice surface mounts
+    // a chessboard (no dedicated testid on its root). Assert a board
+    // square is reachable and the openings-detail page is gone.
+    const firstPlay = page.locator('[data-testid^="play-plan-"]').first();
+    await firstPlay.waitFor({ timeout: 6_000 });
+    await firstPlay.click();
+    await expect(page.locator('[data-square="a1"]').first()).toBeVisible({
+      timeout: 10_000,
+    });
+    await expect(page.getByTestId('opening-detail')).toHaveCount(0);
+    expect(rec.pageErrors).toEqual([]);
+  });
+
+  test('CommonMistakesSection toggle expands the miniboard preview', async ({ page }) => {
+    const rec = recordPage(page);
+    await gotoOpeningDetail(page, 'italian-game');
+    await expect(page.getByTestId('common-mistakes-section')).toBeVisible();
+    // Before click: the mistake row has no data-square thumbnail
+    // descendants (those only render when expanded).
+    const mistakeRow = page.getByTestId('mistake-0');
+    const squaresBefore = await mistakeRow.locator('[data-square]').count();
+    await page.getByTestId('mistake-toggle-0').click();
+    // After click: the expanded miniboard renders, so descendant
+    // [data-square] count climbs above 0.
+    await expect
+      .poll(
+        async () => mistakeRow.locator('[data-square]').count(),
+        { timeout: 5_000 },
+      )
+      .toBeGreaterThan(squaresBefore);
+    expect(rec.pageErrors).toEqual([]);
+  });
+
+  test('DrillMode happy-path — play through Italian Game variation 0', async ({ page }) => {
+    // Italian Game variation 0 = "Giuoco Piano: Main Line with Nc3"
+    // (20 plies). The student plays White; opponent moves auto-play
+    // 500ms after each ply is reached. After the final opponent
+    // move, `learn-complete` ("Line Discovered!") mounts.
+    const rec = recordPage(page);
+    await gotoOpeningDetail(page, 'italian-game');
+    await page.getByTestId('variation-learn-0').click();
+    await expect(page.getByTestId('drill-mode')).toBeVisible({ timeout: 10_000 });
+    const pgn =
+      'e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Bxc3 bxc3 d5 Ba3 dxc4';
+    await playOpeningHappyPath(page, pgn, 'white', 'learn-complete');
+    expect(rec.pageErrors).toEqual([]);
+  });
+
+  test('PracticeMode happy-path — play through Italian Game variation 0', async ({ page }) => {
+    // PracticeMode shares the substrate with DrillMode (same
+    // expectedMoves replay, same auto-play opponent moves). The
+    // terminal testid is `practice-complete`.
+    const rec = recordPage(page);
+    await gotoOpeningDetail(page, 'italian-game');
+    await page.getByTestId('variation-practice-0').click();
+    await expect(page.getByTestId('practice-mode')).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByTestId('practice-prompt')).toBeVisible();
+    const pgn =
+      'e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Bxc3 bxc3 d5 Ba3 dxc4';
+    await playOpeningHappyPath(page, pgn, 'white', 'practice-complete');
+    expect(rec.pageErrors).toEqual([]);
+  });
+
+  test('TrainMode happy-path — play through Italian Game trap line 0', async ({ page }) => {
+    // Italian Game trapLines[0] = "Blackburne Shilling Gambit
+    // Refutation" (14 plies, white-side punish).
+    const rec = recordPage(page);
+    await gotoOpeningDetail(page, 'italian-game');
+    await page.getByTestId('train-traps-btn').click();
+    await expect(page.getByTestId('train-mode')).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByTestId('train-prompt')).toBeVisible();
+    const pgn = 'e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5 Nxf7 Qxg2 Rf1 Qxe4+ Be2 Nf3';
+    await playOpeningHappyPath(page, pgn, 'white', 'train-complete');
+    expect(rec.pageErrors).toEqual([]);
+  });
+
+  test('OpeningPlayMode produces a Stockfish reply to a student move', async ({ page }) => {
+    // Click Play → make 1.e4 → wait for Stockfish to respond on the
+    // board. Verify a black piece moved (the simplest detectable
+    // signal that the engine replied) within 30s. We don't care
+    // which Stockfish move comes back — only that some move did.
+    const rec = recordPage(page);
+    await gotoOpeningDetail(page, 'italian-game');
+    await page.getByTestId('play-btn').click();
+    // OpeningPlayMode's root has no testid; assert the board mounts.
+    await expect(page.locator('[data-square="a1"]').first()).toBeVisible({
+      timeout: 15_000,
+    });
+    // Snapshot the e7/d7 squares — Stockfish's most common replies
+    // to 1.e4 are 1...e5, 1...c5, 1...e6, 1...c6, 1...d5, 1...Nf6,
+    // 1...g6, 1...d6, 1...Nc6. Easier-to-check: just verify ANY
+    // black piece left rank 7 within 30s (besides any that the
+    // engine pushed via knight jump from rank 8). We check rank 7
+    // delta — at minimum one of the 8 pawns has moved.
+    const rank7Before = await page.evaluate(() => {
+      const out: string[] = [];
+      for (const f of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
+        const sq = document.querySelector(`[data-square="${f}7"]`);
+        const img = sq?.querySelector('img');
+        out.push(img?.getAttribute('alt') ?? '');
+      }
+      return out.join(',');
+    });
+    await clickBoardMove(page, 'e2', 'e4');
+    // Stockfish takes ~1-3s to respond at default depth, plus the
+    // mount-time engine init. 30s is generous enough for either
+    // condition to land.
+    await page.waitForFunction(
+      (before) => {
+        const cur: string[] = [];
+        for (const f of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
+          const sq = document.querySelector(`[data-square="${f}7"]`);
+          const img = sq?.querySelector('img');
+          cur.push(img?.getAttribute('alt') ?? '');
+        }
+        const after = cur.join(',');
+        return after !== before;
+      },
+      rank7Before,
+      { timeout: 30_000 },
+    );
     expect(rec.pageErrors).toEqual([]);
   });
 });
