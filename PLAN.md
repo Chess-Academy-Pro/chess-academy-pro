@@ -549,3 +549,234 @@ When a new session opens against a partially-completed plan:
    this file was last edited.
 4. If a phase is partially done (e.g., one of three checkboxes
    checked), prefer finishing it before starting a new phase.
+
+---
+
+# Cross-app weakness tracking — new plan (2026-05-14)
+
+## The ask
+
+> "weaknesses needs to be tied to the rest of the app so it can
+>  identify weaknesses while the user is playing in other tabs.
+>  play against coach, learn with coach, puzzles, **HINT BUTTON**,
+>  all data needs to track back into weakness tab for analysis
+>  and reporting back to user." — David
+
+Today `/weaknesses` is fed by ONE signal: imported games +
+Stockfish per-move classification (`gameInsightsService.ts`). The
+ask is to turn it into a **single sink for every weakness signal
+the app already produces** — not just imported-game blunders.
+
+Disease, not symptom: every surface has its own intuition about
+when the user struggled (wrong puzzle move, hint tap, walkthrough
+findMove flip, coach play blunder), but those signals stay
+trapped in their respective surfaces. The weakness profile is
+fractured. Coach brain reads ONE shard, /weaknesses reads
+ANOTHER, the user sees a third. Unify them.
+
+## Audit — what exists today
+
+- `db.games` — imported + finished coach play sessions. Stockfish
+  classifies post-game. Feeds /weaknesses Mistakes/Tactics tabs.
+- `db.mistakePuzzles` — generated from blunders in `db.games`.
+  Feeds MistakesTab.
+- `weaknessAnalyzer.ts` — `computeWeaknessProfile()` +
+  `getStoredWeaknessProfile()`. Already used by coach brain
+  (`coachContextSnapshot`, `coachChatService`,
+  `coachTrainingService`, `coachActionDispatcher`) but NOT
+  surfaced on /weaknesses. Big gap.
+- `puzzles.json` — Lichess curated 15K, themes already tagged.
+  Tactics surface and walkthrough `punish` stage use it. Wrong-
+  move and hint-tap events here are **the cleanest weakness
+  signal in the app** — the theme IS the weakness category. We
+  ignore it entirely today.
+- Walkthrough `findMove` phase — wrong answers logged but not
+  routed to weakness analytics.
+- Hint buttons — multiple surfaces (`/coach/play` Tips,
+  `/coach/teach` Hint, puzzle Hint, mistake-puzzle Hint, endgame
+  Hint, FromYourGames Hint). None emit a structured weakness-
+  signal event.
+
+## A-E phased plan
+
+Each phase = one PR. Ship independently; each lights up more of
+the loop before the next.
+
+### Phase A — Signal persistence layer [STATUS: pending]
+
+The foundation. Without it, every emitter and every consumer is
+ad-hoc.
+
+- New Dexie store `db.weaknessSignals` (bump schema version + add
+  upgrade function per CLAUDE.md standing order).
+- Schema (all fields denormalized for cheap aggregation queries):
+  ```ts
+  interface WeaknessSignal {
+    id: string;
+    createdAt: number;           // epoch ms
+    source: 'puzzle' | 'walkthrough-findmove' | 'coach-play' |
+            'coach-review' | 'endgame' | 'hint-tap' |
+            'game-analysis';
+    kind: 'wrong-move' | 'hint-used' | 'classification' |
+          'self-mistake-recovery';
+    // What the user struggled with — exactly one of these is set
+    tacticType?: TacticType;     // pin / fork / skewer / ...
+    phase?: GamePhase;           // opening / middlegame / endgame
+    openingEco?: string | null;  // C24 etc.
+    openingName?: string | null; // resolved via getOpeningNameByEco
+    // Severity / weight
+    cpLoss?: number;             // when measurable
+    classification?: MoveClassification;  // when classified
+    // Context for drilldown
+    sourceId?: string;           // puzzle id / gameId / lessonId
+    movePly?: number;            // 1-indexed
+    fen?: string;
+    notes?: string;
+  }
+  ```
+- New service `weaknessSignalService.ts`:
+  - `emitWeaknessSignal(partial: Omit<WeaknessSignal, 'id'|'createdAt'>)`
+  - `queryWeaknessSignals(filters)` — by date range, source, tactic, phase, opening
+- Audit-hook coverage on every emit (audit kind:
+  `weakness-signal-emitted`).
+- **Lightweight by default.** No await on the hot path —
+  `emitWeaknessSignal` is fire-and-forget. Worst case a missed
+  write on tab close is acceptable; chasing every signal isn't
+  worth blocking the UI.
+
+### Phase B — Hint-tap instrumentation across the app [STATUS: pending]
+
+David's CAPS emphasis. Single instrumentation pattern, six
+surfaces. Highest signal-to-noise — a hint tap is a *confessed*
+weakness, not an inferred one.
+
+Tag every hint tap with:
+- which surface (`source` field above)
+- WHY the user tapped (auto / manual / stuck — best-effort
+  heuristic per surface; default 'manual' if unknown)
+- what the position is about (tacticType / phase / openingEco
+  pulled from the surrounding context)
+
+Surfaces to wire (in order of impact):
+
+1. **Tactics puzzles** (`/tactics/play`) — the puzzle's
+   `themes[]` is the tacticType set. Emit on hint tap +
+   wrong-move (Phase D will consume).
+2. **Walkthrough Hint** (`/coach/teach`) — surface-mode aware;
+   tag with the active walkthrough's opening + phase.
+3. **Mistake puzzle Hint** — already knows the source mistake's
+   tacticType + phase.
+4. **Coach play Tips** (`/coach/play`) — phase = current phase,
+   no tacticType (too noisy in live play).
+5. **Endgame Hint** — tag phase: 'endgame'.
+6. **From-Your-Games Hint** — phase from puzzle position.
+
+### Phase C — Wrong-answer signal emitters [STATUS: pending]
+
+Mistakes and findMove failures.
+
+- **Puzzles** (`puzzleService.handlePuzzleAttempt` or similar):
+  emit `wrong-move` with the puzzle's themes as tacticType.
+- **Walkthrough findMove**: emit on wrong answer with the
+  branchpoint's opening context.
+- **Coach review self-recovery**: when a user re-plays one of
+  their own mistakes and gets it wrong AGAIN, emit
+  `self-mistake-recovery` with `cpLoss` from the original. This
+  is a structural insight — "you make the same mistake twice"
+  is more useful than "you blundered once".
+- **In-game classifications** already flow via post-game
+  Stockfish analysis. Either replicate into `db.weaknessSignals`
+  on game-analysis completion (cheap denorm) OR teach the
+  consumer to join `db.games.annotations` with the new table.
+  Prefer denorm — keeps the analyzer single-source-of-truth.
+
+### Phase D — Aggregate layer [STATUS: pending]
+
+`weaknessAnalyzer.ts` extended to consume `db.weaknessSignals`
+alongside `db.games`. Produces a unified weakness profile:
+
+- per-tactic-type (count, avg cpLoss, last-seen, hint-rate)
+- per-phase (count, hint-rate)
+- per-opening (cross-references existing OpeningInsights)
+- per-source (so we know if puzzles say "fork weak" but games
+  say "fork strong" — surface the inconsistency)
+- per-difficulty-tier on puzzles (the user is stronger on 1200-
+  rated puzzles than 1500-rated ones in the same theme)
+
+Existing consumers (`coachContextSnapshot`, etc.) keep working
+because the analyzer's output shape grows additively.
+
+### Phase E — Surface to /weaknesses and the Coach [STATUS: pending]
+
+Close the loop. Three new surfaces, ranked by user value:
+
+1. **Tactics tab on /weaknesses** — extend `TacticsTab` to
+   include puzzle-derived signals, not just brilliant/missed
+   in games. Add a "Hint reliance by tactic" row.
+2. **Cross-surface inconsistency callouts** — when a user is
+   90% on a tactic in puzzles but 30% in games, that's a
+   transfer problem worth naming. New section "Drill it, but
+   can't play it" (or similar copy).
+3. **Coach proactive prompts** — when the coach starts a play
+   session, surface the top 1-3 weaknesses from the unified
+   profile so the brain can use them (e.g., "you've been
+   missing pins this week — want me to set up a position?").
+   Hooks into the existing `coachContextSnapshot`.
+
+A **new "Patterns" or "Hint Reliance" tab** is tempting but I'd
+defer it until after Phase E.1 — if extending Tactics/Mistakes
+covers the use cases, don't add a fifth tab.
+
+## Sequencing logic
+
+- **A first** — every other phase is blocked on it. Foundation.
+- **B before C** — hint taps are higher signal-to-noise than
+  wrong-move attribution (which has more edge cases: was it a
+  fingerslip? a guess? a real miss?). Get the cleanest signal
+  flowing first, then layer in the noisier ones.
+- **D before E** — surfaces shouldn't grow their own
+  aggregation logic; centralize in the analyzer.
+- **E can sub-ship** — E.1 (TacticsTab extension) lands
+  independently of E.2 / E.3.
+
+## Decisions to make (move to Decisions log when answered)
+
+- **Where to surface hint reliance?** Sub-section on each tab,
+  or new "Patterns / Habits" tab? Default: extend existing tabs.
+- **What's the lookback window?** Last 30 days for active
+  weakness? Lifetime for "trend reversed" callouts? Default:
+  30d for active surface, 90d available via toggle.
+- **Decay** — should a fork-miss from 6 months ago count?
+  Default: linear decay over 60 days, zero weight beyond.
+- **Cross-device sync** — does Supabase sync need to carry
+  `db.weaknessSignals`? Default: yes (mirrors the other
+  user-data tables). Adds rows to the sync schema; check
+  Phase A migration covers it.
+
+## Risks
+
+- **Dexie migration**: adding a store is low-risk additive, but
+  the upgrade function still has to be reversible. Test on a
+  fresh profile + a profile with existing /weaknesses data.
+- **Hot-path performance**: `emitWeaknessSignal` from a hint
+  button must be sub-ms. No awaits, no network.
+- **Coach brain blast radius**: Phase D touches
+  `weaknessAnalyzer.ts` which feeds the coach. Add `getStored`
+  back-compat path; don't break existing consumers.
+- **False-positive hint signals**: a user who taps hint to learn
+  faster gets tagged as weak. The 'why' field (auto/manual/
+  stuck) mitigates but the heuristic for inferring 'stuck' is
+  fragile. Start with `'manual'` as default; refine if signal
+  is noisy.
+
+## Pickup notes
+
+When the next session resumes this work:
+
+1. Confirm Phase A migration on a fresh `db.delete()` profile +
+   on a profile carrying existing weakness data.
+2. Phase B is six call sites. Don't try to do them all in one
+   PR — bundle 2-3 per PR so individual rollbacks are cheap.
+3. Phase E.3 (Coach proactive prompts) is the highest-payoff
+   but biggest blast radius — let A-D ship and bake before
+   touching the coach context layer.
