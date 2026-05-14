@@ -750,8 +750,14 @@ export async function generateReviewNarration(params: {
   openingName: string | null;
   result: string;
   playerRating: number;
+  /** Coach Narration verbosity ('silent' / 'brief' / 'full'). Brief
+   *  caps the intro LLM call at fewer tokens so the spoken intro
+   *  stays tight; silent skips the LLM call entirely (speakInternal
+   *  silences playback anyway, but we save the token spend). When
+   *  undefined, defaults to full-length behavior (legacy). */
+  coachNarration?: 'silent' | 'brief' | 'full';
 }): Promise<ReviewNarration> {
-  const { moves, playerColor, openingName, result } = params;
+  const { moves, playerColor, openingName, result, coachNarration } = params;
 
   // Reconstruct FENs via chess.js so the UI can rewind cleanly.
   const fenChain = buildFenChain(moves);
@@ -791,24 +797,33 @@ export async function generateReviewNarration(params: {
     fen: fenChain[fenChain.length - 1]?.fenAfter,
     userJustDid: 'Opening review of the completed game (prep scan)',
   };
-  const introRaw = await coachService.ask(
-    {
-      surface: 'review',
-      ask: introUserMessage,
-      liveState: reviewLiveState,
-    },
-    {
-      task: 'chat_response',
-      maxTokens: 200,
-      maxToolRoundTrips: 1,
-      systemPromptAddition: REVIEW_INTRO_ADDITION,
-      // REVIEW_INTRO_ADDITION asks for prose only; REVIEW_MODE_ADDITION
-      // (surface block) mandates [VOICE:] / [BOARD:] markers per turn.
-      // Keep memory + live-state injection via surface='review', but
-      // skip the surface mode block so the prose-only contract wins.
-      suppressSurfaceMode: true,
-    },
-  ).then((a) => unwrapSpineError(a.text)).catch(() => '');
+  // Silent mode: skip the LLM intro entirely (speakInternal silences
+  // playback anyway, so the spent tokens would be invisible). Falls
+  // through to the deterministic defaultIntroText below.
+  const skipIntroLlm = coachNarration === 'silent';
+  // Brief mode: cap the intro at ~80 tokens so the spoken line stays
+  // tight (~1 sentence). Full mode keeps the 200-token allowance.
+  const introMaxTokens = coachNarration === 'brief' ? 80 : 200;
+  const introRaw = skipIntroLlm
+    ? ''
+    : await coachService.ask(
+      {
+        surface: 'review',
+        ask: introUserMessage,
+        liveState: reviewLiveState,
+      },
+      {
+        task: 'chat_response',
+        maxTokens: introMaxTokens,
+        maxToolRoundTrips: 1,
+        systemPromptAddition: REVIEW_INTRO_ADDITION,
+        // REVIEW_INTRO_ADDITION asks for prose only; REVIEW_MODE_ADDITION
+        // (surface block) mandates [VOICE:] / [BOARD:] markers per turn.
+        // Keep memory + live-state injection via surface='review', but
+        // skip the surface mode block so the prose-only contract wins.
+        suppressSurfaceMode: true,
+      },
+    ).then((a) => unwrapSpineError(a.text)).catch(() => '');
 
   // Intro: use LLM response if non-empty and not the ⚠️ error placeholder;
   // else fall back to a grounded default.

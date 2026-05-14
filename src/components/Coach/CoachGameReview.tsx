@@ -28,6 +28,8 @@ import { tryCaptureForgetIntent } from '../../services/openingIntentCapture';
 import { coachService } from '../../coach/coachService';
 import type { LiveState } from '../../coach/types';
 import { useCoachMemoryStore } from '../../stores/coachMemoryStore';
+import { useAppStore } from '../../stores/appStore';
+import { resolveCoachNarration } from '../../utils/coachNarration';
 import { logAppAudit } from '../../services/appAuditor';
 import { CLASSIFICATION_STYLES } from './classificationStyles';
 import { Chess } from 'chess.js';
@@ -275,6 +277,12 @@ export function CoachGameReview(props: CoachGameReviewProps): JSX.Element {
       openingName,
       result,
       playerRating,
+      // Tied to the unified Settings → Coach → Coach Narration dial.
+      // Silent skips the intro LLM call entirely; Brief caps it at
+      // ~80 tokens; Full uses the legacy 200-token allowance. Resolved
+      // fresh per mount so a Settings change between reviews takes
+      // effect on the next open.
+      coachNarration: resolveCoachNarration(useAppStore.getState().activeProfile?.preferences),
     }).then((narration) => {
       // Audit-driven (review walk #4): bail if the component
       // unmounted mid-call (user navigated away). React-level
