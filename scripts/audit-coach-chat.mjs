@@ -164,6 +164,38 @@ async function main() {
           const text = await page.locator(exp.selector).first().textContent().catch(() => '');
           actual = (text ?? '').slice(0, 80);
           ok = (text ?? '').toLowerCase().includes(exp.value.toLowerCase());
+        } else if (exp.kind === 'memory-history-gte') {
+          // Read `coachMemory.v1` from Dexie's meta store and assert
+          // `conversationHistory.length` is >= the threshold. Used to
+          // verify fast-path turns mirror into the spine's conversation
+          // memory (audit finding: pre-fix this was always 0 because
+          // narration toggle / read-this / intent router all skipped
+          // the memory write).
+          const count = await page.evaluate(async () => {
+            return new Promise((resolve) => {
+              const req = indexedDB.open('ChessAcademyDB');
+              req.onsuccess = () => {
+                const db = req.result;
+                if (!db.objectStoreNames.contains('meta')) { resolve(0); return; }
+                const tx = db.transaction('meta', 'readonly');
+                const g = tx.objectStore('meta').get('coachMemory.v1');
+                g.onsuccess = () => {
+                  const val = g.result?.value;
+                  try {
+                    const parsed = val ? JSON.parse(val) : { conversationHistory: [] };
+                    const hist = parsed?.conversationHistory ?? [];
+                    resolve(hist.length);
+                  } catch {
+                    resolve(0);
+                  }
+                };
+                g.onerror = () => resolve(0);
+              };
+              req.onerror = () => resolve(0);
+            });
+          });
+          actual = String(count);
+          ok = count >= exp.value;
         }
       } catch (err) {
         actual = `error: ${err.message}`;
@@ -261,6 +293,9 @@ async function main() {
     { kind: 'url-not-matches', value: /\/coach\/session\//, label: 'no nav off /coach/chat' },
     { kind: 'count-gte', selector: '[data-testid="chat-message-user"]', value: 1, label: 'user message appended' },
     { kind: 'count-gte', selector: '[data-testid="chat-message-assistant"]', value: 1, label: 'assistant ack appended' },
+    // Memory-mirror contract: fast-path turns must land in conversation
+    // memory so the brain's next envelope reflects the turn.
+    { kind: 'memory-history-gte', value: 2, label: 'memory store mirrors user + ack pair' },
   ]);
 
   // ── Fast-path: walkthrough intent ──────────────────────────────
