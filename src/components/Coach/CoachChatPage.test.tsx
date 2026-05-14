@@ -6,6 +6,10 @@ import {
   useCoachSessionStore,
   __resetCoachSessionStoreForTests,
 } from '../../stores/coachSessionStore';
+import {
+  useCoachMemoryStore,
+  __resetCoachMemoryStoreForTests,
+} from '../../stores/coachMemoryStore';
 import { buildUserProfile } from '../../test/factories';
 import type { ChatMessage as ChatMessageType } from '../../types';
 
@@ -66,6 +70,7 @@ describe('CoachChatPage', () => {
     vi.mocked(routeChatIntent).mockReset();
     vi.mocked(routeChatIntent).mockResolvedValue(null);
     __resetCoachSessionStoreForTests();
+    __resetCoachMemoryStoreForTests();
     useAppStore.setState({
       activeProfile: mockProfile,
       chatMessages: [],
@@ -202,6 +207,70 @@ describe('CoachChatPage', () => {
 
     await waitFor(() => expect(getCoachChatResponse).toHaveBeenCalled());
     expect(mockedNavigate).not.toHaveBeenCalled();
+  });
+
+  it('mirrors intent-routed fast-path turns into the coach memory store', async () => {
+    vi.mocked(routeChatIntent).mockResolvedValueOnce({
+      path: '/coach/session/play-against?difficulty=auto',
+      ackMessage: "Let's play!",
+      intent: { kind: 'play-against', raw: "let's play" },
+    });
+
+    render(<CoachChatPage />);
+    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: "let's play" } });
+    fireEvent.click(screen.getByTestId('chat-send-btn'));
+
+    await waitFor(() =>
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        '/coach/session/play-against?difficulty=auto',
+      ),
+    );
+
+    const history = useCoachMemoryStore.getState().conversationHistory;
+    // Both the user ask and the ack must land in memory so the brain's
+    // next envelope reflects the fast-path turn. The bug fixed in this
+    // PR was that fast-paths only wrote to the session store, leaving
+    // memory empty.
+    expect(history.length).toBeGreaterThanOrEqual(2);
+    const recent = history.slice(-2);
+    expect(recent[0]).toMatchObject({
+      role: 'user',
+      surface: 'chat-coach-tab',
+      text: "let's play",
+    });
+    expect(recent[1]).toMatchObject({
+      role: 'coach',
+      surface: 'chat-coach-tab',
+      text: "Let's play!",
+    });
+  });
+
+  it('mirrors LLM-path turns into the coach memory store', async () => {
+    vi.mocked(routeChatIntent).mockResolvedValueOnce(null);
+
+    render(<CoachChatPage />);
+    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'Why is f7 weak?' } });
+    fireEvent.click(screen.getByTestId('chat-send-btn'));
+
+    await waitFor(() => expect(getCoachChatResponse).toHaveBeenCalled());
+
+    // The LLM path writes the user ask immediately and the assistant
+    // reply after the stream resolves. Wait for at least the user
+    // entry, then verify the pair.
+    await waitFor(() => {
+      expect(useCoachMemoryStore.getState().conversationHistory.length).toBeGreaterThanOrEqual(2);
+    });
+    const history = useCoachMemoryStore.getState().conversationHistory;
+    const recent = history.slice(-2);
+    expect(recent[0]).toMatchObject({
+      role: 'user',
+      surface: 'chat-coach-tab',
+      text: 'Why is f7 weak?',
+    });
+    expect(recent[1].role).toBe('coach');
+    expect(recent[1].surface).toBe('chat-coach-tab');
   });
 
   it('action buttons have correct labels', () => {

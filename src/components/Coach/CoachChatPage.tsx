@@ -110,6 +110,20 @@ export function CoachChatPage(): JSX.Element {
     // without depending on LLM prompt-following. When enabling from
     // the chat page (not mid-game), ALSO navigate to a new play
     // session so "narrate a game while we play" actually starts one.
+    // Mirror chat turns into the spine's conversation memory so the
+    // brain's next envelope reflects the back-and-forth. The LLM path
+    // below already does this; fast-paths (narration toggle, read-this,
+    // intent router) used to skip the memory write, leaving the brain
+    // blind to anything the user did via deterministic routes.
+    const recordTurn = (role: 'user' | 'coach', textContent: string): void => {
+      useCoachMemoryStore.getState().appendConversationMessage({
+        surface: 'chat-coach-tab',
+        role,
+        text: textContent,
+        trigger: null,
+      });
+    };
+
     const narrationToggle = detectNarrationToggle(text);
     if (narrationToggle) {
       appendMessage({
@@ -119,6 +133,7 @@ export function CoachChatPage(): JSX.Element {
         modality,
         timestamp: Date.now(),
       });
+      recordTurn('user', text);
       const ack = applyNarrationToggle(narrationToggle.enable);
       appendMessage({
         id: `msg-${Date.now()}-narr`,
@@ -127,6 +142,7 @@ export function CoachChatPage(): JSX.Element {
         modality,
         timestamp: Date.now(),
       } satisfies ChatMessageType);
+      recordTurn('coach', ack);
       if (narrationToggle.enable) {
         void navigate('/coach/session/play-against?narrate=1');
       }
@@ -147,6 +163,7 @@ export function CoachChatPage(): JSX.Element {
           modality,
           timestamp: Date.now(),
         });
+        recordTurn('user', text);
         setVoiceMuted(false);
         voiceMutedRef.current = false;
         // Audit #5: switched from voiceService.speak() to speakForced()
@@ -177,6 +194,7 @@ export function CoachChatPage(): JSX.Element {
           modality,
           timestamp: Date.now(),
         });
+        recordTurn('user', text);
         appendMessage({
           id: `msg-${Date.now()}-ack`,
           role: 'assistant',
@@ -184,6 +202,7 @@ export function CoachChatPage(): JSX.Element {
           modality,
           timestamp: Date.now(),
         });
+        recordTurn('coach', routed.ackMessage);
         if (routed.path) {
           void navigate(routed.path);
         }
@@ -216,12 +235,7 @@ export function CoachChatPage(): JSX.Element {
       timestamp: Date.now(),
     };
     appendMessage(userMsg);
-    useCoachMemoryStore.getState().appendConversationMessage({
-      surface: 'chat-coach-tab',
-      role: 'user',
-      text,
-      trigger: null,
-    });
+    recordTurn('user', text);
 
     let streamed = '';
     // Stop any in-flight TTS at the START of the turn so we don't
@@ -319,12 +333,7 @@ export function CoachChatPage(): JSX.Element {
         timestamp: Date.now(),
       };
       appendMessage(assistantMsg);
-      useCoachMemoryStore.getState().appendConversationMessage({
-        surface: 'chat-coach-tab',
-        role: 'coach',
-        text: cleanText,
-        trigger: null,
-      });
+      recordTurn('coach', cleanText);
     } catch (err) {
       console.warn('[CoachChatPage] coachService.ask failed:', err);
       // Surface the failure to the student instead of leaving a stuck
@@ -344,12 +353,7 @@ export function CoachChatPage(): JSX.Element {
       // stub — the brain can apologize and retry, or change tactic.
       // Without this write, memory shows the user asked a question
       // and the coach silently never replied.
-      useCoachMemoryStore.getState().appendConversationMessage({
-        surface: 'chat-coach-tab',
-        role: 'coach',
-        text: failureText,
-        trigger: null,
-      });
+      recordTurn('coach', failureText);
     } finally {
       setIsStreaming(false);
       setStreamingContent('');
