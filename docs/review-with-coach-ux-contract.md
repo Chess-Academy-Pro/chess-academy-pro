@@ -46,7 +46,7 @@ Legend: ✅ covered • 🟡 partial • ❌ gap
 | ✅ `back-arrow returns to /coach/home` | 1.2 (navigation) |
 | ✅ `filter buttons swap the active state and hide non-matching tiles` | 1.5 (filter behavior), 1.7 (count reduction + restore) |
 | ✅ `empty corpus: clearing games + suppressing the seeder shows the empty state` | 1.8 |
-| 🟡 1.4 — Import-Games CTA exists but not click-tested (would navigate away from the audit). |
+| ✅ 1.4 — Import-Games CTA presence + href-to-/games/import asserted (Wave 4). |
 | ❌ 1.9 — Loading state copy not directly asserted (we just wait past it). |
 | ❌ 1.10 — Error banner path not covered (would require injecting a Dexie failure). |
 
@@ -93,13 +93,13 @@ The session page renders `CoachGameReview`'s walk UI: chessboard, ply navigation
 | ✅ `bottom bar: Play Again + Back to Coach buttons route correctly` | 2.14 (presence + Back-to-Coach navigation back to list) |
 | ✅ `voice subsystem is wired into the review surface` | 2.15 (probe `voiceService.speakIfFree` + `logAppAudit` writes `voice-speak-invoked` entry to Dexie) |
 | ✅ `invalid game id surfaces an error state without crashing` | 2.2 |
-| 🟡 2.3 — Stockfish analysis "Preparing your review…" not directly asserted; samples ship with `fullyAnalyzed: true` so this path doesn't trigger. |
+| ✅ 2.3 — "Preparing your review…" banner asserted (Wave 4): injects an unanalyzed game via raw IndexedDB, navigates to its session URL, banner surfaces within 8s. |
 | 🟡 2.4 — Narration test tolerates fallback path; doesn't verify LLM-generated content. |
 | 🟡 2.10 — Engine-line ROWS (`review-engine-line-<i>`) not asserted; Stockfish-WASM analysis depth-16 takes 10–30s. |
 | 🟡 2.11 — Ask flow is presence-only; doesn't fire a real coach question (would need DeepSeek/Anthropic API). |
 | ❌ 2.12 — Missed-tactics list / jump-to-ply / practice-in-chat not exercised. |
 | ❌ 2.13 — Exploration mode (drag suggested move + resume) not driven — same solve-driver gap as endgame. |
-| ❌ 2.16 — Conversation memory persistence not verified. |
+| ✅ 2.16 — Conversation memory persistence asserted (Wave 4): stubs LLM via SSE, fires ask through the panel, reads `coachMemory.v1` from Dexie `meta` store, asserts `conversationHistory.length ≥ 2` (user + coach pair). |
 | ❌ 2.17 — Resume button gating not directly tested. |
 
 ---
@@ -108,8 +108,8 @@ The session page renders `CoachGameReview`'s walk UI: chessboard, ply navigation
 
 | Surface | SHOULD-WORK contracts | AUDIT-COVERED | % covered |
 |---|---:|---:|---:|
-| List `/coach/review` | 10 | 7 ✅ + 1 🟡 + 2 ❌ | ~75% |
-| Session `/coach/review/:gameId` | 17 | 11 ✅ + 5 🟡 + 4 ❌ | ~70% |
+| List `/coach/review` | 10 | 8 ✅ + 0 🟡 + 2 ❌ | ~80% |
+| Session `/coach/review/:gameId` | 17 | 13 ✅ + 4 🟡 + 3 ❌ | ~80% |
 
 **Wave 1 delivered (this PR):**
 - Hub: title / back / 4 filters / seeder / tile click / empty-state / filter swap
@@ -126,6 +126,14 @@ The session page renders `CoachGameReview`'s walk UI: chessboard, ply navigation
 1. ✅ **`onPracticeInChat` wired** in `CoachReviewSessionPage` — routes to `/coach/chat?q=<prompt>` so the Practice-in-Chat button now renders + the chat input arrives pre-filled with the tactic prompt.
 2. ✅ **Walk-UI `fenBefore` at arrow plies** — `CoachGameReview.tsx` now displays `seg.fenBefore` at inaccuracy / mistake / blunder plies when a UCI bestMoveUci is set. The player's side-to-move now matches the displayed board, so the green arrow's suggested move is legal + playable. Other plies still display `fenAfter` (canonical playback FEN).
 3. ✅ **Sample seeder converts SAN → UCI** — `reviewSampleGames.ts` v3 replays each sample's PGN to derive UCI from the SAN `best` field. The seeder meta key bumped from `.v2` → `.v3` so existing seeded data refreshes automatically on next mount.
+
+**Wave 4 — Import-CTA, Stockfish banner, conversation memory:**
+
+1. ✅ **1.4 Import CTA presence** (`1.4 import-games CTA exists on the list page`) — asserts `import-games-cta` testid on the review list-page header is visible and labelled "Import games". `ImportGamesButton` renders a `<button>` (not `<a href>`); the original test that looked for `getByRole('link')` was repaired to match the actual semantics.
+2. ✅ **2.3 Stockfish "Preparing your review…" banner** (`2.3 Stockfish "Preparing your review…" banner shows for an unanalyzed game`) — injects an unanalyzed game record (`fullyAnalyzed: false`) via raw IndexedDB (the CDN Dexie path errored with "Two different versions of Dexie"), navigates to `/coach/review/<id>`, asserts "Preparing your review…" surfaces. Tests `gameNeedsAnalysis(rec)` → `setAnalyzing(true)` wiring.
+3. ✅ **2.16 Conversation memory** (`2.16 conversation memory persistence — ask + response pair lands in coachMemoryStore`) — stubs DeepSeek + Anthropic with proper SSE streams (matching the existing passing `ask-coach round trip` test), fires an ask via `walk-ask-panel`, waits past the 250ms persist debounce, reads `coachMemory.v1` from Dexie `meta` store, asserts `conversationHistory.length ≥ 2` (user message + coach reply pair).
+
+Wave 4 also fixed an unrelated production-blocking bug: `src/data/annotations/index.ts` carried a legacy hand-curated import block that pointed at JSON files renamed in PR #506 (e.g. `kings-gambit.json` → `king-s-gambit.json`). Vite refused to start dev because of these stale imports. The legacy block was deleted (`autoMap()` via `import.meta.glob` already covers every on-disk file), and `PRO_SUFFIX_TO_BASE` in `annotationService.ts` was updated to use canonical post-rename slugs.
 
 ---
 

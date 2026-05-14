@@ -126,7 +126,7 @@ async function clearGames(page: Page): Promise<void> {
         tx.objectStore('games').clear();
         // Mark the sample-seeder as already-done so re-mounting the
         // list page doesn't re-seed.
-        tx.objectStore('meta').put({ key: 'review-samples-seeded.v3', value: 'true' });
+        tx.objectStore('meta').put({ key: 'review-samples-seeded.v4', value: 'true' });
         tx.oncomplete = () => resolve();
         tx.onerror = () => resolve();
       };
@@ -144,7 +144,7 @@ async function resetSeeder(page: Page): Promise<void> {
         const db = req.result;
         if (!db.objectStoreNames.contains('meta')) { resolve(); return; }
         const tx = db.transaction('meta', 'readwrite');
-        tx.objectStore('meta').delete('review-samples-seeded.v3');
+        tx.objectStore('meta').delete('review-samples-seeded.v4');
         tx.oncomplete = () => resolve();
         tx.onerror = () => resolve();
       };
@@ -783,6 +783,203 @@ test.describe('Review with Coach — full-play audit', () => {
     await page.waitForTimeout(2000);
     // Body still renders.
     await expect(page.locator('body')).toBeVisible();
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  // ── Wave 4 — close the remaining ❌ / 🟡 gaps from the contract ──
+
+  test('1.4 import-games CTA exists on the list page', async ({ page }) => {
+    const recorder = recordPage(page);
+    await gotoList(page);
+    // `ImportGamesButton variant="compact"` renders a <button> with
+    // testid `import-games-cta` and an onClick that navigates to
+    // /games/import. Verify the CTA is present and labelled as
+    // expected; clicking is exercised separately by the
+    // ImportGamesButton unit tests.
+    const importBtn = page.getByTestId('import-games-cta').first();
+    await expect(importBtn).toBeVisible({ timeout: 6000 });
+    await expect(importBtn).toHaveText(/import games/i);
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  test('2.3 Stockfish "Preparing your review…" banner shows for an unanalyzed game', async ({ page }) => {
+    const recorder = recordPage(page);
+    // Stub LLM endpoints (otherwise narration prep blocks the page).
+    await page.route(/api\.deepseek\.com|api\.anthropic\.com/, async (route) => {
+      const url = route.request().url();
+      if (url.includes('anthropic.com')) {
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            id: 'stub-msg', type: 'message', role: 'assistant',
+            content: [{ type: 'text', text: 'stub' }],
+            stop_reason: 'end_turn', usage: { input_tokens: 1, output_tokens: 1 },
+          }),
+        });
+      } else {
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            id: 'stub-chatcmpl', object: 'chat.completion',
+            choices: [{ index: 0, message: { role: 'assistant', content: 'stub' }, finish_reason: 'stop' }],
+            usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+          }),
+        });
+      }
+    });
+    // Visit the list page first so Dexie is ready, then inject an
+    // UNANALYZED game record via raw IndexedDB (loading a second
+    // Dexie from CDN errors with "Two different versions of Dexie"
+    // since the app already has 4.3.0 bound to the same DB).
+    // CoachReviewSessionPage's gameNeedsAnalysis(rec) returns true
+    // for any record missing `fullyAnalyzed: true`; the page sets
+    // `analyzing=true` and renders "Preparing your review…" while
+    // Stockfish runs.
+    await gotoList(page);
+    const injectedId = 'sample-unanalyzed-banner-test';
+    await page.evaluate(async (id) => {
+      await new Promise<void>((resolve, reject) => {
+        const req = indexedDB.open('ChessAcademyDB');
+        req.onsuccess = () => {
+          const db = req.result;
+          if (!db.objectStoreNames.contains('games')) {
+            reject(new Error('games store missing'));
+            return;
+          }
+          const tx = db.transaction('games', 'readwrite');
+          tx.objectStore('games').put({
+            id,
+            pgn: '[White "You"]\n[Black "opp"]\n[Result "1/2-1/2"]\n\n1. d4 d5 2. Nf3 Nf6 1/2-1/2',
+            white: 'You', black: 'opp', result: '1/2-1/2',
+            date: '2025-01-01', event: 'Test', eco: null,
+            whiteElo: 1500, blackElo: 1500, source: 'lichess',
+            annotations: null,
+            coachAnalysis: null,
+            isMasterGame: false,
+            openingId: null,
+            // KEY: missing/false `fullyAnalyzed` forces
+            // gameNeedsAnalysis() = true so the session page enters
+            // the analysis path.
+            fullyAnalyzed: false,
+          });
+          tx.oncomplete = () => resolve();
+          tx.onerror = () => reject(tx.error ?? new Error('put failed'));
+        };
+        req.onerror = () => reject(req.error ?? new Error('open failed'));
+      });
+    }, injectedId);
+
+    // Navigate to the unanalyzed game. The page should set
+    // `analyzing=true` on mount, rendering the banner with copy
+    // "Preparing your review…".
+    await page.goto(`/coach/review/${injectedId}`);
+    await expect(page.getByText(/preparing your review/i)).toBeVisible({ timeout: 8000 });
+    // The walk-ui is gated on the analysis completing — we don't wait
+    // for the full Stockfish analysis (slow + flaky in CI). Asserting
+    // the banner appears at all is sufficient to verify the
+    // gameNeedsAnalysis → setAnalyzing(true) path.
+    expect(recorder.pageErrors).toEqual([]);
+  });
+
+  test('2.16 conversation memory persistence — ask + response pair lands in coachMemoryStore', async ({ page }) => {
+    test.setTimeout(180_000);
+    const recorder = recordPage(page);
+    // CoachGameReview's ask path uses streaming (coachApi.ts —
+    // `stream: true`), so plain JSON responses never reach the UI.
+    // Build SSE chunks matching the OpenAI / Anthropic stream
+    // protocols (same shape used by the passing ask-coach test above).
+    const cannedAnswer = 'The b1-knight is best developed to c3, controlling e4 and d5.';
+    const openAiSse =
+      `data: ${JSON.stringify({ choices: [{ delta: { content: cannedAnswer } }] })}\n\n` +
+      `data: [DONE]\n\n`;
+    const anthropicSse =
+      `event: message_start\ndata: ${JSON.stringify({ type: 'message_start', message: { id: 'm', type: 'message', role: 'assistant', content: [], model: 'claude-haiku-4-5-20251001', stop_reason: null, stop_sequence: null, usage: { input_tokens: 1, output_tokens: 0 } } })}\n\n` +
+      `event: content_block_start\ndata: ${JSON.stringify({ type: 'content_block_start', index: 0, content_block: { type: 'text', text: '' } })}\n\n` +
+      `event: content_block_delta\ndata: ${JSON.stringify({ type: 'content_block_delta', index: 0, delta: { type: 'text_delta', text: cannedAnswer } })}\n\n` +
+      `event: content_block_stop\ndata: ${JSON.stringify({ type: 'content_block_stop', index: 0 })}\n\n` +
+      `event: message_delta\ndata: ${JSON.stringify({ type: 'message_delta', delta: { stop_reason: 'end_turn', stop_sequence: null }, usage: { output_tokens: 1 } })}\n\n` +
+      `event: message_stop\ndata: ${JSON.stringify({ type: 'message_stop' })}\n\n`;
+
+    // gotoSession registers a default JSON stub for intro narration;
+    // register the streaming stub AFTER so it wins for ask calls.
+    await gotoSession(page, 'sample-vienna-amateur-1');
+    await page.route(/api\.deepseek\.com|api\.anthropic\.com/, async (route) => {
+      const url = route.request().url();
+      if (url.includes('anthropic.com')) {
+        await route.fulfill({
+          status: 200,
+          contentType: 'text/event-stream',
+          headers: { 'cache-control': 'no-cache' },
+          body: anthropicSse,
+        });
+      } else {
+        await route.fulfill({
+          status: 200,
+          contentType: 'text/event-stream',
+          headers: { 'cache-control': 'no-cache' },
+          body: openAiSse,
+        });
+      }
+    });
+    // Expand the ask panel.
+    await expect(page.getByTestId('walk-ask-toggle-btn')).toBeVisible({ timeout: 5000 });
+    await page.getByTestId('walk-ask-toggle-btn').click();
+    await expect(page.getByTestId('walk-ask-panel')).toBeVisible({ timeout: 3000 });
+
+    // Type a question + send. The ChatInput's submit handler routes
+    // through coachService.ask({ surface: 'review' }) which mirrors
+    // the result into useCoachMemoryStore. Send button matches
+    // either "Send" text or aria-label depending on the build.
+    const askInput = page.locator('[data-testid="walk-ask-panel"] textarea, [data-testid="walk-ask-panel"] input').first();
+    await askInput.fill('Where should I develop my knight?');
+    await page.keyboard.press('Enter');
+
+    // Wait for the response area to land (text-content settled).
+    await expect(page.getByTestId('walk-ask-response')).toBeVisible({ timeout: 15_000 });
+    await page.waitForTimeout(800);
+
+    // Read the conversation memory store via page.evaluate.
+    // useCoachMemoryStore persists to Dexie via the meta store
+    // under key `coachMemory.v1` (see src/stores/coachMemoryStore.ts).
+    // The persist call is debounced (250ms) so we wait a beat past
+    // the request resolving before reading.
+    await page.waitForTimeout(500);
+    const memorySnapshot = await page.evaluate(async () => {
+      const reqOpen = indexedDB.open('ChessAcademyDB');
+      return new Promise<{ entryCount: number; sample: unknown[]; readError?: string }>((resolve) => {
+        reqOpen.onsuccess = (e) => {
+          const dbi = (e.target as IDBOpenDBRequest).result;
+          if (!Array.from(dbi.objectStoreNames).includes('meta')) {
+            resolve({ entryCount: 0, sample: [], readError: 'meta store missing' });
+            return;
+          }
+          const tx = dbi.transaction(['meta'], 'readonly');
+          const r = tx.objectStore('meta').get('coachMemory.v1');
+          r.onsuccess = () => {
+            const val = (r.result as { value?: string } | undefined)?.value;
+            try {
+              const parsed = val ? JSON.parse(val) : { conversationHistory: [] };
+              const hist = parsed?.conversationHistory ?? [];
+              resolve({ entryCount: hist.length, sample: hist.slice(-4) });
+            } catch (err) {
+              resolve({ entryCount: 0, sample: [], readError: String(err) });
+            }
+          };
+          r.onerror = () => resolve({ entryCount: 0, sample: [], readError: 'read failed' });
+        };
+        reqOpen.onerror = () => resolve({ entryCount: 0, sample: [], readError: 'open failed' });
+      });
+    });
+
+    // The ask panel writes to the conversation history; we expect at
+    // least the most recent user + assistant pair (2 entries).
+    expect(
+      memorySnapshot.entryCount,
+      `coach-memory.v2 conversationHistory should accumulate ask/response pairs (got: ${memorySnapshot.readError ?? 'no error'}); sample=${JSON.stringify(memorySnapshot.sample)}`,
+    ).toBeGreaterThanOrEqual(2);
+
     expect(recorder.pageErrors).toEqual([]);
   });
 });
