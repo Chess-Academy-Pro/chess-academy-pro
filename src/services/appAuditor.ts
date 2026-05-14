@@ -384,7 +384,17 @@ export type AuditKind =
   // fails to load. Hooked into ConsistentChessboard's overlay path so
   // the Phase 1.3 bishop-sprite report has a Network-tab-like trail
   // even from a non-DevTools session.
-  | 'asset-load-error';
+  | 'asset-load-error'
+  // /weaknesses (Game Insights) observability trail. The surface was
+  // observability-blind before this audit — zero audit hooks meant
+  // the audit stream couldn't see when the student refreshed the
+  // report, kicked off background analysis, or routed a search
+  // query. Each of these now fires a distinct kind so a "I tapped
+  // analyze and nothing happened" report has a record.
+  | 'weakness-report-refresh'
+  | 'weakness-report-analyze-kickoff'
+  | 'weakness-report-search-routed'
+  | 'weakness-report-search-fallback';
 
 export interface AuditEntry {
   timestamp: number;

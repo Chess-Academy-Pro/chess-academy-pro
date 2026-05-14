@@ -12,6 +12,7 @@ import { runBackgroundAnalysis } from '../../services/gameAnalysisService';
 import { ImportGamesButton } from '../Games/ImportGamesButton';
 import { useAppStore } from '../../stores/appStore';
 import { routeChatIntent } from '../../services/coachSessionRouter';
+import { logAppAudit } from '../../services/appAuditor';
 import { OverviewTab } from './OverviewTab';
 import { ShareableInsightsStrip } from './ShareableInsightsStrip';
 import { OpeningsTab } from './OpeningsTab';
@@ -82,6 +83,12 @@ export function GameInsightsPage(): JSX.Element {
   async function handleRefresh(): Promise<void> {
     if (refreshing) return;
     setRefreshing(true);
+    void logAppAudit({
+      kind: 'weakness-report-refresh',
+      category: 'subsystem',
+      source: 'GameInsightsPage.handleRefresh',
+      summary: 'manual refresh of all 4 tabs',
+    });
     await loadAll();
     setRefreshing(false);
   }
@@ -93,6 +100,12 @@ export function GameInsightsPage(): JSX.Element {
     // so the yellow top-of-app banner shows "Analyzing 3/12 — ..."
     // across every tab. The useEffect above reloads insights when the
     // run completes.
+    void logAppAudit({
+      kind: 'weakness-report-analyze-kickoff',
+      category: 'subsystem',
+      source: 'GameInsightsPage.handleAnalyze',
+      summary: 'student tapped "Analyze N games now" — background Stockfish run started',
+    });
     runBackgroundAnalysis();
   }
 
@@ -110,12 +123,26 @@ export function GameInsightsPage(): JSX.Element {
     try {
       const routed = await routeChatIntent(query);
       if (routed?.path) {
+        void logAppAudit({
+          kind: 'weakness-report-search-routed',
+          category: 'subsystem',
+          source: 'GameInsightsPage.handleSearch',
+          summary: `search "${query.slice(0, 60)}" → ${routed.path}`,
+          details: JSON.stringify({ query: query.slice(0, 200), routedTo: routed.path }),
+        });
         void navigate(routed.path);
         return;
       }
     } catch (err: unknown) {
       console.warn('[GameInsightsPage] intent routing failed:', err);
     }
+    void logAppAudit({
+      kind: 'weakness-report-search-fallback',
+      category: 'subsystem',
+      source: 'GameInsightsPage.handleSearch',
+      summary: `search "${query.slice(0, 60)}" → /coach/chat (no intent matched)`,
+      details: JSON.stringify({ query: query.slice(0, 200) }),
+    });
     void navigate(`/coach/chat?q=${encodeURIComponent(query)}`);
   }
 
