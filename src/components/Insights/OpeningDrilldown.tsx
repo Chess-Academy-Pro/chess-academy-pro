@@ -6,6 +6,7 @@ import { getGamesByOpening } from '../../services/gameInsightsService';
 import { reconstructMovesFromGame } from '../../services/gameReconstructionService';
 import { calculateAccuracy, getClassificationCounts } from '../../services/accuracyService';
 import { logAppAudit } from '../../services/appAuditor';
+import { useAppStore } from '../../stores/appStore';
 import { InsightsDonutChart } from './InsightsDonutChart';
 import { GameCard } from './GameCard';
 import type { OpeningAggregateStats, GameRecord } from '../../types';
@@ -28,9 +29,31 @@ interface GameCardData {
 
 const AI_NAMES = ['AI Coach', 'Stockfish Bot'];
 
-function getPlayerColor(game: GameRecord): 'white' | 'black' {
+/** Resolve which color the user played in a given game. Previously
+ *  this only checked AI_NAMES and defaulted to 'white' — silently
+ *  misclassified every imported game where the user was Black.
+ *  Now checks the three identity sources the rest of the app uses
+ *  (chess.com username + lichess username + profile name). */
+function getPlayerColor(
+  game: GameRecord,
+  identity: { profileName?: string; chessComUsername?: string; lichessUsername?: string },
+): 'white' | 'black' {
   if (AI_NAMES.includes(game.white)) return 'black';
   if (AI_NAMES.includes(game.black)) return 'white';
+  const candidates: string[] = [];
+  if (identity.chessComUsername) candidates.push(identity.chessComUsername.toLowerCase());
+  if (identity.lichessUsername) candidates.push(identity.lichessUsername.toLowerCase());
+  if (identity.profileName) candidates.push(identity.profileName.toLowerCase());
+  const whiteName = game.white.toLowerCase();
+  const blackName = game.black.toLowerCase();
+  for (const c of candidates) {
+    if (whiteName === c) return 'white';
+    if (blackName === c) return 'black';
+  }
+  for (const c of candidates) {
+    if (whiteName.includes(c)) return 'white';
+    if (blackName.includes(c)) return 'black';
+  }
   return 'white';
 }
 
@@ -42,6 +65,7 @@ function getResult(game: GameRecord, color: 'white' | 'black'): 'win' | 'loss' |
 
 export function OpeningDrilldown({ opening, onBack }: OpeningDrilldownProps): JSX.Element {
   const navigate = useNavigate();
+  const activeProfile = useAppStore((s) => s.activeProfile);
   const [games, setGames] = useState<GameCardData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -52,7 +76,11 @@ export function OpeningDrilldown({ opening, onBack }: OpeningDrilldownProps): JS
     }
     void getGamesByOpening(opening.eco).then((rawGames) => {
       const processed: GameCardData[] = rawGames.map((game) => {
-        const playerColor = getPlayerColor(game);
+        const playerColor = getPlayerColor(game, {
+          profileName: activeProfile?.name,
+          chessComUsername: activeProfile?.preferences.chessComUsername,
+          lichessUsername: activeProfile?.preferences.lichessUsername,
+        });
         let accuracy: number | null = null;
         let blunders = 0, mistakes = 0, inaccuracies = 0;
 
@@ -85,7 +113,11 @@ export function OpeningDrilldown({ opening, onBack }: OpeningDrilldownProps): JS
       setGames(processed);
       setLoading(false);
     });
-  }, [opening.eco]);
+    // activeProfile is read inside the .then() callback above for
+    // playerColor inference; deps include it so a username change
+    // re-resolves the orientation correctly.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [opening.eco, activeProfile?.name, activeProfile?.preferences.chessComUsername, activeProfile?.preferences.lichessUsername]);
 
   const wldData = [
     { name: 'Wins', value: opening.wins, color: 'var(--color-success)' },
