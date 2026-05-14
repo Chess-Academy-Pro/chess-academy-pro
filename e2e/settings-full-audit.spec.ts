@@ -150,11 +150,20 @@ test.beforeAll(async () => {
     audit('R2', 'B1 masterAllOff restore hint', 'FAIL', 'No hint about prior-value restore.');
   }
 
-  // R3a: Coach Detail → Speech Pace
-  if (/label="Speech Pace"/.test(settingsPage)) {
-    audit('R3a', 'C8 Speech Pace label', 'PASS', 'Renamed from "Coach Detail" to "Speech Pace".');
+  // R3a (superseded by the parallel "unified Coach Narration" PR
+  // d5842b8): the old "Coach Detail" → "Speech Pace" relabel targeted
+  // the `coachVerbosity` <select>, which has now been DELETED from the
+  // UI in favor of a single `Coach Narration` (silent/brief/full)
+  // dropdown that supersedes coachVerbosity + coachCommentaryVerbosity
+  // + phaseNarrationVerbosity. The legacy pref fields stay in
+  // UserPreferences as a migration fallback for older profiles. Static
+  // check now verifies the unified label exists.
+  if (/label="Coach Narration"/.test(settingsPage)) {
+    audit('R3a', 'Unified "Coach Narration" select replaces 3 legacy controls', 'PASS',
+      'Single Coach Narration dropdown (silent/brief/full) replaces coachVerbosity + coachCommentaryVerbosity + phaseNarrationVerbosity.');
   } else {
-    audit('R3a', 'C8 Speech Pace label', 'FAIL', 'Old "Coach Detail" label still present.');
+    audit('R3a', 'Unified "Coach Narration" select replaces 3 legacy controls', 'FAIL',
+      'Expected unified "Coach Narration" label not found in SettingsPage.');
   }
 
   // R3b: PersonalityPanel "Verbosity" → "Response Length"
@@ -171,11 +180,22 @@ test.beforeAll(async () => {
     audit('R4', 'C24 Polly priority label', 'FAIL', 'Polly toggle still uses old on/off wording.');
   }
 
-  // R5: speech-pace tooltip mentions silencing via None
-  if (/Pick None to fully silence the coach/.test(settingsPage)) {
-    audit('R5', 'C8 silence-via-None hint', 'PASS', 'Speech Pace tooltip mentions None silences coach.');
+  // R5 (superseded by d5842b8): the unified Coach Narration dropdown
+  // makes the silencer path explicit by structure rather than tooltip
+  // hint — picking "Silent" silences the coach across every surface
+  // via `resolveCoachNarration()` at the voiceService entry points.
+  // Static check now verifies the resolver is wired into the speak
+  // path so "Silent" actually silences (not just persists).
+  const voiceService = await fs.readFile(
+    path.join(REPO_ROOT, 'src/services/voiceService.ts'),
+    'utf-8',
+  );
+  if (/resolveCoachNarration/.test(voiceService)) {
+    audit('R5', 'Coach Narration "silent" wired through voiceService', 'PASS',
+      'voiceService.ts imports resolveCoachNarration so "silent" is honored at the speak() entry point.');
   } else {
-    audit('R5', 'C8 silence-via-None hint', 'FAIL', 'No mention of None as silencer.');
+    audit('R5', 'Coach Narration "silent" wired through voiceService', 'FAIL',
+      'voiceService.ts does not appear to call resolveCoachNarration; "silent" may not actually silence.');
   }
 
   // R6: Supabase URL + userId now encrypted on save
@@ -401,13 +421,20 @@ test.describe('Settings full audit', () => {
         v1 === true && v2 === false ? 'masterAllOff toggles to true and back to false.' : `v1=${v1} v2=${v2}`);
     }
 
-    // B2–B27 quick toggle/select sweep
+    // B-series quick toggle/select sweep. B6 (boardOrientation), B26
+    // (moveConfirmation), B27 (autoPromoteQueen) were SCRAPPED from
+    // the UI in d5842b8 (parallel session) — boardOrientation fought
+    // the per-game studentSide logic, moveConfirmation needed a
+    // confirm-overlay flow that doesn't exist yet, autoPromoteQueen
+    // needed a promotion-picker modal that doesn't exist yet. The
+    // pref fields stay in UserPreferences for migration. The audit
+    // simply drops those rows now that there's no UI control for
+    // them; if those flows ever ship a UI again, re-add the rows.
     const boardRows: Array<[string, string, string, unknown]> = [
       ['B2', 'highlight-last-move-toggle', 'highlightLastMove', false],
       ['B3', 'show-legal-moves-toggle', 'showLegalMoves', false],
       ['B4', 'show-coordinates-toggle', 'showCoordinates', false],
       ['B5', 'animation-speed-select', 'pieceAnimationSpeed', 'slow'],
-      ['B6', 'board-orientation-toggle', 'boardOrientation', false],
       ['B7', 'board-color-select', 'boardColor', 'green'],
       ['B8', 'piece-set-select', 'pieceSet', 'neo'],
       ['B14', 'sound-toggle', 'soundEnabled', false],
@@ -417,8 +444,6 @@ test.describe('Settings full audit', () => {
       ['B23', 'show-hints-toggle', 'showHints', false],
       ['B24', 'voice-narration-toggle', 'voiceEnabled', false],
       ['B25', 'move-method-select', 'moveMethod', 'click'],
-      ['B26', 'move-confirmation-toggle', 'moveConfirmation', true],
-      ['B27', 'auto-promote-queen-toggle', 'autoPromoteQueen', false],
     ];
     for (const [id, testid, prefKey, target] of boardRows) {
       const el = page.getByTestId(testid);
@@ -595,28 +620,41 @@ test.describe('Settings full audit', () => {
       await page.waitForTimeout(400);
     }
 
-    // C8: Speech Pace
+    // C-NARR: unified Coach Narration select (silent/brief/full).
+    // Replaces the legacy C8/C9/C30 rows that targeted three
+    // independent verbosity controls (coachVerbosity,
+    // coachCommentaryVerbosity, phaseNarrationVerbosity). All three
+    // were removed from the UI in d5842b8; their pref fields remain
+    // in UserPreferences only so resolveCoachNarration() can derive
+    // a fallback for older profiles. The new dropdown writes
+    // `coachNarration` and is honored at every voiceService entry
+    // point (speakInternal / speakFast / speakQueuedForced).
     const gameplayRow = page.getByTestId('gameplay-coaching-row');
     if (await safeBool(() => gameplayRow.isVisible({ timeout: 1500 }), false)) {
       await gameplayRow.click();
       await page.waitForTimeout(400);
-      const pace = page.getByTestId('coach-verbosity-select');
-      if (await safeBool(() => pace.isVisible({ timeout: 500 }), false)) {
-        await pace.selectOption('none');
-        const v = await waitForPref(page, 'coachVerbosity', (x: string) => x === 'none');
-        audit('C8', 'Speech Pace (silencer)',
-          v === 'none' ? 'PASS' : 'WARN',
-          v === 'none' ? `coachVerbosity='none' persisted (R5 silencer path).` : `Got ${v}.`);
-      }
-
-      // C9: Commentary frequency
-      const freq = page.getByTestId('coach-commentary-verbosity-select');
-      if (await safeBool(() => freq.isVisible({ timeout: 500 }), false)) {
-        await freq.selectOption('off');
-        const v = await waitForPref(page, 'coachCommentaryVerbosity', (x: string) => x === 'off');
-        audit('C9', 'Commentary frequency',
-          v === 'off' ? 'PASS' : 'WARN',
-          v === 'off' ? `coachCommentaryVerbosity='off' persisted.` : `Got ${v}.`);
+      const narration = page.getByTestId('coach-narration-select');
+      if (await safeBool(() => narration.isVisible({ timeout: 500 }), false)) {
+        // Cycle silent → brief → full and verify persistence each time
+        // so we catch any partial-coverage bug in the new resolver.
+        await narration.selectOption('silent');
+        const vSilent = await waitForPref(page, 'coachNarration', (x: string) => x === 'silent');
+        await narration.selectOption('brief');
+        const vBrief = await waitForPref(page, 'coachNarration', (x: string) => x === 'brief');
+        await narration.selectOption('full');
+        const vFull = await waitForPref(page, 'coachNarration', (x: string) => x === 'full');
+        const allOk = vSilent === 'silent' && vBrief === 'brief' && vFull === 'full';
+        audit('C-NARR', 'Coach Narration (unified silent/brief/full)',
+          allOk ? 'PASS' : 'FAIL',
+          allOk
+            ? `coachNarration persists across all three values: silent → brief → full.`
+            : `silent=${vSilent} brief=${vBrief} full=${vFull}`);
+        // Leave on 'silent' so downstream voice rows can verify the
+        // silencer path. The resolver is checked statically by R5.
+        await narration.selectOption('silent');
+        await page.waitForTimeout(200);
+      } else {
+        audit('C-NARR', 'Coach Narration select', 'FAIL', 'coach-narration-select not visible inside gameplay modal.');
       }
 
       // C10–C14: Gameplay coaching toggles
@@ -641,7 +679,7 @@ test.describe('Settings full audit', () => {
           after !== undefined ? `${prefKey}: ${before} → ${after}.` : `No change observed (before=${before}).`);
       }
     } else {
-      audit('C8', 'Gameplay coaching row', 'SKIP', 'gameplay-coaching-row not visible.');
+      audit('C-NARR', 'Gameplay coaching row', 'SKIP', 'gameplay-coaching-row not visible.');
     }
 
     // Close gameplay modal via its close button.
@@ -772,15 +810,9 @@ test.describe('Settings full audit', () => {
         v === 1.25 ? 'voiceSpeed=1.25 persisted.' : `Got ${v}.`);
     }
 
-    // C30: Phase narration
-    const phaseNarr = page.getByTestId('phase-narration-verbosity-select');
-    if (await safeBool(() => phaseNarr.isVisible({ timeout: 500 }), false)) {
-      await phaseNarr.selectOption('off');
-      const v = await waitForPref(page, 'phaseNarrationVerbosity', (x: string) => x === 'off');
-      audit('C30', 'Phase narration',
-        v === 'off' ? 'PASS' : 'WARN',
-        v === 'off' ? `phaseNarrationVerbosity='off' persisted.` : `Got ${v}.`);
-    }
+    // C30 (phase-narration-verbosity-select) was removed from the UI
+    // in d5842b8 — folded into the unified Coach Narration setting
+    // covered by C-NARR above. No row to add here.
 
     // ───────────── ABOUT TAB ───────────────────────────────────────
     logEvent('--- About tab ---');
