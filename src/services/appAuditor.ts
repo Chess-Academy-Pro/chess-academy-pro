@@ -395,6 +395,14 @@ export type AuditKind =
   | 'weakness-report-analyze-kickoff'
   | 'weakness-report-search-routed'
   | 'weakness-report-search-fallback'
+  // ─── Tactics tab (TACTICS_SHOULD_WORK.md) ────────────────────────────
+  // Mirrors the F1 fix from PR #504 (zero `logAppAudit` calls in
+  // /weaknesses) — same disease applied across all 11 tactics
+  // surfaces. The audit-stream live-watch couldn't see any tactics
+  // interactions before this. One generic kind covers every surface
+  // and step; the `source` field carries the specific surface +
+  // action so downstream consumers can slice.
+  | 'tactics-surface-event'
   // ─── Analytics backbone (ANALYTICS_AUDIT.md, Tier 1-3) ───────────────
   // The audit log already captures forensic events; these kinds carry
   // the *analytic* signal a coach brain or weakness/strength report

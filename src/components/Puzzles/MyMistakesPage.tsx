@@ -11,6 +11,7 @@ import {
   type ReanalysisProgress,
 } from '../../services/mistakePuzzleService';
 import { ArrowLeft, Trash2, AlertTriangle, Trophy, CheckCircle, CircleDot, RefreshCw, BookOpen, Swords, Crown } from 'lucide-react';
+import { logAppAudit } from '../../services/appAuditor';
 import type { MistakePuzzle, MistakeClassification, MistakePuzzleSourceMode, MistakePuzzleStatus, MistakeGamePhase } from '../../types';
 
 type ClassificationFilter = MistakeClassification | 'all';
@@ -73,6 +74,22 @@ export function MyMistakesPage(): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [analyzing, setAnalyzing] = useState(false);
   const [analysisProgress, setAnalysisProgress] = useState<ReanalysisProgress | null>(null);
+
+  // Mount audit — adds observability so the audit-stream can see
+  // when the user opens the mistakes browser. Was zero-coverage
+  // before this commit.
+  useEffect(() => {
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'MyMistakesPage.mount',
+      summary: 'mistakes browser opened',
+      details: JSON.stringify({
+        initialPhase: navState.initialPhase ?? 'all',
+        initialClassification: navState.initialClassification ?? 'all',
+      }),
+    });
+  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadData = useCallback(async () => {
     const [allPuzzles, puzzleStats] = await Promise.all([

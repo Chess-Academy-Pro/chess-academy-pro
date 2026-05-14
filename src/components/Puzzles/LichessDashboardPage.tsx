@@ -9,6 +9,7 @@ import {
   getWeakestThemesFromDashboard,
   formatThemeName,
 } from '../../services/lichessPuzzleService';
+import { logAppAudit } from '../../services/appAuditor';
 import type { LichessPuzzleDashboard, LichessPuzzleActivityEntry } from '../../types';
 
 export function LichessDashboardPage(): JSX.Element {
@@ -24,6 +25,19 @@ export function LichessDashboardPage(): JSX.Element {
   const tokenEncrypted = activeProfile?.preferences.lichessTokenEncrypted;
   const tokenIv = activeProfile?.preferences.lichessTokenIv;
   const hasToken = Boolean(tokenEncrypted && tokenIv);
+
+  // Mount audit — observability for the audit stream. Includes
+  // the token-present flag so the audit-stream can distinguish
+  // empty-token-CTA hits from authenticated dashboard hits.
+  useEffect(() => {
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'LichessDashboardPage.mount',
+      summary: hasToken ? 'lichess dashboard opened (token present)' : 'lichess dashboard opened (no token)',
+      details: JSON.stringify({ hasToken }),
+    });
+  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadData = useCallback(async (): Promise<void> => {
     if (!tokenEncrypted || !tokenIv) return;
@@ -127,9 +141,10 @@ export function LichessDashboardPage(): JSX.Element {
       {/* Header */}
       <div className="flex items-center gap-3">
         <button
-          onClick={() => void navigate('/weaknesses')}
+          onClick={() => void navigate('/tactics')}
           className="p-2 rounded-lg hover:bg-theme-surface transition-colors"
-          aria-label="Back"
+          aria-label="Back to Tactics"
+          data-testid="back-btn"
         >
           <ArrowLeft size={18} className="text-theme-text" />
         </button>

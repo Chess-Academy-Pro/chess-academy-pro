@@ -5,6 +5,7 @@ import { ArrowLeft, Wrench, ChevronRight, ChevronLeft } from 'lucide-react';
 import { buildSetupPuzzleQueue, gradeSetupPuzzle } from '../../services/tacticSetupService';
 import { tacticTypeLabel, tacticTypeIcon } from '../../services/tacticalProfileService';
 import { TacticSetupBoard } from './TacticSetupBoard';
+import { logAppAudit } from '../../services/appAuditor';
 import type { SetupPuzzle, SetupPuzzleDifficulty } from '../../types';
 
 type Phase = 'select' | 'loading' | 'solving' | 'summary';
@@ -28,6 +29,12 @@ export function TacticSetupPage(): JSX.Element {
   const handleSelectDifficulty = useCallback(async (d: SetupPuzzleDifficulty): Promise<void> => {
     setDifficulty(d);
     setPhase('loading');
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'TacticSetupPage.difficulty-selected',
+      summary: `setup-trainer started at difficulty=${d}`,
+    });
     const puzzles = await buildSetupPuzzleQueue(10, d);
     if (puzzles.length === 0) {
       setQueue([]);

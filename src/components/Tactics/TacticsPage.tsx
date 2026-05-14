@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, AlertTriangle, Shuffle, Trophy, Wrench, Crosshair } from 'lucide-react';
 import { useAppStore } from '../../stores/appStore';
@@ -5,6 +6,7 @@ import { SmartSearchBar } from '../Search/SmartSearchBar';
 import { THEME_MAP } from '../../services/puzzleService';
 import { useSettings } from '../../hooks/useSettings';
 import { scaledShadow } from '../../utils/neonColors';
+import { logAppAudit } from '../../services/appAuditor';
 
 // ─── Theme Category Definitions ──────────────────────────────────────────
 
@@ -80,7 +82,44 @@ export function TacticsPage(): JSX.Element {
   const gB = settings.glowBrightness;
   const gS = gB / 100;
 
-  if (!activeProfile) return <></>;
+  // Hub-visit signal so the audit stream can attribute downstream
+  // surface events to the entry path through /tactics. Mirrors the
+  // F1 fix from PR #504 on /weaknesses where the whole tab was
+  // observability-blind.
+  useEffect(() => {
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'TacticsPage.mount',
+      summary: 'tactics hub opened',
+    });
+  }, []);
+
+  const handleNavigate = (route: string, label: string, state?: Record<string, unknown>): void => {
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: `TacticsPage.tap.${label}`,
+      summary: `hub tile "${label}" → ${route}`,
+      details: state ? JSON.stringify({ route, state }) : JSON.stringify({ route }),
+    });
+    void navigate(route, state ? { state } : undefined);
+  };
+
+  if (!activeProfile) {
+    // Render a loading state instead of silent empty render — the
+    // previous behavior left users staring at a blank page during
+    // profile bootstrapping (SHOULD-WORK clause 1).
+    return (
+      <div
+        className="flex items-center justify-center p-6 flex-1 text-sm"
+        style={{ color: 'var(--color-text-muted)' }}
+        data-testid="tactics-page-loading"
+      >
+        Loading tactics…
+      </div>
+    );
+  }
 
   return (
     <div
@@ -107,7 +146,7 @@ export function TacticsPage(): JSX.Element {
           return (
             <button
               key={btn.key}
-              onClick={() => void navigate(btn.route, btn.state ? { state: btn.state } : undefined)}
+              onClick={() => handleNavigate(btn.route, btn.label, btn.state)}
               className={`${btn.colSpan ? 'col-span-2' : ''} ${btn.py} ${btn.bgColor} rounded-2xl flex flex-col items-center justify-center gap-3 transition-all duration-200`}
               style={{ ...neonBorderStyle(btn.rgb, gS), boxShadow: shadow }}
               onMouseEnter={(e) => { applyHoverBorder(e.currentTarget, btn.rgb, gS); e.currentTarget.style.boxShadow = shadowHover; }}
@@ -133,8 +172,8 @@ export function TacticsPage(): JSX.Element {
           // Lichess corpus).
           const onClick =
             card.label === 'Opening Traps'
-              ? () => void navigate('/tactics/opening-traps')
-              : () => void navigate('/tactics/drill', { state: { filterThemes: card.themes } });
+              ? () => handleNavigate('/tactics/opening-traps', card.label)
+              : () => handleNavigate('/tactics/drill', card.label, { filterThemes: card.themes });
           return (
             <button
               key={card.label}
@@ -159,7 +198,7 @@ export function TacticsPage(): JSX.Element {
           return (
             <button
               key={btn.key}
-              onClick={() => void navigate(btn.route)}
+              onClick={() => handleNavigate(btn.route, btn.label)}
               className={`col-span-2 py-6 ${btn.bgColor} rounded-2xl flex flex-col items-center justify-center gap-3 transition-all duration-200`}
               style={{ ...neonBorderStyle(btn.rgb, gS), boxShadow: shadow }}
               onMouseEnter={(e) => { applyHoverBorder(e.currentTarget, btn.rgb, gS); e.currentTarget.style.boxShadow = shadowHover; }}

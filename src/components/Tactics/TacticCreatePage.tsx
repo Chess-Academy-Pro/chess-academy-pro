@@ -14,6 +14,7 @@ import { gradeMistakePuzzle } from '../../services/mistakePuzzleService';
 import { updatePuzzleRating } from '../../services/puzzleService';
 import { tacticTypeLabel, tacticTypeIcon } from '../../services/tacticalProfileService';
 import { voiceService } from '../../services/voiceService';
+import { logAppAudit } from '../../services/appAuditor';
 import {
   createIntro,
   createReplayNarration,
@@ -41,6 +42,18 @@ export function TacticCreatePage(): JSX.Element {
   const setActiveProfile = useAppStore((s) => s.setActiveProfile);
 
   const filterTypes = (location.state as { filterTypes?: TacticType[] } | null)?.filterTypes;
+
+  // Mount audit — observability for the tactics-tab audit stream
+  // (mirrors the F1 fix from PR #504 on /weaknesses).
+  useEffect(() => {
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'TacticCreatePage.mount',
+      summary: 'tactic-create surface opened',
+      details: filterTypes ? JSON.stringify({ filterTypes }) : undefined,
+    });
+  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
   const [phase, setPhase] = useState<Phase>('loading');
   const [queue, setQueue] = useState<TacticCreateItem[]>([]);

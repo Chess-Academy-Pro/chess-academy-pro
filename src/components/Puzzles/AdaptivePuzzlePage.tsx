@@ -18,6 +18,7 @@ import type {
 import type { PuzzleRecord } from '../../types';
 import type { PuzzleOutcome } from './PuzzleBoard';
 import { voiceService } from '../../services/voiceService';
+import { logAppAudit } from '../../services/appAuditor';
 import { DifficultySelector } from './DifficultySelector';
 import { PuzzleBoard } from './PuzzleBoard';
 import { AdaptiveSessionPanel } from './AdaptiveSessionPanel';
@@ -40,6 +41,20 @@ export function AdaptivePuzzlePage(): JSX.Element {
   const navigate = useNavigate();
   const forcedWeakThemes = (location.state as { forcedWeakThemes?: string[] } | null)?.forcedWeakThemes;
   const autoStartedRef = useRef(false);
+
+  // Mount audit — see PR #504 F1 fix lineage; tactics tab was
+  // observability-blind to the audit stream before this.
+  useEffect(() => {
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'AdaptivePuzzlePage.mount',
+      summary: forcedWeakThemes && forcedWeakThemes.length > 0
+        ? `adaptive opened with forced weak themes (${forcedWeakThemes.length})`
+        : 'adaptive opened (manual entry)',
+      details: forcedWeakThemes ? JSON.stringify({ forcedWeakThemes }) : undefined,
+    });
+  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
   const [phase, setPhase] = useState<Phase>('select');
   const [session, setSession] = useState<AdaptiveSessionState | null>(null);

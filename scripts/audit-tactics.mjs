@@ -80,7 +80,7 @@ async function main() {
 
   const report = { base: BASE_URL, startedAt: stamp, scenarios: [] };
 
-  async function scenario(name, action, settleMs, expectations = []) {
+  async function scenario(name, action, settleMs, expectations = [], expectedEventKinds = []) {
     const before = captured.length;
     const errsBefore = pageErrors.length;
     const consBefore = consoleErrors.length;
@@ -104,8 +104,21 @@ async function main() {
       return acc;
     }, {});
     const url = page.url();
+    // Auto-expand `expectedEventKinds` into pass/fail checks. This is
+    // the SHOULD-WORK contract's audit-trail row enforcement — if a
+    // surface CLAIMS to emit `tactics-surface-event` but the stream
+    // never sees one during this scenario, the audit catches the
+    // missing emit. Mirrors PR #504's F1 fix: zero audit emits in
+    // /weaknesses caught the same way.
+    const effectiveExpectations = [
+      ...expectations,
+      ...expectedEventKinds.map((kind) => ({
+        label: `audit-stream saw kind="${kind}"`,
+        fn: () => fresh.some((e) => e?.kind === kind),
+      })),
+    ];
     const checks = [];
-    for (const exp of expectations) {
+    for (const exp of effectiveExpectations) {
       try {
         const ok = await exp.fn();
         checks.push({ label: exp.label, ok: !!ok, detail: exp.detail });
@@ -975,6 +988,26 @@ async function main() {
   }
   report.failedChecks = failed;
 
+  // SHOULD-WORK contract enforcement: audit-hook coverage on every
+  // /tactics/* surface. Iterate scenarios; for any whose final URL
+  // matches a tactics surface, verify at least one
+  // `tactics-surface-event` was emitted during the scenario. This is
+  // the F1-lineage check (PR #504) — pre-fix, every row here would
+  // FAIL because the tactics tab had zero `logAppAudit` emit sites.
+  const TACTICS_URL_RX = /\/tactics(\/|$|\?)/;
+  const auditCoverageGaps = report.scenarios
+    .filter((s) => s.url && TACTICS_URL_RX.test(s.url))
+    .filter((s) => !(s.kindCounts && s.kindCounts['tactics-surface-event'] >= 1))
+    .map((s) => ({
+      scenario: s.name,
+      url: s.url,
+      reason: 'no tactics-surface-event seen during scenario',
+    }));
+  report.auditCoverageGaps = auditCoverageGaps;
+  for (const g of auditCoverageGaps) {
+    failed.push({ scenario: g.scenario, label: 'audit-hook coverage', error: g.reason });
+  }
+
   await writeFile(join(OUT_DIR, 'report.json'), JSON.stringify(report, null, 2));
 
   const allChecks = report.scenarios.reduce((n, s) => n + (s.checks?.length ?? 0), 0);
@@ -989,12 +1022,19 @@ async function main() {
     `Console errors: ${consoleErrors.length}`,
     `Page errors: ${pageErrors.length}`,
     `Runtime-error audit events: ${report.runtimeErrorEvents.length}`,
+    `Tactics surfaces with audit-stream coverage: ${report.scenarios.filter((s) => s.url && /\/tactics(\/|$|\?)/.test(s.url) && s.kindCounts && s.kindCounts['tactics-surface-event'] >= 1).length} / ${report.scenarios.filter((s) => s.url && /\/tactics(\/|$|\?)/.test(s.url)).length}`,
     ``,
     `## Failures`,
     ``,
   ];
   if (failed.length === 0) md.push('_None._');
   else for (const f of failed) md.push(`- **${f.scenario}** — ${f.label}${f.error ? ` — \`${String(f.error).slice(0, 200)}\`` : ''}`);
+  if (auditCoverageGaps.length > 0) {
+    md.push(``, `## Audit-hook coverage gaps`, ``);
+    md.push(`These scenarios reached a /tactics surface but no \`tactics-surface-event\` was emitted during the run — observability gap, see TACTICS_SHOULD_WORK.md.`);
+    md.push(``);
+    for (const g of auditCoverageGaps) md.push(`- **${g.scenario}** — ${g.url}`);
+  }
   await writeFile(join(OUT_DIR, 'report.md'), md.join('\n'));
 
   console.log(`\n[tactics] DONE — ${passed}/${allChecks} checks passed`);

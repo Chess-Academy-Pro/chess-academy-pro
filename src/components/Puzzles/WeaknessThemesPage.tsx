@@ -9,6 +9,7 @@ import {
 import { getAllMistakePuzzles } from '../../services/mistakePuzzleService';
 import { gradeMistakePuzzle } from '../../services/mistakePuzzleService';
 import { MistakePuzzleBoard } from './MistakePuzzleBoard';
+import { logAppAudit } from '../../services/appAuditor';
 import type { WeaknessTheme, WeaknessDrillItem } from '../../types';
 
 type Phase = 'loading' | 'themes' | 'drilling' | 'summary';
@@ -47,6 +48,16 @@ export function WeaknessThemesPage(): JSX.Element {
   const [failed, setFailed] = useState(0);
   const [activeTheme, setActiveTheme] = useState<string | null>(null);
   const [completedSet] = useState(() => new Set<number>());
+
+  // Mount audit — F1-lineage observability for the audit stream.
+  useEffect(() => {
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'WeaknessThemesPage.mount',
+      summary: 'weakness-themes detection page opened',
+    });
+  }, []);
 
   const loadThemes = useCallback(async (): Promise<void> => {
     setPhase('loading');

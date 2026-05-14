@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, RefreshCw, Play, Eye, ChevronRight } from 'lucide-react';
 import { getThemeSkills, THEME_MAP } from '../../services/puzzleService';
 import type { ThemeSkill } from '../../services/puzzleService';
+import { logAppAudit } from '../../services/appAuditor';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -68,13 +69,27 @@ export function TacticalProfilePage(): JSX.Element {
 
   useEffect(() => {
     setLoading(true);
-    void loadProfile().finally(() => setLoading(false));
+    void loadProfile().finally(() => {
+      setLoading(false);
+      void logAppAudit({
+        kind: 'tactics-surface-event',
+        category: 'subsystem',
+        source: 'TacticalProfilePage.mount',
+        summary: 'tactical profile loaded',
+      });
+    });
   }, [loadProfile]);
 
   const handleRefresh = useCallback(async (): Promise<void> => {
     setRefreshing(true);
     await loadProfile();
     setRefreshing(false);
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'TacticalProfilePage.refresh',
+      summary: 'manual refresh',
+    });
   }, [loadProfile]);
 
   const totalAttempts = categories.reduce((sum, c) => sum + c.attempts, 0);

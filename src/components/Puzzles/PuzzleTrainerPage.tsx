@@ -14,6 +14,7 @@ import { useSolveTimer } from '../../hooks/useSolveTimer';
 import { voiceService } from '../../services/voiceService';
 import { ArrowLeft, Brain, SkipForward } from 'lucide-react';
 import { db } from '../../db/schema';
+import { logAppAudit } from '../../services/appAuditor';
 
 type SessionPhase = 'mode_select' | 'solving' | 'grading' | 'complete';
 
@@ -33,6 +34,16 @@ export function PuzzleTrainerPage(): JSX.Element {
   const setActiveProfile = useAppStore((s) => s.setActiveProfile);
   const [phase, setPhase] = useState<SessionPhase>('mode_select');
   const [session, setSession] = useState<SessionState | null>(null);
+
+  // Mount audit — F1-lineage observability fix for the tactics tab.
+  useEffect(() => {
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'PuzzleTrainerPage.mount',
+      summary: 'classic puzzle trainer opened (mode_select)',
+    });
+  }, []);
   const [stats, setStats] = useState<PuzzleStats | null>(null);
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerKey, setTimerKey] = useState(0);

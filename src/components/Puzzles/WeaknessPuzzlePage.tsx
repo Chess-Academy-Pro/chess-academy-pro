@@ -11,6 +11,7 @@ import { PuzzleBoard } from './PuzzleBoard';
 import type { PuzzleOutcome } from './PuzzleBoard';
 import { MistakePuzzleBoard } from './MistakePuzzleBoard';
 import type { WeaknessPuzzleItem } from '../../services/weaknessPuzzleService';
+import { logAppAudit } from '../../services/appAuditor';
 
 type Phase = 'loading' | 'solving' | 'summary';
 
@@ -32,6 +33,12 @@ export function WeaknessPuzzlePage(): JSX.Element {
 
   useEffect(() => {
     void loadQueue();
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'WeaknessPuzzlePage.mount',
+      summary: 'weakness-puzzle queue opened',
+    });
   }, []);
 
   async function loadQueue(): Promise<void> {

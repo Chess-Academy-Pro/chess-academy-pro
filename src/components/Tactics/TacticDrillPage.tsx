@@ -13,6 +13,7 @@ import { PuzzleBoard } from '../Puzzles/PuzzleBoard';
 import type { PuzzleOutcome } from '../Puzzles/PuzzleBoard';
 import type { PuzzleRecord } from '../../types';
 import { db } from '../../db/schema';
+import { logAppAudit } from '../../services/appAuditor';
 
 type Phase = 'loading' | 'solving' | 'summary';
 
@@ -87,6 +88,13 @@ export function TacticDrillPage(): JSX.Element {
     setSolved(0);
     setFailed(0);
     setRatingDelta(null);
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'TacticDrillPage.session-start',
+      summary: `drill started at rating ${startRating} themes=[${lichessThemes.slice(0, 4).join(',')}]`,
+      details: JSON.stringify({ startRating, themes: lichessThemes }),
+    });
 
     const puzzle = await getPuzzleForThemeAtRating(lichessThemes, startRating, seenIdsRef.current);
     if (!puzzle) {
@@ -110,6 +118,20 @@ export function TacticDrillPage(): JSX.Element {
 
     const puzzle = puzzleHistory[currentIndex];
     if (!puzzle) return;
+
+    void logAppAudit({
+      kind: 'tactics-surface-event',
+      category: 'subsystem',
+      source: 'TacticDrillPage.puzzle-graded',
+      summary: `puzzle ${currentIndex + 1}/${DRILL_SIZE} ${outcome.correct ? 'solved' : 'failed'} in ${outcome.solveTimeMs}ms`,
+      details: JSON.stringify({
+        puzzleId: puzzle.id,
+        correct: outcome.correct,
+        solveTimeMs: outcome.solveTimeMs,
+        usedHint: outcome.usedHint,
+        hadRetry: outcome.hadRetry,
+      }),
+    });
 
     // Determine adaptive rating bump
     const isClean = outcome.correct && !outcome.usedHint && !outcome.hadRetry && !outcome.showedSolution;
