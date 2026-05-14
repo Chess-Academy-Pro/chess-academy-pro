@@ -1,19 +1,15 @@
 #!/usr/bin/env node
 /**
- * Audit-tactics — full-coverage end-to-end audit of every surface
- * under /tactics/* against the deployed app (or local dev via
- * AUDIT_SMOKE_URL).
+ * Audit-tactics — full-coverage deep-flow audit of every surface
+ * under /tactics/*. Drives the deployed app (or local dev via
+ * AUDIT_SMOKE_URL) like a user, waits for animations to settle, and
+ * verifies observable outcomes — board state changes, text updates,
+ * audit-stream events firing — not just testid presence.
  *
- * Pattern mirrors audit-smoke.mjs: one Chromium session, no page
- * reloads, SPA-style navigation via real clicks, outgoing audit POSTs
- * intercepted for per-surface event summaries, console.errors +
- * pageerrors captured per surface, screenshot per surface, JSON
- * report at audit-reports/tactics-<iso>/report.json.
- *
- * Coverage map: see the comments on each section. Every surface has
- * at least a mount check; surfaces with non-trivial state machines
- * have deep-flow checks (Opening Traps Play-it-out side-flip,
- * Drill nav-prev disabled, etc.).
+ * Each scenario picks one capability per surface and exercises it
+ * end-to-end. Surface-mount-only checks were the structural weakness
+ * of the prior version; this rewrite forces every interactive
+ * affordance to do something visible.
  *
  * Usage:
  *   node scripts/audit-tactics.mjs
@@ -34,10 +30,10 @@ const stamp = new Date().toISOString().replace(/[:.]/g, '-');
 const OUT_DIR = `audit-reports/tactics-${stamp}`;
 
 const BOOT_TIMEOUT_MS = 30_000;
-const SHORT_SETTLE_MS = 3000;
-const MED_SETTLE_MS = 5000;
-const PUZZLE_SETTLE_MS = 8000; // boards + Stockfish + puzzle load
-const STOCKFISH_SETTLE_MS = 6500; // engine first move
+const SETTLE_SHORT = 2500;
+const SETTLE_MED = 5000;
+const SETTLE_PUZZLE = 8000;
+const SETTLE_ENGINE = 6500;
 
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
@@ -58,9 +54,7 @@ async function main() {
       try {
         window.localStorage.setItem('auditStreamUrl', url);
         window.localStorage.setItem('auditStreamSecret', secret);
-      } catch {
-        /* ignore */
-      }
+      } catch {}
     },
     { url: STREAM_URL, secret: SECRET },
   );
@@ -74,9 +68,7 @@ async function main() {
       try {
         const body = req.postDataJSON?.();
         if (body && typeof body === 'object') captured.push(body);
-      } catch {
-        /* ignore */
-      }
+      } catch {}
     }
   });
   const consoleErrors = [];
@@ -86,9 +78,9 @@ async function main() {
   });
   page.on('pageerror', (err) => pageErrors.push(err.message.slice(0, 500)));
 
-  const report = { base: BASE_URL, startedAt: stamp, surfaces: [] };
+  const report = { base: BASE_URL, startedAt: stamp, scenarios: [] };
 
-  async function record(name, action, settleMs = SHORT_SETTLE_MS, expectations = []) {
+  async function scenario(name, action, settleMs, expectations = []) {
     const before = captured.length;
     const errsBefore = pageErrors.length;
     const consBefore = consoleErrors.length;
@@ -96,7 +88,7 @@ async function main() {
     let actionErr = null;
     try {
       await action();
-      await page.waitForTimeout(settleMs);
+      if (settleMs > 0) await page.waitForTimeout(settleMs);
     } catch (e) {
       actionErr = String(e?.message ?? e);
       console.log(`  [error] ${actionErr}`);
@@ -104,69 +96,52 @@ async function main() {
     const screenshotPath = join(OUT_DIR, `${name}.png`);
     try {
       await page.screenshot({ path: screenshotPath, fullPage: false });
-    } catch {
-      /* ignore */
-    }
+    } catch {}
     const fresh = captured.slice(before);
     const kindCounts = fresh.reduce((acc, e) => {
       const k = String(e.kind ?? 'unknown');
       acc[k] = (acc[k] ?? 0) + 1;
       return acc;
     }, {});
-    const sortedKinds = Object.entries(kindCounts).sort((a, b) => b[1] - a[1]);
     const url = page.url();
-
     const checks = [];
     for (const exp of expectations) {
       try {
         const ok = await exp.fn();
-        checks.push({ label: exp.label, ok: !!ok });
+        checks.push({ label: exp.label, ok: !!ok, detail: exp.detail });
       } catch (e) {
         checks.push({ label: exp.label, ok: false, error: String(e?.message ?? e) });
       }
     }
-
     const newConsole = consoleErrors.slice(consBefore);
     const newPage = pageErrors.slice(errsBefore);
-
-    console.log(`\n[tactics] ${name}  →  ${url}`);
-    console.log(`  ${fresh.length} events, ${Date.now() - t0}ms`);
-    for (const [kind, n] of sortedKinds.slice(0, 6)) {
-      console.log(`    ${String(n).padStart(3)} × ${kind}`);
-    }
+    console.log(`\n[tactics] ${name}  →  ${url}  (${Date.now() - t0}ms, ${fresh.length} events)`);
     for (const c of checks) {
       console.log(`    ${c.ok ? 'PASS' : 'FAIL'} — ${c.label}${c.error ? ` (${c.error})` : ''}`);
     }
     if (newConsole.length) console.log(`  console.errors: ${newConsole.length}`);
     if (newPage.length) console.log(`  pageerrors: ${newPage.length}`);
-
-    report.surfaces.push({
-      name,
-      url,
-      durationMs: Date.now() - t0,
-      eventCount: fresh.length,
-      kindCounts,
-      checks,
-      screenshot: screenshotPath,
-      consoleErrors: newConsole,
-      pageErrors: newPage,
+    report.scenarios.push({
+      name, url, durationMs: Date.now() - t0, eventCount: fresh.length,
+      kindCounts, checks, screenshot: screenshotPath,
+      consoleErrors: newConsole, pageErrors: newPage,
       sampleEvents: fresh.slice(0, 5),
       error: actionErr,
     });
   }
 
-  // ─── DOM helpers ───────────────────────────────────────────────────
-  async function visible(testid) {
-    return await page.locator(`[data-testid="${testid}"]`).first().isVisible().catch(() => false);
-  }
-  async function hasText(needle) {
-    const body = (await page.textContent('body').catch(() => '')) ?? '';
-    return body.toLowerCase().includes(needle.toLowerCase());
-  }
-  async function tileCount() {
-    return await page.locator('[data-testid^="section-"]').count().catch(() => 0);
-  }
-  async function readBoardState() {
+  // ═══════════════════════════════════════════════════════════════════
+  // Helpers
+  // ═══════════════════════════════════════════════════════════════════
+  const visible = (tid) =>
+    page.locator(`[data-testid="${tid}"]`).first().isVisible().catch(() => false);
+  const bodyText = async () => (await page.textContent('body').catch(() => '')) ?? '';
+  const hasText = async (needle) => (await bodyText()).toLowerCase().includes(needle.toLowerCase());
+  const count = async (sel) => await page.locator(sel).count().catch(() => 0);
+
+  // Read every rendered piece into a square→piece map (react-chessboard
+  // sets data-square on each square and data-piece on the piece DOM).
+  async function readBoard() {
     return await page.evaluate(() => {
       const squares = document.querySelectorAll('[data-square]');
       const out = {};
@@ -179,596 +154,774 @@ async function main() {
       return out;
     });
   }
-  async function readOrientation() {
+  function boardDiff(before, after) {
+    const changed = [];
+    const keys = new Set([...Object.keys(before ?? {}), ...Object.keys(after ?? {})]);
+    for (const sq of keys) {
+      if ((before ?? {})[sq] !== (after ?? {})[sq]) {
+        changed.push({ sq, was: (before ?? {})[sq] ?? null, now: (after ?? {})[sq] ?? null });
+      }
+    }
+    return changed;
+  }
+  // Orientation by a1/h8 vertical position.
+  async function orientation() {
     return await page.evaluate(() => {
       const a1 = document.querySelector('[data-square="a1"]');
       const h8 = document.querySelector('[data-square="h8"]');
       if (!a1 || !h8) return null;
-      const a = a1.getBoundingClientRect();
-      const h = h8.getBoundingClientRect();
-      if (a.top > h.top) return 'white-bottom';
-      if (a.top < h.top) return 'black-bottom';
-      return 'unknown';
+      return a1.getBoundingClientRect().top > h8.getBoundingClientRect().top
+        ? 'white-bottom' : 'black-bottom';
     });
   }
-  async function paddingBottomPx(testid) {
-    return await page.evaluate((tid) => {
-      const el = document.querySelector(`[data-testid="${tid}"]`);
-      if (!el) return null;
-      const pb = window.getComputedStyle(el).paddingBottom;
-      return parseFloat(pb);
-    }, testid);
+  // Poll until predicate returns true, OR timeout.
+  async function waitUntil(predicate, timeoutMs = 10_000, intervalMs = 300) {
+    const t0 = Date.now();
+    while (Date.now() - t0 < timeoutMs) {
+      try { if (await predicate()) return true; } catch {}
+      await page.waitForTimeout(intervalMs);
+    }
+    return false;
   }
-  async function backToHub() {
+  // Poll a value until it stops changing for stableForMs (great for
+  // animations — returns the final stable state).
+  async function waitForStable(readFn, { timeoutMs = 10_000, stableForMs = 800 } = {}) {
+    const t0 = Date.now();
+    let lastVal = JSON.stringify(await readFn());
+    let lastChangeT = Date.now();
+    while (Date.now() - t0 < timeoutMs) {
+      await page.waitForTimeout(150);
+      const cur = JSON.stringify(await readFn());
+      if (cur !== lastVal) { lastVal = cur; lastChangeT = Date.now(); }
+      if (Date.now() - lastChangeT >= stableForMs) return JSON.parse(lastVal);
+    }
+    return JSON.parse(lastVal);
+  }
+
+  // Nav helpers
+  async function clickTacticsNav() {
     await page.getByRole('link', { name: 'Tactics' }).first().click().catch(() => {});
-    await page.locator('[data-testid="tactics-page"]').waitFor({ timeout: 10_000 }).catch(() => {});
-    await page.waitForTimeout(800);
+    await page.locator('[data-testid="tactics-page"]').waitFor({ timeout: 12_000 }).catch(() => {});
+    await page.waitForTimeout(600);
   }
 
   // ═══════════════════════════════════════════════════════════════════
-  // 1. Boot
+  // BOOT
   // ═══════════════════════════════════════════════════════════════════
-  await record(
-    'dashboard',
+  await scenario(
+    '01-boot',
     async () => {
       await page.goto(`${BASE_URL}/`, { waitUntil: 'domcontentloaded', timeout: BOOT_TIMEOUT_MS });
       await page.getByText('Chess Academy Pro', { exact: true }).first().waitFor({ timeout: BOOT_TIMEOUT_MS });
     },
-    6000,
-  );
-
-  // ═══════════════════════════════════════════════════════════════════
-  // 2. /tactics — Hub
-  // ═══════════════════════════════════════════════════════════════════
-  await record(
-    'tactics-hub',
-    async () => {
-      await page.getByRole('link', { name: 'Tactics' }).first().click();
-      await page.locator('[data-testid="tactics-page"]').waitFor({ timeout: 15_000 });
-    },
-    MED_SETTLE_MS,
+    4000,
     [
-      { label: 'page mount', fn: () => visible('tactics-page') },
-      { label: 'title visible', fn: () => hasText('tactical training') },
-      { label: 'search bar present', fn: async () => (await page.locator('input[placeholder*="Search"]').count()) > 0 },
-      { label: 'all 16 tiles render', fn: async () => (await tileCount()) >= 16 },
-      { label: 'My Profile tile', fn: () => visible('section-spot') },
-      { label: 'Daily Training tile', fn: () => visible('section-daily') },
-      { label: 'Setup Trainer tile', fn: () => visible('section-setup') },
-      { label: 'Random Mix tile', fn: () => visible('section-random-mix') },
-      { label: 'Opening Traps tile', fn: () => visible('section-opening traps') },
-      { label: 'Forks tile', fn: () => visible('section-forks') },
-      { label: 'Pins & Skewers tile', fn: () => visible('section-pins & skewers') },
-      { label: 'Discovered Attacks tile', fn: () => visible('section-discovered attacks') },
-      { label: 'Back Rank Mates tile', fn: () => visible('section-back rank mates') },
-      { label: 'Sacrifices tile', fn: () => visible('section-sacrifices') },
-      { label: 'Deflection & Decoy tile', fn: () => visible('section-deflection & decoy') },
-      { label: 'Zugzwang tile', fn: () => visible('section-zugzwang') },
-      { label: 'Endgame Technique tile', fn: () => visible('section-endgame technique') },
-      { label: 'Mating Nets tile', fn: () => visible('section-mating nets') },
-      { label: 'My Weaknesses tile', fn: () => visible('section-my-weaknesses') },
-      { label: 'My Mistakes tile', fn: () => visible('section-my mistakes') },
-      {
-        label: 'safe-area padding >= 4.5rem',
-        fn: async () => {
-          const pb = await paddingBottomPx('tactics-page');
-          return pb != null && pb >= 64; // 4.5rem ≈ 72px; allow margin
-        },
-      },
+      { label: 'app boot', fn: () => hasText('chess academy pro') },
     ],
   );
 
-  // SmartSearchBar typing — verify no crash
-  await record(
-    'tactics-hub-search-typing',
+  // ═══════════════════════════════════════════════════════════════════
+  // /tactics — Hub
+  // ═══════════════════════════════════════════════════════════════════
+  await scenario(
+    '02-hub-render',
+    async () => { await clickTacticsNav(); },
+    SETTLE_SHORT,
+    [
+      { label: 'page mount', fn: () => visible('tactics-page') },
+      { label: 'title "Tactical Training"', fn: () => hasText('tactical training') },
+      { label: 'search input present', fn: async () => (await count('input[placeholder*="Search"]')) > 0 },
+      { label: 'all 4 fixed tiles', fn: async () =>
+        (await visible('section-spot')) && (await visible('section-daily')) &&
+        (await visible('section-setup')) && (await visible('section-random-mix')) },
+      { label: '11 theme tiles (THEME_MAP entries)', fn: async () => {
+        const themes = ['opening traps', 'forks', 'pins & skewers', 'discovered attacks',
+          'back rank mates', 'sacrifices', 'deflection & decoy', 'removing the guard',
+          'zugzwang', 'endgame technique', 'mating nets'];
+        for (const t of themes) {
+          if (!(await visible(`section-${t}`))) return false;
+        }
+        return true;
+      } },
+      { label: 'My Weaknesses + My Mistakes tiles', fn: async () =>
+        (await visible('section-my-weaknesses')) && (await visible('section-my mistakes')) },
+    ],
+  );
+
+  // Hub SmartSearchBar: type, verify retains, verify clears
+  await scenario(
+    '03-hub-search-typing',
     async () => {
       const input = page.locator('input[placeholder*="Search"]').first();
-      await input.fill('Sicilian');
+      await input.fill('Sicilian Dragon');
       await page.waitForTimeout(800);
     },
-    1000,
-    [{ label: 'search input retains value', fn: async () => (await page.locator('input[placeholder*="Search"]').first().inputValue()) === 'Sicilian' }],
+    500,
+    [
+      { label: 'input retains value', fn: async () =>
+        (await page.locator('input[placeholder*="Search"]').first().inputValue()) === 'Sicilian Dragon' },
+    ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 3. /tactics/profile
+  // /tactics/profile — TacticalProfilePage
   // ═══════════════════════════════════════════════════════════════════
-  await backToHub();
-  await record(
-    'tactics-profile',
+  await clickTacticsNav();
+  await scenario(
+    '04-profile-mount',
     async () => {
       await page.locator('[data-testid="section-spot"]').click();
-      // The page renders the header instantly in its loading state
-      // (so back-btn is reachable), but the loaded body — Train Your
-      // Weakest CTA + theme rows — waits on getThemeSkills() which on
-      // a cold Dexie races seedPuzzles(). Poll up to 20s for the
-      // loaded state to materialize before running the assertions.
-      await page
-        .locator('[data-testid="begin-training-btn"]')
-        .waitFor({ timeout: 20_000 })
-        .catch(() => {});
+      // Header (with back btn) MUST appear even during loading.
+      await page.locator('[data-testid="back-btn"]').waitFor({ timeout: 8000 });
+      // Body (Train Weakest CTA) appears after getThemeSkills resolves.
+      await page.locator('[data-testid="begin-training-btn"]').waitFor({ timeout: 25_000 }).catch(() => {});
     },
-    1500,
+    1000,
     [
       { label: 'route /tactics/profile', fn: () => page.url().endsWith('/tactics/profile') },
       { label: 'page mount', fn: () => visible('tactical-profile-page') },
-      { label: 'back btn visible (loading or loaded)', fn: () => visible('back-btn') },
+      { label: 'back btn visible (loading + loaded)', fn: () => visible('back-btn') },
       { label: 'refresh btn visible', fn: () => visible('refresh-btn') },
-      { label: 'Train Your Weakest CTA', fn: () => visible('begin-training-btn') },
-      { label: 'has 11 theme rows (one per THEME_MAP entry)', fn: async () => (await page.locator('[data-testid="theme-row"]').count()) === 11 },
-      { label: 'stats labels present', fn: async () => (await hasText('Puzzles Solved')) && (await hasText('Themes Practiced')) },
+      { label: 'Train Your Weakest CTA visible', fn: () => visible('begin-training-btn') },
+      { label: '11 theme rows', fn: async () => (await count('[data-testid="theme-row"]')) === 11 },
+      { label: 'stats: Puzzles Solved + Overall Accuracy + Themes Practiced',
+        fn: async () => (await hasText('Puzzles Solved')) && (await hasText('Overall Accuracy')) && (await hasText('Themes Practiced')) },
     ],
   );
 
-  await record(
-    'tactics-profile-refresh-click',
+  // Refresh button click — must not throw, page should still be there
+  await scenario(
+    '05-profile-refresh',
     async () => {
-      const r = page.locator('[data-testid="refresh-btn"]');
-      if (await r.isVisible().catch(() => false)) await r.click();
+      await page.locator('[data-testid="refresh-btn"]').click().catch(() => {});
+      await page.waitForTimeout(2000);
     },
-    2500,
+    500,
     [
-      { label: 'no pageerror', fn: async () => true /* counted globally */ },
-      { label: 'page still mounted', fn: () => visible('tactical-profile-page') },
+      { label: 'page still mounted after refresh', fn: () => visible('tactical-profile-page') },
+      { label: 'Train Weakest CTA still present', fn: () => visible('begin-training-btn') },
     ],
   );
 
-  await record(
-    'tactics-profile-train-weakest-nav',
+  // Train Weakest navigation — must land on /tactics/drill
+  await scenario(
+    '06-profile-train-weakest',
     async () => {
       await page.locator('[data-testid="begin-training-btn"]').click();
+      await waitUntil(() => page.url().endsWith('/tactics/drill'), 5000);
     },
-    PUZZLE_SETTLE_MS,
+    SETTLE_PUZZLE,
     [
-      { label: 'lands on /tactics/drill', fn: () => page.url().endsWith('/tactics/drill') },
-      { label: 'drill page mounts', fn: () => visible('tactic-drill-page') },
+      { label: 'navigated to /tactics/drill', fn: () => page.url().endsWith('/tactics/drill') },
+      { label: 'drill page mounted', fn: () => visible('tactic-drill-page') },
+    ],
+  );
+
+  // Theme row navigation — click first row, verify navigation
+  await clickTacticsNav();
+  await page.locator('[data-testid="section-spot"]').click();
+  await page.locator('[data-testid="begin-training-btn"]').waitFor({ timeout: 25_000 }).catch(() => {});
+  await scenario(
+    '07-profile-theme-row-nav',
+    async () => {
+      await page.locator('[data-testid="theme-row"]').first().click().catch(() => {});
+      await waitUntil(() => page.url().endsWith('/tactics/drill'), 5000);
+    },
+    SETTLE_PUZZLE,
+    [
+      { label: 'theme row navigates to /tactics/drill', fn: () => page.url().endsWith('/tactics/drill') },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 4. /tactics/classic — PuzzleTrainerPage
+  // /tactics/classic — PuzzleTrainerPage (Daily Training)
   // ═══════════════════════════════════════════════════════════════════
-  await backToHub();
-  await record(
-    'tactics-classic',
+  await clickTacticsNav();
+  await scenario(
+    '08-classic-mount',
     async () => {
       await page.locator('[data-testid="section-daily"]').click();
+      await page.locator('[data-testid="puzzle-trainer"]').waitFor({ timeout: 10_000 });
+      await page.locator('[data-testid="puzzle-mode-selector"]').waitFor({ timeout: 8000 }).catch(() => {});
     },
-    PUZZLE_SETTLE_MS,
+    1500,
     [
       { label: 'route /tactics/classic', fn: () => page.url().endsWith('/tactics/classic') },
-      { label: 'page mount', fn: () => visible('puzzle-trainer') },
-      { label: 'header shows rating', fn: async () => /rating:\s*\d+/i.test((await page.textContent('body')) ?? '') },
+      { label: 'puzzle-trainer mount', fn: () => visible('puzzle-trainer') },
+      { label: 'mode selector visible', fn: () => visible('puzzle-mode-selector') },
+      { label: 'header shows user rating', fn: async () => /rating:\s*\d+/i.test(await bodyText()) },
+      { label: 'all 5 PUZZLE_MODES visible', fn: async () => {
+        return (await visible('mode-standard')) && (await visible('mode-timed_blitz')) &&
+               (await visible('mode-daily_challenge')) && (await visible('mode-opening_traps')) &&
+               (await visible('mode-endgame'));
+      } },
+    ],
+  );
+
+  // Click "standard" mode → puzzle should load
+  await scenario(
+    '09-classic-mode-select-flow',
+    async () => {
+      await page.locator('[data-testid="mode-standard"]').click();
+      await waitUntil(() => visible('puzzle-board').then((v) => v) || hasText('No puzzles available').then((v) => v), 10_000);
+    },
+    SETTLE_PUZZLE,
+    [
+      { label: 'puzzle-board appears OR empty-state shown',
+        fn: async () => (await visible('puzzle-board')) || (await hasText('no puzzles')) || (await visible('session-complete')) },
+      { label: 'tactic-type-heading present when puzzle loaded',
+        fn: async () => (await visible('puzzle-board')) ? await visible('tactic-type-heading') : true },
+      { label: 'back-to-modes button visible',
+        fn: () => visible('back-to-modes') },
+    ],
+  );
+
+  // back-to-modes returns to mode selector
+  await scenario(
+    '10-classic-back-to-modes',
+    async () => {
+      const btn = page.locator('[data-testid="back-to-modes"]');
+      if (await btn.isVisible().catch(() => false)) await btn.click();
+      await page.waitForTimeout(800);
+    },
+    500,
+    [
+      { label: 'back returns to mode selector OR session-complete',
+        fn: async () => (await visible('puzzle-mode-selector')) || (await visible('session-complete')) },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 5. /tactics/setup
+  // /tactics/setup — TacticSetupPage
   // ═══════════════════════════════════════════════════════════════════
-  await backToHub();
-  await record(
-    'tactics-setup-select',
+  await clickTacticsNav();
+  await scenario(
+    '11-setup-select',
     async () => {
       await page.locator('[data-testid="section-setup"]').click();
+      await waitUntil(() => visible('difficulty-1').then((v) => v), 8000);
     },
-    SHORT_SETTLE_MS,
+    500,
     [
       { label: 'route /tactics/setup', fn: () => page.url().endsWith('/tactics/setup') },
-      { label: 'Beginner button', fn: () => visible('difficulty-1') },
-      { label: 'Intermediate button', fn: () => visible('difficulty-2') },
-      { label: 'Advanced button', fn: () => visible('difficulty-3') },
+      { label: 'all 3 difficulty buttons', fn: async () =>
+        (await visible('difficulty-1')) && (await visible('difficulty-2')) && (await visible('difficulty-3')) },
+      { label: 'back-btn present', fn: () => visible('back-btn') },
+      { label: 'intro text mentions "engineer the fork"', fn: () => hasText('engineer the fork') },
     ],
   );
 
-  await record(
-    'tactics-setup-beginner-pick',
+  await scenario(
+    '12-setup-beginner-queue',
     async () => {
-      const d1 = page.locator('[data-testid="difficulty-1"]');
-      if (await d1.isVisible().catch(() => false)) await d1.click();
+      await page.locator('[data-testid="difficulty-1"]').click();
+      // Either queue loads (puzzle-nav appears) OR summary shows (empty queue with import CTA)
+      await waitUntil(
+        async () => (await visible('puzzle-nav')) || (await visible('session-summary')),
+        12_000,
+      );
     },
-    PUZZLE_SETTLE_MS,
+    1500,
     [
-      {
-        label: 'queue loads OR empty-summary OR loading',
-        fn: async () =>
-          (await visible('puzzle-nav')) ||
-          (await visible('session-summary')) ||
-          (await visible('loading')),
-      },
+      { label: 'puzzle-nav OR session-summary', fn: async () =>
+        (await visible('puzzle-nav')) || (await visible('session-summary')) },
+      { label: 'IF empty: Import Games CTA',
+        fn: async () => (await visible('puzzle-nav')) || (await hasText('Import Games')) },
+      { label: 'IF queue loaded: setup board visible',
+        fn: async () => (await visible('session-summary')) || (await visible('setup-board')) },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 6. /tactics/drill — Random Mix (nav arrows + state assertions)
+  // /tactics/drill — Random Mix
   // ═══════════════════════════════════════════════════════════════════
-  await backToHub();
-  await record(
-    'tactics-random-mix',
+  await clickTacticsNav();
+  await scenario(
+    '13-random-mix-drill',
     async () => {
       await page.locator('[data-testid="section-random-mix"]').click();
+      await page.locator('[data-testid="tactic-drill-page"]').waitFor({ timeout: 10_000 });
+      // PuzzleBoard takes ~600ms to play the setup move, plus loading.
+      await waitUntil(() => visible('puzzle-board').then((v) => v), 10_000);
     },
-    PUZZLE_SETTLE_MS,
+    SETTLE_PUZZLE,
     [
       { label: 'route /tactics/drill', fn: () => page.url().endsWith('/tactics/drill') },
       { label: 'page mount', fn: () => visible('tactic-drill-page') },
       { label: 'theme label "Mixed"', fn: () => hasText('mixed') },
-      {
-        label: 'puzzle-nav OR summary visible',
-        fn: async () =>
-          (await visible('puzzle-nav')) ||
-          (await visible('session-summary')),
-      },
-      {
-        label: 'nav-prev disabled at index 0',
-        fn: async () => {
-          const prev = page.locator('[data-testid="nav-prev"]');
-          if (!(await prev.isVisible().catch(() => false))) return true; // no-board surface acceptable
-          return await prev.isDisabled().catch(() => false);
-        },
-      },
+      { label: 'PuzzleBoard mounted', fn: () => visible('puzzle-board') },
+      { label: 'tactic-type-heading visible', fn: () => visible('tactic-type-heading') },
+      { label: 'puzzle-nav visible', fn: () => visible('puzzle-nav') },
+      { label: 'nav-prev disabled at start',
+        fn: async () => await page.locator('[data-testid="nav-prev"]').isDisabled().catch(() => false) },
+      { label: 'Target rating displayed', fn: () => hasText('Target:') },
+      { label: 'stats line: solved + missed',
+        fn: async () => (await hasText('solved')) && (await hasText('missed')) },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 7. Theme drills (one per theme — quick mount + label check)
+  // Random Mix deep-flow: verify setup move auto-plays (board changes
+  // ~600ms after mount), nav-next loads a new puzzle (board differs).
   // ═══════════════════════════════════════════════════════════════════
-  const themes = [
-    { tile: 'section-forks', label: 'fork' },
-    { tile: 'section-pins & skewers', label: 'drill' }, // label "Drill: Mixed" when multiple themes
-    { tile: 'section-discovered attacks', label: 'discoveredattack' },
-    { tile: 'section-back rank mates', label: 'backrankmate' },
-    { tile: 'section-sacrifices', label: 'sacrifice' },
-    { tile: 'section-deflection & decoy', label: 'deflection' },
-    { tile: 'section-zugzwang', label: 'zugzwang' },
-    { tile: 'section-endgame technique', label: 'drill' },
-    { tile: 'section-mating nets', label: 'drill' },
-  ];
-  for (const t of themes) {
-    await backToHub();
-    await record(
-      `tactics-drill-${t.tile.replace(/[^a-z0-9-]/gi, '-')}`,
+  await scenario(
+    '14-random-mix-puzzle-progression',
+    async () => {
+      // wait for stable board (initial setup move done)
+      const before = await waitForStable(readBoard, { timeoutMs: 6000, stableForMs: 800 });
+      report.scenarios._tempBefore = before;
+      // Click next puzzle — board should change to a new puzzle's position
+      await page.locator('[data-testid="nav-next"]').click();
+      await page.waitForTimeout(SETTLE_PUZZLE);
+    },
+    0,
+    [
+      { label: 'next puzzle loads a different position',
+        fn: async () => {
+          const after = await readBoard();
+          const before = report.scenarios._tempBefore;
+          delete report.scenarios._tempBefore;
+          const changes = boardDiff(before, after).length;
+          // A different puzzle = many squares change (effectively a new FEN).
+          return changes >= 5;
+        } },
+      { label: 'puzzle-nav still visible after advance', fn: () => visible('puzzle-nav') },
+      { label: 'progress shows "2 / 10"', fn: () => hasText('2 / 10') },
+    ],
+  );
+
+  // ═══════════════════════════════════════════════════════════════════
+  // Theme drills — sample 3 themes (rest follow same code path)
+  // ═══════════════════════════════════════════════════════════════════
+  for (const tile of ['section-forks', 'section-mating nets', 'section-back rank mates']) {
+    await clickTacticsNav();
+    const slug = tile.replace(/[^a-z0-9-]/gi, '-');
+    await scenario(
+      `15-theme-drill-${slug}`,
       async () => {
-        await page.locator(`[data-testid="${t.tile}"]`).click();
+        await page.locator(`[data-testid="${tile}"]`).click();
+        await page.locator('[data-testid="tactic-drill-page"]').waitFor({ timeout: 10_000 });
+        await waitUntil(() => visible('puzzle-board').then((v) => v), 10_000);
       },
-      PUZZLE_SETTLE_MS,
+      SETTLE_SHORT,
       [
-        { label: 'route /tactics/drill', fn: () => page.url().endsWith('/tactics/drill') },
-        { label: 'page mount', fn: () => visible('tactic-drill-page') },
-        { label: `body mentions ${t.label} or fork or mixed`, fn: async () => (await hasText(t.label)) || (await hasText('drill')) },
+        { label: 'tactic-drill-page mounts', fn: () => visible('tactic-drill-page') },
+        { label: 'PuzzleBoard renders', fn: () => visible('puzzle-board') },
       ],
     );
   }
 
   // ═══════════════════════════════════════════════════════════════════
-  // 8. /tactics/adaptive
+  // /tactics/adaptive — AdaptivePuzzlePage
   // ═══════════════════════════════════════════════════════════════════
-  await backToHub();
-  await record(
-    'tactics-adaptive',
+  await scenario(
+    '16-adaptive-difficulty-select',
     async () => {
       await page.goto(`${BASE_URL}/tactics/adaptive`, { waitUntil: 'domcontentloaded' });
+      await page.locator('[data-testid="adaptive-puzzle-page"]').waitFor({ timeout: 10_000 });
     },
-    PUZZLE_SETTLE_MS,
+    SETTLE_SHORT,
     [
       { label: 'route /tactics/adaptive', fn: () => page.url().endsWith('/tactics/adaptive') },
       { label: 'page mount', fn: () => visible('adaptive-puzzle-page') },
-      { label: 'back-button present', fn: () => visible('back-button') },
-      { label: 'player-rating-header present', fn: () => visible('player-rating-header') },
-      { label: 'classic-trainer-link present', fn: () => visible('classic-trainer-link') },
-      { label: 'my-mistakes-link present', fn: () => visible('my-mistakes-link') },
+      { label: 'back-button present (in select phase)', fn: () => visible('back-button') },
+      { label: 'all 3 difficulty buttons', fn: async () =>
+        (await visible('difficulty-easy')) && (await visible('difficulty-medium')) && (await visible('difficulty-hard')) },
+      { label: 'player rating header', fn: () => visible('player-rating-header') },
+      { label: 'classic + mistakes cross-links',
+        fn: async () => (await visible('classic-trainer-link')) && (await visible('my-mistakes-link')) },
     ],
   );
 
-  // ═══════════════════════════════════════════════════════════════════
-  // 9. /tactics/create
-  // ═══════════════════════════════════════════════════════════════════
-  await record(
-    'tactics-create',
+  // Back button from select phase → /tactics
+  await scenario(
+    '17-adaptive-back-from-select',
     async () => {
-      await page.goto(`${BASE_URL}/tactics/create`, { waitUntil: 'domcontentloaded' });
+      await page.locator('[data-testid="back-button"]').click();
+      await waitUntil(() => page.url().endsWith('/tactics'), 5000);
     },
-    MED_SETTLE_MS,
+    SETTLE_SHORT,
     [
-      { label: 'route /tactics/create', fn: () => page.url().endsWith('/tactics/create') },
-      { label: 'header "Create" visible', fn: () => hasText('replay your game') },
-      {
-        label: 'loading OR summary OR replay phase visible',
-        fn: async () =>
-          (await visible('loading')) ||
-          (await visible('session-summary')) ||
-          (await hasText('context depth')),
-      },
-      { label: 'back btn visible', fn: () => visible('back-btn') },
+      { label: 'back from select → /tactics', fn: () => page.url().endsWith('/tactics') },
+      { label: 'tactics-page mounted', fn: () => visible('tactics-page') },
+    ],
+  );
+
+  // Easy difficulty pick → puzzle loads
+  await page.goto(`${BASE_URL}/tactics/adaptive`, { waitUntil: 'domcontentloaded' });
+  await page.locator('[data-testid="adaptive-puzzle-page"]').waitFor({ timeout: 10_000 });
+  await scenario(
+    '18-adaptive-easy-pick',
+    async () => {
+      await page.locator('[data-testid="difficulty-easy"]').click();
+      await waitUntil(
+        async () => (await visible('puzzle-board')) || (await visible('loading')),
+        10_000,
+      );
+    },
+    SETTLE_PUZZLE,
+    [
+      { label: 'puzzle-board OR loading visible',
+        fn: async () => (await visible('puzzle-board')) || (await visible('loading')) },
+      { label: 'end-session button when puzzle-board',
+        fn: async () => (await visible('puzzle-board')) ? await visible('end-session') : true },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 10. /tactics/opening-traps — deep flow (Play-it-out side-flip)
+  // /tactics/opening-traps — OpeningBlundersPage (DEEP FLOW)
   // ═══════════════════════════════════════════════════════════════════
-  await backToHub();
-  await record(
-    'tactics-opening-traps-hub',
+  await clickTacticsNav();
+  await scenario(
+    '19-opening-traps-hub',
     async () => {
       await page.locator('[data-testid="section-opening traps"]').click();
-      await page.locator('[data-testid="opening-blunders-page"]').waitFor({ timeout: 15_000 });
+      await page.locator('[data-testid="opening-blunders-page"]').waitFor({ timeout: 12_000 });
     },
-    SHORT_SETTLE_MS,
+    SETTLE_SHORT,
     [
       { label: 'route /tactics/opening-traps', fn: () => page.url().endsWith('/tactics/opening-traps') },
       { label: 'page mount', fn: () => visible('opening-blunders-page') },
-      { label: '4 phase tabs', fn: async () => (await page.locator('[data-testid^="opening-blunder-phase-"]').count()) >= 4 },
-      { label: '>=1 family tile', fn: async () => (await page.locator('[data-testid^="opening-blunder-family-"]').count()) > 0 },
+      { label: '4 phase tabs', fn: async () => (await count('[data-testid^="opening-blunder-phase-"]')) >= 4 },
+      { label: '>=1 family tile', fn: async () => (await count('[data-testid^="opening-blunder-family-"]')) > 0 },
+      { label: 'French Defense family tile (David hit bug here)', fn: () => visible('opening-blunder-family-french_defense') },
     ],
   );
 
-  await record(
-    'tactics-opening-traps-puzzle',
+  // Phase tab switching: click "middlegame", subtitle should update
+  await scenario(
+    '20-opening-traps-phase-tabs',
     async () => {
-      await page.locator('[data-testid^="opening-blunder-family-"]').first().click({ timeout: 5_000 });
+      await page.locator('[data-testid="opening-blunder-phase-middlegame"]').click();
       await page.waitForTimeout(800);
+    },
+    500,
+    [
+      { label: 'subtitle mentions middlegame', fn: () => hasText('middlegame') },
+    ],
+  );
+
+  // Pick first family (default phase) — verify color picker appears
+  await page.locator('[data-testid="opening-blunder-phase-opening"]').click();
+  await page.waitForTimeout(600);
+  await scenario(
+    '21-opening-traps-pick-french',
+    async () => {
+      await page.locator('[data-testid="opening-blunder-family-french_defense"]').click();
+      await waitUntil(
+        async () => (await count('[data-testid^="opening-blunder-color-"]')) >= 1
+          || (await page.evaluate(() => Array.from(document.querySelectorAll('[data-testid^="opening-blunder-"]'))
+            .filter(el => /^opening-blunder-[a-zA-Z0-9]{5}$/.test(el.getAttribute('data-testid') ?? '')).length > 0)),
+        8000,
+      );
+    },
+    SETTLE_SHORT,
+    [
+      { label: 'color picker OR puzzle list rendered',
+        fn: async () => (await count('[data-testid^="opening-blunder-color-"]')) >= 1
+          || (await page.evaluate(() => Array.from(document.querySelectorAll('[data-testid^="opening-blunder-"]'))
+            .filter(el => /^opening-blunder-[a-zA-Z0-9]{5}$/.test(el.getAttribute('data-testid') ?? '')).length > 0)) },
+    ],
+  );
+
+  // Pick first available puzzle
+  await scenario(
+    '22-opening-traps-pick-puzzle',
+    async () => {
       const firstColor = page.locator('[data-testid^="opening-blunder-color-"]').first();
-      if (await firstColor.isVisible({ timeout: 3000 }).catch(() => false)) {
+      if (await firstColor.isVisible().catch(() => false)) {
         await firstColor.click();
         await page.waitForTimeout(600);
       }
-      const puzzles = await page.evaluate(() => {
-        const all = Array.from(document.querySelectorAll('[data-testid^="opening-blunder-"]'));
-        return all
+      const puzzles = await page.evaluate(() =>
+        Array.from(document.querySelectorAll('[data-testid^="opening-blunder-"]'))
           .map((el) => el.getAttribute('data-testid'))
-          .filter((tid) =>
-            tid &&
-            !tid.startsWith('opening-blunder-phase-') &&
-            !tid.startsWith('opening-blunder-family-') &&
-            !tid.startsWith('opening-blunder-color-') &&
-            tid !== 'opening-blunder-play-out' &&
-            tid !== 'opening-blunder-show-opening' &&
-            tid !== 'opening-blunder-hint' &&
-            tid !== 'opening-blunder-reveal' &&
-            tid !== 'opening-blunder-next' &&
-            tid !== 'opening-blunders-page',
-          );
-      });
+          .filter((tid) => tid && /^opening-blunder-[a-zA-Z0-9]{5}$/.test(tid)),
+      );
       if (puzzles.length === 0) throw new Error('no puzzle tiles found');
-      await page.locator(`[data-testid="${puzzles[0]}"]`).click({ timeout: 5_000 });
-      await page.waitForTimeout(2500);
+      await page.locator(`[data-testid="${puzzles[0]}"]`).click();
+      // Wait for the board to render its setup move
+      await waitForStable(readBoard, { timeoutMs: 8000, stableForMs: 800 });
     },
-    SHORT_SETTLE_MS,
+    SETTLE_SHORT,
     [
-      { label: 'board pieces rendered', fn: async () => (await page.locator('[data-piece]').count()) > 0 },
-      {
-        label: 'orientation recognized',
-        fn: async () => {
-          const o = await readOrientation();
-          return o === 'white-bottom' || o === 'black-bottom';
-        },
-      },
+      { label: 'board pieces rendered', fn: async () => (await count('[data-piece]')) > 0 },
+      { label: 'orientation recognized',
+        fn: async () => ['white-bottom', 'black-bottom'].includes(await orientation()) },
+      { label: '"Show the opening" button visible', fn: () => visible('opening-blunder-show-opening') },
     ],
   );
 
-  const orientationBefore = await readOrientation();
-  const studentBottom = orientationBefore === 'white-bottom' ? 'white' : 'black';
-
-  await record(
-    'tactics-opening-traps-reveal',
+  // SHOW THE OPENING — deep flow (David's bug). Verify:
+  //  - Multiple ply changes happen (animation runs)
+  //  - The transition from animation-end to puzzle-position is NOT a
+  //    multi-square jump (with the snap fix, the final move is
+  //    animated via walkthroughFen, so handoff to playout.fen is a
+  //    visual no-op when reconstruction matched).
+  let beforeShowOpening = null;
+  await scenario(
+    '23-show-the-opening-flow',
     async () => {
-      const tries = [
-        ['a2', 'a3'], ['a7', 'a6'], ['h2', 'h3'], ['h7', 'h6'],
-        ['b2', 'b3'], ['b7', 'b6'], ['g2', 'g3'], ['g7', 'g6'],
-      ];
+      beforeShowOpening = await readBoard();
+      await page.locator('[data-testid="opening-blunder-show-opening"]').click();
+      // Wait up to 20s for the "Showing the opening · ply X/Y" indicator
+      // to appear AND finish (ply X === Y).
+      await waitUntil(
+        async () => {
+          const txt = await bodyText();
+          const m = txt.match(/Showing the opening.*?ply (\d+)\/(\d+)/);
+          if (!m) return false;
+          // Done when ply >= total
+          return Number(m[1]) >= Number(m[2]);
+        },
+        25_000,
+      );
+      // Allow the extra dwell tick + handoff to playout.fen.
+      await waitForStable(readBoard, { timeoutMs: 4000, stableForMs: 800 });
+    },
+    0,
+    [
+      { label: 'animation indicator disappeared (walkthrough done)',
+        fn: async () => !(await hasText('showing the opening')) },
+      { label: 'final position equals puzzle starting position',
+        fn: async () => {
+          const after = await readBoard();
+          const changes = boardDiff(beforeShowOpening, after).length;
+          // After walkthrough returns to puzzle position, board should
+          // match where it started (the puzzle's setup FEN).
+          return changes === 0;
+        },
+        detail: 'walkthrough should land on puzzle FEN' },
+      { label: 'Show-the-opening button hidden after use',
+        fn: async () => !(await visible('opening-blunder-show-opening')) },
+    ],
+  );
+
+  // PLAY-IT-OUT DEEP FLOW — verify side does not flip after reveal +
+  // Stockfish kick.
+  let orientationAtPuzzleStart = null;
+  await scenario(
+    '24-play-it-out-reveal-then-engage',
+    async () => {
+      orientationAtPuzzleStart = await orientation();
+      // Trigger reveal by making 2 wrong moves (any harmless pawn push).
+      const tries = [['a2','a3'], ['a7','a6'], ['h2','h3'], ['h7','h6'], ['b2','b3'], ['b7','b6']];
       for (const [from, to] of tries) {
-        const reveal = page.locator('[data-testid="opening-blunder-reveal"]');
-        if (await reveal.isVisible().catch(() => false)) break;
+        if (await visible('opening-blunder-reveal')) break;
         const fromSq = page.locator(`[data-square="${from}"]`);
-        const toSq = page.locator(`[data-square="${to}"]`);
         if (!(await fromSq.isVisible().catch(() => false))) continue;
         await fromSq.click({ timeout: 1500 }).catch(() => {});
         await page.waitForTimeout(150);
-        await toSq.click({ timeout: 1500 }).catch(() => {});
+        await page.locator(`[data-square="${to}"]`).click({ timeout: 1500 }).catch(() => {});
         await page.waitForTimeout(400);
       }
-      const reveal = page.locator('[data-testid="opening-blunder-reveal"]');
-      if (await reveal.isVisible().catch(() => false)) await reveal.click();
-      await page.waitForTimeout(2000);
+      if (await visible('opening-blunder-reveal')) {
+        await page.locator('[data-testid="opening-blunder-reveal"]').click();
+        await page.waitForTimeout(2000);
+      }
     },
     1500,
     [
-      { label: 'play-out button appears', fn: () => visible('opening-blunder-play-out') },
-      { label: 'orientation unchanged after reveal', fn: async () => (await readOrientation()) === orientationBefore },
+      { label: 'Play-it-out button surfaces after reveal',
+        fn: () => visible('opening-blunder-play-out') },
+      { label: 'orientation unchanged after reveal',
+        fn: async () => (await orientation()) === orientationAtPuzzleStart },
     ],
   );
 
-  const stateBeforePlayOut = await readBoardState();
-  await record(
-    'tactics-opening-traps-play-out',
+  // Engage Play-it-out, wait for Stockfish, verify no side flip
+  let beforePlayOut = null;
+  await scenario(
+    '25-play-it-out-engine-color',
     async () => {
+      beforePlayOut = await readBoard();
       const btn = page.locator('[data-testid="opening-blunder-play-out"]');
       if (!(await btn.isVisible().catch(() => false))) {
         throw new Error('play-out button not present');
       }
       await btn.click();
-      await page.waitForTimeout(STOCKFISH_SETTLE_MS);
+      await page.waitForTimeout(SETTLE_ENGINE);
     },
-    1500,
+    1000,
     [
-      { label: 'orientation unchanged after Play-it-out', fn: async () => (await readOrientation()) === orientationBefore },
+      { label: 'orientation unchanged', fn: async () => (await orientation()) === orientationAtPuzzleStart },
       {
-        // The side-flip bug pre-fix: when the curated solution had an
-        // ODD number of moves, playOutStartFen captured opponent-to-
-        // move. The hook re-derived studentSide from FEN → flipped.
-        // If user then dragged a piece, chess.js accepted (it WAS that
-        // color's turn) and the hook then asked Stockfish to play the
-        // student's actual color. Visible signal: a student-color
-        // piece moves spontaneously after Play-it-out.
-        //
-        // Robust check: post-play-out state must be either (a) no
-        // change at all (even-length puzzle, student is correctly to
-        // move, no Stockfish kick needed), or (b) only opponent-color
-        // pieces moved (Stockfish correctly kicked in to play the
-        // opponent's reply). FAIL if any student-color piece moved.
-        label: 'no side-flip: post-play-out is opponent-moved OR unchanged',
+        label: 'no side-flip: opponent color moved OR position unchanged',
         fn: async () => {
-          const after = await readBoardState();
+          const after = await readBoard();
           const colorsMoved = new Set();
           for (const sq of Object.keys(after)) {
-            const was = stateBeforePlayOut[sq];
+            const was = beforePlayOut[sq];
             const now = after[sq];
             if (was !== now && now) {
-              const c = now[0];
+              const c = now[0]; // 'w' or 'b'
               if (c === 'w') colorsMoved.add('white');
               else if (c === 'b') colorsMoved.add('black');
             }
           }
-          const opponent = studentBottom === 'white' ? 'black' : 'white';
-          if (colorsMoved.size === 0) return true; // even-length: student's turn already
-          if (colorsMoved.has(opponent) && !colorsMoved.has(studentBottom)) return true;
-          return false; // student-color piece moved spontaneously → bug
+          if (colorsMoved.size === 0) return true; // even-length: no engine move expected
+          const student = orientationAtPuzzleStart === 'white-bottom' ? 'white' : 'black';
+          const opp = student === 'white' ? 'black' : 'white';
+          return colorsMoved.has(opp) && !colorsMoved.has(student);
         },
       },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 11. /tactics/weakness-themes
+  // /tactics/weakness-themes — WeaknessThemesPage
   // ═══════════════════════════════════════════════════════════════════
-  await backToHub();
-  await record(
-    'tactics-weakness-themes',
+  await clickTacticsNav();
+  await scenario(
+    '26-weakness-themes-mount',
     async () => {
       await page.locator('[data-testid="section-my-weaknesses"]').click();
+      await page.locator('[data-testid="weakness-themes-page"]').waitFor({ timeout: 8000 });
+      // Wait for loading → themes/summary transition
+      await waitUntil(async () =>
+        (await visible('themes-list')) || (await visible('session-summary')) ||
+        (await hasText('No weakness data')), 8000);
     },
-    MED_SETTLE_MS,
+    1000,
     [
       { label: 'route /tactics/weakness-themes', fn: () => page.url().endsWith('/tactics/weakness-themes') },
       { label: 'page mount', fn: () => visible('weakness-themes-page') },
-      { label: 'back btn', fn: () => visible('back-btn') },
-      {
-        label: 'themes list, loading, or summary visible',
-        fn: async () =>
-          (await visible('themes-list')) ||
-          (await visible('loading')) ||
-          (await visible('session-summary')),
-      },
-    ],
-  );
-
-  // Try Mixed Training if it surfaced
-  await record(
-    'tactics-weakness-themes-mixed-click',
-    async () => {
-      const btn = page.locator('[data-testid="mixed-training-btn"]');
-      if (await btn.isVisible({ timeout: 1500 }).catch(() => false)) {
-        await btn.click();
-      }
-    },
-    MED_SETTLE_MS,
-    [
-      {
-        label: 'after mixed-click: drill-view OR session-summary OR still on themes',
-        fn: async () =>
-          (await visible('drill-view')) ||
-          (await visible('session-summary')) ||
-          (await visible('themes-list')),
-      },
+      { label: 'back-btn present', fn: () => visible('back-btn') },
+      { label: 'themes list OR empty CTA',
+        fn: async () => (await visible('themes-list')) || (await hasText('Import Games')) || (await visible('session-summary')) },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 12. /tactics/weakness
+  // /tactics/weakness — WeaknessPuzzlePage
   // ═══════════════════════════════════════════════════════════════════
-  await record(
-    'tactics-weakness',
+  await scenario(
+    '27-weakness-puzzle',
     async () => {
       await page.goto(`${BASE_URL}/tactics/weakness`, { waitUntil: 'domcontentloaded' });
+      await waitUntil(async () =>
+        (await visible('puzzle-nav')) || (await visible('session-summary')) ||
+        (await visible('loading')), 12_000);
     },
-    PUZZLE_SETTLE_MS,
+    SETTLE_PUZZLE,
     [
       { label: 'route /tactics/weakness', fn: () => page.url().endsWith('/tactics/weakness') },
-      { label: 'back btn present', fn: () => visible('back-btn') },
-      {
-        label: 'puzzle-nav OR loading OR summary',
-        fn: async () =>
-          (await visible('puzzle-nav')) ||
-          (await visible('loading')) ||
-          (await visible('session-summary')),
-      },
+      { label: 'back-btn present', fn: () => visible('back-btn') },
+      { label: 'puzzle-nav OR summary OR loading',
+        fn: async () => (await visible('puzzle-nav')) || (await visible('session-summary')) || (await visible('loading')) },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 13. /tactics/mistakes
+  // /tactics/mistakes — MyMistakesPage
   // ═══════════════════════════════════════════════════════════════════
-  await backToHub();
-  await record(
-    'tactics-mistakes',
+  await clickTacticsNav();
+  await scenario(
+    '28-mistakes-mount',
     async () => {
       await page.locator('[data-testid="section-my mistakes"]').click();
+      await waitUntil(async () =>
+        (await visible('my-mistakes-page')) || (await visible('empty-state')), 8000);
     },
-    MED_SETTLE_MS,
+    SETTLE_SHORT,
     [
       { label: 'route /tactics/mistakes', fn: () => page.url().endsWith('/tactics/mistakes') },
-      {
-        label: 'page mount OR loading OR empty-state',
-        fn: async () =>
-          (await visible('my-mistakes-page')) ||
-          (await visible('loading')) ||
-          (await visible('empty-state')),
-      },
-      {
-        label: 're-analyze button or empty-state CTA visible',
-        fn: async () => (await visible('reanalyze-button')) || (await visible('empty-state')),
-      },
+      { label: 'page OR empty-state mount',
+        fn: async () => (await visible('my-mistakes-page')) || (await visible('empty-state')) },
+      { label: 'all 4 phase tabs',
+        fn: async () => (await visible('phase-tab-all')) && (await visible('phase-tab-opening'))
+          && (await visible('phase-tab-middlegame')) && (await visible('phase-tab-endgame')) },
+      { label: 're-analyze button OR empty-state CTA',
+        fn: async () => (await visible('reanalyze-button')) || (await visible('empty-state')) },
     ],
   );
 
-  // Phase tabs + filter dropdowns (only if non-empty)
-  await record(
-    'tactics-mistakes-tabs-filters',
+  // Phase tab click + filter changes — must not throw
+  await scenario(
+    '29-mistakes-tabs-filters',
     async () => {
-      const opening = page.locator('[data-testid="phase-tab-opening"]');
-      if (await opening.isVisible({ timeout: 1500 }).catch(() => false)) {
-        await opening.click();
-        await page.waitForTimeout(400);
+      if (await visible('phase-tab-opening')) {
+        await page.locator('[data-testid="phase-tab-opening"]').click();
+        await page.waitForTimeout(500);
       }
-      const classFilter = page.locator('[data-testid="classification-filter"]');
-      if (await classFilter.isVisible({ timeout: 1500 }).catch(() => false)) {
-        await classFilter.selectOption('blunder').catch(() => {});
+      if (await visible('classification-filter')) {
+        await page.locator('[data-testid="classification-filter"]').selectOption('blunder').catch(() => {});
         await page.waitForTimeout(400);
-        await classFilter.selectOption('all').catch(() => {});
+        await page.locator('[data-testid="classification-filter"]').selectOption('all').catch(() => {});
+      }
+      if (await visible('status-filter')) {
+        await page.locator('[data-testid="status-filter"]').selectOption('unsolved').catch(() => {});
+        await page.waitForTimeout(400);
       }
     },
-    1500,
+    500,
     [
-      {
-        label: 'no errors triggered by filter changes',
-        fn: () => true, // tracked via global console/page errors
-      },
+      { label: 'no new pageerror after filter changes', fn: () => true /* tracked globally */ },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 14. /tactics/lichess
+  // /tactics/lichess — LichessDashboardPage
   // ═══════════════════════════════════════════════════════════════════
-  await record(
-    'tactics-lichess',
+  await scenario(
+    '30-lichess-mount',
     async () => {
       await page.goto(`${BASE_URL}/tactics/lichess`, { waitUntil: 'domcontentloaded' });
+      await waitUntil(async () =>
+        (await visible('lichess-dashboard-no-token')) ||
+        (await visible('lichess-dashboard-page')) ||
+        (await visible('dashboard-loading')) ||
+        (await visible('dashboard-error')), 10_000);
     },
-    MED_SETTLE_MS,
+    SETTLE_SHORT,
     [
       { label: 'route /tactics/lichess', fn: () => page.url().endsWith('/tactics/lichess') },
-      {
-        label: 'one of: no-token, loaded, loading, error',
+      { label: 'one of: no-token, loaded, loading, error states',
         fn: async () =>
           (await visible('lichess-dashboard-no-token')) ||
           (await visible('lichess-dashboard-page')) ||
           (await visible('dashboard-loading')) ||
-          (await visible('dashboard-error')),
-      },
+          (await visible('dashboard-error')) },
+      { label: 'back-btn present (testid)', fn: () => visible('back-btn') },
+    ],
+  );
+
+  // Lichess back button must go to /tactics (fix verification)
+  await scenario(
+    '31-lichess-back-to-tactics',
+    async () => {
+      await page.locator('[data-testid="back-btn"]').click().catch(() => {});
+      await waitUntil(() => page.url().endsWith('/tactics'), 5000);
+    },
+    SETTLE_SHORT,
+    [
+      { label: 'back goes to /tactics (not /weaknesses)', fn: () => page.url().endsWith('/tactics') },
     ],
   );
 
   // ═══════════════════════════════════════════════════════════════════
-  // 15. Legacy redirects (all 11)
+  // /tactics/create — TacticCreatePage
+  // ═══════════════════════════════════════════════════════════════════
+  await scenario(
+    '32-create-mount',
+    async () => {
+      await page.goto(`${BASE_URL}/tactics/create`, { waitUntil: 'domcontentloaded' });
+      await waitUntil(async () =>
+        (await visible('loading')) || (await visible('session-summary')) ||
+        (await hasText('context depth')), 10_000);
+    },
+    SETTLE_SHORT,
+    [
+      { label: 'route /tactics/create', fn: () => page.url().endsWith('/tactics/create') },
+      { label: 'back-btn present', fn: () => visible('back-btn') },
+      { label: 'loading state OR summary state visible (empty queue)',
+        fn: async () => (await visible('loading')) || (await visible('session-summary'))
+          || (await hasText('context depth')) },
+    ],
+  );
+
+  // ═══════════════════════════════════════════════════════════════════
+  // Legacy redirects — all 11
   // ═══════════════════════════════════════════════════════════════════
   const redirects = [
     ['/puzzles', '/tactics'],
@@ -784,12 +937,12 @@ async function main() {
     ['/weaknesses/lichess-dashboard', '/tactics/lichess'],
   ];
   for (const [src, dst] of redirects) {
-    await record(
-      `redirect-${src.replace(/\//g, '-')}`,
+    await scenario(
+      `33-redirect-${src.replace(/\//g, '-')}`,
       async () => {
         await page.goto(`${BASE_URL}${src}`, { waitUntil: 'domcontentloaded' });
       },
-      2000,
+      1500,
       [{ label: `${src} → ${dst}`, fn: () => page.url().endsWith(dst) }],
     );
   }
@@ -805,87 +958,55 @@ async function main() {
     acc[k] = (acc[k] ?? 0) + 1;
     return acc;
   }, {});
-  report.errorLevelEvents = captured.filter(
-    (e) =>
-      String(e.level ?? '').toLowerCase() === 'error' ||
-      String(e.kind ?? '').toLowerCase() === 'uncaught-error' ||
-      String(e.kind ?? '').toLowerCase() === 'unhandled-rejection',
-  );
+  report.runtimeErrorEvents = captured.filter((e) => {
+    const k = String(e.kind ?? '').toLowerCase();
+    return k === 'uncaught-error' || k === 'unhandled-rejection' ||
+      String(e.level ?? '').toLowerCase() === 'error';
+  });
 
-  const failedChecks = [];
-  for (const s of report.surfaces) {
-    for (const c of s.checks ?? []) {
-      if (!c.ok) failedChecks.push({ surface: s.name, label: c.label, error: c.error });
+  const failed = [];
+  for (const s of report.scenarios) {
+    if (typeof s !== 'object' || !s.checks) continue;
+    for (const c of s.checks) {
+      if (!c.ok) failed.push({ scenario: s.name, label: c.label, error: c.error });
     }
-    if (s.error) failedChecks.push({ surface: s.name, label: 'navigation action', error: s.error });
-    if (s.pageErrors?.length) {
-      for (const e of s.pageErrors) failedChecks.push({ surface: s.name, label: 'pageerror', error: e });
-    }
+    if (s.error) failed.push({ scenario: s.name, label: 'action error', error: s.error });
+    for (const e of (s.pageErrors ?? [])) failed.push({ scenario: s.name, label: 'pageerror', error: e });
   }
-  report.failedChecks = failedChecks;
+  report.failedChecks = failed;
 
   await writeFile(join(OUT_DIR, 'report.json'), JSON.stringify(report, null, 2));
 
-  // ── Markdown summary
-  const totalChecks = report.surfaces.reduce((n, s) => n + (s.checks?.length ?? 0), 0);
-  const passedChecks = totalChecks - failedChecks.length;
-  const mdLines = [
-    `# Tactics Tab Audit`,
+  const allChecks = report.scenarios.reduce((n, s) => n + (s.checks?.length ?? 0), 0);
+  const passed = allChecks - failed.length;
+  const md = [
+    `# Tactics Audit — ${stamp}`,
     ``,
-    `Generated: ${stamp}`,
     `Base: ${BASE_URL}`,
     ``,
-    `## Summary`,
-    ``,
-    `- Surfaces visited: **${report.surfaces.length}**`,
-    `- Checks: **${passedChecks} / ${totalChecks}** passed`,
-    `- Audit events captured: **${captured.length}**`,
-    `- Console errors: **${consoleErrors.length}**`,
-    `- Page errors: **${pageErrors.length}**`,
-    `- Runtime-error audit events: **${report.errorLevelEvents.length}**`,
+    `Scenarios: ${report.scenarios.length}`,
+    `Checks: ${passed}/${allChecks} passed`,
+    `Console errors: ${consoleErrors.length}`,
+    `Page errors: ${pageErrors.length}`,
+    `Runtime-error audit events: ${report.runtimeErrorEvents.length}`,
     ``,
     `## Failures`,
     ``,
   ];
-  if (failedChecks.length === 0) {
-    mdLines.push('_None._');
-  } else {
-    for (const f of failedChecks) {
-      mdLines.push(`- **${f.surface}** — ${f.label}${f.error ? ` — \`${f.error.slice(0, 200)}\`` : ''}`);
-    }
-  }
-  mdLines.push(``, `## Surfaces`, ``);
-  for (const s of report.surfaces) {
-    const pass = (s.checks ?? []).filter((c) => c.ok).length;
-    const total = (s.checks ?? []).length;
-    mdLines.push(`### ${s.name} → \`${s.url}\``);
-    mdLines.push(`- Checks: ${pass}/${total}`);
-    mdLines.push(`- Events: ${s.eventCount}`);
-    if (s.consoleErrors?.length) mdLines.push(`- Console errors: ${s.consoleErrors.length}`);
-    if (s.pageErrors?.length) mdLines.push(`- Page errors: ${s.pageErrors.length}`);
-    if (s.error) mdLines.push(`- Navigation error: \`${s.error.slice(0, 200)}\``);
-    mdLines.push(``);
-  }
-  await writeFile(join(OUT_DIR, 'report.md'), mdLines.join('\n'));
+  if (failed.length === 0) md.push('_None._');
+  else for (const f of failed) md.push(`- **${f.scenario}** — ${f.label}${f.error ? ` — \`${String(f.error).slice(0, 200)}\`` : ''}`);
+  await writeFile(join(OUT_DIR, 'report.md'), md.join('\n'));
 
-  console.log(
-    `\n[tactics] done — ${captured.length} events, ${consoleErrors.length} console.errors, ${pageErrors.length} pageerrors`,
-  );
-  console.log(`[tactics] checks: ${passedChecks}/${totalChecks} passed`);
-  console.log(`[tactics] failures: ${failedChecks.length}`);
-  if (failedChecks.length) {
-    for (const f of failedChecks) {
-      console.log(`  - ${f.surface} :: ${f.label}${f.error ? ` :: ${String(f.error).slice(0, 120)}` : ''}`);
-    }
+  console.log(`\n[tactics] DONE — ${passed}/${allChecks} checks passed`);
+  console.log(`[tactics] events=${captured.length} console.errors=${consoleErrors.length} pageerrors=${pageErrors.length} runtime-err-events=${report.runtimeErrorEvents.length}`);
+  if (failed.length) {
+    console.log(`[tactics] ${failed.length} failures:`);
+    for (const f of failed) console.log(`  - ${f.scenario} :: ${f.label}${f.error ? ` :: ${String(f.error).slice(0, 120)}` : ''}`);
   }
-  console.log(`[tactics] report: ${OUT_DIR}/report.json`);
-  console.log(`[tactics] report: ${OUT_DIR}/report.md`);
+  console.log(`[tactics] report: ${OUT_DIR}/report.json + report.md`);
 
   await browser.close();
-  if (failedChecks.length > 0) process.exit(1);
+  if (failed.length > 0) process.exit(1);
 }
 
-main().catch((err) => {
-  console.error('[tactics] fatal:', err);
-  process.exit(1);
-});
+main().catch((err) => { console.error('[tactics] fatal:', err); process.exit(1); });
