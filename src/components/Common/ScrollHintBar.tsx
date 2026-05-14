@@ -51,19 +51,26 @@ interface ScrollHintBarProps {
 const ARROW_CLIP_X = 'polygon(0% 25%, 70% 25%, 70% 0%, 100% 50%, 70% 100%, 70% 75%, 0% 75%)';
 const ARROW_CLIP_Y = 'polygon(25% 0%, 75% 0%, 75% 70%, 100% 70%, 50% 100%, 0% 70%, 25% 70%)';
 
-// Comet gradients — fully transparent at the tail, bright white at
-// the leading edge. The clip-path keeps the visible region an arrow.
+// Comet gradients — fully transparent at the tail, ramping through
+// saturated gold and finishing at a near-white leading edge. The
+// clip-path keeps the visible region an arrow. Brightness boosted
+// per David — the comet now reads from across the room instead of
+// blending into the gold track.
 const COMET_GRADIENT_X =
-  'linear-gradient(90deg, rgba(255, 245, 200, 0) 0%, rgba(255, 220, 120, 0.5) 55%, rgba(255, 255, 255, 1) 100%)';
+  'linear-gradient(90deg, rgba(255, 245, 200, 0) 0%, rgba(255, 220, 120, 0.85) 50%, rgba(255, 250, 220, 1) 85%, rgba(255, 255, 255, 1) 100%)';
 const COMET_GRADIENT_Y =
-  'linear-gradient(180deg, rgba(255, 245, 200, 0) 0%, rgba(255, 220, 120, 0.5) 55%, rgba(255, 255, 255, 1) 100%)';
+  'linear-gradient(180deg, rgba(255, 245, 200, 0) 0%, rgba(255, 220, 120, 0.85) 50%, rgba(255, 250, 220, 1) 85%, rgba(255, 255, 255, 1) 100%)';
 
 // Three-layer glow: outer halo, mid bloom, inner highlight. Same
 // gold, three magnitudes — the bar reads as "lit" rather than
 // "drawn."
 const TRACK_GLOW =
   '0 0 24px rgba(251, 191, 36, 0.35), 0 0 8px rgba(251, 191, 36, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4)';
-const ACCENT_GLOW = '0 0 18px rgba(255, 240, 170, 1), 0 0 6px rgba(255, 255, 255, 0.95)';
+// Accent glow stack: outer halo + mid bloom + tight near-white inner
+// edge. Larger radii than the original 18px/6px so the comet trails
+// a visible glow halo, not just a clipped gradient.
+const ACCENT_GLOW =
+  '0 0 32px rgba(255, 230, 130, 0.9), 0 0 14px rgba(255, 240, 170, 1), 0 0 4px rgba(255, 255, 255, 1)';
 
 /** Build a spotlight gradient: brightest gold at `at`, falling off
  *  toward the edges. Falls back to a flat gold when `at` is null. */
@@ -146,7 +153,7 @@ export function ScrollHintBar({
         {showComet && (
           <div className="absolute inset-0 rounded-full overflow-hidden">
             <div
-              className="absolute top-0 h-full w-20 animate-scroll-hint-x"
+              className="absolute top-0 h-full w-32 animate-scroll-hint-x"
               style={{
                 background: COMET_GRADIENT_X,
                 clipPath: ARROW_CLIP_X,
@@ -172,7 +179,7 @@ export function ScrollHintBar({
       {showComet && (
         <div className="absolute inset-0 rounded-full overflow-hidden">
           <div
-            className="absolute left-0 w-full h-20 animate-scroll-hint-y"
+            className="absolute left-0 w-full h-32 animate-scroll-hint-y"
             style={{
               background: COMET_GRADIENT_Y,
               clipPath: ARROW_CLIP_Y,
