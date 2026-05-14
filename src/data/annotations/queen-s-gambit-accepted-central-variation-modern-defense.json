@@ -1,0 +1,35 @@
+{
+  "openingId": "queen-s-gambit-accepted-central-variation-modern-defense",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This move characterizes the Queen's Gambit family of openings, where we prioritize central control and rapid piece development over the more tactical complications that arise from 1.e4. The d4 move is considered slightly more positional than e4, often leading to slower, more strategic middlegames where understanding pawn structures and piece coordination becomes crucial. Our plan revolves around following up with c4 to challenge Black's central presence and gain space on the queenside.",
+      "shortNarration": "1.d4 claims e5 and c5, opens lines for the bishop and queen, and sets up a positional Queen's Gambit with c4 to follow."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds classically by occupying the center with their own pawn, directly challenging our control of the e4 square and establishing symmetrical central tension. This is the most principled response to d4, as it fights for equal share of the center rather than allowing us to dominate with a broad pawn center. Our opponent is preparing to develop their pieces naturally while maintaining central presence, and this move specifically prevents us from playing e4 immediately. Black's pawn on d5 also supports potential piece development to c6 or f6, giving them flexible options for their knight deployment.",
+      "shortNarration": "Black's d5 challenges e4, preventing immediate e4 and creating symmetrical central tension."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're now offering the famous Queen's Gambit, attacking Black's central d5 pawn and trying to deflect it from the center to gain spatial advantage. This move embodies the gambit's core philosophy: we're willing to temporarily sacrifice a pawn to achieve superior central control and faster piece development. By challenging the d5 pawn, we're forcing Black to make a critical decision about the pawn structure - they can either maintain central tension with moves like e6 or Nf6, or accept the gambit with dxc4. The c4 move also prepares potential queenside expansion and gives us more space to maneuver our pieces, particularly supporting a future e4 push if Black releases the center.",
+      "shortNarration": "The Queen's Gambit sacrifices the c4 pawn to challenge d5, forcing Black to decide on central structure while White gains space and development."
+    },
+    {
+      "san": "dxc4",
+      "annotation": "Black accepts the Queen's Gambit, capturing our pawn and temporarily gaining material while clearing the central files for piece activity. This is a perfectly sound choice that leads to sharp, tactical play where Black must be prepared to defend accurately against our central advances. By taking on c4, our opponent is essentially saying they're willing to face increased pressure in exchange for the extra pawn and the opened lines for their pieces. However, Black must be aware that holding onto this pawn will be challenging, as we'll likely regain it with moves like Bxc4 or e3 followed by Bxc4, while simultaneously developing our pieces with tempo.",
+      "shortNarration": "Black takes on c4, gaining a pawn but opening lines for White's central advance — White will regain it with Bxc4 or e3, developing with tempo."
+    },
+    {
+      "san": "e4",
+      "annotation": "We're seizing the initiative in the center with this powerful advance, creating a broad pawn center and opening lines for both our dark-squared bishop and our queen. This move is the hallmark of the Central Variation, where we prioritize rapid central expansion over immediate pawn recapture, believing that our space advantage and piece activity will provide more than adequate compensation for the sacrificed pawn. The e4 pawn now controls the crucial f5 and d5 squares, restricting Black's piece development while preparing rapid kingside piece deployment with Nf3 and potentially Bc4. Our opponent must now deal with significant central pressure and find accurate moves to avoid being overwhelmed by our space advantage and development lead.",
+      "shortNarration": "e4 advances, sacrifices a pawn for a broad center, controls f5 and d5, and opens lines for the queen and bishop."
+    },
+    {
+      "san": "Nc6",
+      "annotation": "Black develops their knight to its most active square, attacking our central e4 pawn while preparing to support their position with piece activity rather than just holding onto the extra c4 pawn. This is the defining move of the Modern Defense within the Queen's Gambit Accepted, showing that our opponent understands the position requires active piece play to handle our central pressure. The knight on c6 also prepares potential advances like e5 or supports the development of other pieces, giving Black counterplay against our space advantage. However, we must be ready to maintain our initiative, likely with moves like Nf3 to defend e4, or even more aggressively with f4-f5 to continue our kingside attack, keeping Black under constant pressure while they try to consolidate their extra material.",
+      "shortNarration": "Black's knight to c6 attacks e4 and prepares counterplay, but we maintain initiative with Nf3 or f4–f5."
+    }
+  ]
+}

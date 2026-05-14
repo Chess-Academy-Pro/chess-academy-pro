@@ -1,0 +1,30 @@
+{
+  "openingId": "queen-s-pawn-game-stonewall-attack",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the Queen's Pawn, which immediately stakes a claim to the central e5 square and opens lines for our dark-squared bishop and queen. This move leads to the Stonewall Attack, a system-based opening where we'll focus on controlling key central squares rather than rapid piece development. The Stonewall is particularly appealing because it offers clear plans and typical pawn structures that are easy to understand and execute. Our main idea will be to build a solid pawn foundation with pawns on d4, e3, and f4, creating a 'stone wall' that controls crucial central squares while preparing a kingside attack.",
+      "shortNarration": "1.d4 claims e5 and opens lines for the queen and dark-squared bishop, building a Stonewall with pawns on d4, e3, and f4 to control the center and prepare a kingside attack."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds symmetrically in the center, immediately challenging our control of the e4 square and establishing their own central presence. This is the most natural and principled response, as Black mirrors our central strategy and prepares to develop their pieces harmoniously. Our opponent is likely heading for a solid setup, possibly with moves like Nf6, e6, and Be7, creating a robust but somewhat passive position. This central tension is exactly what we want to see in the Stonewall - it gives us clear targets and helps us understand where the battle lines will be drawn.",
+      "shortNarration": "Black's symmetrical center challenge sets up a Stonewall with clear central tension and targets."
+    },
+    {
+      "san": "e3",
+      "annotation": "We're continuing with our Stonewall structure by supporting the d4 pawn and preparing to complete our central pawn triangle with f4. This move might look passive since it blocks our light-squared bishop, but it's actually the cornerstone of our entire system. The e3 pawn serves multiple purposes: it prevents Black from playing ...e5 to challenge our center, supports our eventual f4 advance, and creates a solid foundation for our pieces. While this does temporarily limit our light-squared bishop, we'll later reroute it via d2 to more active squares, and the pawn structure compensates by giving us excellent central control.",
+      "shortNarration": "e3 prevents ...e5, supports f4, and creates the Stonewall pawn triangle despite temporarily blocking the light-squared bishop."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops their knight to its ideal square, attacking our e4 square and preparing to castle kingside. This is a flexible and sound developing choice that keeps Black's options open - they can still choose between various setups like the French structure with ...e6, or perhaps even ...Bg4 to pin our knight when we play Nf3. Our opponent is following classical opening principles by developing pieces toward the center and maintaining pressure on our position. This knight on f6 will be an important piece for Black's defense, as it can potentially jump to e4 or d7 depending on how the position evolves.",
+      "shortNarration": "Black's knight to f6 attacks e4 and prepares kingside castling, keeping options open for e6 or Bg4."
+    },
+    {
+      "san": "Bd3",
+      "annotation": "We're developing our light-squared bishop to an excellent diagonal where it eyes the h7 square - a key target in our future kingside attack. This bishop placement is crucial to the Stonewall Attack because it prepares our aggressive intentions on the kingside, particularly the potential sacrifice on h7 that's a hallmark of this opening. The bishop on d3 also supports our planned f4-f5 pawn advance and works harmoniously with our future pieces like the queen (often going to h5) and knights. By placing the bishop before playing Nf3, we avoid any potential pins from ...Bg4 and maintain maximum flexibility for our piece coordination in the coming moves.",
+      "shortNarration": "Bishop to d3 eyes h7 for a future sacrifice, supports f4-f5, and avoids ...Bg4 pins by developing before Nf3."
+    }
+  ]
+}

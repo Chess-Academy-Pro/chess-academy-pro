@@ -1,0 +1,30 @@
+{
+  "openingId": "queen-s-pawn-game-london-system",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, staking an immediate claim to the central e5 square and preparing to build a solid pawn center. This move gives us excellent flexibility since we can transpose into many different systems based on Black's response - the Queen's Gambit, London System, Colle System, or various Indian defenses. The d4 opening typically leads to more positional, strategic games compared to 1.e4, making it perfect for players who prefer solid development and gradual maneuvering over sharp tactical battles. Our main plan is to control the center with pawns and pieces while keeping our options open for the next few moves.",
+      "shortNarration": "1.d4 stakes a claim to e5, builds a solid pawn center, and keeps flexibility for the Queen's Gambit, London, or Indian defenses."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds symmetrically in the center, immediately challenging our control of the e4 square and establishing their own space in the middle of the board. This is the most principled response, leading to classical pawn structures where both sides have equal central presence. Our opponent is signaling they want a balanced, strategic game rather than allowing us to build a big pawn center with moves like e4. Now we need to decide how to develop our pieces - we could go into a Queen's Gambit with c4, play the London System with Bf4, or choose other solid developmental schemes.",
+      "shortNarration": "Black's symmetrical response challenges e4 control; choose between Queen's Gambit, London System, or other solid development."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're developing our knight to its ideal square, where it controls the important central squares e5 and d4 while preparing to castle kingside. This move keeps all our options open - we haven't committed to any specific pawn structure yet and can still transpose into various systems. The knight on f3 is also perfectly placed to support a future e4 pawn advance if the position allows it, and it adds an extra defender to our kingside. This flexible development is exactly what we want in the opening phase, improving our position without revealing our full strategic intentions too early.",
+      "shortNarration": "Knight to f3 controls e5 and d4, prepares kingside castling, and supports a future e4 advance."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black mirrors our development, bringing their knight to the ideal square where it challenges our control of e4 and d5 while preparing their own kingside castling. This symmetrical approach is very natural and leads to balanced positions where both sides have equal chances. Our opponent is also keeping their options open, avoiding commitments like ...c6 (which would signal a Slav setup) or ...e6 (indicating a Queen's Gambit Declined structure). Now is the perfect moment for us to reveal our opening system, and the London System with Bf4 is an excellent choice that will give us a solid, easy-to-play position.",
+      "shortNarration": "Black mirrors development with the knight challenging e4 and d5, preparing kingside castling — we play Bf4, entering the London System."
+    },
+    {
+      "san": "Bf4",
+      "annotation": "We're entering the London System, one of the most reliable and flexible openings in chess that's become extremely popular at all levels from club players to world champions. This bishop development is the hallmark of the London - we're placing our light-squared bishop outside the pawn chain before playing e3, ensuring it won't be locked in by our own pawns. The bishop on f4 controls important central squares like e5 and d6, while also eyeing the h2-b8 diagonal toward Black's kingside. Our plan now is to continue with e3, Bd3, h3 (to give the bishop a retreat square), Nbd2, and c3, creating a solid pawn pyramid that's incredibly difficult for Black to break down while giving us excellent piece coordination and kingside attacking chances.",
+      "shortNarration": "Bishop to f4 outside the pawn chain controls e5, d6, and the h2-b8 diagonal before e3 locks it in."
+    }
+  ]
+}

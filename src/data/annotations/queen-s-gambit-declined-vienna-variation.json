@@ -1,0 +1,45 @@
+{
+  "openingId": "queen-s-gambit-declined-vienna-variation",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while preparing to develop our pieces harmoniously. This move is the foundation of the Queen's Gambit system, where we'll soon offer our c-pawn to gain rapid development and central control. The d4 move also opens a diagonal for our dark-squared bishop and gives our queen access to the kingside. Unlike 1.e4 openings that often lead to tactical fireworks, 1.d4 typically produces more positional, strategic battles where understanding pawn structures and piece coordination becomes crucial.",
+      "shortNarration": "1.d4 stakes a claim to e5 and c5, opens lines for the queen and dark-squared bishop, and sets up the Queen's Gambit for central control."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black immediately challenges our central pawn with this flexible knight development, attacking the d4 pawn and preparing to contest the center. This is one of the most principled responses to 1.d4, as it develops a piece while creating immediate central pressure. The knight on f6 also supports a future ...e6 or ...g6 setup and doesn't commit Black to any particular pawn structure yet. We'll need to decide how to support our d4 pawn, typically with c2-c4 or by developing pieces to defend it.",
+      "shortNarration": "Black's knight on f6 attacks d4, supporting flexible setups like ...e6 or ...g6 — we must defend d4 with c2-c4 or piece development."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're playing the Queen's Gambit, offering our c-pawn to deflect Black's potential ...d5 and gain a powerful pawn center with d4-e4 if accepted. This move also opens the c-file for our rook eventually and activates our queen along the a4-d1 diagonal. The c4 pawn controls the crucial d5 and b5 squares, limiting Black's central options and piece placement. Even if Black doesn't capture on c4, we've gained space and will often recapture with advantage if Black later plays ...dxc4, having provoked useful moves like ...d5 first.",
+      "shortNarration": "Queen's Gambit offers the c-pawn to deflect ...d5, gaining a powerful d4-e4 center and opening the c-file."
+    },
+    {
+      "san": "e6",
+      "annotation": "Our opponent chooses the solid Queen's Gambit Declined setup, supporting an eventual ...d5 while keeping the gambit pawn. This move prepares to challenge our center with ...d5, after which Black will have a firm central presence. The e6 pawn also opens a diagonal for Black's light-squared bishop to develop to e7 or d6, though it does somewhat restrict the dark-squared bishop on c8. This is a classical, sound approach that leads to rich positional play where both sides will fight for central squares and piece activity.",
+      "shortNarration": "Black's e6 supports ...d5 and opens the light-squared bishop's diagonal, but blocks the c8-bishop in a solid Queen's Gambit Declined."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We develop our knight to its ideal square, supporting our d4 pawn while preparing to castle kingside quickly. The knight on f3 also controls key central squares like e5 and d4, and doesn't block any of our pawns or pieces. This flexible development prepares multiple setups - we might continue with Nc3, Bf4, or even e3 depending on how Black responds. The knight from f3 can later jump to e5 for active play or retreat to support our center if needed, making this an excellent practical choice.",
+      "shortNarration": "Nf3 develops to its ideal square, supporting d4 and controlling e5 while preparing kingside castling."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black strikes back in the center with the thematic Queen's Gambit Declined response, establishing a strong point on d5 and refusing our gambit. This central pawn helps Black achieve equality in space and prepares coordinated piece development around this solid foundation. Now Black has successfully declined our gambit while maintaining central tension - the d5 vs c4 and d4 pawn chain will define much of the strategic battle ahead. We'll need to decide whether to maintain tension with moves like Nc3 or resolve it with cxd5, each leading to different pawn structures and plans.",
+      "shortNarration": "Black's d5 pawn refuses the gambit, creating a central pawn chain that will define the strategic battle."
+    },
+    {
+      "san": "Bg5",
+      "annotation": "We develop our dark-squared bishop aggressively, pinning Black's knight to the queen and creating immediate tactical pressure. This active development is a key characteristic of many Queen's Gambit lines, where we try to exploit the somewhat awkward placement of Black's pieces before they can fully coordinate. The bishop on g5 also supports our central control and prepares potential tactics if Black castles kingside. However, we must be ready for Black's counterplay, as this bishop can become a target for moves like ...h6 or ...Be7, and we're slightly exposing ourselves by not castling yet.",
+      "shortNarration": "Bishop to g5 pins the knight to the queen, pressuring Black's coordination before castling."
+    },
+    {
+      "san": "Bb4+",
+      "annotation": "Our opponent plays the sharp Vienna Variation, giving check and forcing us to make a crucial decision about our king safety and piece coordination. This bishop move serves multiple purposes: it breaks the pin on the knight, develops a piece actively, and forces us to either block with Bd2 or Nbd2, or move our king. Black is essentially saying 'solve your development problems first before worrying about my pinned knight.' This leads to sharp, tactical play where both sides must be precise - if we play Bd2, Black often continues with ...Bxd2+ followed by ...Ne4, creating active piece play and central pressure.",
+      "shortNarration": "Bishop to g5 breaks the pin on the knight, forcing Black to block with Bd2 or Nbd2, or move the king — leading to sharp tactical play."
+    }
+  ]
+}

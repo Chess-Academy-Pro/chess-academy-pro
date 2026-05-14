@@ -1,0 +1,45 @@
+{
+  "openingId": "english-opening-king-s-english-variation-two-knights-variation-keres-variation",
+  "moveAnnotations": [
+    {
+      "san": "c4",
+      "annotation": "We're opening with the English Opening, one of the most flexible and sophisticated openings in chess. This move immediately stakes a claim in the center by controlling the d5 and b5 squares, while keeping our options open for development. Unlike 1.e4 or 1.d4, the English doesn't commit to a specific pawn structure right away, allowing us to adapt our setup based on Black's response. The move also prepares potential expansion with d2-d3 or d2-d4, and leaves room for our king's knight to develop to f3 without blocking any pawns.",
+      "shortNarration": "1.c4 controls d5 and b5, keeps pawn structure flexible, and prepares d3 or d4 while leaving f3 open for the knight."
+    },
+    {
+      "san": "e5",
+      "annotation": "Black responds with the most direct and principled move, immediately occupying the center and challenging our control over the d4 square. This is the King's English Variation, where Black adopts a reversed Sicilian structure with colors flipped - we're essentially playing a Sicilian Defense but with an extra tempo as White. Our opponent is signaling aggressive intentions, aiming for quick development and central control rather than allowing us to build up slowly. This move also opens lines for Black's light-squared bishop and queen, while preparing natural development with moves like Nf6, Bc5, or d6.",
+      "shortNarration": "Black plays e5, occupying the center and challenging d4, signaling a reversed Sicilian with an extra tempo for White."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We're developing our knight to its most active square, where it supports a future d2-d4 push and keeps pressure on Black's central pawn. This is the Two Knights Variation of the English, showing our commitment to rapid piece development rather than immediate pawn breaks. The knight on c3 also eyes important squares like d5 and b5, potentially supporting future pawn advances or piece maneuvers. From c3, our knight maintains flexibility - it could later jump to d5, e4, or even retreat to d1 or e2 if the position demands it.",
+      "shortNarration": "Knight to c3 supports d4, pressures d5 and b5, and keeps flexible retreat options."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops naturally with the king's knight, attacking our theoretical e4 square and preparing kingside castling. This is the most popular and logical response, as the knight controls key central squares like d5 and e4, while also supporting Black's e5 pawn. Our opponent is following classical development principles - knights before bishops, control the center, and prepare to castle. The knight on f6 also keeps options open for various pawn structures, whether Black chooses to play d6, d5, or even f5 in some variations.",
+      "shortNarration": "Black's knight on f6 attacks e4, controls d5, and prepares kingside castling."
+    },
+    {
+      "san": "g3",
+      "annotation": "We're preparing to fianchetto our dark-squared bishop, a hallmark of many English Opening systems. This move creates a powerful diagonal for our bishop on g2, where it will eye the long diagonal toward Black's kingside and support central operations. The fianchetto setup is particularly effective in the English because it harmonizes beautifully with our pawn on c4, creating a flexible pawn structure that can support both central and kingside play. This development also prepares kingside castling and avoids some of the tactical complications that can arise from more direct approaches like Nf3.",
+      "shortNarration": "Fianchettoing the dark-squared bishop to g2 eyes the long diagonal toward Black's kingside and supports central play with the c4 pawn."
+    },
+    {
+      "san": "Bc5",
+      "annotation": "Black develops the light-squared bishop to its most active square, creating the Keres Variation of this opening system. This aggressive placement puts immediate pressure on our kingside, particularly targeting the f2 square which is often a weak point in fianchetto structures. Our opponent is following the principle of developing pieces to their most active squares first, and the bishop on c5 also supports potential central play with d6 and f5. However, this bishop placement does come with some risk - it's somewhat exposed on c5 and could become a target for our pieces later, particularly if we can arrange moves like d3 and Be3.",
+      "shortNarration": "Black's bishop to c5 pressures f2 in the Keres Variation, but it's exposed to d3 and Be3."
+    },
+    {
+      "san": "Bg2",
+      "annotation": "We complete our fianchetto development, placing our dark-squared bishop on its ideal square where it surveys the long diagonal. This bishop now exerts pressure toward Black's kingside and supports our central pawns, while also defending our own king position. The bishop on g2 is particularly well-placed in English Opening structures because it can support both defensive and offensive operations - it protects our king, controls key central squares like d5 and e4, and can potentially create threats along the long diagonal. This move also completes our kingside development preparation, allowing us to castle short on the next move if desired.",
+      "shortNarration": "The fianchettoed bishop on g2 controls d5 and e4, supports the center, and eyes Black's kingside."
+    },
+    {
+      "san": "c6",
+      "annotation": "Black plays a solid, multi-purpose move that serves several important functions in this position. This pawn move supports a potential d5 advance, which would challenge our central control and free Black's light-squared bishop for more active play. The move also prepares to potentially reroute the bishop from c5 to a more secure square like b6 via Ba7, if our pieces start to pressure it. Additionally, c6 gives Black's king a potential escape square on c7 and maintains the central tension that's characteristic of this opening system. While this move might look slow, it's actually quite principled - Black is building a solid foundation before committing to more aggressive operations.",
+      "shortNarration": "c6 supports d5, prepares Ba7, and gives the king an escape on c7 while maintaining central tension."
+    }
+  ]
+}

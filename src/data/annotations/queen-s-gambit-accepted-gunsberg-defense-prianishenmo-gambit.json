@@ -1,0 +1,70 @@
+{
+  "openingId": "queen-s-gambit-accepted-gunsberg-defense-prianishenmo-gambit",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the center and preparing the Queen's Gambit. This move controls the important e5 and c5 squares while opening lines for our dark-squared bishop and queen. The d4 advance is more positional than 1.e4, often leading to slower, more strategic middlegames where pawn structure and piece coordination matter enormously. Our plan revolves around offering the c4 gambit next, hoping to gain central control and rapid development in exchange for a temporary pawn sacrifice.",
+      "shortNarration": "1.d4 stakes a claim to the center, controls e5 and c5, and sets up the Queen's Gambit with c4 next."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black responds symmetrically in the center, immediately challenging our d4 pawn and establishing their own central presence. This classical response shows our opponent wants to maintain central equality rather than allow us free reign in the middle of the board. The d5 pawn controls crucial squares like c4 and e4, preventing us from easily expanding our central influence. Black's approach here sets up the possibility of accepting our upcoming gambit, which can lead to sharp tactical complications.",
+      "shortNarration": "Black's symmetrical d5 challenges d4 and controls c4 and e4, setting up a gambit acceptance that sharpens tactics."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're offering the famous Queen's Gambit, attacking Black's d5 pawn and trying to deflect it from the center. This isn't a true gambit since we can usually regain the pawn, but it's a strategic pawn sacrifice aimed at gaining central control and faster development. By pressuring d5, we're hoping to either trade it off (giving us a central majority) or force it to move (allowing us to dominate the center with our pawns). The move also opens the c-file for our rook and prepares to develop our queenside pieces actively.",
+      "shortNarration": "Queen's Gambit pressures d5 to trade or advance it, aiming for central control and faster development."
+    },
+    {
+      "san": "dxc4",
+      "annotation": "Black accepts the gambit, capturing our c4 pawn and temporarily going up material. This is a completely sound decision that leads to the Queen's Gambit Accepted, one of the most respected defenses in chess. By taking on c4, Black removes the pressure on their d5 pawn but also opens the center and gives us potential targets to attack. Our opponent's plan now involves trying to hold onto this extra pawn while completing development, though we'll have excellent compensation in the form of central control and active piece play.",
+      "shortNarration": "Black takes on c4, up a pawn but we get central control and active piece play as compensation."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We develop our knight to its ideal square, attacking the center and preparing to reclaim our gambit pawn. The knight on f3 controls the important e5 and d4 squares while supporting our future pawn advances in the center. This move is more flexible than immediate attempts to regain the pawn because it develops a piece and keeps our options open - we can later play moves like e4, Qa4+, or even Nd2 depending on how Black responds. The knight also prepares castling kingside and supports various tactical ideas in the middlegame.",
+      "shortNarration": "Knight to f3 develops, attacks e5 and d4, and keeps options open for e4, Qa4+, or Nd2."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops their knight to f6, mirroring our development and adding another defender to their kingside. This active move attacks our potential e4 advance and prepares to castle kingside for safety. The knight on f6 is ideally placed to support Black's central operations and can later jump to various squares like e4, d5, or even h5 depending on the position. However, this knight can also become a target for our advancing pawns, particularly if we manage to push e4-e5 later in the game.",
+      "shortNarration": "Black's knight on f6 attacks e4 and supports castling kingside, but risks becoming a target if White pushes e4-e5."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We bring our second knight into the game, adding more pressure to the center and preparing various attacking ideas. The knight on c3 eyes the d5 and e4 squares while supporting our potential pawn advances and piece coordination. This move is part of our standard development pattern in the Queen's Gambit Accepted, where rapid piece mobilization compensates for the temporary pawn deficit. The knight also supports tactical ideas like Nd5 or Ne4, and crucially, it doesn't block our b-pawn, keeping our queenside options flexible.",
+      "shortNarration": "Knight to c3 eyes d5 and e4, supports pawn advances, and keeps the b-pawn flexible."
+    },
+    {
+      "san": "c5",
+      "annotation": "Black strikes back in the center with this pawn advance, challenging our d4 pawn and trying to create counterplay. This move begins the Gunsberg Defense, a sharp continuation where Black doesn't just passively hold onto the extra pawn but actively fights for central squares. The c5 advance opens lines for Black's queen and dark-squared bishop while creating potential weaknesses in both sides' pawn structures. Our opponent is essentially saying they're willing to enter sharp complications rather than simply trying to consolidate their material advantage.",
+      "shortNarration": "Black's c5 advance challenges d4, opens lines for queen and bishop, and sharpens the game rather than consolidating the extra pawn."
+    },
+    {
+      "san": "d5",
+      "annotation": "We push our d-pawn forward, accepting Black's challenge and creating a powerful pawn wedge in the center. This advance gains space and cramps Black's position while opening attacking lines for our pieces. The d5 pawn controls crucial squares like c6 and e6, potentially restricting Black's piece development and creating long-term positional advantages. This move signals our intention to play aggressively, sacrificing pawn structure stability for active piece play and attacking chances against Black's somewhat exposed king.",
+      "shortNarration": "Pushing d5 creates a central pawn wedge, gains space, and opens attacking lines against Black's exposed king."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black challenges our advanced d5 pawn immediately, trying to trade it off before it becomes too strong. This move opens the diagonal for Black's dark-squared bishop and prepares to eliminate our space-gaining central pawn. However, this advance also weakens Black's kingside pawn structure and gives us potential tactical opportunities. Our opponent is walking a tightrope here - they need to neutralize our central pressure without falling too far behind in development or king safety.",
+      "shortNarration": "Black challenges d5 to trade the pawn, opening the dark-squared bishop's diagonal but weakening the kingside pawn structure."
+    },
+    {
+      "san": "e4",
+      "annotation": "We advance our e-pawn, building a massive pawn center and preparing the explosive Prianishenmo Gambit continuation. This move supports our d5 pawn while opening lines for our bishop and creating threats against Black's position. The e4 advance also prepares e4-e5, which would attack Black's pawn on f6 and further cramp their position. We're now playing with tremendous space advantage and attacking potential, though Black still has that extra pawn and will try to prove that our aggression is unsound.",
+      "shortNarration": "e4 advances the pawn center, supports d5, opens lines for the bishop, and threatens e5 to attack f6 — Black's extra pawn must prove the aggression unsound."
+    },
+    {
+      "san": "exd5",
+      "annotation": "Black captures our d5 pawn, trying to reduce the tension in the center and simplify the position. This exchange opens the e-file and gives Black a temporary material advantage of two pawns. However, this capture also allows us to recapture with our e-pawn, creating new attacking possibilities and maintaining central pressure. Black's decision here is risky because it opens up the position when our pieces are more actively placed, potentially giving us dangerous tactical opportunities despite the material deficit.",
+      "shortNarration": "Black captures d5, opening the e-file and giving us a two-pawn deficit but active pieces and central pressure."
+    },
+    {
+      "san": "e5",
+      "annotation": "We recapture with our e-pawn, launching the sharp Prianishenmo Gambit and immediately attacking Black's pawn on f6. This advance creates a powerful passed pawn on e5 while forcing Black's knight to move and disrupting their coordination. The e5 pawn also controls key squares like d6 and f6, cramping Black's position significantly. We're now two pawns down but have tremendous piece activity, a space advantage, and attacking chances - this is the critical moment where the gambit's soundness will be tested through sharp tactical play.",
+      "shortNarration": "Recapturing with e5 launches the Prianishenmo Gambit, sacrificing two pawns for a powerful passed pawn, piece activity, and attacking chances."
+    }
+  ]
+}

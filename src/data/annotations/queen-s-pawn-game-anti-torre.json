@@ -1,0 +1,25 @@
+{
+  "openingId": "queen-s-pawn-game-anti-torre",
+  "moveAnnotations": [
+    {
+      "san": "Nf3",
+      "annotation": "We're starting with a flexible approach that keeps our options open rather than committing to 1.d4 or 1.e4 immediately. This knight development controls the central e5 and d4 squares while preparing to support a future d4 advance, but we're also keeping the door open for systems like the Réti Opening or even a delayed King's Indian Attack setup. The beauty of 1.Nf3 lies in its versatility - we can transpose into virtually any opening system based on how our opponent responds. This move also develops a piece toward the center and prepares kingside castling, following the fundamental opening principles while maintaining maximum flexibility in our pawn structure.",
+      "shortNarration": "1.Nf3 develops toward the center, controls e5 and d4, and keeps transposition options open for d4, e4, or the Réti."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black immediately stakes a claim in the center with this solid pawn move, occupying the d5 square and controlling the important c4 and e4 squares. This response shows that our opponent wants to establish a classical pawn center and is likely comfortable with traditional Queen's Pawn structures that might arise after our eventual d4. By playing d5 so early, Black is also preparing to develop the light-squared bishop to f5 or g4, and potentially the knight to f6, following classical development principles. This move essentially invites us to play d4 and transpose into familiar Queen's Pawn territory, but Black has shown their hand early regarding their central intentions.",
+      "shortNarration": "Black's d5 stakes a central claim, controlling c4 and e4, preparing to develop the bishop to f5 or g4 and the knight to f6."
+    },
+    {
+      "san": "d4",
+      "annotation": "We complete our central pawn duo, creating the ideal pawn center and transforming the game into Queen's Pawn territory. This move supports our pawn on f3, controls the crucial c5 and e5 squares, and opens lines for our pieces - particularly preparing to develop our dark-squared bishop to f4 or g5. Now we have a classical space advantage in the center, and we're well-positioned to continue with natural development like Bf4, e3, and Bd3. The position has transposed into familiar Queen's Pawn structures where we can pursue typical plans of central control and kingside piece activity.",
+      "shortNarration": "Playing d4 completes the central pawn duo, controls c5 and e5, and prepares Bf4 or g5 with a classical space advantage."
+    },
+    {
+      "san": "Bg4",
+      "annotation": "Black develops the bishop with immediate purpose, pinning our knight to the queen and creating tactical pressure on f3. This is the signature move of the Anti-Torre system, where Black aims to disrupt our natural development and force us to make early decisions about our piece placement. The bishop on g4 controls the important f3 and h3 squares while also eyeing a potential exchange on f3 that could damage our kingside pawn structure. We now need to decide how to handle this pin - common options include h3 to challenge the bishop, Be2 to break the pin, or even c4 to immediately challenge Black's central pawn, each leading to different types of positions with their own strategic nuances.",
+      "shortNarration": "Black's bishop pins the knight to the queen on g4, threatening f3 and a potential exchange that damages the kingside pawn structure."
+    }
+  ]
+}

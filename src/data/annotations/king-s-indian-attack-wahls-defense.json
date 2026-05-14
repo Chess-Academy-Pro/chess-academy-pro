@@ -1,0 +1,55 @@
+{
+  "openingId": "king-s-indian-attack-wahls-defense",
+  "moveAnnotations": [
+    {
+      "san": "Nf3",
+      "annotation": "We start with the flexible Knight to f3, which is the hallmark of the King's Indian Attack (KIA). This move controls e5 and d4, the two most critical central squares, without committing to a pawn center immediately. By keeping our options open, we'll adapt to Black's setup and can later decide whether to support a d4 advance or maintain tension on e5.",
+      "shortNarration": "Knight to f3 controls e5 and d4, keeping options open for a d4 advance or tension on e5."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black mirrors our knight placement, which is the most natural and popular response. Black's knight on f6 controls e4 and d5, preventing us from advancing our e-pawn and preparing to support a d5 advance or kingside activity. This symmetric start often leads to a race where both sides try to execute their respective plans.",
+      "shortNarration": "Black's knight on f6 controls e4 and d5, blocking our e-pawn and preparing d5 or kingside play."
+    },
+    {
+      "san": "g3",
+      "annotation": "We fianchetto our kingside bishop, which is absolutely central to KIA theory. The g3 pawn prepares Bg2, where our bishop will exert long-range pressure along the a1-h8 diagonal toward d5 and e4. This setup is remarkably solid and has been used by world champions because it gives us flexibility while maintaining a strong position.",
+      "shortNarration": "Fianchettoed kingside bishop on g2 pressures d5 and e4 along the a1-h8 diagonal."
+    },
+    {
+      "san": "g6",
+      "annotation": "Black mirrors our fianchetto setup, which shows they're playing the Wahls Defense—a symmetrical approach that avoids sharp theoretical battles. By placing the g-pawn on g6, Black prepares to fianchetto their own bishop and create a flexible, solid pawn structure. This symmetry is comfortable for Black but gives us the advantage of moving first.",
+      "shortNarration": "Black mirrors the fianchetto setup in the Wahls Defense, giving White the first-move advantage in a symmetrical, solid structure."
+    },
+    {
+      "san": "Bg2",
+      "annotation": "Our bishop settles on g2, commanding the long diagonal and aiming at d5, which will become increasingly important as the game develops. This placement is incredibly flexible: it pressures Black's center while keeping our own position light and dynamic. The bishop on g2 is perfectly placed to support either a d4 push or to control the center from afar.",
+      "shortNarration": "Bishop on g2 pressures d5 and supports a d4 push while keeping the position flexible."
+    },
+    {
+      "san": "Bg7",
+      "annotation": "Black completes the fianchetto mirror, placing their bishop on g7 with the same long-diagonal control toward our queenside. Now both sides have solid, symmetrical positions, and we must find a way to break the symmetry with our first move advantage. The key is that despite the mirroring, our move order allows us to dictate the pace of the game.",
+      "shortNarration": "Black mirrors the fianchetto, but White's move order advantage breaks the symmetry and dictates the pace."
+    },
+    {
+      "san": "O-O",
+      "annotation": "We castle kingside to secure our king and connect our rooks, which is essential before opening the center. Castling also prepares us to potentially shift our rook to e1 to support central play or to d1 for flexibility. With our king safe, we're ready to commit our d-pawn to d3 and later potentially push d4.",
+      "shortNarration": "Castle kingside to secure the king, connect rooks, and prepare d3 followed by d4."
+    },
+    {
+      "san": "O-O",
+      "annotation": "Black castles kingside as well, maintaining the symmetry and securing their king. At this point, we have equal-looking positions on paper, but our move order advantage means we can gently maneuver to create imbalances. The tension now centers on how we'll break symmetry—typically through d4 or by controlling key squares like e5.",
+      "shortNarration": "Symmetry holds after Black castles kingside, but White can break it with d4 or by controlling e5."
+    },
+    {
+      "san": "d3",
+      "annotation": "We advance our d-pawn to d3, which is the crucial preparatory move in the KIA. From d3, the pawn controls e4 and supports an eventual d4 advance while remaining flexible—we can later play e4 if we wish, or maintain the tension. This modest move also opens the d-file for our d-rook and prepares c4 if we want to play on the queenside.",
+      "shortNarration": "d3 controls e4, supports d4, opens the d-file, and prepares c4 for queenside play."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black strikes at the center immediately with d5, trying to establish a central presence and avoid a passive position. By playing d5, Black challenges us to respond and breaks the symmetry themselves. This is the critical moment: Black wants to keep the center contested, while we must decide whether to meet this challenge with e4, support d4, or maintain flexibility—and your first-move advantage becomes your real test here.",
+      "shortNarration": "Black's d5 challenges the center — White must decide whether to capture, support d4, or maintain flexibility."
+    }
+  ]
+}

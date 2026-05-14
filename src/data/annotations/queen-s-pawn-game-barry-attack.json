@@ -1,0 +1,45 @@
+{
+  "openingId": "queen-s-pawn-game-barry-attack",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 square and preparing to develop our pieces with purpose. This move is the foundation of the Barry Attack system, which aims for rapid development with Nf3, Nc3, and the key Bf4 that gives this opening its character. Unlike 1.e4 openings that often lead to tactical fireworks, 1.d4 typically produces more positional struggles where controlling key squares and piece coordination matter enormously. Our plan is to get our pieces out quickly while maintaining flexibility about our pawn structure, and the Barry Attack specifically targets players who like to fianchetto their king's bishop with an early ...g6.",
+      "shortNarration": "1.d4 stakes a claim to e5 and sets up the Barry Attack with Nf3, Nc3, and Bf4, targeting ...g6 setups."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops the knight to its ideal square, immediately putting pressure on our central d4 pawn while preparing to contest the center. This is one of the most flexible and sound responses to 1.d4, as it doesn't commit to any particular pawn structure yet and keeps options open for various setups. The knight on f6 also supports a potential ...e5 advance and guards against any early tactics involving our queen coming to d8 or similar tricks. From f6, this knight can later jump to e4, d5, or support other central operations, making it a key piece in Black's development scheme.",
+      "shortNarration": "The knight on f6 pressures d4, supports ...e5, and guards against queen tricks on d8."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We develop our knight to f3, following classical opening principles by bringing a piece toward the center while supporting our d4 pawn. This knight controls the crucial e5 and h4 squares, preventing Black from establishing a knight on e5 or launching any early kingside attacks. The knight on f3 is perfectly placed for the Barry Attack system, as it coordinates beautifully with our planned Nc3 and Bf4 setup. This development also prepares to castle kingside quickly while maintaining pressure on Black's position and keeping our options open for various pawn advances like e3 or e4.",
+      "shortNarration": "Nf3 develops toward the center, controls e5 and h4, and supports the Barry Attack setup with Nc3 and Bf4."
+    },
+    {
+      "san": "g6",
+      "annotation": "Black opts for the King's Indian setup with this fianchetto move, preparing to develop the dark-squared bishop to g7 where it will eye the long diagonal and support central operations. This move signals that Black is comfortable with a more complex middlegame where piece activity and dynamic factors often outweigh static advantages. However, this is exactly what we want to see as Barry Attack players, since the early g6 gives us excellent targets for our light-squared bishop on f4. The move also slightly weakens Black's kingside, particularly the f6 square and the light squares around the king, which our system is designed to exploit.",
+      "shortNarration": "Black's fianchetto weakens f6 and kingside light squares — Barry Attack's light-squared bishop on f4 exploits those targets."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We bring our second knight into the game, developing toward the center and adding more support to our d4 pawn while preparing our signature Bf4 move. The knight on c3 controls important central squares like e4 and d5, and creates potential for future pawn advances like e4 or tactical shots involving the knight jumping to b5 or d5. This development also fits perfectly with the Barry Attack philosophy of rapid piece mobilization, as we're getting our minor pieces out before committing to any particular pawn structure. From c3, our knight can later support various plans including e4 advances, queenside expansion with a4-a5, or central breakthroughs depending on how Black responds.",
+      "shortNarration": "Knight to c3 develops toward the center, supports d4, and prepares Bf4 while controlling e4 and d5."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black strikes back in the center immediately, challenging our space advantage and trying to establish equality in the most direct way possible. This central pawn advance prevents us from playing e4 and stakes out the c4 and e4 squares for Black's pieces, while also freeing the light-squared bishop on c8 for development. The move creates some tension in the center and shows that Black is willing to engage in tactical complications rather than allowing us to build up slowly. However, this also plays into our Barry Attack strategy, as the pawn on d5 becomes a potential target for our pieces, and Black has committed to a particular structure that we can now plan against.",
+      "shortNarration": "Black's d5 challenges the center, freeing the c8-bishop but creating a target for White's Barry Attack."
+    },
+    {
+      "san": "Bf4",
+      "annotation": "Here's the signature move of the Barry Attack system – we develop our light-squared bishop to f4, immediately putting pressure on Black's position and creating multiple threats. This bishop targets the weak c7 square (after Black castles) and supports potential e3 followed by h4-h5 attacking ideas against Black's fianchettoed kingside. The bishop on f4 is perfectly placed to support both central control and kingside attacks, and it's much more actively placed than it would be after a normal Bg5 development. This move also prevents Black from easily playing ...c5, since we'd have strong pressure along the a1-h8 diagonal after capturing the pawn, making Black's position immediately uncomfortable and forcing careful defensive play.",
+      "shortNarration": "Bishop to f4 pressures c7, supports e3 and h4-h5 kingside attacks, and prevents ...c5 due to pressure on the a1-h8 diagonal."
+    },
+    {
+      "san": "Bg7",
+      "annotation": "Black completes the fianchetto by developing the dark-squared bishop to g7, where it eyes the long diagonal and provides crucial defense of the kingside, particularly the f6 square where the knight stands. This bishop will be Black's main defensive piece, watching over the dark squares and providing counterplay along the a1-h8 diagonal while supporting potential central breaks like ...c5 or ...e5. However, the bishop's placement also confirms that Black has committed to a structure that our Barry Attack is specifically designed to target, with the early g6 creating light-square weaknesses that our Bf4 can exploit. Black is now ready to castle, but we have excellent piece coordination and should continue with moves like e3, h4, and Qd2 to launch our typical attacking plans against this setup.",
+      "shortNarration": "Black's fianchettoed bishop on g7 eyes the long diagonal and defends f6, but g6 creates light-square weaknesses for Bf4 to exploit."
+    }
+  ]
+}

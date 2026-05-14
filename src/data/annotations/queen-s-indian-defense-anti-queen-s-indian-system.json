@@ -1,0 +1,60 @@
+{
+  "openingId": "queen-s-indian-defense-anti-queen-s-indian-system",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, staking an immediate claim to the central e5 square and preparing to build a classical pawn center. This move also opens lines for our queen and dark-squared bishop while giving us flexible development options. The d4 opening typically leads to more positional, strategic games compared to 1.e4, and we're signaling our intention to control the center with pawns rather than pieces alone. From here, we can transpose into many different systems depending on Black's response.",
+      "shortNarration": "1.d4 stakes a claim to e5, opens lines for queen and dark-squared bishop, and signals a classical pawn center."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops the knight to its ideal square, immediately putting pressure on our central d4 pawn and preparing to challenge our control of the center. This is one of the most flexible responses to 1.d4, as it doesn't commit to any particular pawn structure yet and keeps options open for various defensive setups. The knight on f6 also prepares potential central breaks like ...e5 or ...c5, while supporting kingside castling. Black is essentially saying 'I'll develop first and see what you're planning before committing to a specific structure.'",
+      "shortNarration": "Black's knight on f6 pressures d4 and keeps options open for ...e5, ...c5, or kingside castling."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're playing the English Opening move order, gaining space on the queenside and preparing to fianchetto our king's bishop with g3 and Bg2. This pawn controls the important d5 and b5 squares, potentially limiting Black's central pawn breaks and queenside expansion. The c4 advance also supports a future d4-d5 push under the right circumstances, and it's a key component of the 'Anti-Queen's Indian' system we're employing. By playing c4 before Nf3, we're keeping our options more open than in the traditional Queen's Indian setup.",
+      "shortNarration": "c4 controls d5 and b5, prepares g3/Bg2, and keeps options open for d4-d5 or an Anti-Queen's Indian."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black chooses a solid, classical response that supports the important d5 square and prepares to develop the dark-squared bishop, likely to d6 or e7. This pawn structure is characteristic of many French and Queen's Indian setups, giving Black a solid but somewhat passive position in the short term. The e6 move also keeps the option open for an eventual ...d5 central break, though it does block in the light-squared bishop temporarily. Black is prioritizing solid development and central control over immediate counterplay.",
+      "shortNarration": "Black's e6 supports d5 and prepares ...d5, but temporarily blocks the light-squared bishop for a solid, passive position."
+    },
+    {
+      "san": "Nf3",
+      "annotation": "We're developing our knight to its most active square, where it supports our central d4 pawn and prepares to castle kingside. This knight placement also gives us tactical ideas involving a potential e4-e5 push later, and it can reroute to other squares like d2, e5, or h4 depending on the position's requirements. The knight on f3 is perfectly placed for our upcoming fianchetto setup with g3 and Bg2, as it won't interfere with the bishop's long diagonal. This natural development also keeps pressure on Black to make concrete decisions about their pawn structure.",
+      "shortNarration": "Knight to f3 supports d4, prepares kingside castling, and keeps options open for e5, d2, or h4."
+    },
+    {
+      "san": "b6",
+      "annotation": "Black signals their intention to enter the Queen's Indian Defense by preparing to fianchetto the light-squared bishop on b7, where it will eye our long diagonal and put pressure on our central pawns. This setup is one of the most solid responses to our system, as the bishop on b7 will be very difficult to dislodge and provides excellent long-term pressure. The b6 move also prepares potential queenside expansion with moves like ...a6 and ...c5, giving Black counterplay on that side of the board. However, this does weaken the light squares around Black's king slightly, which we might be able to exploit later.",
+      "shortNarration": "Black fianchettoes the light-squared bishop on b7, pressuring the center and preparing queenside expansion with ...c5."
+    },
+    {
+      "san": "g3",
+      "annotation": "We're committing to the fianchetto development of our king's bishop, which will create a powerful battery along the long diagonal once we play Bg2. This setup is the hallmark of the 'Anti-Queen's Indian System' - instead of playing the traditional Be2, we're opting for a more aggressive setup that puts maximum pressure on Black's queenside. The g3 move also prepares a safe haven for our king after castling, as the fianchettoed bishop provides excellent defensive coverage. This approach often leads to rich middlegame positions where we have excellent piece coordination and long-term pressure.",
+      "shortNarration": "Fianchettoing the king's bishop with g3 and Bg2 creates a powerful battery along the long diagonal, pressuring Black's queenside while securing the king's safety."
+    },
+    {
+      "san": "Bb7",
+      "annotation": "Black completes the fianchetto development that was announced with the previous b6, placing the bishop on its most active square where it pressures our central pawns and long diagonal. This bishop will be a key defensive piece for Black throughout the middlegame, often supporting central breaks like ...d5 or ...c5. The Bb7 also helps Black contest our control of the long diagonal once we complete our own fianchetto with Bg2. However, Black needs to be careful about potential tactics along this diagonal, especially if we can arrange a discovered attack with our pieces.",
+      "shortNarration": "Black's Bb7 pressures the center and long diagonal, supporting ...d5 or ...c5 breaks while contesting White's fianchetto."
+    },
+    {
+      "san": "Bg2",
+      "annotation": "We complete our fianchetto setup, placing our bishop on the long diagonal where it exerts maximum pressure toward Black's queenside and central pawns. This bishop will be one of our most valuable pieces throughout the game, supporting central pawn breaks, providing kingside safety, and creating tactical opportunities. The Bg2 also prepares us to castle kingside safely, as the bishop provides excellent coverage of the dark squares around our king. Now we have a classic 'good bishop versus good bishop' battle on the long diagonal, but our bishop often proves more active due to our superior pawn structure and piece coordination.",
+      "shortNarration": "Bg2 completes the fianchetto, pressuring Black's queenside and center while supporting kingside safety and pawn breaks."
+    },
+    {
+      "san": "Be7",
+      "annotation": "Black develops the dark-squared bishop to a solid defensive square, preparing to castle kingside and maintaining flexibility in the center. This bishop placement is more conservative than alternatives like Bd6, but it provides reliable defense and keeps Black's position compact and hard to attack. The Be7 also supports a potential ...d5 central break by clearing the path for the d-pawn and avoiding any pins along the d-file. Black is prioritizing safety and solid development over immediate counterplay, which is a reasonable approach against our aggressive fianchetto setup.",
+      "shortNarration": "Be7 prepares kingside castling and supports ...d5 while avoiding pins on the d-file."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We develop our knight to its ideal square, where it supports our central d4 pawn and prepares potential pawn advances like d4-d5 or e2-e4. This knight placement also increases our control over key central squares and gives us more options for piece coordination in the middlegame. The Nc3 is a key component of our 'Anti-Queen's Indian' system, as it allows us to maintain maximum pressure on Black's position while keeping our pieces actively placed. From c3, our knight can later jump to more aggressive squares like e4 or b5, depending on how the position develops, and it supports our general plan of building pressure on Black's queenside.",
+      "shortNarration": "Nc3 supports the d4 pawn, eyes e4 and b5, and pressures Black's queenside."
+    }
+  ]
+}

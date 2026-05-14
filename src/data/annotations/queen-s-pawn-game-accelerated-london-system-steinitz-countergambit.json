@@ -1,0 +1,25 @@
+{
+  "openingId": "queen-s-pawn-game-accelerated-london-system-steinitz-countergambit",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, establishing immediate control over the central e5 square and opening lines for our dark-squared bishop and queen. This move stakes our claim to the center while keeping our options open for various setups - we could transpose into a Queen's Gambit, London System, or other d4 openings depending on how our opponent responds. The d4 move is more positional than 1.e4, often leading to slower, more strategic middlegames where pawn structure and piece coordination matter more than immediate tactics. By controlling the center from the start, we're following classical opening principles while maintaining maximum flexibility in our development choices.",
+      "shortNarration": "1.d4 controls e5, opens lines for the queen and dark-squared bishop, and leads to slower, strategic middlegames."
+    },
+    {
+      "san": "d5",
+      "annotation": "Our opponent mirrors our central pawn move, immediately challenging our control of the center and establishing their own stake in the middle of the board. This symmetrical response shows Black wants to fight for equal space rather than allow us to dominate the center unopposed. The d5 pawn controls the crucial c4 and e4 squares, preventing us from easily advancing our pieces to these strong central outposts. Black's move also opens lines for their light-squared bishop and queen, creating potential for active piece development. This is one of the most principled responses to 1.d4, leading to rich middlegame positions where both sides have legitimate chances for an advantage.",
+      "shortNarration": "Black mirrors 1.d4 with 1.d5, fighting for central space and opening lines for the queen and light-squared bishop."
+    },
+    {
+      "san": "Bf4",
+      "annotation": "We're playing the London System setup by developing our dark-squared bishop to f4 before playing Nf3, which is why this is called the 'Accelerated' London. This bishop placement is the hallmark of the London System - it controls the important e5 square and supports a potential e4 pawn advance later. The bishop on f4 also eyes the weakened c7 square and can potentially create threats along the a1-h8 diagonal if Black castles kingside. By developing the bishop early, we avoid the common issue in many d4 openings where this piece gets blocked in by our own pawns, particularly after moves like e3 or c3. This setup gives us a solid, easy-to-play position with clear development plans and typical middlegame ideas involving central control and kingside pressure.",
+      "shortNarration": "The dark-squared bishop on f4 controls e5, eyes c7, and supports a later e4 advance — hallmark of the Accelerated London."
+    },
+    {
+      "san": "c5",
+      "annotation": "Black strikes back in the center with the Steinitz Countergambit, immediately challenging our d4 pawn and creating sharp tactical complications. This aggressive response shows our opponent isn't content with passive development - they're trying to disrupt our London System setup and create immediate central tension. The c5 move attacks our d-pawn and potentially opens the c-file for Black's rook after future exchanges, while also freeing the queen's path along the d8-h4 diagonal. We now face a critical decision: we can capture on c5 (leading to more open positions), defend with c3, or even ignore the attack temporarily with Nf3. Black's counterplay is based on the idea that our early Bf4 might be somewhat premature, as the bishop could become a target or we might need to spend time repositioning it after the central pawn structure changes.",
+      "shortNarration": "Black's c5 challenges the d4 pawn, opening the c-file and queen's diagonal — capture, defend with c3, or ignore with Nf3."
+    }
+  ]
+}

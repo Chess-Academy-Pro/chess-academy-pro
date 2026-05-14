@@ -1,0 +1,55 @@
+{
+  "openingId": "queen-s-gambit-declined-modern-variation-knight-defense",
+  "moveAnnotations": [
+    {
+      "san": "d4",
+      "annotation": "We're opening with the queen's pawn, immediately staking a claim to the central e5 and c5 squares while opening lines for our dark-squared bishop and queen. This move signals our intention to build a strong pawn center and control key central territory. The d4 opening typically leads to more positional, strategic games compared to 1.e4, as we're prioritizing long-term central control over immediate piece activity. Our plan will often involve supporting this pawn with moves like c4, creating the famous 'queen's pawn complex' that can dominate the center.",
+      "shortNarration": "1.d4 stakes a claim to e5 and c5, opens lines for the bishop and queen, and sets up a positional pawn center."
+    },
+    {
+      "san": "d5",
+      "annotation": "Black immediately challenges our central pawn with the most direct and principled response, fighting for their fair share of the center. This move controls the e4 and c4 squares, preventing us from easily advancing our pawns and establishing a broad pawn front. Our opponent is signaling a solid, classical approach rather than allowing us to build an unchallenged pawn center. Black's d5 pawn will often become a key strategic element in the position, and many of Black's pieces will be organized around supporting and maintaining this central foothold.",
+      "shortNarration": "Black's d5 challenges e4, controls c4, and becomes a key central foothold around which their pieces organize."
+    },
+    {
+      "san": "c4",
+      "annotation": "We're playing the famous Queen's Gambit, offering to trade our c-pawn for Black's central d5 pawn to gain central control and open lines for our pieces. This isn't truly a 'gambit' since if Black captures with dxc4, we can easily recapture and maintain material equality while gaining tempo. The move immediately puts pressure on Black's d5 pawn, forcing them to make a critical decision about the pawn structure. Our c4 pawn also eyes the important d5 and b5 squares, beginning to create the tension that defines this opening system.",
+      "shortNarration": "The Queen's Gambit offers the c-pawn for d5 — if Black takes, White recaptures with tempo and gains central control."
+    },
+    {
+      "san": "e6",
+      "annotation": "Black declines the Queen's Gambit by solidly defending the d5 pawn with the king's pawn, leading us into the Queen's Gambit Declined (QGD). This move creates a solid pawn chain on d5-e6 that controls key central squares, but it also blocks in Black's light-squared bishop on c8. Our opponent is choosing a more positional approach, prioritizing pawn structure solidity over piece activity in the short term. The e6 pawn also prepares potential breaks like ...c5 or ...f5 later in the game, though Black must be careful about weakening the kingside.",
+      "shortNarration": "Black's e6 solidifies the d5 pawn chain but blocks the c8 bishop, preparing ...c5 or ...f5 breaks later."
+    },
+    {
+      "san": "Nc3",
+      "annotation": "We develop our knight to its ideal square, adding pressure to the d5 pawn and preparing to support our central pawn advances. This knight controls important squares like e4, b5, and d5, while also preparing potential moves like e4 if Black ever captures on c4. The knight on c3 is a cornerstone piece in QGD structures, often supporting advances like e4 or b4 depending on how the position develops. We're also keeping our options open for different pawn breaks and piece configurations, as the knight from c3 can jump to various squares like e4, b5, or even a4 in some lines.",
+      "shortNarration": "Knight to c3 pressures d5, controls e4 and b5, and supports central pawn breaks."
+    },
+    {
+      "san": "Nf6",
+      "annotation": "Black develops their kingside knight to its ideal square, where it attacks our e4 square and prepares kingside castling while adding indirect defense to the d5 pawn. This is the most active move in the QGD, as the knight on f6 fits perfectly into Black's defensive setup. Our opponent is following classical opening principles by developing pieces toward the center while maintaining the solid pawn structure. The knight on f6 also prepares tactical possibilities like ...Ne4 if we're not careful with our piece coordination, and it supports potential pawn breaks like ...c5.",
+      "shortNarration": "Black's knight on f6 attacks e4, prepares kingside castling, and supports the d5 pawn and a future ...c5 break."
+    },
+    {
+      "san": "Bg5",
+      "annotation": "We develop our light-squared bishop to an aggressive square where it pins Black's knight to the queen, creating immediate tactical pressure. This pin is one of the most challenging aspects Black faces in the QGD, as the knight on f6 becomes somewhat restricted in its movement. The bishop on g5 also supports our central control by eyeing the e7 square and potentially preparing to exchange on f6, which would damage Black's kingside pawn structure. We're increasing the pressure on Black's position and forcing them to deal with this pin before they can comfortably complete their development.",
+      "shortNarration": "Bishop to g5 pins the knight to the queen, pressuring Black's development and threatening to double Black's kingside pawns."
+    },
+    {
+      "san": "Nbd7",
+      "annotation": "Black develops their other knight to d7, which is the most flexible square in this position as it doesn't block the c8 bishop's potential escape routes. This knight can later jump to useful squares like b6, f6 (if the f6 knight moves), or e5, providing Black with good piece coordination. Our opponent is also preparing to challenge our light-squared bishop with moves like ...h6, as the knight on d7 can support the kingside if needed. The move keeps Black's options open while avoiding the more committal ...Nc6, which would block the c-pawn and limit Black's queenside pawn breaks.",
+      "shortNarration": "Knight to d7 keeps options open, avoids blocking the c-pawn, and can later jump to b6, f6, or e5."
+    },
+    {
+      "san": "e3",
+      "annotation": "We solidify our pawn center and prepare to develop our dark-squared bishop, typically to d3 or e2, while also preparing to castle kingside. This move creates a solid pawn triangle on c4-d4-e3 that provides excellent central control and prevents Black from easily challenging our position. The e3 pawn also supports potential f4 advances later in the middlegame, giving us attacking chances on the kingside. While this move is more restrained than the aggressive e4, it fits perfectly with the positional nature of the QGD, where we build our advantage gradually through superior piece coordination and central control.",
+      "shortNarration": "Solidifies the pawn triangle on c4-d4-e3, controls the center, and prepares to develop the dark-squared bishop and castle kingside."
+    },
+    {
+      "san": "c6",
+      "annotation": "Black plays the central idea of the Modern Variation, supporting their d5 pawn with the c-pawn and preparing potential queenside expansion with ...b5 or central breaks with ...c5. This pawn move creates a solid defensive structure while giving Black more options for active piece play, as the c8 bishop now has the potential b7 square available. Our opponent is also preventing any Nb5 ideas from our side and maintaining maximum flexibility in the position. The c6 move is particularly effective because it doesn't commit Black to any specific pawn structure while keeping all their strategic options open for the middlegame.",
+      "shortNarration": "c6 supports d5, enables ...b5 or ...c5 breaks, opens b7 for the bishop, and prevents Nb5."
+    }
+  ]
+}
