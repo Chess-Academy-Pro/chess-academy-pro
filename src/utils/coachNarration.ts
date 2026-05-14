@@ -78,3 +78,31 @@ export function resolvePhaseNarrationVerbosity(
   if (prefs.coachNarration === 'full') return 'standard';
   return prefs.phaseNarrationVerbosity ?? 'standard';
 }
+
+/**
+ * Resolves the LLM-output-length knob (legacy `coachVerbosity`) for
+ * per-move commentary on /coach/play. Tied to the unified
+ * `coachNarration` setting so Brief actually produces SHORT LLM
+ * output instead of full-length prose:
+ *
+ *   - coachNarration='silent' → 'none'   (short-circuits the LLM call)
+ *   - coachNarration='brief'  → 'fast'   (LLM gets the brief-length cap in its prompt)
+ *   - coachNarration='full'   → legacy `coachVerbosity` (default 'unlimited')
+ *
+ * Audit (CoachGamePage.tsx:2662) caught this: `narrationDensity` was
+ * being read straight from `coachVerbosity` and defaulted to
+ * 'unlimited' on every profile that never touched the legacy dial.
+ * That meant Brief-mode key-moment narrations still came back as
+ * full-length prose — same three-way-verbosity confusion the unified
+ * setting was supposed to fix, just hiding one level deeper.
+ */
+export function resolveLlmNarrationDensity(
+  prefs: Pick<UserPreferences, 'coachNarration' | 'coachVerbosity'> | undefined | null,
+): 'none' | 'fast' | 'medium' | 'slow' | 'unlimited' {
+  if (!prefs) return 'unlimited';
+  if (prefs.coachNarration === 'silent') return 'none';
+  if (prefs.coachNarration === 'brief') return 'fast';
+  // 'full' or unset → legacy coachVerbosity (for old profiles that
+  // touched the dial pre-unification) or 'unlimited' default.
+  return prefs.coachVerbosity ?? 'unlimited';
+}

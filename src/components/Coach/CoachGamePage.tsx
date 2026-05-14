@@ -134,7 +134,7 @@ async function evaluateExplorerCandidates(
   return results.filter((r): r is MoveEvaluation => r !== null);
 }
 import { resolveVerbosity, shouldCallLlmForMove } from '../../services/coachCommentaryPolicy';
-import { resolvePhaseNarrationVerbosity } from '../../utils/coachNarration';
+import { resolvePhaseNarrationVerbosity, resolveLlmNarrationDensity } from '../../utils/coachNarration';
 import { BLUNDER_ALERT_ADDITION, EXPLORE_REACTION_ADDITION } from '../../services/coachPrompts';
 import { stockfishEngine } from '../../services/stockfishEngine';
 import { resolveConfig as resolvePlayConfig } from '../../services/coachPlaySession';
@@ -2654,13 +2654,18 @@ export function CoachGamePage({ surfaceMode = 'play' }: CoachGamePageProps = {})
     // Bug observed in production audit ac8088d. WO-NARR-POLICY-03.
     let llmProducedSpeech = false;
     const verbosity = resolveVerbosity(useAppStore.getState().activeProfile);
-    // Narration density — separate from the commentary-gate verbosity
-    // above. Honors the user's Settings toggle (none/fast/medium/slow)
-    // so the LLM output matches the chosen depth. 'none' short-circuits
-    // the LLM call entirely so no tokens are burned producing text
-    // we'd throw away.
-    const narrationDensity =
-      useAppStore.getState().activeProfile?.preferences.coachVerbosity ?? 'unlimited';
+    // Narration density — drives the LLM-output-length knob in the
+    // per-move commentary prompt. Tied to the unified Coach Narration
+    // setting via `resolveLlmNarrationDensity`:
+    //   - Silent → 'none' (short-circuits the LLM call entirely)
+    //   - Brief  → 'fast' (LLM gets the brief-length cap)
+    //   - Full   → legacy coachVerbosity (default 'unlimited')
+    // Pre-fix the density was read straight from coachVerbosity which
+    // defaulted to 'unlimited' on every profile that never touched
+    // the legacy dial — so Brief produced full-length narrations.
+    const narrationDensity = resolveLlmNarrationDensity(
+      useAppStore.getState().activeProfile?.preferences,
+    );
     // Auto-detect the opening from the SAN move history so opening
     // teaching mode activates whenever the position matches a known
     // book line — even if the student didn't pick a subject from the

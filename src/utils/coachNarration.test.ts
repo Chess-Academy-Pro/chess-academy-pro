@@ -3,6 +3,7 @@ import {
   resolveCoachNarration,
   coachNarrationToLength,
   resolvePhaseNarrationVerbosity,
+  resolveLlmNarrationDensity,
 } from './coachNarration';
 
 describe('resolveCoachNarration', () => {
@@ -130,5 +131,55 @@ describe('resolvePhaseNarrationVerbosity', () => {
     expect(
       resolvePhaseNarrationVerbosity({ phaseNarrationVerbosity: 'full' }),
     ).toBe('full');
+  });
+});
+
+describe('resolveLlmNarrationDensity', () => {
+  it('defaults to unlimited for empty/undefined prefs', () => {
+    expect(resolveLlmNarrationDensity(undefined)).toBe('unlimited');
+    expect(resolveLlmNarrationDensity(null)).toBe('unlimited');
+    expect(resolveLlmNarrationDensity({})).toBe('unlimited');
+  });
+
+  it('maps unified coachNarration to LLM density', () => {
+    expect(resolveLlmNarrationDensity({ coachNarration: 'silent' })).toBe('none');
+    expect(resolveLlmNarrationDensity({ coachNarration: 'brief' })).toBe('fast');
+    expect(resolveLlmNarrationDensity({ coachNarration: 'full' })).toBe('unlimited');
+  });
+
+  it('coachNarration wins over legacy coachVerbosity (silent/brief)', () => {
+    expect(
+      resolveLlmNarrationDensity({
+        coachNarration: 'silent',
+        coachVerbosity: 'unlimited',
+      }),
+    ).toBe('none');
+    expect(
+      resolveLlmNarrationDensity({
+        coachNarration: 'brief',
+        coachVerbosity: 'unlimited',
+      }),
+    ).toBe('fast');
+  });
+
+  it('Full mode honors the legacy coachVerbosity for power users', () => {
+    expect(
+      resolveLlmNarrationDensity({
+        coachNarration: 'full',
+        coachVerbosity: 'slow',
+      }),
+    ).toBe('slow');
+    expect(
+      resolveLlmNarrationDensity({
+        coachNarration: 'full',
+        coachVerbosity: 'medium',
+      }),
+    ).toBe('medium');
+  });
+
+  it('falls back to legacy coachVerbosity when unified unset', () => {
+    expect(resolveLlmNarrationDensity({ coachVerbosity: 'fast' })).toBe('fast');
+    expect(resolveLlmNarrationDensity({ coachVerbosity: 'none' })).toBe('none');
+    expect(resolveLlmNarrationDensity({ coachVerbosity: 'unlimited' })).toBe('unlimited');
   });
 });
