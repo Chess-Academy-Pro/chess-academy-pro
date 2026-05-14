@@ -720,6 +720,28 @@ If `git push` keeps failing, fall back to `vercel --prod` to push the
 deployment without going through GitHub — the git history will then
 be local-only until the push resolves.
 
+**Parallel Claude sessions are common.** Dave often runs multiple
+Claude sessions in parallel on this repo, each auditing a different
+tab (settings, endgame, coach-teach, opening-traps, review, tactics,
+etc.). They commit locally AND push to `origin` via merged PRs.
+Consequences:
+
+- Before pushing, ALWAYS run `git fetch origin && git log HEAD..origin/main`
+  to see if other sessions have advanced origin.
+- If origin has moved, the rebase will conflict on any file the
+  other sessions also touched. SettingsPage, useTeachWalkthrough,
+  coach narration paths, endgame JSONs are hot spots.
+- If you find a local commit you didn't make (some other "feat(...)"
+  on your HEAD), it's from another session on this machine — leave
+  it alone unless Dave says otherwise.
+- The safe fallback when origin diverges is `vercel --prod` to ship
+  the deployment + report the divergence to Dave so he can resolve
+  the merge with full context. Don't force-push or `reset --hard
+  origin/main` blindly — you'd lose another session's work.
+- Coordinate via Dave when working surfaces another session might
+  also be on. He'll say "audit running on X tab" if there's a
+  conflict in flight; stand down on those files until clear.
+
 ## Before Finishing a Session
 
 1. All tests pass (`npm run test:run`)
