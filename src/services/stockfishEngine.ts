@@ -290,7 +290,28 @@ class StockfishEngine {
 
       const tryStart = (forceSingle: boolean): void => {
         let resolved: ResolvedWorker;
-        if (forceSingle) {
+        // WO-STOCKFISH-SWAP audit (2026-05-15): iOS Safari MUST short-
+        // circuit BEFORE the forceSingle / sticky-fallback branches.
+        // Both fallback paths route to STOCKFISH_ST_URL (the lite-
+        // single bundle), which crashes 5+ times/sec on iOS Safari
+        // with `RuntimeError: call_indirect to a signature that does
+        // not match`. Live audit at build 7eca7c3 captured 120 such
+        // errors in 15 min on /coach/endgame because the persisted
+        // `_runtimeFallbackAttempted` flag bypassed the iOS check.
+        // iOS Safari → lila is the only safe path; force-single on
+        // iOS would just crash the single bundle the same way.
+        if (isIosSafari()) {
+          resolved = {
+            url: LILA_BRIDGE_URL,
+            variant: 'lila',
+            reason: forceSingle
+              ? 'iOS Safari — lila (forceSingle ignored: lite crashes on this host)'
+              : this._runtimeFallbackAttempted
+                ? 'iOS Safari — lila (sticky-fallback ignored: lite crashes on this host)'
+                : 'iOS Safari detected — using lila-stockfish-web sf16-7 (stockfish-18-lite crashes on this host)',
+            workerType: 'module',
+          };
+        } else if (forceSingle) {
           resolved = {
             url: STOCKFISH_ST_URL,
             variant: 'single',

@@ -752,6 +752,15 @@ export function CoachTeachPage(): JSX.Element {
         { regex: /\bplay\s+(?:it\s+)?(?:for\s+)?real\s+(?:the\s+)?/i, stage: 'play-real' },
       ];
       const trimmed = text.trim();
+      // Live audit (build 7eca7c3) caught the user message being
+      // appended to chat-teach memory TWICE on every non-opening
+      // input: once at line ~852 inside the surface-routing branch
+      // (`if (requestedName)`), and again at line ~1403 in the main
+      // brain path after the pre-flight rejection falls through. The
+      // duplicate doubles the conversation context size sent to the
+      // LLM and pollutes the model's input. This flag short-circuits
+      // the second append when the first one fired.
+      let userMessageAppended = false;
       let stageHint:
         | 'concepts'
         | 'findMove'
@@ -856,6 +865,7 @@ export function CoachTeachPage(): JSX.Element {
           fen: gameRef.current.fen,
           trigger: null,
         });
+        userMessageAppended = true;
 
         // ── Tier 1: Static registry (instant). ─────────────────
         if (staticTree) {
@@ -1400,13 +1410,16 @@ export function CoachTeachPage(): JSX.Element {
       details: JSON.stringify({ fen, turn: fenTurn, overrideFen: !!overrideFen }),
     });
 
-    useCoachMemoryStore.getState().appendConversationMessage({
-      surface: 'chat-teach',
-      role: 'user',
-      text,
-      fen,
-      trigger: null,
-    });
+    if (!userMessageAppended) {
+      useCoachMemoryStore.getState().appendConversationMessage({
+        surface: 'chat-teach',
+        role: 'user',
+        text,
+        fen,
+        trigger: null,
+      });
+      userMessageAppended = true;
+    }
 
     // Auto-pause the walkthrough when the student asks a chat
     // question while it's running. This frees the audio channel so

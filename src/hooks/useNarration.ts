@@ -49,17 +49,37 @@ export function useNarration({
   // Same supersession pattern as useStrictNarration.
   const tokenRef = useRef(0);
   const currentTextRef = useRef<string>('');
+  // Last-spoken-text dedup: live audit (build 7eca7c3) caught the SAME
+  // narration "White's a-pawn races to a8..." spoken 5× within 21s on
+  // /coach/endgame — once per re-render where text was already in
+  // flight or just finished. Tracking the last-spoken value (and a
+  // recent-finish timestamp) suppresses re-fires for the same content
+  // within a 6 s window — long enough to cover typical TTS playback
+  // for a 300-char narration, short enough that a deliberate replay
+  // (user clicks the replay button after listening) still speaks.
+  const lastSpokenRef = useRef<{ text: string; ts: number } | null>(null);
+  const DEDUP_WINDOW_MS = 6000;
 
   // Speak `t` if non-empty. Bumps the token first so any in-flight
   // speak from a prior call sees its token go stale.
   const speakNow = useCallback((t: string): void => {
-    tokenRef.current += 1;
-    const myToken = tokenRef.current;
-    currentTextRef.current = t;
     if (!t) {
+      tokenRef.current += 1;
+      currentTextRef.current = '';
       voiceService.stop();
       return;
     }
+    // Dedup: skip if we just spoke this exact text. Replay() path
+    // bypasses this (it bumps the token without setting lastSpokenRef
+    // beforehand), so explicit user-driven re-speaks still work.
+    const last = lastSpokenRef.current;
+    if (last && last.text === t && Date.now() - last.ts < DEDUP_WINDOW_MS) {
+      return;
+    }
+    tokenRef.current += 1;
+    const myToken = tokenRef.current;
+    currentTextRef.current = t;
+    lastSpokenRef.current = { text: t, ts: Date.now() };
     void voiceService.speakForced(t).catch(() => {
       // Speak failures (network, audio context, etc.) are already
       // logged by voiceService.lastSpeakDiagnostic. Don't throw
@@ -94,6 +114,10 @@ export function useNarration({
 
   const replay = useCallback((): void => {
     if (!enabled) return;
+    // Explicit user-driven replay bypasses the dedup window — the
+    // user clicked the replay button and EXPECTS to hear the same
+    // narration again.
+    lastSpokenRef.current = null;
     speakNow(currentTextRef.current);
   }, [enabled, speakNow]);
 
