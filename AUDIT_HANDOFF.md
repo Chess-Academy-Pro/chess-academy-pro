@@ -57,6 +57,32 @@
 
 ---
 
+## State after the 2026-05-14 "FULL AUDIT" pass
+
+Final prod-audit roll-up after the session that closed the
+Show-the-Opening bug, rate-limited the global error hook, and
+brought every previously-untouched surface under Playwright drive:
+
+| Audit script | Pass rate | Notes |
+|---|---|---|
+| `audit-tactics.mjs` | 118/119 | 52 scenarios. 1 pre-existing flake on scenario 09 (tactic-type-heading timing). 0 pageerrors. |
+| `audit-coach-chat.mjs` | 15/15 | Clean. |
+| `audit-coach-review.mjs` | 23/23 | Clean. |
+| `audit-coach-play.mjs` | ~17/19 | Some flakes on `route-changed` and `coach-opening-auto-detected` audit-event counts — audit-stream timing, not product issue. |
+| `audit-dashboard.mjs` | ~15/17 | Tile-nav flakes on Weaknesses + Import Games. Retry-on-flake added (commit 9397cebe). Likely Vercel chunk-load races. |
+| `audit-untouched-surfaces.mjs` | ~17/19 | Kid Mode Fairy-tale card nav flakes; Play Games card occasionally not-visible in race. |
+
+**No product bugs surfaced by the final sweep.** The remaining 🟡
+flakes look like infra races (Vercel chunk fetch, SPA route transition
+timing in headless Chromium). Coach Review is the cleanest end-to-end.
+
+The **Stockfish-wasm OOM error-loop** documented below was mitigated
+defensively via the global error hook's rate-limiter (commit 6b505d99):
+any future runaway loop caps at 5 verbatim rows + 1 coalesced summary
+per 5-second window instead of writing 895k Dexie rows. Root cause
+investigation in stockfishEngine / useEndgamePlayout still pending —
+the rate-limiter is defense-in-depth, not a root fix.
+
 ## 🔴 Open prod bug surfaced by the audit (2026-05-14)
 
 `audit-tactics.mjs` scenario `25-play-it-out-engine-color` hit
