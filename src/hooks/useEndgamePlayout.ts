@@ -86,6 +86,14 @@ export interface EndgamePlayoutOptions {
    *  accepts and advances (curated-style). Empty/undefined keeps the
    *  default exact-match behavior. */
   acceptableSans?: string[];
+  /** Explicit student side — overrides the default behavior of
+   *  inferring from `startFen.split(' ')[1]`. Required when the
+   *  startFen is captured mid-game (e.g. Play-it-out vs Stockfish
+   *  from a tactic puzzle's terminal position) and the side-to-move
+   *  in the FEN is the OPPONENT, not the student. Without this
+   *  override the hook flips sides on the user and Stockfish plays
+   *  the student's color. */
+  studentSide?: 'white' | 'black';
 }
 
 export type PlayoutPhase =
@@ -208,6 +216,7 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     extendToObviousWin = false,
     replyDelayMs = 450,
     acceptableSans,
+    studentSide: studentSideOverride,
   } = options;
   // Extend-to-obvious-win implies fallback is on; treat them as
   // a single effective flag in the playOpponentReply path.
@@ -229,8 +238,8 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
   }, [effectiveLine]);
 
   const studentSide = useMemo<'white' | 'black'>(
-    () => (startFen.split(' ')[1] === 'w' ? 'white' : 'black'),
-    [startFen],
+    () => studentSideOverride ?? (startFen.split(' ')[1] === 'w' ? 'white' : 'black'),
+    [startFen, studentSideOverride],
   );
 
   // chess.js instance is owned by a ref so it doesn't re-create on
@@ -396,6 +405,25 @@ export function useEndgamePlayout(options: EndgamePlayoutOptions): EndgamePlayou
     extendToObviousWin,
     studentSide,
   ]);
+
+  // Kick Stockfish off when the playout mounts in fallback mode with
+  // the OPPONENT to move (e.g. tactic-puzzle Play-it-out, where the
+  // captured FEN was taken right after the student's last curated move
+  // so it's now the opponent's turn). Without this the UI sits in
+  // 'student-to-move' but the student can't legally move because it
+  // isn't their turn — and the engine never wakes up.
+  useEffect(() => {
+    if (!stockfishFallback) return;
+    if (effectiveLine.length > 0) return; // curated line drives turn order
+    if (chessRef.current.history().length > 0) return; // already in motion
+    const turn = chessRef.current.turn(); // 'w' | 'b'
+    const studentTurn = studentSide === 'white' ? 'w' : 'b';
+    if (turn === studentTurn) return;
+    void playOpponentReply();
+    // playOpponentReply is a useCallback that we intentionally exclude
+    // from the deps — including it would re-kick on every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startFen, stockfishFallback, effectiveLine.length, studentSide]);
 
   /** Attempt a move at the current position. Returns true when the
    *  move was accepted (curated-correct or in-fallback legal),

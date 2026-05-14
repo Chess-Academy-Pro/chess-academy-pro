@@ -781,6 +781,12 @@ function PuzzleView({ puzzle, onExit, onResult, onNext }: PuzzleViewProps): JSX.
     fallbackPliesToPlay: mode === 'playing-out' ? 50 : undefined,
     fallbackDifficulty: 'hard',
     replyDelayMs: 450,
+    // Pin the student to puzzle.studentColor so Play-it-out doesn't
+    // flip sides: the captured playOutStartFen has the OPPONENT's
+    // turn-to-move (curated line just finished on a student move),
+    // and without this override the hook would infer the opponent's
+    // color as the student and let Stockfish play OUR pieces.
+    studentSide,
   });
   const clickToMove = useClickToMove(playout);
 
