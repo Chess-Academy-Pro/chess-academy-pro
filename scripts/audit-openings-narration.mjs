@@ -63,18 +63,49 @@ const asJson = args.has('--json');
 
 function loadOpeningsById() {
   const raw = JSON.parse(readFileSync(OPENINGS_PATH, 'utf8'));
+  // Multiple openings can share the same slug — Lichess assigns the
+  // same name to different PGN sequences (e.g. "Barnes Opening:
+  // Gedult Gambit" has two variants). Store the FULL LIST per slug
+  // so the auditor can pick whichever variant the annotation file
+  // actually matches.
   const byId = new Map();
   for (const row of raw) {
-    // dataLoader stores IDs as slugify(`${eco}-${name}`) but the
-    // annotation files use the ECO-stripped form (matches
-    // annotationService.ts:108 resolveAnnotationId). Index by BOTH
-    // so the lookup is robust.
     const fullId = slugify(`${row.eco}-${row.name}`);
     const nameOnlyId = slugify(row.name);
-    byId.set(fullId, row);
-    if (!byId.has(nameOnlyId)) byId.set(nameOnlyId, row);
+    if (!byId.has(fullId)) byId.set(fullId, []);
+    if (!byId.has(nameOnlyId)) byId.set(nameOnlyId, []);
+    byId.get(fullId).push(row);
+    byId.get(nameOnlyId).push(row);
   }
   return byId;
+}
+
+/** Pick the opening variant whose PGN best matches the annotation's
+ *  SAN sequence. Returns the variant + its plies. When multiple
+ *  variants tie (or there's only one), returns the first. */
+function pickBestVariant(variants, ann) {
+  if (variants.length === 1) {
+    return { row: variants[0], plies: replayPgn(variants[0].pgn) };
+  }
+  let best = null;
+  for (const row of variants) {
+    let plies;
+    try {
+      plies = replayPgn(row.pgn);
+    } catch {
+      continue;
+    }
+    // Score: number of consecutive matching SANs starting from ply 1.
+    let matches = 0;
+    for (let i = 0; i < Math.min(plies.length, ann.moveAnnotations.length); i += 1) {
+      const claimSan = stripSan(ann.moveAnnotations[i].san ?? '');
+      const truthSan = stripSan(plies[i].san);
+      if (claimSan === truthSan) matches += 1;
+      else break;
+    }
+    if (!best || matches > best.matches) best = { row, plies, matches };
+  }
+  return best ? { row: best.row, plies: best.plies } : null;
 }
 
 /** Replay a SAN-only PGN body, return per-ply { san, fenBefore, fenAfter,
@@ -130,13 +161,20 @@ function auditAnnotation(filename, openingId, ann, plies) {
   const errors = [];
   const pushErr = (e) => errors.push({ file: filename, openingId, ...e });
 
-  // annotation-length-drift
-  if (ann.moveAnnotations.length !== plies.length) {
+  // annotation-length-drift — split into OVERFLOW vs SHORTFALL.
+  // Per 2026-05-14 conversation: shortfall (fewer annotations than
+  // PGN plies) is allowed — the unannotated plies just don't get
+  // narration. Overflow (more annotations than plies) is a real bug
+  // because the surplus annotations describe positions that don't
+  // exist in the PGN.
+  if (ann.moveAnnotations.length > plies.length) {
     pushErr({
-      class: 'annotation-length-drift',
+      class: 'annotation-overflow',
       claim: `${ann.moveAnnotations.length} moveAnnotations`,
-      pgnTruth: `${plies.length} plies`,
+      pgnTruth: `${plies.length} plies — surplus ${ann.moveAnnotations.length - plies.length} describes nonexistent positions`,
     });
+  } else if (ann.moveAnnotations.length < plies.length) {
+    // Shortfall — info only, not flagged as error.
   }
 
   for (let i = 0; i < ann.moveAnnotations.length; i += 1) {
@@ -248,8 +286,8 @@ function main() {
       continue;
     }
 
-    const opening = byId.get(ann.openingId);
-    if (!opening) {
+    const variants = byId.get(ann.openingId);
+    if (!variants || variants.length === 0) {
       errors.push({
         file, openingId: ann.openingId,
         class: 'opening-id-pgn-drift',
@@ -260,9 +298,9 @@ function main() {
       continue;
     }
 
-    let plies;
+    let pick;
     try {
-      plies = replayPgn(opening.pgn);
+      pick = pickBestVariant(variants, ann);
     } catch (e) {
       errors.push({
         file, openingId: ann.openingId,
@@ -273,8 +311,18 @@ function main() {
       unparseable += 1;
       continue;
     }
+    if (!pick) {
+      errors.push({
+        file, openingId: ann.openingId,
+        class: 'unparseable',
+        claim: 'no variant has a replayable PGN',
+        pgnTruth: variants.map(v => v.pgn).join(' || '),
+      });
+      unparseable += 1;
+      continue;
+    }
 
-    errors.push(...auditAnnotation(file, ann.openingId, ann, plies));
+    errors.push(...auditAnnotation(file, ann.openingId, ann, pick.plies));
     scanned += 1;
   }
 

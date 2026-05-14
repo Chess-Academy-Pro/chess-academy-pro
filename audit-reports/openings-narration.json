@@ -1,11 +1,11 @@
 {
   "scanned": 1378,
-  "totalErrors": 1851,
+  "totalErrors": 1658,
   "byClass": {
     "opening-id-pgn-drift": 537,
-    "piece-on-square-mismatch": 1033,
-    "annotation-length-drift": 128,
-    "san-mismatch": 153
+    "piece-on-square-mismatch": 1076,
+    "san-mismatch": 32,
+    "annotation-overflow": 13
   },
   "errors": [
     {
@@ -490,13 +490,6 @@
       "snippet": "lack castles kingside, as our bishop on b2 will aim directly at the weakened squ"
     },
     {
-      "file": "alekhine-defense.json",
-      "openingId": "alekhine-defense",
-      "class": "annotation-length-drift",
-      "claim": "7 moveAnnotations",
-      "pgnTruth": "2 plies"
-    },
-    {
       "file": "amar-opening-paris-gambit-gent-gambit.json",
       "openingId": "amar-opening-paris-gambit-gent-gambit",
       "class": "piece-on-square-mismatch",
@@ -618,37 +611,6 @@
       "pgnTruth": "no matching row in openings-lichess.json"
     },
     {
-      "file": "barnes-opening-gedult-gambit.json",
-      "openingId": "barnes-opening-gedult-gambit",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "7 plies"
-    },
-    {
-      "file": "barnes-opening-gedult-gambit.json",
-      "openingId": "barnes-opening-gedult-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 1,
-      "claim": "annotation.san=\"f5\"",
-      "pgnTruth": "PGN ply 2 is d5"
-    },
-    {
-      "file": "barnes-opening-gedult-gambit.json",
-      "openingId": "barnes-opening-gedult-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"fxe4\"",
-      "pgnTruth": "PGN ply 4 is g6"
-    },
-    {
-      "file": "barnes-opening-gedult-gambit.json",
-      "openingId": "barnes-opening-gedult-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"Nc3\"",
-      "pgnTruth": "PGN ply 5 is d4"
-    },
-    {
       "file": "benko-gambit-accepted-central-storming-variation.json",
       "openingId": "benko-gambit-accepted-central-storming-variation",
       "class": "piece-on-square-mismatch",
@@ -747,29 +709,6 @@
       "claim": "bishop on b7",
       "pgnTruth": "b7 is empty after b6",
       "snippet": "y any potential light-squared bishop on b7, and creates tactical possibilities i"
-    },
-    {
-      "file": "benko-gambit-accepted-yugoslav.json",
-      "openingId": "benko-gambit-accepted-yugoslav",
-      "class": "annotation-length-drift",
-      "claim": "17 moveAnnotations",
-      "pgnTruth": "13 plies"
-    },
-    {
-      "file": "benko-gambit-accepted-yugoslav.json",
-      "openingId": "benko-gambit-accepted-yugoslav",
-      "class": "san-mismatch",
-      "plyIndex": 9,
-      "claim": "annotation.san=\"g6\"",
-      "pgnTruth": "PGN ply 10 is Bxa6"
-    },
-    {
-      "file": "benko-gambit-accepted-yugoslav.json",
-      "openingId": "benko-gambit-accepted-yugoslav",
-      "class": "san-mismatch",
-      "plyIndex": 11,
-      "claim": "annotation.san=\"Bxa6\"",
-      "pgnTruth": "PGN ply 12 is d6"
     },
     {
       "file": "benko-gambit-accepted.json",
@@ -1038,41 +977,22 @@
     {
       "file": "benoni-defense-classical-variation-czerniak-defense.json",
       "openingId": "benoni-defense-classical-variation-czerniak-defense",
-      "class": "annotation-length-drift",
-      "claim": "20 moveAnnotations",
-      "pgnTruth": "18 plies"
-    },
-    {
-      "file": "benoni-defense-classical-variation-czerniak-defense.json",
-      "openingId": "benoni-defense-classical-variation-czerniak-defense",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"e6\"",
-      "pgnTruth": "PGN ply 4 is c5"
-    },
-    {
-      "file": "benoni-defense-classical-variation-czerniak-defense.json",
-      "openingId": "benoni-defense-classical-variation-czerniak-defense",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 5 is d5"
-    },
-    {
-      "file": "benoni-defense-classical-variation-czerniak-defense.json",
-      "openingId": "benoni-defense-classical-variation-czerniak-defense",
-      "class": "san-mismatch",
+      "class": "piece-on-square-mismatch",
       "plyIndex": 5,
-      "claim": "annotation.san=\"c5\"",
-      "pgnTruth": "PGN ply 6 is e6"
+      "field": "annotation",
+      "claim": "bishop on g7",
+      "pgnTruth": "g7 actually has bP after c5",
+      "snippet": "ng to fianchetto their king's bishop on g7, creating a powerful battery along th"
     },
     {
       "file": "benoni-defense-classical-variation-czerniak-defense.json",
       "openingId": "benoni-defense-classical-variation-czerniak-defense",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"d5\"",
-      "pgnTruth": "PGN ply 7 is Nc3"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 5,
+      "field": "shortNarration",
+      "claim": "bishop on g7",
+      "pgnTruth": "g7 actually has bP after c5",
+      "snippet": "the Benoni, fianchettoing the bishop on g7 to pressure the center — advance d5 f"
     },
     {
       "file": "benoni-defense-classical-variation-czerniak-defense.json",
@@ -1097,14 +1017,6 @@
     {
       "file": "benoni-defense-classical-variation-czerniak-defense.json",
       "openingId": "benoni-defense-classical-variation-czerniak-defense",
-      "class": "san-mismatch",
-      "plyIndex": 10,
-      "claim": "annotation.san=\"Nc3\"",
-      "pgnTruth": "PGN ply 11 is e4"
-    },
-    {
-      "file": "benoni-defense-classical-variation-czerniak-defense.json",
-      "openingId": "benoni-defense-classical-variation-czerniak-defense",
       "class": "piece-on-square-mismatch",
       "plyIndex": 11,
       "field": "annotation",
@@ -1121,14 +1033,6 @@
       "claim": "bishop on g7",
       "pgnTruth": "g7 is empty after g6",
       "snippet": "ndatory in the Benoni, as the bishop on g7 will support Black's counterplay whil"
-    },
-    {
-      "file": "benoni-defense-classical-variation-czerniak-defense.json",
-      "openingId": "benoni-defense-classical-variation-czerniak-defense",
-      "class": "san-mismatch",
-      "plyIndex": 12,
-      "claim": "annotation.san=\"e4\"",
-      "pgnTruth": "PGN ply 13 is Nf3"
     },
     {
       "file": "benoni-defense-classical-variation-full-line.json",
@@ -1149,13 +1053,6 @@
       "claim": "pawn on f6",
       "pgnTruth": "f6 actually has bN after d6",
       "snippet": "ential retreat square for the pawn on f6 and prepares kingside development. Whil"
-    },
-    {
-      "file": "benoni-defense-classical-variation-main-line.json",
-      "openingId": "benoni-defense-classical-variation-main-line",
-      "class": "annotation-length-drift",
-      "claim": "7 moveAnnotations",
-      "pgnTruth": "17 plies"
     },
     {
       "file": "benoni-defense-classical-variation-main-line.json",
@@ -1208,45 +1105,6 @@
     {
       "file": "benoni-defense-classical-variation.json",
       "openingId": "benoni-defense-classical-variation",
-      "class": "annotation-length-drift",
-      "claim": "16 moveAnnotations",
-      "pgnTruth": "13 plies"
-    },
-    {
-      "file": "benoni-defense-classical-variation.json",
-      "openingId": "benoni-defense-classical-variation",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"c5\"",
-      "pgnTruth": "PGN ply 4 is e6"
-    },
-    {
-      "file": "benoni-defense-classical-variation.json",
-      "openingId": "benoni-defense-classical-variation",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"d5\"",
-      "pgnTruth": "PGN ply 5 is Nf3"
-    },
-    {
-      "file": "benoni-defense-classical-variation.json",
-      "openingId": "benoni-defense-classical-variation",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"e6\"",
-      "pgnTruth": "PGN ply 6 is c5"
-    },
-    {
-      "file": "benoni-defense-classical-variation.json",
-      "openingId": "benoni-defense-classical-variation",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"Nc3\"",
-      "pgnTruth": "PGN ply 7 is d5"
-    },
-    {
-      "file": "benoni-defense-classical-variation.json",
-      "openingId": "benoni-defense-classical-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 9,
       "field": "annotation",
@@ -1263,22 +1121,6 @@
       "claim": "bishop on g7",
       "pgnTruth": "g7 actually has bP after d6",
       "snippet": "fianchettoes the dark-squared bishop on g7, supporting d6 and preparing a centra"
-    },
-    {
-      "file": "benoni-defense-classical-variation.json",
-      "openingId": "benoni-defense-classical-variation",
-      "class": "san-mismatch",
-      "plyIndex": 10,
-      "claim": "annotation.san=\"e4\"",
-      "pgnTruth": "PGN ply 11 is Nc3"
-    },
-    {
-      "file": "benoni-defense-classical-variation.json",
-      "openingId": "benoni-defense-classical-variation",
-      "class": "san-mismatch",
-      "plyIndex": 12,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 13 is e4"
     },
     {
       "file": "benoni-defense-fianchetto-variation-hastings-defense-main-line.json",
@@ -1303,21 +1145,6 @@
     {
       "file": "benoni-defense-fianchetto-variation.json",
       "openingId": "benoni-defense-fianchetto-variation",
-      "class": "annotation-length-drift",
-      "claim": "16 moveAnnotations",
-      "pgnTruth": "13 plies"
-    },
-    {
-      "file": "benoni-defense-fianchetto-variation.json",
-      "openingId": "benoni-defense-fianchetto-variation",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"g3\"",
-      "pgnTruth": "PGN ply 5 is Nf3"
-    },
-    {
-      "file": "benoni-defense-fianchetto-variation.json",
-      "openingId": "benoni-defense-fianchetto-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 6,
       "field": "annotation",
@@ -1334,14 +1161,6 @@
       "claim": "bishop on g7",
       "pgnTruth": "g7 is empty after g6",
       "snippet": "trategy in the Benoni, as the bishop on g7 will exert influence along the long d"
-    },
-    {
-      "file": "benoni-defense-fianchetto-variation.json",
-      "openingId": "benoni-defense-fianchetto-variation",
-      "class": "san-mismatch",
-      "plyIndex": 12,
-      "claim": "annotation.san=\"Bg2\"",
-      "pgnTruth": "PGN ply 13 is g3"
     },
     {
       "file": "benoni-defense-four-pawns-attack-main-line.json",
@@ -1486,20 +1305,6 @@
       "snippet": "e structure, while the future bishop on g7 will exert pressure along the long di"
     },
     {
-      "file": "benoni-defense-old-benoni.json",
-      "openingId": "benoni-defense-old-benoni",
-      "class": "annotation-length-drift",
-      "claim": "4 moveAnnotations",
-      "pgnTruth": "2 plies"
-    },
-    {
-      "file": "benoni-defense-pawn-storm-variation.json",
-      "openingId": "benoni-defense-pawn-storm-variation",
-      "class": "annotation-length-drift",
-      "claim": "7 moveAnnotations",
-      "pgnTruth": "13 plies"
-    },
-    {
       "file": "benoni-defense-pawn-storm-variation.json",
       "openingId": "benoni-defense-pawn-storm-variation",
       "class": "san-mismatch",
@@ -1568,28 +1373,6 @@
       "snippet": " queen pins the knight to the king on a5, threatening Qxc3+ — Bd2 or a3 consolid"
     },
     {
-      "file": "benoni-defense-zilbermints-benoni-gambit.json",
-      "openingId": "benoni-defense-zilbermints-benoni-gambit",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "3 plies"
-    },
-    {
-      "file": "benoni-defense-zilbermints-benoni-gambit.json",
-      "openingId": "benoni-defense-zilbermints-benoni-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 2,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 3 is b4"
-    },
-    {
-      "file": "benoni-defense.json",
-      "openingId": "benoni-defense",
-      "class": "annotation-length-drift",
-      "claim": "12 moveAnnotations",
-      "pgnTruth": "4 plies"
-    },
-    {
       "file": "benoni-defense.json",
       "openingId": "benoni-defense",
       "class": "piece-on-square-mismatch",
@@ -1602,10 +1385,12 @@
     {
       "file": "benoni-defense.json",
       "openingId": "benoni-defense",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"e6\"",
-      "pgnTruth": "PGN ply 4 is c5"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 11,
+      "field": "annotation",
+      "claim": "bishop on g7",
+      "pgnTruth": "g7 is empty after g6",
+      "snippet": "lack's king. The fianchettoed bishop on g7 will become one of Black's most impor"
     },
     {
       "file": "bird-opening-batavo-polish-attack.json",
@@ -1671,13 +1456,6 @@
       "claim": "knight on c3",
       "pgnTruth": "c3 is empty after b5",
       "snippet": "threatens ...b4 to attack the knight on c3 and prepares queenside expansion, com"
-    },
-    {
-      "file": "bird-opening-williams-gambit.json",
-      "openingId": "bird-opening-williams-gambit",
-      "class": "annotation-length-drift",
-      "claim": "7 moveAnnotations",
-      "pgnTruth": "3 plies"
     },
     {
       "file": "birds-opening.json",
@@ -1844,13 +1622,6 @@
       "pgnTruth": "no matching row in openings-lichess.json"
     },
     {
-      "file": "blackmar-diemer-gambit.json",
-      "openingId": "blackmar-diemer-gambit",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "3 plies"
-    },
-    {
       "file": "blumenfeld-countergambit-accepted.json",
       "openingId": "blumenfeld-countergambit-accepted",
       "class": "piece-on-square-mismatch",
@@ -1963,43 +1734,12 @@
     {
       "file": "bogo-indian-defense-retreat-variation.json",
       "openingId": "bogo-indian-defense-retreat-variation",
-      "class": "annotation-length-drift",
-      "claim": "20 moveAnnotations",
-      "pgnTruth": "8 plies"
-    },
-    {
-      "file": "bogo-indian-defense-retreat-variation.json",
-      "openingId": "bogo-indian-defense-retreat-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 3,
       "field": "annotation",
       "claim": "bishop on b7",
       "pgnTruth": "b7 actually has bP after e6",
       "snippet": "ianchetto their light-squared bishop on b7. Black is also preparing to castle ki"
-    },
-    {
-      "file": "bogo-indian-defense-retreat-variation.json",
-      "openingId": "bogo-indian-defense-retreat-variation",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"d5\"",
-      "pgnTruth": "PGN ply 6 is Bb4+"
-    },
-    {
-      "file": "bogo-indian-defense-retreat-variation.json",
-      "openingId": "bogo-indian-defense-retreat-variation",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"g3\"",
-      "pgnTruth": "PGN ply 7 is Bd2"
-    },
-    {
-      "file": "bogo-indian-defense-retreat-variation.json",
-      "openingId": "bogo-indian-defense-retreat-variation",
-      "class": "san-mismatch",
-      "plyIndex": 7,
-      "claim": "annotation.san=\"Bb4+\"",
-      "pgnTruth": "PGN ply 8 is Be7"
     },
     {
       "file": "bogo-indian-defense-vitolins-variation.json",
@@ -2042,21 +1782,6 @@
       "snippet": "es ...d5 while supporting the pawn on f6 and opening a diagonal for the light-sq"
     },
     {
-      "file": "borg-defense-borg-gambit.json",
-      "openingId": "borg-defense-borg-gambit",
-      "class": "annotation-length-drift",
-      "claim": "4 moveAnnotations",
-      "pgnTruth": "2 plies"
-    },
-    {
-      "file": "borg-defense-borg-gambit.json",
-      "openingId": "borg-defense-borg-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 0,
-      "claim": "annotation.san=\"e4\"",
-      "pgnTruth": "PGN ply 1 is d4"
-    },
-    {
       "file": "budapest-gambit.json",
       "openingId": "budapest-gambit",
       "class": "opening-id-pgn-drift",
@@ -2072,20 +1797,6 @@
       "claim": "bishop on g2",
       "pgnTruth": "g2 actually has wP after f4",
       "snippet": "ring to fianchetto our king's bishop on g2 after g3. However, this move comes wi"
-    },
-    {
-      "file": "caro-kann-defense-accelerated-panov-attack.json",
-      "openingId": "caro-kann-defense-accelerated-panov-attack",
-      "class": "annotation-length-drift",
-      "claim": "4 moveAnnotations",
-      "pgnTruth": "3 plies"
-    },
-    {
-      "file": "caro-kann-defense-advance-variation-van-der-wiel-attack.json",
-      "openingId": "caro-kann-defense-advance-variation-van-der-wiel-attack",
-      "class": "annotation-length-drift",
-      "claim": "13 moveAnnotations",
-      "pgnTruth": "7 plies"
     },
     {
       "file": "caro-kann-defense-breyer-variation-stein-attack.json",
@@ -2222,23 +1933,12 @@
     {
       "file": "caro-kann-defense-classical-variation.json",
       "openingId": "caro-kann-defense-classical-variation",
-      "class": "annotation-length-drift",
-      "claim": "14 moveAnnotations",
-      "pgnTruth": "8 plies"
-    },
-    {
-      "file": "caro-kann-defense-de-bruycker-defense.json",
-      "openingId": "caro-kann-defense-de-bruycker-defense",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "4 plies"
-    },
-    {
-      "file": "caro-kann-defense-exchange-variation.json",
-      "openingId": "caro-kann-defense-exchange-variation",
-      "class": "annotation-length-drift",
-      "claim": "8 moveAnnotations",
-      "pgnTruth": "5 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 10,
+      "field": "annotation",
+      "claim": "pawn on g3",
+      "pgnTruth": "g3 actually has wN after h4",
+      "snippet": "al Caro-Kann when we have the pawn on g3, as it supports our kingside ambitions "
     },
     {
       "file": "caro-kann-defense-gurgenidze-system.json",
@@ -2381,13 +2081,6 @@
       "snippet": "vance ...d5 while keeping the pawn on b8 flexible - it can later go to d7 instea"
     },
     {
-      "file": "caro-kann-defense-panov-attack.json",
-      "openingId": "caro-kann-defense-panov-attack",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "7 plies"
-    },
-    {
       "file": "caro-kann-defense-panov-botvinnik-herzog-defense.json",
       "openingId": "caro-kann-defense-panov-botvinnik-herzog-defense",
       "class": "piece-on-square-mismatch",
@@ -2475,13 +2168,6 @@
       "snippet": "bishop pins the knight to the queen on g4, pressuring our position and forcing a"
     },
     {
-      "file": "caro-kann-defense.json",
-      "openingId": "caro-kann-defense",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "2 plies"
-    },
-    {
       "file": "caro-kann.json",
       "openingId": "caro-kann",
       "class": "opening-id-pgn-drift",
@@ -2497,21 +2183,6 @@
       "claim": "king on h7",
       "pgnTruth": "h7 is empty after h6",
       "snippet": "eates a flight square for the king on h7, and can support a later g5 advance in "
-    },
-    {
-      "file": "catalan-opening-closed-main-line.json",
-      "openingId": "catalan-opening-closed-main-line",
-      "class": "annotation-length-drift",
-      "claim": "23 moveAnnotations",
-      "pgnTruth": "15 plies"
-    },
-    {
-      "file": "catalan-opening-closed-main-line.json",
-      "openingId": "catalan-opening-closed-main-line",
-      "class": "san-mismatch",
-      "plyIndex": 14,
-      "claim": "annotation.san=\"Bf4\"",
-      "pgnTruth": "PGN ply 15 is Nbd2"
     },
     {
       "file": "catalan-opening-closed-sokolsky-variation.json",
@@ -2666,24 +2337,10 @@
     {
       "file": "catalan-opening-closed-zagoryansky-variation.json",
       "openingId": "catalan-opening-closed-zagoryansky-variation",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "17 plies"
-    },
-    {
-      "file": "catalan-opening-closed-zagoryansky-variation.json",
-      "openingId": "catalan-opening-closed-zagoryansky-variation",
       "class": "san-mismatch",
       "plyIndex": 4,
       "claim": "annotation.san=\"d5\"",
       "pgnTruth": "PGN ply 5 is Nf3"
-    },
-    {
-      "file": "catalan-opening-closed.json",
-      "openingId": "catalan-opening-closed",
-      "class": "annotation-length-drift",
-      "claim": "19 moveAnnotations",
-      "pgnTruth": "7 plies"
     },
     {
       "file": "catalan-opening-closed.json",
@@ -2748,49 +2405,22 @@
     {
       "file": "catalan-opening-open-defense-classical-line.json",
       "openingId": "catalan-opening-open-defense-classical-line",
-      "class": "annotation-length-drift",
-      "claim": "12 moveAnnotations",
-      "pgnTruth": "10 plies"
-    },
-    {
-      "file": "catalan-opening-open-defense-classical-line.json",
-      "openingId": "catalan-opening-open-defense-classical-line",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 5 is g3"
-    },
-    {
-      "file": "catalan-opening-open-defense-classical-line.json",
-      "openingId": "catalan-opening-open-defense-classical-line",
-      "class": "san-mismatch",
+      "class": "piece-on-square-mismatch",
       "plyIndex": 6,
-      "claim": "annotation.san=\"g3\"",
-      "pgnTruth": "PGN ply 7 is Bg2"
+      "field": "annotation",
+      "claim": "bishop on g2",
+      "pgnTruth": "g2 is empty after g3",
+      "snippet": "s in chess – the fianchettoed bishop on g2 will control key central squares and "
     },
     {
       "file": "catalan-opening-open-defense-classical-line.json",
       "openingId": "catalan-opening-open-defense-classical-line",
-      "class": "san-mismatch",
-      "plyIndex": 7,
-      "claim": "annotation.san=\"Be7\"",
-      "pgnTruth": "PGN ply 8 is dxc4"
-    },
-    {
-      "file": "catalan-opening-open-defense-classical-line.json",
-      "openingId": "catalan-opening-open-defense-classical-line",
-      "class": "san-mismatch",
-      "plyIndex": 8,
-      "claim": "annotation.san=\"Bg2\"",
-      "pgnTruth": "PGN ply 9 is Nf3"
-    },
-    {
-      "file": "catalan-opening-open-defense-classical-line.json",
-      "openingId": "catalan-opening-open-defense-classical-line",
-      "class": "san-mismatch",
-      "plyIndex": 9,
-      "claim": "annotation.san=\"O-O\"",
-      "pgnTruth": "PGN ply 10 is Be7"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 6,
+      "field": "annotation",
+      "claim": "bishop on g2",
+      "pgnTruth": "g2 is empty after g3",
+      "snippet": "h long-term pressure, and the bishop on g2 becomes a monster that influences the"
     },
     {
       "file": "catalan-opening-open-defense-modern-sharp-variation.json",
@@ -2801,13 +2431,6 @@
       "claim": "bishop on g2",
       "pgnTruth": "g2 actually has wP after d4",
       "snippet": "rm pressure of a fianchettoed bishop on g2. Our plan revolves around controlling"
-    },
-    {
-      "file": "catalan-opening-open-defense.json",
-      "openingId": "catalan-opening-open-defense",
-      "class": "annotation-length-drift",
-      "claim": "11 moveAnnotations",
-      "pgnTruth": "8 plies"
     },
     {
       "file": "catalan-opening-open-defense.json",
@@ -2862,9 +2485,9 @@
     {
       "file": "catalan-opening.json",
       "openingId": "catalan-opening",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "18 moveAnnotations",
-      "pgnTruth": "5 plies"
+      "pgnTruth": "6 plies — surplus 12 describes nonexistent positions"
     },
     {
       "file": "catalan-opening.json",
@@ -2919,9 +2542,9 @@
     {
       "file": "danish-gambit.json",
       "openingId": "danish-gambit",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "47 moveAnnotations",
-      "pgnTruth": "5 plies"
+      "pgnTruth": "5 plies — surplus 42 describes nonexistent positions"
     },
     {
       "file": "dutch-defence.json",
@@ -3090,13 +2713,6 @@
     {
       "file": "dutch-defense-classical-variation.json",
       "openingId": "dutch-defense-classical-variation",
-      "class": "annotation-length-drift",
-      "claim": "12 moveAnnotations",
-      "pgnTruth": "4 plies"
-    },
-    {
-      "file": "dutch-defense-classical-variation.json",
-      "openingId": "dutch-defense-classical-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 2,
       "field": "annotation",
@@ -3107,10 +2723,12 @@
     {
       "file": "dutch-defense-classical-variation.json",
       "openingId": "dutch-defense-classical-variation",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 4 is e6"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 4,
+      "field": "shortNarration",
+      "claim": "bishop on g2",
+      "pgnTruth": "g2 is empty after g3",
+      "snippet": "anchettoing the light-squared bishop on g2 targets Black's weakened light square"
     },
     {
       "file": "dutch-defense-fianchetto-attack.json",
@@ -3181,13 +2799,6 @@
       "claim": "bishop on g2",
       "pgnTruth": "g2 is empty after g3",
       "snippet": " fianchetto our light-squared bishop on g2 where it will exert tremendous pressu"
-    },
-    {
-      "file": "dutch-defense-leningrad-variation.json",
-      "openingId": "dutch-defense-leningrad-variation",
-      "class": "annotation-length-drift",
-      "claim": "9 moveAnnotations",
-      "pgnTruth": "6 plies"
     },
     {
       "file": "dutch-defense-leningrad-variation.json",
@@ -3327,13 +2938,6 @@
       "snippet": "ing to fianchetto the queen's bishop on b7 where it will eye our king along the "
     },
     {
-      "file": "dutch-defense-staunton-gambit.json",
-      "openingId": "dutch-defense-staunton-gambit",
-      "class": "annotation-length-drift",
-      "claim": "7 moveAnnotations",
-      "pgnTruth": "3 plies"
-    },
-    {
       "file": "dutch-defense-stonewall-variation-botvinnik-variation.json",
       "openingId": "dutch-defense-stonewall-variation-botvinnik-variation",
       "class": "piece-on-square-mismatch",
@@ -3386,13 +2990,6 @@
     {
       "file": "dutch-defense-stonewall-variation.json",
       "openingId": "dutch-defense-stonewall-variation",
-      "class": "annotation-length-drift",
-      "claim": "15 moveAnnotations",
-      "pgnTruth": "13 plies"
-    },
-    {
-      "file": "dutch-defense-stonewall-variation.json",
-      "openingId": "dutch-defense-stonewall-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 4,
       "field": "annotation",
@@ -3429,21 +3026,6 @@
       "claim": "pawn on f6",
       "pgnTruth": "f6 actually has bN after d5",
       "snippet": "ck's strategy, supporting the pawn on f6 and potentially allowing for piece mane"
-    },
-    {
-      "file": "dutch-defense-stonewall-variation.json",
-      "openingId": "dutch-defense-stonewall-variation",
-      "class": "san-mismatch",
-      "plyIndex": 12,
-      "claim": "annotation.san=\"b3\"",
-      "pgnTruth": "PGN ply 13 is Nc3"
-    },
-    {
-      "file": "dutch-defense.json",
-      "openingId": "dutch-defense",
-      "class": "annotation-length-drift",
-      "claim": "3 moveAnnotations",
-      "pgnTruth": "2 plies"
     },
     {
       "file": "east-indian-defense.json",
@@ -3538,17 +3120,12 @@
     {
       "file": "english-defense.json",
       "openingId": "english-defense",
-      "class": "annotation-length-drift",
-      "claim": "4 moveAnnotations",
-      "pgnTruth": "2 plies"
-    },
-    {
-      "file": "english-defense.json",
-      "openingId": "english-defense",
-      "class": "san-mismatch",
-      "plyIndex": 1,
-      "claim": "annotation.san=\"e6\"",
-      "pgnTruth": "PGN ply 2 is b6"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 3,
+      "field": "annotation",
+      "claim": "bishop on b7",
+      "pgnTruth": "b7 is empty after b6",
+      "snippet": " fianchetto the light-squared bishop on b7. This setup allows Black to exert lon"
     },
     {
       "file": "english-opening-agincourt-defense-catalan-defense-accepted.json",
@@ -3573,13 +3150,6 @@
     {
       "file": "english-opening-agincourt-defense-catalan-defense.json",
       "openingId": "english-opening-agincourt-defense-catalan-defense",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "9 plies"
-    },
-    {
-      "file": "english-opening-agincourt-defense-catalan-defense.json",
-      "openingId": "english-opening-agincourt-defense-catalan-defense",
       "class": "piece-on-square-mismatch",
       "plyIndex": 4,
       "field": "annotation",
@@ -3596,14 +3166,6 @@
       "claim": "bishop on g2",
       "pgnTruth": "g2 is empty after g3",
       "snippet": "Fianchettoing the bishop on g2 pressures Black's d5 pawn and support"
-    },
-    {
-      "file": "english-opening-agincourt-defense-catalan-defense.json",
-      "openingId": "english-opening-agincourt-defense-catalan-defense",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"c5\"",
-      "pgnTruth": "PGN ply 6 is b6"
     },
     {
       "file": "english-opening-agincourt-defense-keres-defense.json",
@@ -3638,13 +3200,6 @@
     {
       "file": "english-opening-agincourt-defense-neo-catalan-declined-early-b3.json",
       "openingId": "english-opening-agincourt-defense-neo-catalan-declined-early-b3",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "9 plies"
-    },
-    {
-      "file": "english-opening-agincourt-defense-neo-catalan-declined-early-b3.json",
-      "openingId": "english-opening-agincourt-defense-neo-catalan-declined-early-b3",
       "class": "piece-on-square-mismatch",
       "plyIndex": 0,
       "field": "annotation",
@@ -3665,80 +3220,22 @@
     {
       "file": "english-opening-agincourt-defense-neo-catalan-declined.json",
       "openingId": "english-opening-agincourt-defense-neo-catalan-declined",
-      "class": "annotation-length-drift",
-      "claim": "14 moveAnnotations",
-      "pgnTruth": "9 plies"
-    },
-    {
-      "file": "english-opening-agincourt-defense-neo-catalan-declined.json",
-      "openingId": "english-opening-agincourt-defense-neo-catalan-declined",
-      "class": "san-mismatch",
-      "plyIndex": 0,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 1 is c4"
-    },
-    {
-      "file": "english-opening-agincourt-defense-neo-catalan-declined.json",
-      "openingId": "english-opening-agincourt-defense-neo-catalan-declined",
-      "class": "san-mismatch",
-      "plyIndex": 1,
-      "claim": "annotation.san=\"d5\"",
-      "pgnTruth": "PGN ply 2 is e6"
-    },
-    {
-      "file": "english-opening-agincourt-defense-neo-catalan-declined.json",
-      "openingId": "english-opening-agincourt-defense-neo-catalan-declined",
-      "class": "san-mismatch",
+      "class": "piece-on-square-mismatch",
       "plyIndex": 2,
-      "claim": "annotation.san=\"g3\"",
-      "pgnTruth": "PGN ply 3 is Nf3"
+      "field": "annotation",
+      "claim": "pawn on f3",
+      "pgnTruth": "f3 actually has wN after g3",
+      "snippet": "anchetto also complements our pawn on f3 by creating a solid kingside structure "
     },
     {
       "file": "english-opening-agincourt-defense-neo-catalan-declined.json",
       "openingId": "english-opening-agincourt-defense-neo-catalan-declined",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 4 is d5"
-    },
-    {
-      "file": "english-opening-agincourt-defense-neo-catalan-declined.json",
-      "openingId": "english-opening-agincourt-defense-neo-catalan-declined",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"Bg2\"",
-      "pgnTruth": "PGN ply 5 is g3"
-    },
-    {
-      "file": "english-opening-agincourt-defense-neo-catalan-declined.json",
-      "openingId": "english-opening-agincourt-defense-neo-catalan-declined",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"e6\"",
-      "pgnTruth": "PGN ply 6 is Nf6"
-    },
-    {
-      "file": "english-opening-agincourt-defense-neo-catalan-declined.json",
-      "openingId": "english-opening-agincourt-defense-neo-catalan-declined",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"O-O\"",
-      "pgnTruth": "PGN ply 7 is Bg2"
-    },
-    {
-      "file": "english-opening-agincourt-defense-neo-catalan-declined.json",
-      "openingId": "english-opening-agincourt-defense-neo-catalan-declined",
-      "class": "san-mismatch",
-      "plyIndex": 8,
-      "claim": "annotation.san=\"c4\"",
-      "pgnTruth": "PGN ply 9 is O-O"
-    },
-    {
-      "file": "english-opening-agincourt-defense.json",
-      "openingId": "english-opening-agincourt-defense",
-      "class": "annotation-length-drift",
-      "claim": "4 moveAnnotations",
-      "pgnTruth": "2 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 2,
+      "field": "shortNarration",
+      "claim": "bishop on g2",
+      "pgnTruth": "g2 is empty after g3",
+      "snippet": "ianchettoing the dark-squared bishop on g2 pressures the center and kingside, pa"
     },
     {
       "file": "english-opening-anglo-gr-nfeld-defense-korchnoi-variation.json",
@@ -3783,17 +3280,12 @@
     {
       "file": "english-opening-anglo-indian-defense-anglo-gr-nfeld-variation.json",
       "openingId": "english-opening-anglo-indian-defense-anglo-gr-nfeld-variation",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "7 plies"
-    },
-    {
-      "file": "english-opening-anglo-indian-defense-anglo-gr-nfeld-variation.json",
-      "openingId": "english-opening-anglo-indian-defense-anglo-gr-nfeld-variation",
-      "class": "san-mismatch",
+      "class": "piece-on-square-mismatch",
       "plyIndex": 6,
-      "claim": "annotation.san=\"g3\"",
-      "pgnTruth": "PGN ply 7 is Nf3"
+      "field": "annotation",
+      "claim": "pawn on d5",
+      "pgnTruth": "d5 actually has bN after g3",
+      "snippet": "t - once we complete Bg2, the pawn on d5 will be under attack. This is a key con"
     },
     {
       "file": "english-opening-anglo-indian-defense-anti-anti-gr-nfeld.json",
@@ -3960,9 +3452,22 @@
     {
       "file": "english-opening-anglo-indian-defense.json",
       "openingId": "english-opening-anglo-indian-defense",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "2 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 3,
+      "field": "annotation",
+      "claim": "pawn on e6",
+      "pgnTruth": "e6 is empty after d5",
+      "snippet": "urrently blocked by their own pawn on e6 (if they were planning ...e6). This paw"
+    },
+    {
+      "file": "english-opening-anglo-indian-defense.json",
+      "openingId": "english-opening-anglo-indian-defense",
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 7,
+      "field": "annotation",
+      "claim": "pawn on d5",
+      "pgnTruth": "d5 actually has bN after c5",
+      "snippet": ". This move also supports the pawn on d5 indirectly by giving Black more space t"
     },
     {
       "file": "english-opening-anglo-scandinavian-defense-l-hn-gambit.json",
@@ -4017,13 +3522,6 @@
     {
       "file": "english-opening-closed-taimanov-variation.json",
       "openingId": "english-opening-closed-taimanov-variation",
-      "class": "annotation-length-drift",
-      "claim": "12 moveAnnotations",
-      "pgnTruth": "10 plies"
-    },
-    {
-      "file": "english-opening-closed-taimanov-variation.json",
-      "openingId": "english-opening-closed-taimanov-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 2,
       "field": "annotation",
@@ -4064,34 +3562,22 @@
     {
       "file": "english-opening-closed-taimanov-variation.json",
       "openingId": "english-opening-closed-taimanov-variation",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"Bg2\"",
-      "pgnTruth": "PGN ply 7 is Rb1"
-    },
-    {
-      "file": "english-opening-closed-taimanov-variation.json",
-      "openingId": "english-opening-closed-taimanov-variation",
-      "class": "san-mismatch",
-      "plyIndex": 7,
-      "claim": "annotation.san=\"Bg7\"",
-      "pgnTruth": "PGN ply 8 is Nh6"
-    },
-    {
-      "file": "english-opening-closed-taimanov-variation.json",
-      "openingId": "english-opening-closed-taimanov-variation",
-      "class": "san-mismatch",
+      "class": "piece-on-square-mismatch",
       "plyIndex": 8,
-      "claim": "annotation.san=\"e3\"",
-      "pgnTruth": "PGN ply 9 is Bg2"
+      "field": "annotation",
+      "claim": "king on e2",
+      "pgnTruth": "e2 is empty after e3",
+      "snippet": "tential escape square for our king on e2 and supports our overall pawn structure"
     },
     {
       "file": "english-opening-closed-taimanov-variation.json",
       "openingId": "english-opening-closed-taimanov-variation",
-      "class": "san-mismatch",
-      "plyIndex": 9,
-      "claim": "annotation.san=\"d6\"",
-      "pgnTruth": "PGN ply 10 is Bg7"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 11,
+      "field": "annotation",
+      "claim": "knight on f6",
+      "pgnTruth": "f6 is empty after Nh6",
+      "snippet": "pical pins and attacks that a knight on f6 might face. Our opponent might be pre"
     },
     {
       "file": "english-opening-drill-variation.json",
@@ -4394,13 +3880,6 @@
       "snippet": "r Black's counterplay, as the pawn on f6 now eyes our e4 pawn, and Black will li"
     },
     {
-      "file": "english-opening-mikenas-carls-variation.json",
-      "openingId": "english-opening-mikenas-carls-variation",
-      "class": "annotation-length-drift",
-      "claim": "7 moveAnnotations",
-      "pgnTruth": "5 plies"
-    },
-    {
       "file": "english-opening-neo-catalan-declined.json",
       "openingId": "english-opening-neo-catalan-declined",
       "class": "piece-on-square-mismatch",
@@ -4531,68 +4010,6 @@
       "plyIndex": 10,
       "claim": "annotation.san=\"g3\"",
       "pgnTruth": "PGN ply 11 is Nxd4"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense.json",
-      "openingId": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "8 plies"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense.json",
-      "openingId": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense",
-      "class": "san-mismatch",
-      "plyIndex": 2,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 3 is d4"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense.json",
-      "openingId": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 4 is c5"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense.json",
-      "openingId": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"Nc3\"",
-      "pgnTruth": "PGN ply 5 is Nf3"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense.json",
-      "openingId": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"c5\"",
-      "pgnTruth": "PGN ply 6 is cxd4"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense.json",
-      "openingId": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"d4\"",
-      "pgnTruth": "PGN ply 7 is Nxd4"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense.json",
-      "openingId": "english-opening-symmetrical-variation-anti-benoni-variation-spielmann-defense",
-      "class": "san-mismatch",
-      "plyIndex": 7,
-      "claim": "annotation.san=\"cxd4\"",
-      "pgnTruth": "PGN ply 8 is Nf6"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-botvinnik-system-reversed-with-nf3.json",
-      "openingId": "english-opening-symmetrical-variation-botvinnik-system-reversed-with-nf3",
-      "class": "annotation-length-drift",
-      "claim": "14 moveAnnotations",
-      "pgnTruth": "10 plies"
     },
     {
       "file": "english-opening-symmetrical-variation-botvinnik-system-reversed-with-nf3.json",
@@ -4755,61 +4172,6 @@
       "snippet": "ares to fianchetto our king's bishop on g2, where it will exert long-range press"
     },
     {
-      "file": "english-opening-symmetrical-variation-rubinstein-variation.json",
-      "openingId": "english-opening-symmetrical-variation-rubinstein-variation",
-      "class": "annotation-length-drift",
-      "claim": "12 moveAnnotations",
-      "pgnTruth": "10 plies"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-rubinstein-variation.json",
-      "openingId": "english-opening-symmetrical-variation-rubinstein-variation",
-      "class": "san-mismatch",
-      "plyIndex": 1,
-      "claim": "annotation.san=\"c5\"",
-      "pgnTruth": "PGN ply 2 is Nf6"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-rubinstein-variation.json",
-      "openingId": "english-opening-symmetrical-variation-rubinstein-variation",
-      "class": "san-mismatch",
-      "plyIndex": 2,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 3 is Nc3"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-rubinstein-variation.json",
-      "openingId": "english-opening-symmetrical-variation-rubinstein-variation",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 4 is c5"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-rubinstein-variation.json",
-      "openingId": "english-opening-symmetrical-variation-rubinstein-variation",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"Nc3\"",
-      "pgnTruth": "PGN ply 5 is g3"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-rubinstein-variation.json",
-      "openingId": "english-opening-symmetrical-variation-rubinstein-variation",
-      "class": "san-mismatch",
-      "plyIndex": 8,
-      "claim": "annotation.san=\"g3\"",
-      "pgnTruth": "PGN ply 9 is Bg2"
-    },
-    {
-      "file": "english-opening-symmetrical-variation-rubinstein-variation.json",
-      "openingId": "english-opening-symmetrical-variation-rubinstein-variation",
-      "class": "san-mismatch",
-      "plyIndex": 9,
-      "claim": "annotation.san=\"Nc6\"",
-      "pgnTruth": "PGN ply 10 is Nc7"
-    },
-    {
       "file": "english-opening-symmetrical-variation-three-knights-fianchetto-variation.json",
       "openingId": "english-opening-symmetrical-variation-three-knights-fianchetto-variation",
       "class": "piece-on-square-mismatch",
@@ -4860,13 +4222,6 @@
       "snippet": " fianchetto the light-squared bishop on g7. Our opponent is maintaining the bala"
     },
     {
-      "file": "english-opening-symmetrical-variation.json",
-      "openingId": "english-opening-symmetrical-variation",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "2 plies"
-    },
-    {
       "file": "english-opening-wing-gambit.json",
       "openingId": "english-opening-wing-gambit",
       "class": "piece-on-square-mismatch",
@@ -4879,31 +4234,16 @@
     {
       "file": "english-opening.json",
       "openingId": "english-opening",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "16 moveAnnotations",
-      "pgnTruth": "1 plies"
-    },
-    {
-      "file": "english-orangutan.json",
-      "openingId": "english-orangutan",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "3 plies"
-    },
-    {
-      "file": "english-orangutan.json",
-      "openingId": "english-orangutan",
-      "class": "san-mismatch",
-      "plyIndex": 2,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 3 is b4"
+      "pgnTruth": "1 plies — surplus 15 describes nonexistent positions"
     },
     {
       "file": "englund-gambit.json",
       "openingId": "englund-gambit",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "36 moveAnnotations",
-      "pgnTruth": "2 plies"
+      "pgnTruth": "2 plies — surplus 34 describes nonexistent positions"
     },
     {
       "file": "evans-gambit.json",
@@ -4975,9 +4315,9 @@
     {
       "file": "four-knights-game.json",
       "openingId": "four-knights-game",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "19 moveAnnotations",
-      "pgnTruth": "6 plies"
+      "pgnTruth": "6 plies — surplus 13 describes nonexistent positions"
     },
     {
       "file": "french-defence.json",
@@ -5073,13 +4413,6 @@
       "claim": "bishop on g7",
       "pgnTruth": "g7 is empty after g6",
       "snippet": "o fianchetto the dark-squared bishop on g7 where it will exert tremendous pressu"
-    },
-    {
-      "file": "gr-nfeld-defense-brinckmann-attack-gr-nfeld-gambit.json",
-      "openingId": "gr-nfeld-defense-brinckmann-attack-gr-nfeld-gambit",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "10 plies"
     },
     {
       "file": "gr-nfeld-defense-brinckmann-attack-gr-nfeld-gambit.json",
@@ -5212,13 +4545,6 @@
     {
       "file": "gr-nfeld-defense-exchange-variation-larsen-variation.json",
       "openingId": "gr-nfeld-defense-exchange-variation-larsen-variation",
-      "class": "annotation-length-drift",
-      "claim": "18 moveAnnotations",
-      "pgnTruth": "16 plies"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-larsen-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-larsen-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 5,
       "field": "annotation",
@@ -5252,93 +4578,6 @@
       "claim": "bishop on g7",
       "pgnTruth": "g7 is empty after Nxc3",
       "snippet": "l pawns while maintaining the bishop on g7 that will continue to pressure our po"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "annotation-length-drift",
-      "claim": "15 moveAnnotations",
-      "pgnTruth": "13 plies"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 2,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 3 is c4"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"c4\"",
-      "pgnTruth": "PGN ply 5 is Nc3"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"Bg7\"",
-      "pgnTruth": "PGN ply 6 is d5"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"Nc3\"",
-      "pgnTruth": "PGN ply 7 is cxd5"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 7,
-      "claim": "annotation.san=\"d5\"",
-      "pgnTruth": "PGN ply 8 is Nxd5"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 8,
-      "claim": "annotation.san=\"cxd5\"",
-      "pgnTruth": "PGN ply 9 is e4"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 9,
-      "claim": "annotation.san=\"Nxd5\"",
-      "pgnTruth": "PGN ply 10 is Nxc3"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 10,
-      "claim": "annotation.san=\"e4\"",
-      "pgnTruth": "PGN ply 11 is bxc3"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 11,
-      "claim": "annotation.san=\"Nxc3\"",
-      "pgnTruth": "PGN ply 12 is Bg7"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-modern-exchange-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-modern-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 12,
-      "claim": "annotation.san=\"bxc3\"",
-      "pgnTruth": "PGN ply 13 is Nf3"
     },
     {
       "file": "gr-nfeld-defense-exchange-variation-nadanian-attack.json",
@@ -5417,13 +4656,6 @@
     {
       "file": "gr-nfeld-defense-exchange-variation-spassky-variation.json",
       "openingId": "gr-nfeld-defense-exchange-variation-spassky-variation",
-      "class": "annotation-length-drift",
-      "claim": "26 moveAnnotations",
-      "pgnTruth": "16 plies"
-    },
-    {
-      "file": "gr-nfeld-defense-exchange-variation-spassky-variation.json",
-      "openingId": "gr-nfeld-defense-exchange-variation-spassky-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 2,
       "field": "annotation",
@@ -5434,10 +4666,12 @@
     {
       "file": "gr-nfeld-defense-exchange-variation-spassky-variation.json",
       "openingId": "gr-nfeld-defense-exchange-variation-spassky-variation",
-      "class": "san-mismatch",
-      "plyIndex": 15,
-      "claim": "annotation.san=\"Nc6\"",
-      "pgnTruth": "PGN ply 16 is O-O"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 19,
+      "field": "shortNarration",
+      "claim": "knight on f3",
+      "pgnTruth": "f3 is empty after Bg4",
+      "snippet": "Black pins the knight on f3 with Bg4, pressuring the center and t"
     },
     {
       "file": "gr-nfeld-defense-exchange-variation.json",
@@ -5622,13 +4856,6 @@
     {
       "file": "gr-nfeld-defense-russian-variation-smyslov-variation.json",
       "openingId": "gr-nfeld-defense-russian-variation-smyslov-variation",
-      "class": "annotation-length-drift",
-      "claim": "17 moveAnnotations",
-      "pgnTruth": "14 plies"
-    },
-    {
-      "file": "gr-nfeld-defense-russian-variation-smyslov-variation.json",
-      "openingId": "gr-nfeld-defense-russian-variation-smyslov-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 5,
       "field": "annotation",
@@ -5665,13 +4892,6 @@
       "claim": "bishop on g7",
       "pgnTruth": "g7 is empty after Nf3",
       "snippet": " against Black's fianchettoed bishop on g7."
-    },
-    {
-      "file": "gr-nfeld-defense-russian-variation.json",
-      "openingId": "gr-nfeld-defense-russian-variation",
-      "class": "annotation-length-drift",
-      "claim": "13 moveAnnotations",
-      "pgnTruth": "9 plies"
     },
     {
       "file": "gr-nfeld-defense-russian-variation.json",
@@ -5756,24 +4976,10 @@
     {
       "file": "gr-nfeld-defense-three-knights-variation-hungarian-attack.json",
       "openingId": "gr-nfeld-defense-three-knights-variation-hungarian-attack",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "9 plies"
-    },
-    {
-      "file": "gr-nfeld-defense-three-knights-variation-hungarian-attack.json",
-      "openingId": "gr-nfeld-defense-three-knights-variation-hungarian-attack",
       "class": "san-mismatch",
       "plyIndex": 4,
       "claim": "annotation.san=\"d5\"",
       "pgnTruth": "PGN ply 5 is Nc3"
-    },
-    {
-      "file": "gr-nfeld-defense-three-knights-variation-hungarian-variation.json",
-      "openingId": "gr-nfeld-defense-three-knights-variation-hungarian-variation",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "11 plies"
     },
     {
       "file": "gr-nfeld-defense-three-knights-variation-hungarian-variation.json",
@@ -5852,13 +5058,6 @@
       "claim": "rook on d8",
       "pgnTruth": "d8 actually has bQ after O-O",
       "snippet": " central counterplay with the rook on d8 or c8."
-    },
-    {
-      "file": "gr-nfeld-defense-three-knights-variation.json",
-      "openingId": "gr-nfeld-defense-three-knights-variation",
-      "class": "annotation-length-drift",
-      "claim": "8 moveAnnotations",
-      "pgnTruth": "7 plies"
     },
     {
       "file": "gr-nfeld-defense-three-knights-variation.json",
@@ -6136,13 +5335,6 @@
       "class": "opening-id-pgn-drift",
       "claim": "openingId \"grunfeld-defence\" referenced",
       "pgnTruth": "no matching row in openings-lichess.json"
-    },
-    {
-      "file": "hippopotamus-defense.json",
-      "openingId": "hippopotamus-defense",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "2 plies"
     },
     {
       "file": "horwitz-defense-zilbermints-gambit.json",
@@ -6595,13 +5787,6 @@
       "snippet": " massive pawn center with the bishop on a2-g8."
     },
     {
-      "file": "indian-defense-budapest-defense.json",
-      "openingId": "indian-defense-budapest-defense",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "4 plies"
-    },
-    {
       "file": "indian-defense-colle-system-kings-indian-variation.json",
       "openingId": "indian-defense-colle-system-kings-indian-variation",
       "class": "opening-id-pgn-drift",
@@ -6801,16 +5986,19 @@
     {
       "file": "indian-defense.json",
       "openingId": "indian-defense",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "2 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 2,
+      "field": "annotation",
+      "claim": "bishop on g2",
+      "pgnTruth": "g2 actually has wP after c4",
+      "snippet": " fianchetto our light-squared bishop on g2 in many lines. The c4 pawn also gives"
     },
     {
       "file": "italian-game.json",
       "openingId": "italian-game",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "20 moveAnnotations",
-      "pgnTruth": "5 plies"
+      "pgnTruth": "5 plies — surplus 15 describes nonexistent positions"
     },
     {
       "file": "k-das-opening-beginners-trap.json",
@@ -6822,25 +6010,12 @@
     {
       "file": "k-das-opening-k-das-gambit.json",
       "openingId": "k-das-opening-k-das-gambit",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "3 plies"
-    },
-    {
-      "file": "k-das-opening-k-das-gambit.json",
-      "openingId": "k-das-opening-k-das-gambit",
-      "class": "san-mismatch",
+      "class": "piece-on-square-mismatch",
       "plyIndex": 1,
-      "claim": "annotation.san=\"e5\"",
-      "pgnTruth": "PGN ply 2 is c5"
-    },
-    {
-      "file": "k-das-opening-k-das-gambit.json",
-      "openingId": "k-das-opening-k-das-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 2,
-      "claim": "annotation.san=\"d4\"",
-      "pgnTruth": "PGN ply 3 is b4"
+      "field": "annotation",
+      "claim": "pawn on d4",
+      "pgnTruth": "d4 is empty after e5",
+      "snippet": "ter before we can establish a pawn on d4, claiming space and following opening p"
     },
     {
       "file": "kings-gambit.json",
@@ -7798,13 +6973,6 @@
     {
       "file": "london-system-with-be2.json",
       "openingId": "london-system-with-be2",
-      "class": "annotation-length-drift",
-      "claim": "11 moveAnnotations",
-      "pgnTruth": "9 plies"
-    },
-    {
-      "file": "london-system-with-be2.json",
-      "openingId": "london-system-with-be2",
       "class": "piece-on-square-mismatch",
       "plyIndex": 3,
       "field": "annotation",
@@ -7825,17 +6993,19 @@
     {
       "file": "london-system-with-be2.json",
       "openingId": "london-system-with-be2",
-      "class": "san-mismatch",
+      "class": "piece-on-square-mismatch",
       "plyIndex": 8,
-      "claim": "annotation.san=\"h3\"",
-      "pgnTruth": "PGN ply 9 is Be2"
+      "field": "annotation",
+      "claim": "pawn on f3",
+      "pgnTruth": "f3 actually has wN after h3",
+      "snippet": "ld be annoying by pinning our pawn on f3 or simply creating tactical complicatio"
     },
     {
       "file": "london-system.json",
       "openingId": "london-system",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "16 moveAnnotations",
-      "pgnTruth": "5 plies"
+      "pgnTruth": "5 plies — surplus 11 describes nonexistent positions"
     },
     {
       "file": "london-system.json",
@@ -8311,29 +7481,6 @@
       "snippet": "Black fianchettoes the king's bishop on g7 to pressure the long diagonal, keepin"
     },
     {
-      "file": "modern-defense.json",
-      "openingId": "modern-defense",
-      "class": "annotation-length-drift",
-      "claim": "4 moveAnnotations",
-      "pgnTruth": "6 plies"
-    },
-    {
-      "file": "modern-defense.json",
-      "openingId": "modern-defense",
-      "class": "san-mismatch",
-      "plyIndex": 0,
-      "claim": "annotation.san=\"e4\"",
-      "pgnTruth": "PGN ply 1 is d4"
-    },
-    {
-      "file": "modern-defense.json",
-      "openingId": "modern-defense",
-      "class": "san-mismatch",
-      "plyIndex": 2,
-      "claim": "annotation.san=\"d4\"",
-      "pgnTruth": "PGN ply 3 is c4"
-    },
-    {
       "file": "neo-gr-nfeld-defense-classical-variation-modern-defense.json",
       "openingId": "neo-gr-nfeld-defense-classical-variation-modern-defense",
       "class": "piece-on-square-mismatch",
@@ -8372,13 +7519,6 @@
       "claim": "bishop on g2",
       "pgnTruth": "g2 is empty after g3",
       "snippet": " to rich positional play. Our bishop on g2 will control the long diagonal from o"
-    },
-    {
-      "file": "neo-gr-nfeld-defense-delayed-exchange-variation.json",
-      "openingId": "neo-gr-nfeld-defense-delayed-exchange-variation",
-      "class": "annotation-length-drift",
-      "claim": "14 moveAnnotations",
-      "pgnTruth": "13 plies"
     },
     {
       "file": "neo-gr-nfeld-defense-delayed-exchange-variation.json",
@@ -8561,21 +7701,6 @@
       "snippet": "otential outposts for Black's knights on d3 or b4. By playing ...c5, Black is fi"
     },
     {
-      "file": "nimzo-indian-defense-classical-variation-berlin-variation.json",
-      "openingId": "nimzo-indian-defense-classical-variation-berlin-variation",
-      "class": "annotation-length-drift",
-      "claim": "12 moveAnnotations",
-      "pgnTruth": "8 plies"
-    },
-    {
-      "file": "nimzo-indian-defense-classical-variation-berlin-variation.json",
-      "openingId": "nimzo-indian-defense-classical-variation-berlin-variation",
-      "class": "san-mismatch",
-      "plyIndex": 7,
-      "claim": "annotation.san=\"O-O\"",
-      "pgnTruth": "PGN ply 8 is c5"
-    },
-    {
       "file": "nimzo-indian-defense-classical-variation-keres-defense.json",
       "openingId": "nimzo-indian-defense-classical-variation-keres-defense",
       "class": "piece-on-square-mismatch",
@@ -8668,19 +7793,22 @@
     {
       "file": "nimzo-indian-defense-classical-variation-noa-variation.json",
       "openingId": "nimzo-indian-defense-classical-variation-noa-variation",
-      "class": "annotation-length-drift",
-      "claim": "13 moveAnnotations",
-      "pgnTruth": "8 plies"
-    },
-    {
-      "file": "nimzo-indian-defense-classical-variation-noa-variation.json",
-      "openingId": "nimzo-indian-defense-classical-variation-noa-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 3,
       "field": "annotation",
       "claim": "pawn on d5",
       "pgnTruth": "d5 is empty after e6",
       "snippet": " ensuring they can maintain a pawn on d5 if they choose to play it. This setup s"
+    },
+    {
+      "file": "nimzo-indian-defense-classical-variation-noa-variation.json",
+      "openingId": "nimzo-indian-defense-classical-variation-noa-variation",
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 9,
+      "field": "shortNarration",
+      "claim": "knight on c3",
+      "pgnTruth": "c3 actually has bB after Bxc3+",
+      "snippet": "Black trades bishop for knight on c3, doubling our c-pawns and checking, b"
     },
     {
       "file": "nimzo-indian-defense-dilworth-gambit.json",
@@ -8805,13 +7933,6 @@
     {
       "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
       "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "annotation-length-drift",
-      "claim": "21 moveAnnotations",
-      "pgnTruth": "19 plies"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
       "class": "piece-on-square-mismatch",
       "plyIndex": 6,
       "field": "annotation",
@@ -8828,78 +7949,6 @@
       "claim": "bishop on d3",
       "pgnTruth": "d3 is empty after e3",
       "snippet": "supports d4, and prepares the bishop on d3 or e2 for a solid center."
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "san-mismatch",
-      "plyIndex": 10,
-      "claim": "annotation.san=\"a3\"",
-      "pgnTruth": "PGN ply 11 is Nf3"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "san-mismatch",
-      "plyIndex": 11,
-      "claim": "annotation.san=\"Bxc3+\"",
-      "pgnTruth": "PGN ply 12 is c5"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "san-mismatch",
-      "plyIndex": 12,
-      "claim": "annotation.san=\"bxc3\"",
-      "pgnTruth": "PGN ply 13 is O-O"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "san-mismatch",
-      "plyIndex": 13,
-      "claim": "annotation.san=\"dxc4\"",
-      "pgnTruth": "PGN ply 14 is Nc6"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "san-mismatch",
-      "plyIndex": 14,
-      "claim": "annotation.san=\"Bxc4\"",
-      "pgnTruth": "PGN ply 15 is a3"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "san-mismatch",
-      "plyIndex": 15,
-      "claim": "annotation.san=\"c5\"",
-      "pgnTruth": "PGN ply 16 is Bxc3"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "san-mismatch",
-      "plyIndex": 16,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 17 is bxc3"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "san-mismatch",
-      "plyIndex": 17,
-      "claim": "annotation.san=\"Nc6\"",
-      "pgnTruth": "PGN ply 18 is dxc4"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-bernstein-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-bernstein-defense",
-      "class": "san-mismatch",
-      "plyIndex": 18,
-      "claim": "annotation.san=\"O-O\"",
-      "pgnTruth": "PGN ply 19 is Bxc4"
     },
     {
       "file": "nimzo-indian-defense-normal-variation-botvinnik-system.json",
@@ -8964,13 +8013,6 @@
     {
       "file": "nimzo-indian-defense-normal-variation-gligoric-system.json",
       "openingId": "nimzo-indian-defense-normal-variation-gligoric-system",
-      "class": "annotation-length-drift",
-      "claim": "14 moveAnnotations",
-      "pgnTruth": "12 plies"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-gligoric-system.json",
-      "openingId": "nimzo-indian-defense-normal-variation-gligoric-system",
       "class": "piece-on-square-mismatch",
       "plyIndex": 8,
       "field": "annotation",
@@ -8991,40 +8033,22 @@
     {
       "file": "nimzo-indian-defense-normal-variation-schlechter-defense.json",
       "openingId": "nimzo-indian-defense-normal-variation-schlechter-defense",
-      "class": "annotation-length-drift",
-      "claim": "14 moveAnnotations",
-      "pgnTruth": "12 plies"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-schlechter-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-schlechter-defense",
-      "class": "san-mismatch",
+      "class": "piece-on-square-mismatch",
       "plyIndex": 7,
-      "claim": "annotation.san=\"b6\"",
-      "pgnTruth": "PGN ply 8 is O-O"
+      "field": "annotation",
+      "claim": "bishop on b7",
+      "pgnTruth": "b7 is empty after b6",
+      "snippet": "ing to fianchetto the queen's bishop on b7, where it will rake down the long dia"
     },
     {
       "file": "nimzo-indian-defense-normal-variation-schlechter-defense.json",
       "openingId": "nimzo-indian-defense-normal-variation-schlechter-defense",
-      "class": "san-mismatch",
-      "plyIndex": 9,
-      "claim": "annotation.san=\"Bb7\"",
-      "pgnTruth": "PGN ply 10 is d5"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation-schlechter-defense.json",
-      "openingId": "nimzo-indian-defense-normal-variation-schlechter-defense",
-      "class": "san-mismatch",
-      "plyIndex": 11,
-      "claim": "annotation.san=\"O-O\"",
-      "pgnTruth": "PGN ply 12 is b6"
-    },
-    {
-      "file": "nimzo-indian-defense-normal-variation.json",
-      "openingId": "nimzo-indian-defense-normal-variation",
-      "class": "annotation-length-drift",
-      "claim": "9 moveAnnotations",
-      "pgnTruth": "8 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 7,
+      "field": "shortNarration",
+      "claim": "bishop on b7",
+      "pgnTruth": "b7 is empty after b6",
+      "snippet": "Black fianchettoes the bishop on b7, supporting ...c5 and aiming the long"
     },
     {
       "file": "nimzo-indian-defense-romanishin-variation-english-hybrid.json",
@@ -9059,34 +8083,12 @@
     {
       "file": "nimzo-indian-defense-romanishin-variation.json",
       "openingId": "nimzo-indian-defense-romanishin-variation",
-      "class": "annotation-length-drift",
-      "claim": "11 moveAnnotations",
-      "pgnTruth": "7 plies"
-    },
-    {
-      "file": "nimzo-indian-defense-romanishin-variation.json",
-      "openingId": "nimzo-indian-defense-romanishin-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 2,
       "field": "shortNarration",
       "claim": "pawn on d5",
       "pgnTruth": "d5 is empty after c4",
       "snippet": "prepares to challenge a Black pawn on d5."
-    },
-    {
-      "file": "nimzo-indian-defense-romanishin-variation.json",
-      "openingId": "nimzo-indian-defense-romanishin-variation",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 7 is g3"
-    },
-    {
-      "file": "nimzo-indian-defense-rubinstein-system-h-bner-variation.json",
-      "openingId": "nimzo-indian-defense-rubinstein-system-h-bner-variation",
-      "class": "annotation-length-drift",
-      "claim": "16 moveAnnotations",
-      "pgnTruth": "14 plies"
     },
     {
       "file": "nimzo-indian-defense-rubinstein-system-h-bner-variation.json",
@@ -9151,13 +8153,6 @@
     {
       "file": "nimzo-indian-defense-rubinstein-system.json",
       "openingId": "nimzo-indian-defense-rubinstein-system",
-      "class": "annotation-length-drift",
-      "claim": "8 moveAnnotations",
-      "pgnTruth": "7 plies"
-    },
-    {
-      "file": "nimzo-indian-defense-rubinstein-system.json",
-      "openingId": "nimzo-indian-defense-rubinstein-system",
       "class": "piece-on-square-mismatch",
       "plyIndex": 5,
       "field": "shortNarration",
@@ -9205,17 +8200,22 @@
     {
       "file": "nimzo-indian-defense-s-misch-variation.json",
       "openingId": "nimzo-indian-defense-s-misch-variation",
-      "class": "annotation-length-drift",
-      "claim": "14 moveAnnotations",
-      "pgnTruth": "7 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 7,
+      "field": "annotation",
+      "claim": "pawn on d5",
+      "pgnTruth": "d5 is empty after c5",
+      "snippet": "otentially establish a strong pawn on d5 or create pressure along the c-file aft"
     },
     {
       "file": "nimzo-indian-defense-s-misch-variation.json",
       "openingId": "nimzo-indian-defense-s-misch-variation",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"e3\"",
-      "pgnTruth": "PGN ply 7 is a3"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 11,
+      "field": "shortNarration",
+      "claim": "knight on c3",
+      "pgnTruth": "c3 actually has bB after Bxc3+",
+      "snippet": "Black captures the knight on c3, forcing doubled c-pawns and trading "
     },
     {
       "file": "nimzo-indian-defense-spielmann-variation-carlsbad-variation.json",
@@ -9226,13 +8226,6 @@
       "claim": "bishop on d2",
       "pgnTruth": "d2 is empty after Ne4",
       "snippet": "outpost square, attacking our bishop on d2 and our knight on c3 while occupying "
-    },
-    {
-      "file": "nimzo-indian-defense-spielmann-variation-stahlberg-variation.json",
-      "openingId": "nimzo-indian-defense-spielmann-variation-stahlberg-variation",
-      "class": "annotation-length-drift",
-      "claim": "17 moveAnnotations",
-      "pgnTruth": "14 plies"
     },
     {
       "file": "nimzo-indian-defense-spielmann-variation-stahlberg-variation.json",
@@ -9267,13 +8260,6 @@
     {
       "file": "nimzo-indian-defense-st-petersburg-variation.json",
       "openingId": "nimzo-indian-defense-st-petersburg-variation",
-      "class": "annotation-length-drift",
-      "claim": "17 moveAnnotations",
-      "pgnTruth": "8 plies"
-    },
-    {
-      "file": "nimzo-indian-defense-st-petersburg-variation.json",
-      "openingId": "nimzo-indian-defense-st-petersburg-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 3,
       "field": "shortNarration",
@@ -9284,20 +8270,22 @@
     {
       "file": "nimzo-indian-defense-st-petersburg-variation.json",
       "openingId": "nimzo-indian-defense-st-petersburg-variation",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 7 is e3"
-    },
-    {
-      "file": "nimzo-indian-defense-st-petersburg-variation.json",
-      "openingId": "nimzo-indian-defense-st-petersburg-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 7,
       "field": "annotation",
       "claim": "bishop on b7",
       "pgnTruth": "b7 is empty after b6",
       "snippet": " fianchetto the light-squared bishop on b7, creating a powerful battery aimed at"
+    },
+    {
+      "file": "nimzo-indian-defense-st-petersburg-variation.json",
+      "openingId": "nimzo-indian-defense-st-petersburg-variation",
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 13,
+      "field": "shortNarration",
+      "claim": "knight on c3",
+      "pgnTruth": "c3 actually has bB after Bxc3+",
+      "snippet": "e dark-squared bishop for the knight on c3, doubling White's c-pawns and weakeni"
     },
     {
       "file": "nimzo-indian-defense-three-knights-variation-korchnoi-variation.json",
@@ -9342,13 +8330,6 @@
     {
       "file": "nimzo-indian-defense.json",
       "openingId": "nimzo-indian-defense",
-      "class": "annotation-length-drift",
-      "claim": "9 moveAnnotations",
-      "pgnTruth": "6 plies"
-    },
-    {
-      "file": "nimzo-indian-defense.json",
-      "openingId": "nimzo-indian-defense",
       "class": "piece-on-square-mismatch",
       "plyIndex": 2,
       "field": "annotation",
@@ -9376,17 +8357,12 @@
     {
       "file": "nimzo-larsen-attack-classical-variation.json",
       "openingId": "nimzo-larsen-attack-classical-variation",
-      "class": "annotation-length-drift",
-      "claim": "3 moveAnnotations",
-      "pgnTruth": "2 plies"
-    },
-    {
-      "file": "nimzo-larsen-attack-classical-variation.json",
-      "openingId": "nimzo-larsen-attack-classical-variation",
-      "class": "san-mismatch",
-      "plyIndex": 0,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 1 is b3"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 2,
+      "field": "annotation",
+      "claim": "bishop on b2",
+      "pgnTruth": "b2 is empty after b3",
+      "snippet": " fianchetto our light-squared bishop on b2, where it bears down the long diagona"
     },
     {
       "file": "nimzo-larsen-attack-english-variation.json",
@@ -9421,26 +8397,12 @@
     {
       "file": "nimzo-larsen-attack-modern-variation.json",
       "openingId": "nimzo-larsen-attack-modern-variation",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "2 plies"
-    },
-    {
-      "file": "nimzo-larsen-attack-modern-variation.json",
-      "openingId": "nimzo-larsen-attack-modern-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 0,
       "field": "annotation",
       "claim": "bishop on b2",
       "pgnTruth": "b2 is empty after b3",
       "snippet": " we prepare to fianchetto our bishop on b2, where it will control the long diago"
-    },
-    {
-      "file": "nimzo-larsen-attack-norfolk-gambit.json",
-      "openingId": "nimzo-larsen-attack-norfolk-gambit",
-      "class": "annotation-length-drift",
-      "claim": "7 moveAnnotations",
-      "pgnTruth": "5 plies"
     },
     {
       "file": "nimzo-larsen-attack-norfolk-gambit.json",
@@ -9455,18 +8417,22 @@
     {
       "file": "nimzo-larsen-attack-norfolk-gambit.json",
       "openingId": "nimzo-larsen-attack-norfolk-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 4 is c5"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 6,
+      "field": "annotation",
+      "claim": "pawn on d4",
+      "pgnTruth": "d4 is empty after e4",
+      "snippet": " would leave us with a strong pawn on d4 and active piece play. This gambit (if "
     },
     {
       "file": "nimzo-larsen-attack-norfolk-gambit.json",
       "openingId": "nimzo-larsen-attack-norfolk-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"Bb2\"",
-      "pgnTruth": "PGN ply 5 is e4"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 6,
+      "field": "shortNarration",
+      "claim": "pawn on d4",
+      "pgnTruth": "d4 is empty after e4",
+      "snippet": " Black takes, we get a strong pawn on d4 and open lines for piece activity."
     },
     {
       "file": "nimzo-larsen-attack-pachman-gambit.json",
@@ -9769,13 +8735,6 @@
       "snippet": "awn with tempo, attacking the pawn on c6 and seizing space in the center while t"
     },
     {
-      "file": "nimzowitsch-defense-scandinavian-variation-bogoljubow-variation.json",
-      "openingId": "nimzowitsch-defense-scandinavian-variation-bogoljubow-variation",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "5 plies"
-    },
-    {
       "file": "nimzowitsch-defense-scandinavian-variation.json",
       "openingId": "nimzowitsch-defense-scandinavian-variation",
       "class": "piece-on-square-mismatch",
@@ -9808,9 +8767,12 @@
     {
       "file": "nimzowitsch-defense.json",
       "openingId": "nimzowitsch-defense",
-      "class": "annotation-length-drift",
-      "claim": "3 moveAnnotations",
-      "pgnTruth": "2 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 2,
+      "field": "annotation",
+      "claim": "pawn on c6",
+      "pgnTruth": "c6 actually has bN after d4",
+      "snippet": "bishop and queen. Now Black's pawn on c6 is directly attacked, so our opponent m"
     },
     {
       "file": "old-indian-defence.json",
@@ -9992,17 +8954,12 @@
     {
       "file": "old-indian-defense.json",
       "openingId": "old-indian-defense",
-      "class": "annotation-length-drift",
-      "claim": "4 moveAnnotations",
-      "pgnTruth": "3 plies"
-    },
-    {
-      "file": "old-indian-defense.json",
-      "openingId": "old-indian-defense",
-      "class": "san-mismatch",
-      "plyIndex": 1,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 2 is d6"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 3,
+      "field": "annotation",
+      "claim": "pawn on f6",
+      "pgnTruth": "f6 actually has bN after d6",
+      "snippet": "ssive setup that supports the pawn on f6 while keeping maximum flexibility for t"
     },
     {
       "file": "owen-defense-hekili-loa-gambit.json",
@@ -10248,13 +9205,6 @@
     {
       "file": "pirc-defense-austrian-attack.json",
       "openingId": "pirc-defense-austrian-attack",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "7 plies"
-    },
-    {
-      "file": "pirc-defense-austrian-attack.json",
-      "openingId": "pirc-defense-austrian-attack",
       "class": "piece-on-square-mismatch",
       "plyIndex": 1,
       "field": "annotation",
@@ -10465,13 +9415,6 @@
     {
       "file": "pirc-defense-classical-variation.json",
       "openingId": "pirc-defense-classical-variation",
-      "class": "annotation-length-drift",
-      "claim": "8 moveAnnotations",
-      "pgnTruth": "7 plies"
-    },
-    {
-      "file": "pirc-defense-classical-variation.json",
-      "openingId": "pirc-defense-classical-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 1,
       "field": "annotation",
@@ -10508,13 +9451,6 @@
       "claim": "bishop on g7",
       "pgnTruth": "g7 actually has bP after d6",
       "snippet": "ares to fianchetto the king's bishop on g7 and allows Black to develop the knigh"
-    },
-    {
-      "file": "pirc-defense.json",
-      "openingId": "pirc-defense",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "2 plies"
     },
     {
       "file": "pirc-defense.json",
@@ -10653,13 +9589,6 @@
       "claim": "pawn on d4",
       "pgnTruth": "d4 is empty after e6",
       "snippet": "isn't committing to a central pawn on d4 immediately, leaving options open for h"
-    },
-    {
-      "file": "polish-opening-with-d5.json",
-      "openingId": "polish-opening-with-d5",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "2 plies"
     },
     {
       "file": "polish-opening-with-d5.json",
@@ -13053,13 +11982,6 @@
     {
       "file": "r-ti-opening-anglo-slav-variation-bogoljubow-variation.json",
       "openingId": "r-ti-opening-anglo-slav-variation-bogoljubow-variation",
-      "class": "annotation-length-drift",
-      "claim": "7 moveAnnotations",
-      "pgnTruth": "5 plies"
-    },
-    {
-      "file": "r-ti-opening-anglo-slav-variation-bogoljubow-variation.json",
-      "openingId": "r-ti-opening-anglo-slav-variation-bogoljubow-variation",
       "class": "piece-on-square-mismatch",
       "plyIndex": 2,
       "field": "annotation",
@@ -13108,6 +12030,16 @@
       "snippet": "b3 fianchettoes the bishop on b2, eyeing Black's kingside and center w"
     },
     {
+      "file": "r-ti-opening-anglo-slav-variation-bogoljubow-variation.json",
+      "openingId": "r-ti-opening-anglo-slav-variation-bogoljubow-variation",
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 5,
+      "field": "annotation",
+      "claim": "pawn on e6",
+      "pgnTruth": "e6 is empty after Bf5",
+      "snippet": "e of the fact that there's no pawn on e6 blocking its path. This move, character"
+    },
+    {
       "file": "r-ti-opening-anglo-slav-variation-capablanca-variation.json",
       "openingId": "r-ti-opening-anglo-slav-variation-capablanca-variation",
       "class": "piece-on-square-mismatch",
@@ -13120,9 +12052,17 @@
     {
       "file": "r-ti-opening-anglo-slav-variation-gurevich-system.json",
       "openingId": "r-ti-opening-anglo-slav-variation-gurevich-system",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "10 moveAnnotations",
-      "pgnTruth": "5 plies"
+      "pgnTruth": "7 plies — surplus 3 describes nonexistent positions"
+    },
+    {
+      "file": "r-ti-opening-anglo-slav-variation-gurevich-system.json",
+      "openingId": "r-ti-opening-anglo-slav-variation-gurevich-system",
+      "class": "san-mismatch",
+      "plyIndex": 6,
+      "claim": "annotation.san=\"b3\"",
+      "pgnTruth": "PGN ply 7 is Qc2"
     },
     {
       "file": "r-ti-opening-anglo-slav-variation-london-defensive-system.json",
@@ -13205,21 +12145,6 @@
       "snippet": "Fianchetto the light-squared bishop on g2 for long-term pressure on the a1–h8 d"
     },
     {
-      "file": "r-ti-opening-anglo-slav-variation-with-g3.json",
-      "openingId": "r-ti-opening-anglo-slav-variation-with-g3",
-      "class": "annotation-length-drift",
-      "claim": "7 moveAnnotations",
-      "pgnTruth": "8 plies"
-    },
-    {
-      "file": "r-ti-opening-anglo-slav-variation-with-g3.json",
-      "openingId": "r-ti-opening-anglo-slav-variation-with-g3",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"Bg2\"",
-      "pgnTruth": "PGN ply 7 is b3"
-    },
-    {
       "file": "r-ti-opening-anglo-slav-variation.json",
       "openingId": "r-ti-opening-anglo-slav-variation",
       "class": "piece-on-square-mismatch",
@@ -13258,13 +12183,6 @@
       "claim": "bishop on b2",
       "pgnTruth": "b2 is empty after b3",
       "snippet": "ares a double fianchetto with bishops on b2 and g2, controlling the long diagona"
-    },
-    {
-      "file": "rapport-jobava-system.json",
-      "openingId": "rapport-jobava-system",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "5 plies"
     },
     {
       "file": "rat-defense-accelerated-gurgenidze.json",
@@ -13316,13 +12234,6 @@
     {
       "file": "richter-veresov-attack.json",
       "openingId": "richter-veresov-attack",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "5 plies"
-    },
-    {
-      "file": "richter-veresov-attack.json",
-      "openingId": "richter-veresov-attack",
       "class": "piece-on-square-mismatch",
       "plyIndex": 4,
       "field": "shortNarration",
@@ -13363,9 +12274,9 @@
     {
       "file": "rubinstein-opening-classical-defense.json",
       "openingId": "rubinstein-opening-classical-defense",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "15 moveAnnotations",
-      "pgnTruth": "14 plies"
+      "pgnTruth": "14 plies — surplus 1 describes nonexistent positions"
     },
     {
       "file": "rubinstein-opening-classical-defense.json",
@@ -13430,13 +12341,6 @@
       "plyIndex": 13,
       "claim": "annotation.san=\"Be7\"",
       "pgnTruth": "PGN ply 14 is O-O"
-    },
-    {
-      "file": "rubinstein-opening-semi-slav-defense.json",
-      "openingId": "rubinstein-opening-semi-slav-defense",
-      "class": "annotation-length-drift",
-      "claim": "15 moveAnnotations",
-      "pgnTruth": "13 plies"
     },
     {
       "file": "rubinstein-opening-semi-slav-defense.json",
@@ -13511,13 +12415,6 @@
     {
       "file": "ruy-lopez-closed-breyer-defense.json",
       "openingId": "ruy-lopez-closed-breyer-defense",
-      "class": "annotation-length-drift",
-      "claim": "24 moveAnnotations",
-      "pgnTruth": "18 plies"
-    },
-    {
-      "file": "ruy-lopez-closed-breyer-defense.json",
-      "openingId": "ruy-lopez-closed-breyer-defense",
       "class": "piece-on-square-mismatch",
       "plyIndex": 17,
       "field": "annotation",
@@ -13534,13 +12431,6 @@
       "claim": "king on b5",
       "pgnTruth": "b5 actually has wB after Bb5",
       "snippet": "bishop pins the knight to the king on b5, threatening to double Black's pawns an"
-    },
-    {
-      "file": "ruy-lopez-closed-chigorin-defense.json",
-      "openingId": "ruy-lopez-closed-chigorin-defense",
-      "class": "annotation-length-drift",
-      "claim": "25 moveAnnotations",
-      "pgnTruth": "19 plies"
     },
     {
       "file": "ruy-lopez-closed-flohr-system.json",
@@ -13653,29 +12543,6 @@
       "snippet": "secure the king, activate the rook on e1, and pressure Black's e5 pawn."
     },
     {
-      "file": "ruy-lopez-closed-worrall-attack-castling-line.json",
-      "openingId": "ruy-lopez-closed-worrall-attack-castling-line",
-      "class": "annotation-length-drift",
-      "claim": "17 moveAnnotations",
-      "pgnTruth": "14 plies"
-    },
-    {
-      "file": "ruy-lopez-closed-worrall-attack-castling-line.json",
-      "openingId": "ruy-lopez-closed-worrall-attack-castling-line",
-      "class": "san-mismatch",
-      "plyIndex": 8,
-      "claim": "annotation.san=\"Qe2\"",
-      "pgnTruth": "PGN ply 9 is O-O"
-    },
-    {
-      "file": "ruy-lopez-closed-worrall-attack-castling-line.json",
-      "openingId": "ruy-lopez-closed-worrall-attack-castling-line",
-      "class": "san-mismatch",
-      "plyIndex": 10,
-      "claim": "annotation.san=\"O-O\"",
-      "pgnTruth": "PGN ply 11 is Qe2"
-    },
-    {
       "file": "ruy-lopez-closed-yates-variation-short-attack.json",
       "openingId": "ruy-lopez-closed-yates-variation-short-attack",
       "class": "piece-on-square-mismatch",
@@ -13694,13 +12561,6 @@
       "claim": "pawn on d4",
       "pgnTruth": "d4 is empty after c3",
       "snippet": "prevents Black from placing a pawn on d4, keeping control of this crucial centra"
-    },
-    {
-      "file": "ruy-lopez-closed.json",
-      "openingId": "ruy-lopez-closed",
-      "class": "annotation-length-drift",
-      "claim": "17 moveAnnotations",
-      "pgnTruth": "10 plies"
     },
     {
       "file": "ruy-lopez-marshall-attack-main-line-spassky-variation.json",
@@ -13922,9 +12782,9 @@
     {
       "file": "ruy-lopez.json",
       "openingId": "ruy-lopez",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "18 moveAnnotations",
-      "pgnTruth": "5 plies"
+      "pgnTruth": "5 plies — surplus 13 describes nonexistent positions"
     },
     {
       "file": "scandinavian-defence.json",
@@ -14022,13 +12882,6 @@
       "claim": "bishop on g7",
       "pgnTruth": "g7 is empty after g6",
       "snippet": "n pawn breaks. The fianchetto bishop on g7 will eye our d4 pawn and provide soli"
-    },
-    {
-      "file": "scandinavian-defense-modern-variation.json",
-      "openingId": "scandinavian-defense-modern-variation",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "4 plies"
     },
     {
       "file": "scandinavian-defense-modern-variation.json",
@@ -14191,13 +13044,6 @@
       "snippet": "s. The move also supports our pawn on c3 and prepares potential advances like d5"
     },
     {
-      "file": "scandinavian-defense.json",
-      "openingId": "scandinavian-defense",
-      "class": "annotation-length-drift",
-      "claim": "3 moveAnnotations",
-      "pgnTruth": "2 plies"
-    },
-    {
       "file": "scotch-gambit.json",
       "openingId": "scotch-gambit",
       "class": "opening-id-pgn-drift",
@@ -14207,9 +13053,9 @@
     {
       "file": "scotch-game.json",
       "openingId": "scotch-game",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "20 moveAnnotations",
-      "pgnTruth": "5 plies"
+      "pgnTruth": "7 plies — surplus 13 describes nonexistent positions"
     },
     {
       "file": "semi-slav-defense-botvinnik-variation-alatortsev-system.json",
@@ -14238,35 +13084,6 @@
       "claim": "pawn on f6",
       "pgnTruth": "f6 actually has bN after e5",
       "snippet": "entire opening strategy - the pawn on f6 is pinned and must move, allowing us to"
-    },
-    {
-      "file": "semi-slav-defense-botvinnik-variation.json",
-      "openingId": "semi-slav-defense-botvinnik-variation",
-      "class": "annotation-length-drift",
-      "claim": "17 moveAnnotations",
-      "pgnTruth": "11 plies"
-    },
-    {
-      "file": "semi-slav-defense-chigorin-defense.json",
-      "openingId": "semi-slav-defense-chigorin-defense",
-      "class": "annotation-length-drift",
-      "claim": "21 moveAnnotations",
-      "pgnTruth": "12 plies"
-    },
-    {
-      "file": "semi-slav-defense-chigorin-defense.json",
-      "openingId": "semi-slav-defense-chigorin-defense",
-      "class": "san-mismatch",
-      "plyIndex": 11,
-      "claim": "annotation.san=\"dxc4\"",
-      "pgnTruth": "PGN ply 12 is Bd6"
-    },
-    {
-      "file": "semi-slav-defense-main-line.json",
-      "openingId": "semi-slav-defense-main-line",
-      "class": "annotation-length-drift",
-      "claim": "19 moveAnnotations",
-      "pgnTruth": "9 plies"
     },
     {
       "file": "semi-slav-defense-marshall-gambit-main-line.json",
@@ -14367,45 +13184,6 @@
       "claim": "pawn on f6",
       "pgnTruth": "f6 actually has bN after e4",
       "snippet": "ance puts pressure on Black's pawn on f6 and gives us excellent attacking chance"
-    },
-    {
-      "file": "semi-slav-defense-meran-variation-sozin-variation.json",
-      "openingId": "semi-slav-defense-meran-variation-sozin-variation",
-      "class": "annotation-length-drift",
-      "claim": "25 moveAnnotations",
-      "pgnTruth": "22 plies"
-    },
-    {
-      "file": "semi-slav-defense-meran-variation-sozin-variation.json",
-      "openingId": "semi-slav-defense-meran-variation-sozin-variation",
-      "class": "san-mismatch",
-      "plyIndex": 2,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 3 is c4"
-    },
-    {
-      "file": "semi-slav-defense-meran-variation-sozin-variation.json",
-      "openingId": "semi-slav-defense-meran-variation-sozin-variation",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 4 is c6"
-    },
-    {
-      "file": "semi-slav-defense-meran-variation-sozin-variation.json",
-      "openingId": "semi-slav-defense-meran-variation-sozin-variation",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"c4\"",
-      "pgnTruth": "PGN ply 5 is Nf3"
-    },
-    {
-      "file": "semi-slav-defense-meran-variation-sozin-variation.json",
-      "openingId": "semi-slav-defense-meran-variation-sozin-variation",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"c6\"",
-      "pgnTruth": "PGN ply 6 is Nf6"
     },
     {
       "file": "semi-slav-defense-meran-variation-sozin-variation.json",
@@ -14540,56 +13318,42 @@
     {
       "file": "semi-slav-defense-meran-variation.json",
       "openingId": "semi-slav-defense-meran-variation",
-      "class": "annotation-length-drift",
-      "claim": "18 moveAnnotations",
-      "pgnTruth": "14 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 16,
+      "field": "annotation",
+      "claim": "pawn on f6",
+      "pgnTruth": "f6 actually has bN after e4",
+      "snippet": "e challenging Black's central pawn on f6. This central break is the natural resp"
     },
     {
       "file": "semi-slav-defense-normal-variation.json",
       "openingId": "semi-slav-defense-normal-variation",
-      "class": "annotation-length-drift",
-      "claim": "15 moveAnnotations",
-      "pgnTruth": "10 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 10,
+      "field": "annotation",
+      "claim": "bishop on b2",
+      "pgnTruth": "b2 is empty after b3",
+      "snippet": "o fianchetto our dark-squared bishop on b2, which will exert tremendous pressure"
     },
     {
       "file": "semi-slav-defense-normal-variation.json",
       "openingId": "semi-slav-defense-normal-variation",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"e6\"",
-      "pgnTruth": "PGN ply 4 is c6"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 10,
+      "field": "annotation",
+      "claim": "bishop on b2",
+      "pgnTruth": "b2 is empty after b3",
+      "snippet": "ueen's Gambit systems, as the bishop on b2 will support our central pawns while "
     },
     {
       "file": "semi-slav-defense-normal-variation.json",
       "openingId": "semi-slav-defense-normal-variation",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"c6\"",
-      "pgnTruth": "PGN ply 6 is Nf6"
-    },
-    {
-      "file": "semi-slav-defense-normal-variation.json",
-      "openingId": "semi-slav-defense-normal-variation",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 7 is e3"
-    },
-    {
-      "file": "semi-slav-defense-normal-variation.json",
-      "openingId": "semi-slav-defense-normal-variation",
-      "class": "san-mismatch",
-      "plyIndex": 7,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 8 is e6"
-    },
-    {
-      "file": "semi-slav-defense-normal-variation.json",
-      "openingId": "semi-slav-defense-normal-variation",
-      "class": "san-mismatch",
-      "plyIndex": 8,
-      "claim": "annotation.san=\"e3\"",
-      "pgnTruth": "PGN ply 9 is Nf3"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 10,
+      "field": "shortNarration",
+      "claim": "bishop on b2",
+      "pgnTruth": "b2 is empty after b3",
+      "snippet": "ianchettoing the dark-squared bishop on b2 pressures Black's king along the long"
     },
     {
       "file": "semi-slav-defense-noteboom-variation-abrahams-variation.json",
@@ -14610,13 +13374,6 @@
       "claim": "knight on d2",
       "pgnTruth": "d2 is empty after Nc3",
       "snippet": "esn't block our b-pawn like a knight on d2 would. The move also prepares various"
-    },
-    {
-      "file": "semi-slav-defense-quiet-variation.json",
-      "openingId": "semi-slav-defense-quiet-variation",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "9 plies"
     },
     {
       "file": "semi-slav-defense-romih-variation.json",
@@ -14651,49 +13408,32 @@
     {
       "file": "semi-slav-defense-stoltz-variation.json",
       "openingId": "semi-slav-defense-stoltz-variation",
-      "class": "annotation-length-drift",
-      "claim": "15 moveAnnotations",
-      "pgnTruth": "11 plies"
-    },
-    {
-      "file": "semi-slav-defense-stoltz-variation.json",
-      "openingId": "semi-slav-defense-stoltz-variation",
-      "class": "san-mismatch",
-      "plyIndex": 2,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 3 is c4"
-    },
-    {
-      "file": "semi-slav-defense-stoltz-variation.json",
-      "openingId": "semi-slav-defense-stoltz-variation",
-      "class": "san-mismatch",
-      "plyIndex": 3,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 4 is c6"
-    },
-    {
-      "file": "semi-slav-defense-stoltz-variation.json",
-      "openingId": "semi-slav-defense-stoltz-variation",
-      "class": "san-mismatch",
+      "class": "piece-on-square-mismatch",
       "plyIndex": 4,
-      "claim": "annotation.san=\"c4\"",
-      "pgnTruth": "PGN ply 5 is Nc3"
+      "field": "annotation",
+      "claim": "bishop on b2",
+      "pgnTruth": "b2 actually has wP after c4",
+      "snippet": " fianchetto our light-squared bishop on b2, where it will exert long-range press"
     },
     {
       "file": "semi-slav-defense-stoltz-variation.json",
       "openingId": "semi-slav-defense-stoltz-variation",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"c6\"",
-      "pgnTruth": "PGN ply 6 is Nf6"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 12,
+      "field": "annotation",
+      "claim": "bishop on b2",
+      "pgnTruth": "b2 is empty after b3",
+      "snippet": " fianchetto our light-squared bishop on b2, where it will exert tremendous press"
     },
     {
       "file": "semi-slav-defense-stoltz-variation.json",
       "openingId": "semi-slav-defense-stoltz-variation",
-      "class": "san-mismatch",
-      "plyIndex": 8,
-      "claim": "annotation.san=\"Nc3\"",
-      "pgnTruth": "PGN ply 9 is Nf3"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 12,
+      "field": "shortNarration",
+      "claim": "bishop on b2",
+      "pgnTruth": "b2 is empty after b3",
+      "snippet": "Fianchetto the light-squared bishop on b2 pressures Black's kingside along the "
     },
     {
       "file": "semi-slav-defense-stonewall-defense.json",
@@ -14832,9 +13572,12 @@
     {
       "file": "sicilian-defense-closed.json",
       "openingId": "sicilian-defense-closed",
-      "class": "annotation-length-drift",
-      "claim": "11 moveAnnotations",
-      "pgnTruth": "3 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 5,
+      "field": "annotation",
+      "claim": "bishop on g7",
+      "pgnTruth": "g7 is empty after g6",
+      "snippet": "ery logical for Black, as the bishop on g7 will be excellently placed to support"
     },
     {
       "file": "sicilian-defense-coles-sicilian-gambit.json",
@@ -15014,13 +13757,6 @@
       "snippet": "c-file and recapture with the knight on c3, gaining central control and developm"
     },
     {
-      "file": "sicilian-defense-smith-morra-gambit.json",
-      "openingId": "sicilian-defense-smith-morra-gambit",
-      "class": "annotation-length-drift",
-      "claim": "5 moveAnnotations",
-      "pgnTruth": "3 plies"
-    },
-    {
       "file": "sicilian-defense-snyder-variation-queen-fianchetto-variation.json",
       "openingId": "sicilian-defense-snyder-variation-queen-fianchetto-variation",
       "class": "piece-on-square-mismatch",
@@ -15029,13 +13765,6 @@
       "claim": "bishop on b2",
       "pgnTruth": "b2 is empty after b3",
       "snippet": " fianchetto our light-squared bishop on b2. This move supports the eventual Bb2,"
-    },
-    {
-      "file": "sicilian-defense.json",
-      "openingId": "sicilian-defense",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "2 plies"
     },
     {
       "file": "sicilian-dragon.json",
@@ -15064,13 +13793,6 @@
       "class": "opening-id-pgn-drift",
       "claim": "openingId \"slav-defence\" referenced",
       "pgnTruth": "no matching row in openings-lichess.json"
-    },
-    {
-      "file": "slav-defense-chebanenko-variation.json",
-      "openingId": "slav-defense-chebanenko-variation",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "8 plies"
     },
     {
       "file": "slav-defense-czech-variation-carlsbad-variation-morozevich-variation.json",
@@ -15193,33 +13915,44 @@
       "snippet": " pawn chain that supports the pawn on f6. However, this move does have the drawb"
     },
     {
-      "file": "slav-defense-exchange-variation.json",
-      "openingId": "slav-defense-exchange-variation",
-      "class": "annotation-length-drift",
-      "claim": "8 moveAnnotations",
-      "pgnTruth": "5 plies"
-    },
-    {
-      "file": "slav-defense-exchange-variation.json",
-      "openingId": "slav-defense-exchange-variation",
-      "class": "san-mismatch",
-      "plyIndex": 4,
-      "claim": "annotation.san=\"Nf3\"",
-      "pgnTruth": "PGN ply 5 is cxd5"
-    },
-    {
-      "file": "slav-defense-geller-gambit.json",
-      "openingId": "slav-defense-geller-gambit",
-      "class": "annotation-length-drift",
-      "claim": "11 moveAnnotations",
-      "pgnTruth": "9 plies"
+      "file": "slav-defense-modern-line.json",
+      "openingId": "slav-defense-modern-line",
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 6,
+      "field": "annotation",
+      "claim": "bishop on g2",
+      "pgnTruth": "g2 is empty after g3",
+      "snippet": " fianchetto our light-squared bishop on g2 where it will become a powerful long-"
     },
     {
       "file": "slav-defense-modern-line.json",
       "openingId": "slav-defense-modern-line",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "5 plies"
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 6,
+      "field": "annotation",
+      "claim": "bishop on g2",
+      "pgnTruth": "g2 is empty after g3",
+      "snippet": "ch is almost inevitable), our bishop on g2 will eye the long diagonal and put pr"
+    },
+    {
+      "file": "slav-defense-modern-line.json",
+      "openingId": "slav-defense-modern-line",
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 6,
+      "field": "shortNarration",
+      "claim": "bishop on g2",
+      "pgnTruth": "g2 is empty after g3",
+      "snippet": "anchettoing the light-squared bishop on g2 pressures Black's queenside after ..."
+    },
+    {
+      "file": "slav-defense-modern-line.json",
+      "openingId": "slav-defense-modern-line",
+      "class": "piece-on-square-mismatch",
+      "plyIndex": 7,
+      "field": "annotation",
+      "claim": "bishop on g2",
+      "pgnTruth": "g2 is empty after dxc4",
+      "snippet": " long diagonal for our future bishop on g2, and the c4 pawn may become a target "
     },
     {
       "file": "slav-defense-quiet-variation-amsterdam-variation.json",
@@ -15230,13 +13963,6 @@
       "claim": "bishop on c8",
       "pgnTruth": "c8 is empty after e6",
       "snippet": "oes block in the dark-squared bishop on c8, which is one of the drawbacks of thi"
-    },
-    {
-      "file": "slav-defense-quiet-variation-schallopp-defense.json",
-      "openingId": "slav-defense-quiet-variation-schallopp-defense",
-      "class": "annotation-length-drift",
-      "claim": "10 moveAnnotations",
-      "pgnTruth": "8 plies"
     },
     {
       "file": "slav-defense-schlechter-variation.json",
@@ -15267,13 +13993,6 @@
       "claim": "knight on c6",
       "pgnTruth": "c6 actually has bP after Nf6",
       "snippet": "Black's knight on c6 attacks c4 and controls e4 and d5, su"
-    },
-    {
-      "file": "slav-defense.json",
-      "openingId": "slav-defense",
-      "class": "annotation-length-drift",
-      "claim": "6 moveAnnotations",
-      "pgnTruth": "4 plies"
     },
     {
       "file": "smith-morra-gambit.json",
@@ -15620,61 +14339,6 @@
       "snippet": "d response that maintains the pawn on f6 while preparing to develop the bishop t"
     },
     {
-      "file": "trompowsky-attack-edge-variation-hergert-gambit.json",
-      "openingId": "trompowsky-attack-edge-variation-hergert-gambit",
-      "class": "annotation-length-drift",
-      "claim": "11 moveAnnotations",
-      "pgnTruth": "13 plies"
-    },
-    {
-      "file": "trompowsky-attack-edge-variation-hergert-gambit.json",
-      "openingId": "trompowsky-attack-edge-variation-hergert-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 5,
-      "claim": "annotation.san=\"d5\"",
-      "pgnTruth": "PGN ply 6 is c6"
-    },
-    {
-      "file": "trompowsky-attack-edge-variation-hergert-gambit.json",
-      "openingId": "trompowsky-attack-edge-variation-hergert-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 6,
-      "claim": "annotation.san=\"f3\"",
-      "pgnTruth": "PGN ply 7 is Nd2"
-    },
-    {
-      "file": "trompowsky-attack-edge-variation-hergert-gambit.json",
-      "openingId": "trompowsky-attack-edge-variation-hergert-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 7,
-      "claim": "annotation.san=\"Nf6\"",
-      "pgnTruth": "PGN ply 8 is Qa5"
-    },
-    {
-      "file": "trompowsky-attack-edge-variation-hergert-gambit.json",
-      "openingId": "trompowsky-attack-edge-variation-hergert-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 8,
-      "claim": "annotation.san=\"Nc3\"",
-      "pgnTruth": "PGN ply 9 is c3"
-    },
-    {
-      "file": "trompowsky-attack-edge-variation-hergert-gambit.json",
-      "openingId": "trompowsky-attack-edge-variation-hergert-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 9,
-      "claim": "annotation.san=\"Bf5\"",
-      "pgnTruth": "PGN ply 10 is Nxd2"
-    },
-    {
-      "file": "trompowsky-attack-edge-variation-hergert-gambit.json",
-      "openingId": "trompowsky-attack-edge-variation-hergert-gambit",
-      "class": "san-mismatch",
-      "plyIndex": 10,
-      "claim": "annotation.san=\"e4\"",
-      "pgnTruth": "PGN ply 11 is Qxd2"
-    },
-    {
       "file": "trompowsky-attack-poisoned-pawn-variation.json",
       "openingId": "trompowsky-attack-poisoned-pawn-variation",
       "class": "piece-on-square-mismatch",
@@ -15697,9 +14361,9 @@
     {
       "file": "trompowsky-attack.json",
       "openingId": "trompowsky-attack",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "20 moveAnnotations",
-      "pgnTruth": "3 plies"
+      "pgnTruth": "3 plies — surplus 17 describes nonexistent positions"
     },
     {
       "file": "two-knights-defence.json",
@@ -15923,9 +14587,9 @@
     {
       "file": "vienna-game.json",
       "openingId": "vienna-game",
-      "class": "annotation-length-drift",
+      "class": "annotation-overflow",
       "claim": "20 moveAnnotations",
-      "pgnTruth": "3 plies"
+      "pgnTruth": "3 plies — surplus 17 describes nonexistent positions"
     },
     {
       "file": "ware-opening-cologne-gambit.json",
@@ -16209,13 +14873,6 @@
       "claim": "pawn on f3",
       "pgnTruth": "f3 actually has wN after e4",
       "snippet": "le. This move complements our pawn on f3 nicely, as both pieces now work togethe"
-    },
-    {
-      "file": "zukertort-opening.json",
-      "openingId": "zukertort-opening",
-      "class": "annotation-length-drift",
-      "claim": "2 moveAnnotations",
-      "pgnTruth": "1 plies"
     }
   ]
 }
