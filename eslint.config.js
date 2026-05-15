@@ -65,6 +65,15 @@ export default tseslint.config(
       }],
       'no-var': 'error',
       'prefer-const': 'error',
+      // 200+ pre-existing occurrences across production source. Each
+      // is a defensive null/undefined check where TS infers the value
+      // is always present. Two failure modes: (a) the check is truly
+      // dead — safe to remove, but (b) the TS type is wrong and the
+      // check IS load-bearing at runtime. Without runtime evidence
+      // for each, sweep-removing risks shipping null-pointer bugs.
+      // Downgrade to warn so it surfaces in dev (caught by future
+      // edits) without blocking ship until the cleanup pass runs.
+      '@typescript-eslint/no-unnecessary-condition': 'warn',
     },
   },
   // Test utilities — fast-refresh rule doesn't apply to test helpers
