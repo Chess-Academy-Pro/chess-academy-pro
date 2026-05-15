@@ -22,6 +22,12 @@ export interface PuzzleRecord {
    *  pre-tagged puzzle records still hanging around in Dexie;
    *  the curated `puzzles.json` always populates it. */
   movingPiece?: MovingPiece;
+  /** Provenance. 'lichess' = the CC0 Lichess puzzle DB (default for
+   *  records in `puzzles.json`). 'training' = the hand-crafted /
+   *  procedurally-generated sub-400 ELO pool that lives in
+   *  `training-puzzles.json` — used by kid mode to bridge the gap
+   *  between rating 100 (kid floor) and 400 (Lichess floor). */
+  source?: 'lichess' | 'training';
   // SRS fields
   srsInterval: number;
   srsEaseFactor: number;
