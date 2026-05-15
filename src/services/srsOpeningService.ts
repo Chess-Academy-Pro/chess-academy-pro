@@ -190,6 +190,85 @@ export async function getDueCards(limit = 30): Promise<SrsOpeningCard[]> {
     .toArray();
 }
 
+/** A line grouping for Woodpecker-style review: every card in this
+ *  group belongs to the same (openingId, variationName) — i.e. the
+ *  same sequence of moves — and at least one of them is due.
+ *
+ *  `cards` is sorted by `pgnPrefix` length ascending, so iterating
+ *  walks the line from move 1 to its end-for-student. The last card's
+ *  `pgnPrefix + ' ' + expectedSan` is the full line PGN. */
+export interface DueLine {
+  openingId: string;
+  variationName: string;
+  studentColor: 'white' | 'black';
+  /** The full line PGN — every ply from move 1 to the student's last
+   *  recorded move. Opponent moves are inferred from the cards' shared
+   *  pgnPrefix chain. */
+  fullPgn: string;
+  cards: SrsOpeningCard[];
+}
+
+/** Returns a queue of due *lines* for Woodpecker mode. Each line is a
+ *  single variation that has at least one card due. The student plays
+ *  through the whole line move-by-move; cards inside the line get
+ *  SM-2 updates individually based on per-position outcomes.
+ *
+ *  Limit is in lines, not cards. SRS theory still applies — a
+ *  Woodpecker session of 5 lines (≈ 30-50 student plies) lines up with
+ *  the per-position cap of ~30. */
+export async function getDueLines(limit = 5): Promise<DueLine[]> {
+  const now = Date.now();
+  const due = await db.srsOpeningCards
+    .where('nextReviewAt')
+    .belowOrEqual(now)
+    .toArray();
+
+  // Group by (openingId, variationName). Pull in any sibling cards from
+  // the same variation even if they aren't due themselves — Woodpecker
+  // is whole-line; we always replay the full sequence, so we need every
+  // student position in the line. Cards not due still get SM-2'd by the
+  // outcome of THIS replay, just from a different starting interval.
+  const byLine = new Map<string, DueLine>();
+  const lineKeys = new Set<string>();
+  for (const card of due) {
+    lineKeys.add(`${card.openingId}::${card.variationName}`);
+  }
+
+  if (lineKeys.size === 0) return [];
+
+  for (const key of lineKeys) {
+    const [openingId, variationName] = key.split('::');
+    const cards = await db.srsOpeningCards
+      .where('openingId')
+      .equals(openingId)
+      .filter((c) => c.variationName === variationName)
+      .toArray();
+    if (cards.length === 0) continue;
+    cards.sort((a, b) => a.pgnPrefix.length - b.pgnPrefix.length);
+    const last = cards[cards.length - 1];
+    const fullPgn = last.pgnPrefix
+      ? `${last.pgnPrefix} ${last.expectedSan}`.trim()
+      : last.expectedSan;
+    byLine.set(key, {
+      openingId,
+      variationName,
+      studentColor: cards[0].studentColor,
+      fullPgn,
+      cards,
+    });
+  }
+
+  // Sort by most-overdue first card in each line so the line with the
+  // hottest review pressure surfaces first.
+  return Array.from(byLine.values())
+    .sort((a, b) => {
+      const aMin = Math.min(...a.cards.map((c) => c.nextReviewAt));
+      const bMin = Math.min(...b.cards.map((c) => c.nextReviewAt));
+      return aMin - bMin;
+    })
+    .slice(0, limit);
+}
+
 /** Count of cards due (no limit). Drives the "X due today" header. */
 export async function getDueCount(): Promise<number> {
   const now = Date.now();

@@ -6,6 +6,7 @@ import {
   generateCardsForOpening,
   getDueCards,
   getDueCount,
+  getDueLines,
   getEnrolledOpenings,
   isEnrolled,
   normalizeSan,
@@ -291,6 +292,94 @@ describe('srsOpeningService', () => {
       const byId = Object.fromEntries(rows.map((r) => [r.openingId, r]));
       expect(byId.italian).toEqual({ openingId: 'italian', totalCards: 2, dueCards: 1 });
       expect(byId.sicilian).toEqual({ openingId: 'sicilian', totalCards: 1, dueCards: 1 });
+    });
+  });
+
+  describe('getDueLines', () => {
+    it('groups due cards by (openingId, variationName) with the full line PGN', async () => {
+      const opening = makeOpening({
+        pgn: 'e4 e5 Nf3 Nc6 Bc4',
+        color: 'white',
+      });
+      await enrollOpening(opening);
+      const lines = await getDueLines();
+      expect(lines).toHaveLength(1);
+      const line = lines[0];
+      expect(line.openingId).toBe('italian-game');
+      expect(line.variationName).toBe('Italian Game');
+      expect(line.studentColor).toBe('white');
+      expect(line.fullPgn).toBe('e4 e5 Nf3 Nc6 Bc4');
+      // Cards sorted by pgnPrefix length ascending.
+      expect(line.cards.map((c) => c.expectedSan)).toEqual(['e4', 'Nf3', 'Bc4']);
+    });
+
+    it('returns one DueLine per variation', async () => {
+      // Pick variations that diverge from move 2 (black) so no
+      // student-to-move positions collide via the FEN-based card-id.
+      // Same position with multiple "answers" gets deduped — that's
+      // the single-answer SRS contract.
+      const opening = makeOpening({
+        pgn: '',
+        variations: [
+          { name: 'Italian', pgn: 'e4 e5 Nf3 Nc6 Bc4', explanation: '' },
+          { name: 'French', pgn: 'e4 e6 d4 d5 Nc3', explanation: '' },
+        ],
+      } as Partial<OpeningRecord>);
+      await enrollOpening(opening);
+      const lines = await getDueLines();
+      const names = lines.map((l) => l.variationName).sort();
+      expect(names).toContain('Italian');
+      expect(names).toContain('French');
+    });
+
+    it('pulls all sibling cards into a line even if some are not due', async () => {
+      // Manually insert two cards on the same variation — one due, one not.
+      const now = Date.now();
+      await db.srsOpeningCards.bulkAdd([
+        makeCard({
+          id: 'a',
+          variationName: 'Test Line',
+          pgnPrefix: '',
+          expectedSan: 'e4',
+          nextReviewAt: now - 1000,
+        }),
+        makeCard({
+          id: 'b',
+          variationName: 'Test Line',
+          pgnPrefix: 'e4 e5',
+          expectedSan: 'Nf3',
+          nextReviewAt: now + 60_000, // not due
+        }),
+      ]);
+      const lines = await getDueLines();
+      expect(lines).toHaveLength(1);
+      // Both cards present — Woodpecker replays the whole line.
+      expect(lines[0].cards).toHaveLength(2);
+    });
+
+    it('respects the line limit', async () => {
+      const now = Date.now();
+      // Make 8 distinct variations, each with one due card.
+      for (let i = 0; i < 8; i++) {
+        await db.srsOpeningCards.add(
+          makeCard({
+            id: `card-${i}`,
+            openingId: `o-${i}`,
+            variationName: `var-${i}`,
+            nextReviewAt: now - 1000 - i,
+          }),
+        );
+      }
+      const lines = await getDueLines(3);
+      expect(lines).toHaveLength(3);
+    });
+
+    it('returns empty list when no cards are due', async () => {
+      const now = Date.now();
+      await db.srsOpeningCards.add(
+        makeCard({ id: 'x', nextReviewAt: now + 60_000 }),
+      );
+      expect(await getDueLines()).toEqual([]);
     });
   });
 

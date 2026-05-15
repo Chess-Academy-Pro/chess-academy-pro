@@ -230,13 +230,27 @@ test.describe('/openings/srs — opening trainer', () => {
     await expect(page.locator('[data-testid="srs-start-session"]')).toBeVisible();
     await expect(page.locator(`[data-testid="srs-enrolled-${openingId}"]`)).toBeVisible();
 
-    // ── E. Start session — board mounts, prompt is clean ──────────
+    // ── Mode tabs visible on hub ──────────────────────────────────
+    await expect(page.locator('[data-testid="srs-mode-tabs"]')).toBeVisible();
+    await expect(page.locator('[data-testid="srs-mode-card"]')).toBeVisible();
+    await expect(page.locator('[data-testid="srs-mode-line"]')).toBeVisible();
+
+    // ── E. Start session in CARD mode (default) — board mounts ────
     await page.locator('[data-testid="srs-start-session"]').click();
     await page.waitForSelector('[data-testid="srs-session"]', { timeout: 10_000 });
+    // Mode toggle is also present at the top of the board during a
+    // session — David's explicit ask.
+    await expect(page.locator('[data-testid="srs-session"] [data-testid="srs-mode-tabs"]')).toBeVisible();
     await expect(page.locator('[data-square="a1"]').first()).toBeVisible();
     const squareCount = await page.locator('[data-square]').count();
     expect(squareCount).toBe(64);
 
+    // Card mode kicks off with a play-in animation; wait for it to
+    // hand off to the student's turn before asserting on the prompt.
+    await expect(page.locator('[data-testid="srs-prompt"]')).toHaveText(
+      /(White|Black) to move/i,
+      { timeout: 10_000 },
+    );
     const variation = (await page.locator('[data-testid="srs-variation-name"]').innerText()).trim();
     const prompt = (await page.locator('[data-testid="srs-prompt"]').innerText()).trim();
     expect(variation.length).toBeGreaterThan(0);
@@ -252,6 +266,12 @@ test.describe('/openings/srs — opening trainer', () => {
     }
 
     // ── G. Correct move → green feedback path ────────────────────
+    // Wait for the play-in animation to finish (prompt switches from
+    // "Watching the line" to "<Color> to move").
+    await expect(page.locator('[data-testid="srs-prompt"]')).toHaveText(
+      /(White|Black) to move/i,
+      { timeout: 10_000 },
+    );
     let card = await readNextDueCard(page);
     expect(card, 'no due card found in Dexie despite hub showing due > 0').not.toBeNull();
     if (!card) return;
@@ -267,11 +287,16 @@ test.describe('/openings/srs — opening trainer', () => {
       expect(correctFeedback).not.toContain(phrase);
     }
 
-    // Wait for the auto-advance — the feedback strip clears.
+    // Wait for the auto-advance — the feedback strip clears AND the
+    // next card's play-in finishes (so prompt is back to "<Color> to
+    // move", not "Watching the line").
     await page.waitForTimeout(1500);
+    await expect(page.locator('[data-testid="srs-prompt"]')).toHaveText(
+      /(White|Black) to move/i,
+      { timeout: 10_000 },
+    );
 
     // ── H. Wrong move → red feedback path ────────────────────────
-    // We may have advanced into a new card. Read it fresh.
     card = await readNextDueCard(page);
     if (card) {
       const wrong = pickWrongMove(card.fenBefore, card.expectedSan);
@@ -375,6 +400,85 @@ test.describe('/openings/srs — opening trainer', () => {
     })) as Array<{ text: string; location: string }>;
     const onSrs = speakCalls.filter((c) => c.location.includes('/openings/srs'));
     expect(onSrs, `speechSynthesis.speak fired on /openings/srs: ${JSON.stringify(onSrs)}`).toEqual([]);
+
+    // ── N. LINE mode — Woodpecker walkthrough ─────────────────────
+    // Re-enroll so we have due cards, then start a Line session via
+    // the mode tab.
+    await page.goto(`/openings/${openingId}`);
+    await page.waitForSelector('[data-testid="opening-detail"]', { timeout: 60_000 });
+    if ((await page.locator('[data-testid="srs-enroll-btn"]').count()) > 0) {
+      await page.locator('[data-testid="srs-enroll-btn"]').click();
+      await expect(page.locator('[data-testid="srs-unenroll-btn"]')).toBeVisible({ timeout: 5_000 });
+    }
+    await gotoSrsHub(page);
+    // Click the Line-mode tab on the hub.
+    await page.locator('[data-testid="srs-mode-line"]').click();
+    await expect(page.locator('[data-testid="srs-start-session"]')).toBeVisible();
+    await page.locator('[data-testid="srs-start-session"]').click();
+    await page.waitForSelector('[data-testid="srs-session"]', { timeout: 10_000 });
+
+    // In Line mode, the counter says "Line N of M".
+    await expect(page.locator('[data-testid="srs-card-counter"]')).toContainText(/Line \d+ of \d+/i);
+
+    // Walk through the active line move-by-move. Read each due card
+    // from Dexie before each student turn; opponent plies auto-play
+    // in between.
+    //
+    // For each student ply we read the next-due card with the lowest
+    // pgnPrefix length that we haven't visited yet.
+    const visitedCardIds = new Set<string>();
+    const MAX_PLIES = 30;
+    let landedAtLineComplete = false;
+    for (let i = 0; i < MAX_PLIES; i++) {
+      // If we're at the all-complete screen, bail.
+      if ((await page.locator('[data-testid="srs-complete"]').count()) > 0) {
+        landedAtLineComplete = true;
+        break;
+      }
+      // Wait for the prompt to settle into a student turn — if the
+      // opponent is moving, the prompt reads "Watching the line".
+      try {
+        await expect(page.locator('[data-testid="srs-prompt"]')).toHaveText(
+          /(White|Black) to move/i,
+          { timeout: 8_000 },
+        );
+      } catch {
+        // Maybe completed during the wait — recheck.
+        if ((await page.locator('[data-testid="srs-complete"]').count()) > 0) {
+          landedAtLineComplete = true;
+          break;
+        }
+        throw new Error(`stuck on opponent turn at iteration ${i}`);
+      }
+      const next = await readNextDueCard(page);
+      if (!next || visitedCardIds.has(next.id)) {
+        // No new card found — either we've reached end of line or
+        // Dexie's ordering quirked. Bail to the safety timeout.
+        break;
+      }
+      visitedCardIds.add(next.id);
+      const move = expectedToFromTo(next.fenBefore, next.expectedSan);
+      await clickBoardMove(page, move.from, move.to);
+      // Brief breath for the move to register + opponent to auto-play.
+      await page.waitForTimeout(800);
+    }
+    // We don't strictly require all-complete — some lines have many
+    // plies and the 30-iteration cap may not finish them. But we DO
+    // require we made progress: visitedCardIds is non-empty AND the
+    // prompt-text banlist held throughout.
+    expect(visitedCardIds.size).toBeGreaterThan(0);
+    void landedAtLineComplete; // recorded for future assertions
+
+    // Banlist on the line-mode session DOM.
+    if ((await page.locator('[data-testid="srs-session"]').count()) > 0) {
+      const lineSessionText = await page.locator('[data-testid="srs-session"]').innerText();
+      for (const phrase of NARRATION_BANLIST) {
+        expect(
+          lineSessionText,
+          `banned phrase "${phrase}" in line-mode session DOM`,
+        ).not.toContain(phrase);
+      }
+    }
 
     // ── M. Un-enroll wipes the deck ───────────────────────────────
     await page.goto(`/openings/${openingId}`);
