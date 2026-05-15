@@ -540,7 +540,7 @@ function RepeatMistakeCard({ repeats }: { repeats: EngagementSummary['repeatMist
       <div className="flex items-center gap-2 mb-2">
         <Repeat size={16} style={{ color: 'var(--color-error)' }} />
         <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--color-text-muted)' }}>
-          Same mistake, twice
+          Stuck on mistakes
         </h3>
       </div>
       <div className="flex items-baseline gap-2 mb-2">
@@ -548,7 +548,7 @@ function RepeatMistakeCard({ repeats }: { repeats: EngagementSummary['repeatMist
           {repeats.repeatedMistakes}
         </span>
         <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-          of {repeats.totalUnsolved} unsolved mistake puzzles
+          of {repeats.totalUnsolved} mistake puzzles you've tried ≥2 times and still missed
         </span>
       </div>
       {tactics.length > 0 && (

@@ -24,9 +24,12 @@
  * Companion docs: ANALYTICS_AUDIT.md. The build plan there maps
  * each query function to the emit sites that feed it.
  */
+import { Chess } from 'chess.js';
 import { getAppAuditLog, type AuditEntry, type AuditKind } from './appAuditor';
 import { db } from '../db/schema';
 import { getOverviewInsights, getOpeningInsights } from './gameInsightsService';
+import { uciMoveToSan } from '../utils/uciToSan';
+import { detectTacticType } from './missedTacticService';
 import type {
   GamePhase,
   TacticType,
@@ -714,10 +717,44 @@ export interface TacticBreadth {
 }
 
 export async function tacticTypeBreadth(): Promise<TacticBreadth> {
-  const tactics = await db.classifiedTactics.toArray();
-  const types = new Set<TacticType>();
-  for (const t of tactics) types.add(t.tacticType);
-  return { distinctTypes: types.size, types: Array.from(types).sort() };
+  // Pre-fix this read `db.classifiedTactics` thinking those were
+  // tactics the player FOUND. But `tacticClassifierService` only
+  // writes that table for mistakes/blunders — they're MISSED
+  // tactics, not finds. So this card was inverted: showing
+  // breadth-of-misses while labeled as breadth-of-finds.
+  //
+  // Now scan annotations directly for brilliant/great moves and
+  // classify each via `detectTacticType(preFen, bestMove)`. Real
+  // strength signal.
+  const found = await scanFoundTacticsByType();
+  return { distinctTypes: found.size, types: Array.from(found.keys()).sort() };
+}
+
+/** Scan every fully-analyzed player game for moves classified as
+ *  brilliant or great, group them by detected tactic type. Returns
+ *  a Map<TacticType, count>. Used by `tacticTypeBreadth` and
+ *  `tacticTransferGap` as the canonical "tactics the player found"
+ *  source — the alternative (db.classifiedTactics) is actually
+ *  misses-only and was being misread as finds. */
+async function scanFoundTacticsByType(): Promise<Map<TacticType, number>> {
+  const playerGames = await loadPlayerGames();
+  const counts = new Map<TacticType, number>();
+  for (const { game, color } of playerGames) {
+    if (!game.fullyAnalyzed || !game.annotations || game.annotations.length === 0) continue;
+    const preMoveFens = buildPreMoveFens(game.pgn, game.annotations.length);
+    for (let i = 0; i < game.annotations.length; i++) {
+      const ann = game.annotations[i];
+      if (ann.color !== color) continue;
+      if (ann.classification !== 'brilliant' && ann.classification !== 'great') continue;
+      if (!ann.bestMove) continue;
+      const preFen = preMoveFens[i];
+      if (!preFen) continue;
+      const type = detectTacticType(preFen, ann.bestMove);
+      if (type === 'tactical_sequence') continue; // catch-all bucket — skip
+      counts.set(type, (counts.get(type) ?? 0) + 1);
+    }
+  }
+  return counts;
 }
 
 // ─── Brilliant-move concentration ──────────────────────────────────────
@@ -825,7 +862,6 @@ export interface TacticTransferRow {
 }
 
 export async function tacticTransferGap(): Promise<TacticTransferRow[]> {
-  const tactics = await db.classifiedTactics.toArray();
   const mistakes = await db.mistakePuzzles.toArray();
 
   // Build puzzle-side accuracy by tactic, using mistakePuzzles as the
@@ -839,15 +875,13 @@ export async function tacticTransferGap(): Promise<TacticTransferRow[]> {
     puzzleByType.set(m.tacticType, bin);
   }
 
-  // In-game side: classifiedTactics carries each found-tactic; missed
-  // tactics need a different source (missedTacticService /
-  // gameInsightsService.getTacticInsights). For a stable join we count
-  // classifiedTactics by type as "found"; mistakePuzzles tagged with
-  // the same tacticType serve as a proxy for "missed" occurrences.
-  const foundByType = new Map<TacticType, number>();
-  for (const t of tactics) {
-    foundByType.set(t.tacticType, (foundByType.get(t.tacticType) ?? 0) + 1);
-  }
+  // In-game "found" side. Pre-fix this read `db.classifiedTactics`
+  // which (per tacticClassifierService.ts:177) only contains the
+  // player's MISTAKES tagged with tactic type — i.e. misses. So the
+  // matrix was comparing "missed-via-A" to "missed-via-B" with a
+  // confusing "found-vs-missed" label. Fixed by scanning annotations
+  // for brilliant/great moves and detecting their tactic type.
+  const foundByType = await scanFoundTacticsByType();
 
   const types = new Set<TacticType>([
     ...puzzleByType.keys(),
@@ -884,15 +918,22 @@ export async function tacticTransferGap(): Promise<TacticTransferRow[]> {
   return rows;
 }
 
-// ─── Repeat-of-mistake ─────────────────────────────────────────────────
+// ─── Stuck-on-mistake ──────────────────────────────────────────────────
 //
-// "Made the same mistake twice." Strongest single weakness signal we
-// can derive today: mistake puzzles with status='unsolved' AND
-// attempts >= 2 mean the student re-attempted and missed again.
+// Named "repeat-mistake" historically. What this actually measures:
+// mistake puzzles the student has attempted ≥2 times AND still
+// hasn't solved (status==='unsolved'). That's "stuck on this puzzle"
+// — NOT "the same mistake recurring across different games." The
+// surface card title now reads "Stuck on mistakes" to match the
+// actual measurement. A real cross-game recurrence signal would
+// require fingerprinting mistakes by FEN + tactic-type and joining
+// across `sourceGameId` — deeper work, deferred.
 
 export interface RepeatMistakeStats {
   totalUnsolved: number;
-  repeatedMistakes: number;       // attempts >= 2 still unsolved
+  /** Count of mistake puzzles with attempts ≥ 2 still unsolved —
+   *  "stuck on this specific puzzle." */
+  repeatedMistakes: number;
   byTactic: Partial<Record<TacticType, number>>;
 }
 
@@ -926,43 +967,54 @@ export interface StreakStats {
 }
 
 export async function streaks(): Promise<StreakStats> {
+  // Newest-first ordering: a streak runs from the head of the list
+  // and breaks on the first non-match. `currentStreak` counts the
+  // unbroken head run; `longestStreak` is the max over the whole
+  // history.
+  //
+  // Pre-fix the prior implementation tracked two interleaved
+  // counters (`cur` + `scan`) with an `if (cur === scan - 1)`
+  // catch-up rule. That rule fired even after a leading loss had
+  // reset scan to 0 — subsequent wins re-incremented `cur` from 0,
+  // so a recent loss didn't actually break the "current" streak.
   const games = await loadPlayerGames();
-  // Sort newest-first by date string (ISO-safe lexicographic).
   games.sort((a, b) => b.game.date.localeCompare(a.game.date));
-  let cur = 0, longest = 0, scan = 0;
-  for (const { game, color } of games) {
-    const win = isWin(game, color);
-    if (win) {
-      scan++;
-      if (scan > longest) longest = scan;
-      if (cur === scan - 1) cur = scan; // still on the leading streak
-    } else {
-      if (scan === 0) cur = 0;          // first non-win in the leading slot ends current streak
-      else if (cur > 0 && scan === cur) cur = scan; // no-op
-      scan = 0;
-    }
-  }
+  const winStreak = computeHeadAndLongestStreak(games.map(({ game, color }) => isWin(game, color)));
+
   // Solve streak: most-recent-first ordering on mistakePuzzles.
   const mistakes = await db.mistakePuzzles.toArray();
   mistakes.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-  let curS = 0, longestS = 0, scanS = 0;
-  for (const m of mistakes) {
-    const firstTry = m.attempts === 1 && m.successes >= 1;
-    if (firstTry) {
-      scanS++;
-      if (scanS > longestS) longestS = scanS;
-      if (curS === scanS - 1) curS = scanS;
+  const solveStreak = computeHeadAndLongestStreak(
+    mistakes.map((m) => m.attempts === 1 && m.successes >= 1),
+  );
+
+  return {
+    currentWinStreak: winStreak.current,
+    longestWinStreak: winStreak.longest,
+    currentSolveStreak: solveStreak.current,
+    longestSolveStreak: solveStreak.longest,
+  };
+}
+
+/** Compute `{ current, longest }` streak length over a newest-first
+ *  boolean sequence. `current` = unbroken head run; `longest` = max
+ *  over the whole sequence. */
+function computeHeadAndLongestStreak(seq: boolean[]): { current: number; longest: number } {
+  let current = 0;
+  let longest = 0;
+  let headBroken = false;
+  let run = 0;
+  for (const v of seq) {
+    if (v) {
+      run++;
+      if (!headBroken) current = run;
+      if (run > longest) longest = run;
     } else {
-      if (scanS === 0) curS = 0;
-      scanS = 0;
+      headBroken = true;
+      run = 0;
     }
   }
-  return {
-    currentWinStreak: cur,
-    longestWinStreak: longest,
-    currentSolveStreak: curS,
-    longestSolveStreak: longestS,
-  };
+  return { current, longest };
 }
 
 // ─── Activity heatmap (calendar) ───────────────────────────────────────
@@ -1218,6 +1270,28 @@ function phaseForMoveNumber(moveNumber: number): GamePhase {
   return 'middlegame';
 }
 
+/** Replay a game's PGN and return the FEN BEFORE each move was
+ *  played. Used to convert annotation `bestMove` (UCI) to the SAN
+ *  format that matches `ann.san`. Returns at most `annotationCount`
+ *  entries — the FEN before the i-th move is at index `i`. Returns
+ *  empty array when the PGN can't be parsed; callers fall back to
+ *  the raw UCI string in that case (still wrong but no worse than
+ *  pre-fix). */
+function buildPreMoveFens(pgn: string, annotationCount: number): string[] {
+  const chess = new Chess();
+  try { chess.loadPgn(pgn); } catch { return []; }
+  const moves = chess.history();
+  if (moves.length === 0) return [];
+  const fens: string[] = [];
+  const replay = new Chess();
+  fens.push(replay.fen());
+  for (let i = 0; i < moves.length && fens.length <= annotationCount; i++) {
+    try { replay.move(moves[i]); } catch { break; }
+    fens.push(replay.fen());
+  }
+  return fens;
+}
+
 export async function criticalMomentsAccuracy(): Promise<CriticalMomentsStats> {
   const playerGames = await loadPlayerGames();
   let total = 0, found = 0;
@@ -1229,7 +1303,14 @@ export async function criticalMomentsAccuracy(): Promise<CriticalMomentsStats> {
 
   for (const { game, color } of playerGames) {
     if (!game.fullyAnalyzed || !game.annotations) continue;
-    for (const ann of game.annotations) {
+    // Build pre-move FENs once per game so we can convert each
+    // annotation's UCI `bestMove` to the SAN format that matches
+    // `ann.san`. Without this, the `san === bestMove` comparison
+    // was always false (SAN like "Nf3" vs UCI like "g1f3") and
+    // `found` reported 0% across the board.
+    const preMoveFens = buildPreMoveFens(game.pgn, game.annotations.length);
+    for (let i = 0; i < game.annotations.length; i++) {
+      const ann = game.annotations[i];
       if (ann.color !== color) continue;
       if (ann.bestMove === null || ann.bestMoveEval === null || ann.evaluation === null) continue;
       // Eval is from White's POV; convert to player's POV.
@@ -1244,7 +1325,12 @@ export async function criticalMomentsAccuracy(): Promise<CriticalMomentsStats> {
       const phase = phaseForMoveNumber(ann.moveNumber);
       byPhase[phase].total++;
       // "Found" the critical moment = played the SAN matching bestMove.
-      if (ann.san === ann.bestMove) {
+      // Convert UCI bestMove → SAN using the FEN BEFORE this move was
+      // played, then compare SAN-to-SAN. Pre-fix, this compared SAN
+      // directly to UCI and always returned false.
+      const preFen = preMoveFens[i];
+      const bestSan = preFen ? uciMoveToSan(ann.bestMove, preFen) : ann.bestMove;
+      if (ann.san === bestSan) {
         found++;
         byPhase[phase].found++;
       }

@@ -3,6 +3,7 @@ import { getRepertoireOpenings } from './openingService';
 import { reconstructMovesFromGame } from './gameReconstructionService';
 import { calculateAccuracy, getClassificationCounts } from './accuracyService';
 import { getPhaseBreakdown } from './gamePhaseService';
+import { uciMoveToSan } from '../utils/uciToSan';
 import { detectMissedTactics } from './missedTacticService';
 import { getMistakePuzzleStats } from './mistakePuzzleService';
 import { gameNeedsAnalysis } from './gameAnalysisService';
@@ -253,14 +254,22 @@ export async function getOverviewInsights(): Promise<OverviewInsights> {
         phaseMap[p.phase].mistakes += p.mistakes;
       }
 
-      // Best move agreement
-      for (const move of moves) {
+      // Best move agreement — convert UCI bestMove → SAN using the
+      // FEN BEFORE the move was played (the previous move's `fen` =
+      // current move's pre-fen, or the start position when i === 0).
+      // Pre-fix this compared SAN directly to UCI (e.g. "Nf3" vs
+      // "g1f3") and `bestMoveMatches` was 0 for every game.
+      const STARTING_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+      for (let mi = 0; mi < moves.length; mi++) {
+        const move = moves[mi];
         if (move.isCoachMove) continue;
         const isMoveWhite = move.moveNumber % 2 === 1;
         if ((playerColor === 'white' && !isMoveWhite) || (playerColor === 'black' && isMoveWhite)) continue;
         if (move.bestMove && move.san) {
           bestMoveTotal++;
-          if (move.san === move.bestMove) bestMoveMatches++;
+          const preFen = mi > 0 ? moves[mi - 1].fen : STARTING_FEN;
+          const bestSan = uciMoveToSan(move.bestMove, preFen);
+          if (move.san === bestSan) bestMoveMatches++;
         }
       }
     }
