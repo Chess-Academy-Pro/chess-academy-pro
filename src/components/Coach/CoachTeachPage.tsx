@@ -1828,7 +1828,7 @@ export function CoachTeachPage(): JSX.Element {
   // comes from the LLM via the teach-mode prompt.
   return (
     <div
-      className="flex flex-col md:flex-row h-full overflow-hidden pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-0"
+      className="flex flex-col md:flex-row h-full overflow-hidden pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-0"
       data-testid="coach-teach-page"
     >
       {/* Left column: header + board. flex-none on mobile so this

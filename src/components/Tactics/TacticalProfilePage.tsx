@@ -126,7 +126,7 @@ export function TacticalProfilePage(): JSX.Element {
   if (loading) {
     return (
       <div
-        className="max-w-2xl mx-auto w-full p-6 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-5"
+        className="max-w-2xl mx-auto w-full p-6 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-5"
         data-testid="tactical-profile-page"
       >
         {header}
@@ -139,7 +139,7 @@ export function TacticalProfilePage(): JSX.Element {
 
   return (
     <motion.div
-      className="max-w-2xl mx-auto w-full p-6 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-5"
+      className="max-w-2xl mx-auto w-full p-6 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-5"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       data-testid="tactical-profile-page"

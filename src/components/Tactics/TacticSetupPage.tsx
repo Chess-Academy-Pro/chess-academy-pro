@@ -84,7 +84,7 @@ export function TacticSetupPage(): JSX.Element {
   const total = solved + failed;
 
   return (
-    <div className="max-w-2xl mx-auto w-full p-4 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-4 min-h-[80vh]">
+    <div className="max-w-2xl mx-auto w-full p-4 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-4 min-h-[80vh]">
       {/* Header */}
       <div className="flex items-center gap-3">
         <button onClick={() => void navigate('/tactics')} className="p-2 rounded-lg hover:opacity-80" data-testid="back-btn">

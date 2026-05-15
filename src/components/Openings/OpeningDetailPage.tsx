@@ -574,7 +574,7 @@ export function OpeningDetailPage(): JSX.Element {
   };
 
   return (
-    <div className="flex flex-col flex-1 p-4 md:p-6 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 overflow-y-auto" data-testid="opening-detail">
+    <div className="flex flex-col flex-1 p-4 md:p-6 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 overflow-y-auto" data-testid="opening-detail">
       {/* Header */}
       <div className="flex items-center gap-3 mb-5">
         <button
@@ -625,7 +625,7 @@ export function OpeningDetailPage(): JSX.Element {
       <div className="grid grid-cols-4 gap-1.5 mb-6">
         <button
           onClick={() => setViewMode('walkthrough')}
-          className="flex flex-col items-center justify-center gap-1 py-3 rounded-xl bg-theme-accent text-white font-semibold text-xs hover:opacity-90 transition-opacity"
+          className="flex flex-col items-center justify-center gap-1 py-3 rounded-xl bg-theme-accent text-white font-semibold text-xs hover:opacity-90 transition-opacity opening-action-glow opening-action-glow-watch"
           data-testid="walkthrough-btn"
         >
           <PlayCircle size={18} />
@@ -633,7 +633,7 @@ export function OpeningDetailPage(): JSX.Element {
         </button>
         <button
           onClick={() => setViewMode('learn')}
-          className="flex flex-col items-center justify-center gap-1 py-3 rounded-xl bg-theme-surface border border-theme-border text-theme-text font-semibold text-xs hover:bg-theme-border transition-colors"
+          className="flex flex-col items-center justify-center gap-1 py-3 rounded-xl bg-theme-surface border border-theme-border text-theme-text font-semibold text-xs hover:bg-theme-border transition-colors opening-action-glow opening-action-glow-learn"
           data-testid="learn-btn"
         >
           <LearnIcon size={18} />
@@ -641,7 +641,7 @@ export function OpeningDetailPage(): JSX.Element {
         </button>
         <button
           onClick={() => setViewMode('practice')}
-          className="flex flex-col items-center justify-center gap-1 py-3 rounded-xl bg-theme-surface border border-theme-border text-theme-text font-semibold text-xs hover:bg-theme-border transition-colors"
+          className="flex flex-col items-center justify-center gap-1 py-3 rounded-xl bg-theme-surface border border-theme-border text-theme-text font-semibold text-xs hover:bg-theme-border transition-colors opening-action-glow opening-action-glow-practice"
           data-testid="practice-btn"
         >
           <Brain size={18} />
@@ -649,7 +649,7 @@ export function OpeningDetailPage(): JSX.Element {
         </button>
         <button
           onClick={() => setViewMode('play')}
-          className="flex flex-col items-center justify-center gap-1 py-3 rounded-xl bg-theme-surface border border-theme-border text-theme-text font-semibold text-xs hover:bg-theme-border transition-colors"
+          className="flex flex-col items-center justify-center gap-1 py-3 rounded-xl bg-theme-surface border border-theme-border text-theme-text font-semibold text-xs hover:bg-theme-border transition-colors opening-action-glow opening-action-glow-play"
           data-testid="play-btn"
         >
           <Swords size={18} />

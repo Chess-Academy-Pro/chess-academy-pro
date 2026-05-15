@@ -83,7 +83,7 @@ export function AnalysisBoardPage(): JSX.Element {
   }, [game]);
 
   return (
-    <div className="flex flex-col gap-4 p-6 flex-1 overflow-y-auto pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="analysis-board">
+    <div className="flex flex-col gap-4 p-6 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="analysis-board">
       {/* Header */}
       <div className="flex items-center justify-between">
         <button

@@ -186,7 +186,7 @@ export function PuzzleTrainerPage(): JSX.Element {
     : null;
 
   return (
-    <div className="flex flex-col flex-1 p-4 md:p-6 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 overflow-y-auto" data-testid="puzzle-trainer">
+    <div className="flex flex-col flex-1 p-4 md:p-6 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 overflow-y-auto" data-testid="puzzle-trainer">
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         {phase !== 'mode_select' && (

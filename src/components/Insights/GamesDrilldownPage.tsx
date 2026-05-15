@@ -136,7 +136,7 @@ export function GamesDrilldownPage(): JSX.Element {
       )}
 
       {/* Game list */}
-      <div className="flex-1 overflow-y-auto px-5 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6">
+      <div className="flex-1 overflow-y-auto px-5 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6">
         {games === null && (
           <div className="py-8 text-center text-sm" style={{ color: 'var(--color-text-muted)' }}>
             Loading games…

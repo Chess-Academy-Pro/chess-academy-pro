@@ -119,7 +119,7 @@ export function WeaknessThemesPage(): JSX.Element {
 
   return (
     <div
-      className="max-w-2xl mx-auto w-full p-4 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-4 min-h-[80vh]"
+      className="max-w-2xl mx-auto w-full p-4 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 flex flex-col gap-4 min-h-[80vh]"
       data-testid="weakness-themes-page"
     >
       {/* Header */}

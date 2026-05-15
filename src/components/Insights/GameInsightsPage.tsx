@@ -320,7 +320,7 @@ export function GameInsightsPage(): JSX.Element {
       </div>
 
       {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto px-5 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6">
+      <div className="flex-1 overflow-y-auto px-5 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6">
         {tab === 'overview' && overview && (
           <>
             {/* Shareable "Your Chess, In A Nutshell" cards — the

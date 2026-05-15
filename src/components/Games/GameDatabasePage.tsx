@@ -50,7 +50,7 @@ export function GameDatabasePage(): JSX.Element {
 
   if (selectedGame) {
     return (
-      <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" style={{ color: 'var(--color-text)' }}>
+      <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" style={{ color: 'var(--color-text)' }}>
         <GameViewer game={selectedGame} onClose={() => setSelectedGame(null)} />
       </div>
     );
@@ -58,7 +58,7 @@ export function GameDatabasePage(): JSX.Element {
 
   return (
     <div
-      className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6"
+      className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6"
       style={{ color: 'var(--color-text)' }}
       data-testid="game-database-page"
     >

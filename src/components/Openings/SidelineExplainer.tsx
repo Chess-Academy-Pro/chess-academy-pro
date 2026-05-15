@@ -114,7 +114,7 @@ export function SidelineExplainer({
                 <X size={16} />
               </button>
             </div>
-            <div className="overflow-y-auto p-4 text-sm leading-relaxed whitespace-pre-wrap text-theme-text">
+            <div className="overflow-y-auto px-4 pt-4 pb-16 text-sm leading-relaxed whitespace-pre-wrap text-theme-text">
               {explanation}
             </div>
           </div>
