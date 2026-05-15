@@ -222,6 +222,15 @@ export function AnalyticsAuditPanel(): JSX.Element {
       </Section>
 
       <Section title="Position dwell" icon={null}>
+        {/* `position-dwell` AuditKind exists in the union but no
+            surface emits it yet (ANALYTICS_AUDIT.md Tier 1 plan,
+            still pending). Showing the section flagged so the
+            empty values don't look like a bug. Remove the badge
+            once emit sites are wired into the move-input layer. */}
+        <div className="mb-2 inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold"
+             style={{ background: 'color-mix(in srgb, var(--color-warning) 18%, transparent)', color: 'var(--color-warning)' }}>
+          Not yet emitted — Tier 1 build pending
+        </div>
         <div className="grid grid-cols-3 gap-2 text-[11px]">
           <Stat label="Opening" value={audit.dwell.opening.samples > 0 ? `${Math.round(audit.dwell.opening.avgMs / 1000)}s` : '—'} sub={`${audit.dwell.opening.samples}n`} />
           <Stat label="Middlegame" value={audit.dwell.middlegame.samples > 0 ? `${Math.round(audit.dwell.middlegame.avgMs / 1000)}s` : '—'} sub={`${audit.dwell.middlegame.samples}n`} />

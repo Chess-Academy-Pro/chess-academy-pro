@@ -28,7 +28,6 @@ import { Chess } from 'chess.js';
 import { getAppAuditLog, type AuditEntry, type AuditKind } from './appAuditor';
 import { db } from '../db/schema';
 import { getOverviewInsights, getOpeningInsights } from './gameInsightsService';
-import { uciMoveToSan } from '../utils/uciToSan';
 import { detectTacticType } from './missedTacticService';
 import type {
   GamePhase,
@@ -1262,8 +1261,6 @@ export interface CriticalMomentsStats {
   byPhase: { phase: GamePhase; total: number; found: number; accuracyPct: number }[];
 }
 
-const CRITICAL_SWING_THRESHOLD_CP = 100;
-
 function phaseForMoveNumber(moveNumber: number): GamePhase {
   if (moveNumber <= 10) return 'opening';
   if (moveNumber >= 30) return 'endgame';
@@ -1301,36 +1298,31 @@ export async function criticalMomentsAccuracy(): Promise<CriticalMomentsStats> {
     endgame: { total: 0, found: 0 },
   };
 
+  // "Critical moment" = position the player had a sharp choice in,
+  // i.e. the move classifier flagged it as either a tactical FIND
+  // (brilliant / great) or a tactical MISS (miss / mistake /
+  // blunder). The classification already encodes "this position had
+  // meaningful eval delta available" — we don't need to recompute it
+  // from raw centipawn deltas.
+  //
+  // Pre-fix this used `swing = bestEval - actualEval >= 100cp` as
+  // the critical-moment gate. That definition is the SAME as "the
+  // player just gave up 100+ cp" — by definition the played move
+  // wasn't the best, so the subsequent `ann.san === bestSan` check
+  // was always false. Decision quality stuck at 0% regardless of
+  // how well the user actually played.
   for (const { game, color } of playerGames) {
     if (!game.fullyAnalyzed || !game.annotations) continue;
-    // Build pre-move FENs once per game so we can convert each
-    // annotation's UCI `bestMove` to the SAN format that matches
-    // `ann.san`. Without this, the `san === bestMove` comparison
-    // was always false (SAN like "Nf3" vs UCI like "g1f3") and
-    // `found` reported 0% across the board.
-    const preMoveFens = buildPreMoveFens(game.pgn, game.annotations.length);
-    for (let i = 0; i < game.annotations.length; i++) {
-      const ann = game.annotations[i];
+    for (const ann of game.annotations) {
       if (ann.color !== color) continue;
-      if (ann.bestMove === null || ann.bestMoveEval === null || ann.evaluation === null) continue;
-      // Eval is from White's POV; convert to player's POV.
-      const playerBestEval = color === 'white' ? ann.bestMoveEval : -ann.bestMoveEval;
-      const playerActualEval = color === 'white' ? ann.evaluation : -ann.evaluation;
-      const swing = playerBestEval - playerActualEval;
-      // Only counts positions where the best move would have been ≥100cp
-      // better than what was played AND the available improvement was
-      // real (a critical opportunity, not a forced "any move is fine").
-      if (swing < CRITICAL_SWING_THRESHOLD_CP) continue;
+      const cls = ann.classification;
+      const isFind = cls === 'brilliant' || cls === 'great';
+      const isMiss = cls === 'miss' || cls === 'mistake' || cls === 'blunder';
+      if (!isFind && !isMiss) continue;
       total++;
       const phase = phaseForMoveNumber(ann.moveNumber);
       byPhase[phase].total++;
-      // "Found" the critical moment = played the SAN matching bestMove.
-      // Convert UCI bestMove → SAN using the FEN BEFORE this move was
-      // played, then compare SAN-to-SAN. Pre-fix, this compared SAN
-      // directly to UCI and always returned false.
-      const preFen = preMoveFens[i];
-      const bestSan = preFen ? uciMoveToSan(ann.bestMove, preFen) : ann.bestMove;
-      if (ann.san === bestSan) {
+      if (isFind) {
         found++;
         byPhase[phase].found++;
       }
