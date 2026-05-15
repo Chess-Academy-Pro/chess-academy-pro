@@ -36,7 +36,7 @@ export interface ChessLessonLayoutProps {
 /** Pixel offset reserved at the bottom of the page on mobile to clear the nav bar.
  *  Mobile nav is `py-2 pb-safe` (~2.5rem icons + 1rem padding + safe-area). */
 const MOBILE_NAV_CLEARANCE_CLASS =
-  'pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-4';
+  'pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-4';
 
 /** Fixed gap between the board and the controls. Generous on purpose — the
  *  buttons must never feel cramped or risk being tapped while picking a piece. */

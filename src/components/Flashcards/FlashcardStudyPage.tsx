@@ -137,7 +137,7 @@ export function FlashcardStudyPage(): JSX.Element {
 
   if (phase === 'modes') {
     return (
-      <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="flashcard-modes">
+      <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="flashcard-modes">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold text-theme-text">Flashcard Drills</h1>
@@ -188,7 +188,7 @@ export function FlashcardStudyPage(): JSX.Element {
   if (phase === 'complete') {
     const modeLabel = (selectedMode ? MODES.find((m) => m.id === selectedMode)?.label : '') ?? '';
     return (
-      <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="flashcard-complete">
+      <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="flashcard-complete">
         <button
           onClick={handleBackToModes}
           className="flex items-center gap-1 text-sm text-theme-text-muted hover:text-theme-text transition-colors self-start"
@@ -255,7 +255,7 @@ export function FlashcardStudyPage(): JSX.Element {
         : 'Best Move / Variation';
 
   return (
-    <div className="flex flex-col lg:flex-row gap-4 p-6 flex-1 overflow-y-auto pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="flashcard-study">
+    <div className="flex flex-col lg:flex-row gap-4 p-6 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="flashcard-study">
       {/* Board panel (left on desktop) */}
       <div className="flex flex-col gap-4 lg:w-1/2">
         {/* Header */}

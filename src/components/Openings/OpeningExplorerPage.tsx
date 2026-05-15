@@ -120,7 +120,7 @@ export function OpeningExplorerPage(): JSX.Element {
   }
 
   return (
-    <div className="flex flex-col flex-1 p-4 md:p-6 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 overflow-y-auto" data-testid="opening-explorer">
+    <div className="flex flex-col flex-1 p-4 md:p-6 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 overflow-y-auto" data-testid="opening-explorer">
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         <BookOpen size={24} className="text-theme-accent" />

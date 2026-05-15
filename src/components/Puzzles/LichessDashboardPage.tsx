@@ -72,7 +72,7 @@ export function LichessDashboardPage(): JSX.Element {
 
   if (!hasToken) {
     return (
-      <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="lichess-dashboard-no-token">
+      <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="lichess-dashboard-no-token">
         <div className="flex items-center gap-3">
           <button
             onClick={() => void navigate('/tactics')}
@@ -137,7 +137,7 @@ export function LichessDashboardPage(): JSX.Element {
     : [];
 
   return (
-    <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="lichess-dashboard-page">
+    <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="lichess-dashboard-page">
       {/* Header */}
       <div className="flex items-center gap-3">
         <button

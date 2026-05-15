@@ -152,7 +152,7 @@ export function GamesPage(): JSX.Element {
   // ─── Challenge mode selection ───────────────────────────────────────────────
   if (phase === 'challenge-modes') {
     return (
-      <div className="flex-1 overflow-y-auto p-4 md:p-6 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="challenge-modes">
+      <div className="flex-1 overflow-y-auto p-4 md:p-6 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="challenge-modes">
         <div className="max-w-lg mx-auto space-y-4">
           <div className="flex items-center gap-3 mb-4">
             <button
@@ -193,7 +193,7 @@ export function GamesPage(): JSX.Element {
 
   // ─── Main menu ──────────────────────────────────────────────────────────────
   return (
-    <div className="flex-1 overflow-y-auto p-4 md:p-6 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="games-page">
+    <div className="flex-1 overflow-y-auto p-4 md:p-6 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6" data-testid="games-page">
       <div className="max-w-lg mx-auto space-y-4">
         <div className="mb-4">
           <h1 className="text-xl font-bold text-theme-text">Play</h1>
