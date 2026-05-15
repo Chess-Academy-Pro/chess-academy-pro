@@ -362,7 +362,7 @@ export function resolveOpeningEntry(
       return a.pgn.length > b.pgn.length ? a : b;
     });
   }
-  function emit(e: OpeningEntry) {
+  function emit(e: OpeningEntry): { canonicalName: string; eco: string; moves: string[] } {
     return {
       canonicalName: e.name,
       eco: e.eco,

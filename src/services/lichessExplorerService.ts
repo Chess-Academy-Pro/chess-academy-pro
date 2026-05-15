@@ -57,7 +57,7 @@ function emitLichessFailure(
 ): void {
   const e = err as { name?: string; message?: string; cause?: unknown } | null;
   const errorName = e?.name ?? 'UnknownError';
-  const errorMessage = e?.message ?? (err === null ? 'null' : String(err));
+  const errorMessage = e?.message ?? (err === null ? 'null' : err instanceof Error ? err.message : JSON.stringify(err));
   const cause =
     e?.cause !== undefined && e?.cause !== null
       ? typeof e.cause === 'string'

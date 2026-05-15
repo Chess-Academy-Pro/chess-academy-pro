@@ -22,7 +22,15 @@ const makeMove = (overrides: Partial<StudentMoveRecord> = {}): StudentMoveRecord
 
 // Stub the StockfishAnalysis shape — only `evaluation` is read by the
 // recap service.
-const evalResult = (cp: number) => ({
+const evalResult = (cp: number): {
+  bestMove: string;
+  evaluation: number;
+  isMate: boolean;
+  mateIn: null;
+  depth: number;
+  topLines: never[];
+  nodesPerSecond: number;
+} => ({
   bestMove: 'e2e4',
   evaluation: cp,
   isMate: false,

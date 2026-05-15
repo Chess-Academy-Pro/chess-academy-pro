@@ -8,7 +8,7 @@ vi.mock('react-chessboard', () => ({
   Chessboard: ({ options = {} }: { options?: ChessboardOptions }): JSX.Element => (
     <div
       data-testid="mock-chessboard"
-      data-position={String(options.position ?? '')}
+      data-position={typeof options.position === 'string' ? options.position : JSON.stringify(options.position ?? '')}
       data-orientation={options.boardOrientation ?? 'white'}
       data-draggable={String(options.allowDragging ?? true)}
       data-anim={String(options.animationDurationInMs ?? '')}

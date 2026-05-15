@@ -501,7 +501,7 @@ async function ask(input: CoachAskInput, options: CoachServiceOptions = {}): Pro
       }
     }
 
-    const dispatchOne = async (call: typeof lastResponse.toolCalls[number]) => {
+    const dispatchOne = async (call: typeof lastResponse.toolCalls[number]): Promise<void> => {
        
       const tool = getTool(call.name);
       // Existence already verified above; non-null assertion is safe

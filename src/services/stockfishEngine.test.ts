@@ -1002,7 +1002,7 @@ describe('resolveWorkerUrl', () => {
 
   it('returns multi-threaded variant when crossOriginIsolated and SharedArrayBuffer are both available', async () => {
     vi.stubGlobal('window', { crossOriginIsolated: true });
-    vi.stubGlobal('SharedArrayBuffer', class {});
+    vi.stubGlobal('SharedArrayBuffer', function SharedArrayBufferStub() { /* stub */ });
     vi.resetModules();
     const { resolveWorkerUrl } = await import('./stockfishEngine');
     const result = resolveWorkerUrl();
@@ -1014,7 +1014,7 @@ describe('resolveWorkerUrl', () => {
 
   it('falls back to single-threaded variant when crossOriginIsolated is false', async () => {
     vi.stubGlobal('window', { crossOriginIsolated: false });
-    vi.stubGlobal('SharedArrayBuffer', class {});
+    vi.stubGlobal('SharedArrayBuffer', function SharedArrayBufferStub() { /* stub */ });
     vi.resetModules();
     const { resolveWorkerUrl } = await import('./stockfishEngine');
     const result = resolveWorkerUrl();
@@ -1246,7 +1246,7 @@ describe('runtime fallback (multi → single)', () => {
       crossOriginIsolated: true,
       location: { pathname: '/' },
     });
-    vi.stubGlobal('SharedArrayBuffer', class {});
+    vi.stubGlobal('SharedArrayBuffer', function SharedArrayBufferStub() { /* stub */ });
 
     const workerUrls: string[] = [];
     vi.stubGlobal(

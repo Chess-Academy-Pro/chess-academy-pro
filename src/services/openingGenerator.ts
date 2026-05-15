@@ -2983,7 +2983,7 @@ function puzzleTagsMatchOpening(
 function tagsOfPuzzle(p: RawPuzzle): string[] {
   if (!p.openingTags) return [];
   if (Array.isArray(p.openingTags)) return p.openingTags;
-  return String(p.openingTags).split(/\s+/).filter(Boolean);
+  return p.openingTags.split(/\s+/).filter(Boolean);
 }
 
 /** Convert a UCI move string ("e2e4", "e7e8q") to SAN by playing it

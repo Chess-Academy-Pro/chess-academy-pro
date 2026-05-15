@@ -218,12 +218,9 @@ describe('classifyPosition — removal of guard detection', () => {
 describe('classifyPosition — hanging piece detection', () => {
   it('detects a hanging piece after a move', () => {
     // After white plays a move, black has a hanging bishop on c5 (attacked, not defended)
-    const fen = '4k3/8/8/2b5/8/8/8/4KN2 w - - 0 1';
-    const fenAfter = playMove(fen, 'Nd2');
-    const result = classifyPosition(fen, fenAfter, 'Nd2', 0, 0);
-    // After Nd2, does the knight attack c5? No, Nd2 doesn't attack c5.
-    // Let me use a position where after the move, a piece IS hanging:
-    // White plays Ne3, which attacks c4. If there's a black piece on c4 undefended...
+    // The original Nd2 setup didn't actually create a hanging piece —
+    // kept around for documentation; the real assertion uses fen2 / Ne3
+    // below, which DOES attack the undefended c4 bishop.
     const fen2 = '4k3/8/8/8/2b5/8/8/4KN2 w - - 0 1';
     const fenAfter2 = playMove(fen2, 'Ne3');
     const result2 = classifyPosition(fen2, fenAfter2, 'Ne3', 0, -100);

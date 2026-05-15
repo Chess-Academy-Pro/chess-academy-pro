@@ -605,7 +605,6 @@ export const GameChatPanel = forwardRef<GameChatPanelHandle, GameChatPanelProps>
         setIsStreaming(true);
         setStreamingContent('');
         speechBufferRef.current = '';
-        let fullResponse = '';
         // WO-COACH-TTS-STRIP-01: streaming sanitization state.
         // streamMarkupBuf holds raw text that includes an in-flight
         // `[[DIRECTIVE...` we haven't seen the `]]` for yet. streamSafeBuf
@@ -657,7 +656,6 @@ export const GameChatPanel = forwardRef<GameChatPanelHandle, GameChatPanelProps>
               flirt: activeProfile.preferences.coachFlirt,
               verbosity: activeProfile.preferences.coachResponseLength,
               onChunk: (chunk: string) => {
-                fullResponse += chunk;
                 // WO-COACH-TTS-STRIP-01: sanitize the streaming buffer
                 // for both display and TTS. sanitizeCoachStream holds
                 // back any in-flight `[[DIRECTIVE...` until the
@@ -889,7 +887,6 @@ export const GameChatPanel = forwardRef<GameChatPanelHandle, GameChatPanelProps>
       setIsStreaming(true);
       setStreamingContent('');
       speechBufferRef.current = '';
-      let drawerFullResponse = '';
       // WO-COACH-TTS-STRIP-01: same streaming-sanitize buffers as the
       // in-game branch above.
       let drawerMarkupBuf = '';
@@ -935,7 +932,6 @@ export const GameChatPanel = forwardRef<GameChatPanelHandle, GameChatPanelProps>
             flirt: activeProfile.preferences.coachFlirt,
             verbosity: activeProfile.preferences.coachResponseLength,
             onChunk: (chunk: string) => {
-              drawerFullResponse += chunk;
               // WO-COACH-TTS-STRIP-01: same streaming-sanitize as the
               // in-game branch.
               drawerMarkupBuf += chunk;

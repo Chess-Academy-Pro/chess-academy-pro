@@ -12,7 +12,7 @@ vi.mock('../Board/ControlledChessBoard', () => ({
       <div
         data-testid="chess-board"
         data-fen={game?.fen ?? ''}
-        data-interactive={String(props.interactive ?? false)}
+        data-interactive={props.interactive === true ? 'true' : 'false'}
       >
         Board
       </div>

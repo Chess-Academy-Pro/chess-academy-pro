@@ -917,7 +917,7 @@ export function installGlobalErrorHooks(): () => void {
   }
 
   const onError = (event: ErrorEvent): void => {
-    const message = event.error instanceof Error ? event.error.message : String(event.message);
+    const message = event.error instanceof Error ? event.error.message : event.message;
     const stack = event.error instanceof Error ? event.error.stack : undefined;
     emitWithRateLimit({
       kind: 'uncaught-error',

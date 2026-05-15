@@ -37,7 +37,7 @@ const STEPS = [
   { narration: 'Step two narration.' },
 ];
 
-function defaultProps(overrides: Partial<Parameters<typeof useStrictNarration>[0]> = {}) {
+function defaultProps(overrides: Partial<Parameters<typeof useStrictNarration>[0]> = {}): Parameters<typeof useStrictNarration>[0] {
   return {
     stepCount: STEPS.length,
     applyStep: vi.fn(),

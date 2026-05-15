@@ -642,7 +642,7 @@ function LessonView({
     try {
       const probe = new Chess(fen);
       const moves = probe.moves({ verbose: true });
-      const strip = (s: string) =>
+      const strip = (s: string): string =>
         s.replace(/[+#!?]+$/, '').replace(/=Q$|=R$|=B$|=N$/, '');
       const match = moves.find((m) => strip(m.san) === strip(correctSan));
       if (!match) return null;
