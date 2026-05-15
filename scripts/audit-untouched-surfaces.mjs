@@ -21,6 +21,7 @@
  *   AUDIT_SMOKE_URL=http://localhost:5173 node scripts/audit-untouched-surfaces.mjs
  */
 import { chromium } from 'playwright';
+import { resolveChromiumExecutable } from './audit-lib/chromium.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -41,7 +42,9 @@ async function main() {
   console.log(`[untouched] base    = ${BASE_URL}`);
   console.log(`[untouched] outDir  = ${OUT_DIR}`);
 
-  const browser = await chromium.launch({ headless: !HEADED });
+  const executablePath = await resolveChromiumExecutable(HEADED);
+  if (executablePath) console.log(`[untouched-surfaces] chromium = ${executablePath}`);
+  const browser = await chromium.launch({ headless: !HEADED, executablePath });
   const ctx = await browser.newContext({
     viewport: { width: 414, height: 896 },
     deviceScaleFactor: 2,

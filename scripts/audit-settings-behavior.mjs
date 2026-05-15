@@ -19,6 +19,7 @@
  *   - assert:         (events) => { ok, why } — inspects captured POSTs
  */
 import { chromium } from 'playwright';
+import { resolveChromiumExecutable } from './audit-lib/chromium.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -31,7 +32,9 @@ const STREAM_URL_PROD = 'https://chess-academy-pro.vercel.app/api/audit-stream';
 const STREAM_URL_LOCAL = `${BASE_URL}/api/audit-stream`;
 
 async function main() {
-  const browser = await chromium.launch({ headless: !HEADED });
+  const executablePath = await resolveChromiumExecutable(HEADED);
+  if (executablePath) console.log(`[settings-behavior] chromium = ${executablePath}`);
+  const browser = await chromium.launch({ headless: !HEADED, executablePath });
   const ctx = await browser.newContext({
     viewport: { width: 414, height: 896 },
     deviceScaleFactor: 2,

@@ -19,6 +19,7 @@
  * Default target = prod (chess-academy-pro.vercel.app).
  */
 import { chromium } from 'playwright';
+import { resolveChromiumExecutable } from './audit-lib/chromium.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -38,7 +39,9 @@ async function main() {
   console.log(`[back-from-review] base    = ${BASE_URL}`);
   console.log(`[back-from-review] outDir  = ${OUT_DIR}`);
 
-  const browser = await chromium.launch({ headless: !HEADED });
+  const executablePath = await resolveChromiumExecutable(HEADED);
+  if (executablePath) console.log(`[back-from-review] chromium = ${executablePath}`);
+  const browser = await chromium.launch({ headless: !HEADED, executablePath });
   const ctx = await browser.newContext({
     viewport: { width: 414, height: 896 },
     deviceScaleFactor: 2,

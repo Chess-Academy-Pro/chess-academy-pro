@@ -14,6 +14,7 @@
  *   AUDIT_SMOKE_HEADED=1 node scripts/audit-openings-ui.mjs
  */
 import { chromium } from 'playwright';
+import { resolveChromiumExecutable } from './audit-lib/chromium.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -34,7 +35,9 @@ async function main() {
   await mkdir(OUT_DIR, { recursive: true });
   console.log(`[openings-ui] base=${BASE_URL} out=${OUT_DIR}`);
 
-  const browser = await chromium.launch({ headless: !HEADED });
+  const executablePath = await resolveChromiumExecutable(HEADED);
+  if (executablePath) console.log(`[openings-ui] chromium = ${executablePath}`);
+  const browser = await chromium.launch({ headless: !HEADED, executablePath });
   const ctx = await browser.newContext({
     viewport: { width: 414, height: 896 },
     deviceScaleFactor: 2,

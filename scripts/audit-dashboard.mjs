@@ -33,6 +33,7 @@
  *   AUDIT_SMOKE_HEADED=1 node scripts/audit-dashboard.mjs
  */
 import { chromium } from 'playwright';
+import { resolveChromiumExecutable } from './audit-lib/chromium.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -55,7 +56,9 @@ async function main() {
   console.log(`[dashboard] outDir  = ${OUT_DIR}`);
   console.log(`[dashboard] headed  = ${HEADED}`);
 
-  const browser = await chromium.launch({ headless: !HEADED });
+  const executablePath = await resolveChromiumExecutable(HEADED);
+  if (executablePath) console.log(`[dashboard] chromium = ${executablePath}`);
+  const browser = await chromium.launch({ headless: !HEADED, executablePath });
   const ctx = await browser.newContext({
     viewport: { width: 414, height: 896 },
     deviceScaleFactor: 2,
