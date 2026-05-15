@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 import { BoardGlowButton, BoardGlowSettings } from './BoardGlowSettings';
 import { NarrationAuditPanel } from './NarrationAuditPanel';
 import { AnalyticsAuditPanel } from './AnalyticsAuditPanel';
+import { ScrollHintBar } from '../Common/ScrollHintBar';
 import { APP_VERSION, BETA_MODE } from '../../utils/constants';
 import { hardRefresh } from '../../utils/hardRefresh';
 import type { UserProfile, PieceAnimationSpeed, CoachNarration, MoveMethod } from '../../types';
@@ -40,6 +41,12 @@ export function SettingsPage(): JSX.Element {
   const activeProfile = useAppStore((s) => s.activeProfile);
   const setActiveProfile = useAppStore((s) => s.setActiveProfile);
   const [tab, setTab] = useState<SettingsTab>('profile');
+  // Drives the ScrollHintBar below the tab strip — the gold arrow
+  // sweep tells the user the tabs scroll horizontally when they
+  // overflow on narrow viewports (6 tabs at min-width starts
+  // scrolling around 360px). Same pattern as CoachEndgamePage.
+  const tabStripRef = useRef<HTMLDivElement>(null);
+  const activeTabIndex = Math.max(0, TABS.findIndex((t) => t.id === tab));
 
   if (!activeProfile) return <></>;
 
@@ -52,21 +59,32 @@ export function SettingsPage(): JSX.Element {
       <h1 className="text-2xl font-bold">Settings</h1>
 
       {/* Tab bar */}
-      <div className="flex gap-1 rounded-lg p-1" style={{ background: 'var(--color-bg-secondary)' }}>
-        {TABS.map(({ id, label }) => (
-          <button
-            key={id}
-            onClick={() => setTab(id)}
-            className="flex-1 flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors"
-            style={{
-              background: tab === id ? 'var(--color-surface)' : 'transparent',
-              color: tab === id ? 'var(--color-text)' : 'var(--color-text-muted)',
-            }}
-            data-testid={`tab-${id}`}
-          >
-            {label}
-          </button>
-        ))}
+      <div>
+        <div
+          ref={tabStripRef}
+          className="flex gap-1 rounded-lg p-1 overflow-x-auto"
+          style={{ background: 'var(--color-bg-secondary)' }}
+        >
+          {TABS.map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => setTab(id)}
+              className="flex-1 min-w-[80px] flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap"
+              style={{
+                background: tab === id ? 'var(--color-surface)' : 'transparent',
+                color: tab === id ? 'var(--color-text)' : 'var(--color-text-muted)',
+              }}
+              data-testid={`tab-${id}`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <ScrollHintBar
+          targetRef={tabStripRef}
+          axis="x"
+          spotlightAt={(activeTabIndex + 0.5) / TABS.length}
+        />
       </div>
 
       {/* Tab content */}
