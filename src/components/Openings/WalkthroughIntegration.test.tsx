@@ -50,6 +50,7 @@ vi.mock('../../services/voiceService', () => ({
     isPlaying: vi.fn().mockReturnValue(false),
     warmup: vi.fn().mockResolvedValue(undefined),
     clearCache: vi.fn(),
+    prefetchAudio: vi.fn().mockResolvedValue(undefined),
   },
 }));
 

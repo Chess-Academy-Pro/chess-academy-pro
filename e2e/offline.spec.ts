@@ -16,13 +16,13 @@ test.describe('Offline / PWA', () => {
 
   test('app loads and is interactive', async ({ page }) => {
     await page.goto('/');
-    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 10000 });
+    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 30000 });
     await expect(page.getByTestId('dashboard')).toBeVisible();
   });
 
   test('going offline shows an offline indicator', async ({ page, context }) => {
     await page.goto('/');
-    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 10000 });
+    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 30000 });
 
     // Go offline
     await context.setOffline(true);
@@ -50,11 +50,11 @@ test.describe('Offline / PWA', () => {
 
   test('cached data is accessible after page reload', async ({ page }) => {
     await page.goto('/');
-    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 10000 });
+    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 30000 });
 
     // Reload and verify the app still works
     await page.reload();
-    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 10000 });
+    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 30000 });
     await expect(page.getByTestId('dashboard')).toBeVisible();
   });
 });

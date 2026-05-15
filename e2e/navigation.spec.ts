@@ -3,17 +3,18 @@ import { test, expect } from '@playwright/test';
 test.describe('Navigation', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    // Wait for the app to load
-    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 10000 });
+    // 30s — fresh IndexedDB cold-start can exceed 10s on slow machines.
+    // App boots seed openings DB before the dashboard testid mounts.
+    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 30000 });
   });
 
   test('dashboard loads as home page', async ({ page }) => {
     await expect(page.getByTestId('dashboard')).toBeVisible();
   });
 
-  test('navigates to puzzles via sidebar', async ({ page }) => {
-    await page.getByRole('link', { name: 'Puzzles' }).first().click();
-    await expect(page).toHaveURL(/\/puzzles/);
+  test('navigates to tactics via sidebar', async ({ page }) => {
+    await page.getByRole('link', { name: 'Tactics' }).first().click();
+    await expect(page).toHaveURL(/\/tactics/);
   });
 
   test('navigates to openings via sidebar', async ({ page }) => {
@@ -21,29 +22,19 @@ test.describe('Navigation', () => {
     await expect(page).toHaveURL(/\/openings/);
   });
 
-  test('navigates to flashcards via sidebar', async ({ page }) => {
-    await page.getByRole('link', { name: 'Flashcards' }).first().click();
-    await expect(page).toHaveURL(/\/flashcards/);
-  });
-
   test('navigates to coach via sidebar', async ({ page }) => {
     await page.getByRole('link', { name: 'Coach' }).first().click();
     await expect(page).toHaveURL(/\/coach/);
   });
 
-  test('navigates to games via sidebar', async ({ page }) => {
-    await page.getByRole('link', { name: 'Games' }).first().click();
-    await expect(page).toHaveURL(/\/games/);
+  test('navigates to weaknesses via sidebar', async ({ page }) => {
+    await page.getByRole('link', { name: 'Weaknesses' }).first().click();
+    await expect(page).toHaveURL(/\/weaknesses/);
   });
 
-  test('navigates to analysis via sidebar', async ({ page }) => {
-    await page.getByRole('link', { name: 'Analysis' }).first().click();
-    await expect(page).toHaveURL(/\/analysis/);
-  });
-
-  test('navigates to stats via sidebar', async ({ page }) => {
-    await page.getByRole('link', { name: 'Stats' }).first().click();
-    await expect(page).toHaveURL(/\/stats/);
+  test('navigates to kids mode via sidebar', async ({ page }) => {
+    await page.getByRole('link', { name: 'Kids Mode' }).first().click();
+    await expect(page).toHaveURL(/\/kid/);
   });
 
   test('navigates to settings via sidebar', async ({ page }) => {
@@ -57,8 +48,8 @@ test.describe('Navigation', () => {
   });
 
   test('back navigation works after visiting a page', async ({ page }) => {
-    await page.getByRole('link', { name: 'Puzzles' }).first().click();
-    await expect(page).toHaveURL(/\/puzzles/);
+    await page.getByRole('link', { name: 'Tactics' }).first().click();
+    await expect(page).toHaveURL(/\/tactics/);
     await page.goBack();
     await expect(page).toHaveURL('/');
   });
