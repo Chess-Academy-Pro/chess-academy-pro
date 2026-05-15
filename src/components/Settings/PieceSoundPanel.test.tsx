@@ -31,10 +31,10 @@ describe('PieceSoundPanel', () => {
 
   it('all sliders default to 50 when profile has no custom values', () => {
     render(<PieceSoundPanel />);
-    expect((screen.getByTestId('piece-sound-pitch') as HTMLInputElement).value).toBe('50');
-    expect((screen.getByTestId('piece-sound-tone') as HTMLInputElement).value).toBe('50');
-    expect((screen.getByTestId('piece-sound-waveform') as HTMLInputElement).value).toBe('50');
-    expect((screen.getByTestId('piece-sound-length') as HTMLInputElement).value).toBe('50');
+    expect((screen.getByTestId('piece-sound-pitch')).value).toBe('50');
+    expect((screen.getByTestId('piece-sound-tone')).value).toBe('50');
+    expect((screen.getByTestId('piece-sound-waveform')).value).toBe('50');
+    expect((screen.getByTestId('piece-sound-length')).value).toBe('50');
   });
 
   it('moving a slider applies the customization to soundService immediately (live preview)', () => {
@@ -58,8 +58,8 @@ describe('PieceSoundPanel', () => {
     fireEvent.change(screen.getByTestId('piece-sound-pitch'), { target: { value: '20' } });
     fireEvent.change(screen.getByTestId('piece-sound-tone'), { target: { value: '90' } });
     fireEvent.click(screen.getByTestId('piece-sound-reset'));
-    expect((screen.getByTestId('piece-sound-pitch') as HTMLInputElement).value).toBe('50');
-    expect((screen.getByTestId('piece-sound-tone') as HTMLInputElement).value).toBe('50');
+    expect((screen.getByTestId('piece-sound-pitch')).value).toBe('50');
+    expect((screen.getByTestId('piece-sound-tone')).value).toBe('50');
   });
 
   it('debounced persistence writes slider values to the active profile', async () => {

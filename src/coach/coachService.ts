@@ -387,7 +387,7 @@ async function ask(input: CoachAskInput, options: CoachServiceOptions = {}): Pro
   const maxRoundTrips = Math.max(1, options.maxToolRoundTrips ?? 1);
 
   let currentEnvelope: AssembledEnvelope = envelope;
-  let useStreaming = !!options.onChunk && typeof provider.callStreaming === 'function';
+  const useStreaming = !!options.onChunk && typeof provider.callStreaming === 'function';
   let lastResponse: ProviderResponse = { text: '', toolCalls: [] };
 
   for (let trip = 1; trip <= maxRoundTrips; trip++) {
@@ -502,7 +502,7 @@ async function ask(input: CoachAskInput, options: CoachServiceOptions = {}): Pro
     }
 
     const dispatchOne = async (call: typeof lastResponse.toolCalls[number]) => {
-      // eslint-disable-next-line no-console
+       
       const tool = getTool(call.name);
       // Existence already verified above; non-null assertion is safe
       // here because unknown tools were filtered out.

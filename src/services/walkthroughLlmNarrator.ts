@@ -161,7 +161,7 @@ async function requestLlmNarrations(
     .map(
       (m) =>
         `${m.ply}. ${m.sideToMove} ${m.san}` +
-        `${indices.includes(m.index) ? '  [NARRATE]' : '  [skip — curated]'}`,
+        (indices.includes(m.index) ? '  [NARRATE]' : '  [skip — curated]'),
     )
     .join('\n');
 
@@ -291,7 +291,7 @@ function parseCache(raw: string): CachedNarrations | null {
       ) {
         return {
           version: p.version,
-          narrations: p.narrations as string[],
+          narrations: p.narrations,
           createdAt: 0,
         };
       }

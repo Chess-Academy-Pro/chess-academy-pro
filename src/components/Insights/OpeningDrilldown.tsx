@@ -116,7 +116,7 @@ export function OpeningDrilldown({ opening, onBack }: OpeningDrilldownProps): JS
     // activeProfile is read inside the .then() callback above for
     // playerColor inference; deps include it so a username change
     // re-resolves the orientation correctly.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [opening.eco, activeProfile?.name, activeProfile?.preferences.chessComUsername, activeProfile?.preferences.lichessUsername]);
 
   const wldData = [

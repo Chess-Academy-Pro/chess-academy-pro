@@ -67,7 +67,7 @@ export function EndgameRecapCard({
   const runRecap = (): void => {
     if (studentMoves.length === 0) return;
     setPhase({ kind: 'loading' });
-    let cancelled = false;
+    const cancelled = false;
     buildEndgameRecap(studentMoves, studentSide)
       .then((r) => {
         if (cancelled) return;

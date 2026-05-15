@@ -187,7 +187,7 @@ describe('CoachChatPage', () => {
     });
 
     render(<CoachChatPage />);
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: "let's play" } });
     fireEvent.click(screen.getByTestId('chat-send-btn'));
 
@@ -204,7 +204,7 @@ describe('CoachChatPage', () => {
     vi.mocked(routeChatIntent).mockResolvedValueOnce(null);
 
     render(<CoachChatPage />);
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: 'Why is f7 weak?' } });
     fireEvent.click(screen.getByTestId('chat-send-btn'));
 
@@ -220,7 +220,7 @@ describe('CoachChatPage', () => {
     });
 
     render(<CoachChatPage />);
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: "let's play" } });
     fireEvent.click(screen.getByTestId('chat-send-btn'));
 
@@ -253,7 +253,7 @@ describe('CoachChatPage', () => {
     vi.mocked(routeChatIntent).mockResolvedValueOnce(null);
 
     render(<CoachChatPage />);
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: 'Why is f7 weak?' } });
     fireEvent.click(screen.getByTestId('chat-send-btn'));
 
@@ -288,7 +288,7 @@ describe('CoachChatPage', () => {
     const spy = vi.spyOn(coachService, 'ask').mockRejectedValueOnce(new Error('simulated provider outage'));
 
     render(<CoachChatPage />);
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: 'Why is f7 weak?' } });
     fireEvent.click(screen.getByTestId('chat-send-btn'));
 
@@ -312,7 +312,7 @@ describe('CoachChatPage', () => {
     vi.mocked(routeChatIntent).mockResolvedValueOnce(null);
 
     render(<CoachChatPage />);
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: 'Why is f7 weak?' } });
     fireEvent.click(screen.getByTestId('chat-send-btn'));
 
@@ -360,7 +360,7 @@ describe('CoachChatPage', () => {
     });
 
     render(<CoachChatPage />);
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: 'What now?' } });
     fireEvent.click(screen.getByTestId('chat-send-btn'));
 
@@ -389,7 +389,7 @@ describe('CoachChatPage', () => {
     });
 
     render(<CoachChatPage />);
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: 'tell me' } });
     fireEvent.click(screen.getByTestId('chat-send-btn'));
 
@@ -420,7 +420,7 @@ describe('CoachChatPage', () => {
     });
 
     render(<CoachChatPage />);
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: "let's play" } });
     // Fire two sends synchronously — same JS tick.
     fireEvent.click(screen.getByTestId('chat-send-btn'));
@@ -461,7 +461,7 @@ describe('CoachChatPage', () => {
     });
 
     // Send "read this to me".
-    const input = screen.getByTestId('chat-text-input') as HTMLInputElement;
+    const input = screen.getByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: 'read this to me' } });
     fireEvent.click(screen.getByTestId('chat-send-btn'));
 

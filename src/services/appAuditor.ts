@@ -517,7 +517,7 @@ export interface AuditEntry {
  *  display the running bundle hash without rummaging in audit rows. */
 export function getBuildId(): string {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+     
     return typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : 'unknown';
   } catch {
     return 'unknown';

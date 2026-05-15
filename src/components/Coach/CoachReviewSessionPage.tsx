@@ -178,7 +178,7 @@ function adaptGameRecord(
     keyMoments,
     playerColor,
     result: game.result,
-    openingName: game.eco ? `${game.eco}` : null,
+    openingName: game.eco ? game.eco : null,
     playerName: playerColor === 'white' ? game.white : game.black,
     playerRating: playerColor === 'white' ? game.whiteElo ?? 1500 : game.blackElo ?? 1500,
     opponentRating: playerColor === 'white' ? game.blackElo ?? 1500 : game.whiteElo ?? 1500,

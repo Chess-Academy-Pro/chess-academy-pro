@@ -25,7 +25,7 @@ describe('walkthrough tree validation', () => {
       if (errors.length > 0) {
         // Surfacing the actual messages in the test output makes
         // CI failures debuggable without re-running locally.
-        // eslint-disable-next-line no-console
+         
         console.log(formatIssues(errors));
       }
       expect(errors).toEqual([]);
@@ -35,7 +35,7 @@ describe('walkthrough tree validation', () => {
       const legalityIssues = validateMoveLegality(VIENNA_GAME);
       const errors = legalityIssues.filter((i) => i.severity === 'error');
       if (errors.length > 0) {
-        // eslint-disable-next-line no-console
+         
         console.log(formatIssues(errors));
       }
       expect(errors).toEqual([]);
@@ -44,7 +44,7 @@ describe('walkthrough tree validation', () => {
     it('has fewer than 25 warnings (style sanity)', () => {
       const warnings = issues.filter((i) => i.severity === 'warning');
       if (warnings.length >= 25) {
-        // eslint-disable-next-line no-console
+         
         console.log(formatIssues(warnings));
       }
       expect(warnings.length).toBeLessThan(25);

@@ -83,7 +83,7 @@ describe('CoachTeachPage — Polly dispatch (regression for speakQueuedForced bu
    *  test below to invoke the LLM — kickoff is now a canned greeting
    *  with no LLM call, so streaming has to be triggered by user input. */
   async function sendStudentMessage(text: string): Promise<void> {
-    const input = await screen.findByTestId('chat-text-input') as HTMLInputElement;
+    const input = await screen.findByTestId('chat-text-input');
     fireEvent.change(input, { target: { value: text } });
     fireEvent.submit(input.closest('form')!);
   }

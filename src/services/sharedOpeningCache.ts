@@ -34,7 +34,6 @@ import {
   validateWalkthroughTree,
   validateTreeMoveLegality,
 } from '../data/openingWalkthroughs/validate';
-import type { UserProfile } from '../types';
 import type { WalkthroughTree } from '../types/walkthroughTree';
 
 /** Bumped whenever prompt-shape changes invalidate prior trees.
@@ -67,7 +66,7 @@ interface SharedCacheRow {
  *  per-user folder). Returns null when not configured. */
 async function getCacheConfig(): Promise<SharedCacheConfig | null> {
   try {
-    const profile = (await db.profiles.get('main')) as UserProfile | undefined;
+    const profile = (await db.profiles.get('main'));
     if (!profile) return null;
     const prefs = profile.preferences as unknown as Record<string, unknown>;
     const url = (prefs.supabaseUrl as string | null) ?? null;

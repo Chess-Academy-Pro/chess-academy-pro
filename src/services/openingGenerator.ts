@@ -1329,7 +1329,7 @@ Fix the issues above and produce a SHORTER, valid tree.`
     // `children` array (assertTreeShape now auto-fills empty
     // children, see commit 59282db).
     assertTreeShape(toolResult);
-    tree = toolResult as WalkthroughTree;
+    tree = toolResult;
     void logAppAudit({
       kind: 'coach-surface-migrated',
       category: 'subsystem',

@@ -925,7 +925,7 @@ export function CoachTeachPage(): JSX.Element {
           });
           voiceService.stop();
           if (stageHint) {
-            walkthrough.startAtStageMenu(staticTree, stageHint as 'concepts' | 'findMove' | 'drill' | 'punish');
+            walkthrough.startAtStageMenu(staticTree, stageHint);
           } else if (walkthroughDone) {
             walkthrough.start(staticTree, { showChooser: true });
           } else {
@@ -1036,7 +1036,7 @@ export function CoachTeachPage(): JSX.Element {
           });
           voiceService.stop();
           if (stageHint) {
-            walkthrough.startAtStageMenu(cachedTree, stageHint as 'concepts' | 'findMove' | 'drill' | 'punish');
+            walkthrough.startAtStageMenu(cachedTree, stageHint);
           } else if (walkthroughDone) {
             walkthrough.start(cachedTree, { showChooser: true });
           } else {
@@ -1123,7 +1123,7 @@ export function CoachTeachPage(): JSX.Element {
             walkthrough.stop();
             navigate(`/coach/play?opening=${encodeURIComponent(sharedTree.openingName)}`);
           } else if (stageHint) {
-            walkthrough.startAtStageMenu(sharedTree, stageHint as 'concepts' | 'findMove' | 'drill' | 'punish');
+            walkthrough.startAtStageMenu(sharedTree, stageHint);
           } else {
             walkthrough.start(sharedTree);
           }
@@ -1203,7 +1203,7 @@ export function CoachTeachPage(): JSX.Element {
               walkthrough.stop();
               navigate(`/coach/play?opening=${encodeURIComponent(result.tree.openingName)}`);
             } else if (stageHint) {
-              walkthrough.startAtStageMenu(result.tree, stageHint as 'concepts' | 'findMove' | 'drill' | 'punish');
+              walkthrough.startAtStageMenu(result.tree, stageHint);
             } else {
               walkthrough.start(result.tree);
             }
@@ -1816,7 +1816,7 @@ export function CoachTeachPage(): JSX.Element {
       speechChainRef.current = Promise.resolve(voiceService.speakForcedPollyOnly(welcomeLine))
         .catch(() => undefined);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [activeProfile]);
 
   // Layout mirrors CoachGamePage (Play with Coach) — same outer column
@@ -3319,7 +3319,7 @@ function QuizPanel({
       // explanation is being read).
       void voiceService.speakForced(promptToSpeak);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [activeStage, stageIndex, tree]);
 
   if (!tree || !activeStage) return <div data-testid="walkthrough-quiz-empty" />;
@@ -3347,7 +3347,7 @@ function QuizPanel({
     questions = (tree.findMove ?? []).map((q) => ({
       prompt: q.prompt,
       choices: q.candidates.map((c) => ({
-        text: `${c.label}`,
+        text: c.label,
         correct: c.correct,
         explanation: c.explanation,
       })),

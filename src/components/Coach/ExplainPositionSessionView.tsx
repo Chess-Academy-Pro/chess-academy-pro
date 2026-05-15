@@ -102,7 +102,7 @@ export function ExplainPositionSessionView({
           : `${(sf.evaluation / 100).toFixed(2)} pawns`;
         const candidateLines = sf.topLines.slice(0, 3).map((line, i) => {
           const moveSeq = line.moves.slice(0, 5).join(' ');
-          const lineEval = line.mate !== null ? `M${line.mate}` : `${(line.evaluation / 100).toFixed(2)}`;
+          const lineEval = line.mate !== null ? `M${line.mate}` : (line.evaluation / 100).toFixed(2);
           return `  ${i + 1}. ${moveSeq} (${lineEval})`;
         }).join('\n');
         const ask = [

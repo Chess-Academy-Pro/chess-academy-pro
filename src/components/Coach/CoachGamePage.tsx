@@ -912,7 +912,7 @@ export function CoachGamePage(_props: CoachGamePageProps = {}): JSX.Element {
       const dotted = divergenceIdx % 2 === 0 ? `${moveNumber}.` : `${moveNumber}…`;
       const whoMoved = divergenceIdx % 2 === 0 ? 'White' : 'Black';
       const studentMoved = whoMoved.toLowerCase() === intent.color;
-      const verb = studentMoved ? 'You' : `${whoMoved}`;
+      const verb = studentMoved ? 'You' : whoMoved;
       const msg = studentMoved
         ? `Heads up — ${verb} just left ${entry.canonicalName} theory. The book here was ${dotted}${bookSan}, you played ${dotted}${movedSan}. Out of book.`
         : `${verb} deviated from the book ${entry.canonicalName} line at ${dotted}${movedSan} (theory was ${dotted}${bookSan}). You're on your own from here.`;
@@ -2944,7 +2944,7 @@ export function CoachGamePage(_props: CoachGamePageProps = {}): JSX.Element {
               activePrefs?.coachPersonalityVoices,
               activePrefs?.pollyVoice ?? 'ruth',
             );
-            return POLLY_VOICES.find((v) => v.id === activeVoice)?.engine as 'generative' | 'neural' | undefined;
+            return POLLY_VOICES.find((v) => v.id === activeVoice)?.engine;
           })(),
           // Stream the LLM and ship each completed sentence to Polly
           // the moment it lands. `createStreamingSpeaker()` encapsulates
@@ -3474,7 +3474,7 @@ export function CoachGamePage(_props: CoachGamePageProps = {}): JSX.Element {
     const moves = gameState.moves;
     if (moves.length === 0) return;
     const lastMove = moves[moves.length - 1];
-    const lastWasCoach = lastMove.isCoachMove === true;
+    const lastWasCoach = lastMove.isCoachMove;
     // Coach just replied → undo coach + student. Student's move was
     // the most recent → undo student only. Either way, anything
     // before the student's most recent move stays untouched.

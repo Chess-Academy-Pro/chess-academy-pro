@@ -24,7 +24,7 @@ describe('buildPieceRenderer', () => {
   it('logs an asset-load-error audit when a piece image fails to load', async () => {
     const auditor = await import('./appAuditor');
     const pieces = buildPieceRenderer('alpha');
-    const RenderBishop = pieces!.bB!;
+    const RenderBishop = pieces!.bB;
     const { container } = render(<RenderBishop />);
     const img = container.querySelector('img');
     expect(img).toBeTruthy();

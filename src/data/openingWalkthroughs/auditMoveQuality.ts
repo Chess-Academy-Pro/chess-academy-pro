@@ -305,11 +305,11 @@ async function main(): Promise<void> {
   for (const name of targets) {
     const tree = resolveWalkthroughTree(name);
     if (!tree) {
-      // eslint-disable-next-line no-console
+       
       console.log(`Skipping "${name}" — no tree registered`);
       continue;
     }
-    // eslint-disable-next-line no-console
+     
     console.log(
       `\nAuditing ${tree.openingName} (${tree.eco}) at depth ${depth}…`,
     );
@@ -320,21 +320,21 @@ async function main(): Promise<void> {
     const warnings = issues.filter((i) => i.severity === 'warning');
     totalErrors += errors.length;
     totalWarnings += warnings.length;
-    // eslint-disable-next-line no-console
+     
     console.log(
       `\n  ${errors.length} errors, ${warnings.length} warnings (${((t1 - t0) / 1000).toFixed(1)}s)`,
     );
     for (const issue of issues) {
       const tag =
         issue.severity === 'error' ? 'ERROR' : 'warn ';
-      // eslint-disable-next-line no-console
+       
       console.log(`  [${tag}] ${issue.path.join(' ')}`);
-      // eslint-disable-next-line no-console
+       
       console.log(`           ${issue.message}`);
     }
   }
 
-  // eslint-disable-next-line no-console
+   
   console.log(
     `\n=== AUDIT COMPLETE: ${totalErrors} errors, ${totalWarnings} warnings ===`,
   );
@@ -342,7 +342,7 @@ async function main(): Promise<void> {
 }
 
 main().catch((err) => {
-  // eslint-disable-next-line no-console
+   
   console.error('Audit failed:', err);
   process.exit(2);
 });

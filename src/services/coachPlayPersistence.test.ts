@@ -127,7 +127,7 @@ describe('coachPlayPersistence', () => {
     it('caps persisted transcript at 200 newest messages', async () => {
       const huge: ChatMessage[] = Array.from({ length: 250 }, (_, i) => ({
         id: String(i),
-        role: (i % 2 === 0 ? 'user' : 'assistant') as 'user' | 'assistant',
+        role: (i % 2 === 0 ? 'user' : 'assistant'),
         content: `msg ${i}`,
         timestamp: i,
       }));

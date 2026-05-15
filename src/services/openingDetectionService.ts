@@ -49,7 +49,7 @@ let _terminalShortPgns: Set<string> | null = null;
 
 function getTerminalShortPgns(): Set<string> {
   if (_terminalShortPgns) return _terminalShortPgns;
-  const entries = openingsData as OpeningEntry[];
+  const entries = openingsData;
   // Walk every entry's strict PGN prefixes once — any prefix we see
   // is "extended" by at least one DB entry, so it has children.
   const extendedPrefixes = new Set<string>();
@@ -98,7 +98,7 @@ function buildTrie(entries: OpeningEntry[]): TrieNode {
 
 function getTrie(): TrieNode {
   if (!cachedTrie) {
-    cachedTrie = buildTrie(openingsData as OpeningEntry[]);
+    cachedTrie = buildTrie(openingsData);
   }
   return cachedTrie;
 }
@@ -301,7 +301,7 @@ const NAME_ALIASES: Record<string, string> = {
  *  shortest-wins logic ignored the extended entry; the new logic
  *  uses it as the spine when there's no fork picker to populate. */
 export function findShortestCanonicalPgn(canonicalName: string): string | null {
-  const entries = openingsData as OpeningEntry[];
+  const entries = openingsData;
   const matches = entries.filter((e) => e.name === canonicalName);
   if (matches.length === 0) return null;
   // Check whether any sub-variation entries exist under this name
@@ -337,7 +337,7 @@ export function resolveOpeningEntry(
   // rows with no continuation (e.g. Gunderam Gambit at 4 plies).
   // Preserves all teachable openings; deep-dive (PGN-prefix) and
   // in-game detection still see the full DB via separate code paths.
-  const entries = (openingsData as OpeningEntry[]).filter(isTeachableEntry);
+  const entries = (openingsData).filter(isTeachableEntry);
   const trimmed = openingName.trim();
   if (!trimmed) return null;
 
@@ -412,7 +412,7 @@ export function findOpeningByPgnPrefix(
   moves: string[],
 ): { canonicalName: string; eco: string } | null {
   if (moves.length === 0) return null;
-  const entries = openingsData as OpeningEntry[];
+  const entries = openingsData;
   const target = moves.join(' ');
   // We want entries whose PGN is a *prefix* of `target` — i.e. the
   // user's sequence is a continuation of (or equal to) the entry's
@@ -505,7 +505,7 @@ function mostFrequent(items: string[]): string {
 export function findContinuationsAtPly(
   prefix: string[],
 ): Map<string, { name: string; eco: string }> {
-  const entries = openingsData as OpeningEntry[];
+  const entries = openingsData;
   const prefixStr = prefix.join(' ');
   const result = new Map<string, { name: string; eco: string }>();
   const candidates = prefix.length === 0
@@ -569,7 +569,7 @@ export function findSiblingExtensionBranches(
   canonicalName: string,
   canonicalPgn: string,
 ): ForkBranch[] {
-  const entries = openingsData as OpeningEntry[];
+  const entries = openingsData;
   // The DB sometimes carries multiple entries with the same canonical
   // name at different depths (e.g. "Sicilian Defense: Najdorf
   // Variation" appears at 10, 11, 12, 13, 14 plies). For fork
@@ -707,7 +707,7 @@ export function findRelatedDbEntries(
   openingName: string,
   maxEntries: number = 30,
 ): OpeningEntry[] {
-  const entries = openingsData as OpeningEntry[];
+  const entries = openingsData;
   const lower = openingName.toLowerCase();
 
   // 1. Find the bare opening — exact name match prefers shortest PGN
@@ -899,7 +899,7 @@ export function findLinePickerOptions(
   // AND "King's Indian Attack" both strip to "kings indian"),
   // prefer Defense > Game > Opening > Attack (defense is the most
   // commonly-meant when a user types just the family name).
-  const entries = openingsData as OpeningEntry[];
+  const entries = openingsData;
   const bareCandidates = entries.filter((e) => {
     const eNorm = normalizeNameForMatch(e.name);
     if (eNorm === queryNorm) return true;

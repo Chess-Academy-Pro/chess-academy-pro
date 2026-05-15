@@ -145,11 +145,11 @@ describe('PersonalityPanel', () => {
     setup();
     fireEvent.click(screen.getByTestId('personality-row'));
     // All 5 voice pickers present with default voice pre-selected.
-    expect((screen.getByTestId('personality-voice-default') as HTMLSelectElement).value).toBe('ruth');
-    expect((screen.getByTestId('personality-voice-soft') as HTMLSelectElement).value).toBe('joanna');
-    expect((screen.getByTestId('personality-voice-edgy') as HTMLSelectElement).value).toBe('stephen');
-    expect((screen.getByTestId('personality-voice-flirtatious') as HTMLSelectElement).value).toBe('ruth');
-    expect((screen.getByTestId('personality-voice-drill-sergeant') as HTMLSelectElement).value).toBe('matthew');
+    expect((screen.getByTestId('personality-voice-default')).value).toBe('ruth');
+    expect((screen.getByTestId('personality-voice-soft')).value).toBe('joanna');
+    expect((screen.getByTestId('personality-voice-edgy')).value).toBe('stephen');
+    expect((screen.getByTestId('personality-voice-flirtatious')).value).toBe('ruth');
+    expect((screen.getByTestId('personality-voice-drill-sergeant')).value).toBe('matthew');
   });
 
   it('voice override persists only when it differs from the per-personality default', async () => {

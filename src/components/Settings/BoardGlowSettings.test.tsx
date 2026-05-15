@@ -67,7 +67,7 @@ describe('BoardGlowSettings', () => {
 
   it('auto-saves after changing brightness', async () => {
     renderWithProviders(<BoardGlowSettings />);
-    const slider = screen.getByTestId('dimmer-master') as HTMLInputElement;
+    const slider = screen.getByTestId('dimmer-master');
     fireEvent.change(slider, { target: { value: '150' } });
     // Auto-save shows status after debounce
     await waitFor(() => {

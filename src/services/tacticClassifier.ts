@@ -734,8 +734,8 @@ export function scanUpcomingTactics(
         const stepTactics = detectTacticsAtStep(
           fenBefore,
           fenAfter,
-          moveResult.from as Square,
-          moveResult.to as Square,
+          moveResult.from,
+          moveResult.to,
           movingColor,
         );
 

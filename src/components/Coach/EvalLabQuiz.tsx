@@ -401,7 +401,7 @@ function QuizItemRunner({
     if (stage !== 'reveal' || resultLogged || heldTheEval === null) return;
     setResultLogged(true);
     const stage0Correct = item.isKeystone ? stage0Guess === item.verdict : true;
-    const firstTryPerfect = stage0Correct && stage1FirstTry && heldTheEval === true;
+    const firstTryPerfect = stage0Correct && stage1FirstTry && heldTheEval;
     onComplete({
       item,
       stage0Correct,

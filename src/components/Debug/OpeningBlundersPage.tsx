@@ -234,7 +234,7 @@ function applyFirstMove(fen: string, uci: string): string {
 
 function puzzleGoalSentence(themes: string[]): string {
   const mateN = themes.find((t) => /^mateIn\d$/.test(t));
-  if (mateN) return `${mateN.replace('mateIn', 'Mate in ')}`;
+  if (mateN) return mateN.replace('mateIn', 'Mate in ');
   if (themes.includes('crushing')) return 'Win decisive material';
   if (themes.includes('mate')) return 'Deliver mate';
   const pattern = themes.find((t) =>
