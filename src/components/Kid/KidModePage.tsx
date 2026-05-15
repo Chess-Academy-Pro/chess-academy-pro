@@ -1,13 +1,11 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Volume2, VolumeX, ArrowLeft, Map, Swords, Shield, Footprints, Gamepad2, Puzzle, Play } from 'lucide-react';
+import { Volume2, VolumeX, ArrowLeft, Map, Swords, Gamepad2, Puzzle, Play } from 'lucide-react';
 import { useAppStore } from '../../stores/appStore';
 import { voiceService } from '../../services/voiceService';
 import { getGameProgress, getGameCompletedChapterCount } from '../../services/journeyService';
 import { PAWNS_JOURNEY_CONFIG, FAIRY_TALE_CONFIG } from '../../data/kidGameConfigs';
 import { KidChessboard } from '../Chessboard/KidChessboard';
-import { BishopVsPawns } from './BishopVsPawns';
-import { ColorWars } from './ColorWars';
 import type { ChessPiece, JourneyProgress } from '../../types';
 
 interface PieceLesson {
@@ -35,7 +33,7 @@ const FIND_KING_FENS = [
   'rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1',
 ];
 
-type KidView = 'menu' | 'findKing' | 'bishopVsPawns' | 'colorWars';
+type KidView = 'menu' | 'findKing';
 
 export function KidModePage(): JSX.Element {
   const activeProfile = useAppStore((s) => s.activeProfile);
@@ -114,14 +112,6 @@ export function KidModePage(): JSX.Element {
   const bishopGamesUnlocked = journeyProgress?.chapters['rook']?.completed ?? false;
 
   if (!activeProfile) return <></>;
-
-  if (view === 'bishopVsPawns') {
-    return <BishopVsPawns onBack={() => setView('menu')} />;
-  }
-
-  if (view === 'colorWars') {
-    return <ColorWars onBack={() => setView('menu')} />;
-  }
 
   return (
     <div
@@ -234,14 +224,14 @@ export function KidModePage(): JSX.Element {
           <div className="flex flex-col gap-3">
             {/* Pawn Games */}
             <button
-              onClick={() => void navigate('/kid/mini-games')}
+              onClick={() => void navigate('/kid/pawn-games')}
               className="rounded-xl p-5 border-2 flex items-center gap-4 hover:opacity-80 transition-opacity w-full text-left"
               style={{
                 background: 'var(--color-surface)',
                 borderColor: 'var(--color-accent)',
                 boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
               }}
-              data-testid="mini-games-card"
+              data-testid="pawn-games-card"
             >
               <Swords size={28} style={{ color: 'var(--color-accent)' }} />
               <div className="flex-1">
@@ -300,50 +290,27 @@ export function KidModePage(): JSX.Element {
                 Complete the Rook chapter to unlock bishop games!
               </p>
             )}
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={() => { if (bishopGamesUnlocked) setView('bishopVsPawns'); }}
-                disabled={!bishopGamesUnlocked}
-                className={`rounded-xl p-5 border-2 flex items-center gap-4 transition-opacity w-full text-left ${
-                  !bishopGamesUnlocked ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-80'
-                }`}
-                style={{
-                  background: 'var(--color-surface)',
-                  borderColor: 'var(--color-accent)',
-                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-                }}
-                data-testid="bishop-vs-pawns-btn"
-              >
-                <span className="text-3xl">♗</span>
-                <div className="flex-1">
-                  <div className="font-bold">Bishop vs Pawns</div>
-                  <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                    Catch the pawns!
-                  </div>
+            <button
+              onClick={() => { if (bishopGamesUnlocked) void navigate('/kid/bishop-games'); }}
+              disabled={!bishopGamesUnlocked}
+              className={`rounded-xl p-5 border-2 flex items-center gap-4 transition-opacity w-full text-left ${
+                !bishopGamesUnlocked ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-80'
+              }`}
+              style={{
+                background: 'var(--color-surface)',
+                borderColor: 'var(--color-accent)',
+                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+              }}
+              data-testid="bishop-games-card"
+            >
+              <span className="text-3xl">♗</span>
+              <div className="flex-1">
+                <div className="font-bold text-lg">Bishop Games</div>
+                <div className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+                  Bishop vs Pawns & Color Wars
                 </div>
-              </button>
-              <button
-                onClick={() => { if (bishopGamesUnlocked) setView('colorWars'); }}
-                disabled={!bishopGamesUnlocked}
-                className={`rounded-xl p-5 border-2 flex items-center gap-4 transition-opacity w-full text-left ${
-                  !bishopGamesUnlocked ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-80'
-                }`}
-                style={{
-                  background: 'var(--color-surface)',
-                  borderColor: 'var(--color-accent)',
-                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-                }}
-                data-testid="color-wars-btn"
-              >
-                <span className="text-3xl">♗♗</span>
-                <div className="flex-1">
-                  <div className="font-bold">Color Wars</div>
-                  <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                    Two bishops attack!
-                  </div>
-                </div>
-              </button>
-            </div>
+              </div>
+            </button>
 
             {/* Queen Games */}
             <button
@@ -366,46 +333,24 @@ export function KidModePage(): JSX.Element {
             </button>
 
             {/* King Games */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <button
-                onClick={() => void navigate('/kid/king-escape')}
-                className="rounded-xl p-5 border-2 flex items-center gap-4 hover:opacity-80 transition-opacity w-full text-left"
-                style={{
-                  background: 'var(--color-surface)',
-                  borderColor: 'var(--color-accent)',
-                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-                }}
-                data-testid="king-escape-card"
-              >
-                <Shield size={28} style={{ color: 'var(--color-accent)' }} />
-                <div className="flex-1">
-                  <div className="font-bold">King Escape</div>
-                  <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                    Save the king from check!
-                  </div>
+            <button
+              onClick={() => void navigate('/kid/king-games')}
+              className="rounded-xl p-5 border-2 flex items-center gap-4 hover:opacity-80 transition-opacity w-full text-left"
+              style={{
+                background: 'var(--color-surface)',
+                borderColor: 'var(--color-accent)',
+                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+              }}
+              data-testid="king-games-card"
+            >
+              <span className="text-3xl">♚</span>
+              <div className="flex-1">
+                <div className="font-bold text-lg">King Games</div>
+                <div className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+                  King Escape & King March
                 </div>
-              </button>
-
-              <button
-                onClick={() => void navigate('/kid/king-march')}
-                className="rounded-xl p-5 border-2 flex items-center gap-4 hover:opacity-80 transition-opacity w-full text-left"
-                style={{
-                  background: 'var(--color-surface)',
-                  borderColor: 'var(--color-accent)',
-                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-                }}
-                data-testid="king-march-card"
-              >
-                <Footprints size={28} style={{ color: 'var(--color-accent)' }} />
-                <div className="flex-1">
-                  <div className="font-bold">King March</div>
-                  <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                    March the king to rank 8!
-                  </div>
-                </div>
-              </button>
-            </div>
-
+              </div>
+            </button>
             {/* Find the King */}
             <button
               onClick={() => { setView('findKing'); setFindKingIdx(0); setFindKingScore(0); kidSpeak('Find the King! Where is the White King? Tap it!'); }}

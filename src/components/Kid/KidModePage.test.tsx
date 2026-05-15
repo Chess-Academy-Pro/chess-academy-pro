@@ -195,32 +195,28 @@ describe('KidModePage', () => {
     expect(screen.queryByTestId('kid-mode-page')).not.toBeInTheDocument();
   });
 
-  it('renders mini-games card with "Pawn Games" text', () => {
+  it('renders pawn-games card with "Pawn Games" text', () => {
     useAppStore.getState().setActiveProfile(createProfile());
     render(<KidModePage />);
 
-    expect(screen.getByTestId('mini-games-card')).toBeInTheDocument();
+    expect(screen.getByTestId('pawn-games-card')).toBeInTheDocument();
     expect(screen.getByText('Pawn Games')).toBeInTheDocument();
   });
 
-  it('clicking mini-games card triggers navigation', () => {
+  it('clicking pawn-games card triggers navigation', () => {
     useAppStore.getState().setActiveProfile(createProfile());
     render(<KidModePage />);
 
-    fireEvent.click(screen.getByTestId('mini-games-card'));
+    fireEvent.click(screen.getByTestId('pawn-games-card'));
   });
 
-  it('renders king escape and king march cards', () => {
+  it('renders the unified king-games hub card', () => {
     useAppStore.getState().setActiveProfile(createProfile());
     render(<KidModePage />);
 
-    expect(screen.getByTestId('king-escape-card')).toBeInTheDocument();
-    expect(screen.getByText('King Escape')).toBeInTheDocument();
-    expect(screen.getByText('Save the king from check!')).toBeInTheDocument();
-
-    expect(screen.getByTestId('king-march-card')).toBeInTheDocument();
-    expect(screen.getByText('King March')).toBeInTheDocument();
-    expect(screen.getByText('March the king to rank 8!')).toBeInTheDocument();
+    expect(screen.getByTestId('king-games-card')).toBeInTheDocument();
+    expect(screen.getByText('King Games')).toBeInTheDocument();
+    expect(screen.getByText('King Escape & King March')).toBeInTheDocument();
   });
 
   it('renders knight games card', () => {
@@ -261,24 +257,23 @@ describe('KidModePage', () => {
     expect(screen.getByText('Piece Lessons')).toBeInTheDocument();
   });
 
-  it('shows bishop games section with two buttons', () => {
+  it('shows the unified Bishop Games hub tile', () => {
     useAppStore.getState().setActiveProfile(createProfile());
     render(<KidModePage />);
 
-    expect(screen.getByTestId('bishop-vs-pawns-btn')).toBeInTheDocument();
-    expect(screen.getByTestId('color-wars-btn')).toBeInTheDocument();
+    expect(screen.getByTestId('bishop-games-card')).toBeInTheDocument();
+    expect(screen.getByText('Bishop Games')).toBeInTheDocument();
   });
 
-  it('bishop game buttons are disabled when rook chapter not completed', () => {
+  it('Bishop Games tile is disabled when rook chapter not completed', () => {
     useAppStore.getState().setActiveProfile(createProfile());
     render(<KidModePage />);
 
-    expect(screen.getByTestId('bishop-vs-pawns-btn')).toBeDisabled();
-    expect(screen.getByTestId('color-wars-btn')).toBeDisabled();
+    expect(screen.getByTestId('bishop-games-card')).toBeDisabled();
     expect(screen.getByTestId('bishop-games-locked-msg')).toBeInTheDocument();
   });
 
-  it('bishop game buttons are enabled when rook chapter is completed', async () => {
+  it('Bishop Games tile is enabled when rook chapter is completed', async () => {
     const progress: JourneyProgress = {
       chapters: { rook: { chapterId: 'rook', lessonsCompleted: 3, puzzlesCorrect: 5, puzzlesCompleted: 5, completed: true, bestScore: 5, completedAt: null } },
       currentChapterId: 'bishop',
@@ -289,13 +284,14 @@ describe('KidModePage', () => {
     useAppStore.getState().setActiveProfile(createProfile());
     render(<KidModePage />);
 
-    const bvpBtn = await screen.findByTestId('bishop-vs-pawns-btn');
-    expect(bvpBtn).not.toBeDisabled();
-    expect(screen.getByTestId('color-wars-btn')).not.toBeDisabled();
+    const btn = await screen.findByTestId('bishop-games-card');
+    // Wait for async unlock to settle.
+    await new Promise((r) => setTimeout(r, 0));
+    expect(btn).not.toBeDisabled();
     expect(screen.queryByTestId('bishop-games-locked-msg')).not.toBeInTheDocument();
   });
 
-  it('clicking Bishop vs Pawns button shows the game', async () => {
+  it('clicking Bishop Games tile navigates (no in-place render)', async () => {
     const progress: JourneyProgress = {
       chapters: { rook: { chapterId: 'rook', lessonsCompleted: 3, puzzlesCorrect: 5, puzzlesCompleted: 5, completed: true, bestScore: 5, completedAt: null } },
       currentChapterId: 'bishop',
@@ -306,62 +302,11 @@ describe('KidModePage', () => {
     useAppStore.getState().setActiveProfile(createProfile());
     render(<KidModePage />);
 
-    const btn = await screen.findByTestId('bishop-vs-pawns-btn');
+    const btn = await screen.findByTestId('bishop-games-card');
     fireEvent.click(btn);
-    expect(screen.getByTestId('bishop-vs-pawns-game')).toBeInTheDocument();
-  });
-
-  it('clicking Color Wars button shows the game', async () => {
-    const progress: JourneyProgress = {
-      chapters: { rook: { chapterId: 'rook', lessonsCompleted: 3, puzzlesCorrect: 5, puzzlesCompleted: 5, completed: true, bestScore: 5, completedAt: null } },
-      currentChapterId: 'bishop',
-      startedAt: new Date().toISOString(),
-      completedAt: null,
-    };
-    vi.mocked(getGameProgress).mockResolvedValue(progress);
-    useAppStore.getState().setActiveProfile(createProfile());
-    render(<KidModePage />);
-
-    const btn = await screen.findByTestId('color-wars-btn');
-    fireEvent.click(btn);
-    expect(screen.getByTestId('color-wars-game')).toBeInTheDocument();
-  });
-
-  it('back from Bishop vs Pawns returns to menu', async () => {
-    const progress: JourneyProgress = {
-      chapters: { rook: { chapterId: 'rook', lessonsCompleted: 3, puzzlesCorrect: 5, puzzlesCompleted: 5, completed: true, bestScore: 5, completedAt: null } },
-      currentChapterId: 'bishop',
-      startedAt: new Date().toISOString(),
-      completedAt: null,
-    };
-    vi.mocked(getGameProgress).mockResolvedValue(progress);
-    useAppStore.getState().setActiveProfile(createProfile());
-    render(<KidModePage />);
-
-    const btn = await screen.findByTestId('bishop-vs-pawns-btn');
-    fireEvent.click(btn);
-    expect(screen.getByTestId('bishop-vs-pawns-game')).toBeInTheDocument();
-
-    fireEvent.click(screen.getByTestId('bvp-back'));
-    expect(screen.getByTestId('kid-mode-page')).toBeInTheDocument();
-  });
-
-  it('back from Color Wars returns to menu', async () => {
-    const progress: JourneyProgress = {
-      chapters: { rook: { chapterId: 'rook', lessonsCompleted: 3, puzzlesCorrect: 5, puzzlesCompleted: 5, completed: true, bestScore: 5, completedAt: null } },
-      currentChapterId: 'bishop',
-      startedAt: new Date().toISOString(),
-      completedAt: null,
-    };
-    vi.mocked(getGameProgress).mockResolvedValue(progress);
-    useAppStore.getState().setActiveProfile(createProfile());
-    render(<KidModePage />);
-
-    const btn = await screen.findByTestId('color-wars-btn');
-    fireEvent.click(btn);
-    expect(screen.getByTestId('color-wars-game')).toBeInTheDocument();
-
-    fireEvent.click(screen.getByTestId('cw-back'));
+    // Routing happens via React Router — KidModePage no longer renders
+    // BishopVsPawns / ColorWars in-place. Just verify the click didn't
+    // crash and the hub stays mounted (Router would unmount on real nav).
     expect(screen.getByTestId('kid-mode-page')).toBeInTheDocument();
   });
 

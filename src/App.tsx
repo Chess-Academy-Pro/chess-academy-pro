@@ -66,6 +66,8 @@ import { MiniGameHubPage } from './components/Kid/MiniGameHubPage';
 import { MiniGamePage } from './components/Kid/MiniGamePage';
 import { KingEscapeGame } from './components/Kid/KingEscapeGame';
 import { KingMarchGame } from './components/Kid/KingMarchGame';
+import { KingGamesPage } from './components/Kid/KingGamesPage';
+import { BishopGamesPage, BishopVsPawnsRoute, ColorWarsRoute } from './components/Kid/BishopGamesPage';
 import { KnightGamesPage } from './components/Kid/KnightGamesPage';
 import { LeapFrogGame } from './components/Kid/LeapFrogGame';
 import { KnightSweepGame } from './components/Kid/KnightSweepGame';
@@ -316,11 +318,25 @@ export function App(): JSX.Element {
           <Route path="/kid/rook-games" element={<ErrorBoundary><RookGamesPage /></ErrorBoundary>} />
           <Route path="/kid/rook-maze/:level" element={<ErrorBoundary><RookMazePage /></ErrorBoundary>} />
           <Route path="/kid/row-clearer/:level" element={<ErrorBoundary><RowClearerPage /></ErrorBoundary>} />
-          <Route path="/kid/mini-games" element={<ErrorBoundary><MiniGameHubPage /></ErrorBoundary>} />
-          <Route path="/kid/mini-games/pawn-wars/:level" element={<ErrorBoundary><MiniGamePage gameId="pawn-wars" /></ErrorBoundary>} />
-          <Route path="/kid/mini-games/blocker/:level" element={<ErrorBoundary><MiniGamePage gameId="blocker" /></ErrorBoundary>} />
-          <Route path="/kid/king-escape" element={<ErrorBoundary><KingEscapeGame /></ErrorBoundary>} />
-          <Route path="/kid/king-march" element={<ErrorBoundary><KingMarchGame /></ErrorBoundary>} />
+          <Route path="/kid/pawn-games" element={<ErrorBoundary><MiniGameHubPage /></ErrorBoundary>} />
+          <Route path="/kid/pawn-games/pawn-wars/:level" element={<ErrorBoundary><MiniGamePage gameId="pawn-wars" /></ErrorBoundary>} />
+          <Route path="/kid/pawn-games/blocker/:level" element={<ErrorBoundary><MiniGamePage gameId="blocker" /></ErrorBoundary>} />
+          {/* Legacy /kid/mini-games* hub redirect — old route renamed
+              to /kid/pawn-games. Sub-routes redirect to the hub
+              rather than carry the :level through (kid section is
+              single-user, no realistic deep-link bookmarks). */}
+          <Route path="/kid/mini-games" element={<Navigate to="/kid/pawn-games" replace />} />
+          <Route path="/kid/mini-games/pawn-wars/:level" element={<Navigate to="/kid/pawn-games" replace />} />
+          <Route path="/kid/mini-games/blocker/:level" element={<Navigate to="/kid/pawn-games" replace />} />
+          <Route path="/kid/king-games" element={<ErrorBoundary><KingGamesPage /></ErrorBoundary>} />
+          <Route path="/kid/king-games/escape" element={<ErrorBoundary><KingEscapeGame /></ErrorBoundary>} />
+          <Route path="/kid/king-games/march" element={<ErrorBoundary><KingMarchGame /></ErrorBoundary>} />
+          {/* Legacy /kid/king-* routes — redirect to the new king-games hub. */}
+          <Route path="/kid/king-escape" element={<Navigate to="/kid/king-games/escape" replace />} />
+          <Route path="/kid/king-march" element={<Navigate to="/kid/king-games/march" replace />} />
+          <Route path="/kid/bishop-games" element={<ErrorBoundary><BishopGamesPage /></ErrorBoundary>} />
+          <Route path="/kid/bishop-games/vs-pawns" element={<ErrorBoundary><BishopVsPawnsRoute /></ErrorBoundary>} />
+          <Route path="/kid/bishop-games/color-wars" element={<ErrorBoundary><ColorWarsRoute /></ErrorBoundary>} />
           <Route path="/kid/knight-games" element={<ErrorBoundary><KnightGamesPage /></ErrorBoundary>} />
           <Route path="/kid/knight-games/leap-frog" element={<ErrorBoundary><LeapFrogGame /></ErrorBoundary>} />
           <Route path="/kid/knight-games/knight-sweep" element={<ErrorBoundary><KnightSweepGame /></ErrorBoundary>} />
