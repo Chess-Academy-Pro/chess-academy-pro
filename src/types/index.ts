@@ -1,5 +1,14 @@
 // ─── Puzzle ──────────────────────────────────────────────────────────────────
 
+/** The chess piece that moves first in a puzzle (i.e. the solver's
+ *  first move). Computed at curation time by applying the puzzle's
+ *  first UCI move via chess.js — see scripts/tag-puzzle-moving-piece.mjs.
+ *  Required by the kid section's per-piece puzzle filter (Lichess's
+ *  `moves` field is UCI, not SAN, so the SAN's piece letter can't be
+ *  derived without parsing the position). 'P' covers pawn pushes,
+ *  pawn captures, and promotions; 'K' covers castling. */
+export type MovingPiece = 'K' | 'Q' | 'R' | 'B' | 'N' | 'P';
+
 export interface PuzzleRecord {
   id: string;
   fen: string;
@@ -9,6 +18,10 @@ export interface PuzzleRecord {
   openingTags: string | null;
   popularity: number;
   nbPlays: number;
+  /** First-move piece. Optional for backward compat with any
+   *  pre-tagged puzzle records still hanging around in Dexie;
+   *  the curated `puzzles.json` always populates it. */
+  movingPiece?: MovingPiece;
   // SRS fields
   srsInterval: number;
   srsEaseFactor: number;
