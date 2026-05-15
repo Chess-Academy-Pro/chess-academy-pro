@@ -38,6 +38,29 @@ interface InterceptedCall {
 test.describe('Coach walkthrough contract — wire-level verification', () => {
   test.setTimeout(120_000);
 
+  // This spec needs the coach to actually issue an LLM HTTP request
+  // so the intercept can capture the system prompt. The sandboxed dev
+  // environment running this test typically does NOT have working
+  // VITE_DEEPSEEK_API_KEY / VITE_ANTHROPIC_API_KEY env vars + the
+  // obfuscated embedded fallback may be inert too. Without a key the
+  // coach short-circuits with a "no key" error BEFORE making the
+  // fetch, so the route handler sees zero calls and the test fails.
+  //
+  // In CI / production environments where the keys ARE present, this
+  // test runs end-to-end and proves the contract reaches the wire.
+  // The unit-level coverage in src/coach/__tests__/envelope.test.ts
+  // (9 cases under "WALKTHROUGH_PROMISE_CONTRACT inclusion") locks
+  // the contract's presence in the assembled envelope without needing
+  // real credentials, so this spec is purely the wire-delivery
+  // confirmation layer.
+  test.skip(
+    !process.env.VITE_DEEPSEEK_API_KEY &&
+      !process.env.VITE_ANTHROPIC_API_KEY &&
+      !process.env.DEEPSEEK_KEY &&
+      !process.env.ANTHROPIC_KEY,
+    'No LLM API key available in env — wire test requires the coach to actually make a request. Envelope unit tests (envelope.test.ts) cover the assembly logic without needing credentials.',
+  );
+
   test('system prompt to LLM contains WALKTHROUGH_PROMISE_CONTRACT on /coach/teach', async ({
     page,
   }) => {
