@@ -18,6 +18,7 @@
     "test:e2e": "playwright test",
     "postinstall": "npm run stockfish:copy",
     "setup:ios": "npx cap add ios; npx cap sync ios; cp ios-patches/App/AppDelegate.swift ios/App/App/AppDelegate.swift",
+    "setup:android": "npx cap add android; npx cap sync android",
     "audit:voice": "node scripts/audit-voice-coverage.js",
     "audit:openings": "tsx src/data/openingWalkthroughs/auditMoveQuality.ts",
     "audit:endgame": "node scripts/audit-endgame-results.mjs",
@@ -54,6 +55,7 @@
     "zustand": "5.0.11"
   },
   "devDependencies": {
+    "@capacitor/android": "8.1.0",
     "@capacitor/cli": "8.1.0",
     "@capacitor/ios": "8.1.0",
     "@playwright/test": "1.58.2",

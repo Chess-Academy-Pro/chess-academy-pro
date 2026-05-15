@@ -13,7 +13,7 @@ import type { OpeningRecord, SmartSearchResult } from '../../types';
 import { ProRepertoiresTab } from './ProRepertoiresTab';
 import { GambitsTab } from './GambitsTab';
 import { SmartSearchBar } from '../Search/SmartSearchBar';
-import { BookOpen, Library, ChevronDown, ChevronRight, Users, Swords } from 'lucide-react';
+import { BookOpen, Library, ChevronDown, ChevronRight, Users, Swords, Sparkles } from 'lucide-react';
 
 type TabMode = 'common' | 'pro' | 'gambits' | 'all';
 
@@ -126,6 +126,24 @@ export function OpeningExplorerPage(): JSX.Element {
         <BookOpen size={24} className="text-theme-accent" />
         <h1 className="text-2xl font-bold text-theme-text">Openings</h1>
       </div>
+
+      {/* SRS Trainer entry tile */}
+      <button
+        onClick={() => void navigate('/openings/srs')}
+        className="w-full flex items-center justify-between p-3 rounded-xl bg-theme-surface border-2 border-purple-500/30 hover:border-purple-400/60 mb-4 transition-colors text-left"
+        data-testid="srs-trainer-entry"
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-purple-500/15 flex items-center justify-center">
+            <Sparkles size={18} className="text-purple-400" />
+          </div>
+          <div>
+            <p className="text-sm font-bold text-theme-text">Opening Trainer</p>
+            <p className="text-xs text-theme-text-muted">Daily spaced-repetition review</p>
+          </div>
+        </div>
+        <ChevronRight size={18} className="text-theme-text-muted" />
+      </button>
 
       {/* Tab toggle */}
       <div className="grid grid-cols-4 gap-1 mb-4 p-1 bg-theme-surface rounded-xl" data-testid="tab-toggle">

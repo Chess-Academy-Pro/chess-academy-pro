@@ -21,6 +21,7 @@ import { BuildVersionWidget } from './components/Debug/BuildVersionWidget';
 import { DashboardPage } from './components/Dashboard/DashboardPage';
 import { OpeningExplorerPage } from './components/Openings/OpeningExplorerPage';
 import { OpeningDetailPage } from './components/Openings/OpeningDetailPage';
+import { SrsTrainerPage } from './components/Openings/SrsTrainerPage';
 import { PuzzleTrainerPage } from './components/Puzzles/PuzzleTrainerPage';
 import { AdaptivePuzzlePage } from './components/Puzzles/AdaptivePuzzlePage';
 import { MyMistakesPage } from './components/Puzzles/MyMistakesPage';
@@ -231,6 +232,7 @@ export function App(): JSX.Element {
           <Route path="/" element={<ErrorBoundary><DashboardPage /></ErrorBoundary>} />
           {/* Openings */}
           <Route path="/openings" element={<ErrorBoundary><OpeningExplorerPage /></ErrorBoundary>} />
+          <Route path="/openings/srs" element={<ErrorBoundary><SrsTrainerPage /></ErrorBoundary>} />
           <Route path="/openings/pro/:playerId" element={<ErrorBoundary><ProPlayerPage /></ErrorBoundary>} />
           <Route path="/openings/pro/:playerId/:id" element={<ErrorBoundary><OpeningDetailPage /></ErrorBoundary>} />
           <Route path="/openings/:id" element={<ErrorBoundary><OpeningDetailPage /></ErrorBoundary>} />

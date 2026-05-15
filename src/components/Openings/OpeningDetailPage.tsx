@@ -29,6 +29,11 @@ import {
   getTotalLines,
   toggleFavorite,
 } from '../../services/openingService';
+import {
+  enrollOpening,
+  unenrollOpening,
+  isEnrolled,
+} from '../../services/srsOpeningService';
 import { narrateOpeningSection } from '../../services/openingSectionNarrator';
 import type { OpeningRecord, ModelGame, MiddlegamePlan } from '../../types';
 import {
@@ -50,6 +55,8 @@ import {
   Heart,
   PlayCircle,
   Loader2,
+  Sparkles,
+  CheckCircle2,
 } from 'lucide-react';
 
 type ViewMode =
@@ -107,6 +114,9 @@ export function OpeningDetailPage(): JSX.Element {
   const [quizIndex, setQuizIndex] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [quizPlayFen, setQuizPlayFen] = useState<string | null>(null);
+  const [srsEnrolled, setSrsEnrolled] = useState<boolean>(false);
+  const [srsBusy, setSrsBusy] = useState<boolean>(false);
+  const [srsFlash, setSrsFlash] = useState<string | null>(null);
 
   const loadOpening = useCallback(async (): Promise<void> => {
     if (!id) return;
@@ -118,6 +128,38 @@ export function OpeningDetailPage(): JSX.Element {
   useEffect(() => {
     void loadOpening();
   }, [loadOpening]);
+
+  // SRS enrollment state — refreshed every time the opening loads
+  // so toggling from another tab eventually reconciles.
+  useEffect(() => {
+    if (!id) return;
+    void isEnrolled(id).then(setSrsEnrolled);
+  }, [id]);
+
+  const handleToggleSrs = useCallback(async (): Promise<void> => {
+    if (!opening || srsBusy) return;
+    setSrsBusy(true);
+    try {
+      if (srsEnrolled) {
+        await unenrollOpening(opening.id);
+        setSrsEnrolled(false);
+        setSrsFlash('Removed from trainer');
+      } else {
+        const result = await enrollOpening(opening);
+        setSrsEnrolled(true);
+        if (result.added > 0) {
+          setSrsFlash(`Added ${result.added} card${result.added !== 1 ? 's' : ''} to trainer`);
+        } else if (result.alreadyEnrolled > 0) {
+          setSrsFlash('Already in trainer');
+        } else {
+          setSrsFlash('No reviewable positions in this line');
+        }
+      }
+      setTimeout(() => setSrsFlash(null), 2200);
+    } finally {
+      setSrsBusy(false);
+    }
+  }, [opening, srsEnrolled, srsBusy]);
 
   // Cleanup speech on unmount
   useEffect(() => {
@@ -656,6 +698,37 @@ export function OpeningDetailPage(): JSX.Element {
           Play
         </button>
       </div>
+
+      {/* SRS trainer enrollment */}
+      <div className="flex items-center gap-2 mb-5" data-testid="srs-enroll-row">
+        <button
+          onClick={() => void handleToggleSrs()}
+          disabled={srsBusy}
+          className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-colors border-2 ${
+            srsEnrolled
+              ? 'bg-purple-500/15 border-purple-400/60 text-purple-200 hover:bg-purple-500/25'
+              : 'bg-theme-surface border-purple-500/30 text-theme-text hover:border-purple-400/60'
+          } disabled:opacity-60 disabled:cursor-wait`}
+          data-testid={srsEnrolled ? 'srs-unenroll-btn' : 'srs-enroll-btn'}
+        >
+          {srsEnrolled ? <CheckCircle2 size={16} /> : <Sparkles size={16} />}
+          {srsEnrolled ? 'In trainer' : 'Add to trainer'}
+        </button>
+        {srsEnrolled && (
+          <button
+            onClick={() => void navigate('/openings/srs')}
+            className="px-3 py-2.5 rounded-xl bg-purple-500/15 border-2 border-purple-400/60 text-purple-200 text-sm font-semibold hover:bg-purple-500/25 transition-colors"
+            data-testid="srs-open-btn"
+          >
+            Review
+          </button>
+        )}
+      </div>
+      {srsFlash && (
+        <p className="text-xs text-purple-300 -mt-3 mb-4" data-testid="srs-flash">
+          {srsFlash}
+        </p>
+      )}
 
       {/* Overview */}
       {opening.overview && (

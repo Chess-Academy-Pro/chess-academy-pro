@@ -1637,3 +1637,47 @@ export interface EndgameProgressRecord {
   /** Unix ms timestamp of the last completed playout. */
   lastPlayedAt: number;
 }
+
+// ─── SRS opening trainer (Chessable MoveTrainer-style) ───────────────────────
+//
+// One card per position where it's the student's side to move within an
+// enrolled opening line. SM-2 scheduling: correct moves push next-review
+// further out exponentially; misses reset to 1 day + decrement ease.
+//
+// The card identity is the FEN-before-move, not the SAN. That way Italian
+// Game lines that transpose to the same position via different move orders
+// share a single card. SAN is stored as the "expected answer" string.
+
+export interface SrsOpeningCard {
+  /** `${openingId}::${normalizedFenBefore}` — stable across enrollment cycles. */
+  id: string;
+  /** Source opening (eg `italian-game`). */
+  openingId: string;
+  /** Display name of the variation this position came from. May be the
+   *  opening's main line if the position is on the main PGN. */
+  variationName: string;
+  /** FEN before the student's move. */
+  fenBefore: string;
+  /** Expected SAN — what the student should play. Stripped of check
+   *  marks (`+`, `#`) and decorators (`!`, `?`) for forgiving comparison. */
+  expectedSan: string;
+  /** Move history leading to fenBefore, as a space-separated SAN string.
+   *  Used to render the "X moves into the Italian Game…" context line. */
+  pgnPrefix: string;
+  /** Side the student plays (matches opening.color or variation override). */
+  studentColor: 'white' | 'black';
+  /** SM-2 ease factor. Starts at 2.5; ranges 1.3 – 2.6+. */
+  ease: number;
+  /** Days until next review. 0 = same-day, 1 = tomorrow. */
+  intervalDays: number;
+  /** Unix ms — when this card next needs review. */
+  nextReviewAt: number;
+  /** Total successful reviews. */
+  successes: number;
+  /** Total times the student got it wrong. Drives lapse-count UX. */
+  lapses: number;
+  /** Unix ms of the last review attempt (success OR fail). */
+  lastReviewedAt: number | null;
+  /** Unix ms of when this card was first enrolled. */
+  createdAt: number;
+}

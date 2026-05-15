@@ -19,6 +19,7 @@ import type {
   SetupPuzzle,
   OpeningNarration,
   EndgameProgressRecord,
+  SrsOpeningCard,
 } from '../types';
 import type { WalkthroughTree } from '../types/walkthroughTree';
 
@@ -57,6 +58,7 @@ class ChessAcademyDB extends Dexie {
   openingNarrations!: EntityTable<OpeningNarration, 'id'>;
   cachedOpenings!: EntityTable<CachedOpening, 'normalizedName'>;
   endgameProgress!: EntityTable<EndgameProgressRecord, 'id'>;
+  srsOpeningCards!: EntityTable<SrsOpeningCard, 'id'>;
 
   constructor() {
     super('ChessAcademyDB');
@@ -539,6 +541,33 @@ class ChessAcademyDB extends Dexie {
       // No data migration needed — adding an optional field; existing
       // profile rows remain valid (endgameRating is read with a 1200
       // fallback at the call site).
+    });
+
+    // v25: SRS opening trainer (Chessable MoveTrainer-style). One row per
+    // student-to-move position in an enrolled opening line. Indexes
+    // support the daily review queue (nextReviewAt) and the per-opening
+    // enrollment listing (openingId).
+    this.version(25).stores({
+      puzzles: 'id, rating, *themes, srsDueDate, userRating',
+      openings: 'id, eco, name, color, isRepertoire, isFavorite',
+      games: 'id, source, eco, date, isMasterGame, openingId',
+      flashcards: 'id, openingId, type, srsDueDate',
+      profiles: 'id',
+      sessions: 'id, date, profileId',
+      meta: 'key',
+      mistakePuzzles: 'id, sourceGameId, classification, srsDueDate, status, sourceMode, gamePhase',
+      modelGames: 'id, openingId',
+      middlegamePlans: 'id, openingId',
+      generatedContent: 'id, openingId, type, generatedAt',
+      openingWeakSpots: 'id, openingId, failCount, lastFailedAt',
+      classifiedTactics: 'id, sourceGameId, tacticType, playerColor, createdAt',
+      setupPuzzles: 'id, tacticType, difficulty, srsDueDate, status, sourceGameId',
+      openingNarrations: 'id, openingName, variation, moveSan, fen, approved',
+      cachedOpenings: 'normalizedName, eco, generatedAt',
+      endgameProgress: 'id, lessonId, lastPlayedAt',
+      srsOpeningCards: 'id, openingId, nextReviewAt, [openingId+nextReviewAt]',
+    }).upgrade(async () => {
+      // No data migration — brand-new store; existing data untouched.
     });
   }
 }
