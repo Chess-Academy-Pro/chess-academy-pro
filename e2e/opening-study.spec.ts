@@ -3,7 +3,8 @@ import { test, expect } from '@playwright/test';
 test.describe('Opening Study', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 10000 });
+    // 30s — fresh IndexedDB cold-start can exceed 10s on slow CI/sandbox.
+    await page.waitForSelector('[data-testid="dashboard"]', { timeout: 30000 });
   });
 
   test('navigates to openings page', async ({ page }) => {
