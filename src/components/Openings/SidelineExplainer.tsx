@@ -58,17 +58,17 @@ export function SidelineExplainer({
       <button
         onClick={() => void handleExplain()}
         disabled={loading}
-        className="p-1.5 rounded-lg hover:bg-purple-500/20 text-theme-text-muted hover:text-purple-400 transition-colors disabled:opacity-50"
+        className="p-1.5 transition-colors disabled:opacity-50"
         aria-label={explanation ? 'Close explanation' : `Explain ${variation.name}`}
         title={explanation ? 'Close' : 'AI Explain'}
         data-testid="sideline-explain-btn"
       >
         {loading ? (
-          <Loader2 size={16} className="animate-spin text-purple-400" />
+          <Loader2 size={16} className="animate-spin text-purple-400 sideline-sparkle-glow" />
         ) : explanation ? (
-          <X size={16} />
+          <X size={16} className="text-purple-400 sideline-sparkle-glow" />
         ) : (
-          <Sparkles size={16} />
+          <Sparkles size={16} className="text-purple-400 sideline-sparkle-glow" />
         )}
       </button>
       {explanation && (
