@@ -483,6 +483,12 @@ export type AuditKind =
   //   `coach-brain-ask-received`. Captures what the student asks about
   //   — their questions reveal their gaps better than their moves.
   | 'coach-question-topic'
+  // `srs-session-{start,complete}`: opening trainer review-session
+  //   trail. Lets us see in the audit stream when David opens the
+  //   trainer and how many cards he's clearing per session — useful
+  //   signal for tuning the daily cap and the per-card budget.
+  | 'srs-session-start'
+  | 'srs-session-complete'
   // `analytics-self-audit`: emitted by the in-app AnalyticsAuditPanel
   //   when the user opens the coverage view. Lets the audit stream see
   //   that David is actively inspecting the analytic surface.
