@@ -322,6 +322,9 @@ function enforceMateFloor(rating: number): boolean {
   return rating >= 1000;
 }
 
+// CoachGamePageProps is intentionally empty — reserved for future props
+// without breaking the public type signature.
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface CoachGamePageProps {}
 
 export function CoachGamePage(_props: CoachGamePageProps = {}): JSX.Element {

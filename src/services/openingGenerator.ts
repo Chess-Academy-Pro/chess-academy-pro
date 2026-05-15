@@ -999,6 +999,7 @@ export function repairLeafOutros(tree: WalkthroughTree): number {
   let dropped = 0;
   for (const key of Object.keys(tree.leafOutros)) {
     if (!validLeafPaths.has(key)) {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- legitimate dynamic-key pruning of stale leaf outros.
       delete tree.leafOutros[key];
       dropped += 1;
     }
@@ -3242,7 +3243,7 @@ Emit a JSON object: { lessons: [ ${prepared.length} entries, in the same order, 
  *  unquoted object keys). Production audit (build 9dedf2a): stage
  *  gen was failing silently with the same iOS Safari parse errors
  *  the tree gen had recovery for, but parseStageArray bypassed it. */
-function parseStageArray<T>(raw: string): T[] | null {
+function parseStageArray(raw: string): unknown[] | null {
   let text = raw.trim();
   text = text.replace(/^```(?:json)?\s*/, '').replace(/\s*```\s*$/, '');
   const firstBracket = text.indexOf('[');
@@ -3251,10 +3252,10 @@ function parseStageArray<T>(raw: string): T[] | null {
   let jsonText = text.slice(firstBracket, lastBracket + 1);
   jsonText = jsonText.replace(/^\s*\/\/[^\n]*$/gm, '');
   jsonText = jsonText.replace(/,(\s*[}\]])/g, '$1');
-  function tryParse(t: string): T[] | null {
+  function tryParse(t: string): unknown[] | null {
     try {
       const parsed = JSON.parse(t) as unknown;
-      return Array.isArray(parsed) ? (parsed as T[]) : null;
+      return Array.isArray(parsed) ? parsed : null;
     } catch {
       return null;
     }
@@ -3382,7 +3383,7 @@ async function generateOneStage(
     });
     return { ok: false, reason: raw };
   }
-  const data = parseStageArray<unknown>(raw);
+  const data = parseStageArray(raw);
   if (!data) {
     void logAppAudit({
       kind: 'llm-error',

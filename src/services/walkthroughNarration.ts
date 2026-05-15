@@ -47,7 +47,7 @@ const GENERIC_ANNOTATION_PATTERNS: RegExp[] = [
   /\bThis is a critical moment where precise play is essential\b/i,
 
   // ─── Bare move fragments ─────────────────────────────────────────────
-  /^\s*[A-Za-z][\w+#=!?\-]*\s+by\s+(?:White|Black)\.\s*$/i,
+  /^\s*[A-Za-z][\w+#=!?-]*\s+by\s+(?:White|Black)\.\s*$/i,
 
   // ─── "Development" filler ────────────────────────────────────────────
   /\bDevelopment with purpose\s*[—–-]\s*the \w+ on \w+ eyes important squares\b/i,

@@ -682,6 +682,17 @@ function LessonView({
     };
   }, [wrongFlash]);
 
+  // Hoisted above the conditional early-returns to satisfy rules-of-
+  // hooks. Was previously declared at line ~835 (after the early
+  // CuratedMatingLessonView / ChessLessonLayout returns), which made
+  // the hook order observably different across renders depending on
+  // pattern.category.
+  const mergedForkStyles = useMemo<Record<string, React.CSSProperties>>(() => ({
+    ...forkClickStyles,
+    ...matingHintStyles,
+    ...wrongFlashStyles,
+  }), [forkClickStyles, matingHintStyles, wrongFlashStyles]);
+
   const header = (
     <div className="px-3 py-2 md:p-4 border-b border-theme-border">
       <div className="flex items-center justify-between gap-2">
@@ -832,11 +843,7 @@ function LessonView({
   // attempt the correct mate move directly. During narration /
   // animation the board is non-interactive — pieces wouldn't make
   // sense to move while the coach is still talking.
-  const mergedForkStyles = useMemo<Record<string, React.CSSProperties>>(() => ({
-    ...forkClickStyles,
-    ...matingHintStyles,
-    ...wrongFlashStyles,
-  }), [forkClickStyles, matingHintStyles, wrongFlashStyles]);
+  // (mergedForkStyles is now hoisted above the early returns.)
 
   const board = (
     <ConsistentChessboard

@@ -82,6 +82,7 @@ export async function getCompletedStages(
 export async function resetOpeningProgress(openingName: string): Promise<void> {
   const p = await read();
   const key = openingName.toLowerCase();
+  // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- legitimate dynamic key removal from a Record-typed progress map.
   delete p[key];
   await write(p);
 }

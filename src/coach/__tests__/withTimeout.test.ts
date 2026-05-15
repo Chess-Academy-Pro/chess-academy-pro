@@ -50,6 +50,9 @@ describe('withTimeout', () => {
   });
 
   it('wraps non-Error throws into Error before propagating', async () => {
+    // Deliberate non-Error reject value — verifies the wrap-into-Error
+    // behavior described in the test name.
+    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
     const promise = Promise.reject('a string error');
     await expect(withTimeout(promise, 1000, 'string-reject')).rejects.toThrow('a string error');
   });

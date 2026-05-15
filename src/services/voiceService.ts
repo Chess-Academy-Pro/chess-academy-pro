@@ -150,9 +150,9 @@ const PAWN_CAPTURE_RE = /\b([a-h])x([a-h][1-8])\b/g;
  *  e.g. "P(f3)", "P [f3]", "P <f3>", "P →f3", "P->f3", "P—f3",
  *  "P (on f3)". Covers the "piece-and-location" shorthand that doesn't
  *  use the word "on" (or wraps it in parens). */
-const PIECE_LETTER_ADJACENT_SQUARE_RE = /\b([PNBRQK])\s*[(\[<\-\u2013\u2014\u2192]+\s*(?:on\s+)?([a-h][1-8])\b/g;
+const PIECE_LETTER_ADJACENT_SQUARE_RE = /\b([PNBRQK])\s*[([<\-\u2013\u2014\u2192]+\s*(?:on\s+)?([a-h][1-8])\b/g;
 /** Parenthesized bare piece letter: "piece at f3 (P)" → "piece at f3 (pawn)". */
-const PIECE_LETTER_IN_PARENS_RE = /([(\[<])([PNBRQK])(?=[)\]>.,;:\s])/g;
+const PIECE_LETTER_IN_PARENS_RE = /([([<])([PNBRQK])(?=[)\]>.,;:\s])/g;
 /** Isolated piece-letter shorthand after a chess-context word. Kept
  *  narrow enough not to touch "Plan B" in non-chess prose, but broad
  *  enough to cover the verbs and qualifiers LLMs actually emit

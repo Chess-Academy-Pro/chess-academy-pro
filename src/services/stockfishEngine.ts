@@ -550,7 +550,7 @@ class StockfishEngine {
       tryStart(false);
     });
 
-    return this.initPromise.catch((err) => {
+    return this.initPromise.catch((err: unknown) => {
       // Surface init failures as crash events so the retry path can run.
       // ALSO record the failure timestamp so subsequent initialize()
       // calls in the next 30s fail-fast instead of re-OOMing.

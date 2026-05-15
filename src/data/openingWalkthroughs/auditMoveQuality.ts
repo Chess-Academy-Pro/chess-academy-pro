@@ -341,8 +341,7 @@ async function main(): Promise<void> {
   process.exit(totalErrors > 0 ? 1 : 0);
 }
 
-main().catch((err) => {
-   
+main().catch((err: unknown) => {
   console.error('Audit failed:', err);
   process.exit(2);
 });
