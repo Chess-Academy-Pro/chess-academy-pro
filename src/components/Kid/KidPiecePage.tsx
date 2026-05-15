@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Volume2, VolumeX } from 'lucide-react';
-import { ControlledChessBoard } from '../Board/ControlledChessBoard';
+import { KidChessboard } from '../Chessboard/KidChessboard';
 import { useChessGame } from '../../hooks/useChessGame';
 import { useBoardContext } from '../../hooks/useBoardContext';
 import { voiceService } from '../../services/voiceService';
@@ -143,12 +143,9 @@ export function KidPiecePage(): JSX.Element {
       </div>
 
       <div className="w-full md:max-w-[420px] mx-auto">
-        <ControlledChessBoard
+        <KidChessboard
           game={game}
           interactive
-          showFlipButton={false}
-          showUndoButton={false}
-          showResetButton={false}
         />
       </div>
 

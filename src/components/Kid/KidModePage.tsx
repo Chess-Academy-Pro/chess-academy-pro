@@ -5,7 +5,7 @@ import { useAppStore } from '../../stores/appStore';
 import { voiceService } from '../../services/voiceService';
 import { getGameProgress, getGameCompletedChapterCount } from '../../services/journeyService';
 import { PAWNS_JOURNEY_CONFIG, FAIRY_TALE_CONFIG } from '../../data/kidGameConfigs';
-import { ChessBoard } from '../Board/ChessBoard';
+import { KidChessboard } from '../Chessboard/KidChessboard';
 import { BishopVsPawns } from './BishopVsPawns';
 import { ColorWars } from './ColorWars';
 import type { ChessPiece, JourneyProgress } from '../../types';
@@ -499,12 +499,9 @@ export function KidModePage(): JSX.Element {
             </div>
           )}
           <div className="w-full md:max-w-[420px] mx-auto relative">
-            <ChessBoard
+            <KidChessboard
               initialFen={FIND_KING_FENS[findKingIdx]}
               interactive={false}
-              showFlipButton={false}
-              showUndoButton={false}
-              showResetButton={false}
             />
             {/* Clickable overlay grid for square tapping */}
             <div className="absolute inset-0 grid grid-cols-8 grid-rows-8" data-testid="find-king-overlay">

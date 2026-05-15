@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { ArrowLeft, Volume2, VolumeX, RotateCcw } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChessBoard } from '../Board/ChessBoard';
+import { KidChessboard } from '../Chessboard/KidChessboard';
 import { StarDisplay } from './StarDisplay';
 import { usePieceSound } from '../../hooks/usePieceSound';
 import { voiceService } from '../../services/voiceService';
@@ -286,13 +286,10 @@ export function BishopVsPawns({ onBack }: BishopVsPawnsProps): JSX.Element {
             )}
 
             <div className="w-full md:max-w-[420px] mx-auto relative">
-              <ChessBoard
+              <KidChessboard
                 key={boardKey}
                 initialFen={fen}
                 interactive={false}
-                showFlipButton={false}
-                showUndoButton={false}
-                showResetButton={false}
               />
               {/* Clickable overlay grid */}
               <div

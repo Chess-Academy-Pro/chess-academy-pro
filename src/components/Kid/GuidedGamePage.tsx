@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Chess } from 'chess.js';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Volume2, VolumeX, Play, SkipForward } from 'lucide-react';
-import { ChessBoard } from '../Board/ChessBoard';
+import { KidChessboard } from '../Chessboard/KidChessboard';
 import { StarDisplay } from './StarDisplay';
 import { voiceService } from '../../services/voiceService';
 import { GUIDED_GAMES } from '../../data/guidedGames';
@@ -429,14 +429,11 @@ export function GuidedGamePage(): JSX.Element {
 
           {/* Chess board */}
           <div className="w-full md:max-w-[420px] mx-auto">
-            <ChessBoard
+            <KidChessboard
               key={boardKey}
               initialFen={boardFen}
               orientation={boardOrientation}
               interactive={isPlayerTurn && !isAutoPlaying && feedback !== 'correct'}
-              showFlipButton={false}
-              showUndoButton={false}
-              showResetButton={false}
               onMove={handlePlayerMove}
               arrows={getHintArrows()}
               annotationHighlights={

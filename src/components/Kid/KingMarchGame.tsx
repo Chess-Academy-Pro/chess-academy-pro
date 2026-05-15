@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Chess, type Square } from 'chess.js';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Volume2, VolumeX } from 'lucide-react';
-import { ChessBoard } from '../Board/ChessBoard';
+import { KidChessboard } from '../Chessboard/KidChessboard';
 import { StarDisplay } from './StarDisplay';
 import { voiceService } from '../../services/voiceService';
 import { KING_MARCH_LEVELS } from '../../data/kingGameLevels';
@@ -264,13 +264,10 @@ export function KingMarchGame(): JSX.Element {
               </div>
 
               <div className="w-full md:max-w-[420px] mx-auto relative">
-                <ChessBoard
+                <KidChessboard
                   key={boardKey}
                   initialFen={currentFen}
                   interactive={true}
-                  showFlipButton={false}
-                  showUndoButton={false}
-                  showResetButton={false}
                   onMove={handleMove}
                   annotationHighlights={annotationHighlights}
                 />

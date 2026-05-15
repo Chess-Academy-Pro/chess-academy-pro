@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Lightbulb, RotateCcw } from 'lucide-react';
 import { Chess } from 'chess.js';
-import { ChessBoard } from '../Board/ChessBoard';
+import { KidChessboard } from '../Chessboard/KidChessboard';
 import { StarDisplay } from './StarDisplay';
 import { voiceService } from '../../services/voiceService';
 import {
@@ -342,13 +342,9 @@ export function MiniGamePage({ gameId }: MiniGamePageProps): JSX.Element {
       {phase === 'playing' && (
         <>
           <div className="w-full md:max-w-[420px] mx-auto">
-            <ChessBoard
+            <KidChessboard
               initialFen={currentFen}
               interactive={!isAiTurn}
-              showFlipButton={false}
-              showUndoButton={false}
-              showResetButton={false}
-              showEvalBar={false}
               onMove={handlePlayerMove}
               annotationHighlights={annotationHighlights}
               arrows={arrows}

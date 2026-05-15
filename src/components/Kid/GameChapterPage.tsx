@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Chess } from 'chess.js';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Volume2, VolumeX, Loader } from 'lucide-react';
-import { ControlledChessBoard } from '../Board/ControlledChessBoard';
+import { KidChessboard } from '../Chessboard/KidChessboard';
 import { useChessGame } from '../../hooks/useChessGame';
 import { HintButton } from '../Coach/HintButton';
 import { StarDisplay } from './StarDisplay';
@@ -444,12 +444,9 @@ export function GameChapterPage({ config }: GameChapterPageProps): JSX.Element {
               </p>
 
               <div className="w-full md:max-w-[420px] mx-auto">
-                <ControlledChessBoard
+                <KidChessboard
                   game={lessonGame}
                   interactive={false}
-                  showFlipButton={false}
-                  showUndoButton={false}
-                  showResetButton={false}
                 />
               </div>
 
@@ -513,12 +510,9 @@ export function GameChapterPage({ config }: GameChapterPageProps): JSX.Element {
               </h3>
 
               <div className="w-full md:max-w-[420px] mx-auto">
-                <ControlledChessBoard
+                <KidChessboard
                   game={puzzleGame}
                   interactive={true}
-                  showFlipButton={false}
-                  showUndoButton={false}
-                  showResetButton={false}
                   onMove={handlePuzzleMove}
                   arrows={hintState.arrows.length > 0 ? hintState.arrows : undefined}
                   ghostMove={hintState.ghostMove}
