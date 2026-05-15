@@ -864,7 +864,8 @@ export type CoachTask =
   | 'sideline_explanation'
   | 'smart_search'
   | 'explore_reaction'
-  | 'intent_classify';
+  | 'intent_classify'
+  | 'kid_puzzle_gen';
 
 export interface CoachContext {
   fen: string;

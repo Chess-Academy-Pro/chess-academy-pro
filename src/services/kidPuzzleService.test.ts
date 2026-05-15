@@ -5,7 +5,7 @@ import type { JourneyChapter } from '../types';
 
 // Mock the coachApi module
 vi.mock('./coachApi', () => ({
-  getCoachChatResponse: vi.fn(),
+  getKidLlmResponse: vi.fn(),
 }));
 
 const MOCK_CHAPTER: JourneyChapter = {
@@ -68,13 +68,13 @@ describe('kidPuzzleService', () => {
   });
 
   describe('generateKidPuzzles', () => {
-    let mockGetCoachChatResponse: ReturnType<typeof vi.fn>;
+    let mockGetKidLlmResponse: ReturnType<typeof vi.fn>;
 
     beforeEach(async () => {
       vi.resetModules();
       const coachApi = await import('./coachApi');
-      mockGetCoachChatResponse = coachApi.getCoachChatResponse as ReturnType<typeof vi.fn>;
-      mockGetCoachChatResponse.mockReset();
+      mockGetKidLlmResponse = coachApi.getKidLlmResponse as ReturnType<typeof vi.fn>;
+      mockGetKidLlmResponse.mockReset();
     });
 
     it('parses valid AI-generated puzzles', async () => {
@@ -99,7 +99,7 @@ describe('kidPuzzleService', () => {
         },
       ]);
 
-      mockGetCoachChatResponse.mockResolvedValue(aiResponse);
+      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
 
       const profile = buildUserProfile({ currentRating: 600, level: 1 });
       const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
@@ -126,7 +126,7 @@ describe('kidPuzzleService', () => {
         },
       ]) + '\n```';
 
-      mockGetCoachChatResponse.mockResolvedValue(aiResponse);
+      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
 
       const profile = buildUserProfile();
       const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
@@ -157,7 +157,7 @@ describe('kidPuzzleService', () => {
         },
       ]);
 
-      mockGetCoachChatResponse.mockResolvedValue(aiResponse);
+      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
 
       const profile = buildUserProfile();
       const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
@@ -188,7 +188,7 @@ describe('kidPuzzleService', () => {
         },
       ]);
 
-      mockGetCoachChatResponse.mockResolvedValue(aiResponse);
+      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
 
       const profile = buildUserProfile();
       const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
@@ -207,7 +207,7 @@ describe('kidPuzzleService', () => {
         },
       ]);
 
-      mockGetCoachChatResponse.mockResolvedValue(aiResponse);
+      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
 
       const profile = buildUserProfile();
       const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
@@ -216,7 +216,7 @@ describe('kidPuzzleService', () => {
     });
 
     it('falls back to hardcoded puzzles on API error', async () => {
-      mockGetCoachChatResponse.mockRejectedValue(new Error('API error'));
+      mockGetKidLlmResponse.mockRejectedValue(new Error('API error'));
 
       const profile = buildUserProfile();
       const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
@@ -225,7 +225,7 @@ describe('kidPuzzleService', () => {
     });
 
     it('falls back when response is not valid JSON', async () => {
-      mockGetCoachChatResponse.mockResolvedValue('Sorry, I cannot generate puzzles right now.');
+      mockGetKidLlmResponse.mockResolvedValue('Sorry, I cannot generate puzzles right now.');
 
       const profile = buildUserProfile();
       const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
@@ -249,7 +249,7 @@ describe('kidPuzzleService', () => {
         },
       ]);
 
-      mockGetCoachChatResponse.mockResolvedValue(aiResponse);
+      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
 
       const profile = buildUserProfile();
       const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
@@ -259,12 +259,12 @@ describe('kidPuzzleService', () => {
     });
 
     it('includes profile info in the prompt sent to the API', async () => {
-      mockGetCoachChatResponse.mockResolvedValue('[]');
+      mockGetKidLlmResponse.mockResolvedValue('[]');
 
       const profile = buildUserProfile({ currentRating: 800, level: 3 });
       await generateKidPuzzles(MOCK_CHAPTER, profile);
 
-      expect(mockGetCoachChatResponse).toHaveBeenCalledWith(
+      expect(mockGetKidLlmResponse).toHaveBeenCalledWith(
         expect.arrayContaining([
           expect.objectContaining({
             role: 'user',

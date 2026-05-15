@@ -41,6 +41,10 @@ const DEEPSEEK_MODEL_MAP: Record<CoachTask, string> = {
   smart_search:            'deepseek-chat',
   explore_reaction:        'deepseek-chat',
   intent_classify:         'deepseek-chat',
+  // Kid-mode puzzle annotation — short, neutral, JSON-shaped prose.
+  // Routed via getKidLlmResponse (skipPersonality=true) — see CLAUDE.md
+  // "Kids section non-negotiables".
+  kid_puzzle_gen:          'deepseek-chat',
 
   // Per-event analysis → MID (deepseek-reasoner)
   post_game_analysis:      'deepseek-reasoner',
@@ -94,6 +98,9 @@ const ANTHROPIC_MODEL_MAP: Record<CoachTask, string> = {
   smart_search:            'claude-haiku-4-5-20251001',
   explore_reaction:        'claude-haiku-4-5-20251001',
   intent_classify:         'claude-haiku-4-5-20251001',
+  // Kid-mode puzzle annotation — Haiku is plenty for neutral kid-safe
+  // hint text. Same isolation contract as DEEPSEEK_MODEL_MAP above.
+  kid_puzzle_gen:          'claude-haiku-4-5-20251001',
 
   // Per-event analysis → MID (Sonnet)
   post_game_analysis:      'claude-sonnet-4-6',
@@ -159,6 +166,7 @@ const TASK_CATEGORY: Record<CoachTask, 'commentary' | 'analysis' | 'reports'> = 
   smart_search:              'commentary',
   explore_reaction:          'commentary',
   intent_classify:           'commentary',
+  kid_puzzle_gen:            'commentary',
   interactive_review:        'commentary',
   chat_response:             'analysis',
   position_analysis_chat:    'analysis',
@@ -799,6 +807,13 @@ export async function getCoachChatResponse(
    *  fallback chain still kicks in if the forced provider's call
    *  errors. */
   forceProvider?: AiProvider,
+  /** Kid-mode safety lane. When true, skips both
+   *  `loadPersonalityAddition` and `loadResponseLengthAddition` so the
+   *  user's coach personality dials (edgy / drill-sergeant / profanity
+   *  intensity) cannot bleed into kid surfaces. Kid callers should use
+   *  `getKidLlmResponse` rather than passing this flag directly. See
+   *  CLAUDE.md "Kids section non-negotiables" #3. */
+  skipPersonality?: boolean,
 ): Promise<string> {
   const config = forceProvider
     ? await getForcedProviderConfig(forceProvider)
@@ -817,8 +832,12 @@ export async function getCoachChatResponse(
   // the "one coach across all tabs" feel. Failing this lookup
   // gracefully (no profile, fresh install) keeps the legacy flat
   // persona as the fallback so the surface still works.
-  const personalityAddition = await loadPersonalityAddition();
-  const responseLengthAddition = await loadResponseLengthAddition();
+  //
+  // EXCEPTION: `skipPersonality` short-circuits both lookups so kid
+  // mode (and any future "neutral voice" surface) can guarantee no
+  // adult personality leaks in — see comment on the parameter above.
+  const personalityAddition = skipPersonality ? '' : await loadPersonalityAddition();
+  const responseLengthAddition = skipPersonality ? '' : await loadResponseLengthAddition();
   const systemPrompt = buildSystemPromptWithVerbosity(
     SYSTEM_PROMPT,
     verbosity,
@@ -950,3 +969,51 @@ export async function getCoachCommentary(
     return OFFLINE_FALLBACKS[task] ?? OFFLINE_FALLBACKS.default;
   }
 }
+
+// ─── Kid-mode safety lane ──────────────────────────────────────────────
+//
+// All kid LLM calls go through this wrapper. Pins:
+//   1. `skipPersonality: true` — user's coach personality / profanity
+//      / mockery / flirt dials cannot bleed in.
+//   2. A kid-safety system prompt that asserts age-appropriate output,
+//      JSON-only when requested, no slang / negative language / taunting,
+//      ≤ 12 words per text field.
+//   3. `task: 'kid_puzzle_gen'` so audit-stream entries are filterable
+//      and per-task model maps stay tight.
+// Kid surfaces MUST use this wrapper instead of `getCoachChatResponse`
+// directly. See CLAUDE.md "Kids section non-negotiables" #3 & #17.
+
+const KID_SAFETY_PROMPT = `You are writing text for a child aged 5-10 learning chess.
+
+ABSOLUTE RULES:
+- Age-appropriate, friendly, encouraging tone — no slang, no sarcasm.
+- No negative language, no comparison to other kids, no taunting.
+- No idioms ("a piece of cake", "by the skin of your teeth"). Literal language only.
+- No standard algebraic notation. Spell out moves ("the knight takes the bishop", not "Nxc6").
+- ≤ 12 words per text field unless explicitly told otherwise.
+- Output JSON only when the user asks for JSON. No prose around it.
+- You are the position teaching the student. You are not "I", you are not a tutor character.`;
+
+/** Kid-mode LLM entry point. Forces neutral/Ruth personality and
+ *  prepends the kid-safety system prompt. Returns the raw string just
+ *  like `getCoachChatResponse`. Callers in kid surfaces must use this
+ *  wrapper; importing `getCoachChatResponse` directly from a `Kid/`
+ *  file is banned (see scripts/audit-kid-llm-hallucination.mjs). */
+export async function getKidLlmResponse(
+  messages: { role: 'user' | 'assistant'; content: string }[],
+  systemPromptAddition: string,
+  maxTokens: number = 1024,
+): Promise<string> {
+  const fullAddition = `${KID_SAFETY_PROMPT}\n\n${systemPromptAddition}`.trim();
+  return getCoachChatResponse(
+    messages,
+    fullAddition,
+    undefined,        // no streaming for kid puzzles
+    'kid_puzzle_gen', // task — audit-stream filterable
+    maxTokens,
+    undefined,        // no verbosity override
+    undefined,        // no forced provider
+    true,             // skipPersonality — the safety contract
+  );
+}
+

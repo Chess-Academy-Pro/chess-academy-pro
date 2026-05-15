@@ -308,6 +308,81 @@ The DB is the brain for all four stages; LLM only writes prose.
 Only `concepts` remains LLM-only — by design, since it's
 prose-question-with-prose-answers and has no SANs to invert.
 
+## 🧒 Kids section — non-negotiables
+
+The kid section (`/kid/*`) is for David's young brother. Adult-app
+patterns DON'T automatically apply — and adult-app personalities
+(edgy / drill-sergeant / profanity) must NEVER bleed in. The full
+plan is at `docs/plans/2026-05-15-kids-section.md`; this is the
+durable contract list any session touching kid surfaces must hold.
+
+1. **LLM only writes prose, never plays moves.** chess.js validates
+   every move. Same rule as `/coach/teach`.
+2. **LLM never selects which puzzle/level the kid sees.** Puzzle
+   selection is deterministic: filter `puzzles.json` by piece +
+   rating band + theme; pick first N. The LLM only writes hint and
+   encouragement text.
+3. **No coach personality leaks into kid mode.** Every kid LLM
+   call goes through `getKidLlmResponse` (in `coachApi.ts`), which
+   passes `skipPersonality: true` to `getCoachChatResponse` and
+   prepends a kid-safety system prompt. **Importing
+   `getCoachChatResponse` directly from a `Kid/` file is banned.**
+4. **Voice is Ruth, default tone, no exceptions.** `voiceService`
+   calls from kid surfaces pass `personality: 'default'` explicitly.
+5. **Narration constraints — kid carve-out.** Praise IS allowed in
+   kid mode, but **only on milestones**: chapter complete, level
+   cleared, all-stars run, puzzle session summary. Per-move praise
+   ("Great move!", "Excellent!" after every click) is banned —
+   tunes out. Restate the move's *effect* instead ("the knight is
+   safe now").
+6. **No SAN in kid-facing text.** Spelled-out moves only.
+7. **No timer pressure** unless a game's whole point is the timer
+   (e.g. Color Wars). Untimed by default.
+8. **Adaptive difficulty per-piece, persisted in Dexie**, never
+   lost on session end.
+9. **Every kid hub looks the same.** Identical shape across all 6
+   pieces. No `setView` rendering — everything routes.
+10. **Kid mode never reads from or writes to coach state.**
+    `useBoardContext` removed from `KidPiecePage` and
+    `GameChapterPage`. The only Zustand keys kid mode reads:
+    `activeProfile`, `activeTheme`, `setActiveTheme`.
+11. **Bottom-nav phantom padding removed.** `pb-[calc(6.5rem+...)]`
+    → `pb-6` everywhere under `/kid` since no bottom nav renders
+    there (KidLayout is a sibling of AppLayout).
+12. **`KidChessboard` is the only board** under `/kid/*`. Other
+    primitives are banned. `KidChessboard` wraps
+    `ConsistentChessboard` and removes eval bar, move list, PGN,
+    arrows-on-hover — simpler is better for kids.
+13. **CC0 only.** Lichess puzzle data only. No copyrighted
+    ChessKid content. No fabricated sidelines.
+14. **The 6 pieces own their hubs.** Names: `pawn-games`,
+    `rook-games`, `knight-games`, `bishop-games`, `queen-games`,
+    `king-games`. Pre-existing `/kid/mini-games` is being renamed
+    to `/kid/pawn-games`.
+15. **Sandbox levels step in 5-level bands.** No continuous ELO
+    adaptation for sandbox games — only for puzzles.
+    Bands: 1-5 easy, 6-10 medium, 11-15 hard, 16-20 expert.
+16. **Every puzzle has a `movingPiece` tag.** Filtering by piece
+    requires it. Build step computes it from chess.js applied to
+    the puzzle's UCI move (Lichess `moves` field is UCI not SAN
+    — filtering by SAN first-char returns 100% pawn for everything).
+17. **The DB is the source of truth in kid mode. The LLM only
+    writes prose.** Same contract as
+    `generateOpeningFromDbNarration`. Puzzle positions and
+    solutions come from `puzzles.json` + the 100-400 training
+    pool. Sandbox levels come from `*Levels.ts` config files.
+    The LLM is ONLY ever asked for hint text and encouragement,
+    never FENs, never moves, never level layouts. Every LLM
+    output is sanitized; on any anomaly fall back to static
+    templates. **An LLM hallucinating chess content in kid mode
+    is a P0 bug.**
+
+When you touch any file under `src/components/Kid/`, any service
+named `*Kid*.ts`, any data file used by kid surfaces, or any route
+matching `/kid/*` — check the relevant non-negotiables before you
+push. The Phase 11 audit script (`scripts/audit-kid-llm-hallucination.mjs`,
+once it lands) is the runtime gate; this list is the design gate.
+
 ## Project Overview
 
 Chess Academy Pro is an AI-powered chess training PWA built with React + TypeScript + Vite. It wraps as a native iOS app via Capacitor and is distributed through TestFlight. The app features an LLM-powered chess coach (Claude API), Stockfish WASM analysis, spaced repetition puzzles, opening training, and adaptive difficulty.

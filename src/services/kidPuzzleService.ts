@@ -1,26 +1,33 @@
 import { Chess } from 'chess.js';
-import { getCoachChatResponse } from './coachApi';
+import { getKidLlmResponse } from './coachApi';
 import type { JourneyChapter, JourneyPuzzle, UserProfile } from '../types';
 
-const KID_PUZZLE_SYSTEM_PROMPT = `You are a chess puzzle creator for kids aged 5-10. Generate simple, fun puzzles that teach one concept at a time.
+// Kid puzzle generation runs through `getKidLlmResponse`, which pins
+// `skipPersonality: true` and prepends a kid-safety system prompt
+// — see CLAUDE.md "Kids section non-negotiables" #3 & #17. The
+// instructions below are puzzle-shape only; the safety language lives
+// in coachApi.ts so it can't be forgotten by any kid caller.
+//
+// Long-term, this whole "ask the LLM to invent positions" pattern is
+// scheduled for inversion (Phase 0.5 + 0.6 of the kid plan) — the DB
+// will pick positions and the LLM will only annotate them. Until that
+// lands, every output is still validated by chess.js before we render
+// it; an invalid FEN or illegal solution drops the puzzle.
+const KID_PUZZLE_SYSTEM_PROMPT = `Generate chess puzzles for a child learning to play.
 
 RULES:
 - Every FEN must be a LEGAL chess position (both kings present, valid turn indicator)
 - The solution must be a SINGLE legal move in standard algebraic notation (SAN)
 - Keep positions very simple — 2-6 pieces total (always include both kings)
-- Hints should be encouraging and age-appropriate
-- Success messages should celebrate the child's achievement
 - Focus on the specific piece/concept requested
-- Make puzzles progressively harder (first is easy, last is challenging)
 
-RESPONSE FORMAT:
-Return ONLY a JSON array, no other text. Each element:
+RESPONSE FORMAT — JSON array only, no prose:
 [
   {
     "fen": "valid FEN string",
     "solution": "single SAN move like e4, Nf3, Bxc6, etc.",
-    "hint": "friendly hint for the child",
-    "successMessage": "celebration message"
+    "hint": "spelled-out hint for the child (no SAN, ≤ 12 words)",
+    "successMessage": "short milestone celebration (≤ 8 words)"
   }
 ]`;
 
@@ -91,7 +98,7 @@ Chapter piece: ${chapter.id} (the chapter focuses on teaching how this piece mov
 Make each puzzle use only the ${chapter.id} piece concept. The child just finished learning about this piece, so test their understanding with fun positions.`;
 
   try {
-    const response = await getCoachChatResponse(
+    const response = await getKidLlmResponse(
       [{ role: 'user', content: userMessage }],
       KID_PUZZLE_SYSTEM_PROMPT,
     );
