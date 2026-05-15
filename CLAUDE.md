@@ -538,6 +538,7 @@ Use `src/test/factories.ts` for all test data. Available builders:
 - **Module isolation:** Use `vi.resetModules()` + dynamic `await import()` only when testing singleton modules that need fresh instances per test (e.g., `speechService`).
 - **Accessibility tests:** Use `vitest-axe` for automated checks (`axe(container)` returns `{ violations }`) + manual ARIA attribute assertions. Keep axe tests focused on simple components to avoid timeouts.
 - **E2E tests:** Playwright config in `playwright.config.ts`. Tests in `e2e/` directory. Use `data-testid` selectors for reliability.
+- **Playwright Worker-URL detection (gotcha):** `performance.getEntriesByType('resource')` does NOT reliably capture Web Worker source URLs — it'll miss `new Worker('/foo.js')` requests, so a spec watching for which Stockfish variant loaded gets an empty list and false-negatives. Use `page.on('request', ...)` instead — it fires for every HTTP request the page (or any spawned worker) makes. Captured in `e2e/stockfish-ios-fix.spec.ts` after v3 failed: subscribe at test start, collect URLs into a local array, assert against the captured list at the end. Same pattern for any future spec that needs to verify "did the right worker / chunk / wasm bundle load."
 
 ## Git Conventions
 
