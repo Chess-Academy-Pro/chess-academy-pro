@@ -69,9 +69,9 @@ export async function saveCoachPlayState(state: CoachPlayActiveState): Promise<v
  */
 export async function loadCoachPlayState(): Promise<CoachPlayActiveState | null> {
   try {
-    const record = await db.table('meta').get(META_KEY);
+    const record = await db.meta.get(META_KEY);
     if (!record) return null;
-    const value = record.value as CoachPlayActiveState | undefined;
+    const value = record.value as unknown as CoachPlayActiveState | undefined;
     if (!value || !value.fen) return null;
     if (Date.now() - value.updatedAt > MAX_AGE_MS) {
       // Stale — clear so we don't keep reading it forever.
@@ -120,9 +120,9 @@ export async function saveCoachPlayChat(messages: ChatMessage[]): Promise<void> 
  */
 export async function loadCoachPlayChat(): Promise<ChatMessage[]> {
   try {
-    const record = await db.table('meta').get(CHAT_META_KEY);
+    const record = await db.meta.get(CHAT_META_KEY);
     if (!record) return [];
-    const value = record.value as ChatMessage[] | undefined;
+    const value = record.value as unknown as ChatMessage[] | undefined;
     return Array.isArray(value) ? value : [];
   } catch {
     return [];

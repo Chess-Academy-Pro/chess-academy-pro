@@ -3253,7 +3253,7 @@ function parseStageArray<T>(raw: string): T[] | null {
   jsonText = jsonText.replace(/,(\s*[}\]])/g, '$1');
   function tryParse(t: string): T[] | null {
     try {
-      const parsed = JSON.parse(t);
+      const parsed = JSON.parse(t) as unknown;
       return Array.isArray(parsed) ? (parsed as T[]) : null;
     } catch {
       return null;

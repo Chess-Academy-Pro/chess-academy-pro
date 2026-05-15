@@ -100,6 +100,16 @@ export default tseslint.config(
       // before every access in test code is noise that doesn't
       // surface real bugs (a typo here fails the test instantly).
       '@typescript-eslint/no-non-null-assertion': 'off',
+      // Test fixtures and mocks often work with loosely-typed data
+      // (e.g. `Record<string, unknown>` props, JSON fixtures cast as
+      // `any`). The unsafe-* rules fire on every access into these,
+      // which adds noise without catching production bugs — the
+      // test setup itself is the safety net.
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
     },
   },
 );
