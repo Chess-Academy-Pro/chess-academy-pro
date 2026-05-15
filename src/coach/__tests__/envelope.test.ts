@@ -272,6 +272,84 @@ describe('formatEnvelopeAsUserMessage', () => {
     expect(msg).toMatch(/opens the king position/);
   });
 
+  describe('WALKTHROUGH_PROMISE_CONTRACT inclusion (live audit fix, build 7eca7c3+)', () => {
+    // Contract sentinel: a unique phrase from the block header so the
+    // assertion fails clearly if the contract gets removed or renamed.
+    const CONTRACT_SENTINEL = 'WALKTHROUGH PROMISE — IF YOU SAY YOU\'LL WALK ME THROUGH';
+    const verbosityScalingSentinel = 'VERBOSITY SCALING';
+
+    it.each([
+      ['teach', true],
+      ['game-chat', true],
+      ['standalone-chat', true],
+    ] as const)(
+      'INCLUDES the walkthrough contract on user-driven %s surface',
+      (surface, shouldInclude) => {
+        const env = assembleEnvelope({
+          toolbelt: getToolDefinitions(),
+          input: {
+            surface,
+            ask: 'walk me through the italian',
+            liveState: { surface },
+          },
+        });
+        const prompt = formatEnvelopeAsSystemPrompt(env);
+        if (shouldInclude) {
+          expect(prompt).toContain(CONTRACT_SENTINEL);
+          expect(prompt).toContain(verbosityScalingSentinel);
+        }
+      },
+    );
+
+    it.each([
+      ['review'],
+      ['phase-narration'],
+      ['hint'],
+      ['ping'],
+    ] as const)(
+      'EXCLUDES the walkthrough contract on non-user-driven %s surface',
+      (surface) => {
+        const env = assembleEnvelope({
+          toolbelt: getToolDefinitions(),
+          input: {
+            surface,
+            ask: 'whatever',
+            liveState: { surface },
+          },
+        });
+        const prompt = formatEnvelopeAsSystemPrompt(env);
+        expect(prompt).not.toContain(CONTRACT_SENTINEL);
+      },
+    );
+
+    it('contract sits inside the surface block, before VERBOSITY (so verbosity scaling reads as authoritative)', () => {
+      const env = assembleEnvelope({
+        toolbelt: getToolDefinitions(),
+        input: { surface: 'teach', ask: 'walk me through', liveState: { surface: 'teach' } },
+        verbosity: 'normal',
+      });
+      const prompt = formatEnvelopeAsSystemPrompt(env);
+      const contractIdx = prompt.indexOf(CONTRACT_SENTINEL);
+      const verbosityIdx = prompt.indexOf('═══ VERBOSITY: NORMAL ═══');
+      expect(contractIdx).toBeGreaterThan(0);
+      expect(verbosityIdx).toBeGreaterThan(0);
+      // VERBOSITY block appears AFTER the contract — the contract
+      // references it ("the surrounding VERBOSITY block governs...") so
+      // the ordering must keep the verbosity block downstream.
+      expect(verbosityIdx).toBeGreaterThan(contractIdx);
+    });
+
+    it('contract is suppressed when suppressSurfaceMode is set', () => {
+      const env = assembleEnvelope({
+        toolbelt: getToolDefinitions(),
+        input: { surface: 'teach', ask: 'whatever', liveState: { surface: 'teach' } },
+        suppressSurfaceMode: true,
+      });
+      const prompt = formatEnvelopeAsSystemPrompt(env);
+      expect(prompt).not.toContain(CONTRACT_SENTINEL);
+    });
+  });
+
   it('renders recent hint requests as a compact summary (BRAIN-05b)', () => {
     // Three hint events at plies 12, 14, 16 with tiers 1 / 2 / 3.
     // Envelope should render: "Recent hint requests: 3 in the last
