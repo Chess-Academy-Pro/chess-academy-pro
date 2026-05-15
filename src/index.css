@@ -179,28 +179,28 @@ body {
  * Practice / Play) and still proportionate on the small 36px icon
  * buttons in the line / variation rows. */
 .opening-action-glow-watch {
-  box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.5), 0 0 10px rgba(250, 204, 21, 0.35), 0 0 22px rgba(250, 204, 21, 0.2);
+  box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.85), 0 0 14px rgba(250, 204, 21, 0.65), 0 0 32px rgba(250, 204, 21, 0.35);
 }
 .opening-action-glow-watch:hover {
-  box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.85), 0 0 20px rgba(250, 204, 21, 0.7), 0 0 44px rgba(250, 204, 21, 0.4);
+  box-shadow: 0 0 0 2px rgba(250, 204, 21, 1), 0 0 24px rgba(250, 204, 21, 0.9), 0 0 56px rgba(250, 204, 21, 0.55);
 }
 .opening-action-glow-learn {
-  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5), 0 0 12px rgba(56, 189, 248, 0.4), 0 0 26px rgba(56, 189, 248, 0.22);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.85), 0 0 14px rgba(56, 189, 248, 0.65), 0 0 32px rgba(56, 189, 248, 0.35);
 }
 .opening-action-glow-learn:hover {
-  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.85), 0 0 22px rgba(56, 189, 248, 0.7), 0 0 48px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 1), 0 0 24px rgba(56, 189, 248, 0.9), 0 0 56px rgba(56, 189, 248, 0.55);
 }
 .opening-action-glow-practice {
-  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.5), 0 0 12px rgba(251, 191, 36, 0.4), 0 0 26px rgba(251, 191, 36, 0.22);
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.85), 0 0 14px rgba(251, 191, 36, 0.65), 0 0 32px rgba(251, 191, 36, 0.35);
 }
 .opening-action-glow-practice:hover {
-  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.85), 0 0 22px rgba(251, 191, 36, 0.7), 0 0 48px rgba(251, 191, 36, 0.4);
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 1), 0 0 24px rgba(251, 191, 36, 0.9), 0 0 56px rgba(251, 191, 36, 0.55);
 }
 .opening-action-glow-play {
-  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.5), 0 0 12px rgba(52, 211, 153, 0.4), 0 0 26px rgba(52, 211, 153, 0.22);
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.85), 0 0 14px rgba(52, 211, 153, 0.65), 0 0 32px rgba(52, 211, 153, 0.35);
 }
 .opening-action-glow-play:hover {
-  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.85), 0 0 22px rgba(52, 211, 153, 0.7), 0 0 48px rgba(52, 211, 153, 0.4);
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 1), 0 0 24px rgba(52, 211, 153, 0.9), 0 0 56px rgba(52, 211, 153, 0.55);
 }
 
 /* ─── Kid Mode overrides ──────────────────────────────────────────────────── */
