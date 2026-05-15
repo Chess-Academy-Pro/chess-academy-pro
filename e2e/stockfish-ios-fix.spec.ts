@@ -34,6 +34,10 @@ test.describe('Stockfish iOS preflight fix', () => {
     userAgent: IOS_UA,
     viewport: { width: 390, height: 844 },
   });
+  // Generous timeout for IndexedDB cold-start (seedDatabase loads
+  // 3,641 ECO entries on first visit) + Stockfish init + the 15s
+  // crash-detection wait. Same budget as the openings.spec.ts suite.
+  test.setTimeout(120_000);
 
   test('iOS Safari routes to lila, not lite-single, even with sticky-fallback flag set', async ({
     page,
