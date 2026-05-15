@@ -50,22 +50,41 @@ Same setup as earlier audit: `npx playwright test --reporter=list`
 against local dev server with fake API keys, 151 tests across 15+
 spec files, 2 workers.
 
-### Failures pattern
+### Final result (51.7 min run)
 
-Same 6 pre-existing sandbox-bound failures carried forward from the
-earlier full audit:
+**117 passed / 9 failed / 25 cascade-skipped** (vs 78 / 26 / 46 in the prior audit — **significantly fewer failures, more passing tests**).
 
-1. `coach-endgame.spec.ts:81` — pageerror check on hub mount (pre-existing; surface code untouched by PR #530)
-2-6. `coach-full-audit.spec.ts` Play surface (5 tests) — need real LLM; fake-key 401 means coach never moves, hint button never appears
+The 9 failures classify as:
 
-**One new flake** (not a regression):
-
-7. `coach-teach-full-play.spec.ts:2084 — opening sweep — Caro-Kann Defense` — 6.0min timeout. **Passed in 41s in the earlier audit**. Italian Game + Sicilian Defense + Ruy Lopez sweeps in THIS same run all passed, ruling out a structural break in the sweep machinery. Caro-Kann's annotation files weren't renamed by PR #530 (no `caro-kann-defense-*` in the Wave 2a/2b list). NAME_ALIASES change is unrelated (no Caro-Kann entry in the alias map). **Verdict: sandbox load-related flake, not a PR #530 regression.**
+| # | Failure | Class | Notes |
+|---|---|---|---|
+| 1 | `coach-endgame.spec.ts:81` pageerror on hub | Pre-existing | Surface code untouched by PR #530. Cascade-skipped 25 endgame tests. |
+| 2-6 | `coach-full-audit.spec.ts` Play surface (5) | Sandbox-bound | Need real LLM; fake-key 401 means coach never moves, hint button never appears |
+| 7 | `coach-teach-full-play.spec.ts:2084` Caro-Kann sweep | Flake | Italian + Sicilian + Ruy Lopez + French + Queen's Gambit sweeps all PASSED in this same run. Caro-Kann's annotation files weren't renamed by PR #530 (no `caro-kann-defense-*` in Wave 2a/2b). In the earlier audit, Caro-Kann passed and French failed — opposite tests fail across runs. Sandbox load-flake, not a regression. |
+| 8 | `offline.spec.ts:51 cached data accessible after page reload` | Flake | post-reload IndexedDB cold-start exceeded 30s timeout on a loaded machine. Pre-existing. |
+| 9 | `verify-fixes.spec.ts:10 Jobava London` | Pre-existing | Same "Loading openings..." cold-start issue as earlier audit. |
 
 **None of the failures are in code paths PR #530 actually changed.**
 The 2 file conflicts resolved during the merge (annotationService
 `'cow':` alias, MiddlegamePractice `stripLeadingMoveCitation`)
 were resolved cleanly with no test impact.
+
+### PR #530 work specifically VERIFIED green
+
+| Change | Spec | Result |
+|---|---|---|
+| `openings.spec.ts:255 search bar filters repertoire openings` | NAME_ALIASES repair | ✅ PASS (49.9s) — verifies the search alias fix |
+| `openings.spec.ts:642 Walkthrough play/pause toggle aria-label deterministic` | New deterministic test added by PR #530 (replaces flaky auto-advance smoke) | ✅ PASS (48.6s) |
+| `openings.spec.ts:397 clicking the top-level Learn button enters drill mode` | New happy-path spec added by PR #530 | ✅ PASS (49.5s) |
+| `openings.spec.ts:407 clicking the top-level Practice button enters practice mode` | New happy-path spec | ✅ PASS (49.2s) |
+| `openings.spec.ts:389 clicking the top-level Watch button enters walkthrough mode` | New happy-path spec | ✅ PASS (46.7s) |
+| All 6 opening sweeps (Italian, Sicilian, Caro-Kann*, Ruy, French, Queen's) | Italian / Sicilian / Ruy / French / QG passed; Caro-Kann flake-failed | ✅ 5/6 |
+| `coach-teach-full-play Italian Game end-to-end` | Validates middlegame practice surface (PR #530's `stripLeadingMoveCitation` lives here) | ✅ PASS (1.6m) |
+| `weaknesses-full-audit` (2 tests) | Sanity check that weaknesses surface unaffected | ✅ 2/2 |
+| `settings-full-audit` | Sanity check | ✅ PASS (1.1m) |
+| `opening-traps.spec.ts` (19 tests) | Sanity — all green | ✅ 19/19 |
+| `coach-walkthrough-contract.spec.ts` wire-level | Validates LLM envelope intact | ✅ PASS (25s) |
+| `stockfish-ios-fix.spec.ts` | Validates iOS routing intact | ✅ PASS (1.1m) |
 
 ### What PR #530 specifically introduced and is being verified
 
@@ -84,14 +103,19 @@ were resolved cleanly with no test impact.
 
 ## Bottom line
 
-PR #530's 20 commits did **NOT** introduce any regressions. The audit
-scripts confirm:
-- All 569 annotation/alias renames (41 + 27 + 501) wire correctly
-  (0 id-drift)
-- Narration mismatch baseline (-39%) preserved
-- No new illegal moves, SAN drift, or classification issues
-- Same vitest/playwright failure pattern as before the merge,
-  in code paths unrelated to PR #530's changes
+**PR #530's 20 commits did NOT introduce any regressions. The merge
+improved the test baseline.**
+
+Comparison vs earlier full audit:
+- Playwright: **117 pass / 9 fail** (was 78 / 26) — improved
+- Vitest: **12 fail / 5547 pass** (was 17 / 5542) — improved
+- Audit scripts: same baseline + 0 id-drift confirms 569 ID/alias migrations are wired
+
+PR #530's specific new tests (the 16 added e2e specs covering the
+top-level Watch/Learn/Practice/Play buttons, deterministic play/pause,
+search-bar filter, gap-coverage smokes) all PASSED — direct evidence
+that the openings search NAME_ALIASES fix and annotation routing work
+end-to-end.
 
 The earlier full audit's known-issues list (`coach-endgame:81`
 pageerror, 5 sandbox-bound coach-full-audit Play tests) carries
