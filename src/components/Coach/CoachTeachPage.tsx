@@ -686,6 +686,21 @@ export function CoachTeachPage(): JSX.Element {
     // walkthrough.start() directly when the student types an obvious
     // "teach me / walk me through / show me [opening]" ask. The
     // brain only sees asks that DON'T match.
+    //
+    // Live audit (build 7eca7c3) caught the user message being
+    // appended to chat-teach memory TWICE on every non-opening
+    // input: once at line ~852 inside the surface-routing branch
+    // (`if (requestedName)`), and again at line ~1419 in the main
+    // brain path. The flag short-circuits the second append when the
+    // first one fired. It MUST be declared outside the
+    // `if (!opts?.kickoff)` block — the brain-path reference at
+    // line ~1419 is reachable even when the kickoff branch is taken
+    // (kickoff sets the flag false → falls through to the brain
+    // path), and a chat ask like "What general opening principles
+    // should I know?" also falls through. Production audit (build
+    // 7edb4bb): the brain path threw `userMessageAppended is not
+    // defined` because the let was scoped inside the kickoff block.
+    let userMessageAppended = false;
     if (!opts?.kickoff) {
       // /clearcache — emergency lever for the user when iOS Safari's
       // Reset Website Data hasn't been cooperating. Wipes Dexie's
@@ -752,15 +767,10 @@ export function CoachTeachPage(): JSX.Element {
         { regex: /\bplay\s+(?:it\s+)?(?:for\s+)?real\s+(?:the\s+)?/i, stage: 'play-real' },
       ];
       const trimmed = text.trim();
-      // Live audit (build 7eca7c3) caught the user message being
-      // appended to chat-teach memory TWICE on every non-opening
-      // input: once at line ~852 inside the surface-routing branch
-      // (`if (requestedName)`), and again at line ~1403 in the main
-      // brain path after the pre-flight rejection falls through. The
-      // duplicate doubles the conversation context size sent to the
-      // LLM and pollutes the model's input. This flag short-circuits
-      // the second append when the first one fired.
-      let userMessageAppended = false;
+      // `userMessageAppended` is hoisted to the outer scope — see the
+      // long comment block above `if (!opts?.kickoff)`. Don't
+      // re-declare it here; doing so would shadow the outer let and
+      // re-introduce the "not defined" pageerror on the brain path.
       let stageHint:
         | 'concepts'
         | 'findMove'
@@ -861,6 +871,7 @@ export function CoachTeachPage(): JSX.Element {
         useCoachMemoryStore.getState().appendConversationMessage({
           surface: 'chat-teach',
           role: 'user',
+          text,
           // Self-audit (2026-05-15): use the override FEN when the
           // caller provides one (board onMove callback). Without this
           // the first append stores the PRE-move position — and the
