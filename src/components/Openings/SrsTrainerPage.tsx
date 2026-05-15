@@ -580,6 +580,9 @@ export function SrsTrainerPage(): JSX.Element {
   }
 
   // ─── Mode tabs (used in hub + session) ────────────────────────────────
+  // Selected tab: strong color + bright multi-layer glow.
+  // Unselected tab: SUBTLE same-color glow so the user can see "this is
+  // a chooser" at a glance without competing with the active state.
   const ModeTabs = ({ inSessionView }: { inSessionView: boolean }): JSX.Element => (
     <div
       className="grid grid-cols-2 gap-1 p-1 bg-theme-surface rounded-xl mb-3"
@@ -590,7 +593,7 @@ export function SrsTrainerPage(): JSX.Element {
         className={`flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs font-medium transition-all border-l-2 border-b-2 ${
           mode === 'card'
             ? 'bg-purple-500/25 text-purple-200 border-purple-400/80 shadow-[0_0_6px_rgba(168,85,247,0.7),0_0_14px_rgba(168,85,247,0.45),0_0_24px_rgba(168,85,247,0.25)]'
-            : 'text-theme-text-muted hover:text-theme-text border-transparent'
+            : 'text-purple-400/70 hover:text-purple-300 border-purple-500/25 shadow-[0_0_4px_rgba(168,85,247,0.25),0_0_10px_rgba(168,85,247,0.12)]'
         }`}
         data-testid="srs-mode-card"
       >
@@ -604,7 +607,7 @@ export function SrsTrainerPage(): JSX.Element {
         className={`flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs font-medium transition-all border-l-2 border-b-2 ${
           mode === 'line'
             ? 'bg-amber-500/25 text-amber-200 border-amber-400/80 shadow-[0_0_6px_rgba(245,158,11,0.7),0_0_14px_rgba(245,158,11,0.45),0_0_24px_rgba(245,158,11,0.25)]'
-            : 'text-theme-text-muted hover:text-theme-text border-transparent'
+            : 'text-amber-400/70 hover:text-amber-300 border-amber-500/25 shadow-[0_0_4px_rgba(245,158,11,0.25),0_0_10px_rgba(245,158,11,0.12)]'
         }`}
         data-testid="srs-mode-line"
       >
@@ -740,7 +743,10 @@ export function SrsTrainerPage(): JSX.Element {
         : 0;
 
     return (
-      <div className="flex flex-col flex-1 overflow-hidden" data-testid="srs-session">
+      <div
+        className="flex flex-col flex-1 min-h-0 overflow-hidden pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-4"
+        data-testid="srs-session"
+      >
         {/* Top bar */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-theme-border">
           <button
@@ -798,9 +804,12 @@ export function SrsTrainerPage(): JSX.Element {
           </p>
         </div>
 
-        {/* Board (ConsistentChessboard controlled mode) */}
-        <div className="flex-1 flex flex-col items-center justify-start px-2 py-2">
-          <div className="w-full md:max-w-[420px]">
+        {/* Board (ConsistentChessboard controlled mode). Cap the board's
+            max-height the same way ChessLessonLayout does so the
+            bottom rank can't slide under the mobile nav on short
+            phones. min-h-0 lets the flex-1 ancestor actually shrink. */}
+        <div className="flex-1 min-h-0 flex flex-col items-center justify-start px-2 py-2 overflow-y-auto">
+          <div className="w-full self-center md:max-w-[420px] max-h-[min(60vh,440px)]">
             <div className="relative">
               <ConsistentChessboard
                 game={game}
