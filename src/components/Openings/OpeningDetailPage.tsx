@@ -776,7 +776,7 @@ export function OpeningDetailPage(): JSX.Element {
                   <div className="flex items-center gap-1.5 mt-2 ml-[60px]">
                     <button
                       onClick={() => handleStartTrapLineAction(i, 'walkthrough')}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-watch"
                       aria-label={`Watch ${line.name}`}
                       title="Watch"
                       data-testid={`trap-walkthrough-${i}`}
@@ -785,7 +785,7 @@ export function OpeningDetailPage(): JSX.Element {
                     </button>
                     <button
                       onClick={() => handleStartTrapLineAction(i, 'learn')}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-learn"
                       aria-label={`Learn ${line.name}`}
                       title="Learn"
                       data-testid={`trap-learn-${i}`}
@@ -794,7 +794,7 @@ export function OpeningDetailPage(): JSX.Element {
                     </button>
                     <button
                       onClick={() => handleStartTrapLineAction(i, 'practice')}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-practice"
                       aria-label={`Practice ${line.name}`}
                       title="Practice"
                       data-testid={`trap-practice-${i}`}
@@ -803,7 +803,7 @@ export function OpeningDetailPage(): JSX.Element {
                     </button>
                     <button
                       onClick={() => handleStartTrapLineAction(i, 'play')}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-play"
                       aria-label={`Play ${line.name}`}
                       title="Play"
                       data-testid={`trap-play-${i}`}
@@ -869,7 +869,7 @@ export function OpeningDetailPage(): JSX.Element {
                   <div className="flex items-center gap-1.5 mt-2 ml-[60px]">
                     <button
                       onClick={() => handleStartWarningLineAction(i, 'walkthrough')}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-watch"
                       aria-label={`Watch ${line.name}`}
                       title="Watch"
                       data-testid={`warning-walkthrough-${i}`}
@@ -878,7 +878,7 @@ export function OpeningDetailPage(): JSX.Element {
                     </button>
                     <button
                       onClick={() => handleStartWarningLineAction(i, 'learn')}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-learn"
                       aria-label={`Learn ${line.name}`}
                       title="Learn"
                       data-testid={`warning-learn-${i}`}
@@ -887,7 +887,7 @@ export function OpeningDetailPage(): JSX.Element {
                     </button>
                     <button
                       onClick={() => handleStartWarningLineAction(i, 'practice')}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-practice"
                       aria-label={`Practice ${line.name}`}
                       title="Practice"
                       data-testid={`warning-practice-${i}`}
@@ -896,7 +896,7 @@ export function OpeningDetailPage(): JSX.Element {
                     </button>
                     <button
                       onClick={() => handleStartWarningLineAction(i, 'play')}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-play"
                       aria-label={`Play ${line.name}`}
                       title="Play"
                       data-testid={`warning-play-${i}`}
@@ -967,7 +967,7 @@ export function OpeningDetailPage(): JSX.Element {
                   <div className="flex items-center gap-1.5 mt-2 ml-[60px]">
                     <button
                       onClick={() => handleStartVariationWalkthrough(i)}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-watch"
                       aria-label={`Watch ${variation.name}`}
                       title="Watch"
                       data-testid={`variation-walkthrough-${i}`}
@@ -976,7 +976,7 @@ export function OpeningDetailPage(): JSX.Element {
                     </button>
                     <button
                       onClick={() => handleStartVariationLearn(i)}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-learn"
                       aria-label={`Learn ${variation.name}`}
                       title="Learn"
                       data-testid={`variation-learn-${i}`}
@@ -985,7 +985,7 @@ export function OpeningDetailPage(): JSX.Element {
                     </button>
                     <button
                       onClick={() => handleStartVariationPractice(i)}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-practice"
                       aria-label={`Practice ${variation.name}`}
                       title="Practice"
                       data-testid={`variation-practice-${i}`}
@@ -994,7 +994,7 @@ export function OpeningDetailPage(): JSX.Element {
                     </button>
                     <button
                       onClick={() => handleStartVariationPlay(i)}
-                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors"
+                      className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg hover:bg-theme-accent/20 bg-theme-surface border border-theme-border hover:border-theme-accent/40 text-theme-text-muted hover:text-theme-accent transition-colors opening-action-glow opening-action-glow-play"
                       aria-label={`Play ${variation.name}`}
                       title="Play"
                       data-testid={`variation-play-${i}`}
