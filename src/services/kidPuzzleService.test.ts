@@ -268,7 +268,7 @@ describe('kidPuzzleService', () => {
         expect.arrayContaining([
           expect.objectContaining({
             role: 'user',
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+             
             content: expect.stringContaining('800'),
           }),
         ]),

@@ -5,7 +5,7 @@ import { PracticeMode } from './PracticeMode';
 import { buildOpeningRecord } from '../../test/factories';
 import type { OpeningRecord } from '../../types';
 
-/* eslint-disable @typescript-eslint/require-await */
+ 
 
 // ─── Mocks ───────────────────────────────────────────────────────────────────
 

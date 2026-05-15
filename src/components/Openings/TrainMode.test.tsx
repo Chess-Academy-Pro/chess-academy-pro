@@ -5,7 +5,7 @@ import { TrainMode } from './TrainMode';
 import { buildOpeningRecord } from '../../test/factories';
 import type { OpeningRecord, OpeningVariation } from '../../types';
 
-/* eslint-disable @typescript-eslint/require-await */
+ 
 
 // ─── Mocks ───────────────────────────────────────────────────────────────────
 
