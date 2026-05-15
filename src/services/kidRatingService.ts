@@ -56,7 +56,8 @@ export async function getAllKidRatings(): Promise<Record<ChessPiece, number>> {
     pawn: DEFAULT_KID_RATING,
   };
   for (const p of KID_PIECES) {
-    if (typeof map[p] === 'number') out[p] = map[p] as number;
+    const v = map[p];
+    if (typeof v === 'number') out[p] = v;
   }
   return out;
 }
