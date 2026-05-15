@@ -32,7 +32,7 @@ beforeEach(() => {
 function mockProvider(response: ProviderResponse): Provider {
   return {
     name: 'deepseek',
-    call: vi.fn(async () => response),
+    call: vi.fn(() => Promise.resolve(response)),
   };
 }
 
@@ -133,7 +133,7 @@ describe('coachService.ask', () => {
   // single-trip behavior. Chat surfaces opt in to 3 explicitly via the
   // CoachServiceOptions.maxToolRoundTrips field.
   it('default round-trip budget is 1 — provider is called once when no tools fire', async () => {
-    const call = vi.fn(async () => ({ text: 'A.', toolCalls: [] }));
+    const call = vi.fn(() => Promise.resolve({ text: 'A.', toolCalls: [] }));
     const provider: Provider = { name: 'deepseek', call };
     await coachService.ask(
       { surface: 'ping', ask: 'q', liveState: { surface: 'ping' } },
@@ -156,7 +156,7 @@ describe('coachService.ask', () => {
       // Sentinel — should never be reached at budget=1.
       { text: 'should not reach', toolCalls: [] },
     ];
-    const call = vi.fn(async () => responses.shift() ?? { text: '', toolCalls: [] });
+    const call = vi.fn(() => Promise.resolve(responses.shift() ?? { text: '', toolCalls: [] }));
     const provider: Provider = { name: 'deepseek', call };
     await coachService.ask(
       { surface: 'ping', ask: 'q', liveState: { surface: 'ping' } },
@@ -182,7 +182,7 @@ describe('coachService.ask', () => {
       // Final turn — no tools, just a narrative answer.
       { text: 'turn 3: final', toolCalls: [] },
     ];
-    const call = vi.fn(async () => responses.shift() ?? { text: '', toolCalls: [] });
+    const call = vi.fn(() => Promise.resolve(responses.shift() ?? { text: '', toolCalls: [] }));
     const provider: Provider = { name: 'deepseek', call };
     const answer = await coachService.ask(
       { surface: 'ping', ask: 'q', liveState: { surface: 'ping' } },

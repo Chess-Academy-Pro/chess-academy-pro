@@ -79,6 +79,12 @@ export default tseslint.config(
     files: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}'],
     rules: {
       '@typescript-eslint/unbound-method': 'off',
+      // Test mocks frequently need to satisfy a `Promise<T>`-returning
+      // interface without doing real async work (e.g.
+      // `vi.fn(async (env) => responseFixture)`). Forcing
+      // `() => Promise.resolve(x)` everywhere adds noise without
+      // catching real bugs in test code.
+      '@typescript-eslint/require-await': 'off',
     },
   },
 );

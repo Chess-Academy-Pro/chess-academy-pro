@@ -1487,10 +1487,10 @@ export function CoachTeachPage(): JSX.Element {
           // trip N+1 sees the post-trip-N board state. Without it the
           // brain hallucinates extra moves on the wrong side.
           getLiveFen: () => liveFenRef.current,
-          onPlayMove: async (san: string) => handlePlayMove(san),
-          onTakeBackMove: async (count: number) => handleTakeBack(count),
-          onSetBoardPosition: async (newFen: string) => handleSetBoardPosition(newFen),
-          onResetBoard: async () => handleResetBoard(),
+          onPlayMove: (san: string) => handlePlayMove(san),
+          onTakeBackMove: (count: number) => handleTakeBack(count),
+          onSetBoardPosition: (newFen: string) => handleSetBoardPosition(newFen),
+          onResetBoard: () => handleResetBoard(),
           onNavigate: (path: string) => { void navigate(path); },
           // Walkthrough handoff: when the LLM decides "let's drill this
           // opening line as a guided walkthrough," route the student

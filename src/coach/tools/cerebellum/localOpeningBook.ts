@@ -46,6 +46,7 @@ export const localOpeningBookTool: Tool = {
     },
     required: ['moveHistory', 'aiColor'],
   },
+  // eslint-disable-next-line @typescript-eslint/require-await -- CoachTool.execute is typed Promise<...>; this implementation is purely synchronous but must match the interface.
   async execute(args) {
     const rawHistory = typeof args.moveHistory === 'string' ? args.moveHistory : '';
     const aiColor = args.aiColor === 'white' || args.aiColor === 'black'
