@@ -772,7 +772,11 @@ export async function getCoachStructuredResponse(
       throw err;
     }
   }
-  if (lastErr) throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
+  if (lastErr) {
+    throw lastErr instanceof Error
+      ? lastErr
+      : new Error(typeof lastErr === 'string' ? lastErr : JSON.stringify(lastErr));
+  }
   throw new Error('No API key configured for tool-use call (neither DeepSeek nor Anthropic)');
 }
 
