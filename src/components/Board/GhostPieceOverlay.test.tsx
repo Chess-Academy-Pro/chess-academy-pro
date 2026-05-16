@@ -108,12 +108,12 @@ describe('GhostPieceOverlay', () => {
 describe('getPieceImageUrl', () => {
   it('returns lichess CDN URL for non-default piece set', () => {
     const url = getPieceImageUrl('wN', 'neo');
-    expect(url).toBe('https://lichess1.org/assets/piece/companion/wN.svg');
+    expect(url).toBe('https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/piece/companion/wN.svg');
   });
 
   it('returns lichess CDN URL for alpha set', () => {
     const url = getPieceImageUrl('bQ', 'alpha');
-    expect(url).toBe('https://lichess1.org/assets/piece/alpha/bQ.svg');
+    expect(url).toBe('https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/piece/alpha/bQ.svg');
   });
 
   it('returns fallback URL for default staunton set', () => {
