@@ -46,19 +46,24 @@ interface ScrollHintBarProps {
   className?: string;
 }
 
-// Shine gradients — asymmetric, soft. Transparent left tail builds
-// gradually through warm gold to a near-white peak near the leading
-// (right / bottom) edge, then fades back to fully transparent at the
-// very edge so there's no hard boundary where the box ends. The
-// gradient itself defines the visible shape — no box-shadow halo,
-// because a shadow draws around the element's BOUNDING RECTANGLE
-// and reads as a defined object travelling. With no shadow + soft
-// edges, the eye sees a brightness shift moving across the bar, not
-// a shape sliding over it.
+// Shine gradients — all-gold, no white. The eye reads "this region
+// of the bar is brighter" rather than "a white object is moving over
+// the bar" because the moving overlay never breaks the gold colour
+// envelope. Peak alpha (~0.55) at ~90% of element width gives a soft
+// brightness lean toward the leading edge; both extremes fade to
+// fully transparent so there's no hard rectangle boundary.
+//
+// Composite math: at peak alpha 0.55 over the amber-400 track
+// (251, 191, 36):
+//   R: 251 * 0.45 + 255 * 0.55 = ~253
+//   G: 191 * 0.45 + 235 * 0.55 = ~215
+//   B: 36  * 0.45 + 120 * 0.55 = ~82
+// Result ≈ (253, 215, 82) — a brighter, slightly creamier gold. Still
+// firmly in the gold spectrum; not a white tracer.
 const SHINE_GRADIENT_X =
-  'linear-gradient(90deg, rgba(255, 245, 200, 0) 0%, rgba(255, 230, 150, 0.18) 45%, rgba(255, 245, 200, 0.55) 75%, rgba(255, 255, 235, 0.95) 90%, rgba(255, 245, 200, 0) 100%)';
+  'linear-gradient(90deg, rgba(255, 220, 100, 0) 0%, rgba(255, 225, 120, 0.18) 45%, rgba(255, 235, 150, 0.38) 75%, rgba(255, 240, 170, 0.55) 90%, rgba(255, 220, 100, 0) 100%)';
 const SHINE_GRADIENT_Y =
-  'linear-gradient(180deg, rgba(255, 245, 200, 0) 0%, rgba(255, 230, 150, 0.18) 45%, rgba(255, 245, 200, 0.55) 75%, rgba(255, 255, 235, 0.95) 90%, rgba(255, 245, 200, 0) 100%)';
+  'linear-gradient(180deg, rgba(255, 220, 100, 0) 0%, rgba(255, 225, 120, 0.18) 45%, rgba(255, 235, 150, 0.38) 75%, rgba(255, 240, 170, 0.55) 90%, rgba(255, 220, 100, 0) 100%)';
 
 // Three-layer glow: outer halo, mid bloom, inner highlight. Same
 // gold, three magnitudes — the bar reads as "lit" rather than
