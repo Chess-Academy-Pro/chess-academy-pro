@@ -6,6 +6,7 @@ import { useAppStore, selectFreshBoardSnapshot } from '../../stores/appStore';
 import { useCoachSessionStore } from '../../stores/coachSessionStore';
 import { useCoachMemoryStore } from '../../stores/coachMemoryStore';
 import { parseCoachIntent } from '../../services/coachAgent';
+import { favoriteOpeningTool } from '../../coach/tools/cerebrum/favoriteOpening';
 import { voiceInputService } from '../../services/voiceInputService';
 import { coachService } from '../../coach/coachService';
 import type { LiveState } from '../../coach/types';
@@ -82,7 +83,8 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
     agentIntent.kind === 'play-against' ||
     agentIntent.kind === 'walkthrough' ||
     agentIntent.kind === 'puzzle' ||
-    agentIntent.kind === 'explain-position';
+    agentIntent.kind === 'explain-position' ||
+    agentIntent.kind === 'favorite-opening';
   const totalItems =
     results.length + (showAskCoach ? 1 : 0) + (showAgentAction ? 1 : 0);
   const agentActionIndex = showAgentAction ? 0 : -1;
@@ -213,6 +215,24 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
         setShowDropdown(false);
         inputRef.current?.blur();
         void navigate(`/coach/session/explain-position${qs ? `?${qs}` : ''}`);
+      } else if (intent.kind === 'favorite-opening' && intent.subject) {
+        const subject = intent.subject;
+        voiceInputService.stopListening();
+        clear();
+        setShowDropdown(false);
+        inputRef.current?.blur();
+        void (async () => {
+          const result = await favoriteOpeningTool.execute({ name: subject });
+          void logAppAudit({
+            kind: 'coach-surface-migrated',
+            category: 'subsystem',
+            source: 'SmartSearchBar.favoriteOpeningVoicePath',
+            summary: result.ok
+              ? `favorited "${subject}" via voice search`
+              : `favorite failed for "${subject}": ${result.error ?? 'unknown'}`,
+            details: JSON.stringify(result),
+          });
+        })();
       } else {
         // ── WO-BRAIN-05a — VOICE-ONLY QA ROUTES THROUGH coachService ────
         // No structured intent — voice-only QA. The brain handles it
@@ -388,6 +408,25 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
       }
       const qs = params.toString();
       void navigate(`/coach/session/explain-position${qs ? `?${qs}` : ''}`);
+    } else if (agentIntent.kind === 'favorite-opening' && agentIntent.subject) {
+      // Rolodex fast-path (WO-ROLODEX-PLUMBING-01 item 5). Invoke
+      // the tool directly — no navigation. The Openings page (and
+      // future rolodex UI) reads `isFavorite` from Dexie reactively,
+      // so the heart flips wherever it's visible. Audit captures the
+      // operation regardless of whether a hearted UI is open.
+      const subject = agentIntent.subject;
+      void (async () => {
+        const result = await favoriteOpeningTool.execute({ name: subject });
+        void logAppAudit({
+          kind: 'coach-surface-migrated',
+          category: 'subsystem',
+          source: 'SmartSearchBar.favoriteOpeningFastPath',
+          summary: result.ok
+            ? `favorited "${subject}" via search bar`
+            : `favorite failed for "${subject}": ${result.error ?? 'unknown'}`,
+          details: JSON.stringify(result),
+        });
+      })();
     }
   }, [agentIntent, clear, navigate, lastBoardSnapshot]);
 
@@ -412,6 +451,10 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
           : 'Practice puzzles';
       case 'explain-position':
         return 'Analyze the position';
+      case 'favorite-opening':
+        return agentIntent.subject
+          ? `Add ${agentIntent.subject} to your Training Plan`
+          : 'Add to Training Plan';
       default:
         return 'Start session';
     }
@@ -438,6 +481,8 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
         return 'Opens puzzle trainer';
       case 'explain-position':
         return 'Stockfish + coach explanation';
+      case 'favorite-opening':
+        return 'Favorites the opening in one tap';
       case 'continue-middlegame':
       default:
         return 'Opens a lesson session with the coach';

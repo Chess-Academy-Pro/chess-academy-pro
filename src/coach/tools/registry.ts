@@ -27,6 +27,7 @@ import { localOpeningBookTool } from './cerebellum/localOpeningBook';
 
 import { navigateToRouteTool } from './cerebrum/navigateToRoute';
 import { setIntendedOpeningTool } from './cerebrum/setIntendedOpening';
+import { favoriteOpeningTool } from './cerebrum/favoriteOpening';
 import { clearMemoryTool } from './cerebrum/clearMemory';
 import { playMoveTool } from './cerebrum/playMove';
 import { takeBackMoveTool } from './cerebrum/takeBackMove';
@@ -54,6 +55,7 @@ export const COACH_TOOLS: Tool[] = [
   // Cerebrum
   navigateToRouteTool,
   setIntendedOpeningTool,
+  favoriteOpeningTool,
   clearMemoryTool,
   playMoveTool,
   takeBackMoveTool,

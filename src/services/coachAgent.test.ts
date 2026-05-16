@@ -360,3 +360,122 @@ describe('parseCoachIntent — walkthrough subject variants', () => {
     expect(intent.subject?.toLowerCase()).toContain('caro');
   });
 });
+
+// ─── Favorite-opening (rolodex AI-search fast-path) ────────────────────────
+// WO-ROLODEX-PLUMBING-01 item 5. The deterministic regex-first route for
+// natural-language favoriting; the LLM tool `favorite_opening` is the
+// fallback for phrasings these regexes don't catch.
+
+describe('parseCoachIntent — favorite-opening', () => {
+  describe('pattern A — favorite / star / bookmark verb (no scope qualifier needed)', () => {
+    it('"favorite the italian" → favorite-opening, subject extracted', () => {
+      const intent = parseCoachIntent('favorite the italian');
+      expect(intent.kind).toBe('favorite-opening');
+      expect(intent.subject?.toLowerCase()).toContain('italian');
+    });
+
+    it('"favourite the italian" (British spelling) is recognized', () => {
+      const intent = parseCoachIntent('favourite the italian');
+      expect(intent.kind).toBe('favorite-opening');
+      expect(intent.subject?.toLowerCase()).toContain('italian');
+    });
+
+    it('"star the vienna" → favorite-opening, subject="vienna"', () => {
+      const intent = parseCoachIntent('star the vienna');
+      expect(intent.kind).toBe('favorite-opening');
+      expect(intent.subject?.toLowerCase()).toContain('vienna');
+    });
+
+    it('"bookmark the london" → favorite-opening', () => {
+      const intent = parseCoachIntent('bookmark the london');
+      expect(intent.kind).toBe('favorite-opening');
+      expect(intent.subject?.toLowerCase()).toContain('london');
+    });
+
+    it('accepts polite prefixes ("please favorite the italian")', () => {
+      const intent = parseCoachIntent('please favorite the italian');
+      expect(intent.kind).toBe('favorite-opening');
+    });
+
+    it('accepts "can you favorite the italian"', () => {
+      const intent = parseCoachIntent('can you favorite the italian');
+      expect(intent.kind).toBe('favorite-opening');
+    });
+
+    it('accepts "i want to favorite the italian"', () => {
+      const intent = parseCoachIntent('i want to favorite the italian');
+      expect(intent.kind).toBe('favorite-opening');
+    });
+
+    it('accepts trailing punctuation', () => {
+      const intent = parseCoachIntent('favorite the italian.');
+      expect(intent.kind).toBe('favorite-opening');
+    });
+  });
+
+  describe('pattern B — add / save with scope qualifier required', () => {
+    it('"add caro-kann to my training plan" → favorite-opening', () => {
+      const intent = parseCoachIntent('add caro-kann to my training plan');
+      expect(intent.kind).toBe('favorite-opening');
+      expect(intent.subject?.toLowerCase()).toContain('caro');
+    });
+
+    it('"save the french for my rolodex" → favorite-opening', () => {
+      const intent = parseCoachIntent('save the french for my rolodex');
+      expect(intent.kind).toBe('favorite-opening');
+      expect(intent.subject?.toLowerCase()).toContain('french');
+    });
+
+    it('"add the queen\'s gambit to my favorites" → favorite-opening', () => {
+      const intent = parseCoachIntent("add the queen's gambit to my favorites");
+      expect(intent.kind).toBe('favorite-opening');
+      expect(intent.subject?.toLowerCase()).toContain('queen');
+    });
+
+    it('"add the italian to my favourites" (British spelling) works', () => {
+      const intent = parseCoachIntent('add the italian to my favourites');
+      expect(intent.kind).toBe('favorite-opening');
+    });
+
+    it('"add" alone without scope qualifier does NOT match (too ambiguous)', () => {
+      // Without the scope qualifier "add" is too generic. The intent
+      // falls through to other branches or qa.
+      const intent = parseCoachIntent('add the italian');
+      expect(intent.kind).not.toBe('favorite-opening');
+    });
+  });
+
+  describe('does not hijack other intents', () => {
+    it('"play the italian" → play-against (NOT favorite-opening)', () => {
+      const intent = parseCoachIntent('play the italian');
+      expect(intent.kind).not.toBe('favorite-opening');
+    });
+
+    it('"explain the italian" → explain-position or walkthrough, never favorite-opening', () => {
+      const intent = parseCoachIntent('explain the italian');
+      expect(intent.kind).not.toBe('favorite-opening');
+    });
+
+    it('"study the caro-kann" → walkthrough (existing pattern preserved)', () => {
+      const intent = parseCoachIntent('study the Caro-Kann');
+      expect(intent.kind).toBe('walkthrough');
+    });
+
+    it('"show me the italian" → walkthrough, NOT favorite-opening', () => {
+      const intent = parseCoachIntent('show me the italian');
+      expect(intent.kind).not.toBe('favorite-opening');
+    });
+  });
+
+  describe('alias expansion', () => {
+    it('aliased input ("favorite the najdorf") expands the subject via expandOpeningAlias', () => {
+      const intent = parseCoachIntent('favorite the najdorf');
+      expect(intent.kind).toBe('favorite-opening');
+      // expandOpeningAlias may return a canonical name like
+      // "Sicilian Defense: Najdorf Variation" — exact downstream
+      // form isn't pinned here, but the subject must be non-empty
+      // and reference the underlying opening.
+      expect(intent.subject).toBeTruthy();
+    });
+  });
+});

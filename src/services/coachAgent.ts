@@ -22,6 +22,7 @@ export type CoachIntentKind =
   | 'walkthrough'
   | 'explain-position'
   | 'review-game'
+  | 'favorite-opening'
   | 'qa';
 
 export type CoachDifficulty = 'easy' | 'medium' | 'hard' | 'auto';
@@ -111,6 +112,46 @@ export function parseCoachIntent(query: string): CoachIntent {
 
   if (!raw) {
     return { kind: 'qa', raw };
+  }
+
+  // -1. Favorite-opening intent — "favorite the italian", "star the
+  //     vienna", "add caro-kann to my training plan", "bookmark the
+  //     french for my rolodex". Wires the rolodex's natural-language
+  //     favoriting path (WO-ROLODEX-PLUMBING-01 item 5).
+  //
+  //     Pattern A: `<verb> [the] <subject>` where verb is one of
+  //       favorite / favourite / star / bookmark. The verb is
+  //       distinctive enough that no scope qualifier is needed —
+  //       "favorite this" or "favorite the X" reliably means
+  //       favoriting an opening.
+  //
+  //     Pattern B: `add <subject> to [my] (training plan|rolodex|
+  //       favorites|favourites)` — "add" alone is too ambiguous
+  //       (add a move, add a tag, etc.), so we require the scope
+  //       qualifier.
+  //
+  //     Runs FIRST so a phrasing like "star the vienna" isn't
+  //     hijacked by a downstream branch matching "vienna" as a
+  //     play / walkthrough target.
+  {
+    const favA = lower.match(
+      /^(?:please\s+|can\s+you\s+|could\s+you\s+|i\s+want\s+to\s+|i'?d\s+like\s+to\s+)?(?:favorite|favourite|star|bookmark)\s+(?:the\s+)?(.+?)\s*\.?\s*$/,
+    );
+    const favB = lower.match(
+      /^(?:please\s+|can\s+you\s+|could\s+you\s+|i\s+want\s+to\s+|i'?d\s+like\s+to\s+)?(?:add|save)\s+(?:the\s+)?(.+?)\s+(?:to|for|in)\s+(?:my\s+)?(?:training\s+plan|rolodex|favorites|favourites)\s*\.?\s*$/,
+    );
+    const m = favA ?? favB;
+    if (m) {
+      const subjectRaw = m[1];
+      const cleaned = cleanSubject(subjectRaw);
+      if (cleaned.length > 0) {
+        return {
+          kind: 'favorite-opening',
+          subject: expandOpeningAlias(cleaned),
+          raw,
+        };
+      }
+    }
   }
 
   // 0. "Explain this position" / "what's happening here" / "analyze
