@@ -57,24 +57,48 @@ async function main() {
   );
   const classifications = clsFile.classifications;
 
-  const entries = reps.openings.flatMap((o) =>
-    (o.trapLines ?? []).map((t) => ({
+  // Two arrays per opening, mirrored contracts:
+  //   trapLines  — student is the trap-setter; should END UP BETTER
+  //   warningLines — opposite: shown as "what happens if YOU fall
+  //                  into this." Student should END UP WORSE. The
+  //                  warning's job is to scare the student off the
+  //                  bad move; if the line accidentally shows the
+  //                  student winning, the warning is toothless /
+  //                  misclassified and worth flagging.
+  const entries = reps.openings.flatMap((o) => [
+    ...(o.trapLines ?? []).map((t) => ({
+      role: 'trap',
       openingId: o.id,
       openingName: o.name,
-      color: o.color, // student side
+      color: o.color,
       name: t.name,
       pgn: t.pgn,
       explanation: t.explanation,
     })),
-  );
+    ...(o.warningLines ?? []).map((t) => ({
+      role: 'warning',
+      openingId: o.id,
+      openingName: o.name,
+      color: o.color,
+      name: t.name,
+      pgn: t.pgn,
+      explanation: t.explanation,
+    })),
+  ]);
 
-  console.log(`[trap-orientation] auditing ${entries.length} trapLines`);
+  const trapCount = entries.filter((e) => e.role === 'trap').length;
+  const warningCount = entries.filter((e) => e.role === 'warning').length;
+  console.log(`[trap-orientation] auditing ${entries.length} entries (${trapCount} trapLines + ${warningCount} warningLines)`);
   console.log(`[trap-orientation] out: ${OUT_DIR}\n`);
 
   const results = [];
   for (const e of entries) {
     const key = `${e.openingId}::${e.name}`;
-    const kind = classifications[key] ?? 'UNCLASSIFIED';
+    // Warnings don't carry trap-kind classifications — the role itself
+    // ('warning') is the classification. Only trapLines look up in the
+    // sidecar.
+    const kind =
+      e.role === 'warning' ? 'warning' : (classifications[key] ?? 'UNCLASSIFIED');
 
     const chess = new Chess();
     let parseError = null;
@@ -123,6 +147,16 @@ async function main() {
     const flags = [];
     if (parseError) {
       flags.push(`PGN_PARSE_ERROR: ${parseError.slice(0, 100)}`);
+    } else if (e.role === 'warning') {
+      // Warning contract: line should END WORSE for the student
+      // (this is "don't do X, here's why"). If the warning instead
+      // shows the student winning, the entry was filed in the wrong
+      // bucket and should be in trapLines.
+      if (mateOn === 'opponent') {
+        flags.push(`TOOTHLESS_WARNING: warning ends in student-delivered mate — should be in trapLines`);
+      } else if (materialDelta > 2) {
+        flags.push(`TOOTHLESS_WARNING: warning ends with student up ${materialDelta} material — should be in trapLines`);
+      }
     } else if (mateOn === 'student') {
       // Mate against the student is always a hard fail regardless of
       // kind, and it short-circuits any material check (a mate-down
@@ -175,6 +209,7 @@ async function main() {
     }
 
     results.push({
+      role: e.role,
       openingId: e.openingId,
       openingName: e.openingName,
       studentColor: e.color,
@@ -202,6 +237,7 @@ async function main() {
   const grouped = {
     INVERTED_MATE: flagged.filter((r) => r.flags.some((f) => f.startsWith('INVERTED_MATE:'))),
     INVERTED_MATERIAL: flagged.filter((r) => r.flags.some((f) => f.startsWith('INVERTED_MATERIAL:'))),
+    TOOTHLESS_WARNING: flagged.filter((r) => r.flags.some((f) => f.startsWith('TOOTHLESS_WARNING:'))),
     WEAK_TRAP: flagged.filter((r) => r.flags.some((f) => f.startsWith('WEAK_TRAP:'))),
     STUDENT_NOT_PUNISHER: flagged.filter((r) => r.flags.some((f) => f.startsWith('STUDENT_NOT_PUNISHER:'))),
     UNCLASSIFIED: flagged.filter((r) => r.flags.some((f) => f.startsWith('UNCLASSIFIED:'))),
@@ -256,6 +292,7 @@ async function main() {
 
   printGroup('INVERTED_MATE (student gets mated)', grouped.INVERTED_MATE);
   printGroup('INVERTED_MATERIAL (student is down material at end)', grouped.INVERTED_MATERIAL);
+  printGroup('TOOTHLESS_WARNING (warning entry ends with student winning)', grouped.TOOTHLESS_WARNING);
   printGroup('STUDENT_NOT_PUNISHER (trap ends on opponent move)', grouped.STUDENT_NOT_PUNISHER);
   printGroup('WEAK_TRAP (kind=trap but not clearly +3 or mate)', grouped.WEAK_TRAP);
   printGroup('UNCLASSIFIED (missing from trap-line-classifications.json)', grouped.UNCLASSIFIED);

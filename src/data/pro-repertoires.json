@@ -908,11 +908,6 @@
       ],
       "trapLines": [
         {
-          "name": "Advance Variation Qb6 Fork",
-          "pgn": "e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5 O-O cxd4 Nxd4 Bc5 Be3 Qb6 Nb3 Qxb3 axb3",
-          "explanation": "In the Advance, if White plays casually, Black can win a pawn with the Qb6 fork targeting b2 and d4 simultaneously. White must be very precise in this line."
-        },
-        {
           "name": "Two Knights Bg4 Pin Trick",
           "pgn": "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bh5 exd5 cxd5 Bb5+ Nc6 g4 Bg6 Ne5 Rc8 d4 e6 Qf3 Bb4",
           "explanation": "After 3...Bg4, if White gets greedy with g4, Black gets strong counterplay with Nc6 and Rc8. The pin on c3 causes real headaches for White."
@@ -923,6 +918,11 @@
           "name": "Fantasy Variation e5 Trap",
           "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 exd4 Bc4 Bb4+ Kf1",
           "explanation": "Avoid capturing dxe4 in the Fantasy — after fxe4, White gets a strong center and open f-file. Black's position becomes harder to play. Stick with e6 instead."
+        },
+        {
+          "name": "Advance Variation Qb6 Fork",
+          "pgn": "e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5 O-O cxd4 Nxd4 Bc5 Be3 Qb6 Nb3 Qxb3 axb3",
+          "explanation": "In the Advance, if White plays casually, Black can win a pawn with the Qb6 fork targeting b2 and d4 simultaneously. White must be very precise in this line."
         }
       ]
     },
@@ -1292,14 +1292,14 @@
       ],
       "trapLines": [
         {
-          "name": "Noah's Ark Trap",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O b5 Bb3 d6 d4 Nxd4 Nxd4 exd4 Qxd4 c5 Qd5 Be6 Qc6+ Bd7 Qd5 c4",
-          "explanation": "Black plays ...b5, ...c5, and ...c4 to trap the bishop on b3. If White is not careful, the bishop has no retreat and is lost on the queenside."
-        },
-        {
           "name": "Premature Nxe4 Trap",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Bc5 Nbd2 Nxd2 Qxd2",
           "explanation": "Black grabs the e4 pawn too early with ...Nxe4 before castling. White plays Re1 and d4, opening the center while Black's king is still exposed, winning back the pawn with a superior position."
+        },
+        {
+          "name": "Berlin Tarrasch Trap",
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 d6 d4 Bd7 Nc3 Nf6 O-O Be7 Re1 O-O",
+          "explanation": "After Black castles too early in the Steinitz/Berlin setup, White wins a piece with 8.Bxc6 Bxc6 9.dxe5 dxe5 10.Qxd8 Raxd8 11.Nxe5 Bxe4 12.Nxe4 Nxe4 13.Nd3 — Black's knight on e4 has no good retreat. A classical 19th-century opening trap documented under Ruy Lopez: Berlin Defense, Tarrasch Trap (ECO C66)."
         }
       ]
     },
@@ -2673,14 +2673,16 @@
       ],
       "trapLines": [
         {
-          "name": "Nxc3 Qa5+ Exchange Trick",
-          "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Qa4+ Nd7 Be3 O-O Nf3 c5 Rd1 Qa5 Qxa5 b6",
-          "explanation": "After cxd5 Nxd5 and Nxc3, Black can play Qa5+ forcing exchanges. The resulting endgame is pleasant for Black who targets the doubled c-pawns."
-        },
-        {
           "name": "Center Overextension Punished by c5",
           "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Bc4 O-O Ne2 c5 O-O Nc6 Be3 cxd4 cxd4 Bg4 f3 Na5 Bd3 Be6",
           "explanation": "When White builds a big e4-d4 center, Black undermines it with c5. The center collapses and Black's Bg7 dominates the long diagonal."
+        }
+      ],
+      "warningLines": [
+        {
+          "name": "Nxc3 Qa5+ Exchange Trick",
+          "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Qa4+ Nd7 Be3 O-O Nf3 c5 Rd1 Qa5 Qxa5 b6",
+          "explanation": "After cxd5 Nxd5 and Nxc3, Black can play Qa5+ forcing exchanges. The resulting endgame is pleasant for Black who targets the doubled c-pawns."
         }
       ]
     },
@@ -2772,14 +2774,14 @@
       ],
       "trapLines": [
         {
-          "name": "Noah's Ark Trap",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O d6 d4 b5 Bb3 Na5 dxe5 Nxb3 axb3 dxe5 Qxd8+ Kxd8",
-          "explanation": "Black plays b5, Na5, and traps the bishop on b3. If White is not careful, the bishop has no retreat squares and is lost. A classic trap in the Ruy Lopez."
-        },
-        {
           "name": "Nxe4 Pawn Grab Refuted",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Be7 Re1 Nc5 Nd4 Nxb3 Nxb3",
           "explanation": "Black grabs the e4 pawn with Nxe4 but White gets the Open Ruy Lopez with d4 and dxe5. White's active pieces and the strong e5 pawn give a powerful initiative."
+        },
+        {
+          "name": "Open Tarrasch Trap",
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Be7 Re1 O-O Nd4 Qd7 Nxe6 fxe6 Rxe4",
+          "explanation": "In the Open Spanish, Black's 9...Be7 (instead of the correct 9...Bc5) allows the Tarrasch Trap. After 11.Nd4 Qd7 12.Nxe6 fxe6 13.Rxe4, the rook lift wins material: if 13...dxe4 then 14.Qxd7 wins the queen, and 13...Bd6 14.Rxe6 keeps White up a clear pawn with active pieces. ECO C83."
         }
       ]
     },
@@ -3480,14 +3482,14 @@
       ],
       "trapLines": [
         {
-          "name": "Noah's Ark Trap",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 d6 d4 b5 Bb3 Nxd4 Nxd4 exd4 Qxd4 c5 Qd5 Be6 Qc6+ Bd7 Qd5 c4",
-          "explanation": "The classic Noah's Ark trap. Black plays b5, a6, and c5 to corral the bishop on the queenside. After c4, the bishop on b3 has no escape and is won."
-        },
-        {
           "name": "Nxe4 Refutation",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Bc5 Nbd2 O-O Bc2 Nxd2 Qxd2",
           "explanation": "If Black grabs the e4 pawn early with Nxe4, White plays d4 opening the center while Black's knight is offside. Re1 can come with tempo pinning the knight and White gets strong initiative."
+        },
+        {
+          "name": "Bird's Defense Refutation",
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nd4 Nxd4 exd4 O-O",
+          "explanation": "Bird's Defense (3...Nd4) is a known dubious sideline: trading the knight on d4 leaves Black with a doubled isolated d-pawn and a tempo deficit. After 4.Nxd4 exd4 5.O-O, White finishes development unmolested while Black still has to solve the cramped d-pawn. ECO C61 (Ruy Lopez: Bird Variation)."
         }
       ]
     },
@@ -3897,7 +3899,9 @@
           "name": "Englund Queen Pressure",
           "pgn": "d4 e5 dxe5 Nc6 Nf3 Qe7 Bf4 Qb4+ Bd2 Qxb2 Nc3 Bb4 Rb1 Qa3 Nd5 Bxd2+ Qxd2 Nxe5 Nxe5 Qe7",
           "explanation": "After dxe5 Nc6 and Qe7, Black puts immediate pressure on the e5 pawn. White must be careful or the queen infiltrates with Qb4+ grabbing the b2 pawn and creating chaos."
-        },
+        }
+      ],
+      "warningLines": [
         {
           "name": "Englund Queen Trap",
           "pgn": "d4 e5 dxe5 Nc6 Nf3 Qe7 Qd5 f6 exf6 Nxf6 Qb3 d5 Bg5 Rb8 Nc3 Nb4 O-O-O Nc2 Bxf6 Qxf6 Nd5 Qd6 Qxc2",
@@ -4157,7 +4161,9 @@
           "name": "Qh4 Exploitation",
           "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Qh4 Nb5 Qxe4+ Be2 Qe5 N1c3 Bb4 O-O Bxc3 bxc3 Nf6 Nd4 O-O Nf3 Qe7 Re1",
           "explanation": "After Nxd4 Qh4, Black's queen grabs the e4 pawn but White plays Nb5 threatening Nc7. Black must spend time retreating while White develops with tempo and castles quickly."
-        },
+        }
+      ],
+      "warningLines": [
         {
           "name": "Bc5 Fork Setup",
           "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Nxc6 Qf6 Qf3 Qxf3 gxf3 bxc6 Nc3 Nf6 Bg5 Bb7 O-O-O d6 e5 dxe5 Bxf6 gxf6 Rd8+ Kxd8",
