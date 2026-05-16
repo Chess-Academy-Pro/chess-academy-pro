@@ -56,8 +56,8 @@ describe('Pro Repertoire PGN Legality', () => {
     expect(proRepertoire.players).toHaveLength(14);
   });
 
-  it('has 79 openings total', () => {
-    expect(proRepertoire.openings).toHaveLength(80);
+  it('has 82 openings total', () => {
+    expect(proRepertoire.openings).toHaveLength(82);
   });
 
   it('every opening has a valid playerId', () => {
