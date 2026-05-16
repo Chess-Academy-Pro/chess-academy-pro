@@ -11,20 +11,10 @@ import type { CoachDifficulty, PuzzleRecord } from '../../types';
 
 type KidPuzzlePhase = 'select' | 'loading' | 'playing';
 
-const CORRECT_MESSAGES = [
-  'Amazing job! You are a puzzle star!',
-  'Wow, you solved it! Great thinking!',
-  'Super smart move! Keep going!',
-  'You did it! Chess genius!',
-  'Fantastic! You found the right move!',
-];
-
-const INCORRECT_MESSAGES = [
-  'Good try! Every puzzle makes you stronger!',
-  'Almost! You will get the next one!',
-  'Keep practicing, you are getting better!',
-  'Nice effort! Let us try another one!',
-];
+// Per non-negotiable #5, per-puzzle voice praise is banned —
+// it tunes out within minutes. The on-screen overlay (⭐ correct
+// / 💪 incorrect) carries the per-puzzle feedback. Voice fires
+// only at session summary (handleDone → kidSpeak).
 
 const DIFFICULTY_INFO: Record<CoachDifficulty, { emoji: string; label: string; description: string }> = {
   easy:   { emoji: '🌱', label: 'Beginner', description: 'Simple puzzles to get started' },
@@ -137,10 +127,9 @@ export function KidPuzzlePage(): JSX.Element {
       );
     }
 
+    // Per-puzzle voice deliberately silent — see comment near the
+    // (removed) CORRECT_MESSAGES / INCORRECT_MESSAGES arrays.
     voiceService.stop();
-    const messages = correct ? CORRECT_MESSAGES : INCORRECT_MESSAGES;
-    const msg = messages[Math.floor(Math.random() * messages.length)];
-    kidSpeak(msg);
 
     // Auto-advance to next puzzle
     autoAdvanceTimerRef.current = setTimeout(() => {

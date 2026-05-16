@@ -14,7 +14,14 @@ type GamePhase = 'intro' | 'playing' | 'complete';
 
 const AUTO_PLAY_DELAY_MS = 1200;
 const WRONG_MOVE_DISPLAY_MS = 1800;
-const CELEBRATION_MESSAGES = [
+// Per non-negotiable #5, per-move voice praise is banned. The
+// on-screen flash carries the per-move feedback; voice fires
+// only on milestone moves ('You earned a star!') and the
+// game-complete outro narration.
+const MILESTONE_VOICE = 'You earned a star!';
+// Visual-only celebration banner (no voice). Variety prevents
+// the flash text from going stale across a 20-move walkthrough.
+const CELEBRATION_TEXT = [
   'Great move!',
   'Perfect!',
   'You got it!',
@@ -181,7 +188,7 @@ export function GuidedGamePage(): JSX.Element {
     if (isCorrect) {
       // Correct move!
       setFeedback('correct');
-      const celebration = CELEBRATION_MESSAGES[Math.floor(Math.random() * CELEBRATION_MESSAGES.length)];
+      const celebration = CELEBRATION_TEXT[Math.floor(Math.random() * CELEBRATION_TEXT.length)];
       setCelebrationText(celebration);
       setWrongAttempts(0);
 
@@ -196,10 +203,11 @@ export function GuidedGamePage(): JSX.Element {
 
       if (currentMove.isMilestone) {
         setStarsEarned((s) => s + 1);
-        kidSpeak(`${celebration} You earned a star!`);
-      } else {
-        kidSpeak(celebration);
+        kidSpeak(MILESTONE_VOICE);
       }
+      // Non-milestone correct moves: visual celebration only. The
+      // narration block (currentMove.narration) speaks separately
+      // when set, after the feedback timeout below.
 
       feedbackTimeoutRef.current = setTimeout(() => {
         setFeedback(null);
