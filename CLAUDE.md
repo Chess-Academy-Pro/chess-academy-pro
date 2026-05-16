@@ -1013,6 +1013,7 @@ After every `git push origin main`:
    | `/tactics/*` | `scripts/audit-tactics.mjs` |
    | `/weaknesses` (or its tab/row → review flow) | `scripts/audit-weaknesses.mjs` |
    | `/openings/*` | `scripts/audit-openings-ui.mjs` (coordinate — often 🚧 in flight) |
+   | `/openings/:id` trap + warning tiles | `scripts/audit-opening-trap-tiles.mjs` |
    | `/` (dashboard) + SmartSearchBar | `scripts/audit-dashboard.mjs` |
    | settings toggles | `scripts/audit-settings-behavior.mjs` |
    | Cross-surface UI scaffolding | run multiple of the above |
