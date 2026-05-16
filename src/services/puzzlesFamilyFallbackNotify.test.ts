@@ -60,6 +60,29 @@ describe('puzzlesFamilyFallbackNotify', () => {
       expect(prompt.toLowerCase()).toContain('no first-person');
       expect(prompt.toLowerCase()).toContain('no ui references');
     });
+
+    it('framing itself avoids UI words — brain mimics example phrasing more than rule lists', () => {
+      // The brain follows the framing's phrasing more than the rules
+      // it's told to follow. "The student tapped their card" leaks
+      // UI vocabulary into the response even with an explicit "no UI
+      // references" instruction. Keep the framing subject-matter only.
+      const prompt = buildPuzzlesFamilyFallbackPrompt({
+        favoritedOpening: 'Italian Game', family: 'Italian Game', count: 192,
+      });
+      const factual = prompt.split(/Respond in/i)[0] ?? '';
+      // The rules section may legitimately mention UI words in the
+      // ban list ("no UI references"); only the factual framing
+      // before "Respond in..." must stay UI-free.
+      expect(factual.toLowerCase()).not.toMatch(/\b(tap|tapped|card|rolodex|click|button|screen|page)\b/);
+    });
+
+    it('includes the librarian-vs-coach tone anchor', () => {
+      const prompt = buildPuzzlesFamilyFallbackPrompt({
+        favoritedOpening: 'X', family: 'Y', count: 10,
+      });
+      expect(prompt.toLowerCase()).toContain('coach pointing');
+      expect(prompt.toLowerCase()).toContain('librarian');
+    });
   });
 
   describe('requestPuzzlesFamilyFallbackVoice', () => {

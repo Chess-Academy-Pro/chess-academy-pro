@@ -45,18 +45,26 @@ export interface PuzzlesFamilyFallbackInput {
  *  the brain has exactly the three facts (favorited opening, family,
  *  count) without ambient context bleeding in.
  *
- *  The brain is instructed (via the standard system prompt) to
- *  respond in coach voice — one short line, no UI references, no
- *  meta-coaching. We ask explicitly for one sentence so the
- *  response doesn't expand into a lesson the student didn't ask for. */
+ *  Carefully avoids UI references ("tapped a card", "the rolodex")
+ *  in the FRAMING — the brain mimics example phrasing more than it
+ *  follows rule lists, and a UI-flavored framing leaks through to
+ *  the response even with explicit bans. Instead: the student "is
+ *  studying" the opening and "wants to practice." Pure subject-
+ *  matter language.
+ *
+ *  The tone anchor ("coach pointing forward, not librarian
+ *  explaining the catalog") shifts the register from informational
+ *  to instructional — meaningful one-line lever per Dave's review. */
 export function buildPuzzlesFamilyFallbackPrompt(
   input: PuzzlesFamilyFallbackInput,
 ): string {
   const { favoritedOpening, family, count } = input;
   return [
-    `The student tapped their "${favoritedOpening}" rolodex card to practice puzzles, but no Lichess puzzles are tagged with that exact variation.`,
-    `Fallback: the broader ${family} family has ${count} tagged puzzle${count === 1 ? '' : 's'} available.`,
-    'Respond in ONE coach-voice sentence acknowledging the fallback and pointing the student at the family puzzles. Concrete, no first-person, no UI references, no "good choice" pleasantries.',
+    `The student is studying the ${favoritedOpening} and wants to practice puzzles.`,
+    `No Lichess puzzles are tagged with that exact variation, but the broader ${family} family has ${count} tagged puzzle${count === 1 ? '' : 's'} available.`,
+    'Respond in ONE coach-voice sentence acknowledging the fallback and pointing the student at the family puzzles.',
+    'Concrete, no first-person, no UI references, no "good choice" pleasantries.',
+    'Speak like a coach pointing the student forward, not like a librarian explaining a catalog.',
   ].join(' ');
 }
 
