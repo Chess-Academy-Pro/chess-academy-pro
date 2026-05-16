@@ -216,7 +216,7 @@ describe('KidModePage', () => {
 
     expect(screen.getByTestId('king-games-card')).toBeInTheDocument();
     expect(screen.getByText('King Games')).toBeInTheDocument();
-    expect(screen.getByText('King Escape & King March')).toBeInTheDocument();
+    expect(screen.getByText('Escape · March')).toBeInTheDocument();
   });
 
   it('renders knight games card', () => {
