@@ -80,7 +80,7 @@ describe('getTrapLineKind classification lookup', () => {
     // these to non-trap, this test fires.
     expect(getTrapLineKind('pro-ericrosen-stafford', 'Oh No My Queen Trap')).toBe('trap');
     expect(getTrapLineKind('pro-samayraina-italian', "Legal's Mate Setup")).toBe('trap');
-    expect(getTrapLineKind('pro-carlsen-ruy-lopez', "Noah's Ark Trap")).toBe('trap');
+    expect(getTrapLineKind('pro-firouzja-ruy-lopez', 'Open Tarrasch Trap')).toBe('trap');
     expect(getTrapLineKind('pro-naroditsky-jobava-london', 'Nb5-Nc7 Fork Trap')).toBe('trap');
   });
 

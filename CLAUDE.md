@@ -248,29 +248,70 @@ spine; don't reinvent it.
   function carries a UA fallback chain because Lichess's CDN 401s
   iOS Safari's default UA.
 
-**Trap-data taxonomy (commits `79f3a20`, `d575c84`).** Three kinds
-across every "punish-style" lesson — drives whether the entry
-surfaces as a bright-red TRAP tile or stays internal as a softer
-chip:
+**Trap-data taxonomy (commits `79f3a20`, `d575c84`, `2204166`).**
+Two parallel arrays per opening — `trapLines[]` (student weapons)
+and `warningLines[]` (student anti-traps to avoid) — with three
+kinds inside `trapLines[]` that drive whether the entry surfaces
+as a bright-red TRAP tile or stays internal as a softer chip:
+
+**The orientation contract (David's rule, audit 2026-05-16):**
+- `trapLines[]` — STUDENT WEAPONS. The OPPONENT makes a natural-
+  looking slip; the student plays the principled / tactical reply
+  and ends up better. The PGN should end with the student gaining
+  material, delivering mate, or accumulating decisive positional
+  advantage. **`scripts/audit-trap-orientation.mjs` enforces this**
+  and `src/data/pro-repertoires-orientation.test.ts` is the build-
+  time gate. Inverted entries (where the PGN literally shows the
+  student losing material) get moved to `warningLines[]`.
+- `warningLines[]` — STUDENT ANTI-TRAPS. The line shows what
+  happens if THE STUDENT falls into a trap — the student is the
+  one who slips and gets punished. Used to scare the student off
+  the bad move. PGN ends with the student down material or
+  positionally lost. Used to live empty; pre-existing schema +
+  UI support since `OpeningDetailPage` carries a "train warnings"
+  button that walks these lines. Audit script flags
+  `TOOTHLESS_WARNING` when a warning line accidentally rewards
+  the student (then it should be in `trapLines[]` instead).
+
+**Three kinds inside `trapLines[]`** (sidecar
+`src/data/trap-line-classifications.json`):
 - `trap`    : opponent's natural-looking move has a CONCRETE
               tactical refutation (forced material/mate within ~3
-              plies). Bright-red chip. Examples: Noah's Ark Trap,
-              Legal's Mate, Nb5-Nc7 fork, Stafford "Oh No My
-              Queen", Qb6-Nb5 queen trap. ONLY these reach the
-              line picker as red TRAP tiles.
+              plies). Bright-red chip. Examples: Legal's Mate,
+              Nb5-Nc7 fork, Stafford "Oh No My Queen", Qb6-Nb5
+              queen trap, Open Tarrasch Trap. ONLY these reach
+              the line picker as red TRAP tiles.
+              **Sacrificial attacks** where the win is positional
+              accumulation (Fried Liver, Milner-Barry Greek gift,
+              Bxf7 sacs) do NOT belong here — they're `mistake`.
+              Reclassified 2026-05-16 after audit flagged them as
+              "trap PGN ends with student down material."
 - `mistake` : counting / structural blunder, no forced tactic —
               "now you're better" via principle. Amber chip.
               Examples: doubled pawns from a6 Bxc6, gambit accepted
-              with structural edge, knight chases that lose tempo.
+              with structural edge, knight chases that lose tempo,
+              sacrificial gambits where the win is positional.
 - `theme`   : long maneuvering middlegame plan. Blue chip.
               Examples: Berlin Wall bishop pair, KID kingside storm,
               Stonewall fortress, Catalan diagonal pressure.
 
+**Side-of-the-board check.** Before adding a new trapLine, ask:
+*who plays the bad move, who plays the punishment?* The
+punishment-side must match the opening's `color` (the side the
+student plays). Noah's Ark Trap (Black's c5-c4 entombing White's
+Bb3) was wrongly listed under three WHITE Ruy Lopez repertoires
+(Carlsen, Firouzja, Praggnanandhaa) — student-side mismatch.
+Removed 2026-05-16; replaced with Berlin Tarrasch Trap, Open
+Tarrasch Trap, and Bird's Defense Refutation (all canonical
+white-side Ruy Lopez lines from `openings-lichess.json`).
+
 Two data sources, same taxonomy:
-- `pro-repertoires.json > trapLines[]` — classified via the
-  sidecar file `src/data/trap-line-classifications.json` (keyed
+- `pro-repertoires.json > trapLines[]` and `warningLines[]` —
+  classified via the sidecar file
+  `src/data/trap-line-classifications.json` (keyed
   `<openingId>::<trapName>` → kind). Sidecar so the curated
-  source JSON stays untouched.
+  source JSON stays untouched. `warningLines[]` carry no
+  classification (the role IS the classification).
 - `vienna.ts > punish[]` — embedded `kind` field on each
   `PunishLesson`. New static walkthroughs (if any are ever added)
   should set this field directly.
