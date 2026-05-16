@@ -99,12 +99,15 @@ body {
 
 /* ─── Scroll-hint indicator ───────────────────────────────────────────────── */
 /* A solid gold bar with a soft gold-white glint that slides
-   continuously across it. Sweeps in ONE direction (left→right for x,
-   top→bottom for y) on a slow loop so the surface always reads as
-   alive. The shine starts off-bar so its leading edge fades in over
-   the bar rather than popping. */
+   continuously across it. The shine is a 50%-of-bar wide element
+   with an asymmetric gradient (brightness builds toward its leading
+   edge, fades to transparent at both extremes) so what the eye reads
+   is a brightness shift travelling, not a shape sliding. Sweeps
+   left→right for x, top→bottom for y. Element starts fully off-bar
+   on the trailing side so its first appearance is the soft tail
+   easing in, not the bright peak popping. */
 @keyframes scrollHintSweepX {
-  0%   { left: -40%;  opacity: 0;   }
+  0%   { left: -50%;  opacity: 0;   }
   15%  { opacity: 1;                }
   85%  { opacity: 1;                }
   100% { left: 100%;  opacity: 0;   }
@@ -113,7 +116,7 @@ body {
   animation: scrollHintSweepX 3.2s ease-in-out infinite;
 }
 @keyframes scrollHintSweepY {
-  0%   { top: -40%;   opacity: 0;   }
+  0%   { top: -50%;   opacity: 0;   }
   15%  { opacity: 1;                }
   85%  { opacity: 1;                }
   100% { top: 100%;   opacity: 0;   }

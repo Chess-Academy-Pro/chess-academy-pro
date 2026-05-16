@@ -46,25 +46,25 @@ interface ScrollHintBarProps {
   className?: string;
 }
 
-// Shine gradients — soft, symmetric falloff from transparent → gold
-// → near-white centre → gold → transparent. No clip-path; the
-// gradient itself IS the shape. Reads as a glint sliding across the
-// bar rather than a discrete shape moving over it.
+// Shine gradients — asymmetric, soft. Transparent left tail builds
+// gradually through warm gold to a near-white peak near the leading
+// (right / bottom) edge, then fades back to fully transparent at the
+// very edge so there's no hard boundary where the box ends. The
+// gradient itself defines the visible shape — no box-shadow halo,
+// because a shadow draws around the element's BOUNDING RECTANGLE
+// and reads as a defined object travelling. With no shadow + soft
+// edges, the eye sees a brightness shift moving across the bar, not
+// a shape sliding over it.
 const SHINE_GRADIENT_X =
-  'linear-gradient(90deg, rgba(255, 245, 200, 0) 0%, rgba(255, 225, 130, 0.45) 25%, rgba(255, 250, 220, 0.95) 50%, rgba(255, 225, 130, 0.45) 75%, rgba(255, 245, 200, 0) 100%)';
+  'linear-gradient(90deg, rgba(255, 245, 200, 0) 0%, rgba(255, 230, 150, 0.18) 45%, rgba(255, 245, 200, 0.55) 75%, rgba(255, 255, 235, 0.95) 90%, rgba(255, 245, 200, 0) 100%)';
 const SHINE_GRADIENT_Y =
-  'linear-gradient(180deg, rgba(255, 245, 200, 0) 0%, rgba(255, 225, 130, 0.45) 25%, rgba(255, 250, 220, 0.95) 50%, rgba(255, 225, 130, 0.45) 75%, rgba(255, 245, 200, 0) 100%)';
+  'linear-gradient(180deg, rgba(255, 245, 200, 0) 0%, rgba(255, 230, 150, 0.18) 45%, rgba(255, 245, 200, 0.55) 75%, rgba(255, 255, 235, 0.95) 90%, rgba(255, 245, 200, 0) 100%)';
 
 // Three-layer glow: outer halo, mid bloom, inner highlight. Same
 // gold, three magnitudes — the bar reads as "lit" rather than
 // "drawn."
 const TRACK_GLOW =
   '0 0 24px rgba(251, 191, 36, 0.35), 0 0 8px rgba(251, 191, 36, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4)';
-// Shine glow stack: a soft warm bloom that follows the moving glint
-// so the brightness halo travels with it rather than being trapped
-// inside the bar's clip.
-const SHINE_GLOW =
-  '0 0 24px rgba(255, 230, 130, 0.75), 0 0 10px rgba(255, 245, 200, 0.9)';
 
 /** Build a spotlight gradient: brightest gold at `at`, falling off
  *  toward the edges. Falls back to a flat gold when `at` is null. */
@@ -146,12 +146,9 @@ export function ScrollHintBar({
       >
         <div className="absolute inset-0 rounded-full overflow-hidden">
           <div
-            className="absolute top-0 h-full w-40 animate-scroll-hint-x"
+            className="absolute top-0 h-full w-1/2 animate-scroll-hint-x"
             data-testid="scroll-hint-shine"
-            style={{
-              background: SHINE_GRADIENT_X,
-              boxShadow: SHINE_GLOW,
-            }}
+            style={{ background: SHINE_GRADIENT_X }}
           />
         </div>
       </div>
@@ -170,12 +167,9 @@ export function ScrollHintBar({
     >
       <div className="absolute inset-0 rounded-full overflow-hidden">
         <div
-          className="absolute left-0 w-full h-40 animate-scroll-hint-y"
+          className="absolute left-0 w-full h-1/2 animate-scroll-hint-y"
           data-testid="scroll-hint-shine"
-          style={{
-            background: SHINE_GRADIENT_Y,
-            boxShadow: SHINE_GLOW,
-          }}
+          style={{ background: SHINE_GRADIENT_Y }}
         />
       </div>
     </div>
