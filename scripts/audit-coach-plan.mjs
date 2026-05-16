@@ -26,14 +26,20 @@
  */
 import { chromium } from 'playwright';
 import { resolveChromiumExecutable } from './audit-lib/chromium.mjs';
+import { startAuditListener } from './audit-lib/audit-listener.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const BASE_URL = process.env.AUDIT_SMOKE_URL ?? 'https://chess-academy-pro.vercel.app';
-const SECRET =
+const PROD_SECRET =
   process.env.AUDIT_STREAM_SECRET ??
   '06fe5f2383534090df8b6ba11e79088eb665ec780175df4f032befc02a530782';
-const STREAM_URL = `${BASE_URL}/api/audit-stream`;
+// Use the local sidecar listener when running against localhost — the
+// browser POSTs go to a real handler we control, so we verify the
+// full streaming round-trip (not just the outgoing body via
+// page.on('request')). Against prod we still use the deployed
+// /api/audit-stream endpoint.
+const USE_SIDECAR = BASE_URL.includes('localhost');
 const HEADED = process.env.AUDIT_SMOKE_HEADED === '1';
 const stamp = new Date().toISOString().replace(/[:.]/g, '-');
 const OUT_DIR = `audit-reports/coach-plan-${stamp}`;
@@ -55,6 +61,15 @@ async function main() {
   console.log(`[coach-plan] base    = ${BASE_URL}`);
   console.log(`[coach-plan] outDir  = ${OUT_DIR}`);
   console.log(`[coach-plan] headed  = ${HEADED}`);
+
+  // Stand up a sidecar /audit-stream listener when targeting localhost
+  // so the browser's POSTs land on a real handler and we can verify
+  // the round-trip (POST in → GET out). Against prod we point at the
+  // deployed endpoint as before.
+  const listener = USE_SIDECAR ? await startAuditListener() : null;
+  const STREAM_URL = listener?.url ?? `${BASE_URL}/api/audit-stream`;
+  const SECRET = listener?.secret ?? PROD_SECRET;
+  if (listener) console.log(`[coach-plan] listener = ${listener.url} (sidecar)`);
 
   const executablePath = await resolveChromiumExecutable(HEADED);
   if (executablePath) console.log(`[coach-plan] chromium = ${executablePath}`);
@@ -343,6 +358,33 @@ async function main() {
     (s.expectations ?? []).filter((e) => !e.ok).map((e) => ({ surface: s.name, ...e })),
   );
 
+  // Round-trip check: when running with the sidecar listener, compare
+  // browser-side intercepted POST bodies against what the listener
+  // actually received and stored. Any divergence means a POST failed
+  // server-side (network error, secret mismatch, malformed body)
+  // even though the browser thought it sent.
+  if (listener) {
+    const listenerEvents = listener.getCapturedEvents();
+    report.listenerRoundTrip = {
+      browserSidePOSTs: captured.length,
+      listenerSideReceived: listenerEvents.length,
+      mismatch: captured.length !== listenerEvents.length,
+      kindCountsListener: listener.countByKind(),
+      narrationSampleFromListener: listener
+        .eventsOfKind('coach-narration-spoken')
+        .slice(0, 5)
+        .map((e) => ({
+          textPreview:
+            (typeof e.payload === 'object' ? e.payload?.textPreview : null) ??
+            String(e.summary ?? '').slice(0, 80),
+          timestamp: e.timestamp,
+        })),
+    };
+    console.log(
+      `[coach-plan] listener: browser-sent=${captured.length}  server-received=${listenerEvents.length}  ${report.listenerRoundTrip.mismatch ? '⚠ MISMATCH' : '✓ round-trip ok'}`,
+    );
+  }
+
   await writeFile(join(OUT_DIR, 'report.json'), JSON.stringify(report, null, 2));
   console.log(
     `\n[coach-plan] done — ${captured.length} total events, ${consoleErrors.length} console.errors, ${pageErrors.length} pageerrors`,
@@ -358,6 +400,7 @@ async function main() {
   console.log(`[coach-plan] report: ${OUT_DIR}/report.json`);
 
   await browser.close();
+  if (listener) await listener.stop();
   process.exit(failedExpectations.length === 0 ? 0 : 1);
 }
 
