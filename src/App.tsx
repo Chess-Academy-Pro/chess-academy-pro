@@ -69,6 +69,7 @@ import { KingMarchGame } from './components/Kid/KingMarchGame';
 import { KingGamesPage } from './components/Kid/KingGamesPage';
 import { BishopGamesPage, BishopVsPawnsRoute, ColorWarsRoute } from './components/Kid/BishopGamesPage';
 import { KidPiecePuzzlesPage } from './components/Kid/KidPiecePuzzlesPage';
+import { PieceMazePage } from './components/Kid/PieceMazePage';
 import { KnightGamesPage } from './components/Kid/KnightGamesPage';
 import { LeapFrogGame } from './components/Kid/LeapFrogGame';
 import { KnightSweepGame } from './components/Kid/KnightSweepGame';
@@ -352,6 +353,14 @@ export function App(): JSX.Element {
           <Route path="/kid/bishop-games/puzzles" element={<ErrorBoundary><KidPiecePuzzlesPage piece="bishop" /></ErrorBoundary>} />
           <Route path="/kid/queen-games/puzzles"  element={<ErrorBoundary><KidPiecePuzzlesPage piece="queen" /></ErrorBoundary>} />
           <Route path="/kid/king-games/puzzles"   element={<ErrorBoundary><KidPiecePuzzlesPage piece="king" /></ErrorBoundary>} />
+          {/* Phase 7 — generic piece-maze sandbox levels. 5 levels per
+              piece × 6 pieces = 30 new sandbox levels. */}
+          <Route path="/kid/pawn-games/maze/:level"   element={<ErrorBoundary><PieceMazePage piece="pawn" /></ErrorBoundary>} />
+          <Route path="/kid/rook-games/maze/:level"   element={<ErrorBoundary><PieceMazePage piece="rook" /></ErrorBoundary>} />
+          <Route path="/kid/knight-games/maze/:level" element={<ErrorBoundary><PieceMazePage piece="knight" /></ErrorBoundary>} />
+          <Route path="/kid/bishop-games/maze/:level" element={<ErrorBoundary><PieceMazePage piece="bishop" /></ErrorBoundary>} />
+          <Route path="/kid/queen-games/maze/:level"  element={<ErrorBoundary><PieceMazePage piece="queen" /></ErrorBoundary>} />
+          <Route path="/kid/king-games/maze/:level"   element={<ErrorBoundary><PieceMazePage piece="king" /></ErrorBoundary>} />
           <Route path="/kid/:piece" element={<ErrorBoundary><KidPiecePage /></ErrorBoundary>} />
         </Route>
       </Routes>

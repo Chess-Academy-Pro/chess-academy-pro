@@ -23,6 +23,8 @@
 // ControlledChessBoard, ChessBoard, or react-chessboard directly under
 // src/components/Kid/.
 
+import type { CSSProperties } from 'react';
+import type { SquareHandlerArgs } from 'react-chessboard';
 import { ChessBoard, type ChessBoardProps } from '../Board/ChessBoard';
 import {
   ControlledChessBoard,
@@ -47,8 +49,14 @@ type ValidatingKidProps = Omit<
 interface StaticKidProps {
   fen: string | PiecePositionMap;
   boardOrientation?: 'white' | 'black';
-  interactive?: false;
+  interactive?: boolean;
   className?: string;
+  /** Click handler for square-tap interactions on a static board
+   *  (piece-maze gameplay routes square clicks through here rather
+   *  than chess.js move validation). */
+  onSquareClick?: (args: SquareHandlerArgs) => void;
+  /** Custom per-square styling — e.g. legal-move dots, target tint. */
+  squareStyles?: Record<string, CSSProperties>;
 }
 
 export type KidChessboardProps =
@@ -95,8 +103,10 @@ export function KidChessboard(props: KidChessboardProps): JSX.Element {
     <ConsistentChessboard
       fen={props.fen}
       boardOrientation={props.boardOrientation}
-      interactive={false}
+      interactive={props.interactive ?? false}
       className={props.className}
+      onSquareClick={props.onSquareClick}
+      squareStyles={props.squareStyles}
     />
   );
 }

@@ -133,6 +133,25 @@ export function BishopGamesPage(): JSX.Element {
             </div>
           </div>
         </button>
+
+        <button
+          onClick={() => void navigate('/kid/bishop-games/maze/1')}
+          className="rounded-xl p-5 border-2 flex items-center gap-4 hover:opacity-80 transition-opacity w-full text-left"
+          style={{
+            background: 'var(--color-surface)',
+            borderColor: 'var(--color-accent)',
+            boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+          }}
+          data-testid="bishop-maze-card"
+        >
+          <span className="text-2xl">🧭</span>
+          <div className="flex-1">
+            <div className="font-bold text-lg">Bishop Path</div>
+            <div className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+              Guide the bishop to the target square.
+            </div>
+          </div>
+        </button>
       </div>
     </div>
   );
