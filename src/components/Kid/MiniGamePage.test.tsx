@@ -209,13 +209,13 @@ describe('MiniGamePage', () => {
     expect(screen.getByTestId('mock-chessboard')).toBeInTheDocument();
   });
 
-  // 7. Back button navigates to /kid/mini-games
-  it('back button navigates to /kid/mini-games', () => {
+  // 7. Back button navigates to /kid/pawn-games
+  it('back button navigates to /kid/pawn-games', () => {
     render(<MiniGamePage gameId="pawn-wars" />);
 
     fireEvent.click(screen.getByTestId('mini-game-back'));
 
-    expect(mockNavigate).toHaveBeenCalledWith('/kid/mini-games');
+    expect(mockNavigate).toHaveBeenCalledWith('/kid/pawn-games');
   });
 
   // 8. Shows locked screen when level is locked
@@ -263,7 +263,7 @@ describe('MiniGamePage', () => {
 
     fireEvent.click(screen.getByTestId('mini-game-next'));
 
-    expect(mockNavigate).toHaveBeenCalledWith('/kid/mini-games/pawn-wars/2');
+    expect(mockNavigate).toHaveBeenCalledWith('/kid/pawn-games/pawn-wars/2');
   });
 
   // 11. Won phase "Play Again" restarts game
@@ -402,14 +402,14 @@ describe('MiniGamePage', () => {
   });
 
   // 19. Locked screen back button navigates to mini-games
-  it('locked screen back button navigates to /kid/mini-games', () => {
+  it('locked screen back button navigates to /kid/pawn-games', () => {
     mockIsUnlocked.mockReturnValue(false);
 
     render(<MiniGamePage gameId="pawn-wars" />);
 
     fireEvent.click(screen.getByText('Back to Mini-Games'));
 
-    expect(mockNavigate).toHaveBeenCalledWith('/kid/mini-games');
+    expect(mockNavigate).toHaveBeenCalledWith('/kid/pawn-games');
   });
 
   // 20. voiceService.stop is called when Start is clicked
