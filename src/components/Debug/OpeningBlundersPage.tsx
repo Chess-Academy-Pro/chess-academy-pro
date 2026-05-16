@@ -13,7 +13,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Chess } from 'chess.js';
 import { ArrowLeft, ChevronRight, Target, Flame } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ConsistentChessboard } from '../Chessboard/ConsistentChessboard';
 import { ChessLessonLayout } from '../Layout/ChessLessonLayout';
 import { useEndgamePlayout } from '../../hooks/useEndgamePlayout';
@@ -305,6 +305,31 @@ export function OpeningBlundersPage(): JSX.Element {
   const [activeFamily, setActiveFamily] = useState<string | null>(null);
   const [activeColor, setActiveColor] = useState<ColorTab>('white');
   const [activePuzzle, setActivePuzzle] = useState<OpeningBlunderPuzzle | null>(null);
+
+  // Rolodex deep-link filter (WO-ROLODEX-PLUMBING-01 item 3c). When
+  // `/tactics/opening-traps?opening=<name>` is set, auto-select the
+  // matching family so the user lands in the family-detail view for
+  // that opening instead of the generic picker. Match strategy: case-
+  // insensitive against both `family` (machine key, e.g. "italian
+  // game") and `label` (display, e.g. "Italian Game"). Falls through
+  // to the picker if no match — better than silently swallowing the
+  // param.
+  const [searchParams] = useSearchParams();
+  const rolodexFilterFiredRef = useRef(false);
+  useEffect(() => {
+    if (rolodexFilterFiredRef.current) return;
+    if (allFamilies.length === 0) return;
+    const targetName = searchParams.get('opening');
+    if (!targetName) return;
+    rolodexFilterFiredRef.current = true;
+    const trimmed = targetName.trim().toLowerCase();
+    const match = allFamilies.find(
+      (f) => f.family.toLowerCase() === trimmed || f.label.toLowerCase() === trimmed,
+    );
+    if (match) {
+      setActiveFamily(match.family);
+    }
+  }, [allFamilies, searchParams]);
 
   // Ordered list of puzzles for the active family + color — drives
   // auto-advance. Adaptive-sorted (closest-to-rating first) so the

@@ -2,11 +2,15 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '../../test/utils';
 import { CoachGamePage } from './CoachGamePage';
 import { useAppStore } from '../../stores/appStore';
+import { useCoachMemoryStore } from '../../stores/coachMemoryStore';
+import { voiceService } from '../../services/voiceService';
 import { buildUserProfile } from '../../test/factories';
 
 vi.mock('../../services/voiceService', () => ({
   voiceService: {
     speak: vi.fn().mockResolvedValue(undefined),
+    speakForced: vi.fn().mockResolvedValue(undefined),
+    speakForcedPollyOnly: vi.fn().mockResolvedValue(undefined),
     stop: vi.fn(),
   },
 }));
@@ -274,5 +278,104 @@ describe('CoachGamePage', () => {
   it('does not show explore engine eval initially', () => {
     render(<CoachGamePage />);
     expect(screen.queryByTestId('explore-engine-eval')).not.toBeInTheDocument();
+  });
+
+  // ─── Rolodex entry beat — WO-ROLODEX-PLUMBING-01 item 1 ─────────────────────
+  // The entry beat is the rolodex's "the coach knows what you tapped" signal.
+  // Wires `intendedOpening` (set by the rolodex URL deep-link) through to
+  // `voiceService.speakForced` AND the chat-mirror inject path. These tests
+  // pin both boundaries so a regression in the voice channel (e.g.
+  // useNarration → speakForced wire-up breaking) is caught at the unit-test
+  // level, since the e2e audit assertion only verifies the chat-mirror
+  // (voice routing in headless Chromium is too fragile to gate on).
+  describe('rolodex entry beat', () => {
+    beforeEach(() => {
+      // Reset between tests so guard refs don't carry over.
+      useCoachMemoryStore.setState({ intendedOpening: null });
+      vi.mocked(voiceService.speakForced).mockClear();
+    });
+
+    /** Helper — flush React effects + queued timers under fake timers.
+     *  useNarration's speakNow runs inside a useEffect dispatched by
+     *  the React scheduler, which queues via microtasks + timers. */
+    async function flushEntryBeat(): Promise<void> {
+      // Drain pending microtasks (React effect scheduling).
+      await vi.advanceTimersByTimeAsync(0);
+      // Drain timers (useNarration's dedup window + any setTimeout
+      // chains inside the speak path mocks).
+      await vi.advanceTimersByTimeAsync(100);
+    }
+
+    it('fires voiceService.speakForced when intent was captured from URL', async () => {
+      useCoachMemoryStore.setState({
+        intendedOpening: {
+          name: 'Italian Game',
+          color: 'white',
+          setAt: Date.now(),
+          capturedFromSurface: 'url-or-resume',
+        },
+      });
+      render(<CoachGamePage />);
+      await flushEntryBeat();
+      // useNarration's dedup window may suppress the first speak if
+      // the test infra fires multiple effects within 6s of fake time;
+      // also drain longer to be sure.
+      await vi.advanceTimersByTimeAsync(7000);
+      const calls = vi.mocked(voiceService.speakForced).mock.calls;
+      const entryBeatCall = calls.find(
+        (args) => typeof args[0] === 'string' && /^Italian Game as White\./.test(args[0]),
+      );
+      // Diagnostic: dump store state + all speakForced calls if assertion fails
+      const storeState = useCoachMemoryStore.getState().intendedOpening;
+      expect(
+        entryBeatCall,
+        `speakForced calls: ${JSON.stringify(calls.map((c) => c[0]))}; storeState: ${JSON.stringify(storeState)}`,
+      ).toBeDefined();
+    });
+
+    it('formats the spoken text with the side label matching intendedOpening.color', async () => {
+      useCoachMemoryStore.setState({
+        intendedOpening: {
+          name: 'Caro-Kann Defense',
+          color: 'black',
+          setAt: Date.now(),
+          capturedFromSurface: 'url-or-resume',
+        },
+      });
+      render(<CoachGamePage />);
+      await flushEntryBeat();
+      const calls = vi.mocked(voiceService.speakForced).mock.calls;
+      const entryBeat = calls.find(
+        (args) => typeof args[0] === 'string' && /^Caro-Kann Defense as Black\./.test(args[0]),
+      );
+      expect(entryBeat).toBeDefined();
+    });
+
+    it('does NOT fire when intent was captured from chat (not URL)', async () => {
+      useCoachMemoryStore.setState({
+        intendedOpening: {
+          name: 'Italian Game',
+          color: 'white',
+          setAt: Date.now(),
+          capturedFromSurface: 'in-game-chat',
+        },
+      });
+      render(<CoachGamePage />);
+      await flushEntryBeat();
+      const italianCalls = vi
+        .mocked(voiceService.speakForced)
+        .mock.calls.filter((args) => typeof args[0] === 'string' && /italian game/i.test(args[0]));
+      expect(italianCalls).toHaveLength(0);
+    });
+
+    it('does NOT fire when no intent is set', async () => {
+      // intendedOpening is null per the beforeEach reset
+      render(<CoachGamePage />);
+      await flushEntryBeat();
+      const italianCalls = vi
+        .mocked(voiceService.speakForced)
+        .mock.calls.filter((args) => typeof args[0] === 'string' && /italian game/i.test(args[0]));
+      expect(italianCalls).toHaveLength(0);
+    });
   });
 });

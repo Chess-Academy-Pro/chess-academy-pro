@@ -151,6 +151,11 @@ export type AuditKind =
   // from a surface that has been migrated to coachService.ask. Used in
   // production logs to confirm the migrated path is the one running.
   | 'coach-surface-migrated'
+  // Rolodex entry beat (WO-ROLODEX-PLUMBING-01 item 1). Fires once per
+  // session per opening when /coach/play (or another coach surface in
+  // future) is loaded with `?opening=<name>` and the captured intent
+  // produces the rolodex's signature entry-narration line.
+  | 'rolodex-entry-beat'
   // Coach-hub navigation (WO-COACH-UNIFY-01 audit item #15). Fires
   // when the user taps a tile on the Coach hub so a "I went to
   // Coach but ended up somewhere else" report has a trail.
