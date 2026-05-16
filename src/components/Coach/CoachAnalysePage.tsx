@@ -10,7 +10,10 @@ import { useAppStore } from '../../stores/appStore';
 import { stockfishEngine } from '../../services/stockfishEngine';
 import { coachService } from '../../coach/coachService';
 import { voiceService } from '../../services/voiceService';
-import { createStreamingSpeaker, type StreamingSpeaker } from '../../services/streamingSpeaker';
+import {
+  createStreamingDispatcher,
+  type StreamingDispatcher,
+} from '../../services/streamingSpeaker';
 import { SENTENCE_END_RE, unwrapSpineError } from '../../services/sanitizeCoachText';
 import { logAppAudit } from '../../services/appAuditor';
 import type { StockfishAnalysis } from '../../types';
@@ -39,22 +42,12 @@ export function CoachAnalysePage(): JSX.Element {
   // Each completed sentence speaks via speakForced as soon as the
   // SENTENCE_END_RE terminator arrives in the stream (first sentence
   // within ~500ms instead of waiting for full LLM completion).
-  // `createStreamingSpeaker` encapsulates the abandoned-on-busy chain
-  // semantics — see streamingSpeaker.ts.
-  const speakerRef = useRef<StreamingSpeaker>(createStreamingSpeaker());
-  const dispatchSentencesFromChunk = useCallback((accumulated: string) => {
-    let remaining = accumulated;
-    let consumed = 0;
-    let match: RegExpExecArray | null;
-    while ((match = SENTENCE_END_RE.exec(remaining)) !== null) {
-      const endIdx = match.index + match[1].length;
-      const sentence = remaining.slice(0, endIdx).trim();
-      if (sentence) speakerRef.current.add(sentence);
-      remaining = remaining.slice(endIdx);
-      consumed += endIdx;
-    }
-    void consumed;
-  }, []);
+  // `createStreamingDispatcher` tracks an accumulated-text cursor so
+  // each sentence dispatches exactly once across all chunks (fixes
+  // the 2026-05-16 voice-loop bug — same shape lived here too).
+  const dispatcherRef = useRef<StreamingDispatcher>(
+    createStreamingDispatcher(SENTENCE_END_RE),
+  );
 
   const analysePosition = useCallback(async (fen: string) => {
     setLoading(true);
@@ -62,7 +55,7 @@ export function CoachAnalysePage(): JSX.Element {
     // Cut any in-flight TTS before starting a new narration. Fresh
     // speaker so a prior stream's abandoned flag doesn't carry over.
     voiceService.stop();
-    speakerRef.current = createStreamingSpeaker();
+    dispatcherRef.current = createStreamingDispatcher(SENTENCE_END_RE);
 
     try {
       // Run Stockfish analysis
@@ -122,7 +115,7 @@ export function CoachAnalysePage(): JSX.Element {
           onChunk: (chunk: string) => {
             explanation += chunk;
             setCoachExplanation(explanation);
-            dispatchSentencesFromChunk(explanation);
+            dispatcherRef.current.push(explanation);
           },
         },
       );
@@ -135,7 +128,7 @@ export function CoachAnalysePage(): JSX.Element {
           summary: result.text.slice(0, 120),
           fen,
         });
-      } else if (speakerRef.current.count() === 0) {
+      } else if (dispatcherRef.current.count() === 0) {
         // Fallback: if no sentence terminator fired (very short
         // response), speak whatever we got.
         void voiceService.speakIfFree(finalText.slice(0, 600));
@@ -146,7 +139,7 @@ export function CoachAnalysePage(): JSX.Element {
     } finally {
       setLoading(false);
     }
-  }, [activeProfile, dispatchSentencesFromChunk]);
+  }, [activeProfile]);
 
   const handleLoadFen = useCallback(() => {
     const fen = fenInput.trim() || START_FEN;
@@ -163,7 +156,7 @@ export function CoachAnalysePage(): JSX.Element {
   const handleFollowUp = useCallback(async (question: string) => {
     setLoading(true);
     voiceService.stop();
-    speakerRef.current = createStreamingSpeaker();
+    dispatcherRef.current = createStreamingDispatcher(SENTENCE_END_RE);
 
     const evalText = analysis
       ? (analysis.isMate
@@ -199,7 +192,7 @@ export function CoachAnalysePage(): JSX.Element {
         onChunk: (chunk: string) => {
           response += chunk;
           setCoachExplanation((prev) => prev + '\n\n' + response);
-          dispatchSentencesFromChunk(response);
+          dispatcherRef.current.push(response);
         },
       },
     );
@@ -211,11 +204,11 @@ export function CoachAnalysePage(): JSX.Element {
         source: 'CoachAnalysePage.handleFollowUp',
         summary: result.text.slice(0, 120),
       });
-    } else if (speakerRef.current.count() === 0) {
+    } else if (dispatcherRef.current.count() === 0) {
       void voiceService.speakIfFree(finalText.slice(0, 400));
     }
     setLoading(false);
-  }, [game.fen, analysis, activeProfile, dispatchSentencesFromChunk]);
+  }, [game.fen, analysis, activeProfile]);
 
   return (
     <div className="flex flex-col pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6 max-w-2xl mx-auto w-full" data-testid="coach-analyse-page">
