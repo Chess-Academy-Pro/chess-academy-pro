@@ -1797,7 +1797,18 @@ export function CoachTeachPage(): JSX.Element {
       // the same Polly pipeline as any other coach turn, and seeded
       // into conversation memory so the brain knows the greeting
       // already happened on the next round-trip.
-      const welcomeLine = 'Welcome to my classroom — what would you like to learn today?';
+      // Rolodex-aware welcome line (WO-ROLODEX-PLUMBING-01 item 3).
+      // When the student arrived via `?opening=<name>` (rolodex deep
+      // link), greet them with the named opening pre-selected and
+      // invite them to start the walkthrough. Otherwise keep the
+      // legacy open-ended classroom greeting.
+      //
+      // Per WO spec: do NOT auto-launch the walkthrough. The student
+      // confirms by typing "yes" / "start" / tapping a Start button.
+      const rolodexOpening = searchParams.get('opening');
+      const welcomeLine = rolodexOpening
+        ? `Ready to start the ${rolodexOpening.trim()} walkthrough?`
+        : 'Welcome to my classroom — what would you like to learn today?';
       setKickoffStatus(null);
       const turnId = `t-${Date.now()}-welcome`;
       setMessages((prev) => [...prev, {
@@ -1817,7 +1828,11 @@ export function CoachTeachPage(): JSX.Element {
       speechChainRef.current = Promise.resolve(voiceService.speakForcedPollyOnly(welcomeLine))
         .catch(() => undefined);
     })();
-     
+
+  // searchParams is read once in the kickoff to pick the welcome
+  // line; we deliberately do NOT re-fire on later searchParams
+  // changes (kickoffFiredRef guards against that anyway).
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeProfile]);
 
   // Layout mirrors CoachGamePage (Play with Coach) — same outer column
@@ -2403,6 +2418,33 @@ export function CoachTeachPage(): JSX.Element {
               ))}
             </div>
           )}
+
+          {/* Rolodex Start button (WO-ROLODEX-PLUMBING-01 item 3a).
+              When the page was opened via `?opening=<name>`, the
+              welcome line invites the student to start that specific
+              walkthrough. The button below makes the start action a
+              single tap instead of requiring a typed reply. Auto-
+              hides once the student sends their first message
+              (messages.length > 1 — welcome already present). */}
+          {searchParams.get('opening') !== null && messages.length === 1 && !streaming && !kickoffStatus && (() => {
+            const rolodexOpening = searchParams.get('opening') as string;
+            const trimmed = rolodexOpening.trim();
+            return (
+              <button
+                type="button"
+                onClick={() => void handleSubmit(`Show me the ${trimmed} walkthrough.`)}
+                className="block w-full mt-3 px-4 py-3 rounded-lg border-2 text-sm font-semibold"
+                style={{
+                  borderColor: 'var(--color-accent, #06b6d4)',
+                  backgroundColor: 'rgba(6, 182, 212, 0.10)',
+                  color: 'var(--color-text)',
+                }}
+                data-testid="rolodex-start-walkthrough"
+              >
+                Start the {trimmed} walkthrough
+              </button>
+            );
+          })()}
         </div>
       </div>
     </div>

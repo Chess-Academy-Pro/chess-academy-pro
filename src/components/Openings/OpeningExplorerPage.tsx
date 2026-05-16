@@ -1,9 +1,10 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   getRepertoireOpenings,
   getOpeningsByEcoLetter,
+  searchOpenings,
   toggleFavorite,
 } from '../../services/openingService';
 import { seedDatabase } from '../../services/dataLoader';
@@ -29,6 +30,7 @@ const ECO_DESCRIPTIONS: Record<string, string> = {
 
 export function OpeningExplorerPage(): JSX.Element {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [repertoire, setRepertoire] = useState<OpeningRecord[]>([]);
   const [searchResultIds, setSearchResultIds] = useState<Set<string> | null>(null);
   const [loading, setLoading] = useState(true);
@@ -49,6 +51,39 @@ export function OpeningExplorerPage(): JSX.Element {
     }
     void load();
   }, []);
+
+  // Rolodex deep-link redirect (WO-ROLODEX-PLUMBING-01 item 3b).
+  // `/openings?opening=<name>` lands here from a rolodex card and we
+  // jump straight to that opening's detail view. Resolution chain:
+  //   1. Exact-name match in the user's repertoire (most common —
+  //      rolodex shows favorited openings)
+  //   2. Fuzzy match in the full openings DB (fallback for
+  //      capitalization / variation drift)
+  //   3. Stay on the explorer (no redirect) if nothing resolves
+  // Uses `replace: true` so the back button returns to the rolodex /
+  // referrer, not back to /openings.
+  const rolodexRedirectFiredRef = useRef(false);
+  useEffect(() => {
+    if (rolodexRedirectFiredRef.current) return;
+    const targetName = searchParams.get('opening');
+    if (!targetName) return;
+    if (loading) return;
+    rolodexRedirectFiredRef.current = true;
+    const trimmed = targetName.trim();
+    const inRepertoire = repertoire.find(
+      (o) => o.name.toLowerCase() === trimmed.toLowerCase(),
+    );
+    if (inRepertoire) {
+      void navigate(`/openings/${inRepertoire.id}`, { replace: true });
+      return;
+    }
+    void (async () => {
+      const results = await searchOpenings(trimmed);
+      if (results.length > 0) {
+        void navigate(`/openings/${results[0].id}`, { replace: true });
+      }
+    })();
+  }, [loading, repertoire, searchParams, navigate]);
 
   // Load ECO groups when switching to "All Openings" tab
   useEffect(() => {

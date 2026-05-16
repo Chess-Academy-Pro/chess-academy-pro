@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { db } from '../../db/schema';
 import { GameCard } from './GameCard';
 import { GameViewer } from './GameViewer';
@@ -12,7 +12,12 @@ export function GameDatabasePage(): JSX.Element {
   const [selectedGame, setSelectedGame] = useState<GameRecord | null>(null);
   const [showImport, setShowImport] = useState(false);
   const [pastedPgn, setPastedPgn] = useState('');
-  const [filterEco, setFilterEco] = useState('');
+  // Initialize filterEco from `?eco=<code>` query param so rolodex
+  // deep-links land with the filter pre-applied (WO-ROLODEX-PLUMBING-01
+  // item 3d). The filter UI shows the value as if the user typed it
+  // and the existing filter pipeline at line 28 applies it visually.
+  const [searchParams] = useSearchParams();
+  const [filterEco, setFilterEco] = useState(() => (searchParams.get('eco') ?? '').trim());
   const [filterSource, setFilterSource] = useState<string>('all');
 
   useEffect(() => {

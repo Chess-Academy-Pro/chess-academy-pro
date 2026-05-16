@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { MistakePuzzleBoard } from './MistakePuzzleBoard';
 import {
   getAllMistakePuzzles,
@@ -62,7 +62,16 @@ interface MistakesPageLocationState {
 export function MyMistakesPage(): JSX.Element {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const navState = (location.state ?? {}) as MistakesPageLocationState;
+  // Rolodex deep-link URL fallback (WO-ROLODEX-PLUMBING-01 item 4).
+  // The legacy entry path passes `initialOpeningName` via
+  // `location.state` (in-app navigation only); the rolodex deep-link
+  // `/tactics/mistakes?opening=<name>` is also accepted by reading
+  // the URL param. State wins when both are present (in-app links
+  // can carry more context).
+  const urlOpeningParam = (searchParams.get('opening') ?? '').trim();
+  const initialOpeningFromUrlOrState = navState.initialOpeningName ?? (urlOpeningParam.length > 0 ? urlOpeningParam : null);
   const [puzzles, setPuzzles] = useState<MistakePuzzle[]>([]);
   const [stats, setStats] = useState<MistakePuzzleStats | null>(null);
   const [activePuzzle, setActivePuzzle] = useState<MistakePuzzle | null>(null);
@@ -70,7 +79,7 @@ export function MyMistakesPage(): JSX.Element {
   const [classFilter, setClassFilter] = useState<ClassificationFilter>(navState.initialClassification ?? 'all');
   const [sourceFilter, setSourceFilter] = useState<SourceFilter>('all');
   const [statusFilter, setStatusFilter] = useState<StatusFilter>(navState.initialStatus ?? 'all');
-  const [openingFilter, setOpeningFilter] = useState<string | null>(navState.initialOpeningName ?? null);
+  const [openingFilter, setOpeningFilter] = useState<string | null>(initialOpeningFromUrlOrState);
   const [loading, setLoading] = useState(true);
   const [analyzing, setAnalyzing] = useState(false);
   const [analysisProgress, setAnalysisProgress] = useState<ReanalysisProgress | null>(null);

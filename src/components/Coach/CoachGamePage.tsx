@@ -26,6 +26,8 @@ import { ResignButton } from './ResignButton';
 import { PositionNarrationBanner } from './PositionNarrationBanner';
 import { usePositionNarration } from '../../hooks/usePositionNarration';
 import { usePhaseNarration } from '../../hooks/usePhaseNarration';
+import { useNarration } from '../../hooks/useNarration';
+import { buildPlayEntryNarration } from '../../services/playEntryNarration';
 import {
   createPhaseTransitionState,
   detectPhaseTransition,
@@ -575,6 +577,128 @@ export function CoachGamePage(_props: CoachGamePageProps = {}): JSX.Element {
     subjectAppliedRef.current = true;
     handleOpeningRequest(seed);
   }, [subjectParam, handleOpeningRequest, initialGameFen, searchParams]);
+
+  // Rolodex entry beat. When the student arrived via a rolodex-style
+  // deep link (URL carries `?opening=<name>` → `setIntendedOpening`
+  // fires with `capturedFromSurface: 'url-or-resume'`), fire ONE
+  // coach line acknowledging the captured intent. Without this beat
+  // the cold-load experience is indistinguishable from a generic
+  // `/coach/play` — board at starting position, "vs Stockfish Bot",
+  // no felt cue the rolodex link worked. This is the rolodex's
+  // signature.
+  //
+  // Voice routing matches CoachEndgamePage / EndgameLessonTab — the
+  // user opted into the lesson (tapped a rolodex card), so narration
+  // IS the lesson. `useNarration` calls `voiceService.speakForced`
+  // (bypasses voiceEnabled pref, see hook header at
+  // `src/hooks/useNarration.ts:19-23`).
+  //
+  // Always mirrored to chat via injectAssistantMessage so voice-off
+  // users still see the line. Same dual-path shape as the plan
+  // tracker (CoachGamePage:923).
+  //
+  // Fires once per session per opening via entryBeatFiredRef (same
+  // guard pattern as offBookFiredRef below).
+  const [entryBeatText, setEntryBeatText] = useState<string>('');
+  const entryBeatFiredRef = useRef(false);
+  useNarration({ text: entryBeatText });
+  useEffect(() => {
+    if (entryBeatFiredRef.current) return;
+    if (!intendedOpening) return;
+    if (intendedOpening.capturedFromSurface !== 'url-or-resume') return;
+    entryBeatFiredRef.current = true;
+    const text = buildPlayEntryNarration({
+      openingName: intendedOpening.name,
+      studentSide: intendedOpening.color,
+    });
+    setEntryBeatText(text);
+    gameChatRef.current?.injectAssistantMessage(text);
+    void logAppAudit({
+      kind: 'rolodex-entry-beat',
+      category: 'subsystem',
+      source: 'CoachGamePage.rolodexEntryBeat',
+      summary: `entry beat fired for "${intendedOpening.name}" (${intendedOpening.color})`,
+      details: text,
+    });
+  }, [intendedOpening]);
+
+  // Middlegame mode auto-play (WO-ROLODEX-PLUMBING-01 item 2). When the
+  // student arrived with `?opening=<name>&mode=middlegame`, walk through
+  // the full book PGN (no ply cap — Dave's call: the favorited opening's
+  // PGN IS the end of book by definition) and hand over to the normal
+  // game loop. Pacing: 700ms per move. The makeCoachMove timer below
+  // uses 800ms — staying under that delay means each book move cancels
+  // the pending coach-move timer (via the effect cleanup), so AI never
+  // fires DURING book play. After the last book move, no more
+  // game.makeMove calls happen → makeCoachMove's effect re-runs and
+  // schedules its own 800ms timer → AI takes over from end-of-book.
+  //
+  // `mode=from-start` (the default when `?mode=` is missing or any
+  // other value) does NOT auto-play — student plays from move 1 with
+  // the intent already captured.
+  //
+  // Skipped when `?fen=` is set — an explicit FEN overrides the book.
+  const middlegameAutoplayFiredRef = useRef(false);
+  useEffect(() => {
+    if (middlegameAutoplayFiredRef.current) return;
+    if (!intendedOpening) return;
+    if (intendedOpening.capturedFromSurface !== 'url-or-resume') return;
+    const mode = searchParams.get('mode');
+    if (mode !== 'middlegame') return;
+    if (initialGameFen) return;
+
+    middlegameAutoplayFiredRef.current = true;
+    const sanMoves = getOpeningMoves(intendedOpening.name);
+    if (!sanMoves || sanMoves.length === 0) {
+      console.warn('[CoachGame] middlegame: no book moves for', intendedOpening.name);
+      return;
+    }
+
+    let cancelled = false;
+    const playMoves = async (): Promise<void> => {
+      const probe = new Chess();
+      let appliedCount = 0;
+      for (let i = 0; i < sanMoves.length; i++) {
+        if (cancelled) return;
+        const san = sanMoves[i];
+        // chess.js v1.4 throws on illegal SAN rather than returning
+        // null. Wrap so a bad book entry doesn't crash the autoplay.
+        let probeMove: ReturnType<typeof probe.move>;
+        try {
+          probeMove = probe.move(san);
+        } catch (err) {
+          console.warn('[CoachGame] middlegame: SAN parse failed at index', i, ':', san, err);
+          break;
+        }
+        const applied = game.makeMove(probeMove.from, probeMove.to, probeMove.promotion);
+        if (!applied) {
+          console.warn('[CoachGame] middlegame: makeMove failed at index', i, ':', san);
+          break;
+        }
+        appliedCount += 1;
+        // 700ms pacing — under makeCoachMove's 800ms timer so AI
+        // never fires DURING book play. Last move skips the wait.
+        if (i < sanMoves.length - 1) {
+          await new Promise((r) => setTimeout(r, 700));
+        }
+      }
+      if (cancelled) return;
+      void logAppAudit({
+        kind: 'rolodex-entry-beat',
+        category: 'subsystem',
+        source: 'CoachGamePage.middlegameAutoplay',
+        summary: `middlegame autoplay completed ${appliedCount}/${sanMoves.length} plies for "${intendedOpening.name}"`,
+        details: sanMoves.join(' '),
+      });
+    };
+    void playMoves();
+    return () => {
+      cancelled = true;
+    };
+  // game.makeMove is stable per the hook; intentionally NOT in deps
+  // to avoid re-firing on every render.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [intendedOpening, searchParams, initialGameFen]);
 
   // Resume a saved in-progress game from Dexie. Runs once on mount.
   // Only fires when the URL has no explicit game specifier (?fen,
