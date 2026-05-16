@@ -7,6 +7,58 @@ This file is loaded automatically in every Claude Code session. Follow these ins
 The user is **David**. Address him by name when relevant. Single-user
 app, built for him. No multi-tenancy, no other accounts.
 
+## 🚨 NON-NEGOTIABLE GATES (apply to every change, every session)
+
+These are HARD requirements — not "best effort." Skipping them is a
+ship-blocking failure no matter how trivial the change looks.
+
+### G1. Playwright audit after EVERY merge to main.
+
+After every push that lands on `main`, run the relevant
+`scripts/audit-*.mjs` Playwright script per the matrix below. No
+exceptions. The matrix lives in §Post-Deploy Audit (MANDATORY). Unit
+tests + typecheck + lint are NOT sufficient — they don't catch deploy
+pipeline issues. The 2026-05-14 back-button incident proved this:
+green local tests, broken on prod, only the audit caught it.
+
+**If you literally cannot run Playwright in your environment** (no
+browser binary, blocked CDN, etc.) you MUST:
+- Say so EXPLICITLY in your reply ("I cannot run Playwright here").
+- Open a tracking note in the PR description so David knows the audit
+  is owed BY HIM or BY THE NEXT SESSION.
+- Never claim the change is "done" or "shipped" — pushed-and-merged
+  without a green audit is "deployed and unverified."
+
+### G2. Audit-stream pull on EVERY runtime-touching change.
+
+After any push that touches a runtime path that emits audits — coach
+brain, walkthrough runtime, voice, navigation, tool calls, stage gen,
+uncaught errors, openings detail page, kid surfaces, etc. — pull the
+recent live audit events via `GET /api/audit-stream?since=<ms>` with
+the `x-audit-secret` header. The secret is in per-project memory. See
+§Audit Stream below for the full pattern.
+
+Pull PROACTIVELY (without asking). Empty pulls are fine — say so and
+move on. Skip pulls only for pure content / data-JSON / CSS / test /
+docs / build-config changes that can't emit any audits.
+
+### G3. No chess content invented from memory.
+
+Move sequences, FENs, opening sub-lines, trap continuations — these
+ALL come from `src/data/openings-lichess.json` or chess.js validation.
+The LLM only writes prose narration. If you can't find a continuation
+in the DB, the line doesn't exist for us — DO NOT invent moves "from
+opening theory" or "from book knowledge." When a sacrificial attack
+doesn't have a forced material gain in the DB, classify it as
+`mistake` (positional advantage); never extend with invented book
+moves.
+
+Violating these gates wastes David's money and erodes trust faster
+than missing the underlying task. The shallow-work failure mode IS
+the harm here.
+
+---
+
 ## 🧠 Operate at full depth (non-negotiable)
 
 David has a very high IQ and is impatient with surface-level work.
@@ -101,11 +153,16 @@ chess structure when the DB already has it. Concretely:
   they don't exist. We don't make stuff up and we certainly don't
   break what we have just built!"
 
-**Audit stream — pull live runtime events on demand.** When David is
-debugging a reproducible runtime issue on the live build (Vercel
-production), the app can stream audit events to `/api/audit-stream`
-and Claude can pull them with `GET /api/audit-stream?since=<ms>` +
-`x-audit-secret` header. Use it like this:
+**Audit stream — gate G2 (NON-NEGOTIABLE).** Implements gate G2 from
+the top of this file. After every push that touches a runtime path
+that emits audits — coach brain, walkthrough runtime, voice (which
+includes narration!), navigation, tool calls, stage gen, uncaught
+errors, openings detail page, kid surfaces, etc. — Claude MUST pull
+the live audit-stream events. This is the only way to close the loop
+on a deployed change without David copy-pasting. Not optional.
+
+Endpoint: `GET /api/audit-stream?since=<ms>` with `x-audit-secret`
+header. The secret is in per-project memory.
 
 - **Default to proactive.** The whole point of this feature is to
   close the loop without David copy-pasting. After any push that
@@ -864,11 +921,12 @@ Consequences:
 
 ## Post-Deploy Audit (MANDATORY — run after EVERY build)
 
-**Non-negotiable.** After every push that lands on `main` and
-triggers a Vercel deploy, run the relevant Playwright audit script
-against the LIVE production URL and confirm all scenarios green
-before claiming the work is done. Unit tests + typecheck + lint
-are NOT sufficient — they don't catch deploy-pipeline issues
+**Non-negotiable.** This implements gate G1 from §NON-NEGOTIABLE
+GATES at the top of this file. After every push that lands on `main`
+and triggers a Vercel deploy, run the relevant Playwright audit
+script against the LIVE production URL and confirm all scenarios
+green before claiming the work is done. Unit tests + typecheck +
+lint are NOT sufficient — they don't catch deploy-pipeline issues
 (wrong bundle aliased, env vars scoped to the wrong environment,
 function cold-start regressions, CDN cache serving stale assets).
 
@@ -877,6 +935,18 @@ unit tests passed, code was correct, but the production alias
 lagged behind main and the fix wasn't live. The audit-back-from-
 review.mjs script caught the gap; nothing in the local test suite
 could have. Lesson: **trust the audit, not the test pass.**
+
+**Cannot-run-Playwright clause (G1, repeated here for emphasis).** If
+your environment can't run Playwright (no browser binary, blocked
+CDN, sandboxed remote session, etc.):
+- Say so EXPLICITLY in the merge reply: "I cannot run Playwright in
+  this environment — David, please run `scripts/audit-<name>.mjs`."
+- Track the missing audit in the PR description as a to-do.
+- Do NOT claim the change is "shipped" or "verified" — pushed-and-
+  merged without a green audit is "deployed and unverified."
+- Audit-stream pull (gate G2) is still required regardless. It uses
+  HTTP, not a browser, and works in every environment that has
+  outbound network to `chess-academy-pro.vercel.app`.
 
 ### The standard post-deploy ritual
 

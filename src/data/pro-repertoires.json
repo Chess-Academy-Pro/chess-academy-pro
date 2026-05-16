@@ -719,7 +719,7 @@
         {
           "name": "Fried Liver Setup",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Nxd5 Nxf7 Kxf7 Qf3+ Ke6 Nc3",
-          "explanation": "If Black plays Nf6 without d6, White launches Ng5 targeting f7. After Nxf7 Kxf7 Qf3+, the exposed king gives White a devastating attack."
+          "explanation": "This is the Fried Liver Attack — a positional sacrifice, not an immediate-material trap. After Nxf7 Kxf7 Qf3+ Ke6 Nc3, White is DOWN a knight on the board but Black's king is stranded on e6 with no escape squares, no developed pieces, and White's queen + knight + bishop already pointing at the king. The advantage is positional: White's attacking pieces are coordinated and Black's king is hung out to dry. Material recovers gradually through the attack, not in the next two moves. Tell the student: the win here is positional pressure, not a 3-move tactic."
         },
         {
           "name": "d4 Push Catching the Bishop",
@@ -1132,7 +1132,7 @@
         {
           "name": "f-File Rook Lift Attack",
           "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 exd4 Bc4 Nf6 e5 Nd5 O-O Be7 Nxd4 O-O Rxf7 Rxf7 Bxd5 cxd5 Qh5",
-          "explanation": "White castles and uses the open f-file for a devastating rook lift. After Rxf7 and Qh5, Black's king is caught in a mating net."
+          "explanation": "A sacrificial attack — White gives up rook and bishop for a mating net, not for immediate material. After Rxf7 Rxf7 Bxd5 cxd5 Qh5, White is DOWN material on paper but Black's king has no defenders on the kingside, the f-file is wide open, and the Qh5 threat is overwhelming. The advantage is positional: Black has to defend with imprecise moves under pressure, and material recovers through the attack. Tell the student: this isn't 'win a piece in two moves' — it's 'play a position you can't lose with care.'"
         }
       ]
     },
@@ -1190,7 +1190,7 @@
         {
           "name": "Nc6 d5 Fork",
           "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 Bd7 O-O cxd4 cxd4 Nxd4 Nxd4 Qxd4 Nc3 a6 Qe2 Ne7 Rd1 Qb6 Nxd5 exd5 e6 fxe6 Bxh7",
-          "explanation": "After Black captures on d4, White develops and plays Nxd5. After exd5, the e6 push rips open Black's kingside, winning the h7 pawn and exposing the king."
+          "explanation": "The Milner-Barry Gambit is itself a positional sacrifice, and Bxh7+ is a Greek Gift — White sacs a bishop for an exposed king. After Bxh7, White is DOWN material but the Black king is on h7 with no defenders, and White's queen + remaining minor piece + open lines deliver a winning attack over the next 5-10 moves. The advantage is positional, not concrete. Tell the student: the win materializes through pressure, not a forced tactic; you're paying material for a king attack you should convert with accurate play."
         }
       ]
     },
@@ -4112,7 +4112,7 @@
         {
           "name": "Nf6 Fork Trick",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Nxc3 bxc3 Bxc3 Qb3 Bxa1 Bxf7+ Kf8 Bg5 Ne7 Re1",
-          "explanation": "Black plays Nxe4 grabbing a pawn but after O-O and Qb3, White gets a devastating attack. The Bxf7+ sacrifice exposes the king and White's pieces swarm in for the attack."
+          "explanation": "A sacrificial attack on f7 — Bxf7+ followed by piece activity, not a forced material win. White is DOWN material after Bxf7+ Kf8 Bg5 Ne7 Re1 because Black grabbed a rook earlier (Bxa1), but White has bishop pair, open lines, and Black's king is cornered on f8 with no kingside development. The advantage is positional: Black has to defend a wreck and White's pieces coordinate for a long attack. Tell the student: this is not 'trap Black's queen' — it's 'pay material for a permanently better position.'"
         }
       ]
     },
