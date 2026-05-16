@@ -42,6 +42,34 @@ Dated, append-only. Anything that needs Dave's call lands here first.
   is. No cap at 10. Simpler model: the favorited opening's PGN IS the
   end of book by definition. (Earlier proposal had a 10-ply cap;
   reversed before any code was written.)
+
+  **Worst-case observed:** *Ruy Lopez: Marshall Attack, Main Line,
+  Spassky Variation* (C89) at 36 plies, ~24.5s animation at the
+  current 700ms-per-move pacing. Second-worst: *Semi-Slav Defense:
+  Meran Variation, Rellstab Attack* (D49) at 29 plies, ~19.6s.
+  Typical openings the user actually favorites land at 5-15 plies
+  (~3-10s). This is intentional — the user explicitly chose a deep
+  variation; the build-up IS the lesson, not noise to skip past. If
+  future user feedback says 24s is too long, the lever is the
+  per-move pacing (currently 700ms — chosen to stay under
+  `makeCoachMove`'s 800ms timer so AI never fires during book play).
+
+  **Known issue (deferred):** Audit-log writes from `CoachGamePage`
+  entry-beat path don't appear in `db.meta('app-audit-log.v1')`
+  despite the code path executing (verified via console.log capture
+  through Playwright). Other audit events from the same page
+  (`app-boot`, `coach-memory-intent-set`) land cleanly. The
+  `.catch(() => undefined)` in `logAppAudit`'s serialized write chain
+  swallows errors silently — exactly the failure mode where you
+  can't diagnose from logs. The PR-B e2e audit assertion fell back
+  to chat-mirror as the trigger signal (always reliable);
+  voice-side wiring is pinned at the unit-test level
+  (`CoachGamePage.test.tsx` › `rolodex entry beat`) so the "voice
+  silently dies, chat works" regression is still caught — just at
+  a different boundary. Worth investigating when next touching
+  audit infrastructure (instrument the chain's catch, or add a
+  per-write success/failure return to `logAppAudit`).
+
 - **2026-05-16 — Family-fallback coach voice = fire-and-forget on row tap.**
   Navigate immediately; voice plays when the brain responds.
   Mitigates the "Stop and ask Dave if family-fallback voice introduces

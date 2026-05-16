@@ -31,27 +31,27 @@ const SCENARIOS = [
     label: '/coach/play?opening=Italian Game&mode=from-start',
     url: `${BASE}/coach/play?opening=${encodeURIComponent(ITALIAN)}&mode=from-start`,
     settleMs: 7000,
-    assert: async ({ page, speakCalls, pollyCalls }) => {
+    assert: async ({ page }) => {
       const checks = [];
-      // Entry-beat trigger fired. Any of three signals counts:
-      //   • Chat mirror appended ("Italian" in body) — the
-      //     `gameChatRef.injectAssistantMessage(text)` path. Always
-      //     fires regardless of voice settings.
-      //   • Polly content fetch (URL has actual text, not the
-      //     `text=.&` voice-pack pre-warm pings).
-      //   • Web Speech `speak()` mentioning Italian (fallback path).
-      // The voice channel in audit envs is unreliable (no Polly creds
-      // → 401 → fallback may or may not reach speechSynthesis in
-      // headless Chromium); the chat mirror IS the user-visible
-      // felt-experience signal and is sufficient for "trigger fired."
-      const contentPolly = pollyCalls.filter((c) => !/text=\.&/i.test(c.url));
-      const italianSpeak = speakCalls.some((c) => /italian/i.test(c.text));
+      // E2E trigger signal: chat mirror appended with the opening
+      // name + side. The `gameChatRef.injectAssistantMessage` path
+      // always fires when the entry beat useEffect runs, regardless
+      // of voice routing.
+      //
+      // Voice-side wiring ("trigger fires but voice path is wired
+      // wrong") is verified separately at the unit-test level in
+      // CoachGamePage.test.tsx — that test mocks voiceService and
+      // asserts `useNarration` receives the entry-beat text. Headless
+      // Chromium's voice stack is too fragile (no Polly creds, no
+      // audio context) to gate on at the e2e tier.
       const bodyText = await page.evaluate(() => document.body.innerText);
-      const chatMirror = /italian/i.test(bodyText);
+      const chatMirror = /italian game as (white|black)/i.test(bodyText);
       checks.push({
-        name: 'entry-beat-trigger-fired',
-        pass: chatMirror || contentPolly.length > 0 || italianSpeak,
-        detail: `chat-mirror=${chatMirror} polly-content=${contentPolly.length} speak-italian=${italianSpeak}`,
+        name: 'entry-beat-chat-mirror',
+        pass: chatMirror,
+        detail: chatMirror
+          ? 'chat mirror present (matched "Italian Game as White|Black")'
+          : `chat mirror NOT found in body (last 200 chars: "${bodyText.slice(-200)}")`,
       });
       // Board stayed at start (from-start mode = no auto-play)
       const moveList = await page.evaluate(() => {
@@ -73,17 +73,14 @@ const SCENARIOS = [
     label: '/coach/play?opening=Italian Game&mode=middlegame',
     url: `${BASE}/coach/play?opening=${encodeURIComponent(ITALIAN)}&mode=middlegame`,
     settleMs: 9000, // long enough for book auto-play at ~700ms/move (Italian is 3-6 plies)
-    assert: async ({ page, speakCalls, pollyCalls }) => {
+    assert: async ({ page }) => {
       const checks = [];
-      // Same trigger check as from-start (any of the 3 signals)
-      const contentPolly = pollyCalls.filter((c) => !/text=\.&/i.test(c.url));
-      const italianSpeak = speakCalls.some((c) => /italian/i.test(c.text));
       const bodyText = await page.evaluate(() => document.body.innerText);
-      const chatMirror = /italian/i.test(bodyText);
+      const chatMirror = /italian game as (white|black)/i.test(bodyText);
       checks.push({
-        name: 'entry-beat-trigger-fired',
-        pass: chatMirror || contentPolly.length > 0 || italianSpeak,
-        detail: `chat-mirror=${chatMirror} polly-content=${contentPolly.length} speak=${italianSpeak}`,
+        name: 'entry-beat-chat-mirror',
+        pass: chatMirror,
+        detail: chatMirror ? 'chat mirror present' : `body (last 200): "${bodyText.slice(-200)}"`,
       });
       // Board moved off starting position — probe Chess instance via
       // chess.js global or move-list panel. Most reliable: count
@@ -143,13 +140,20 @@ const SCENARIOS = [
     settleMs: 0,
     customDrive: async ({ page, scenario }) => {
       await page.goto(scenario.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-      // Wait until either we've redirected or 60s passes
       const tStart = Date.now();
+      // Phase 1: wait for redirect to detail (URL changes off /openings).
       while (Date.now() - tStart < 60000) {
-        const url = page.url();
-        if (/\/openings\/[^?/]+/.test(url)) break;
-        // Page still loading or no redirect yet
+        if (/\/openings\/[^?/]+/.test(page.url())) break;
         await page.waitForTimeout(1000);
+      }
+      // Phase 2: wait for the detail page to finish loading (replace
+      // the "Loading opening..." placeholder with real content).
+      while (Date.now() - tStart < 60000) {
+        const stillLoading = await page.evaluate(() =>
+          /Loading opening/i.test(document.body.innerText),
+        );
+        if (!stillLoading) break;
+        await page.waitForTimeout(500);
       }
     },
     assert: async ({ page }) => {
@@ -282,6 +286,7 @@ async function runScenario(browser, scenario) {
       } catch {}
       return origFetch.apply(this, arguments);
     };
+
   });
 
   let navError = null;

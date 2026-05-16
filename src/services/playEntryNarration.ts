@@ -39,7 +39,12 @@ export type StudentSide = 'white' | 'black';
 
 /** Side-agnostic directives. Order matters — index is the hash modulus. */
 const DIRECTIVES = [
-  'Show me the main line.',
+  // Rule 6 ("ban first-person and meta"): the position is the
+  // narrator, not a tutor character. Directives are all imperative
+  // with no "I" / "me" / "let's". Parallel structure across all 4
+  // intentionally — the entry beat reads as a coach signature, not
+  // random narration.
+  'Show the main line.',
   'Open with the book moves.',
   'Lead with the principal moves.',
   'Play it through.',

@@ -78,9 +78,16 @@ describe('playEntryNarration', () => {
       }
     });
 
-    it('rule 6 — no first-person, no meta-coaching', () => {
+    it('rule 6 — no first-person, no meta-coaching in the directive', () => {
       for (const line of ALL_LINES) {
-        expect(line).not.toMatch(/\b(I think|I'll|I will|let's|let me|we'll|we will)\b/i);
+        // The openingName + sideLabel prefix is informative content,
+        // not first-person. The directive (second sentence) must stay
+        // imperative — no "I" / "me" / "we" / "let's" / "let me".
+        const parts = line.split('. ');
+        const directive = parts[1] ?? '';
+        expect(directive, `directive "${directive}" contains first-person/meta`).not.toMatch(
+          /\b(I think|I'll|I will|let's|let me|we'll|we will|show me|tell me|give me|teach me)\b/i,
+        );
       }
     });
 
