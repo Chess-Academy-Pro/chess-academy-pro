@@ -95,3 +95,61 @@ export function createStreamingSpeaker(): StreamingSpeaker {
     },
   };
 }
+
+/** A streaming dispatcher pairs a {@link StreamingSpeaker} with an
+ *  accumulating-text cursor. Surfaces that stream an LLM response
+ *  chunk-by-chunk feed the ENTIRE accumulated text on every chunk;
+ *  the dispatcher tracks how much of that text it has already
+ *  consumed and only dispatches newly-completed sentences past the
+ *  cursor.
+ *
+ *  Without this cursor, the naive shape (loop over the full
+ *  accumulated text on every chunk) speaks every previously-completed
+ *  sentence again on every chunk — a 5-sentence response over 20
+ *  chunks queues ~50 narration calls, with the first sentence
+ *  speaking ~20 times. Production audit 2026-05-16: David reported
+ *  "Training plan voice loop" on /coach/plan; same bug shape lived
+ *  in CoachSessionPlanPage, ExplainPositionSessionView,
+ *  CoachAnalysePage, and any other surface that lazily processes
+ *  `accumulated` instead of just the new tail.
+ */
+export interface StreamingDispatcher {
+  /** Push the latest accumulated text from the LLM stream. Dispatches
+   *  any newly-completed sentences (past the internal cursor) to the
+   *  wrapped speaker. Idempotent on repeat calls with the same input. */
+  push(accumulatedText: string): void;
+  /** Total sentences dispatched (forwarded from the wrapped speaker). */
+  count(): number;
+  isAbandoned(): boolean;
+  abandon(): void;
+}
+
+/** Create a dispatcher that owns a fresh StreamingSpeaker. Callers can
+ *  optionally pass a pre-built speaker to wire in custom test mocks.
+ *  The sentence-terminator regex MUST be NON-global (no `/g` flag) —
+ *  the dispatcher slices its input internally and relies on `.exec()`
+ *  starting fresh from index 0 each call. */
+export function createStreamingDispatcher(
+  sentenceRegex: RegExp,
+  speaker: StreamingSpeaker = createStreamingSpeaker(),
+): StreamingDispatcher {
+  let cursor = 0;
+  return {
+    push(accumulatedText: string): void {
+      if (accumulatedText.length <= cursor) return; // no new text
+      const tail = accumulatedText.slice(cursor);
+      let offset = 0;
+      let match: RegExpExecArray | null;
+      while ((match = sentenceRegex.exec(tail.slice(offset))) !== null) {
+        const endIdx = match.index + match[1].length;
+        const sentence = tail.slice(offset, offset + endIdx).trim();
+        if (sentence) speaker.add(sentence);
+        offset += endIdx;
+      }
+      cursor += offset;
+    },
+    count: () => speaker.count(),
+    isAbandoned: () => speaker.isAbandoned(),
+    abandon: () => speaker.abandon(),
+  };
+}

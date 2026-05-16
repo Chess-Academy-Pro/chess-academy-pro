@@ -19,7 +19,10 @@ import { ChatInput } from './ChatInput';
 import { stockfishEngine } from '../../services/stockfishEngine';
 import { coachService } from '../../coach/coachService';
 import { voiceService } from '../../services/voiceService';
-import { createStreamingSpeaker, type StreamingSpeaker } from '../../services/streamingSpeaker';
+import {
+  createStreamingDispatcher,
+  type StreamingDispatcher,
+} from '../../services/streamingSpeaker';
 import { SENTENCE_END_RE, unwrapSpineError } from '../../services/sanitizeCoachText';
 import { logAppAudit } from '../../services/appAuditor';
 import { useAppStore } from '../../stores/appStore';
@@ -51,22 +54,15 @@ export function ExplainPositionSessionView({
   // Streaming-voice dispatcher: same pattern as CoachAnalysePage /
   // CoachSessionPlanPage. First sentence speaks ~500ms after first
   // chunk arrives instead of waiting for the full LLM completion.
-  // `createStreamingSpeaker` encapsulates the abandoned-on-busy chain
-  // semantics — see streamingSpeaker.ts.
-  const speakerRef = useRef<StreamingSpeaker>(createStreamingSpeaker());
-  const dispatchSentencesFromChunk = useCallback((accumulated: string) => {
+  // `createStreamingDispatcher` tracks an accumulated-text cursor so
+  // each sentence dispatches exactly once across all chunks (fixes
+  // the 2026-05-16 voice-loop bug — same shape lived here too).
+  const dispatcherRef = useRef<StreamingDispatcher>(
+    createStreamingDispatcher(SENTENCE_END_RE),
+  );
+  const pushAccumulated = useCallback((accumulated: string) => {
     if (voiceMuted) return;
-    let remaining = accumulated;
-    let consumed = 0;
-    let match: RegExpExecArray | null;
-    while ((match = SENTENCE_END_RE.exec(remaining)) !== null) {
-      const endIdx = match.index + match[1].length;
-      const sentence = remaining.slice(0, endIdx).trim();
-      if (sentence) speakerRef.current.add(sentence);
-      remaining = remaining.slice(endIdx);
-      consumed += endIdx;
-    }
-    void consumed;
+    dispatcherRef.current.push(accumulated);
   }, [voiceMuted]);
 
   useEffect(() => {
@@ -95,7 +91,7 @@ export function ExplainPositionSessionView({
 
         // Reset speech chain for this position's narration. Fresh
         // speaker so a prior stream's abandoned flag doesn't carry over.
-        speakerRef.current = createStreamingSpeaker();
+        dispatcherRef.current = createStreamingDispatcher(SENTENCE_END_RE);
 
         const evalText = sf.isMate
           ? `Mate in ${sf.mateIn ?? '?'}`
@@ -138,7 +134,7 @@ export function ExplainPositionSessionView({
               if (cancelled.value || !mountedRef.current) return;
               streamed += chunk;
               setExplanation(streamed);
-              dispatchSentencesFromChunk(streamed);
+              pushAccumulated(streamed);
             },
           },
         );
@@ -153,7 +149,7 @@ export function ExplainPositionSessionView({
             summary: result.text.slice(0, 120),
             fen: targetFen,
           });
-        } else if (!voiceMuted && speakerRef.current.count() === 0) {
+        } else if (!voiceMuted && dispatcherRef.current.count() === 0) {
           // Fallback: short response without a sentence terminator.
           void voiceService.speakIfFree(finalText.slice(0, 600));
         }
@@ -182,7 +178,7 @@ export function ExplainPositionSessionView({
       if (!analysis) return;
       setLoading(true);
       voiceService.stop();
-      speakerRef.current = createStreamingSpeaker();
+      dispatcherRef.current = createStreamingDispatcher(SENTENCE_END_RE);
 
       const evalText = analysis.isMate
         ? `Mate in ${analysis.mateIn ?? '?'}`
@@ -217,7 +213,7 @@ export function ExplainPositionSessionView({
             if (!mountedRef.current) return;
             response += chunk;
             setExplanation((prev) => `${prev}\n\n${response}`);
-            dispatchSentencesFromChunk(response);
+            pushAccumulated(response);
           },
         },
       );
@@ -231,12 +227,12 @@ export function ExplainPositionSessionView({
           summary: result.text.slice(0, 120),
           fen: targetFen,
         });
-      } else if (!voiceMuted && speakerRef.current.count() === 0) {
+      } else if (!voiceMuted && dispatcherRef.current.count() === 0) {
         void voiceService.speakIfFree(finalText.slice(0, 400));
       }
       setLoading(false);
     },
-    [targetFen, analysis, activeProfile, voiceMuted, dispatchSentencesFromChunk],
+    [targetFen, analysis, activeProfile, voiceMuted, pushAccumulated],
   );
 
   const evalDisplay = analysis

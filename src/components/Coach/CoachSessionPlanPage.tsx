@@ -9,7 +9,10 @@ import { coachService } from '../../coach/coachService';
 import { logAppAudit } from '../../services/appAuditor';
 import { SENTENCE_END_RE } from '../../services/sanitizeCoachText';
 import { voiceService } from '../../services/voiceService';
-import { createStreamingSpeaker, type StreamingSpeaker } from '../../services/streamingSpeaker';
+import {
+  createStreamingDispatcher,
+  type StreamingDispatcher,
+} from '../../services/streamingSpeaker';
 import { SESSION_PLAN_ADDITION } from '../../services/coachPrompts';
 import { ChatInput } from './ChatInput';
 import type { SessionPlan, SessionBlock } from '../../types';
@@ -65,20 +68,13 @@ export function CoachSessionPlanPage(): JSX.Element {
   // sentence-fast: each completed sentence speaks ~500ms after the
   // first chunk arrives instead of waiting for the full LLM response
   // (the prior shape delayed audio by 3-5s).
-  // `createStreamingSpeaker` encapsulates the abandoned-on-busy chain
-  // semantics — see streamingSpeaker.ts.
-  const speakerRef = useRef<StreamingSpeaker>(createStreamingSpeaker());
-
-  const dispatchSentencesFromChunk = useCallback((accumulatedText: string) => {
-    let remaining = accumulatedText;
-    let match: RegExpExecArray | null;
-    while ((match = SENTENCE_END_RE.exec(remaining)) !== null) {
-      const endIdx = match.index + match[1].length;
-      const sentence = remaining.slice(0, endIdx).trim();
-      if (sentence) speakerRef.current.add(sentence);
-      remaining = remaining.slice(endIdx);
-    }
-  }, []);
+  // `createStreamingDispatcher` tracks an accumulated-text cursor so
+  // each sentence dispatches exactly once across all chunks (fixes
+  // the 2026-05-16 "training-plan voice loop" where every prior
+  // sentence re-spoke on every new chunk).
+  const dispatcherRef = useRef<StreamingDispatcher>(
+    createStreamingDispatcher(SENTENCE_END_RE),
+  );
 
   // Generate initial plan
   useEffect(() => {
@@ -107,7 +103,7 @@ export function CoachSessionPlanPage(): JSX.Element {
           'Explain the plan to the student in 3-5 sentences. Why these blocks, in this order, given their rating and weaknesses.',
         ].join('\n');
 
-        speakerRef.current = createStreamingSpeaker();
+        dispatcherRef.current = createStreamingDispatcher(SENTENCE_END_RE);
         let explanation = '';
         const result = await coachService.ask(
           {
@@ -131,7 +127,7 @@ export function CoachSessionPlanPage(): JSX.Element {
               // streams. Replaces the legacy after-the-fact
               // voiceService.speak(explanation.slice(0, 300)) call,
               // which couldn't start until the WHOLE response landed.
-              dispatchSentencesFromChunk(explanation);
+              dispatcherRef.current.push(explanation);
             },
           },
         );
@@ -150,7 +146,7 @@ export function CoachSessionPlanPage(): JSX.Element {
           });
         }
         const finalText = isProviderError ? '' : result.text;
-        if (finalText && speakerRef.current.count() === 0) {
+        if (finalText && dispatcherRef.current.count() === 0) {
           // Fallback: if no sentence terminator fired during streaming
           // (very short response, no period), speak whatever we got.
           void voiceService.speakIfFree(finalText.slice(0, 600));
@@ -175,7 +171,7 @@ export function CoachSessionPlanPage(): JSX.Element {
     // Stop any in-flight narration from the prior plan; the
     // adjustment will start its own sentence chain.
     voiceService.stop();
-    speakerRef.current = createStreamingSpeaker();
+    dispatcherRef.current = createStreamingDispatcher(SENTENCE_END_RE);
 
     try {
       const adjustedPlan = await generateCoachSession(activeProfile, text);
@@ -210,7 +206,7 @@ export function CoachSessionPlanPage(): JSX.Element {
           onChunk: (chunk: string) => {
             explanation += chunk;
             setCoachExplanation(explanation);
-            dispatchSentencesFromChunk(explanation);
+            dispatcherRef.current.push(explanation);
           },
         },
       );
@@ -224,7 +220,7 @@ export function CoachSessionPlanPage(): JSX.Element {
         });
       }
       const finalText = isProviderError ? '' : result.text;
-      if (finalText && speakerRef.current.count() === 0) {
+      if (finalText && dispatcherRef.current.count() === 0) {
         void voiceService.speakIfFree(finalText.slice(0, 400));
       }
     } catch {
@@ -232,7 +228,7 @@ export function CoachSessionPlanPage(): JSX.Element {
     } finally {
       setAdjusting(false);
     }
-  }, [activeProfile, plan, dispatchSentencesFromChunk]);
+  }, [activeProfile, plan]);
 
   // Start session
   const handleStartSession = useCallback(async () => {
