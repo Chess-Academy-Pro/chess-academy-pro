@@ -183,6 +183,12 @@ export const APP_ROUTES_MANIFEST: RouteManifestEntry[] = [
     description: 'Synced Lichess puzzle dashboard.',
     featuresAvailable: ['lichess-puzzles'],
   },
+  {
+    path: '/tactics/opening-traps',
+    title: 'Opening Traps',
+    description: 'Trap-themed puzzles grouped by opening family. Each tile is a known opening pitfall with a forced refutation. Supports ?opening=<name> query param to filter to a single opening family.',
+    featuresAvailable: ['opening-trap-puzzles', 'opening-trap-picker', 'show-the-opening', 'play-it-out'],
+  },
   // ─── Weaknesses (insights) ────────────────────────────────────────
   {
     path: '/weaknesses',
