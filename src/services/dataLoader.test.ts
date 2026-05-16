@@ -6,6 +6,7 @@ import {
   loadEcoData,
   loadRepertoireData,
   computePosition,
+  reconcileProRepertoires,
 } from './dataLoader';
 
 // ─── Mocks ────────────────────────────────────────────────────────────────────
@@ -174,5 +175,91 @@ describe('seedDatabase', () => {
     await seedDatabase();
     const flashcardCount = await db.flashcards.count();
     expect(flashcardCount).toBeGreaterThan(0);
+  }, 60000);
+});
+
+describe('reconcileProRepertoires — pick up JSON updates without wiping progress', () => {
+  it('preserves user-progress fields when refreshing static content', async () => {
+    await seedDatabase();
+    // Pick a pro opening that should exist in the seeded data.
+    const id = 'pro-firouzja-ruy-lopez';
+    const before = await db.openings.get(id);
+    expect(before).toBeDefined();
+    if (!before) return;
+
+    // Simulate the user having drilled this opening + marked it as
+    // a personal repertoire + favorite. Plus woodpecker reps.
+    await db.openings.put({
+      ...before,
+      isRepertoire: true,
+      isFavorite: true,
+      drillAccuracy: 0.85,
+      drillAttempts: 17,
+      lastStudied: '2026-05-15T10:00:00Z',
+      woodpeckerReps: 3,
+      woodpeckerSpeed: 42,
+      woodpeckerLastDate: '2026-05-15',
+    });
+
+    // Force a reconcile run by clearing the revision-key meta.
+    await db.meta.delete('pro_data_revision');
+    await reconcileProRepertoires();
+
+    const after = await db.openings.get(id);
+    expect(after).toBeDefined();
+    if (!after) return;
+
+    // User-progress fields preserved.
+    expect(after.isRepertoire).toBe(true);
+    expect(after.isFavorite).toBe(true);
+    expect(after.drillAccuracy).toBe(0.85);
+    expect(after.drillAttempts).toBe(17);
+    expect(after.lastStudied).toBe('2026-05-15T10:00:00Z');
+    expect(after.woodpeckerReps).toBe(3);
+    expect(after.woodpeckerSpeed).toBe(42);
+    expect(after.woodpeckerLastDate).toBe('2026-05-15');
+
+    // Static content fields refreshed (still present, not nulled).
+    expect(after.name).toBe(before.name);
+    expect(after.trapLines).toBeTruthy();
+    expect(after.trapLines!.length).toBeGreaterThan(0);
+  }, 60000);
+
+  it('inserts brand-new pro entries with default progress fields', async () => {
+    await seedDatabase();
+    // Wipe a known pro entry to simulate it being added in this revision.
+    const id = 'pro-firouzja-ruy-lopez';
+    await db.openings.delete(id);
+    expect(await db.openings.get(id)).toBeUndefined();
+
+    // Force reconcile.
+    await db.meta.delete('pro_data_revision');
+    await reconcileProRepertoires();
+
+    const after = await db.openings.get(id);
+    expect(after).toBeDefined();
+    if (!after) return;
+    expect(after.drillAccuracy).toBe(0);
+    expect(after.drillAttempts).toBe(0);
+    expect(after.isFavorite).toBe(false);
+    expect(after.isRepertoire).toBe(false);
+  }, 60000);
+
+  it('is a no-op when revision matches (no Dexie writes)', async () => {
+    await seedDatabase();
+    const before = await db.openings.get('pro-firouzja-ruy-lopez');
+    expect(before).toBeDefined();
+    if (!before) return;
+
+    // Mark this opening to detect whether reconcile rewrote it. The
+    // marker is in a static field that reconcile WOULD overwrite if
+    // it ran — so an unchanged value proves no-op behavior.
+    await db.openings.put({ ...before, style: 'TEST-MARKER-DO-NOT-OVERWRITE' });
+
+    // Second call — revision is current, should no-op.
+    await reconcileProRepertoires();
+
+    const after = await db.openings.get('pro-firouzja-ruy-lopez');
+    expect(after?.style).toBe('TEST-MARKER-DO-NOT-OVERWRITE');
   }, 60000);
 });

@@ -89,6 +89,23 @@ function slugify(name: string): string {
 
 const SEED_KEY = 'db_seeded_v12';
 
+/**
+ * Pro-repertoire content revision. Bump this whenever
+ * `src/data/pro-repertoires.json` changes shape — added/renamed/
+ * removed trapLines, warningLines, variations, explanations,
+ * color/style edits, anything content-driven. On the next boot,
+ * every user's Dexie reconciles to the new content via
+ * `reconcileProRepertoires()` while preserving drill/SRS/woodpecker
+ * progress, isRepertoire, isFavorite, and any per-opening dynamic
+ * state.
+ *
+ * Versioning convention: `<YYYY-MM-DD>-<short-topic>`. The string is
+ * compared byte-for-byte to the meta key, so any change triggers a
+ * full content refresh.
+ */
+const PRO_DATA_REVISION = '2026-05-16-traps-orient-fix';
+const PRO_REVISION_KEY = 'pro_data_revision';
+
 export async function isDatabaseSeeded(): Promise<boolean> {
   const record = await db.meta.get(SEED_KEY);
   return record?.value === 'true';
@@ -224,6 +241,93 @@ export async function loadProRepertoireData(): Promise<void> {
   });
 
   await db.openings.bulkPut(records);
+}
+
+/**
+ * Reconcile `pro-repertoires.json` content into Dexie for already-
+ * seeded users. No-op when the meta-stored revision matches the
+ * current `PRO_DATA_REVISION` constant; otherwise walks every entry
+ * in the JSON and merges static content fields onto the existing
+ * Dexie record (or inserts fresh when the id is new).
+ *
+ * User-progress fields are preserved across the merge:
+ *   isRepertoire, drillAccuracy, drillAttempts, lastStudied,
+ *   woodpeckerReps, woodpeckerSpeed, woodpeckerLastDate,
+ *   variationAccuracy, drillHistory, linesDiscovered,
+ *   linesPerfected, isFavorite, srs* fields.
+ *
+ * Static fields rewritten from the JSON:
+ *   eco, name, pgn, uci, fen, color, style, proPlayerId, overview,
+ *   keyIdeas, traps, warnings, variations, trapLines, warningLines.
+ *
+ * Entries that disappear from the JSON are left in Dexie untouched
+ * (orphaned records won't surface in the player-list UI but a user
+ * who had stats on them keeps that history).
+ */
+export async function reconcileProRepertoires(): Promise<void> {
+  const meta = await db.meta.get(PRO_REVISION_KEY);
+  if (meta?.value === PRO_DATA_REVISION) return;
+
+  const defaults = createDefaultSrsFields();
+  const entries = (proRepertoireData as { openings: ProRepertoireEntry[] }).openings;
+
+  const toPut: OpeningRecord[] = [];
+  for (const entry of entries) {
+    const { fen, uci } = computePosition(entry.pgn);
+    const existing = await db.openings.get(entry.id);
+
+    if (existing) {
+      toPut.push({
+        ...existing,
+        eco: entry.eco,
+        name: entry.name,
+        pgn: entry.pgn,
+        uci,
+        fen,
+        color: entry.color,
+        style: entry.style,
+        proPlayerId: entry.playerId,
+        overview: entry.overview,
+        keyIdeas: entry.keyIdeas,
+        traps: entry.traps,
+        warnings: entry.warnings,
+        variations: entry.variations,
+        trapLines: entry.trapLines ?? null,
+        warningLines: entry.warningLines ?? null,
+      });
+    } else {
+      toPut.push({
+        id: entry.id,
+        eco: entry.eco,
+        name: entry.name,
+        pgn: entry.pgn,
+        uci,
+        fen,
+        color: entry.color,
+        style: entry.style,
+        isRepertoire: false,
+        proPlayerId: entry.playerId,
+        overview: entry.overview,
+        keyIdeas: entry.keyIdeas,
+        traps: entry.traps,
+        warnings: entry.warnings,
+        variations: entry.variations,
+        trapLines: entry.trapLines ?? null,
+        warningLines: entry.warningLines ?? null,
+        drillAccuracy: 0,
+        drillAttempts: 0,
+        lastStudied: null,
+        woodpeckerReps: 0,
+        woodpeckerSpeed: null,
+        woodpeckerLastDate: null,
+        isFavorite: false,
+        ...defaults,
+      });
+    }
+  }
+
+  await db.openings.bulkPut(toPut);
+  await db.meta.put({ key: PRO_REVISION_KEY, value: PRO_DATA_REVISION });
 }
 
 // ─── Gambit Loader ───────────────────────────────────────────────────────────
@@ -384,18 +488,30 @@ async function loadOpeningNarrations(): Promise<void> {
 
 /**
  * Seeds the database on first launch. Safe to call on every app start —
- * it's a no-op if already seeded.
+ * the bulk seed is a no-op if already seeded, but pro-repertoire
+ * content is reconciled on every boot so existing users pick up
+ * trapLines/warningLines/variations/explanation updates without
+ * losing drill progress. See `reconcileProRepertoires` for details.
  */
 export async function seedDatabase(): Promise<void> {
-  if (await isDatabaseSeeded()) return;
+  if (!(await isDatabaseSeeded())) {
+    await loadEcoData();
+    await loadRepertoireData();
+    await loadProRepertoireData();
+    await loadGambitData();
+    await loadModelGamesData();
+    await loadMiddlegamePlansData();
+    await seedFlashcardsForRepertoire();
+    await loadOpeningNarrations();
+    await markDatabaseSeeded();
+    // Fresh seed already used the current JSON — mark the revision
+    // so the reconcile path no-ops on the next boot.
+    await db.meta.put({ key: PRO_REVISION_KEY, value: PRO_DATA_REVISION });
+    return;
+  }
 
-  await loadEcoData();
-  await loadRepertoireData();
-  await loadProRepertoireData();
-  await loadGambitData();
-  await loadModelGamesData();
-  await loadMiddlegamePlansData();
-  await seedFlashcardsForRepertoire();
-  await loadOpeningNarrations();
-  await markDatabaseSeeded();
+  // Already-seeded users: reconcile pro content on every boot so
+  // updates to pro-repertoires.json reach them without wiping
+  // drill/SRS/favorites/woodpecker progress.
+  await reconcileProRepertoires();
 }
