@@ -2,6 +2,26 @@ import { db } from '../db/schema';
 import type { OpeningRecord, DrillAttempt } from '../types';
 import { fuzzyScore } from '../utils/fuzzySearch';
 
+// ─── Opening name helpers ────────────────────────────────────────────────────
+
+/** Derive the family-level name from a (possibly deep) opening name.
+ *
+ *  The openings DB names variations as `<Family>: <Variation>` (e.g.
+ *  `"Italian Game: Two Knights Defense"`). The family is everything
+ *  before the first colon. Family-level openings have no colon and
+ *  return their own name unchanged.
+ *
+ *  Used by the rolodex Puzzles selector (WO-ROLODEX-PLUMBING-01
+ *  item 11) for family-fallback: when a deep variation has no
+ *  exact-name puzzle matches, walk up to the family and query
+ *  there. `OpeningRecord` has no parent/family field — this is the
+ *  derivation. */
+export function getOpeningFamily(name: string): string {
+  const colonIdx = name.indexOf(':');
+  if (colonIdx === -1) return name.trim();
+  return name.slice(0, colonIdx).trim();
+}
+
 // ─── Queries ──────────────────────────────────────────────────────────────────
 
 /** Returns all repertoire openings, optionally filtered by color, sorted by mastery (weakest first). */
