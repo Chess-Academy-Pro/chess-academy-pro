@@ -303,7 +303,13 @@ export function OpeningExplorerPage(): JSX.Element {
             </div>
           )}
 
-          {/* ECO letter groups */}
+          {/* ECO letter groups — wrapped in a sentinel div so audits
+              can wait on a stable "all-tab data loaded" signal rather
+              than racing the first eco-group's render against a cold
+              IndexedDB load. */}
+          {!displayAllSearch && !allLoading && (
+            <div data-testid="all-tab-ready" className="contents" />
+          )}
           {!displayAllSearch && !allLoading && ECO_LETTERS.map((letter) => {
             const group = ecoGroups[letter] ?? [];
             const isExpanded = expandedLetters.has(letter);

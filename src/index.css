@@ -98,27 +98,31 @@ body {
 }
 
 /* ─── Scroll-hint indicator ───────────────────────────────────────────────── */
-/* A solid gold bar with a bright arrow-shaped accent that sweeps in
-   ONE direction (left→right for x, top→bottom for y) and resets.
-   Hints "there's more content this way" without the visual ambiguity
-   of a bouncing accent. */
+/* A solid gold bar with a soft gold-white glint that slides
+   continuously across it. The shine is a 50%-of-bar wide element
+   with an asymmetric gradient (brightness builds toward its leading
+   edge, fades to transparent at both extremes) so what the eye reads
+   is a brightness shift travelling, not a shape sliding. Sweeps
+   left→right for x, top→bottom for y. Element starts fully off-bar
+   on the trailing side so its first appearance is the soft tail
+   easing in, not the bright peak popping. */
 @keyframes scrollHintSweepX {
-  0%   { left: -10%;  opacity: 0;   }
-  12%  { opacity: 1;                }
-  88%  { opacity: 1;                }
+  0%   { left: -50%;  opacity: 0;   }
+  15%  { opacity: 1;                }
+  85%  { opacity: 1;                }
   100% { left: 100%;  opacity: 0;   }
 }
 .animate-scroll-hint-x {
-  animation: scrollHintSweepX 2.4s ease-in-out infinite;
+  animation: scrollHintSweepX 3.2s ease-in-out infinite;
 }
 @keyframes scrollHintSweepY {
-  0%   { top: -10%;   opacity: 0;   }
-  12%  { opacity: 1;                }
-  88%  { opacity: 1;                }
+  0%   { top: -50%;   opacity: 0;   }
+  15%  { opacity: 1;                }
+  85%  { opacity: 1;                }
   100% { top: 100%;   opacity: 0;   }
 }
 .animate-scroll-hint-y {
-  animation: scrollHintSweepY 2.4s ease-in-out infinite;
+  animation: scrollHintSweepY 3.2s ease-in-out infinite;
 }
 
 /* ─── Puzzle board flash animations ──────────────────────────────────────── */

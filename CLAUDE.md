@@ -866,7 +866,8 @@ After every `git push origin main`:
    | `/coach/chat` | `scripts/audit-coach-chat.mjs` |
    | `/coach/teach` (Learn) | (no script yet — write one if you're shipping a real change here) |
    | `/coach/home` + tile nav | `scripts/audit-untouched-surfaces.mjs` |
-   | `/coach/analyse` / `/plan` / `/train` | `scripts/audit-untouched-surfaces.mjs` |
+   | `/coach/plan` (Training Plan) | `scripts/audit-coach-plan.mjs` |
+   | `/coach/analyse` / `/train` | `scripts/audit-untouched-surfaces.mjs` |
    | `/tactics/*` | `scripts/audit-tactics.mjs` |
    | `/weaknesses` (or its tab/row → review flow) | `scripts/audit-weaknesses.mjs` |
    | `/openings/*` | `scripts/audit-openings-ui.mjs` (coordinate — often 🚧 in flight) |

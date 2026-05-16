@@ -199,7 +199,12 @@ async function main() {
     '05-tab-all-eco-groups',
     async () => {
       await page.locator('[data-testid="tab-all"]').click();
-      await waitUntil(() => visible('eco-group-A').then((v) => v), 20_000);
+      // Wait on the `all-tab-ready` sentinel — only renders when
+      // `allLoading` flips to false (all 5 ECO letter queries against
+      // the 3000+ entry openings IndexedDB completed). 30s budget
+      // accommodates a cold cross-origin-isolated load on prod;
+      // anything past that is a genuine stall worth failing.
+      await waitUntil(() => visible('all-tab-ready').then((v) => v), 30_000);
     },
     SETTLE_SHORT,
     [

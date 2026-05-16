@@ -60,7 +60,12 @@ const OUT_DIR = `audit-reports/tactics-${stamp}`;
 const BOOT_TIMEOUT_MS = 30_000;
 const SETTLE_SHORT = 2500;
 const SETTLE_MED = 5000;
-const SETTLE_PUZZLE = 8000;
+// SETTLE_PUZZLE = settle time after a puzzle/drill navigation. Reduced
+// 2026-05-15 (8000→5000) — the prior value summed across ~8 scenarios
+// pushed the full audit past the 5-minute harness budget. 5s is still
+// plenty for the puzzle-trainer / drill page to mount + render its
+// first puzzle on prod.
+const SETTLE_PUZZLE = 5000;
 const SETTLE_ENGINE = 6500;
 
 async function main() {
@@ -333,7 +338,11 @@ async function main() {
       // Header (with back btn) MUST appear even during loading.
       await page.locator('[data-testid="back-btn"]').waitFor({ timeout: 8000 });
       // Body (Train Weakest CTA) appears after getThemeSkills resolves.
-      await page.locator('[data-testid="begin-training-btn"]').waitFor({ timeout: 25_000 }).catch(() => {});
+      // Was 25s — reduced 2026-05-15 to 10s after the audit kept summing
+      // multiple silent-fail 25s waits and breaching the 5-min budget.
+      // On a healthy prod the API resolves in <3s; 10s leaves headroom
+      // without bleeding the wall clock when the page is genuinely stuck.
+      await page.locator('[data-testid="begin-training-btn"]').waitFor({ timeout: 10_000 }).catch(() => {});
     },
     1000,
     [
@@ -379,7 +388,8 @@ async function main() {
   // Theme row navigation — click first row, verify navigation
   await clickTacticsNav();
   await page.locator('[data-testid="section-spot"]').click();
-  await page.locator('[data-testid="begin-training-btn"]').waitFor({ timeout: 25_000 }).catch(() => {});
+  // Was 25s — reduced 2026-05-15 to 10s (same reasoning as scenario 04).
+  await page.locator('[data-testid="begin-training-btn"]').waitFor({ timeout: 10_000 }).catch(() => {});
   await scenario(
     '07-profile-theme-row-nav',
     async () => {

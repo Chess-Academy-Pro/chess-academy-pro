@@ -109,13 +109,21 @@ async function main() {
 
   // ── Test specs ──────────────────────────────────────────────────
   const tests = [
+    // The narration-density assertions drive /coach/session/walkthrough,
+    // not /coach/teach. Audit-driven fix 2026-05-15: /coach/teach is a
+    // chat surface that ignores ?subject= — only CoachSessionPage's
+    // walkthrough route consumes it via resolveWalkthroughSession +
+    // useWalkthroughRunner, which is the path that actually drives
+    // voiceService speak calls per move. The old URL just opened
+    // CoachTeachPage in greeting mode, so full/brief reported 0 voice
+    // events even though the density gate was fine.
     {
-      label: 'Coach Narration = "silent" → no voice-speak-invoked on /coach/teach Vienna walkthrough',
+      label: 'Coach Narration = "silent" → no voice-speak-invoked on Vienna walkthrough',
       run: async () => {
         await openSettings();
         await setCoachNarration('silent');
         const before = await snapshot();
-        await page.goto(`${BASE_URL}/coach/teach?subject=Vienna%20Game`, { waitUntil: 'domcontentloaded' });
+        await page.goto(`${BASE_URL}/coach/session/walkthrough?subject=Vienna%20Game`, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(8000);
         const events = eventsSince(before);
         const speaks = events.filter((e) => e.kind === 'voice-speak-invoked');
@@ -127,12 +135,12 @@ async function main() {
       },
     },
     {
-      label: 'Coach Narration = "full" → voice-speak-invoked fires on /coach/teach Vienna',
+      label: 'Coach Narration = "full" → voice-speak-invoked fires on Vienna walkthrough',
       run: async () => {
         await openSettings();
         await setCoachNarration('full');
         const before = await snapshot();
-        await page.goto(`${BASE_URL}/coach/teach?subject=Vienna%20Game`, { waitUntil: 'domcontentloaded' });
+        await page.goto(`${BASE_URL}/coach/session/walkthrough?subject=Vienna%20Game`, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(8000);
         const events = eventsSince(before);
         const speaks = events.filter((e) => e.kind === 'voice-speak-invoked');
@@ -144,12 +152,12 @@ async function main() {
       },
     },
     {
-      label: 'Coach Narration = "brief" → voice-speak-invoked fires (using shortText)',
+      label: 'Coach Narration = "brief" → voice-speak-invoked fires on Vienna walkthrough (shortText path)',
       run: async () => {
         await openSettings();
         await setCoachNarration('brief');
         const before = await snapshot();
-        await page.goto(`${BASE_URL}/coach/teach?subject=Vienna%20Game`, { waitUntil: 'domcontentloaded' });
+        await page.goto(`${BASE_URL}/coach/session/walkthrough?subject=Vienna%20Game`, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(8000);
         const events = eventsSince(before);
         const speaks = events.filter((e) => e.kind === 'voice-speak-invoked');
