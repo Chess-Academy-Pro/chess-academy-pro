@@ -634,18 +634,18 @@
       "trapLines": [
         {
           "name": "Fried Liver Setup",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Nxd5 Nxf7 Kxf7 Qf3+ Ke6 Nc3",
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Nxd5 Nxf7 Kxf7 Qf3+ Ke6 Nc3 Nb4 O-O c6 d4 Qf6 Qd1 Ke7",
           "explanation": "This is the Fried Liver Attack — a positional sacrifice, not an immediate-material trap. After Nxf7 Kxf7 Qf3+ Ke6 Nc3, White is DOWN a knight on the board but Black's king is stranded on e6 with no escape squares, no developed pieces, and White's queen + knight + bishop already pointing at the king. The advantage is positional: White's attacking pieces are coordinated and Black's king is hung out to dry. Material recovers gradually through the attack, not in the next two moves. Tell the student: the win here is positional pressure, not a 3-move tactic."
         },
         {
           "name": "d4 Push Catching the Bishop",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d4 Bxd4 Nxd4 Nxd4 O-O Nf6 f4 d6 fxe5 dxe5 Bg5",
-          "explanation": "After d4, if Black captures with the bishop, Nxd4 Nxd4 and White castles with tempo. White gets rapid development and open lines against Black's exposed pieces."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d4 Bxd4 Nxd4 Nxd4 Be3 Nc6 Qh5 Qe7 Nc3 Nf6 Qh4 d6 Bg5 Be6",
+          "explanation": "If Black grabs d4 with the bishop, Nxd4 Nxd4 Be3 hits the wandering knight. White's lead in development plus the dark-squared bishop on the long diagonal gives lasting pressure."
         },
         {
           "name": "Ng5 f7 Pressure",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 O-O Nxe4 Re1 d5 Bxd5 Qxd5 Nc3 Qa5 Nxe4 Be6 Nxd4",
-          "explanation": "In the mainline with d4, if Black grabs e4 with the knight, Re1 pins it. After the dust settles White wins back material with a superior position."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 O-O Nxe4 Re1 d5 Bxd5 Qxd5 Nc3 Qa5 Nxe4 Be6 Neg5 O-O-O Nxe6 fxe6 Rxe6 Bd6",
+          "explanation": "In the mainline with d4, if Black grabs e4 with the knight, Re1 pins it. After Neg5 + Nxe6, the long forced sequence opens the e-file with the rook on the dangerous e6 square — White's lead in development translates into pressure throughout the middlegame."
         }
       ]
     },
