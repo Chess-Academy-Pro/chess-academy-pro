@@ -1941,20 +1941,20 @@
         },
         {
           "name": "Slow Italian with d3",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O a6 a4 Ba7 Nbd2 O-O Re1 Be6 Bb3 h6 Nf1 Re8 Ng3 d5",
-          "explanation": "A more restrained approach that Caruana also employs. White plays d3 for a slower build and avoids the IQP positions entirely."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O a6 a4 Ba7 Nbd2 O-O Re1 Be6 Bb3 h6",
+          "explanation": "A more restrained approach that Caruana also employs. White plays d3 for a slower build with Nbd2 + Bb3 + Re1 — both sides ready for the eventual d4 break."
         }
       ],
       "trapLines": [
         {
           "name": "...exd4 cxd4 Center Steamroll",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Bd2 Bxd2+ Nbxd2 d5 exd5 Nxd5 O-O O-O Qb3 Nce7 Rfe1 c6 Ne4 Bf5 Nc5 b6 Nd3",
-          "explanation": "After ...exd4 cxd4, White gets a powerful IQP with active pieces. The knight maneuver Ne4-c5 creates pressure on both flanks that Black cannot handle."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Bd2 Bxd2+ Nbxd2 d5 exd5 Nxd5 O-O O-O",
+          "explanation": "After ...exd4 cxd4, White gets a powerful IQP with active pieces. The completed development O-O O-O signals the start of the middlegame where White's central pawn advantage steers the play."
         },
         {
           "name": "...Nxe4 Pawn Grab Punished",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Nxc3 bxc3 Bxc3 Qb3 Bxa1 Bxf7+ Kf8 Bg5 Ne7 Re1 d5 Bxe7+ Qxe7 Rxe7",
-          "explanation": "Black grabs e4 with ...Nxe4 but White sacrifices the exchange with O-O. After Bxf7+ and Bg5, the attack is overwhelming and Black's king is caught."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Bxc3",
+          "explanation": "Black grabs e4 with ...Nxe4 but White's d4-cxd4 + Nc3 sacrifice opens lines toward the black king. After Bxc3 the e-file is open for Re1 + Bxf7+ tactics."
         }
       ]
     },
