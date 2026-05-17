@@ -439,7 +439,7 @@
       "playerId": "naroditsky",
       "eco": "C29",
       "name": "Vienna Game (Naroditsky)",
-      "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Bg4 Qe2 Nc5 d4 Bxf3 Qxf3 Qh4+ g3 Qe4+ Qxe4 Nxe4 Bf4",
+      "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Bg4 Qe2 Nc5 d4 Bxf3 Qxf3 Qh4+ Qf2 Qxf2+ Kxf2 Ne6 Be3 c6 Bd3 Be7",
       "color": "white",
       "style": "Gambit, Aggressive",
       "overview": "Naroditsky frequently uses the Vienna Gambit in his speedrun series. The f4 push immediately challenges Black's center and leads to open, tactical positions. It is one of Danya's favorite ways to create imbalances early.",
@@ -459,37 +459,21 @@
       "variations": [
         {
           "name": "Vienna Gambit 3.f4 d5",
-          "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Bg4 Qe2 Nc5 d4 Bxf3 Qxf3 Qh4+ g3 Qe4+ Qxe4 Nxe4 Bf4",
-          "explanation": "The main gambit line. After the queen trade, White has a slight edge with the bishop pair and central control. The endgame is pleasant for White."
+          "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Bg4 Qe2 Nc5 d4 Bxf3 Qxf3 Qh4+ Qf2 Qxf2+ Kxf2 Ne6 Be3 c6 Bd3 Be7",
+          "explanation": "The main gambit line. After Qh4+ Qf2! the queens trade off and Kxf2 keeps White's structure intact; the resulting middlegame has the bishop pair and central control."
         },
         {
           "name": "Vienna Game 3.Bc4 Quiet",
-          "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 Nf3 O-O O-O Nc6 Na4 Bb6 Nxb6 axb6 c3 Be6 Bb3 d5 exd5 Nxd5 d4 exd4 Nxd4",
-          "explanation": "A quieter setup where White develops the bishop first. The position is less forcing but gives White a solid center and kingside attacking chances after f4."
+          "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 Nf3 O-O O-O c6 Bb3 Nbd7 Ne2 Bb6 c3 Nc5 Bc2 Bg4 Ng3 Nh5",
+          "explanation": "A quieter setup where White develops the bishop first. After c6 Black builds a Italian-style structure; both sides manoeuvre slowly for the f-file break."
         },
         {
           "name": "Vienna Copycat 2...Nc6 3.f4",
-          "pgn": "e4 e5 Nc3 Nc6 f4 exf4 Nf3 g5 Bc4 g4 O-O gxf3 Qxf3 d6 d4 Bg4 Qf2 Nf6 Bxf4",
-          "explanation": "When Black copies with Nc6, the Vienna Gambit with f4 leads to wild King's Gambit-style positions. Danya uses this for maximum chaos in blitz."
+          "pgn": "e4 e5 Nc3 Nc6 f4 exf4 Nf3 g5 Bc4 g4 O-O gxf3 Qxf3 Bc5+ Kh1 Qh4 Nd5 Ne5 Qe2 Ng4",
+          "explanation": "When Black copies with Nc6, the Vienna Gambit with f4 leads to wild King's Gambit-style positions. After Bc5+ Kh1 the board explodes into tactics on both wings."
         }
       ],
-      "trapLines": [
-        {
-          "name": "exf4 Central Domination",
-          "pgn": "e4 e5 Nc3 Nf6 f4 exf4 d4 d5 e5 Ne4 Nf3 Be7 Bd3 Nxc3 bxc3 O-O O-O f5 Ba3 Bxa3 Qe1",
-          "explanation": "Black captures ...exf4 but White responds with d4 seizing a massive center. After e5 the knight is pushed back and White's pieces flood in with Bd3, O-O, and Ba3 exchanging Black's good bishop."
-        },
-        {
-          "name": "Premature ...d5 Tactical Shot",
-          "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Qf3 Nxc3 bxc3 Be7 d4 O-O Bd3 f5 exf6 Bxf6 Qh5 g6 Qh6",
-          "explanation": "After ...d5 and ...Nxe4, White recaptures with Qf3 creating threats. Black tries to castle but White's queen infiltrates to h5 and h6 with a mating attack against the weakened kingside."
-        },
-        {
-          "name": "Bc5 Trapped by f5",
-          "pgn": "e4 e5 Nc3 Nf6 f4 Bc5 fxe5 Nxe4 Qf3 Nxc3 dxc3 f5 exf6 Qxf6 Qd5 Qf7 Qxc5 Nc6 Nf3 d6 Qe3+ Be6",
-          "explanation": "Black develops ...Bc5 early but after fxe5 and d-pawn opens, White hits the bishop with Qd5 winning it. Black's compensation is insufficient after Qxc5."
-        }
-      ]
+      "trapLines": []
     },
     {
       "id": "pro-naroditsky-semi-slav",
