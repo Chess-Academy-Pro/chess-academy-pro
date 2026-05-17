@@ -539,6 +539,11 @@ export type AuditKind =
   //   coach served the stock "I can't verify which moves are sound"
   //   response. Last-line G3 protection.
   | 'master-play-enforcement-fallback'
+  // `master-play-off-book-fallback`: position has no master-play data
+  //   (source:none). Coach skipped the LLM retry loop entirely and
+  //   served a Stockfish-derived response. SAN comes from the engine,
+  //   not the LLM, so claim validation is satisfied by construction.
+  | 'master-play-off-book-fallback'
   // Opening-play opponent move source trail. Fired by
   //   `coachGameEngine.getAdaptiveMove` for every move the opponent
   //   makes once past the canonical repertoire line. The `source`

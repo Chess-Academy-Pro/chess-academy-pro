@@ -8,6 +8,7 @@ import { recordApiUsage } from './coachCostService';
 import { lookupMasterPlay } from './masterPlayLookup';
 import { validateClaims, type ClaimValidationResult } from './claimValidator';
 import { logAppAudit } from './appAuditor';
+import { stockfishEngine } from './stockfishEngine';
 import type { MasterPlayContext, MasterPlayResult } from './masterPlayTypes';
 import type { CoachTask, CoachContext, CoachVerbosity, AiProvider } from '../types';
 
@@ -1047,6 +1048,49 @@ function emitEnforcementFallback(
   });
 }
 
+function emitOffBookFallback(
+  fen: string,
+  san: string,
+  uci: string,
+  surface: string,
+  sessionId: string | undefined,
+): void {
+  void logAppAudit({
+    kind: 'master-play-off-book-fallback',
+    category: 'subsystem',
+    source: 'coachApi.getCoachChatResponse',
+    summary: `off-book — engine suggested ${san} (uci=${uci}) surface=${surface}`,
+    details: JSON.stringify({ fen, san, uci, surface, sessionId }),
+  });
+}
+
+/** Convert a UCI move to SAN by replaying it on a chess.js board from
+ *  the given FEN. Returns null if the move is illegal or the FEN
+ *  doesn't parse — caller falls through to the stock response. */
+function uciToSan(uci: string, fen: string): string | null {
+  try {
+    const chess = new Chess(fen);
+    const from = uci.slice(0, 2);
+    const to = uci.slice(2, 4);
+    const promotion = uci.length > 4 ? uci.slice(4, 5) : undefined;
+    const result = chess.move({ from, to, promotion });
+    return result?.san ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** Off-book response template. First sentence becomes the spoken
+ *  narration fallback when no [VOICE:] marker is present, so it's
+ *  written to sound natural on its own. */
+function buildOffBookResponse(san: string): string {
+  return (
+    `We're off-book here — no master games cover this position. ` +
+    `The engine's top recommendation is **${san}**. ` +
+    `Run it through the analysis board for the full continuation.`
+  );
+}
+
 /** Build a strengthened addendum to attach on retry. The first retry's
  *  strengthening points to the most recent violation; the second retry
  *  doubles down and forbids the LLM from making chess claims at all
@@ -1216,6 +1260,34 @@ export async function getCoachChatResponse(
   // true if we built a context, which requires grounding.
   const { surface, sessionId } = grounding ?? { surface: 'unknown', sessionId: undefined };
   const originalQuery = messages[messages.length - 1]?.content ?? '';
+
+  // ── Off-book early branch ─────────────────────────────────────────
+  // When master-play has no data for this position (source:none), the
+  // LLM keeps inventing SANs and burns three retries before serving an
+  // unhelpful "I can't verify" stock response. Skip that loop: ask
+  // Stockfish for its top move and serve a deterministic answer. The
+  // SAN comes from the engine, not the LLM, so claim validation is
+  // satisfied by construction. Falls through to the legacy retry loop
+  // if Stockfish is unavailable (e.g. tests/jsdom) so we never regress
+  // to crashing on the chat turn.
+  if (
+    masterPlayContext &&
+    masterPlayContext.current.source === 'none' &&
+    grounding?.currentFen
+  ) {
+    try {
+      const uci = await stockfishEngine.getBestMove(grounding.currentFen, 2000);
+      const san = uciToSan(uci, grounding.currentFen);
+      if (san) {
+        const offBookResponse = buildOffBookResponse(san);
+        emitOffBookFallback(grounding.currentFen, san, uci, surface, sessionId);
+        if (onStream) onStream(offBookResponse);
+        return offBookResponse;
+      }
+    } catch (err) {
+      console.warn('[CoachAPI] Off-book Stockfish fallback unavailable:', err);
+    }
+  }
 
   // Attempt 1 (no addendum).
   let response = await callOnce(buildSystemPromptFor(), false);

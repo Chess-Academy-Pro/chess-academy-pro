@@ -110,6 +110,14 @@ function installFetchMock(plan: FetchPlan): { llmCalls: number; lichessCalls: nu
 }
 
 beforeEach(() => {
+  // `getProviderConfig` reads VITE_ANTHROPIC_API_KEY / VITE_DEEPSEEK_API_KEY
+  // off `import.meta.env`. The vitest config doesn't pre-seed those (the
+  // production build pulls them through Vite's `define`), so without a
+  // stub the function returns null and every test gets the "No API key
+  // configured" error. Stub once per test; the mocked fetch handles the
+  // actual provider response.
+  vi.stubEnv('VITE_DEEPSEEK_API_KEY', 'sk-test-deepseek');
+  vi.stubEnv('VITE_ANTHROPIC_API_KEY', 'sk-test-anthropic');
   __resetMasterPlayLookupForTests();
   _resetLichessCircuitBreaker();
   __resetProviderCooldownsForTests();
@@ -302,6 +310,40 @@ describe('grounding — no master data (source:none)', () => {
       { currentFen: STARTING_FEN, surface: '/coach/chat' },
     );
     expect(r).toContain('grounded master data');
+  });
+
+  it('off-book fallback: serves a Stockfish-derived response when source:none and engine is available', async () => {
+    // When master-play has no data, getCoachChatResponse should skip the
+    // 3-retry LLM loop entirely and return a deterministic engine-backed
+    // response. The SAN comes from Stockfish, not the LLM, so the LLM
+    // is never called on this turn.
+    const stockfishModule = await import('./stockfishEngine');
+    const getBestMoveSpy = vi
+      .spyOn(stockfishModule.stockfishEngine, 'getBestMove')
+      // From the starting FEN, e2e4 is the universally-known engine reply.
+      .mockResolvedValueOnce('e2e4');
+
+    const counters = installFetchMock({
+      lichess: EMPTY_LICHESS_PAYLOAD,
+      llmTexts: ['THIS LLM RESPONSE SHOULD NEVER BE SERVED'],
+    });
+    const r = await getCoachChatResponse(
+      [{ role: 'user', content: 'what should I play here?' }],
+      '',
+      undefined,
+      'chat_response',
+      1024,
+      undefined,
+      undefined,
+      undefined,
+      { currentFen: STARTING_FEN, surface: '/coach/chat' },
+    );
+    expect(r).toContain('off-book');
+    expect(r).toContain('**e4**'); // SAN derived from UCI e2e4 from the starting position
+    expect(r).not.toContain('THIS LLM RESPONSE SHOULD NEVER BE SERVED');
+    expect(counters.llmCalls).toBe(0); // LLM is bypassed entirely
+    expect(getBestMoveSpy).toHaveBeenCalledTimes(1);
+    expect(getBestMoveSpy).toHaveBeenCalledWith(STARTING_FEN, expect.any(Number));
   });
 });
 
