@@ -2327,19 +2327,19 @@
         },
         {
           "name": "3...e6 Variation",
-          "pgn": "e4 c5 Nf3 Nc6 Bb5 e6 Bxc6 bxc6 d3 Ne7 O-O Ng6 e5 d6 Re1 Be7 exd6 Qxd6 Nbd2 O-O Nc4 Qc7",
-          "explanation": "Against e6, the exchange on c6 gives a different structure. White plays e5 to gain space and restrict Black's pieces."
+          "pgn": "e4 c5 Nf3 Nc6 Bb5 e6 Bxc6 bxc6 d3 Ne7 O-O Ng6 e5",
+          "explanation": "Against e6, the exchange on c6 gives a different structure. The Ne7-Ng6 manoeuvre + White's e5 push creates a positional middlegame with both sides playing for structural advantages."
         }
       ],
       "trapLines": [
         {
           "name": "bxc6 Structural Disaster",
-          "pgn": "e4 c5 Nf3 Nc6 Bb5 g6 Bxc6 bxc6 d3 Bg7 O-O Nf6 Re1 O-O e5 Nd5 h3 f6 d4 cxd4 Nxd4",
-          "explanation": "When Black recaptures with bxc6 instead of dxc6, the pawn structure is worse with isolated a and c pawns. White exploits the weaknesses with e5 and d4."
+          "pgn": "e4 c5 Nf3 Nc6 Bb5 g6 Bxc6 bxc6 d3 Bg7 O-O Nf6 Re1 O-O",
+          "explanation": "When Black recaptures with bxc6 instead of dxc6, the pawn structure is worse with isolated a and c pawns. White exploits the weaknesses with e5 and d4 in the next phase."
         },
         {
           "name": "a6 Bxc6 Structural Edge",
-          "pgn": "e4 c5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 d3 Nf6 h3 g6 Nc3 Bg7 Be3 O-O Qd2 Nd7 O-O-O b5",
+          "pgn": "e4 c5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 d3",
           "explanation": "After the early a6, White plays Bxc6 anyway giving Black doubled c-pawns. White gets a lasting structural advantage with a clear plan to target the weak pawns."
         }
       ]
