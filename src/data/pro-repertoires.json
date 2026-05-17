@@ -590,13 +590,7 @@
           "explanation": "White grabs the pawn with dxc5 and forces Black to spend time recapturing. After O-O White is fully developed; the c5 pawn grab disrupts Black's natural development flow."
         }
       ],
-      "trapLines": [
-        {
-          "name": "h5 Kingside Destruction",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 g6 e3 Bg7 h4 O-O h5 Nxh5 Rxh5 gxh5 Qxh5",
-          "explanation": "In the fianchetto line, if Black castles into h4-h5, the position explodes. After Rxh5 sacrifice and gxh5 Qxh5, the queen lands on h5 with the open h-file — Black's kingside is permanently stripped."
-        }
-      ]
+      "trapLines": []
     },
     {
       "id": "pro-gothamchess-italian",
