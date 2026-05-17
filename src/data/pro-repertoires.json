@@ -2228,20 +2228,20 @@
         },
         {
           "name": "Anti-Berlin 4.d3",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Be6 O-O Bd6 Nb3 Nd7 Bg5 f6 Be3 O-O d4 exd4 Nfxd4 Ne5",
-          "explanation": "Against the Anti-Berlin with d3, Caruana develops actively with Bc5/Be6 and aims for central play. The position is slightly different from the standard Berlin but equally solid."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Be6 O-O Bd6 Nb3 Nd7",
+          "explanation": "Against the Anti-Berlin with d3, Caruana develops actively with Bc5/Be6 and aims for central play. The Nd7 + Bd6 setup keeps the bishop pair and prepares ...f6/...O-O."
         }
       ],
       "trapLines": [
         {
           "name": "...Nd6 Punishes Avoiding Endgame",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8 h3 Be7 Bf4 Be6 Rad1 Rd8 Rfe1 h6 g4 Nh4 Nd4 Bd5",
-          "explanation": "If White avoids the standard endgame, Black's ...Nd6 reroutes perfectly. The knight goes to f5 controlling key squares and Black achieves a fortress the bishop pair cannot crack."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8 h3 Be7 Bf4 Be6 Rad1 Rd8",
+          "explanation": "If White avoids the standard endgame, Black's ...Nd6 reroutes perfectly. After Rad1 Rd8, both sides complete development; Black's bishop pair gives long-term equality."
         },
         {
           "name": "Bishop Pair in Berlin Wall",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8 h3 Be7 Bf4 Be6 Rad1 h6 Rfe1 Rd8 Rxd8+ Kxd8 g4 Nh4 Nd4 Bd5 f3 Kc8",
-          "explanation": "In the Berlin Wall structure, Black's bishop pair provides long-term compensation. The Bd5 and Be7 control key squares while White's knights struggle to find active posts."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8 h3 Be7 Bf4 Be6 Rad1",
+          "explanation": "In the Berlin Wall structure, Black's bishop pair provides long-term compensation. After Rad1, both sides centralize rooks — Black aims to keep the bishop pair active on the long diagonals."
         }
       ]
     },
