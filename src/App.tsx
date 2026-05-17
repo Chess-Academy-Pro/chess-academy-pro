@@ -33,7 +33,7 @@ import { CoachGamePage } from './components/Coach/CoachGamePage';
 import { CoachChatPage } from './components/Coach/CoachChatPage';
 import { CoachSessionPage } from './components/Coach/CoachSessionPage';
 import { CoachAnalysePage } from './components/Coach/CoachAnalysePage';
-import { CoachSessionPlanPage } from './components/Coach/CoachSessionPlanPage';
+import { TrainingPlanRolodexPage } from './components/Coach/TrainingPlanRolodexPage';
 import { GameInsightsPage } from './components/Insights/GameInsightsPage';
 import { GamesDrilldownPage } from './components/Insights/GamesDrilldownPage';
 import { CoachTrainPage } from './components/Coach/CoachTrainPage';
@@ -252,7 +252,7 @@ export function App(): JSX.Element {
           <Route path="/coach/chat" element={<ErrorBoundary><CoachChatPage /></ErrorBoundary>} />
           <Route path="/coach/session/:kind" element={<ErrorBoundary><CoachSessionPage /></ErrorBoundary>} />
           <Route path="/coach/analyse" element={<ErrorBoundary><CoachAnalysePage /></ErrorBoundary>} />
-          <Route path="/coach/plan" element={<ErrorBoundary><CoachSessionPlanPage /></ErrorBoundary>} />
+          <Route path="/coach/plan" element={<ErrorBoundary><TrainingPlanRolodexPage /></ErrorBoundary>} />
           {/* /coach/report is a legacy alias — redirect lives below in the redirects block */}
           <Route path="/coach/train" element={<ErrorBoundary><CoachTrainPage /></ErrorBoundary>} />
           <Route path="/coach/teach" element={<ErrorBoundary><CoachTeachPage /></ErrorBoundary>} />

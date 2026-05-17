@@ -51,8 +51,8 @@ export function ExplainPositionSessionView({
   const [loading, setLoading] = useState<boolean>(true);
   const [voiceMuted, setVoiceMuted] = useState<boolean>(true);
   const mountedRef = useRef<boolean>(true);
-  // Streaming-voice dispatcher: same pattern as CoachAnalysePage /
-  // CoachSessionPlanPage. First sentence speaks ~500ms after first
+  // Streaming-voice dispatcher: same pattern as CoachAnalysePage.
+  // First sentence speaks ~500ms after first
   // chunk arrives instead of waiting for the full LLM completion.
   // `createStreamingDispatcher` tracks an accumulated-text cursor so
   // each sentence dispatches exactly once across all chunks (fixes

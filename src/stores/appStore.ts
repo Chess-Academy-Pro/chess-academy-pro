@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 import { db } from '../db/schema';
 import type {
-  UserProfile, SessionRecord, AppTheme,
+  UserProfile, AppTheme,
   CoachGameState, ChatMessage, WeaknessProfile,
 } from '../types';
 
@@ -29,11 +29,6 @@ interface AppState {
   // Auth / Profile
   activeProfile: UserProfile | null;
   isLoading: boolean;
-
-  // Current session
-  currentSession: SessionRecord | null;
-  sessionTimerActive: boolean;
-  sessionElapsedSeconds: number;
 
   // UI state
   activeTheme: AppTheme | null;
@@ -103,10 +98,6 @@ export const LAST_BOARD_SNAPSHOT_TTL_MS = 15 * 60 * 1000;
 interface AppActions {
   setActiveProfile: (profile: UserProfile | null) => void;
   setLoading: (loading: boolean) => void;
-  setCurrentSession: (session: SessionRecord | null) => void;
-  startSessionTimer: () => void;
-  stopSessionTimer: () => void;
-  tickSessionTimer: () => void;
   setActiveTheme: (theme: AppTheme) => void;
   setSidebarOpen: (open: boolean) => void;
   toggleEngine: () => void;
@@ -140,9 +131,6 @@ interface AppActions {
 const DEFAULT_STATE: AppState = {
   activeProfile: null,
   isLoading: true,
-  currentSession: null,
-  sessionTimerActive: false,
-  sessionElapsedSeconds: 0,
   activeTheme: null,
   sidebarOpen: false,
   engineEnabled: true,
@@ -182,19 +170,6 @@ export const useAppStore = create<AppState & AppActions>()(
     },
 
     setLoading: (loading) => set({ isLoading: loading }),
-
-    setCurrentSession: (session) => set({ currentSession: session }),
-
-    startSessionTimer: () => set({ sessionTimerActive: true }),
-
-    stopSessionTimer: () => set({ sessionTimerActive: false }),
-
-    tickSessionTimer: () =>
-      set((state) => ({
-        sessionElapsedSeconds: state.sessionTimerActive
-          ? state.sessionElapsedSeconds + 1
-          : state.sessionElapsedSeconds,
-      })),
 
     setActiveTheme: (theme) => set({ activeTheme: theme }),
 

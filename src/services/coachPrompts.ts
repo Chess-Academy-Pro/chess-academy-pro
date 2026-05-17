@@ -775,17 +775,6 @@ BANNED:
 - Any move reference not in the block.
 - Any eval number that doesn't match the block.`;
 
-// ─── Session Planning Addition ──────────────────────────────────────────────
-
-export const SESSION_PLAN_ADDITION = `Generate a personalized training session plan for this student. Consider their:
-- Current rating and skill gaps (from their skill radar)
-- Bad habits and areas needing work
-- Daily session time target
-- What they've been working on recently
-
-Format the plan as 3-5 blocks with time allocations. Explain WHY each block matters.
-If the student pushes back or asks for adjustments, be flexible and modify the plan.`;
-
 // ─── Explore Ahead Reaction Addition ────────────────────────────────────────
 
 export const EXPLORE_REACTION_ADDITION = `The student is exploring moves freely on a position from a coach-suggested line. After each move they play, react in 1–2 punchy sentences.

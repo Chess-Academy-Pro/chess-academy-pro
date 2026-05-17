@@ -161,8 +161,8 @@ export function sanitizeCoachStream(
  * positive split into pieces).
  *
  * Audit-driven (#29): three different regexes were in use across
- * GameChatPanel, CoachChatPage, CoachTeachPage, CoachSessionPlanPage.
- * CoachChatPage's lacked the `(?<!\d)` lookbehind, so SAN move
+ * GameChatPanel, CoachChatPage, and CoachTeachPage. CoachChatPage's
+ * lacked the `(?<!\d)` lookbehind, so SAN move
  * numbers ("1.", "12.") split sentences and Polly voiced "1." /
  * "Nc3 Nc6 3." as separate utterances.
  *

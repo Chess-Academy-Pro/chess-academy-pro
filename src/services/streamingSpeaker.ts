@@ -16,10 +16,10 @@
  * undone the moment the second sentence arrived.
  *
  * Production audit (build 6459def+) Finding 167 caught this on
- * /coach/play; the same pattern existed unfixed in CoachAnalysePage,
- * ExplainPositionSessionView, and CoachSessionPlanPage. Centralizing
- * the chain logic here so all four surfaces get the fix and any
- * future streaming surface picks it up by default.
+ * /coach/play; the same pattern existed unfixed in CoachAnalysePage
+ * and ExplainPositionSessionView. Centralizing the chain logic here
+ * so all surfaces get the fix and any future streaming surface picks
+ * it up by default.
  */
 import { voiceService } from './voiceService';
 
@@ -109,9 +109,9 @@ export function createStreamingSpeaker(): StreamingSpeaker {
  *  chunks queues ~50 narration calls, with the first sentence
  *  speaking ~20 times. Production audit 2026-05-16: David reported
  *  "Training plan voice loop" on /coach/plan; same bug shape lived
- *  in CoachSessionPlanPage, ExplainPositionSessionView,
- *  CoachAnalysePage, and any other surface that lazily processes
- *  `accumulated` instead of just the new tail.
+ *  in ExplainPositionSessionView, CoachAnalysePage, and any other
+ *  surface that lazily processes `accumulated` instead of just the
+ *  new tail.
  */
 export interface StreamingDispatcher {
   /** Push the latest accumulated text from the LLM stream. Dispatches

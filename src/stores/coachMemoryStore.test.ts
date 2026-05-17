@@ -99,6 +99,103 @@ describe('useCoachMemoryStore persistence', () => {
   });
 });
 
+describe('useCoachMemoryStore.setActiveOpeningCard', () => {
+  it('sets the active card for the given color and bumps lastActiveRolodexColor', () => {
+    useCoachMemoryStore.getState().setActiveOpeningCard('white', 'italian-game-id');
+    const s = useCoachMemoryStore.getState();
+    expect(s.activeOpeningCardId).toEqual({ white: 'italian-game-id', black: null });
+    expect(s.lastActiveRolodexColor).toBe('white');
+    expect(auditCalls.some((c) => c.kind === 'coach-memory-rolodex-active-card-set')).toBe(true);
+  });
+
+  it('updates only the color passed; the other slot is untouched', () => {
+    const s = useCoachMemoryStore.getState();
+    s.setActiveOpeningCard('white', 'italian-game-id');
+    s.setActiveOpeningCard('black', 'caro-kann-id');
+    const state = useCoachMemoryStore.getState();
+    expect(state.activeOpeningCardId).toEqual({
+      white: 'italian-game-id',
+      black: 'caro-kann-id',
+    });
+    expect(state.lastActiveRolodexColor).toBe('black');
+  });
+
+  it('is a no-op when the same id is set again for the same color', () => {
+    const s = useCoachMemoryStore.getState();
+    s.setActiveOpeningCard('white', 'italian-game-id');
+    auditCalls.length = 0;
+    s.setActiveOpeningCard('white', 'italian-game-id');
+    expect(auditCalls).toHaveLength(0);
+  });
+
+  it('re-runs when the same id is set for the same color but folder was last-touched elsewhere', () => {
+    const s = useCoachMemoryStore.getState();
+    s.setActiveOpeningCard('white', 'italian-game-id');
+    s.setActiveOpeningCard('black', 'caro-kann-id');
+    auditCalls.length = 0;
+    s.setActiveOpeningCard('white', 'italian-game-id');
+    expect(useCoachMemoryStore.getState().lastActiveRolodexColor).toBe('white');
+    expect(auditCalls).toHaveLength(1);
+  });
+
+  it('accepts null to clear the active card for a color (last favorite removed)', () => {
+    const s = useCoachMemoryStore.getState();
+    s.setActiveOpeningCard('white', 'italian-game-id');
+    s.setActiveOpeningCard('white', null);
+    expect(useCoachMemoryStore.getState().activeOpeningCardId.white).toBeNull();
+  });
+});
+
+describe('useCoachMemoryStore rolodex persistence', () => {
+  it('roundtrips activeOpeningCardId + lastActiveRolodexColor through Dexie via hydrate', async () => {
+    useCoachMemoryStore.getState().setActiveOpeningCard('white', 'italian-game-id');
+    useCoachMemoryStore.getState().setActiveOpeningCard('black', 'caro-kann-id');
+    await __flushCoachMemoryPersistForTests();
+
+    __resetCoachMemoryStoreForTests();
+    expect(useCoachMemoryStore.getState().activeOpeningCardId).toEqual({
+      white: null,
+      black: null,
+    });
+
+    await useCoachMemoryStore.getState().hydrate();
+
+    expect(useCoachMemoryStore.getState().activeOpeningCardId).toEqual({
+      white: 'italian-game-id',
+      black: 'caro-kann-id',
+    });
+    expect(useCoachMemoryStore.getState().lastActiveRolodexColor).toBe('black');
+  });
+
+  it('falls back to defaults when a legacy persisted blob omits the rolodex fields', async () => {
+    // Simulate a persisted blob written before the rolodex fields existed —
+    // the keys are simply absent from the JSON payload.
+    await db.meta.put({
+      key: 'coachMemory.v1',
+      value: JSON.stringify({
+        intendedOpening: null,
+        conversationHistory: [],
+        preferences: { likes: [], dislikes: [], style: null },
+        hintRequests: [],
+        blunderPatterns: [],
+        growthMap: [],
+        gameHistory: [],
+        savedPosition: null,
+        autoSavedPosition: null,
+      }),
+    });
+
+    __resetCoachMemoryStoreForTests();
+    await useCoachMemoryStore.getState().hydrate();
+
+    expect(useCoachMemoryStore.getState().activeOpeningCardId).toEqual({
+      white: null,
+      black: null,
+    });
+    expect(useCoachMemoryStore.getState().lastActiveRolodexColor).toBeNull();
+  });
+});
+
 describe('tryCaptureOpeningIntent', () => {
   it('captures Caro-Kann from a chat message and writes to the store', () => {
     const result = tryCaptureOpeningIntent(

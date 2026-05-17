@@ -6,7 +6,6 @@ import {
 } from '../stores/appStore';
 import {
   buildUserProfile,
-  buildSessionRecord,
   buildCoachGameState,
   buildChatMessage,
 } from '../test/factories';
@@ -25,18 +24,6 @@ describe('DEFAULT_STATE', () => {
 
   it('initial isLoading is true', () => {
     expect(useAppStore.getState().isLoading).toBe(true);
-  });
-
-  it('initial currentSession is null', () => {
-    expect(useAppStore.getState().currentSession).toBeNull();
-  });
-
-  it('initial sessionTimerActive is false', () => {
-    expect(useAppStore.getState().sessionTimerActive).toBe(false);
-  });
-
-  it('initial sessionElapsedSeconds is 0', () => {
-    expect(useAppStore.getState().sessionElapsedSeconds).toBe(0);
   });
 
   it('initial engineEnabled is true', () => {
@@ -80,12 +67,6 @@ describe('Setters', () => {
     expect(useAppStore.getState().isLoading).toBe(false);
   });
 
-  it('setCurrentSession sets session', () => {
-    const session = buildSessionRecord();
-    useAppStore.getState().setCurrentSession(session);
-    expect(useAppStore.getState().currentSession).toEqual(session);
-  });
-
   it('setCoachGameState sets game state', () => {
     const gameState = buildCoachGameState();
     useAppStore.getState().setCoachGameState(gameState);
@@ -104,47 +85,6 @@ describe('Setters', () => {
   it('setSidebarOpen sets sidebar state', () => {
     useAppStore.getState().setSidebarOpen(true);
     expect(useAppStore.getState().sidebarOpen).toBe(true);
-  });
-});
-
-// ─── Session Timer ───────────────────────────────────────────────────────────
-
-describe('Session Timer', () => {
-  it('startSessionTimer sets sessionTimerActive to true', () => {
-    useAppStore.getState().startSessionTimer();
-    expect(useAppStore.getState().sessionTimerActive).toBe(true);
-  });
-
-  it('stopSessionTimer sets sessionTimerActive to false', () => {
-    useAppStore.getState().startSessionTimer();
-    useAppStore.getState().stopSessionTimer();
-    expect(useAppStore.getState().sessionTimerActive).toBe(false);
-  });
-
-  it('tickSessionTimer increments when active', () => {
-    useAppStore.getState().startSessionTimer();
-    useAppStore.getState().tickSessionTimer();
-    expect(useAppStore.getState().sessionElapsedSeconds).toBe(1);
-
-    useAppStore.getState().tickSessionTimer();
-    expect(useAppStore.getState().sessionElapsedSeconds).toBe(2);
-  });
-
-  it('tickSessionTimer does NOT increment when inactive', () => {
-    // Timer is inactive by default
-    useAppStore.getState().tickSessionTimer();
-    expect(useAppStore.getState().sessionElapsedSeconds).toBe(0);
-  });
-
-  it('tickSessionTimer stops incrementing after timer is stopped', () => {
-    useAppStore.getState().startSessionTimer();
-    useAppStore.getState().tickSessionTimer();
-    useAppStore.getState().tickSessionTimer();
-    expect(useAppStore.getState().sessionElapsedSeconds).toBe(2);
-
-    useAppStore.getState().stopSessionTimer();
-    useAppStore.getState().tickSessionTimer();
-    expect(useAppStore.getState().sessionElapsedSeconds).toBe(2);
   });
 });
 
@@ -201,9 +141,6 @@ describe('Reset', () => {
     // Mutate every piece of state
     useAppStore.getState().setActiveProfile(buildUserProfile());
     useAppStore.getState().setLoading(false);
-    useAppStore.getState().setCurrentSession(buildSessionRecord());
-    useAppStore.getState().startSessionTimer();
-    useAppStore.getState().tickSessionTimer();
     useAppStore.getState().setSidebarOpen(true);
     useAppStore.getState().toggleEngine();
     useAppStore.getState().toggleEvalBar();
@@ -217,9 +154,6 @@ describe('Reset', () => {
     const state = useAppStore.getState();
     expect(state.activeProfile).toBeNull();
     expect(state.isLoading).toBe(true);
-    expect(state.currentSession).toBeNull();
-    expect(state.sessionTimerActive).toBe(false);
-    expect(state.sessionElapsedSeconds).toBe(0);
     expect(state.sidebarOpen).toBe(false);
     expect(state.engineEnabled).toBe(true);
     expect(state.evalBarVisible).toBe(true);
