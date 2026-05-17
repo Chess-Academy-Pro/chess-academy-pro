@@ -1198,13 +1198,13 @@
       "trapLines": [
         {
           "name": "Greedy c4 Pawn Grab",
-          "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Nc6 O-O Rb8 Nc3 b5 Ne5 Nd5 Nxc6 Rb6 Nxd5 exd5 Bxd5",
-          "explanation": "Black takes the c4 pawn and tries to hold it with ...b5, but White's Bg2 fires down the long diagonal. After Ne5 and Nxd5, White wins material thanks to the x-ray pressure on the diagonal."
+          "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Nc6 O-O Rb8 Nc3 b5 Ne5",
+          "explanation": "Black takes the c4 pawn and tries to hold it with ...b5. White's Bg2 fires down the long diagonal — Ne5 attacks the b5-Nc6 pair and prepares the diagonal break."
         },
         {
           "name": "Queen Trapped on Diagonal",
-          "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 a6 Qxc4 b5 Qc2 Bb7 Bf4 Nd5 Nc3 Nxf4 gxf4 Qd7 Ne5 Qd6 Nc6",
-          "explanation": "Black develops the bishop to b7 but the long diagonal becomes a liability. White's Bg2 combined with Ne5 creates tactical threats, and Nc6 forks the queen and bishop."
+          "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 a6 Qxc4 b5 Qc2 Bb7 Bf4 Nd5 Nc3 Nxf4 gxf4 Qd7",
+          "explanation": "Black develops the bishop to b7 but the long diagonal becomes a liability. After Bf4 Nxf4 gxf4 + Qd7, White's open g-file plus the long-diagonal Bg2 give a lasting attacking initiative."
         }
       ]
     },
