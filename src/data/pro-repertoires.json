@@ -3881,25 +3881,25 @@
         },
         {
           "name": "Aggressive Ng5 Line",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5+ c6 dxc6 bxc6 Bd3 Nd5 Nf3 Bd6 O-O O-O Re1 f6 b3 Nf4 Bb2",
-          "explanation": "When Akeem wants to teach attacking chess, he pulls out the Ng5 Two Knights line. The resulting complications are excellent for developing tactical vision — exactly the kind of positions Akeem uses in his teaching."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5+ c6 dxc6 bxc6 Bd3 Nd5 Nf3 Bd6 O-O O-O Re1",
+          "explanation": "When Akeem wants to teach attacking chess, he pulls out the Ng5 Two Knights line. The resulting complications are excellent for developing tactical vision."
         },
         {
           "name": "Slow Italian d3",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 O-O O-O c3 d6 Re1 a6 Bb3 Ba7 Nbd2 Be6 Bxe6 fxe6 Nf1 d5 Bg5 dxe4 dxe4",
-          "explanation": "The slow Italian with d3. Akeem teaches this for positional understanding — White builds slowly and waits for the right moment. It demonstrates patience, a key chess and life principle."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 O-O O-O c3 d6 Re1 a6 Bb3 Ba7 Nbd2 Be6",
+          "explanation": "The slow Italian with d3. White builds slowly and waits for the right moment — Akeem teaches this for positional understanding and patience."
         }
       ],
       "trapLines": [
         {
           "name": "Scholar's Mate Counter-Attack",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 Ng5 Qe7 Qf3 d6 d3 Nf6 Be3 Bg4 Qg3 Bxe3 fxe3 Nh5 Qf2 Qf6",
-          "explanation": "If White goes for a Scholar's mate-style Qh5, Black defends with Qe7 and Nf6 gaining tempo on the queen. Black turns the early queen sortie into a development advantage."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 Ng5",
+          "explanation": "If White goes for a Scholar's mate-style Qh5 or Ng5 attack, Black defends with Qe7 + Nf6 gaining tempo on the queen. Black turns the early queen sortie into a development advantage."
         },
         {
           "name": "Nf6 Fork Trick",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Nxc3 bxc3 Bxc3 Qb3 Bxa1 Bxf7+ Kf8 Bg5 Ne7 Re1",
-          "explanation": "A sacrificial attack on f7 — Bxf7+ followed by piece activity, not a forced material win. White is DOWN material after Bxf7+ Kf8 Bg5 Ne7 Re1 because Black grabbed a rook earlier (Bxa1), but White has bishop pair, open lines, and Black's king is cornered on f8 with no kingside development. The advantage is positional: Black has to defend a wreck and White's pieces coordinate for a long attack. Tell the student: this is not 'trap Black's queen' — it's 'pay material for a permanently better position.'"
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O",
+          "explanation": "A sacrificial attack on f7 — Bxf7+ followed by piece activity, not a forced material win. After Nxe4 + O-O, White's open lines and active pieces compensate for the material; the student should be told this is positional pressure, not 'trap Black's queen'."
         }
       ]
     },
