@@ -160,28 +160,114 @@ async function main() {
   }
 
   // ─── § 4. Piece-maze gameplay ────────────────────────────────────────
-  // SHOULD: clicking the target wins the level.
-  console.log('\n[kid-deep] § 4. Maze gameplay (level 1)');
+  // SHOULD: a BFS-computed shortest path from pieceStart to target,
+  // played one square at a time, ends in the won state. (Earlier
+  // version assumed a single target click; rook/king l1 actually
+  // need multi-move paths.)
+  console.log('\n[kid-deep] § 4. Maze gameplay (level 1, BFS-driven)');
+
+  // Inline BFS solvers — mirror the live pieceMazeService rules. Used
+  // both to compute the win path and to assert the level config is
+  // solvable from the audit side.
+  const FILES = 'abcdefgh';
+  const fi = (s) => FILES.indexOf(s[0]);
+  const ri = (s) => parseInt(s[1], 10) - 1;
+  const sq = (f, r) => `${FILES[f]}${r + 1}`;
+  const ROOK_DIRS = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+  const BISHOP_DIRS = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
+  const QUEEN_DIRS = [...ROOK_DIRS, ...BISHOP_DIRS];
+  const KNIGHT_DELTAS = [[1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1], [-2, 1], [-1, 2]];
+  function slide(from, blocked, dirs, max = 7) {
+    const out = []; const f = fi(from); const r = ri(from);
+    for (const [df, dr] of dirs) {
+      let cf = f + df, cr = r + dr, n = 0;
+      while (cf >= 0 && cf < 8 && cr >= 0 && cr < 8 && n < max) {
+        const s = sq(cf, cr);
+        if (blocked.has(s)) break;
+        out.push(s); cf += df; cr += dr; n++;
+      }
+    }
+    return out;
+  }
+  function getMoves(piece, from, blocked) {
+    if (piece === 'king')   return slide(from, blocked, QUEEN_DIRS, 1);
+    if (piece === 'queen')  return slide(from, blocked, QUEEN_DIRS);
+    if (piece === 'rook')   return slide(from, blocked, ROOK_DIRS);
+    if (piece === 'bishop') return slide(from, blocked, BISHOP_DIRS);
+    if (piece === 'knight') {
+      const out = []; const f = fi(from); const r = ri(from);
+      for (const [df, dr] of KNIGHT_DELTAS) {
+        const cf = f + df, cr = r + dr;
+        if (cf < 0 || cf >= 8 || cr < 0 || cr >= 8) continue;
+        const s = sq(cf, cr);
+        if (!blocked.has(s)) out.push(s);
+      }
+      return out;
+    }
+    if (piece === 'pawn') {
+      const f = fi(from); const r = ri(from);
+      if (r >= 7) return [];
+      const out = []; const one = sq(f, r + 1);
+      if (!blocked.has(one)) {
+        out.push(one);
+        if (r === 1) { const two = sq(f, r + 2); if (!blocked.has(two)) out.push(two); }
+      }
+      return out;
+    }
+    return [];
+  }
+  function bfsPath(piece, start, target, obstacles) {
+    const blocked = new Set(obstacles);
+    const prev = new Map();
+    prev.set(start, null);
+    const q = [start];
+    while (q.length) {
+      const cur = q.shift();
+      if (cur === target) {
+        const path = []; let s = cur;
+        while (s && s !== start) { path.unshift(s); s = prev.get(s); }
+        return path;
+      }
+      for (const nx of getMoves(piece, cur, blocked)) {
+        if (!prev.has(nx)) { prev.set(nx, cur); q.push(nx); }
+      }
+    }
+    return null;
+  }
+
+  // Level 1 configs — keep in sync with src/data/pieceMazeLevels.ts ids=1.
   const MAZE_L1 = {
-    king: 'e5', queen: 'h8', rook: 'h8', bishop: 'h8',
-    knight: 'c3', pawn: 'a8',
+    king:   { start: 'a1', target: 'e5', obstacles: [] },
+    queen:  { start: 'a1', target: 'h8', obstacles: [] },
+    rook:   { start: 'a1', target: 'h8', obstacles: [] },
+    bishop: { start: 'a1', target: 'h8', obstacles: [] },
+    knight: { start: 'b1', target: 'c3', obstacles: [] },
+    pawn:   { start: 'a7', target: 'a8', obstacles: [] },
   };
+
   for (const p of PIECES) {
-    const target = MAZE_L1[p];
+    const cfg = MAZE_L1[p];
     await runScenario(`${p}-maze-l1-loads`, `/kid/${p}-games/maze/1 mounts`, async () => {
       await page.goto(`${BASE_URL}/kid/${p}-games/maze/1`, { timeout: 30000 });
-      await page.locator(`[data-testid="piece-maze-${p}"]`).waitFor({ timeout: 20000 });
+      await page.locator(`[data-testid="piece-maze-${p}"]`).waitFor({ timeout: 30000 });
     });
     await runScenario(`${p}-maze-l1-move-count-0`, 'starts at 0 moves', async () => {
       const t = (await page.locator('[data-testid="piece-maze-move-count"]').textContent())?.trim();
       if (t !== '0') throw new Error(`move-count=${t}`);
     });
-    await runScenario(`${p}-maze-l1-target-wins`, `clicking ${target} reaches won state`, async () => {
-      const sel = `[data-square="${target}"]`;
-      const t = page.locator(sel).first();
-      if ((await t.count()) === 0) throw new Error(`target ${target} not addressable`);
-      await t.click({ timeout: 5000 });
+    await runScenario(`${p}-maze-l1-bfs-path-wins`, `walking BFS path reaches won state`, async () => {
+      const path = bfsPath(p, cfg.start, cfg.target, cfg.obstacles);
+      if (!path || path.length === 0) {
+        throw new Error(`no BFS path from ${cfg.start} to ${cfg.target} for ${p}`);
+      }
+      for (const square of path) {
+        const t = page.locator(`[data-square="${square}"]`).first();
+        if ((await t.count()) === 0) throw new Error(`square ${square} not addressable`);
+        await t.click({ timeout: 5000 });
+        await page.waitForTimeout(150); // let React state settle
+      }
       await page.locator('[data-testid="piece-maze-won"]').waitFor({ timeout: 10000 });
+      return { details: `${path.length}-move path` };
     });
   }
 
