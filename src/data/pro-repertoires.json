@@ -4090,29 +4090,29 @@
       "variations": [
         {
           "name": "Giuoco Piano Solid",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Bd2 Bxd2+ Nbxd2 d5 exd5 Nxd5 O-O O-O Re1 Bg4 Qb3 Na5 Qa4 Nxc4 Qxc4",
-          "explanation": "The solid main line. Samay plays this because it is straightforward — develop, castle, and play in the center. No need to memorize 20 moves of theory. Just good chess principles."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Bd2 Bxd2+ Nbxd2 d5 exd5 Nxd5 O-O O-O Re1 Bg4",
+          "explanation": "The solid main line. Samay plays this because it is straightforward — develop, castle, and play in the center. The Bg4 pin sets up the typical Italian middlegame play."
         },
         {
           "name": "Italian with d3",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 O-O O-O c3 d6 Re1 a6 Bb3 Ba7 Nbd2 Be6 Bxe6 fxe6 Nf1 Qe8 Ng3 Qg6 Nh4 Qf7",
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 O-O O-O c3 d6 Re1 a6 Bb3 Ba7 Nbd2 Be6",
           "explanation": "The quiet d3 Italian. Samay likes this because it avoids complicated theory and leads to a pleasant middlegame. White develops slowly and waits for Black to make a mistake."
         },
         {
           "name": "Evans Gambit Surprise",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Be7 d4 Na5 Be2 exd4 Qxd4 Nf6 e5 Nc6 Qh4 Nd5 Qg3 g6 O-O Nb6 c4 d6 exd6 Qxd6 Qxd6 Bxd6",
-          "explanation": "When Samay wants to spice things up, he goes for the Evans Gambit. Sacrificing a pawn for rapid development creates the kind of exciting positions that make great content and great chess."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Be7 d4 Na5 Be2 exd4 Qxd4 Nf6 e5 Nc6 Qh4 Nd5 Qg3 g6 O-O Nb6 c4 d6",
+          "explanation": "When Samay wants to spice things up, he goes for the Evans Gambit. Sacrificing a pawn for rapid development creates exciting positions where attacking play can pay off."
         }
       ],
       "trapLines": [
         {
           "name": "Legal's Mate Setup",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 d6 Nc3 Bg4 h3 Bh5 Nxe5 Bxd1 Bxf7+ Ke7 Nd5#",
-          "explanation": "The classic Legal's Mate pattern. White sacrifices the queen with Nxe5 and after Bxd1, Bxf7+ and Nd5+ deliver checkmate or win massive material. A devastating trap against greedy play."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 d6 Nc3 Bg4 h3",
+          "explanation": "The setup for Legal's Mate. If Black insists on the Bg4 pin and White plays h3, Black's natural Bh5 (instead of trading) allows the famous Nxe5! queen sacrifice followed by Bxf7+ Ke7 Nd5#."
         },
         {
           "name": "d4 Center Trick",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d4 Bxd4 Nxd4 Nxd4 O-O d6 f4 Nf6 fxe5 dxe5 Bg5 Be6 Bxe6 fxe6 Bxf6 Qxf6 Rxf6 gxf6 Qh5+",
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d4 Bxd4 Nxd4 Nxd4 O-O",
           "explanation": "White sacrifices the d4 pawn to lure the bishop and after Nxd4, castles with tempo. The open center and f4 push create dangerous attacking chances against Black's exposed king."
         }
       ]
