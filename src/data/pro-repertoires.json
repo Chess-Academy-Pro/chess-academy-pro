@@ -3127,15 +3127,15 @@
         },
         {
           "name": "Classical 5...Bb6 Retreat",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb6 e5 d5 exf6 dxc4 fxg7 Rg8 d5",
-          "explanation": "If Black retreats the bishop to b6 instead of checking, White pushes e5 gaining space. After exf6 dxc4 fxg7, White disrupts Black's kingside and the d5 push creates a powerful passed pawn."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb6",
+          "explanation": "If Black retreats the bishop to b6 instead of checking, White pushes e5 gaining space. The resulting position with disrupted kingside structure creates lasting attacking chances."
         }
       ],
       "trapLines": [
         {
           "name": "Nxe4 Premature Grab",
-          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Nxe4 d5 Nd6 dxc6 Nxc4 Qd5",
-          "explanation": "If Black grabs e4 too early, d5 attacks the knight and after Nd6 dxc6, White wins the bishop pair and has a powerful initiative with Qd5 targeting multiple weaknesses."
+          "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Nxe4",
+          "explanation": "If Black grabs e4 too early, d5 attacks the knight. The resulting tactical sequence wins material and gives White a powerful initiative."
         }
       ]
     },
