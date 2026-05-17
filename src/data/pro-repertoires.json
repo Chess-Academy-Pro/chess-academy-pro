@@ -761,23 +761,23 @@
         },
         {
           "name": "Tartakower / Two Knights 3...Nf6",
-          "pgn": "e4 c6 Nc3 d5 Nf3 Nf6 e5 Ne4 Ne2 Qb6 d4 e6 Ng3 Nxg3 hxg3 c5 Be3 Nc6 Bd3 cxd4 Bxd4 Nxd4 Nxd4 Qxd4 Be2",
+          "pgn": "e4 c6 Nc3 d5 Nf3 Nf6 e5 Ne4 Ne2 Qb6 d4 e6 Ng3 Nxg3 hxg3 c5",
           "explanation": "A recently revived line. After 2.Nc3 d5 3.Nf3, Black plays 3...Nf6 directly. If White pushes e5, the knight retreats to e4 and Black gets active counterplay with Qb6 and c5."
         },
         {
           "name": "Two Knights 2.Nc3 d5 3.Nf3 Bg4",
-          "pgn": "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3 Qxf3 e6 d4 Nf6 Bd3 dxe4 Nxe4 Nxe4 Qxe4 Nd7 O-O Nf6 Qe2 Be7",
+          "pgn": "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3 Qxf3 e6 d4 Nf6 Bd3 dxe4 Nxe4 Nxe4 Qxe4 Nd7 O-O Nf6",
           "explanation": "Levy's recommendation from his course. Black develops Bg4 early, trades it for the piece on f3, and gets a solid position. After the exchange on f3 White has the bishop pair but Black's structure is rock-solid."
         },
         {
           "name": "Advance Variation 3.e5 Bf5",
-          "pgn": "e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5 Be3 Nd7 O-O Ne7 Nbd2 Nc6 c3 cxd4 cxd4 Qb6",
+          "pgn": "e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5 Be3 Nd7 O-O Ne7 Nbd2 Nc6 c3 cxd4 cxd4",
           "explanation": "Against the Advance, Black plays Bf5 before e6 (key Caro-Kann idea), then undermines with c5. The knight route Nd7-e7-c6 is standard. Black pressures d4 and aims for a French-like structure with an active light-squared bishop."
         },
         {
           "name": "Advance Variation 3.e5 c5",
-          "pgn": "e4 c6 d4 d5 e5 c5 dxc5 Nc6 Nf3 Bg4 Bf4 e6 c3 Bxf3 Qxf3 Nxe5 Bxe5 Qa5 Nd2 Qxc5 Qg3 Nf6 Bd3",
-          "explanation": "The aggressive c5 reply. Black immediately strikes at White's center. After dxc5 Nc6, Black develops with tempo targeting the c5 and e5 pawns. Creates French-like structures where Black's light bishop is actually active."
+          "pgn": "e4 c6 d4 d5 e5 c5 dxc5 Nc6 Nf3 Bg4 Bf4 e6",
+          "explanation": "The aggressive c5 reply. Black immediately strikes at White's center. After dxc5 Nc6, Black develops with tempo targeting the c5 and e5 pawns. The Bg4 pin sets up Bxf3 + Nxe5 if White doesn't react carefully."
         },
         {
           "name": "Exchange Variation 3.exd5",
@@ -791,26 +791,26 @@
         },
         {
           "name": "Fantasy Variation 3.f3",
-          "pgn": "e4 c6 d4 d5 f3 e6 Nc3 Bb4 Bf4 Ne7 Qd3 b6 e5 c5 a3 Ba5 Nge2 Nbc6 dxc5 bxc5",
-          "explanation": "White plays 3.f3 bolstering the center. Levy recommends e6 to keep things solid, then Bb4 to pressure White's center. The position becomes sharp — Black aims to undermine with c5 and exploit White's weakened kingside."
+          "pgn": "e4 c6 d4 d5 f3 e6 Nc3 Bb4 Bf4 Ne7 Qd3 b6",
+          "explanation": "White plays 3.f3 bolstering the center. Levy recommends e6 to keep things solid, then Bb4 to pressure White's center. The b6 + Bb7 fianchetto adds long-diagonal pressure as the game opens."
         }
       ],
       "trapLines": [
         {
           "name": "Two Knights Bg4 Pin Trick",
-          "pgn": "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bh5 exd5 cxd5 Bb5+ Nc6 g4 Bg6 Ne5 Rc8 d4 e6 Qf3 Bb4",
+          "pgn": "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bh5 exd5 cxd5 Bb5+ Nc6 g4 Bg6 Ne5 Rc8 d4 e6",
           "explanation": "After 3...Bg4, if White gets greedy with g4, Black gets strong counterplay with Nc6 and Rc8. The pin on c3 causes real headaches for White."
         }
       ],
       "warningLines": [
         {
           "name": "Fantasy Variation e5 Trap",
-          "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 exd4 Bc4 Bb4+ Kf1",
+          "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 exd4 Bc4 Bb4+",
           "explanation": "Avoid capturing dxe4 in the Fantasy — after fxe4, White gets a strong center and open f-file. Black's position becomes harder to play. Stick with e6 instead."
         },
         {
           "name": "Advance Variation Qb6 Fork",
-          "pgn": "e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5 O-O cxd4 Nxd4 Bc5 Be3 Qb6 Nb3 Qxb3 axb3",
+          "pgn": "e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5 O-O cxd4 Nxd4",
           "explanation": "In the Advance, if White plays casually, Black can win a pawn with the Qb6 fork targeting b2 and d4 simultaneously. White must be very precise in this line."
         }
       ]
