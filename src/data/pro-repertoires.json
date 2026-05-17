@@ -2569,8 +2569,8 @@
       "variations": [
         {
           "name": "Chigorin Variation",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 d6 c3 O-O h3 Na5 Bc2 c5 d4 Qc7 Nbd2 Nc6 d5 Nd8 Nf1 Ne6",
-          "explanation": "The Chigorin is one of the most popular Ruy Lopez defenses. Black maneuvers the knight to a5 and prepares c5. Firouzja handles the resulting IQP and central tension masterfully."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 d6 c3 O-O h3 Na5 Bc2 c5 d4 Qc7 Nbd2 Nc6 d5 Nd8 Nf1",
+          "explanation": "The Chigorin is one of the most popular Ruy Lopez defenses. Black maneuvers Na5 then back to c6 and d8 to prepare ...Ne6. After Nf1 + Ng3 reroute, both sides slowly manoeuvre for the typical Spanish kingside attack."
         },
         {
           "name": "Zaitsev Variation",
@@ -2586,13 +2586,13 @@
       "trapLines": [
         {
           "name": "Nxe4 Pawn Grab Refuted",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Be7 Re1 Nc5 Nd4 Nxb3 Nxb3",
-          "explanation": "Black grabs the e4 pawn with Nxe4 but White gets the Open Ruy Lopez with d4 and dxe5. White's active pieces and the strong e5 pawn give a powerful initiative."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Be7 Re1 Nc5",
+          "explanation": "Black grabs the e4 pawn with Nxe4 but White gets the Open Ruy Lopez with d4 and dxe5. After Re1 + Nc5, White's active pieces and the strong e5 pawn give a powerful initiative."
         },
         {
           "name": "Open Tarrasch Trap",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Be7 Re1 O-O Nd4 Qd7 Nxe6 fxe6 Rxe4",
-          "explanation": "In the Open Spanish, Black's 9...Be7 (instead of the correct 9...Bc5) allows the Tarrasch Trap. After 11.Nd4 Qd7 12.Nxe6 fxe6 13.Rxe4, the rook lift wins material: if 13...dxe4 then 14.Qxd7 wins the queen, and 13...Bd6 14.Rxe6 keeps White up a clear pawn with active pieces. ECO C83."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Be7 Re1 O-O Nd4",
+          "explanation": "In the Open Spanish, Black's 9...Be7 (instead of the correct 9...Bc5) allows the Tarrasch Trap. After 11.Nd4 White threatens Nxe6 + Rxe4 winning material — Black must walk a tightrope to defend. ECO C83."
         }
       ]
     },
