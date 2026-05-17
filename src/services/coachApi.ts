@@ -11,6 +11,12 @@ import { logAppAudit } from './appAuditor';
 import type { MasterPlayContext, MasterPlayResult } from './masterPlayTypes';
 import type { CoachTask, CoachContext, CoachVerbosity, AiProvider } from '../types';
 
+// WO-COACH-MASTER-INTEGRATION audit bridge — installs window.__masterPlayAudit
+// when the audit-stream is configured, letting the Playwright audit drive
+// the deployed app's services via page.evaluate. No-op for real users.
+// Side-effect import keeps the audit script free of source-path knowledge.
+import './masterPlayAuditBridge';
+
 /**
  * Model routing policy
  * --------------------

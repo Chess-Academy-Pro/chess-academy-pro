@@ -246,8 +246,10 @@ async function main() {
   // ── Scenario 1: Layer A — watcher prefetch + look-ahead ────────────
   await scenario('watcher.prefetch-starting-position', async () => {
     const result = await page.evaluate(async (fen) => {
-      const watcher = await import('/src/services/masterPlayWatcher.ts');
-      const cache = await import('/src/services/masterPlayCache.ts');
+      const bridge = (window).__masterPlayAudit;
+      if (!bridge) throw new Error('window.__masterPlayAudit not installed — audit bridge not active');
+      const watcher = bridge;
+      const cache = { masterPlayCache: bridge.masterPlayCache };
       cache.masterPlayCache.clear();
       await watcher.prefetchMasterPlay(fen, { surface: '/coach/chat', sessionId: 'audit-1' });
       // Give audit-stream POSTs time to fire.
@@ -273,7 +275,9 @@ async function main() {
   // ── Scenario 2: Cache hit on repeat prefetch ──────────────────────
   await scenario('watcher.repeat-prefetch-cache-hit', async () => {
     const result = await page.evaluate(async (fen) => {
-      const watcher = await import('/src/services/masterPlayWatcher.ts');
+      const bridge = (window).__masterPlayAudit;
+      if (!bridge) throw new Error('window.__masterPlayAudit not installed');
+      const watcher = bridge;
       await watcher.prefetchMasterPlay(fen, { surface: '/coach/chat', sessionId: 'audit-2', skipLookahead: true });
       await new Promise((r) => setTimeout(r, 200));
       return { ok: true };
@@ -284,7 +288,9 @@ async function main() {
   // ── Scenario 3: Layer B — pre-injection on move-question ──────────
   await scenario('layer-b.pre-injection-on-move-question', async () => {
     return page.evaluate(async (fen) => {
-      const coachApi = await import('/src/services/coachApi.ts');
+      const bridge = (window).__masterPlayAudit;
+      if (!bridge) throw new Error('window.__masterPlayAudit not installed');
+      const coachApi = bridge;
       const lib = (window).__masterAuditLib;
       lib.llmTexts = ['Masters most commonly play e4 in this position.'];
       const r = await coachApi.getCoachChatResponse(
@@ -306,7 +312,9 @@ async function main() {
   // ── Scenario 4: Layer D — claim validator trip + retry ────────────
   await scenario('layer-d.claim-validator-trip-then-stock-fallback', async () => {
     return page.evaluate(async (fen) => {
-      const coachApi = await import('/src/services/coachApi.ts');
+      const bridge = (window).__masterPlayAudit;
+      if (!bridge) throw new Error('window.__masterPlayAudit not installed');
+      const coachApi = bridge;
       const lib = (window).__masterAuditLib;
       lib.llmTexts = [
         'Try Nh6 here.',          // SAN not in context — violation
@@ -348,8 +356,10 @@ async function main() {
   await scenario('kid.watcher-short-circuits', async () => {
     const before = captured.length;
     const result = await page.evaluate(async (fen) => {
-      const watcher = await import('/src/services/masterPlayWatcher.ts');
-      const cache = await import('/src/services/masterPlayCache.ts');
+      const bridge = (window).__masterPlayAudit;
+      if (!bridge) throw new Error('window.__masterPlayAudit not installed — audit bridge not active');
+      const watcher = bridge;
+      const cache = { masterPlayCache: bridge.masterPlayCache };
       cache.masterPlayCache.clear();
       await watcher.prefetchMasterPlay(fen, { surface: '/kid/pawn-games', sessionId: 'audit-5' });
       await new Promise((r) => setTimeout(r, 300));
@@ -371,7 +381,9 @@ async function main() {
   await scenario('kid.llm-call-does-not-engage-grounding', async () => {
     const before = captured.length;
     const result = await page.evaluate(async () => {
-      const coachApi = await import('/src/services/coachApi.ts');
+      const bridge = (window).__masterPlayAudit;
+      if (!bridge) throw new Error('window.__masterPlayAudit not installed');
+      const coachApi = bridge;
       const lib = (window).__masterAuditLib;
       lib.llmTexts = ["That's the white pawn."];
       const r = await coachApi.getKidLlmResponse(
@@ -395,7 +407,9 @@ async function main() {
   await scenario('intent.non-move-question-stays-out-of-pipeline', async () => {
     const before = captured.length;
     await page.evaluate(async (fen) => {
-      const coachApi = await import('/src/services/coachApi.ts');
+      const bridge = (window).__masterPlayAudit;
+      if (!bridge) throw new Error('window.__masterPlayAudit not installed');
+      const coachApi = bridge;
       const lib = (window).__masterAuditLib;
       lib.llmTexts = ['The Sicilian is a defense against 1.e4.'];
       await coachApi.getCoachChatResponse(
