@@ -142,6 +142,108 @@ export const PIECE_SWEEP_LEVELS: PieceSweepLevel[] = [
     piece: 'pawn', id: 5, name: 'Pawn Sweep',
     pieceStart: 'a2', targets: ['b3', 'c4', 'd5', 'e6'], obstacles: [], par: 4,
   },
+
+  // ── Phase 7c — band-2 (medium) levels, procedurally generated ──
+  {
+    piece: 'king', id: 6, name: 'King Hunt 1',
+    pieceStart: 'b6', targets: ["c4","c7","e2","f4"], obstacles: ["g4"], par: 8,
+  },
+  {
+    piece: 'king', id: 7, name: 'King Hunt 2',
+    pieceStart: 'd7', targets: ["c1","c6","f3","g3"], obstacles: ["h2"], par: 9,
+  },
+  {
+    piece: 'king', id: 8, name: 'King Hunt 3',
+    pieceStart: 'b8', targets: ["e1","e6","f1","g2"], obstacles: ["e3"], par: 9,
+  },
+  {
+    piece: 'king', id: 9, name: 'King Hunt 4',
+    pieceStart: 'e6', targets: ["e4","f1","g2","h2"], obstacles: ["b1"], par: 7,
+  },
+  {
+    piece: 'king', id: 10, name: 'King Hunt 5',
+    pieceStart: 'c7', targets: ["b2","c4","c6","e2"], obstacles: ["e3"], par: 8,
+  },
+  {
+    piece: 'queen', id: 6, name: 'Queen Hunt 1',
+    pieceStart: 'c5', targets: ["d7","e2","e6","g5"], obstacles: ["a6"], par: 5,
+  },
+  {
+    piece: 'queen', id: 7, name: 'Queen Hunt 2',
+    pieceStart: 'b2', targets: ["a7","b7","d8","f1"], obstacles: ["a5"], par: 6,
+  },
+  {
+    piece: 'queen', id: 8, name: 'Queen Hunt 3',
+    pieceStart: 'c7', targets: ["d4","f4","g3","g4"], obstacles: ["h5"], par: 4,
+  },
+  {
+    piece: 'queen', id: 9, name: 'Queen Hunt 4',
+    pieceStart: 'b7', targets: ["a4","c7","g3","h1"], obstacles: ["e2"], par: 6,
+  },
+  {
+    piece: 'queen', id: 10, name: 'Queen Hunt 5',
+    pieceStart: 'h4', targets: ["a1","a2","g2","h1"], obstacles: ["b4"], par: 4,
+  },
+  {
+    piece: 'rook', id: 6, name: 'Rook Hunt 1',
+    pieceStart: 'h1', targets: ["b8","c1","g4","h7"], obstacles: ["e4"], par: 7,
+  },
+  {
+    piece: 'rook', id: 7, name: 'Rook Hunt 2',
+    pieceStart: 'c4', targets: ["c3","d5","g2","h3"], obstacles: ["a2"], par: 6,
+  },
+  {
+    piece: 'rook', id: 8, name: 'Rook Hunt 3',
+    pieceStart: 'g5', targets: ["b3","c1","e3","f6"], obstacles: ["g1"], par: 7,
+  },
+  {
+    piece: 'rook', id: 9, name: 'Rook Hunt 4',
+    pieceStart: 'f4', targets: ["a2","b5","h4","h5"], obstacles: ["f1"], par: 5,
+  },
+  {
+    piece: 'rook', id: 10, name: 'Rook Hunt 5',
+    pieceStart: 'a8', targets: ["a7","b5","c2","d3"], obstacles: ["b3"], par: 7,
+  },
+  {
+    piece: 'bishop', id: 6, name: 'Bishop Hunt 1',
+    pieceStart: 'a4', targets: ["b1","b5","c4","c8"], obstacles: ["h6"], par: 6,
+  },
+  {
+    piece: 'bishop', id: 7, name: 'Bishop Hunt 2',
+    pieceStart: 'b6', targets: ["c7","d2","f8","g5"], obstacles: ["h6"], par: 6,
+  },
+  {
+    piece: 'bishop', id: 8, name: 'Bishop Hunt 3',
+    pieceStart: 'a5', targets: ["a1","c3","e5","h6"], obstacles: ["g1"], par: 5,
+  },
+  {
+    piece: 'bishop', id: 9, name: 'Bishop Hunt 4',
+    pieceStart: 'a1', targets: ["a5","b6","g3","h2"], obstacles: ["c6"], par: 6,
+  },
+  {
+    piece: 'bishop', id: 10, name: 'Bishop Hunt 5',
+    pieceStart: 'g1', targets: ["d8","e1","e3","g3"], obstacles: ["h7"], par: 6,
+  },
+  {
+    piece: 'knight', id: 6, name: 'Knight Hunt 1',
+    pieceStart: 'a5', targets: ["c5","f7","g6","g7"], obstacles: ["b4"], par: 9,
+  },
+  {
+    piece: 'knight', id: 7, name: 'Knight Hunt 2',
+    pieceStart: 'f8', targets: ["c3","d6","g7","h5"], obstacles: ["c5"], par: 8,
+  },
+  {
+    piece: 'knight', id: 8, name: 'Knight Hunt 3',
+    pieceStart: 'd1', targets: ["f1","f3","g6","h8"], obstacles: ["d7"], par: 7,
+  },
+  {
+    piece: 'knight', id: 9, name: 'Knight Hunt 4',
+    pieceStart: 'f4', targets: ["c3","d5","f1","h5"], obstacles: ["g5"], par: 6,
+  },
+  {
+    piece: 'knight', id: 10, name: 'Knight Hunt 5',
+    pieceStart: 'f2', targets: ["b7","c1","f1","g3"], obstacles: ["b4"], par: 9,
+  },
 ];
 
 export function getSweepLevelsForPiece(
