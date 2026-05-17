@@ -18,41 +18,6 @@
     "petrov-defence::trap::Wrong Move Order Punishment": [
       "WEAK_TRAP"
     ],
-    "london-system::trap::Nh5 Misplacement Trap": [
-      "PGN_NOT_IN_DB",
-      "WEAK_TRAP"
-    ],
-    "london-system::trap::c5 Qb6 Trap": [
-      "PGN_NOT_IN_DB",
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
-    "london-system::trap::e5 Central Blunder Trap": [
-      "PGN_NOT_IN_DB",
-      "WEAK_TRAP"
-    ],
-    "london-system::trap::Jobava Nb5 Fork Combo": [
-      "INVERTED_MATERIAL",
-      "PGN_NOT_IN_DB"
-    ],
-    "london-system::trap::Oh No My Queen Trap": [
-      "INVERTED_MATERIAL",
-      "PGN_NOT_IN_DB",
-      "STUDENT_NOT_PUNISHER"
-    ],
-    "london-system::trap::Jobava Kingside Pawn Storm": [
-      "INVERTED_MATERIAL",
-      "PGN_NOT_IN_DB"
-    ],
-    "london-system::warning::Early Bf5 Counter": [
-      "PGN_NOT_IN_DB"
-    ],
-    "london-system::warning::King's Indian Counterattack": [
-      "PGN_NOT_IN_DB"
-    ],
-    "london-system::warning::Dutch f5-f4 Pawn Storm": [
-      "PGN_NOT_IN_DB"
-    ],
     "catalan-opening::trap::Long Diagonal Rook Skewer": [
       "STUDENT_NOT_PUNISHER"
     ],
@@ -575,6 +540,39 @@
       "STUDENT_NOT_PUNISHER"
     ],
     "queens-gambit::warning::Premature e4 Push": [
+      "TOOTHLESS_WARNING"
+    ],
+    "london-system::trap::Nh5 Misplacement Trap": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "london-system::trap::c5 Qb6 Trap": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "london-system::trap::e5 Central Blunder Trap": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "london-system::trap::Jobava Nb5 Fork Combo": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "london-system::trap::Oh No My Queen Trap": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "london-system::trap::Jobava Kingside Pawn Storm": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "london-system::warning::Early Bf5 Counter": [
+      "TOOTHLESS_WARNING"
+    ],
+    "london-system::warning::King's Indian Counterattack": [
+      "TOOTHLESS_WARNING"
+    ],
+    "london-system::warning::Dutch f5-f4 Pawn Storm": [
       "TOOTHLESS_WARNING"
     ]
   }

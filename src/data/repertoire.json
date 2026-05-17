@@ -1049,7 +1049,7 @@
     "id": "sicilian-alapin",
     "eco": "B22",
     "name": "Sicilian: Alapin",
-    "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7 Bxc6 Qxc6",
+    "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7 Bxc6 Qxc6 Qg4 Bf6 Rd1 Rd8 Ne4 Nd5 Be3 b6",
     "color": "black",
     "style": "Solid, Anti-Sicilian",
     "overview": "The Alapin (2.c3) is White's attempt to build a big center with d4 without allowing the Open Sicilian. As Black, you shouldn't be annoyed — you should be happy! White has given up the right to play the dangerous Open Sicilian mainlines. Your job is to challenge the center immediately, develop naturally, and show that c3 is a wasted move. The positions are strategically rich and favor the player who understands pawn structures better.",
@@ -1992,7 +1992,7 @@
     "id": "london-system",
     "eco": "D00",
     "name": "London System",
-    "pgn": "d4 Nf6 Nf3 g6 Bf4 Bg7 e3 d6 Be2 O-O O-O Nbd7 h3 b6 c3 Bb7 Nbd2 Ne4 Nxe4 Bxe4 Qc2 Bb7",
+    "pgn": "d4 Nf6 Nf3 g6 Bf4 Bg7 e3 d6 Be2 O-O O-O Nbd7 h3 b6 c3 Bb7 Nbd2 Ne4 Nxe4 Bxe4",
     "color": "white",
     "style": "Solid, Universal",
     "overview": "The London System is the ultimate low-maintenance opening — you develop Bf4, e3, Nf3, Bd3, Nbd2, c3 in almost any order regardless of what Black does. It's incredibly reliable and gives you a solid, playable position against virtually anything. The dark-squared bishop on f4 is the star piece, and from there you can launch kingside attacks or play a positional game depending on what Black gives you.",
@@ -2013,91 +2013,91 @@
     "variations": [
       {
         "name": "London vs Queen's Pawn",
-        "pgn": "d4 d5 Bf4 Nf6 e3 e6 Nf3 c5 c3 Nc6 Nbd2 Bd6 Bg3 O-O Bd3 Qe7 Ne5 Nd7 f4 f5 Ndf3 Nf6 Qb3 Bxe5 Nxe5 Bd7 O-O Rab8 Rae1",
+        "pgn": "d4 d5 Bf4 Nf6 e3 e6 Nf3 c5 c3 Nc6 Nbd2 Bd6 Bg3 O-O Bd3 Qe7 Ne5 Nd7 f4 f5 Ndf3 Nf6",
         "explanation": "The bread-and-butter London against ...d5. White builds the classic d4-e3-c3 pyramid and places the knight on e5, the ideal outpost in this structure. The f4 push reinforces Ne5 and creates kingside attacking chances. With Qb3 pressuring b7, White combines queenside threats with a potential kingside assault through the f-file."
       },
       {
         "name": "London vs King's Indian",
-        "pgn": "d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 O-O Nbd7 h3 b6 c3 Bb7 Nbd2 Ne8 Bh2 f5 Qb3",
+        "pgn": "d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 O-O Nbd7 h3 b6 c3 Bb7 Nbd2 Ne8",
         "explanation": "Against the King's Indian fianchetto, White develops with Be2 instead of Bd3 since Black hasn't committed to a piece on e6. The h3 move prevents ...Ng4 tricks and Bh2 preserves the London bishop from exchange attempts. White reroutes the knight via Nbd2-c4 to pressure d6, then strikes with e4 to open the center when Black's knight has retreated."
       },
       {
         "name": "Jobava London",
-        "pgn": "d4 Nf6 Bf4 d5 Nc3 e6 e3 c5 Nf3 Nc6 Nb5 Bd6 Bxd6 Qxd6 Nc3 O-O Bd3 e5 dxe5 Nxe5 Nxe5 Qxe5 O-O Bg4 f3 Bd7 e4 dxe4 fxe4",
+        "pgn": "d4 Nf6 Bf4 d5 Nc3 e6 e3 c5 Nf3 a6 Be2 Nc6 O-O Bd6",
         "explanation": "The Jobava London uses Nc3 instead of c3, creating a fundamentally more aggressive setup with immediate ideas of Nb5 or e4. The knight jumps to b5 to harass the queen or threaten Nd6+. After the central break with e4, White seizes space and opens lines for the bishops. This variation has surged in popularity because it gives White active piece play while maintaining the London's solid foundation."
       },
       {
         "name": "London vs Grunfeld Setup",
-        "pgn": "d4 Nf6 Bf4 g6 e3 Bg7 Nf3 d5 Be2 O-O O-O c5 c3 Nc6 Nbd2 Nd7 Nh4 e5 dxe5 Ndxe5 Nhf3 Nxf3+ Nxf3 Be6 Nd4 Nxd4 cxd4 Qb6 Qb3",
+        "pgn": "d4 Nf6 Bf4 g6 e3 Bg7 Nf3 d5 Be2 O-O O-O c5 c3 Nc6 Nbd2 Nd7",
         "explanation": "Against Black's Grunfeld-style setup with ...g6 and ...d5, White completes development before choosing a plan. The Nh4 maneuver eyes the f5 square, a powerful outpost in this pawn structure. After Black's ...e5 break, the central exchanges lead to a position where White's bishop pair and better pawn structure give a lasting advantage. The Qb3 move creates pressure on b7 and d5 simultaneously."
       },
       {
         "name": "London vs Dutch",
-        "pgn": "d4 f5 Bf4 Nf6 e3 e6 Nf3 d5 Bd3 Bd6 Bxd6 Qxd6 O-O O-O c4 c6 Nc3 Ne4 Nxe4 fxe4 Bxe4 dxe4 Nd2",
+        "pgn": "d4 f5 Bf4 Nf6 e3 e6 Nf3 d5 Bd3 Bd6",
         "explanation": "The London is a superb weapon against the Dutch because Bf4 directly contests the dark squares that Black weakened with ...f5. The bishop trade on d6 saddles Black with a potentially weak e6 pawn and the f5 square becomes a permanent hole. After c4 challenges the center, White opens the f-file and exploits Black's chronically weakened kingside light squares."
       },
       {
         "name": "London vs Bf5 Mirror",
-        "pgn": "d4 d5 Bf4 Bf5 e3 e6 Nf3 Nf6 c4 c6 Nc3 Bd6 Bxd6 Qxd6 Bd3 Bxd3 Qxd3 Nbd7 O-O O-O e4 dxe4 Nxe4 Nxe4 Qxe4 Nf6 Qe2 Rfe8 Rfe1",
+        "pgn": "d4 d5 Bf4 Bf5 e3 e6 Nf3 Nf6 c4 c6 Nc3 Bd6 Bxd6 Qxd6 Bd3 Bxd3 Qxd3 Nbd7 O-O O-O e4 dxe4 Nxe4 Nxe4 Qxe4 Nf6 Qe2",
         "explanation": "When Black mirrors with ...Bf5, White should not shy away from the bishop trade. Instead, play c4 and Nc3 to build a big center, then exchange bishops on d3 and d6. The resulting position after e4 gives White a powerful central pawn majority and open lines. White's superior center and active rooks on the e- and d-files provide a clear positional advantage."
       },
       {
         "name": "London: Nh4-f5 Knight Maneuver",
-        "pgn": "d4 d5 Bf4 Nf6 e3 e6 Nd2 Bd6 Bg3 O-O Bd3 c5 c3 Nc6 Ngf3 Qe7 Ne5 Nd7 Nxc6 bxc6 Nf3 f5 Nh4 Bxg3 hxg3 Nf6 Nf3 Ne4 Qc2",
+        "pgn": "d4 d5 Bf4 Nf6 e3 e6 Nd2 Bd6 Bg3 O-O Bd3 c5 c3 Nc6 Ngf3 Qe7 Ne5 Nd7 Nxc6 bxc6 Nf3",
         "explanation": "This sophisticated regrouping maneuver sends the knight to h4 and then f5, where it becomes a dominating piece pressuring e7, d6, and g7. The idea works especially well when Black has committed to ...e6, since the f5 square is permanently weakened. Combined with the battery of Qc2 and Bd3 aimed at the kingside, this creates serious attacking prospects."
       },
       {
         "name": "London vs Early c5 Challenge",
-        "pgn": "d4 Nf6 Bf4 c5 d5 b5 e3 Bb7 Nf3 e6 c4 a6 a4 b4 dxe6 fxe6 Be2 d5 O-O Bd6 Bg3 O-O Nbd2 Nc6 cxd5 exd5 Nb3 Qe7 Rc1",
+        "pgn": "d4 Nf6 Bf4 c5 d5 b5 f3 g6 e4 Bg7 Be3 O-O Bxc5 d6",
         "explanation": "When Black plays an early ...c5 challenging the d4 pawn, White advances d5 to seize space. Black's Benko-style gambit with ...b5 looks aggressive but White's solid structure and extra central space are more important. After e3 and c4, White undermines Black's queenside expansion and the d5 pawn becomes a powerful space-gaining wedge dividing Black's army."
       }
     ],
     "trapLines": [
       {
         "name": "Nh5 Misplacement Trap",
-        "pgn": "d4 d5 Bf4 Nf6 e3 e6 Nf3 Bd6 Bg3 Nh5 Bd3 Nxg3 hxg3 Nd7 c3 Qe7 Nbd2 e5 dxe5 Nxe5 Nxe5 Bxe5 Qh5 g6 Qh4 Bg7 O-O-O O-O Nf3 f6 g4",
+        "pgn": "d4 d5 Bf4 Nf6 e3 e6 Nf3 Bd6 Bg3",
         "explanation": "Black trades the dark-squared bishop with ...Nh5 but hands White the half-open h-file and a potent kingside attack. After hxg3, the doubled g-pawns open the h-file like a highway to Black's king. The Qh5 and then Qh4 maneuver creates immediate threats, and with O-O-O White launches a devastating kingside pawn storm with g4-g5 that is very difficult to defend."
       },
       {
         "name": "c5 Qb6 Trap",
-        "pgn": "d4 d5 Bf4 Nf6 e3 c5 c3 Qb6 Qb3 c4 Qc2 Bf5 Qc1 e6 Nf3 Nbd7 Nbd2 Be7 Be2 O-O O-O a5 a3 Nh5 Be5 f6 Bg3 Nxg3 hxg3 e5 dxe5 Nxe5 Nxe5 fxe5",
+        "pgn": "d4 d5 Bf4 Nf6 e3 c5 c3 Qb6 Qb3 c4 Qc2",
         "explanation": "Black tries to exploit b2 with ...Qb6, but after Qb3 and then Qc2, Black's queen has wasted time. White calmly completes development while Black's queen is awkwardly placed on b6 with no real targets. The endgame threat of Qc3 targeting e5 and c4 simultaneously leaves Black struggling to hold the overextended queenside pawns."
       },
       {
         "name": "e5 Central Blunder Trap",
-        "pgn": "d4 d5 Bf4 Nf6 e3 c5 Nf3 Nc6 c3 e6 Nbd2 Bd6 Bg3 O-O Bd3 Bxg3 hxg3 Qd6 Qe2 e5 dxe5 Nxe5 Nxe5 Qxe5 Nf3 Qd6 e4 dxe4 Bxe4 Nxe4 Qxe4",
+        "pgn": "d4 d5 Bf4 Nf6 e3 c5 Nf3 Nc6 c3 e6 Nbd2 Bd6 Bg3 O-O Bd3 Bxg3 hxg3",
         "explanation": "When Black plays ...e5 without full preparation, the central exchange opens the position in White's favor. After dxe5 Nxe5 Nxe5, the resulting pawn structure gives White the e4 break for free. The bishop on d3 and queen on e2 form a battery that exploits the opened e-file, and Black's isolated c5 pawn becomes a permanent weakness."
       },
       {
         "name": "Jobava Nb5 Fork Combo",
-        "pgn": "d4 Nf6 Nc3 d5 Bf4 c5 e3 cxd4 exd4 a6 Nf3 Nc6 Ne5 e6 Nb5 axb5 Bxb5 Bd7 Nxd7 Qxd7 Bxc6 bxc6 O-O Be7 Re1 O-O c3 Ne4 Qc2 f5 Qd3 Bf6 Qxe4 fxe4 Rxe4",
+        "pgn": "d4 Nf6 Nc3 d5 Bf4 c5 e3 cxd4 exd4 a6 Nf3 Nc6 Ne5 e6",
         "explanation": "In the Jobava London with Nc3, White plays Ne5 to dominate the center and then unleashes the devastating Nb5 fork targeting c7 and a7. After axb5 Bxb5, the pin on c6 forces material concessions. The Nxd7 exchange eliminates Black's bishop pair, and White's centralized pieces create lasting pressure. The rook lift Rxe4 wins back material with interest while maintaining complete control of the position."
       },
       {
         "name": "Oh No My Queen Trap",
-        "pgn": "d4 d5 Bf4 Nf6 e3 c5 Nf3 Nc6 c3 Qb6 Qb3 c4 Qc2 Nh5 Bd6 exd6 Nbd2 Be7 g4 Nf6 g5 Nd7 h4 f6 gxf6 Nxf6 Bd3 O-O O-O-O Bd7",
+        "pgn": "d4 d5 Bf4 Nf6 e3 c5 Nf3 Nc6 c3 Qb6 Qb3 c4 Qc2",
         "explanation": "When Black tries ...Qb6 to target b2, White plays Qb3 to trade queens. After ...c4 Qc2 Nh5, it looks like Black has trapped White's bishop on f4, but the stunning Bd6 sacrifice gives up the bishop to permanently wreck Black's pawn structure. After exd6, Black has an ugly isolated d6 pawn and weakened dark squares. White follows with g4-g5-h4 launching a kingside pawn storm while castling queenside for safety."
       },
       {
         "name": "Jobava Kingside Pawn Storm",
-        "pgn": "d4 Nf6 Nc3 d5 Bf4 e6 e3 Bd6 Bxd6 Qxd6 Bd3 Nbd7 Nf3 e5 dxe5 Nxe5 Nxe5 Qxe5 Qf3 O-O O-O-O c6 g4 Nd7 h4 Nc5 g5 Nxd3+ Rxd3 Be6 h5 Qf5 Qg3 Rad8 h6 g6 Ne4 dxe4 Rxd8 Rxd8 Qc7",
+        "pgn": "d4 Nf6 Nc3 d5 Bf4 e6 e3 Bd6 Bxd6 Qxd6",
         "explanation": "In the Jobava system, White trades dark-squared bishops early then launches a ferocious kingside pawn storm with g4-g5-h4-h5. After castling queenside, White's pawns roll forward relentlessly. The h6 pawn wedge severely weakens Black's kingside and creates a permanent hook for the attack. Ne4 sacrifices the knight to open lines, and after Rxd8 the queen invades on c7 with devastating threats against Black's back rank and the exposed king."
       }
     ],
     "warningLines": [
       {
         "name": "Early Bf5 Counter",
-        "pgn": "d4 d5 Bf4 Bf5 e3 e6 Nf3 Bd6 Bxd6 Qxd6 Bd3 Bxd3 Qxd3 Nd7 Nbd2 Ngf6 O-O O-O c4 c5 cxd5 exd5 Nb3 Qe7 Rac1 Rfc8 Rfe1 a5 a3",
+        "pgn": "d4 d5 Bf4 Bf5 e3 e6 Nf3 Bd6 Bxd6 Qxd6",
         "explanation": "If Black plays ...Bf5 early and forces the bishop trade on d3, White loses the bishop pair and the position becomes very equal. The symmetrical pawn structure with no bishops of opposite color leaves few winning chances. To avoid this, consider delaying Bf4 until after Nf3, or play c4 early to create imbalances before Black can simplify."
       },
       {
         "name": "King's Indian Counterattack",
-        "pgn": "d4 Nf6 Bf4 g6 Nf3 Bg7 e3 d6 Be2 O-O O-O Nbd7 h3 Qe8 c3 e5 Bh2 Nh5 dxe5 dxe5",
+        "pgn": "d4 Nf6 Bf4 g6 Nf3 Bg7 e3 d6 Be2 O-O O-O Nbd7 h3 Qe8 c3 e5 Bh2",
         "explanation": "Against the King's Indian, Black's ...e5 and ...Nh5 combination is dangerous if White plays passively. The bishop retreats to h2 where it is merely a tall pawn, and Black seizes the initiative in the center with ...f5 threatening ...f4. White must play actively with Nc4 and c4 to maintain counterplay, or risk being steamrolled on the kingside."
       },
       {
         "name": "Dutch f5-f4 Pawn Storm",
-        "pgn": "d4 f5 Bf4 Nf6 e3 e6 Nf3 b6 Be2 Bb7 O-O Be7 c4 O-O Nc3 Ne4 Nxe4 Bxe4 Nd2 Bb7 Bf3 Bxf3 Nxf3 d6 Qe2 Nd7 Rad1 Bf6 d5 e5 Bg3 f4",
+        "pgn": "d4 f5 Bf4 Nf6 e3 e6 Nf3 b6 Be2 Bb7 O-O Be7 c4 O-O Nc3 Ne4 Nxe4 Bxe4",
         "explanation": "Against the Dutch, if White develops too slowly, Black launches a kingside pawn storm with ...f4 trapping the London bishop on g3. The ...e5 and ...f4 chain restricts the bishop to a passive role and gives Black a powerful space advantage on the kingside. White must challenge Black's center with c4 and d5 before the pawn storm develops momentum."
       }
     ]
