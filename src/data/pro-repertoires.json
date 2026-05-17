@@ -1468,13 +1468,13 @@
       "trapLines": [
         {
           "name": "Wrong Attack e5 Fork",
-          "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O f4 b5 f5 b4 Nd5 Nxd5 exd5 e4",
-          "explanation": "White launches a premature kingside attack with f4-f5 but Black strikes with ...b4 and ...e4, gaining central control. The knight is driven away and Black's counterplay is faster."
+          "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O f4 b5",
+          "explanation": "After the standard Najdorf English Attack setup, Black breaks with ...b5 to launch queenside counterplay before White's f4-f5 thrust gains momentum."
         },
         {
           "name": "Nxe4 Pawn Grab",
-          "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 f3 Nbd7 Qd2 b5 a3 Rc8 Rfd1 Nxe4 fxe4 d5",
-          "explanation": "When White is underdeveloped or has loosened the kingside with f3, Black grabs with ...Nxe4 fxe4 d5, blowing open the center. White's weakened king position and Black's active pieces create serious tactical threats."
+          "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 f3 Nbd7",
+          "explanation": "When White is underdeveloped or has loosened the kingside with f3, Black builds the standard Be6 + Nbd7 setup. The ...Nxe4 break later targets f3's weakening — Black's piece coordination gives lasting tactical chances."
         }
       ]
     },
