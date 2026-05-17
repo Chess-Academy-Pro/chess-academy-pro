@@ -155,12 +155,20 @@ export interface GameSummary {
 /** Training Plan rolodex per-color active-card pointer. Each color
  *  remembers which favorited opening sits at the front of its stack.
  *  Persists across sessions so the rolodex resumes where the student
- *  left off. PR-4 of WO-ROLODEX-UI-01 adds `favoritedAt` and
- *  `userOrderedFavorites` to this same store; this shape is the
- *  PR-1 slice. */
+ *  left off. */
 export interface RolodexActiveCard {
   white: string | null;
   black: string | null;
+}
+
+/** Training Plan rolodex per-color ordering. The card stack renders
+ *  these ids in this array's order (front-of-stack = last index).
+ *  Empty array means "no custom order yet" — the page initializes
+ *  from `favoritedAt` descending on first mount. PR-4 of
+ *  WO-ROLODEX-UI-01. */
+export interface RolodexUserOrder {
+  white: string[];
+  black: string[];
 }
 
 interface CoachMemoryState {
@@ -192,6 +200,20 @@ interface CoachMemoryState {
    *  Drives the mobile manila-tab default ("open the folder I was
    *  last using"). Null on a fresh user with no rolodex history. */
   lastActiveRolodexColor: 'white' | 'black' | null;
+  /** Training Plan rolodex: timestamp of when each opening was
+   *  favorited (ISO-8601, UTC). Drives the default stack order
+   *  before the user has applied any custom drag-reorder ("most
+   *  recently favorited on top"). Backfilled on rolodex mount
+   *  for any favorited opening missing an entry (e.g. favorited
+   *  before this field existed). PR-4. */
+  favoritedAt: Record<string, string>;
+  /** Training Plan rolodex: user's custom drag-reorder per color.
+   *  Empty array = no custom order set yet (page falls back to
+   *  `favoritedAt` desc). Non-empty = source of truth for that
+   *  color's stack order; the page reconciles with the current
+   *  favorites list on mount (prepending new favorites + pruning
+   *  unfavorited entries). PR-4. */
+  userOrderedFavorites: RolodexUserOrder;
   hydrated: boolean;
 }
 
@@ -246,6 +268,18 @@ interface CoachMemoryActions {
    *  Pass `null` to clear (used when the last favorite in a color is
    *  unfavorited). */
   setActiveOpeningCard: (color: 'white' | 'black', openingId: string | null) => void;
+  /** Training Plan rolodex: record when an opening was favorited.
+   *  No-op if an entry for this id already exists (favorites
+   *  retain their original timestamp through tab switches); pass
+   *  `force: true` from the unfavorite→re-favorite flow if a fresh
+   *  timestamp is required. PR-4. */
+  setFavoritedAt: (openingId: string, when?: string, force?: boolean) => void;
+  /** Training Plan rolodex: replace a color's custom drag order.
+   *  Called from drag-end (full new sequence) and from the page's
+   *  reconciliation pass (prepend new favorites, prune unfavorited).
+   *  Pass an empty array to clear and revert to favoritedAt-desc
+   *  default. PR-4. */
+  setRolodexOrder: (color: 'white' | 'black', orderedIds: string[]) => void;
   hydrate: () => Promise<void>;
 }
 
@@ -263,6 +297,8 @@ const DEFAULT_STATE: CoachMemoryState = {
   autoSavedPosition: null,
   activeOpeningCardId: { white: null, black: null },
   lastActiveRolodexColor: null,
+  favoritedAt: {},
+  userOrderedFavorites: { white: [], black: [] },
   hydrated: false,
 };
 
@@ -441,6 +477,37 @@ export const useCoachMemoryStore = create<CoachMemoryState & CoachMemoryActions>
       schedulePersist(get);
     },
 
+    setFavoritedAt: (openingId, when, force) => {
+      const map = get().favoritedAt;
+      if (map[openingId] && !force) return; // no-op: timestamp already recorded
+      const next = { ...map, [openingId]: when ?? new Date().toISOString() };
+      set({ favoritedAt: next });
+      schedulePersist(get);
+    },
+
+    setRolodexOrder: (color, orderedIds) => {
+      const prev = get().userOrderedFavorites;
+      // Cheap value-equality short-circuit so the page's mount-time
+      // reconciliation pass doesn't churn audits + persists when the
+      // resolved order matches what's already stored.
+      if (
+        prev[color].length === orderedIds.length &&
+        prev[color].every((id, i) => id === orderedIds[i])
+      ) {
+        return;
+      }
+      const next: RolodexUserOrder = { ...prev, [color]: orderedIds };
+      set({ userOrderedFavorites: next });
+      void logAppAudit({
+        kind: 'coach-memory-rolodex-order-set',
+        category: 'subsystem',
+        source: 'useCoachMemoryStore.setRolodexOrder',
+        summary: `${color} order=${orderedIds.length} ids`,
+        details: JSON.stringify({ color, orderedIds }),
+      });
+      schedulePersist(get);
+    },
+
     appendConversationMessage: (input) => {
       const id = input.id ?? `msg-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
       const message: CoachMessage = {
@@ -493,6 +560,9 @@ export const useCoachMemoryStore = create<CoachMemoryState & CoachMemoryActions>
             restored.activeOpeningCardId ?? DEFAULT_STATE.activeOpeningCardId,
           lastActiveRolodexColor:
             restored.lastActiveRolodexColor ?? DEFAULT_STATE.lastActiveRolodexColor,
+          favoritedAt: restored.favoritedAt ?? DEFAULT_STATE.favoritedAt,
+          userOrderedFavorites:
+            restored.userOrderedFavorites ?? DEFAULT_STATE.userOrderedFavorites,
           hydrated: true,
         });
       } else {
@@ -516,6 +586,8 @@ interface PersistedShape {
   autoSavedPosition: SavedPosition | null;
   activeOpeningCardId: RolodexActiveCard;
   lastActiveRolodexColor: 'white' | 'black' | null;
+  favoritedAt: Record<string, string>;
+  userOrderedFavorites: RolodexUserOrder;
 }
 
 let persistTimer: ReturnType<typeof setTimeout> | null = null;
@@ -540,6 +612,8 @@ async function writePersisted(state: CoachMemoryState): Promise<void> {
     autoSavedPosition: state.autoSavedPosition,
     activeOpeningCardId: state.activeOpeningCardId,
     lastActiveRolodexColor: state.lastActiveRolodexColor,
+    favoritedAt: state.favoritedAt,
+    userOrderedFavorites: state.userOrderedFavorites,
   };
   try {
     await db.meta.put({ key: META_KEY, value: JSON.stringify(payload) });

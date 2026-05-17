@@ -377,6 +377,10 @@ async function main() {
     { kind: 'count-gte', selector: '[data-testid="rolodex-row-count-gm-games"]', value: 1, label: 'GM Games count element renders (placeholder —)' },
     { kind: 'count-gte', selector: '[data-testid="rolodex-empty-state-black"]', value: 1, label: 'black still empty (only seeded white)' },
     { kind: 'audit-present', audit: 'coach-memory-rolodex-active-card-set', label: 'first-favorite auto-activate audit fires' },
+    // PR-4 reconciliation: the page's mount-time order pass adds the
+    // newly-seeded favorite to userOrderedFavorites[white], firing
+    // an order-set audit. Proves the reconcile wiring is live end-to-end.
+    { kind: 'audit-present', audit: 'coach-memory-rolodex-order-set', label: 'reconcile fires rolodex-order-set audit' },
   ]);
 
   // ── Theory & Lines row tap → /openings?opening=<name> ────────────

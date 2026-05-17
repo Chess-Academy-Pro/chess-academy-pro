@@ -25,6 +25,16 @@ interface CloudBackup {
   created_at: string;
 }
 
+/** Meta table row shape. Keys are domain-scoped strings
+ *  (`coachMemory.v1`, `openingProgress`, `app-audit-log.v1`, …);
+ *  values are serialized JSON blobs. The store treats them as
+ *  opaque on sync — each subsystem re-deserializes its own blob on
+ *  next read. */
+interface MetaRow {
+  key: string;
+  value: unknown;
+}
+
 interface ImportData {
   profiles?: UserProfile[];
   sessions?: SessionRecord[];
@@ -36,6 +46,11 @@ interface ImportData {
   classifiedTactics?: ClassifiedTactic[];
   setupPuzzles?: SetupPuzzle[];
   openingWeakSpots?: OpeningWeakSpot[];
+  /** WO-ROLODEX-UI-01 PR-4: `db.meta` blob carrying coachMemoryStore
+   *  state (intendedOpening, savedPosition, the rolodex's
+   *  activeOpeningCardId / lastActiveRolodexColor / favoritedAt /
+   *  userOrderedFavorites, etc.) for cross-device sync. */
+  meta?: MetaRow[];
 }
 
 /** Try-decrypt a (`{key}Encrypted`, `{key}Iv`) pair, falling back to
@@ -196,5 +211,13 @@ export async function importUserData(json: string): Promise<void> {
   }
   if (data.openingWeakSpots) {
     await db.openingWeakSpots.bulkPut(data.openingWeakSpots);
+  }
+  if (data.meta) {
+    // bulkPut by key — same shape as how the in-app writers persist.
+    // Note: the in-memory coachMemoryStore won't see the new blob
+    // until its next hydrate() call (typically next app boot), so the
+    // import lands but the live store keeps its current state until
+    // reload. Acceptable for a manual import flow.
+    await db.meta.bulkPut(data.meta as { key: string; value: unknown }[]);
   }
 }

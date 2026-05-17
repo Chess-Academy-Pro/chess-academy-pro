@@ -273,5 +273,37 @@ describe('syncService', () => {
       expect(restored).toHaveLength(1);
       expect(restored[0].id).toBe('mp-rt');
     });
+
+    it('round-trips the meta blob (coach memory + rolodex state) — WO-ROLODEX-UI-01 PR-4', async () => {
+      // Stand in for whatever the in-app store writes: a serialized
+      // coachMemory.v1 entry holding rolodex order state.
+      await db.meta.put({
+        key: 'coachMemory.v1',
+        value: JSON.stringify({
+          activeOpeningCardId: { white: 'italian', black: null },
+          lastActiveRolodexColor: 'white',
+          favoritedAt: { italian: '2026-05-17T00:00:00.000Z' },
+          userOrderedFavorites: { white: ['italian'], black: [] },
+        }),
+      });
+      await db.meta.put({ key: 'openingProgress', value: JSON.stringify({ italian: ['walkthrough'] }) });
+
+      const exported = await exportUserData();
+      await db.meta.clear();
+      expect(await db.meta.count()).toBe(0);
+
+      await importUserData(exported);
+
+      const restored = await db.meta.toArray();
+      const byKey = Object.fromEntries(restored.map((r) => [r.key, r.value]));
+      expect(byKey['coachMemory.v1']).toBeDefined();
+      expect(byKey['openingProgress']).toBeDefined();
+      // Value round-trips intact — the importer is opaque about the
+      // blob shape, so any serialization-safe payload survives.
+      const restoredCoach = JSON.parse(byKey['coachMemory.v1']) as {
+        activeOpeningCardId: { white: string | null };
+      };
+      expect(restoredCoach.activeOpeningCardId.white).toBe('italian');
+    });
   });
 });

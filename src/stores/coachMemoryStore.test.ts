@@ -196,6 +196,96 @@ describe('useCoachMemoryStore rolodex persistence', () => {
   });
 });
 
+describe('useCoachMemoryStore.setFavoritedAt', () => {
+  it('records a timestamp for a new opening id', () => {
+    useCoachMemoryStore.getState().setFavoritedAt('italian-game', '2026-05-17T00:00:00.000Z');
+    expect(useCoachMemoryStore.getState().favoritedAt['italian-game']).toBe('2026-05-17T00:00:00.000Z');
+  });
+
+  it('is a no-op when an entry already exists (preserves original favorite time)', () => {
+    const s = useCoachMemoryStore.getState();
+    s.setFavoritedAt('italian-game', '2026-01-01T00:00:00.000Z');
+    s.setFavoritedAt('italian-game', '2026-05-17T00:00:00.000Z');
+    expect(useCoachMemoryStore.getState().favoritedAt['italian-game']).toBe('2026-01-01T00:00:00.000Z');
+  });
+
+  it('respects force=true so the unfavorite→re-favorite flow can refresh the timestamp', () => {
+    const s = useCoachMemoryStore.getState();
+    s.setFavoritedAt('italian-game', '2026-01-01T00:00:00.000Z');
+    s.setFavoritedAt('italian-game', '2026-05-17T00:00:00.000Z', true);
+    expect(useCoachMemoryStore.getState().favoritedAt['italian-game']).toBe('2026-05-17T00:00:00.000Z');
+  });
+
+  it('defaults to now when no timestamp is provided', () => {
+    const before = Date.now();
+    useCoachMemoryStore.getState().setFavoritedAt('italian-game');
+    const stored = useCoachMemoryStore.getState().favoritedAt['italian-game'];
+    expect(new Date(stored).getTime()).toBeGreaterThanOrEqual(before);
+  });
+});
+
+describe('useCoachMemoryStore.setRolodexOrder', () => {
+  it('replaces the order for a color and emits an audit', () => {
+    useCoachMemoryStore.getState().setRolodexOrder('white', ['italian', 'ruy-lopez', 'london']);
+    const state = useCoachMemoryStore.getState();
+    expect(state.userOrderedFavorites.white).toEqual(['italian', 'ruy-lopez', 'london']);
+    expect(state.userOrderedFavorites.black).toEqual([]);
+    expect(auditCalls.some((c) => c.kind === 'coach-memory-rolodex-order-set')).toBe(true);
+  });
+
+  it('updates the other color independently', () => {
+    const s = useCoachMemoryStore.getState();
+    s.setRolodexOrder('white', ['italian']);
+    s.setRolodexOrder('black', ['caro-kann', 'french']);
+    const state = useCoachMemoryStore.getState();
+    expect(state.userOrderedFavorites).toEqual({
+      white: ['italian'],
+      black: ['caro-kann', 'french'],
+    });
+  });
+
+  it('is a no-op when the new order matches the existing order (no audit)', () => {
+    const s = useCoachMemoryStore.getState();
+    s.setRolodexOrder('white', ['italian', 'ruy-lopez']);
+    auditCalls.length = 0;
+    s.setRolodexOrder('white', ['italian', 'ruy-lopez']);
+    expect(auditCalls).toHaveLength(0);
+  });
+
+  it('accepts an empty array to clear back to default ordering', () => {
+    const s = useCoachMemoryStore.getState();
+    s.setRolodexOrder('white', ['italian']);
+    s.setRolodexOrder('white', []);
+    expect(useCoachMemoryStore.getState().userOrderedFavorites.white).toEqual([]);
+  });
+});
+
+describe('useCoachMemoryStore PR-4 persistence', () => {
+  it('roundtrips favoritedAt + userOrderedFavorites through Dexie via hydrate', async () => {
+    const s = useCoachMemoryStore.getState();
+    s.setFavoritedAt('italian', '2026-05-17T00:00:00.000Z');
+    s.setFavoritedAt('caro-kann', '2026-05-16T00:00:00.000Z');
+    s.setRolodexOrder('white', ['italian']);
+    s.setRolodexOrder('black', ['caro-kann']);
+    await __flushCoachMemoryPersistForTests();
+
+    __resetCoachMemoryStoreForTests();
+    expect(useCoachMemoryStore.getState().favoritedAt).toEqual({});
+    expect(useCoachMemoryStore.getState().userOrderedFavorites).toEqual({ white: [], black: [] });
+
+    await useCoachMemoryStore.getState().hydrate();
+
+    expect(useCoachMemoryStore.getState().favoritedAt).toEqual({
+      italian: '2026-05-17T00:00:00.000Z',
+      'caro-kann': '2026-05-16T00:00:00.000Z',
+    });
+    expect(useCoachMemoryStore.getState().userOrderedFavorites).toEqual({
+      white: ['italian'],
+      black: ['caro-kann'],
+    });
+  });
+});
+
 describe('tryCaptureOpeningIntent', () => {
   it('captures Caro-Kann from a chat message and writes to the store', () => {
     const result = tryCaptureOpeningIntent(

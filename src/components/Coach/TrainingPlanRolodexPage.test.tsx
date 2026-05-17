@@ -11,6 +11,24 @@ vi.mock('../../services/appAuditor', () => ({
 const mockGetFavoriteOpenings = vi.fn();
 vi.mock('../../services/openingService', () => ({
   getFavoriteOpenings: () => mockGetFavoriteOpenings(),
+  // RolodexCard renders PuzzlesRow → useOpeningPuzzlesProgress →
+  // puzzlesByOpening.getOpeningFamily(). Mock the dependency chain
+  // explicitly so card-row hooks don't crash when openingService
+  // is replaced wholesale.
+  getOpeningFamily: (name: string) => name.split(':')[0].trim(),
+  toggleFavorite: vi.fn(),
+}));
+
+// Short-circuit the per-row progress hooks so card-body rendering
+// doesn't reach into Dexie / bundled puzzle data on each test.
+// The page tests assert on its OWN concerns (load, reconcile,
+// active-card flow) — row-specific tests live in RolodexRow.test.tsx.
+vi.mock('../../hooks/useOpeningProgress', () => ({
+  useOpeningLinesProgress: () => ({ completed: 0, total: 0, loading: false }),
+  useOpeningPuzzlesProgress: () => ({ count: 0, source: 'none' as const }),
+  useOpeningTrapsProgress: () => ({ completed: 0, total: 0, loading: false }),
+  useOpeningMistakesProgress: () => ({ completed: 0, total: 0, loading: false }),
+  useOpeningWalkthroughProgress: () => ({ completed: 0, total: 0, loading: false }),
 }));
 
 import { render, screen, waitFor, within } from '../../test/utils';
@@ -197,6 +215,69 @@ describe('TrainingPlanRolodexPage — cold load with multiple favorites in both 
     // The stale persisted id was overwritten with the resolved fallback.
     await waitFor(() => {
       expect(useCoachMemoryStore.getState().activeOpeningCardId.white).toBe('italian');
+    });
+  });
+});
+
+describe('TrainingPlanRolodexPage — PR-4 reconciliation', () => {
+  it('backfills favoritedAt for every loaded favorite (one entry per id)', async () => {
+    mockGetFavoriteOpenings.mockResolvedValueOnce([
+      buildOpening({ id: 'italian', name: 'Italian Game', color: 'white' }),
+      buildOpening({ id: 'caro-kann', name: 'Caro-Kann', color: 'black' }),
+    ]);
+    render(<TrainingPlanRolodexPage />);
+    await waitFor(() => {
+      const map = useCoachMemoryStore.getState().favoritedAt;
+      expect(map['italian']).toBeDefined();
+      expect(map['caro-kann']).toBeDefined();
+    });
+  });
+
+  it('initializes userOrderedFavorites in favoritedAt-desc order on first mount', async () => {
+    // Seed favoritedAt out-of-order so the reconcile can sort
+    useCoachMemoryStore.getState().setFavoritedAt('older-fave', '2026-01-01T00:00:00.000Z');
+    useCoachMemoryStore.getState().setFavoritedAt('newer-fave', '2026-05-17T00:00:00.000Z');
+
+    mockGetFavoriteOpenings.mockResolvedValueOnce([
+      buildOpening({ id: 'older-fave', name: 'Older Favorite', color: 'white' }),
+      buildOpening({ id: 'newer-fave', name: 'Newer Favorite', color: 'white' }),
+    ]);
+    render(<TrainingPlanRolodexPage />);
+    await waitFor(() => {
+      const order = useCoachMemoryStore.getState().userOrderedFavorites.white;
+      expect(order).toEqual(['newer-fave', 'older-fave']);
+    });
+  });
+
+  it('prepends newly-favorited openings to existing custom order', async () => {
+    // User had a custom order; then favorited a new opening
+    useCoachMemoryStore.getState().setRolodexOrder('white', ['existing-1', 'existing-2']);
+    useCoachMemoryStore.getState().setFavoritedAt('existing-1', '2026-01-01T00:00:00.000Z');
+    useCoachMemoryStore.getState().setFavoritedAt('existing-2', '2026-01-02T00:00:00.000Z');
+    useCoachMemoryStore.getState().setFavoritedAt('brand-new', '2026-05-17T00:00:00.000Z');
+
+    mockGetFavoriteOpenings.mockResolvedValueOnce([
+      buildOpening({ id: 'existing-1', name: 'Existing 1', color: 'white' }),
+      buildOpening({ id: 'existing-2', name: 'Existing 2', color: 'white' }),
+      buildOpening({ id: 'brand-new', name: 'Brand New', color: 'white' }),
+    ]);
+    render(<TrainingPlanRolodexPage />);
+    await waitFor(() => {
+      const order = useCoachMemoryStore.getState().userOrderedFavorites.white;
+      expect(order).toEqual(['brand-new', 'existing-1', 'existing-2']);
+    });
+  });
+
+  it('prunes externally-unfavorited ids from the custom order', async () => {
+    useCoachMemoryStore.getState().setRolodexOrder('white', ['keep', 'drop-me', 'also-keep']);
+    mockGetFavoriteOpenings.mockResolvedValueOnce([
+      buildOpening({ id: 'keep', name: 'Keep', color: 'white' }),
+      buildOpening({ id: 'also-keep', name: 'Also Keep', color: 'white' }),
+    ]);
+    render(<TrainingPlanRolodexPage />);
+    await waitFor(() => {
+      const order = useCoachMemoryStore.getState().userOrderedFavorites.white;
+      expect(order).toEqual(['keep', 'also-keep']);
     });
   });
 });

@@ -97,13 +97,61 @@ function RolodexEmptyState({ color }: { color: RolodexColor }): JSX.Element {
   );
 }
 
+/** Reconcile the persisted user-ordered list with the current set of
+ *  favorited openings for that color. Returns the OpeningRecord[] in
+ *  the final render order (front-of-stack = last index). Algorithm:
+ *
+ *    1. Drop any ids in the persisted order that aren't favorited
+ *       anymore (unfavorited externally).
+ *    2. Identify favorites missing from the persisted order — they
+ *       were favorited since the last reconcile.
+ *    3. Sort the newcomers by `favoritedAt` desc (newest on top),
+ *       falling back to `name` for missing/equal timestamps.
+ *    4. Prepend the newcomers to the surviving persisted order.
+ *
+ *  When the persisted order is empty (no custom drag yet), step 1
+ *  yields an empty `surviving` and the whole list comes through step
+ *  3 — which is exactly the "default = favoritedAt desc" behavior.
+ *  When it's non-empty, the user's intentional arrangement is
+ *  preserved with only newcomers/orphans reconciled.
+ */
+function reconcileOrder(
+  colorFavorites: OpeningRecord[],
+  persistedOrder: string[],
+  favoritedAt: Record<string, string>,
+): { ordered: OpeningRecord[]; idsForPersist: string[] } {
+  const byId = new Map(colorFavorites.map((o) => [o.id, o]));
+  const surviving = persistedOrder.filter((id) => byId.has(id));
+  const survivingSet = new Set(surviving);
+  const newcomers = colorFavorites
+    .filter((o) => !survivingSet.has(o.id))
+    .sort((a, b) => {
+      const ta = favoritedAt[a.id] ?? '';
+      const tb = favoritedAt[b.id] ?? '';
+      // Descending — newest favorited first
+      if (ta && tb) return tb.localeCompare(ta);
+      if (ta) return -1;
+      if (tb) return 1;
+      return a.name.localeCompare(b.name);
+    });
+  const idsForPersist = [...newcomers.map((o) => o.id), ...surviving];
+  const ordered = idsForPersist
+    .map((id) => byId.get(id))
+    .filter((o): o is OpeningRecord => o !== undefined);
+  return { ordered, idsForPersist };
+}
+
 export function TrainingPlanRolodexPage(): JSX.Element {
   const [favorites, setFavorites] = useState<OpeningRecord[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   const persisted = useCoachMemoryStore((s) => s.activeOpeningCardId);
   const lastActiveColor = useCoachMemoryStore((s) => s.lastActiveRolodexColor);
+  const favoritedAt = useCoachMemoryStore((s) => s.favoritedAt);
+  const userOrderedFavorites = useCoachMemoryStore((s) => s.userOrderedFavorites);
   const setActiveOpeningCard = useCoachMemoryStore((s) => s.setActiveOpeningCard);
+  const setFavoritedAt = useCoachMemoryStore((s) => s.setFavoritedAt);
+  const setRolodexOrder = useCoachMemoryStore((s) => s.setRolodexOrder);
 
   // Mobile manila tab — defaults to last-active color, falls back to
   // 'white' on a fresh user with no rolodex history. Hoisted into
@@ -128,14 +176,65 @@ export function TrainingPlanRolodexPage(): JSX.Element {
     };
   }, []);
 
-  const white = useMemo(
-    () => favorites.filter((o) => o.color === 'white'),
-    [favorites],
+  // Backfill `favoritedAt` for any favorite that doesn't have a
+  // timestamp yet. Pre-PR-4 favorites slot in with their first-seen
+  // time; from then on the timestamp is stable. Drives default sort
+  // order for newcomers in the reconcile step below. `setFavoritedAt`
+  // is a no-op when the id already has an entry, so this is cheap to
+  // run on every mount.
+  useEffect(() => {
+    if (!loaded) return;
+    for (const fav of favorites) {
+      setFavoritedAt(fav.id);
+    }
+  }, [loaded, favorites, setFavoritedAt]);
+
+  const whiteReconcile = useMemo(
+    () =>
+      reconcileOrder(
+        favorites.filter((o) => o.color === 'white'),
+        userOrderedFavorites.white,
+        favoritedAt,
+      ),
+    [favorites, userOrderedFavorites.white, favoritedAt],
   );
-  const black = useMemo(
-    () => favorites.filter((o) => o.color === 'black'),
-    [favorites],
+  const blackReconcile = useMemo(
+    () =>
+      reconcileOrder(
+        favorites.filter((o) => o.color === 'black'),
+        userOrderedFavorites.black,
+        favoritedAt,
+      ),
+    [favorites, userOrderedFavorites.black, favoritedAt],
   );
+
+  const white = whiteReconcile.ordered;
+  const black = blackReconcile.ordered;
+
+  // Persist the reconciled order if it differs from what's stored.
+  // This is also the only place new favorites get added to
+  // userOrderedFavorites (no hook into toggleFavorite needed — the
+  // rolodex IS the authority for its own ordering).
+  useEffect(() => {
+    if (!loaded) return;
+    const wPrev = userOrderedFavorites.white;
+    const wNext = whiteReconcile.idsForPersist;
+    if (wPrev.length !== wNext.length || wPrev.some((id, i) => id !== wNext[i])) {
+      setRolodexOrder('white', wNext);
+    }
+    const bPrev = userOrderedFavorites.black;
+    const bNext = blackReconcile.idsForPersist;
+    if (bPrev.length !== bNext.length || bPrev.some((id, i) => id !== bNext[i])) {
+      setRolodexOrder('black', bNext);
+    }
+  }, [
+    loaded,
+    whiteReconcile.idsForPersist,
+    blackReconcile.idsForPersist,
+    userOrderedFavorites.white,
+    userOrderedFavorites.black,
+    setRolodexOrder,
+  ]);
 
   const resolvedWhiteActive = useMemo(
     () => resolveActiveId(white, persisted.white),
@@ -192,10 +291,19 @@ export function TrainingPlanRolodexPage(): JSX.Element {
           favorites={list}
           activeId={activeId}
           onActivate={(id) => setActiveOpeningCard(color, id)}
+          onReorder={(orderedIds) => setRolodexOrder(color, orderedIds)}
         />
       );
     },
-    [loaded, white, black, resolvedWhiteActive, resolvedBlackActive, setActiveOpeningCard],
+    [
+      loaded,
+      white,
+      black,
+      resolvedWhiteActive,
+      resolvedBlackActive,
+      setActiveOpeningCard,
+      setRolodexOrder,
+    ],
   );
 
   const mobileTabClass = (color: RolodexColor): string => {
