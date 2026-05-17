@@ -68,6 +68,19 @@ async function main() {
   ];
 
   const entries = [];
+
+  // Pull in TS-extracted PGNs (vienna.ts + guidedGames.ts), produced
+  // by scripts/extract-ts-pgns.mjs. Optional — skip gracefully if
+  // the sidecar isn't present.
+  try {
+    const tsEntries = JSON.parse(
+      await readFile('audit-reports/ts-extracted-pgns.json', 'utf8'),
+    );
+    entries.push(...tsEntries);
+    console.log(`[audit-vs-masters] loaded ${tsEntries.length} entries from ts-extracted-pgns.json`);
+  } catch {
+    console.log('[audit-vs-masters] no ts-extracted-pgns.json — run scripts/extract-ts-pgns.mjs to include TS sources');
+  }
   for (const { file, shape, mainOnly } of sources) {
     const raw = JSON.parse(await readFile(`src/data/${file}`, 'utf8'));
     if (shape === 'middlegame') {
