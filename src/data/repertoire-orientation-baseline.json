@@ -200,15 +200,6 @@
     "scandinavian-defence::warning::Queen Wandering Danger": [
       "PGN_NOT_IN_DB"
     ],
-    "alekhine-defence::trap::Four Pawns Attack Counter": [
-      "WEAK_TRAP"
-    ],
-    "alekhine-defence::trap::Bg4 Pin Pressure": [
-      "WEAK_TRAP"
-    ],
-    "alekhine-defence::trap::Exchange Variation Development Lead": [
-      "WEAK_TRAP"
-    ],
     "philidor-defence::trap::Legal's Mate Reversal": [
       "PGN_NOT_IN_DB",
       "STUDENT_NOT_PUNISHER"
@@ -559,6 +550,16 @@
     ],
     "pirc-defence::trap::150 Attack Bishop Trade": [
       "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "alekhine-defence::trap::Bg4 Pin Pressure": [
+      "WEAK_TRAP"
+    ],
+    "alekhine-defence::trap::Exchange Variation Development Lead": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "alekhine-defence::trap::Four Pawns Attack Counter": [
       "WEAK_TRAP"
     ]
   }

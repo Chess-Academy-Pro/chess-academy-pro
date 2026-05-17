@@ -1563,10 +1563,11 @@
     "id": "alekhine-defence",
     "eco": "B02",
     "name": "Alekhine's Defence",
-    "pgn": "e4 Nf6 e5 Nd5 d4 d6 Nf3 Bg4 Be2 e6 O-O Be7 c4 Nb6 Nc3 O-O Be3 N8d7 h3 Bh5 Qd2 d5",
+    "pgn": "e4 Nf6 e5 Nd5 d4 d6 Nf3 Bg4 Be2 e6 O-O Be7 c4 Nb6 Nc3 O-O Be3 N8d7 exd6 cxd6 b3 Nf6 Rc1 Nbd7 h3 Bh5 g4 Bg6 Nh4 d5 Nxg6 hxg6 Bf3 dxc4 bxc4 Rc8 c5 b6",
     "color": "black",
     "style": "Provocative, Dynamic",
-    "overview": "Alekhine's Defence is a provocative opening where you invite White to push pawns forward and overextend. After 1...Nf6, you're basically saying 'go ahead, grab all that space — I'll show you it's a weakness.' The knight dances around provoking pawn advances, and then you systematically dismantle White's center. It's psychologically challenging for White because their 'advantage' can evaporate quickly.",
+    "overview": "Alekhine's Defence is a provocative opening — invite White to push pawns forward and overextend. After 1...Nf6 you provoke 2.e5 attacking the knight, then retreat ...Nd5 and develop while White commits to the big center. The Modern main line goes ...Bg4 pin and ...e6 with the c4 push and exd6 simplification; Black's flexible structure outweighs White's space. The middlegame revolves around Black's ...Bh5-Bg6 maneuvering against White's central pawn duo and the queenside push with ...b6 supporting the c-file battery.",
+    "shortOverview": "Provoke 2.e5 with ...Nf6, retreat ...Nd5, develop while White overextends. The Bg4 pin and ...e6 setup gives flexible counterplay.",
     "keyIdeas": [
       "Provoke White's pawns forward to create targets for counterattack",
       "Use the knight's retreat to develop pieces with tempo against the extended center",
@@ -1584,72 +1585,79 @@
     "variations": [
       {
         "name": "Four Pawns Attack",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 f4 dxe5 fxe5 Nc6 Be3 Bf5 Nc3 e6 Nf3 Bb4 Rc1 Bxc3+ bxc3 O-O Be2 Na5 Nd2 f6 exf6 Qxf6 O-O Rad8",
-        "explanation": "White goes all-in with four center pawns, but this overextension creates targets. After ...dxe5 fxe5, Black develops with tempo against the hanging pawns and the ...Nc6 attack on d4 and e5 forces White to defend constantly. The ...Bb4 pin on c3 is critical, and after the exchange Black opens the b-file and weakens White's queenside. Black's plan involves ...f6 to crack open the center where White's overextended pawns become liabilities rather than strengths."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 f4 dxe5 fxe5 Nc6 Be3 Bf5 Nc3 e6 Nf3 Bb4 Rc1",
+        "explanation": "White goes all-in with four center pawns, but this overextension creates targets. After ...dxe5 fxe5, Black develops with tempo against the hanging pawns. The ...Nc6 attack on d4 and e5 forces tactical complications, while ...Bf5 and ...Bb4 create concrete pressure on the queenside. Rc1 prepares c5 to fix Black's queenside structure before the position opens.",
+        "shortExplanation": "White's four-pawn center overextends. Black plays ...dxe5 fxe5 and develops with tempo: ...Nc6, ...Bf5, ...Bb4."
       },
       {
         "name": "Modern Variation",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 Nf3 Bg4 Be2 e6 O-O Be7 c4 Nb6 Nc3 O-O Be3 d5 c5 Bxf3 Bxf3 Nc8 b4 N8d7 Qd2 a6 a4 Re8 Rfb1 Nf8",
-        "explanation": "The Modern Variation with Nf3 and Be2 is the most solid and popular main line. Black develops the bishop to g4 before it gets locked behind the ...e6 pawn, pinning the f3 knight to create pressure on d4. After castling, the ...d5 push establishes a firm central foothold. The resulting positions are strategically rich with Black aiming to undermine White's queenside pawn chain with ...a6 and ...Nc8-d7, while White expands with b4 and a4 but faces a solid wall."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 Nf3 Bg4 Be2 e6 O-O Be7 c4 Nb6 Nc3 O-O Be3 d5 c5 Bxf3 Bxf3 Nc4 Bf4 b6 b3 Na5",
+        "explanation": "The Modern Variation with Nf3 and Be2 is the most popular main line. Black develops the bishop to g4 early, pinning the f3 knight before ...e6 traps it behind the pawn chain. After ...d5 and the c5 push, the ...Bxf3-Bxf3 trade is followed by ...Nc4 activating the knight on a great outpost. White's Bf4 development and b3 keep the queenside flexible while Black plays for ...b6 and ...Na5 maneuvering.",
+        "shortExplanation": "Modern Nf3+Be2 setup. ...Bg4 pin, ...e6, then ...Bxf3 trade and ...Nc4-Na5 for queenside counterplay."
       },
       {
         "name": "Exchange Variation",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 exd6 exd6 Nf3 Be7 Be2 O-O O-O Nc6 Nc3 Bf5 b3 d5 c5 Nc8 Bb2",
-        "explanation": "White exchanges on d6 leading to a quieter, more strategic game. Black gets easy development and a comfortable position with the bishop pair potential. The d6 pawn looks isolated but is well-supported by Black's active pieces, particularly the bishop on f5 controlling key light squares. Black should aim for ...d5 to equalize fully, then use the two bishops and active rooks to generate long-term pressure against White's queenside."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 exd6 exd6 Nf3 Be7 Be2 O-O O-O Nc6 Nc3 Bf5 b3",
+        "explanation": "White exchanges on d6 leading to a quieter, more strategic game. Black gets easy development and bishop pair potential. The d6 pawn looks isolated but is well-supported by the active piece configuration. The ...Bf5 development pressures e4 while ...Nc6 hits d4, and b3 prepares slow queenside expansion before the middlegame plans crystallize.",
+        "shortExplanation": "Quiet exchange line. Black develops with ...Be7, ...O-O, ...Nc6, ...Bf5 pressuring the center."
       },
       {
         "name": "Two Pawns Attack",
-        "pgn": "e4 Nf6 e5 Nd5 c4 Nb6 d4 d6 exd6 exd6 Nf3 Be7 Be2 O-O O-O Bf5 Nc3 Nc6 Be3 d5 c5 Nc4 Bxc4 dxc4 Qa4 Bd7 Qxc4 Na5 Qd3 c6 Nd2 Nc4",
-        "explanation": "A more restrained version of the Four Pawns Attack where White builds a strong center with c4 and d4 without overextending with f4. Black's pieces develop actively targeting the d4 pawn, and the ...d5 break is the key equalizing move. The knight maneuver ...Nc4 is thematic, hitting e3 and d2 while controlling important squares. After the exchanges, Black's position is fully equal with good piece activity compensating for White's slight space advantage."
+        "pgn": "e4 Nf6 e5 Nd5 c4 Nb6 d4 d6 exd6 exd6 Nf3 Be7 Be2 O-O O-O Bf5 Nc3 Nc6 Be3 d5 c5 Nc4 Bxc4 dxc4 Qa4",
+        "explanation": "A more restrained version of the Four Pawns Attack — White builds with c4 and d4 without overextending with f4. Black develops actively against the d4 pawn with ...Bf5 and ...Nc6. The ...d5 break followed by ...Nc4 exchanges pieces and isolates the c-pawn after Bxc4. Qa4 attacks the queenside while Black has the bishop pair to compensate.",
+        "shortExplanation": "Restrained two-pawn center. ...Bf5-Nc6 hits d4, then ...d5-Nc4 break wins the bishop pair."
       },
       {
         "name": "Chase Variation",
-        "pgn": "e4 Nf6 e5 Nd5 c4 Nb6 c5 Nd5 d4 d6 Bc4 Nb4 cxd6 cxd6 Na3 dxe5 dxe5 N8c6 Nf3 Bf5 O-O e6 Be3 Be7 Rc1 O-O Qe2 Nd3 Bb3",
-        "explanation": "The Chase Variation features the aggressive c5 push trying to drive Black's knight further away. However, Black can exploit this with ...Nb4 threatening ...Nc2, forcing White to spend time dealing with the knight invasion. After ...dxe5 dxe5, Black has opened the center favorably and the piece on b4 creates constant tactical threats. The line demonstrates that chasing the knight too far weakens White's own position by creating holes in the center."
+        "pgn": "e4 Nf6 e5 Nd5 c4 Nb6 c5 Nd5 d4 d6 cxd6 exd6 Nf3 dxe5 dxe5 Bb4+ Bd2 O-O Bc4 Nc6 O-O Bg4",
+        "explanation": "The Chase Variation features the aggressive c4-c5 push driving Black's knight back to d5. After ...d6, White's cxd6 simplifies the position. Black takes on e5 with ...dxe5 dxe5, then plays ...Bb4+ to disrupt White's coordination. The ...Bg4 pin completes development with active piece play in an open position where Black's better-coordinated minor pieces compensate for the early knight chase.",
+        "shortExplanation": "c4-c5 chase. After ...Nd5 d4 d6 cxd6, Black plays ...dxe5 and ...Bb4+ for active piece play."
       },
       {
         "name": "Scandinavian Transposition",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 Nf3 dxe5 Nxe5 Nd7 Nxd7 Bxd7 c4 Nb6 Nc3 g6 Be3 Bg7 Be2 O-O O-O Bc6 Bf3 e5 d5 Bxd5 cxd5 Nxd5 Bxd5 Qxd5",
-        "explanation": "Black transposes into a structure with Scandinavian flavor by exchanging on e5 early. The ...Nd7 exchange simplifies the position and Black's fianchettoed bishop becomes the key attacking piece on the long diagonal. After ...Bg7 and castling, Black has a harmonious setup where the g7 bishop pressures d4 and the queenside. The central break ...e5 followed by ...d5 equalizes completely, and Black can play for a win with the active bishop pair in the resulting open position."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 Nf3 dxe5 Nxe5 Nd7 Nxd7 Bxd7 c4",
+        "explanation": "Black transposes into a Scandinavian-flavored structure by exchanging on e5 early. The ...Nd7-Bxd7 simplifies the position with reduced tension. White's c4 expands but the structure is balanced, and Black's bishops have clear development paths via ...Nc6 and ...g6-Bg7. The trade-heavy approach suits players who want a quieter Alekhine middlegame.",
+        "shortExplanation": "Exchange on e5 early via ...dxe5 Nxe5 Nd7 — Scandinavian-flavored simplification with balanced piece play."
       },
       {
         "name": "Voronezh Variation",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 exd6 cxd6 Nc3 g6 Be3 Bg7 Rc1 O-O b3 e5 d5",
-        "explanation": "The Voronezh Variation with c4 and exd6 cxd6 leads to a complex strategic battle. Black fianchettoes and plays for ...e5 to establish a strong center, while White expands on the queenside. The ...f5 push is Black's key attacking idea, seizing kingside space and preparing ...Nf6 to support the e5 pawn. White's g4 counter is critical but double-edged, opening the g-file which can backfire if Black's attack arrives first with ...Nh5 and ...Qh4."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 exd6 cxd6 Nc3 g6 Be3 Bg7 Rc1 O-O b3 e5 d5 h6 Nf3 Bg4",
+        "explanation": "The Voronezh Variation with c4 and exd6 cxd6 leads to a complex strategic battle. Black fianchettoes and plays for ...e5 to establish a strong central foothold while White expands on the queenside. After ...e5 d5, the position closes with both sides preparing the long maneuvering middlegame. The ...h6-Bg4 development supports kingside flexibility against White's eventual Nf3 setup.",
+        "shortExplanation": "c4+exd6 cxd6 → Black fianchettoes, plays ...e5, then ...h6-Bg4 for the maneuvering middlegame."
       }
     ],
     "trapLines": [
       {
         "name": "Four Pawns Attack Counter",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 f4 dxe5 fxe5 Nc6 Be3 Bf5 Nc3 e6 Nf3 Bb4 Rc1 Bxc3+ bxc3 O-O d5 Na5 Nd4 Bg6 c5 Nd7 dxe6 fxe6 Nxe6 Qh4+",
-        "explanation": "Black's pieces flood into active squares while White's overextended center buckles under the pressure. The ...Bb4 pin and ...Bxc3+ exchange wreck White's pawn structure, and the ...Na5 retreat maintains pressure on c4 and c5. When White gets greedy with Nxe6, Black's Qh4+ is a devastating counter-blow, exploiting the weakened kingside after f4 has been played. The combination of tactical threats and structural weaknesses makes this position unplayable for White."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 f4 dxe5 fxe5 Nc6 Be3 Bf5 Nc3 e6 Nf3 Bb4 Be2 O-O O-O Na5 c5 Bxc3 bxc3 Nbc4",
+        "explanation": "Black's pieces flood into active squares while White's overextended center buckles. The ...Bb4 pin on c3 + Be2 + O-O setup is forced, then ...Na5 attacking the c4 pawn and ...Bxc3 wreck White's queenside structure. ...Nbc4 establishes a strong outpost where Black's pieces dominate. The combination of pin pressure and central knight invasion makes White's position uncomfortable.",
+        "shortExplanation": "...Bb4 pin + ...Na5/Bxc3 dismantle White's queenside; ...Nbc4 outpost completes the counterattack."
       },
       {
         "name": "Bg4 Pin Pressure",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 Nf3 Bg4 Be2 e6 O-O Be7 c4 Nb6 exd6 cxd6 d5 exd5 cxd5 O-O Nc3 N8d7 h3 Bh5 Bf4 Re8 Re1 Bf6 g4 Bg6 Bd3 Nc5",
-        "explanation": "After the center opens up, Black's pieces are wonderfully coordinated with the bishop on g4 pinning the f3 knight and the rook preparing to use the e-file. The ...cxd6 recapture gives Black the half-open c-file for counterplay. Black targets the isolated d5 pawn while maintaining pressure along the pin diagonal. The ...Nc5 maneuver attacks d3 and b3, and if White advances g4, the light squares around the king become permanently weak."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 Nf3 Bg4 Be2 e6 O-O Be7 c4 Nb6 exd6 cxd6 Nc3 O-O Be3 d5 c5 Bxf3 Bxf3 Nc4 Bc1 Nc6",
+        "explanation": "After the center opens with exd6 cxd6, Black's pieces coordinate beautifully. The ...Bg4 pin against f3 is followed by ...e6 and quick development. After ...d5 c5, the ...Bxf3 trade simplifies and ...Nc4 occupies a strong outpost. The Bc1 retreat by White acknowledges the awkward position, and ...Nc6 completes the active piece setup. Not a forced tactic — a positional plan giving Black easy piece coordination.",
+        "shortExplanation": "exd6 cxd6 → ...Bg4 pin + ...Bxf3 trade + ...Nc4 outpost = Black piece coordination wins."
       },
       {
         "name": "Exchange Variation Development Lead",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 exd6 exd6 Nf3 Be7 Be2 O-O O-O Bf5 Nc3 d5 c5 Nc4 b3 Na3 Bd3 Bxd3 Qxd3 Nc4 Rb1 Nc6 b4 a5 b5 Ncb2 Qe2 Na4",
-        "explanation": "In the Exchange Variation, Black's rapid development with ...Bf5 and ...d5 creates immediate pressure against White's center. The knight maneuver ...Nc4 forces White to weaken the queenside with b3, and then ...Na3 infiltrates with tempo. White's queenside becomes overextended trying to chase the knight, and Black's pieces coordinate beautifully along the open e-file and against the c5 pawn. The resulting position gives Black a clear initiative despite the simplified structure."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 exd6 exd6 Nf3 Be7 Be2 O-O O-O Bf5 Nc3",
+        "explanation": "In the Exchange Variation, Black's rapid development with ...Be7, ...O-O, and ...Bf5 puts immediate piece pressure on White's center. The active piece placement compensates for the structural weakness of the d6 pawn. From this position Black plays for active piece coordination — the developmental lead is the lesson, not a forced material win. The half-open e-file and bishop pair potential give long-term equality.",
+        "shortExplanation": "Exchange Variation: ...Bf5 + ...Be7 + early castling = active piece play, not forced tactics."
       }
     ],
     "warningLines": [
       {
         "name": "Four Pawns Steamroll",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 f4 dxe5 fxe5 g6 Nc3 Bg7 Nf3 O-O Be2 Bg4 O-O Nc6 Be3 f6 exf6 Bxf6 d5 Na5 c5 Bxf3 Bxf3",
-        "explanation": "If Black plays too passively against the Four Pawns Attack, White's center becomes a steamroller. The f4-e5 pawn chain restricts Black's pieces severely, and the bishop on g7 is blocked by its own pawns. The key is to challenge the center immediately with ...dxe5 and piece pressure, not let White consolidate. Once White achieves d5 and c5, the space advantage is overwhelming and Black's minor pieces have no good squares."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 f4 dxe5 fxe5 g6 Nc3 Bg7 c5 Nd5 Bc4 Nxc3 bxc3 O-O Nf3",
+        "explanation": "If Black plays passively with ...g6 in the Four Pawns Attack, White's c5 push restricts Black's pieces. The Nd5 retreat under Bc4 attack forces the Nxc3 trade, giving White doubled c-pawns but a powerful central pawn duo. Black manages to castle but the position favors White's space advantage. The lesson: Black must challenge the f4-e5 chain with active moves like ...Nc6 and ...Bb4, not passive fianchetto development.",
+        "shortExplanation": "Four Pawns Steamroll: passive ...g6 lets White push c5 and dominate; demand active ...Nc6/...Bb4 instead."
       },
       {
         "name": "Exchange Passive Play Danger",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 exd6 cxd6 Nc3 g6 Be3 Bg7 Rc1 O-O b3 e5 d5",
-        "explanation": "In the Exchange Variation, if Black doesn't develop actively, the slightly weak d6 pawn becomes a long-term target. White's plan is to fix the pawn on d6 with d5 and then probe it with pieces. The g4 push is a clever idea, opening lines on the kingside where Black's king is exposed. Black must always look for ...e5 or ...Bf5 to activate pieces, never allowing a passive setup where the bishop on g7 bites on d4 granite."
-      },
-      {
-        "name": "Modern Variation c5 Bind",
-        "pgn": "e4 Nf6 e5 Nd5 d4 d6 Nf3 Bg4 Be2 e6 O-O Be7 c4 Nb6 Nc3 O-O Be3 d5 c5 Bxf3 Bxf3 Nc8 b4 a6 a4 N8d7 Qb3 Re8 a5 Nf8 b5 axb5 Qxb5 Ng6",
-        "explanation": "When Black allows White to establish c5 and then expand with b4-a4-b5, the queenside bind becomes suffocating. Black's knight on b6 is pushed back and the c8 knight has no good route into the game. White's space advantage grows on both flanks while Black is cramped. The lesson is that Black must challenge the c5 point early with ...b6 or find active counterplay with ...f6 before White's bind becomes permanent."
+        "pgn": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 exd6 cxd6 Nc3 g6 Be3 Bg7 Rc1 O-O b3 e5 dxe5 dxe5 Qxd8 Rxd8 c5 N6d7 Bc4 Nc6",
+        "explanation": "In the Exchange Variation, if Black plays the natural-looking ...e5 push without preparation, White's dxe5 dxe5 Qxd8 trades queens and leads to a structurally favorable endgame. The c5 push forces ...N6d7, and Bc4 puts the bishop on its best diagonal. Black is left with an isolated e-pawn and slightly worse piece coordination. The lesson: in this Exchange line, Black should keep central tension and develop fully before committing to ...e5.",
+        "shortExplanation": "...e5 prematurely lets White trade queens and reach a structurally favorable endgame; develop fully first."
       }
     ]
   },
