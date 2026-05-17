@@ -14,7 +14,7 @@
  * `src/services/coachActionDispatcher.ts`. Returned as
  * `ProviderToolCall[]` in shape, contents, and ordering.
  */
-import { getCoachChatResponse } from '../../services/coachApi';
+import { getCoachChatResponse, type MasterGroundingOptions } from '../../services/coachApi';
 import { parseActions } from '../../services/coachActionDispatcher';
 import type {
   AssembledEnvelope,
@@ -64,6 +64,8 @@ async function callDeepSeek(
     maxTokens,
     'medium',
     'deepseek',
+    undefined,        // skipPersonality — coach lane
+    options?.grounding as MasterGroundingOptions | undefined, // WO-COACH-MASTER-INTEGRATION
   );
   const timeout = new Promise<string>((_, reject) =>
     setTimeout(() => reject(new Error('coach-brain-deepseek-timeout')), PROVIDER_TIMEOUT_MS),

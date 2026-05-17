@@ -14,7 +14,7 @@
  * The brain's eventual flip to Anthropic is meant to be a one-line
  * change at the `COACH_PROVIDER` level. Keep that easy.
  */
-import { getCoachChatResponse } from '../../services/coachApi';
+import { getCoachChatResponse, type MasterGroundingOptions } from '../../services/coachApi';
 import { parseActions } from '../../services/coachActionDispatcher';
 import type {
   AssembledEnvelope,
@@ -67,6 +67,8 @@ async function callAnthropicViaCoachApi(
     maxTokens,
     'medium',
     'anthropic',
+    undefined,        // skipPersonality — coach lane, personality blocks apply
+    options?.grounding as MasterGroundingOptions | undefined, // WO-COACH-MASTER-INTEGRATION
   );
   const timeout = new Promise<string>((_, reject) =>
     setTimeout(() => reject(new Error('coach-brain-anthropic-timeout')), PROVIDER_TIMEOUT_MS),

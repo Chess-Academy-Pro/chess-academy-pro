@@ -571,12 +571,22 @@ export function VoiceChatMic({ fen, pgn, turn, playerColor = 'white', onOpeningR
     // this to the cheap tier (deepseek-chat / claude-haiku). Voice
     // replies are 1-2 sentences anyway; reasoner is overkill + slower.
     // Capped at VOICE_MAX_TOKENS so responses stay snappy.
+    // WO-COACH-MASTER-INTEGRATION: pass the current FEN so the brain
+    // can engage master-play grounding when the user's spoken question
+    // is a move question ("what should I play?", "what do masters
+    // play?"). Voice is one of the most likely surfaces to hit this
+    // intent. The watcher's not mounted on voice but the cache may
+    // already be warm from the host board surface.
     const rawResponse = await getCoachChatResponse(
       formatted,
       systemAddition,
       onChunk,
       'chat_response',
       VOICE_MAX_TOKENS,
+      undefined, // verbosityOverride
+      undefined, // forceProvider
+      undefined, // skipPersonality
+      fen ? { currentFen: getCurrentFen?.() ?? fen, surface: '/voice-chat' } : undefined,
     );
 
     // Strip + persist any [[REMEMBER: ...]] notes the coach emitted.

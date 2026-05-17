@@ -262,12 +262,18 @@ export function MiddlegamePractice({
 
       const systemAddition = `${MIDDLEGAME_PRACTICE_PROMPT}\n\n${planContextRef.current}`;
 
+      // WO-COACH-MASTER-INTEGRATION: pass the current FEN so the
+      // brain can ground move-question feedback against master data.
       const response = await getCoachChatResponse(
         chatHistoryRef.current,
         systemAddition,
         undefined,
         'explore_reaction',
         256,
+        undefined, // verbosityOverride
+        undefined, // forceProvider
+        undefined, // skipPersonality
+        fen ? { currentFen: fen, surface: '/openings/middlegame-practice' } : undefined,
       );
 
       if (!isMountedRef.current) return;

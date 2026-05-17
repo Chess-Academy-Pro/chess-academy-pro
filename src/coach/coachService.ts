@@ -69,6 +69,26 @@ function pickProvider(name: ProviderName): Provider {
   return name === 'anthropic' ? anthropicProvider : deepseekProvider;
 }
 
+/** Map the spine's `CoachSurface` enum to a route path the audit
+ *  stream + claim-validator audits can attribute against. Used by
+ *  the auto-grounding hook to label which surface generated each
+ *  master-play event. WO-COACH-MASTER-INTEGRATION. */
+function coachSurfaceToRoute(surface: string): string {
+  switch (surface) {
+    case 'home-chat':       return '/coach/home';
+    case 'standalone-chat': return '/coach/chat';
+    case 'game-chat':       return '/coach/play';
+    case 'move-selector':   return '/coach/play';
+    case 'hint':            return '/coach/play';
+    case 'phase-narration': return '/coach/play';
+    case 'ping':            return '/coach/play';
+    case 'review':          return '/coach/review';
+    case 'teach':           return '/coach/teach';
+    case 'smart-search':    return '/';
+    default:                return `/coach/${surface}`;
+  }
+}
+
 export interface CoachServiceOptions {
   /** Override the active provider. Useful for tests. */
   provider?: ProviderName;
@@ -183,6 +203,16 @@ export interface CoachServiceOptions {
    *  side that already moved (production audit, build 38d4ace). The
    *  surface should pass a getter that reads from a ref. */
   getLiveFen?: () => string;
+  /** WO-COACH-MASTER-INTEGRATION — master-play grounding for THIS
+   *  coach turn. When provided AND intent detection matches a move
+   *  question, the brain pre-injects master-play context for the
+   *  current FEN + look-ahead positions and validates the LLM's
+   *  output (up to 2 retries; stock fallback after exhaustion).
+   *  Surfaces pass `{ currentFen, surface }`; the watcher
+   *  (`useMasterPlayWatcher`) keeps the cache warm so the pre-
+   *  injection path is near-instant. Kid surfaces MUST NOT pass this.
+   *  See `MasterGroundingOptions` in `src/services/coachApi.ts`. */
+  grounding?: import('../services/coachApi').MasterGroundingOptions;
 }
 
 /** Format a list of tool results plus the LLM's previous text into a
@@ -426,9 +456,29 @@ async function ask(input: CoachAskInput, options: CoachServiceOptions = {}): Pro
       }),
     });
 
-    const providerCallOptions = options.task !== undefined || options.maxTokens !== undefined
-      ? { task: options.task, maxTokens: options.maxTokens }
-      : undefined;
+    // WO-COACH-MASTER-INTEGRATION — auto-build grounding when the
+    // surface didn't pass one explicitly. Every coach surface that
+    // hands the spine a `liveState.fen` qualifies; the intent detector
+    // inside `getCoachChatResponse` decides whether to actually engage
+    // the pipeline based on the user's last message. Kid surfaces use
+    // `getKidLlmResponse` directly (not coachService.ask), so this
+    // path is coach-lane-only by construction.
+    const autoGrounding =
+      options.grounding ??
+      (input.liveState.fen
+        ? {
+            currentFen: input.liveState.fen,
+            surface: coachSurfaceToRoute(input.liveState.surface),
+          }
+        : undefined);
+    const providerCallOptions =
+      options.task !== undefined || options.maxTokens !== undefined || autoGrounding
+        ? {
+            task: options.task,
+            maxTokens: options.maxTokens,
+            grounding: autoGrounding,
+          }
+        : undefined;
     lastResponse = useStreaming && options.onChunk && provider.callStreaming
       ? await provider.callStreaming(currentEnvelope, options.onChunk, providerCallOptions)
       : await provider.call(currentEnvelope, providerCallOptions);

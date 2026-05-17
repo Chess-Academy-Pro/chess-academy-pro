@@ -223,6 +223,9 @@ export function useLiveCoach(args: UseLiveCoachArgs): UseLiveCoachResult {
 
       let response = '';
       try {
+        // WO-COACH-MASTER-INTEGRATION: pass the post-move FEN so live
+        // interjections can be grounded if the trigger fires on a
+        // move-question-shaped turn.
         const promise = getCoachChatResponse(
           [{ role: 'user', content: userMessage }],
           ADDITION_BY_TRIGGER[winner.trigger],
@@ -230,6 +233,9 @@ export function useLiveCoach(args: UseLiveCoachArgs): UseLiveCoachResult {
           'chat_response',
           LIVE_COACH_MAX_TOKENS,
           'medium',
+          undefined, // forceProvider
+          undefined, // skipPersonality
+          ctx.fenAfter ? { currentFen: ctx.fenAfter, surface: '/coach/play' } : undefined,
         );
         const timeout = new Promise<string>((_, reject) =>
           setTimeout(() => reject(new Error('live-coach-timeout')), LIVE_COACH_API_TIMEOUT_MS),

@@ -323,6 +323,15 @@ export interface ProviderCallOptions {
    *  one-shot calls (tactic alerts, explore reactions) that don't
    *  need a long context budget. */
   maxTokens?: number;
+  /** WO-COACH-MASTER-INTEGRATION — master-play grounding for THIS
+   *  turn. When provided AND the user's last message looks like a
+   *  move question, the brain pre-injects master-play context and
+   *  validates the response against it (up to 2 retries; stock
+   *  fallback after exhaustion). The surface decides whether to
+   *  engage by passing this block; the provider passes it through to
+   *  `getCoachChatResponse`. Kid surfaces MUST NOT pass this.
+   *  See `MasterGroundingOptions` in `src/services/coachApi.ts`. */
+  grounding?: import('../services/coachApi').MasterGroundingOptions;
 }
 
 export interface Provider {
