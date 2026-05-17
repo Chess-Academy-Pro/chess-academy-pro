@@ -66,11 +66,16 @@ console.log(`[extract] vienna.ts (tree paths): ${viennaTreeCount}`);
 let viennaPunishCount = 0;
 for (const p of VIENNA_GAME.punish ?? []) {
   const setup = p.setupMoves ?? [];
+  // inaccuracy = the bad move Black plays AFTER the setup but BEFORE
+  // the punishment. Must be included or the audit will skip the
+  // intermediate position.
+  const inacc = typeof p.inaccuracy === 'string' ? [p.inaccuracy]
+              : Array.isArray(p.inaccuracy) ? p.inaccuracy : [];
   // punishment can be either a single SAN string or an array
   const punSans = Array.isArray(p.punishment)
     ? p.punishment
     : (typeof p.punishment === 'string' ? [p.punishment] : []);
-  const full = [...setup, ...punSans];
+  const full = [...setup, ...inacc, ...punSans];
   if (full.length === 0) continue;
   entries.push({
     source: 'openingWalkthroughs/vienna.ts',
