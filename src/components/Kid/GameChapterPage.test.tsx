@@ -10,7 +10,16 @@ import { GameChapterPage } from './GameChapterPage';
 // helpers; only the network calls are replaced with vi.fn() resolves.
 vi.mock('../../coach/coachService', () => ({
   coachService: {
-    ask: vi.fn().mockResolvedValue({ text: '', toolCallIds: [], provider: 'deepseek' }),
+    // Non-empty text so `hintState.nudgeText` populates and the
+    // `chapter-hint-text` conditional render fires for the hint
+    // advance assertions. Distinctive prefix is greppable in any
+    // future debugging — if this string shows up in production
+    // logs, the brain path was unmocked when it shouldn't have been.
+    ask: vi.fn().mockResolvedValue({
+      text: '[TEST MOCK] hint nudge text',
+      toolCallIds: [],
+      provider: 'deepseek',
+    }),
   },
 }));
 vi.mock('../../services/coachApi', async (importOriginal) => {

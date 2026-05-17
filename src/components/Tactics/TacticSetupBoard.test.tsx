@@ -7,7 +7,16 @@ import { buildSetupPuzzle, resetFactoryCounter } from '../../test/factories';
 // brain entry point + all 6 network-wrapping coachApi exports.
 vi.mock('../../coach/coachService', () => ({
   coachService: {
-    ask: vi.fn().mockResolvedValue({ text: '', toolCallIds: [], provider: 'deepseek' }),
+    // Non-empty text so `hintState.nudgeText` populates and the
+    // `hint-nudge` conditional render fires for the hint-level-2
+    // assertion. Distinctive prefix is greppable in any future
+    // debugging — if this string shows up in production logs,
+    // the brain path was unmocked when it shouldn't have been.
+    ask: vi.fn().mockResolvedValue({
+      text: '[TEST MOCK] hint nudge text',
+      toolCallIds: [],
+      provider: 'deepseek',
+    }),
   },
 }));
 vi.mock('../../services/coachApi', async (importOriginal) => {
