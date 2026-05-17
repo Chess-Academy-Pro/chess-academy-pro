@@ -183,17 +183,6 @@
     "caro-kann::warning::Two Knights Early e6 Mistake": [
       "PGN_NOT_IN_DB"
     ],
-    "pirc-defence::trap::Austrian Attack e5 Trick": [
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
-    "pirc-defence::trap::Classical Pin Trap": [
-      "WEAK_TRAP"
-    ],
-    "pirc-defence::trap::150 Attack Qa5 Counter": [
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
     "scandinavian-defence::trap::Qa5 b2 Trap": [
       "INVERTED_MATERIAL",
       "STUDENT_NOT_PUNISHER"
@@ -558,6 +547,17 @@
       "WEAK_TRAP"
     ],
     "evans-gambit::trap::Knight Fork Counter": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "pirc-defence::trap::Austrian Attack e5 Trick": [
+      "WEAK_TRAP"
+    ],
+    "pirc-defence::trap::Classical Pin Trap": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "pirc-defence::trap::150 Attack Bishop Trade": [
       "STUDENT_NOT_PUNISHER",
       "WEAK_TRAP"
     ]
