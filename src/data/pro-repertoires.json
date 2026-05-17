@@ -2248,47 +2248,47 @@
       "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Bxc3 bxc3 d5 Ba3 dxc4 Re1 Be6 Rxe4",
       "color": "white",
       "style": "Aggressive, Sharp",
-      "overview": "Firouzja plays the Italian Game with maximum aggression. His fearless approach to the resulting tactical complications often catches opponents off guard. He favors the sharp lines where White sacrifices material for a powerful initiative.",
+      "overview": "Firouzja's Italian is what happens when the youngest player to reach 2800 FIDE decides 'I want a chaos opening, but with sound positional foundations.' Where Caruana plays the IQP for technique, Firouzja plays it for the bishop pair gambit — sacrificing a pawn to reach positions with two raking bishops and open lines. His Italian games typically last 30 moves: the first 15 are forced, the next 10 are tactical chaos, and the final 5 are conversion. Risk-tolerant, unforgiving, fast.",
       "keyIdeas": [
-        "Open the center with c3-d4 and create tactical complications — this central control is the foundation for all middlegame operations",
-        "Sacrifice pawns for activity — the initiative is worth material — a key strategic concept in Italian Game",
-        "Use the open e-file and diagonal pressure to create threats — maintaining this pressure forces the opponent to defend passively",
-        "The bishop pair in open positions is a powerful weapon — piece placement and activity are more important than material in these positions"
+        "The c3+d4 break PLUS the Nc3 sacrifice. Firouzja's line goes 5.d4 exd4 6.cxd4 Bb4+ 7.Nc3! (not Bd2) — accepting the …Nxe4 grab on purpose, because the resulting open position with the bishop pair compensates the pawn.",
+        "Ba3 is the key attacking move. After …Bxc3 bxc3 d5 Ba3! — the bishop fires down the a3-f8 diagonal at Black's king-side, AND prevents Black from castling safely.",
+        "Use the open e-file and the bishop pair together. The Re1 lift + Bc4 (or Bb3) + Ba3 creates a three-piece attack on Black's central files.",
+        "The Evans Gambit lives in Firouzja's repertoire as a surprise weapon. When opponents have prepared the Italian, the Evans (with 4.b4!) takes them out of book entirely."
       ],
       "traps": [
-        "After d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O, White gets huge compensation for the pawn"
+        "After 5.d4 exd4 6.cxd4 Bb4+ 7.Nc3 Nxe4 8.O-O Bxc3 9.bxc3 d5 10.Ba3! — Black's king is permanently stuck on e8 because Ba3 prevents castling kingside. After …dxc4 11.Re1 Be6 12.Rxe4! — exchange sacrifice for further attacking play. Pure Firouzja tactical violence."
       ],
       "warnings": [
-        "Do not play too passively — the Italian requires active play to justify the pawn structure",
-        "Watch for Black's counterplay with d5 and Be6 — keep the initiative"
+        "DON'T play the slow Italian (d3 system) if you want Firouzja's gambit chances. The d4 break is necessary; without it, you're playing a passive Italian that doesn't fit Firouzja's style.",
+        "Watch for Black's …d5 + …Be6 counterplay. If Black challenges the centre AND develops the bishop accurately, your initiative can fizzle. Maintain pressure with concrete moves, not passive development."
       ],
       "variations": [
         {
           "name": "Sharp Gambit Line",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Bxc3 bxc3 d5 Ba3 dxc4 Re1 Be6",
-          "explanation": "Firouzja's preferred sharp line. White sacrifices a pawn for massive piece activity and the two bishops. The resulting positions require exact calculation."
+          "explanation": "Firouzja's flagship Italian gambit line. After 5.d4 exd4 6.cxd4 Bb4+ — instead of the safe 7.Bd2, Firouzja plays 7.Nc3! offering the e4-pawn. Black accepts with 7...Nxe4 8.O-O Bxc3 9.bxc3 — White now has doubled c-pawns but a beautiful initiative. 9...d5 (Black tries to defend the e-file) 10.Ba3! (preventing kingside castling AND eyeing f8) dxc4 11.Re1 Be6 — White has the bishop pair, the open e-file, the a3-bishop pinning, and Black still hasn't castled. The compensation is more than the pawn."
         },
         {
           "name": "Giuoco Pianissimo",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 O-O d6 c3 a6 a4 Ba7 Nbd2 O-O Re1 Be6 Bb3 h6",
-          "explanation": "A slower approach that Firouzja uses occasionally. White builds up behind d3 with the Nbd2 + Bb3 + Re1 setup, preparing the slow Nf1-Ng3 manoeuvre to launch a kingside attack."
+          "explanation": "When Firouzja wants a slower game (rare, but sometimes), he plays the d3 system. After standard development through 11.Re1 Be6 12.Bb3 h6 — both sides reach a typical Italian middlegame with the centre closed. The plan: Nf1-Ng3 + h3 + Nh4 + f4 for a kingside attack. Same Italian, slower tempo. Not Firouzja's preferred style, but he handles it accurately when needed."
         },
         {
           "name": "Evans Gambit Spirit",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O d6 cxd4 Bb6 Nc3 Bg4",
-          "explanation": "Firouzja occasionally plays Evans Gambit-style positions, sacrificing the b4 pawn for rapid development and a powerful center. The Bg4 pin sets up the typical sharp tactical play that follows."
+          "explanation": "The Evans Gambit — Firouzja's chaos weapon when opponents have prepared mainline Italian. 4.b4! sacrifices a pawn for tempo (4...Bxb4 5.c3 Ba5) and central control (6.d4 exd4 7.O-O d6 8.cxd4). After 8...Bb6 9.Nc3 Bg4 — Black tries to pin the f3-knight. White's plan: Bb2 + Qb3 + Nd5 piling up on the kingside while Black's queen and king are still on the queenside. The Evans is theoretically unsound but practically lethal at every level except top-10 GMs."
         }
       ],
       "trapLines": [
         {
           "name": "Nxe4 Grab Punished by d5",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 Nxe4",
-          "explanation": "Black grabs the e4 pawn with Nxe4 too early — White's response d5 forks the knight and bishop, winning material with a dominating center."
+          "explanation": "When Black greedily grabs e4 with the knight (instead of the principled 5...exd4), White plays 6.d5! immediately. The d5-pawn forks the c6-knight (which has to move) AND attacks Black's bishop on c5 indirectly. After 6...Ne7 (the only square — Nb8 wastes more tempo) 7.dxc6 — White wins material AND keeps the central pawn duo. Classic Italian punishment for amateurs who 'just grab the pawn'."
         },
         {
           "name": "exd4 Center Steamroll",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4",
-          "explanation": "After exd4 cxd4, White's center pawns are ready to steamroll forward with d5 and e5. Black must play with extreme care or get rolled by the central pawn duo."
+          "explanation": "After the standard 5.d4 exd4 6.cxd4, White has the central pawn duo c-d-e all in the center. Black's options are limited: 6...Bb4+ (forcing the trade — main line), 6...Bb6 (passive), or 6...d5 (challenging the centre with structural concessions). Each move is concrete; Firouzja's preparation typically reaches move 12-15 in any of these branches with the better-placed pieces."
         }
       ]
     },
@@ -2300,42 +2300,42 @@
       "pgn": "e4 c5 Nf3 Nc6 Bb5 g6 Bxc6 dxc6 d3 Bg7 h3 Nf6 Nc3 Nd7 Be3 e5 Qd2 O-O O-O-O b5",
       "color": "white",
       "style": "Positional, Flexible",
-      "overview": "Firouzja uses the Rossolimo to avoid the heavy theory of Open Sicilians. The bishop exchange on c6 gives Black doubled pawns and White a stable positional advantage. It is a practical weapon that leads to positions where Firouzja's creativity thrives.",
+      "overview": "Firouzja's Rossolimo is his anti-theory weapon against the Sicilian — he plays it specifically against opponents who've spent 200 hours on Najdorf preparation. By playing 3.Bb5 he wipes the slate clean: no Najdorf, no Dragon, no Sveshnikov. Black has to think from move 3. Firouzja's preference is the immediate Bxc6 commitment — sacrifice the bishop pair for a permanent structural advantage. The doubled c-pawns become a long-term target that he attacks throughout the middlegame with characteristic aggression.",
       "keyIdeas": [
-        "Exchange on c6 to saddle Black with doubled c-pawns — this structural feature shapes all future strategic decisions in the position",
-        "Play d3, h3, and develop pieces to control the center — this central control is the foundation for all middlegame operations",
-        "The pawn structure gives White a long-term advantage on the kingside — timing this correctly before the opponent can generate counterplay is critical",
-        "Castle queenside and play for a kingside attack with g4-g5 — timing this correctly before the opponent can generate counterplay is critical"
+        "Bb5 + Bxc6 is one decision. Most Rossolimo players hold the pin for tempo gain; Firouzja trades immediately, accepting the bishop pair concession for the permanent structural damage.",
+        "After …dxc6 (the standard recapture), Black has doubled c-pawns AND the c-file isn't fully open. Target c6 and c7 with rook lifts and knight outposts for the entire middlegame.",
+        "O-O-O queenside castling is Firouzja's signature plan. Against opposite-side-castled Black, the g4-g5 pawn storm arrives faster than Black's queenside counterplay.",
+        "The kingside attack uses pieces, not just pawns. The Bf4 + Qd2 + Bh6 reroute is the standard plan — trade off Black's fianchetto bishop, then attack the dark squares with everything."
       ],
       "traps": [
-        "After Bxc6 dxc6, if Black plays e5 too early, White can exploit the dark square weaknesses"
+        "If Black plays 3…g6 (fianchetto) and you respond 4.Bxc6 bxc6 (the WORSE recapture for Black), Black's pawn structure has isolated a/c pawns. After 5.O-O Bg7 6.Re1 — the open b-file and weak a-pawn give White a positional win."
       ],
       "warnings": [
-        "Do not exchange too many pieces — the doubled pawns advantage is endgame-related",
-        "Respect Black's bishop pair — they can become very active in open positions"
+        "Don't trade pieces unnecessarily. The doubled c-pawn structural advantage matters MOST when there are still pieces on the board to attack with. In simplified endgames, Black often holds.",
+        "Respect Black's bishop pair. Even though you've damaged their structure, the two bishops in open positions can create dynamic compensation if Black plays actively. Keep the position closed when possible."
       ],
       "variations": [
         {
           "name": "3...g6 Main Line",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 g6 Bxc6 dxc6 d3 Bg7 h3 Nf6 Nc3 Nd7 Be3 e5 Qd2 O-O O-O-O b5",
-          "explanation": "The main Rossolimo setup. White gets opposite-side castling and a clear plan. The doubled c-pawns are a long-term weakness for Black."
+          "explanation": "Firouzja's flagship Rossolimo setup. After 3...g6 (Black's most popular reply) 4.Bxc6! dxc6 (the principled recapture — keeps the c-pawn structure) 5.d3 (modest, supports future e4 stability) Bg7 6.h3 (preventing …Bg4 pin) Nf6 7.Nc3 Nd7 (Black reroutes knight from f6 to defend e5) 8.Be3 e5 (Black locks the centre) 9.Qd2 O-O 10.O-O-O — White castles long, signalling the kingside attack. Black's 10...b5 starts counterplay on the queenside but White's attack arrives first thanks to the natural g4-g5 push."
         },
         {
           "name": "3...e6 Variation",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 e6 Bxc6 bxc6 d3 Ne7 O-O Ng6 e5",
-          "explanation": "Against e6, the exchange on c6 gives a different structure. The Ne7-Ng6 manoeuvre + White's e5 push creates a positional middlegame with both sides playing for structural advantages."
+          "explanation": "When Black plays 3...e6 instead of the fianchetto, the recapture 4.Bxc6 bxc6 (forced — …dxc6 here misplaces the d-pawn) creates a different doubled-pawn structure. White plays 5.d3 (calm) Ne7 (knight reroute via …Ng6) 6.O-O Ng6 7.e5! — the central push cramps Black's pieces. The Ne7-g6 manoeuvre is the only useful Black plan; White's structural and space edge favours the long-term grind."
         }
       ],
       "trapLines": [
         {
           "name": "bxc6 Structural Disaster",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 g6 Bxc6 bxc6 d3 Bg7 O-O Nf6 Re1 O-O",
-          "explanation": "When Black recaptures with bxc6 instead of dxc6, the pawn structure is worse with isolated a and c pawns. White exploits the weaknesses with e5 and d4 in the next phase."
+          "explanation": "When Black plays 4...bxc6 (instead of the correct …dxc6), the structure is permanently worse: isolated a-pawn AND doubled c-pawns. After 5.d3 Bg7 6.O-O Nf6 7.Re1 O-O — White has a long-term plan to attack on the queenside (where Black is structurally weak) AND target c6/c7 with rooks and knights. The bishop pair compensation Black has doesn't match the structural permanent damage."
         },
         {
           "name": "a6 Bxc6 Structural Edge",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 d3",
-          "explanation": "After the early a6, White plays Bxc6 anyway giving Black doubled c-pawns. White gets a lasting structural advantage with a clear plan to target the weak pawns."
+          "explanation": "When Black plays the natural 3...a6 (kicking the bishop), Firouzja commits with 4.Bxc6! dxc6 (forced — Black takes back keeping the c-pawn intact) 5.d3 — same doubled-pawn structure reached via different move order. The …a6 commitment is now wasted because the bishop is gone; meanwhile White has a clear plan to attack the queenside pawns over the next 30 moves."
         }
       ]
     },
