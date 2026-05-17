@@ -1,5 +1,12 @@
 # Rolodex Plumbing — WO-ROLODEX-PLUMBING-01
 
+**Status: COMPLETE (2026-05-16).** All 4 PRs merged · Vercel green.
+This doc is now archival — see the retrospective at the bottom for
+what landed, what was deferred, what surprised us, and the
+confidence read for WO-ROLODEX-UI-01.
+
+---
+
 Living plan doc for the foundation work that lets the Training Plan
 rolodex UI ship in a follow-up WO. Append-and-update — status flags
 track per item.
@@ -13,12 +20,14 @@ track per item.
 
 ## Phased plan
 
-| PR | Items | Status | Branch |
-|---|---|---|---|
-| **A.** Cleanup + alias data | 6, 8, 9, 12 | pending | `claude/rolodex-plumbing-a` |
-| **B.** Deep-link parity | 1, 2, 3, 4 | pending | `claude/rolodex-plumbing-b` |
-| **C.** Selectors + family-fallback | 7, 11, 13 | pending | `claude/rolodex-plumbing-c` |
-| **D.** Brain action — favoriteOpening | 5 | pending | `claude/rolodex-plumbing-d` |
+| PR | Items | Status | Merge SHA | PR # |
+|---|---|---|---|---|
+| **A.** Cleanup + alias data | 6, 8, 9, 12 | **live** | `a216b347` | [#558](https://github.com/dyahnke-pro/chess-academy-pro/pull/558) |
+| **B.** Deep-link parity | 1, 2, 3, 4 | **live** | `8cf70cd9` | [#559](https://github.com/dyahnke-pro/chess-academy-pro/pull/559) |
+| **C.** Selectors + family-fallback | 7, 11, 13 | **live** | `8ff16092` | [#561](https://github.com/dyahnke-pro/chess-academy-pro/pull/561) |
+| **D.** Brain action — favoriteOpening | 5 | **live** | `ede0fce9` | [#562](https://github.com/dyahnke-pro/chess-academy-pro/pull/562) |
+
+Also-ran: [#557](https://github.com/dyahnke-pro/chess-academy-pro/pull/557) — test-cleanup one-liners that landed alongside as a separate tiny PR to keep PR-A scope clean (4 data-drift fixes carved out of the audit triage; balance of 13 deferred to WO-TEST-CLEANUP-01).
 
 Status legend: pending · in progress · merged · live (Vercel green + audited).
 
@@ -101,19 +110,19 @@ Dated, append-only. Anything that needs Dave's call lands here first.
 
 | # | Item | PR | Status | Notes |
 |---|---|---|---|---|
-| 1 | Fix `/coach/play` cold-load filter regression | B | pending | Static read at `CoachGamePage.tsx:548,569,573`. Diagnose root cause before patching. |
-| 2 | Add `mode` parameter (`from-start` / `middlegame`) | B | pending | No ply cap (decision above). |
-| 3 | URL deep-link wiring for 5 destinations | B | pending | Uses item 11's selector for `/tactics/*?opening=`. |
-| 4 | `/tactics/mistakes` URL fallback | B | pending | Add `useSearchParams` fallback to existing `location.state` path. |
-| 5 | `favoriteOpening` write tool + intent regex | D | pending | Pattern: `src/coach/tools/cerebrum/<name>.ts` (see `play_move`). |
-| 6 | `/tactics/opening-traps` → `appRoutesManifest.ts` | A | pending | Trivial. |
-| 7 | Per-opening completion selectors (4 hooks + placeholder) | C | pending | Pulls from `openings.linesDiscovered`, `openings.linesPerfected`, `meta.openingProgress`, `mistakePuzzles.openingName`. |
-| 8 | Delete transient audit driver | A | pending | `audit-reports/rolodex-audit-01/driver.mjs` + `audit-reports/puzzle-opening-coverage/coverage.mjs`. |
-| 9 | App-map sweep | A | pending | Confirm no other gaps now that we're adding query params. |
+| 1 | Fix `/coach/play` cold-load filter regression | B | **done** | Static read at `CoachGamePage.tsx:548,569,573`. Diagnose root cause before patching. |
+| 2 | Add `mode` parameter (`from-start` / `middlegame`) | B | **done** | No ply cap (decision above). |
+| 3 | URL deep-link wiring for 5 destinations | B | **done** | Uses item 11's selector for `/tactics/*?opening=`. |
+| 4 | `/tactics/mistakes` URL fallback | B | **done** | Add `useSearchParams` fallback to existing `location.state` path. |
+| 5 | `favoriteOpening` write tool + intent regex | D | **done** | Pattern: `src/coach/tools/cerebrum/<name>.ts` (see `play_move`). |
+| 6 | `/tactics/opening-traps` → `appRoutesManifest.ts` | A | **done** | Trivial. |
+| 7 | Per-opening completion selectors (4 hooks + placeholder) | C | **done** | Pulls from `openings.linesDiscovered`, `openings.linesPerfected`, `meta.openingProgress`, `mistakePuzzles.openingName`. |
+| 8 | Delete transient audit driver | A | **done** | `audit-reports/rolodex-audit-01/driver.mjs` + `audit-reports/puzzle-opening-coverage/coverage.mjs`. |
+| 9 | App-map sweep | A | **done** | Confirm no other gaps now that we're adding query params. |
 | 10 | Puzzle coverage report | — | done | Shipped as `docs/audits/puzzle-opening-coverage.md`. |
-| 11 | Family-fallback Puzzles selector + brain LLM call | C | pending | Returns `{count, source, family?}`. |
-| 12 | Lichess alias map | A | pending | 8 useful entries (~133 puzzles recovered). |
-| 13 | Wire fallback awareness into Puzzles row only | C | pending | Other rows stay simple this WO. |
+| 11 | Family-fallback Puzzles selector + brain LLM call | C | **done** | Returns `{count, source, family?}`. |
+| 12 | Lichess alias map | A | **done** | 8 useful entries (~133 puzzles recovered). |
+| 13 | Wire fallback awareness into Puzzles row only | C | **done** | Family-fallback architecturally confined to `puzzlesByOpening.ts` — other 4 hooks do exact-name lookups only. |
 
 ---
 
@@ -159,3 +168,199 @@ If this session ends before all 4 PRs ship:
    it; until then, the transient driver pattern (off-tree, per
    `docs/sandbox-playwright-setup.md`) is the gate.
 4. **Don't touch the parallel session's work.** See above.
+
+---
+
+## Retrospective — 2026-05-16
+
+PLUMBING-01 shipped same-day across 4 phased PRs. 31 files changed,
+~3,400 lines of code + tests + docs. Total green test count added:
+~190.
+
+### What landed
+
+- **Item 1** — Rolodex entry beat on `/coach/play` (4-variant stem
+  rotation, deterministic-by-opening, voice + chat-mirror).
+- **Item 2** — `?mode=from-start|middlegame` URL param, no ply cap
+  (Dave's call), 700ms pacing under `makeCoachMove`'s 800ms timer.
+- **Item 3** — URL deep-link wiring for 5 destinations
+  (`/openings`, `/coach/teach`, `/tactics/opening-traps`, `/games`,
+  `/tactics/mistakes`). The 7 acceptance URLs all green via the
+  rig.
+- **Item 4** — `/tactics/mistakes?opening=` URL fallback alongside
+  the existing `location.state` path.
+- **Item 5** — `favoriteOpeningTool` (cerebrum, kind: write) with
+  idempotency guard against the `toggleFavorite` flip-back trap.
+  AI search fast-path in `parseCoachIntent` (2 regex patterns).
+  SmartSearchBar wired through chip-tap + voice paths.
+- **Item 6** — `/tactics/opening-traps` added to
+  `appRoutesManifest.ts`.
+- **Item 7** — 6 progress hooks (4 tracked: walkthrough · lines ·
+  traps · mistakes; 1 family-fallback: puzzles; 1 placeholder for
+  GM Games / Practice).
+- **Item 8** — Transient audit drivers deleted.
+- **Item 9** — App-map sweep confirmed.
+- **Item 10** — Puzzle coverage report (`docs/audits/puzzle-opening-coverage.md`).
+- **Item 11** — Family-fallback Puzzles selector + brain LLM call
+  (`requestPuzzlesFamilyFallbackVoice`, fire-and-forget, full brain
+  with no template fast-path, librarian-vs-coach tone anchor).
+- **Item 12** — `OPENING_TAG_ALIASES` (8 entries, ~128 puzzles
+  recovered; Petrov's Defense ↔ Russian_Game is the biggest single
+  win at 49).
+- **Item 13** — Architectural enforcement that family-fallback
+  lives only in the Puzzles selector.
+
+### What we deferred (named, with reasons)
+
+- **Trap-completion tracking on `OpeningRecord`.** `useOpeningTrapsProgress`
+  ships with `completed: 0` and total = `trapLines.length`. The
+  underlying data model has no `trapsPerfected[]` parallel to
+  `linesPerfected[]`. TODO marker in the hook + decision-log entry.
+  *Reason:* infra change, M effort, not blocking the rolodex UI's
+  v1 render (the chip shows "N traps available" cleanly).
+- **GM Games / Practice from move 1 / Practice middlegame
+  per-opening progress.** Ship as `{ status: 'not-tracked-yet' }`
+  via `useOpeningProgressPlaceholder`. *Reason:* no per-opening
+  data substrate exists on those rows. New Dexie tables required
+  (~L effort each). Out of scope per WO item 7's explicit
+  "ship as not-tracked" guidance.
+- **Kid-Mode puzzles by opening.** The `training-puzzles.json`
+  sub-rating-400 pool has 0 `openingTags` — entirely untagged.
+  *Reason:* needs an engine pass to re-tag 300 puzzles. Separate WO.
+- **Bulk re-tagging of the 11,793 untagged Lichess puzzles.**
+  *Reason:* would require an engine pass; family-fallback covers
+  most of the practical gap without it.
+- **Rate-limit on the family-fallback brain call.** Every row tap
+  fires a fresh LLM round-trip. *Reason:* Dave's "firehose-first"
+  v1 stance. Memoization keyed on `${opening}::${family}::${count}`
+  is a 20-LOC add when needed.
+- **`'rolodex'` `CoachSurface` value.** The family-fallback brain
+  call tags surface as `'standalone-chat'` (closest existing).
+  Adding `'rolodex'` would touch `envelope.ts` and its handlers.
+  *Reason:* out of scope for a data-plumbing PR; standalone-chat
+  produces the right register.
+- **9 of 13 pre-existing test failures.** Carved 4 one-liners into
+  #557 (test-cleanup); deferred the remaining 9 (Settings testid
+  sweep, Kid/PracticeMode hint flow, useTeachWalkthrough timing,
+  Stockfish UCI mock drift, etc.) to WO-TEST-CLEANUP-01.
+- **Audit-log Dexie write-chain investigation.** The
+  `rolodex-entry-beat` audit doesn't appear in
+  `db.meta('app-audit-log.v1')` despite the code path executing;
+  other audits from the same page (e.g. `coach-memory-intent-set`)
+  land cleanly. `.catch(() => undefined)` in the write chain
+  swallows errors silently. *Reason:* unknown root cause, ~30 min
+  spent without resolution. Voice-side coverage moved to unit-
+  test boundary instead. Documented in decisions log; worth a
+  look when next touching audit infrastructure.
+
+### What surprised us
+
+- **The audit's "regression" was a spec question, not a bug.** The
+  pre-build audit framed `/coach/play?opening=` as a regression
+  ("intent captured but moves never appear on board"). PR-B's
+  pre-coding investigation revealed the brain DOES see the intent
+  (envelope confirmed via runtime LLM request body capture); the
+  moves don't appear because that's correct behavior for
+  `mode=from-start` — the student plays from move 1 themselves.
+  The actual missing piece was the *entry-beat narration* on cold
+  load, which is more "felt-experience signature" than
+  "regression fix." Reframed item 1 from fix-the-bug to add-the-
+  signature.
+
+- **The Dexie audit-log silent-failure.** Real-time anomaly Dave's
+  audit-stream rig wouldn't have caught: the code path runs
+  (verified via Playwright console-log capture), the chat mirror
+  appears (verified visually), but the corresponding audit row
+  never lands in `db.meta`. Wasted 30 min trying to instrument
+  the cause before pivoting to unit-test the wiring at the
+  voice-service boundary instead. The audit-log path needs an
+  instrumentation pass — the swallowing `.catch` is exactly the
+  failure mode where you can't diagnose from production traces.
+
+- **Parallel-session interference was real and active.** Throughout
+  the session, another Claude session (working
+  `claude/coach-master-integration`) repeatedly:
+  - Checked out their branch in MY working tree (mid-session)
+  - Stashed my work with labels like *"OTHER-SESSION rolodex+coachgametest
+    WIP — DO NOT pop on coach-master-integration branch"*
+  - Left untracked files (`masterPlayLookup.ts`, etc.) that
+    caused my typecheck to fail until I removed them
+
+  Recovery cost ~20 min total across the session. Dave's
+  "git status sanity before every commit" rule caught all
+  attempted leakage — zero parallel files made it into any of
+  my 4 PRs. The protocol works but it's annoying tax. If this
+  becomes routine, a session-isolation wrapper (separate
+  worktree per Claude session) would be a cleaner fix than
+  per-commit vigilance.
+
+- **Voice-service routing is fragile in the audit env.** Headless
+  Chromium has `speechSynthesis` but no audio engine; Polly
+  fetches return 401 without creds. The fallback chain between
+  them is non-deterministic in this env (sometimes speak fires,
+  sometimes content-Polly fires, sometimes neither). The Dexie
+  audit-log path WAS supposed to be the orthogonal signal — and
+  that's what failed (see above). Chat-mirror became the reliable
+  e2e signal; voice-wiring coverage moved to unit tests where
+  it's deterministic.
+
+- **`useNarration` actually IGNORES voiceEnabled.** Initial
+  recommendation to Dave was wrong (`useNarration` "respects
+  voiceEnabled pref"). It uses `voiceService.speakForced`
+  internally — explicitly bypasses the pref. The hook's own
+  header comment spells this out. Caught via code-review pre-
+  coding; Dave reversed his "respect voiceEnabled" call to
+  "use speakForced" once the precedent was clear (endgame
+  surfaces have used speakForced since PR #447 — the
+  established pattern is "user opted into the lesson, narration
+  IS the lesson").
+
+### Confidence read for WO-ROLODEX-UI-01
+
+**High confidence** the rolodex UI can land cleanly on this
+plumbing. Specific reasons:
+
+- All 7 deep-link URLs from the acceptance criterion are verified
+  green via the audit script. Tap a card row → land on the right
+  destination → filter visually applied. This is the single
+  biggest UI risk, and it's already pinned at the e2e tier.
+- Progress hooks have the right shape — `{completed, total,
+  loading}` for tracked rows, `{status: 'not-tracked-yet'}` for
+  placeholder. UI conditionals are trivially uniform per row.
+- `favoriteOpeningTool` is idempotent — the UI can wire a star
+  toggle that re-favorites on every tap without worrying about
+  flip-back.
+- Family-fallback selector returns `{count, source, family?}` in
+  one synchronous call. Memoized per opening name — 35 selector
+  calls on a 5-favorite × 7-row rolodex mount cost ~50ms once,
+  microseconds thereafter.
+- Brain voice on family-fallback is fire-and-forget — UI
+  navigation never blocks on the LLM round-trip.
+
+**Two specific risks worth flagging for the UI WO:**
+
+1. **The audit-stream gap (deferred above) means voice-side
+   regressions in the rolodex UI won't be caught by an e2e
+   script — only by unit tests of the wiring.** PR-B's
+   entry-beat tests are the template. The UI WO should pin
+   voiceService.speakForced calls at the unit-test boundary
+   for any rolodex-side narration.
+
+2. **The brain voice on family-fallback uses
+   `'standalone-chat'` surface tag.** If the UI WO finds the
+   register feels off (too conversational, not card-row-ish),
+   adding a `'rolodex'` surface to `CoachSurface` + a matching
+   `envelope.ts` branch is the proper fix. Out of scope for
+   PLUMBING-01; flagged so the UI session can decide.
+
+**Estimated UI WO scope:** ~3-5 days, one PR, no plumbing
+discoveries expected. The hard part is the manila-tabs ↔ desktop-
+two-column responsive shape and the long-press drag-reorder; the
+data is fully wired.
+
+### Order of operations for next sessions
+
+1. **WO-TEST-CLEANUP-01** (priority pin — Anthropic API leak is
+   billing real credits per test run). Drafted from the triage
+   in `audit-reports/` + the deferred-failures list above.
+2. **WO-ROLODEX-UI-01** — the actual rolodex UI on this plumbing.
