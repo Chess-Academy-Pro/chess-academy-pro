@@ -2631,20 +2631,20 @@
         },
         {
           "name": "Bayonet Defense",
-          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 b4 Nh5 Re1 f5 Ng5 Nf6 Bf3 c6 dxc6 Nxc6 Nd5 Kh8",
+          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 b4 Nh5 Re1 f5 Ng5 Nf6 Bf3 c6 dxc6 Nxc6",
           "explanation": "Against the Bayonet Attack 9.b4, Firouzja defends dynamically with Nh5-f5-Nf6 maneuvers. After dxc6 Nxc6, the position is razor-sharp with both sides pushing forward on opposite flanks."
         }
       ],
       "trapLines": [
         {
           "name": "Premature c5 Punished by b6",
-          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 c5 Ne8 cxd6 cxd6 b4 f5 Nd2 Nf6 Nb3 b6",
-          "explanation": "White pushes c5 prematurely and Black responds with b6 undermining the queenside pawn chain. Black gets counterplay on the c-file and maintains the kingside attack."
+          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 c5",
+          "explanation": "White pushes c5 prematurely. Black responds with the typical King's Indian counter — Ne8 + cxd6 cxd6 + b6 — undermining the queenside while keeping the kingside attack potential alive."
         },
         {
           "name": "f5-f4 Kingside Storm",
-          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 Be3 f4 Bf2 g5 Nd3 Ng6 c5 Rf7 Rc1 h5",
-          "explanation": "Black launches f5-f4 followed by g5 and h5 creating an unstoppable kingside pawn storm. The rook lifts to f7 supporting the attack while White's queenside play is too slow."
+          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 Be3 f4 Bf2 g5 Nd3 Ng6 c5",
+          "explanation": "Black launches f5-f4 followed by g5 and Ng6 creating an unstoppable kingside pawn storm. White's queenside push c5 races against Black's attack — opposite-side castled middlegame at maximum tension."
         }
       ]
     },
