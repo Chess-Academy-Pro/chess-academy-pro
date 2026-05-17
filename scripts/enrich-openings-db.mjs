@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * enrich-openings-db.mjs — offline pipeline that populates
- * src/data/openings-lichess-extended.json with master-game-validated
+ * public/data/openings-masters-db.json with master-game-validated
  * continuations past each named opening's terminus.
  *
  * Architecture (David's decision 2026-05-16):
@@ -48,7 +48,7 @@ const MIN_MASTER_GAMES = 1;          // keep any move played in ≥1 master game
 const ANON_THROTTLE_MS = 1100;       // 1 req/s budget
 const AUTH_THROTTLE_MS = 250;        // 4 req/s budget when authed
 const PROGRESS_SAVE_INTERVAL = 100;  // save partial output every N positions
-const OUTPUT_PATH = 'src/data/openings-lichess-extended.json';
+const OUTPUT_PATH = 'public/data/openings-masters-db.json';
 
 const args = new Set(process.argv.slice(2));
 const sliceArg = process.argv.find((a) => a.startsWith('--slice='))?.slice(8);

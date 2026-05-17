@@ -5,7 +5,7 @@
  *
  * Consumes:
  *   audit-reports/pgn-vs-masters-<latest>/report.json
- *   src/data/openings-lichess-extended.json
+ *   public/data/openings-masters-db.json
  *
  * For each flagged entry:
  *   1. Keep the validated prefix (validatedPly plies — these are
@@ -57,7 +57,7 @@ async function main() {
   console.log(`[repair] reading audit: ${reportPath}`);
   const audit = JSON.parse(await readFile(reportPath, 'utf8'));
   const enriched = JSON.parse(
-    await readFile('src/data/openings-lichess-extended.json', 'utf8'),
+    await readFile('public/data/openings-masters-db.json', 'utf8'),
   );
   const positions = enriched.positions ?? {};
 

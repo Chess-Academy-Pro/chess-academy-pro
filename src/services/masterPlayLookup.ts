@@ -8,12 +8,13 @@
  * Resolution order:
  *
  *   1. In-memory cache (sync) — `masterPlayCache.get(fen)`.
- *   2. Local extended DB (sync after first lazy-load) —
- *      `src/data/openings-lichess-extended.json`. Built offline by
+ *   2. Local extended DB (async after first lazy-load) —
+ *      `public/data/openings-masters-db.json`. Built offline by
  *      `scripts/enrich-openings-db.mjs` from the Lichess masters
- *      explorer. Sparse: `{ san, games }` per move. Tolerates an
- *      empty file (parallel workstream not merged yet — fall through
- *      cleanly to live).
+ *      explorer. Sparse: `{ san, games }` per move. Served as a
+ *      static asset (not bundled into JS) and fetched on first
+ *      use, then cached in memory. Tolerates missing / empty file
+ *      (fall through cleanly to live).
  *   3. Live Lichess (async) — `lichessExplorerService.fetchLichessExplorer`
  *      with `source: 'masters'`. Only fired when:
  *        - local missed, AND
@@ -100,45 +101,74 @@ export interface LookupOptions {
    *  always lets the live path run. */
   localOnly?: boolean;
   /** Test-only — inject a synthetic local DB without touching the
-   *  bundled `openings-lichess-extended.json`. Production code never
-   *  passes this. */
+   *  bundled `public/data/openings-masters-db.json`. Production code
+   *  never passes this. */
   __testLocalDb?: LocalDb;
 }
 
 // ─── Local-DB lazy load ────────────────────────────────────────────
 
+/** Public-path of the static masters DB asset. Vite copies
+ *  `public/` to the build root verbatim; this URL is served by the
+ *  same origin as the SPA. Keeping the file out of the JS bundle is
+ *  critical — the masters DB is ~36 MB and would otherwise be
+ *  inlined into `index.js`, blowing past the PWA precache limit and
+ *  causing every cold-load to download the whole file. With this
+ *  fetch-on-demand pattern the coach grounding pipeline pays for it
+ *  only when a master-play lookup actually fires, and the browser
+ *  HTTP cache holds it across reloads. */
+const MASTERS_DB_URL = '/data/openings-masters-db.json';
+
 let localDbCache: LocalDb | null | undefined;
+let localDbInflight: Promise<LocalDb | null> | null = null;
 
 async function getLocalDb(): Promise<LocalDb | null> {
   if (localDbCache !== undefined) return localDbCache;
-  try {
-    const mod = await import('../data/openings-lichess-extended.json');
-    const raw = (mod as { default?: unknown }).default ?? (mod as unknown);
-    if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
-      const obj = raw as Record<string, unknown>;
-      // Detect the "empty placeholder" case (3-byte `[]` or `{}`).
-      if (Object.keys(obj).length === 0) {
+  if (localDbInflight) return localDbInflight;
+  localDbInflight = (async () => {
+    try {
+      // In SSR / non-browser test env, `fetch` may be missing — bail
+      // to "no local data" (live fallback handles it).
+      if (typeof fetch !== 'function') {
         localDbCache = null;
         return null;
       }
-      localDbCache = obj as LocalDb;
-      return localDbCache;
+      const resp = await fetch(MASTERS_DB_URL);
+      if (!resp.ok) {
+        localDbCache = null;
+        return null;
+      }
+      const raw = (await resp.json()) as unknown;
+      if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
+        const obj = raw as Record<string, unknown>;
+        // Detect the "empty placeholder" case.
+        if (Object.keys(obj).length === 0) {
+          localDbCache = null;
+          return null;
+        }
+        localDbCache = obj as LocalDb;
+        return localDbCache;
+      }
+      localDbCache = null;
+      return null;
+    } catch {
+      // Network error / parse error / missing file. Treat as "no
+      // local data" — every lookup falls through to live. Silent:
+      // this is the expected steady state when offline or when the
+      // file isn't deployed yet.
+      localDbCache = null;
+      return null;
+    } finally {
+      localDbInflight = null;
     }
-    localDbCache = null;
-    return null;
-  } catch {
-    // File missing / parse error / dynamic-import not supported in this
-    // env. Treat as "no local data" — every lookup falls through to
-    // live. Silent: this is the expected steady state while the parallel
-    // workstream's data hasn't merged.
-    localDbCache = null;
-    return null;
-  }
+  })();
+  return localDbInflight;
 }
 
 /** Test-only — reset the lazy-load cache. */
 export function __resetLocalDbForTests(): void {
   localDbCache = undefined;
+  localDbInflight = null;
 }
 
 // ─── Resolver ──────────────────────────────────────────────────────

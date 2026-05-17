@@ -68,7 +68,7 @@ async function explorer(fen) {
 function posFen(f) { return f.split(' ').slice(0, 4).join(' '); }
 
 // Load local DB for free hits
-const db = JSON.parse(await readFile('src/data/openings-lichess-extended.json', 'utf8'));
+const db = JSON.parse(await readFile('public/data/openings-masters-db.json', 'utf8'));
 const positions = db.positions ?? {};
 
 const chess = new Chess();
