@@ -252,37 +252,21 @@
       "variations": [
         {
           "name": "Main Line 3...dxe4 4.fxe4 e5",
-          "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 Bg4 Bc4 Nd7 O-O Ngf6 c3 Bd6",
-          "explanation": "The sharpest continuation. Black challenges the center with e5 but White's development lead and bishop pair provide long-term compensation."
+          "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 Bg4 Bc4 Nd7 O-O Ngf6 c3 Bd6 Bg5 O-O Nbd2 Qc7 Qe1 Bh5 Qh4 Bg6 Rae1 b5 Bb3 Rae8",
+          "explanation": "The sharpest continuation. After ...e5, White's Qe1-h4 maneuver builds a kingside attack while both sides complete development. The bishop pair and open files keep White's initiative alive."
         },
         {
           "name": "3...e6 Solid Response",
-          "pgn": "e4 c6 d4 d5 f3 e6 Nc3 Bb4 Bf4 Nf6 e5 Nfd7 a3 Ba5 b4 Bc7 Qd3 c5",
-          "explanation": "Black keeps things solid. White plays like a French Defense with a massive center and kingside attacking chances."
+          "pgn": "e4 c6 d4 d5 f3 e6 Nc3 Bb4 Bf4 Nf6 e5 Nfd7 a3 Be7 Be3 c5 f4 cxd4 Qxd4 Nc6 Qd2 Ndxe5 fxe5 d4",
+          "explanation": "Black keeps things solid French-style. After a3 Be7 the bishop retreats; White plays Be3 and f4 to stake out the kingside while Black hits back with the c5 break."
         },
         {
           "name": "3...Qb6 Queen Sortie",
-          "pgn": "e4 c6 d4 d5 f3 Qb6 Nc3 dxe4 fxe4 e5 Nf3 exd4 Qxd4 Qxd4 Nxd4 Bc5 Be3 Nf6",
-          "explanation": "Black targets b2 early. After the queen trade, White has a comfortable edge in the endgame with better development and the e4 pawn controlling key squares."
+          "pgn": "e4 c6 d4 d5 f3 Qb6 Nc3 dxe4 fxe4 e5 Nf3 exd4 Qxd4 Qxd4 Nxd4 Bc5 Be3 Nf6 O-O-O Nbd7 h3 Ne5 Bf4 Ng6 Bh2 O-O e5 Nd5",
+          "explanation": "Black targets b2 early. After the queen trade White castles queenside and pushes e5 to cramp Black; the resulting endgame favors White's better development."
         }
       ],
-      "trapLines": [
-        {
-          "name": "Premature ...e5 f-file Attack",
-          "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 exd4 Bc4 Nf6 e5 Nd5 Qxd4 Be7 O-O O-O Bxd5 cxd5 Nc3",
-          "explanation": "Black plays ...e5 but after White opens the center, the f-file becomes a devastating attacking lane. White castles and doubles rooks with a crushing kingside initiative."
-        },
-        {
-          "name": "Kingside Storm After ...O-O",
-          "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 Bg4 Bc4 Nd7 O-O Ngf6 c3 Bd6 Qb3 Qe7 Bg5 O-O Nbd2 b5 Bd3 a5",
-          "explanation": "After Black castles kingside, White sacrifices the exchange on f6 and pushes e5 to rip open the king's defenses. The bishop pair and open lines create a mating attack."
-        },
-        {
-          "name": "...Qb6 Tactical Refutation",
-          "pgn": "e4 c6 d4 d5 f3 Qb6 a4 dxe4 fxe4 Qxd4 Nc3 Qxe4+ Be2 Qa4 Nf3 Bg4 O-O e6 Nb5 Bd6 Nxd6+ Ke7",
-          "explanation": "Black grabs pawns with ...Qxd4 and ...Qxe4+ but White develops rapidly. After Nb5 the knight invades with devastating effect, and Black's exposed king cannot find safety."
-        }
-      ]
+      "trapLines": []
     },
     {
       "id": "pro-naroditsky-najdorf",
