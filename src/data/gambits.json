@@ -357,7 +357,7 @@
     "id": "danish-gambit",
     "eco": "C21",
     "name": "Danish Gambit",
-    "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Nf6 e5 Nh5 Qb3 Qe7 Nf3 g6 O-O Bg7 Nc3 O-O Rae1 Nc6 Nd5 Qd8 Nf6+ Qxf6 Bxf7+ Rxf7 Qxf7+ Kxf7",
+    "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Nf6 e5",
     "color": "white",
     "style": "Ultra-Aggressive, Romantic",
     "overview": "The Danish Gambit is chess on steroids — you sacrifice not one but TWO pawns to get a dream position with bishops on c4 and b2, both aimed at Black's king like heat-seeking missiles. If Black grabs both pawns, you'll have every piece developed while Black is still figuring out where to put the knights. This is the ultimate 'punish the greedy player' opening and produces some of the most exciting middlegame positions in all of chess.",
@@ -380,71 +380,71 @@
     "variations": [
       {
         "name": "Danish Gambit: Full Accepted with e5 Push",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Nf6 e5 Nh5 Qb3 Qe7 Nf3 g6 O-O Bg7 Re1 Nc6 Nc3 O-O Nd5 Qd8 Nf6+ Qxf6 Bxf7+ Rxf7 Qxf7+",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Nf6 e5",
         "explanation": "Black takes both pawns and tries to hold on. White plays e5 to kick the knight and Qb3 to triple on f7. After O-O and Re1, White's position is a textbook attacking setup. The Nd5 jump creates tremendous pressure, and Bxg7 strips Black's dark square protection."
       },
       {
         "name": "Danish Gambit: d5 Return (Schlechter Defense)",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 d5 Bxd5 Nf6 Bxf7+ Kxf7 Qxd8 Bb4+ Qd2 Bxd2+ Nxd2 Nc6 Ngf3 Re8+ Kf1 Bg4 Kg1 Rad8 h3 Bf5 a3 Nd5",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 d5 Bxd5 Nf6 Bxf7+ Kxf7 Qxd8 Bb4+ Qd2 Bxd2+ Nxd2",
         "explanation": "The strongest defense — Black returns a pawn with d5 to break up White's attack. After Bxd5 Nf6, the position simplifies significantly. White has some initiative but Black is solid and has recovered development. This is the main reason the Danish isn't played at the highest level."
       },
       {
         "name": "Danish Gambit: One Pawn Accepted with d5",
-        "pgn": "e4 e5 d4 exd4 c3 d5 exd5 Qxd5 cxd4 Nc6 Nf3 Bb4+ Bd2 Bxd2+ Nbxd2 Nf6 Bc4 Qd6 O-O O-O Re1 Re8 Rxe8+ Nxe8 Qb3 Be6 Bxe6 Qxe6 Qxb7 Nd6",
+        "pgn": "e4 e5 d4 exd4 c3 d5 exd5 Qxd5 cxd4 Nc6 Nf3 Bb4+",
         "explanation": "Black takes one pawn but counters with d5 instead of dxc3. This leads to a more positional game where White has an isolated d-pawn but active pieces. The game is roughly equal but requires careful handling from both sides."
       },
       {
         "name": "Danish Gambit: Bb4+ Intermezzo",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Bb4+ Kf1 Nf6 e5 d5 exf6 dxc4 Qh5 O-O fxg7 Re8 Nf3 Nc6 Ne1 Rxe1#",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2",
         "explanation": "After the Bb4+ intermezzo, White loses castling rights but gains time with the king walk. The fxg7 pawn creates threats of promotion and the open lines toward Black's king are lethal. Even with the king on f1, White's attack is devastating because the two bishops dominate."
       },
       {
         "name": "Danish Gambit: Lindehn Continuation",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 d6 Qb3 Qe7 Nf3 Nc6 O-O Nf6 e5 dxe5 Nxe5 Nxe5 Bxe5 Qd7 Re1 Be7 Nc3 O-O Rad1 Qxd1 Bxf7+",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2",
         "explanation": "The Lindehn Continuation features a slower buildup where White plays Qb3 and develops calmly before striking with e5. After Nxe5, the centralized knight controls the game. Re1 and Rad1 bring all the heavy pieces into the attack. Black is under constant pressure on every file."
       }
     ],
     "trapLines": [
       {
         "name": "f7 Avalanche",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Bb4+ Kf1 Nf6 e5 d5 exf6 dxc4 fxg7 Rg8 Qh5 Rxg7 Qxh7 Nc6 Bxg7 Qg5 Bf6 Qxf6 Nf3",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2",
         "explanation": "After Black plays Bb4+ and Nf6, White pushes e5 kicking the knight and creating chaos. The fxg7 pawn threatens to promote and Qh5 adds more fire. The open lines toward Black's king combined with the promotion threat make this position incredibly hard to defend."
       },
       {
         "name": "Greedy Grab Punishment",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Nc6 Nf3 d6 Qb3 Qe7 O-O Na5 Bxf7+ Kd8 Qa4 Qe4 Ng5 Qe1 Rxe1 Nf6 Bxf6+ gxf6 Qe8#",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2",
         "explanation": "If Black develops slowly with Nc6 and d6, the Bxf7+ sacrifice rips open the king. After Kd8, the Black king is permanently stuck and Qa4 creates multiple threats. The knight hops to f7 with check and then wins material on h8. A common pattern against passive defense."
       },
       {
         "name": "Bxf7+ Sacrifice Pattern",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Nf6 e5 Nh5 Nf3 d6 O-O dxe5 Bxf7+ Kxf7 Ng5+ Ke8 Qxh5+ g6 Qh4 Bg7 Nf7 Rf8 Bxe5 Bxe5 Nxe5 Qe7 Re1",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2",
         "explanation": "The Bxf7+ sacrifice followed by Ng5+ tears the Black king out of safety. After Qxh5+ and Qh4, White's queen dominates the board while Black's king is stranded. The knight on e5 acts as a permanent thorn. This combination wins more games in the Danish than any other pattern."
       },
       {
         "name": "d5 Counterstrike Refutation",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 d5 Bxd5 Nf6 Nc3 Bb4 Bxf7+ Kxf7 Qb3+ Be6 Nge2 Nc6 O-O Re8 Nd4 Na5 Qc2 Bd6 Nxe6 Bxh2+",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 d5 Bxd5 Nf6",
         "explanation": "When Black plays the d5 counterstrike, White can try the aggressive Bxf7+ anyway. After Kxf7 and Qb3+, the king is exposed. While this isn't objectively best, it creates enormous practical problems. Most players cannot find the correct defense over the board against the combined threats."
       },
       {
         "name": "Nc6 Slow Development Trap",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Nc6 Nf3 Nf6 e5 Ng4 O-O d5 exd6 Bxd6 Re1+ Nce5 Nxe5 Nxe5 Rxe5+ Bxe5 Qh5 Qd6 Bxf7+ Kd7 Bxe5",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2",
         "explanation": "After Black develops both knights passively, the e5 push opens the position perfectly for White's bishops. Re1+ creates a devastating pin, and after Nce5 Nxe5 Rxe5+, the discovered check leads to massive material gain. The two bishops and open lines overwhelm Black's uncoordinated pieces."
       }
     ],
     "warningLines": [
       {
         "name": "Schlechter Defense: Best Response",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 d5 Bxd5 Nf6 Nc3 Bb4 Nf3 O-O O-O Nxd5 Nxd5 Bd6 Re1 Nc6 Qd3 Be6 Nf4 Bxf4 e5 Bxh2+ Nxh2 Nxe5 Qxh7+",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 d5 Bxd5 Nf6",
         "explanation": "The Schlechter Defense with ...d5 is the reason the Danish isn't played at the top level. Black returns the pawn to neutralize the attack and reaches a comfortable position. White's two-pawn investment yields only a small initiative that experienced players can defend against without much trouble."
       },
       {
         "name": "Sorensen Defense: d5 Before Taking Both Pawns",
-        "pgn": "e4 e5 d4 exd4 c3 d5 exd5 Qxd5 cxd4 Nc6 Nf3 Bg4 Nc3 Bb4 Be2 Qd6 O-O Bxf3 Bxf3 Nge7 Be3 O-O a3 Bxc3 bxc3 Nd5 Bg4 Rad8",
+        "pgn": "e4 e5 d4 exd4 c3 d5 exd5 Qxd5 cxd4 Nc6 Nf3 Bg4 Nc3 Bb4 Be2",
         "explanation": "Black plays d5 before taking the second pawn, leading to a sane position where White's isolated d-pawn is a weakness. The resulting middlegame favors Black slightly due to the structural advantage. This is the safest way for Black to handle the Danish Gambit."
       },
       {
         "name": "Two Knights Defense: Black Returns Pawn Wisely",
-        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Nf6 Nc3 Bb4 Nge2 Nxe4 O-O Nxc3 Nxc3 Bxc3 Bxc3 d5 Bb3 Be6 Qh5 g6 Qh6 Bf5 Rae1+ Be4 Rxe4+ dxe4 Bxf7+ Kxf7 Qxh7+ Rxh7",
+        "pgn": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2",
         "explanation": "After Black plays Nxe4, the extra pawn is returned but Black gains time for development. The resulting position is roughly equal — White has active pieces but Black's structure is sound and the king can reach safety. This is a practical concern for Danish Gambit players."
       }
     ]
