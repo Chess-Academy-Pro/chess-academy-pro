@@ -852,12 +852,12 @@
       "trapLines": [
         {
           "name": "Bf5 e6 Bb4 Pin Trap",
-          "pgn": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bd3 e6 O-O Bb4 Bd2 Nc6 a3 Bxc3 Bxc3 Qa6 Bxf5 exf5",
-          "explanation": "Black develops Bf5, e6, and Bb4 creating a pin on Nc3. If White plays carelessly, Black wins the pinned knight or gets a dominant queenside position."
+          "pgn": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bd3 e6 O-O",
+          "explanation": "Black develops Bf5, e6, then sets up the Bb4 pin on Nc3. After O-O White has finished kingside development but the Nc3 is pinned — a careless move loses the knight or the queenside structure."
         },
         {
           "name": "c2 Weakness Exploitation",
-          "pgn": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bc4 e6 O-O c6 Re1 Qc7 Nh4 Bg4 f3 Bd6",
+          "pgn": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bc4 e6 O-O c6 Re1",
           "explanation": "After natural development, Black's Bf5 and c6 setup targets the c2 pawn. If White overextends with Nh4, Black redirects with Bg4 and pressures the weakened kingside."
         },
         {
