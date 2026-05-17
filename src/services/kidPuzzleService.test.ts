@@ -1,31 +1,47 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { validatePuzzleFen, generateKidPuzzles } from './kidPuzzleService';
 import { buildUserProfile } from '../test/factories';
-import type { JourneyChapter } from '../types';
+import type { JourneyChapter, PuzzleRecord } from '../types';
 
-// Mock the coachApi module
-vi.mock('./coachApi', () => ({
-  getKidLlmResponse: vi.fn(),
+vi.mock('./puzzleService', () => ({
+  seedPuzzles: vi.fn().mockResolvedValue(undefined),
+  getKidPiecePuzzles: vi.fn(),
+}));
+vi.mock('./kidRatingService', () => ({
+  getKidRating: vi.fn().mockResolvedValue(100),
 }));
 
-const MOCK_CHAPTER: JourneyChapter = {
+function dbPuzzle(overrides: Partial<PuzzleRecord> = {}): PuzzleRecord {
+  return {
+    id: 'p1',
+    fen: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1',
+    moves: 'e2e4',
+    rating: 100,
+    themes: ['oneMove'],
+    openingTags: null,
+    popularity: 100,
+    nbPlays: 0,
+    srsInterval: 0,
+    srsEaseFactor: 2.5,
+    srsRepetitions: 0,
+    srsDueDate: '1970-01-01',
+    srsLastReview: null,
+    userRating: 100,
+    attempts: 0,
+    successes: 0,
+    ...overrides,
+  };
+}
+
+const MOCK_PAWN_CHAPTER: JourneyChapter = {
   id: 'pawn',
   title: 'The Brave Pawn',
   subtitle: 'Learn how pawns move and capture',
-  icon: '\u265F',
+  icon: '♟',
   storyIntro: 'Once upon a time...',
   storyOutro: 'Amazing!',
   requiredPuzzleScore: 2,
-  lessons: [
-    {
-      id: 'pawn-lesson-1',
-      title: 'First Steps',
-      story: 'Pawns move forward.',
-      fen: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1',
-      highlightSquares: ['e3', 'e4'],
-      instruction: 'Move the pawn.',
-    },
-  ],
+  lessons: [],
   puzzles: [
     {
       id: 'pawn-puzzle-1',
@@ -44,236 +60,113 @@ const MOCK_CHAPTER: JourneyChapter = {
   ],
 };
 
+const MOCK_TACTICS_CHAPTER: JourneyChapter = {
+  ...MOCK_PAWN_CHAPTER,
+  id: 'tactics',
+  title: 'First Tactics',
+};
+
 describe('kidPuzzleService', () => {
   describe('validatePuzzleFen', () => {
     it('returns true for a valid position and legal move', () => {
       expect(validatePuzzleFen('4k3/8/8/8/8/8/4P3/4K3 w - - 0 1', 'e4')).toBe(true);
     });
-
     it('returns true for a capture move', () => {
       expect(validatePuzzleFen('4k3/8/8/4p3/3P4/8/8/4K3 w - - 0 1', 'dxe5')).toBe(true);
     });
-
     it('returns false for an illegal move', () => {
       expect(validatePuzzleFen('4k3/8/8/8/8/8/4P3/4K3 w - - 0 1', 'e5')).toBe(false);
     });
-
     it('returns false for an invalid FEN', () => {
       expect(validatePuzzleFen('not-a-fen', 'e4')).toBe(false);
     });
-
     it('returns false for a move that does not exist', () => {
       expect(validatePuzzleFen('4k3/8/8/8/8/8/4P3/4K3 w - - 0 1', 'Nf3')).toBe(false);
     });
   });
 
-  describe('generateKidPuzzles', () => {
-    let mockGetKidLlmResponse: ReturnType<typeof vi.fn>;
+  describe('generateKidPuzzles (DB-anchored, non-negotiable #17)', () => {
+    let mockGetKidPiecePuzzles: ReturnType<typeof vi.fn>;
+    let mockGetKidRating: ReturnType<typeof vi.fn>;
 
     beforeEach(async () => {
       vi.resetModules();
-      const coachApi = await import('./coachApi');
-      mockGetKidLlmResponse = coachApi.getKidLlmResponse as ReturnType<typeof vi.fn>;
-      mockGetKidLlmResponse.mockReset();
+      const puzzleService = await import('./puzzleService');
+      const ratingService = await import('./kidRatingService');
+      mockGetKidPiecePuzzles = puzzleService.getKidPiecePuzzles as ReturnType<typeof vi.fn>;
+      mockGetKidRating = ratingService.getKidRating as ReturnType<typeof vi.fn>;
+      mockGetKidPiecePuzzles.mockReset();
+      mockGetKidRating.mockResolvedValue(100);
     });
 
-    it('parses valid AI-generated puzzles', async () => {
-      const aiResponse = JSON.stringify([
-        {
-          fen: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1',
-          solution: 'e4',
-          hint: 'Push the pawn!',
-          successMessage: 'Well done!',
-        },
-        {
-          fen: '4k3/8/8/4p3/3P4/8/8/4K3 w - - 0 1',
-          solution: 'dxe5',
-          hint: 'Capture!',
-          successMessage: 'You got it!',
-        },
-        {
-          fen: '4k3/8/8/8/4P3/8/8/4K3 w - - 0 1',
-          solution: 'e5',
-          hint: 'Push forward!',
-          successMessage: 'Nice!',
-        },
+    it('returns DB-sourced puzzles for piece chapters with db- id prefix', async () => {
+      mockGetKidPiecePuzzles.mockResolvedValue([
+        dbPuzzle({ id: 'abc' }),
+        dbPuzzle({ id: 'def', fen: '4k3/8/8/4p3/3P4/8/8/4K3 w - - 0 1', moves: 'd4e5' }),
       ]);
-
-      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
-
-      const profile = buildUserProfile({ currentRating: 600, level: 1 });
-      const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
-
-      expect(puzzles).toHaveLength(3);
-      expect(puzzles[0].id).toBe('ai-pawn-1');
-      expect(puzzles[0].solution).toEqual(['e4']);
-      expect(puzzles[0].hint).toBe('Push the pawn!');
-    });
-
-    it('handles JSON wrapped in code fences', async () => {
-      const aiResponse = '```json\n' + JSON.stringify([
-        {
-          fen: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1',
-          solution: 'e4',
-          hint: 'Go!',
-          successMessage: 'Yes!',
-        },
-        {
-          fen: '4k3/8/8/4p3/3P4/8/8/4K3 w - - 0 1',
-          solution: 'dxe5',
-          hint: 'Capture!',
-          successMessage: 'Great!',
-        },
-      ]) + '\n```';
-
-      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
-
       const profile = buildUserProfile();
-      const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
+      const puzzles = await generateKidPuzzles(MOCK_PAWN_CHAPTER, profile);
 
       expect(puzzles).toHaveLength(2);
+      expect(puzzles[0].id).toBe('db-abc');
+      expect(puzzles[1].id).toBe('db-def');
+      // Solutions converted from UCI → SAN via chess.js.
       expect(puzzles[0].solution).toEqual(['e4']);
+      expect(puzzles[1].solution).toEqual(['dxe5']);
+      // Static hint comes from the piece-hint template.
+      expect(puzzles[0].hint).toContain('pawn');
     });
 
-    it('filters out puzzles with invalid FEN', async () => {
-      const aiResponse = JSON.stringify([
-        {
-          fen: 'invalid-fen',
-          solution: 'e4',
-          hint: 'Bad!',
-          successMessage: 'No!',
-        },
-        {
-          fen: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1',
-          solution: 'e4',
-          hint: 'Good!',
-          successMessage: 'Yes!',
-        },
-        {
-          fen: '4k3/8/8/4p3/3P4/8/8/4K3 w - - 0 1',
-          solution: 'dxe5',
-          hint: 'Nice!',
-          successMessage: 'Great!',
-        },
-      ]);
-
-      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
-
+    it('falls back to chapter.puzzles for non-piece chapters (tactics, first-game)', async () => {
       const profile = buildUserProfile();
-      const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
+      const puzzles = await generateKidPuzzles(MOCK_TACTICS_CHAPTER, profile);
+      expect(puzzles).toBe(MOCK_TACTICS_CHAPTER.puzzles);
+      expect(mockGetKidPiecePuzzles).not.toHaveBeenCalled();
+    });
 
+    it('reads kid rating via kidRatingService and forwards to the picker', async () => {
+      mockGetKidRating.mockResolvedValue(225);
+      mockGetKidPiecePuzzles.mockResolvedValue([dbPuzzle(), dbPuzzle({ id: 'p2' })]);
+      const profile = buildUserProfile();
+      await generateKidPuzzles(MOCK_PAWN_CHAPTER, profile);
+      expect(mockGetKidRating).toHaveBeenCalledWith('pawn');
+      expect(mockGetKidPiecePuzzles).toHaveBeenCalledWith('pawn', 225, expect.any(Number));
+    });
+
+    it('falls back to chapter.puzzles when DB returns fewer than 2 puzzles', async () => {
+      mockGetKidPiecePuzzles.mockResolvedValue([dbPuzzle()]);
+      const profile = buildUserProfile();
+      const puzzles = await generateKidPuzzles(MOCK_PAWN_CHAPTER, profile);
+      expect(puzzles).toBe(MOCK_PAWN_CHAPTER.puzzles);
+    });
+
+    it('falls back to chapter.puzzles when the picker throws', async () => {
+      mockGetKidPiecePuzzles.mockRejectedValue(new Error('Dexie offline'));
+      const profile = buildUserProfile();
+      const puzzles = await generateKidPuzzles(MOCK_PAWN_CHAPTER, profile);
+      expect(puzzles).toBe(MOCK_PAWN_CHAPTER.puzzles);
+    });
+
+    it('skips DB puzzles whose UCI first move is illegal from the FEN', async () => {
+      mockGetKidPiecePuzzles.mockResolvedValue([
+        // First move e2e5 (3-square pawn push) is illegal — should be dropped.
+        dbPuzzle({ id: 'bad', fen: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1', moves: 'e2e5' }),
+        dbPuzzle({ id: 'ok1' }),
+        dbPuzzle({ id: 'ok2', fen: '4k3/8/8/4p3/3P4/8/8/4K3 w - - 0 1', moves: 'd4e5' }),
+      ]);
+      const profile = buildUserProfile();
+      const puzzles = await generateKidPuzzles(MOCK_PAWN_CHAPTER, profile);
       expect(puzzles).toHaveLength(2);
-      expect(puzzles[0].fen).toBe('4k3/8/8/8/8/8/4P3/4K3 w - - 0 1');
+      expect(puzzles.map((p) => p.id)).toEqual(['db-ok1', 'db-ok2']);
     });
 
-    it('filters out puzzles with illegal solution moves', async () => {
-      const aiResponse = JSON.stringify([
-        {
-          fen: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1',
-          solution: 'Nf3',
-          hint: 'Wrong piece!',
-          successMessage: 'No!',
-        },
-        {
-          fen: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1',
-          solution: 'e4',
-          hint: 'Right!',
-          successMessage: 'Yes!',
-        },
-        {
-          fen: '4k3/8/8/4p3/3P4/8/8/4K3 w - - 0 1',
-          solution: 'dxe5',
-          hint: 'Capture!',
-          successMessage: 'Great!',
-        },
-      ]);
-
-      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
-
+    it('no AI-id prefix appears in any returned puzzle (non-negotiable #17)', async () => {
+      mockGetKidPiecePuzzles.mockResolvedValue([dbPuzzle(), dbPuzzle({ id: 'p2' })]);
       const profile = buildUserProfile();
-      const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
-
-      expect(puzzles).toHaveLength(2);
-      expect(puzzles[0].solution).toEqual(['e4']);
-    });
-
-    it('falls back to hardcoded puzzles when fewer than 2 valid AI puzzles', async () => {
-      const aiResponse = JSON.stringify([
-        {
-          fen: 'invalid-fen',
-          solution: 'e4',
-          hint: 'Bad',
-          successMessage: 'No',
-        },
-      ]);
-
-      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
-
-      const profile = buildUserProfile();
-      const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
-
-      expect(puzzles).toBe(MOCK_CHAPTER.puzzles);
-    });
-
-    it('falls back to hardcoded puzzles on API error', async () => {
-      mockGetKidLlmResponse.mockRejectedValue(new Error('API error'));
-
-      const profile = buildUserProfile();
-      const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
-
-      expect(puzzles).toBe(MOCK_CHAPTER.puzzles);
-    });
-
-    it('falls back when response is not valid JSON', async () => {
-      mockGetKidLlmResponse.mockResolvedValue('Sorry, I cannot generate puzzles right now.');
-
-      const profile = buildUserProfile();
-      const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
-
-      expect(puzzles).toBe(MOCK_CHAPTER.puzzles);
-    });
-
-    it('generates puzzle IDs based on chapter and index', async () => {
-      const aiResponse = JSON.stringify([
-        {
-          fen: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1',
-          solution: 'e4',
-          hint: 'Go!',
-          successMessage: 'Yes!',
-        },
-        {
-          fen: '4k3/8/8/4p3/3P4/8/8/4K3 w - - 0 1',
-          solution: 'dxe5',
-          hint: 'Capture!',
-          successMessage: 'Great!',
-        },
-      ]);
-
-      mockGetKidLlmResponse.mockResolvedValue(aiResponse);
-
-      const profile = buildUserProfile();
-      const puzzles = await generateKidPuzzles(MOCK_CHAPTER, profile);
-
-      expect(puzzles[0].id).toBe('ai-pawn-1');
-      expect(puzzles[1].id).toBe('ai-pawn-2');
-    });
-
-    it('includes profile info in the prompt sent to the API', async () => {
-      mockGetKidLlmResponse.mockResolvedValue('[]');
-
-      const profile = buildUserProfile({ currentRating: 800, level: 3 });
-      await generateKidPuzzles(MOCK_CHAPTER, profile);
-
-      expect(mockGetKidLlmResponse).toHaveBeenCalledWith(
-        expect.arrayContaining([
-          expect.objectContaining({
-            role: 'user',
-             
-            content: expect.stringContaining('800'),
-          }),
-        ]),
-        expect.any(String),
-      );
+      const puzzles = await generateKidPuzzles(MOCK_PAWN_CHAPTER, profile);
+      for (const p of puzzles) {
+        expect(p.id.startsWith('ai-')).toBe(false);
+      }
     });
   });
 });
