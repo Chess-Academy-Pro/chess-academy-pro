@@ -2,7 +2,7 @@
 /**
  * audit-pgn-vs-masters.mjs — the real LLM-fabrication detector.
  *
- * Reads `src/data/openings-lichess-extended.json` (produced by
+ * Reads `public/data/openings-masters-db.json` (produced by
  * `enrich-openings-db.mjs`) and walks every authored PGN move-by-move:
  *
  *   1. At each position FEN, look up the enriched DB.
@@ -45,9 +45,9 @@ async function main() {
 
   let enriched;
   try {
-    enriched = JSON.parse(await readFile('src/data/openings-lichess-extended.json', 'utf8'));
+    enriched = JSON.parse(await readFile('public/data/openings-masters-db.json', 'utf8'));
   } catch (err) {
-    console.error('[audit-vs-masters] Could not read enriched DB at src/data/openings-lichess-extended.json');
+    console.error('[audit-vs-masters] Could not read enriched DB at public/data/openings-masters-db.json');
     console.error('  Run `node scripts/enrich-openings-db.mjs` first.');
     process.exit(1);
   }

@@ -68,7 +68,7 @@ function posFen(f) {
   return f.split(' ').slice(0, 4).join(' ');
 }
 
-const db = JSON.parse(await readFile('src/data/openings-lichess-extended.json', 'utf8'));
+const db = JSON.parse(await readFile('public/data/openings-masters-db.json', 'utf8'));
 const positions = db.positions ?? {};
 console.log('[audit-one] DB:', Object.keys(positions).length, 'positions');
 

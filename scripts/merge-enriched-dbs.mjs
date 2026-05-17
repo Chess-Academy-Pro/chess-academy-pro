@@ -3,11 +3,11 @@
  * merge-enriched-dbs.mjs — union two enriched-DB outputs into one.
  *
  * Reads:
- *   src/data/openings-lichess-extended.json  (main BFS-expansion run)
+ *   public/data/openings-masters-db.json  (main BFS-expansion run)
  *   src/data/openings-lichess-spine.json     (spine-positions run)
  *
  * Writes:
- *   src/data/openings-lichess-extended.json  (replaced with merged)
+ *   public/data/openings-masters-db.json  (replaced with merged)
  *
  * If a position appears in both, the entry with more total master games
  * wins (more authoritative). If counts are equal, the longer move list
@@ -26,7 +26,7 @@ function totalGames(moves) {
 }
 
 async function main() {
-  const main = JSON.parse(await readFile('src/data/openings-lichess-extended.json', 'utf8'));
+  const main = JSON.parse(await readFile('public/data/openings-masters-db.json', 'utf8'));
   const spine = JSON.parse(await readFile('src/data/openings-lichess-spine.json', 'utf8'));
 
   const mainPos = main.positions ?? {};
@@ -87,10 +87,10 @@ async function main() {
   };
 
   // Atomic: write to .tmp then rename
-  const TMP = 'src/data/openings-lichess-extended.json.tmp';
+  const TMP = 'public/data/openings-masters-db.json.tmp';
   await writeFile(TMP, JSON.stringify(out, null, 2) + '\n');
-  await rename(TMP, 'src/data/openings-lichess-extended.json');
-  const size = (await readFile('src/data/openings-lichess-extended.json')).length;
+  await rename(TMP, 'public/data/openings-masters-db.json');
+  const size = (await readFile('public/data/openings-masters-db.json')).length;
   console.log(`\nMerged DB written. Size: ${(size / 1024 / 1024).toFixed(2)} MB`);
   console.log('Re-run audit-pgn-vs-masters.mjs against the merged DB.');
 }
