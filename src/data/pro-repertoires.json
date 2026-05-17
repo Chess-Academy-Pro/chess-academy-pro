@@ -1807,8 +1807,8 @@
       "trapLines": [
         {
           "name": "Premature e5 Trap",
-          "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5 Qc2 Rfb8 b3 Ne5",
-          "explanation": "After White plays passively with b3, Black's Ne5 threatens to dominate the board. The knight can go to c4 or d3, creating havoc in White's position."
+          "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5",
+          "explanation": "After the Benko's standard king-walk setup, Black plays Qa5 + Rfb8 to coordinate the queenside attack. The pressure on the a/b files plus Bg7 on the long diagonal forces White into permanent defensive posture."
         }
       ]
     },
