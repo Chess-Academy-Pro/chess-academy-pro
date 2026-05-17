@@ -910,7 +910,7 @@
     "id": "gambit-benko-gambit",
     "eco": "A57",
     "name": "Benko Gambit",
-    "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5 Qc2 Rfb8 Rb1 Nb6 Nd2 Nc4 Nxc4 Qxc3",
+    "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5 Qc2 Rfb8",
     "color": "black",
     "style": "Positional, Queenside Pressure",
     "overview": "The Benko Gambit is the most positionally sound gambit in chess — Black sacrifices a pawn not for a quick attack, but for long-lasting queenside pressure that can grind White down over the entire game. After b5 and a6, Black opens the a and b files and gets sustained initiative with rooks, bishops, and queens all participating in the pressure. Unlike most gambits, the Benko works beautifully in the endgame too — those open files and active pieces give Black compensation even without queens on the board.",
@@ -933,72 +933,31 @@
     "variations": [
       {
         "name": "Benko Gambit: Fully Accepted (King Walk)",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5 Qc2 Rfb8 Rb1 Nb6 Nd2 Nc4 Nxc4 Qxc3 Qxc3 Nxe4 Qxg7+ Kxg7 Bh6+ Kxh6",
+        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5 Qc2 Rfb8",
         "explanation": "The main line where White accepts both pawns with the king walk maneuver. After Kxf1, g3, and Kg2, White's king is safe on g2. Black plays the standard Benko plan with Bg7, O-O, Nbd7, and rooks to the a and b files. The resulting middlegame is one of the most strategically rich in chess."
       },
       {
         "name": "Benko Gambit: Fianchetto System",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 g3 d6 Bg2 g6 Nf3 Bg7 O-O O-O Nc3 Nbd7 Re1 Qa5 Qc2 Rfb8 Rb1 Nb6 Nd2 Nc4 Nxc4 Bxc4 a4 Ra6 e4 Rba8 Be3 Nd7",
-        "explanation": "White fianchettos the kingside bishop, creating a solid but passive setup. Black responds with the standard plan of Bg7, O-O, and rooks to the open files. The Nc4 maneuver targets the b2 and a3 weaknesses. After Ra6 and Rba8, the doubled rooks create irresistible pressure."
-      },
-      {
-        "name": "Benko Gambit: Declined with Nd2",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 Nd2 bxc4 Nxc4 d6 e4 g6 Nf3 Bg7 Be2 O-O O-O Ba6 Qc2 Bxc4 Bxc4 Nbd7 a4 Qa5 Bd2 Qb6 Bc3 Rfb8 Bd3 a5 Ra2 Nxe4",
-        "explanation": "White declines the full gambit with Nd2, recovering the pawn on c4. Black still gets an active position with d6, Bg7, and Ba6. The Benko spirit lives on even in declined lines — Black's piece placement is natural and the open a-file provides lasting counterplay."
+        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 g3 d6 Bg2 g6 Nf3 Bg7 O-O O-O Nc3 Nbd7 Re1 Qa5 Qc2 Rfb8 Rb1 Nb6",
+        "explanation": "White fianchettos the kingside bishop, creating a solid but passive setup. Black responds with the standard plan of Bg7, O-O, and rooks to the open files. The Nb6 maneuver prepares Nc4 to target the b2 and a3 weaknesses; the doubled rooks on the a-file are coming."
       },
       {
         "name": "Benko Gambit: Modern with bxa6 g6",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 g6 Nc3 Bxa6 e4 Bxf1 Kxf1 d6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5 Qc2 Rfb8 Nd2 Nb6 Rb1 Nc4 Nxc4 Qxc3 Qxc3 Nxe4 Qxg7+ Kxg7 Bh6+ Kxh6",
+        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 g6 Nc3 Bxa6 e4 Bxf1 Kxf1 d6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5 Qc2 Rfb8",
         "explanation": "A modern move order where Black plays g6 before Bxa6. This can transpose to the main lines but gives Black some flexibility. The key ideas remain the same — fianchetto, trade the light-squared bishop, and apply pressure on the a and b files with rooks."
-      },
-      {
-        "name": "Benko Gambit: e6 Break System",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 Nf3 g6 e4 Bxf1 Kxf1 Bg7 g3 O-O Kg2 Nbd7 Re1 Qa5 Qc2 Rfb8 a4 Ne8 h3 Nc7 Be3 Nb5 Nxb5 Rxb5 Nd2 e6 dxe6 fxe6",
-        "explanation": "The e6 break is a powerful pawn lever that opens the position when White has blocked the queenside. After dxe6 fxe6, the e-file opens and Black's rooks become extremely active. Combined with the already-open a and b files, Black has pressure on three files simultaneously."
       }
     ],
-    "trapLines": [
-      {
-        "name": "a-File Pressure Trap",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 Nf3 Bg7 g3 O-O Kg2 Nbd7 Re1 Qa5 Qc2 Rfb8 Rb1 Nb6 b3 Ra7 Bb2 Rba8 Ra1 Nbxd5 exd5 Nxd5 Nxd5 e5 Nf6+ Bxf6",
-        "explanation": "The doubled rooks on the a-file create tremendous pressure. After Ra7 and Rba8, every piece on a2 and a4 is a target. The knight maneuver to b5 attacks the a3 and c3 squares. White is tied down to defense of the queenside while Black can improve at leisure."
-      },
-      {
-        "name": "Nc6 Fork Trick",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 Nf3 Nxd5 Nxd5 Qa5+ Bd2 Qxd2+ Nxd2 e5 Nf6+ gxf6 Qa4+ Nc6 Qxc6+ Ke7 Qxd6+ Kxd6 Ne4+ Kd5 O-O-O+ Kxe4 Rd4+ cxd4 f3+ Kd5 e4+ dxe3 Bc4+ Bxc4",
-        "explanation": "After White pushes e5 too aggressively, Black can exploit the weakened center. The exchange sacrifice followed by Nc5 and Na4 creates devastating threats. The knight on c3 forks multiple targets and Black's queenside majority becomes a decisive advantage."
-      },
-      {
-        "name": "Fianchetto Battery Trap",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 Nf3 g6 g3 Bg7 Bg2 O-O O-O Nbd7 Qc2 Ra7 Rd1 Qa8 Bf1 Qxd5 Nxd5 Nxd5 Rxd5 e5 Rxe5 dxe5 Nxe5 Nxe5 Qxc5 Nf3+ exf3 Bxb2 Qxf8+ Kxf8",
-        "explanation": "The fianchetto battery with Bg7, Ra7, and Qa8 targets the a2 pawn. When White's pieces are tied down, the Bxa2 sacrifice opens the floodgates. After Nxa2 Qxa2 Rxa2, Black has a powerful passed a-pawn and active rooks. The queenside pressure becomes unstoppable."
-      },
-      {
-        "name": "Queenside Avalanche",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5 Qc2 Rfb8 Rb1 Nb6 Nd2 Nc4 Nxc4 Qxc3 Qxc3 Nxe4 Qxg7+ Kxg7 Bh6+ Kxh6 Rxe4 e5 Nxe5 dxe5",
-        "explanation": "A typical Benko endgame where Black's queenside pressure becomes overwhelming. Even after queens are traded, the doubled rooks on the a-file combined with the Bg7 on the long diagonal create a vise. White's extra pawn is meaningless when every piece is tied down to defense."
-      },
-      {
-        "name": "Rook Lift to a6",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 Nf3 g6 e4 Bxf1 Kxf1 Bg7 Kg1 O-O Ne2 Nbd7 a4 Ra6 e5 dxe5 Nxe5 Nxe5 Be3 Nf3+ gxf3 Qxd5 Qxd5 Nxd5 Bxc5 e5 Bxf8 e4 fxe4 Kxf8",
-        "explanation": "The rook lift Ra6 is a classic Benko maneuver. The rook supports the a-file pressure and can swing to b6 or c6 if needed. After Qa8 and Rba8, the doubled rooks are devastating. The knight maneuver Nc7-Nb5 targets the a-pawn and creates additional threats."
-      }
-    ],
+    "trapLines": [],
     "warningLines": [
       {
-        "name": "White's Central Breakthrough (e4-e5)",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 Nf3 Bg7 g3 O-O Kg2 Nbd7 Re1 Ng4 h3 Nge5 Nxe5 Nxe5 f4 Nd7 e5 dxe5 fxe5 Nxe5 Bf4 Nd3 Qxd3 Qxd5+ Qf3 Qxf3+ Kxf3",
-        "explanation": "If White manages to push e4-e5 at the right moment, the central majority comes alive. The pawns advance and open lines for White's pieces. This is the main danger in the Benko — if White plays actively in the center instead of passively defending, the gambit pawn deficit becomes real."
+        "name": "White's Central Push (f4 + e5)",
+        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 Nf3 Bg7 g3 O-O Kg2 Nbd7 Re1 Ng4 h3 Nge5 Nxe5 Nxe5 f4",
+        "explanation": "When White breaks with f4 to chase Black's centralized knight and prepare the e4-e5 advance, the central majority comes alive. The pawns are coiling for an e5 push that opens lines for White's pieces and reveals the cost of the gambit pawn — Black's queenside pressure may not arrive in time. This is the main danger in the Benko: if White plays actively in the center instead of passively defending, the pawn deficit becomes real."
       },
       {
         "name": "Benko Declined: a4 Line",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 a4 bxc4 Nc3 g6 e4 d6 Bxc4 Bg7 Nf3 O-O O-O Ba6 Bxa6 Nxa6 Re1 Nc7 Bf4 Rb8 Qc2 Nfe8 a5 Rb5 Nd2 f5 exf5 Rxf5 Nc4 Nxd5 Nxd5 Rxd5",
-        "explanation": "White declines the full gambit with a4, recovering the pawn while maintaining the center. After Nc3, e4, and Bxc4, White has a solid position. Black still has some activity but the characteristic Benko pressure is greatly reduced because the a-file isn't fully open."
-      },
-      {
-        "name": "King's Indian Attack Setup",
-        "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 f3 g6 e4 Bxf1 Kxf1 Bg7 g3 O-O Kg2 Nbd7 Nge2 Ne5 Be3 Qa5 Qd2 Rfb8 a4 Nfd7 Nc1 Nb6 Nb3 Qa6 f4 Nbd7 Nd4 cxd4 Bxd4 Nc5",
-        "explanation": "White's King's Indian Attack setup with f3, e4, and Nge2 creates a fortress. The center is solid and the king is safe on g2. Black's queenside pressure is contained and the extra pawn gives White a long-term advantage. This patient approach is one of the best ways to handle the Benko."
+        "pgn": "d4 Nf6 c4 c5 d5 b5 a4 bxc4 Nc3 g6 e4 d6 Bxc4 Bg7 Nf3 O-O O-O Ba6",
+        "explanation": "White declines the full gambit with a4, recovering the c4-pawn while maintaining the central pawn duo. After Nc3, e4, Bxc4, and natural development, White has a solid King's Indian-like position with the extra space. Black's Ba6 still tries to trade the light-squared bishop, but the characteristic Benko pressure is greatly reduced because the a-file isn't fully open and White is not stuck with the king walk to g2."
       }
     ]
   }
