@@ -2478,8 +2478,8 @@
         },
         {
           "name": "Fianchetto Grunfeld",
-          "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be2 O-O O-O Nc6 Be3 cxd4 cxd4 Bg4 d5 Na5 Nd4 Bd7",
-          "explanation": "In the Fianchetto variation, White plays solidly with Be2 and O-O. Firouzja responds with c5 to challenge the center immediately, creating a sharp middlegame with counterplay against the d4 pawn."
+          "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be2 O-O O-O Nc6 Be3 cxd4 cxd4 Bg4 d5 Na5 Nd4",
+          "explanation": "In the Fianchetto variation, White plays solidly with Be2 + O-O. Black challenges the center with c5 and after the cxd4 + d5 sequence, Na5 + Nd4 brings the knights to active squares for the upcoming middlegame."
         }
       ],
       "trapLines": [
@@ -2492,8 +2492,8 @@
       "warningLines": [
         {
           "name": "Nxc3 Qa5+ Exchange Trick",
-          "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Qa4+ Nd7 Be3 O-O Nf3 c5 Rd1 Qa5 Qxa5 b6",
-          "explanation": "After cxd5 Nxd5 and Nxc3, Black can play Qa5+ forcing exchanges. The resulting endgame is pleasant for Black who targets the doubled c-pawns."
+          "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Qa4+ Nd7 Be3 O-O",
+          "explanation": "After cxd5 Nxd5 and Nxc3, Black can play Qa5+ forcing exchanges. The Qa4+ sideline leads to similar structures where Black's plan is to target the doubled c-pawns."
         }
       ]
     },
