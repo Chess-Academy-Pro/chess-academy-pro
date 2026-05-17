@@ -38,7 +38,7 @@ export function CoachAnalysePage(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [candidateMoves, setCandidateMoves] = useState<string[]>([]);
 
-  // Streaming-voice dispatcher refs — same pattern as CoachSessionPlanPage.
+  // Streaming-voice dispatcher refs — same pattern as ExplainPositionSessionView.
   // Each completed sentence speaks via speakForced as soon as the
   // SENTENCE_END_RE terminator arrives in the stream (first sentence
   // within ~500ms instead of waiting for full LLM completion).

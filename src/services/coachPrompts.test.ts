@@ -3,7 +3,6 @@ import {
   SYSTEM_PROMPT,
   GAME_NARRATION_ADDITION,
   POSITION_ANALYSIS_ADDITION,
-  SESSION_PLAN_ADDITION,
   OPENING_ANNOTATION_ADDITION,
   openingAnnotationPrompt,
   buildChessContextMessage,
@@ -38,13 +37,6 @@ describe('coachPrompts', () => {
     it('is a non-empty string with analysis content', () => {
       expect(POSITION_ANALYSIS_ADDITION).toBeTruthy();
       expect(POSITION_ANALYSIS_ADDITION.length).toBeGreaterThan(30);
-    });
-  });
-
-  describe('SESSION_PLAN_ADDITION', () => {
-    it('is a non-empty string with session planning content', () => {
-      expect(SESSION_PLAN_ADDITION).toBeTruthy();
-      expect(SESSION_PLAN_ADDITION.length).toBeGreaterThan(30);
     });
   });
 

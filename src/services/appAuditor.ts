@@ -156,6 +156,12 @@ export type AuditKind =
   // future) is loaded with `?opening=<name>` and the captured intent
   // produces the rolodex's signature entry-narration line.
   | 'rolodex-entry-beat'
+  // Training Plan rolodex active-card pointer changes (WO-ROLODEX-UI-01
+  // PR-1). Fires when a card becomes the front of its color's stack,
+  // which is also the signal that bumps lastActiveRolodexColor (drives
+  // the mobile manila-tab default). Filter on this kind to trace
+  // "which card has been at the top of which folder over time."
+  | 'coach-memory-rolodex-active-card-set'
   // Coach-hub navigation (WO-COACH-UNIFY-01 audit item #15). Fires
   // when the user taps a tile on the Coach hub so a "I went to
   // Coach but ended up somewhere else" report has a trail.

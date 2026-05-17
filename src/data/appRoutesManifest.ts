@@ -44,9 +44,10 @@ export const APP_ROUTES_MANIFEST: RouteManifestEntry[] = [
   },
   {
     path: '/coach/plan',
-    title: 'Coach Session Plan',
-    description: 'A session plan the coach can run with the student.',
-    featuresAvailable: ['session-plan'],
+    title: 'Training Plan',
+    description:
+      "The student's Training Plan rolodex: a side-by-side view of their favorited openings split into two folders, White on the left and Black on the right (manila folder tabs on mobile). Each folder shows that color's repertoire as a stack of cards the student flips through. The active card is the front of the stack and persists across sessions. From any card the student can drill the opening's lines, puzzles, traps, GM games, blunders, or run a coached walkthrough or practice game. Capabilities: activate an opening card by name (e.g. \"open my Italian card\"), favorite a new opening from anywhere (favoriteOpening tool).",
+    featuresAvailable: ['rolodex', 'favorited-openings', 'opening-card-activation'],
   },
   {
     path: '/coach/train',

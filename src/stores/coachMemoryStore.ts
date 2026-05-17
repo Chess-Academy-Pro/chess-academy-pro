@@ -152,6 +152,17 @@ export interface GameSummary {
   openingName: string | null;
 }
 
+/** Training Plan rolodex per-color active-card pointer. Each color
+ *  remembers which favorited opening sits at the front of its stack.
+ *  Persists across sessions so the rolodex resumes where the student
+ *  left off. PR-4 of WO-ROLODEX-UI-01 adds `favoritedAt` and
+ *  `userOrderedFavorites` to this same store; this shape is the
+ *  PR-1 slice. */
+export interface RolodexActiveCard {
+  white: string | null;
+  black: string | null;
+}
+
 interface CoachMemoryState {
   intendedOpening: IntendedOpening | null;
   conversationHistory: CoachMessage[];
@@ -171,6 +182,16 @@ interface CoachMemoryState {
    *  brain prefers `savedPosition`; falls back to `autoSavedPosition`
    *  when no explicit save exists. */
   autoSavedPosition: SavedPosition | null;
+  /** Training Plan rolodex: per-color id of the card at the front of
+   *  the stack. Null means "no active card yet" (e.g. zero favorites
+   *  in that color, or the rolodex has never been touched). Updated
+   *  via `setActiveOpeningCard`, which also bumps
+   *  `lastActiveRolodexColor`. */
+  activeOpeningCardId: RolodexActiveCard;
+  /** Training Plan rolodex: which color's folder was last touched.
+   *  Drives the mobile manila-tab default ("open the folder I was
+   *  last using"). Null on a fresh user with no rolodex history. */
+  lastActiveRolodexColor: 'white' | 'black' | null;
   hydrated: boolean;
 }
 
@@ -219,6 +240,12 @@ interface CoachMemoryActions {
     id?: string;
     timestamp?: number;
   }) => string;
+  /** Training Plan rolodex: mark a card as the active front-of-stack
+   *  for its color. No-op if the same id is already active for that
+   *  color (avoids spurious audit + persist churn on every render).
+   *  Pass `null` to clear (used when the last favorite in a color is
+   *  unfavorited). */
+  setActiveOpeningCard: (color: 'white' | 'black', openingId: string | null) => void;
   hydrate: () => Promise<void>;
 }
 
@@ -234,6 +261,8 @@ const DEFAULT_STATE: CoachMemoryState = {
   gameHistory: [],
   savedPosition: null,
   autoSavedPosition: null,
+  activeOpeningCardId: { white: null, black: null },
+  lastActiveRolodexColor: null,
   hydrated: false,
 };
 
@@ -395,6 +424,23 @@ export const useCoachMemoryStore = create<CoachMemoryState & CoachMemoryActions>
       schedulePersist(get);
     },
 
+    setActiveOpeningCard: (color, openingId) => {
+      const prev = get().activeOpeningCardId;
+      if (prev[color] === openingId && get().lastActiveRolodexColor === color) {
+        return; // no-op: same card already at front, folder already last-touched
+      }
+      const next: RolodexActiveCard = { ...prev, [color]: openingId };
+      set({ activeOpeningCardId: next, lastActiveRolodexColor: color });
+      void logAppAudit({
+        kind: 'coach-memory-rolodex-active-card-set',
+        category: 'subsystem',
+        source: 'useCoachMemoryStore.setActiveOpeningCard',
+        summary: `${color}=${openingId ?? '(none)'}`,
+        details: JSON.stringify({ color, openingId, white: next.white, black: next.black }),
+      });
+      schedulePersist(get);
+    },
+
     appendConversationMessage: (input) => {
       const id = input.id ?? `msg-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
       const message: CoachMessage = {
@@ -443,6 +489,10 @@ export const useCoachMemoryStore = create<CoachMemoryState & CoachMemoryActions>
           gameHistory: restored.gameHistory ?? [],
           savedPosition: restored.savedPosition ?? null,
           autoSavedPosition: restored.autoSavedPosition ?? null,
+          activeOpeningCardId:
+            restored.activeOpeningCardId ?? DEFAULT_STATE.activeOpeningCardId,
+          lastActiveRolodexColor:
+            restored.lastActiveRolodexColor ?? DEFAULT_STATE.lastActiveRolodexColor,
           hydrated: true,
         });
       } else {
@@ -464,6 +514,8 @@ interface PersistedShape {
   gameHistory: GameSummary[];
   savedPosition: SavedPosition | null;
   autoSavedPosition: SavedPosition | null;
+  activeOpeningCardId: RolodexActiveCard;
+  lastActiveRolodexColor: 'white' | 'black' | null;
 }
 
 let persistTimer: ReturnType<typeof setTimeout> | null = null;
@@ -486,6 +538,8 @@ async function writePersisted(state: CoachMemoryState): Promise<void> {
     gameHistory: state.gameHistory,
     savedPosition: state.savedPosition,
     autoSavedPosition: state.autoSavedPosition,
+    activeOpeningCardId: state.activeOpeningCardId,
+    lastActiveRolodexColor: state.lastActiveRolodexColor,
   };
   try {
     await db.meta.put({ key: META_KEY, value: JSON.stringify(payload) });
