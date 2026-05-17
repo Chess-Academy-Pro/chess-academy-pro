@@ -1035,30 +1035,25 @@
         },
         {
           "name": "Black Declines with Bd7",
-          "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 Bd7 O-O cxd4 cxd4 Nxd4 Nxd4 Qxd4 Nc3 Qb6 Be3 Qd8 f4",
-          "explanation": "If Black delays capturing, White just develops and builds a strong center. The f4 push further reinforces e5 and the dark-square bishop controls key squares."
+          "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 Bd7 O-O cxd4 cxd4 Nxd4 Nxd4 Qxd4 Nc3 Qb6",
+          "explanation": "If Black delays capturing, White just develops and builds a strong center. After Nc3 the knight eyes d5 and prepares the typical e5-supporting structure."
         },
         {
           "name": "Anti-French 3.e5 Advance",
-          "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Nh6 Bd3 cxd4 cxd4 Nf5 Bxf5 exf5 Nc3 Be6 O-O Be7 Bg5 Bxg5 Nxg5",
-          "explanation": "Sometimes Black tries Nh6 to reroute to f5. White continues normally — after Bxf5 exf5, Black has doubled f-pawns and a weakened kingside. White has a clear structural advantage."
+          "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Nh6 Bd3 cxd4 cxd4 Nf5 Bxf5 exf5 Nc3 Be6 O-O Be7",
+          "explanation": "When Black tries Nh6-f5 to reroute the knight, Bxf5 exf5 leaves Black with doubled f-pawns. White's structural edge translates into long-term pressure."
         }
       ],
       "trapLines": [
         {
           "name": "cxd4 cxd4 Powerful Center",
-          "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 cxd4 cxd4 Bb4+ Bd2 Bxd2+ Nbxd2 Nge7 Bd3 O-O O-O f6 exf6 Rxf6 Nb3",
-          "explanation": "Black takes cxd4 cxd4 and White keeps a powerful IQP. The d4 pawn supports active pieces and White's development advantage creates real attacking chances."
+          "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 cxd4 cxd4 Bb4+",
+          "explanation": "Black takes cxd4 cxd4 and tries Bb4+ to disrupt — but White keeps a powerful IQP with active piece play. The d4 pawn supports the central break that follows."
         },
         {
           "name": "Qb6 Greed Punished",
-          "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Bd7 O-O Nxd4 Nxd4 Qxd4 Nc3 Qb6 Be3 Qd8 Qg4 g6 Bh6",
+          "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Bd7 O-O Nxd4 Nxd4 Qxd4 Nc3 Qb6",
           "explanation": "After Qb6 hits b2 and d4, White ignores the threats and develops with Bd3 and O-O. Once Nc3 gains tempo on the queen, White's development lead becomes overwhelming."
-        },
-        {
-          "name": "Nc6 d5 Fork",
-          "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 Bd7 O-O cxd4 cxd4 Nxd4 Nxd4 Qxd4 Nc3 a6 Qe2 Ne7 Rd1 Qb6 Nxd5 exd5 e6 fxe6 Bxh7",
-          "explanation": "The Milner-Barry Gambit is itself a positional sacrifice, and Bxh7+ is a Greek Gift — White sacs a bishop for an exposed king. After Bxh7, White is DOWN material but the Black king is on h7 with no defenders, and White's queen + remaining minor piece + open lines deliver a winning attack over the next 5-10 moves. The advantage is positional, not concrete. Tell the student: the win materializes through pressure, not a forced tactic; you're paying material for a king attack you should convert with accurate play."
         }
       ]
     },
