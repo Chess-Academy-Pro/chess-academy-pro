@@ -527,7 +527,7 @@
       "playerId": "naroditsky",
       "eco": "D00",
       "name": "Jobava London (Naroditsky)",
-      "pgn": "d4 d5 Nc3 Nf6 Bf4 e6 Nb5 Na6 e3 Be7 Nf3 O-O Bd3 c6 Nc3 Nc7",
+      "pgn": "d4 d5 Nc3 Nf6 Bf4 e6 Nb5 Na6 e3 Be7 Nf3 O-O Bd3 c6 Nc3",
       "color": "white",
       "style": "Aggressive, Dynamic",
       "overview": "Naroditsky's Jobava London — developed with GM Bortnyk — is a modern aggressive system where White plays d4, Nc3, and Bf4 before committing to a pawn structure. Unlike the traditional London (Nf3 + Bf4), the knight on c3 creates immediate threats like Nb5 targeting c7 and supports a future e4 break. Danya loves this opening because it avoids heavy theory while generating sharp attacking chances from move 3.",
@@ -551,55 +551,50 @@
       "variations": [
         {
           "name": "Main Line 3...e6 4.Nb5",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 e6 Nb5 Na6 e3 Be7 Nf3 O-O Bd3 c6 Nc3 Nc7 O-O b6 e4 dxe4 Nxe4 Bb7",
-          "explanation": "Danya's main recommendation. After 4.Nb5, Black is forced to play the awkward Na6. White develops naturally with e3, Nf3, Bd3, and then breaks with e4. The knight retreats to c3 after forcing Na6, but Black's knight takes two extra moves to reroute via c7. White gets a comfortable space advantage and central break."
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 e6 Nb5 Na6 e3 Be7 Nf3 O-O Bd3 c6 Nc3",
+          "explanation": "Danya's main recommendation. After 4.Nb5 Black is forced to play the awkward Na6. White develops with e3 + Nf3 + Bd3 then reroutes the knight back to c3 — Black's Na6 is stuck taking two extra tempi to come back to a useful square."
         },
         {
           "name": "Anti-Nb5: 3...a6",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 a6 e3 e6 Bd3 c5 dxc5 Bxc5 Nf3 O-O O-O Nc6 a3 b5 Qe2 Bb7",
-          "explanation": "Black prevents Nb5 with a6 but wastes a tempo. Naroditsky plays e3 and Bd3, then meets c5 with dxc5. White gets easy development and can later push e4 when ready. The a6 tempo loss means White is always slightly ahead in the race."
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 a6 e3 e6 Bd3 c5 dxc5 Bxc5 Nf3 O-O O-O Nc6 a3 b5",
+          "explanation": "Black prevents Nb5 with a6 but wastes a tempo. White meets c5 with dxc5 and develops harmoniously; the a6 tempo loss means White is always slightly ahead in the race."
         },
         {
           "name": "Fianchetto 3...g6 4.e3 h4!",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 g6 e3 Bg7 h4 h5 Nf3 Bg4 Be2 O-O Ne5 Bxe2 Qxe2 Nbd7 Qd2 c5 dxc5 Nxc5 O-O-O",
-          "explanation": "Against the fianchetto, h4! is the signature move. If Black castles into it, h5 rips open the kingside. With h5 stopping the advance, White exploits the weakened g5 square and plays Ne5 with a powerful outpost. White often castles queenside for an opposite-side attack."
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 g6 e3 Bg7 h4 h5 Nf3 Bg4 Be2 O-O Ne5 Bxe2 Qxe2 Nbd7",
+          "explanation": "Against the fianchetto, h4! is the signature move. With h5 stopping the advance, White exploits the weakened g5 square and plays Ne5 — the resulting middlegame favors White's piece activity."
         },
         {
           "name": "Fianchetto Aggressive 5.h4 O-O 6.h5",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 g6 e3 Bg7 h4 O-O h5 Nxh5 Rxh5 gxh5 Qxh5 f5 O-O-O Nc6 Bd3 e5 dxe5 Nxe5 Nf3",
-          "explanation": "If Black castles into h4, Danya shows that h5! is crushing. After Nxh5 Rxh5 gxh5 Qxh5, White has a ferocious attack with the open h-file and active pieces aimed at the exposed king. The sacrifice is sound — White gets tremendous compensation."
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 g6 e3 Bg7 h4 O-O h5 Nxh5 Rxh5 gxh5 Qxh5 f5",
+          "explanation": "If Black castles into h4, h5! is crushing. After Nxh5 Rxh5 gxh5 Qxh5, White has the open h-file and queen on h5 — Black's f5 defense is the only try but development is far behind."
         },
         {
           "name": "Bishop Out 3...Bf5 (Bishop Hunt)",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 Bf5 f3 e6 g4 Bg6 h4 h5 g5 Nfd7 e4 dxe4 fxe4 Bb4 Bd3 Nf8 Nf3 Bxc3+ bxc3",
-          "explanation": "Naroditsky's aggressive plan against Bf5. White plays f3 to prepare e4 and then hunts the bishop with g4-h4. After g5 chases the knight, White achieves the dream e4 break with a massive center. Even if Black trades on c3, White's bishop pair and huge center dominate. The bishop on g6 is passive, blocked by its own pawns."
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 Bf5 f3 e6 g4 Bg6 h4 h5 g5 Nfd7 e4 dxe4 fxe4 Bb4",
+          "explanation": "Naroditsky's aggressive plan against Bf5. White plays f3 to prepare e4 and hunts the bishop with g4-h4. After e4 fxe4, the bishop on g6 is passive and White's center dominates."
         },
         {
           "name": "Slav Setup 3...c6",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 c6 e3 Bf5 f3 e6 g4 Bg6 h4 h5 g5 Nfd7 e4 dxe4 fxe4 Bb4 Bd2 Qa5 Nf3 e5 dxe5",
-          "explanation": "Against the Slav c6, White again plays e3 then f3-g4-h4 to expand on the kingside and hunt the bishop. The plan mirrors the Bf5 line but Black has committed c6 instead of developing. White's center becomes overwhelming after e4."
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 c6 e3 Bf5 f3 e6 g4 Bg6 h4 h5 g5 Nfd7",
+          "explanation": "Against the Slav c6, White expands kingside with f3-g4-h4 to hunt the bishop. The plan mirrors the Bf5 line but Black has committed c6 instead of developing — White's center becomes overwhelming after e4."
         },
         {
           "name": "Center Counter 3...c5",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 c5 e3 cxd4 exd4 a6 Nf3 Nc6 Bd3 Bg4 O-O e6 h3 Bh5 Re1 Be7 a3 O-O Ne5",
-          "explanation": "When Black challenges with c5, White plays e3 and recaptures with the pawn to maintain a strong d4 center. After natural development, Ne5 is a powerful outpost. White gets an IQP position but with excellent piece activity — the Jobava bishops are more active than in a normal London."
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 c5 e3 cxd4 exd4 a6 Nf3 Nc6 Bd3 Bg4",
+          "explanation": "When Black challenges with c5, White recaptures with the pawn to maintain a strong d4 center. The Bg4 pin invites h3 + Bh5 — White retains the active piece play and central tension."
         },
         {
           "name": "Aggressive 3...c5 4.dxc5",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 c5 dxc5 e6 e3 Bxc5 Nf3 O-O Bd3 Nc6 O-O a6 a3 b5 Qe2 Bb7 Rad1 Qe7",
-          "explanation": "An alternative against c5 — White grabs the pawn with dxc5 and forces Black to spend time recapturing. White gets rapid development with e3, Nf3, Bd3, and a harmonious setup. The c5 pawn grab disrupts Black's natural development flow."
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 c5 dxc5 e6 e3 Bxc5 Nf3 O-O Bd3 Nc6 O-O",
+          "explanation": "White grabs the pawn with dxc5 and forces Black to spend time recapturing. After O-O White is fully developed; the c5 pawn grab disrupts Black's natural development flow."
         }
       ],
       "trapLines": [
         {
-          "name": "Nb5-Nc7 Fork Trap",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 e6 Nb5 c6 Nc7 Qxc7 Bxc7",
-          "explanation": "If Black plays c6 instead of Na6 after 4.Nb5, White plays Nc7+! forking king and rook. After Qxc7 Bxc7, White wins the exchange. Many players at club level fall for this."
-        },
-        {
           "name": "h5 Kingside Destruction",
-          "pgn": "d4 d5 Nc3 Nf6 Bf4 g6 e3 Bg7 h4 O-O h5 Nxh5 Rxh5 gxh5 Qxh5 Bf6 Nf3 Bg7 Bd3 f5 Ng5 Qe8 Qxh7+",
-          "explanation": "In the fianchetto line, if Black castles into h4-h5, the position explodes. After the Rxh5 sacrifice and Qxh5, White's attack is unstoppable with Nf3-g5 and Bd3 pointed at the king. Qxh7+ is often mate or wins decisive material."
+          "pgn": "d4 d5 Nc3 Nf6 Bf4 g6 e3 Bg7 h4 O-O h5 Nxh5 Rxh5 gxh5 Qxh5",
+          "explanation": "In the fianchetto line, if Black castles into h4-h5, the position explodes. After Rxh5 sacrifice and gxh5 Qxh5, the queen lands on h5 with the open h-file — Black's kingside is permanently stripped."
         }
       ]
     },
