@@ -1316,15 +1316,15 @@
         },
         {
           "name": "Berlin with 4.d3 (Anti-Berlin)",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Be6 O-O Bd6 Nb3 Qe7 Bg5 Nd7 Nh4 f6 Be3 O-O-O",
-          "explanation": "When White avoids the main Berlin with d3, Black develops freely. The position is comfortable and Black has good chances for counterplay."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Be6 O-O Bd6 Nb3 Qe7",
+          "explanation": "When White avoids the main Berlin with d3, Black develops freely. The Nb3 + Qe7 setup keeps Black's pieces coordinated for the eventual O-O-O counterattack."
         }
       ],
       "trapLines": [
         {
           "name": "Aggressive d4 Backfire",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8 Bg5 Be6 Rad1 Be7 Bxe7 Nxe7 Nd4 Bd5 f3 h5",
-          "explanation": "White pushes too aggressively with Bg5 and Nd4 but Black consolidates with ...Bd5 and ...h5. The bishop pair proves superior and Black gains long-term counterplay."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8",
+          "explanation": "White pushes too aggressively with d4 + Bxc6 + dxe5, but after the queen trade Black's bishop pair plus active king-walk equalize quickly — the Ke8 + Nf5 setup keeps Black's pieces coordinated."
         },
         {
           "name": "Berlin Queen Trade Surprise",
