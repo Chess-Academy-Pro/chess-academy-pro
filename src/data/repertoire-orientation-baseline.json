@@ -18,30 +18,6 @@
     "petrov-defence::trap::Wrong Move Order Punishment": [
       "WEAK_TRAP"
     ],
-    "trompowsky-attack::trap::Ne4 Bh4 Blunder": [
-      "PGN_NOT_IN_DB",
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
-    "trompowsky-attack::trap::Vaganian Gambit Refutation": [
-      "PGN_NOT_IN_DB",
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
-    "trompowsky-attack::trap::d5 Premature Pin Break": [
-      "PGN_NOT_IN_DB",
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
-    "trompowsky-attack::warning::Overextending with e4 Too Early": [
-      "PGN_NOT_IN_DB"
-    ],
-    "trompowsky-attack::warning::Ignoring Black's c5 Break": [
-      "PGN_NOT_IN_DB"
-    ],
-    "trompowsky-attack::warning::Allowing Offbeat Sidelines": [
-      "PGN_NOT_IN_DB"
-    ],
     "qgd::trap::Elephant Trap": [
       "WEAK_TRAP"
     ],
@@ -586,6 +562,33 @@
     "catalan-opening::trap::Qc2 Discovery on the Diagonal": [
       "WEAK_TRAP",
       "STUDENT_NOT_PUNISHER"
+    ],
+    "trompowsky-attack::trap::Ne4 Bh4 Blunder": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER",
+      "PGN_NOT_IN_DB"
+    ],
+    "trompowsky-attack::trap::Vaganian Gambit Refutation": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER",
+      "PGN_NOT_IN_DB"
+    ],
+    "trompowsky-attack::trap::d5 Premature Pin Break": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER",
+      "PGN_NOT_IN_DB"
+    ],
+    "trompowsky-attack::warning::Overextending with e4 Too Early": [
+      "TOOTHLESS_WARNING",
+      "PGN_NOT_IN_DB"
+    ],
+    "trompowsky-attack::warning::Ignoring Black's c5 Break": [
+      "TOOTHLESS_WARNING",
+      "PGN_NOT_IN_DB"
+    ],
+    "trompowsky-attack::warning::Allowing Offbeat Sidelines": [
+      "TOOTHLESS_WARNING",
+      "PGN_NOT_IN_DB"
     ]
   }
 }

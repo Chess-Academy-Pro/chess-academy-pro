@@ -2200,7 +2200,7 @@
     "id": "trompowsky-attack",
     "eco": "A45",
     "name": "Trompowsky Attack",
-    "pgn": "d4 Nf6 Bg5 Ne4 Bf4 d5 e3 c5 Bd3 Nd6 Nf3 Nc6 O-O Nf5 c3 e6 Nbd2 Be7 Qc2 O-O e4 dxe4 Nxe4 Bd7",
+    "pgn": "d4 Nf6 Bg5 Ne4 Bf4 d5 e3 c5 Bd3 Nf6 c3 Nc6 Nd2 Bg4 Ngf3 e6 O-O Rc8 Qa4 Nd7 Ne5 Ndxe5 Bxe5 Qd7 Bg3 Bh5 dxc5 Bxc5",
     "color": "white",
     "style": "Aggressive, Anti-Indian",
     "overview": "The Trompowsky Attack is a brilliant way to sidestep all of Black's prepared Indian defenses. By playing 2.Bg5 immediately, you force Black to deal with the pin on the f6 knight before they can set up their favorite system. It's a practical weapon that gets opponents out of their comfort zone from move two — and the positions are surprisingly rich.",
@@ -2221,76 +2221,76 @@
     "trapLines": [
       {
         "name": "Ne4 Bh4 Blunder",
-        "pgn": "d4 Nf6 Bg5 Ne4 Bh4 g5 Bg3 Nxg3 hxg3 d5 Nf3 Bg7 e3 c5 Bd3 Nc6 Nc3 cxd4 exd4 Bg4 Be2 e6 O-O O-O Re1 Rc8",
+        "pgn": "d4 Nf6 Bg5 Ne4 Bh4 g5 Bg3",
         "explanation": "Retreating to h4 instead of f4 is a common amateur mistake that gives Black the bishop pair and saddles White with permanently doubled g-pawns. After ...g5 and ...Nxg3, Black develops smoothly with ...Bg7, ...c5, and ...Nc6. White has zero compensation for the structural damage, and the g3 pawn is a long-term weakness that Black can target in the endgame."
       },
       {
         "name": "Vaganian Gambit Refutation",
-        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 c5 d5 Qb6 Bc1 e6 dxe6 fxe6 Nc3 Nxc3 bxc3 d5 e3 Bd6 Nf3 O-O Bd3 Nd7 O-O Nf6 Nd4 Bd7 f3 Rac8",
+        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 c5 d5 Qb6 Bc1 e6",
         "explanation": "In the Vaganian Gambit, Black plays 4...c5 and 5...Qb6 forcing the bishop back to c1. White gambits the d-pawn with dxe6 fxe6, creating an isolated e6 pawn and a lead in development. However, Black's active pieces and the semi-open f-file provide excellent counterplay. White must castle quickly and centralize the knight on d4 to exploit Black's structural weakness before Black completes development."
       },
       {
         "name": "d5 Premature Pin Break",
-        "pgn": "d4 Nf6 Bg5 d5 Bxf6 exf6 e3 Bd6 c4 dxc4 Bxc4 O-O Nc3 Re8 Qc2 Nd7 Nge2 Nb6 Bb3 Bf5 Qd2 Qe7 O-O a5 a3 a4 Ba2 Be4",
+        "pgn": "d4 Nf6 Bg5 d5 Bxf6 exf6 e3 Bd6 c4 dxc4 Bxc4 O-O Nc3",
         "explanation": "After 2...d5 3.Bxf6 exf6, Black accepts doubled f-pawns in exchange for the bishop pair and open e-file. White must act quickly to exploit the structure before Black's bishops become dominant. The critical mistake is allowing Black to develop ...Bf5 and ...Re8 with strong pressure. White should aim for c4, Nc3, and Nge2 to control the center, but Black's long-term bishop pair advantage makes this a tricky line to navigate."
       }
     ],
     "variations": [
       {
         "name": "2...Ne4 3.Bf4 Main Line",
-        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 d5 e3 c5 Bd3 Nc6 Nf3 Nf6 O-O Bg4 c3 e6 Nbd2 Bd6 Bxd6 Qxd6 Qc2 Bxf3 Nxf3 O-O e4 dxe4 Bxe4 Nxe4 Qxe4",
+        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 d5 e3 c5 Bd3 Nc6",
         "explanation": "The most important line in the Trompowsky. After 2...Ne4 3.Bf4, White retreats to the ideal diagonal and maintains the bishop pair. Black returns the knight to f6 and develops with ...Bg4, ...e6, and ...Bd6. White builds a solid center with c3, Nbd2, and aims for the e4 break. The exchange on d6 gives White a pleasant middlegame with better pawn structure and the e4 lever as the primary source of initiative."
       },
       {
         "name": "2...d5 3.Bxf6 Doubled Pawns",
-        "pgn": "d4 Nf6 Bg5 d5 Bxf6 exf6 e3 Bd6 Bd3 O-O Nd2 Re8 Ne2 c5 c3 Nc6 O-O cxd4 exd4 f5 Nf4 Bc7 Re1 Rxe1+ Qxe1 Qf6 Qe3 Bd7",
+        "pgn": "d4 Nf6 Bg5 d5 Bxf6 exf6 e3 Bd6 Bd3 O-O Nd2 Re8",
         "explanation": "White takes on f6 immediately, inflicting permanent doubled pawns on Black. The trade-off is that Black gains the bishop pair and the semi-open e-file. White plays a solid setup with e3, Bd3, Nd2, and Ne2, aiming to exploit the f-pawns in the endgame. The Nf4 outpost is particularly strong, pressuring d5 and eyeing g6. Black must keep the position dynamic and avoid simplifications where the pawn weakness tells."
       },
       {
         "name": "2...e6 French-Type Structure",
-        "pgn": "d4 Nf6 Bg5 e6 e4 h6 Bxf6 Qxf6 Nc3 d6 Qd2 Nd7 O-O-O Be7 f4 O-O Nf3 c5 e5 dxe5 fxe5",
+        "pgn": "d4 Nf6 Bg5 e6 e4 h6 Bxf6 Qxf6 Nc3 d6 Qd2 Nd7 O-O-O",
         "explanation": "Against 2...e6, White transposes into an aggressive system with e4, creating a French Defense structure where the dark-squared bishop has already been exchanged on f6. After h6 and Bxf6 Qxf6, White has a strong center and can castle queenside for a direct kingside attack. The f4-f5 or e5 push creates serious pressure, and Black must be careful not to become passive. White's plan involves Nf3, Bd3, and Qf4 with a powerful initiative."
       },
       {
         "name": "Raptor Variation 2...c5",
-        "pgn": "d4 Nf6 Bg5 c5 d5 Qb6 Nc3 Qxb2 Bd2 Qb6 e4 d6 f4 e6 Bc4 exd5 exd5 Be7 Nf3 O-O O-O Bg4 Rb1 Qc7 h3 Bxf3 Qxf3 Nbd7",
+        "pgn": "d4 Nf6 Bg5 c5 d5 Qb6 Nc3 Qxb2 Bd2 Qb6 e4 d6 f4 e6 Bc4 exd5",
         "explanation": "The Raptor Variation is one of the sharpest lines in the Trompowsky. After 2...c5 3.d5 Qb6, Black grabs the b2 pawn, but White gets a massive center with e4 and f4 plus rapid development. The Bd2 retreat prepares Bc4 targeting f7, and after O-O White has a huge lead in development. Black must return material or suffer a devastating attack. The key is that White's center pawns and piece activity provide more than enough compensation for the pawn."
       },
       {
         "name": "2...g6 Fianchetto Response",
-        "pgn": "d4 Nf6 Bg5 g6 Bxf6 exf6 c4 d5 cxd5 Qxd5 Nc3 Qa5 e3 Bg7 Bd3 O-O Nge2 Re8 O-O Nd7 Qb3 Nb6 Ng3 Be6 Qc2 Rad8 Nge4 f5 Ng5 Bd5",
+        "pgn": "d4 Nf6 Bg5 g6 Bxf6 exf6 c4 d5 cxd5 Qxd5 Nc3 Qa5 e3 Bg7",
         "explanation": "When Black fianchettoes with 2...g6, White takes on f6 immediately to saddle Black with doubled f-pawns. After exf6, Black has the bishop pair and open e-file but the pawn structure is compromised. White develops with Nc3, e3, Bd3, and Nge2, aiming for the Ng3-e4 maneuver to exploit the weakened kingside. The piece on e4 is a monster, hitting f6 and d6 simultaneously, and Black must work hard to prove the bishops compensate for the structural damage."
       },
       {
         "name": "Vaganian Gambit 2...Ne4 3.Bf4 c5",
-        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 c5 d5 Qb6 Bc1 Qxb2 Nd2 Nxd2 Bxd2 Qb6 e4 d6 Bc3 e5 dxe6 Bxe6 Nf3 Be7 Be2 O-O O-O Nd7 Rb1 Qc7",
+        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 c5 d5 Qb6 Bc1 e6 f3 Nf6 e4 exd5",
         "explanation": "The Vaganian Gambit arises when Black plays 3...c5 instead of 3...d5 in the Ne4 Bf4 line. After 4.d5 Qb6, White offers the b2 pawn to accelerate development. If Black accepts with Qxb2, White gets rapid piece play with Nd2, e4, and quick development. The open b-file and central pawn wedge on d5 give White long-lasting compensation. Black must be very precise to hold the extra pawn while fending off White's initiative."
       },
       {
         "name": "2...Ne4 3.Bf4 c5 4.f3 Sideline",
-        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 c5 f3 Nf6 d5 Qb6 Bc1 d6 e4 g6 Na3 Bg7 Nc4 Qc7 a4 O-O Bd3 e6 Ne3 exd5 exd5 Nbd7",
+        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 c5 f3 Nf6 d5 Qb6 Bc1 d6 e4 g6 Na3",
         "explanation": "The 4.f3 line is a sharp alternative where White chases the knight back and builds a powerful center with e4. After Nf6 retreats, White plays d5 clamping down on the center and develops with Na3-c4 targeting d6 and b6. The position resembles a Benoni-type structure where White has extra time from the knight retreat. Black must counterattack on the queenside with ...Qb6, ...a6, and eventually ...b5, or risk being squeezed by White's space advantage."
       },
       {
         "name": "2...d5 3.Bxf6 gxf6 Recapture",
-        "pgn": "d4 Nf6 Bg5 d5 Bxf6 gxf6 e3 c5 dxc5 e6 c4 dxc4 Qxd8+ Kxd8 Bxc4 Bxc5 Nf3 Ke7 Nc3 Nd7 O-O Nb6 Bb5 Rd8 Rfd1 Bd7 Bxd7 Rxd7 Rxd7+ Kxd7 Rd1+ Ke7",
+        "pgn": "d4 Nf6 Bg5 d5 Bxf6 gxf6 e3 c5 dxc5 e6 c4 dxc4 Qxd8+ Kxd8 Bxc4 Bxc5 Nf3 Ke7 Nc3 Nd7 O-O",
         "explanation": "The gxf6 recapture is the ambitious alternative to exf6. Black accepts a shattered kingside in exchange for the half-open g-file and active piece play. After c5 and e6, Black develops quickly and the position often simplifies into an endgame where Black's bishop pair and active rooks compensate for the damaged structure. White should aim for an early queen exchange with Qxd8+ to exploit the king's inability to castle, but Black's active pieces make this harder than it looks."
       }
     ],
     "warningLines": [
       {
         "name": "Overextending with e4 Too Early",
-        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 d5 e3 Nc6 Nd2 Nxd2 Qxd2 e6 Ngf3 Bd6 Bxd6 Qxd6 c3 O-O Bd3 e5 dxe5 Qxe5 O-O Rd8 Bc2 Bf5 Nd4 Bxc2 Qxc2 Nxd4 cxd4 Qxd4",
+        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 d5 e3 Nc6",
         "explanation": "Pushing e4 prematurely in the Ne4 Bf4 line is a common mistake for White. After Black develops smoothly with ...Nc6, ...e6, and ...Bd6, the center becomes fluid. If White pushes e4 without proper preparation, Black strikes with ...e5 and after dxe5 Qxe5, the center is wide open with Black's pieces perfectly placed. White should maintain the solid e3 structure and build up gradually with Bd3, Nf3, and O-O before considering any central expansion."
       },
       {
         "name": "Ignoring Black's c5 Break",
-        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 d5 e3 c5 c3 Nc6 Nd2 Nxd2 Qxd2 cxd4 exd4 Bf5 Bd3 Bxd3 Qxd3 e6 Nf3 Bd6 Bxd6 Qxd6 O-O O-O Rfe1 Rfe8",
+        "pgn": "d4 Nf6 Bg5 Ne4 Bf4 d5 e3 c5 c3 Nc6 Nd2 Nxd2 Qxd2 cxd4 exd4 Bf5",
         "explanation": "When White plays too passively with c3 and Nd2 without challenging Black's c5 break, Black equalizes easily. After ...cxd4 exd4, the isolated d4 pawn becomes a target and Black's pieces develop to ideal squares. The exchange of light-squared bishops further reduces White's attacking potential. White must develop aggressively with Bd3 and Nf3 first, keeping the option of e4 alive to maintain the initiative that the Trompowsky promises."
       },
       {
         "name": "Allowing Offbeat Sidelines",
-        "pgn": "d4 Nf6 Bg5 Ne4 h4 d5 Nd2 Nxd2 Qxd2 e6 e3 c5 dxc5 Bxc5 Nf3 Nc6 Bd3 Qa5 Qxa5 Nxa5 O-O Bd7 Nd4",
+        "pgn": "d4 Nf6 Bg5 Ne4 h4 d5 Nd2 Nxd2 Qxd2",
         "explanation": "Some White players try offbeat moves like 3.h4 to prevent ...g5 ideas or 3.Nd2 to exchange knights. These sidelines give up the initiative completely. After 3.h4, the pawn is overextended and weakens the kingside permanently. After 3.Nd2, White has no advantage from the opening as Black develops freely. The only principled move after 2...Ne4 is 3.Bf4, keeping the bishop active and maintaining the structural imbalance that gives the Trompowsky its bite."
       }
     ]
