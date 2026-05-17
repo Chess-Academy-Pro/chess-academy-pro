@@ -2772,20 +2772,20 @@
         },
         {
           "name": "d3 Slow System",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 d3 b5 Bb3 d6 a4 Bd7 c3 O-O Nbd2 Na5 Ba2 c5 Re1 Nc6",
-          "explanation": "An even quieter approach where White plays d3 before Re1. The position builds slowly but White retains long-term chances."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 d3 b5 Bb3 d6 a4 Bd7 c3 O-O Nbd2 Na5 Ba2 c5 Re1",
+          "explanation": "An even quieter approach where White plays d3 before Re1. The Nbd2 + Re1 setup keeps options open for the eventual d4 break or Nf1-g3 manoeuvre."
         }
       ],
       "trapLines": [
         {
           "name": "Marshall Attack Prevented",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O h3 d5 exd5 Nxd5 Nxe5 Nxe5 Rxe5 c6 d4 Bd6 Re1 Qh4 g3 Qh3 Be3",
-          "explanation": "The h3 move order prevents the Marshall Attack. If Black tries d5 anyway, White is better prepared with the extra tempo. The attack fizzles and White keeps a solid edge."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O h3 d5 exd5 Nxd5 Nxe5 Nxe5 Rxe5",
+          "explanation": "The h3 move order prevents the Marshall Attack. If Black tries d5 anyway, White's extra tempo means the attack fizzles — White consolidates the extra pawn."
         },
         {
           "name": "Premature d5 Loses a Pawn",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O h3 Bb7 d3 d5 exd5 Nxd5 Nxe5 Nxe5 Rxe5 Nf4 Bxf4 Bd6 Bg5 Bxe5 Bxd8",
-          "explanation": "If Black plays d5 prematurely in the Anti-Marshall structure, exd5 followed by Nxe5 wins a pawn cleanly. White's pieces are better coordinated and the extra pawn tells."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O h3 Bb7 d3 d5 exd5 Nxd5 Nxe5 Nxe5 Rxe5",
+          "explanation": "If Black plays d5 prematurely in the Anti-Marshall structure, exd5 followed by Nxe5 + Rxe5 wins a pawn cleanly. White's pieces are better coordinated and the extra pawn tells."
         }
       ]
     },
