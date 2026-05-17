@@ -330,7 +330,7 @@
       "playerId": "naroditsky",
       "eco": "E90",
       "name": "King's Indian Defense (Naroditsky)",
-      "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5",
+      "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 g4 Kh8 Nd3 Ng8 Kh1 a5 Rg1 b6 Bd2 Nc5",
       "color": "black",
       "style": "Aggressive, Dynamic",
       "overview": "Naroditsky plays the King's Indian when he wants a fighting game against 1.d4. The classical setup with the Mar del Plata pawn storm creates exciting kingside attacks. Danya emphasizes understanding the typical plans over memorizing long theory lines.",
@@ -350,35 +350,25 @@
       "variations": [
         {
           "name": "Mar del Plata Main Line",
-          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5",
-          "explanation": "The classic King's Indian battleground. Both sides attack on opposite flanks — White on the queenside with c5-c6, Black on the kingside with f5-f4-g5."
+          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 g4 Kh8 Nd3 Ng8 Kh1 a5 Rg1 b6 Bd2 Nc5",
+          "explanation": "The classic battleground. After g4 Kh8, both kings shuffle and prepare flank attacks — Black manoeuvres Ng8 / Nc5 to support the kingside, White rebuilds with Nd3 + Rg1 for the slow grinder."
         },
         {
           "name": "Classical 9.b4 Line",
-          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 b4 Nh5 Re1 f5",
-          "explanation": "White expands on the queenside immediately. Black responds with the standard f5 break. The position requires precise timing from both sides."
+          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 b4 Nh5 Re1 f5 Ng5 Nf6 Bf3 c6 Be3 h6 Ne6 Bxe6",
+          "explanation": "White expands on the queenside with b4 immediately. After Ng5-Ne6 the knight invades; the trade Bxe6 closes the diagonal but opens the f-file for Black's counterplay."
         },
         {
           "name": "Fianchetto Variation",
-          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 g3 O-O Bg2 d6 Nf3 Nbd7 O-O e5 e4 c6 h3 Qb6",
-          "explanation": "White fianchettoes the bishop. This is more positional but Black can still generate play with c6 and d5, or switch to a kingside plan with f5."
+          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 g3 O-O Bg2 d6 Nf3 Nbd7 O-O e5 e4 c6 h3 Qb6 Re1 exd4 Nxd4 Re8 Nc2 Nc5 b4 Ne6 Be3 Qc7",
+          "explanation": "White fianchettoes the bishop for a positional King's Indian. Black plays the central exchange exd4 + Nc5/Ne6 manoeuvre; the resulting middlegame has balanced piece play."
         }
       ],
       "trapLines": [
         {
-          "name": "Premature c5 Counterstrike",
-          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 c5 Nf5 cxd6 cxd6 Nd2 Nd4 Nc4",
-          "explanation": "White pushes c5 too early trying to break through. Black captures back and gets a dominant knight on d4 with active pieces and kingside attacking chances."
-        },
-        {
           "name": "f5-f4 Pawn Storm Crush",
-          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 Be3 f4 Bf2 g5 Nd3 Ng6 c5 Nf6 cxd6 cxd6 Rc1 g4 Nb4 g3",
-          "explanation": "Black's kingside pawn storm with f5-f4-g5-g4-g3 is devastating. White's queenside play is too slow and Black crashes through with rooks on the g and h files."
-        },
-        {
-          "name": "Classic Nh5-Nf4 Sacrifice",
-          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Nd3 Ng6 c5 Nf6 cxd6 cxd6 Nb5 g4 Nxa7 g3 hxg3 fxg3 Bxg3 Nh5",
-          "explanation": "Black reroutes the knight via Nh5 heading for f4 where it becomes an unstoppable attacking piece. Combined with the open g-file, White's kingside collapses."
+          "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 Be3 f4 Bf2 g5 Nd3 Ng6 c5 Nf6 cxd6",
+          "explanation": "Black's textbook kingside pawn storm. After f5-f4-g5 with Ng6 + Nf6, the kingside pawns roll forward; White's queenside breakthrough c5-cxd6 comes too late."
         }
       ]
     },
