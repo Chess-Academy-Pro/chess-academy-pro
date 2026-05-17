@@ -1293,42 +1293,42 @@
       "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8 h3 Be7 Bf4 Be6 Rad1 h6",
       "color": "black",
       "style": "Solid, Technical",
-      "overview": "The Berlin Wall — Carlsen's most reliable weapon against 1.e4. By entering the queenless middlegame, Black neutralizes White's attacking chances and plays for a draw or better. Magnus's endgame technique makes this opening deadly in his hands.",
+      "overview": "Vladimir Kramnik used the Berlin Wall to dethrone Garry Kasparov in 2000 — and chess hasn't been the same since. Magnus inherited the system and uses it as his trusted '1.e4 emergency draw weapon'. The miracle of the Berlin: by trading queens on move 8, Black REMOVES White's main attacking pieces. What remains is a complex endgame where Black has the bishop pair, slightly doubled pawns, and a king walking to e8 (yes, e8 — not castled). It looks suspicious. It's actually fine. Magnus has won countless games from this position by simply outlasting opponents who think 'the queens are off, must be a draw.'",
       "keyIdeas": [
-        "Trade queens early to eliminate White's attacking potential — timing this correctly before the opponent can generate counterplay is critical",
-        "The king goes to e8-f8-g8 for safety after the queen trade — the queen's active placement creates multi-directional threats that are hard to address",
-        "The bishop pair and central pawns give Black long-term compensation — this central control is the foundation for all middlegame operations",
-        "Target the ...c5 break to challenge White's d4 pawn and activate pieces — in the Berlin endgame, piece activity compensates for the slightly inferior structure"
+        "The queen trade is FORCED, not optional. After 5.O-O Nxe4 6.d4 Nd6 7.Bxc6 dxc6 8.dxe5 Nf5 9.Qxd8+ Kxd8 — that's the Berlin Wall position. EVERY Black move was best; if you deviate at any of these steps, you're playing a worse opening.",
+        "The king on d8 (then e8 then often f7) is FINE. It looks exposed but White's attacking pieces are gone — no queens, soon to trade rooks. The king becomes an active piece in the endgame, walking to centre via Ke8-Kf7 like a typical endgame king.",
+        "Both bishops on c8 and f8 are your trumps. Don't trade them lightly. The bishop pair in an open queenless endgame is worth roughly 0.5 pawns — exactly the structural compensation you need for the doubled c-pawns.",
+        "The c5 break is the endgame's strategic theme. After …c5 (sometimes prepared by …Bd7, …Ke8-f7, …Re8), Black opens the centre, activates the bishops, and the doubled c-pawns become irrelevant when one of them queens."
       ],
       "traps": [
-        "After Qxd8+ Kxd8, if White plays carelessly, Black can get a surprise attack with Bd6 and Rg8"
+        "After 9.Qxd8+ Kxd8 10.Nc3 — if White plays the casual 10...Ke8?? immediately, Black walks into 11.Nxe5! Be6 12.Nxc6+ winning a pawn for nothing. The correct move order is to play …Be6 or …Bd7 first BEFORE walking the king."
       ],
       "warnings": [
-        "Do not castle — the king belongs on e8 first, then walks to safety",
-        "Be patient in the endgame — Black's advantage is structural, not tactical"
+        "DON'T castle in the Berlin. The king's journey is e8 → f7 (walked over multiple moves) — NEVER short-castle which puts the king on g8 where it's actually MORE exposed in the queenless middlegame because White's pieces aim at the kingside.",
+        "Be patient. The Berlin's advantage is positional and structural — bishop pair, eventual …c5 break, slightly better pawn structure. There are no tactical fireworks. If you try to 'win quickly' you'll lose the structural edge by overextending."
       ],
       "variations": [
         {
           "name": "Berlin Endgame Main Line",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8 h3 Be7 Bf4 Be6 Rad1 h6",
-          "explanation": "The classic Berlin endgame. White has the e5 pawn but Black has the bishop pair and a solid structure. Both sides need to play precisely."
+          "explanation": "The Berlin Wall position in its purest form. After 5.O-O Nxe4 6.d4 Nd6 7.Bxc6 dxc6 8.dxe5 Nf5 — Black's knight reroutes to f5 (the only good square) and 9.Qxd8+ Kxd8! — the king takes voluntarily. 10.Nc3 Ke8 (the king starts walking back to safety) 11.h3 (prophylaxis) Be7 12.Bf4 (developing the bishop to a more active diagonal) Be6 13.Rad1 (centralising the rook) h6 — Black's typical defensive move. Position assessment: White has a slight structural edge (e5-pawn intact, no doubled pawns); Black has the bishop pair AND will eventually push …c5 freeing everything. Engines call this position +0.20 for White; Magnus's win rate from Black is around 50%."
         },
         {
           "name": "Berlin with 4.d3 (Anti-Berlin)",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Be6 O-O Bd6 Nb3 Qe7",
-          "explanation": "When White avoids the main Berlin with d3, Black develops freely. The Nb3 + Qe7 setup keeps Black's pieces coordinated for the eventual O-O-O counterattack."
+          "explanation": "When White avoids the Berlin Wall entirely with 4.d3 (the Anti-Berlin), Black plays a different game: 4...Bc5 develops aggressively, 5.Bxc6 dxc6 (Black takes the doubled-pawn structure voluntarily — the bishop pair is worth it), 6.Nbd2 Be6 7.O-O Bd6 (rerouting the bishop). The …Bd6 + …Qe7 + …O-O-O setup signals a long-side castle ambition. Black gets the bishop pair without entering the queenless endgame — a more dynamic version of the standard Berlin treatment."
         }
       ],
       "trapLines": [
         {
           "name": "Aggressive d4 Backfire",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8",
-          "explanation": "White pushes too aggressively with d4 + Bxc6 + dxe5, but after the queen trade Black's bishop pair plus active king-walk equalize quickly — the Ke8 + Nf5 setup keeps Black's pieces coordinated."
+          "explanation": "This is THE Berlin Wall position — when White accepts the forced trade and reaches the queenless endgame, the assessment is roughly equal but Black has the dynamic chances. Walk the sequence: 5...Nxe4 (the only critical move) 6.d4 Nd6 (the knight retreats) 7.Bxc6 dxc6 (recapturing with the d-pawn doubles Black's c-pawns but opens the d-file) 8.dxe5 Nf5 (knight goes to f5 — its only good square) 9.Qxd8+ Kxd8 — kings trade queens. The position now: Black has bishops on c8 and f8 (the trumps), king on d8 walking to e8, and a slightly worse structure. Bishop pair endgames in open positions favour Black."
         },
         {
           "name": "Berlin Queen Trade Surprise",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 Re1 Nd6 Nxe5 Be7 Bf1 Nxe5 Rxe5 O-O d4 Bf6 Re1 Nf5 c3 d5",
-          "explanation": "White tries Re1 to avoid the Berlin endgame but Black develops smoothly with ...Be7, ...O-O, and ...Bf6. The knight reaches f5 with an active position and Black equalizes comfortably."
+          "explanation": "When White tries 5.Re1 (instead of 5.O-O Nxe4 6.d4) to AVOID the Berlin endgame, Black still gets a fine position: 5...Nd6 (saving the knight) 6.Nxe5 Be7 7.Bf1 (the bishop retreats from the Bb5-pin) Nxe5 8.Rxe5 O-O — both sides develop. After 9.d4 Bf6 10.Re1 Nf5 11.c3 d5 — Black's knight on f5 is well-placed, the bishop on f6 is active, and Black has reached an equal middlegame WITHOUT entering the queenless endgame. A flexible alternative when you want to avoid endgame theory."
         }
       ]
     },
