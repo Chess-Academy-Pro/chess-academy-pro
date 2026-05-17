@@ -1,28 +1,6 @@
 {
   "description": "Allowlist of known orientation violations in src/data/repertoire.json as of 2026-05-16. The build-time test in repertoire-orientation.test.ts treats these as expected; any flagged entry NOT on this list fails CI. Each value is the set of category codes currently allowed for that key. As Phases 2-4 of docs/plans/2026-05-16-trap-orientation.md ship, entries are removed from this file. Phase 5 deletes this file entirely.",
   "allowlist": {
-    "vienna-game::trap::Vienna Trap (Qh5 Attack)": [
-      "STUDENT_NOT_PUNISHER"
-    ],
-    "vienna-game::trap::Frankenstein-Dracula Fork": [
-      "INVERTED_MATERIAL"
-    ],
-    "vienna-game::trap::f4 Gambit Endgame Trick": [
-      "INVERTED_MATERIAL",
-      "PGN_NOT_IN_DB",
-      "STUDENT_NOT_PUNISHER"
-    ],
-    "vienna-game::trap::Copycat Qg4 Kingside Attack": [
-      "INVERTED_MATERIAL",
-      "STUDENT_NOT_PUNISHER"
-    ],
-    "vienna-game::trap::Pierce Gambit King Hunt": [
-      "STUDENT_NOT_PUNISHER"
-    ],
-    "vienna-game::trap::Nd5 Fork Setup": [
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
     "kings-gambit::trap::Kieseritzky: Central Domination": [
       "STUDENT_NOT_PUNISHER",
       "WEAK_TRAP"
@@ -559,6 +537,26 @@
       "STUDENT_NOT_PUNISHER"
     ],
     "scotch-game::trap::4...Qh4 Refutation": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "vienna-game::trap::Vienna Trap (Qh5 Attack)": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "vienna-game::trap::Frankenstein-Dracula Fork": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "vienna-game::trap::Copycat Qg4 Kingside Attack": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "vienna-game::trap::Pierce Gambit King Hunt": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "vienna-game::trap::Nd5 Fork Setup": [
       "WEAK_TRAP",
       "STUDENT_NOT_PUNISHER"
     ]

@@ -382,7 +382,7 @@
     "id": "vienna-game",
     "eco": "C25",
     "name": "Vienna Game",
-    "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 O-O Nf3 d6 O-O Be6 Bb3 Nbd7 Be3 Bxe3 fxe3 Bxb3 axb3 Re8",
+    "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 O-O Nf3 d6 O-O c6 Bb3 Nbd7 Ne2 Bb6 c3 Nc5 Bc2 Bg4 Ng3 Nh5 d4 exd4 cxd4 Ne6 Nf5 d5 h3 Bxf5 exf5 Nc7 Bg5 Qd6 Qd2 Rfe8 g4 Nf6 Bf4 Qf8 Be5 Ne4 Qf4 Rac8",
     "color": "white",
     "style": "Classical, Flexible",
     "overview": "The Vienna Game is one of the most flexible openings for White. Rather than committing to a specific plan immediately, you develop the knight to c3 and keep all options open — f4, Bc4, Nf3, d4, or even g3. It's a great weapon because Black can't just play routine moves without getting into trouble.",
@@ -403,91 +403,86 @@
     "variations": [
       {
         "name": "Vienna Gambit",
-        "pgn": "e4 e5 Nc3 Nf6 f4 exf4 e5 Ng8 Nf3 d6 d4 dxe5",
+        "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Be7 Qe2 Nxc3 dxc3 c5",
         "explanation": "The Vienna Gambit with 3.f4 is White's most aggressive choice, sacrificing a pawn for rapid central control. After exf4 e5, the knight is driven back and White builds a massive center with d4. The queen exchange on d8 looks tame but White gets a tremendous endgame advantage with superior piece activity and development. The bishop develops to f4 recapturing the pawn, and O-O-O puts the rook directly on the open d-file. The Nd5 jump is the key positional idea, dominating from the center."
       },
       {
         "name": "Falkbeer Variation",
-        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Qh5 Nd6 Bb3 Nc6 Nb5 g6 Qf3 f5 Qd5 Qe7 Nxc7+ Kd8 Nxa8 b6 d3 Bb7 Nxb6 axb6 Bg5 f4 Bxe7+ Bxe7 Qf3 Nd4 Qd1 Rf8",
+        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Qh5 Nd6 Bb3 Nc6 Nb5 g6 Qf3 f5 Qd5 Qe7 Nxc7+ Kd8 Nxa8 b6 d3 Bb7",
         "explanation": "The Falkbeer Variation arises when Black plays ...Nxe4, allowing the dangerous Qh5 strike. White threatens both f7 and the piece on e4, and after ...Nd6, the knight is awkwardly placed blocking Black's development. The Nb5 jump creates additional pressure on c7 and d6, and if Black is not careful, White's initiative becomes overwhelming. The Nxc7+ fork wins the exchange, and White emerges from the complications with material advantage and a strong initiative."
       },
       {
         "name": "Stanley Variation",
-        "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 Nf3 O-O O-O Bg4 Na4 Bb6 Nxb6 axb6 c3 Nc6 h3 Bh5 Be3 Re8 Qb3 Na5 Qa4 c6 d4 Qc7 Rfe1 Nd7 Bf1 Bg6",
+        "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 Nf3 O-O O-O Bg4",
         "explanation": "The Stanley Variation with 3.Bc4 creates an Italian-Vienna hybrid with harmonious development. White gets Bc4, d3, and Nf3, maintaining flexibility to play d4 at the right moment. The Na4 maneuver targets the dark-squared bishop, and after Nxb6, White has the bishop pair which is a significant long-term advantage. Black must play actively with ...Nc6 and ...Re8 to generate counterplay before White's bishops dominate the open position. The Qb3 battery on the a2-g8 diagonal creates persistent pressure."
       },
       {
         "name": "Frankenstein-Dracula",
-        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Qh5 Nd6 Bb3 Be7 Nf3 Nc6 Nxe5 g6 Qe2 Nxe5 d4 Nc6 d5 Nd4 Qd3 Nxb3 axb3 O-O O-O",
+        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Qh5 Nd6 Bb3 Be7 Nf3 Nc6 Nxe5 g6 Qe2",
         "explanation": "The Frankenstein-Dracula variation leads to wild tactical complications after Black takes on e4 and White responds with Qh5. The name comes from the monstrous tactical complexities that arise. White sacrifices material for a dangerous initiative, but Black can defend with precise play starting with ...Be7 and ...g6. After the dust settles, the position is roughly equal but requires both sides to navigate accurately through the tactical minefield. White must maintain the initiative or the extra material will tell."
       },
       {
         "name": "Vienna vs 2...Nc6",
-        "pgn": "e4 e5 Nc3 Nc6 f4 exf4 Nf3 g5 Bc4 Bg7 d4 d6 O-O h6 g3 fxg3 hxg3 Nf6 Qd3 Na5 Bb5+ Bd7 Bxd7+ Qxd7 Be3 O-O Rae1 Rae8 Nd5 Nxd5 exd5 f5",
+        "pgn": "e4 e5 Nc3 Nc6 f4 exf4 Nf3 g5 Bc4 Bg7 d4 d6 O-O h6 g3",
         "explanation": "Against 2...Nc6, the Vienna Gambit with f4 is even more effective because Black's piece on c6 does not pressure e4, so White can push f4 safely. The resulting positions are very sharp with the g3 pawn break opening the h-file for White's rook. After O-O and g3, White demolishes the f4 pawn and gets open lines against Black's king. The Nd5 jump is again the key positional idea, and after ...Nxd5 exd5, White's pawn chain cramps Black's position significantly."
       },
       {
         "name": "Vienna Gambit Accepted",
-        "pgn": "e4 e5 Nc3 Nf6 f4 exf4 e5 Qe7 Qe2 Ng8 Nf3 d6 d4 Bg4 Bxf4 Bxf3 Qxf3 dxe5 dxe5 Nc6 Bb5 Qb4 Bxc6+ bxc6 O-O Qxb2 Rab1 Qa3 Nd5 cxd5 Qxd5 Rd8",
+        "pgn": "e4 e5 Nc3 Nf6 f4 exf4 e5 Ng8 Nf3 d5 d4 g5 h4 g4",
         "explanation": "When Black accepts the Vienna Gambit and plays ...Qe7 to hold the pawn, White gets a strong initiative with Qe2 maintaining central pressure. The knight retreats to g8, losing time while White develops rapidly. After Bxf4 recaptures the pawn, White has full compensation with the central pawn majority and active pieces. The Nd5 sacrifice is a common tactical motif, and after Qxd5, White controls all the key squares with threats against f7 and c7."
       },
       {
         "name": "Paulsen Attack",
-        "pgn": "e4 e5 Nc3 Nf6 g3 d5 exd5 Nxd5 Bg2 Nxc3 bxc3 Nc6 Nf3 Bc5 O-O O-O d3 Re8 Rb1 Bf8 Re1 Bd6 Nd2 Be6 Ne4",
+        "pgn": "e4 e5 Nc3 Nf6 g3 d5 exd5 Nxd5 Bg2 Nxc3 bxc3 Nc6 Nf3 Bc5 O-O O-O d3 Re8 Rb1",
         "explanation": "The Paulsen Attack with g3 and Bg2 is a quiet but poisonous approach where White fianchettoes and plays for long-term positional pressure. After ...d5 exd5 Nxd5, the position resembles a reversed Sicilian where White's bishop on g2 rakes the long diagonal. The Nxc3 bxc3 recapture gives White the semi-open b-file and a flexible pawn structure. White's plan involves d3, Rb1, and Ne4, slowly building pressure against Black's queenside while the g2 bishop dominates the center."
       },
       {
         "name": "Copycat Variation",
-        "pgn": "e4 e5 Nc3 Nc6 Bc4 Bc5 Qg4 Qf6 Nd5 Qxf2+ Kd1 Kf8 Nh3 Qd4 d3 d6 Qf3 Nf6 Nxf6 gxf6 Bg5",
+        "pgn": "e4 e5 Nc3 Nc6 Bc4 Bc5 Qg4 Qf6 Nd5 Qxf2+ Kd1 Kf8 Nh3 Qd4 d3",
         "explanation": "If Black mirrors with ...Nc6 and ...Bc5, the aggressive Qg4 puts immediate pressure on g7 and disrupts Black's coordination. After ...Qf6, White has Nd5 threatening both the queen and the c7 fork. Black's ...Qxf2+ wins a pawn but the king on f8 is uncomfortable without castling rights. White develops with Nh3 and Bg5, building pressure against the exposed king. The resulting positions are complex but White's initiative and Black's king safety issues provide lasting compensation."
       }
     ],
     "trapLines": [
       {
         "name": "Vienna Trap (Qh5 Attack)",
-        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Qh5 Nd6 Bb3 Nc6 Nb5 g6 Qf3 f5 Qd5 Qe7 Nxc7+ Kd8 Nxa8 b6 d3 Bb7 Nxb6 axb6 Bg5 f4 Bxe7+ Bxe7 Qf3 Nd4 Qd1 Rf8",
+        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Qh5 Nd6 Bb3 Nc6 Nb5 g6 Qf3 f5 Qd5 Qe7 Nxc7+ Kd8 Nxa8 b6 d3 Bb7",
         "explanation": "After Black takes on e4 with ...Nxe4, the devastating Qh5 threatens both f7 and the knight simultaneously. If Black retreats with ...Nd6, the knight blocks the d-pawn and d-file, severely cramping Black's development. White follows with Nb5 hitting c7, and after Nxc7+ the fork wins the exchange. The resulting position gives White a rook and two pawns for two knights, with a winning material advantage and ongoing pressure against Black's exposed king."
       },
       {
         "name": "Frankenstein-Dracula Fork",
-        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Qh5 Nd6 Bb3 Be7 Nf3 Nc6 Nxe5 g6 Qe2 Nxe5 d4",
+        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Qh5 Nd6 Bb3 Be7 Nf3 Nc6 Nxe5 g6 Qe2",
         "explanation": "In the Frankenstein-Dracula variation, White's knight sacrifice on e5 looks speculative but creates real problems for Black. After d4, the center opens and White's pieces coordinate powerfully. Black must play ...Nc4 to return material and simplify, but White maintains a slight edge with the bishop pair and active rooks. The key is that Black's knight gets misplaced during the tactical complications, and White's initiative persists into the middlegame with pressure on both flanks."
       },
       {
-        "name": "f4 Gambit Endgame Trick",
-        "pgn": "e4 e5 Nc3 Nf6 f4 exf4 e5 Ng8 Nf3 d6 d4 dxe5",
-        "explanation": "In the Vienna Gambit endgame, White's superior development and active pieces create surprisingly dangerous threats. After the queen exchange, White's pieces flood the center with Nxe5, Bxf4, and O-O-O. The critical move is Nd5 attacking the e7 bishop and threatening Nc7, forking the rooks. Black's king is stuck in the center and the rook on h8 is trapped. White's initiative in this queenless position is worth more than the pawn deficit."
-      },
-      {
         "name": "Copycat Qg4 Kingside Attack",
-        "pgn": "e4 e5 Nc3 Nc6 Bc4 Nf6 d3 Na5 Qf3 Nxc4 dxc4 Bc5 Bg5 d6 Nd5 Be6 Nxf6+ gxf6 Bh6 Rg8 O-O-O Qe7 Nh3 O-O-O Nf4 Bg4 Qg3 Bxd1 Rxd1 d5",
+        "pgn": "e4 e5 Nc3 Nc6 Bc4 Nf6 d3 Na5 Qf3 Nxc4 dxc4",
         "explanation": "White plays Qf3 targeting f7 and develops aggressively with Bg5 and Nd5. After the powerful Nd5 jump hits both f6 and e7, Black must accept a weakened kingside with ...gxf6. The Bh6 prevents castling kingside, and after O-O-O White's rook immediately pressures the d-file. The Nf4 lands on a dominant square eyeing g6 and e6, creating a crushing bind on Black's position."
       },
       {
         "name": "Pierce Gambit King Hunt",
-        "pgn": "e4 e5 Nc3 Nc6 f4 exf4 d4 Qh4+ Ke2 d5 exd5 Bg4+ Nf3 O-O-O dxc6 Bc5 cxb7+ Kb8 Bxf4 Nf6 Nd5 Rhe8+ Kd3 Bf5+ Kc4 Be6",
+        "pgn": "e4 e5 Nc3 Nc6 f4 exf4 d4 Qh4+ Ke2 d5",
         "explanation": "The Pierce Gambit sacrifices castling rights with Ke2 to maintain the initiative. After d5 opens the center, Black tries ...Bg4+ but White blocks with Nf3 and pushes dxc6-cxb7+ winning a pawn. The Bxf4 recapture develops with tempo, and Nd5 creates a dominant centralized knight. Although White's king looks exposed on c4, the centralized pieces and passed b7 pawn create confusion. Black's ...Be6 threatens the king but White has escaped to safety."
       },
       {
         "name": "Nd5 Fork Setup",
-        "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 O-O f4 d6 Nf3 Nc6 Na4 Bg4 Nxc5 dxc5 fxe5 Nd7 Bg5 Qe7 O-O Ndxe5 Nxe5 Nxe5 Bb5 f6 Bh4 c6 Ba4 f5",
+        "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 O-O f4 d6 Nf3 Nc6 Na4 Bg4 Nxc5 dxc5",
         "explanation": "White maneuvers the knight to a4 to exchange Black's strong dark-squared bishop with Nxc5. After dxc5, Black's pawn structure is weakened and the d5 square becomes available. The Bg5 pin creates tactical pressure, and after Bb5 pins the knight, White establishes a strong positional grip. Black's ...f5 push is forced to gain counterplay but further weakens the e6 and g6 squares for White to exploit."
       }
     ],
     "warningLines": [
       {
         "name": "Black's d5 Counterstrike",
-        "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Bg4 Be2 Nc6 d3 Nxc3 bxc3 d4 O-O dxc3 Qe1 Bxf3 Bxf3 Nxe5 Bxb7 Rb8 Bf3 Bd6 Bg5 Qd7 Qxc3 O-O Qe1 Rfe8",
+        "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Bg4 Be2",
         "explanation": "After f4, Black can strike back with ...d5 immediately, which is the strongest theoretical response. This counterstrike in the center challenges White's gambit and leads to complex positions where Black's central control compensates for any development advantage. If White captures with fxe5 Nxe4, Black's knight sits powerfully on e4 and the ...Bg4 pin creates real problems. White must play precisely or Black's counterplay becomes overwhelming with the active bishops and central presence."
       },
       {
         "name": "Premature Bxf7+ Backfires",
-        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Bxf7+ Kxf7 Nxe4 d5 Ng3 e4 N1e2 Bc5 d4 exd3 cxd3 Re8 O-O Kg8 Nf4 Nc6 Nfh5 Bg4 Qb3 Re2 Be3 Bxe3 fxe3 Ne5 Qxd5+ Be6 Qb5 Rxe3",
+        "pgn": "e4 e5 Nc3 Nf6 Bc4 Nxe4 Bxf7+ Kxf7 Nxe4 d5 Ng3",
         "explanation": "Going for Bxf7+ too early is a common mistake by aggressive players. After ...Kxf7, White has sacrificed a piece but lacks the follow-up to justify it. Black's king is temporarily exposed but quickly finds safety while the extra piece dominates. White's position deteriorates as Black develops with ...d5 and ...e4, seizing the center and pushing White's pieces back. The moral is that sacrifices need concrete tactical justification, not just general attacking ideas."
       },
       {
         "name": "Quiet 2...Nc6 Solid Defense",
-        "pgn": "e4 e5 Nc3 Nc6 Bc4 Nf6 d3 Bc5 Nf3 d6 O-O O-O Bg5 h6 Bh4 Be6 Bxe6 fxe6 Nd5 g5 Nxf6+ Qxf6 Bg3 Qg6 Nh4 Qf7 Nf5 Kh7",
+        "pgn": "e4 e5 Nc3 Nc6 Bc4 Nf6 d3 Bc5 Nf3 d6 O-O O-O Bg5 h6",
         "explanation": "When Black plays the solid 2...Nc6 followed by ...Nf6 and ...Bc5, White's standard plans are less effective because Black has a fully developed position. The ...Be6 exchange eliminates White's best attacking bishop, and after ...O-O, Black's position is very solid. White's kingside attack with Bg5 and Nd5 looks threatening but Black defends accurately with ...h6 and ...g5. The lesson for White is to avoid premature aggression when Black has developed harmoniously."
       }
     ]
