@@ -480,7 +480,7 @@
       "playerId": "naroditsky",
       "eco": "D43",
       "name": "Semi-Slav Defense (Naroditsky)",
-      "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bxf6 Qxf6 e3 Nd7 Bd3 dxc4 Bxc4 g6 O-O Bg7",
+      "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bxf6 Qxf6 e3 Nd7 Bd3 dxc4 Bxc4 g6 O-O Bg7 e4 e5 d5 Nb6 Bb3 Bg4 Rc1 O-O h3 Bxf3",
       "color": "black",
       "style": "Solid, Flexible",
       "overview": "Naroditsky uses the Semi-Slav as a solid alternative to the Grunfeld against 1.d4. The c6-d5 pawn chain provides stability while keeping options for both kingside and queenside play. Danya likes the Moscow Variation where Black gets active piece play.",
@@ -500,35 +500,25 @@
       "variations": [
         {
           "name": "Moscow Variation 5.Bg5 h6",
-          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bxf6 Qxf6 e3 Nd7 Bd3 dxc4 Bxc4 g6 O-O Bg7",
-          "explanation": "Danya's main choice. After Bxf6 Qxf6, Black has the bishop pair and a flexible pawn structure. The fianchetto setup with g6 and Bg7 gives long-term pressure."
+          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bxf6 Qxf6 e3 Nd7 Bd3 dxc4 Bxc4 g6 O-O Bg7 e4 e5 d5 Nb6 Bb3 Bg4 Rc1 O-O h3 Bxf3",
+          "explanation": "Danya's main choice. After Bxf6 Qxf6 Black has the bishop pair. The e5 push closes the center; the dark-square strategy with Bg7 + Bxf3 keeps Black's pieces active."
         },
         {
           "name": "Meran Variation",
-          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 O-O a6 e4 c5 d5 e5",
-          "explanation": "The sharpest Semi-Slav line. Black expands on the queenside with b5 and a6, then plays c5 to challenge the center. The position becomes very dynamic."
+          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 O-O a6 e4 c5 d5 e5 b3 Bd6 Re1 O-O Bf1 h6",
+          "explanation": "The sharpest Semi-Slav line. Black expands on the queenside with b5+a6 then breaks with c5/e5. The closed center stays balanced as both sides complete development."
         },
         {
           "name": "Anti-Moscow 5.Bg5 dxc4",
-          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 exf6 Bb7",
-          "explanation": "An incredibly sharp gambit where Black grabs a pawn and White gets a ferocious attack. Naroditsky has analyzed this deeply — the computer approves of Black's position but practical play is very tricky."
+          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 exf6 Bb7 g3 c5 d5 Qb6 Bg2 O-O-O",
+          "explanation": "An incredibly sharp gambit where Black grabs a pawn and White piece-sacrifices for attack. After O-O-O Black's king is safe while the bishops on b7 + Bg7 dominate the long diagonals — engines prefer Black, but the play remains extremely tricky in practice."
         }
       ],
       "trapLines": [
         {
           "name": "Poisoned b7 Pawn Queen Trap",
-          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 exf6 Bb7 g3 c5 d5 Qb6 Bg2 O-O-O O-O b4 Na4 Qb5 a3",
-          "explanation": "In the Anti-Moscow gambit, White grabs pawns but Black's pieces swarm. After ...O-O-O Black's king is safe while White's kingside is shredded. The queen and bishops create unstoppable threats."
-        },
-        {
-          "name": "Marshall Gambit Trap",
-          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Ne4 Nxe4 dxe4 Nd2 e5 Nxe4 exd4 Qxd4 Qxd4 exd4 Bb4+ Ke2 Bf5 Ng3 Bg6 a3 Bd6",
-          "explanation": "Black sacrifices a pawn with ...Ne4 and ...e5 to shatter White's center. After the queen trade, White's king is stuck in the center and Black's bishops dominate the open position."
-        },
-        {
-          "name": "dxc4 b5 Expansion Trap",
-          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 a6 e4 c5 d5 c4 Bc2 e5 Nxb5 axb5",
-          "explanation": "Black expands with ...b5 and ...c5 catching White off guard. When White takes on b5, Black has ...Bc5 with active pieces and a dangerous passed c-pawn that is hard to stop."
+          "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 exf6 Bb7 g3 c5 d5 Qb6 Bg2 O-O-O",
+          "explanation": "In the Anti-Moscow gambit, White grabs pawns but Black's pieces swarm. After ...O-O-O Black's king is safe while White's kingside is shredded — the bishops on b7 + g7 plus the central pawn break creates unstoppable pressure."
         }
       ]
     },
