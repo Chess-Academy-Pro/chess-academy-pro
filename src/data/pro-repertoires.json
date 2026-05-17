@@ -1520,13 +1520,13 @@
       "trapLines": [
         {
           "name": "Premature ...d4 Pawn Storm",
-          "pgn": "Nf3 d5 g3 Nf6 Bg2 e6 O-O Be7 d3 O-O Nbd2 d4 e4 Nc6 Nc4 Nd7 a4 a5 Nfd2 f6 f4",
-          "explanation": "Black closes the center with ...d4 thinking it restricts White, but it frees White to launch a devastating kingside pawn storm with f4-f5."
+          "pgn": "Nf3 d5 g3 Nf6 Bg2 e6 O-O Be7 d3 O-O Nbd2 d4",
+          "explanation": "Black closes the center with ...d4 thinking it restricts White, but it frees White to launch a devastating kingside pawn storm with f4-f5 against the now-permanent dark-square structure."
         },
         {
           "name": "Early ...c5 Long Diagonal",
-          "pgn": "Nf3 d5 g3 Nf6 Bg2 e6 O-O Be7 d3 O-O Nbd2 c5 e4 dxe4 dxe4 Qc7 e5 Nd5 Nc4 Nc6 Re1 Rd8 Bf4",
-          "explanation": "Black grabs space with ...c5 too early without securing d5. White breaks with e4-e5 and the Bg2 dominates the open long diagonal."
+          "pgn": "Nf3 d5 g3 Nf6 Bg2 e6 O-O Be7 d3 O-O Nbd2 c5 e4 dxe4 dxe4",
+          "explanation": "Black grabs space with ...c5 too early without securing d5. After e4 dxe4 dxe4, White's Bg2 dominates the open long diagonal — the e4 pawn supports the central e5 push."
         }
       ]
     },
