@@ -453,7 +453,7 @@
     "id": "smith-morra-gambit",
     "eco": "B21",
     "name": "Smith-Morra Gambit",
-    "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1 O-O e5 dxe5 Nxe5 Nxe5 Qxe5 Qc7 Qh5 Bd6 Bg5 Be7 Bf4",
+    "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1 O-O",
     "color": "white",
     "style": "Aggressive, Anti-Sicilian",
     "overview": "Tired of getting outbooked in the Sicilian? The Smith-Morra Gambit blows up all of Black's preparation in one move. You sacrifice a pawn with d4 and c3 to get rapid piece development, open lines, and a dangerous initiative against the Sicilian. White's pieces pour out like water while Black struggles to untangle — it's the ultimate anti-Sicilian weapon for attacking players who want to dictate the terms of the battle.",
@@ -476,66 +476,66 @@
     "variations": [
       {
         "name": "Smith-Morra: Classical Setup",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1 O-O e5 dxe5 Nxe5 Nxe5 Qxe5 Qc7 Qg3 Bd6 Qg5 Be7 Bf4 Nd5 Nxd5 exd5 Bxd5",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1 O-O",
         "explanation": "The main line where Black plays a standard Sicilian setup. White develops naturally with Bc4, O-O, Qe2, and Rd1. The e5 push opens the position and creates immediate threats. After Nxe5, White's pieces dominate the center and the bishop pair rakes across the board."
       },
       {
         "name": "Smith-Morra: Fianchetto Defense",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 g6 Bc4 Bg7 e5 Nf6 Bf4 O-O O-O d5 exd6 Qxd6 Nb5 Qd7 Qxd7 Bxd7 Nc7 Rac8 Nd5 Nxd5 Bxd5 a6 Rac1",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 g6 Bc4 Bg7 e5",
         "explanation": "Black fianchettos with g6 and Bg7. White pushes e5 to cramp Black's position and prevent d5. The Bf4 development combined with O-O creates a harmonious setup. After Nb5 and Nc7, White's knight creates chaos on the queenside while maintaining central control."
       },
       {
         "name": "Smith-Morra Declined: d3 Push",
-        "pgn": "e4 c5 d4 cxd4 c3 d3 Bxd3 Nc6 Nf3 d6 O-O Nf6 Nbd2 g6 Bc2 Bg7 Re1 O-O b3 e5 Bb2 Be6 Nc4 Rc8 a4 Nd7 a5 f5",
+        "pgn": "e4 c5 d4 cxd4 c3 d3 Bxd3 Nc6 Nf3 d6 O-O Nf6",
         "explanation": "Black declines by pushing d3 instead of taking on c3. This avoids the gambit but gives White a free developing move with Bxd3. The resulting position is like a Maroczy Bind where White has a comfortable space advantage. The Nc4 and a4-a5 plan creates queenside pressure."
       },
       {
         "name": "Smith-Morra: Siberian Trap",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1 O-O Bf4 Qa5 e5 dxe5 Nxe5 Nxe5 Bxe5 Qxe5 Nd5 Qd6 Nxe7+ Qxe7 Bxe6 Bxe6 Qxe6",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1 O-O Bf4",
         "explanation": "The Siberian Trap is the Smith-Morra's most famous tactical idea. After Qa5 and e5, the position becomes razor-sharp. The Nd5 jump is the key move — it forks multiple pieces and creates discovered threats along the e-file. Even if Black defends accurately, White emerges with excellent compensation."
       },
       {
         "name": "Smith-Morra: Taylor Defense",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 e6 Bc4 a6 O-O Nge7 Bg5 h6 Bh4 b5 Bb3 Ng6 Bg3 Be7 Nd5 exd5 exd5 Na5 d6 Bf6 Re1+ Kf8 Nd4",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 e6 Bc4 a6 O-O Nge7 Bg5 h6 Bh4 b5 Bb3",
         "explanation": "The Taylor Defense with a6 and Nge7 is a common amateur setup. White plays Bg5 to create a pin and then Nd5 is devastating. After exd5 and d6, the passed pawn cramps Black's entire position. The Re1+ pin and Nd4 centralization create a winning attack."
       }
     ],
     "trapLines": [
       {
         "name": "Siberian Trap (Qa5-Qe5)",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 a6 Rd1 Qc7 Bf4 Ne5 Nxe5 dxe5 Rd8+ Kxd8 Bg5 Be7 Nd5 exd5 Bxf6 dxc4 Bxe7+ Ke8 Qxc4",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 a6 Rd1 Qc7 Bf4 Ne5",
         "explanation": "A devastating variation of the Siberian Trap. After White's Rd1 and Bf4, the pin on the d-file sets up multiple tactical motifs. The Nd5 sacrifice blows open the position — after exd5 Bxf6, the discovered attack on the queen combined with the bishop invasion is fatal."
       },
       {
         "name": "Nd5 Tactical Bomb",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Be7 Qe2 Nf6 Rd1 O-O Bf4 e5 Nd5 Nxd5 exd5 Nb8 Nxe5 dxe5 d6 Bf6 Bxe5 Bxe5 Qxe5 Nc6 Qg3",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Be7 Qe2 Nf6 Rd1",
         "explanation": "The thematic Nd5 jump is the signature move of the Smith-Morra. When it lands, the position explodes. After Nxd5 exd5, the passed d-pawn races forward to d6, cutting Black's position in half. Combined with Nxe5 and Bxe5, White's pieces converge with devastating force."
       },
       {
         "name": "Pin Trick on d-file (Nd4)",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1 O-O Bg5 a6 e5 dxe5 Nd5 exd5 Bxd5 Qxd5 Rxd5 Nxd5 Nxe5 Nxe5 Qxe5 Bf6 Qe8 Bxb2 Rb1",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1",
         "explanation": "The pin trick along the d-file is a common motif in the Smith-Morra. After e5 opens the position, Nd5 combines with the rook on d1 to create a deadly pin. Black's queen is under constant pressure, and even if material is traded, White's initiative continues into the endgame."
       },
       {
         "name": "Development Trap: Passive Play Punished",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O a6 Qe2 Nf6 Rd1 Qc7 Bf4 e5 Bg5 Be7 Nd5 Nxd5 Bxe7 Ncxe7 exd5 O-O Nxe5 dxe5 Qxe5 Qxe5 Bxa6",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O a6 Qe2 Nf6 Rd1 Qc7 Bf4",
         "explanation": "When Black plays passively with a6 and delays castling, the e5 push combined with Bg5 creates a nasty pin. After Nd5, the threats multiply — Nxe7 combined with various discovered attacks make the position unplayable for Black. The extra development tempo decides the game."
       }
     ],
     "warningLines": [
       {
         "name": "Chicago Defense: Black Neutralizes",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 e6 Nf3 a6 Bc4 b5 Bb3 Bb7 O-O d6 Qe2 Nd7 Rd1 Ngf6 Bf4 Be7 Rac1 O-O e5 dxe5 Nxe5 Nxe5 Bxe5 Nd7 Bf4 Bf6",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 e6 Nf3 a6 Bc4 b5 Bb3 Bb7 O-O d6 Qe2 Nd7 Rd1 Ngf6 Bf4",
         "explanation": "Black's most solid setup with ...e6, ...a6, ...b5, and ...Bb7 neutralizes a lot of White's initiative. The bishop on b7 covers d5 and Black slowly untangles. Against this precise defense, White's compensation is at its thinnest — active play is essential to justify the pawn sacrifice."
       },
       {
         "name": "Endgame Danger: Black Simplifies",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1 O-O Be3 a6 Rac1 Qa5 Bb3 Bd7 Nd4 Nxd4 Bxd4 Bc6 f3 Nd7 Be3 Bf6 Nd5 Bxd5 Rxd5 e5",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1",
         "explanation": "If Black trades pieces carefully and reaches an endgame, the extra pawn becomes the dominant factor. This is the fundamental weakness of the Smith-Morra — it's built for the middlegame. If you let the position simplify, you're fighting for a draw at best."
       },
       {
         "name": "Black Plays d5 Counterstrike",
-        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1 O-O Bg5 a6 e5 dxe5 Nxe5 Qc7 Nxc6 bxc6 Be3 Nd5 Nxd5 cxd5 Bd3 Bb7 Rac1 Qd7",
+        "pgn": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6 O-O Nf6 Qe2 Be7 Rd1",
         "explanation": "When Black plays the accurate d5 counterstrike at the right moment, the position simplifies favorably. Black's central control and bishop pair provide adequate compensation for any initiative White might claim. This is why precise timing of e5 is critical for White."
       }
     ]
