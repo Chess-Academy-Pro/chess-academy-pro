@@ -7,7 +7,6 @@ import { KidChessboard } from '../Chessboard/KidChessboard';
 import { useChessGame } from '../../hooks/useChessGame';
 import { HintButton } from '../Coach/HintButton';
 import { StarDisplay } from './StarDisplay';
-import { useBoardContext } from '../../hooks/useBoardContext';
 import { useHintSystem } from '../../hooks/useHintSystem';
 import { useAppStore } from '../../stores/appStore';
 import { voiceService } from '../../services/voiceService';
@@ -101,15 +100,9 @@ export function GameChapterPage({ config }: GameChapterPageProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: rerun on puzzleIndex/activePuzzles only; tracked for dedicated audit.
   }, [puzzleIndex, activePuzzles, puzzleGame.loadFen]);
 
-  // Publish board context for global coach drawer
-  const currentFen = chapter
-    ? phase === 'puzzle'
-      ? activePuzzles[puzzleIndex]?.fen ?? ''
-      : phase === 'lesson'
-        ? chapter.lessons[lessonIndex]?.fen ?? ''
-        : ''
-    : '';
-  useBoardContext(currentFen, '', 0, 'white', 'w');
+  // useBoardContext removed — kid mode must not write to coach state
+  // (non-negotiable #10). Was a dead wire: AppLayout's coach FAB never
+  // mounts under KidLayout.
 
   // Derive knownMove for hint system from current puzzle's solution
   const currentPuzzleForHint = phase === 'puzzle' && !puzzlesLoading ? activePuzzles[puzzleIndex] : undefined;
@@ -351,7 +344,7 @@ export function GameChapterPage({ config }: GameChapterPageProps): JSX.Element {
 
   return (
     <div
-      className="flex flex-col flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6"
+      className="flex flex-col flex-1 overflow-y-auto pb-6"
       style={{ color: 'var(--color-text)', background: 'var(--color-bg)' }}
       data-testid="journey-chapter-page"
     >

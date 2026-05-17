@@ -97,7 +97,7 @@ export function RookGamesPage(): JSX.Element {
 
   return (
     <div
-      className="flex flex-col gap-4 p-6 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6"
+      className="flex flex-col gap-4 p-6 flex-1 overflow-y-auto pb-6"
       style={{ color: 'var(--color-text)' }}
       data-testid="rook-games-page"
     >

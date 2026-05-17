@@ -243,7 +243,7 @@ export function RowClearerPage(): JSX.Element {
 
   return (
     <div
-      className="flex flex-col flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6"
+      className="flex flex-col flex-1 overflow-y-auto pb-6"
       style={{ color: 'var(--color-text)', background: 'var(--color-bg)' }}
       data-testid="row-clearer-page"
     >

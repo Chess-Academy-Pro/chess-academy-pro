@@ -295,7 +295,7 @@ export function MiniGamePage({ gameId }: MiniGamePageProps): JSX.Element {
 
   return (
     <div
-      className="flex flex-col gap-2 p-4 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-4"
+      className="flex flex-col gap-2 p-4 flex-1 overflow-y-auto pb-6 md:pb-4"
       style={{ color: 'var(--color-text)' }}
       data-testid="mini-game-page"
     >

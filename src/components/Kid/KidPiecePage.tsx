@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Volume2, VolumeX } from 'lucide-react';
 import { KidChessboard } from '../Chessboard/KidChessboard';
 import { useChessGame } from '../../hooks/useChessGame';
-import { useBoardContext } from '../../hooks/useBoardContext';
 import { voiceService } from '../../services/voiceService';
 import type { ChessPiece } from '../../types';
 
@@ -34,9 +33,10 @@ export function KidPiecePage(): JSX.Element {
   const pieceFenForGame = piece && VALID_PIECES.has(piece) ? PIECE_CONFIG[piece as ChessPiece].fen : undefined;
   const game = useChessGame(pieceFenForGame, 'white', 'b');
 
-  // Publish board context for global coach drawer
-  const pieceFen = piece && VALID_PIECES.has(piece) ? PIECE_CONFIG[piece as ChessPiece].fen : '';
-  useBoardContext(pieceFen, '', 0, 'white', 'w');
+  // No useBoardContext call — kid mode must not write to coach state
+  // (non-negotiable #10). The global coach drawer is also hidden in
+  // KidLayout (it never mounts AppLayout's FAB), so this hook was
+  // a dead wire that only existed for symmetry with the adult tree.
 
   const speakInstruction = useCallback((text: string): void => {
     if (!voiceOn) return;
@@ -77,7 +77,7 @@ export function KidPiecePage(): JSX.Element {
 
   return (
     <div
-      className="flex flex-col gap-3 p-4 flex-1 overflow-y-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-6"
+      className="flex flex-col gap-3 p-4 flex-1 overflow-y-auto pb-6"
       style={{ color: 'var(--color-text)' }}
       data-testid={`kid-piece-${piece}`}
     >
