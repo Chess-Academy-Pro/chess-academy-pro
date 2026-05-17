@@ -128,66 +128,66 @@
       {
         "name": "Evans Gambit: Normal Variation with d5 Push",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O d6 cxd4 Bb6 d5 Na5 Bb2",
-        "explanation": "The main line where Black retreats to a5 and plays d6 to hold the center. White gets a powerful d4-d5 pawn chain, develops the dark-squared bishop to b2, and prepares a kingside attack with f4. Black is cramped and must find a way to break free before White's attack crashes through."
+        "explanation": "The main line. After 5.b4 Bxb4 6.c3 Ba5, White builds the center with c3 + d4 and trades the gambit pawn for tempo. The d5 push cramps Black; Bb2 develops the dark-squared bishop to the long diagonal where it eyes g7 and the entire kingside."
       },
       {
         "name": "Evans Gambit: Slow Variation with Be7 Retreat",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Be7 d4 Na5 Be2 exd4 Qxd4 Nf6 e5 Nc6 Qh4 Nd5 Qg3",
-        "explanation": "Black retreats the bishop to e7 — a conservative choice avoiding the sharpest lines. White plays d4 and builds up gradually. After Qxd4 and e5, the central space advantage and open lines provide excellent compensation. The queen on g3 eyes both the kingside and the g7 pawn."
+        "explanation": "Black retreats the bishop to e7 — a conservative choice avoiding the sharpest lines. White plays d4 and builds up gradually. After Qxd4 + e5, the central space advantage and open lines provide excellent compensation; the queen on g3 eyes both the kingside and the g7 pawn."
       },
       {
         "name": "Evans Gambit Declined: Bb6 System",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bb6 a4 a6 Nc3 Nf6 Nd5 Nxd5 exd5 Nd4 a5 Ba7",
-        "explanation": "Black declines with Bb6 — a sensible choice avoiding the sharpest play. White pushes a4-a5 to gain queenside space and plays Nd5 for a central grip. The game becomes less tactical but White retains a dynamic initiative with active pieces and space advantage."
+        "explanation": "Black declines with Bb6 — a sensible choice avoiding the sharpest play. White pushes a4-a5 to gain queenside space and plays Nd5 for a central grip; the trade Nxd5 + exd5 leaves White with a strong d5 pawn and the open e-file."
       },
       {
         "name": "Evans Gambit: Compromised Defense (dxc3)",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O dxc3 Qb3 Qf6 e5 Qg6 Nxc3 Nge7 Ba3 O-O",
-        "explanation": "The sharpest line where Black grabs the c3 pawn. White plays Qb3 targeting f7, and e5 gains space with tempo. After Nxc3, Ba3 prevents Black from developing normally. The Nd5 jump creates multiple threats and White's piece activity is overwhelming despite being down two pawns."
+        "explanation": "The sharpest line where Black grabs the c3 pawn. White plays Qb3 targeting f7, and e5 gains space with tempo. After Nxc3 + Ba3, White's piece activity is overwhelming despite being down two pawns — Ba3 specifically targets the e7-knight and prevents Black from developing comfortably."
       },
       {
         "name": "Evans Gambit: Waller Attack with Qb3",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Bc5 d4 exd4 O-O d6 cxd4 Bb6 Nc3 Bg4",
-        "explanation": "The Waller Attack features Qa4 and Qb3 to create constant pressure on the queenside while aiming at f7. After Nd5, the knight is a monster controlling key squares. Combined with a4 and Bg5, White's pieces coordinate beautifully for a crushing middlegame attack."
+        "explanation": "The Waller Attack — after Black retreats Bc5 (instead of Ba5), White builds the same big center and develops Nc3. The Bg4 pin tries to slow White's attack but White has Qa4 / Qb3 ready to trade the bishop or chase it away while maintaining the kingside pressure."
       }
     ],
     "trapLines": [
       {
         "name": "Anderssen's Attacking Pattern",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O dxc3 Qb3 Qf6 e5 Qg6 Nxc3 Nge7 Ba3",
-        "explanation": "After Black grabs the c3 pawn, White plays Qb3 targeting f7. The Nd5 jump combined with Ba3 creates an avalanche of threats. After Nxe7+ and Nxg6+, the double check destroys Black's kingside. Most club players simply cannot survive this onslaught."
+        "explanation": "After Black grabs the c3 pawn, White plays Qb3 targeting f7 + e5 chasing the queen + Nxc3 recovering material. The Ba3 finale prevents Black from castling — the Nge7 knight is pinned against the king and Black has no comfortable way to complete development."
       },
       {
         "name": "Quick d5 Double Attack",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4",
-        "explanation": "If Black greedily plays Nxe4 instead of retreating, White plays the stunning Qd5 with a double attack on f7 and the knight. After Qxf7+ Kd8, the king is stuck in the center and Bg5+ creates a discovered attack. Black loses massive material in all lines."
+        "explanation": "The classic setup. If Black grabs greedily here (Nxe4 instead of retreating), White's e4-d4-c3 pawn chain plus Bc4 targeting f7 creates immediate tactical problems. The d4 move opens the d-file behind Black's still-undeveloped queenside."
       },
       {
         "name": "Stone-Ware Trap (d3 Grab Punishment)",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O d3 Qb3 Qf6 e5 Qg6",
-        "explanation": "Black tries to hold the extra pawn with d3 but this move blocks development fatally. White plays Qb3 and e5 to build overwhelming pressure. The Ba3 move pins down Black's position, preventing normal development. The d3 pawn falls eventually and Black is left with a wrecked position."
+        "explanation": "Black tries to hold the extra pawn with the awkward d3 advance. White plays Qb3 (targeting f7 + b7) and e5 (chasing the queen to g6) — Black's queen is misplaced, the d3 pawn is permanently dead, and White's pieces are ready to launch the kingside attack."
       },
       {
         "name": "Lasker Defense Counter-Trap",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4",
-        "explanation": "The Lasker Defense looks strong for Black but White has a powerful counter. After O-O and dxc6, the passed b-pawn becomes a monster. Even after queens are traded, Nd5 combined with Bg5+ creates serious problems. White's initiative persists deep into the endgame."
+        "explanation": "The Lasker Defense setup. After 6.d4 Black will return the pawn with ...d5 simplifying — but White has the resource d4-d5 + dxc6 first, creating a passed b-pawn that becomes a long-term winning factor in the endgame."
       }
     ],
     "warningLines": [
       {
         "name": "Lasker Defense: Black Equalizes",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4",
-        "explanation": "Lasker's Defense is considered the strongest reply — Black returns the pawn with d5 to simplify and neutralize White's initiative. After accurate play with Be6 and O-O, Black reaches a comfortable position where the bishop pair provides adequate compensation. White must play very precisely to maintain even a small edge."
+        "explanation": "Lasker's Defense setup. Black plans to return the pawn with ...d5 to simplify and neutralize White's initiative — after the trades Black gets the bishop pair as compensation for being down a tempo. This is why theory considers Lasker's the strongest reply to the Evans."
       },
       {
         "name": "Compromised Defense: Black Consolidates",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O d3 Qb3 Qf6 e5 Qg6",
-        "explanation": "If Black manages to castle safely and hold the extra d3 pawn, White's initiative can fizzle out. After Nge7, b5, and O-O, Black consolidates and the extra pawn becomes a real asset. This is why tempo is everything in the Evans — delay means death for the attack."
+        "explanation": "Black holds the extra d3 pawn and aims for ...Nge7 + ...b5 to consolidate. If White can't break through in the next 5–8 moves, the initiative fizzles out and the extra pawn becomes a real asset — tempo is everything in the Evans."
       },
       {
         "name": "Central Counter with d5 exd5 Nxd5",
         "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O Nf6 e5 d5 exf6 dxc4",
-        "explanation": "Black's precise central counter with d5 and Nf6 challenges White's center directly. After exf6 dxc4, Black has won the key light-squared bishop and has good piece activity. The resulting position is sharp but Black has equalized the material and has real chances."
+        "explanation": "Black's precise central counter — ...Nf6 + ...d5 challenges White's center directly. After exf6 dxc4, Black has won the key light-squared bishop and has full piece activity; the sharp position is balanced material-wise with real chances."
       }
     ]
   },
