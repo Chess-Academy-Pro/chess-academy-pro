@@ -18,15 +18,6 @@
     "petrov-defence::trap::Wrong Move Order Punishment": [
       "WEAK_TRAP"
     ],
-    "qgd::trap::Elephant Trap": [
-      "WEAK_TRAP"
-    ],
-    "qgd::trap::Lasker Trap with Central Break": [
-      "WEAK_TRAP"
-    ],
-    "qgd::trap::Cambridge Springs Queen Trap": [
-      "WEAK_TRAP"
-    ],
     "qga::trap::Premature d5 Refutation": [
       "WEAK_TRAP"
     ],
@@ -589,6 +580,23 @@
     "trompowsky-attack::warning::Allowing Offbeat Sidelines": [
       "TOOTHLESS_WARNING",
       "PGN_NOT_IN_DB"
+    ],
+    "qgd::trap::Elephant Trap": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "qgd::trap::Cambridge Springs Queen Trap": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "qgd::warning::Passive Setup Without ...c5 or ...dxc4": [
+      "TOOTHLESS_WARNING"
+    ],
+    "qgd::warning::Early ...dxc4 Without Follow-up": [
+      "TOOTHLESS_WARNING"
+    ],
+    "qgd::warning::Allowing White's Kingside Attack in Exchange Variation": [
+      "TOOTHLESS_WARNING"
     ]
   }
 }

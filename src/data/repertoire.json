@@ -2299,7 +2299,7 @@
     "id": "qgd",
     "eco": "D30",
     "name": "Queen's Gambit Declined",
-    "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7 Rc1 c6 Bd3 dxc4 Bxc4 Nd5 Bxe7 Qxe7 O-O Nxc3 Rxc3 e5 Bb3 exd4 exd4 Nf6 Re1 Bg4",
+    "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7 Rc1 c6 Bd3 dxc4 Bxc4 Nd5 Bxe7 Qxe7 O-O Nxc3 Rxc3 e5 Bb3 exd4 exd4 Nf6 Re1",
     "color": "black",
     "style": "Solid, Classical",
     "overview": "The Queen's Gambit Declined is one of the most solid and respected openings in chess. By playing ...e6, you support your d5 pawn and prepare to develop naturally. The positions are strategic and rich — you're playing the same lines that Capablanca and Karpov used to win World Championships. It's all about understanding pawn structures and piece placement.",
@@ -2320,7 +2320,7 @@
     "trapLines": [
       {
         "name": "Elephant Trap",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Nbd7 cxd5 exd5 Nxd5 Nxd5 Bxd8 Bb4+ Qd2 Bxd2+ Kxd2 Kxd8",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Nbd7 cxd5 exd5",
         "explanation": "The famous Elephant Trap springs after White carelessly takes on d5 twice. Black recaptures with the knight, and when White greedily plays Bxd8, Bb4+ forks the king and queen. After the simplifications Black reaches a level endgame, but the trap wins material against unprepared opponents. Always know this pattern when playing the QGD with ...Nbd7."
       },
       {
@@ -2330,66 +2330,66 @@
       },
       {
         "name": "Cambridge Springs Queen Trap",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Nbd7 Nf3 c6 e3 Qa5 Nd2 Bb4 Qc2 O-O Be2 e5 O-O exd4 exd4 dxc4 Bxf6 Nxf6",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Nbd7 Nf3 c6 e3 Qa5 Nd2 Bb4 Qc2 O-O Be2 e5 O-O exd4",
         "explanation": "The Cambridge Springs sets a cunning trap with ...Qa5 pinning the Nc3 along the a5-e1 diagonal. If White plays carelessly, Black's queen and bishop create deadly threats against the pinned knight. The ...Bb4 follow-up intensifies the pressure, and White must be very precise to avoid losing material. This is one of the most practical traps in tournament play."
       }
     ],
     "variations": [
       {
         "name": "Orthodox Defense Main Line",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7 Rc1 c6 Bd3 dxc4 Bxc4 Nd5 Bxe7 Qxe7 O-O Nxc3 Rxc3 e5 dxe5 Nxe5 Nxe5 Qxe5 Bb3 Bg4 Qd4 Qe6",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7 Rc1 c6 Bd3 dxc4 Bxc4 Nd5 Bxe7 Qxe7 O-O Nxc3 Rxc3 e5 dxe5 Nxe5 Nxe5 Qxe5",
         "explanation": "The most classical continuation of the QGD, played by Capablanca and Karpov. Black develops solidly with Be7, castles, and plays Nbd7 before timing the ...dxc4 break perfectly. After ...Nd5 challenges the bishop and ...e5 opens the center, Black achieves full equality with active pieces. The key is understanding that ...dxc4 and ...Nd5 must come together as a package — the piece on d5 is the cornerstone of Black's counterplay."
       },
       {
         "name": "Tartakower Variation",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 h6 Bh4 b6 cxd5 Nxd5 Bxe7 Qxe7 Nxd5 exd5 Rc1 Be6 Qa4 c5 Qa3 Rc8 Bb5 a6 dxc5 bxc5 Be2 Qb7",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 h6 Bh4 b6 cxd5 Nxd5 Bxe7 Qxe7 Nxd5 exd5 Rc1 Be6 Qa4 c5 Qa3 Rc8 Bb5 a6 dxc5 bxc5",
         "explanation": "Karpov's beloved system where Black plays ...h6 and ...b6, developing the light-squared bishop actively. After the exchange on d5, Black gets the bishop pair and pressure along the c-file and long diagonal. The ...Bb7 plan gives Black excellent control of the light squares, and the ...c5 break challenges White's center. This variation is extremely solid and has been used successfully at the highest level for over a century."
       },
       {
         "name": "Lasker Defense",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 h6 Bh4 Ne4 Bxe7 Qxe7 cxd5 Nxc3 bxc3 exd5 Qb3 Qd6 c4 dxc4 Bxc4 Nd7 O-O Nb6 Bd3 Bd7 Rfc1 Rfc8",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 h6 Bh4 Ne4 Bxe7 Qxe7 cxd5 Nxc3 bxc3 exd5 Qb3 Qd6 c4 dxc4 Bxc4",
         "explanation": "Lasker's brilliant simplifying idea plays ...Ne4 early, forcing exchanges that relieve Black's cramped position. After ...Nxc3 and bxc3, White has doubled c-pawns that become a long-term weakness. Black follows up with ...c5 to challenge the center and targets the isolated c-pawns. This is the ultimate equalizing weapon in the QGD — simple to play, hard to crack, and it has neutralized many a strong White player."
       },
       {
         "name": "Exchange Variation",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 cxd5 exd5 Bg5 Be7 e3 O-O Bd3 Nbd7 Nf3 Re8 Qc2 c6 O-O Nf8 Rab1 Ng6 b4 a6 a4 Bd6 b5 Bc7 bxc6 bxc6",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 cxd5 exd5 Bg5 Be7 e3 O-O Bd3 Nbd7 Nf3 Re8 Qc2 c6 O-O Nf8 Rab1 Ng6 b4 a6 a4 Bd6 b5",
         "explanation": "White exchanges on d5 early to create a symmetrical pawn structure, then launches the minority attack with b4-b5. Black must defend accurately on the queenside while seeking kingside counterplay. The key defensive idea is ...Nf8-g6, rerouting the knight to support both flanks. Despite the symmetry, these positions are rich with strategic nuance — Black should aim for piece activity on the kingside with ...Ng6, ...Bd6, and potentially ...Nf4."
       },
       {
         "name": "Ragozin Variation",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Nf3 Bb4 Bg5 dxc4 e4 c5 Bxc4 cxd4 Nxd4 Qa5 Bd2 Qc5 Nb3 Qe7 Qf3 O-O O-O-O a5 a3 Bxc3 Bxc3 a4 Nd4 Nbd7",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Nf3 Bb4 Bg5 dxc4 e4 c5 Bxc4 cxd4 Nxd4 Qa5 Bd2 Qc5",
         "explanation": "The Ragozin blends ideas from the Nimzo-Indian and QGD — Black plays ...Bb4 pinning the knight and creating immediate tension. After ...dxc4 and ...c5, Black gets dynamic piece play and challenges White's center directly. The resulting positions are sharper than the classical QGD, with Black often getting counterplay against White's king if it castles queenside. This variation rewards players who like active, concrete play over slow maneuvering."
       },
       {
         "name": "Vienna Variation",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Nf3 dxc4 e3 a6 Bxc4 b5 Bd3 Bb7 O-O Nbd7 e4 c5 d5 e5 b3 Be7 Nh4 O-O Nf5 Bc8 Nxe7+ Qxe7 Bg5 h6 Bh4",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Nf3 dxc4 e3 a6 Bxc4 b5 Bd3 Bb7 O-O Nbd7 e4 c5 d5 e5 b3",
         "explanation": "The Vienna Variation features Black's early ...dxc4 capture, conceding the center temporarily but gaining time to develop the queenside with ...a6, ...b5, and ...Bb7. White gets a strong center but Black's queenside expansion creates counterplay. The resulting positions are complex and double-edged, with Black aiming for the ...c5 break to undermine White's center. This is a practical choice for players who prefer concrete play to theoretical battles."
       },
       {
         "name": "Cambridge Springs",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Nbd7 Nf3 c6 e3 Qa5 Nd2 Bb4 Qc2 O-O Bd3 dxc4 Bxc4 e5 O-O exd4 exd4 Nb6 Bd3 Bg4 f3 Bh5 Nde4 Nxe4 Nxe4",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Nbd7 Nf3 c6 e3 Qa5 Nd2 Bb4 Qc2 O-O Bd3 dxc4",
         "explanation": "The Cambridge Springs with ...Qa5 is a sharp counterattacking system where Black exploits the pin on the Nc3 along the a5-e1 diagonal. After ...Bb4 intensifies the pin, White faces difficult decisions about how to untangle. Black gets active piece play and targets White's center, with the queen on a5 coordinating beautifully with the bishop on b4 and knight on d7. This variation has been a reliable weapon for over a century and remains dangerous at all levels."
       },
       {
         "name": "Bf4 QGD",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bf4 Be7 e3 O-O Nf3 Nbd7 c5 Nh5 Bd3 Nxf4 exf4 b6 b4 a5 a3 Ba6 Bxa6 Rxa6 O-O g6 Qe2 axb4 axb4 bxc5 bxc5",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bf4 Be7 e3 O-O Nf3 Nbd7 c5 Nh5 Bd3 Nxf4 exf4 b6 b4 a5 a3 Ba6",
         "explanation": "When White avoids Bg5 entirely and plays Bf4, the character of the game changes significantly. Black doesn't face the pin on the Nf6, so the light-squared bishop problem is less acute. Black can aim for ...Nh5 to challenge the Bf4 directly, or develop with ...b6 and ...Ba6 exchanging light-squared bishops. The resulting positions are quieter but strategically rich, with play revolving around the queenside pawn structure and the fight for control of e5."
       }
     ],
     "warningLines": [
       {
         "name": "Passive Setup Without ...c5 or ...dxc4",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7 Bd3 b6 O-O Bb7 cxd5 exd5 Ne5 Nxe5 dxe5 Ne8 Bf4 c5 Qg4 g6",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7 Bd3 b6 O-O Bb7 cxd5 exd5 Ne5",
         "explanation": "Playing too passively without the timely ...dxc4 or ...c5 break allows White to build a dominating position. The bishop on b7 bites into the granite d5 pawn, and White can launch a dangerous kingside attack. The e5-pawn becomes a permanent thorn in Black's position, and the lack of counterplay means Black is defending for the entire game. Always ensure you have an active plan before committing to a pawn structure."
       },
       {
         "name": "Early ...dxc4 Without Follow-up",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 dxc4 e3 b5 a4 c6 axb5 cxb5 Nxb5 Qa5+ Nc3 Bb4 Bxc4 O-O Nf3 Ba6 Bxa6 Nxa6 Qb3 Nc7 O-O Bxc3 bxc3 Nce8 Nd2",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 Bg5 dxc4 e3",
         "explanation": "Taking on c4 too early without the standard preparation of ...Be7, ...O-O, and ...Nbd7 gives White easy play. The attempt to hold the pawn with ...b5 creates queenside weaknesses that White exploits with a4. Black ends up with weak pawns and undeveloped pieces, while White's centralized pieces dominate. The correct approach is to develop first and capture on c4 only when ...Nd5 is ready."
       },
       {
         "name": "Allowing White's Kingside Attack in Exchange Variation",
-        "pgn": "d4 d5 c4 e6 Nc3 Nf6 cxd5 exd5 Bg5 Be7 e3 O-O Bd3 Nbd7 Qc2 Re8 Nge2 Nf8 O-O-O c6 Kb1 Ng6 h4 Be6 Ng3 Qa5 h5 Nf8 Nf5 Bxf5 Bxf5 Bd8",
+        "pgn": "d4 d5 c4 e6 Nc3 Nf6 cxd5 exd5 Bg5 Be7 e3 O-O Bd3 Nbd7 Qc2 Re8 Nge2 Nf8 O-O-O c6 Kb1",
         "explanation": "In the Exchange Variation, if Black plays too passively and allows White to castle queenside and launch a kingside pawn storm, the position becomes very dangerous. White's h4-h5 advance combined with pieces aimed at the kingside creates serious threats. Black must seek active counterplay with ...b5 and the minority attack on the queenside, or find the right moment for ...c5 to open the center before White's attack becomes overwhelming."
       }
     ]
