@@ -3044,7 +3044,7 @@
       "playerId": "dubov",
       "eco": "A80",
       "name": "Dutch Defense (Dubov)",
-      "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Nc6 d5 Ne5 Nxe5 dxe5 Qb3 Kh8 Be3 e4 f3 exf3 Bxf3 c6",
+      "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Nc6 d5 Ne5 Nxe5 dxe5 Qb3 Kh8 Be3",
       "color": "black",
       "style": "Dynamic, Unbalancing",
       "overview": "Dubov uses the Leningrad Dutch as his most ambitious Black weapon. The f5 pawn creates an unbalanced structure from move one, leading to the creative, dynamic middlegames that Dubov excels in. His deep understanding of the resulting pawn structures is key to his success.",
@@ -3064,30 +3064,30 @@
       "variations": [
         {
           "name": "Leningrad Main Line",
-          "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Nc6 d5 Ne5 Nxe5 dxe5 Qb3 Kh8 Be3 e4 f3 exf3 Bxf3 c6",
-          "explanation": "The main Leningrad Dutch. Black builds a kingside pawn wall and aims for a slow attack. Dubov uses the unbalanced structure to create creative attacking chances."
+          "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Nc6 d5 Ne5 Nxe5 dxe5 Qb3 Kh8 Be3",
+          "explanation": "The main Leningrad Dutch. Black builds a kingside pawn wall and aims for a slow attack. After Be3 White prepares the central play; Black's creative middlegame plans take over from here."
         },
         {
           "name": "Stonewall Dutch",
-          "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 d5 O-O Bd6 c4 c6 b3 Qe7 Bb2 O-O Nbd2 b6 Ne5 Bb7 Nd3 Nbd7 Nf4 Ne4",
-          "explanation": "The Stonewall setup with d5-e6-f5 creates a solid pawn wall. Dubov plays it when he wants a more structured position with clear piece maneuvering plans."
+          "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 d5 O-O Bd6 c4 c6 b3 Qe7 Bb2 O-O Nbd2 b6 Ne5 Bb7 Nd3 Nbd7 Nf4",
+          "explanation": "The Stonewall setup with d5-e6-f5 creates a solid pawn wall. After Nf4 White probes the e6 outpost; Dubov uses these structures for piece maneuvering plans."
         },
         {
           "name": "Anti-Staunton Gambit",
-          "pgn": "d4 f5 e4 fxe4 Nc3 Nf6 Bg5 d5 Bxf6 exf6 Qh5+ g6 Qe2 Be7 O-O-O c6 Nxe4 O-O Nf3 Nd7 Nc5 Nxc5 dxc5 Bf5",
-          "explanation": "Against the Staunton Gambit (e4), Dubov accepts the pawn and defends accurately. Black emerges with an extra pawn and solid position after the tactical complications clear."
+          "pgn": "d4 f5 e4 fxe4 Nc3 Nf6 Bg5 d5 Bxf6 exf6 Qh5+ g6",
+          "explanation": "Against the Staunton Gambit (e4), Dubov accepts the pawn and defends accurately. After Qh5+ g6 the immediate threats are blunted and Black keeps the extra pawn."
         }
       ],
       "trapLines": [
         {
           "name": "e4 fxe4 Favorable Opening",
-          "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 e5 dxe5 dxe5 e4 fxe4 Nxe4 Nxe4 Bg5 Qe8 Qd5+ Kh8 Rad1",
-          "explanation": "White plays e4 trying to blow open the center but after fxe4, Black gets a favorable position. The open f-file and active Bg7 give Black excellent attacking prospects."
+          "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 e5",
+          "explanation": "White plays e4 trying to blow open the center but after fxe4, Black gets a favorable position. The e5 push completes Black's central setup with the long-diagonal Bg7 ready for action."
         },
         {
           "name": "Stonewall d5 Fortress",
-          "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 d5 O-O Bd6 c4 c6 b3 Qe7 Bb2 O-O Nbd2 b6 Ne5 Bb7 Nd3 Nbd7 Nf4 Ne4 Nxe4 fxe4 f3 exf3 Bxf3 Nf6",
-          "explanation": "The Stonewall setup with d5-e6-f5 creates an impenetrable fortress in the center. White struggles to break through while Black maneuvers pieces for a kingside attack."
+          "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 d5 O-O Bd6 c4 c6 b3 Qe7 Bb2 O-O Nbd2 b6 Ne5 Bb7 Nd3 Nbd7 Nf4",
+          "explanation": "The Stonewall setup with d5-e6-f5 creates an impenetrable fortress in the center. After Nf4 White struggles to break through while Black maneuvers pieces for a kingside attack."
         }
       ]
     },
