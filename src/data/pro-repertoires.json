@@ -1958,7 +1958,7 @@
       "playerId": "caruana",
       "eco": "C65",
       "name": "Anti-Berlin (Caruana)",
-      "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Be6 O-O Bd6 Nb3 Qe7 Bg5 Nd7 Nh4 f6 Be3 O-O-O",
+      "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Be6 O-O Bd6 Nb3 Qe7",
       "color": "white",
       "style": "Positional, Modern",
       "overview": "Caruana pioneered many Anti-Berlin ideas to avoid the drawish Berlin Endgame. By playing d3 instead of O-O on move 4, White keeps more pieces on the board and creates an asymmetric middlegame where preparation and understanding matter.",
@@ -1978,25 +1978,20 @@
       "variations": [
         {
           "name": "d3 Anti-Berlin",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Be6 O-O Bd6 Nb3 Qe7 Bg5 Nd7 Nh4 f6 Be3 O-O-O",
-          "explanation": "Caruana's preferred anti-Berlin weapon. White exchanges on c6 and plays for a middlegame with the bishop pair against Black's doubled pawns."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Be6 O-O Bd6 Nb3 Qe7",
+          "explanation": "Caruana's preferred anti-Berlin. White exchanges on c6 and plays for a middlegame with the bishop pair against Black's doubled pawns; the Nb3 + Qe7 setup keeps the queens on the board."
         },
         {
           "name": "5.O-O Berlin Main Line",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8 Bg5 Be7 Bxe7 Kxe7 Rad1 Be6",
-          "explanation": "For comparison — the main Berlin endgame that Caruana sometimes enters when he has specific preparation ready."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8",
+          "explanation": "For comparison — the main Berlin endgame. After the queen trade Black's bishop pair plus king centralization equalize; Caruana enters this only with specific preparation."
         }
       ],
       "trapLines": [
         {
-          "name": "...Nxe4 Refuted by d3",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nxe5 Qd4",
-          "explanation": "Black tries ...Nxe4 thinking it wins a pawn, but d3 was played precisely to cover e4. After the queens trade, White's knight dominates from f4."
-        },
-        {
           "name": "...a6 Bishop Pair Advantage",
-          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 a6 Bxc6 dxc6 Nbd2 Bc5 O-O Be6 Nb3 Bb6 Bg5 h6 Bh4 Qe7 Re1 Nd7 d4 f6 a4",
-          "explanation": "Black plays ...a6 kicking the bishop, but White happily trades on c6 and keeps the bishop pair. The doubled c-pawns are a permanent structural weakness."
+          "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 d3 a6 Bxc6 dxc6",
+          "explanation": "Black plays ...a6 kicking the bishop, but White happily trades on c6 and keeps the bishop pair. The doubled c-pawns are a permanent structural weakness for the rest of the game."
         }
       ]
     },
