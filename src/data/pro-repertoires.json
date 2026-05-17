@@ -1420,22 +1420,11 @@
         },
         {
           "name": "Jobava-London Attack",
-          "pgn": "d4 Nf6 Nc3 d5 Bf4 c5 e3 cxd4 exd4 a6 Nf3 Nc6 Bd3 Bg4 O-O e6 h3 Bh5 Re1 Be7 a3 O-O",
-          "explanation": "The more aggressive Jobava setup with Nc3 before Nf3. This gives White more flexibility and the knight can go to b5 or e5."
+          "pgn": "d4 Nf6 Nc3 d5 Bf4 c5 e3 cxd4 exd4 a6 Nf3 Nc6 Bd3 Bg4",
+          "explanation": "The more aggressive Jobava setup with Nc3 before Nf3. The Bg4 pin invites h3 + Bh5 — White retains the flexible setup with Nc3 ready to jump to b5 or e5."
         }
       ],
-      "trapLines": [
-        {
-          "name": "Premature Qb6 Refuted",
-          "pgn": "d4 Nf6 Nf3 d5 Bf4 c5 e3 Qb6 Nc3 Qxb2 Nb5 Na6 Bc7 Qb4+ c3",
-          "explanation": "Black plays ...Qb6 to hit b2 but White has a tactical defense with Nc3 and Nb5. After ...Qxb2, Nb5 threatens Nc7+ and the queen gets trapped."
-        },
-        {
-          "name": "Premature e5 Pawn Drop",
-          "pgn": "d4 Nf6 Nf3 d5 Bf4 c5 e3 e5 dxe5 Ne4 Bd3 Qa5+ Nbd2 Nxd2 Qxd2 Qxd2+ Kxd2 Be6 Ng5 Bd7 e4",
-          "explanation": "Black pushes ...e5 too early and after dxe5, White wins a clean pawn. The London bishop on f4 supports the e5 pawn and Black's center collapses."
-        }
-      ]
+      "trapLines": []
     },
     {
       "id": "pro-carlsen-sicilian-najdorf",
