@@ -69,6 +69,25 @@ export default defineConfig(({ mode }) => {
               cacheableResponse: { statuses: [0, 200] },
             },
           },
+          {
+            // Static data JSONs served from `/public/data/` —
+            // currently the 36 MB Lichess masters DB used by the
+            // coach grounding pipeline (`masterPlayLookup`). Not
+            // precached (it would download the whole file on every
+            // PWA install and blow the workbox 10 MB cap), but once
+            // the user visits any coach surface online the SW caches
+            // it CacheFirst. Subsequent loads — including fully
+            // offline — hit the SW cache. 90-day expiration matches
+            // how often the DB is regenerated.
+            urlPattern: /\/data\/.*\.json$/i,
+            handler: 'CacheFirst' as const,
+            options: {
+              cacheName: 'opening-data-cache',
+              expiration: { maxEntries: 5, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              cacheableResponse: { statuses: [0, 200] },
+              matchOptions: { ignoreSearch: true },
+            },
+          },
         ],
       },
       manifest: {
