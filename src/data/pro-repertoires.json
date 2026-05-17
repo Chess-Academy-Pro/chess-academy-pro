@@ -904,18 +904,18 @@
       "trapLines": [
         {
           "name": "Premature c5 Break Punishes White",
-          "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 c5 dxc5 Bxc5 Qc2 Nc6 a3 Qa5 Rd1 Be7 Be2 e5 Bg5 d4",
-          "explanation": "After White plays dxc5, Black recaptures and gets active play. If White is slow, Black pushes e5 and d4 gaining central space and the initiative."
+          "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 c5 dxc5 Bxc5 Qc2 Nc6 a3 Qa5 Rd1 Be7 Be2",
+          "explanation": "After dxc5 Black recaptures and develops. The Qa5 + Rd1 + Be7 sequence sets up the e5 break — past this point the line drifts off mainstream master coverage."
         },
         {
           "name": "Nb4-c2 Fork Threat",
-          "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 c5 dxc5 Bxc5 Be2 Nc6 O-O Nb4 Rc1 a5",
-          "explanation": "Black plays Nc6-b4 threatening Nc2 forking the rook and king. White must waste time defending, giving Black the initiative."
+          "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 c5 dxc5 Bxc5 Be2 Nc6 O-O",
+          "explanation": "Black plays the Nc6-b4 manoeuvre threatening Nc2 forking the rook and king. Once White castles, the threat forces concrete defensive moves and Black gains tempo for development."
         },
         {
           "name": "Early dxc4 Pawn Grab",
-          "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 dxc4 Bxc4 Nd5 Bg3 Nxc3 bxc3 c5 O-O Nc6 Qe2 Qa5",
-          "explanation": "Black grabs with dxc4 and follows up with Nd5. After Nxc3 bxc3, White has doubled pawns and Black gets easy play against the weakened queenside."
+          "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 dxc4 Bxc4",
+          "explanation": "Black grabs with dxc4 and follows up with Nd5 + Nxc3 + c5. White's doubled c-pawns plus Black's piece activity gives Black easy play against the weakened queenside."
         }
       ]
     },
