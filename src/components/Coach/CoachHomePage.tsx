@@ -5,7 +5,7 @@ import { SmartSearchBar } from '../Search/SmartSearchBar';
 import { useSettings } from '../../hooks/useSettings';
 import { scaledShadow } from '../../utils/neonColors';
 import { logAppAudit } from '../../services/appAuditor';
-import type { CSSProperties, MouseEvent, ReactNode } from 'react';
+import type { CSSProperties, KeyboardEvent, MouseEvent, ReactNode } from 'react';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -266,6 +266,19 @@ function InfoButton({ label, info, textColorClass }: { label: string; info: stri
   );
 }
 
+// Keyboard activation for div role="button" tiles. The tile wrapper
+// can't be a real <button> because it contains the InfoButton (and
+// its modal close button) — nested <button> elements are invalid
+// HTML and cause React hydration warnings.
+function activateOnKey(onClick: () => void) {
+  return (e: KeyboardEvent<HTMLDivElement>): void => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
+}
+
 /** Primary tile. Default: aspect-square in one column (Learn /
  *  Play). With `wide`: spans 2 columns at 2:1 aspect so HEIGHT
  *  equals the aspect-square primaries above (the Endgame layout).
@@ -277,9 +290,13 @@ function PrimaryTile({ icon, label, subtitle, info, rgb, bgClass, textColorClass
     ? 'col-span-2 aspect-[2/1] px-6 py-4'
     : 'aspect-square px-3 py-4';
   return (
-    <button
+    <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
-      className={`${bgClass} ${sizeClass} rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-200 relative`}
+      onKeyDown={activateOnKey(onClick)}
+      aria-label={label}
+      className={`${bgClass} ${sizeClass} rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-200 relative cursor-pointer`}
       style={{ ...neonBorderStyle(rgb, gS), boxShadow: shadow }}
       onMouseEnter={(e) => { applyHoverBorder(e.currentTarget, rgb, gS); e.currentTarget.style.boxShadow = shadowHover; }}
       onMouseLeave={(e) => { applyRestBorder(e.currentTarget, rgb, gS); e.currentTarget.style.boxShadow = shadow; }}
@@ -296,7 +313,7 @@ function PrimaryTile({ icon, label, subtitle, info, rgb, bgClass, textColorClass
           {subtitle}
         </span>
       )}
-    </button>
+    </div>
   );
 }
 
@@ -306,9 +323,13 @@ function SecondaryTile({ icon, label, info, rgb, bgClass, textColorClass, onClic
   const shadow = scaledShadow(rgb, gB);
   const shadowHover = scaledShadow(rgb, Math.min(200, gB * 1.4));
   return (
-    <button
+    <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
-      className={`${bgClass} rounded-2xl flex flex-col items-center justify-center gap-2 py-6 transition-all duration-200 relative`}
+      onKeyDown={activateOnKey(onClick)}
+      aria-label={label}
+      className={`${bgClass} rounded-2xl flex flex-col items-center justify-center gap-2 py-6 transition-all duration-200 relative cursor-pointer`}
       style={{ ...neonBorderStyle(rgb, gS), boxShadow: shadow }}
       onMouseEnter={(e) => { applyHoverBorder(e.currentTarget, rgb, gS); e.currentTarget.style.boxShadow = shadowHover; }}
       onMouseLeave={(e) => { applyRestBorder(e.currentTarget, rgb, gS); e.currentTarget.style.boxShadow = shadow; }}
@@ -317,6 +338,6 @@ function SecondaryTile({ icon, label, info, rgb, bgClass, textColorClass, onClic
       {info && <InfoButton label={label} info={info} textColorClass={textColorClass} />}
       {icon}
       <span className={`text-sm font-bold ${textColorClass}`}>{label}</span>
-    </button>
+    </div>
   );
 }
