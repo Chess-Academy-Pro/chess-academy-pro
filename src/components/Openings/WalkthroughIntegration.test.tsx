@@ -14,6 +14,28 @@ import type { OpeningRecord } from '../../types';
 
 // ── Mocks (everything except annotationService) ────────────────────────────
 
+// API-leak guard (WO-TEST-CLEANUP-01 Part A) — intercepts modern
+// brain entry point + all 6 network-wrapping coachApi exports.
+// This test passed in CI but was a SILENT credit leak — assertions
+// green while Anthropic 400'd in the background on every run.
+vi.mock('../../coach/coachService', () => ({
+  coachService: {
+    ask: vi.fn().mockResolvedValue({ text: '', toolCallIds: [], provider: 'deepseek' }),
+  },
+}));
+vi.mock('../../services/coachApi', async (importOriginal) => {
+  const orig = await importOriginal<typeof import('../../services/coachApi')>();
+  return {
+    ...orig,
+    getCoachCommentary: vi.fn().mockResolvedValue(''),
+    getCoachChatResponse: vi.fn().mockResolvedValue(''),
+    getCoachStructuredResponse: vi.fn().mockResolvedValue({}),
+    getKidLlmResponse: vi.fn().mockResolvedValue(''),
+    callAnthropicWithTool: vi.fn().mockResolvedValue({}),
+    callDeepseekWithTool: vi.fn().mockResolvedValue({}),
+  };
+});
+
 vi.mock('react-chessboard', () => ({
   Chessboard: () => <div data-testid="chessboard">Board</div>,
 }));

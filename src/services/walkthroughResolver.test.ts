@@ -8,6 +8,30 @@ vi.mock('./annotationService', () => ({
   loadSubLineAnnotations: vi.fn(),
 }));
 
+// API-leak guard (WO-TEST-CLEANUP-01 Part A) — intercept the
+// 6 network-wrapping exports of coachApi + the modern coachService
+// brain entry point. Spread-original-override preserves type
+// exports, constants, and helpers so transitive imports stay intact;
+// only the calls that hit Anthropic / DeepSeek are replaced with
+// vi.fn() resolves so this test runs free of API credits.
+vi.mock('../coach/coachService', () => ({
+  coachService: {
+    ask: vi.fn().mockResolvedValue({ text: '', toolCallIds: [], provider: 'deepseek' }),
+  },
+}));
+vi.mock('./coachApi', async (importOriginal) => {
+  const orig = await importOriginal<typeof import('./coachApi')>();
+  return {
+    ...orig,
+    getCoachCommentary: vi.fn().mockResolvedValue(''),
+    getCoachChatResponse: vi.fn().mockResolvedValue(''),
+    getCoachStructuredResponse: vi.fn().mockResolvedValue({}),
+    getKidLlmResponse: vi.fn().mockResolvedValue(''),
+    callAnthropicWithTool: vi.fn().mockResolvedValue({}),
+    callDeepseekWithTool: vi.fn().mockResolvedValue({}),
+  };
+});
+
 import { searchOpenings } from './openingService';
 import { loadAnnotations, loadSubLineAnnotations } from './annotationService';
 import {

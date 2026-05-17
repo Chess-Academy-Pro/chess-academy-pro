@@ -3,6 +3,28 @@ import { render as rtlRender, screen, waitFor, fireEvent, act } from '@testing-l
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { MotionConfig } from 'framer-motion';
 import { GameChapterPage } from './GameChapterPage';
+
+// API-leak guard (WO-TEST-CLEANUP-01 Part A) — intercepts modern
+// brain entry point + all 6 network-wrapping coachApi exports.
+// Spread-original-override preserves type exports / constants /
+// helpers; only the network calls are replaced with vi.fn() resolves.
+vi.mock('../../coach/coachService', () => ({
+  coachService: {
+    ask: vi.fn().mockResolvedValue({ text: '', toolCallIds: [], provider: 'deepseek' }),
+  },
+}));
+vi.mock('../../services/coachApi', async (importOriginal) => {
+  const orig = await importOriginal<typeof import('../../services/coachApi')>();
+  return {
+    ...orig,
+    getCoachCommentary: vi.fn().mockResolvedValue(''),
+    getCoachChatResponse: vi.fn().mockResolvedValue(''),
+    getCoachStructuredResponse: vi.fn().mockResolvedValue({}),
+    getKidLlmResponse: vi.fn().mockResolvedValue(''),
+    callAnthropicWithTool: vi.fn().mockResolvedValue({}),
+    callDeepseekWithTool: vi.fn().mockResolvedValue({}),
+  };
+});
 import { useAppStore } from '../../stores/appStore';
 import { buildUserProfile } from '../../test/factories';
 import type { KidGameConfig, JourneyChapter } from '../../types';
