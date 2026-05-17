@@ -17,13 +17,17 @@ interface OpeningEntry {
  *  PGN — the existing "longest matching entry wins" logic naturally
  *  prefers the deeper line for `findShortestCanonicalPgn` callers
  *  that walk to middlegame. When `openings-lichess-extended.json` is
- *  empty (e.g. before the mining script has run), behavior is
- *  identical to canonical-only. User: "Do not break my app!!
- *  Everything is coded in the exact same way it is now!" — this
- *  merge respects that contract. */
+ *  empty (or has been repurposed as the position-indexed masters DB
+ *  for the coach-grounding pipeline — i.e. shape `{ positions: {...} }`
+ *  rather than an array), behavior is identical to canonical-only.
+ *  User: "Do not break my app!! Everything is coded in the exact
+ *  same way it is now!" — this merge respects that contract. */
+const extendedAsArray: OpeningEntry[] = Array.isArray(extendedOpenings)
+  ? (extendedOpenings as OpeningEntry[])
+  : [];
 const openingsData: OpeningEntry[] = [
   ...(canonicalOpenings as OpeningEntry[]),
-  ...(extendedOpenings as OpeningEntry[]),
+  ...extendedAsArray,
 ];
 
 interface TrieNode {

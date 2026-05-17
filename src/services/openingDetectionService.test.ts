@@ -389,12 +389,12 @@ describe('openingDetectionService', () => {
 
   describe('Lichess-extended entries conform to canonical shape', () => {
     /* eslint-disable @typescript-eslint/no-require-imports */
-    const extended = require('../data/openings-lichess-extended.json') as Array<{
-      eco?: unknown;
-      name?: unknown;
-      pgn?: unknown;
-    }>;
+    const extendedRaw = require('../data/openings-lichess-extended.json') as unknown;
     /* eslint-enable @typescript-eslint/no-require-imports */
+    const extended: Array<{ eco?: unknown; name?: unknown; pgn?: unknown }> =
+      Array.isArray(extendedRaw)
+        ? (extendedRaw as Array<{ eco?: unknown; name?: unknown; pgn?: unknown }>)
+        : [];
 
     it('every extended entry has the {eco, name, pgn} shape canonical entries use', () => {
       // Existing trie-build, name-resolution, and longest-PGN reducers
@@ -402,6 +402,9 @@ describe('openingDetectionService', () => {
       // string}`. If the mining script ever emits a different shape,
       // every downstream resolver crashes silently. Lock the
       // invariant here — empty array is fine; non-empty must conform.
+      // (When the file has been repurposed as the position-indexed
+      // masters DB for the coach-grounding pipeline, `extended` is
+      // empty and this assertion is vacuously true.)
       for (const e of extended) {
         expect(typeof e.eco).toBe('string');
         expect(typeof e.name).toBe('string');
