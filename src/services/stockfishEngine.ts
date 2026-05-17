@@ -254,11 +254,18 @@ class StockfishEngine {
   // window instead of re-entering the init flow and re-OOMing. The
   // audit (2026-05-14 scenario 25 + 26) captured 1.3M browser-level
   // pageerror events when consumer-side useEffects re-called
-  // analyzePosition in a tight loop after each OOM. The 30s window
-  // bounds the cascade to "a few errors then silent fail-fast" and
-  // recovers on its own when the memory pressure clears.
+  // analyzePosition in a tight loop after each OOM. The cooldown
+  // window bounds the cascade to "a few errors then silent fail-fast"
+  // and recovers on its own when the memory pressure clears.
+  //
+  // 2026-05-17 audit caught the original 30s being too long in
+  // practice: a single init timeout poisoned every subsequent
+  // opponent move during /openings/<id>/play (random moves for ~30s
+  // until cooldown expired). Reduced to 5s — still bounds the
+  // OOM cascade (the cascade fires in milliseconds, not seconds)
+  // but recovers fast enough that human-paced play doesn't stall.
   private _initFailedAt: number | null = null;
-  private static readonly INIT_COOLDOWN_MS = 30_000;
+  private static readonly INIT_COOLDOWN_MS = 5_000;
 
   async initialize(): Promise<void> {
     if (this._permanentlyUnavailable) {

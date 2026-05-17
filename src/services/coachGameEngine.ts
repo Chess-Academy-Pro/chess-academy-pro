@@ -3,6 +3,7 @@ import { stockfishEngine } from './stockfishEngine';
 import { getNextOpeningBookMove } from './openingDetectionService';
 import { findHangingPieces } from './tacticClassifier';
 import { lookupMasterPlay } from './masterPlayLookup';
+import { pickBookMove } from './coachBookMove';
 import { logAppAudit } from './appAuditor';
 import type { StockfishAnalysis, CoachDifficulty } from '../types';
 
@@ -57,25 +58,66 @@ function getVarietyChance(targetElo: number): number {
   return 0.03;
 }
 
+/** Compact 0-100 quality score for a legal move. Higher = better.
+ *  Hand-built priorities so the last-resort random fallback is
+ *  PLAUSIBLE-looking, not literal-random. Used when both the masters
+ *  DB AND the Lichess broader DB AND Stockfish all fail — exceptional
+ *  case but the user still deserves a sensible move. */
+function scoreLegalMove(fen: string, m: { from: string; to: string; flags: string; promotion?: string }): number {
+  let score = 50;
+  // Captures rank highest — taking material is usually fine
+  if (m.flags.includes('c') || m.flags.includes('e')) score += 30;
+  // Promotions
+  if (m.promotion) score += 25;
+  // Castling — almost always safe and good
+  if (m.flags.includes('k') || m.flags.includes('q')) score += 20;
+  // Central squares are stronger
+  const toFile = m.to[0];
+  const toRank = m.to[1];
+  if ('de'.includes(toFile) && '45'.includes(toRank)) score += 10;
+  if ('cdef'.includes(toFile) && '3456'.includes(toRank)) score += 5;
+  // Flank pawn pushes are usually waste of tempo — penalize hard
+  // (this is what blocked `b7b6` style nonsense moves in the
+  // 2026-05-17 audit). Detect: pawn move ending on a/b/g/h file
+  // and not capturing.
+  if (!m.flags.includes('c') && !m.flags.includes('e')) {
+    if ('abgh'.includes(toFile)) score -= 15;
+  }
+  // Penalize moves that leave own pieces hanging
+  try {
+    const test = new Chess(fen);
+    const chessTurn = test.turn();
+    test.move({ from: m.from, to: m.to, promotion: m.promotion });
+    const hanging = findHangingPieces(test).filter((p) => p.color === chessTurn);
+    score -= hanging.length * 25;
+  } catch {
+    // chess.js refused the move shape; treat as low quality
+    score -= 50;
+  }
+  return score;
+}
+
 export function getRandomLegalMove(fen: string): string | null {
   try {
     const chess = new Chess(fen);
     const moves = chess.moves({ verbose: true });
     if (moves.length === 0) return null;
 
-    // Score each move by how many own pieces it leaves hanging
-    const scored = moves.map((m) => {
-      const test = new Chess(fen);
-      test.move({ from: m.from, to: m.to, promotion: m.promotion });
-      const hanging = findHangingPieces(test).filter((p) => p.color === chess.turn());
-      return { move: m, hangingCount: hanging.length };
-    });
-
-    // Prefer moves with fewest hanging pieces
-    scored.sort((a, b) => a.hangingCount - b.hangingCount);
-    const bestScore = scored[0].hangingCount;
-    const candidates = scored.filter((s) => s.hangingCount === bestScore);
-    const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+    // Score every legal move and pick from the top-3 (weighted by
+    // their scores). This way "random" still looks like a plausible
+    // human move — captures + central development first, no flank
+    // pawn pushes when better options exist.
+    const scored = moves
+      .map((m) => ({ move: m, score: scoreLegalMove(fen, m) }))
+      .sort((a, b) => b.score - a.score);
+    const topK = scored.slice(0, Math.min(3, scored.length));
+    const totalWeight = topK.reduce((sum, s) => sum + Math.max(1, s.score), 0);
+    let r = Math.random() * totalWeight;
+    let chosen = topK[0];
+    for (const s of topK) {
+      r -= Math.max(1, s.score);
+      if (r <= 0) { chosen = s; break; }
+    }
     return `${chosen.move.from}${chosen.move.to}${chosen.move.promotion ?? ''}`;
   } catch {
     return null;
@@ -150,7 +192,7 @@ function pickMasterMove(
 export async function getAdaptiveMove(
   fen: string,
   targetElo: number,
-): Promise<{ move: string; analysis: StockfishAnalysis; source: 'masters' | 'stockfish-best' | 'stockfish-variety' | 'stockfish-fallback' | 'random' }> {
+): Promise<{ move: string; analysis: StockfishAnalysis; source: 'masters' | 'lichess-games' | 'stockfish-best' | 'stockfish-variety' | 'stockfish-fallback' | 'random' }> {
   const depth = getDepthForElo(targetElo);
   const skillLevel = getSkillLevelForElo(targetElo);
 
@@ -159,8 +201,9 @@ export async function getAdaptiveMove(
   // master games, the opponent plays a weighted-random move from the
   // top-5 replies — keeps the line natural / theoretically sound and
   // avoids Stockfish-low-skill blunders that send the user wandering
-  // off into nonsense positions. Falls through to Stockfish on cache
-  // miss / network failure.
+  // off into nonsense positions. Falls through to broader Lichess on
+  // masters miss; that falls through to Stockfish; that falls through
+  // to last-resort random.
   //
   // Audit emissions on every branch so the play surface is debuggable
   // from the audit stream alone (no console-log archaeology).
@@ -189,12 +232,12 @@ export async function getAdaptiveMove(
         }
       }
     }
-    // No masters data OR pickMasterMove rejected. Fall through to Stockfish.
+    // No masters data OR pickMasterMove rejected. Fall through.
     void logAppAudit({
       kind: 'coach-opponent-masters-miss',
       category: 'subsystem',
       source: 'coachGameEngine.getAdaptiveMove',
-      summary: `source=${masters.source} totalGames=${masters.totalGames} elo=${targetElo} — falling to stockfish`,
+      summary: `source=${masters.source} totalGames=${masters.totalGames} elo=${targetElo} — trying broader lichess DB`,
       fen,
     });
   } catch (err) {
@@ -204,6 +247,59 @@ export async function getAdaptiveMove(
       category: 'subsystem',
       source: 'coachGameEngine.getAdaptiveMove',
       summary: `error=${(err as Error)?.message ?? err} elo=${targetElo}`,
+      fen,
+    });
+  }
+
+  // Layer 0.5 — broader Lichess games DB. Catches the long tail
+  // positions where masters dries up (off-mainstream openings past
+  // book, e.g. Bird's Opening past ply 8). Has WAY more coverage
+  // than masters because it includes every Lichess game (rated +
+  // casual). Relaxed thresholds vs the standard pickBookMove
+  // call — we WANT this layer to fire deep, since the alternative
+  // is Stockfish failing → random move.
+  //
+  // Why this matters: 2026-05-17 live audit showed `source=random
+  // move=b7b6` and `source=random move=f6g4` after Stockfish
+  // init timed out in Bird's Opening. With this layer, deep
+  // off-book positions still get a Lichess-played move (which any
+  // user has tried before) instead of a chess.js random walk.
+  try {
+    const lichess = await pickBookMove(fen, {
+      maxPly: 200,        // no horizon — try at any depth
+      minTotalGames: 50,  // sparser than the 500-game cutoff for the
+                          // primary book picker, but enough to filter
+                          // out one-off games
+      topN: 5,
+    });
+    if (lichess) {
+      const uci = `${lichess.uci.slice(0, 2)}${lichess.uci.slice(2, 4)}${lichess.uci.length > 4 ? lichess.uci[4] : ''}`;
+      void logAppAudit({
+        kind: 'coach-opponent-move-source',
+        category: 'subsystem',
+        source: 'coachGameEngine.getAdaptiveMove',
+        summary: `source=lichess-games san=${lichess.san} uci=${uci} opening=${lichess.openingName ?? '-'} elo=${targetElo}`,
+        fen,
+      });
+      return {
+        move: uci,
+        analysis: { ...FALLBACK_ANALYSIS, bestMove: uci },
+        source: 'lichess-games',
+      };
+    }
+    void logAppAudit({
+      kind: 'coach-opponent-masters-miss',
+      category: 'subsystem',
+      source: 'coachGameEngine.getAdaptiveMove',
+      summary: `lichess-games also empty — falling to stockfish (elo=${targetElo})`,
+      fen,
+    });
+  } catch (err) {
+    void logAppAudit({
+      kind: 'coach-opponent-masters-error',
+      category: 'subsystem',
+      source: 'coachGameEngine.getAdaptiveMove',
+      summary: `lichess-games lookup error=${(err as Error)?.message ?? err}`,
       fen,
     });
   }
