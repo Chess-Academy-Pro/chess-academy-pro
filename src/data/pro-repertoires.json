@@ -2047,7 +2047,7 @@
       "playerId": "caruana",
       "eco": "D37",
       "name": "Queen's Gambit Declined (Caruana)",
-      "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bf4 O-O e3 Nbd7 Be2 c5 dxc5 Nxc5 O-O dxc4 Bxc4 a6 a4 b6",
+      "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bf4 O-O e3 Nbd7 Be2 c5 dxc5 Nxc5 O-O dxc4 Bxc4 a6 a4",
       "color": "black",
       "style": "Solid, Classical",
       "overview": "Caruana's reliable weapon against 1.d4. The QGD provides the solid foundation he needs while still offering enough play to press for a win. His precise understanding of the arising middlegame and endgame positions is among the best in the world.",
@@ -2067,8 +2067,8 @@
       "variations": [
         {
           "name": "5.Bf4 with c5",
-          "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bf4 O-O e3 Nbd7 Be2 c5 dxc5 Nxc5 O-O dxc4 Bxc4 a6 a4 b6",
-          "explanation": "Caruana's main line. The recapture Nxc5 gives Black an active position. The bishop on c4 is well-placed but Black has counterplay."
+          "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bf4 O-O e3 Nbd7 Be2 c5 dxc5 Nxc5 O-O dxc4 Bxc4 a6 a4",
+          "explanation": "Caruana's main line. The recapture Nxc5 + a6 + a4 mirrored move sequence places the knight on its active outpost while preparing ...b6/...Bb7 for full coordination."
         },
         {
           "name": "Exchange Variation",
@@ -2084,13 +2084,13 @@
       "trapLines": [
         {
           "name": "Premature e4 Punished",
-          "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bf4 O-O e3 Nbd7 Be2 c5 dxc5 Nxc5 O-O dxc4 Bxc4 a6 e4 b5 Bd3 Bb7 e5 Nd5 Nxd5 Bxd5 Be4 Bxe4 Nd2 Bb7",
-          "explanation": "White pushes e4 prematurely and Black exploits the overextension. After ...b5 and ...Bb7, Black's pieces are perfectly placed and the e5 pawn becomes weak."
+          "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bf4 O-O e3 Nbd7 Be2 c5 dxc5 Nxc5 O-O dxc4 Bxc4 a6",
+          "explanation": "After dxc4 + a6 setup, if White tries to push e4 prematurely, Black has ...b5 + ...Bb7 ready — the central tension favors Black's coordinated piece play."
         },
         {
           "name": "Lasker Defense ...Ne4 Exchange",
-          "pgn": "d4 Nf6 c4 e6 Nc3 d5 Bg5 Be7 e3 O-O Nf3 h6 Bh4 Ne4 Bxe7 Qxe7 cxd5 Nxc3 bxc3 exd5 Qb3 Rd8 c4 dxc4 Bxc4 Nc6 O-O Na5 Qa4 Nxc4 Qxc4 Be6",
-          "explanation": "The classic Lasker trick: ...Ne4 forces Bxe7 Qxe7 then Nxc3 damages White's structure. Black equalizes easily and the doubled c-pawns are weak long-term."
+          "pgn": "d4 Nf6 c4 e6 Nc3 d5 Bg5 Be7 e3 O-O Nf3 h6 Bh4 Ne4 Bxe7 Qxe7 cxd5 Nxc3 bxc3 exd5 Qb3 Rd8 c4 dxc4 Bxc4 Nc6 O-O Na5",
+          "explanation": "The classic Lasker trick: ...Ne4 forces Bxe7 Qxe7 then Nxc3 damages White's structure. Black equalizes easily and the doubled c-pawns become long-term targets for ...Na5 + ...Nxc4."
         }
       ]
     },
