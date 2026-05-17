@@ -1,0 +1,565 @@
+{
+  "description": "Allowlist of known orientation violations in src/data/repertoire.json as of 2026-05-16. The build-time test in repertoire-orientation.test.ts treats these as expected; any flagged entry NOT on this list fails CI. Each value is the set of category codes currently allowed for that key. As Phases 2-4 of docs/plans/2026-05-16-trap-orientation.md ship, entries are removed from this file. Phase 5 deletes this file entirely.",
+  "allowlist": {
+    "italian-game::trap::Blackburne Shilling Gambit Refutation": [
+      "INVERTED_MATE"
+    ],
+    "italian-game::trap::Fried Liver Attack": [
+      "INVERTED_MATERIAL",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "italian-game::trap::Italian: Legal's Mate Pattern": [
+      "PGN_NOT_IN_DB"
+    ],
+    "italian-game::trap::Jerome Gambit": [
+      "WEAK_TRAP"
+    ],
+    "italian-game::trap::Lolli Attack": [
+      "INVERTED_MATERIAL",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "italian-game::trap::Giuoco Piano Queen Trap": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "italian-game::warning::Traxler Counterattack": [
+      "TOOTHLESS_WARNING"
+    ],
+    "ruy-lopez::trap::Noah's Ark Trap": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "ruy-lopez::trap::Fishing Pole Trap": [
+      "INVERTED_MATE"
+    ],
+    "ruy-lopez::trap::Tarrasch Trap": [
+      "WEAK_TRAP"
+    ],
+    "scotch-game::trap::Mieses Center Domination Trap": [
+      "WEAK_TRAP"
+    ],
+    "scotch-game::trap::Scotch Gambit Nd5 Fork Trap": [
+      "INVERTED_MATERIAL"
+    ],
+    "scotch-game::trap::Goring Gambit Kingside Storm": [
+      "INVERTED_MATERIAL"
+    ],
+    "scotch-game::trap::Scotch Gambit Bxf7+ Sacrifice": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "scotch-game::trap::4...Qh4 Refutation": [
+      "WEAK_TRAP"
+    ],
+    "vienna-game::trap::Vienna Trap (Qh5 Attack)": [
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "vienna-game::trap::Frankenstein-Dracula Fork": [
+      "INVERTED_MATERIAL"
+    ],
+    "vienna-game::trap::f4 Gambit Endgame Trick": [
+      "INVERTED_MATERIAL",
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "vienna-game::trap::Copycat Qg4 Kingside Attack": [
+      "INVERTED_MATERIAL",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "vienna-game::trap::Pierce Gambit King Hunt": [
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "vienna-game::trap::Nd5 Fork Setup": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "kings-gambit::trap::Kieseritzky: Central Domination": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "kings-gambit::trap::Allgaier: King Hunt Continuation": [
+      "INVERTED_MATERIAL"
+    ],
+    "kings-gambit::trap::Muzio: Total Development Lead": [
+      "INVERTED_MATERIAL",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-gambit::trap::Cunningham Defense Refutation": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "kings-gambit::trap::Bishop's Gambit f7 Attack": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "kings-gambit::trap::h4 Kingside Storm": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "four-knights-game::trap::Rubinstein Counter-Trap: Nd4 Nxe5 Qe7": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "four-knights-game::trap::Belgrade Gambit Nd5 Central Bind": [
+      "INVERTED_MATERIAL"
+    ],
+    "four-knights-game::trap::Scotch Four Knights Fork Trick": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "four-knights-game::warning::Passive Play in Spanish: Missing d4 Break": [
+      "TOOTHLESS_WARNING"
+    ],
+    "sicilian-najdorf::trap::Najdorf: Central ...d5 Break Tactic": [
+      "WEAK_TRAP"
+    ],
+    "sicilian-najdorf::trap::Najdorf: ...b5-b4 Queenside Attack Timing": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "sicilian-najdorf::trap::Najdorf: Knight Sacrifice on d5": [
+      "INVERTED_MATERIAL",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "sicilian-najdorf::trap::Najdorf: English Attack Nd5 Counter": [
+      "WEAK_TRAP"
+    ],
+    "sicilian-najdorf::warning::6.Bg5 Pin Dangers: Unpinning Too Late": [
+      "TOOTHLESS_WARNING"
+    ],
+    "sicilian-dragon::trap::The Exchange Sacrifice ...Rxc3": [
+      "WEAK_TRAP"
+    ],
+    "sicilian-dragon::trap::The ...Nc4 Fork Trick": [
+      "WEAK_TRAP"
+    ],
+    "sicilian-dragon::trap::The g-file Counterattack After ...gxh5": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "sicilian-sveshnikov::trap::Sveshnikov: ...f5 Breakthrough Combination": [
+      "WEAK_TRAP"
+    ],
+    "sicilian-sveshnikov::trap::Sveshnikov: b4 Queenside Demolition": [
+      "WEAK_TRAP"
+    ],
+    "sicilian-sveshnikov::trap::Sveshnikov: ...Nd4 Central Occupation": [
+      "WEAK_TRAP"
+    ],
+    "sicilian-alapin::trap::Alapin: IQP Exploitation and Piece Exchanges": [
+      "WEAK_TRAP"
+    ],
+    "sicilian-alapin::trap::Alapin: Knight Outpost on d5": [
+      "WEAK_TRAP"
+    ],
+    "sicilian-alapin::trap::Alapin: ...e5 Counter-Thrust Trap": [
+      "WEAK_TRAP"
+    ],
+    "french-defence::trap::Advance Variation Qb6 Fork Trap": [
+      "WEAK_TRAP"
+    ],
+    "french-defence::trap::Winawer Poisoned Pawn Counterattack": [
+      "WEAK_TRAP"
+    ],
+    "french-defence::trap::Classical Bg5 Pin Trap": [
+      "WEAK_TRAP"
+    ],
+    "caro-kann::trap::Advance Variation Center Collapse": [
+      "WEAK_TRAP"
+    ],
+    "caro-kann::trap::Classical h-pawn Overextension": [
+      "WEAK_TRAP"
+    ],
+    "caro-kann::trap::Panov IQP Exploitation": [
+      "WEAK_TRAP"
+    ],
+    "caro-kann::trap::Fantasy Variation Refutation": [
+      "WEAK_TRAP"
+    ],
+    "caro-kann::trap::Hillbilly Attack Refutation": [
+      "PGN_NOT_IN_DB",
+      "WEAK_TRAP"
+    ],
+    "caro-kann::warning::Two Knights Early e6 Mistake": [
+      "PGN_NOT_IN_DB"
+    ],
+    "pirc-defence::trap::Austrian Attack e5 Trick": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "pirc-defence::trap::Classical Pin Trap": [
+      "WEAK_TRAP"
+    ],
+    "pirc-defence::trap::150 Attack Qa5 Counter": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "scandinavian-defence::trap::Qa5 b2 Trap": [
+      "INVERTED_MATERIAL",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "scandinavian-defence::trap::Nb4 Fork Threat": [
+      "WEAK_TRAP"
+    ],
+    "scandinavian-defence::trap::Nf6 c4 Counter": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "scandinavian-defence::trap::Blackmar-Diemer Style e5 Refutation": [
+      "WEAK_TRAP"
+    ],
+    "scandinavian-defence::warning::Queen Wandering Danger": [
+      "PGN_NOT_IN_DB"
+    ],
+    "alekhine-defence::trap::Four Pawns Attack Counter": [
+      "WEAK_TRAP"
+    ],
+    "alekhine-defence::trap::Bg4 Pin Pressure": [
+      "WEAK_TRAP"
+    ],
+    "alekhine-defence::trap::Exchange Variation Development Lead": [
+      "WEAK_TRAP"
+    ],
+    "philidor-defence::trap::Legal's Mate Reversal": [
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "philidor-defence::trap::d4 Capture Refutation": [
+      "WEAK_TRAP"
+    ],
+    "philidor-defence::trap::Early d5 Counter": [
+      "WEAK_TRAP"
+    ],
+    "petrov-defence::trap::Nxf7 Refutation": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "petrov-defence::trap::Wrong Move Order Punishment": [
+      "WEAK_TRAP"
+    ],
+    "queens-gambit::trap::QGA e4 Thrust": [
+      "INVERTED_MATERIAL"
+    ],
+    "queens-gambit::trap::Minority Attack Breakthrough": [
+      "WEAK_TRAP"
+    ],
+    "queens-gambit::trap::Exchange Variation Knight Outpost": [
+      "WEAK_TRAP"
+    ],
+    "london-system::trap::Nh5 Misplacement Trap": [
+      "PGN_NOT_IN_DB",
+      "WEAK_TRAP"
+    ],
+    "london-system::trap::c5 Qb6 Trap": [
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "london-system::trap::e5 Central Blunder Trap": [
+      "PGN_NOT_IN_DB",
+      "WEAK_TRAP"
+    ],
+    "london-system::trap::Jobava Nb5 Fork Combo": [
+      "INVERTED_MATERIAL",
+      "PGN_NOT_IN_DB"
+    ],
+    "london-system::trap::Oh No My Queen Trap": [
+      "INVERTED_MATERIAL",
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "london-system::trap::Jobava Kingside Pawn Storm": [
+      "INVERTED_MATERIAL",
+      "PGN_NOT_IN_DB"
+    ],
+    "london-system::warning::Early Bf5 Counter": [
+      "PGN_NOT_IN_DB"
+    ],
+    "london-system::warning::King's Indian Counterattack": [
+      "PGN_NOT_IN_DB"
+    ],
+    "london-system::warning::Dutch f5-f4 Pawn Storm": [
+      "PGN_NOT_IN_DB"
+    ],
+    "catalan-opening::trap::Long Diagonal Rook Skewer": [
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "catalan-opening::trap::a4 Undermining: Queen Fork": [
+      "INVERTED_MATERIAL"
+    ],
+    "catalan-opening::trap::Qc2 Discovery on the Diagonal": [
+      "WEAK_TRAP"
+    ],
+    "trompowsky-attack::trap::Ne4 Bh4 Blunder": [
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "trompowsky-attack::trap::Vaganian Gambit Refutation": [
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "trompowsky-attack::trap::d5 Premature Pin Break": [
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "trompowsky-attack::warning::Overextending with e4 Too Early": [
+      "PGN_NOT_IN_DB"
+    ],
+    "trompowsky-attack::warning::Ignoring Black's c5 Break": [
+      "PGN_NOT_IN_DB"
+    ],
+    "trompowsky-attack::warning::Allowing Offbeat Sidelines": [
+      "PGN_NOT_IN_DB"
+    ],
+    "qgd::trap::Elephant Trap": [
+      "WEAK_TRAP"
+    ],
+    "qgd::trap::Lasker Trap with Central Break": [
+      "WEAK_TRAP"
+    ],
+    "qgd::trap::Cambridge Springs Queen Trap": [
+      "WEAK_TRAP"
+    ],
+    "qga::trap::Premature d5 Refutation": [
+      "WEAK_TRAP"
+    ],
+    "qga::trap::b5 Counter-attack": [
+      "WEAK_TRAP"
+    ],
+    "qga::trap::Bb7 Long Diagonal Pressure": [
+      "WEAK_TRAP"
+    ],
+    "slav-defence::trap::Qb3 Trap Defense": [
+      "WEAK_TRAP"
+    ],
+    "slav-defence::trap::Exchange Slav Qb6 Trick": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "slav-defence::trap::Geller Gambit Refutation": [
+      "WEAK_TRAP"
+    ],
+    "slav-defence::warning::Premature ...Bf5 Before ...c6": [
+      "PGN_NOT_IN_DB"
+    ],
+    "slav-defence::warning::Early ...dxc4 Without Development": [
+      "TOOTHLESS_WARNING"
+    ],
+    "semi-slav::trap::Botvinnik Material Grab": [
+      "WEAK_TRAP"
+    ],
+    "semi-slav::trap::Anti-Meran c5 Break": [
+      "WEAK_TRAP"
+    ],
+    "semi-slav::trap::Meran Queenside Expansion Trap": [
+      "WEAK_TRAP"
+    ],
+    "kings-indian-defence::trap::Kingside Pawn Storm": [
+      "WEAK_TRAP"
+    ],
+    "kings-indian-defence::trap::Central Exchange Tactic": [
+      "WEAK_TRAP"
+    ],
+    "kings-indian-defence::trap::Bayonet Attack Counter-Trap": [
+      "WEAK_TRAP"
+    ],
+    "kings-indian-defence::trap::Classical f4 Breakthrough": [
+      "WEAK_TRAP"
+    ],
+    "nimzo-indian::trap::Double Pawns Endgame Trick": [
+      "WEAK_TRAP"
+    ],
+    "nimzo-indian::trap::e4 Block After Bxc3": [
+      "WEAK_TRAP"
+    ],
+    "nimzo-indian::trap::Saemisch c5 Pawn Storm": [
+      "WEAK_TRAP"
+    ],
+    "nimzo-indian::trap::4.f3 Central Counter": [
+      "WEAK_TRAP"
+    ],
+    "grunfeld-defence::trap::Exchange Variation c3 Pressure": [
+      "WEAK_TRAP"
+    ],
+    "grunfeld-defence::trap::Russian System Nc6 Pressure": [
+      "WEAK_TRAP"
+    ],
+    "grunfeld-defence::trap::Exchange Qa5 Infiltration": [
+      "WEAK_TRAP"
+    ],
+    "grunfeld-defence::trap::d5 Passed Pawn Blockade Break": [
+      "WEAK_TRAP"
+    ],
+    "dutch-defence::trap::Leningrad Kingside Attack": [
+      "WEAK_TRAP"
+    ],
+    "dutch-defence::trap::Stonewall Ne4 Bind": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "dutch-defence::trap::Anti-Dutch Bg5 Neutralization": [
+      "PGN_NOT_IN_DB",
+      "WEAK_TRAP"
+    ],
+    "dutch-defence::warning::Allowing White's e4 Break Unchallenged": [
+      "PGN_NOT_IN_DB"
+    ],
+    "benoni-defence::trap::Queenside Pawn Storm Trap": [
+      "INVERTED_MATERIAL",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "benoni-defence::trap::Knight Outpost Domination": [
+      "WEAK_TRAP"
+    ],
+    "benoni-defence::trap::e4 Undermining Tactic": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "benko-gambit::trap::Queenside Bind Trap": [
+      "WEAK_TRAP"
+    ],
+    "benko-gambit::trap::f3 Delay Exploitation": [
+      "WEAK_TRAP"
+    ],
+    "benko-gambit::trap::Exchange Sacrifice on b2": [
+      "WEAK_TRAP"
+    ],
+    "queens-indian::trap::Central Light Square Domination": [
+      "WEAK_TRAP"
+    ],
+    "queens-indian::trap::Early d5 Strike Against e3": [
+      "WEAK_TRAP"
+    ],
+    "queens-indian::trap::Petrosian Counterblow": [
+      "WEAK_TRAP"
+    ],
+    "budapest-gambit::trap::Pin Exploitation Trap": [
+      "WEAK_TRAP"
+    ],
+    "budapest-gambit::trap::Fajarowicz e-file Ambush": [
+      "INVERTED_MATERIAL"
+    ],
+    "budapest-gambit::trap::Alekhine Center Collapse": [
+      "WEAK_TRAP"
+    ],
+    "old-indian-defence::trap::Queenside Overextension Punish": [
+      "WEAK_TRAP"
+    ],
+    "old-indian-defence::trap::Knight Outpost on c5": [
+      "WEAK_TRAP"
+    ],
+    "old-indian-defence::trap::Kingside Attack with f5": [
+      "WEAK_TRAP"
+    ],
+    "old-indian-defence::warning::Passive Play Warning": [
+      "TOOTHLESS_WARNING"
+    ],
+    "english-opening::trap::Reversed Sicilian Tempo Advantage": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "english-opening::trap::Queenside Expansion": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "english-opening::trap::Botvinnik System e5 Wedge": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "english-opening::warning::Allowing ...f5 Break": [
+      "PGN_NOT_IN_DB"
+    ],
+    "reti-opening::trap::d4 Pawn Target Trap": [
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "reti-opening::trap::Reti Accepted f7 Pressure": [
+      "PGN_NOT_IN_DB",
+      "WEAK_TRAP"
+    ],
+    "reti-opening::trap::Anti-Slav Bishop Trap": [
+      "WEAK_TRAP"
+    ],
+    "reti-opening::warning::Black's e5-d4 Space Grab": [
+      "PGN_NOT_IN_DB"
+    ],
+    "reti-opening::warning::Premature c5 Leak": [
+      "PGN_NOT_IN_DB"
+    ],
+    "kings-indian-attack::trap::e4 Break Unleashed": [
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "kings-indian-attack::trap::French Structure Squeeze": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "kings-indian-attack::trap::Fischer's Kingside Buildup": [
+      "PGN_NOT_IN_DB",
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "kings-indian-attack::warning::Premature e4 Rush": [
+      "PGN_NOT_IN_DB"
+    ],
+    "kings-indian-attack::warning::Queenside Collapse": [
+      "PGN_NOT_IN_DB"
+    ],
+    "kings-indian-attack::warning::Stale Kingside Without Follow-Up": [
+      "PGN_NOT_IN_DB"
+    ],
+    "birds-opening::trap::Qg3 Kingside Pressure": [
+      "INVERTED_MATERIAL",
+      "PGN_NOT_IN_DB"
+    ],
+    "birds-opening::trap::From's Gambit Refutation": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "birds-opening::trap::Swiss Gambit Rapid Attack": [
+      "PGN_NOT_IN_DB",
+      "WEAK_TRAP"
+    ],
+    "birds-opening::warning::Kingside Diagonal Weakness": [
+      "PGN_NOT_IN_DB"
+    ],
+    "two-knights-defence::trap::Na5 Development Lead": [
+      "WEAK_TRAP"
+    ],
+    "two-knights-defence::trap::d4 Counter-Sacrifice Trap": [
+      "WEAK_TRAP"
+    ],
+    "two-knights-defence::trap::Traxler f2 Attack": [
+      "INVERTED_MATERIAL"
+    ],
+    "two-knights-defence::warning::Never Play 5...Nxd5 (Fried Liver)": [
+      "TOOTHLESS_WARNING"
+    ],
+    "evans-gambit::trap::Development Avalanche": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ],
+    "evans-gambit::trap::Slow Evans Pressure": [
+      "INVERTED_MATERIAL",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "evans-gambit::trap::Double Pawn Sacrifice": [
+      "WEAK_TRAP"
+    ],
+    "evans-gambit::trap::Qb3 f7 Battery": [
+      "WEAK_TRAP"
+    ],
+    "evans-gambit::trap::Anderssen Attack": [
+      "WEAK_TRAP"
+    ],
+    "evans-gambit::trap::Knight Fork Counter": [
+      "STUDENT_NOT_PUNISHER",
+      "WEAK_TRAP"
+    ]
+  }
+}

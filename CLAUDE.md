@@ -372,10 +372,17 @@ as a bright-red TRAP tile or stays internal as a softer chip:
   looking slip; the student plays the principled / tactical reply
   and ends up better. The PGN should end with the student gaining
   material, delivering mate, or accumulating decisive positional
-  advantage. **`scripts/audit-trap-orientation.mjs` enforces this**
-  and `src/data/pro-repertoires-orientation.test.ts` is the build-
-  time gate. Inverted entries (where the PGN literally shows the
-  student losing material) get moved to `warningLines[]`.
+  advantage. Two parallel gates enforce this — one per data file:
+  - `pro-repertoires.json` → `scripts/audit-trap-orientation.mjs`
+    + `src/data/pro-repertoires-orientation.test.ts` (build-time).
+  - `repertoire.json` → `scripts/audit-repertoire-orientation.mjs`
+    + `src/data/repertoire-orientation.test.ts` (build-time, with
+    an allowlist baseline of 166 known offenders shrinking through
+    Phases 2-4 of `docs/plans/2026-05-16-trap-orientation.md`; the
+    repertoire audit also enforces G3 via `PGN_NOT_IN_DB` — every
+    line must anchor to a ≥6-ply prefix in `openings-lichess.json`).
+  Inverted entries (where the PGN literally shows the student
+  losing material) get moved to `warningLines[]`.
 - `warningLines[]` — STUDENT ANTI-TRAPS. The line shows what
   happens if THE STUDENT falls into a trap — the student is the
   one who slips and gets punished. Used to scare the student off
@@ -1042,6 +1049,8 @@ After every `git push origin main`:
    | `/weaknesses` (or its tab/row → review flow) | `scripts/audit-weaknesses.mjs` |
    | `/openings/*` | `scripts/audit-openings-ui.mjs` (coordinate — often 🚧 in flight) |
    | `/openings/:id` trap + warning tiles | `scripts/audit-opening-trap-tiles.mjs` |
+   | `src/data/repertoire.json` trap/warning content | `scripts/audit-repertoire-orientation.mjs` (data-only — runs without a browser) |
+   | `src/data/pro-repertoires.json` trap/warning content | `scripts/audit-trap-orientation.mjs` (data-only — runs without a browser) |
    | `/` (dashboard) + SmartSearchBar | `scripts/audit-dashboard.mjs` |
    | settings toggles | `scripts/audit-settings-behavior.mjs` |
    | Cross-surface UI scaffolding | run multiple of the above |
