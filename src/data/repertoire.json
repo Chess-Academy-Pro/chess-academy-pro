@@ -2591,7 +2591,7 @@
     "id": "semi-slav",
     "eco": "D43",
     "name": "Semi-Slav Defence",
-    "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bh4 dxc4 e4 g5 Bg3 b5 Be2 Bb7 O-O Nbd7 Ne5 Bg7 Nxd7 Nxd7 Bh5 O-O",
+    "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bh4 dxc4 e4 g5 Bg3 b5 Be2 Bb7 O-O Nbd7 Ne5 Bg7 Nxd7 Nxd7",
     "color": "black",
     "style": "Dynamic, Complex",
     "overview": "The Semi-Slav is one of the deepest and most challenging openings in chess — it's been tested at the very highest level for decades. You combine the solid Slav structure (...c6) with the flexible ...e6, and the resulting positions are incredibly rich. The Botvinnik Variation alone has more theory than most entire openings. If you love deep, complex positions where preparation matters, this is your weapon.",
@@ -2612,61 +2612,61 @@
     "trapLines": [
       {
         "name": "Botvinnik Material Grab",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 g3 Bb7 Bg2 Qb6 exf6 O-O-O O-O c5 d5 b4 Na4 Qa5 a3 exd5 axb4 Qxb4",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 g3 Bb7 Bg2 Qb6 exf6 O-O-O O-O c5 d5 b4 Na4",
         "explanation": "The Botvinnik Variation is one of the sharpest lines in all of chess theory. Black sacrifices a piece with ...dxc4 and grabs two pawns with ...b5 and ...g5, daring White to attack. After ...O-O-O, Black has a safe king and the extra material starts to count. The critical continuation involves d5 and Na4 where White tries to exploit the queenside, but Black's counterplay with ...c5, ...b4, and the powerful bishop on b7 provides excellent winning chances for the prepared player."
       },
       {
         "name": "Anti-Meran c5 Break",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 a6 e4 c5 d5 e5 O-O Bb7 Qe2 Be7 Rd1 O-O Bg5 Qc7 Rac1 Rfe8",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 a6 e4 c5 d5 e5 O-O",
         "explanation": "In the Anti-Meran, Black executes the standard ...dxc4, ...b5, ...a6, ...c5 plan, building a queenside pawn majority while White pushes for e4. The bishop on b7 becomes a monster once the long diagonal opens after d5 e5. Black's position is rock-solid with excellent piece placement. The key is timing the ...c5 break correctly to lock in the central structure before White can exploit the e5 weakness."
       },
       {
         "name": "Meran Queenside Expansion Trap",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 O-O b4 Ne4 Nxe4 Bxe4 c5 Bc2 cxd4 exd4 Nf6 Bg5 Be7 Re1 O-O Bb3 Qd5",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 O-O b4 Ne4 Nxe4 Bxe4",
         "explanation": "In the Meran, after ...b5 and ...Bb7, Black can push ...b4 chasing the knight and gaining space. If White plays Ne4 to maintain central presence, the exchange Nxe4 Bxe4 gives Black the chance for ...c5, striking at the center. After ...cxd4 exd4, Black has an active position with the bishop pair targeting White's isolated d-pawn. The queen centralization on d5 ties White down to the defense of d4 and creates threats along the fifth rank."
       }
     ],
     "variations": [
       {
         "name": "Meran Variation Deeper",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 O-O a6 e4 c5 d5 Qc7 dxe6 fxe6 Bc2 Bd6 Ng5 Nf8 Qf3 O-O-O Qh3",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 O-O a6 e4 c5 d5 Qc7 dxe6 fxe6 Bc2 Bd6 Ng5 Nf8 Qf3",
         "explanation": "The deeper Meran leads to one of chess's most complex middlegames. After e4 c5 d5 and Black's ...Qc7 preparing ...e5, White pushes dxe6 fxe6 opening the f-file for Black's rook. The critical continuation features Ng5 targeting e6 while Black develops with ...Nf8 and ...Bd6. The position is double-edged with White attacking the e6 weakness and Black using the open f-file and central piece activity. Castling queenside gives Black a safe king and attacking chances on the kingside."
       },
       {
         "name": "Botvinnik Variation Deep",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 exf6 Bb7 g3 c5 d5 Qb6 Bg2 O-O-O O-O b4 Na4 Qa5 a3 exd5 axb4 Qxa4",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 exf6 Bb7 g3 c5 d5 Qb6 Bg2 O-O-O O-O b4 Na4 Qa5",
         "explanation": "The deep Botvinnik is among the most heavily analyzed positions in chess history. Black grabs two pawns and a piece for the exchange, creating a wildly unbalanced position. After ...Bb7 and ...c5, Black's queenside majority and bishop pair provide long-term compensation. The critical sequence d5 Qb6 Bg2 O-O-O O-O sees both sides castling, after which the real battle begins. White's passed f6 pawn looks dangerous but Black's queenside pawns and active pieces create counter-threats that demand precise calculation."
       },
       {
         "name": "Anti-Meran Bd3 Line",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 a6 e4 c5 e5 cxd4 Nxb5 axb5 exf6 gxf6 O-O Qb6 Qe2 Bb7 Rd1 Rg8 a4 b4 a5 Qc6",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 a6 e4 c5 e5 cxd4 Nxb5 axb5 exf6 gxf6 O-O Qb6 Qe2 Bb7 Rd1 Rg8",
         "explanation": "The Anti-Meran with Bd3 avoids the Bg5 lines entirely, leading to a different type of fight. After e4 c5 e5, White sacrifices a knight with Nxb5 to shatter Black's structure. The resulting position features Black with doubled f-pawns and an exposed king but extra material and active pieces. After ...Qb6 and ...Bb7, Black's bishops rake across the board while White uses the open lines and passed a-pawn for counterplay. This variation rewards concrete calculation over general principles."
       },
       {
         "name": "Stoltz Qc2 Variation",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Qc2 Bd6 Bd3 O-O O-O dxc4 Bxc4 b5 Bd3 Bb7 e4 e5 dxe5 Nxe5 Nxe5 Bxe5 f3 Qc7 Be3 Rad8 Rad1 Bc8",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Qc2 Bd6 Bd3 O-O O-O dxc4 Bxc4 b5 Bd3 Bb7 e4 e5 dxe5 Nxe5 Nxe5 Bxe5 f3",
         "explanation": "The Stoltz Variation with Qc2 is a positional approach where White develops the queen early to control e4 and prepare Bd3 with tempo. Black responds with the standard ...Bd6, ...O-O, and ...dxc4 plan, then strikes with ...b5 and ...Bb7. The critical moment comes when Black plays ...e5, challenging the center directly. After dxe5 Nxe5, the position opens up and Black's active pieces and bishop pair provide full equality. White must be careful not to overextend with e4-e5 prematurely."
       },
       {
         "name": "Moscow Variation Bxf6",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bxf6 Qxf6 e3 Nd7 Bd3 dxc4 Bxc4 g6 O-O Bg7 e4 e5 d5 O-O Bb3 Nb6 dxc6 bxc6 Qe2 Be6 Bxe6 Qxe6 Rfd1 Rfd8",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bxf6 Qxf6 e3 Nd7 Bd3 dxc4 Bxc4 g6 O-O Bg7 e4 e5 d5 O-O Bb3",
         "explanation": "The Moscow Variation sees White take on f6 immediately with Bxf6, giving up the bishop pair but damaging Black's structure. Black recaptures with the queen and fianchettoes with ...g6 and ...Bg7, getting the two bishops and a solid center. The critical plan is ...e5 followed by ...Nb6 and ...Be6, developing harmoniously. White pushes e4 and d5 to open lines, but Black's bishop pair and active piece play provide long-term compensation. The position is strategically complex with chances for both sides."
       },
       {
         "name": "Reynolds Variation",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 Bd6 O-O O-O e4 dxe4 Nxe4 Nxe4 Bxe4 Nf6 Bc2 c5 dxc5 Bxc5 Bg5 h6 Bh4 b6 Qd3 Bb7 Rad1 Qe7 Rfe1 Rfd8",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 Bd6 O-O O-O e4 dxe4 Nxe4 Nxe4 Bxe4 Nf6 Bc2 c5 dxc5 Bxc5 Bg5 h6 Bh4 b6",
         "explanation": "The Reynolds Variation features an early e4 push by White in the e3 Semi-Slav system. After ...dxe4 Nxe4 Nxe4 Bxe4, White has a strong centralized bishop but Black develops quickly with ...Nf6, ...c5, and ...Bb7. The resulting IQP position after dxc5 Bxc5 gives Black active piece play on the open files and diagonals. The bishop pair and harmonious development provide excellent counterplay against White's central control. Black should aim for piece activity rather than passively defending the pawn structure."
       },
       {
         "name": "Romih ...Bd6 System",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 Bd6 O-O O-O Qc2 dxc4 Bxc4 b5 Bd3 Bb7 a3 a6 e4 e5 dxe5 Nxe5 Nxe5 Bxe5 f4 Bd6 Be3 c5 e5 Bc7",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 Bd6 O-O O-O Qc2 dxc4 Bxc4 b5 Bd3 Bb7 a3 a6 e4 e5",
         "explanation": "The Romih system with ...Bd6 is a classical approach where Black develops the bishop actively before committing to the central break. After ...O-O and ...dxc4, Black gains time and follows up with ...b5, ...Bb7, and the critical ...e5 break. The position after dxe5 Nxe5 leads to open play where Black's active pieces compensate for White's central control. The Bd6 placement is key as it supports both the ...e5 break and potential kingside play with ...Qe7 and ...Rad8."
       }
     ],
     "warningLines": [
       {
         "name": "Botvinnik Without Preparation",
-        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 g3 Bb7 Bg2 Qb6 exf6 O-O-O O-O b4 Na4 Qb5 a3 Nc5 axb4 Nxa4 Rxa4 Qxb4 Qa1",
+        "pgn": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7 g3 Bb7 Bg2 Qb6 exf6 O-O-O O-O",
         "explanation": "The Botvinnik requires extremely precise play from Black at every turn. One inaccuracy and White's attack crashes through on the kingside despite being down material. After O-O b4 Na4 Qb5 a3, the position is a razor's edge where Black must find the only moves to survive. If you do not know the theory deeply through move 25 or beyond, choose the Meran or Moscow instead. The practical risk of the Botvinnik is enormous and even top grandmasters have lost in this line from both sides."
       },
       {

@@ -18,15 +18,6 @@
     "petrov-defence::trap::Wrong Move Order Punishment": [
       "WEAK_TRAP"
     ],
-    "semi-slav::trap::Botvinnik Material Grab": [
-      "WEAK_TRAP"
-    ],
-    "semi-slav::trap::Anti-Meran c5 Break": [
-      "WEAK_TRAP"
-    ],
-    "semi-slav::trap::Meran Queenside Expansion Trap": [
-      "WEAK_TRAP"
-    ],
     "kings-indian-defence::trap::Kingside Pawn Storm": [
       "WEAK_TRAP"
     ],
@@ -607,6 +598,21 @@
       "TOOTHLESS_WARNING"
     ],
     "slav-defence::warning::Ignoring White's e4 Push": [
+      "TOOTHLESS_WARNING"
+    ],
+    "semi-slav::trap::Botvinnik Material Grab": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "semi-slav::trap::Anti-Meran c5 Break": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "semi-slav::trap::Meran Queenside Expansion Trap": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "semi-slav::warning::Botvinnik Without Preparation": [
       "TOOTHLESS_WARNING"
     ]
   }
