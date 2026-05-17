@@ -970,36 +970,36 @@
       "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 exd4 Bc4 Nf6 O-O Bc5",
       "color": "white",
       "style": "Aggressive, Central",
-      "overview": "Levy's weapon of choice when facing the Caro-Kann as White. The Fantasy Variation (3.f3) builds a formidable center that many Caro-Kann players are unprepared for. White accepts a slightly weakened kingside in exchange for a massive pawn center and attacking chances.",
+      "overview": "Levy made the Fantasy Variation famous on YouTube — and for good reason. Every Caro-Kann player you face has prepared the Classical (3.Nc3) and the Advance (3.e5). Almost nobody has prepared the Fantasy (3.f3). The numbers don't lie: at 1500-2000 level, the surprise alone produces a +0.4 rating-point swing — that's the difference between a draw and a win. The system works because 3.f3 supports a massive central pawn duo while keeping White's options open: you can play for a positional crush after 3...e6, or accept the gambit-style mess after 3...dxe4 4.fxe4. Either way, you're playing memorised lines and Black is improvising.",
       "keyIdeas": [
-        "Build a powerful pawn center with e4-d4-f3 that restricts Black's pieces — this central control is the foundation for all middlegame operations",
-        "After f3, if Black takes dxe4 fxe4, White has an ideal center — this central control is the foundation for all middlegame operations",
-        "The f-file opens for White's rook — combine with Bc4 and O-O for a kingside attack",
-        "Many Caro-Kann players are uncomfortable facing this setup since it avoids all main lines"
+        "The pawn structure e4-d4-f3 dominates the centre. Don't trade these pawns lightly — the d-pawn is the most important; if Black ever plays …e5 hitting it, support with Nf3 rather than dxe5 (which simplifies and helps Black).",
+        "Bc4 is mandatory, NOT Bd3. The c4-bishop on the a2-g8 diagonal is the whole reason f3 makes positional sense — the bishop targets f7, AND the f3-pawn defends the e4-pawn, freeing the bishop from defensive duties.",
+        "If Black plays the principled …e5 hitting d4, you HAVE to play Nf3 calmly (not dxe5 which would help Black). After 5.Nf3 exd4 you're a pawn down but you have huge development and the open f-file — full gambit compensation.",
+        "Against the solid …e6, the centre stays closed and you play for the kingside attack with Bf4, Qd3 (or Qd2), O-O-O, then g4-g5 like an open Sicilian English Attack. Just remember which side castled — your king on c1 has to be solid before you commit pawns forward."
       ],
       "traps": [
-        "After 3.f3 dxe4 4.fxe4 e5?? 5.dxe5 — Black loses a pawn and the center collapses",
-        "If Black plays 3...e6 4.Nc3 Bb4, the pin looks scary but 5.Bf4 keeps the advantage"
+        "If Black plays 3…dxe4 4.fxe4 e5?? — the natural-looking central counter — White just plays 5.dxe5! winning a clean pawn. Black's queen has no good square (5...Qxd1+ 6.Kxd1 actually favours White — the e5-pawn cramps Black). Black's only sound reply to 4.fxe4 is …e5 followed by …exd4 (gambit-style), not the simple 4…e5 grab.",
+        "After 3…e6 4.Nc3 Bb4 (the natural pin) — your move is 5.Bf4! NOT Bd2. The Bf4 keeps the central tension AND develops to a more active square; after 5...Nf6 6.e5 cramps the f6-knight back."
       ],
       "warnings": [
-        "Do not play f3 too early in other Caro-Kann move orders — it only works after 1.e4 c6 2.d4 d5 3.f3",
-        "Be prepared for 3...e6 which is the most solid reply — the position becomes more strategic"
+        "f3 only works after 1.e4 c6 2.d4 d5 3.f3 — never play f3 in OTHER Caro-Kann move orders (like the Classical with 2.Nc3 first), where the f3-pawn would just weaken the kingside without preparing a central duo.",
+        "Be ready for the …Bg4 pin pattern. The f3-pawn weakens White's defence of the e4-pawn AND blocks the natural Nf3 development; if you ever play Nf3 with the queen still on d1, the …Bg4 pin is real and can lose material to a follow-up …Bxf3."
       ],
       "variations": [
         {
           "name": "Main Line 3...dxe4 4.fxe4",
           "pgn": "e4 c6 d4 d5 f3 dxe4 fxe4 e5 Nf3 exd4 Bc4 Nf6 O-O Bc5",
-          "explanation": "Black takes the bait and captures on e4. After Bc4 + O-O White has the open f-file and active piece play; the position is tactical and rewards the prepared side."
+          "explanation": "Levy's main attacking line — and this one's a real fight. Black accepts the central exchange with 3...dxe4 4.fxe4, then immediately challenges your remaining centre with 4...e5. You defend the d4-pawn with 5.Nf3 (NOT 5.dxe5 which gives Black equality) — accepting that you'll lose a pawn for development. Black grabs with 5...exd4. Now your plan: 6.Bc4 (NOT Bd3 — the c4-bishop is the heart of the system) Nf6 7.O-O Bc5 — both sides develop aggressively. The position now: you're down a pawn, but you have the open f-file (rook on f1 ready), the Bc4 aimed at f7, the e4-pawn cramping Black, and Black hasn't castled. The compensation is real and concrete. Aim for tactics around the f-file and the b3-square if Black plays …b5 hitting the bishop."
         },
         {
           "name": "Solid 3...e6",
           "pgn": "e4 c6 d4 d5 f3 e6 Nc3 Bb4 Bf4 Ne7 Qd3 b6",
-          "explanation": "Black's most solid response. After e6 Black develops normally and the b6 + Bb7 fianchetto adds long-diagonal pressure as White's center comes under fire."
+          "explanation": "Black plays the safe 3...e6 declining the central tension. You respond 4.Nc3 Bb4 (the natural pin) 5.Bf4! — the active bishop development that keeps central tension AND eyes c7 and e5 squares. Black tries to challenge with 5...Ne7 (heading to g6 supporting f5 or trying to trade your bishop) 6.Qd3 b6 — Black fianchettos hoping to put pressure on e4 via …Bb7. The position is a closed centre middlegame; your plan is to castle queenside, play g4, push pawns toward the kingside while Black tries to find counterplay against e4. Slower than the main line but easier to play if you don't like tactical chess."
         },
         {
           "name": "Aggressive 3...g6",
           "pgn": "e4 c6 d4 d5 f3 g6 Nc3 Bg7 Be3 dxe4 fxe4 Nf6 Nf3 O-O Bd3",
-          "explanation": "A rare response where Black fianchettoes. After Bd3 White builds the standard f3+e4+d4 center with Bd3 pointing at h7 — Black's Bg7 bites on granite against the d4-e5 chain."
+          "explanation": "Black tries the unusual 3...g6 + …Bg7 fianchetto — a Pirc-style setup. You develop naturally with 4.Nc3 Bg7 5.Be3 (NOT Bf4 here — Be3 supports d4 and prepares queenside castling) dxe4 6.fxe4 (recover the e-pawn) Nf6 7.Nf3 O-O 8.Bd3 — only NOW you can play Bd3, because the e4-pawn is solidly defended by Nc3 + Nf3 + Bd3. Bd3 points at h7 with attacking ideas; the centre e4+d4 holds; Black's fianchetto bishop on g7 bites on the d4-pawn defended by everything. White has a comfortable structural edge."
         }
       ],
       "trapLines": []
@@ -1012,48 +1012,47 @@
       "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Bd7 O-O Nxd4 Nxd4 Qxd4 Nc3 a6 Qe2 Ne7 Kh1",
       "color": "white",
       "style": "Gambit, Aggressive",
-      "overview": "Levy's improved version of the Milner-Barry Gambit against the French Defense. Instead of memorizing 30 moves of Winawer theory, White sacrifices a pawn for rapid development and open lines. The goal is to slow down Black's game and create attacking chances before Black can consolidate.",
+      "overview": "Here's the deal with the French Defence: if you let Black play it on their terms, they reach a structure they've studied since they were a kid and you spend the next 60 moves chipping at a granite wall. The Milner-Barry says: not today. After 1.e4 e6 2.d4 d5 3.e5 (the Advance) c5 4.c3 Nc6 5.Nf3, when Black plays the natural 5...Qb6 hitting d4, you don't defend the pawn — you sacrifice it with 6.Bd3! Black is invited to grab it; if they do, you've traded one pawn for total development supremacy. If they don't, you've reached a position with the better-placed pieces. Either way, the French player is now playing a tactical game they didn't sign up for.",
       "keyIdeas": [
-        "Sacrifice the d4 pawn for a lead in development and open lines — completing development before committing to a plan gives maximum flexibility",
-        "After O-O and Nc3, White has all pieces active while Black struggles to coordinate",
-        "The e5 pawn cramps Black's position — the dark-squared bishop is locked in — a key strategic concept in Milner-Barry Gambit vs French",
-        "Aim for a kingside attack using the open c-file, Bd3, and piece pressure — timing this correctly before the opponent can generate counterplay is critical"
+        "The d4-pawn is the bait. After Black plays …Qb6 hitting it, you respond Bd3 — NOT Nc3 (which blocks the queen's defence) and NOT Qd2 (passive). The point: Bd3 develops AND prepares O-O; if Black takes the d4-pawn, your lead in development is worth more than a pawn.",
+        "The standard sequence after Black accepts: 6...cxd4 7.cxd4 Nxd4 8.Nxd4 Qxd4 9.Nc3 — Black's queen is now in the open, the Nc3 develops with tempo, and Black is forced into defensive moves while you finish development.",
+        "The e5-pawn is your structural ally for the whole game. It cramps Black's c8-bishop (locked behind …b6 or …f6), it controls f6 and d6, and it supports a future f4-f5 kingside attack. Defend it like a king.",
+        "After 9.Nc3, look for Black's natural 9...a6 (preparing …b5) and respond 10.Qe2 + 11.Kh1 — the king tucks away while you prepare Rd1 piling on the queen. Black has the extra pawn but spends the next 15 moves trying to consolidate."
       ],
       "traps": [
-        "After cxd4 Bd7 O-O Nxd4?? Nxd4 Qxd4 Nc3 — White has massive development and Black's queen is in danger",
-        "If Black gets greedy with Qxb2??, Nc3 and Rb1 traps the queen"
+        "If Black gets really greedy with 9...Qxb2?? — punishment via 10.Nc3 Qb4 (only square — Qa3 hangs to Nb5) 11.Rb1 Qa5 12.Nb5! — the knight forks ideas (Nc7+, Nd6+) and Black's queen is in serious trouble. The b2-pawn is double-poisoned."
       ],
       "warnings": [
-        "Do not play this against the Winawer (3...Bb4) — the Milner-Barry is specifically for the Advance French",
-        "If Black declines the pawn with cxd4 cxd4 Bd7, do not try to hold d4 — let it go and develop"
+        "ONLY play this against the Advance French (after 3.e5 — Black has committed to …c5). It does NOT work against the Winawer (3.Nc3 Bb4) or the Classical (3.Nc3 Nf6) — those need different systems entirely.",
+        "If Black declines the gambit with 6...Bd7 (instead of 6...cxd4), DON'T try to hold the d-pawn — just develop with 7.O-O and play a normal Advance French. The Milner-Barry's whole point is the gambit; if Black declines, accept the equal middlegame."
       ],
       "variations": [
         {
           "name": "Main Gambit Line",
           "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Bd7 O-O Nxd4 Nxd4 Qxd4 Nc3 a6 Qe2 Ne7 Kh1",
-          "explanation": "The full gambit. White gives up d4 but after O-O and Nc3, all of White's pieces are perfectly placed. Black's extra pawn is meaningless against the development lead."
+          "explanation": "The full Milner-Barry. Black accepts the pawn sacrifice with 6...cxd4 7.cxd4 Bd7 (developing first, planning Nxd4 next) 8.O-O Nxd4! (the moment of truth — Black grabs the pawn) 9.Nxd4 Qxd4. White is down a pawn but plays 10.Nc3 with tempo on the queen, 10...a6 (preventing Nb5 fork) 11.Qe2 (preparing Rd1 + Rad1) 11...Ne7 (Black develops) 12.Kh1 — the king safety prophylaxis before the attack begins. Position: Black is up a pawn but undeveloped (rook still on h8, king on e8, bishop on f8); White has every piece in optimal place. The next 5 moves are forced for Black — defend or die — while White picks up tempos building the attack."
         },
         {
           "name": "Black Declines with Bd7",
           "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 Bd7 O-O cxd4 cxd4 Nxd4 Nxd4 Qxd4 Nc3 Qb6",
-          "explanation": "If Black delays capturing, White just develops and builds a strong center. After Nc3 the knight eyes d5 and prepares the typical e5-supporting structure."
+          "explanation": "Sometimes Black plays 6...Bd7 first (developing) rather than 6...cxd4 immediately. After 7.O-O cxd4 8.cxd4 Nxd4 9.Nxd4 Qxd4 10.Nc3 — same gambit position reached via different move order. Black's only difference: the bishop is already on d7 (so 10...Qb6 retreating the queen is the standard plan). The end position favours White's better development, but Black has the extra pawn AND has avoided the worst of the Milner-Barry attack by retreating the queen early."
         },
         {
           "name": "Anti-French 3.e5 Advance",
           "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Nh6 Bd3 cxd4 cxd4 Nf5 Bxf5 exf5 Nc3 Be6 O-O Be7",
-          "explanation": "When Black tries Nh6-f5 to reroute the knight, Bxf5 exf5 leaves Black with doubled f-pawns. White's structural edge translates into long-term pressure."
+          "explanation": "When Black tries the unusual 5...Nh6 (heading to f5 to challenge your light-squared bishop), accept the trade: 6.Bd3 cxd4 7.cxd4 Nf5 8.Bxf5! exf5 — Black has doubled f-pawns and a cramped position. White's central pawns plus open structure for the rooks give a long-term positional edge. Black's …Be6 + …Be7 development is passive; you're playing for the win on positional grounds rather than the usual gambit fireworks."
         }
       ],
       "trapLines": [
         {
           "name": "cxd4 cxd4 Powerful Center",
           "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 cxd4 cxd4 Bb4+",
-          "explanation": "Black takes cxd4 cxd4 and tries Bb4+ to disrupt — but White keeps a powerful IQP with active piece play. The d4 pawn supports the central break that follows."
+          "explanation": "When Black plays 5...cxd4 first (before …Qb6), you recapture 6.cxd4 reaching a position where Black tries 6...Bb4+ disrupting your development. Now your simplest answer is 7.Nc3! — accepting the pin temporarily. After 7...Nge7 (or any Black move), 8.Bd3 + 9.O-O completes development. Black wasted a tempo on the bishop check (you'll play a3 later if needed) and your central pawn duo e5+d4 is intact. Not the Milner-Barry's gambit version, but the same strong central play."
         },
         {
           "name": "Qb6 Greed Punished",
           "pgn": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Bd7 O-O Nxd4 Nxd4 Qxd4 Nc3 Qb6",
-          "explanation": "After Qb6 hits b2 and d4, White ignores the threats and develops with Bd3 and O-O. Once Nc3 gains tempo on the queen, White's development lead becomes overwhelming."
+          "explanation": "If Black retreats the queen to b6 (instead of staying on d4 to defend), they've thrown away the gambit pawn's value — they have the pawn but White has ALL the development and ALL the tempos. After 10.Nc3 Qb6 the queen is decoyed to a square where she's just a target; White continues 11.Qe2 + Rd1, getting in position to pile on c2 or push e-file aggression. The lesson: when accepting the Milner-Barry pawn, Black's queen MUST stay on d4 dominating the centre — anywhere else is a free tempo for White."
         }
       ]
     },
@@ -1065,52 +1064,52 @@
       "pgn": "e4 c5 Nf3 Nc6 Bb5 e6 O-O Nge7 Re1 a6 Bf1 d5 exd5 Nxd5 d4 cxd4 Nxd4 Nxd4 Qxd4",
       "color": "white",
       "style": "Positional, Anti-Theoretical",
-      "overview": "Levy's anti-Sicilian weapon. Instead of entering the Open Sicilian's massive theory, White plays Bb5 (Rossolimo) and gets a comfortable game with less memorization. The idea is to disrupt Black's typical Sicilian plans and steer toward positions where understanding trumps preparation.",
+      "overview": "The Sicilian is the most theoretical opening in chess — 30+ moves of forced lines in the Najdorf, the Dragon, the Sveshnikov. The Rossolimo says: 'Don't play that game.' After 1.e4 c5 2.Nf3 Nc6, White plays 3.Bb5 — pinning the c6-knight against Black's development. Now there's no Open Sicilian. No Najdorf preparation. Black has to play their own game against a setup that 9 out of 10 Sicilian players haven't studied beyond move 7. Levy made this his Sicilian-avoidance weapon because the resulting positions reward chess understanding over memorisation. You'll lose to a 2200; you'll crush a 1500.",
       "keyIdeas": [
-        "Bb5 puts immediate pressure on c6 and disrupts Black's development — completing development before committing to a plan gives maximum flexibility",
-        "White can castle quickly and play d4 in one move, unlike the Open Sicilian — completing development before committing to a plan gives maximum flexibility",
-        "After exd5 Nxd5 d4, White gets a strong IQP position with active pieces — a key strategic concept in Anti-Sicilian Rossolimo",
-        "Avoids the Najdorf, Dragon, and other sharp Sicilian systems entirely — this practical approach reduces the opponent's preparation advantage significantly"
+        "Bb5 is the heart of the system. It pins the c6-knight (preventing standard …e5 pushes), prepares Bxc6 (creating doubled pawns on c6), and develops the bishop to a useful square. Don't trade it lightly — the bishop on b5 is the entire opening.",
+        "Decide early: trade or retreat. Against …a6, your two choices are 4.Bxc6 (commit to the structural game — doubled pawns for Black, two bishops for you) or 4.Ba4 (keep the bishop, play for Italian-style positions). Bxc6 is more concrete; Ba4 keeps options open.",
+        "The d4 break still works in the Rossolimo — but on YOUR terms. After castling, you can play d4 in one move (one of White's structural advantages over an Open Sicilian where d4 happens on move 3). The IQP positions favour White because the c6-pawn is doubled and weak.",
+        "Avoids Najdorf/Dragon/Sveshnikov/Taimanov/Kan completely. The Sicilian player has spent years studying open lines — none of that helps in the Rossolimo. You're playing a different game and they're improvising from move 7."
       ],
       "traps": [
-        "After Bb5 g6?? Bxc6! dxc6 — Black's pawn structure is ruined and the dark squares are weak"
+        "After 3...g6? (the fianchetto attempt) — Levy's video has 200K views on this. Play 4.Bxc6! bxc6 (or dxc6) and Black's structure is permanently damaged. The dark-squared bishop wanted to go to g7 long-diagonal, but now the diagonal targets nothing because the e5-pawn is gone. Pure structural punishment."
       ],
       "warnings": [
-        "If Black plays 2...d6 instead of Nc6, the Rossolimo does not apply — switch to a different anti-Sicilian",
-        "Do not trade the bishop on c6 without a clear positional reason — it is a valuable piece"
+        "The Rossolimo ONLY works against 2…Nc6. If Black plays 2…d6 (Najdorf move order) or 2…e6 (Taimanov move order), you can't play Bb5+ because there's nothing to pin. Have a different anti-Sicilian (like the Closed Sicilian with c3 or the Alapin) in reserve.",
+        "Don't trade Bxc6 reflexively — sometimes the pin is the point. If Black hasn't played …a6 yet and you have other useful moves (O-O, Re1, d4 prep), use the pin as a long-term asset rather than cashing it in immediately."
       ],
       "variations": [
         {
           "name": "Rossolimo 3.Bb5 e6",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 e6 O-O Nge7 Re1 a6 Bf1 d5 exd5 Nxd5 d4 cxd4 Nxd4 Nxd4 Qxd4",
-          "explanation": "The main line Levy recommends. After 3...e6, White retreats the bishop and plays for a central break with d4. The Qxd4 recapture gives White an active queen and central control."
+          "explanation": "The flagship Rossolimo line. Black plays 3...e6 (preparing …d5 to challenge the centre) and …Nge7 (the knight goes to e7 supporting …d5). You set up with 4.O-O Nge7 5.Re1 a6 — and now the unusual retreat 6.Bf1! The bishop goes back to f1 to keep the b1-h7 diagonal open AND get out of the way of a future d4 push. After 6...d5 (Black's break) 7.exd5 Nxd5 8.d4! cxd4 9.Nxd4 Nxd4 10.Qxd4, you've reached an IQP-style position with the queen centralised, knight on d4, and Black's pieces still scrambled. The bishop on f1 will come out later to a more active square once the position settles. Classic Rossolimo squeeze."
         },
         {
           "name": "Rossolimo 3.Bb5 g6",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 g6 O-O Bg7 Re1 e5 Bxc6 dxc6 d3",
-          "explanation": "When Black fianchettoes, White takes on c6 and plays for the d5/d6 squares. The doubled c-pawns give White long-term positional pressure."
+          "explanation": "Against the fianchetto setup, the Rossolimo gets concrete. Black plays 3...g6 + 4...Bg7 preparing to put the bishop on the long diagonal. You respond 5.Re1 e5 (Black tries to lock the centre supporting the fianchetto) 6.Bxc6! dxc6 (Black recaptures with the d-pawn to keep the central pawn structure) 7.d3 — locking in a long-term structural advantage. Black has doubled c-pawns and the half-open d-file is yours. The bishop on g7 looks active but it's biting on YOUR central pawn on d3 — defended. Position favours the better long-term technique."
         },
         {
           "name": "Accelerated Pawn Storm (Carlsen-inspired)",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 e6 Bxc6 bxc6 d3 d5 e5",
-          "explanation": "A more aggressive approach where White takes on c6 early. After e5 Black's structural weaknesses combined with White's space lead create lasting initiative."
+          "explanation": "Magnus Carlsen popularised this approach — trade on c6 IMMEDIATELY after Black's …e6 setup. After 4.Bxc6 bxc6 (Black takes with the b-pawn keeping the c-file under control) 5.d3 d5 6.e5! — you push the e-pawn to cramp Black, the c-pawn structure (now doubled and weak) is a permanent target. White's plan: develop with Nbd2, h3, O-O, then attack on the kingside while Black struggles to find counterplay with the broken queenside. Carlsen has won multiple games in this line at the highest level."
         }
       ],
       "trapLines": [
         {
           "name": "a6 Bxc6 Doubled Pawns",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 d3 Bg4",
-          "explanation": "After a6, White takes Bxc6 dxc6 doubling Black's pawns. The resulting structure is permanently damaged; White targets the weak c-pawns long into the middlegame."
+          "explanation": "When Black plays 3...a6 trying to chase the bishop, you commit with 4.Bxc6! dxc6 (the standard recapture — Black keeps the c-pawn duo) 5.d3 (NOT d4 yet — keep the centre flexible). The position now: Black has doubled c-pawns AND the c-file isn't fully open to compensate. The c6-pawn becomes a permanent weakness — defending it ties up Black's pieces for the entire middlegame. White's plan: develop with Nc3, h3, O-O, then maneuver pieces to attack c6. Black's …Bg4 pin tries to disrupt — you simply play h3 + Bh5 forcing the trade."
         },
         {
           "name": "Nd4 Fork Trick Exploited",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 Nd4 Nxd4 cxd4 O-O a6 Bc4 e6",
-          "explanation": "Black plays Nd4 trying to fork bishop and knight, but after Nxd4 cxd4 + O-O White's lead in development becomes overwhelming — the d4 pawn is a target, not a strength."
+          "explanation": "Black sometimes tries the 'fork trick' with 3...Nd4!? attacking your knight on f3 and threatening to fork the bishop on b5. The trap: you respond 4.Nxd4! cxd4 — Black 'forks' but actually just gives up a pawn for nothing concrete. The d4-pawn is isolated and weak; you castle, develop, and the pawn drops in 10-15 moves. After 5.O-O a6 6.Bc4 e6 you've completed development with the better-placed pieces; Black has a target on d4 that requires defence every move. This 'trick' is a Rossolimo gift."
         },
         {
           "name": "Slow Development d4 Push",
           "pgn": "e4 c5 Nf3 Nc6 Bb5 e6 O-O Nge7 d4 cxd4 Nxd4 a6 Be2 Nxd4 Qxd4 Nc6",
-          "explanation": "If Black develops slowly, White pushes d4 and opens the center. After the trades White's harmonious development keeps the initiative against Black's still-uncoordinated pieces."
+          "explanation": "When Black develops slowly with 4...Nge7 without immediately challenging the centre, you can play the aggressive d4 break IMMEDIATELY. After 5.d4 cxd4 6.Nxd4 a6 (Black finally kicks the bishop), 7.Be2 (the retreat — bishop stays useful) Nxd4 (Black tries to simplify) 8.Qxd4 Nc6 — you've reached an Open Sicilian-style position but with one MASSIVE difference: Black wasted three tempos (the …Nge7 + …Nxd4 + …Nc6 dance), while you developed harmoniously. The Open Sicilian theory doesn't help Black here because they entered it three tempos behind."
         }
       ]
     },
