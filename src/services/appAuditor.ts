@@ -510,7 +510,27 @@ export type AuditKind =
   // `analytics-self-audit`: emitted by the in-app AnalyticsAuditPanel
   //   when the user opens the coverage view. Lets the audit stream see
   //   that David is actively inspecting the analytic surface.
-  | 'analytics-self-audit';
+  | 'analytics-self-audit'
+  // WO-COACH-MASTER-INTEGRATION — four-layer pipeline that grounds the
+  //   coach in master-game data so it never invents SANs / frequencies
+  //   / player names / years. The runtime instrument of CLAUDE.md G3.
+  // `master-play-prefetch`: watcher kicked off a lookup ahead of the
+  //   user asking. Details carry `trigger` ('move' / 'lookahead' /
+  //   'walkthrough-preload'), `source` ('local' / 'lichess-live' /
+  //   'none'), `latencyMs`, `cacheState` ('hit' / 'miss-fresh').
+  | 'master-play-prefetch'
+  // `master-play-lookup`: resolver call from pre-injection or the LLM
+  //   tool path. Details carry `source`, `moveCount`, `totalGames`,
+  //   `latencyMs`, `triggeredBy` ('pre-injection' / 'llm-tool-call' / …).
+  | 'master-play-lookup'
+  // `claim-validator-trip`: post-response gate caught an ungrounded
+  //   chess claim. Details carry `kind` ('san' / 'numeric' / 'entity' /
+  //   'comparative'), the claim text, the reason, and `retryNumber`.
+  | 'claim-validator-trip'
+  // `master-play-enforcement-fallback`: 2-retry budget exhausted; the
+  //   coach served the stock "I can't verify which moves are sound"
+  //   response. Last-line G3 protection.
+  | 'master-play-enforcement-fallback';
 
 export interface AuditEntry {
   timestamp: number;
