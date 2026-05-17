@@ -396,6 +396,13 @@ export function AppLayout(): JSX.Element {
               key={to}
               to={to}
               end={to === '/'}
+              // WO-ROLODEX-UI-01 PR-5: the Coach tab is the slide
+              // destination for the favorite-an-opening star
+              // animation. StarAnimationLayer looks this up via
+              // `nav-coach-tab` testid; keeping the per-tab testid
+              // tagged so adding more animation destinations later
+              // doesn't need a second pass.
+              data-testid={`nav-${to.replace(/^\//, '').replace(/\//g, '-') || 'home'}-tab`}
               className={({ isActive }) =>
                 `flex flex-col items-center gap-0.5 px-2 py-1 text-xs font-medium transition-colors min-w-0 ${
                   isActive ? activeText : ''

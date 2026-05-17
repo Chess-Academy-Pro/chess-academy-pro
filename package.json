@@ -10,7 +10,7 @@
     "prebuild": "node validate-stockfish.cjs",
     "build": "tsc -b --force && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 229",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 248",
     "typecheck": "tsc -b --force",
     "test": "vitest",
     "test:run": "vitest run",

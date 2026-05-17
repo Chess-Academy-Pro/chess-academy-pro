@@ -16,6 +16,7 @@ import { AppLayout } from './components/ui/AppLayout';
 import { LoadingScreen } from './components/ui/LoadingScreen';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
 import { BuildVersionWidget } from './components/Debug/BuildVersionWidget';
+import { StarAnimationLayer } from './components/StarAnimationLayer';
 
 // Page-level imports
 import { DashboardPage } from './components/Dashboard/DashboardPage';
@@ -373,6 +374,7 @@ export function App(): JSX.Element {
         </Route>
       </Routes>
       <BuildVersionWidget />
+      <StarAnimationLayer />
     </BrowserRouter>
   );
 }

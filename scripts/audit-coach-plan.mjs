@@ -329,6 +329,13 @@ async function main() {
     { kind: 'url-matches', value: /\/coach\/plan/, label: 'navigated to /coach/plan' },
     { kind: 'visible', selector: '[data-testid="training-plan-rolodex-page"]', label: 'rolodex page root mounts' },
     { kind: 'visible', selector: '[data-testid="rolodex-folder-tabs"]', label: 'mobile folder tabs render' },
+    // PR-5 contract: the Coach nav tab in the bottom nav is the
+    // destination StarAnimationLayer slides favorited cards toward.
+    // If this testid moves or the tab disappears, the cross-surface
+    // star animation degrades to fade-on-source (covered by
+    // StarAnimationLayer.test.tsx). Pin here so the audit catches
+    // either regression.
+    { kind: 'visible', selector: '[data-testid="nav-coach-home-tab"]', label: 'Coach nav tab present (star animation slide target)' },
   ]);
 
   // ── Empty state: zero favorites → per-color Browse Openings CTA ──

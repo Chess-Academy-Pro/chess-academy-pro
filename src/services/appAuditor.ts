@@ -169,6 +169,14 @@ export type AuditKind =
   // unfavorited entries). Filter on this to trace "what's the user's
   // intentional repertoire arrangement vs the system's defaults."
   | 'coach-memory-rolodex-order-set'
+  // Star animation when an opening is favorited from any surface
+  // (WO-ROLODEX-UI-01 PR-5). Fires from StarAnimationLayer when a
+  // source surface (OpeningCard, OpeningDetailPage, ProPlayerPage)
+  // triggers a ghost slide toward the Coach nav tab. Always
+  // accompanies the toggleFavorite that produced it; filter on this
+  // when you want to confirm visual feedback rendered for a
+  // favorite action vs just the underlying state change.
+  | 'star-animation-triggered'
   // Coach-hub navigation (WO-COACH-UNIFY-01 audit item #15). Fires
   // when the user taps a tile on the Coach hub so a "I went to
   // Coach but ended up somewhere else" report has a trail.

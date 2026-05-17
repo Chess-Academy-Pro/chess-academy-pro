@@ -2,6 +2,7 @@ import { MasteryRing } from './MasteryRing';
 import { getMasteryPercent, needsReview } from '../../services/openingService';
 import type { OpeningRecord } from '../../types';
 import { Repeat, AlertCircle, Heart } from 'lucide-react';
+import { useStarAnimationStore } from '../../stores/starAnimationStore';
 import { getNeonColor, scaledShadow } from '../../utils/neonColors';
 import { useSettings } from '../../hooks/useSettings';
 
@@ -29,6 +30,7 @@ export function OpeningCard({ opening, onClick, onToggleFavorite }: OpeningCardP
   const { settings } = useSettings();
   const b = settings.glowBrightness;
   const s = b / 100;
+  const triggerStarAnimation = useStarAnimationStore((store) => store.trigger);
 
   const shadow = scaledShadow(neon.rgb, b);
   const shadowHov = scaledShadow(neon.rgb, Math.min(200, b * 1.4));
@@ -109,6 +111,16 @@ export function OpeningCard({ opening, onClick, onToggleFavorite }: OpeningCardP
           <button
             onClick={(e) => {
               e.stopPropagation();
+              // Fire the star-slide animation only on the false→true
+              // edge — unfavoriting doesn't earn the visual.
+              if (!opening.isFavorite) {
+                const r = e.currentTarget.getBoundingClientRect();
+                triggerStarAnimation({
+                  sourceRect: { x: r.x, y: r.y, width: r.width, height: r.height },
+                  openingName: opening.name,
+                  openingColor: opening.color,
+                });
+              }
               onToggleFavorite(e);
             }}
             className="p-1.5 rounded-lg hover:bg-theme-border/50 transition-colors shrink-0"

@@ -35,6 +35,7 @@ import {
   isEnrolled,
 } from '../../services/srsOpeningService';
 import { narrateOpeningSection } from '../../services/openingSectionNarrator';
+import { useStarAnimationStore } from '../../stores/starAnimationStore';
 import type { OpeningRecord, ModelGame, MiddlegamePlan } from '../../types';
 import {
   ArrowLeft,
@@ -101,6 +102,7 @@ export function OpeningDetailPage(): JSX.Element {
   const navigate = useNavigate();
   const location = useLocation();
   const isProContext = location.pathname.includes('/openings/pro/');
+  const triggerStarAnimation = useStarAnimationStore((store) => store.trigger);
   const [opening, setOpening] = useState<OpeningRecord | null>(null);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<ViewMode>('detail');
@@ -642,7 +644,22 @@ export function OpeningDetailPage(): JSX.Element {
           </div>
         </div>
         <button
-          onClick={() => void handleToggleFavorite()}
+          onClick={(e) => {
+            // Fire the star-slide animation only when the click will
+            // FAVORITE (false→true). Unfavoriting doesn't earn the
+            // visual. Source rect captured BEFORE handleToggleFavorite
+            // runs so the heart's pre-toggle position is what the
+            // ghost slides from.
+            if (!opening.isFavorite) {
+              const r = e.currentTarget.getBoundingClientRect();
+              triggerStarAnimation({
+                sourceRect: { x: r.x, y: r.y, width: r.width, height: r.height },
+                openingName: opening.name,
+                openingColor: opening.color,
+              });
+            }
+            void handleToggleFavorite();
+          }}
           className="p-2 rounded-lg hover:bg-theme-surface transition-colors"
           aria-label={opening.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           data-testid="favorite-btn"
