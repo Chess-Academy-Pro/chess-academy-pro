@@ -1340,35 +1340,35 @@
       "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bf4 O-O e3 Nbd7 c5 Nh5 Bd3 Nxf4 exf4 b6 b4 a5 a3 Ba6",
       "color": "black",
       "style": "Solid, Grinding",
-      "overview": "Carlsen's primary defense against 1.d4. The QGD suits his style perfectly — solid, reliable, and with enough imbalances to outplay opponents in the middlegame and endgame. He has won countless games from seemingly equal QGD positions.",
+      "overview": "Magnus's QGD is a love letter to classical chess. Tarrasch played it. Capablanca played it. Karpov played it for two decades and never lost a World Championship game in it. Magnus uses it specifically when he needs reliability — against in-form opponents, in must-not-lose games, in matches where one mistake costs everything. The QGD doesn't 'win' the opening; it equalises by move 15 and then asks your opponent to outplay you for the next 40. They usually can't. This isn't Magnus's flashy opening — it's his foundation.",
       "keyIdeas": [
-        "Solidly defend d5 with e6 and develop the kingside — timing this correctly before the opponent can generate counterplay is critical",
-        "Play c5 or c6 at the right moment to challenge White's center — this central control is the foundation for all middlegame operations",
-        "The bishop on e7 is passive initially but can activate via d6 or f6 — piece placement and activity are more important than material in these positions",
-        "Aim for endgames where Black's solid structure provides winning chances — the structural advantages become more pronounced with fewer pieces on the board"
+        "d5 + e6 + Nf6 + Be7 + O-O — that's the QGD setup, in that order, every game. Master this five-piece formation before you worry about anything else. The structure won't lose; only the player can lose.",
+        "The c8-bishop is the QGD's only real problem. Three solutions exist: (a) Tartakower's …b6 + …Bb7 fianchetto, (b) classical …Nbd7 + …c6 + …Bd7-Be8-f5, or (c) trade off via …Bb4 (Ragozin variation). Always know which solution you're playing for BEFORE move 8.",
+        "…c5 is the equalising break. The right moment: when you've castled, completed minor piece development, and White hasn't yet played c5 themselves. After …c5 the centre opens, your pieces breathe, and the structure becomes balanced.",
+        "The QGD's secret: it's harder for White to PLAY than for Black. White has to find a plan; Black just defends and waits. Magnus's superpower is patience — outwaiting opponents who run out of ideas."
       ],
       "traps": [
-        "If White plays cxd5 exd5 early, Black's pieces become very active — the IQP is not weak here"
+        "If White plays cxd5 too early (the Exchange Variation) before completing development, the resulting IQP-shaped position favours Black — your pieces are already harmoniously placed, White's aren't. Welcome the cxd5 exchange when White hasn't yet played Nf3."
       ],
       "warnings": [
-        "Do not play dxc4 early unless there is a concrete reason",
-        "Be careful of kingside attacks if the center closes"
+        "NEVER take on c4 early. The …dxc4 capture surrenders the central tension AND gives White a tempo when Bxc4 develops with attack. Save …dxc4 for specific Meran-like moments, not as a default response.",
+        "Watch for kingside attacks when the centre closes. In the QGD lines where White locks the centre with c5, White's plan switches to a kingside attack with f4-f5 — be ready to defend with …Re8 + …Nf8 + …g6 prophylaxis."
       ],
       "variations": [
         {
           "name": "5.Bf4 System",
           "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bf4 O-O e3 Nbd7 c5 Nh5 Bd3 Nxf4 exf4 b6 b4 a5 a3 Ba6",
-          "explanation": "A popular modern approach. Black provokes c5 and then undermines it with b6 and a5. The position offers long-term counterplay."
+          "explanation": "Magnus's preferred QGD line against the active 5.Bf4. After 5...Be7 6.e3 O-O 7.c5! (White grabs space by closing the queenside) 7...Nh5! (the signature counter — Black attacks the bishop on f4 immediately, refusing to let White consolidate). 8.Bd3 Nxf4 9.exf4 — Black accepts White's doubled f-pawns in exchange for the bishop trade. Now the structural battle begins: White has space (c5 + d4 + f4); Black has the bishop pair AND queenside undermining ideas with 9...b6 (challenging c5) 10.b4 (White defends with another pawn) 10...a5 11.a3 (White holds) 11...Ba6 — Black trades the light-squared bishop too, simplifying into a balanced middlegame. Pure strategic chess."
         },
         {
           "name": "Tartakower Variation",
           "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Be7 Bg5 h6 Bh4 O-O e3 b6 cxd5 Nxd5 Bxe7 Qxe7 Nxd5 exd5 Rc1 Be6 Bd3 c5",
-          "explanation": "The classic Tartakower where Black plays b6 to fianchetto the bishop. It solves the problem of the bad c8 bishop and leads to balanced positions."
+          "explanation": "The Tartakower solves the c8-bishop problem with a fianchetto. After 5.Bg5 h6 6.Bh4 O-O 7.e3 b6! — Black announces the plan: …Bb7 is coming. White's typical reply 8.cxd5 Nxd5 9.Bxe7 Qxe7 10.Nxd5 exd5 — massive simplification. Now Black plays 11...Be6 (developing the c8-bishop on e6 instead of b7, after the centre opened) 12.Bd3 c5! — the equalising break with full development complete. The Tartakower's elegance: it solves the bishop problem AND reaches a balanced middlegame in a forced sequence of trades."
         },
         {
           "name": "Ragozin Variation",
           "pgn": "d4 Nf6 c4 e6 Nc3 d5 Nf3 Bb4 Bg5 dxc4 e4 c5 Bxc4 cxd4 Nxd4 Qa5 Bd2 Qc5",
-          "explanation": "The Ragozin is a dynamic alternative for Black where Bb4 pins the knight early. After Qa5 + Qc5 the queen probes both diagonals — Carlsen uses this to create imbalanced positions where his technique decides."
+          "explanation": "The Ragozin is the most aggressive QGD answer — 4...Bb4 pins the c3-knight immediately, before White can consolidate. After 5.Bg5 dxc4 6.e4 (White grabs the centre) c5 7.Bxc4 cxd4 (chain of central trades) 8.Nxd4 Qa5 — Black's queen leaps to the queenside threatening multiple ideas (Qxg5, pinning the d4-knight if it moves). 9.Bd2 Qc5 — the queen probes both wings. Magnus uses this when he wants dynamic chances; the imbalanced position (Black has gambited central control for piece activity) creates winning chances for both sides."
         }
       ],
       "trapLines": [
@@ -1392,35 +1392,35 @@
       "pgn": "d4 Nf6 Nf3 d5 Bf4 c5 e3 Nc6 Nbd2 e6 c3 Bd6 Bg3 O-O Bd3 b6 O-O Bb7 Ne5",
       "color": "white",
       "style": "Positional, Solid",
-      "overview": "Carlsen adopted the London System in recent years as a practical weapon. He uses it to reach middlegame positions where his superior understanding gives him an edge without needing deep theoretical preparation. His treatment is more dynamic than the typical London.",
+      "overview": "Magnus took the London System — long considered a beginner's weapon — and made it a World Championship-level opening. His insight: the London isn't passive; it's PATIENT. Play the same pieces on the same squares every game (Bf4, e3, c3, Nbd2, Bd3, O-O), reach a flexible middlegame, and start outplaying. Carlsen's London games against top opposition have a 60%+ win rate as White — because the LACK of theoretical risk lets him focus 100% on the middlegame battle his opponent has to navigate.",
       "keyIdeas": [
-        "Develop Bf4 before e3 to avoid blocking the bishop — completing development before committing to a plan gives maximum flexibility",
-        "Build a solid center with d4-e3-c3 and then look for e4 — this central control is the foundation for all middlegame operations",
-        "The Ne5 outpost is extremely powerful — it controls key central squares — a key strategic concept in Queen's Pawn London",
-        "Aim for a slow positional squeeze rather than a quick attack — timing this correctly before the opponent can generate counterplay is critical"
+        "Bf4 BEFORE e3 — non-negotiable. If you play e3 first, the dark-squared bishop is locked behind its own pawn permanently. This is the single most important move-order rule in the London.",
+        "The Ne5 outpost is Magnus's signature. After full development, the Nf3-knight jumps to e5 — a square no Black piece can permanently dislodge it from. Combined with Bf4 + Bd3 pointing at the kingside, the Ne5 becomes the heart of any attack.",
+        "Build slowly: d4 + e3 + c3 + Nbd2 + Bd3 + O-O is the standard setup, regardless of what Black does. Same pieces, same squares, every game. Then make ONE move that fits the specific position (Ne5, h3, a4, or Re1).",
+        "The e4 break is reserved for the late middlegame. Most amateurs play e4 too soon (wanting action); Magnus waits 25 moves until the structure is ripe, then e4 opens lines for ALL the developed pieces simultaneously."
       ],
       "traps": [
-        "If Black plays Nh5 trying to trade the bishop, Bg3 and Ne5 gives White a dominant knight"
+        "If Black tries the standard …Nh5 (attacking Bf4 hoping for a trade), the bishop retreats to g3 where it stays USEFUL — controls h4, defends h2, and the h5-knight becomes a target for a future Ne5 or h3+g4."
       ],
       "warnings": [
-        "Do not play e3 before Bf4 — the bishop gets trapped",
-        "Watch for c5 and Qb6 targeting b2"
+        "DON'T play e3 before Bf4. Doing so blocks the c1-bishop forever and you've reached a worse Colle System instead of a London.",
+        "The b2-pawn is the London's only structural weakness. Black's …c5 + …Qb6 hits it; always have c3 ready (which you should be playing anyway) — never leave b2 undefended without a piece backing it up."
       ],
       "variations": [
         {
           "name": "Standard London vs d5",
           "pgn": "d4 Nf6 Nf3 d5 Bf4 c5 e3 Nc6 Nbd2 e6 c3 Bd6 Bg3 O-O Bd3 b6 O-O Bb7 Ne5",
-          "explanation": "Carlsen's main setup. The Ne5 outpost is the key move — it controls the center and supports a potential kingside expansion with f4."
+          "explanation": "Carlsen's standard treatment. Both sides develop in textbook order: 5...c5 (Black challenges centre) 6.e3 (NOT before Bf4!) Nc6 7.Nbd2 e6 8.c3 (defending b2 prophylactically) 9.Bg3 (the bishop retreats from a potential …Bd6 trade, keeping its useful diagonal) 10.Bd3 b6 11.O-O Bb7 12.Ne5! — the signature move. The knight reaches its dream outpost on e5, supported by f4 (after Bf4 swung to g3, the f-pawn is free to move). Black has full development but White has the more active piece structure. The middlegame plan: f4 push, Rfb3 lift, Qf3 swing — slowly building a kingside attack while the centre stays closed."
         },
         {
           "name": "London vs King's Indian",
           "pgn": "d4 Nf6 Nf3 g6 Bf4 Bg7 e3 O-O Be2 d6 O-O Nbd7 h3 c5 c3 b6 Nbd2 Bb7 a4 a6",
-          "explanation": "Against the KID setup, Carlsen plays more cautiously. The h3-Be2 setup avoids any Bg4 pins and prepares for a slow central expansion."
+          "explanation": "When Black fianchettos with 2...g6 + 3...Bg7, the London adapts. Magnus uses Be2 instead of Bd3 (because the …Bd3-h7 attacking idea doesn't work against a fianchettoed bishop on g7 covering h7). After 4.e3 O-O 5.Be2 d6 6.O-O Nbd7 7.h3 (prophylaxis against …Ng4 ideas) c5 8.c3 b6 9.Nbd2 Bb7 10.a4 a6 — both sides develop calmly. The structure favours White's space; Black's typical KID kingside attack doesn't work because there's no exposed king to attack."
         },
         {
           "name": "Jobava-London Attack",
           "pgn": "d4 Nf6 Nc3 d5 Bf4 c5 e3 cxd4 exd4 a6 Nf3 Nc6 Bd3 Bg4",
-          "explanation": "The more aggressive Jobava setup with Nc3 before Nf3. The Bg4 pin invites h3 + Bh5 — White retains the flexible setup with Nc3 ready to jump to b5 or e5."
+          "explanation": "The more aggressive Jobava version — Nc3 before Nf3, which threatens Nb5 hitting c7. Black plays the principled 3...d5 (otherwise Nb5 forks come), 4.Bf4 c5 (challenging centre) 5.e3 cxd4 (Black opens the position) 6.exd4 a6 (preventing Nb5 forever) 7.Nf3 Nc6 8.Bd3 Bg4 — Black tries the …Bg4 pin. White's reply: h3 + Bh5 forcing the bishop to commit, then standard London development. The Jobava version is sharper than the pure London because the Nc3 can re-route to b5/d2/e2 dynamically based on what Black does."
         }
       ],
       "trapLines": []
@@ -1433,35 +1433,35 @@
       "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Qd2 Nbd7 a4 Qc7",
       "color": "black",
       "style": "Dynamic, Positional",
-      "overview": "Carlsen played the Najdorf extensively in his earlier career and still uses it occasionally. His approach is more positional than most Najdorf players — he aims for solid piece placement and long-term structural advantages rather than wild tactical melees.",
+      "overview": "Magnus's Najdorf is the positional Najdorf — quiet pieces, solid king, slowly accumulated advantages. He doesn't play the Bg5 Poisoned Pawn lines that Fischer made famous; he plays the calm 6.Be2 setup where Black gets a stable position and waits for White to overpress. The Najdorf in Magnus's hands has the highest practical drawing rate of any Sicilian — and when he wants the full point, he simply outplays opponents in the endgame. This is the Najdorf as a marathon weapon, not a sprint weapon.",
       "keyIdeas": [
-        "Develop Be7 and castle quickly for a safe king position — completing development before committing to a plan gives maximum flexibility",
-        "The e5 push gains space and restricts White's knight — piece placement and activity are more important than material in these positions",
-        "Play on the queenside with Qc7, Rc8, and eventual b5 — the queen's active placement creates multi-directional threats that are hard to address",
-        "Carlsen's endgame prowess makes the Najdorf endgames especially dangerous — the structural advantages become more pronounced with fewer pieces on the board"
+        "…Be7 + …O-O quickly is Magnus's signature against ALL Najdorf systems — including the English Attack. While other players castle long or delay castling, Magnus prioritises king safety and accepts the position is going to be a long technical battle.",
+        "…e5 closes the centre and creates the typical Najdorf hole on d5. Don't worry about the hole — it's a manageable weakness if you keep …Nbd7 and …Nb6 ready to challenge any White knight that lands there.",
+        "Queenside expansion with …Qc7 + …Rc8 + …b5 is the Najdorf's strategic theme. The timing of …b5 matters: only after the queenside is fully prepared, never before White has played a4 (which makes axb5 a real threat).",
+        "Magnus's endgame edge: the Najdorf endgames after the queens trade favour the side with better technique. With a slight space disadvantage, Magnus reaches drawn endgames against grandmasters; against everyone else, he wins them."
       ],
       "traps": [
-        "After a4, if Black plays b5 prematurely, axb5 opens the a-file for White's rook"
+        "Be careful with …b5 timing. After White plays a4 (preventing …b5), the natural-looking …b5? hangs to axb5 opening the a-file for White's rook. The right order: prepare with …Nbd7 + …Rb8 first, THEN consider …b5."
       ],
       "warnings": [
-        "Avoid sharp Poisoned Pawn lines — Carlsen prefers solid setups",
-        "Watch for Nd5 jumps by White that can disrupt Black's coordination"
+        "Avoid the Bg5 Poisoned Pawn lines (with …Qxb2). Magnus deliberately doesn't play these — they're too sharp and theoretical. If you want the Najdorf for stability, accept the slight worse-but-defensible positions in the Bg5 e6 system instead.",
+        "Watch for the Nd5 sacrifice. In all Najdorf systems where White has Be3 + Qd2 + O-O-O, the thematic Nd5! sacrifice (Nxd5 exd5 + e5 push) breaks Black's centre open. Defend with …e6 or prepare …Nxd5 to avoid the e5 cramp."
       ],
       "variations": [
         {
           "name": "6.Be2 Positional",
           "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Qd2 Nbd7 a4 Qc7",
-          "explanation": "Carlsen's preferred system. Solid development with Be7 and O-O, followed by piece maneuvering. Less sharp than other Najdorf lines but very reliable."
+          "explanation": "Magnus's flagship Najdorf line. After 6.Be2 (the most restrained White system), Black plays the textbook 6...e5! 7.Nb3 (the knight is shoved back) Be7 (calm development, not the sharp Bg5 lines) 8.O-O O-O 9.Be3 Be6 (controls the d5 outpost) 10.Qd2 Nbd7 (the knight reroutes to support the queenside) 11.a4 (White prevents …b5) Qc7 — the queen reaches its standard square. Position assessment: White has a slight space edge, Black has the solid setup. The middlegame plan: …Rfc8 + eventual …b6 + …Bb7 fianchetto, then slow strategic chess. Magnus's win rate from this position at elite level is well above 50% as Black."
         },
         {
           "name": "6.Bg5 e6 Classical",
           "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 Bd3 b5 Rhe1 Bb7",
-          "explanation": "Against the aggressive Bg5, Carlsen plays the standard e6 setup. He prefers Qc7 and Nbd7 over the sharper lines, keeping the position under control."
+          "explanation": "Against the sharp 6.Bg5, Magnus chooses the QUIET classical setup. 6...e6 (not the Poisoned Pawn 6...Qb6!?) 7.f4 Be7 8.Qf3 Qc7 9.O-O-O Nbd7 — both sides castle on opposite wings, the race is on. But Magnus's version is calmer: 10.Bd3 b5 11.Rhe1 Bb7 — solid Black development without sharp tactics. The position becomes a long-term opposite-side-castling race where structural advantages matter more than tempo races."
         },
         {
           "name": "Anti-English Attack",
           "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be6 f3 h5 Qd2 Nbd7 O-O-O Be7 Kb1 Qc7",
-          "explanation": "Against the English Attack, Carlsen's modern approach includes the h5 move to slow down White's g4 push. This prophylactic idea has become popular at the highest level."
+          "explanation": "Against the English Attack (Be3 + Qd2 + O-O-O + g4 storm), Magnus pioneered the prophylactic 8...h5! — preventing White's g4 attack BEFORE it happens. After 6.Be3 e5 7.Nb3 Be6 8.f3 h5! 9.Qd2 Nbd7 10.O-O-O Be7 11.Kb1 Qc7 — Black has slowed White's kingside attack dramatically. The …h5 move is unusual but practical: it weakens g5 slightly but completely neutralises White's main attacking lever. This idea has been adopted by virtually every top Najdorf player since Magnus popularised it."
         }
       ],
       "trapLines": [
