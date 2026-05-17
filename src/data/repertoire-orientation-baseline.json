@@ -1,23 +1,6 @@
 {
   "description": "Allowlist of known orientation violations in src/data/repertoire.json as of 2026-05-16. The build-time test in repertoire-orientation.test.ts treats these as expected; any flagged entry NOT on this list fails CI. Each value is the set of category codes currently allowed for that key. As Phases 2-4 of docs/plans/2026-05-16-trap-orientation.md ship, entries are removed from this file. Phase 5 deletes this file entirely.",
   "allowlist": {
-    "sicilian-najdorf::trap::Najdorf: Central ...d5 Break Tactic": [
-      "WEAK_TRAP"
-    ],
-    "sicilian-najdorf::trap::Najdorf: ...b5-b4 Queenside Attack Timing": [
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
-    "sicilian-najdorf::trap::Najdorf: Knight Sacrifice on d5": [
-      "INVERTED_MATERIAL",
-      "STUDENT_NOT_PUNISHER"
-    ],
-    "sicilian-najdorf::trap::Najdorf: English Attack Nd5 Counter": [
-      "WEAK_TRAP"
-    ],
-    "sicilian-najdorf::warning::6.Bg5 Pin Dangers: Unpinning Too Late": [
-      "TOOTHLESS_WARNING"
-    ],
     "sicilian-dragon::trap::The Exchange Sacrifice ...Rxc3": [
       "WEAK_TRAP"
     ],
@@ -560,6 +543,25 @@
     "four-knights-game::trap::Scotch Four Knights Fork Trick": [
       "WEAK_TRAP",
       "STUDENT_NOT_PUNISHER"
+    ],
+    "sicilian-najdorf::trap::Najdorf: Central ...d5 Break Tactic": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "sicilian-najdorf::trap::Najdorf: ...b5-b4 Queenside Attack Timing": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "sicilian-najdorf::trap::Najdorf: Poisoned Pawn Survival": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "sicilian-najdorf::trap::Najdorf: English Attack Nd5 Counter": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "sicilian-najdorf::warning::6.Bg5 Pin Dangers: Unpinning Too Late": [
+      "TOOTHLESS_WARNING"
     ]
   }
 }

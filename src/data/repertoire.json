@@ -736,7 +736,7 @@
     "variations": [
       {
         "name": "Najdorf: English Attack (6.Be3 Main Line)",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be7 f3 Be6 Qd2 Nbd7 O-O-O b5 g4 b4 Na4 Nb6 Nxb6 Qxb6 Na5 Qc7 Kb1 Rc8 Nc4 d5",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be7 f3 Be6 Qd2 Nbd7 O-O-O b5 g4 b4 Na4",
         "explanation": "The English Attack is White's most dangerous system against the Najdorf. After castling queenside, White launches a kingside pawn storm with g4-g5 while Black counters on the queenside with ...b5-b4. The critical tension is whether White's g5 breakthrough against the f6 knight arrives before Black's queenside attack cracks open the a- and b-files against the white king. The knight maneuver Na5 targets c6 and pressures the queenside, but Black's thematic ...d5 break in the center often arrives just in time to seize the initiative."
       },
       {
@@ -746,27 +746,27 @@
       },
       {
         "name": "Najdorf: 6.Bg5 Main Line (with e6 and f4)",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 Bd3 b5 Rhe1 Bb7 Qg3 b4 Na4 O-O e5 dxe5 fxe5 Nd5 Bxe7 Nxe7",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 Bd3 b5 Rhe1 Bb7 Qg3 b4",
         "explanation": "The 6.Bg5 system creates immediate tension with the pin on f6 and the e5 push threat. After ...e6, a Scheveningen pawn structure arises where White builds attacking chances with f4 and the Bd3/Qg3 battery aimed at the kingside. Black must time the ...b5 queenside counterattack precisely while navigating the e5 break, which can blow open the center favorably for White. The critical moment is when White plays e5: if Black is not fully developed, the opening of lines can be fatal, but with ...Bb7 and proper piece coordination, Black holds the balance."
       },
       {
         "name": "Najdorf: Poisoned Pawn (6.Bg5 Qb6)",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Qb6 Qd2 Qxb2 Rb1 Qa3 e5 dxe5 fxe5 Nfd7 Ne4 Qxa2 Rd1 Qd5 Qe3 Qxe5 Be2 Bc5 Nxc5 Nxc5",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Qb6 Qd2 Qxb2 Rb1 Qa3 e5 dxe5 fxe5 Nfd7 Ne4 Qxa2 Rd1 Qd5 Qe3 Qxe5 Be2 Bc5",
         "explanation": "The Poisoned Pawn is one of the most theoretically dense lines in all of chess, famously championed by Fischer. Black boldly grabs the b2 pawn and navigates a labyrinth of forcing moves where the queen must find safety while White generates piece activity. After e5 dxe5 fxe5, White opens lines aggressively, but Black's extra pawn provides long-term compensation if they survive the middlegame. The key defensive resource ...Qd5 centralizes the queen powerfully, and after the piece exchanges Black often emerges with a healthy extra pawn in the endgame."
       },
       {
         "name": "Najdorf: 6.f3 English Attack Move Order",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 f3 e5 Nb3 Be6 Be3 Be7 Qd2 Nbd7 O-O-O b5 g4 b4 Na4 Nb6 Nxb6 Qxb6 Na5 Rc8 Kb1 Qc7 Nc4 d5",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 f3 e5 Nb3 Be6 Be3 Be7 Qd2 Nbd7 O-O-O b5 g4 b4 Na4",
         "explanation": "The 6.f3 move order reaches English Attack positions but avoids certain Black setups possible after 6.Be3 (such as the immediate ...Ng4). White's plan remains the same: castle queenside, push g4-g5 against the f6 knight, and attack the kingside. Black counters with the thematic ...b5-b4, and the knight maneuver ...Nb6 trades a defender while ...Rc8 pressures the c-file against White's king. The resulting positions are double-edged with mutual attacks on opposite flanks, and the central ...d5 break is Black's key liberating resource."
       },
       {
         "name": "Najdorf: Fischer-Sozin Attack (6.Bc4)",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 Nc6 Nxc6 Qxc6 Re1 Bb7 Bg5 O-O Rad1 Rac8 f3 Qc7 Qh4",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 Nc6 Nxc6 Qxc6 Re1 Bb7 Bg5 O-O Rad1",
         "explanation": "The Fischer-Sozin Attack with 6.Bc4 was Fischer's early weapon before he switched to the Poisoned Pawn. The bishop targets the sensitive e6-f7 diagonal and White often builds a kingside attack with Qf3-g3 and Bg5. Black must play ...e6 to block the diagonal, creating a Scheveningen structure, and develops counterplay with ...b5 and ...Bb7 pressuring the long diagonal. The key battle revolves around White's kingside ambitions versus Black's central and queenside resources; premature action by either side is punished by the opponent's preparation."
       },
       {
         "name": "Najdorf: Adams Attack (6.g3 Fianchetto)",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 g3 e5 Nde2 Be7 Bg2 O-O O-O b5 a3 Bb7 Nd5 Nxd5 exd5 Nd7 c4 bxc4 Nf4 Bg5 Nd3",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 g3 e5 Nde2 Be7 Bg2 O-O O-O b5 a3 Bb7",
         "explanation": "The 6.g3 fianchetto system is a positional approach where White develops the bishop to g2, targeting the long diagonal and the d5 square. After ...e5, the knight retreats to e2 rather than b3, keeping flexible options. Black achieves a comfortable Najdorf setup with ...b5 and ...Bb7 but must watch the d5 outpost carefully since the g2 bishop amplifies its power. White aims for a Nd5 occupation, often followed by c4 to undermine Black's queenside pawns and establish lasting positional pressure."
       },
       {
@@ -776,34 +776,34 @@
       },
       {
         "name": "Najdorf: Anti-Najdorf (6.a4)",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 a4 Nc6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Nd5 Bxd5 exd5 Nb4 c4 a5 f3 Nbd3 Bf2",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 a4 Nc6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Nd5",
         "explanation": "The Anti-Najdorf 6.a4 directly prevents Black's queenside expansion with ...b5, which is the soul of many Najdorf lines. Without the ...b5 lever, Black must find alternative plans, typically opting for ...Nc6 and ...e5 with a more restrained positional approach. White gains lasting queenside space and the d5 outpost becomes easier to maintain since Black's usual ...b5 challenge is off the table. Black compensates by building a solid central structure, but the resulting positions tend to favor White's strategic plans with Be3, Nd5, and slow maneuvering."
       }
     ],
     "trapLines": [
       {
         "name": "Najdorf: Central ...d5 Break Tactic",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 f4 exf4 Bxf4 Nc6 Qd3 d5 exd5 Nb4 Qd2 Nbxd5 Nxd5 Nxd5 Bg3 Bb4 c3 Bc5+ Kh1 Qf6",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 f4 exf4 Bxf4 Nc6",
         "explanation": "After White plays f4 in the Classical Najdorf, Black has a powerful tactical resource: capture with ...exf4 followed by ...Nc6 and the thematic ...d5 pawn break. This strikes at the center while the f4 pawn is gone, creating open lines for Black's pieces. The e4 pawn becomes overloaded after ...d5, and Black's knights flood into active squares with ...Nb4 hitting d3 and c2. The resulting positions give Black active piece play and often a slight initiative thanks to the centralized pieces and open lines."
       },
       {
         "name": "Najdorf: ...b5-b4 Queenside Attack Timing",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be6 f3 Be7 Qd2 Nbd7 O-O-O b5 g4 b4 Na4 Nb6 Nxb6 Qxb6 Na5 Qc7 Kb1 Rc8 Nc4 d5 exd5 Nxd5 Bd3",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be6 f3 Be7 Qd2 Nbd7 O-O-O b5 g4 b4",
         "explanation": "The ...b5-b4 pawn storm is Black's primary counterattacking weapon in the English Attack. The timing is critical: Black pushes ...b4 to evict the c3 knight, then uses the open b-file and a-file against White's king. After ...Nb6 and ...Qxb6, Black redirects the queen to c7 to support ...Rc8 and ...d5. The lethal threat is ...d5 breaking open the center while White's pieces are committed to the kingside: if Black achieves this break with piece support, the queenside attack often arrives first."
       },
       {
         "name": "Najdorf: Knight Sacrifice on d5",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 Bd3 b5 Rhe1 Bb7 Nd5 exd5 exd5 Bxd5 Qh3 Bf3 gxf3 O-O Nf5 Nc5 Nxe7+ Kh8 Bc4",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 Bd3 b5 Rhe1 Bb7 Nd5 exd5",
         "explanation": "The knight sacrifice Nd5 is one of White's most dangerous attacking ideas in the 6.Bg5 Najdorf. After ...exd5 exd5, White rips open the e-file against Black's king and the d5 pawn acts as a battering ram splitting Black's position. If Black captures with ...Bxd5, the queen lifts to h3 with devastating threats along the h3-c8 diagonal. Black must respond with extreme precision: ...Bf3 gives back material to blunt the attack, but after Nf5 targeting e7 and g7, White often maintains a ferocious initiative with pieces swarming the kingside."
       },
       {
         "name": "Najdorf: Poisoned Pawn Survival",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Qb6 Qd2 Qxb2 Rb1 Qa3 e5 dxe5 fxe5 Nfd7 Bc4 Bb4 Rd1 Bxc3 Qxc3 Qxc3+ Bd2 Qa1+ Ke2 O-O",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Qb6 Qd2 Qxb2 Rb1 Qa3 e5 dxe5 fxe5 Nfd7 Bc4 Bb4",
         "explanation": "The Poisoned Pawn variation is the most critical test of the Najdorf. Black grabs the b2 pawn with ...Qxb2 and must navigate a minefield of tactical threats. After e5 opens the center, White builds massive pressure with Bc4 targeting f7. However, Black's ...Bb4 pin and ...Bxc3 exchange simplify the position. The queen exchange with ...Qxc3+ defuses White's attack, and after ...Qa1+ Ke2 O-O, Black castles into safety with an extra pawn and a winning endgame."
       },
       {
         "name": "Najdorf: English Attack Nd5 Counter",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be7 f3 Be6 Qd2 Nbd7 O-O-O b5 g4 b4 Na4 Nb6 Nxb6 Qxb6 Na5 Rc8 Kb1 O-O Nc4 Qc7 g5 Nh5 Nxd6 Bxd6 Qxd6 Qxd6 Rxd6 Nf4",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be7 f3 Be6 Qd2 Nbd7 O-O-O b5 g4 b4",
         "explanation": "Against the English Attack with Be3 and f3, Black times the queenside counterattack with ...b5-b4 to evict the c3 knight. After the knight exchange on b6, Black redirects play with ...Rc8 pressuring the c-file. When White commits with Nxd6, Black exchanges down to a favorable endgame where the knight on f4 dominates from its outpost. The ...Nf4 knight attacks both e2 and g2, giving Black a clear advantage in the resulting position."
       }
     ],
@@ -815,7 +815,7 @@
       },
       {
         "name": "Premature ...e5 Weakening the d5 Outpost",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Nd5 Bxd5 exd5 Nbd7 c4 a5 Nc1 Nc5 Nd3 Nxd3 Bxd3 Nd7 Qg4 Bg5 Bxg5 Qxg5 Qxg5",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Nd5 Bxd5 exd5 Nbd7 c4 a5",
         "explanation": "After ...e5, the d5 square becomes a permanent weakness that White can exploit with a powerful knight outpost. If Black allows Nd5 without adequate counterplay prepared, the knight dominates the board controlling key squares on c7, e7, f6, and b6. The c4 advance locks out any ...b5 break, and White's bishop pair plus the d5 outpost create a lasting strategic advantage. Black should only play ...e5 when ready to immediately contest d5 with ...Be6 or prepare the liberating ...f5 counterblow."
       },
       {
