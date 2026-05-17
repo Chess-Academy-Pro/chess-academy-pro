@@ -2349,7 +2349,7 @@
       "playerId": "firouzja",
       "eco": "C25",
       "name": "Vienna Game (Firouzja)",
-      "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4 Nc6 Nf3 Bg4 Na4 Bb6 Nxb6 axb6 fxe5 dxe5 O-O O-O",
+      "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4 Nc6 Nf3 Bg4 Na4 Bb6 Nxb6 axb6",
       "color": "white",
       "style": "Aggressive, Creative",
       "overview": "Firouzja occasionally employs the Vienna Game as a surprise weapon. The early Nc3 keeps options open for f4 or Bc4 setups. His aggressive style makes the Vienna particularly dangerous — opponents face immediate tactical problems.",
@@ -2369,24 +2369,24 @@
       "variations": [
         {
           "name": "Vienna with f4",
-          "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4 Nc6 Nf3 Bg4 Na4 Bb6 Nxb6 axb6 fxe5 dxe5 O-O O-O",
-          "explanation": "Firouzja's aggressive Vienna setup. The f4 push creates immediate central tension and the Na4 maneuver targets Black's bishop."
+          "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4 Nc6 Nf3 Bg4 Na4 Bb6 Nxb6 axb6",
+          "explanation": "Firouzja's aggressive Vienna setup. The f4 push creates immediate central tension and the Na4-Nxb6 maneuver targets Black's bishop pair."
         },
         {
           "name": "Vienna Gambit",
-          "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Bc5 d4 Bb4 Bd3 Nxc3 bxc3 Bxc3+ Bd2 Bxa1 Qxa1 O-O O-O",
-          "explanation": "The aggressive gambit continuation. White sacrifices material for open lines and rapid development. Very much in Firouzja's attacking style."
+          "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Bc5 d4 Bb4 Bd3 Nxc3 bxc3 Bxc3+ Bd2 Bxa1 Qxa1",
+          "explanation": "The aggressive gambit continuation. After Qxa1, White is down an exchange but has open lines, the bishop pair, and a powerful central pawn duo — very much in Firouzja's attacking style."
         }
       ],
       "trapLines": [
         {
           "name": "exf4 Opens the f-file",
-          "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4 exf4 Bxf4 O-O Nf3 Bg4 Qd2 Nc6 O-O-O Nd4 Nxd4 Bxd4 Bxd6",
-          "explanation": "Black captures exf4 but White recaptures with the bishop and gets an open f-file. After castling, White's rook on f1 creates strong attacking pressure."
+          "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4",
+          "explanation": "When Black captures exf4 after the f4 push, White recaptures with the bishop and gets an open f-file. The rook on f1 creates strong attacking pressure as the game opens up."
         },
         {
           "name": "Bg4 Pin Broken by f5",
-          "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4 Bg4 Nf3 Nc6 Na4 Bb6 Nxb6 axb6 f5 Bxf5 exf5 d5 Bb3 e4 dxe4 Nxe4 O-O",
+          "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4",
           "explanation": "Black pins the knight with Bg4 but White plays f5 breaking the pin and gaining kingside space. The bishop is forced to retreat and White gets a strong attack."
         }
       ]
