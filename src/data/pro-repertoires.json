@@ -601,35 +601,35 @@
       "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Bd2 Bxd2+ Nbxd2 d5 exd5 Nxd5 O-O O-O",
       "color": "white",
       "style": "Classical, Solid",
-      "overview": "Levy's go-to recommendation for 800–1800 club players because the Italian punishes the most common opening mistakes (early king moves, premature trades, missing the c3+d4 break) without requiring you to memorise the kind of theory the Ruy Lopez demands. You develop naturally, target f7, and then choose between a Giuoco Piano squeeze or a c3+d4 central blast depending on Black's setup. Win the opening battle nine times out of ten just by knowing the principles.",
+      "overview": "The Italian Game is the first opening every chess player should learn — and the one most never stop playing. Why? Because 1.e4 e5 2.Nf3 Nc6 3.Bc4 develops two perfect pieces in two moves, points the bishop at the weakest square in chess (f7), and asks Black: 'What's your plan?' Most Black players don't have one. Levy teaches this as his foundational 1.e4 weapon because the strategic ideas are timeless — develop knights before bishops, castle quickly, control the centre — and you can play it from your first tournament to your last. The bonus: club players almost always blunder by move 12 if they haven't studied the c3+d4 break.",
       "keyIdeas": [
-        "Bc4 + Nf3 are non-negotiable first moves. The bishop on c4 stares at f7 (Black's structural weakest square — defended only by the king); the knight on f3 holds e4 and controls d4/g5/h4.",
-        "c3 + d4 is the breakout. Once you've castled, play c3 to prepare d4. If Black trades cxd4, you get an isolated d-pawn that's a STRENGTH in the middlegame (central squares, piece activity) — only weakness in the endgame.",
-        "Don't fear the isolated d4-pawn. It controls c5 and e5, supports any future d5 push, and gives Bd3 (after the trades) a clean diagonal at h7. Most amateurs play AGAINST you trying to win the pawn — that's exactly what you want, because they ignore your developing initiative.",
-        "If Black goes passive with the Hungarian Defence (…Be7), the Italian becomes a positional squeeze: build with d3, Re1, h3, Nbd2, then organise a slow kingside attack. The Italian works whether Black plays sharp or quiet."
+        "f7 is the target, full stop. Bc4 + Nf3 + Ng5 (in some lines) all aim at the f7-square. In the Italian, every tactical opportunity ultimately traces back to the bishop on c4 and the pawn on f7 defended only by the king.",
+        "The c3+d4 sequence is the engine. Play c3 to prepare d4, then push d4 to open the centre. If Black takes (exd4), you recapture cxd4 building a centre pawn duo. If Black ignores you (Nf6, O-O), you take dxe5 and grab space. Every Italian middlegame plan starts with d4.",
+        "When the isolated d-pawn appears (after Bb4+ Bd2 Bxd2+ Nbxd2 d5 exd5 Nxd5), DON'T sweat it. The isolated d4-pawn controls c5 and e5, gives your pieces central squares, and the Bd3 + Qd3 battery aimed at h7 wins games. The 'isolated pawn weakness' is endgame theory; you're playing the middlegame.",
+        "If Black plays the Hungarian Defence (...Be7), the Italian becomes the positional Italian. Set up d3, c3, Re1, Nbd2, then plan h3 + Nh2 + f4 for a slow kingside attack. Different style, same opening — you choose the speed."
       ],
       "traps": [
-        "Against the Two Knights (Bc4 Nf6), if Black plays the ambitious 4…Bc5 instead of 4…Be7, you can fire off 5.d4! immediately — after exd4 cxd4 Bb4+ Bd2 Bxd2+ Nbxd2 d5 exd5 Nxd5, you reach the Giuoco Piano main line with all the active piece play."
+        "Against 3...Nf6 (Two Knights), if Black plays 4...Bc5 the Two Knights becomes a Giuoco Piano hybrid — and you can launch 5.d4! immediately. After 5...exd4 6.cxd4 Bb4+ 7.Bd2 Bxd2+ 8.Nbxd2 d5 9.exd5 Nxd5, you reach the IQP position with full development and Black has spent two tempos on the dark-squared bishop trade."
       ],
       "warnings": [
-        "DON'T play d4 if you haven't castled or finished kingside development. The classic blunder is 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.d4? exd4 5.Nxd4? Nxd4 6.Qxd4 — Black plays 6…Nf6 and White's queen comes under attack.",
-        "Watch the e4-pawn whenever your knight on f3 moves. The standard tactical resource for Black is …Nxe4 if e4 is undefended — always count defenders before moving the f3-knight."
+        "NEVER play d4 before castling. The classic amateur disaster: 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.d4? exd4 5.Nxd4? Nxd4 6.Qxd4 Nf6 — Black develops with attack on the queen, then Black castles and you've spent two queen moves while Black caught up.",
+        "Count defenders of e4 every time you move the f3-knight. If you play Ng5 (attacking f7) but e4 is now undefended, Black has ...Nxe4! and the tactical adventure backfires. The e4-pawn is fragile in the Italian."
       ],
       "variations": [
         {
           "name": "Giuoco Piano c3-d4",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Bd2 Bxd2+ Nbxd2 d5 exd5 Nxd5 O-O O-O",
-          "explanation": "Levy's flagship Italian line. After 5.d4 exd4 6.cxd4, Black's natural 6…Bb4+ forces the trade of dark-squared bishops, leaving you with an isolated d4-pawn but the better-placed pieces. The d-pawn controls c5 and e5, your knight on d2 reroutes to f1–g3 for the kingside attack, and Black has no obvious plan beyond defence. This is the Italian's main weapon at every level from beginner to GM."
+          "explanation": "The Giuoco Piano's main line — 'the Quiet Game' that's anything but. After 4.c3 Nf6 5.d4! exd4 6.cxd4, Black's d4-pawn target is staring at the Bc5. The natural defence is 6...Bb4+ — but this only delays the trade. 7.Bd2 Bxd2+ 8.Nbxd2 (NOT Qxd2 — the knight wants the d2-square to reroute via f1-g3) 8...d5 9.exd5 Nxd5 trades the e-pawn for Black's d-pawn, leaving White with an isolated d4-pawn. Both sides castle. This is the textbook IQP position — White has the active pieces (Nd2 heading to f1-g3, Bd3 eyeing h7, queen ready to swing), Black has the slightly better structure. Play it dynamically: every IQP middlegame is won by the side that attacks first."
         },
         {
           "name": "Slow Italian d3",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 O-O d6 c3 a6 a4 Ba7 Re1 O-O Nbd2 Be6",
-          "explanation": "For players who hate isolated pawns or prefer a slow squeeze. 4.d3 keeps the centre closed; White then builds with c3, Re1, Nbd2, eyes the kingside attack with Nf1–g3 and h3+Nh4 ideas. The downside: it's slower and gives Black equal chances. The upside: there's literally no theory beyond move 8."
+          "explanation": "When you don't want the IQP fireworks, 4.d3 is the calm system. You set up the Italian formation behind a closed centre: 5.O-O O-O 6.c3 (preparing d4 later) 6...d6 (Black mirrors) 7.a4 (preventing Black's …b5 expansion) 7...a6 — Black plays the prophylaxis dance. 8.a4 Ba7 (Black avoids the b6/a5 trade) 9.Re1 O-O 10.Nbd2 Be6 — both sides develop in mirror image. The middlegame plan: White wants Nf1-g3-Nh4 + f4 break; Black wants the same idea reversed. Same skill on both sides means a draw; better technique wins."
         },
         {
           "name": "Evans Gambit",
           "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O d6 cxd4 Bb6 Nc3 Bg4",
-          "explanation": "The 19th-century crowd-pleaser. You sacrifice the b-pawn to gain a tempo on the c5-bishop AND blast open the centre with c3+d4. After Black accepts with …Bxb4, every White move comes with tempo and the resulting attack is brutal at amateur level. Kasparov resurrected this against Anand — if it's good enough for Kasparov, it's good enough for blitz."
+          "explanation": "Captain Evans's 1820 invention — still terrifying 200 years later. 4.b4! sacrifices a pawn to gain a tempo (4...Bxb4) and then 5.c3 chases the bishop while preparing d4. Black's best retreat is 5...Ba5 (5...Bc5 hangs to d4 with tempo; 5...Bd6 blocks the d-pawn). Now 6.d4 exd4 7.O-O d6 8.cxd4 Bb6 — you've built a massive centre AND castled in 8 moves, while Black has moved the bishop three times. Black's 9...Bg4 tries to pin the f3-knight, but you respond with 10.Bb2 + Nc3 + Qb3 piling up on the kingside. The Evans was Kasparov's surprise weapon against Anand at Riga 1995 — a 25-move kingside attack ended the game."
         }
       ],
       "trapLines": [
