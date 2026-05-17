@@ -2025,15 +2025,15 @@
         },
         {
           "name": "5.Nc3 Main Line",
-          "pgn": "e4 e5 Nf3 Nf6 Nxe5 d6 Nf3 Nxe4 Nc3 Nxc3 dxc3 Be7 Bf4 Nd7 Qd5 Nf6 Qe4 O-O Bd3 Nd5 Bg3 c6 O-O Bf6",
-          "explanation": "An alternative where White plays Nc3 instead of d4. The position is slightly different but equally solid for Black."
+          "pgn": "e4 e5 Nf3 Nf6 Nxe5 d6 Nf3 Nxe4 Nc3 Nxc3 dxc3 Be7 Bf4 Nd7",
+          "explanation": "An alternative where White plays Nc3 instead of d4. After Nxc3 dxc3 + Be7 + Nd7, Black has a symmetric pawn structure and equal piece play."
         }
       ],
       "trapLines": [
         {
           "name": "Premature d4 and ...Qh4 Pressure",
-          "pgn": "e4 e5 Nf3 Nf6 Nxe5 d6 Nf3 Nxe4 d4 d5 Bd3 Bd6 O-O O-O c4 c6 Nc3 Nxc3 bxc3 dxc4 Bxc4 Bg4 Rb1 b5 Bd3 Nd7 Rb4",
-          "explanation": "White plays d4 too aggressively and Black gets ...Bg4 pinning the knight. The pressure on the d4-c3 complex gives Black a comfortable position with easy play."
+          "pgn": "e4 e5 Nf3 Nf6 Nxe5 d6 Nf3 Nxe4 d4 d5 Bd3 Bd6 O-O O-O c4 c6 Nc3 Nxc3 bxc3 dxc4 Bxc4 Bg4 Rb1 b5 Bd3 Nd7",
+          "explanation": "After d4 + c4 + Nc3, the long forced exchanges leave Black with active piece play. The Bg4 pin plus ...b5 forces White into defensive moves; Black's lead in coordination is the key dynamic factor."
         },
         {
           "name": "Nf3 Retreat Strong Center",
