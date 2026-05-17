@@ -367,9 +367,42 @@ async function main() {
     { kind: 'count-gte', selector: '[data-testid="rolodex-row-walkthrough"]', value: 1, label: 'Walkthrough row present' },
     { kind: 'count-gte', selector: '[data-testid="rolodex-row-practice-from-start"]', value: 1, label: 'Practice from move 1 row present' },
     { kind: 'count-gte', selector: '[data-testid="rolodex-row-practice-middlegame"]', value: 1, label: 'Practice middlegame row present' },
+    // PR-3 contract: each row carries its own count element. Tracked
+    // rows render "X / Y", placeholder rows render "—". Either way
+    // the data-testid must exist so the audit catches regressions
+    // where rows are present but counts disappear.
+    { kind: 'count-gte', selector: '[data-testid="rolodex-row-count-theory-lines"]', value: 1, label: 'Theory & Lines count element renders' },
+    { kind: 'count-gte', selector: '[data-testid="rolodex-row-count-puzzles"]', value: 1, label: 'Puzzles count element renders' },
+    { kind: 'count-gte', selector: '[data-testid="rolodex-row-count-walkthrough"]', value: 1, label: 'Walkthrough count element renders' },
+    { kind: 'count-gte', selector: '[data-testid="rolodex-row-count-gm-games"]', value: 1, label: 'GM Games count element renders (placeholder —)' },
     { kind: 'count-gte', selector: '[data-testid="rolodex-empty-state-black"]', value: 1, label: 'black still empty (only seeded white)' },
     { kind: 'audit-present', audit: 'coach-memory-rolodex-active-card-set', label: 'first-favorite auto-activate audit fires' },
   ]);
+
+  // ── Theory & Lines row tap → /openings?opening=<name> ────────────
+  // One representative row-tap scenario to verify the PR-3 navigation
+  // contract end-to-end. Each row's destination URL is unit-tested in
+  // RolodexRow.test.tsx; the audit pins the integration.
+  await record('plan-row-tap-navigation', async () => {
+    await page.locator('[data-testid="rolodex-row-tap-theory-lines"]').first().click();
+    await page.waitForURL(/\/openings/, { timeout: 10_000 });
+    await page.waitForTimeout(HYDRATE_SETTLE_MS);
+  }, NAV_SETTLE_MS, [
+    // /openings auto-resolves `?opening=<name>` to the matched opening's
+    // detail page (`/openings/<id>-<slug>`) — that's the desired UX
+    // (skip the list, land on the opening). Either URL is acceptable;
+    // both routes are part of the /openings surface.
+    {
+      kind: 'url-matches',
+      value: /\/openings(\?opening=Italian|\/[a-z0-9-]*italian)/i,
+      label: 'lands on /openings with the Italian Game in focus',
+    },
+  ]);
+
+  // Navigate back to /coach/plan for the subsequent scenarios.
+  await page.goto(`${BASE_URL}/coach/plan`, { waitUntil: 'domcontentloaded' });
+  await page.locator('[data-testid="training-plan-rolodex-page"]').waitFor({ timeout: 15_000 });
+  await page.waitForTimeout(HYDRATE_SETTLE_MS);
 
   // ── Seed multiple favorites; verify active card body + back tabs ─
   await record('plan-multi-favorite-stack', async () => {

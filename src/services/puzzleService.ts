@@ -1,6 +1,7 @@
 import { db } from '../db/schema';
 import { calculateNextInterval, createDefaultSrsFields } from './srsEngine';
 import { getMistakePuzzlesDue } from './mistakePuzzleService';
+import { getPuzzleIdsByOpening, type PuzzleIdsByOpening } from './puzzlesByOpening';
 import puzzleData from '../data/puzzles.json';
 import trainingPuzzleData from '../data/training-puzzles.json';
 import type { PuzzleRecord, SrsGrade, CoachDifficulty, MistakePuzzle, ChessPiece } from '../types';
@@ -275,6 +276,73 @@ export async function getPuzzleForThemeAtRating(
   const unseen = any.filter((p) => !seenIds.has(p.id));
   if (unseen.length > 0) {
     const sorted = unseen.sort((a, b) => Math.abs(a.rating - targetRating) - Math.abs(b.rating - targetRating));
+    return sorted[Math.floor(Math.random() * Math.min(5, sorted.length))];
+  }
+  return null;
+}
+
+/** Resolves an opening name to its candidate puzzle IDs once (with
+ *  family-fallback) and memoizes per name+rating window for the
+ *  duration of a drill session. Lookup is in-memory + sync. */
+const openingIdsCache = new Map<string, PuzzleIdsByOpening>();
+function getCachedOpeningIds(openingName: string): PuzzleIdsByOpening {
+  const cached = openingIdsCache.get(openingName);
+  if (cached) return cached;
+  const fresh = getPuzzleIdsByOpening(openingName);
+  openingIdsCache.set(openingName, fresh);
+  return fresh;
+}
+
+/** Test-only — clears the opening-IDs memo cache. */
+export function _resetOpeningPuzzleCacheForTest(): void {
+  openingIdsCache.clear();
+}
+
+/**
+ * Opening-filtered counterpart to `getPuzzleForThemeAtRating`.
+ * Returns a single puzzle tagged with the named opening (family-
+ * fallback ladder applied via `getPuzzleIdsByOpening`) near the
+ * target rating. The drill page uses this when invoked with
+ * `?opening=<name>` (WO-ROLODEX-UI-01 PR-3).
+ *
+ * Same band-expansion shape as the theme variant — expand up to 3×
+ * if nothing's in the initial band, then settle for any opening-
+ * tagged puzzle anywhere in a 600pt window. Returns `null` only
+ * when zero puzzles exist for that opening / family at any rating.
+ */
+export async function getPuzzleForOpeningAtRating(
+  openingName: string,
+  targetRating: number,
+  seenIds: Set<string>,
+  bandWidth: number = 200,
+): Promise<PuzzleRecord | null> {
+  const resolution = getCachedOpeningIds(openingName);
+  if (resolution.ids.length === 0) return null;
+  const idSet = new Set(resolution.ids);
+  for (const mult of [1, 2, 3]) {
+    const bw = bandWidth * mult;
+    const candidates = await db.puzzles
+      .where('rating')
+      .between(targetRating - bw, targetRating + bw)
+      .toArray();
+    const matched = candidates
+      .filter((p) => !seenIds.has(p.id) && idSet.has(p.id))
+      .sort((a, b) => Math.abs(a.rating - targetRating) - Math.abs(b.rating - targetRating));
+    if (matched.length > 0) {
+      const pool = matched.slice(0, 5);
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
+  }
+  // Final fallback: any opening-tagged puzzle in a 600pt window.
+  const any = await db.puzzles
+    .where('rating')
+    .between(targetRating - 600, targetRating + 600)
+    .toArray();
+  const unseen = any.filter((p) => !seenIds.has(p.id) && idSet.has(p.id));
+  if (unseen.length > 0) {
+    const sorted = unseen.sort(
+      (a, b) => Math.abs(a.rating - targetRating) - Math.abs(b.rating - targetRating),
+    );
     return sorted[Math.floor(Math.random() * Math.min(5, sorted.length))];
   }
   return null;

@@ -1,4 +1,16 @@
 import { describe, it, expect, vi } from 'vitest';
+
+// Mock the per-opening progress hooks so the row tests stay
+// hermetic — RolodexCard renders the 8 row components and each one
+// calls into the PLUMBING-01 hooks; without mocks they'd hit Dexie.
+vi.mock('../../hooks/useOpeningProgress', () => ({
+  useOpeningLinesProgress: () => ({ completed: 0, total: 0, loading: false }),
+  useOpeningPuzzlesProgress: () => ({ count: 0, source: 'none' as const }),
+  useOpeningTrapsProgress: () => ({ completed: 0, total: 0, loading: false }),
+  useOpeningMistakesProgress: () => ({ completed: 0, total: 0, loading: false }),
+  useOpeningWalkthroughProgress: () => ({ completed: 0, total: 0, loading: false }),
+}));
+
 import { render, screen, fireEvent } from '../../test/utils';
 import { RolodexCard } from './RolodexCard';
 import { ROLODEX_ROWS } from './rolodexRows';
@@ -56,20 +68,8 @@ describe('RolodexCard — active state', () => {
       const li = screen.getByTestId(`rolodex-row-${row.key}`);
       expect(li).toBeInTheDocument();
       expect(li).toHaveTextContent(row.label);
-      // Placeholder "—" is in every row until PR-3 wires counts.
-      expect(li).toHaveTextContent('—');
     }
     expect(ROLODEX_ROWS).toHaveLength(8);
-  });
-
-  it('exposes the PR-3 placeholder marker so the test suite catches when it disappears', () => {
-    const onActivate = vi.fn();
-    render(
-      <RolodexCard opening={buildOpening()} isActive onActivate={onActivate} />,
-    );
-    expect(
-      screen.getByTestId('rolodex-card-pr-marker-italian'),
-    ).toBeInTheDocument();
   });
 
   it('does NOT render the tab button when active', () => {

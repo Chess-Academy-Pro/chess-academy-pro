@@ -154,6 +154,59 @@ export function getPuzzlesProgress(openingName: string): PuzzlesProgress {
   return { count: 0, source: 'none' };
 }
 
+/** Returned by `getPuzzleIdsByOpening` — the ids feed the drill's
+ *  rating-band fetch; the `source` + `family` mirror what the
+ *  rolodex Puzzles row already exposes so the destination chip
+ *  on `/tactics/drill` can render the same family-fallback label
+ *  the user just tapped on the card. */
+export interface PuzzleIdsByOpening {
+  ids: string[];
+  source: PuzzlesProgressSource;
+  family?: string;
+}
+
+/** Like `getPuzzlesProgress` but returns the actual puzzle IDs (not
+ *  just a count). Used by `/tactics/drill` to filter the puzzle pool
+ *  to those tagged with the favorited opening (with the same family-
+ *  fallback ladder as the rolodex row).
+ *
+ *  WO-ROLODEX-UI-01 PR-3: the Puzzles row navigates to
+ *  `/tactics/drill?opening=<favorited-name>` and the destination
+ *  page calls this to filter its candidate pool. Family-fallback
+ *  resolution happens here (not at the destination) so the
+ *  rolodex card and the drill page always agree on which puzzles
+ *  count toward this opening. */
+export function getPuzzleIdsByOpening(openingName: string): PuzzleIdsByOpening {
+  const trimmed = openingName.trim();
+  const exact = collectPuzzleIdsForName(trimmed);
+  if (exact.length > 0) return { ids: exact, source: 'exact' };
+
+  const family = getOpeningFamily(trimmed);
+  if (family !== trimmed) {
+    const familyIds = collectPuzzleIdsForName(family);
+    if (familyIds.length > 0) {
+      return { ids: familyIds, source: 'family', family };
+    }
+  }
+  return { ids: [], source: 'none' };
+}
+
+/** Helper — same dedup logic as `countPuzzlesForName` but returns
+ *  the underlying IDs as an array (sorted for deterministic ordering
+ *  in tests). */
+function collectPuzzleIdsForName(dbName: string): string[] {
+  const index = getIndex();
+  const tokens = [normalizeOpeningNameToLichessToken(dbName), ...getAliasedTokens(dbName)];
+  const seen = new Set<string>();
+  for (const t of tokens) {
+    if (!t) continue;
+    const ids = index.get(t);
+    if (!ids) continue;
+    for (const id of ids) seen.add(id);
+  }
+  return [...seen].sort();
+}
+
 /** Test-only — clear the cached index. Lets unit tests verify the
  *  lazy-build path and reset between runs that mock puzzleData. */
 export function _resetIndexForTest(): void {

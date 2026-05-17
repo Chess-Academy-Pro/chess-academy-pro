@@ -27,7 +27,16 @@
  * `onLongPress` callback but no gesture wiring lands here.
  */
 import { motion } from 'framer-motion';
-import { ROLODEX_ROWS } from './rolodexRows';
+import {
+  TheoryLinesRow,
+  PuzzlesRow,
+  GMGamesRow,
+  TrapsRow,
+  BlundersRow,
+  WalkthroughRow,
+  PracticeFromStartRow,
+  PracticeMiddlegameRow,
+} from './RolodexRow';
 import type { OpeningRecord } from '../../types';
 
 interface RolodexCardProps {
@@ -68,28 +77,15 @@ export function RolodexCard({ opening, isActive, onActivate }: RolodexCardProps)
             </h3>
           </header>
           <ul className="divide-y divide-theme-border" data-testid={`rolodex-card-rows-${opening.id}`}>
-            {ROLODEX_ROWS.map((row) => (
-              <li
-                key={row.key}
-                className="px-4 py-3 flex items-center gap-3"
-                data-testid={`rolodex-row-${row.key}`}
-              >
-                <row.Icon
-                  size={20}
-                  className="text-theme-text-muted shrink-0"
-                  aria-hidden
-                />
-                <span className="flex-1 text-sm text-theme-text">{row.label}</span>
-                <span className="text-xs text-theme-text-muted tabular-nums">—</span>
-              </li>
-            ))}
+            <TheoryLinesRow opening={opening} />
+            <PuzzlesRow opening={opening} />
+            <GMGamesRow opening={opening} />
+            <TrapsRow opening={opening} />
+            <BlundersRow opening={opening} />
+            <WalkthroughRow opening={opening} />
+            <PracticeFromStartRow opening={opening} />
+            <PracticeMiddlegameRow opening={opening} />
           </ul>
-          <p
-            className="px-4 py-2 text-[11px] italic text-theme-text-muted bg-theme-surface/40 border-t border-theme-border"
-            data-testid={`rolodex-card-pr-marker-${opening.id}`}
-          >
-            Row counts + deep links land in PR-3.
-          </p>
         </div>
       ) : (
         <button

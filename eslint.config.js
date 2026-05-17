@@ -19,6 +19,11 @@ export default tseslint.config(
       'playwright.config.ts',
       'api',
       'scripts',
+      // Claude Code spawn_task worktrees live here; they duplicate the
+      // src tree under a path that's outside tsconfig's include scope,
+      // which makes the typed parser fail with "parserOptions.project"
+      // errors on every file in the worktree. Skip the whole tree.
+      '.claude/worktrees/**',
     ],
   },
   {

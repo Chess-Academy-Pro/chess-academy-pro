@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
+  getPuzzleIdsByOpening,
   getPuzzlesProgress,
   normalizeOpeningNameToLichessToken,
 } from './puzzlesByOpening';
@@ -88,6 +89,58 @@ describe('puzzlesByOpening', () => {
       // unless exact yields zero.
       const r = getPuzzlesProgress('Italian Game');
       expect(r.source).toBe('exact');
+    });
+  });
+
+  describe('getPuzzleIdsByOpening (WO-ROLODEX-UI-01 PR-3)', () => {
+    it('returns at least one id and source=exact for a top-level opening with tagged puzzles', () => {
+      const r = getPuzzleIdsByOpening('Italian Game');
+      expect(r.source).toBe('exact');
+      expect(r.ids.length).toBeGreaterThan(0);
+      // family is set only when source === 'family'
+      expect(r.family).toBeUndefined();
+    });
+
+    it('returns deterministically sorted ids (stable across calls)', () => {
+      const a = getPuzzleIdsByOpening('Italian Game').ids;
+      const b = getPuzzleIdsByOpening('Italian Game').ids;
+      expect(a).toEqual(b);
+      const sorted = [...a].sort();
+      expect(a).toEqual(sorted);
+    });
+
+    it('walks up to the family when the deep variation has no exact match', () => {
+      // Pick a deep variation that's unlikely to have exact puzzles
+      // but whose family does. The family-fallback ladder mirrors
+      // getPuzzlesProgress's, so this test verifies they stay in sync.
+      const r = getPuzzleIdsByOpening('Italian Game: Classical Variation, Center Holding Variation');
+      if (r.source === 'family') {
+        expect(r.family).toBe('Italian Game');
+        expect(r.ids.length).toBeGreaterThan(0);
+      } else if (r.source === 'exact') {
+        // If Lichess happens to tag this exact line, fine — still ids.
+        expect(r.ids.length).toBeGreaterThan(0);
+      } else {
+        // The acceptable third outcome is source=none; we don't
+        // pin a count expectation here because puzzle data evolves.
+        expect(r.ids).toHaveLength(0);
+      }
+    });
+
+    it('returns ids=[] and source=none for an unknown opening', () => {
+      const r = getPuzzleIdsByOpening('Totally Made Up Opening Defense');
+      expect(r.source).toBe('none');
+      expect(r.ids).toEqual([]);
+    });
+
+    it('count from getPuzzlesProgress matches ids.length from getPuzzleIdsByOpening', () => {
+      // The two queries must stay in lockstep — the rolodex Puzzles
+      // row count must equal the drill's actual filtered pool size.
+      const name = 'Italian Game';
+      const progress = getPuzzlesProgress(name);
+      const ids = getPuzzleIdsByOpening(name);
+      expect(ids.ids.length).toBe(progress.count);
+      expect(ids.source).toBe(progress.source);
     });
   });
 });

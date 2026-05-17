@@ -1,13 +1,15 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Swords, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Swords, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import {
   getPuzzleForThemeAtRating,
+  getPuzzleForOpeningAtRating,
   calculateRatingDelta,
   applyTimeBonus,
   THEME_MAP,
 } from '../../services/puzzleService';
+import { getPuzzleIdsByOpening } from '../../services/puzzlesByOpening';
 import { useAppStore } from '../../stores/appStore';
 import { PuzzleBoard } from '../Puzzles/PuzzleBoard';
 import type { PuzzleOutcome } from '../Puzzles/PuzzleBoard';
@@ -34,9 +36,24 @@ interface DrillResult {
 export function TacticDrillPage(): JSX.Element {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const activeProfile = useAppStore((s) => s.activeProfile);
   const setActiveProfile = useAppStore((s) => s.setActiveProfile);
   const setGlobalBoardContext = useAppStore((s) => s.setGlobalBoardContext);
+
+  // Opening-filtered drill (WO-ROLODEX-UI-01 PR-3) — entered via the
+  // rolodex Puzzles row at /coach/plan. When `?opening=` is set, the
+  // drill skips theme-based fetching and pulls puzzles tagged with the
+  // favorited opening (with family-fallback ladder via
+  // getPuzzleIdsByOpening). The chip in the header reflects the
+  // resolution: exact ("Italian Game") or family-fallback
+  // ("Italian Game family"). When the param is absent the drill
+  // behaves exactly as before (theme-based).
+  const openingFilter = (searchParams.get('opening') ?? '').trim() || null;
+  const openingResolution = useMemo(
+    () => (openingFilter ? getPuzzleIdsByOpening(openingFilter) : null),
+    [openingFilter],
+  );
 
   const filterThemes = (location.state as { filterThemes?: string[] } | null)?.filterThemes;
   const filterTypes = (location.state as { filterTypes?: string[] } | null)?.filterTypes;
@@ -72,10 +89,15 @@ export function TacticDrillPage(): JSX.Element {
     return () => { setGlobalBoardContext(null); };
   }, [setGlobalBoardContext]);
 
-  /** Fetch the next puzzle at the current adaptive rating. */
+  /** Fetch the next puzzle at the current adaptive rating. Routes
+   *  through the opening-filtered fetch when `?opening=` is set, the
+   *  theme-based fetch otherwise. */
   const fetchNextPuzzle = useCallback(async (targetRating: number): Promise<PuzzleRecord | null> => {
+    if (openingFilter) {
+      return getPuzzleForOpeningAtRating(openingFilter, targetRating, seenIdsRef.current);
+    }
     return getPuzzleForThemeAtRating(lichessThemes, targetRating, seenIdsRef.current);
-  }, [lichessThemes]);
+  }, [lichessThemes, openingFilter]);
 
   /** Start or restart a drill session. */
   const startSession = useCallback(async (): Promise<void> => {
@@ -92,11 +114,20 @@ export function TacticDrillPage(): JSX.Element {
       kind: 'tactics-surface-event',
       category: 'subsystem',
       source: 'TacticDrillPage.session-start',
-      summary: `drill started at rating ${startRating} themes=[${lichessThemes.slice(0, 4).join(',')}]`,
-      details: JSON.stringify({ startRating, themes: lichessThemes }),
+      summary: openingFilter
+        ? `drill started at rating ${startRating} opening="${openingFilter}" source=${openingResolution?.source ?? '?'}`
+        : `drill started at rating ${startRating} themes=[${lichessThemes.slice(0, 4).join(',')}]`,
+      details: JSON.stringify({
+        startRating,
+        themes: lichessThemes,
+        openingFilter,
+        openingResolution,
+      }),
     });
 
-    const puzzle = await getPuzzleForThemeAtRating(lichessThemes, startRating, seenIdsRef.current);
+    const puzzle = openingFilter
+      ? await getPuzzleForOpeningAtRating(openingFilter, startRating, seenIdsRef.current)
+      : await getPuzzleForThemeAtRating(lichessThemes, startRating, seenIdsRef.current);
     if (!puzzle) {
       setPhase('summary');
       return;
@@ -105,7 +136,7 @@ export function TacticDrillPage(): JSX.Element {
     setPuzzleHistory([puzzle]);
     setCurrentIndex(0);
     setPhase('solving');
-  }, [lichessThemes, activeProfile]);
+  }, [lichessThemes, activeProfile, openingFilter, openingResolution]);
 
   useEffect(() => {
     void startSession();
@@ -237,8 +268,26 @@ export function TacticDrillPage(): JSX.Element {
         </button>
         <Swords size={22} style={{ color: 'var(--color-warning)' }} />
         <h1 className="text-lg font-bold flex-1" style={{ color: 'var(--color-text)' }}>
-          Drill: {themeLabel}
+          {openingFilter
+            ? `Drill: ${openingResolution?.source === 'family' && openingResolution.family ? openingResolution.family : openingFilter}`
+            : `Drill: ${themeLabel}`}
         </h1>
+        {openingFilter && (
+          <button
+            type="button"
+            onClick={() => void navigate('/tactics/drill')}
+            className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold bg-theme-accent/15 text-theme-accent hover:opacity-80 transition-opacity"
+            data-testid="drill-opening-filter-chip"
+            aria-label={`Clear ${openingFilter} filter`}
+          >
+            <span>
+              {openingResolution?.source === 'family' && openingResolution.family
+                ? `${openingResolution.family} family`
+                : openingFilter}
+            </span>
+            <X size={12} aria-hidden />
+          </button>
+        )}
         {phase === 'solving' && (
           <div className="flex items-center gap-2">
             <span className="text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>
