@@ -77,20 +77,37 @@ Copy the pattern. Don't invent a new one.
 
 ### Part B — Hint-flow quintet (shared-root investigation)
 
-**Failures:**
-- `GameChapterPage.test.tsx` · "hint button advances through hint levels"
-- `JourneyChapterPage.test.tsx` · "hint button advances through hint levels"
-- `PracticeMode.test.tsx` · "clicking hint advances through levels"
-- `TacticSetupBoard.test.tsx` · "shows nudge text at hint level 2"
-- `useHintSystem.test.ts` · "uses HINT_TIER_3_ADDITION on third tap and renders an arrow"
+**Status (2026-05-16):** Original 5-failure hypothesis was wrong about
+the shared root. After PR-B1 work the failures decomposed cleanly:
 
-**Hypothesis:** PR #511 (May 14, analytics backbone) added a "hint-revealed audit emit" path to `useHintSystem.ts` (+25 LOC) that changed Tier 3's render flow. None of the affected tests were updated. All 5 failures may share this root cause.
+- 3 surface tests (GameChapterPage, JourneyChapterPage,
+  TacticSetupBoard) — caused by Part A's empty-string
+  `coachService.ask` mock breaking the `{nudgeText && (...)}`
+  conditional render. Fixed in **PR-B1 (#570)** by giving the mock
+  non-empty text.
+- PracticeMode — caused by Part A's Anthropic API leak. Resolved
+  as a side effect of **Part A (#568)** before Part B ran.
+- `useHintSystem.test.ts` Tier 3 — pure inter-file pollution
+  (passes in isolation, fails in full suite). Different class of
+  problem entirely; PR #511 was NOT the cause despite the original
+  hypothesis.
 
-**Investigation first, fix second.**
+**PR-B1 (merged):** 3 surface tests fixed. Test debt cleared down to
+the one inter-file pollution case.
 
-Step 1: Read PR #511's diff on `useHintSystem.ts`. Identify what changed in the Tier 3 render flow.
-Step 2: Read all 5 failing tests. Confirm whether they all break on the same code path (Tier 3 render with audit emit) or whether some are separate failures that just look similar.
-Step 3: Report back the diagnosis before fixing. If it's one root, the fix is one change + updating test assertions. If it's actually 5 separate fixes, scope expands and we decide whether to do all 5 in this WO or defer some.
+**PR-B2 (deferred):** `useHintSystem.test.ts` Tier 3 investigation
+moved to known-issue status. Test passes in isolation, source code
+is correct, failure is full-suite-only — textbook deferrable test
+debt. Defer rationale was context-window preservation for
+WO-ROLODEX-UI-01 (the biggest creative build of this arc gets a
+fresh CC session).
+
+**Handoff:** `docs/audits/usehintsystem-pollution-investigation-notes.md`
+— captures what's known, the rejected hypotheses (PR #511 ruled
+out), the leading theory for next session (coachMemoryStore module
+cache via the mock factory's `await import` at line 87), the
+bisection approach, and Dave's `vi.resetModules()` defensive
+workaround for any new test added to the polluted suite.
 
 ### Part C — Settings testid sweep (shared root)
 
