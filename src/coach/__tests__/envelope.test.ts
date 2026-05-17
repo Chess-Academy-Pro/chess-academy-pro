@@ -33,7 +33,7 @@ describe('assembleEnvelope', () => {
     expect(env.memory).toBeTruthy();
     expect(env.appMap.length).toBeGreaterThan(5);
     expect(env.liveState.surface).toBe('ping');
-    expect(env.toolbelt.length).toBe(22);
+    expect(env.toolbelt.length).toBe(23);
     expect(env.ask).toBe('hello');
   });
 
