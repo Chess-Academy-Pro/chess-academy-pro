@@ -3039,7 +3039,7 @@
     "id": "dutch-defence",
     "eco": "A80",
     "name": "Dutch Defence",
-    "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Qe8 d5 Na6 Rb1 Bd7 b4 Nc5 Bf4 e5 dxe6 Bxe6",
+    "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Qe8 d5 Na6 Rb1 Bd7 b4",
     "color": "black",
     "style": "Aggressive, Unbalanced",
     "overview": "The Dutch Defence is a bold, aggressive choice that immediately unbalances the position. By playing ...f5 on move one, you declare your intention to attack the kingside. The Leningrad variation with ...g6 and ...Bg7 is the most popular — you get a King's Indian-type setup with the extra punch of ...f5 already played. It's not the most solid opening, but it creates the kind of fighting positions where anything can happen.",
@@ -3060,71 +3060,71 @@
     "trapLines": [
       {
         "name": "Leningrad Kingside Attack",
-        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Qe8 d5 Na6 Rb1 Nc5 b3 a5 Bb2 Qf7 e3 e5 dxe6 Bxe6 Nd4 Bd7 Qe2 Rae8",
+        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Qe8 d5 Na6 Rb1 Nc5",
         "explanation": "In the Leningrad, Black's ...Qe8 is the signature move, preparing to swing to h5 or f7 for kingside play. After d5, the position closes on the queenside and Black redirects the knight via a6-c5. The critical idea is ...e5, opening the center and activating the g7 bishop along the long diagonal. White must react precisely or face a devastating kingside attack with ...f4, ...Qh5, and the rook swinging to the f-file. The Leningrad pawn structure gives Black a natural kingside initiative."
       },
       {
         "name": "Stonewall Ne4 Bind",
-        "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 d5 O-O Bd6 c4 c6 b3 Qe7 Bb2 O-O Nbd2 Nbd7 Ne5 Nxe5 dxe5 Bc5 Nf3 Ne4 Nd4 Bd7 f3 Ng5 Kh1",
+        "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 d5 O-O Bd6 c4 c6 b3 Qe7 Bb2 O-O Nbd2 Nbd7 Ne5",
         "explanation": "The Stonewall with ...d5, ...c6, ...Bd6 creates an iron wall in the center that White's g2 bishop cannot penetrate. The knight on e4 is the most powerful outpost on the board, controlling d2, f2, c3, and g3. After White plays Ne5 and Nf3, Black repositions with ...Ne4 and if White pushes f3, the knight retreats to g5 with a vicious attack on h3. The dark-squared bishop on c5 or d6 supports the kingside assault. This trap catches White players who underestimate the Stonewall's attacking potential."
       },
       {
         "name": "Anti-Dutch Bg5 Neutralization",
-        "pgn": "d4 f5 Bg5 h6 Bh4 g5 Bg3 Nf6 e3 d6 Nd2 Bg7 Ngf3 Nc6 c3 O-O Bd3 e5 dxe5 dxe5 Bc2 Qe7 O-O Be6 Re1 Rad8 Qe2 Nd5 Bb3 f4 exf4 gxf4 Bh4 Qf7",
+        "pgn": "d4 f5 Bg5 h6 Bh4 g5 Bg3 Nf6 e3 d6 Nd2",
         "explanation": "Against the Anti-Dutch 2.Bg5, Black plays ...h6 and ...g5 chasing the bishop, then fianchettoes with ...Bg7. The resulting structure resembles a favorable King's Indian where Black's g5 advance has already gained space on the kingside. After ...e5 and ...f4, Black's kingside attack is already rolling. The bishop on g3 is passive and White must be very careful not to get overrun. This shows that 2.Bg5 is more annoying than truly dangerous for a prepared player."
       }
     ],
     "variations": [
       {
         "name": "Leningrad g6 Main Line",
-        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Qe8 d5 Na6 Rb1 Nc5 b3 a5 Bb2 Qf7 e3 Bd7 Qe2 c6 dxc6 bxc6 Nd4 Rab8 a4 e5",
+        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Qe8 d5 Na6 Rb1 Nc5 b3",
         "explanation": "The Leningrad is the most popular and aggressive Dutch system. Black fianchettoes and gets a King's Indian-type structure with the added punch of ...f5 already played. The queen maneuver ...Qe8-f7 supports the kingside and the center, while ...Na6-c5 pressures the b3 pawn and controls e4. The key break is ...e5, opening the center for the g7 bishop and creating a powerful mobile pawn center. After d5 and ...c6, Black undermines White's center and seizes the initiative."
       },
       {
         "name": "Stonewall d5 e6 Bd6",
-        "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 d5 O-O Bd6 c4 c6 b3 Qe7 Bb2 b6 Nbd2 Bb7 Ne5 O-O Ndf3 Nbd7 Nd3 Ne4 Nfe5 Nxe5 Nxe5 Rac8 f3",
+        "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 d5 O-O Bd6 c4 c6 b3 Qe7 Bb2 b6 Nbd2 Bb7 Ne5 O-O Ndf3 Nbd7 Nd3 Ne4 Nfe5 Nxe5",
         "explanation": "The Stonewall puts pawns on d5, e6, f5, and c6, creating an impregnable central wall. The dark-squared bishop goes to d6 where it eyes the kingside, and the knight aims for the e4 outpost. The key plan is ...b6 and ...Bb7, developing the light-squared bishop outside the pawn chain before it gets locked in. After ...Ne4, Black has a dominant centralized piece that restricts White's entire position. White's g2 bishop is completely blocked by the d5-e6 chain and plays no role in the game."
       },
       {
         "name": "Classical Be7 Line",
-        "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 Be7 O-O O-O c4 d5 b3 c6 Bb2 Nbd7 Nbd2 Ne4 Nxe4 fxe4 Nd2",
+        "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 Be7 O-O O-O c4 d5 b3 c6 Bb2 Nbd7 Nbd2 Ne4 Nxe4 fxe4",
         "explanation": "The Classical Dutch with ...Be7 is more solid than the Leningrad, avoiding the weakening of the kingside with ...g6. Black develops naturally with ...O-O, ...d5, and fights for the e4 square. The pawn on e4 is the cornerstone of Black's position, controlling key squares and restricting White's activity. After ...fxe4 and ...Bf5, Black has active piece play and the half-open f-file. The position is strategically rich with Black aiming for ...e5 to open the center when the timing is right."
       },
       {
         "name": "Anti-Dutch 2.Bg5 Response",
-        "pgn": "d4 f5 Bg5 g6 Nc3 Bg7 e3 Nf6 Bd3 d5 Nge2 O-O O-O c6 Qd2 Nbd7 f3 e5 dxe5 Nxe5 Bh6 Bxh6",
+        "pgn": "d4 f5 Bg5 g6 Nc3 Bg7 e3 Nf6 Bd3 d5 Nge2",
         "explanation": "The tricky 2.Bg5 tries to punish Black's early ...f5 by threatening Bxf6 followed by Qd1-h5+. Black should respond calmly with ...g6, preventing Qh5+ and preparing to fianchetto. After ...Bg7, ...Nf6, ...d5, and ...O-O, Black reaches a perfectly normal Dutch position where the piece on g5 is misplaced. The critical idea is ...e5, opening the center and exploiting the fact that White has wasted time with the bishop maneuver. The resulting positions are comfortable for Black."
       },
       {
         "name": "Leningrad e5 Break",
-        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Nc6 Nd5 Be6 Nxf6+ Bxf6 Bxf6",
+        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3",
         "explanation": "The ...e5 break is the most aggressive continuation in the Leningrad. After dxe5 dxe5, Black opens the center and activates all pieces. The queen exchange leads to an active endgame where Black's central pawns and piece activity provide excellent compensation. The Bg7 controls the long diagonal and the f5 pawn supports e4. After the piece exchanges, Black gets an active rook on the b-file and a passed d-pawn. This line is ideal for players who want to fight for the full point."
       },
       {
         "name": "Ilyin-Zhenevsky System",
-        "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 Be7 O-O O-O c4 d5 Nc3 c6 Qc2 Qe8 b3 Qh5 Bb2 Nbd7 Rfe1 Ne4 Nxe4 fxe4 Nd2 Qg6 f3 e3 Nf1 Nf6 Nxe3 e5 dxe5 Ng4",
+        "pgn": "d4 f5 g3 Nf6 Bg2 e6 Nf3 Be7 O-O O-O c4 d5 Nc3 c6 Qc2 Qe8",
         "explanation": "The Ilyin-Zhenevsky system is a classical Dutch setup where Black plays ...Be7, ...Qe8, and ...Qh5, swinging the queen to the kingside for an attack. The plan involves ...Ne4, centralizing the knight, and then ...e5 to open the center. After ...Qh5, the queen targets h2 and supports the kingside pawn advance. The ...e3 push creates a wedge in White's position that disrupts coordination. This system has been used successfully by many grandmasters and offers Black clear attacking plans with minimal theoretical memorization required."
       },
       {
         "name": "Hopton Attack Response",
-        "pgn": "d4 f5 Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O c4 d6 Nc3 c6 d5 e5 dxe6 Bxe6 b3 Na6 Bb2 Nc5 Qd4 Qe7 Ng5 Bd7 e4 fxe4 Ngxe4 Ncxe4 Nxe4 Nxe4",
+        "pgn": "d4 f5 Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O c4 d6 Nc3 c6 d5 e5 dxe6 Bxe6 b3 Na6 Bb2 Nc5",
         "explanation": "The Hopton Attack features White playing Nf3, g3, Bg2 with an early d5 push, trying to exploit the tension in the center. Black responds with ...e5, the key break that challenges White's center directly. After dxe6 Bxe6, Black has active piece play and the open e-file for the rook. The knight maneuver ...Na6-c5 targets the e4 square and the b3 pawn. The resulting positions are dynamic and offer Black clear counterplay against White's central ambitions. The fianchettoed bishop on g7 is a powerful piece once the center opens."
       }
     ],
     "warningLines": [
       {
         "name": "Weak e5 Square",
-        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Qe8 b3 e5 dxe5 dxe5 Ba3 Rf7 Nd5 Nxd5 cxd5 c6 dxc6 Nxc6 Rac1 Be6 Nd2 Nd4 e3 Nc2 Rxc2 Bxb3 Rc3 Bxa2",
+        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Qe8 b3 e5 dxe5 dxe5 Ba3 Rf7",
         "explanation": "If Black plays ...e5 without proper preparation in the Leningrad, the d6 and d5 squares become critically weak. White plants a knight on d5 and dominates the position, while Black's e5 pawn becomes a target rather than a strength. The correct approach is to prepare ...e5 with ...Nc6, ...Bd7, and ...Rae8 before committing to the central break. Timing is everything in the Dutch, and premature pawn breaks can turn the inherent structural weaknesses of ...f5 into a permanent liability."
       },
       {
         "name": "Neglecting Development for Pawn Moves",
-        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 c6 Qc2 Kh8 e4 fxe4 Nxe4 Nxe4 Qxe4 Bf5 Qe2 d5 c5 Nd7 Bf4 Qe8 Rfe1 Qf7 Nd2 e5 dxe5 Nxe5 Bxe5 Bxe5 Nf3 Bg7 Qd2",
+        "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 c6 Qc2 Kh8",
         "explanation": "Playing too many pawn moves like ...c6, ...Kh8, and ...d6 without developing pieces lets White seize the initiative with e4. Once the center opens, Black's undeveloped queenside becomes a critical liability. The knight on d7 is stuck, the bishop on c8 has no prospects, and White's pieces pour into the center. In the Dutch, piece development is even more important than in other openings because the ...f5 pawn already weakens the king. Always prioritize getting pieces to active squares before pushing pawns."
       },
       {
         "name": "Allowing White's e4 Break Unchallenged",
-        "pgn": "d4 f5 c4 Nf6 Nc3 g6 Nf3 Bg7 g3 O-O Bg2 d6 O-O Nc6 d5 Na5 Nd4 c5 dxc6 bxc6 b3 Rb8 Bb2 Ne4 Nxe4 fxe4",
+        "pgn": "d4 f5 c4 Nf6 Nc3 g6 Nf3 Bg7 g3 O-O Bg2 d6 O-O Nc6 d5 Na5",
         "explanation": "When Black neglects the center and allows White to consolidate with d5 followed by piece exchanges, the Dutch structure's weaknesses become exposed. The e4 square falls to White, the c6 pawn is weak, and Black's pieces lack coordination. The fundamental rule of the Dutch is to maintain tension in the center and never allow White a free hand to reorganize. If White achieves e4 without Black having counterplay on the f-file or the kingside, the opening has failed strategically."
       }
     ]
