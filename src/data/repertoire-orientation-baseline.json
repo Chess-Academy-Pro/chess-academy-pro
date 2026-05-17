@@ -1,29 +1,6 @@
 {
   "description": "Allowlist of known orientation violations in src/data/repertoire.json as of 2026-05-16. The build-time test in repertoire-orientation.test.ts treats these as expected; any flagged entry NOT on this list fails CI. Each value is the set of category codes currently allowed for that key. As Phases 2-4 of docs/plans/2026-05-16-trap-orientation.md ship, entries are removed from this file. Phase 5 deletes this file entirely.",
   "allowlist": {
-    "kings-gambit::trap::Kieseritzky: Central Domination": [
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
-    "kings-gambit::trap::Allgaier: King Hunt Continuation": [
-      "INVERTED_MATERIAL"
-    ],
-    "kings-gambit::trap::Muzio: Total Development Lead": [
-      "INVERTED_MATERIAL",
-      "STUDENT_NOT_PUNISHER"
-    ],
-    "kings-gambit::trap::Cunningham Defense Refutation": [
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
-    "kings-gambit::trap::Bishop's Gambit f7 Attack": [
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
-    "kings-gambit::trap::h4 Kingside Storm": [
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
     "four-knights-game::trap::Rubinstein Counter-Trap: Nd4 Nxe5 Qe7": [
       "STUDENT_NOT_PUNISHER",
       "WEAK_TRAP"
@@ -557,6 +534,32 @@
       "STUDENT_NOT_PUNISHER"
     ],
     "vienna-game::trap::Nd5 Fork Setup": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-gambit::trap::Kieseritzky: Central Domination": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-gambit::trap::Allgaier: King Hunt Continuation": [
+      "INVERTED_MATERIAL",
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-gambit::trap::Muzio: Total Development Lead": [
+      "INVERTED_MATERIAL",
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-gambit::trap::Cunningham Defense Refutation": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-gambit::trap::Bishop's Gambit f7 Attack": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-gambit::trap::h4 Kingside Storm": [
       "WEAK_TRAP",
       "STUDENT_NOT_PUNISHER"
     ]
