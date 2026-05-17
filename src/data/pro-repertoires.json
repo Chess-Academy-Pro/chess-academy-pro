@@ -1238,22 +1238,11 @@
         },
         {
           "name": "Symmetrical English",
-          "pgn": "c4 c5 Nc3 Nf6 Nf3 d5 cxd5 Nxd5 e3 Nc6 Bc4 Nb6 Bb3 e6 O-O Be7 d4 cxd4 exd4 O-O",
-          "explanation": "A more common structure where both sides play c-pawns. The position can transpose into a Maroczy Bind structure where White has a small edge."
+          "pgn": "c4 c5 Nc3 Nf6 Nf3 d5 cxd5 Nxd5 e3 Nc6 Bc4 Nb6 Bb3",
+          "explanation": "A more common structure where both sides play c-pawns. The Bb3 + Nf3 setup eyes the f7 and central squares; the position can transpose into a Maroczy Bind."
         }
       ],
-      "trapLines": [
-        {
-          "name": "Premature d4 Push",
-          "pgn": "c4 e5 Nc3 Nf6 Nf3 Nc6 g3 d5 cxd5 Nxd5 Bg2 Ndb4 O-O Nd3 Qa4",
-          "explanation": "Black pushes a knight to d3 trying to exploit White's setup but the knights become overextended. White's Bg2 controls the long diagonal and Qa4-Qb5+ wins material."
-        },
-        {
-          "name": "Backfiring e4 Fork",
-          "pgn": "c4 e5 Nc3 Nf6 Nf3 Nc6 g3 e4 Ng5 Qe7 Bg2 h6 Ngxe4 Nxe4 Nxe4 d5 cxd5 Nb4 d3 Qe5 O-O Bf5 d4",
-          "explanation": "Black tries ...e4 to fork the knights but it overextends the pawn. White retreats Ng5 and recaptures the e4 pawn, emerging with a strong center after d4."
-        }
-      ]
+      "trapLines": []
     },
     {
       "id": "pro-carlsen-sveshnikov",
