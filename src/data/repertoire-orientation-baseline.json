@@ -1,16 +1,6 @@
 {
   "description": "Allowlist of known orientation violations in src/data/repertoire.json as of 2026-05-16. The build-time test in repertoire-orientation.test.ts treats these as expected; any flagged entry NOT on this list fails CI. Each value is the set of category codes currently allowed for that key. As Phases 2-4 of docs/plans/2026-05-16-trap-orientation.md ship, entries are removed from this file. Phase 5 deletes this file entirely.",
   "allowlist": {
-    "sicilian-dragon::trap::The Exchange Sacrifice ...Rxc3": [
-      "WEAK_TRAP"
-    ],
-    "sicilian-dragon::trap::The ...Nc4 Fork Trick": [
-      "WEAK_TRAP"
-    ],
-    "sicilian-dragon::trap::The g-file Counterattack After ...gxh5": [
-      "STUDENT_NOT_PUNISHER",
-      "WEAK_TRAP"
-    ],
     "sicilian-sveshnikov::trap::Sveshnikov: ...f5 Breakthrough Combination": [
       "WEAK_TRAP"
     ],
@@ -561,6 +551,21 @@
       "STUDENT_NOT_PUNISHER"
     ],
     "sicilian-najdorf::warning::6.Bg5 Pin Dangers: Unpinning Too Late": [
+      "TOOTHLESS_WARNING"
+    ],
+    "sicilian-dragon::trap::The Exchange Sacrifice ...Rxc3": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "sicilian-dragon::trap::The ...Nc4 Fork Trick": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "sicilian-dragon::trap::The g-file Counterattack After ...gxh5": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "sicilian-dragon::warning::White's h-file Breakthrough": [
       "TOOTHLESS_WARNING"
     ]
   }

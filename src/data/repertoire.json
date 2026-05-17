@@ -850,35 +850,35 @@
     "variations": [
       {
         "name": "Yugoslav Attack Main Line",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rc8 Bb3 Ne5 h4 h5 Kb1 Nc4 Bxc4 Rxc4 g4 hxg4 h5 Nxh5 Bh6 Bxh6 Qxh6 Rxc3",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rc8 Bb3 Ne5 h4 h5 Kb1 Nc4 Bxc4 Rxc4 g4 hxg4 h5 Nxh5",
         "explanation": "The ultimate Dragon tabiya and the most critical test of the entire opening. White deploys the Yugoslav setup with Be3, f3, Qd2, Bc4, and O-O-O, then launches the kingside pawn storm with h4 and g4. Black counters with the ...Ne5-c4 maneuver to exchange White's light-squared bishop, followed by the thematic exchange sacrifice ...Rxc3 to shatter White's queenside pawns. The race to deliver checkmate first defines every tempo of this razor-sharp line, where both sides must calculate the interaction between White's h-file attack and Black's pressure down the c-file against the exposed white king.",
         "frequency": "very common",
         "deviationMove": 12
       },
       {
         "name": "Yugoslav Attack: Soltis Variation",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rc8 Bb3 Ne5 h4 h5 Bg5 Rc5 Kb1 b5 g4 hxg4 fxg4 a5 Nd5 Nxd5 Bxd5 a4",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rc8 Bb3 Ne5 h4 h5 Bg5 Rc5 Kb1 b5 g4 hxg4",
         "explanation": "The Soltis Variation (12...h5) is Black's most theoretically important response to the Yugoslav Attack, immediately halting White's h-pawn advance. The rook lift ...Rc5 is the signature move, defending laterally along the fifth rank while preparing the ...b5 advance. After White switches to a central break with g4, Black launches the queenside pawn storm with ...b5 and ...a5-a4, racing to crack open lines against the white king on the opposite wing. This variation produces the purest form of the opposite-side castling race that defines Dragon chess.",
         "frequency": "very common",
         "deviationMove": 13
       },
       {
         "name": "Yugoslav Attack: Chinese Dragon",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rb8 Bb3 Na5 Kb1 b5 Nd5 Nxb3 axb3 Nxd5 exd5 a5 Bh6 Bxh6 Qxh6 a4 bxa4 b4",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rb8 Bb3 Na5 Kb1 b5 Nd5",
         "explanation": "The Chinese Dragon features ...Rb8 instead of the standard ...Rc8, preparing ...b5 without committing the knight to e5 first. The idea is to play ...Na5 targeting the b3 bishop, then launch the b-pawn advance immediately. After White plants a pawn on d5, Black exchanges it off and opens the a- and b-files with ...a5-a4, creating unstoppable queenside pressure. This modern treatment avoids certain forcing lines in the Soltis and gives Black a more flexible attacking scheme where the c-file rook can later swing to c8 with maximum impact.",
         "frequency": "common",
         "deviationMove": 10
       },
       {
         "name": "Classical Variation",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be2 Bg7 O-O O-O Be3 Nc6 Nb3 Be6 f4 Na5 f5 Bc4 Nxa5 Bxe2 Qxe2 Qxa5 g4 Qc7 fxg6 hxg6 g5 Nh5 Nd5 Qd8",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be2 Bg7 O-O O-O Be3 Nc6 Nb3 Be6 f4 Na5 f5 Bc4 Nxa5 Bxe2 Qxe2 Qxa5 g4",
         "explanation": "The Classical Variation with Be2 and short castling offers White a safer king but less aggressive attacking chances than the Yugoslav. Black achieves comfortable development and can choose between ...Na5 to trade the light-squared bishop and ...Be6 systems. When White pushes f4-f5 to generate kingside play, Black counters by exploiting the weakened e5 square and the opened long diagonal for the Dragon bishop. The resulting middlegames reward positional understanding over pure calculation, as Black's fianchettoed bishop remains a powerful long-term asset on the h8-a1 diagonal.",
         "frequency": "common",
         "deviationMove": 6
       },
       {
         "name": "Levenfish Variation",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 f4 Nc6 Nxc6 bxc6 e5 Nd7 exd6 exd6 Be2 Be7 O-O O-O Be3 Rb8 Rb1 d5 Bf3 Bf6 Na4 Re8 Qd2 Bb7",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 f4 Nc6 Nxc6 bxc6 e5 Nd7 exd6 exd6 Be2",
         "explanation": "The Levenfish Variation (6.f4) is an aggressive alternative that avoids the main Yugoslav theory entirely by pushing f4 immediately. After the exchange on c6, Black recaptures with the b-pawn to keep the center fluid, and the resulting pawn structure after ...exd6 resembles a Sicilian-meets-Open-Game hybrid. Black compensates for the slightly awkward doubled c-pawns with the open b-file for counterplay and a strong fianchettoed bishop. The key for Black is reaching ...d5 to equalize in the center, after which the bishop pair and active rooks provide excellent long-term chances.",
         "frequency": "uncommon",
         "deviationMove": 6
@@ -892,14 +892,14 @@
       },
       {
         "name": "Dragadorf Hybrid",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 g6 f3 Bg7 Qd2 O-O O-O-O b5 Nd5 Nxd5 exd5 Bb7 Kb1 Nd7 g4 Nb6 Bd3 Nc4 Bxc4 bxc4 Ne2 Rb8",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 g6 f3 Bg7 Qd2 O-O O-O-O b5 Nd5 Nxd5 exd5 Bb7",
         "explanation": "The Dragadorf blends the Dragon fianchetto with the Najdorf's ...a6, creating a hybrid that sidesteps much of White's standard Yugoslav preparation. By playing ...a6 before ...g6, Black keeps the option of ...b5 without needing to spend a tempo on ...Bd7 first, accelerating the queenside pawn storm. After White castles long, the ...b5 advance combined with ...Bb7 creates immediate pressure down the b-file and the long diagonal. This move order has gained popularity at the grandmaster level because it forces White to reconsider standard Yugoslav schemes where the knight lands on d5 early.",
         "frequency": "common",
         "deviationMove": 5
       },
       {
         "name": "Anti-Dragon: Bg5 Line",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Nd7 O-O O-O Qd2 a6 Be2 Bg7 Rad1 b5 a3 Bb7 f4 Nc5 Bf3 Rc8 Rfe1 e6",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6",
         "explanation": "The Anti-Dragon with 6.Bg5 aims to damage Black's pawn structure by trading the bishop for the f6 knight before the Dragon setup is fully deployed. After Bxf6 Bxf6, Black has the bishop pair but the dark-squared bishop is temporarily misplaced on f6 and must retreat to g7. White follows up with Bb5+ and quick development, hoping to exploit the time Black spends rerouting pieces. Black should welcome the bishop pair, play ...b5 for queenside space, and aim for ...e5 or ...e6 to solidify the center, after which the two bishops become a significant long-term advantage.",
         "frequency": "uncommon",
         "deviationMove": 6
@@ -908,19 +908,19 @@
     "trapLines": [
       {
         "name": "The Exchange Sacrifice ...Rxc3",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rc8 Bb3 Ne5 h4 h5 Bh6 Rxc3 bxc3 Bxh6 Qxh6 Qa5 Kb1 Qxc3",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rc8 Bb3 Ne5 h4 h5 Bh6",
         "explanation": "The exchange sacrifice on c3 is the single most important tactical motif in the entire Dragon. Black gives up the rook for a knight, shattering White's queenside pawn structure and opening the c-file for the remaining pieces. After ...Bxh6 Qxh6, Black's queen infiltrates with ...Qa5 and ...Qxc3, exploiting the tripled and isolated c-pawns while the unopposed Dragon bishop exerts fearsome pressure down the long diagonal. White's kingside attack stalls without the dark-squared bishop, and Black's piece coordination around the weakened white king typically decides the game.",
         "frequency": "very common"
       },
       {
         "name": "The ...Nc4 Fork Trick",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Ne5 Bb3 Rc8 h4 Nc4 Bxc4 Rxc4 Nb3 b5 Kb1 a5 a3 a4 Na1 Be6",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Ne5 Bb3 Rc8 h4 Nc4 Bxc4 Rxc4",
         "explanation": "The ...Ne5-c4 knight maneuver is a tactical device that wins the bishop pair and activates Black's rook simultaneously. After Bxc4 Rxc4, the rook is aggressively posted on the fourth rank, and ...b5 follows with tempo threatening ...b4 to open lines against White's king. If White tries to avoid the trade with Bb5, Black plays ...a6 chasing the bishop and gaining even more time for the queenside attack. The key follow-up is ...a5-a4 cramping White's queenside, when the threat of ...b4 combined with the active rook on c4 creates a positional bind that is difficult to untangle.",
         "frequency": "common"
       },
       {
         "name": "The g-file Counterattack After ...gxh5",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rc8 Bb3 Ne5 h4 h5 g4 hxg4 fxg4",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Rc8 Bb3 Ne5 h4 h5 g4 hxg4",
         "explanation": "When White gambits the g-pawn to rip open the kingside, Black can accept with ...hxg4 and ...Nxg4, counterattacking on the newly opened g-file and exploiting the weakened light squares around White's king. After the exchange sacrifice ...Rxc3, the queen enters with ...Qf6 threatening both ...Qf2 and ...Nf2 forks while the c3 pawn falls. White's h-file attack is neutralized because Black's knight on g4 controls the critical h2 and f2 squares. This line demonstrates a core Dragon principle: sometimes the best defense is a devastating counterattack, turning White's own pawn advances into weaknesses.",
         "frequency": "uncommon"
       }
@@ -928,7 +928,7 @@
     "warningLines": [
       {
         "name": "White's h-file Breakthrough",
-        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Qa5 Bb3 Rfc8 h4 h5 g4 hxg4 h5 Nxh5 Nd5 Qa6 Bh6 Bxh6 Qxh6",
+        "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Bd7 O-O-O Qa5 Bb3 Rfc8 h4 h5",
         "explanation": "This warning line shows what happens when Black delays queenside counterplay and allows White to execute the h-file breakthrough unchallenged. After g4 and h5, the h-file cracks open and White's heavy pieces pour in toward the exposed black king. The devastating Nd5 jump combined with Bh6 strips away the Dragon bishop, leaving Black's king defenseless on the dark squares. The critical lesson is that Black must generate counterplay with ...Rc8, ...Ne5, and ...Nc4 immediately rather than playing passively with ...Qa5 and ...Rfc8 which waste precious tempi in the attacking race.",
         "frequency": "common"
       },
