@@ -3929,7 +3929,7 @@
       "variations": [
         {
           "name": "Classical 4...Bc5",
-          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Be3 Qf6 c3 Nge7 Bc4 O-O O-O d6 f4 Bb6 f5 Nxd4 Bxd4 Bxd4 cxd4",
+          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Be3 Qf6 c3 Nge7 Bc4 O-O O-O d6 f4 Bb6",
           "explanation": "The main classical line. White develops naturally and prepares f4-f5. Akeem teaches this because it demonstrates how to build an attack — every move contributes to the kingside assault."
         },
         {
@@ -3946,14 +3946,14 @@
       "trapLines": [
         {
           "name": "Qh4 Exploitation",
-          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Qh4 Nb5 Qxe4+ Be2 Qe5 N1c3 Bb4 O-O Bxc3 bxc3 Nf6 Nd4 O-O Nf3 Qe7 Re1",
+          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Qh4 Nb5 Qxe4+ Be2",
           "explanation": "After Nxd4 Qh4, Black's queen grabs the e4 pawn but White plays Nb5 threatening Nc7. Black must spend time retreating while White develops with tempo and castles quickly."
         }
       ],
       "warningLines": [
         {
           "name": "Bc5 Fork Setup",
-          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Nxc6 Qf6 Qf3 Qxf3 gxf3 bxc6 Nc3 Nf6 Bg5 Bb7 O-O-O d6 e5 dxe5 Bxf6 gxf6 Rd8+ Kxd8",
+          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Nxc6 Qf6 Qf3 Qxf3 gxf3 bxc6 Nc3 Nf6",
           "explanation": "After Bc5 Nxc6, if Black plays Qf6 White trades queens and gets a superior endgame. The doubled f-pawns and active rooks give White a lasting structural advantage."
         }
       ]
