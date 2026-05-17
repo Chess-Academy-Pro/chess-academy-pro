@@ -1121,35 +1121,35 @@
       "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 d6 c3 O-O h3 Nb8 d4 Nbd7",
       "color": "white",
       "style": "Classical, Strategic",
-      "overview": "The Ruy Lopez has been Carlsen's primary 1.e4 weapon throughout his career. He plays it in the most classical fashion, building a slow positional squeeze. Magnus is famous for outplaying opponents in seemingly equal Ruy Lopez positions through superior endgame technique.",
+      "overview": "Magnus plays the Ruy Lopez the way it was meant to be played — as a 60-move chess clinic. He's not looking for an attacking position in 12 moves. He's looking for the SLIGHTEST positional edge he can convert across the next 40. His Ruy Lopez record at the highest level is the most dominant in modern history: he's won repeatedly from positions where Stockfish gives White +0.15. The opening teaches you something most chess teachers won't: you don't need an advantage to win. You need to make the second-best move on every turn, while your opponent makes the third-best.",
       "keyIdeas": [
-        "Build a strong center with c3 and d4 while maintaining the bishop on b3 — this central control is the foundation for all middlegame operations",
-        "The h3 move prevents Bg4 pins and prepares a kingside expansion — timing this correctly before the opponent can generate counterplay is critical",
-        "Play d4 to gain central space and create structural advantages — this central control is the foundation for all middlegame operations",
-        "Aim for technical endgames where White's space advantage is decisive — the structural advantages become more pronounced with fewer pieces on the board"
+        "Bb5 → Ba4 → Bb3 is one bishop's journey. The first move pins, the second retreats from the …a6 chase, the third repositions where it stays for the whole game (eyeing f7 from the a2-g8 diagonal). Don't lose patience with the bishop tour — it's not wasted time.",
+        "The h3 move is the most important non-developing move in the opening. It prevents the …Bg4 pin AND prepares the future Nh2-g4 manoeuvre AND creates a luft for the king. Looks like a tempo loss; actually it's an investment.",
+        "Build c3 + d4 SLOWLY. The d4 push only happens after castling, h3, AND Re1 — you're not racing. The patience IS the strategy: you reach a slightly better position with everything coordinated while Black reaches an equal position with awkward pieces.",
+        "Carlsen's signature move is to AVOID exchanges that simplify. In Ruy positions where most GMs trade pieces and play for draw, Magnus keeps queens on, keeps minor pieces, and waits for the opponent to make one inaccuracy. That patience is the whole opening's reward."
       ],
       "traps": [
-        "If Black plays Nxe4 too early, Re1 pins the knight and wins it back with advantage"
+        "If Black plays the natural 5...Nxe4 against the Ruy (the Open Ruy), watch for the 6.d4! immediate centre challenge — after 6...b5 7.Bb3 d5 the position is sharp but White's pawn on e5 (after exchanges) is a strong cramping piece."
       ],
       "warnings": [
-        "Do not rush d4 without proper preparation — c3 and Re1 should come first",
-        "Watch for the Marshall Attack if Black plays O-O and b5 without d6 first"
+        "DON'T play d4 before h3 + Re1 + c3. Premature d4 lets Black play …exd4 followed by the …Bg4 pin without your h3 prophylaxis. Magnus has a specific move order: c3 first (move 6), h3 next (move 7), THEN Re1 (move 8), THEN d4 (move 9+).",
+        "If Black plays the Marshall Gambit (8...d5!? instead of …d6), Magnus has a specific anti-Marshall with 8.a4 — don't accept the gambit, prevent it. The Marshall is too sharp for the slow technical style."
       ],
       "variations": [
         {
           "name": "Closed Ruy Lopez Main Line",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 d6 c3 O-O h3 Nb8 d4 Nbd7",
-          "explanation": "Carlsen's main weapon. The Breyer-like regrouping with Nb8-d7 gives Black flexibility but White builds up slowly and methodically with d4 and Nbd2."
+          "explanation": "The Breyer Variation — Magnus's preferred Ruy Lopez setup. Watch the slow strategic dance. The bishop tour Bb5 → Ba4 → Bb3 takes three moves but positions the bishop perfectly. Black's mysterious 9...Nb8 is the Breyer's signature — retreating the knight to reposition via …Nbd7 (defending e5 indirectly and freeing the c-pawn for …c5). White meanwhile sets up the full classical Ruy structure: c3 + h3 + Re1 + d4. Both sides have completed development; the middlegame is one of the deepest in chess. Magnus's record from this position is the basis of multiple World Championship matches."
         },
         {
           "name": "Anti-Marshall with 8.a4",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O a4 b4 d3 d6 Nbd2 Na5 Ba2 c5",
-          "explanation": "Instead of allowing the Marshall Gambit, Carlsen plays a4 to probe Black's queenside. The position becomes more strategic and avoids sharp Marshall theory."
+          "explanation": "Instead of allowing the Marshall Gambit (8...d5!? with crazy attacking chess), Magnus plays 8.a4! probing the queenside before Black commits. After 8...b4 (closing the queenside) 9.d3 (NOT d4 — keep the structure flexible), the position becomes positional manoeuvring chess. Black's 9...d6 + 10.Nbd2 Na5 (kicking the bishop to a2) 11.Ba2 c5 — both sides set up for a long slow squeeze. The a4 system avoided the Marshall completely; Magnus is now playing a position with a slight space edge and no theoretical risks. Pure championship-style chess."
         },
         {
           "name": "Berlin Wall Endgame",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Ke8 h3 Be7 Bf4 Be6",
-          "explanation": "When Black plays the Berlin, White enters the famous endgame. Carlsen has won many games from this position through superior technique."
+          "explanation": "The Berlin Wall — the most famous endgame in modern chess (Kramnik used it to dethrone Kasparov in 2000). When Black plays 3...Nf6 instead of the main 3...a6, White can force the queen trade with 4.O-O Nxe4 5.d4 Nd6 6.Bxc6 dxc6 7.dxe5 Nf5 8.Qxd8+ Kxd8. The resulting position is queenless — Black has the bishop pair AND the doubled c-pawns (a trade-off). The middlegame plays itself technically: White has a slight edge from better pawn structure, Black has bishop pair compensation. Carlsen has converted this position dozens of times against the world's best — the technique is the opening's entire point."
         }
       ],
       "trapLines": [
@@ -1168,42 +1168,42 @@
       "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 a6 a4 Bd7 Qxc4 Bc6 Bf4 Nbd7",
       "color": "white",
       "style": "Positional, Grinding",
-      "overview": "The Catalan is Carlsen's main weapon with 1.d4. The fianchettoed bishop on g2 exerts long-term pressure along the long diagonal. Magnus uses it to create small advantages that he converts with his legendary endgame skill.",
+      "overview": "If the Ruy Lopez is Magnus's 1.e4 weapon, the Catalan is his 1.d4 weapon — and it's even more dominant. The fianchettoed bishop on g2 is the most underrated piece in chess: it stares down the a8-rook from across the board, supports queenside pawn pushes, and turns every endgame into White's favour. Magnus has won World Championship games from positions Stockfish calls equal because the Bg2 quietly outlasts Black's c8-bishop across 50 moves. The Catalan teaches you what 'small advantages' really means — they're not 'almost equal,' they're 'eventually decisive.'",
       "keyIdeas": [
-        "The bishop on g2 controls the long diagonal and pressures Black's queenside — maintaining this pressure forces the opponent to defend passively",
-        "After dxc4, White regains the pawn with a better position — this structural feature shapes all future strategic decisions in the position",
-        "Play a4 to prevent b5 and keep Black's queenside under control — this practical approach reduces the opponent's preparation advantage significantly",
-        "The position is slightly better for White with long-term grinding potential — a key strategic concept in Catalan Opening"
+        "The Bg2 is the entire opening. From g2 it aims at a8, b7, c6, d5, e4, f3 — the longest diagonal in chess. NEVER trade this bishop unless you're winning material; the Catalan without the g2-bishop is just a worse Queen's Gambit.",
+        "When Black plays …dxc4 (the Open Catalan), don't recapture immediately — first play Qc2 + a4 setting up the recovery. The pawn isn't going anywhere because Bg2 prevents Black from holding it with …b5. After Qxc4 you've got back the pawn AND your queen is centralised.",
+        "a4 is the Catalan's most important pawn move. It prevents Black's …b5 (which would defend c4 and develop the c8-bishop to b7), keeps the queenside cramped, and creates the long-term weakness on the b6-square that the Bg2 can eventually exploit.",
+        "Don't push e4 early. Most amateurs reach for e4 too soon (it 'feels right'); but in the Catalan, the e4 push gives Black equalising counterplay. The right plan is slow piece improvement — Bf4 to a more active square, Nbd2 → Nb3 → Nd2 reroutes, Rfc1, Qb3 piling up."
       ],
       "traps": [
-        "If Black tries to hold the c4 pawn with b5, a4 undermines it and Bg2 pressure is enormous"
+        "If Black tries to keep the c4-pawn with the natural-looking …b5, you play a4! undermining. After …c6 (defending b5), 9.axb5 cxb5 — Black's queenside pawns are wrecked AND the c-file is open for your rooks. Greedy c4-pawn-holding is one of the Catalan's biggest punishments."
       ],
       "warnings": [
-        "Do not play e4 too early — the Catalan is about patience",
-        "Respect Black's counterplay with c5 — sometimes the center opens favorably for Black"
+        "DON'T play e4 in the first 15 moves. The Catalan is patience chess — Black has fewer good ideas the longer the centre stays closed. Premature e4 dissolves your structural advantage.",
+        "Respect Black's …c5 break. In some lines (after Black plays …Nbd7 + …b6 + …Bb7), the …c5 break opens the centre on Black's terms — and your Bg2's diagonal can become irrelevant if the centre opens with pawns in the wrong place."
       ],
       "variations": [
         {
           "name": "Open Catalan Main Line",
           "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 a6 a4 Bd7 Qxc4 Bc6 Bf4 Nbd7",
-          "explanation": "The most popular line. White recovers the c4 pawn and has long-term pressure. The Bg2 is a monster piece that Black must constantly respect."
+          "explanation": "Magnus's flagship Catalan line. After 6...dxc4 (the Open Catalan — Black grabs the pawn), you DON'T recapture immediately. 7.Qc2 prepares the recovery WHILE pinning Black's queenside. 7...a6 (Black tries to hold c4 with …b5) 8.a4! — the killer prophylaxis. Now …b5 hangs to axb5. Black plays 8...Bd7 (no other useful developing square) 9.Qxc4 — pawn recovered. 9...Bc6 (Black trades the bishop on the long diagonal to neutralise your Bg2) 10.Bf4 Nbd7 — both sides develop. The bishop trade on c6 is forced eventually; the question is on whose terms. Magnus's positions from here win endgames through superior technique."
         },
         {
           "name": "Closed Catalan",
           "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O Nbd7 Qc2 c6 Nbd2 b6 e4 Bb7 e5 Ne8",
-          "explanation": "Black keeps the center closed. White pushes e4-e5 to grab space and restrict Black's pieces. The position requires patience but White has a stable edge."
+          "explanation": "When Black plays the Closed Catalan with 6...Nbd7 (keeping d5 supported rather than taking on c4), you reach a calmer position. 7.Qc2 c6 8.Nbd2 b6 (Black prepares …Bb7 fianchetto) 9.e4! — NOW you play e4, because Black has committed to a closed setup where the e4 push gains space without dissolving your structural edge. 9...Bb7 10.e5 Ne8 — Black's knight is shoved to e8 (passive), the centre stays closed, and you have a long-term space advantage. The plan from here: Nb3 (rerouting to support queenside), Re1, Bd3 — slow improvement of every piece."
         }
       ],
       "trapLines": [
         {
           "name": "Greedy c4 Pawn Grab",
           "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Nc6 O-O Rb8 Nc3 b5 Ne5",
-          "explanation": "Black takes the c4 pawn and tries to hold it with ...b5. White's Bg2 fires down the long diagonal — Ne5 attacks the b5-Nc6 pair and prepares the diagonal break."
+          "explanation": "When Black tries to actually KEEP the c4-pawn (the dream of every amateur 1.d4 player who thought they'd win a pawn), the punishment is brutal. After 5.Nf3 Nc6 6.O-O Rb8 (Black plans …b5 to defend c4) 7.Nc3 b5 8.Ne5! — the knight invades on a key central square, attacks the c6-knight, and prepares Nxb5 forks. Black's queenside pawn structure (b5+c4) is built on sand — every White piece is pointed at it. Within 3-5 moves, Black either loses the c4-pawn back PLUS some structural quality, or loses material to a Bg2-driven attack on the long diagonal."
         },
         {
           "name": "Queen Trapped on Diagonal",
           "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 a6 Qxc4 b5 Qc2 Bb7 Bf4 Nd5 Nc3 Nxf4 gxf4 Qd7",
-          "explanation": "Black develops the bishop to b7 but the long diagonal becomes a liability. After Bf4 Nxf4 gxf4 + Qd7, White's open g-file plus the long-diagonal Bg2 give a lasting attacking initiative."
+          "explanation": "A subtle Catalan tactical theme. Black plays the typical setup with …b5 + …Bb7 trying to neutralise the long diagonal. After 11.Bf4 (developing) Nd5 (Black tries to trade knights and bishop pair) 12.Nc3 Nxf4 13.gxf4 — the doubled f-pawns LOOK like a weakness, but they're a strength: the g-file is half-open for the rook AND the Bg2 still owns the diagonal. After 13...Qd7, Black has nominal equality but the white attacking pieces are aimed at the kingside; the next White move (Rg1) sets up the attack."
         }
       ]
     },
