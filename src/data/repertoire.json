@@ -1049,7 +1049,7 @@
     "id": "sicilian-alapin",
     "eco": "B22",
     "name": "Sicilian: Alapin",
-    "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7 Bxc6 Qxc6 Bf4 O-O",
+    "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7 Bxc6 Qxc6",
     "color": "black",
     "style": "Solid, Anti-Sicilian",
     "overview": "The Alapin (2.c3) is White's attempt to build a big center with d4 without allowing the Open Sicilian. As Black, you shouldn't be annoyed — you should be happy! White has given up the right to play the dangerous Open Sicilian mainlines. Your job is to challenge the center immediately, develop naturally, and show that c3 is a wasted move. The positions are strategically rich and favor the player who understands pawn structures better.",
@@ -1070,76 +1070,76 @@
     "variations": [
       {
         "name": "Alapin: 2...Nf6 Main Line (Endgame)",
-        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb3 dxe5 dxe5 Qxd1+ Kxd1 Bg4 Ke1 O-O-O Nc3 Be6 Bxe6+ fxe6 Be3 Nd5 Nxd5 exd5",
+        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb3 dxe5 dxe5 Qxd1+",
         "explanation": "The critical main line leads to a queenless middlegame after Qxd1+ where Black has excellent piece activity despite White's awkward king on e1. The bishop pins the f3-knight with ...Bg4, and after ...O-O-O Black develops rapid counterplay. The key exchange ...Bxe6+ fxe6 opens the f-file for Black's rook while creating connected central pawns that control key squares."
       },
       {
         "name": "Alapin: 2...d5 Central Counter (IQP Play)",
-        "pgn": "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 e6 Bd3 Be7 O-O O-O Be3 cxd4 cxd4 Nc6 Nc3 Qd6 a3 Bd7 Bc2",
+        "pgn": "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 e6 Bd3 Be7 O-O O-O Be3 cxd4 cxd4 Nc6 Nc3 Qd6 a3 Bd7",
         "explanation": "The most direct response with 2...d5 challenges the center immediately, and after 3.exd5 Qxd5 Black gets the queen centralized early. White builds an IQP after cxd4, and Black develops harmoniously with ...Nf6, ...Be7, ...O-O to target the isolated d4 pawn. The knight maneuver ...Nb4 hits c2 and d3, forcing White to give up the bishop pair and conceding a lasting structural disadvantage."
       },
       {
         "name": "Alapin: 2...e6 Solid (French Structure)",
-        "pgn": "e4 c5 c3 e6 d4 d5 e5 Nc6 Nf3 Bd7 Be2 Nge7 O-O Nf5 Na3 cxd4 cxd4 Be7 Nc2 O-O Be3 f6 exf6 Bxf6 Qd2 Qe7 Rac1 Rac8",
+        "pgn": "e4 c5 c3 e6 d4 d5 e5 Nc6 Nf3 Bd7 Be2 Nge7 O-O Nf5 Na3 cxd4 cxd4 Be7 Nc2 O-O",
         "explanation": "A rock-solid French-like setup with 2...e6 and 3...d5 resembling the French Advance Variation but with extra queenside space from the c-pawn exchange. The knight reaches a powerful outpost on f5 via e7, eyeing both d4 and e3. After ...cxd4 cxd4, Black undermines the e5 chain with ...f6, opening lines for active piece play."
       },
       {
         "name": "Alapin: 2...g6 Fianchetto",
-        "pgn": "e4 c5 c3 g6 d4 cxd4 cxd4 d5 e5 Bg7 Nc3 Nc6 Nf3 Nh6 Bb5 O-O Bxc6 bxc6 O-O Bg4 h3 Bxf3 Qxf3 Nf5 Rd1 e6 Be3 Qb6",
+        "pgn": "e4 c5 c3 g6 d4 cxd4 cxd4 d5 e5 Bg7 Nc3 Nc6 Nf3 Nh6 Bb5 O-O Bxc6 bxc6 O-O Bg4 h3 Bxf3 Qxf3 Nf5 Rd1",
         "explanation": "The fianchetto approach develops the bishop on g7 targeting the d4 pawn along the long diagonal, creating a favorable Dragon-like structure. The knight develops via h6 to avoid blocking the g7 bishop, then reroutes to f5 attacking d4 and e3 simultaneously. After ...Bg4 exchanges and ...Qb6, Black creates tactical pressure on both b2 and d4 that exploits the weakness of White's center."
       },
       {
         "name": "Alapin: 2...Nf6 3.e5 Nd5 4.d4 cxd4 5.Nf3 (Alt Move Order)",
-        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb3 dxe5 dxe5 Qxd1+ Kxd1 Bg4 Ke1 O-O-O Nbd2 Be6 Bxe6+ fxe6 Ng5 Rd5 Nxe6 Rxe5",
+        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb3 dxe5 dxe5 Qxd1+",
         "explanation": "An alternative move order where White plays 5.Nf3 before recapturing, transposing into the main line endgame with subtle timing differences. Black develops with ...Nc6, ...d6, and reaches the familiar Qxd1+ structure with ...Bg4 pinning the knight. After the bishop exchange on e6, Black's ...Rd5 centralizes the rook powerfully and ...Rxe5 recovers the pawn with an active position."
       },
       {
         "name": "Alapin: 2...d5 3.exd5 Qxd5 4.d4 Nc6 (with ...e5)",
-        "pgn": "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 e5 dxe5 Qxd1+ Kxd1 Nxe5 Nxe5 Bd6+ Ke1 Bxe5 Nd2 Nf6 Nc4 Bf4 Bxf4 O-O Be2 Re8 Be3 Nd5",
+        "pgn": "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 e5 dxe5 Qxd1+ Kxd1",
         "explanation": "After 2...d5 3.exd5 Qxd5, Black plays 4...Nc6 preparing the dynamic ...e5 break to open the center before White consolidates. After dxe5 Qxd1+ Kxd1 Nxe5, the king is displaced on d1 and the bishop check on d6 forces Ke1. The pin with ...Bg4 wins the bishop pair, giving Black a clear advantage with active pieces against White's awkwardly placed king."
       },
       {
         "name": "Alapin: 2...Nf6 3.e5 Nd5 4.d4 cxd4 5.cxd4 d6 (IQP Accepted)",
-        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7 Bf4 O-O d5 exd5 Nxd5 Nxd5 Qxd5",
+        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7",
         "explanation": "In this IQP-accepted line, White gets more dynamic play than the endgame variation through exchanges on d7 that remove Black's bishop pair. The d4 pawn becomes an isolani, but White uses it dynamically with d5 to open lines and generate initiative. Black must be precise with ...Be7 and ...O-O, ensuring that when d5 is pushed, the capture leads to a balanced position where accurate defense neutralizes White's activity."
       },
       {
         "name": "Alapin: 2...d5 3.exd5 Nf6 (Knight Recapture)",
-        "pgn": "e4 c5 c3 d5 exd5 Nf6 d4 cxd4 cxd4 Nxd5 Nf3 Nc6 Be2 e6 O-O Be7 Nc3 Nxc3 bxc3 O-O Bd3 b6 Qe2 Bb7 Bg5 Rc8 Rac1 Na5",
+        "pgn": "e4 c5 c3 d5 exd5 Nf6 d4 cxd4 cxd4 Nxd5 Nf3 Nc6 Be2",
         "explanation": "Instead of the common 3...Qxd5, Black recaptures with 3...Nf6 to avoid the queen sortie and reach a solid Caro-Kann-like structure. After 4.d4 cxd4 5.cxd4 Nxd5, White gets the IQP but Black develops smoothly with ...Nc6, ...Be7, ...O-O. The fianchetto with ...b6 and ...Bb7 targets d5 and the weakened long diagonal, while ...Na5-c4 blockades the isolated pawn."
       }
     ],
     "trapLines": [
       {
         "name": "Alapin: IQP Exploitation and Piece Exchanges",
-        "pgn": "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 e6 Be2 cxd4 cxd4 Nc6 O-O Be7 Nc3 Qd8 Be3 O-O Rc1 Nd5 Nxd5 exd5 Qb3 Na5 Qa4 Bd7 Qd1 Rc8 Rxc8 Qxc8",
+        "pgn": "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 e6 Be2 cxd4 cxd4 Nc6 O-O Be7 Nc3 Qd8 Be3 O-O Rc1",
         "explanation": "When White has the IQP, Black's strategy is methodical piece exchanges and relentless pressure on d4 through development with ...Be7, ...O-O, and centralizing with ...Nd5. After exchanging knights, Black's pawn on d5 blockades White's isolani permanently. The rook exchange on c8 simplifies towards a winning endgame where White's dynamic compensation evaporates without attacking pieces."
       },
       {
         "name": "Alapin: Knight Outpost on d5",
-        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7 a4 O-O a5 Nd5 Nxd5 Qxd5 Be3 Rfd8",
+        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7",
         "explanation": "Black exploits the knight on d5 as an unassailable outpost, and even when exchanged, the queen recaptures on d5 maintaining central dominance. The queen on d5 pressures both d4 and a2 while ...Rfd8 adds to the siege of the isolated pawn. White's a4-a5 advance creates holes on b5 and weakens the queenside, leaving every piece optimally placed to target structural weaknesses."
       },
       {
         "name": "Alapin: ...e5 Counter-Thrust Trap",
-        "pgn": "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 e5 dxe5 Qxd1+ Kxd1 Nxe5 Nxe5 Bd6+ Ke1 Bxe5 Nd2 Nf6 Nc4 Bg4 Be2 Bxe2 Kxe2 O-O Be3 Rfe8",
+        "pgn": "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 e5 dxe5 Qxd1+ Kxd1",
         "explanation": "The ...e5 counter-thrust after 4...Nc6 opens the center before White can consolidate, leading to an endgame after Qxd1+ with the White king stranded. The bishop check on d6 forces Ke1, and after ...Bxe5 Black dominates the center with the bishop pair. The pin with ...Bg4 wins material while ...Rfe8 activates the rook on the open e-file, giving Black a clear advantage."
       }
     ],
     "warningLines": [
       {
         "name": "Alapin: White's e5 Space Cramp",
-        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 e6 Nf3 d6 Bd3 Nc6 O-O Be7 Nc3 Nxc3 bxc3 dxe5 dxe5 O-O Qc2 h6 Re1 Bd7 Bf4 Rc8 Rad1 Qe8",
+        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 e6 Nf3 d6 Bd3 Nc6 O-O Be7",
         "explanation": "If Black plays too passively after 2...Nf6, White's e5 pawn imposes a crushing space advantage with pieces coordinating beautifully behind it. The exchange ...Nxc3 too early gives White a strong pawn center and the open b-file for pressure. The lesson is to challenge e5 actively with ...d6 and ...f6 rather than exchanging the powerful d5 knight prematurely."
       },
       {
         "name": "Alapin: Passive Play Lets White Attack",
-        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb3 dxe5 dxe5 Qxd1+ Kxd1 Bg4 Ke1 O-O-O Nc3 Be6 Be3 Nd5 Nxd5 Bxd5 Bxd5 Rxd5 Ke2 Rd8 Rhd1",
+        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb3 dxe5 dxe5 Qxd1+",
         "explanation": "In the endgame after Qxd1+, Black must play energetically or White consolidates with a strong e5 pawn and active piece coordination. Exchanging too many minor pieces with ...Nd5 Nxd5 leaves White with a knight versus a passive bishop and doubled rooks on the d-file. The key is to maintain piece tension and keep the light-squared bishop active with ...Bg4 rather than trading it off."
       },
       {
         "name": "Alapin: Danger of ...e5 Blocking the Bishop",
-        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 e6 Nc3 Nxc3 bxc3 Be7 Bd3 Nd7 O-O dxe5 dxe5 Nc5 Bc2 O-O Nd4 Bd7 Qg4 Kh8 Bh6 Rg8 Nf5",
+        "pgn": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 e6 Nc3 Nxc3 bxc3 Be7 Bd3",
         "explanation": "This warning shows the danger of allowing White to maintain the e5 pawn unchallenged, as ...e6 permanently blocks the light-squared bishop on c8. White builds a powerful kingside attack with Qg4, Bh6, and Nf5, exploiting the weakened dark squares around Black's king. Black must either challenge e5 with ...d6 and active recapture, or play ...d5 to avoid this cramped structure entirely."
       }
     ]
