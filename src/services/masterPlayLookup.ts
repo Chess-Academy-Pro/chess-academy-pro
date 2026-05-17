@@ -331,7 +331,7 @@ export async function lookupMasterPlay(
     if (opts.localOnly) {
       return emptyResult(key);
     }
-    if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
       return emptyResult(key);
     }
     try {

@@ -1,9 +1,14 @@
 // All LLM API calls must go through this file only — per CLAUDE.md
 import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
+import { Chess } from 'chess.js';
 import { db } from '../db/schema';
 import { SYSTEM_PROMPT, buildChessContextMessage, getVerbosityInstruction } from './coachPrompts';
 import { recordApiUsage } from './coachCostService';
+import { lookupMasterPlay } from './masterPlayLookup';
+import { validateClaims, type ClaimValidationResult } from './claimValidator';
+import { logAppAudit } from './appAuditor';
+import type { MasterPlayContext, MasterPlayResult } from './masterPlayTypes';
 import type { CoachTask, CoachContext, CoachVerbosity, AiProvider } from '../types';
 
 /**
@@ -788,6 +793,282 @@ export async function getCoachStructuredResponse(
   throw new Error('No API key configured for tool-use call (neither DeepSeek nor Anthropic)');
 }
 
+// ─── WO-COACH-MASTER-INTEGRATION — master-play grounding (Layers B + D) ─
+//
+// The four-layer grounding pipeline (CLAUDE.md G3 runtime instrument)
+// hangs off `getCoachChatResponse` via the optional `grounding` parameter.
+// Surfaces that want grounding pass a `MasterGroundingOptions` block; the
+// function detects move-question intent on the latest user message,
+// pre-injects master-play context from the cache (Layer B), then
+// validates the LLM's output against that context (Layer D) and retries
+// up to twice before falling back to the stock "I can't verify" response.
+//
+// Layer A (watcher prefetch) is invoked by the surface's
+// `useMasterPlayWatcher` hook — it runs ahead of every chat turn, so by
+// the time pre-injection asks the cache for the current FEN, the data is
+// almost always already there. Layer C (LLM-driven tool call for follow-
+// up positions) is deferred to a follow-up PR; the watcher's look-ahead
+// pass already covers the practical "and if I play X?" follow-ups by
+// pre-injecting the top-3 child positions alongside the current one.
+
+/** Surfaces that want master-play grounding pass this block. The
+ *  function decides INTERNALLY whether to engage (intent detector +
+ *  context availability) — surfaces don't need to gate the call. */
+export interface MasterGroundingOptions {
+  /** The FEN the user is currently looking at. When undefined, Layer B
+   *  skips: nothing to ground against. The watcher's prefetch is also
+   *  keyed on this FEN, so callers should pass the SAME FEN the watcher
+   *  saw most recently. */
+  currentFen?: string;
+  /** Surface route for audit attribution. Goes into every emitted
+   *  audit event (`master-play-lookup`, `claim-validator-trip`, etc). */
+  surface: string;
+  /** Session correlator for audit attribution. */
+  sessionId?: string;
+  /** Force the grounding pipeline ON regardless of intent detection.
+   *  Used by integration tests; production surfaces leave undefined. */
+  forceEngage?: boolean;
+}
+
+/** Move-question intent patterns. The detector matches the last user
+ *  message against the union — any match engages Layer B. Conservative:
+ *  better to engage grounding on a question that doesn't need it
+ *  (cheap pass-through when context has no data) than to miss a move
+ *  question and let the LLM invent. */
+const MOVE_QUESTION_PATTERNS: ReadonlyArray<RegExp> = [
+  /\bwhat\s+(?:should|do|would|can)\s+I\s+play\b/i,
+  /\bwhat'?s?\s+the\s+(?:best|right|correct)\s+move\b/i,
+  /\bwhat\s+(?:move|moves)\s+(?:should|do|does)\b/i,
+  /\bwhat\s+do\s+masters\s+(?:play|do|choose)\b/i,
+  /\bwhat\s+do\s+grandmasters\s+(?:play|do|choose)\b/i,
+  /\bwhat\s+do\s+(?:they|pros)\s+(?:play|do|choose)\b/i,
+  /\bwhat'?s?\s+(?:the\s+)?most\s+(?:popular|common|played)\b/i,
+  /\bwhich\s+move\s+(?:is|wins|works|scores)\b/i,
+  /\bis\s+[A-Za-z][\w-]*\s+(?:a\s+)?(?:good|bad|sound|playable|winning|losing)\b/i,
+  /\b(?:should|can)\s+I\s+play\s+[A-Za-z][\w-]*\b/i,
+  /\bwhat\s+happens?\s+(?:after|if\s+I\s+play)\b/i,
+  /\bwhat\s+(?:about|if)\s+[A-Za-z][\w-]*\??/i,
+  /\bbest\s+continuation\b/i,
+  /\bbook\s+move\b/i,
+  /\bmain\s+line\b/i,
+  /\bcontinuation\s+(?:here|after)\b/i,
+  /\bhow\s+do\s+(?:masters|pros|GMs)\s+continue\b/i,
+];
+
+/** Match the last user message. Returns true if any pattern fires. */
+function detectMoveQuestionIntent(
+  messages: ReadonlyArray<{ role: 'user' | 'assistant'; content: string }>,
+): boolean {
+  for (let i = messages.length - 1; i >= 0; i -= 1) {
+    const m = messages[i];
+    if (m.role !== 'user') continue;
+    const text = m.content;
+    for (const pat of MOVE_QUESTION_PATTERNS) {
+      if (pat.test(text)) return true;
+    }
+    return false; // Only look at the most recent user message.
+  }
+  return false;
+}
+
+/** Build the look-ahead set for a position. For each of the top-N
+ *  master moves, apply via chess.js to get the resulting FEN, then
+ *  look it up. Results are pulled from the cache when available so
+ *  this method is cheap when the watcher has done its job. */
+async function buildLookahead(
+  fen: string,
+  current: MasterPlayResult,
+  surface: string,
+  sessionId: string | undefined,
+  maxCandidates = 3,
+): Promise<MasterPlayContext['lookahead']> {
+  if (current.moves.length === 0) return [];
+  const top = current.moves.slice(0, maxCandidates);
+  const out: MasterPlayContext['lookahead'][number][] = [];
+  for (const move of top) {
+    let childFen: string;
+    try {
+      const chess = new Chess(fen);
+      const played = chess.move(move.san);
+      if (!played) continue;
+      childFen = chess.fen();
+    } catch {
+      continue;
+    }
+    const childResult = await lookupMasterPlay(childFen, {
+      triggeredBy: 'pre-injection',
+      surface,
+      sessionId,
+    });
+    out.push({ moveFromCurrent: move.san, result: childResult });
+  }
+  return out;
+}
+
+/** Assemble the full master-play context for the brain. Returns
+ *  undefined when no FEN was provided OR when both current + look-ahead
+ *  resolve to source:'none' (the brain has nothing grounded to say). */
+async function buildMasterPlayContext(
+  grounding: MasterGroundingOptions,
+): Promise<MasterPlayContext | undefined> {
+  if (!grounding.currentFen) return undefined;
+  const current = await lookupMasterPlay(grounding.currentFen, {
+    triggeredBy: 'pre-injection',
+    surface: grounding.surface,
+    sessionId: grounding.sessionId,
+  });
+  if (current.source === 'none' || current.moves.length === 0) {
+    // Honest "no master data" context — claim validator will use this
+    // to reject any SAN/percentage the LLM tries to fabricate.
+    return { current, lookahead: [] };
+  }
+  const lookahead = await buildLookahead(
+    grounding.currentFen,
+    current,
+    grounding.surface,
+    grounding.sessionId,
+  );
+  return { current, lookahead };
+}
+
+/** Render the context as a system-prompt block the LLM can consume.
+ *  Format is deliberately structured (move counts + percentages +
+ *  attribution) so the LLM can read off values without paraphrasing. */
+function renderMasterPlayContextBlock(ctx: MasterPlayContext): string {
+  const lines: string[] = ['═══ MASTER-PLAY CONTEXT (grounded data — use ONLY these figures) ═══'];
+  const c = ctx.current;
+  if (c.source === 'none' || c.moves.length === 0) {
+    lines.push('No master-game data is available for the current position.');
+    lines.push('Do NOT cite move popularity, win rates, ratings, player names, or "what masters play" for this position.');
+    lines.push('If the user asks a move question, say so explicitly — recommend they analyze with the engine.');
+  } else {
+    lines.push(`Position: ${c.fen}`);
+    lines.push(`Source: ${c.source}    Total master games: ${c.totalGames}`);
+    lines.push('Top moves played by masters in this position:');
+    for (const m of c.moves.slice(0, 6)) {
+      const wPct = (m.whitePct * 100).toFixed(0);
+      const dPct = (m.drawPct * 100).toFixed(0);
+      const bPct = (m.blackPct * 100).toFixed(0);
+      const rating = m.averageRating ? ` avg-rating ${m.averageRating}` : '';
+      lines.push(`  • ${m.san} — ${m.games} games (W:${wPct}% D:${dPct}% B:${bPct}%)${rating}`);
+    }
+    if (c.topGames && c.topGames.length > 0) {
+      lines.push('Notable master games in this position:');
+      for (const g of c.topGames.slice(0, 4)) {
+        const white = g.white ?? '?';
+        const black = g.black ?? '?';
+        const year = g.year ?? '?';
+        const event = g.event ? ` (${g.event})` : '';
+        const result = g.result ?? '*';
+        lines.push(`  • ${white} vs ${black}, ${year}${event} — ${result}`);
+      }
+    }
+    if (ctx.lookahead.length > 0) {
+      lines.push('Look-ahead — positions after each top move:');
+      for (const la of ctx.lookahead) {
+        const r = la.result;
+        if (r.source === 'none' || r.moves.length === 0) {
+          lines.push(`  After ${la.moveFromCurrent}: no master data.`);
+          continue;
+        }
+        const top = r.moves.slice(0, 4).map((m) => `${m.san} (${m.games}g)`).join(', ');
+        lines.push(`  After ${la.moveFromCurrent}: ${r.totalGames} games — top: ${top}`);
+      }
+    }
+  }
+  lines.push('');
+  lines.push('GROUNDING RULES (non-negotiable):');
+  lines.push('  • When recommending a move, citing frequencies / ratings / player names / years, or making');
+  lines.push('    comparative claims about master practice — ground EVERY such claim in the data above.');
+  lines.push('  • Never invent or estimate move popularity, game counts, ratings, or "what masters play"');
+  lines.push('    figures that are not literally in the data above.');
+  lines.push('  • If you need a position not shown, say so — do not fabricate the answer.');
+  lines.push('  • Strategic prose (plan ideas, structural concepts) without specific SANs is unrestricted.');
+  lines.push('═══════════════════════════════════════════════════════════════════════════');
+  return lines.join('\n');
+}
+
+/** Stock fallback served when retries are exhausted. Generic enough
+ *  to feel like a coach being honest about uncertainty rather than
+ *  hitting a programmatic dead end. */
+const STOCK_GROUNDING_FALLBACK =
+  "I can't verify which moves are sound here from master practice right now. " +
+  "If you want a concrete recommendation, run the position through the engine — " +
+  "I'd rather stay honest than guess.";
+
+function emitClaimValidatorTrips(
+  validation: ClaimValidationResult,
+  retryNumber: 1 | 2,
+  surface: string,
+  sessionId: string | undefined,
+): void {
+  for (const v of validation.violations) {
+    void logAppAudit({
+      kind: 'claim-validator-trip',
+      category: 'subsystem',
+      source: 'coachApi.getCoachChatResponse',
+      summary: `kind=${v.kind} claim="${v.claim.slice(0, 60)}" retry=${retryNumber} surface=${surface}`,
+      details: JSON.stringify({
+        kind: v.kind,
+        claim: v.claim,
+        reason: v.reason,
+        retryNumber,
+        surface,
+        sessionId,
+      }),
+    });
+  }
+}
+
+function emitEnforcementFallback(
+  originalQuery: string,
+  lastValidation: ClaimValidationResult,
+  surface: string,
+  sessionId: string | undefined,
+): void {
+  void logAppAudit({
+    kind: 'master-play-enforcement-fallback',
+    category: 'subsystem',
+    source: 'coachApi.getCoachChatResponse',
+    summary: `retry budget exhausted — stock response served surface=${surface}`,
+    details: JSON.stringify({
+      originalQuery: originalQuery.slice(0, 240),
+      violationCount: lastValidation.violations.length,
+      sampleViolation: lastValidation.violations[0],
+      surface,
+      sessionId,
+    }),
+  });
+}
+
+/** Build a strengthened addendum to attach on retry. The first retry's
+ *  strengthening points to the most recent violation; the second retry
+ *  doubles down and forbids the LLM from making chess claims at all
+ *  if it can't ground them. */
+function buildRetryAddendum(retryNumber: 1 | 2, lastValidation: ClaimValidationResult): string {
+  const violationSummary = lastValidation.violations
+    .slice(0, 5)
+    .map((v) => `[${v.kind}] ${v.claim}: ${v.reason}`)
+    .join('\n  ');
+  if (retryNumber === 1) {
+    return [
+      '═══ GROUNDING VIOLATION ON PRIOR ATTEMPT ═══',
+      'Your previous response was rejected. The following claims were not grounded in the master-play context:',
+      `  ${violationSummary}`,
+      'Regenerate WITHOUT those claims. Either use only data from the master-play context above, or omit',
+      'the chess specifics entirely and answer with strategic prose.',
+    ].join('\n');
+  }
+  return [
+    '═══ FINAL ATTEMPT — STRICTEST GROUNDING ═══',
+    'Two grounding violations so far:',
+    `  ${violationSummary}`,
+    'On this attempt: cite NO move SAN unless it appears verbatim in the master-play context above.',
+    'Cite NO percentage, game count, rating, player name, or year unless it derives directly from the context.',
+    'If you cannot answer under those constraints, say so plainly and recommend the user run the engine.',
+  ].join('\n');
+}
+
 export async function getCoachChatResponse(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPromptAddition: string,
@@ -814,6 +1095,14 @@ export async function getCoachChatResponse(
    *  `getKidLlmResponse` rather than passing this flag directly. See
    *  CLAUDE.md "Kids section non-negotiables" #3. */
   skipPersonality?: boolean,
+  /** WO-COACH-MASTER-INTEGRATION — when set, runs the four-layer
+   *  master-play grounding pipeline for this turn. The function decides
+   *  internally whether to engage based on intent detection. Surfaces
+   *  pass `currentFen` from their game state; the watcher
+   *  (`useMasterPlayWatcher`) keeps the cache warm so pre-injection is
+   *  near-instant. `getKidLlmResponse` does NOT pass this — kid lane
+   *  excluded by contract. */
+  grounding?: MasterGroundingOptions,
 ): Promise<string> {
   const config = forceProvider
     ? await getForcedProviderConfig(forceProvider)
@@ -838,31 +1127,120 @@ export async function getCoachChatResponse(
   // adult personality leaks in — see comment on the parameter above.
   const personalityAddition = skipPersonality ? '' : await loadPersonalityAddition();
   const responseLengthAddition = skipPersonality ? '' : await loadResponseLengthAddition();
-  const systemPrompt = buildSystemPromptWithVerbosity(
-    SYSTEM_PROMPT,
-    verbosity,
-    [personalityAddition, responseLengthAddition, systemPromptAddition].filter(Boolean).join('\n\n') || undefined,
-  );
 
-  try {
-    return await callChatWithConfig(config, messages, systemPrompt, onStream, task, maxTokens);
-  } catch (error) {
-    console.warn(`[CoachAPI] ${config.provider} failed, trying fallback...`, error);
-    markProviderDead(config.provider);
-    const fallback = getFallbackConfig(config.provider);
-    if (fallback) {
+  // ── Layer B: master-play pre-injection ────────────────────────────
+  // Only engages when: grounding options were passed (a surface opted
+  // in), AND either intent detector fires OR the caller forced it
+  // (integration tests). When engaged, we build the masterPlayContext
+  // (cache → local DB → live Lichess fallback chain) and inject a
+  // structured prompt block. We also disable streaming for this turn
+  // so the post-response claim validator (Layer D) can rerun if needed
+  // without the user seeing a half-bad answer first.
+  let masterPlayContext: MasterPlayContext | undefined;
+  let groundingEngaged = false;
+  if (grounding) {
+    const intentFired = grounding.forceEngage === true || detectMoveQuestionIntent(messages);
+    if (intentFired) {
       try {
-        return await callChatWithConfig(fallback, messages, systemPrompt, onStream, task, maxTokens);
-      } catch (fallbackError) {
-        console.error('[CoachAPI] Fallback also failed:', fallbackError);
-        markProviderDead(fallback.provider);
-        const errMsg = fallbackError instanceof Error ? fallbackError.message : String(fallbackError);
-        return `⚠️ Coach error: ${errMsg}`;
+        masterPlayContext = await buildMasterPlayContext(grounding);
+        groundingEngaged = masterPlayContext !== undefined;
+      } catch (err) {
+        // Building the context shouldn't throw, but if it does, fail
+        // open — proceed without grounding rather than crash the turn.
+        console.warn('[CoachAPI] buildMasterPlayContext threw:', err);
       }
     }
-    const errMsg = error instanceof Error ? error.message : String(error);
-    return `⚠️ Coach error: ${errMsg}`;
   }
+  const groundingBlock = masterPlayContext
+    ? renderMasterPlayContextBlock(masterPlayContext)
+    : '';
+
+  const buildSystemPromptFor = (extraAddendum: string = ''): string => {
+    return buildSystemPromptWithVerbosity(
+      SYSTEM_PROMPT,
+      verbosity,
+      [
+        personalityAddition,
+        responseLengthAddition,
+        groundingBlock,
+        systemPromptAddition,
+        extraAddendum,
+      ]
+        .filter(Boolean)
+        .join('\n\n') || undefined,
+    );
+  };
+
+  // Helper that wraps the existing primary+fallback provider chain
+  // so we can reuse it across retries without duplicating the
+  // error-handling. Returns null on dead-end (both providers failed)
+  // so the caller can decide whether to retry or stock-out.
+  const callOnce = async (systemPrompt: string, allowStream: boolean): Promise<string> => {
+    const onStreamForCall = allowStream ? onStream : undefined;
+    try {
+      return await callChatWithConfig(config, messages, systemPrompt, onStreamForCall, task, maxTokens);
+    } catch (error) {
+      console.warn(`[CoachAPI] ${config.provider} failed, trying fallback...`, error);
+      markProviderDead(config.provider);
+      const fallback = getFallbackConfig(config.provider);
+      if (fallback) {
+        try {
+          return await callChatWithConfig(fallback, messages, systemPrompt, onStreamForCall, task, maxTokens);
+        } catch (fallbackError) {
+          console.error('[CoachAPI] Fallback also failed:', fallbackError);
+          markProviderDead(fallback.provider);
+          const errMsg = fallbackError instanceof Error ? fallbackError.message : String(fallbackError);
+          return `⚠️ Coach error: ${errMsg}`;
+        }
+      }
+      const errMsg = error instanceof Error ? error.message : String(error);
+      return `⚠️ Coach error: ${errMsg}`;
+    }
+  };
+
+  // ── Non-grounded path: existing behavior, streaming-as-passed ──
+  if (!groundingEngaged) {
+    return callOnce(buildSystemPromptFor(), true);
+  }
+
+  // ── Grounded path: collect → validate → retry up to 2x → stock ──
+  // Streaming is disabled on grounded turns so the validator can
+  // reject without the user seeing a half-bad response. `grounding`
+  // is guaranteed non-null at this point — `groundingEngaged` is only
+  // true if we built a context, which requires grounding.
+  const { surface, sessionId } = grounding ?? { surface: 'unknown', sessionId: undefined };
+  const originalQuery = messages[messages.length - 1]?.content ?? '';
+
+  // Attempt 1 (no addendum).
+  let response = await callOnce(buildSystemPromptFor(), false);
+  let validation = validateClaims(response, masterPlayContext);
+  if (validation.ok) {
+    if (onStream && response) onStream(response);
+    return response;
+  }
+  emitClaimValidatorTrips(validation, 1, surface, sessionId);
+
+  // Attempt 2 (mild strengthening).
+  response = await callOnce(buildSystemPromptFor(buildRetryAddendum(1, validation)), false);
+  validation = validateClaims(response, masterPlayContext);
+  if (validation.ok) {
+    if (onStream && response) onStream(response);
+    return response;
+  }
+  emitClaimValidatorTrips(validation, 2, surface, sessionId);
+
+  // Attempt 3 (strictest).
+  response = await callOnce(buildSystemPromptFor(buildRetryAddendum(2, validation)), false);
+  validation = validateClaims(response, masterPlayContext);
+  if (validation.ok) {
+    if (onStream && response) onStream(response);
+    return response;
+  }
+  // Retry budget exhausted. Serve the stock fallback so the user
+  // doesn't see an ungrounded response slip through.
+  emitEnforcementFallback(originalQuery, validation, surface, sessionId);
+  if (onStream) onStream(STOCK_GROUNDING_FALLBACK);
+  return STOCK_GROUNDING_FALLBACK;
 }
 
 /** Read the active profile's personality dials and render the

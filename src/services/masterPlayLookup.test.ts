@@ -9,7 +9,6 @@ import fixture from '../test/fixtures/masters-test-db.json';
 
 const STARTING_FEN_4 = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -';
 const STARTING_FEN_6 = `${STARTING_FEN_4} 0 1`;
-const ITALIAN_FEN_4 = 'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq -';
 // Pre-3.Bc4 position — the fixture has topGames at this entry.
 const ITALIAN_PRE_BC4_FEN = 'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -';
 const UNKNOWN_FEN = '8/8/8/8/8/8/8/8 w - -';

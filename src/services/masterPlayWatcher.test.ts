@@ -10,7 +10,6 @@ import {
 } from './masterPlayLookup';
 import { _resetLichessCircuitBreaker } from './lichessExplorerService';
 import { masterPlayCache } from './masterPlayCache';
-import fixture from '../test/fixtures/masters-test-db.json';
 
 const STARTING_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 const AFTER_E4_FEN_4 = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq -';
