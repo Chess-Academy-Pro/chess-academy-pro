@@ -3321,7 +3321,7 @@
     "id": "queens-indian",
     "eco": "E15",
     "name": "Queen's Indian Defence",
-    "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 Ne4 Qc2 Nxc3 Qxc3 f5 Bf4 Nc6 Rfd1 d6 Rac1 Bf6",
+    "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 Ne4 Qc2 Nxc3 Qxc3 f5 Bf4",
     "color": "black",
     "style": "Positional, Solid",
     "overview": "The Queen's Indian Defence is one of the most solid and flexible systems in chess. After 3...b6, Black develops the bishop to b7 to control the central light squares, especially e4 and d5. This is the go-to response when White plays 3.Nf3 instead of 3.Nc3. It's been a favorite of world champions like Karpov and Kramnik because of its rock-solid nature.",
@@ -3342,49 +3342,49 @@
     "variations": [
       {
         "name": "Queen's Indian: Fianchetto Variation (Deep)",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 d5 cxd5 Nxd5 Nxd5 Bxd5 Qc2 c5 Rd1 Nc6 dxc5 bxc5 e4",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 d5 cxd5 Nxd5 Nxd5 Bxd5 Qc2 c5",
         "explanation": "The Fianchetto system is White's most common approach against the Queen's Indian. After the symmetrical fianchetto, Black challenges with ...d5 to contest the center immediately. The exchange sequence leads to an open position where the Bg2 and Bb7 face off on the long diagonal. Black obtains a comfortable isolated queen pawn position after ...c5, where active piece play compensates for the structural weakness. The key is that Black's minor pieces are well-placed to support the c5 pawn and generate pressure along the c-file and against White's e4 advance."
       },
       {
         "name": "Queen's Indian: Petrosian Variation (a3)",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 a3 Bb7 Nc3 d5 cxd5 Nxd5 Qc2 Be7 e4 Nxc3 bxc3 O-O Bd3 c5 O-O Qc7 Qe2 Nc6 Rd1 cxd4 cxd4 Nb4 Bb1 Rac8",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 a3 Bb7 Nc3 d5 cxd5 Nxd5 Qc2 Be7 e4 Nxc3 bxc3 O-O Bd3 c5 O-O Qc7 Qe2 Nc6 Rd1",
         "explanation": "The Petrosian Variation with a3 is a prophylactic masterpiece that prevents the annoying ...Bb4 pin. White aims for a powerful center with e4 and active piece play. Black's best response is the immediate ...d5 challenge, forcing exchanges that relieve the central tension. After ...c5, Black undermines the d4 pawn and generates counterplay on the c-file. The knight hop ...Nb4 targets both d3 and a2, creating persistent threats that force White to be careful about overextending the center."
       },
       {
         "name": "Queen's Indian: Kasparov Variation (Nc3/a3)",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 Nc3 Bb7 a3 d5 cxd5 Nxd5 Qc2 Be7 e4 Nxc3 bxc3 O-O Bd3 c5 O-O Qc7 Qe2 Nd7 Bb2 Nf6 Rad1 cxd4 cxd4 Rfd8 Rfe1 Rac8",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 Nc3 Bb7 a3 d5 cxd5 Nxd5 Qc2 Be7 e4 Nxc3 bxc3 O-O Bd3 c5 O-O Qc7 Qe2 Nd7 Bb2 Nf6 Rad1",
         "explanation": "Kasparov's treatment with Nc3 before a3 is a subtle move-order refinement that keeps more options open. The key difference from the Petrosian is that Nc3 develops a piece immediately, putting pressure on Black to react. After the standard ...d5 exchange, White gets the same big center but with slightly better piece coordination. Black equalizes through the thematic ...c5 break and piece activity along the c-file. The ...Nd7-f6 regrouping targets e4 and supports the ...Rfd8/...Rac8 rook deployment."
       },
       {
         "name": "Queen's Indian: Nimzowitsch Variation (...Bb4+)",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Bb4+ Bd2 Bxd2+ Qxd2 O-O Nc3 Ne4 Qc2 Nxc3 Qxc3 d6 O-O Nd7 Qc2 f5 d5 Nf6 Nd4 Qe8 b3 e5 Nb5 e4",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Bb4+ Bd2 Bxd2+ Qxd2 O-O Nc3 Ne4 Qc2 Nxc3 Qxc3 d6 O-O Nd7 Qc2",
         "explanation": "The Nimzowitsch Variation with ...Bb4+ is Black's most direct approach to simplification. By trading dark-squared bishops immediately, Black removes White's option for a Catalan-like squeeze. The position becomes strategically clear: Black controls the light squares with the Bb7 and fights for the e4 outpost. After ...f5 and ...e5, Black builds a strong central presence that compensates for the slightly passive bishop on b7. The ...e4 advance locks in Black's space advantage and creates a powerful pawn wedge."
       },
       {
         "name": "Queen's Indian: Classical Variation (...Be7)",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 Ne4 Qc2 Nxc3 Qxc3 f5 d5 Bf6 Qd3 d6 Nd4 Qe8 e4 fxe4 Bxe4",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 Ne4 Qc2 Nxc3 Qxc3 f5 d5 Bf6",
         "explanation": "The Classical Variation with ...Be7 is the most flexible option, keeping all structural options open. Black waits to see White's setup before committing to a pawn structure. The ...Ne4 exchange followed by ...f5 is the key plan, seizing control of the e4 square and creating kingside space. After White plays d5 to gain central territory, Black's Bf6 pressures the dark squares and supports a potential ...e5 break. The ...Na6-c5 maneuver gives Black an excellent outpost and targets the e4 square again."
       },
       {
         "name": "Queen's Indian: Miles Variation (...Ba6)",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Ba6 Qa4 Bb7 Bg2 c5 dxc5 bxc5 O-O Be7 Nc3 O-O Rd1 Qb6 Bf4 d6 e4 Nh5 Be3 Nd7 Rac1 Nhf6 Nd5 Nxd5 exd5 Nf6",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Ba6 Qa4 Bb7 Bg2 c5 dxc5 bxc5 O-O Be7 Nc3 O-O Rd1 Qb6 Bf4 d6",
         "explanation": "The Miles Variation with ...Ba6 is a creative approach aimed at exchanging light-squared bishops to eliminate White's Catalan bishop on g2. The early ...Ba6 targets the c4 pawn and provokes White into an early queen move. After the queen retreats and Black plays ...Bb7, Black has gained a tempo and disrupted White's natural development. The resulting positions after ...c5 and ...bxc5 give Black active piece play along the c-file and the half-open b-file. The trade-off is that Black's pawn structure is slightly weakened, but the piece activity more than compensates."
       },
       {
         "name": "Queen's Indian: 4.e3 System",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 e3 Bb7 Bd3 Be7 O-O O-O Nc3 d5 cxd5 exd5 b3 Nbd7 Bb2 c5 Rc1 Rc8 Qe2 Re8 Rfd1 Bd6 dxc5 bxc5 Bb1 Qe7 Ne5 Nf8",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 e3 Bb7 Bd3 Be7 O-O O-O Nc3 d5 cxd5 exd5 b3 Nbd7 Bb2 c5 Rc1 Rc8 Qe2 Re8 Rfd1 Bd6",
         "explanation": "The 4.e3 system is a quiet but venomous approach where White avoids the Catalan fianchetto entirely. The Bd3 development targets the kingside while e3 gives the center solid support. Black responds with the classical ...d5 to equalize in the center, reaching a Queen's Gambit Declined structure with the bishop actively placed on b7. After ...c5 and the central exchange, the position becomes a typical hanging pawns scenario where Black's c5/d5 duo can be either a strength or weakness depending on piece activity."
       }
     ],
     "trapLines": [
       {
         "name": "Central Light Square Domination",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 Ne4 Qc2 Nxc3 Qxc3 Be4 Qc2 Bxf3 Bxf3 Nc6 d5 Nb4 Qb1 exd5 cxd5 d6 a3 Na6 e4 Nc5",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 Ne4 Qc2 Nxc3 Qxc3 Be4",
         "explanation": "After the knight exchange on c3, Black seizes the initiative with ...Be4, forcing White into an uncomfortable decision. If the Nf3 moves, the Bg2 is deprived of its best diagonal. After ...Bxf3 Bxf3, Black controls the light squares completely and the knight reroutes via b4 to pressure the d5 pawn. The ...Nc5 outpost is extremely powerful, hitting both e4 and a4 while being almost impossible to dislodge. White's fianchetto setup has backfired because the bishop on f3 is passive."
       },
       {
         "name": "Early d5 Strike Against e3",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 e3 Bb7 Bd3 Be7 O-O O-O Nc3 d5 cxd5 exd5 b3 Nbd7 Bb2 c5 Rc1 Rc8 Ne5 Nxe5 dxe5 Nd7 f4 d4 exd4 cxd4 Ne4 Bc5",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 e3 Bb7 Bd3 Be7 O-O O-O Nc3 d5 cxd5 exd5 b3 Nbd7 Bb2 c5 Rc1 Rc8",
         "explanation": "Against the 4.e3 system, Black's ...d5 strike leads to sharp central play. After the pawn exchanges, the hanging pawns position transforms into a dynamic battle where Black's d4 pawn becomes a powerful passed pawn. The bishop pair on c5 and b7 rakes across the board while the d4 pawn ties down White's pieces. The Nc5 placement combined with pressure on the e5 pawn gives Black a dangerous initiative that is hard to neutralize."
       },
       {
@@ -3396,17 +3396,17 @@
     "warningLines": [
       {
         "name": "Misplaced Ba6 Without Preparation",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Ba6 b3 Bb4+ Bd2 Be7 Bg2 c6 Bc3 d5 Nbd2 Nbd7 O-O O-O Qc2 Bb7 e4 dxe4 Nxe4 Nxe4 Qxe4 Nf6 Qe2",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Ba6 b3 Bb4+ Bd2 Be7 Bg2 c6 Bc3 d5 Nbd2 Nbd7 O-O O-O Qc2",
         "explanation": "Playing ...Ba6 without the right follow-up can leave the bishop stranded and out of play. After White responds with b3, the c4 pawn is defended and the bishop on a6 has no good target. Black wastes multiple tempi repositioning it back to b7, giving White a significant development advantage. The correct approach is to play ...Ba6 only in specific lines where the bishop genuinely pressures c4 or when combined with ...d5 to open the diagonal. In most fianchetto lines, ...Bb7 is the safer and more reliable choice."
       },
       {
         "name": "Allowing White's d5 Advance",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O d5 exd5 Nh4 c6 cxd5 Nxd5 Nf5 Bf6 e4 Nc7 Nd6 Ba6 Re1",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O d5 exd5 Nh4 c6 cxd5 Nxd5 Nf5 Bf6 e4",
         "explanation": "If White achieves d5 without Black having adequate counterplay, the position opens catastrophically for Black. The Bg2 becomes a monster on the long diagonal, the Nh4-f5 maneuver targets the weakened kingside, and Black's bishop on b7 is completely buried behind the d5 pawn. The Nf5-d6 outpost is devastating, hitting b7 and f7 simultaneously. Always be ready to meet d5 with immediate counterplay or prevent it with timely ...d5 of your own."
       },
       {
         "name": "Passive Setup Without ...d5 or ...c5",
-        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 d6 Qc2 Nbd7 e4 e5 d5 Nc5 Ne1 a5 Nd3 Nxd3 Qxd3 Nd7 f4 exf4 Bxf4 Bf6 Rae1 Re8 Qf3",
+        "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 d6 Qc2 Nbd7 e4 e5 d5",
         "explanation": "Without an early ...d5 or ...c5 challenge, Black's position becomes dangerously passive. White builds a massive center with e4 and d5, entombing the Bb7 completely. The space advantage allows White to regroup pieces at leisure and prepare a kingside attack with f4. Black's pieces are cramped behind the pawn chain with no active plan. The bishop on b7 stares at the d5 pawn wall and contributes nothing to the defense. Always challenge the center early with ...d5 or ...c5 to keep the position balanced."
       }
     ]

@@ -18,15 +18,6 @@
     "petrov-defence::trap::Wrong Move Order Punishment": [
       "WEAK_TRAP"
     ],
-    "queens-indian::trap::Central Light Square Domination": [
-      "WEAK_TRAP"
-    ],
-    "queens-indian::trap::Early d5 Strike Against e3": [
-      "WEAK_TRAP"
-    ],
-    "queens-indian::trap::Petrosian Counterblow": [
-      "WEAK_TRAP"
-    ],
     "budapest-gambit::trap::Pin Exploitation Trap": [
       "WEAK_TRAP"
     ],
@@ -655,6 +646,23 @@
       "TOOTHLESS_WARNING"
     ],
     "benko-gambit::warning::Ignoring the Open Files": [
+      "TOOTHLESS_WARNING"
+    ],
+    "queens-indian::trap::Central Light Square Domination": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "queens-indian::trap::Early d5 Strike Against e3": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "queens-indian::warning::Misplaced Ba6 Without Preparation": [
+      "TOOTHLESS_WARNING"
+    ],
+    "queens-indian::warning::Allowing White's d5 Advance": [
+      "TOOTHLESS_WARNING"
+    ],
+    "queens-indian::warning::Passive Setup Without ...d5 or ...c5": [
       "TOOTHLESS_WARNING"
     ]
   }
