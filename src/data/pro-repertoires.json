@@ -824,47 +824,47 @@
       "pgn": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bc4 e6 Bd2 c6 Qe2 Bb4 O-O-O Nbd7",
       "color": "black",
       "style": "Practical, Provocative",
-      "overview": "The Gotham Scandi — Levy popularized this opening for club players. By recapturing with the piece on d5 and placing it on a5, Black develops quickly and avoids the heavy theory of mainline openings. It is provocative but fundamentally sound.",
+      "overview": "Here's the dirty secret of opening theory: half of chess writing says 'don't bring your queen out early'. The Scandinavian says: 'I will, and your move'. After 1.e4 d5 2.exd5 Qxd5 — yes, your queen is on d5 in the open — but White's natural 3.Nc3 attacks the queen, which means White has to ASK you where she goes (3...Qa5 is the answer, hitting the e1-h4 diagonal). You've used your one queen move to gain three things: developed your queen with tempo, decoyed White's knight to c3 where it commits, and signalled you're playing fast and direct. Levy made this Black's anti-1.e4 weapon for the YouTube generation because there's almost no theory beyond move 8 — you just develop normally and the queen on a5 quietly does its job pinning ideas against e1.",
       "keyIdeas": [
-        "Recapture with Qxd5 and retreat to a5 to pressure along the a5-e1 diagonal — maintaining this pressure forces the opponent to defend passively",
-        "Develop the bishop to f5 before playing e6 — same idea as the Caro-Kann — a key strategic concept in Scandinavian Defense",
-        "Play c6 to support the center and prepare Bb4 pins — this central control is the foundation for all middlegame operations",
-        "Aim for quick development and practical play over theoretical depth — completing development before committing to a plan gives maximum flexibility"
+        "Qxd5 → Qa5 is one move sequence, not two. Don't recapture with the queen on d5 thinking you'll figure out where to put her later — the only good square is a5 (the c-file gets defended by the queen, and Qa5 pins the c3-knight against the e1-king if the bishop ever comes off c1).",
+        "Bf5 BEFORE e6 is mandatory. The whole point of the Scandinavian over the Caro-Kann is that the queen comes out instead of the c-pawn — preserving the option to develop the c8-bishop OUTSIDE the pawn chain. Lock the bishop in with …e6 first and you've played a Caro-Kann a tempo down.",
+        "c6 has TWO purposes. It supports an eventual …d5 break (regaining centre control) AND it prepares …Bb4 hitting the c3-knight WITH the queen on a5 pinning it — a pin-and-attack combo that wins material if White isn't careful.",
+        "Don't let White play d5. Once you've castled, watch for any moment where White's d4-d5 push could fork your queen on a5 and a piece on b5 or c6. Pre-empt with …Bd7 + …Nc6-b4 reroute if needed."
       ],
       "traps": [
-        "After Nc3 Qa5 d4 Nf6 Nf3 Bf5, if White plays Bd3 Bxd3 Qxd3, Black is very comfortable"
+        "After 4.Nf3 Bf5 5.Bd3 — White attacks the f5-bishop hoping for the trade. Don't trade! Move the bishop with 5...Bg6 or accept 5...Bxd3 6.Qxd3 only if it suits your structure. The Bd3 is a Caro-Kann move, not a Scandinavian move — White hasn't earned the bishop trade yet."
       ],
       "warnings": [
-        "Do not play Qd8 — it wastes time; Qa5 is the correct square",
-        "Watch for d4-d5 pushes that can catch the queen in an awkward position"
+        "NEVER play …Qd8 retreating to the back rank — you've now wasted three tempos with the queen and you're playing the Centre Counter with no compensation. Qa5 is forced; if you didn't want Qa5, don't play the Scandinavian.",
+        "Watch for d4-d5 forks. The d4-pawn can advance to d5 attacking your queen on a5 AND something on b5 or c6 simultaneously. If your queenside isn't safe (no bishop on d7, no knight on c6 yet), don't play …c5 or …b5 that creates more targets."
       ],
       "variations": [
         {
           "name": "Main Line Qa5",
           "pgn": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bc4 e6 Bd2 c6 Qe2 Bb4 O-O-O Nbd7",
-          "explanation": "Levy's main recommendation. Black develops rapidly and creates pressure. The queenside castling by White allows for sharp play."
+          "explanation": "The full mainline as Levy teaches it. 3.Nc3 Qa5 places the queen on the magic square; 4.d4 Nf6 5.Nf3 Bf5 — the bishop comes out BEFORE …e6 (this is the Scandinavian's whole point). 6.Bc4 e6 7.Bd2 (preparing O-O-O) c6 8.Qe2 Bb4! — there's the pin and attack: Bb4 hits Nc3, which is pinned by Qa5 against the king on e1. White's response: 9.O-O-O Nbd7 reaches the critical position. Both kings have committed: White queenside, Black kingside (after …Be7 and …O-O). The game becomes opposite-side castle race, but Black is fully developed and has the …c5 break ready. Levy's signature line — easy to play, easy to remember, gets you a real game from move 1."
         },
         {
           "name": "2...Nf6 Scandinavian",
           "pgn": "e4 d5 exd5 Nf6 d4 Nxd5 c4 Nb6 Nf3 g6 Nc3 Bg7 Be3 O-O Be2 Nc6 O-O e5",
-          "explanation": "An alternative where Black recaptures with the knight. The resulting positions are more like a Grunfeld structure with the bishop on g7."
+          "explanation": "The 'modern' Scandinavian — instead of bringing the queen out, develop the knight directly. After 2...Nf6 3.d4 (White grabs even more centre) Nxd5 4.c4 Nb6 (the knight retreats, but the c-pawn has advanced and White has committed pieces), the position takes on a Grünfeld feel: Black fianchettos with 4...g6 and 5...Bg7, fights for d4 with 9...Nc6 and the eventual 10...e5 break. The opening costs nothing positionally — Black just chose a slightly slower but more flexible setup than the queen-out main line."
         }
       ],
       "trapLines": [
         {
           "name": "Bf5 e6 Bb4 Pin Trap",
           "pgn": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bd3 e6 O-O",
-          "explanation": "Black develops Bf5, e6, then sets up the Bb4 pin on Nc3. After O-O White has finished kingside development but the Nc3 is pinned — a careless move loses the knight or the queenside structure."
+          "explanation": "A textbook Scandinavian moment — White plays the natural 6.Bd3 attacking your bishop on f5. Instead of trading (which Black usually wants to avoid), Black plays 6...e6 reinforcing the f5-bishop with the e-pawn. Now after 7.O-O, look at the long diagonal: Nc3 is pinned against the e1-king by Qa5 (no bishop blocks the diagonal). The next move …Bb4! piles on the pin. If White doesn't find an exact defence (often Bd2 + a3), the c3-knight falls or White loses the queenside pawn structure to forced …Bxc3+ trades. The trap exploits the e1-h4 diagonal — that's why Qa5 was placed there from move 3."
         },
         {
           "name": "c2 Weakness Exploitation",
           "pgn": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bc4 e6 O-O c6 Re1",
-          "explanation": "After natural development, Black's Bf5 and c6 setup targets the c2 pawn. If White overextends with Nh4, Black redirects with Bg4 and pressures the weakened kingside."
+          "explanation": "After Black's standard setup — Qa5, Bf5, e6, c6 — every Black piece points at White's queenside. The c6-pawn supports a future …b5 expansion; the queen on a5 eyes a2 and e1; the bishop on f5 controls the c2-square (the d3-square is where White's bishop went, but c2 stays under pressure). If White overplays with something like Nh4 trying to trade the bishop, Black redirects with …Bg4 attacking the f3-knight (now without back-up), and the queenside pressure becomes overwhelming. Lesson: in the Scandinavian, your Bf5 is doing TWO jobs at once — kingside development AND queenside c2-pressure."
         },
         {
           "name": "Knight Fork Trick",
           "pgn": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Bd2 c6 Nf3 Bf5 Bc4 e6 Nd5 Qd8 Nxf6+ gxf6 Qe2 Nd7",
-          "explanation": "If White plays Nd5 too early, after Qd8 Nxf6+ gxf6, Black gets the bishop pair and open g-file for counterplay despite the ugly pawns."
+          "explanation": "White tries to disrupt Black's setup with 8.Nd5 — apparently winning a tempo on the f6-knight. But Black retreats the queen to d8 calmly. After 9.Nxf6+ gxf6 (the only recapture — Black's structure is ugly), Black accepts doubled f-pawns in exchange for the half-open g-file AND the bishop pair (you've kept both your bishops). The …Nd7 reroute heads to f8 or e5 supporting the kingside. Looks like Black is worse — but the bishop pair plus the open g-file gives genuine compensation. Levy's point: don't fear ugly pawns if the dynamic compensation is real."
         }
       ]
     },
@@ -876,47 +876,47 @@
       "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 c5 dxc5 Bxc5 Qc2 Nc6 a3 Qa5 Rd1 Be7",
       "color": "black",
       "style": "Solid, Classical",
-      "overview": "Levy's recommendation against 1.d4. The QGD is one of the most reliable openings in chess history. Black solidly defends d5 with e6 and develops naturally. It is boring for the opponent but effective — exactly what Levy wants.",
+      "overview": "The QGD is the chess defence equivalent of a Volvo: not exciting, never breaks down, lasts forever. Tarrasch played it. Capablanca made it his career. Karpov used it to win World Championships. The structure (pawns on d5 + e6, knight on f6, bishop on e7, king on g8) hasn't been broken in 150 years — there's literally no opponent prep strong enough to win in the QGD by force. Levy teaches it because it lets Black focus on middlegame plans instead of opening theory. The downside: your opponent will recognise it immediately and might steer for a draw. The upside: you can't lose in 25 moves.",
       "keyIdeas": [
-        "Defend d5 solidly with e6 and develop the kingside quickly — timing this correctly before the opponent can generate counterplay is critical",
-        "The bishop on e7 protects the king and can reroute to f6 or d6 — piece placement and activity are more important than material in these positions",
-        "Play c5 at the right moment to challenge White's center — this central control is the foundation for all middlegame operations",
-        "Aim for equality out of the opening and then outplay in the middlegame — a key strategic concept in Queen's Gambit Declined"
+        "Defend d5 with e6 immediately — not c6 (that's the Slav, a different opening). The …e6 move locks in your light-squared bishop on c8, which becomes the QGD's biggest practical problem to solve. Plan its escape from move 1.",
+        "The c8-bishop is your project. The three main paths: …Bd7-…Be8-…f5/g6 (slowest but safest), …b6+…Bb7 (after preparing with …a6 if needed), or trade it off via …Bg4 after Nf3. Never let it die on c8.",
+        "…c5 is the equalising break, not the winning break. After …c5 the position opens, your pieces can move, and you reach a balanced position. But …c5 played too early hangs the d5-pawn; played too late is unnecessary. The right moment is when both knights are out, both rooks are connected, and White hasn't yet played dxc5 themselves.",
+        "Against the Exchange Variation (cxd5 exd5), you're playing for the Carlsbad structure — minority attack chess. White will try b4-b5 attacking your c6-pawn; you defend with …a6 and …Rb8 + …b5 yourself, neutralising the attack and aiming for the slightly better endgame."
       ],
       "traps": [
-        "If White plays cxd5 exd5 too early, Black gets a free IQP position with active pieces"
+        "If White plays the Exchange Variation TOO early (cxd5 before c4 has been developed), Black can answer …exd5 with confidence — the resulting IQP-shaped middlegame has Black with active pieces on c-file, e-file, and the standard …Bf5 + …Nb4-d3 attacking plan. Easier game than the QGD-proper."
       ],
       "warnings": [
-        "Do not take on c4 early — dxc4 gives White a tempo with e4",
-        "The bishop on c8 can be hard to develop — plan Bd7-Be8-f5 if needed"
+        "NEVER take on c4 with …dxc4 in the QGD unless you have a concrete plan. Surrendering the central tension lets White play e4 with a strong centre and a tempo against your c4-pawn (White recaptures Bxc4 with development).",
+        "The c8-bishop is your problem. If you forget to plan its development, you'll reach move 20 with a piece that can only see two squares. Build every move with one eye on how the light-squared bishop eventually gets out."
       ],
       "variations": [
         {
           "name": "Classical 5.Bf4 Line",
           "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 c5 dxc5 Bxc5 Qc2 Nc6 a3 Qa5 Rd1 Be7",
-          "explanation": "A popular modern approach. Black recaptures on c5 with the bishop and has harmonious development. The position is balanced with chances for both sides."
+          "explanation": "The modern QGD mainline against the active 5.Bf4 system. After 5...O-O 6.e3 c5! (yes, …c5 played early!) 7.dxc5 Bxc5 — Black grabs the central pawn back with the bishop, accepting White's slight space advantage but reaching active piece play. 8.Qc2 Nc6 9.a3 Qa5 (eyeing c3 and creating threats against the pinned knight) 10.Rd1 — and now the funny 10...Be7! reroutes the bishop AWAY from the active c5-square back to e7. Why? Because Be7 prepares …Nd7 + …e5 freeing the position. Looks like waste of tempo; actually a typical QGD manoeuvre — pieces reach their best squares slowly, not directly."
         },
         {
           "name": "Exchange Variation",
           "pgn": "d4 d5 c4 e6 Nc3 Nf6 cxd5 exd5 Bg5 Be7 e3 O-O Bd3 Nbd7 Nf3 Re8 Qc2 c6 O-O Nf8",
-          "explanation": "Against the Exchange, Black plays the Minority Attack defense. The position is solid and Black aims for counterplay against White's queenside pawns."
+          "explanation": "The Exchange Variation transforms the QGD into a Carlsbad structure — Black has a pawn on c6 supporting d5, White has pawns on c5-side and the b-pawn ready to push to b5. After 4.cxd5 exd5 5.Bg5 Be7 6.e3 O-O 7.Bd3 Nbd7 8.Nf3 Re8 9.Qc2 c6 10.O-O, the position settles. The plan is the Minority Attack: White will play Rab1 + b4 + b5 trying to create a weakness on c6 (after bxc6 bxc6 Black has a backward c-pawn). Black's counter: the 10...Nf8! manoeuvre reroutes the knight to g6 or e6 supporting the …f5 break or the …Bf5 light-square trade. Outplay your opponent with patient regrouping."
         }
       ],
       "trapLines": [
         {
           "name": "Premature c5 Break Punishes White",
           "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 c5 dxc5 Bxc5 Qc2 Nc6 a3 Qa5 Rd1 Be7 Be2",
-          "explanation": "After dxc5 Black recaptures and develops. The Qa5 + Rd1 + Be7 sequence sets up the e5 break — past this point the line drifts off mainstream master coverage."
+          "explanation": "The Bf4 system as Levy teaches it. After Black plays …c5 (the central equalising break) and the dust settles with …Bxc5, White's natural development with Qc2 + a3 + Rd1 looks solid — but each move loses a tempo. By move 11 (11.Be2) White still hasn't castled and Black has reached a position with full development, the Qa5 well-placed, and the …Be7 redirect prepping the …e5 break. The lesson: in the QGD, White's slight opening advantage evaporates if Black plays the …c5 break at the right moment."
         },
         {
           "name": "Nb4-c2 Fork Threat",
           "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 c5 dxc5 Bxc5 Be2 Nc6 O-O",
-          "explanation": "Black plays the Nc6-b4 manoeuvre threatening Nc2 forking the rook and king. Once White castles, the threat forces concrete defensive moves and Black gains tempo for development."
+          "explanation": "The classic QGD knight tour — after Black plays …c5 + …Bxc5 + …Nc6, the next move on Black's wishlist is …Nb4 forking the queen on c2 (in some lines) AND threatening …Nc2 forking king and rook on a1. White must address this concretely — usually with a3 forcing the knight back to a6 — but every move spent on the knight chase is a move Black gets to improve a different piece. Practical QGD: harass with the knight, develop while the opponent reacts."
         },
         {
           "name": "Early dxc4 Pawn Grab",
           "pgn": "d4 d5 c4 e6 Nf3 Nf6 Nc3 Be7 Bf4 O-O e3 dxc4 Bxc4",
-          "explanation": "Black grabs with dxc4 and follows up with Nd5 + Nxc3 + c5. White's doubled c-pawns plus Black's piece activity gives Black easy play against the weakened queenside."
+          "explanation": "Sometimes — but only sometimes — …dxc4 makes sense in the QGD. Specifically: when Black can follow up with …Nd5 attacking the c3-knight AND the bishop on f4, gaining the bishop pair in some lines (after …Nxc3 bxc3). The c-pawn capture loses central tension but gains piece activity. The trade-off: White gets a clean Bxc4 development and the central pawn duo dissolves. Play this only if you've calculated the consequences — most amateurs play …dxc4 reflexively and lose the central battle."
         }
       ]
     },
