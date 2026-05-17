@@ -1,0 +1,96 @@
+{
+  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -": {
+    "totalGames": 50000,
+    "moves": [
+      { "san": "e4", "uci": "e2e4", "games": 22000, "white": 9000, "draws": 8500, "black": 4500, "averageRating": 2480 },
+      { "san": "d4", "uci": "d2d4", "games": 19000, "white": 7600, "draws": 7800, "black": 3600, "averageRating": 2510 },
+      { "san": "Nf3", "uci": "g1f3", "games": 6500, "white": 2400, "draws": 2800, "black": 1300, "averageRating": 2500 },
+      { "san": "c4", "uci": "c2c4", "games": 2500, "white": 950, "draws": 1100, "black": 450, "averageRating": 2520 }
+    ]
+  },
+  "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq -": {
+    "totalGames": 9800,
+    "moves": [
+      { "san": "Nf3", "uci": "g1f3", "games": 6300, "white": 2400, "draws": 2700, "black": 1200, "averageRating": 2475 },
+      { "san": "Bc4", "uci": "f1c4", "games": 1800, "white": 720, "draws": 800, "black": 280, "averageRating": 2430 },
+      { "san": "Nc3", "uci": "b1c3", "games": 900, "white": 320, "draws": 410, "black": 170, "averageRating": 2440 }
+    ]
+  },
+  "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -": {
+    "totalGames": 6100,
+    "topGames": [
+      { "id": "abc12345", "white": "Carlsen, M", "black": "Caruana, F", "whiteRating": 2842, "blackRating": 2832, "year": 2018, "result": "1/2-1/2", "event": "World Championship" }
+    ],
+    "moves": [
+      { "san": "Bb5", "uci": "f1b5", "games": 3500, "white": 1300, "draws": 1600, "black": 600, "averageRating": 2495 },
+      { "san": "Bc4", "uci": "f1c4", "games": 1900, "white": 750, "draws": 800, "black": 350, "averageRating": 2440 },
+      { "san": "d4", "uci": "d2d4", "games": 700, "white": 260, "draws": 290, "black": 150, "averageRating": 2420 }
+    ]
+  },
+  "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq -": {
+    "totalGames": 1850,
+    "moves": [
+      { "san": "Bc5", "uci": "f8c5", "games": 1050, "white": 380, "draws": 460, "black": 210, "averageRating": 2410 },
+      { "san": "Nf6", "uci": "g8f6", "games": 600, "white": 230, "draws": 270, "black": 100, "averageRating": 2425 },
+      { "san": "Be7", "uci": "f8e7", "games": 200, "white": 80, "draws": 90, "black": 30, "averageRating": 2400 }
+    ]
+  },
+  "rnbqkb1r/pppppp1p/5np1/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq -": {
+    "totalGames": 4200,
+    "moves": [
+      { "san": "c4", "uci": "c2c4", "games": 2200, "white": 820, "draws": 990, "black": 390, "averageRating": 2500 },
+      { "san": "Nf3", "uci": "g1f3", "games": 1100, "white": 410, "draws": 500, "black": 190, "averageRating": 2475 },
+      { "san": "Nc3", "uci": "b1c3", "games": 750, "white": 290, "draws": 320, "black": 140, "averageRating": 2465 }
+    ]
+  },
+  "rnbqkb1r/ppp1pp1p/3p1np1/8/3PP3/2N5/PPP2PPP/R1BQKBNR w KQkq -": {
+    "totalGames": 2800,
+    "topGames": [
+      { "id": "def67890", "white": "Kasparov, G", "black": "Polgar, J", "whiteRating": 2780, "blackRating": 2670, "year": 1996, "result": "1-0", "event": "Linares" }
+    ],
+    "moves": [
+      { "san": "f4", "uci": "f2f4", "games": 1200, "white": 480, "draws": 540, "black": 180, "averageRating": 2510 },
+      { "san": "Be2", "uci": "f1e2", "games": 800, "white": 290, "draws": 360, "black": 150, "averageRating": 2480 },
+      { "san": "Bd3", "uci": "f1d3", "games": 500, "white": 180, "draws": 230, "black": 90, "averageRating": 2470 },
+      { "san": "Be3", "uci": "c1e3", "games": 300, "white": 110, "draws": 130, "black": 60, "averageRating": 2475 }
+    ]
+  },
+  "rnbqkb1r/pp2pppp/3p1n2/2pP4/4P3/2N5/PPP2PPP/R1BQKBNR b KQkq -": {
+    "totalGames": 1450,
+    "moves": [
+      { "san": "Nbd7", "uci": "b8d7", "games": 600, "white": 220, "draws": 280, "black": 100, "averageRating": 2470 },
+      { "san": "g6", "uci": "g7g6", "games": 450, "white": 170, "draws": 200, "black": 80, "averageRating": 2480 },
+      { "san": "Bg4", "uci": "c8g4", "games": 400, "white": 150, "draws": 180, "black": 70, "averageRating": 2475 }
+    ]
+  },
+  "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq -": {
+    "totalGames": 14000,
+    "moves": [
+      { "san": "Nf3", "uci": "g1f3", "games": 9500, "white": 3650, "draws": 4200, "black": 1650, "averageRating": 2490 },
+      { "san": "Nc3", "uci": "b1c3", "games": 2900, "white": 1100, "draws": 1280, "black": 520, "averageRating": 2470 },
+      { "san": "c3", "uci": "c2c3", "games": 1100, "white": 410, "draws": 510, "black": 180, "averageRating": 2440 }
+    ]
+  },
+  "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq -": {
+    "totalGames": 8700,
+    "topGames": [
+      { "id": "fis72spa", "white": "Fischer, R", "black": "Spassky, B", "whiteRating": 2785, "blackRating": 2660, "year": 1972, "result": "0-1", "event": "World Championship" }
+    ],
+    "moves": [
+      { "san": "Bg5", "uci": "c1g5", "games": 3100, "white": 1180, "draws": 1380, "black": 540, "averageRating": 2540 },
+      { "san": "Be3", "uci": "c1e3", "games": 2400, "white": 920, "draws": 1080, "black": 400, "averageRating": 2530 },
+      { "san": "Be2", "uci": "f1e2", "games": 1800, "white": 690, "draws": 810, "black": 300, "averageRating": 2510 },
+      { "san": "f3", "uci": "f2f3", "games": 1100, "white": 420, "draws": 490, "black": 190, "averageRating": 2525 }
+    ]
+  },
+  "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq -": {
+    "totalGames": 22000,
+    "moves": [
+      { "san": "e5", "uci": "e7e5", "games": 9800, "white": 3700, "draws": 4300, "black": 1800, "averageRating": 2470 },
+      { "san": "c5", "uci": "c7c5", "games": 7100, "white": 2700, "draws": 3100, "black": 1300, "averageRating": 2485 },
+      { "san": "e6", "uci": "e7e6", "games": 2300, "white": 880, "draws": 1020, "black": 400, "averageRating": 2460 },
+      { "san": "c6", "uci": "c7c6", "games": 1500, "white": 560, "draws": 680, "black": 260, "averageRating": 2455 },
+      { "san": "d6", "uci": "d7d6", "games": 700, "white": 270, "draws": 310, "black": 120, "averageRating": 2470 }
+    ]
+  }
+}
