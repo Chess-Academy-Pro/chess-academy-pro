@@ -2819,8 +2819,8 @@
         },
         {
           "name": "3...c5 Immediate",
-          "pgn": "e4 e6 d4 d5 Nd2 c5 Ngf3 cxd4 Nxd4 Nc6 Bb5 Bd7 Nxc6 Bxc6 Bxc6+ bxc6 O-O Nf6 e5 Nd7 Nf3 Be7",
-          "explanation": "When Black plays c5 immediately, the position simplifies. White has a slight edge due to the better pawn structure."
+          "pgn": "e4 e6 d4 d5 Nd2 c5 Ngf3 cxd4 Nxd4 Nc6 Bb5 Bd7 Nxc6 Bxc6 Bxc6+ bxc6 O-O Nf6 e5 Nd7",
+          "explanation": "When Black plays c5 immediately, the position simplifies via trades on c6 and the e5 push. White has a slight edge due to the better pawn structure."
         }
       ],
       "trapLines": [
@@ -2831,8 +2831,8 @@
         },
         {
           "name": "dxe4 Nxe4 Central Domination",
-          "pgn": "e4 e6 d4 d5 Nd2 dxe4 Nxe4 Nd7 Nf3 Ngf6 Nxf6+ Nxf6 Bd3 Be7 O-O O-O Qe2 c5 Rd1 cxd4 Nxd4 a6 Bg5",
-          "explanation": "If Black captures dxe4, White recaptures Nxe4 and dominates the center. The knight on e4 is powerful and after development White has a clear advantage with the open position."
+          "pgn": "e4 e6 d4 d5 Nd2 dxe4 Nxe4 Nd7 Nf3 Ngf6 Nxf6+ Nxf6 Bd3 Be7 O-O O-O Qe2 c5",
+          "explanation": "If Black captures dxe4, White recaptures Nxe4 and dominates the center. After completed development on both sides, White's knight outpost potential plus open piece play gives a clear positional edge."
         }
       ]
     },
