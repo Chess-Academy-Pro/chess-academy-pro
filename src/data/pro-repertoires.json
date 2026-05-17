@@ -1535,7 +1535,7 @@
       "playerId": "hikaru",
       "eco": "C45",
       "name": "Scotch Game (Hikaru)",
-      "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6 e5 Qe7 Qe2 Nd5 c4 Ba6 b3 g6 f4 Bg7 Ba3 Qe6",
+      "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6 e5 Qe7 Qe2 Nd5 c4 Ba6 b3 g6 f4 Bg7",
       "color": "white",
       "style": "Tactical, Dynamic",
       "overview": "Hikaru plays the Scotch Four Knights and the classical Scotch as a surprise weapon. His approach is direct — open the center, develop rapidly, and create tactical complications. He often catches opponents off guard with this choice.",
@@ -1560,20 +1560,15 @@
         },
         {
           "name": "Scotch 4...Bc5 Classical",
-          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Nxc6 Qf6 Qd2 dxc6 Nc3 Ne7 Be2 O-O O-O Qg6 Nd1 Bf5",
-          "explanation": "Against 4...Bc5, Hikaru plays Nxc6 and gets a comfortable position. White's superior pawn structure and development give a lasting edge."
+          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Nxc6 Qf6 Qd2 dxc6 Nc3 Ne7",
+          "explanation": "Against 4...Bc5, Hikaru plays Nxc6 + Qd2 and gets a comfortable position. The Ne7 development is forced — White's superior pawn structure and lead in development give a lasting edge."
         }
       ],
       "trapLines": [
         {
           "name": "Misplaced Queen ...Qh4",
-          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Qh4 Nb5 Qxe4+ Be2 Qe5 N1c3 Bb4 O-O Bxc3 bxc3 Nf6 Nd4 O-O Nf5 Qe6 Ba3",
-          "explanation": "Black plays ...Qh4 grabbing the e4 pawn but the queen becomes a target. White develops with tempo via Nb5 and Nf5 with a crushing initiative."
-        },
-        {
-          "name": "Bc5 Pin After Nxc6",
-          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Nxc6 Qf6 Qd2 dxc6 Nc3 Ne7 Bc4 O-O O-O Ng6 Nd5 Qd8",
-          "explanation": "After Nxc6, White plays Nd5 exploiting the pin on the d-file and Bg5 adds pressure. Black's queen has no good squares and the position collapses."
+          "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Qh4 Nb5 Qxe4+ Be2",
+          "explanation": "Black plays ...Qh4 grabbing the e4 pawn but the queen becomes a target. After Nb5 White's pieces flood the queenside and Black's queen wanders — White develops with tempo for the rest of the opening."
         }
       ]
     },
