@@ -18,15 +18,6 @@
     "petrov-defence::trap::Wrong Move Order Punishment": [
       "WEAK_TRAP"
     ],
-    "qga::trap::Premature d5 Refutation": [
-      "WEAK_TRAP"
-    ],
-    "qga::trap::b5 Counter-attack": [
-      "WEAK_TRAP"
-    ],
-    "qga::trap::Bb7 Long Diagonal Pressure": [
-      "WEAK_TRAP"
-    ],
     "slav-defence::trap::Qb3 Trap Defense": [
       "WEAK_TRAP"
     ],
@@ -596,6 +587,24 @@
       "TOOTHLESS_WARNING"
     ],
     "qgd::warning::Allowing White's Kingside Attack in Exchange Variation": [
+      "TOOTHLESS_WARNING"
+    ],
+    "qga::trap::Premature d5 Refutation": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "qga::trap::b5 Counter-attack": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "qga::trap::Bb7 Long Diagonal Pressure": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "qga::warning::Holding c4 Too Long": [
+      "TOOTHLESS_WARNING"
+    ],
+    "qga::warning::Missing the ...c5 Break": [
       "TOOTHLESS_WARNING"
     ]
   }

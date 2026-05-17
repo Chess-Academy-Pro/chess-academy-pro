@@ -2398,7 +2398,7 @@
     "id": "qga",
     "eco": "D20",
     "name": "Queen's Gambit Accepted",
-    "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 Qe2 b5 Bb3 Bb7 Rd1 Nbd7 Nc3 Be7 e4 O-O Bg5 cxd4",
+    "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 Qe2 b5 Bb3 Bb7 Rd1 Nbd7 Nc3 Be7 e4",
     "color": "black",
     "style": "Active, Counter-attacking",
     "overview": "The Queen's Gambit Accepted is a pragmatic and dynamic choice. You take the pawn on c4 not to hold it, but to develop freely while White recaptures. After ...e6 and ...c5, Black gets an active position with easy piece development. It's been a favorite of players like Anand who love active piece play over static structures.",
@@ -2419,17 +2419,17 @@
     "trapLines": [
       {
         "name": "Premature d5 Refutation",
-        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 d5 exd5 Bxd5 Nxd5 Qxd5 Be6 Qd1 Nc6 O-O Be7 Nc3 O-O a3 Bf6 Rb1 Qe7 Bd2 Rad8",
+        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5",
         "explanation": "If White pushes d5 prematurely in the main line, Black recaptures cleanly with ...exd5 Bxd5 Nxd5 Qxd5 Be6, gaining tempo on the queen. After ...Nc6 and ...Be7, Black has a massive lead in development with the bishop pair and open lines. White's center has evaporated and the queen must retreat to a passive square. This trap punishes White for trying to force the issue before completing development."
       },
       {
         "name": "b5 Counter-attack",
-        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 a4 Nc6 Qe2 cxd4 Rd1 Be7 exd4 O-O Nc3 Nb4 Bg5 Nbd5 Nxd5 Nxd5 Bd2 Bf6 Bc3 b6",
+        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 a4 Nc6 Qe2 cxd4 Rd1 Be7 exd4 O-O Nc3 Nb4 Bg5 Nbd5",
         "explanation": "When White plays a4 to prevent the natural ...b5 expansion, Black switches plans with ...Nc6 and ...Nb4, targeting the d3 and c2 squares. The knight on b4 is a powerful outpost that disrupts White's coordination and forces concessions. After ...Nbd5, Black has a centralized knight and comfortable equality. This line shows why a4 is not always the best response to Black's queenside ambitions."
       },
       {
         "name": "Bb7 Long Diagonal Pressure",
-        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 Qe2 b5 Bb3 Bb7 Rd1 Nbd7 Nc3 Bd6 e4 cxd4 Rxd4 Nc5 e5 Nxb3 axb3 Nd5 Nxd5 Bxd5",
+        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 Qe2 b5 Bb3 Bb7 Rd1 Nbd7 Nc3 Bd6 e4 cxd4 Rxd4",
         "explanation": "Black's bishop on b7 is the star piece in the QGA. After the standard ...a6, ...b5, ...Bb7 setup, the bishop exerts enormous pressure along the long diagonal toward g2. If White pushes e4 aggressively, Black can exploit the weakened light squares. After ...cxd4 and the exchanges, Black's centralized pieces and active bishop pair give excellent counterplay against White's overextended center."
       }
     ],
@@ -2441,44 +2441,44 @@
       },
       {
         "name": "Smyslov Variation 3...a6",
-        "pgn": "d4 d5 c4 dxc4 Nf3 a6 e3 Nf6 Bxc4 e6 O-O c5 Qe2 Nc6 Rd1 b5 Bb3 cxd4 exd4 Be7 Nc3 O-O Bg5 Bb7 d5 exd5 Nxd5 Nxd5 Bxe7 Ncxe7 Bxd5 Bxd5",
+        "pgn": "d4 d5 c4 dxc4 Nf3 a6 e3 Nf6 Bxc4 e6 O-O c5 Qe2 Nc6 Rd1 b5 Bb3 cxd4 exd4 Be7 Nc3",
         "explanation": "Smyslov's idea of 3...a6 immediately prepares ...b5 to hold the c4 pawn or at least gain queenside space. The move is flexible, keeping Black's options open for various pawn structures. After ...Nf6, ...e6, and ...c5, the position transposes into a favorable version of the main line where Black's ...a6 is already in. The critical line involves d5 and piece exchanges leading to a balanced middlegame where Black's bishop pair provides long-term compensation."
       },
       {
         "name": "Sadler Variation ...Bg4",
-        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 Bg4 Bxc4 e6 h3 Bh5 Nc3 Nbd7 g4 Bg6 Nh4 Be4 Nxe4 Nxe4 f3 Nd6 Bb3 c5 Nf5 Nxf5 gxf5 Be7 fxe6 fxe6 Qe2 O-O",
+        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 Bg4 Bxc4 e6 h3 Bh5 Nc3 Nbd7 g4 Bg6 Nh4 Be4 Nxe4 Nxe4",
         "explanation": "The Sadler/Bg4 line is an active approach where Black develops the bishop outside the pawn chain before playing ...e6, avoiding the traditional light-square bishop problem. After h3 Bh5, White plays aggressively with g4, but Black maneuvers the bishop to e4 via g6. The resulting positions are sharp and double-edged, with White's kingside expansion creating both attacking chances and structural weaknesses that Black can exploit in the middlegame."
       },
       {
         "name": "Central Variation 3.e4",
-        "pgn": "d4 d5 c4 dxc4 e4 e5 Nf3 exd4 Bxc4 Nc6 O-O Nf6 Ng5 d3 Nxf7 Qe7 Nxh8 Bg4 Qd2 O-O-O Nc3",
+        "pgn": "d4 d5 c4 dxc4 e4 e5 Nf3 exd4 Bxc4 Nc6 O-O Nf6 Ng5",
         "explanation": "Against the aggressive 3.e4, Black strikes back immediately with ...e5, creating a sharp tactical battle. The critical line features White's knight raid with Ng5-Nxf7, winning the exchange but giving Black a massive lead in development with ...Bg4 and ...O-O-O. Black's pieces are perfectly coordinated while White must untangle the trapped knight on h8. The resulting positions are complex and offer Black excellent practical chances despite the material deficit."
       },
       {
         "name": "Alekhine Variation 4.Nc3",
-        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 Nc3 a6 e4 b5 e5 Nd5 a4 Nxc3 bxc3 Qd5 g3 Bb7 Bg2 Qd8 O-O e6 Qe2 Be7 Rd1 Nd7 d5 exd5 Nd4 Nc5 Nxb5 axb5",
+        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 Nc3 a6 e4 b5 e5 Nd5 a4 Nxc3 bxc3 Qd5 g3 Bb7 Bg2",
         "explanation": "White plays Nc3 before e3, aiming for the aggressive e4 push. Black counters with ...a6 and ...b5, holding the c4 pawn and building queenside play. After e5 Nd5, the knight is centralized and White's doubled c-pawns are a permanent weakness. The resulting positions are dynamic with chances for both sides, but Black's extra pawn and solid structure provide long-term security if the middlegame complications are navigated correctly."
       },
       {
         "name": "Modern Tabiya with Rd1",
-        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 Bb3 Nc6 Nc3 cxd4 exd4 Be7 Re1 O-O Bg5 b5 d5 Na5 dxe6 Nxb3 exf7+ Kh8 Qxb3",
+        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 Bb3 Nc6 Nc3 cxd4 exd4 Be7 Re1 O-O Bg5 b5 d5",
         "explanation": "The modern tabiya arises after White plays Bb3 and Nc3 with Re1, building up central pressure before committing to a plan. Black develops with ...Nc6, ...cxd4, and ...Be7, preparing to castle and activate pieces. The critical d5 push leads to sharp tactical play where the exf7+ intermediate move creates complications. Black emerges with the bishop pair and active pieces, compensating for the slightly disrupted king position."
       },
       {
         "name": "Janowski Variation ...Qd5",
-        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 dxc5 Bxc5 Qe2 Nc6 Nc3 b5 Bb3 Bb7 Rd1 Qe7 e4 O-O Bg5 Nd4 Nxd4 Bxd4 e5 Nd5 Nxd5 Bxd5",
+        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6 dxc5 Bxc5 Qe2 Nc6 Nc3 b5 Bb3 Bb7 Rd1 Qe7 e4",
         "explanation": "The Janowski variation features an early ...Qd5 centralizing the queen or transposing into an IQP structure after dxc5. Black willingly accepts an isolated queen pawn position but gets active piece play in return. The piece on c5 targets f2, the knight can jump to d4 or e5, and the queen can swing to the kingside. This line is ideal for players who prefer dynamic piece play over static structural advantages, and the IQP provides a natural focal point for middlegame planning."
       }
     ],
     "warningLines": [
       {
         "name": "Holding c4 Too Long",
-        "pgn": "d4 d5 c4 dxc4 Nf3 b5 a4 c6 axb5 cxb5 b3 cxb3 Qxb3 a6 Nc3 Nf6 e4 e6 Be2 Bb4 Bd2 O-O O-O Bxc3 Bxc3 Qc7 d5 exd5 exd5 Bb7 Rfe1 Nxd5",
+        "pgn": "d4 d5 c4 dxc4 Nf3 b5 a4 c6",
         "explanation": "Trying to hold the extra c4 pawn with an early ...b5 leads to a severely weakened queenside. White opens lines with a4 and b3, getting excellent piece activity against Black's exposed pawns on a6 and b5. The fundamental principle of the QGA is to give back the pawn for free development, not to cling to material. When Black plays ...b5 too early without completing development, the queenside becomes full of holes that White exploits with active pieces."
       },
       {
         "name": "Missing the ...c5 Break",
-        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 Be7 O-O O-O Nc3 a6 Qe2 b6 Rd1 Bb7 e4 Nbd7 e5 Nd5 Nxd5 exd5 Bd3 c6 Bf4 Re8 Re1 Nf8",
+        "pgn": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 Be7 O-O O-O Nc3",
         "explanation": "Without the timely ...c5 break, Black gets a passive position where White dominates the center with e4-e5. The bishop on b7 bites on granite, the knight on d7 is cramped, and White's pieces pour into the center. The ...c5 break is the lifeblood of Black's position in the QGA. It challenges White's center, opens lines for the bishops, and gives the queen active squares. Delaying it allows White to build an overwhelming space advantage."
       },
       {
