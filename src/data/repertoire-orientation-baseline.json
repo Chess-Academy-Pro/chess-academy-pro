@@ -18,18 +18,6 @@
     "petrov-defence::trap::Wrong Move Order Punishment": [
       "WEAK_TRAP"
     ],
-    "kings-indian-defence::trap::Kingside Pawn Storm": [
-      "WEAK_TRAP"
-    ],
-    "kings-indian-defence::trap::Central Exchange Tactic": [
-      "WEAK_TRAP"
-    ],
-    "kings-indian-defence::trap::Bayonet Attack Counter-Trap": [
-      "WEAK_TRAP"
-    ],
-    "kings-indian-defence::trap::Classical f4 Breakthrough": [
-      "WEAK_TRAP"
-    ],
     "nimzo-indian::trap::Double Pawns Endgame Trick": [
       "WEAK_TRAP"
     ],
@@ -613,6 +601,28 @@
       "STUDENT_NOT_PUNISHER"
     ],
     "semi-slav::warning::Botvinnik Without Preparation": [
+      "TOOTHLESS_WARNING"
+    ],
+    "kings-indian-defence::trap::Kingside Pawn Storm": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-indian-defence::trap::Central Exchange Tactic": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-indian-defence::trap::Bayonet Attack Counter-Trap": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-indian-defence::trap::Classical f4 Breakthrough": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "kings-indian-defence::warning::Ignoring the Queenside Race": [
+      "TOOTHLESS_WARNING"
+    ],
+    "kings-indian-defence::warning::Premature ...f5 Without Nd7": [
       "TOOTHLESS_WARNING"
     ]
   }
