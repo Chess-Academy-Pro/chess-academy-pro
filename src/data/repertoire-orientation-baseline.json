@@ -18,18 +18,6 @@
     "petrov-defence::trap::Wrong Move Order Punishment": [
       "WEAK_TRAP"
     ],
-    "grunfeld-defence::trap::Exchange Variation c3 Pressure": [
-      "WEAK_TRAP"
-    ],
-    "grunfeld-defence::trap::Russian System Nc6 Pressure": [
-      "WEAK_TRAP"
-    ],
-    "grunfeld-defence::trap::Exchange Qa5 Infiltration": [
-      "WEAK_TRAP"
-    ],
-    "grunfeld-defence::trap::d5 Passed Pawn Blockade Break": [
-      "WEAK_TRAP"
-    ],
     "dutch-defence::trap::Leningrad Kingside Attack": [
       "WEAK_TRAP"
     ],
@@ -628,6 +616,23 @@
       "TOOTHLESS_WARNING"
     ],
     "nimzo-indian::warning::Premature ...c5 Without ...d5": [
+      "TOOTHLESS_WARNING"
+    ],
+    "grunfeld-defence::trap::Russian System Nc6 Pressure": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "grunfeld-defence::trap::Exchange Qa5 Infiltration": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "grunfeld-defence::warning::Never Trade the Dark-Squared Bishop": [
+      "TOOTHLESS_WARNING"
+    ],
+    "grunfeld-defence::warning::Delaying ...c5 Lets Center Consolidate": [
+      "TOOTHLESS_WARNING"
+    ],
+    "grunfeld-defence::warning::Passive Play in the Exchange": [
       "TOOTHLESS_WARNING"
     ]
   }

@@ -2921,7 +2921,7 @@
     "id": "grunfeld-defence",
     "eco": "D80",
     "name": "Grünfeld Defence",
-    "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 O-O Rc1 cxd4 cxd4 Nc6 Be2 Bg4 O-O Rfd8",
+    "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 O-O Rc1 cxd4 cxd4 Nc6",
     "color": "black",
     "style": "Dynamic, Counter-attacking",
     "overview": "The Grünfeld is the ultimate counterattacking defense. You actually encourage White to build a massive pawn center with e4 and d4, then systematically destroy it with ...c5, ...Nc6, and the pressure from the Bg7 on the long diagonal. It's been the primary weapon of Kasparov, Grischuk, and MVL. The positions are incredibly dynamic — White has the center, but Black has the initiative.",
@@ -2947,12 +2947,12 @@
       },
       {
         "name": "Russian System Nc6 Pressure",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 Nf3 Bg7 Qb3 dxc4 Qxc4 O-O e4 Nc6 Be2 e5 d5 Nd4 Nxd4 exd4 Nb5 c5 dxc6 bxc6 Nc3 Be6 Qa4 d3 Bf3 Rb8 O-O c5",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 Nf3 Bg7 Qb3 dxc4 Qxc4 O-O e4 Nc6 Be2 e5 d5 Nd4 Nxd4 exd4",
         "explanation": "In the Russian System with Qb3, Black plays ...Nc6 and ...e5, striking at the center. After ...Nd4, Black gets powerful piece play and the d4 pawn becomes a strong passed pawn."
       },
       {
         "name": "Exchange Qa5 Infiltration",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 O-O Rc1 Rd8 d5 e6 Be2 exd5 exd5 b5 O-O Nd7",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 O-O Rc1 Rd8 d5 e6 Be2 exd5 exd5 b5",
         "explanation": "In the Exchange Grünfeld, Black targets the vulnerable c3 pawn with ...Qa5 and ...c5, forcing White into difficult defensive choices. After simplifying the center with ...e6 and ...exd5, Black develops the knight to d7 heading for e5 or b6 with active piece play. The Bg7 dominates the long diagonal and Black's pieces coordinate to blockade and eventually win the isolated d5 pawn. White's doubled c-pawns remain a permanent structural weakness."
       },
       {
@@ -2964,73 +2964,73 @@
     "variations": [
       {
         "name": "Exchange Variation: Main Line",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 O-O Rc1 cxd4 cxd4 Qxd2+ Nxd2 Rd8 d5 e6 Bc4 exd5 Bxd5 Nc6 Nb3 Na5 Nxa5 Rxd5 Nc4 Bf5",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 O-O Rc1 cxd4 cxd4 Qxd2+ Nxd2 Rd8 d5 e6 Bc4 exd5 Bxd5 Nc6",
         "explanation": "The Exchange Variation is the Grünfeld's main battleground. White gets a powerful e4/d4 pawn center while Black attacks it with ...c5, ...Nc6, and the Bg7 pressure. The critical moment comes after Qa5 and Qd2 — Black can trade queens and enter an endgame where the structural weaknesses become targets, or keep queens on for more dynamic play. The d5 advance is White's key resource, but Black's piece activity and Bg7's long diagonal pressure provide lasting compensation.",
         "frequency": "very common",
         "deviationMove": 5
       },
       {
         "name": "Exchange: Be3 Qa5 Qd2 with Rc1",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 Nc6 Rc1 cxd4 cxd4 Qa3 d5 Ne5 Nxe5 Bxe5 Bc4 Bd7 O-O Rc8 Bb3 O-O Rfd1 Bg7 d6 e6 Bg5",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 Nc6 Rc1 cxd4 cxd4",
         "explanation": "The Rc1 line with Qa3 is one of the sharpest Exchange Grünfeld variations. Black's queen infiltrates to a3 but becomes offside. White pushes d5-d6-d7 creating a monster passed pawn. The fight centers on whether Black can blockade the d-pawn and coordinate a queenside attack while White's pawn advances. Modern theory shows Black needs to play ...Nc6xe5 at the right moment to challenge the center.",
         "frequency": "common",
         "deviationMove": 10
       },
       {
         "name": "Russian System (Qb3)",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 Nf3 Bg7 Qb3 dxc4 Qxc4 O-O e4 Nc6 Be2 Nd7 Be3 Nb6 Qd3 f5 exf5 gxf5 O-O e5 dxe5 Nxe5 Nxe5 Bxe5 Rad1 Qf6 f4",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 Nf3 Bg7 Qb3 dxc4 Qxc4 O-O e4 Nc6 Be2 Nd7 Be3 Nb6 Qd3 f5",
         "explanation": "The Russian System with Qb3 targets b7 and d5 simultaneously. After ...dxc4 Qxc4, the queen is actively placed but White must develop quickly. Black's key plan is ...Nc6 and ...f5, striking at the e4 pawn. The ...f5 break is the nuclear option — it opens the f-file and activates all of Black's pieces. White must decide between pushing e5 or accepting the structural change with exf5.",
         "frequency": "common",
         "deviationMove": 5
       },
       {
         "name": "Fianchetto Variation",
-        "pgn": "d4 Nf6 c4 g6 Nf3 Bg7 g3 d5 Bg2 dxc4 Na3 c3 bxc3 c5 O-O O-O Rb1 cxd4 cxd4 Nc6 d5 Na5 Nd4 Bd7",
+        "pgn": "d4 Nf6 c4 g6 Nf3 Bg7 g3 d5 Bg2 dxc4 Na3 c3 bxc3 c5 O-O O-O Rb1",
         "explanation": "The Fianchetto avoids the Exchange Variation's sharp theoretical battles. After ...dxc4, Black temporarily grabs a pawn with ...c3, disrupting White's queenside. White recovers with Na3-b1-c3 but Black has gained time for development. The positions are quieter but strategically rich — the battle revolves around White's d5 advance versus Black's pressure on the c3/d4 pawns. The Bg7 controls the long diagonal and supports Black's counterplay.",
         "frequency": "common",
         "deviationMove": 4
       },
       {
         "name": "Bc4 Classical",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Bc4 c5 Ne2 O-O O-O Nc6 Be3 Bg4 f3 Na5 Bxf7+ Rxf7 fxg4 Rxf1+ Kxf1 cxd4 cxd4 Qd6 Qd3 Rd8 Rd1 Nc4",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Bc4 c5 Ne2 O-O O-O Nc6 Be3 Bg4 f3 Na5 Bxf7+ Rxf7 fxg4 Rxf1+ Kxf1 cxd4 cxd4 Qd6",
         "explanation": "The Bc4 line targets f7 directly and is White's most aggressive Exchange option. After ...c5 and ...Nc6, Black challenges the center while White develops with Ne2 and O-O. The key tactical motif is Black's ...Bg4, pinning the f3 pawn and creating threats. If White plays Bxf7+, a complex tactical sequence ensues where Black gets excellent compensation with the active bishop pair and queenside pressure.",
         "frequency": "common",
         "deviationMove": 7
       },
       {
         "name": "Neo-Grünfeld (g3 without Nc3)",
-        "pgn": "d4 Nf6 c4 g6 g3 d5 Bg2 Bg7 Nf3 O-O O-O dxc4 Na3 c3 bxc3 c5 dxc5 Qa5 c4 Qxc5 Bb2 Nc6 Qd2 Qa5 Nc2 Bf5 Rfc1 Rac8 Ne3 Be6 Nd5 Bxd5 cxd5 Nd4",
+        "pgn": "d4 Nf6 c4 g6 g3 d5 Bg2 Bg7 Nf3 O-O O-O dxc4 Na3 c3 bxc3 c5 dxc5 Qa5",
         "explanation": "The Neo-Grünfeld avoids the Exchange Variation entirely. After ...dxc4, Black grabs a pawn and White must work to recover it via Na3. The positions are unique to this move order — less forcing than the Exchange but still very rich. Black's queenside pressure with ...Qa5 and ...Nc6 combined with the Bg7 on the long diagonal gives excellent counterplay. White's compensation comes from the bishop pair and central control.",
         "frequency": "uncommon",
         "deviationMove": 4
       },
       {
         "name": "Exchange: Nf3 c5 Rb1 (Modern)",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Rb1 O-O Be2 cxd4 cxd4 Qa5+ Bd2 Qxa2 O-O Bg4 Rxb7 Bxf3 Bxf3 Nc6 d5 Nd4 Bg4 e5",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Rb1 O-O Be2 cxd4 cxd4 Qa5+ Bd2 Qxa2 O-O Bg4 Rxb7 Bxf3 Bxf3",
         "explanation": "The modern Rb1 line allows Black to capture the a2 pawn, creating an imbalanced position. White's compensation comes from the active rook on b7, the powerful d5 pawn, and pressure along the open files. Black's queen on a2 is temporarily offside but the extra pawn matters in the long run. This has become a major theoretical battleground with computer preparation playing a key role.",
         "frequency": "common",
         "deviationMove": 9
       },
       {
         "name": "Taimanov Variation (f3)",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Bc4 c5 Ne2 Nc6 Be3 O-O O-O cxd4 cxd4 Bd7 Rc1 Rc8 f3 Na5 Bd3 Be6 d5",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Bc4 c5 Ne2 Nc6 Be3 O-O O-O cxd4 cxd4 Bd7 Rc1 Rc8",
         "explanation": "The Taimanov with f3 builds a strong pawn center and supports e4 permanently. The bishop goes to c4 targeting f7, and White castles with a powerful setup. Black must counter with ...Na5 attacking the Bc4, and the ...Be6-a2 maneuver creates tactical complications. The f3 pawn shore up the center but weakens the kingside slightly, giving Black long-term counterplay targets."
       }
     ],
     "warningLines": [
       {
         "name": "Never Trade the Dark-Squared Bishop",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Bc4 c5 Ne2 O-O O-O Nc6 Be3 cxd4 cxd4 Na5 Bd3 Be6 d5 Bd7 Nd4 e6 dxe6 fxe6 f4 Nc4 Bc1 Bc6 f5 Nd6 fxg6 hxg6 Qg4",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Bc4 c5 Ne2 O-O O-O Nc6 Be3 cxd4 cxd4 Na5 Bd3 Be6 d5",
         "explanation": "The Bg7 is the Grünfeld's crown jewel — it controls the a1-h8 diagonal and keeps permanent pressure on White's d4 pawn. Trading it for a minor piece transforms the position entirely in White's favor: the center becomes unassailable, the long diagonal goes dark, and White can advance freely. Never exchange this bishop unless you get overwhelming compensation elsewhere. If White achieves f4-f5 without the Bg7 pressuring d4, the position is strategically lost."
       },
       {
         "name": "Delaying ...c5 Lets Center Consolidate",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 O-O Be2 b6 O-O Bb7 Bf4 e6 Qd2 Nd7 Rfd1 c5 d5 exd5 exd5 Nf6 Bc4 Re8 d6",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 O-O Be2 b6 O-O Bb7",
         "explanation": "The Grünfeld demands immediate ...c5 to challenge the center. Playing ...b6 or ...Nc6 first gives White time to consolidate with Be2, O-O, Bf4 building an iron center. Once d5 is played with the center fully supported, Black's Bg7 becomes a spectator biting on the d4 pawn chain. The d6 advance creates a monster passed pawn that Black cannot stop. Challenge White's center NOW, not later."
       },
       {
         "name": "Passive Play in the Exchange",
-        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 O-O Rc1 Rd8 d5 e6 c4 exd5 exd5 Na6 Be2 Nc7 O-O b6 Rfd1 Ba6 Nd4 Rac8 Nb5 Nxb5 cxb5 Bb7 d6",
+        "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be3 Qa5 Qd2 O-O Rc1 Rd8 d5 e6 c4",
         "explanation": "If Black plays passively in the Exchange Variation — delaying ...cxd4 or failing to generate queenside counterplay — White's d-pawn advances to d5-d6, becoming a decisive passed pawn. The c4 support pawn creates an iron chain, and Black's pieces get pushed back. Always maintain active play: the ...cxd4 exchange followed by ...Qa5 and ...Nc6 keeps the pressure on White's center."
       }
     ]
