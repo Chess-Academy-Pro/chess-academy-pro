@@ -2,6 +2,8 @@ import { Chess } from 'chess.js';
 import { stockfishEngine } from './stockfishEngine';
 import { getNextOpeningBookMove } from './openingDetectionService';
 import { findHangingPieces } from './tacticClassifier';
+import { lookupMasterPlay } from './masterPlayLookup';
+import { logAppAudit } from './appAuditor';
 import type { StockfishAnalysis, CoachDifficulty } from '../types';
 
 const COACH_MOVE_TIMEOUT_MS = 5000;
@@ -111,12 +113,100 @@ export function tryOpeningBookMove(
   }
 }
 
+/** UCI encoder used by the master-play path. Converts a SAN move into
+ *  the UCI string the rest of the play loop expects. Returns null if
+ *  chess.js refuses the move (e.g. ambiguous / illegal for this FEN). */
+function sanToUci(fen: string, san: string): string | null {
+  try {
+    const chess = new Chess(fen);
+    const move = chess.move(san);
+    return `${move.from}${move.to}${move.promotion ?? ''}`;
+  } catch {
+    return null;
+  }
+}
+
+/** Pick a master move from a `MasterPlayResult`, weighted by total games
+ *  played. Returns the chosen MasterPlayMove, or null when the result
+ *  is empty / too sparse. */
+function pickMasterMove(
+  moves: ReadonlyArray<{ san: string; games: number }>,
+  rng: () => number = Math.random,
+): { san: string; games: number } | null {
+  // Filter to popular replies: cap at top 5 and require ≥1 game.
+  const candidates = moves.filter((m) => m.games > 0).slice(0, 5);
+  if (candidates.length === 0) return null;
+  const total = candidates.reduce((sum, m) => sum + m.games, 0);
+  if (total === 0) return null;
+  const r = rng() * total;
+  let acc = 0;
+  for (const m of candidates) {
+    acc += m.games;
+    if (r < acc) return m;
+  }
+  return candidates[candidates.length - 1];
+}
+
 export async function getAdaptiveMove(
   fen: string,
   targetElo: number,
-): Promise<{ move: string; analysis: StockfishAnalysis }> {
+): Promise<{ move: string; analysis: StockfishAnalysis; source: 'masters' | 'stockfish-best' | 'stockfish-variety' | 'stockfish-fallback' | 'random' }> {
   const depth = getDepthForElo(targetElo);
   const skillLevel = getSkillLevelForElo(targetElo);
+
+  // Layer 0 — master play. Consult the canonical masters DB (local
+  // first, then live Lichess) BEFORE Stockfish. When this position has
+  // master games, the opponent plays a weighted-random move from the
+  // top-5 replies — keeps the line natural / theoretically sound and
+  // avoids Stockfish-low-skill blunders that send the user wandering
+  // off into nonsense positions. Falls through to Stockfish on cache
+  // miss / network failure.
+  //
+  // Audit emissions on every branch so the play surface is debuggable
+  // from the audit stream alone (no console-log archaeology).
+  try {
+    const masters = await lookupMasterPlay(fen, {
+      triggeredBy: 'manual',
+      surface: 'coachGameEngine.getAdaptiveMove',
+    });
+    if (masters.source !== 'none' && masters.moves.length > 0) {
+      const picked = pickMasterMove(masters.moves);
+      if (picked) {
+        const uci = sanToUci(fen, picked.san);
+        if (uci) {
+          void logAppAudit({
+            kind: 'coach-opponent-move-source',
+            category: 'subsystem',
+            source: 'coachGameEngine.getAdaptiveMove',
+            summary: `source=${masters.source} san=${picked.san} games=${picked.games}/${masters.totalGames} elo=${targetElo}`,
+            fen,
+          });
+          return {
+            move: uci,
+            analysis: { ...FALLBACK_ANALYSIS, bestMove: uci },
+            source: 'masters',
+          };
+        }
+      }
+    }
+    // No masters data OR pickMasterMove rejected. Fall through to Stockfish.
+    void logAppAudit({
+      kind: 'coach-opponent-masters-miss',
+      category: 'subsystem',
+      source: 'coachGameEngine.getAdaptiveMove',
+      summary: `source=${masters.source} totalGames=${masters.totalGames} elo=${targetElo} — falling to stockfish`,
+      fen,
+    });
+  } catch (err) {
+    // Don't let masters-lookup errors block play. Log and continue.
+    void logAppAudit({
+      kind: 'coach-opponent-masters-error',
+      category: 'subsystem',
+      source: 'coachGameEngine.getAdaptiveMove',
+      summary: `error=${(err as Error)?.message ?? err} elo=${targetElo}`,
+      fen,
+    });
+  }
 
   let analysis: StockfishAnalysis;
   try {
@@ -125,7 +215,13 @@ export async function getAdaptiveMove(
       makeTimeoutPromise(COACH_MOVE_TIMEOUT_MS),
     ]);
   } catch (error) {
-    console.warn('[CoachEngine] Full analysis failed/timed out, trying quick bestmove:', error);
+    void logAppAudit({
+      kind: 'coach-opponent-stockfish-error',
+      category: 'subsystem',
+      source: 'coachGameEngine.getAdaptiveMove',
+      summary: `analyzePosition failed/timeout — ${(error as Error)?.message ?? error}`,
+      fen,
+    });
     stockfishEngine.stop();
 
     // Second attempt: use movetime-based best move (always returns within budget)
@@ -135,17 +231,44 @@ export async function getAdaptiveMove(
         makeTimeoutPromise(4000),
       ]);
       if (bestMove && bestMove !== '(none)') {
-        console.log('[CoachEngine] Fallback getBestMove succeeded:', bestMove);
-        return { move: bestMove, analysis: { ...FALLBACK_ANALYSIS, bestMove } };
+        void logAppAudit({
+          kind: 'coach-opponent-move-source',
+          category: 'subsystem',
+          source: 'coachGameEngine.getAdaptiveMove',
+          summary: `source=stockfish-fallback move=${bestMove} elo=${targetElo}`,
+          fen,
+        });
+        return {
+          move: bestMove,
+          analysis: { ...FALLBACK_ANALYSIS, bestMove },
+          source: 'stockfish-fallback',
+        };
       }
-    } catch {
-      console.warn('[CoachEngine] getBestMove also failed, using random legal move');
+    } catch (innerErr) {
+      void logAppAudit({
+        kind: 'coach-opponent-stockfish-error',
+        category: 'subsystem',
+        source: 'coachGameEngine.getAdaptiveMove',
+        summary: `getBestMove fallback also failed — ${(innerErr as Error)?.message ?? innerErr}`,
+        fen,
+      });
     }
 
     // Last resort: random legal move (should be extremely rare)
     const fallbackMove = getRandomLegalMove(fen);
     if (!fallbackMove) throw new Error('No legal moves available');
-    return { move: fallbackMove, analysis: { ...FALLBACK_ANALYSIS, bestMove: fallbackMove } };
+    void logAppAudit({
+      kind: 'coach-opponent-move-source',
+      category: 'subsystem',
+      source: 'coachGameEngine.getAdaptiveMove',
+      summary: `source=random move=${fallbackMove} elo=${targetElo}`,
+      fen,
+    });
+    return {
+      move: fallbackMove,
+      analysis: { ...FALLBACK_ANALYSIS, bestMove: fallbackMove },
+      source: 'random',
+    };
   }
 
   const varietyChance = getVarietyChance(targetElo);
@@ -160,14 +283,26 @@ export async function getAdaptiveMove(
         topLines[0].evaluation - secondLine.evaluation,
       );
       if (evalDiff < 80) {
-        console.log('[CoachEngine] Picked 2nd-best move for variety:', secondLine.moves[0]);
-        return { move: secondLine.moves[0], analysis };
+        void logAppAudit({
+          kind: 'coach-opponent-move-source',
+          category: 'subsystem',
+          source: 'coachGameEngine.getAdaptiveMove',
+          summary: `source=stockfish-variety move=${secondLine.moves[0]} evalDiff=${evalDiff}cp elo=${targetElo}`,
+          fen,
+        });
+        return { move: secondLine.moves[0], analysis, source: 'stockfish-variety' };
       }
     }
   }
 
-  console.log('[CoachEngine] Playing best move:', analysis.bestMove, 'eval:', analysis.evaluation, 'skill:', skillLevel);
-  return { move: analysis.bestMove, analysis };
+  void logAppAudit({
+    kind: 'coach-opponent-move-source',
+    category: 'subsystem',
+    source: 'coachGameEngine.getAdaptiveMove',
+    summary: `source=stockfish-best move=${analysis.bestMove} eval=${analysis.evaluation}cp skill=${skillLevel} elo=${targetElo}`,
+    fen,
+  });
+  return { move: analysis.bestMove, analysis, source: 'stockfish-best' };
 }
 
 /** ELO offset per difficulty level relative to the player rating. */

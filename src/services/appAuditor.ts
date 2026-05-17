@@ -538,7 +538,36 @@ export type AuditKind =
   // `master-play-enforcement-fallback`: 2-retry budget exhausted; the
   //   coach served the stock "I can't verify which moves are sound"
   //   response. Last-line G3 protection.
-  | 'master-play-enforcement-fallback';
+  | 'master-play-enforcement-fallback'
+  // Opening-play opponent move source trail. Fired by
+  //   `coachGameEngine.getAdaptiveMove` for every move the opponent
+  //   makes once past the canonical repertoire line. The `source`
+  //   field tells you which layer answered: 'masters' (local DB or
+  //   live Lichess masters), 'stockfish-best' / 'stockfish-variety'
+  //   / 'stockfish-fallback', or 'random'. Diagnostic for "opponent
+  //   doesn't use the DB" complaints.
+  | 'coach-opponent-move-source'
+  // Both masters miss + masters lookup error variants — separate so
+  //   you can tell "no data for this position" from "network /
+  //   parser failure".
+  | 'coach-opponent-masters-miss'
+  | 'coach-opponent-masters-error'
+  // Stockfish-side failure during opponent-move selection. Fires
+  //   when analyzePosition rejects or times out and we have to fall
+  //   through to getBestMove / random.
+  | 'coach-opponent-stockfish-error'
+  // Higher-level opponent-move audits emitted by the OpeningPlayMode
+  //   dispatch site (one per move). Includes the source field from
+  //   getAdaptiveMove plus the chosen UCI + opening context. Used by
+  //   the play-mode regression audits.
+  | 'opening-play-opponent-move'
+  | 'opening-play-opponent-error'
+  // Eval-bar pipe diagnostics for /openings/<id>/play. Distinguish
+  //   normal updates from PrefetchDropped (expected during opponent
+  //   brain calls) and hard errors.
+  | 'opening-play-eval-updated'
+  | 'opening-play-eval-prefetch-dropped'
+  | 'opening-play-eval-error';
 
 export interface AuditEntry {
   timestamp: number;

@@ -21,6 +21,8 @@ import { stockfishEngine } from '../../services/stockfishEngine';
 import { fetchCloudEval } from '../../services/lichessExplorerService';
 import { voiceService } from '../../services/voiceService';
 import { usePieceSound } from '../../hooks/usePieceSound';
+import { useMasterPlayWatcher } from '../../hooks/useMasterPlayWatcher';
+import { logAppAudit } from '../../services/appAuditor';
 import type { OpeningRecord, OpeningVariation, OpeningPlayResult, CoachDifficulty, AnalysisLine, LichessCloudEval } from '../../types';
 import type { MoveResult } from '../../hooks/useChessGame';
 import type { MoveQuality } from '../Board/ChessBoard';
@@ -172,24 +174,70 @@ export function OpeningPlayMode({ opening, customLine, startFen, onExit }: Openi
   });
 
   // ─── Stockfish eval on position change ──────────────────────────────────
+  // Runs at priority='prefetch' so it doesn't contend with the
+  // opponent-move analyzePosition call (which runs at default 'brain'
+  // priority). Without this split the eval-bar pipe lost every race
+  // against getAdaptiveMove and the bar froze at its initial value.
+  // Each branch (success / prefetch-dropped / hard fail) emits an audit
+  // event so a stuck eval bar is debuggable from the audit stream.
   useEffect(() => {
     let cancelled = false;
     void (async () => {
       try {
-        const analysis = await stockfishEngine.analyzePosition(game.fen, 12);
+        const analysis = await stockfishEngine.analyzePosition(
+          game.fen,
+          12,
+          undefined,
+          'prefetch',
+        );
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (!cancelled) {
           setLatestEval(analysis.evaluation);
           setLatestIsMate(analysis.isMate);
           setLatestMateIn(analysis.mateIn);
           setLatestTopLines(analysis.topLines);
+          void logAppAudit({
+            kind: 'opening-play-eval-updated',
+            category: 'subsystem',
+            source: 'OpeningPlayMode.evalEffect',
+            summary: `eval=${analysis.evaluation}cp isMate=${analysis.isMate} mateIn=${analysis.mateIn ?? '-'} depth=${analysis.depth}`,
+            fen: game.fen,
+          });
         }
-      } catch {
-        // Stockfish not ready yet
+      } catch (err) {
+        const msg = (err as Error)?.message ?? String(err);
+        if (/PrefetchDropped|dropped/i.test(msg)) {
+          // Expected when the opponent-move analyzePosition is in flight;
+          // a subsequent FEN change will re-fire this effect.
+          void logAppAudit({
+            kind: 'opening-play-eval-prefetch-dropped',
+            category: 'subsystem',
+            source: 'OpeningPlayMode.evalEffect',
+            summary: `dropped by in-flight brain eval — will retry on next FEN change`,
+            fen: game.fen,
+          });
+          return;
+        }
+        void logAppAudit({
+          kind: 'opening-play-eval-error',
+          category: 'subsystem',
+          source: 'OpeningPlayMode.evalEffect',
+          summary: `analyzePosition failed — ${msg}`,
+          fen: game.fen,
+        });
       }
     })();
     return () => { cancelled = true; };
   }, [game.fen]);
+
+  // ─── Coach grounding (Layer A) — masterPlayWatcher prefetch ─────────────
+  // Warms the local masters cache + look-ahead positions on every FEN
+  // change so the coach grounding pipeline can answer "what do masters
+  // play here?" without waiting on a live Lichess call. Same hook the
+  // rest of the coach surfaces use — keeps `/openings/<id>/play` in
+  // sync with `/coach/play` so opponent move source decisions stay
+  // consistent across the app.
+  useMasterPlayWatcher(`/openings/${opening.id}/play`, game.fen);
 
   // ─── Lichess cloud eval on position change ────────────────────────────
   useEffect(() => {
@@ -354,16 +402,27 @@ export function OpeningPlayMode({ opening, customLine, startFen, onExit }: Openi
           setComputerLastMove({ from: expected.from, to: expected.to });
           setMoveHistory((prev) => [...prev, { fen: moveResult.fen, from: expected.from, to: expected.to }]);
           moveCountRef.current += 1;
-          
+          void logAppAudit({
+            kind: 'opening-play-opponent-move',
+            category: 'subsystem',
+            source: 'OpeningPlayMode.makeComputerMove',
+            summary: `source=repertoire move=${expected.from}${expected.to} idx=${currentMoveIdx}/${openingMoves.length} openingId=${opening.id}`,
+            fen: moveResult.fen,
+          });
           if (moveCountRef.current >= openingPhaseLength) {
             setPlayPhase('middlegame');
           }
         }
       } else {
-        // Stockfish opponent
+        // Post-opening / post-deviation opponent. getAdaptiveMove now
+        // consults the masters DB (local → live Lichess) before falling
+        // through to Stockfish — its internal `source` field tells us
+        // which layer answered. Surface it via an opponent-move audit
+        // so the play surface is debuggable end-to-end.
         try {
-          const { move } = await getAdaptiveMove(game.fen, targetStrength);
+          const adaptive = await getAdaptiveMove(game.fen, targetStrength);
           if (isCancelled()) return;
+          const { move, source } = adaptive;
 
           let result = tryMakeMove(move);
           if (!result) {
@@ -375,10 +434,23 @@ export function OpeningPlayMode({ opening, customLine, startFen, onExit }: Openi
             const r = result;
             setMoveHistory((prev) => [...prev, { fen: r.fen, from: r.from, to: r.to }]);
             moveCountRef.current += 1;
-            
+            void logAppAudit({
+              kind: 'opening-play-opponent-move',
+              category: 'subsystem',
+              source: 'OpeningPlayMode.makeComputerMove',
+              summary: `source=${source} move=${result.from}${result.to} openingId=${opening.id} targetElo=${targetStrength}`,
+              fen: r.fen,
+            });
           }
-        } catch {
+        } catch (err) {
           if (isCancelled()) return;
+          void logAppAudit({
+            kind: 'opening-play-opponent-error',
+            category: 'subsystem',
+            source: 'OpeningPlayMode.makeComputerMove',
+            summary: `getAdaptiveMove threw — ${(err as Error)?.message ?? err}`,
+            fen: game.fen,
+          });
           const randomMove = getRandomLegalMove(game.fen);
           if (randomMove) {
             const fallback = tryMakeMove(randomMove);
@@ -386,7 +458,13 @@ export function OpeningPlayMode({ opening, customLine, startFen, onExit }: Openi
               setComputerLastMove({ from: fallback.from, to: fallback.to });
               setMoveHistory((prev) => [...prev, { fen: fallback.fen, from: fallback.from, to: fallback.to }]);
               moveCountRef.current += 1;
-              
+              void logAppAudit({
+                kind: 'opening-play-opponent-move',
+                category: 'subsystem',
+                source: 'OpeningPlayMode.makeComputerMove',
+                summary: `source=random move=${fallback.from}${fallback.to} (catch-fallback) openingId=${opening.id}`,
+                fen: fallback.fen,
+              });
             }
           }
         }
