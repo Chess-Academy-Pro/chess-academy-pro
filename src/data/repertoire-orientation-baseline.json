@@ -18,15 +18,6 @@
     "petrov-defence::trap::Wrong Move Order Punishment": [
       "WEAK_TRAP"
     ],
-    "budapest-gambit::trap::Pin Exploitation Trap": [
-      "WEAK_TRAP"
-    ],
-    "budapest-gambit::trap::Fajarowicz e-file Ambush": [
-      "INVERTED_MATERIAL"
-    ],
-    "budapest-gambit::trap::Alekhine Center Collapse": [
-      "WEAK_TRAP"
-    ],
     "old-indian-defence::trap::Queenside Overextension Punish": [
       "WEAK_TRAP"
     ],
@@ -663,6 +654,19 @@
       "TOOTHLESS_WARNING"
     ],
     "queens-indian::warning::Passive Setup Without ...d5 or ...c5": [
+      "TOOTHLESS_WARNING"
+    ],
+    "budapest-gambit::trap::Pin Exploitation Trap": [
+      "WEAK_TRAP",
+      "STUDENT_NOT_PUNISHER"
+    ],
+    "budapest-gambit::warning::Don't Allow Quiet Consolidation": [
+      "TOOTHLESS_WARNING"
+    ],
+    "budapest-gambit::warning::Overextension in Adler Lines": [
+      "TOOTHLESS_WARNING"
+    ],
+    "budapest-gambit::warning::Premature d5 Break": [
       "TOOTHLESS_WARNING"
     ]
   }
