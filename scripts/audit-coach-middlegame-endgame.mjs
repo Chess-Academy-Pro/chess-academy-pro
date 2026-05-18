@@ -412,11 +412,18 @@ async function main() {
     },
     assertions: [
       { kind: 'url-matches', value: /\/coach\/session\/middlegame/, label: 'navigated to middlegame session route' },
-      // Either the walkthrough text mentions "middlegame", OR the
-      // session header text "Walkthrough" / "Italian" surfaces, OR
-      // an error/empty state. Any of these confirms the route mounted
-      // without crashing.
-      { kind: 'text-on-page', value: 'italian', label: 'page mounted (Italian content surfaces)' },
+      // The session shell renders the plan title ("Central Expansion
+      // with d4" for italian-game), a position counter ("0 / 7"), and
+      // a Play button — any of those text fragments confirms the
+      // useWalkthroughRunner mounted and the middlegame Teach surface
+      // is alive. We don't pin to a specific plan title because the
+      // resolver may pick a different plan for the same opening as
+      // the data grows.
+      {
+        kind: 'text-on-page',
+        value: 'play',
+        label: 'Teach surface mounted (Play control rendered)',
+      },
     ],
   });
   report.modeMatrix.middlegame['italian-game'] = {
