@@ -2693,47 +2693,47 @@
       "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 a6 Qxc4 b5 Qc2 Bb7 Bd2 Be4 Qc1 Nc6",
       "color": "white",
       "style": "Creative, Dynamic",
-      "overview": "Dubov plays the Catalan with his trademark creativity. While most players use it as a slow grinding weapon, Dubov finds unexpected tactical resources and dynamic ideas. His Catalan games are always surprising and entertaining.",
+      "overview": "Dubov plays the Catalan like a creative mad scientist. The opening was christened at the 1929 Barcelona tournament when Savielly Tartakower fianchettoed his bishop and named it after the host region; Botvinnik and Kasparov used it occasionally before Vladimir Kramnik elevated it to championship status in the 2000s. Dubov's contribution: he found ways to make the slow positional Catalan into a SHARP tactical opening — sacrificing pawns and pieces to reach the dynamic positions his calculation rewards. While Carlsen and Caruana grind out wins from quiet Catalans, Dubov turns the same opening into a brawl. Source: Magnus Carlsen called Dubov 'the most creative player I've ever worked with' (Dubov was Carlsen's second for the 2018 World Championship match).",
       "keyIdeas": [
-        "The Bg2 creates long-term pressure along the long diagonal — maintaining this pressure forces the opponent to defend passively",
-        "Recover the c4 pawn with Qc2 or a4 while maintaining pressure — maintaining this pressure forces the opponent to defend passively",
-        "Look for dynamic piece play rather than just positional grinding — a key strategic concept in Catalan Opening",
-        "Use unexpected pawn sacrifices to generate initiative — this structural feature shapes all future strategic decisions in the position"
+        "The Bg2 is the Catalan's defining piece — it stares at the a8-rook from across the board AND supports queenside operations. Dubov often sacrifices the pawn structure to ACTIVATE the Bg2 sooner.",
+        "Recover the c4 pawn flexibly: Qc2 (mainline), Qa4+ (Karpov's idea), or a4 (positional probe). Each leads to different middlegame structures; Dubov picks based on what's most unbalancing.",
+        "Dubov's Gambit Catalan (8.Ne5!?) sacrifices the bishop pair on c6 for piece activity — engines call it equal, but practical results favour the side calculating concretely.",
+        "Look for dynamic central breaks (e4, d5) instead of slow manoeuvring. The Catalan's bishop on g2 is most powerful when the centre OPENS, not when it stays closed."
       ],
       "traps": [
-        "If Black tries to hold c4 with b5, the Bg2 becomes a monster and a4 undermines the structure"
+        "If Black tries to hold the c4-pawn with …b5, you play a4 IMMEDIATELY — the Bg2 plus a4 undermining wrecks Black's queenside structure within 3-4 moves."
       ],
       "warnings": [
-        "Do not play on autopilot — the Catalan requires awareness of tactical possibilities",
-        "Respect Black's counterplay with c5 — it can equalize if timed well"
+        "Don't play the Catalan on autopilot. Dubov's version requires SEEING the tactical possibilities at every move — if you play 'standard Catalan moves' without alertness, you'll miss the creative resources that make his version distinctive.",
+        "Watch Black's …c5 break. If timed correctly (after Black's pieces are fully developed), the …c5 break dissolves the central tension and the Bg2's diagonal becomes irrelevant."
       ],
       "variations": [
         {
           "name": "Open Catalan",
           "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 a6 Qxc4 b5 Qc2 Bb7 Bd2 Be4 Qc1 Nc6",
-          "explanation": "Dubov's main Catalan line. He recovers the pawn with Qc2 and develops the queenside actively. The Bd2 move prepares Bc3 with kingside pressure."
+          "explanation": "Dubov's main Catalan with a creative twist on the standard plan. After 6...dxc4 7.Qc2 a6 8.Qxc4 b5 9.Qc2 Bb7 — Black sets up the queenside. Now 10.Bd2! (Dubov's choice — preparing Bc3 to challenge the long diagonal) Be4! (Black's counter-creative move) 11.Qc1 Nc6 — both sides reach an unbalanced position where dynamic chances dominate over positional. Pure Dubov chess."
         },
         {
           "name": "Closed Catalan with e4",
           "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O Nbd7 Qc2 c6 Nbd2 b6 e4 Bb7 e5 Ne8 Re1 Nc7",
-          "explanation": "A more aggressive approach where Dubov pushes e4-e5. The position becomes sharp and White has kingside attacking chances."
+          "explanation": "When Black plays the Closed Catalan (with 5...Nbd7 keeping d5 supported), Dubov plays AGGRESSIVELY with 9.e4! — pushing the central pawn even though it gives up Catalan flexibility. After 9...Bb7 10.e5 Ne8 (Black's knight is shoved back) 11.Re1 Nc7 — White has space and kingside attacking chances. Most Catalan players treat the Closed Catalan as a slow squeeze; Dubov treats it as a kingside-attack opening."
         },
         {
           "name": "Gambit Catalan",
           "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Be7 O-O O-O Ne5 Nc6 Bxc6 bxc6 Nxc6 Qe8 Nxe7+ Qxe7 Qa4 e5 dxe5 Qxe5",
-          "explanation": "Dubov's creative gambit approach. White sacrifices the bishop pair for active piece play; the resulting unbalanced position rewards creative play and concrete calculation."
+          "explanation": "Dubov's signature Catalan gambit. After 5...dxc4 6.Nf3 Be7 7.O-O O-O 8.Ne5! (the wild knight invasion) Nc6 9.Bxc6 bxc6 10.Nxc6 — White wins the bishop pair AND a tempo. After 10...Qe8 11.Nxe7+ Qxe7 12.Qa4 e5 13.dxe5 Qxe5 — the position is wildly unbalanced. Engines call it equal; over the board, the player who calculates better wins. Dubov has won spectacular games in this line."
         }
       ],
       "trapLines": [
         {
           "name": "c4 Grab and Bg2 Recovery",
           "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 a6 O-O Nc6 e3 Bd7 Qe2 b5 a4 Rb8 axb5 axb5",
-          "explanation": "Black grabs the c4 pawn and tries to hold it with b5, but White's Bg2 on the long diagonal combined with a4 undermines the structure. White recovers the pawn with interest."
+          "explanation": "When Black tries to KEEP the c4-pawn (greedy amateur dream), you punish with a4 undermining. After 9.a4 Rb8 10.axb5 axb5 — Black's queenside is wrecked: the open a-file is yours, the b-pawn is weak, and the Bg2 fires down the long diagonal at the now-exposed pieces. The c4-pawn that Black 'won' becomes a target instead of an asset."
         },
         {
           "name": "Long Diagonal Skewer",
           "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 a6 a4 Bd7 Qxc4 Bc6 Bf4",
-          "explanation": "The Bg2 creates a devastating long diagonal threat. After Bf4 White has full development with pressure on Black's queenside; the long diagonal continues to be the dominant strategic theme."
+          "explanation": "The standard Catalan recovery sequence with Dubov's preferred Bf4 development. After 9.Bf4 (active bishop, eyes c7) — both bishops are aimed at Black's queenside. The …Bc6 trade attempt is met by the standard Catalan plan of Nbd2 + Rfc1 + Bb2 piling up on the long diagonal. White's structural pressure is permanent."
         }
       ]
     },
