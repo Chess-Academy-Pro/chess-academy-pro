@@ -2446,49 +2446,49 @@
       "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Rb1 O-O Be2 cxd4 cxd4 Qa5+ Bd2 Qxa2 O-O Bg4",
       "color": "black",
       "style": "Dynamic, Counter-attacking",
-      "overview": "Firouzja uses the Grunfeld to fight for a win with Black against 1.d4. The opening allows White to build a massive center, which Black then attacks with piece pressure. It suits his dynamic, fearless style perfectly.",
+      "overview": "Firouzja uses the Grünfeld to fight for wins as Black against 1.d4. Austrian master Ernst Grünfeld invented this defence in 1922 against Aron Nimzowitsch — letting White have the centre, then attacking it from the wings. Fischer played it as his main weapon in his 1972 World Championship match; Kasparov-Karpov 1986-1990 featured legendary Grünfeld battles where Kasparov's preparation drove the theory deeper than anyone imagined; Carlsen made it his wins-with-Black weapon. Firouzja brings the engine-era preparation to the famously sharp Exchange Variation — including the modern …Qa5+/…Qxa2 pawn-grab idea that requires nerves of steel.",
       "keyIdeas": [
-        "Allow White a big center and then undermine it with c5 — this central control is the foundation for all middlegame operations",
-        "The Bg7 exerts tremendous pressure along the long diagonal — maintaining this pressure forces the opponent to defend passively",
-        "Grab the a2 pawn when possible — it is a real material gain — a key strategic concept in Grunfeld Defense",
-        "Play aggressively for tactical complications in the Grünfeld — Firouzja's style involves sharp piece play and concrete calculation rather than quiet positional maneuvering"
+        "The Grünfeld philosophy: LET White build d4+e4+c3, then dismantle it with …c5 + …Bg7 pressure + …Qa5/Qb6 tactics. Hypermodern strategy in pure form.",
+        "The Bg7 is your most important piece — it stares at d4 (and via the long diagonal, at a1 where White's rook lives) for the entire game. Never trade lightly.",
+        "The …Qa5+ → …Qxa2 pawn grab is a real material grab, NOT a tactical blunder. In the Exchange Variation, White's c-pawn structure is doubled and the a2-pawn is structurally weak. Take it.",
+        "Calculate sharper than your opponent. The Grünfeld rewards concrete calculation in 1990s-style theoretical positions — Firouzja's edge is engine-era preparation in lines older players still play from memory."
       ],
       "traps": [
-        "After bxc3 Bg7 Nf3 c5 Rb1, if White plays Be3, Black can grab a2 with Qa5+ Bd2 Qxa2"
+        "After 7.Bg7 8.Nf3 c5 9.Rb1 (the modern Rb1 setup), if White plays 10.Be3 (instead of the principled 10.Be2), Black has 10...Qa5+! 11.Bd2 Qxa2 — grabbing the a-pawn cleanly because the b1-rook can't easily defend it. Pure positional theft."
       ],
       "warnings": [
-        "Do not let White consolidate the center without counterplay",
-        "The a2 pawn grab can be dangerous if White gets too much initiative"
+        "Don't let White consolidate the centre. Every move you spend NOT challenging d4+e4 is a move White gets to build a stable structure that becomes unbreakable.",
+        "The a2-pawn grab is dangerous if you let White's initiative compound. After grabbing the pawn, you MUST complete development quickly (…Bg4, …Nc6, …Rfd8) — if White's pieces all reach attacking squares first, your queen on a2 becomes a target."
       ],
       "variations": [
         {
           "name": "Exchange Variation with Qa5+",
           "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Rb1 O-O Be2 cxd4 cxd4 Qa5+ Bd2 Qxa2 O-O Bg4",
-          "explanation": "Firouzja's aggressive approach. Black grabs the a-pawn and creates immediate pressure. The resulting positions are razor-sharp."
+          "explanation": "Firouzja's most ambitious Grünfeld line — the queen-pawn grab. After the standard Exchange Variation 7.Bg7 8.Nf3 c5 9.Rb1 (the modern setup) O-O 10.Be2 cxd4 11.cxd4 — Black plays 11...Qa5+! 12.Bd2 Qxa2! grabbing the a-pawn cleanly. Now 13.O-O Bg4 — Black is up a pawn AND has the bishop pin on f3. White has central pieces but no concrete attack. Black completes development with …Nc6, …Rac8, …Rfd8, and the extra pawn wins the long game. Engine-era Grünfeld: take the pawn, defend, win."
         },
         {
           "name": "Russian System with Qb3",
           "pgn": "d4 Nf6 c4 g6 Nc3 d5 Nf3 Bg7 Qb3 dxc4 Qxc4 O-O e4 a6 Be2 b5 Qb3 c5 dxc5 Be6 Qc2 Nbd7",
-          "explanation": "Against the Russian System, Firouzja plays b5 and c5 to challenge White's center. The position offers rich play for both sides."
+          "explanation": "The Russian System with 5.Qb3 was Soviet GM Smyslov's preferred anti-Grünfeld; the queen defends c4 from b3. Firouzja's response: 5...dxc4 6.Qxc4 O-O 7.e4 a6 8.Be2 b5 (Black grabs queenside space) 9.Qb3 c5 10.dxc5 Be6 11.Qc2 Nbd7 — Black has aggressive queenside expansion AND central pressure. The …b5 + …c5 + …Be6 combo aims at White's centre while developing minor pieces."
         },
         {
           "name": "Fianchetto Grunfeld",
           "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Nf3 c5 Be2 O-O O-O Nc6 Be3 cxd4 cxd4 Bg4 d5 Na5 Nd4",
-          "explanation": "In the Fianchetto variation, White plays solidly with Be2 + O-O. Black challenges the center with c5 and after the cxd4 + d5 sequence, Na5 + Nd4 brings the knights to active squares for the upcoming middlegame."
+          "explanation": "When White plays the modest Be2 setup (instead of the aggressive Bc4 lines), Black faces a slower structural battle. After 10.Be2 O-O 11.O-O Nc6 (developing) 12.Be3 cxd4 13.cxd4 (the standard pawn capture sequence) Bg4 14.d5 (White pushes the centre) Na5 — Black's knight reaches a queenside outpost attacking c4. The 15.Nd4 reroute brings White's knight to a central square. Strategic Grünfeld where both sides manoeuvre for the better piece placement."
         }
       ],
       "trapLines": [
         {
           "name": "Center Overextension Punished by c5",
           "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Bc4 O-O Ne2 c5 O-O Nc6 Be3 cxd4 cxd4 Bg4 f3 Na5 Bd3 Be6",
-          "explanation": "When White builds a big e4-d4 center, Black undermines it with c5. The center collapses and Black's Bg7 dominates the long diagonal."
+          "explanation": "Classic Grünfeld punishment for the Bc4+Ne2 setup. When White over-extends with the big e4+d4 centre AND the Bc4 development, Black plays the textbook 11...c5 (challenging d4) and after the 12.O-O Nc6 13.Be3 cxd4 14.cxd4 trades, Black's pieces are perfectly placed (Bg4 pinning, Na5 attacking c4-bishop) while White's centre is exposed. The …Bxa1 exchange-sacrifice motif is always lurking in the air."
         }
       ],
       "warningLines": [
         {
           "name": "Nxc3 Qa5+ Exchange Trick",
           "pgn": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7 Qa4+ Nd7 Be3 O-O",
-          "explanation": "After cxd5 Nxd5 and Nxc3, Black can play Qa5+ forcing exchanges. The Qa4+ sideline leads to similar structures where Black's plan is to target the doubled c-pawns."
+          "explanation": "The Qa4+ sideline (some Black players use Qa5+ in similar positions). After 6.bxc3 Bg7 7.Qa4+ Nd7 (Black blocks with the queenside knight) 8.Be3 O-O — Black has completed development with the standard plan of targeting the doubled c-pawns. The Qa4 was meant to disrupt Black's development but it loses a tempo when …Nd7 calmly blocks AND develops at the same time."
         }
       ]
     },
@@ -2500,42 +2500,42 @@
       "pgn": "e4 e6 d4 d5 Nc3 Nf6 Bg5 dxe4 Nxe4 Be7 Bxf6 gxf6 Nf3 b6 Bc4 Bb7 Qe2 Nd7 O-O-O",
       "color": "black",
       "style": "Solid, Surprise",
-      "overview": "Firouzja occasionally surprises opponents with the French Defense. It is an unexpected weapon that catches 1.e4 players off guard. The Burn Variation with dxe4 leads to an asymmetric position where Firouzja's creativity can flourish.",
+      "overview": "Firouzja's French Defence is a surprise weapon when he wants to drag 1.e4 players out of their comfort zone. The French was famously played in the 1834 La Bourdonnais–McDonnell match (the first 'world championship' match of the modern era), making it one of chess's oldest defensive systems. It was Aaron Nimzowitsch's main weapon (he played it for 30 years and considered it 'theoretically inferior but practically excellent'); Mikhail Botvinnik used it to win World Championship games; Wolfgang Uhlmann championed it at elite level for decades. The Burn Variation (4...dxe4, named for English master Amos Burn in the late 1800s) is Firouzja's choice — the doubled f-pawns look ugly but give Black excellent central control and unbalanced positions where calculation decides.",
       "keyIdeas": [
-        "Play e6 to build a solid pawn chain and prepare d5 — this structural feature shapes all future strategic decisions in the position",
-        "The French structure is resilient and hard to break down — this structural feature shapes all future strategic decisions in the position",
-        "After ...dxe4, the center opens favorably — the French bishop that was locked behind pawns now has open diagonals, and Black's pieces spring to life",
-        "The doubled f-pawns after Bxf6 gxf6 give Black central control and open files — this central control is the foundation for all middlegame operations"
+        "…e6 + …d5 builds the French pawn chain — the structural backbone of every French variation. The downside: the c8-bishop is initially locked behind the e-pawn; the upside: the structure is extraordinarily solid.",
+        "In the Burn Variation (4...dxe4 5.Nxe4 Be7 6.Bxf6 gxf6), Black accepts doubled f-pawns for two reasons: the bishop pair AND the half-open g-file for the rook. Looks worse than it plays.",
+        "The light-squared bishop (the famous 'French bishop') is the opening's eternal problem. Solutions: …b6 + …Bb7 (long-diagonal fianchetto), …Bd7 → …Be8 → …Bg6 (slow reroute), or trading via …Bxg5 in early lines.",
+        "Aim for opposite-side castling chaos. In the Burn Variation, after the bishop trade on f6, Black often castles queenside — the king on c8 is safe enough and the kingside files open for attack."
       ],
       "traps": [
-        "In the Winawer with Bb4, if White plays a3 Ba5, the bishop can retreat to c7 and remain active"
+        "In the Winawer with 3...Bb4 (a different French line), if White plays 4.a3 and Black retreats 4...Ba5, the bishop can later swing to c7 to defend the kingside — but in the modern lines, 4...Bxc3+ trading is usually correct."
       ],
       "warnings": [
-        "The light-squared bishop is traditionally passive — develop it via b7 or a6",
-        "Be careful in the Advance Variation — c5 must come quickly"
+        "The light-squared bishop is the French player's lifelong project. Plan its development from move 3 — without a clear path for the c8-bishop, you reach move 20 with a piece that has only 2 useful squares.",
+        "In the Advance Variation (3.e5), the …c5 break must come immediately. If you delay …c5 for even one move, White consolidates the centre and the French becomes a positionally lost defence."
       ],
       "variations": [
         {
           "name": "Burn Variation 4...dxe4",
           "pgn": "e4 e6 d4 d5 Nc3 Nf6 Bg5 dxe4 Nxe4 Be7 Bxf6 gxf6 Nf3 b6 Bc4 Bb7 Qe2 Nd7 O-O-O",
-          "explanation": "Firouzja's preferred French setup. The doubled f-pawns look ugly but give Black excellent central control. With opposite-side castling looming, the resulting position is unbalanced and dynamic."
+          "explanation": "Firouzja's preferred French line — the Burn Variation. After 4.Nc3 Nf6 (Black develops naturally) 5.Bg5 (White's classical pin) dxe4! (Black's principled gambit — sacrificing the pawn for piece play) 6.Nxe4 Be7 7.Bxf6 (White must trade) gxf6 — yes, doubled f-pawns, but Black has the bishop pair AND will get the open g-file for the rook. 8.Nf3 b6 (fianchetto preparation) 9.Bc4 Bb7 10.Qe2 Nd7 11.O-O-O — White castles queenside and Black follows suit, reaching an unbalanced middlegame where Firouzja's tactical sense flourishes. The 'ugly' pawn structure is actually fine."
         },
         {
           "name": "Classical 4...Be7",
           "pgn": "e4 e6 d4 d5 Nc3 Nf6 Bg5 Be7 e5 Nfd7 Bxe7 Qxe7 f4 O-O Nf3 c5 Qd2 Nc6 dxc5 Nxc5 O-O-O f6",
-          "explanation": "A more traditional approach where Black develops the bishop before it gets locked in. After e5 Nfd7, the position becomes a typical French structure."
+          "explanation": "When Firouzja wants a more traditional French, he plays 4...Be7 (instead of the Burn's 4...dxe4). After 5.e5 Nfd7 (the standard knight retreat) 6.Bxe7 Qxe7 7.f4 (White's standard expansion) O-O 8.Nf3 c5 (the equalising break) 9.Qd2 Nc6 10.dxc5 Nxc5 11.O-O-O f6 — Black has reached a typical French structure with the …c5 break completed. The position is balanced with chances on both wings."
         }
       ],
       "trapLines": [
         {
           "name": "Qh5 Kingside Attack Refuted",
           "pgn": "e4 e6 d4 d5 Nc3 Nf6 Bg5 dxe4 Nxe4 Be7 Bxf6 gxf6 Nf3 Bd7 Nc3",
-          "explanation": "White tries to exploit the weakened kingside after gxf6 but Black develops Bf5 + Bd7 and castles queenside. The bishop pair compensates for the doubled pawns and Black is safe."
+          "explanation": "After Black's Burn Variation setup (with the doubled f-pawns), White sometimes tries to exploit the apparent kingside weakness with Qh5-attacks. Black's response: calm development with …Bd7 (preparing …Bc6 fianchetto via this square) + queenside castling. The bishop pair compensates for the structural concession; Black's king is safer than it looks."
         },
         {
           "name": "Bishop Pair Compensation",
           "pgn": "e4 e6 d4 d5 Nc3 Nf6 Bg5 dxe4 Nxe4 Be7 Bxf6 gxf6 Nf3 b6 Bc4 Bb7 Qe2 Nd7 O-O-O",
-          "explanation": "Despite the doubled f-pawns, Black's two bishops are powerful in the open position. After O-O-O the queenside-castled formation supports the ...c5 break — the structure looks worse than it plays."
+          "explanation": "The full Burn position with opposite-side castling. Despite the doubled f-pawns, Black's two bishops (Be7 + Bb7) are powerful in the open position. The Bb7 + half-open g-file for the …Rg8 lift creates real attacking chances against the white king on c1. The …c5 break is coming next move; the position is dynamically balanced with chances for both sides."
         }
       ]
     },
@@ -2547,47 +2547,47 @@
       "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 d6 c3 O-O h3 Bb7 d4 Re8 Nbd2 Bf8 a4 h6 Bc2 exd4 cxd4 Nb4",
       "color": "white",
       "style": "Classical, Aggressive",
-      "overview": "Firouzja plays the Ruy Lopez with youthful energy and fearless attacking ambitions. He favors the main lines where both sides get clear plans, trusting his tactical ability to outplay opponents in the resulting complications.",
+      "overview": "Firouzja plays the Ruy Lopez with the bold attacking style of a teenager who just broke into the world's top 5. The Ruy Lopez (named after Spanish priest Ruy López de Segura who analyzed it in his 1561 book) is chess's most studied opening — every World Champion from Steinitz to Carlsen has lived and died by its theory. The Chigorin Variation honours Russian master Mikhail Chigorin (late 1800s); the Zaitsev Variation was developed by Soviet trainer Igor Zaitsev (Karpov's longtime second). Firouzja brings 21st-century engine preparation to lines that have been analysed for 460 years — finding novelties where everyone thought the theory was finished.",
       "keyIdeas": [
-        "Build a strong center with d4 and use the Bb3/Bc2 to target f7 — this central control is the foundation for all middlegame operations",
-        "The typical plan involves a4 to undermine Black's queenside and h3 to prevent Bg4",
-        "Prepare for the central break d5 or kingside expansion with Nf1-g3 — this central control is the foundation for all middlegame operations",
-        "The Ruy Lopez gives White a lasting positional advantage when played accurately — a key strategic concept in Ruy Lopez"
+        "Build the classic d4 centre slowly: c3 + h3 + Re1 + d4 in that order. Patience matters — premature d4 lets Black equalise with central exchanges.",
+        "The Bb3 → Bc2 manoeuvre keeps the bishop on the b1-h7 diagonal aimed at the kingside. After …d5 by Black, the bishop is redirected to attack from c2; without this reroute, the bishop becomes a tall pawn.",
+        "a4 is the queenside probe. By poking Black's b-pawn with a4, you force …b4 (closing the queenside) or …bxa4 (giving up structure). Either way, you've gained information AND tempo.",
+        "Watch for the Marshall Attack. If Black plays …d5 instead of …d6 (the gambit), you face the most prepared opening in chess. Be ready with the Anti-Marshall (a4) OR have your Marshall defensive lines memorised."
       ],
       "traps": [
-        "After Re1 b5 Bb3 d6 c3, if Black plays Na5 too early, Bc2 d5 creates immediate tension"
+        "After 5.O-O Be7 6.Re1 b5 7.Bb3 d6 8.c3 — if Black plays the natural 8...Na5? too early (without first preparing with …O-O), 9.Bc2 d5 10.exd5 e4 11.Nxe5 — White wins material thanks to the loose Na5 and Black's underdeveloped pieces."
       ],
       "warnings": [
-        "The Ruy Lopez requires patience — do not force the issue too early",
-        "Watch for the Marshall Attack if you allow O-O before h3"
+        "Ruy Lopez requires PATIENCE. Most amateurs lose Ruy positions by trying to force tactical breakthroughs before the position is ready. Build slowly, exchange wisely, win the technical phase.",
+        "Watch for the Marshall Attack: 8.c3 d5! (instead of the safe 8...d6). If you haven't prepared the Anti-Marshall lines, ALWAYS play 8.h3 first (the Anti-Marshall move-order) to prevent the gambit."
       ],
       "variations": [
         {
           "name": "Chigorin Variation",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 d6 c3 O-O h3 Na5 Bc2 c5 d4 Qc7 Nbd2 Nc6 d5 Nd8 Nf1",
-          "explanation": "The Chigorin is one of the most popular Ruy Lopez defenses. Black maneuvers Na5 then back to c6 and d8 to prepare ...Ne6. After Nf1 + Ng3 reroute, both sides slowly manoeuvre for the typical Spanish kingside attack."
+          "explanation": "The Chigorin Variation (named after Mikhail Chigorin, late 1800s) — one of the most strategically rich Ruy Lopez systems. The trademark knight tour Nf6-Na5-Nc6-Nd8 (yes, all the way back!) prepares …Ne6 supporting the kingside. After 13.d5 (White closes the centre) Nd8 14.Nf1 (knight reroutes to g3) — both sides finish development. The middlegame plan: White attacks the kingside with f4-f5; Black defends with …g6 + …Nh7-Ng5. Slow positional chess at its richest."
         },
         {
           "name": "Zaitsev Variation",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 d6 c3 O-O h3 Bb7 d4 Re8 Nbd2 Bf8 a4 h6 Bc2 exd4 cxd4 Nb4",
-          "explanation": "The Zaitsev features Bb7 and Re8, aiming for central counterplay. Firouzja plays a4 to weaken the queenside and Bc2 to keep the bishop aimed at the kingside."
+          "explanation": "The Zaitsev (developed by Karpov's second Igor Zaitsev in the 1970s-80s) — used extensively in the Karpov-Kasparov matches. Black plays …Bb7 (fianchetto) + …Re8 (eyeing the e-file) for central counterplay. After 14.a4 (the queenside probe) h6 (preparing …Nh7) 15.Bc2 exd4 16.cxd4 Nb4 — Black attacks the c2-bishop, gaining tempo. The Zaitsev features sharp tactical play in lines that look quiet."
         },
         {
           "name": "Open Ruy Lopez",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 Nbd2 Nc5 c3 Be7 Bc2 Bg4 Re1 O-O",
-          "explanation": "When Black captures on e4, the Open Ruy Lopez arises. White gets active piece play and the e5 pawn is a strong asset. Firouzja uses his tactical prowess in these sharp positions."
+          "explanation": "The Open Ruy Lopez — when Black grabs the e4-pawn with 5...Nxe4 instead of playing solidly. After 6.d4 b5 7.Bb3 d5 8.dxe5 Be6 — Black has temporarily won a pawn but White has the strong e5-cramping piece. 9.Nbd2 Nc5 10.c3 Be7 11.Bc2 Bg4 12.Re1 O-O — Black has activated all pieces; White has central control. The position is sharp and unbalanced, perfect for Firouzja's tactical style."
         }
       ],
       "trapLines": [
         {
           "name": "Nxe4 Pawn Grab Refuted",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Be7 Re1 Nc5",
-          "explanation": "Black grabs the e4 pawn with Nxe4 but White gets the Open Ruy Lopez with d4 and dxe5. After Re1 + Nc5, White's active pieces and the strong e5 pawn give a powerful initiative."
+          "explanation": "The Open Ruy Lopez where Black grabs the e-pawn. White's response is the standard 6.d4 challenging the centre AND 8.dxe5 reaching the structurally favourable position. After 9.c3 (supporting the centre) Be7 10.Re1 Nc5 — Black has won a pawn but White's e5-pawn cramps Black's pieces, the c2-bishop aims at h7, and the e-file is open for the rook. The pawn isn't worth the time White has gained."
         },
         {
           "name": "Open Tarrasch Trap",
           "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 c3 Be7 Re1 O-O Nd4",
-          "explanation": "In the Open Spanish, Black's 9...Be7 (instead of the correct 9...Bc5) allows the Tarrasch Trap. After 11.Nd4 White threatens Nxe6 + Rxe4 winning material — Black must walk a tightrope to defend. ECO C83."
+          "explanation": "The Open Tarrasch Trap (ECO C83) — named after Siegbert Tarrasch who first analyzed the position. In the Open Spanish, Black's 9...Be7 (instead of the correct 9...Bc5) creates a positional weakness on the f7-square. After 11.Nd4! White threatens 12.Nxe6 + 13.Rxe4 winning material — Black must defend with extreme precision. A classic 19th-century opening trap that still catches amateurs in the engine era."
         }
       ]
     },
@@ -2599,47 +2599,47 @@
       "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 Be3 f4 Bf2 g5",
       "color": "black",
       "style": "Aggressive, Dynamic",
-      "overview": "Firouzja plays the King's Indian with devastating aggression. His kingside attacks in the Mar del Plata variation are among the most feared in modern chess. The combination of youthful energy and deep calculation makes his KID a lethal weapon.",
+      "overview": "Firouzja plays the King's Indian with the violence of youth — and the preparation of an engine. The KID has a 100-year pedigree as Black's most violent answer to 1.d4: pioneered by the hypermoderns (Réti, Nimzowitsch) in the 1920s, perfected by David Bronstein and Mikhail Tal in the 1950s for spectacular attacking play, and immortalised by Bobby Fischer (1972 World Championship match) and Garry Kasparov who used it for a decade against Karpov. The Mar del Plata variation is named for the 1953 Mar del Plata tournament in Argentina where Pal Benko introduced the modern attacking treatment. Firouzja brings this 100-year-old opening into the engine era with novelties in lines other players think are exhausted.",
       "keyIdeas": [
-        "Fianchetto to g7 and castle quickly, then push f5-f4 for a kingside attack — timing this correctly before the opponent can generate counterplay is critical",
-        "The pawn storm g5-g4 opens lines against White's king — timing this correctly before the opponent can generate counterplay is critical",
-        "Use the Bg7 to support central and kingside operations — this central control is the foundation for all middlegame operations",
-        "The typical sacrifice Nf6-h5-f4 and g5-g4 creates unstoppable threats — a key strategic concept in King's Indian Defense"
+        "The Bg7 fianchetto is non-negotiable. The bishop on g7 controls the long a1-h8 diagonal forever, supports kingside attacks AND aims at White's queenside. Never trade it lightly.",
+        "Once the centre locks with d5, the game splits in two: White attacks queenside (c5 push), Black attacks kingside (f5-f4-g5). The faster attack wins, and Black's attack is usually faster.",
+        "The knight tour Nf6-h5-f4 (or via Nf6-e8-g7-f5-f4) lands the knight on f4 attacking d3, e2, g2, h3 simultaneously. This is the KID's single most violent piece-tour.",
+        "Don't fear the closed centre. A locked centre means no White counterplay; you're guaranteed time to mobilise the kingside attack. The d4-d5 closure is the KID's friend, not enemy."
       ],
       "traps": [
-        "After d5 Ne7, if White plays passively, f5-f4-g5-g4 creates a devastating attack"
+        "After 7.d5 Ne7, if White plays passively (no g3, no h3, no kingside defensive prep), Black launches the immediate f5-f4-g5-g4 pawn cascade — the kingside attack arrives in 8-10 moves and is often unstoppable."
       ],
       "warnings": [
-        "Watch for White's c5-c6 queenside breakthrough — it can win by force",
-        "Do not push f5 if White can respond with exf5 and open the center prematurely"
+        "Watch for White's c5-c6 queenside breakthrough. If you ignore the queenside and White gets c5 → c6 → cxd6 cxd6 → Nc6 outpost, your queenside collapses faster than your kingside attack matures.",
+        "DON'T play …f5 if White can respond exf5 opening the centre. The centre must lock with d5 first; an open centre makes …f5 a structural liability."
       ],
       "variations": [
         {
           "name": "Mar del Plata Main Line",
           "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 Be3 f4 Bf2 g5",
-          "explanation": "The sharpest King's Indian continuation. Black's f4-g5 pawn storm creates a terrifying kingside attack. Firouzja excels in these positions where both sides race on opposite wings."
+          "explanation": "The Mar del Plata variation — named for the 1953 Mar del Plata tournament. The sharpest King's Indian position in chess theory: after 8.d5 Ne7 9.Ne1 (White reroutes the knight) Nd7 10.f3 f5! 11.Be3 f4! (the locking move — kingside is now permanent attack territory) 12.Bf2 g5! — Black's kingside pawn cascade is launched. White's only defensive idea is the slow Nd3-Nf2-Nf1 reroute supporting g3 break; meanwhile Black's …Ng6 + …Rf6-Rh6 lift creates unstoppable mating threats. Firouzja's tactical depth in these positions wins decisive games at elite level."
         },
         {
           "name": "Classical 9.Nd2",
           "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Nd2 a5 a3 Nd7 Rb1 f5 b4 Nf6 f3 f4",
-          "explanation": "Against 9.Nd2, Firouzja plays a5 to slow White's queenside expansion. The resulting positions are slightly slower but Black still gets a powerful kingside attack with f5-f4."
+          "explanation": "When White plays 9.Nd2 (instead of the Mar del Plata's 9.Ne1), preparing a slower queenside attack with b4, Firouzja plays 9...a5! immediately — preventing the b4 push and gaining queenside space. After 10.a3 Nd7 11.Rb1 f5 12.b4 Nf6 13.f3 f4 — Black gets the same kingside attack as the Mar del Plata but with the queenside locked (so White has less counterplay). Strategically a better KID line for Black."
         },
         {
           "name": "Bayonet Defense",
           "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 b4 Nh5 Re1 f5 Ng5 Nf6 Bf3 c6 dxc6 Nxc6",
-          "explanation": "Against the Bayonet Attack 9.b4, Firouzja defends dynamically with Nh5-f5-Nf6 maneuvers. After dxc6 Nxc6, the position is razor-sharp with both sides pushing forward on opposite flanks."
+          "explanation": "Against the Bayonet Attack (Kramnik's 9.b4 anti-KID weapon — White grabs queenside space before Black can lock the centre), Firouzja plays 9...Nh5! immediately — the knight prepares …f5 with one tempo. After 10.Re1 f5 11.Ng5 Nf6 (forcing the trade of attacking knights) 12.Bf3 c6 (Black challenges the centre) 13.dxc6 Nxc6 — Black has opened the position WITHIN the KID structure, giving Firouzja the dynamic chances his calculation thrives on."
         }
       ],
       "trapLines": [
         {
           "name": "Premature c5 Punished by b6",
           "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 c5",
-          "explanation": "White pushes c5 prematurely. Black responds with the typical King's Indian counter — Ne8 + cxd6 cxd6 + b6 — undermining the queenside while keeping the kingside attack potential alive."
+          "explanation": "If White pushes 9.c5 prematurely (before getting the b4 push ready), Black has the textbook KID counter: 9...Ne8 (the knight evacuates to support …f5) followed by 10.cxd6 cxd6 11.b4 b6! — Black breaks the queenside chain at exactly the right moment. White's …c5 push collapses, and Black retains the …f5 break for the kingside attack. The KID's flexibility AT ITS BEST."
         },
         {
           "name": "f5-f4 Kingside Storm",
           "pgn": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6 d5 Ne7 Ne1 Nd7 f3 f5 Be3 f4 Bf2 g5 Nd3 Ng6 c5",
-          "explanation": "Black launches f5-f4 followed by g5 and Ng6 creating an unstoppable kingside pawn storm. White's queenside push c5 races against Black's attack — opposite-side castled middlegame at maximum tension."
+          "explanation": "The full Mar del Plata kingside storm. After Black launches …f5-f4-g5, White's queenside attack with 13.Nd3 (reroutes to support c5) and 14.c5 races against Black's …Ng6 + …Rf6 + …Qe8-h5 attacking buildup. The position is opposite-side castled middlegame at maximum tension — both sides must calculate every move concretely. Firouzja's win-rate in this position at elite level is one of the highest in the KID."
         }
       ]
     },
