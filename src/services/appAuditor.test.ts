@@ -154,6 +154,33 @@ describe('appAuditor', () => {
       }
     });
 
+    it('suppresses the transient SW load-failed rejection (iOS Safari cold-start)', async () => {
+      // The browser auto-retries SW registration on next visit and the
+      // SW activates fine; the rejection is noise that we don't want
+      // surfaced as a runtime/unhandled-rejection.
+      const uninstall = installGlobalErrorHooks();
+      try {
+        const swMessages = [
+          'Script https://chess-academy-pro.vercel.app/sw.js load failed',
+          'sw.js load failed',
+          'Failed to register sw.js: registration failed',
+        ];
+        for (const msg of swMessages) {
+          const event = new Event('unhandledrejection') as PromiseRejectionEvent;
+          Object.defineProperty(event, 'reason', { value: new Error(msg) });
+          window.dispatchEvent(event);
+        }
+        await new Promise((r) => setTimeout(r, 10));
+        const log = await getAppAuditLog();
+        const swRejections = log.filter(
+          (e) => e.kind === 'unhandled-rejection' && /sw\.js/i.test(e.summary),
+        );
+        expect(swRejections).toEqual([]);
+      } finally {
+        uninstall();
+      }
+    });
+
     it('cleanup detaches listeners', async () => {
       const uninstall = installGlobalErrorHooks();
       uninstall();

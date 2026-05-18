@@ -1016,6 +1016,18 @@ export function installGlobalErrorHooks(): () => void {
     const reason = event.reason as unknown;
     const message = reason instanceof Error ? reason.message : String(reason);
     const stack = reason instanceof Error ? reason.stack : undefined;
+    // Suppress the iOS-Safari `/sw.js load failed` transient class.
+    // VitePWA's auto-injected registration races the page load on
+    // cold-start; if the SW request hits a network blip or a CDN
+    // cache miss the registration promise rejects. The browser
+    // RETRIES on next visit and the SW activates fine — the audit
+    // log just sees the rejection. Caught in 2026-05-18 audit
+    // finding 195. Marking handled so it doesn't noise the
+    // unhandled-rejection counter.
+    if (/sw\.js[^a-zA-Z0-9]*(load failed|fetch.*failed|request.*failed|registration failed|FetchEvent failed)/i.test(message)) {
+      event.preventDefault();
+      return;
+    }
     emitWithRateLimit({
       kind: 'unhandled-rejection',
       category: 'runtime',
