@@ -3853,20 +3853,20 @@
       "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5",
       "color": "white",
       "style": "Classical, Tactical",
-      "overview": "Akeem Brown teaches the Italian Game as the foundation of good chess. His approach is rooted in classical principles — develop, control the center, and look for tactical opportunities. Akeem connects each move to a life philosophy: every piece has a purpose, just like every person has potential. His Italian is tactical but disciplined.",
+      "overview": "Akeem Brown — youngest National Master in Jamaican history at age 16 — teaches the Italian Game as the foundation of good chess. The Italian itself is one of chess's oldest analyzed openings: documented in Pedro Damiano's 1512 chess treatise, refined by Greco's 1620s manuscripts, demonstrated to attacking perfection by Paul Morphy on his 1858 European tour, and modernised by Carlsen's d3 system in the 2010s. Akeem connects each opening principle to a life philosophy: every piece has a purpose, just like every person has potential. His Italian is tactical but disciplined — built on classical principles of development, central control, and looking for tactical opportunities.",
       "keyIdeas": [
-        "Develop with purpose — Bc4 aims at f7, the weakest point in Black's camp — a key strategic concept in Italian Game",
-        "Control the center first, then look for tactical opportunities — this central control is the foundation for all middlegame operations",
-        "Use c3 and d4 to build a classical center and open lines for attack — this central control is the foundation for all middlegame operations",
-        "Every move should have a reason — just like every decision in life — a key strategic concept in Italian Game"
+        "Develop with purpose. Bc4 aims at f7 (the weakest square in chess — defended only by the king); Nf3 controls e5 and d4; everything has a job.",
+        "Control the centre first, then look for tactical opportunities. The Italian's c3+d4 break opens lines for ALL the pieces simultaneously.",
+        "Build the c3+d4 pawn duo. After 4.c3 Nf6 5.d4 exd4 6.cxd4, you have the classical centre AND the open b-file for the rook after future …Bb4+ trades.",
+        "Every move should have a reason — just like every decision in life. The Italian rewards thoughtful play, not memorised moves."
       ],
       "traps": [
-        "After Bc4, the Fried Liver with Ng5 is always a threat if Black plays carelessly",
-        "In the Giuoco Piano, Nxe4 tricks can backfire badly for Black"
+        "Against the Two Knights setup (Bc4 Nf6), the Fried Liver Attack (4.Ng5) creates immediate threats against f7. Black's only good defense is 4...d5 (the principled reply); anything else leads to a positionally lost position for Black.",
+        "In the Giuoco Piano main lines, …Nxe4 tricks (where Black thinks they're winning a pawn) often backfire — 5.d5! forks the c6-knight and the e4-knight loses material."
       ],
       "warnings": [
-        "Do not sacrifice material without a clear follow-up",
-        "Against the Two Knights with d5, be ready for sharp tactical play"
+        "Don't sacrifice material without a clear follow-up. The Italian rewards calm classical play; impulsive sacrifices usually lose.",
+        "Against the Two Knights with …d5 (the principled defence to Ng5), be ready for sharp tactical play. The Fried Liver positions require precise calculation."
       ],
       "variations": [
         {
@@ -3906,20 +3906,20 @@
       "pgn": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4",
       "color": "white",
       "style": "Open, Tactical",
-      "overview": "Akeem's Scotch Game is about seizing the initiative from the very start. By opening the center with d4 on move three, White immediately creates tactical opportunities. Akeem teaches the Scotch because it embodies his chess philosophy: be bold, take control, and create opportunities. The open positions that arise reward tactical awareness and active play.",
+      "overview": "Akeem's Scotch Game is about seizing the initiative from the very start. The opening takes its name from the 1824 London-Edinburgh correspondence match where the Scottish team's 3.d4 challenge gave the line its identity; Wilhelm Steinitz analysed it deeply in the 1880s; Garry Kasparov revived the Scotch at the elite level in the 1990s (he played it against Karpov in 1990, breaking the Spanish/Italian monopoly). By opening the centre with d4 on move three, White creates tactical opportunities immediately. Akeem teaches the Scotch because it embodies his chess philosophy: be bold, take control, create opportunities.",
       "keyIdeas": [
-        "Open the center immediately with d4 — do not wait around — a key strategic concept in Scotch Game",
-        "After Nxd4, use the centralized knight to control key squares — this central control is the foundation for all middlegame operations",
-        "Develop pieces to active squares and look for f4-f5 attacking plans — timing this correctly before the opponent can generate counterplay is critical",
-        "The open position rewards sharp tactical play and calculation — a key strategic concept in Scotch Game"
+        "Open the centre immediately with 3.d4 — don't wait. The Italian builds slowly; the Scotch attacks NOW.",
+        "After 4.Nxd4, your knight sits on the most centralized square on the board. From d4 it eyes b5, c6, e6, f5 — almost the whole board.",
+        "Develop with attacking purpose. The Bc4 + Be3 + O-O setup followed by f4 creates a kingside attack while Black is still trying to coordinate.",
+        "The open central position rewards sharp tactical calculation. Akeem teaches the Scotch as a way to build a student's tactical vision."
       ],
       "traps": [
-        "After Nxd4 Qh4, the queen sortie looks scary but White plays Nb5 with tempo",
-        "If Black plays Bc5 Nxc6 bxc6, White has a structural advantage"
+        "After 4.Nxd4 Qh4? (Black's aggressive but bad queen move), 5.Nb5! threatens Nxc7+ AND Nd6+; Black is forced into 5...Qxe4+ 6.Be2 where White is fully developed and Black hasn't moved a minor piece.",
+        "After 4...Bc5 5.Nxc6 bxc6 — Black gets doubled c-pawns. The structural advantage is permanent and worth a tempo in development."
       ],
       "warnings": [
-        "Do not trade pieces unnecessarily — your advantage is dynamic",
-        "Be careful after Nxd4 Nf6 — Black wants to equalize with rapid development"
+        "Don't trade pieces unnecessarily. The Scotch's edge is dynamic — the initiative, the better-placed pieces. Trades that simplify favour Black.",
+        "After 4.Nxd4 Nf6, Black aims to equalize with rapid development. Keep the initiative with active piece play (Nc3, Bc4, O-O) instead of slow positional moves."
       ],
       "variations": [
         {
@@ -3961,20 +3961,20 @@
       "pgn": "e4 e5 f4",
       "color": "white",
       "style": "Romantic, Aggressive",
-      "overview": "The King's Gambit is Akeem's weapon for teaching fearless chess. By sacrificing the f-pawn on move two, White declares: I am here to attack. Akeem loves this opening because it embodies everything he believes about chess and life — sometimes you have to take a risk to achieve something great. The resulting positions are wild, tactical, and endlessly entertaining.",
+      "overview": "The King's Gambit is Akeem's weapon for teaching fearless chess — the most romantic opening in chess history. Played at the highest level for 300 years (Greco analyzed it in the 1620s; Morphy used it for his famous attacking masterpieces in the 1850s-60s; Anderssen's 'Immortal Game' of 1851 was a King's Gambit), the opening earned the nickname 'romantic' because it embodied the 19th-century chess ideal: attack the king at all costs. Modern theory considers it dubious — Bobby Fischer's famous 1961 article 'A Bust to the King's Gambit' helped knock it out of elite play — but it remains a beloved teaching tool because it embodies attacking principles in their purest form. Akeem loves this opening because it embodies everything he believes: sometimes you have to take a risk to achieve something great.",
       "keyIdeas": [
-        "Sacrifice the f-pawn to open the f-file for your rook — this structural feature shapes all future strategic decisions in the position",
-        "After exf4, develop rapidly with Nf3, Bc4, and O-O — completing development before committing to a plan gives maximum flexibility",
-        "Use the open f-file and diagonal pressure to attack the Black king — timing this correctly before the opponent can generate counterplay is critical",
-        "Play with courage — the King's Gambit rewards bold play — a key strategic concept in King's Gambit"
+        "Sacrifice the f-pawn (2.f4) to open the f-file for your rook AND fight for central control. The trade-off: you've weakened your kingside; the payoff: you're attacking on move 2.",
+        "After 2...exf4, develop rapidly: Nf3 (preventing …Qh4+), Bc4 (aimed at f7), and O-O (king safety). Speed matters more than material in the King's Gambit.",
+        "Use the open f-file and the Bc4 + Nf3 + Qh5 attacking patterns. Three pieces aimed at f7 is the King's Gambit's standard threat.",
+        "Play with courage. The King's Gambit rewards bold attacking moves; if you play it timidly, you've sacrificed a pawn for nothing."
       ],
       "traps": [
-        "After exf4 Qh4+ g3 fxg3, White plays hxg3 or Nf3 depending on the position",
-        "If Black declines with d5, exd5 gives White a central pawn and open lines"
+        "After 2...exf4 3.Nf3 g5 (the Schallop Variation — Black tries to keep the f4-pawn) 4.Bc4 g4 5.O-O! — the famous Muzio Gambit, where White sacrifices the f3-knight for an overwhelming attack. The line is theoretically unsound but practically devastating.",
+        "If Black declines with 2...d5 (the Falkbeer Counter-Gambit), 3.exd5 e4 reaches sharp positions where Black has a central pawn but White has structural compensation."
       ],
       "warnings": [
-        "The King's Gambit weakens your own king — play precisely after castling",
-        "Against the Falkbeer Counter Gambit (d5), know the main theoretical lines"
+        "The King's Gambit weakens your own king. Play precisely after castling — one slip and the same open f-file you wanted becomes a deadly attacking lane for Black.",
+        "Against the Falkbeer Counter-Gambit (2...d5), know the main theoretical lines. It's the only Black response that consistently gives advantage."
       ],
       "variations": [
         {
@@ -4067,20 +4067,20 @@
       "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5",
       "color": "white",
       "style": "Classical, Fun",
-      "overview": "Samay Raina plays the Italian Game because it is the opening every chess player should know first. As a comedian-turned-chess-streamer, Samay approaches the Italian with enthusiasm and humor — but do not underestimate him. His Italian is surprisingly sound, focusing on natural development and looking for tactical opportunities. As he would say: 'First develop, then attack, then celebrate.'",
+      "overview": "Samay Raina plays the Italian Game because it's the opening every chess player should know first. The Indian comedian-turned-chess-streamer (who won SuperPogChamps 2025) approaches the Italian with enthusiasm and humour — but don't underestimate him. The Italian Game itself is one of chess's oldest analyzed openings: Pedro Damiano's 1512 treatise contains Italian Game analyses, Greco's 1620s manuscripts laid its theoretical foundations, and Paul Morphy's 1858 European tour demonstrated its attacking potential in spectacular brilliancies still studied today. Samay's Italian is surprisingly sound — focusing on natural development and tactical opportunities. As he would say: 'First develop, then attack, then celebrate.'",
       "keyIdeas": [
-        "Develop pieces to natural squares — knights before bishops before rooks — a key strategic concept in Italian Game",
-        "Target f7 with Bc4 — the weakest square in Black's position — a key strategic concept in Italian Game",
-        "Build a center with c3 and d4 when the time is right — this central control is the foundation for all middlegame operations",
-        "Keep it simple and look for tactical shots — chess should be fun — a key strategic concept in Italian Game"
+        "Develop pieces to natural squares: knights before bishops before rooks. Knights to f3 + c3, bishops to c4 + e3 (or g5), rooks to e1 after castling. Same setup every game.",
+        "Target f7 with Bc4. F7 is the weakest square in chess — defended only by the king — and every Italian tactical idea ultimately traces back to pressure on this square.",
+        "Build the c3+d4 pawn duo when the time is right. After 4.c3 Nf6 5.d4 exd4 6.cxd4, you have the classical centre and the open b-file for the rook (after future …Bb4+ trades).",
+        "Keep it simple and look for tactical shots. The Italian rewards opening principles — develop quickly, castle, look at tactics — without requiring deep theoretical preparation."
       ],
       "traps": [
-        "After Bc4 Bc5, watch for opportunities to play d4 and open the center",
-        "The Scholar's Mate threat (Qh5/Bc4xf7) is always worth checking"
+        "After 3.Bc4 Bc5 (the standard Giuoco Piano), watch for 4.d4! immediately — opening the centre while Black hasn't committed pieces. Combined with the Bc4 aimed at f7, this creates real attacking chances.",
+        "The Scholar's Mate threat (Qh5 + Bxf7#) is always worth checking. Against unprepared opponents, the threat alone forces defensive moves that lose tempo."
       ],
       "warnings": [
-        "Do not play too passively — the Italian requires active piece play",
-        "Against the Two Knights, be ready for sharp play after Nf6"
+        "Don't play too passively. The Italian requires active piece play — the d3 slow system is fine BUT you must eventually look for tactics or attacks, otherwise Black equalises.",
+        "Against the Two Knights (3...Nf6 instead of 3...Bc5), be ready for sharp play. The Fried Liver Attack (4.Ng5) requires accurate calculation; the slow 4.d3 lines lead to standard Italian middlegames."
       ],
       "variations": [
         {
@@ -4120,20 +4120,20 @@
       "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6",
       "color": "black",
       "style": "Tactical, Ambitious",
-      "overview": "Samay plays the Najdorf because if you are going to play the Sicilian, you might as well play the best version. The Najdorf is ambitious and tactical — exactly the kind of opening that creates exciting content. Samay's approach is to learn the main ideas rather than memorize 30 moves of theory, which makes his Najdorf entertaining and sometimes unpredictable.",
+      "overview": "Samay plays the Najdorf because if you're going to play the Sicilian, you might as well play the best version. The Najdorf is named after Argentine GM Miguel Najdorf, who fled Poland for Argentina in 1939 right before WWII (his entire family was killed in the Holocaust); he made Argentina his home and pioneered the …a6 move in the 1940s. Bobby Fischer immortalised it in his 1972 World Championship run; Kasparov played it for thirty years against Karpov. Samay's approach is to learn the main IDEAS rather than memorize 30 moves of theory, which makes his Najdorf entertaining and sometimes unpredictable — perfect for streaming content.",
       "keyIdeas": [
-        "Play a6 to prepare b5 and keep options open for queenside expansion — the queen's active placement creates multi-directional threats that are hard to address",
-        "Time the ...e5 central break carefully — playing it too early leaves d5 weak, but delaying it allows White to consolidate. The right moment is when all pieces support the advance",
-        "Place a rook on the c-file with ...Rc8 to generate queenside pressure — combined with ...Qa5 or ...Qb6, this creates dangerous counterplay along the open file",
-        "The Najdorf creates fighting positions — every game is different — a key strategic concept in Sicilian Najdorf"
+        "…a6 (the Najdorf move) is prophylactic AND preparatory. It prevents White's Nb5 fork tactics AND prepares the …b5 queenside expansion.",
+        "Time the …e5 central break carefully. Played too early leaves d5 weak; played at the right moment (when White has committed Nb3 or Be3), it establishes Black's central structure.",
+        "Use the half-open c-file with …Rc8. Combined with …Qa5 or …Qb6, the c-file becomes Black's primary counterattacking lane.",
+        "Every Najdorf game is different. The opening rewards understanding over memorization — exactly Samay's approach, which makes his games entertaining (and sometimes surprising)."
       ],
       "traps": [
-        "After Be3 e5 Nb3, do not play Nxe4 immediately — it loses to d5",
-        "If White plays f3, look for Be6 and slow queenside expansion"
+        "After 6.Be3 e5 7.Nb3, the natural …Nxe4? loses immediately to 8.Nd5! forking pieces. Always complete development before grabbing central pawns.",
+        "Against 6.f3 (the English Attack with kingside pawn storm prep), Black plays …Be6 and …Nbd7 setting up the slow queenside expansion. Don't rush …b5."
       ],
       "warnings": [
-        "The Najdorf requires preparation — do not wing it against strong players",
-        "Against the English Attack, know when to push b5 and when to wait"
+        "The Najdorf requires PREPARATION. Don't wing it against strong opponents — the lines are concrete and theoretical mistakes lose quickly.",
+        "Against the English Attack, knowing WHEN to push …b5 matters. Pushing too early loses to a4 attacks; pushing too late lets White's kingside attack arrive first."
       ],
       "variations": [
         {
@@ -4173,20 +4173,20 @@
       "pgn": "d4 Nf6 c4 e6 Nc3 Bb4",
       "color": "black",
       "style": "Solid, Flexible",
-      "overview": "Samay's Nimzo-Indian is his go-to defense against 1.d4. The Nimzo is perfect for an improving player — it is theoretically sound, positionally rich, and does not require memorizing 25 moves of theory to play well. By pinning the knight on c3, Black disrupts White's plans and creates the kind of imbalanced positions where understanding trumps memorization.",
+      "overview": "Samay's Nimzo-Indian is his go-to defence against 1.d4. The opening was created by Aron Nimzowitsch — the Latvian-Danish chess revolutionary whose 1925 book 'My System' redefined chess strategy — to prove that pinning a knight is worth more than developing a centre. Capablanca initially dismissed Nimzowitsch's hypermodern ideas, then started losing to them at the 1929 Carlsbad tournament. The Nimzo is theoretically sound, positionally rich, and doesn't require memorizing 25 moves of theory to play well — perfect for an improving player like Samay (who's risen from amateur to ~1900 rating through public play). The Rubinstein Variation (4.e3) honours Akiba Rubinstein; the Samisch Variation (4.a3) is from Friedrich Samisch.",
       "keyIdeas": [
-        "Pin the knight on c3 with Bb4 — disrupting White's center control — a key strategic concept in Nimzo-Indian Defense",
-        "Play for the doubled c-pawns after Bxc3 when it suits the position — this structural feature shapes all future strategic decisions in the position",
-        "Complete development efficiently with ...d5, ...e6, and quick castling — in the Nimzo-Indian, getting the king safe before launching central breaks is essential for success",
-        "The Nimzo gives Black flexible pawn structures and active piece play — this structural feature shapes all future strategic decisions in the position"
+        "Pin the c3-knight with …Bb4 — disrupting White's e4 push. As long as the bishop stays on b4, White can never play e4 cleanly.",
+        "After Bxc3+ bxc3, White has doubled c-pawns AND a damaged structure. This is YOUR structural target for the entire middlegame — pile up on the c-file with …Rc8, attack with knights to b6/a5.",
+        "Complete development efficiently with …d5 + …e6 + quick castling. Don't get fancy — get the king safe BEFORE starting strategic plans.",
+        "The Nimzo gives Black flexible pawn structures. You choose between …c5 break + IQP structures or solid …d5+…b6 setups depending on what White does."
       ],
       "traps": [
-        "After Nc3 Bb4, if White plays a3 too early, Bxc3+ bxc3 gives Black the doubled c-pawn target",
-        "In the Samisch (a3 Bxc3+ bxc3), Black can play c5 and attack the weakened pawn structure"
+        "After 3.Nc3 Bb4, if White plays 4.a3 too early (the Samisch), 4...Bxc3+ 5.bxc3 — White gets the bishop pair but you have permanent doubled c-pawns to attack. Often Black scores well in this structural battle.",
+        "In the Samisch (4.a3 line), Black plays …c5 striking the doubled c-pawn structure. The 5.bxc3 c5 setup gives Black immediate structural targets."
       ],
       "warnings": [
-        "Do not trade the dark-squared bishop without getting something in return",
-        "Against the Classical (Qc2), be ready for a strategic battle"
+        "Don't trade the dark-squared bishop without getting something in return. The …Bxc3+ trade is GOOD when it creates doubled pawns; BAD when White recaptures Nxc3 keeping the structure intact.",
+        "Against the Classical 4.Qc2 (Capablanca's preferred system), be ready for a strategic battle. White avoids the structural concession; Black needs to be patient and use the central pressure …d5 creates."
       ],
       "variations": [
         {
