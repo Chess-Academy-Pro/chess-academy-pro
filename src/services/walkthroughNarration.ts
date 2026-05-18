@@ -157,6 +157,41 @@ const GENERIC_ANNOTATION_PATTERNS: RegExp[] = [
   // ─── Generic "improving coordination / winning material" stubs ──────
   /\bimproving piece coordination and maintaining pressure\b/i,
   /\bwinning material or improving the position\b/i,
+
+  // ─── Offline-generator templates with HARDCODED piece names ─────────
+  //
+  // 2026-05-18 deep-walk audit caught 81 instances where the curated
+  // annotation file embeds these templates with a piece name that
+  // DOESN'T match the move actually played on that ply. Examples:
+  //   - "White moves the bishop to e3."  played as g4 (pawn)
+  //   - "Black develops the queen to h4." played as Ne7 (knight)
+  //   - "White moves the queen to f2."    played as Re1 (rook)
+  // The template's hardcoded piece is a relic of the offline generator
+  // walking the wrong PGN — the generator filled in piece + square
+  // from a different line's ply N. Catching the templated phrasing
+  // suppresses the wrong content so the LLM enricher can replace it.
+  /\b(?:The |White's |Black's )?(?:queen|rook|bishop|knight|king)\s+takes up an influential position on [a-h][1-8](?:,\s*eyeing multiple targets)?\b/i,
+  /\b(?:The |White's |Black's )?(?:queen|rook|bishop|knight)\s+on [a-h][1-8] controls key (?:diagonal|file|rank|square) squares\b/i,
+  /\b(?:The |White's |Black's )?(?:queen|rook|bishop|knight)\s+on [a-h][1-8] (?:controls key diagonal squares and )?maintains active piece play\b/i,
+  /\b(?:White|Black)\s+moves the (?:queen|rook|bishop|knight) to [a-h][1-8]\.\s*The (?:queen|rook|bishop|knight)/i,
+  /\b(?:White|Black)\s+takes on [a-h][1-8],\s*removing (?:White's|Black's) (?:queen|rook|bishop|knight)\b/i,
+  /\b(?:White|Black)\s+wins the piece on [a-h][1-8],\s*removing (?:White's|Black's) (?:queen|rook|bishop|knight)\b/i,
+  /\bThis also (?:gives|delivers) check, disrupting the opponent's coordination\b/i,
+  /\bThe rook takes up a powerful position on the [a-h][-\s]?file, pressuring (?:White|Black)'s position\b/i,
+
+  // ─── Offline-generator "thematic exchange" filler ───────────────────
+  // "fxe5 captures the pawn. This exchange is thematic in the X — it
+  //  defines the resulting pawn structure and piece activity."
+  // The first sentence is templated SAN narration, the second is
+  // boilerplate. Both lifted from the offline generator template pool.
+  /\b[A-Za-z][\w+#=!?-]*\s+captures the pawn\.\s+This exchange is thematic in the\b/i,
+  /\bThis exchange is thematic in the .{1,80}—\s*it defines the resulting pawn structure and piece activity\b/i,
+
+  // ─── "Bishop on safe square / preparing to castle" template ─────────
+  // Generated on plies that aren't bishop moves — the template carried
+  // over from the wrong ply during offline generation.
+  /\b(?:Black|White) develops the bishop to a safe square, preparing to castle (?:king|queen)side\.\s*The bishop on [a-h][1-8] is somewhat passive but solid\b/i,
+  /\bthis move completes (?:Black|White)[’']s basic development and prepares to challenge (?:White|Black)[’']s central control\b/i,
 ];
 
 /**

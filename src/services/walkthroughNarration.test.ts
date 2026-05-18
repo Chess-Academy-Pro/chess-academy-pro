@@ -208,6 +208,22 @@ describe('isGenericAnnotationText — subline generator filler', () => {
     // Bare "Side plays SAN." fallback
     'White plays Nf3.',
     'Black plays d5.',
+    // 2026-05-18 deep-walk audit — hardcoded-piece templates that
+    // describe the wrong piece on the wrong square. The offline
+    // generator embedded these on plies where the actual move is
+    // a totally different piece (e.g. "White moves the bishop to e3"
+    // on a g4 pawn push, "Black develops the queen to h4" on a Ne7
+    // knight move). Suppress so the LLM enricher can replace.
+    'White moves the bishop to e3. The bishop on e3 controls key diagonal squares and maintains active piece play.',
+    'White moves the queen to f2. The queen takes up an influential position on f2, eyeing multiple targets.',
+    'Black develops the queen to h4. The queen takes up an influential position on h4, eyeing multiple targets. This also checks the king, creating tactical pressure.',
+    'White takes on h4, removing Black’s queen. The queen takes up an influential position on h4, eyeing multiple targets.',
+    "Black moves the rook to e8. The rook takes up a powerful position on the e-file, pressuring White's position.",
+    'White wins the piece on d8, removing Black’s queen. This also gives check, disrupting the opponent’s coordination. The queen takes up an influential position on d8, eyeing multiple targets.',
+    'Black wins the piece on g5, removing White’s knight. The bishop on g5 controls key diagonal squares and maintains active piece play.',
+    'fxe5 captures the pawn. This exchange is thematic in the Najdorf: Poisoned Pawn — it defines the resulting pawn structure and piece activity.',
+    'Black develops the bishop to a safe square, preparing to castle kingside. The bishop on e7 is somewhat passive but solid, defending the kingside and maintaining flexibility.',
+    'Black castles kingside, bringing the king to safety and activating the rook. this move completes Black’s basic development and prepares to challenge White’s central control.',
   ];
 
   for (const line of FILLER_LINES) {
