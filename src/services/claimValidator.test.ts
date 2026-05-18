@@ -202,3 +202,116 @@ describe('validateClaims — clean output', () => {
     expect(r.violations).toEqual([]);
   });
 });
+
+// ─── DB-grounding extension (WO-COACH-DB-GROUNDING) ────────────────
+//
+// The claim validator accepts SANs and player names that aren't in the
+// live master-play context as long as they're canon in the openings DB
+// (`openings-lichess.json`). These tests pin the behaviour: Vienna
+// Steinitz Gambit moves should not trip, "Steinitz" attribution should
+// not trip, but a fabricated SAN ("Qh6") that's not in EITHER source
+// still trips.
+
+function ctxWithDbOnly(): MasterPlayContext {
+  return {
+    current: {
+      fen: 'rnbqkbnr/pppp1ppp/8/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq -',
+      totalGames: 0,
+      moves: [],
+      source: 'none',
+    },
+    lookahead: [],
+    dbEntries: [
+      {
+        eco: 'C25',
+        name: 'Vienna Game',
+        pgn: 'e4 e5 Nc3',
+        sans: ['e4', 'e5', 'Nc3'],
+      },
+      {
+        eco: 'C25',
+        name: 'Vienna Game: Vienna Gambit, Steinitz Gambit Accepted',
+        pgn: 'e4 e5 Nc3 Nc6 f4 exf4 d4',
+        sans: ['e4', 'e5', 'Nc3', 'Nc6', 'f4', 'exf4', 'd4'],
+      },
+    ],
+  };
+}
+
+function ctxWithBoth(): MasterPlayContext {
+  const base = buildContext();
+  return {
+    ...base,
+    dbEntries: [
+      {
+        eco: 'C84',
+        name: 'Ruy Lopez: Marshall Attack',
+        pgn: 'e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O c3 d5',
+        sans: ['e4', 'e5', 'Nf3', 'Nc6', 'Bb5', 'a6', 'Ba4', 'Nf6', 'O-O', 'Be7', 'Re1', 'b5', 'Bb3', 'O-O', 'c3', 'd5'],
+      },
+    ],
+  };
+}
+
+describe('validateClaims — DB grounding', () => {
+  it('accepts a SAN canon in dbEntries even when master-play has no data', () => {
+    const r = validateClaims(
+      "You play exf4, accepting the gambit. After 4.d4 White rebuilds the center.",
+      ctxWithDbOnly(),
+    );
+    const sanViolations = r.violations.filter((v) => v.kind === 'san');
+    expect(sanViolations).toEqual([]);
+  });
+
+  it('accepts an opening-pioneer player name when it appears in a DB entry name', () => {
+    const r = validateClaims(
+      "This is the Steinitz Gambit — a sharp pawn sac for kingside attack.",
+      ctxWithDbOnly(),
+    );
+    const entityViolations = r.violations.filter((v) => v.kind === 'entity');
+    expect(entityViolations).toEqual([]);
+  });
+
+  it('still flags a fabricated SAN that is in NEITHER master-play nor DB', () => {
+    const r = validateClaims('Best here is Qh6, a known refutation.', ctxWithDbOnly());
+    const sanViolations = r.violations.filter((v) => v.kind === 'san');
+    expect(sanViolations.length).toBeGreaterThan(0);
+    expect(sanViolations[0].claim).toBe('Qh6');
+  });
+
+  it('still flags fabricated percentages even with DB grounding (DB has no popularity data)', () => {
+    const r = validateClaims('Masters score 73% with this line.', ctxWithDbOnly());
+    const pctViolations = r.violations.filter((v) => v.kind === 'numeric');
+    expect(pctViolations.length).toBeGreaterThan(0);
+  });
+
+  it('accepts SANs from BOTH sources unioned (master-play + DB)', () => {
+    const r = validateClaims(
+      "Main move is Bb5 (Lopez), but the Marshall Attack continues with d5 to seize the center.",
+      ctxWithBoth(),
+    );
+    const sanViolations = r.violations.filter((v) => v.kind === 'san');
+    expect(sanViolations).toEqual([]);
+  });
+
+  it('accepts a player attribution when topGames has them OR DB names them', () => {
+    // Marshall is in the DB entry name but not in master-play topGames
+    // for the Marshall Attack context — should still pass.
+    const r = validateClaims('Marshall pioneered this gambit in 1918.', ctxWithBoth());
+    const marshallViolation = r.violations.find(
+      (v) => v.kind === 'entity' && v.claim === 'Marshall',
+    );
+    // Marshall is not in our CANONICAL_PLAYERS list, but Steinitz is —
+    // so this test really proves the dbEntries path lets a name through.
+    // Sanity-check with a player we DO match in CANONICAL_PLAYERS:
+    const r2 = validateClaims(
+      "The Steinitz Gambit is named after the first World Champion.",
+      ctxWithDbOnly(),
+    );
+    const steinitzViolation = r2.violations.find(
+      (v) => v.kind === 'entity' && v.claim === 'Steinitz',
+    );
+    expect(steinitzViolation).toBeUndefined();
+    expect(marshallViolation).toBeUndefined();
+  });
+});

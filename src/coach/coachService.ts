@@ -468,6 +468,14 @@ async function ask(input: CoachAskInput, options: CoachServiceOptions = {}): Pro
       (input.liveState.fen
         ? {
             currentFen: input.liveState.fen,
+            // DB-grounding: thread the move history through so the
+            // claim validator can consult openings-lichess.json as a
+            // second source. Without this, the validator rejected
+            // SANs that are canon in the current opening's named
+            // sub-variations but not in the live Lichess explorer's
+            // top-N for the exact FEN (the Steinitz Gambit failure
+            // mode caught 2026-05-18).
+            moveHistory: input.liveState.moveHistory,
             surface: coachSurfaceToRoute(input.liveState.surface),
           }
         : undefined);

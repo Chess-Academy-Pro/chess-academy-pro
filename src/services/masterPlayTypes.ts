@@ -68,6 +68,24 @@ export interface MasterPlayResult {
   topGames?: ReadonlyArray<MasterPlayTopGame>;
 }
 
+/** A canonical opening DB entry (from `openings-lichess.json` +
+ *  `openings-lichess-extended.json`). Used by the claim validator as a
+ *  SECOND grounding source alongside live master-play data — when a
+ *  named opening (Vienna Steinitz Gambit, Najdorf English Attack,
+ *  Marshall Attack, ...) exists in the DB, its move sequence and name
+ *  attribution count as book theory the coach is free to teach without
+ *  needing live Lichess explorer top-N coverage of every position. */
+export interface OpeningDbEntry {
+  /** ECO classification, e.g. "C24". */
+  eco: string;
+  /** Canonical name from the Lichess DB. */
+  name: string;
+  /** Space-separated SAN sequence. */
+  pgn: string;
+  /** SANs derived from `pgn` for fast contains-checks. */
+  sans: ReadonlyArray<string>;
+}
+
 /** The block injected into the LLM system prompt at Layer B. Built
  *  from one or more MasterPlayResults (current FEN + look-ahead
  *  children). Read by `claimValidator` to ground SAN / numeric /
@@ -83,4 +101,14 @@ export interface MasterPlayContext {
     moveFromCurrent: string;
     result: MasterPlayResult;
   }>;
+  /** Canonical Lichess-DB opening entries that match the current FEN's
+   *  move history OR were referenced by name in the most recent user
+   *  message. Populated by `getCoachChatResponse` after
+   *  `buildMasterPlayContext` returns. The claim validator consults
+   *  this alongside `current.moves` so the coach can answer "walk me
+   *  through the Steinitz Gambit" without the validator rejecting
+   *  every SAN that isn't in Lichess's live top-N for that exact
+   *  position. Empty / undefined when neither path matched (validator
+   *  falls back to master-play-only behavior). */
+  dbEntries?: ReadonlyArray<OpeningDbEntry>;
 }

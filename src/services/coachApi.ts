@@ -8,7 +8,8 @@ import { recordApiUsage } from './coachCostService';
 import { lookupMasterPlay } from './masterPlayLookup';
 import { validateClaims, type ClaimValidationResult } from './claimValidator';
 import { logAppAudit } from './appAuditor';
-import type { MasterPlayContext, MasterPlayResult } from './masterPlayTypes';
+import type { MasterPlayContext, MasterPlayResult, OpeningDbEntry } from './masterPlayTypes';
+import { buildOpeningDbEntries } from './openingDbGrounding';
 import type { CoachTask, CoachContext, CoachVerbosity, AiProvider } from '../types';
 
 // WO-COACH-MASTER-INTEGRATION audit bridge — installs window.__masterPlayAudit
@@ -826,6 +827,15 @@ export interface MasterGroundingOptions {
    *  keyed on this FEN, so callers should pass the SAME FEN the watcher
    *  saw most recently. */
   currentFen?: string;
+  /** SAN move history that led to `currentFen`. Used by the
+   *  DB-grounding extension to resolve the current opening via
+   *  `findOpeningByPgnPrefix` and pull canonical sub-variations from
+   *  `openings-lichess.json` as a SECOND grounding source alongside
+   *  the live Lichess master-play data. Optional — when omitted, the
+   *  DB-grounding still works via name-based detection on the user's
+   *  most recent message ("walk me through the Steinitz Gambit"
+   *  surfaces the right entries with no move history needed). */
+  moveHistory?: ReadonlyArray<string>;
   /** Surface route for audit attribution. Goes into every emitted
    *  audit event (`master-play-lookup`, `claim-validator-trip`, etc). */
   surface: string;
@@ -982,12 +992,30 @@ function renderMasterPlayContextBlock(ctx: MasterPlayContext): string {
       }
     }
   }
+  // ── DB-grounding block ──────────────────────────────────────────────
+  // Canonical opening entries from openings-lichess.json that match
+  // the current move history OR were referenced by name in the user's
+  // most recent message. The coach can teach any opening name, SAN, or
+  // sub-variation listed here as book theory — these don't need
+  // master-play attribution to count as grounded.
+  if (ctx.dbEntries && ctx.dbEntries.length > 0) {
+    lines.push('');
+    lines.push('OPENING THEORY CONTEXT (canonical Lichess DB — book theory):');
+    lines.push('These named openings and sub-variations match the current position or your student\'s question.');
+    lines.push('SANs and names listed here are valid book theory you may teach without master-game attribution.');
+    for (const e of ctx.dbEntries.slice(0, 8)) {
+      lines.push(`  • [${e.eco}] ${e.name} — ${e.pgn}`);
+    }
+  }
   lines.push('');
   lines.push('GROUNDING RULES (non-negotiable):');
   lines.push('  • When recommending a move, citing frequencies / ratings / player names / years, or making');
-  lines.push('    comparative claims about master practice — ground EVERY such claim in the data above.');
+  lines.push('    comparative claims about master practice — ground EVERY such claim in the master-play data');
+  lines.push('    above.');
   lines.push('  • Never invent or estimate move popularity, game counts, ratings, or "what masters play"');
-  lines.push('    figures that are not literally in the data above.');
+  lines.push('    figures that are not literally in the master-play data.');
+  lines.push('  • SANs and opening names found in the OPENING THEORY CONTEXT above are valid book theory —');
+  lines.push('    you may teach them freely, naming the opening and walking through the canonical sequence.');
   lines.push('  • If you need a position not shown, say so — do not fabricate the answer.');
   lines.push('  • Strategic prose (plan ideas, structural concepts) without specific SANs is unrestricted.');
   lines.push('═══════════════════════════════════════════════════════════════════════════');
@@ -1149,6 +1177,43 @@ export async function getCoachChatResponse(
     if (intentFired) {
       try {
         masterPlayContext = await buildMasterPlayContext(grounding);
+        // DB-grounding extension: attach canonical openings-lichess.json
+        // entries that match the current move history OR were referenced
+        // by name in the user's latest message. The claim validator
+        // consults these alongside master-play, so the coach can answer
+        // "walk me through the Steinitz Gambit" even when live Lichess
+        // explorer's top-N for the exact position doesn't carry the
+        // gambit's canonical continuations. Always-on when grounding
+        // engages — cheap (in-memory DB scan) and additive.
+        const lastUserContent = (() => {
+          for (let i = messages.length - 1; i >= 0; i -= 1) {
+            if (messages[i].role === 'user') return messages[i].content;
+          }
+          return '';
+        })();
+        const dbEntries: ReadonlyArray<OpeningDbEntry> = buildOpeningDbEntries({
+          moveHistory: grounding.moveHistory,
+          userMessage: lastUserContent,
+          maxEntries: 8,
+        });
+        if (masterPlayContext && dbEntries.length > 0) {
+          masterPlayContext = { ...masterPlayContext, dbEntries };
+        } else if (!masterPlayContext && dbEntries.length > 0) {
+          // No master data at all, but the DB caught the opening — still
+          // useful grounding. Build a minimal context with empty master
+          // data and the DB entries attached so the validator can use
+          // them.
+          masterPlayContext = {
+            current: {
+              fen: grounding.currentFen ?? '',
+              totalGames: 0,
+              moves: [],
+              source: 'none',
+            },
+            lookahead: [],
+            dbEntries,
+          };
+        }
         groundingEngaged = masterPlayContext !== undefined;
       } catch (err) {
         // Building the context shouldn't throw, but if it does, fail
