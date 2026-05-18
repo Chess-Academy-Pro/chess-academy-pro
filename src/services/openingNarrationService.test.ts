@@ -5,6 +5,7 @@ import {
   shouldUseClaudeFallback,
   pickNarration,
   seedNarrations,
+  isOpeningNameCompatible,
 } from './openingNarrationService';
 import type { OpeningNarration } from '../types';
 
@@ -91,6 +92,42 @@ describe('openingNarrationService', () => {
       await seedNarrations([UNAPPROVED]);
       const result = await getBestNarration('some-fen', ['Nf3'], 'Test Opening');
       expect(result).toBeNull();
+    });
+
+    it('REJECTS FEN match when seed openingName is incompatible with active opening', async () => {
+      // 2026-05-17 Fantasy Caro regression: every 1.e4 opening reaches
+      // the same FEN as the Italian Game seed entry, so the FEN match
+      // was leaking Italian Game narration into Caro / Sicilian / French
+      // / Pirc walkthroughs. The FEN result must now be gated on opening
+      // name compatibility — when incompatible, we fall through to the
+      // opening-name lookup (which fails for cross-family) and then to
+      // move-only (weak match that shouldUseClaudeFallback rejects).
+      await seedNarrations([ITALIAN_E4]);
+      const result = await getBestNarration(
+        FEN_AFTER_E4,
+        ['e4'],
+        'Fantasy Variation vs Caro-Kann (GothamChess)',
+      );
+      // FEN match must NOT fire; if any match returns, it must be the
+      // weak move-only kind which the caller's shouldUseClaudeFallback
+      // gate rejects (so the original annotation is preserved).
+      expect(result?.matchType).not.toBe('fen');
+      if (result) {
+        expect(shouldUseClaudeFallback(result)).toBe(true);
+      }
+    });
+
+    it('REJECTS FEN match when no active opening name is provided', async () => {
+      // Without an active opening name we can't verify compatibility,
+      // so the FEN match is conservatively rejected. The function may
+      // still return a weak move-only match which the caller's
+      // shouldUseClaudeFallback gate rejects.
+      await seedNarrations([ITALIAN_E4]);
+      const result = await getBestNarration(FEN_AFTER_E4, ['e4']);
+      expect(result?.matchType).not.toBe('fen');
+      if (result) {
+        expect(shouldUseClaudeFallback(result)).toBe(true);
+      }
     });
 
     it('prefers variation-specific match over generic', async () => {
@@ -184,6 +221,42 @@ describe('openingNarrationService', () => {
       await seedNarrations([ITALIAN_E4]);
       const count = await db.openingNarrations.count();
       expect(count).toBe(1);
+    });
+  });
+
+  describe('isOpeningNameCompatible', () => {
+    it('returns false when active name is missing', () => {
+      expect(isOpeningNameCompatible('Italian Game', undefined)).toBe(false);
+      expect(isOpeningNameCompatible('Italian Game', '')).toBe(false);
+    });
+
+    it('returns true for exact match (case-insensitive)', () => {
+      expect(isOpeningNameCompatible('Italian Game', 'italian game')).toBe(true);
+      expect(isOpeningNameCompatible('Sicilian Defense', 'Sicilian Defense')).toBe(true);
+    });
+
+    it('returns true when one name is a substring of the other', () => {
+      // Family seed ↔ specific active name
+      expect(
+        isOpeningNameCompatible('Caro-Kann Defense', 'Caro-Kann Defense: Classical Variation'),
+      ).toBe(true);
+    });
+
+    it('returns false for cross-family names (Italian vs Caro)', () => {
+      // The bug we're fixing: Italian Game seed leaking into Caro walkthrough
+      expect(
+        isOpeningNameCompatible('Italian Game', 'Fantasy Variation vs Caro-Kann (GothamChess)'),
+      ).toBe(false);
+      expect(isOpeningNameCompatible('Italian Game', 'Sicilian Defense')).toBe(false);
+      expect(isOpeningNameCompatible('Italian Game', 'French Defense')).toBe(false);
+    });
+
+    it('strips parenthesised attributions before matching', () => {
+      // Pro-repertoire IDs carry "(GothamChess)" / "(by Naroditsky)" — these
+      // must not break name compatibility against the bare family name.
+      expect(
+        isOpeningNameCompatible('Caro-Kann Defense', 'Caro-Kann Defense (GothamChess)'),
+      ).toBe(true);
     });
   });
 });

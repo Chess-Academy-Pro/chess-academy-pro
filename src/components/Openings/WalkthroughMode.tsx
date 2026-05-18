@@ -15,7 +15,7 @@ import { voiceService } from '../../services/voiceService';
 import { unlockAudioContext } from '../../services/audioContextManager';
 import { stockfishEngine } from '../../services/stockfishEngine';
 import { fetchCloudEval } from '../../services/lichessExplorerService';
-import { loadSubLineAnnotations, loadAnnotationsForPgn, enhanceWithNarration } from '../../services/annotationService';
+import { loadSubLineAnnotations, loadAnnotationsForPgn } from '../../services/annotationService';
 import { useBoardContext } from '../../hooks/useBoardContext';
 import { useStrictNarration } from '../../hooks/useStrictNarration';
 import { trimToSentences, isGenericAnnotationText } from '../../services/walkthroughNarration';
@@ -482,20 +482,17 @@ export function WalkthroughMode({
     return null;
   }, [annotations, currentMoveIndex, expectedMoves]);
 
-  const [currentAnnotation, setCurrentAnnotation] = useState<OpeningMoveAnnotation | null>(null);
-
-  useEffect(() => {
-    if (!baseAnnotation) {
-      setCurrentAnnotation(null);
-      return;
-    }
-    let cancelled = false;
-    const moveHistory = expectedMoves.slice(0, currentMoveIndex).map((m) => m.san);
-    void enhanceWithNarration(baseAnnotation, currentFen, moveHistory, opening.name).then((enhanced) => {
-      if (!cancelled) setCurrentAnnotation(enhanced);
-    });
-    return () => { cancelled = true; };
-  }, [baseAnnotation, currentFen, currentMoveIndex, expectedMoves, opening.name]);
+  // The displayed annotation is the base annotation (curated JSON +
+  // LLM enrichment). The legacy `enhanceWithNarration` override was
+  // REMOVED here on 2026-05-17 because the FEN-keyed
+  // `db.openingNarrations` seed table was leaking cross-family
+  // narration: every walkthrough that started 1.e4 (Caro, Sicilian,
+  // French, Pirc) pulled the seeded "Italian Game with e4" text
+  // because all share the same FEN after 1.e4. The seed system
+  // pre-dates `walkthroughLlmNarrator` — with the LLM narrator now
+  // generating per-variation prose from curator context, the
+  // FEN-keyed seed is strictly inferior and harmful here.
+  const currentAnnotation = baseAnnotation;
 
   // ─── Real-time arrow/highlight reveal via TTS boundary events ────────────
 

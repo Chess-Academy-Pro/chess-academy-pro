@@ -314,11 +314,10 @@ export async function loadAnnotationsForPgn(
     return data.moveAnnotations;
   }
 
-  // Search subLines for a better match
+  // Search subLines for the BEST match
+  let bestAnnotations = data.moveAnnotations;
+  let bestMatch = mainLineMatch;
   if (data.subLines && data.subLines.length > 0) {
-    let bestAnnotations = data.moveAnnotations;
-    let bestMatch = mainLineMatch;
-
     for (const subLine of data.subLines) {
       const subMatch = countMatchingMoves(pgn, subLine.moveAnnotations);
       if (subMatch > bestMatch) {
@@ -326,11 +325,26 @@ export async function loadAnnotationsForPgn(
         bestAnnotations = subLine.moveAnnotations;
       }
     }
-
-    return bestAnnotations;
   }
 
-  return data.moveAnnotations;
+  // If even the BEST match covers less than half the PGN's plies, the
+  // annotations are for a DIFFERENT variation than what the user is
+  // walking through — returning them would put wrong-variation
+  // commentary on the board (e.g. Caro Classical "3.Nc3 / develops
+  // the knight" text rendered on Fantasy Caro's 3.f3 move). Return null
+  // instead so the WalkthroughMode caller's synthesise-from-PGN +
+  // LLM-enricher path takes over fully. 2026-05-17 Fantasy Caro audit
+  // caught this — pro-gothamchess-fantasy-caro resolves to
+  // caro-kann-defense.json whose main line is Classical Caro; the first
+  // 4 plies prefix-match (1.e4 c6 2.d4 d5) so the loader returned
+  // Classical annotations and the first 6 plies of the walkthrough
+  // showed Classical Caro narration.
+  const pgnLen = pgnMoveCount;
+  if (pgnLen > 0 && bestMatch * 2 < pgnLen) {
+    return null;
+  }
+
+  return bestAnnotations;
 }
 
 export async function loadSubLineAnnotations(
