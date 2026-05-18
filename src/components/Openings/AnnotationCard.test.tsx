@@ -50,6 +50,39 @@ describe('AnnotationCard', () => {
     );
   });
 
+  it('prefers narration field over annotation when both present', () => {
+    // 2026-05-17 regression: AnnotationCard was reading only
+    // `annotation.annotation`, so when WalkthroughMode synthesised
+    // bare-SAN stubs (annotation = "fxe4") and the LLM enricher
+    // filled `narration`, the card displayed the filtered-out stub
+    // (empty) while voice spoke the LLM narration correctly.
+    const annWithNarration = {
+      ...fullAnnotation,
+      annotation: 'fxe4', // bare SAN — matches isGenericAnnotationText filter
+      narration: 'White recaptures with the f-pawn, opening the f-file for the rook.',
+    };
+    render(
+      <AnnotationCard annotation={annWithNarration} moveNumber={3} isWhite={true} visible={true} />,
+    );
+    expect(screen.getByTestId('annotation-text')).toHaveTextContent(
+      'White recaptures with the f-pawn, opening the f-file for the rook.',
+    );
+  });
+
+  it('falls back to annotation when narration is empty/whitespace', () => {
+    const annWithoutNarration = {
+      ...fullAnnotation,
+      annotation: 'Solid teaching annotation here.',
+      narration: '   ',
+    };
+    render(
+      <AnnotationCard annotation={annWithoutNarration} moveNumber={1} isWhite={true} visible={true} />,
+    );
+    expect(screen.getByTestId('annotation-text')).toHaveTextContent(
+      'Solid teaching annotation here.',
+    );
+  });
+
   it('renders pawn structure section when present', () => {
     render(
       <AnnotationCard annotation={fullAnnotation} moveNumber={1} isWhite={true} visible={true} />,

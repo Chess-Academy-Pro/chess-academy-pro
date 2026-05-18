@@ -54,16 +54,29 @@ export function AnnotationCard({
             </span>
           </div>
 
-          {/* Main annotation — suppress generic template filler ("X by
-              White. The position is heading toward the critical moment.")
-              that was baked into the annotation JSONs by an offline
-              stub generator. Without this suppression the same two
-              canned sentences would repeat across every opening. */}
-          {!isGenericAnnotationText(annotation.annotation) && (
-            <p className="text-sm text-theme-text leading-relaxed" data-testid="annotation-text">
-              {annotation.annotation}
-            </p>
-          )}
+          {/* Main displayed text. Prefer `narration` when present (LLM
+              enricher writes here), fall back to `annotation` (curated
+              static text writes here). Suppress generic template filler
+              ("X by White. The position is heading toward the critical
+              moment.") that was baked into the annotation JSONs by an
+              offline stub generator. The 2026-05-17 Fantasy Caro audit
+              caught a display regression: for openings whose static
+              annotations don't match the active PGN, WalkthroughMode
+              synthesises bare-SAN stubs (annotation = SAN) and the LLM
+              enricher fills `narration` — but this <p> was only reading
+              `annotation`, so the LLM-generated narration was SPOKEN
+              (voice fallback chain: narration → annotation) but never
+              DISPLAYED. The card showed empty while the voice spoke
+              correctly. Reading narration first closes that gap. */}
+          {(() => {
+            const displayText = annotation.narration?.trim() || annotation.annotation;
+            if (!displayText || isGenericAnnotationText(displayText)) return null;
+            return (
+              <p className="text-sm text-theme-text leading-relaxed" data-testid="annotation-text">
+                {displayText}
+              </p>
+            );
+          })()}
 
           {/* Move Order Note — why this move order matters */}
           {annotation.moveOrderNote && (
