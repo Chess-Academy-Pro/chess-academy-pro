@@ -224,6 +224,16 @@ describe('isGenericAnnotationText — subline generator filler', () => {
     'fxe5 captures the pawn. This exchange is thematic in the Najdorf: Poisoned Pawn — it defines the resulting pawn structure and piece activity.',
     'Black develops the bishop to a safe square, preparing to castle kingside. The bishop on e7 is somewhat passive but solid, defending the kingside and maintaining flexibility.',
     'Black castles kingside, bringing the king to safety and activating the rook. this move completes Black’s basic development and prepares to challenge White’s central control.',
+    // 2026-05-18 round 2 of generator-template suppression — sentences
+    // that appear 5-69× across distinct sublines (generator filler).
+    'The knight reaches a powerful central outpost on d4, controlling multiple key squares.',
+    "The rook takes up a powerful position on the e-file, pressuring Black's position.",
+    'This is a key positional idea.',
+    'From here, understanding the strategic plans — piece placement, pawn breaks, and targets — is essential.',
+    "cxd4 completes the variation. The resulting position after this capture offers Black clear targets and plans. Study this structure — you'll see it often in the Milner-Barry.",
+    'black brings the bishop to its natural square on a5. the bishop on a5 controls key diagonal squares and maintains active piece play.',
+    'white deploys the knight to f5. the knight reaches a powerful central outpost on f5, controlling multiple key squares.',
+    "White castles kingside, bringing the king to safety while activating the rook for the upcoming attack. This calm move ignores Black's material gain and focuses on rapid piece coordination.",
   ];
 
   for (const line of FILLER_LINES) {

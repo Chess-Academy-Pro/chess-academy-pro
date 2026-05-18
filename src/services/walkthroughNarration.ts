@@ -192,6 +192,35 @@ const GENERIC_ANNOTATION_PATTERNS: RegExp[] = [
   // over from the wrong ply during offline generation.
   /\b(?:Black|White) develops the bishop to a safe square, preparing to castle (?:king|queen)side\.\s*The bishop on [a-h][1-8] is somewhat passive but solid\b/i,
   /\bthis move completes (?:Black|White)[’']s basic development and prepares to challenge (?:White|Black)[’']s central control\b/i,
+
+  // ─── Round 2 of offline-generator template suppression ──────────────
+  //
+  // Sentence-frequency scan of the 628-subline deep-walk audit caught
+  // more templates appearing 5-69× across distinct sublines — clear
+  // signature of a generator filling these into many positions
+  // regardless of the actual move/idea.
+  /\bThe knight reaches a powerful central outpost on [a-h][1-8],\s*controlling multiple key squares\b/i,
+  /\bThe rook takes up a powerful position on the [a-h][-\s]?file,\s*pressuring (?:White|Black)['’]s position\b/i,
+  /\bThe (?:knight|bishop|rook|queen) on [a-h][1-8] (?:controls|maintains)\b.{0,80}(?:active piece play|key (?:diagonal|central|file) squares)\b/i,
+  /^\s*This is a key positional idea\.?\s*$/i,
+  /\bFrom here,\s*understanding the strategic plans\s*[—–-]\s*piece placement,\s*pawn breaks,\s*and targets\s*[—–-]\s*is essential\b/i,
+
+  // ─── "completes the variation" / "resulting position offers" template ─
+  // Used in Milner-Barry, French, Italian openings on consecutive plies
+  // with IDENTICAL text — the generator filled the same sentence on
+  // ply N and ply N+1 (audit 2026-05-18: Milner-Barry / Black Declines
+  // with Bd7 / plies 14+15).
+  /\b[A-Za-z][\w+#=!?-]*\s+completes the variation\.\s+The resulting position after this capture offers (?:Black|White) clear targets and plans\b/i,
+  /\bStudy this structure\s*[—–-]\s*you[’']ll see it often in (?:Milner-Barry|French|Italian)/i,
+
+  // ─── "natural square" + "active piece play" stub combo ───────────────
+  // "black brings the bishop to its natural square on a5. the bishop on a5
+  //  controls key diagonal squares and maintains active piece play."
+  /\b(?:White|Black|white|black)\s+brings the (?:bishop|knight|rook|queen) to its natural square on [a-h][1-8]\b/i,
+  /\b(?:White|Black|white|black)\s+deploys the (?:bishop|knight|rook|queen) to [a-h][1-8]\b/i,
+
+  // ─── "calm move ignores Black's material gain" stub ─────────────────
+  /\bThis calm move ignores (?:Black|White)['’]s material gain and focuses on rapid piece coordination\b/i,
 ];
 
 /**
