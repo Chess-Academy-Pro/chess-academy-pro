@@ -2347,42 +2347,42 @@
       "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4 Nc6 Nf3 Bg4 Na4 Bb6 Nxb6 axb6",
       "color": "white",
       "style": "Aggressive, Creative",
-      "overview": "Firouzja occasionally employs the Vienna Game as a surprise weapon. The early Nc3 keeps options open for f4 or Bc4 setups. His aggressive style makes the Vienna particularly dangerous — opponents face immediate tactical problems.",
+      "overview": "Firouzja's Vienna Game is the King's Gambit's smarter cousin. Named after the Viennese chess circles of the 1860s-1880s where Wilhelm Steinitz (the first official World Champion) and his students experimented with it, the Vienna was a popular tournament weapon through the early 1900s before the Italian and Spanish overshadowed it. Modern engine preparation has resurrected it: Vassily Ivanchuk and Adams use it occasionally at elite level. Firouzja's aggressive style fits perfectly — by tucking Nc3 in first, you defend e4 and keep the f-pawn free for either f4 (gambit) or f3 (solid). Either way, opponents who autopilot through 2.Nc3 see f4 on move 3 and immediately have problems they haven't studied.",
       "keyIdeas": [
-        "Develop Nc3 before Nf3 to keep the f-pawn free — this flexibility is the Vienna's key advantage, allowing f4 (gambit), f3 (solid), or d3 (quiet) depending on Black's response",
-        "The f4 push creates immediate tension in the center — this central control is the foundation for all middlegame operations",
-        "Bc4 targets f7 and combines with Nc3 for attacking chances — timing this correctly before the opponent can generate counterplay is critical",
-        "The Vienna can transpose into favorable lines of the King's Gambit — a key strategic concept in Vienna Game"
+        "Nc3 BEFORE Nf3 is the entire opening's reason for existing. The reversed order protects e4 (so 3.f4 doesn't hang the pawn after …Nxe4) AND keeps Nf3 in reserve for after the f-pawn moves.",
+        "Against 2…Nf6 (most common), 3.f4 is the principled Vienna Gambit. After 3...d5 (Black's only critical reply) 4.fxe5 Nxe4, you've sacrificed a pawn for open lines and active piece development.",
+        "Against 2…Nc6 (Italian-like setup), play 3.Bc4 first (or 3.f4 for the violent version). The Nc3+Bc4 combo aims at f7 with the standard Italian-style pressure plus the Vienna's central control.",
+        "The Vienna transitions to King's Gambit-style attacks but with one improvement: your knight is on c3, NOT b1. That extra piece in the attack is the difference between a sound gambit and an unsound one."
       ],
       "traps": [
-        "After Nc3 Nf6 Bc4 Nxe4?! Qh5! creates immediate threats against f7 and the knight"
+        "After 2…Nf6 3.Bc4 Nxe4?? (the natural-looking pawn grab) — 4.Qh5! creates double threats: Qxf7# AND Qxe5+ winning the knight. Black's only saving move is 4...Nd6 (defending mate but losing material). Pure Vienna shot."
       ],
       "warnings": [
-        "The f4 push weakens the kingside — play it only when ready to follow up",
-        "Do not allow Black to equalize with d5 without being prepared"
+        "Don't play 3.f4 if Black hasn't committed pieces yet. After move-orders like 2.Nc3 Bc5 (skipping …Nf6), the f4 push hangs the e-pawn AND weakens your king prematurely.",
+        "Watch for …d5 equalising. In ANY Vienna position, if Black gets in …d5 before you've completed development, the centre dissolves and your opening edge vanishes. Prevent or punish …d5 specifically."
       ],
       "variations": [
         {
           "name": "Vienna with f4",
           "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4 Nc6 Nf3 Bg4 Na4 Bb6 Nxb6 axb6",
-          "explanation": "Firouzja's aggressive Vienna setup. The f4 push creates immediate central tension and the Na4-Nxb6 maneuver targets Black's bishop pair."
+          "explanation": "Firouzja's positional Vienna setup. After 2...Nf6 3.Bc4 Bc5 4.d3 (calm development) d6 5.f4 (the attacking signal) Nc6 6.Nf3 Bg4 (Black pins) 7.Na4! (sidestepping the pin AND attacking the c5-bishop) Bb6 8.Nxb6 axb6 — Black's pawn structure is now doubled on b6+b7. The Na4-Nxb6 manoeuvre is the line's signature: trade off Black's most active piece, accept the structural concession for the long-term positional edge."
         },
         {
           "name": "Vienna Gambit",
           "pgn": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Bc5 d4 Bb4 Bd3 Nxc3 bxc3 Bxc3+ Bd2 Bxa1 Qxa1",
-          "explanation": "The aggressive gambit continuation. After Qxa1, White is down an exchange but has open lines, the bishop pair, and a powerful central pawn duo — very much in Firouzja's attacking style."
+          "explanation": "The Vienna Gambit at its most aggressive — a classic example of investing material for piece activity. After 3.f4 d5! (the principled reply) 4.fxe5 Nxe4 5.Nf3 Bc5 6.d4 Bb4 (Black pins the knight) 7.Bd3 Nxc3 8.bxc3 Bxc3+ 9.Bd2 Bxa1 10.Qxa1 — White is down an exchange (rook for bishop) but has the bishop pair, the open f-file, the central pawn duo e5+d4, and Black hasn't castled. The compensation is real; the position is genuinely murky for both sides. Pure attacking chess."
         }
       ],
       "trapLines": [
         {
           "name": "exf4 Opens the f-file",
           "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4",
-          "explanation": "When Black captures exf4 after the f4 push, White recaptures with the bishop and gets an open f-file. The rook on f1 creates strong attacking pressure as the game opens up."
+          "explanation": "When Black captures 5...exf4 (the natural pawn-grab response to your f4 push), you recapture with Bxf4 (NOT Bxh6 if the f-pawn went forward without the knight being on f6). The open f-file becomes White's attacking lane — Rf1 lifts to f3 or f5, the Bc4 still aims at f7, and the queen joins via Qe2 or Qf3. Three pieces aimed at f7; the attack often crashes through in 6-8 moves."
         },
         {
           "name": "Bg4 Pin Broken by f5",
           "pgn": "e4 e5 Nc3 Nf6 Bc4 Bc5 d3 d6 f4",
-          "explanation": "Black pins the knight with Bg4 but White plays f5 breaking the pin and gaining kingside space. The bishop is forced to retreat and White gets a strong attack."
+          "explanation": "When Black plays …Bg4 trying to pin the f3-knight (in lines where Nf3 has been played), the Vienna's response is 6.f5! breaking the pin from the wrong side. The f-pawn attacks Black's e5-pawn AND blocks the diagonal between the Bg4 and the f3-knight. The bishop is forced to retreat, you've gained a tempo AND space."
         }
       ]
     },
@@ -2394,47 +2394,47 @@
       "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be7 f3 Be6 Qd2 Nbd7 O-O-O b5 g4 Nb6",
       "color": "black",
       "style": "Sharp, Dynamic",
-      "overview": "Firouzja plays the Najdorf with the fearlessness of youth. He is not afraid of the sharpest lines and often outprepares his opponents in the resulting tactical melees. His Najdorf is characterized by deep preparation and creative middlegame play.",
+      "overview": "Firouzja plays the Najdorf with the fearlessness of youth — and the preparation of an engine. The opening is named after Argentine GM Miguel Najdorf, who fled Poland for Argentina in 1939 right before WWII (his entire family was killed in the Holocaust); he made his new country his home and pioneered the …a6 move in the 1940s. Bobby Fischer immortalised it in his 1972 World Championship run, Kasparov played it for thirty years against Karpov, and Firouzja represents the next generation — the youngest player to reach 2800 FIDE (2021, age 18) brings 21st-century engine preparation to one of chess's oldest theoretical battlegrounds. His Najdorf is characterized by deep preparation in the English Attack opposite-side castling races.",
       "keyIdeas": [
-        "The a6 move prepares b5 and controls b5 for the knight — piece placement and activity are more important than material in these positions",
-        "Develop with Be7, Be6, Nbd7 for maximum flexibility — completing development before committing to a plan gives maximum flexibility",
-        "Counter on the queenside with b5 while defending the kingside — timing this correctly before the opponent can generate counterplay is critical",
-        "Use the Najdorf's inherent dynamism to create counterplay — a key strategic concept in Sicilian Najdorf"
+        "…a6 (the Najdorf move) is prophylaxis disguised as development — it prevents White's Nb5 ideas (which would fork c7 and d6) AND prepares the …b5 queenside expansion. One move, two strategic functions.",
+        "Develop with Be7, Be6, Nbd7 for maximum flexibility. Don't commit the king until you've seen White's setup — castling kingside into White's pawn storm in the English Attack is the most common Najdorf mistake.",
+        "Counter on the queenside with …b5 while defending the kingside. The …b5–b4 push forces White's Nc3 to move, opening lines for Black's attack on the white king (if White castled long).",
+        "The Najdorf rewards calculation. Every move can be a tactical resource: Nd5 sacrifices in many lines, …b4 pawn pushes, exchange sacrifices on c3. Firouzja's edge is finding the right move 5 seconds faster than opponents."
       ],
       "traps": [
-        "After Be3 e5 Nb3 Be7, if White plays g4 too aggressively, b5 starts a fierce counterattack"
+        "In the English Attack after 6.Be3 e5 7.Nb3 Be7, if White plays 8.g4 too aggressively (before completing kingside development), Black's 8...b5 starts a fierce counterattack — the queenside files open faster than White's g-file attack arrives."
       ],
       "warnings": [
-        "The Najdorf requires precise knowledge — preparation is essential",
-        "Watch for Nd5 sacrifices that can demolish Black's position"
+        "The Najdorf requires PRECISE knowledge. Without engine-checked preparation in your specific variation, you can be checkmated in 25 moves by a player who knows the line cold. Don't play 'on principle' in the Najdorf.",
+        "Nd5 sacrifices are everywhere. In Be3/Bg5/Be2 systems, the Nd5 sac is the position's defining tactical theme. Always calculate it — even if it looks impossible — before making any move that allows it."
       ],
       "variations": [
         {
           "name": "English Attack",
           "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be7 f3 Be6 Qd2 Nbd7 O-O-O b5 g4 Nb6",
-          "explanation": "The sharpest Najdorf continuation. Both sides attack on opposite flanks. Firouzja thrives in these positions."
+          "explanation": "The sharpest Najdorf line — the English Attack with opposite-side castling. After 6.Be3 e5 7.Nb3 Be7 (Black's flexible bishop development) 8.f3 (preparing g4) Be6 (controlling d5) 9.Qd2 Nbd7 10.O-O-O — White's king is on c1, the race is on. Black plays 10...b5! (queenside attack starts immediately) 11.g4 Nb6 (the knight reroutes to support …b4) — both sides are aimed at the opposing king. The winner is the side who calculates faster; in Firouzja's case, that's almost always him."
         },
         {
           "name": "6.Bg5 Main Line",
           "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 Bd3 b5 Rhe1 Bb7",
-          "explanation": "Against the classical Bg5, Firouzja plays the traditional setup. The position requires deep theoretical knowledge."
+          "explanation": "Against 6.Bg5 (the classical attacking system), Firouzja plays the standard …e6 setup (not the Poisoned Pawn 6...Qb6!?). After 7.f4 Be7 8.Qf3 Qc7 9.O-O-O Nbd7 10.Bd3 b5 11.Rhe1 Bb7 — both sides have completed development for the opposite-side race. Black's …Bb7 fianchetto aims at the white king on c1; the …b5–b4 push is coming. Firouzja's tactical sense in these razor-sharp positions ranks among the world's best."
         },
         {
           "name": "6.Be2 Classical",
           "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Qd2 Nbd7 a4 Rc8 f3 Qc7",
-          "explanation": "The Classical 6.Be2 is a more restrained approach where Firouzja gets a flexible position. White develops solidly and chooses between kingside and queenside plans based on Black's setup."
+          "explanation": "Against the calm 6.Be2 system (Karpov's preference and now Magnus's main weapon), Firouzja plays the textbook setup: …e5 forcing Nb3, then …Be7/…O-O for king safety, …Be6/…Nbd7 controlling d5, …Rc8/…Qc7 for queenside pressure. A more strategic game than the English Attack but Firouzja navigates it well — the position is balanced with active piece play for both sides."
         }
       ],
       "trapLines": [
         {
           "name": "Bc4 e6 Nxe4 Trick",
           "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3",
-          "explanation": "When White plays Bc4, Black sets up the queenside counterplay. After Qg3 the queen is misplaced — Black is ready for ...Nxe4 + ...d5 tricks to crack open the centre."
+          "explanation": "When White plays the Fischer Attack with 6.Bc4 (Bobby Fischer's pet weapon from his championship era), Black needs the CRITICAL move order: 6...e6 BEFORE …b5 (otherwise Bxe6! is winning). After the standard 7.Bb3 b5 8.O-O Be7 9.Qf3 Qc7, White's natural 10.Qg3 (preparing the kingside attack) misplaces the queen — Black is ready for tactical resources like …Nxe4 + …d5 cracking open the centre while White's queen is on the wrong side. Pure Najdorf tactical sharpness."
         },
         {
           "name": "Overextended g4 Punished",
           "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be7 f3 Be6 Qd2 Nbd7 g4 b5 g5 Nh5 O-O-O Nb6 Nd5 Bxd5 exd5",
-          "explanation": "White pushes g4 aggressively but Black strikes back with b5 and the Nh5 manoeuvre. After exd5 the central pawns become long-term targets and Black's queenside counterplay rolls forward."
+          "explanation": "When White pushes g4 too aggressively (before O-O-O), Black strikes back with 8...b5! starting the counterattack. After 9.g5 (continuing the kingside attack) Nh5 (knight reroutes to a useful square) 10.O-O-O Nb6 (the second knight joins the queenside attack) 11.Nd5! (White's typical tactical resource) Bxd5 12.exd5 — White has the structural pluses but Black's pieces are aimed at the king on c1. The …Nxe4 and …b4 tactics arrive in 3-5 moves; the game is decided by whichever attack lands first."
         }
       ]
     },
