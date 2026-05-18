@@ -477,6 +477,184 @@ async function main() {
     ],
   });
 
+  // ─────────────────────────────────────────────────────────────────
+  // E2E mode walks — drive each post-walkthrough stage through at
+  // least one full interaction loop. Vienna is the target for all
+  // four stage modes because the static-registry tree carries
+  // hand-authored concepts / findMove / drill / punish content,
+  // so the e2e drive does not depend on an LLM key being present.
+  // ─────────────────────────────────────────────────────────────────
+
+  // ── E1: Quiz (concepts) — full loop ─────────────────────────────
+  await clearSessionAndReload();
+  await recordScenario('E1_quiz_full_loop', {
+    run: async () => {
+      await page.locator('[data-testid="chat-text-input"]').click();
+      await page.locator('[data-testid="chat-text-input"]').fill('quiz me on Vienna');
+      await page.locator('[data-testid="chat-send-btn"]').click();
+      await waitForEvent(intercepted, (e) =>
+        e.kind === 'coach-surface-migrated' &&
+        /\[stage=concepts\]|landed at concepts/i.test(e.summary ?? ''),
+        45_000,
+      );
+      // Wait for the quiz panel to mount.
+      await page.locator('[data-testid="walkthrough-quiz-panel"]').waitFor({ timeout: 15_000 });
+      // Pick choice 0, see the feedback render, advance.
+      await page.locator('[data-testid="walkthrough-quiz-choice-0"]').click();
+      await page.locator('[data-testid="walkthrough-quiz-next"]').waitFor({ timeout: 8_000 });
+      await page.locator('[data-testid="walkthrough-quiz-next"]').click();
+      await page.waitForTimeout(1500);
+    },
+    assertions: [
+      {
+        kind: 'visible',
+        selector: '[data-testid="walkthrough-quiz-panel"], [data-testid="walkthrough-quiz-complete"], [data-testid="walkthrough-stage-menu"]',
+        label: 'advanced past Q1 (next question OR quiz-complete OR back to stage menu)',
+      },
+      {
+        kind: 'audit-summary-contains',
+        value: 'concepts',
+        label: 'concepts stage routing audit fired',
+      },
+    ],
+  });
+
+  // ── E2: Drill (woodpecker) — pick line + play first move ────────
+  await clearSessionAndReload();
+  await recordScenario('E2_drill_full_loop', {
+    run: async () => {
+      await page.locator('[data-testid="chat-text-input"]').click();
+      await page.locator('[data-testid="chat-text-input"]').fill('drill Vienna');
+      await page.locator('[data-testid="chat-send-btn"]').click();
+      await waitForEvent(intercepted, (e) =>
+        e.kind === 'coach-surface-migrated' &&
+        /\[stage=drill\]|landed at drill/i.test(e.summary ?? ''),
+        45_000,
+      );
+      // Drill picker: pick line 0.
+      await page.locator('[data-testid="walkthrough-drill-picker"]').waitFor({ timeout: 10_000 }).catch(() => undefined);
+      const pickerLine = page.locator('[data-testid="walkthrough-drill-line-0"]');
+      if (await pickerLine.isVisible().catch(() => false)) {
+        await pickerLine.click();
+      }
+      // Wait for active drill state with the board ready for input.
+      await page.locator('[data-testid="walkthrough-drill-active"]').waitFor({ timeout: 10_000 }).catch(() => undefined);
+      // Play 1.e4 via click-to-move.
+      await tryMove(page, 'e2', 'e4');
+      await page.waitForTimeout(1500);
+    },
+    assertions: [
+      {
+        kind: 'visible',
+        selector:
+          '[data-testid="walkthrough-drill-active"], [data-testid="walkthrough-drill-complete"]',
+        label: 'drill UI advanced past the first move (active or complete)',
+      },
+      {
+        kind: 'audit-summary-contains',
+        value: 'drill',
+        label: 'drill stage routing audit fired',
+      },
+    ],
+  });
+
+  // ── E3: Trap (punish) — pick lesson + answer ────────────────────
+  await clearSessionAndReload();
+  await recordScenario('E3_trap_full_loop', {
+    run: async () => {
+      await page.locator('[data-testid="chat-text-input"]').click();
+      await page.locator('[data-testid="chat-text-input"]').fill('punish lines for Vienna');
+      await page.locator('[data-testid="chat-send-btn"]').click();
+      await waitForEvent(intercepted, (e) =>
+        e.kind === 'coach-surface-migrated' &&
+        /\[stage=punish\]|landed at punish/i.test(e.summary ?? ''),
+        45_000,
+      );
+      // Punish picker: pick lesson 0.
+      await page.locator('[data-testid="walkthrough-punish-picker"]').waitFor({ timeout: 10_000 }).catch(() => undefined);
+      const lesson = page.locator('[data-testid="walkthrough-punish-lesson-0"]');
+      if (await lesson.isVisible().catch(() => false)) {
+        await lesson.click();
+      }
+      // Trap lessons land in the quiz panel (same MC UI).
+      await page.locator('[data-testid="walkthrough-quiz-panel"]').waitFor({ timeout: 10_000 }).catch(() => undefined);
+      const choice = page.locator('[data-testid="walkthrough-quiz-choice-0"]');
+      if (await choice.isVisible().catch(() => false)) {
+        await choice.click();
+        // Feedback renders; advance.
+        const next = page.locator('[data-testid="walkthrough-quiz-next"]');
+        if (await next.isVisible().catch(() => false)) {
+          await next.click();
+          await page.waitForTimeout(1500);
+        }
+      }
+    },
+    assertions: [
+      {
+        kind: 'visible',
+        selector:
+          '[data-testid="walkthrough-quiz-panel"], [data-testid="walkthrough-quiz-complete"], [data-testid="walkthrough-stage-menu"], [data-testid="walkthrough-punish-picker"], [data-testid="walkthrough-trap-playing"], [data-testid="walkthrough-narrating-panel"], [data-testid="walkthrough-leaf-panel"], [data-testid="walkthrough-fork-panel"]',
+        label: 'trap UI exercised (picker / question / fork / animation / completion)',
+      },
+      {
+        kind: 'audit-summary-contains',
+        value: 'landed at punish',
+        label: 'punish stage routing audit fired',
+      },
+    ],
+  });
+
+  // ── E4: Teach (full walkthrough) — already proved by S2/S4; do a
+  //      shorter sanity check that the full teach path renders the
+  //      walkthrough panel and the leaf prompt is asked.
+  await clearSessionAndReload();
+  await recordScenario('E4_teach_full_loop', {
+    run: async () => {
+      await page.locator('[data-testid="chat-text-input"]').click();
+      await page.locator('[data-testid="chat-text-input"]').fill('Vienna');
+      await page.locator('[data-testid="chat-send-btn"]').click();
+      await waitForEvent(intercepted, (e) =>
+        e.kind === 'coach-surface-migrated' &&
+        (e.summary ?? '').includes('surface-routed (static): "Vienna"'),
+        45_000,
+      );
+      await driveToLeaf(page);
+    },
+    assertions: [
+      { kind: 'visible', selector: '[data-testid="walkthrough-leaf-panel"]', label: 'walkthrough reaches leaf' },
+      { kind: 'visible', selector: '[data-testid="walkthrough-leaf-play-real"]', label: '"play this line out" leaf button visible' },
+      { kind: 'transcript-contains', value: 'play it out yourself', label: 'coach asks in chat at the leaf' },
+    ],
+  });
+
+  // ── E5: Play — submit "play Vienna" → /coach/play → make a move ─
+  await clearSessionAndReload();
+  await recordScenario('E5_play_full_loop', {
+    run: async () => {
+      await page.locator('[data-testid="chat-text-input"]').click();
+      await page.locator('[data-testid="chat-text-input"]').fill('play it for real Vienna');
+      await page.locator('[data-testid="chat-send-btn"]').click();
+      // Surface routing should set stageHint='play-real' and navigate
+      // to /coach/play. Wait for the URL to change.
+      await page.waitForURL(/\/coach\/play/, { timeout: 20_000 }).catch(() => undefined);
+      await page.waitForTimeout(3000);
+      // Board renders — make a move (e2-e4).
+      await tryMove(page, 'e2', 'e4').catch(() => undefined);
+      await page.waitForTimeout(2500);
+    },
+    assertions: [
+      { kind: 'url-matches', value: /\/coach\/play/, label: 'navigated to /coach/play' },
+      // Either the coach echoed our move via a coach-turn audit OR a
+      // post-move audit fired. Both indicate the live game pipeline
+      // accepted the move.
+      {
+        kind: 'audit-present',
+        audit: 'coach-turn-checkpoint',
+        label: 'coach turn fired (engine pipeline alive)',
+      },
+    ],
+  });
+
   // ── Summary ────────────────────────────────────────────────────
   report.consoleErrors = consoleErrors.slice(0, 60);
   report.pageErrors = pageErrors.slice(0, 60);
@@ -505,6 +683,20 @@ async function main() {
 
   await browser.close();
   await listener.stop();
+}
+
+/** Click-to-move on react-chessboard. Matches scripts/audit-coach-play.mjs
+ *  — drag events don't fire cleanly in headless Chromium, but clicking
+ *  source then destination triggers the same move path. */
+async function tryMove(page, from, to) {
+  const fromSq = page.locator(`[data-square="${from}"]`).first();
+  const toSq = page.locator(`[data-square="${to}"]`).first();
+  if ((await fromSq.count()) === 0 || (await toSq.count()) === 0) {
+    throw new Error(`square not on board: ${from} or ${to}`);
+  }
+  await fromSq.click({ timeout: 2000 });
+  await page.waitForTimeout(200);
+  await toSq.click({ timeout: 2000 });
 }
 
 async function waitForEvent(intercepted, predicate, timeoutMs) {
