@@ -67,24 +67,31 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
   const setCoachDrawerInitialMessage = useAppStore((s) => s.setCoachDrawerInitialMessage);
   const lastBoardSnapshot = useAppStore((s) => selectFreshBoardSnapshot(s));
 
-  const showAskCoach = query.trim().length >= ASK_COACH_MIN_LENGTH;
+  // When a `scope` is set the bar is in pure-search mode — the host
+  // surface (e.g. /openings) wants the query to filter its own list,
+  // NOT route the user into a coach session or open the Ask-Coach
+  // drawer. Suppress both fast-paths in that mode.
+  const pureSearch = Boolean(scope);
+  const showAskCoach = !pureSearch && query.trim().length >= ASK_COACH_MIN_LENGTH;
   // Detect agent-routable intents (e.g. "run me through the middlegame",
   // "play the Sicilian against me"). When matched we show a fast-path
   // "Start session" suggestion at the top of the dropdown.
   const agentIntent = useMemo(
     () =>
-      query.trim().length >= ASK_COACH_MIN_LENGTH
+      !pureSearch && query.trim().length >= ASK_COACH_MIN_LENGTH
         ? parseCoachIntent(query.trim())
         : { kind: 'qa' as const, raw: '' },
-    [query],
+    [query, pureSearch],
   );
   const showAgentAction =
-    agentIntent.kind === 'continue-middlegame' ||
-    agentIntent.kind === 'play-against' ||
-    agentIntent.kind === 'walkthrough' ||
-    agentIntent.kind === 'puzzle' ||
-    agentIntent.kind === 'explain-position' ||
-    agentIntent.kind === 'favorite-opening';
+    !pureSearch && (
+      agentIntent.kind === 'continue-middlegame' ||
+      agentIntent.kind === 'play-against' ||
+      agentIntent.kind === 'walkthrough' ||
+      agentIntent.kind === 'puzzle' ||
+      agentIntent.kind === 'explain-position' ||
+      agentIntent.kind === 'favorite-opening'
+    );
   const totalItems =
     results.length + (showAskCoach ? 1 : 0) + (showAgentAction ? 1 : 0);
   const agentActionIndex = showAgentAction ? 0 : -1;
@@ -166,6 +173,15 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
       const text = transcript.trim();
       if (!text) return;
       setQuery(text);
+      // Scoped search bars (e.g. /openings) are pure-filter — voice
+      // dictation just populates the input so the host page's live
+      // filter updates. Never route into a coach session from a
+      // scoped bar.
+      if (pureSearch) {
+        voiceInputService.stopListening();
+        inputRef.current?.blur();
+        return;
+      }
       // Re-parse the intent against the final transcript (live
       // agentIntent memo may still be showing the interim).
       const intent = parseCoachIntent(text);
@@ -369,7 +385,7 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
     });
     setListening(ok);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- tracked for dedicated audit; intentional dep list.
-  }, [listening, setQuery, clear, navigate, lastBoardSnapshot, askCoach]);
+  }, [listening, setQuery, clear, navigate, lastBoardSnapshot, askCoach, pureSearch]);
 
   const startAgentSession = useCallback((): void => {
     clear();
@@ -514,6 +530,11 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
         handleSelect(results[selectedIndex - resultsOffset]);
       } else if (selectedIndex === askCoachIndex) {
         askCoach(query.trim());
+      } else if (selectedIndex === -1 && pureSearch && results.length > 0) {
+        // Scoped search: Enter on the default state submits to the
+        // top result, matching standard search-bar UX. No coach
+        // fallback — host page's live filter still applies.
+        handleSelect(results[0]);
       } else if (selectedIndex === -1 && showAgentAction) {
         // Unselected default → prefer agent action over ask-coach.
         startAgentSession();
@@ -524,7 +545,7 @@ export function SmartSearchBar({ scope, placeholder, onResultsChange }: SmartSea
       setShowDropdown(false);
       inputRef.current?.blur();
     }
-  }, [showDropdown, totalItems, results, selectedIndex, handleSelect, askCoachIndex, showAskCoach, askCoach, query, agentActionIndex, showAgentAction, startAgentSession, resultsOffset]);
+  }, [showDropdown, totalItems, results, selectedIndex, handleSelect, askCoachIndex, showAskCoach, askCoach, query, agentActionIndex, showAgentAction, startAgentSession, resultsOffset, pureSearch]);
 
   const defaultPlaceholder = scope === 'opening'
     ? 'Search openings — try "Sicilian as black" or "B01"...'

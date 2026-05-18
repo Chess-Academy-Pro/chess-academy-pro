@@ -215,4 +215,70 @@ describe('SmartSearchBar', () => {
       expect(screen.getByText(/Hard/)).toBeInTheDocument();
     });
   });
+
+  describe('scoped search (e.g. /openings tab)', () => {
+    it('does not show Ask Coach suggestion when scoped', async () => {
+      const user = userEvent.setup();
+      renderWithRouter(<SmartSearchBar scope="opening" />);
+
+      const input = screen.getByTestId('smart-search-input');
+      await user.type(input, 'How do I play the Sicilian?');
+
+      await waitFor(() => {
+        expect(screen.queryByTestId('ask-coach-option')).not.toBeInTheDocument();
+      });
+    });
+
+    it('does not show agent-action suggestion when scoped (walkthrough intent)', async () => {
+      const user = userEvent.setup();
+      renderWithRouter(<SmartSearchBar scope="opening" />);
+
+      const input = screen.getByTestId('smart-search-input');
+      await user.type(input, 'teach me the Sicilian Najdorf');
+
+      // Even though the phrase triggers a walkthrough intent normally,
+      // a scoped bar suppresses the coach fast-path entirely.
+      await waitFor(() => {
+        expect(screen.queryByTestId('agent-action-option')).not.toBeInTheDocument();
+      });
+    });
+
+    it('does not open coach drawer on Enter when scoped', async () => {
+      const user = userEvent.setup();
+      renderWithRouter(<SmartSearchBar scope="opening" />);
+
+      const input = screen.getByTestId('smart-search-input');
+      await user.type(input, 'teach me the Sicilian');
+      await user.keyboard('{Enter}');
+
+      const state = useAppStore.getState();
+      expect(state.coachDrawerOpen).toBe(false);
+      expect(state.coachDrawerInitialMessage).toBeFalsy();
+    });
+
+    it('still emits filtered results to onResultsChange when scoped', async () => {
+      await db.openings.add(
+        buildOpeningRecord({ id: 'scoped-test', name: 'Sicilian Defense', eco: 'B20' }),
+      );
+
+      const onResultsChange = vi.fn();
+      const user = userEvent.setup();
+      renderWithRouter(
+        <SmartSearchBar scope="opening" onResultsChange={onResultsChange} />,
+      );
+
+      const input = screen.getByTestId('smart-search-input');
+      await user.type(input, 'Sicilian');
+
+      await waitFor(() => {
+        expect(onResultsChange).toHaveBeenCalled();
+        const lastCall = onResultsChange.mock.calls.at(-1);
+        expect(lastCall?.[0]).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ id: 'scoped-test', category: 'opening' }),
+          ]),
+        );
+      }, { timeout: 3000 });
+    });
+  });
 });
