@@ -7,6 +7,7 @@ import { ChatInput } from './ChatInput';
 import { useChessGame } from '../../hooks/useChessGame';
 import { useBoardContext } from '../../hooks/useBoardContext';
 import { useAppStore } from '../../stores/appStore';
+import { buildTacticsLiveContext } from '../../services/liveTacticsContext';
 import { stockfishEngine } from '../../services/stockfishEngine';
 import { coachService } from '../../coach/coachService';
 import { voiceService } from '../../services/voiceService';
@@ -95,6 +96,20 @@ export function CoachAnalysePage(): JSX.Element {
         `Explain the position in 4-6 sentences: who's better, why, key plans for both sides, what to watch for.`,
       ].join('\n');
 
+      // Tactical context — /coach/analyse already has the
+      // sfAnalysis in scope (it ran Stockfish to power the explain
+      // call), so we can attach the full forward-PV scan, not just
+      // the immediate + hanging detection. This is the analyse
+      // surface's primary job — name the tactics in the position.
+      const analyseStudentColor = fen.split(' ')[1] === 'b' ? 'b' : 'w';
+      const analyseStudentRating =
+        useAppStore.getState().activeProfile?.puzzleRating ?? 1200;
+      const analyseTactics = buildTacticsLiveContext(
+        fen,
+        sfAnalysis,
+        analyseStudentColor,
+        analyseStudentRating,
+      );
       let explanation = '';
       const result = await coachService.ask(
         {
@@ -106,6 +121,7 @@ export function CoachAnalysePage(): JSX.Element {
             evalCp: sfAnalysis.isMate ? undefined : sfAnalysis.evaluation,
             evalMateIn: sfAnalysis.mateIn ?? undefined,
             userJustDid: 'Loaded a position into Analyse',
+            tactics: analyseTactics,
           },
         },
         {
@@ -172,6 +188,19 @@ export function CoachAnalysePage(): JSX.Element {
       `Answer in 2-4 sentences. Stay grounded in the position.`,
     ].join('\n');
 
+    // Tactical context for the follow-up ask — same pattern as the
+    // initial explain call above. `analysis` is the cached SF result
+    // from when the user loaded this position; it powers the forward
+    // PV scan.
+    const followStudentColor = game.fen.split(' ')[1] === 'b' ? 'b' : 'w';
+    const followStudentRating =
+      useAppStore.getState().activeProfile?.puzzleRating ?? 1200;
+    const followTactics = buildTacticsLiveContext(
+      game.fen,
+      analysis ?? null,
+      followStudentColor,
+      followStudentRating,
+    );
     let response = '';
     const result = await coachService.ask(
       {
@@ -183,6 +212,7 @@ export function CoachAnalysePage(): JSX.Element {
           evalCp: analysis && !analysis.isMate ? analysis.evaluation : undefined,
           evalMateIn: analysis?.mateIn ?? undefined,
           userJustDid: `Asked: "${question.slice(0, 60)}"`,
+          tactics: followTactics,
         },
       },
       {

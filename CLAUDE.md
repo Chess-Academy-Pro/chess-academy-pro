@@ -1040,8 +1040,10 @@ After every `git push origin main`:
    | `/coach/review/*` | `scripts/audit-coach-review.mjs` + `scripts/audit-back-from-review.mjs` |
    | `/coach/play` | `scripts/audit-coach-play.mjs` |
    | `/coach/chat` | `scripts/audit-coach-chat.mjs` |
-   | `/coach/teach` (Learn) | (no script yet — write one if you're shipping a real change here) |
+   | `/coach/teach` (Learn) | `scripts/audit-coach-teach-unknown-line.mjs` (unknown / sub-line resolution + middlegame spine depth + leaf play-out prompt) |
    | coach surfaces (any) — master-play grounding | `scripts/audit-coach-master-integration.mjs` |
+   | coach surfaces (any) — tactical-awareness wiring | `scripts/audit-coach-tactical-awareness.mjs` (verifies the TacticsLiveContext block fires + rating-adaptive lookahead lands in {1,2,4,6}) |
+   | `/coach/endgame` + `/coach/session/middlegame` | `scripts/audit-coach-middlegame-endgame.mjs` (mode coverage matrix: which of Teach/Drill/Quiz/Trap/Play each surface supports today) |
    | `/coach/home` + tile nav | `scripts/audit-untouched-surfaces.mjs` |
    | `/coach/plan` (Training Plan) | `scripts/audit-coach-plan.mjs` |
    | `/coach/analyse` / `/train` | `scripts/audit-untouched-surfaces.mjs` |

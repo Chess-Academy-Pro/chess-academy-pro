@@ -664,11 +664,74 @@ function formatLiveStateBlock(state: LiveState): string {
     );
     parts.push(lines.join('\n'));
   }
+  if (state.tactics) {
+    parts.push(formatTacticsSubBlock(state.tactics));
+  }
   if (state.moveHistory && state.moveHistory.length > 0) {
     parts.push(`- Move history: ${state.moveHistory.join(' ')}`);
   }
   if (state.userJustDid) parts.push(`- User just did: ${state.userJustDid}`);
   return parts.join('\n');
+}
+
+/** Render the pre-computed tactical context as a sub-block under
+ *  [Live state]. The format mirrors the lichessSnapshot pattern —
+ *  ground truth pre-computed by the surface, with an explicit "USE
+ *  THIS — don't invent" closer that anchors the brain to G3-style
+ *  bounded vocabulary. The block is omitted entirely when nothing
+ *  was detected (no tactics + no hanging + no upcoming) so a quiet
+ *  position adds zero tokens to the envelope. */
+function formatTacticsSubBlock(tactics: NonNullable<LiveState['tactics']>): string {
+  const has =
+    tactics.immediate.length > 0 ||
+    tactics.hanging.length > 0 ||
+    tactics.threats.length > 0 ||
+    tactics.opportunities.length > 0;
+  if (!has) return '';
+  const lines: string[] = [
+    `- Tactical context (PRE-COMPUTED — bounded vocabulary, G3 applies; lookahead ${tactics.lookaheadDepth} half-moves):`,
+  ];
+  if (tactics.immediate.length > 0) {
+    lines.push(`    Immediate on the board:`);
+    for (const t of tactics.immediate) {
+      lines.push(`      ${t.type.toUpperCase()} — ${t.description}`);
+    }
+  }
+  if (tactics.hanging.length > 0) {
+    const list = tactics.hanging
+      .map((h) => `${h.color === 'w' ? 'white' : 'black'} ${pieceFullName(h.piece)} on ${h.square}`)
+      .join(', ');
+    lines.push(`    Hanging pieces: ${list}`);
+  }
+  if (tactics.threats.length > 0) {
+    lines.push(`    Opponent threats (warn the student, name the pattern):`);
+    for (const t of tactics.threats) {
+      lines.push(`      depth ${t.depthAhead}/${tactics.lookaheadDepth}: ${t.type.toUpperCase()} — ${t.description} (line: ${t.line.join(' ')})`);
+    }
+  }
+  if (tactics.opportunities.length > 0) {
+    lines.push(`    Student opportunities (point these out, name the pattern):`);
+    for (const t of tactics.opportunities) {
+      lines.push(`      depth ${t.depthAhead}/${tactics.lookaheadDepth}: ${t.type.toUpperCase()} — ${t.description} (line: ${t.line.join(' ')})`);
+    }
+  }
+  lines.push(
+    `    NAME the pattern in prose (fork / pin / skewer / back rank / removal of guard / overloaded / discovered attack / etc.). For depth ≥ 2, walk the line: "if you play X, opponent has Y in N." NEVER invent a tactic that isn't in this block. NEVER claim a tactic at greater depth than ${tactics.lookaheadDepth}. The student is intermediate-or-stronger if lookahead ≥ 3 — push them to calculate the full sequence.`,
+  );
+  return lines.join('\n');
+}
+
+function pieceFullName(piece: string): string {
+  const key = piece.toLowerCase();
+  switch (key) {
+    case 'p': return 'pawn';
+    case 'n': return 'knight';
+    case 'b': return 'bishop';
+    case 'r': return 'rook';
+    case 'q': return 'queen';
+    case 'k': return 'king';
+    default: return piece;
+  }
 }
 
 function formatToolbeltBlock(toolbelt: ToolDefinition[]): string {

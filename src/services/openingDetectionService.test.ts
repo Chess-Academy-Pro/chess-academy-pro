@@ -338,22 +338,23 @@ describe('openingDetectionService', () => {
       expect(plies).toBeGreaterThanOrEqual(9);
     });
 
-    it('uses the LONGEST same-name PGN when no sub-variations exist', () => {
+    it('uses the LONGEST same-name PGN (or a cross-name extension) when no sub-variations exist', () => {
       // Whole-DB invariant: for any canonical opening with
       // multiple same-name entries (canonical + extended) AND no
-      // named sub-variations, the spine should be the LONGEST
-      // entry. Builds the invariant test programmatically — when
-      // the mining script populates extended.json with real data,
-      // this fires automatically without test edits.
+      // named sub-variations, the spine MUST start with the longest
+      // same-name PGN (the canonical position is preserved). When
+      // the longest same-name PGN is still short of middlegame
+      // depth, the function MAY extend the spine using a deeper DB
+      // entry whose PGN starts with the canonical (cross-name
+      // extension — see SPINE_EXTENSION_THRESHOLD). Builds the
+      // invariant programmatically so extended.json mining + the
+      // cross-name extension both fire automatically.
       const entries = openingsData as Array<{ eco: string; name: string; pgn: string }>;
       const byName = new Map<string, typeof entries>();
       for (const e of entries) {
         if (!byName.has(e.name)) byName.set(e.name, []);
         byName.get(e.name)!.push(e);
       }
-      // Find a single-entry name with multiple length-distinct
-      // PGNs AND no sub-variations. Skip if no such entry yet
-      // (canonical-only world) — the invariant is dormant.
       let probed = 0;
       for (const [name, group] of byName) {
         if (group.length < 2) continue;
@@ -362,12 +363,39 @@ describe('openingDetectionService', () => {
           a.pgn.length > b.pgn.length ? a : b,
         ).pgn;
         const got = findShortestCanonicalPgn(name);
-        expect(got).toBe(longestPgn);
+        // The result must START WITH the longest same-name PGN —
+        // any deeper continuation still lives in the same line.
+        // (PGN equality is a strict-prefix special case.)
+        expect(got).not.toBeNull();
+        const matches = got === longestPgn || got!.startsWith(longestPgn + ' ');
+        expect(matches).toBe(true);
         probed += 1;
       }
       // It's fine if probed === 0 (no extended data populated yet);
       // the test's purpose is to fire when there IS such data.
       expect(probed).toBeGreaterThanOrEqual(0);
+    });
+
+    it('extends thin spines across name boundaries to reach the middlegame', () => {
+      // Vienna Game: Frankenstein-Dracula Variation is stored at
+      // 6 plies under its bare name but at 20 plies under the
+      // "Stanley Variation, Frankenstein-Dracula Variation" namespace
+      // (same PGN prefix, more-specific Lichess label). Walkthrough
+      // would otherwise stop at the moment the variation begins
+      // instead of teaching through to the middlegame. The spine
+      // resolver should pick up the deeper continuation and return
+      // a PGN that starts with the canonical 6-ply line.
+      const baseEntry = (openingsData as Array<{ name: string; pgn: string }>)
+        .find((e) => e.name === 'Vienna Game: Frankenstein-Dracula Variation');
+      expect(baseEntry).toBeDefined();
+      const got = findShortestCanonicalPgn('Vienna Game: Frankenstein-Dracula Variation');
+      expect(got).not.toBeNull();
+      expect(got!.startsWith(baseEntry!.pgn)).toBe(true);
+      const plies = got!.split(/\s+/).filter(Boolean).length;
+      // Should reach a middlegame-ish depth, well past the 6-ply
+      // bare entry. 14 is conservative — the actual extension lands
+      // at 20 plies under the current DB.
+      expect(plies).toBeGreaterThanOrEqual(14);
     });
 
     it('uses the SHORTEST same-name PGN when sub-variations exist (Najdorf)', () => {

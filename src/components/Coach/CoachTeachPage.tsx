@@ -60,10 +60,15 @@ import { useAppStore } from '../../stores/appStore';
 import { useCoachMemoryStore } from '../../stores/coachMemoryStore';
 import { useSettings } from '../../hooks/useSettings';
 import { db } from '../../db/schema';
+import { getFavoriteOpenings } from '../../services/openingService';
+import type { OpeningRecord } from '../../types';
 import { analyzeRecentGames, gameNeedsAnalysis } from '../../services/gameAnalysisService';
 import type { LiveState } from '../../coach/types';
 import type { ChatMessage as ChatMessageType, BoardArrow, BoardHighlight } from '../../types';
 import { stockfishEngine } from '../../services/stockfishEngine';
+import { buildTacticsLiveContext } from '../../services/liveTacticsContext';
+import { validateTacticClaims } from '../../services/tacticClaimValidator';
+import type { StockfishAnalysis } from '../../types';
 import { fetchLichessExplorer } from '../../services/lichessExplorerService';
 import { withTimeout } from '../../coach/withTimeout';
 
@@ -75,6 +80,56 @@ const SUGGESTIONS = [
   'Show me the Italian Game main line',
   'How do I attack a castled king?',
   'What is the Sicilian Defense and why play it?',
+];
+
+/** Action modes the picker offers above the chat input. Each maps to
+ *  a typed-input phrasing that `handleSubmit`'s STAGE_PATTERNS regexes
+ *  recognize — tapping a mode + opening combination becomes the same
+ *  text input the user could have typed by hand, so the picker is
+ *  purely additive UI and never bypasses the normal routing. */
+const PICKER_ACTIONS = [
+  {
+    id: 'teach',
+    label: 'Teach me',
+    description: 'Walk through the opening from move 1 with voice narration.',
+    buildInput: (opening: string) => opening,
+  },
+  {
+    id: 'drill',
+    label: 'Drill',
+    description: 'Practice the moves on the board, ply by ply.',
+    buildInput: (opening: string) => `drill ${opening}`,
+  },
+  {
+    id: 'quiz',
+    label: 'Quiz me on',
+    description: 'Multiple-choice questions on the key ideas.',
+    buildInput: (opening: string) => `quiz me on ${opening}`,
+  },
+  {
+    id: 'trap',
+    label: 'Trap lines for',
+    description: 'Common opponent slips and how to punish them.',
+    buildInput: (opening: string) => `punish lines for ${opening}`,
+  },
+  {
+    id: 'play',
+    label: 'Play',
+    description: 'Live game vs the coach starting from this opening.',
+    buildInput: (opening: string) => `play it for real ${opening}`,
+  },
+] as const;
+type PickerActionId = (typeof PICKER_ACTIONS)[number]['id'];
+
+/** Fallback openings shown when the student has no favorites yet —
+ *  a curated mix of the most-asked-about ones across both colors. */
+const FALLBACK_OPENING_NAMES: string[] = [
+  'Sicilian Defense',
+  'Italian Game',
+  'Caro-Kann Defense',
+  'French Defense',
+  "Queen's Gambit",
+  'Vienna Game',
 ];
 
 /** A deep-dive entry point pulled from the walkthrough tree. Every
@@ -235,6 +290,28 @@ export function CoachTeachPage(): JSX.Element {
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
   const [streaming, setStreaming] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  // Picker state — drives the starter chips shown above the chat
+  // input while the transcript is empty. `pickerAction` is the
+  // currently-selected mode (Teach / Drill / Quiz / Trap / Play);
+  // tapping an opening chip combines the action with the opening
+  // and submits via the normal handleSubmit path so the picker is
+  // purely additive UI.
+  const [pickerAction, setPickerAction] = useState<PickerActionId>('teach');
+  const [favoriteOpenings, setFavoriteOpenings] = useState<OpeningRecord[]>([]);
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const rows = await getFavoriteOpenings();
+        if (!cancelled) setFavoriteOpenings(rows);
+      } catch {
+        if (!cancelled) setFavoriteOpenings([]);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   const [linePicker, setLinePicker] = useState<{
     canonicalName: string;
     options: LinePickerOption[];
@@ -352,6 +429,10 @@ export function CoachTeachPage(): JSX.Element {
             fen,
             evalCp: a.isMate ? 0 : a.evaluation,
             mateIn: a.mateIn,
+            // Capture the full StockfishAnalysis so handleSubmit can
+            // pre-compute the tactical context block (forks/pins/
+            // threats/opportunities) without re-querying the engine.
+            analysis: a,
           };
         } catch {
           // Stockfish hiccup — leave the bar at the last known value
@@ -481,7 +562,12 @@ export function CoachTeachPage(): JSX.Element {
   // production audit (build 4e628e5). We only surface the eval when
   // its FEN matches the FEN we're asking about, so a one-ply-stale
   // eval doesn't get misattributed to the new position.
-  const latestEvalRef = useRef<{ fen: string; evalCp: number; mateIn: number | null } | null>(null);
+  const latestEvalRef = useRef<{
+    fen: string;
+    evalCp: number;
+    mateIn: number | null;
+    analysis: StockfishAnalysis | null;
+  } | null>(null);
   // Pre-fetched Lichess explorer snapshot for the current FEN. Same
   // pattern as the eval bar — the surface fires the expensive request
   // BEFORE the brain has to ask for it, then injects the compact
@@ -648,6 +734,47 @@ export function CoachTeachPage(): JSX.Element {
     },
     [walkthrough],
   );
+
+  // Coach asks the student whether they want to play the line out
+  // themselves the first time they reach the leaf of a given opening.
+  // Conversational prompt that matches the user's path into the
+  // lesson (typed chat → walkthrough plays → coach asks at the end).
+  // Tracks per-opening so re-visits / backtrack→leaf cycles don't
+  // re-ask. The "Play this line out yourself" button at the leaf
+  // panel is the one-click action that closes the loop.
+  const playOutPromptedFor = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    const openingName = walkthrough.tree?.openingName;
+    if (walkthrough.phase !== 'leaf' || !openingName) return;
+    if (playOutPromptedFor.current.has(openingName)) return;
+    playOutPromptedFor.current.add(openingName);
+    const msg = `That's the canonical line into the middlegame for the ${openingName}. Want to play it out yourself against me? Tap "Play this line out yourself" — or keep learning with quizzes and drills if you'd rather lock it in first.`;
+    const id = `play-out-prompt-${Date.now()}`;
+    setMessages((prev) => [
+      ...prev,
+      { id, role: 'assistant', content: msg, timestamp: Date.now() },
+    ]);
+    useCoachMemoryStore.getState().appendConversationMessage({
+      surface: 'chat-teach',
+      role: 'coach',
+      text: msg,
+      fen: gameRef.current.fen,
+      trigger: null,
+    });
+    // Speak a tight summary — the full sentence above is long for
+    // voice. The position changing in the student's favor IS the
+    // acknowledgment (per CLAUDE.md narration rules); voice carries
+    // only the ask itself.
+    void voiceService
+      .speakForced(`Want to play this line out yourself? Or keep learning?`)
+      .catch(() => undefined);
+    void logAppAudit({
+      kind: 'coach-surface-migrated',
+      category: 'subsystem',
+      source: 'CoachTeachPage.leafPlayOutPrompt',
+      summary: `leaf reached — asked student to play out "${openingName}"`,
+    });
+  }, [walkthrough.phase, walkthrough.tree?.openingName]);
 
   const handleSubmit = useCallback(async (
     text: string,
@@ -1404,6 +1531,30 @@ export function CoachTeachPage(): JSX.Element {
       lichessRef && lichessRef.fen === fen
         ? { lichessSnapshot: lichessRef.snapshot }
         : undefined;
+    // Tactical context (Phase 1+2 of WO-COACH-TACTICAL-AWARENESS):
+    // pre-compute named tactics in the live FEN + threats and
+    // opportunities scanned through Stockfish's PV up to the
+    // rating-adaptive lookahead depth (4 plies for intermediate
+    // students per David's call). The brain's tactical vocabulary
+    // is bounded by this block — G3 contract identical to the
+    // master-play / opening-name grounding pattern. Only attaches
+    // when we have a fresh analysis for this exact FEN; stale evals
+    // would mislead the scan.
+    const cachedAnalysis =
+      latestEvalRef.current && latestEvalRef.current.fen === fen
+        ? latestEvalRef.current.analysis
+        : null;
+    const studentColor = fenTurn === 'white' ? 'w' : 'b';
+    // Rating proxy = puzzleRating (1200 fresh, drifts up/down with
+    // adaptive puzzles). Drives lookahead depth via
+    // `getTacticLookahead` — 4 plies once the student crosses 1400.
+    const studentRating = activeProfile?.puzzleRating ?? 1200;
+    const tacticsForAsk = buildTacticsLiveContext(
+      fen,
+      cachedAnalysis,
+      studentColor,
+      studentRating,
+    );
     const liveState: LiveState = {
       surface: 'teach',
       currentRoute: '/coach/teach',
@@ -1415,9 +1566,16 @@ export function CoachTeachPage(): JSX.Element {
       // when it was Black's turn but the position needed White's
       // response, then chess.js rejected it 5 trips in a row.
       whoseTurn: fenTurn,
+      tactics: tacticsForAsk,
       ...(evalForAsk ?? {}),
       ...(lichessForAsk ?? {}),
     };
+    void logAppAudit({
+      kind: 'coach-surface-migrated',
+      category: 'subsystem',
+      source: 'CoachTeachPage.buildLiveTactics',
+      summary: `tactics ctx: immediate=${tacticsForAsk.immediate.length} hanging=${tacticsForAsk.hanging.length} threats=${tacticsForAsk.threats.length} opps=${tacticsForAsk.opportunities.length} depth=${tacticsForAsk.lookaheadDepth}`,
+    });
 
     void logAppAudit({
       kind: 'coach-surface-migrated',
@@ -1654,6 +1812,33 @@ export function CoachTeachPage(): JSX.Element {
       // unsanitized text would teach the LLM that markup is normal.
       const finalText = sanitizeCoachText(result.text);
       if (finalText) {
+        // G3 enforcement (Phase 2.5 of WO-COACH-TACTICAL-AWARENESS):
+        // scan the response for tactic vocabulary against the bounded
+        // context we sent in the envelope. Audit-only for now — log
+        // violations so we can observe how often the brain invents
+        // tactics in prod. Future iteration: trigger a regen with a
+        // strengthened addendum (mirrors the master-play claim
+        // validator's regen pattern).
+        const validation = validateTacticClaims(finalText, tacticsForAsk);
+        if (validation.violations.length > 0) {
+          void logAppAudit({
+            kind: 'claim-validator-trip',
+            category: 'subsystem',
+            source: 'CoachTeachPage.tacticClaimValidator',
+            summary: `out-of-vocab tactics: ${validation.violations.map((v) => v.type).join(', ')}`,
+            details: JSON.stringify({
+              violations: validation.violations,
+              tacticContext: {
+                immediateTypes: tacticsForAsk.immediate.map((t) => t.type),
+                threatTypes: tacticsForAsk.threats.map((t) => t.type),
+                opportunityTypes: tacticsForAsk.opportunities.map((t) => t.type),
+                hangingCount: tacticsForAsk.hanging.length,
+                lookaheadDepth: tacticsForAsk.lookaheadDepth,
+              },
+            }),
+            fen,
+          });
+        }
         setMessages((prev) => [...prev, {
           id: `${turnId}-c`,
           role: 'assistant',
@@ -2402,22 +2587,122 @@ export function CoachTeachPage(): JSX.Element {
             </div>
           ))}
 
-          {messages.length === 0 && !streaming && !kickoffStatus && (
-            <div className="text-xs space-y-2" style={{ color: 'var(--color-text-muted)' }}>
-              <div>Ask your coach to teach you anything chess. Try:</div>
-              {SUGGESTIONS.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => void handleSubmit(s)}
-                  className="block w-full text-left px-2 py-1.5 rounded-md border text-xs hover:bg-theme-bg"
-                  style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
-                  data-testid={`teach-suggestion-${s.slice(0, 12).replace(/\W+/g, '-').toLowerCase()}`}
+          {messages.length <= 1 && !streaming && !kickoffStatus && !linePicker && !walkthrough.isActive && (() => {
+            const activeAction =
+              PICKER_ACTIONS.find((a) => a.id === pickerAction) ?? PICKER_ACTIONS[0];
+            const openingNames =
+              favoriteOpenings.length > 0
+                ? favoriteOpenings.slice(0, 8).map((o) => o.name)
+                : FALLBACK_OPENING_NAMES;
+            const openingsSourceLabel =
+              favoriteOpenings.length > 0
+                ? 'Your favorited openings'
+                : 'Popular openings';
+            return (
+              <div
+                className="space-y-3"
+                data-testid="teach-picker"
+                style={{ color: 'var(--color-text)' }}
+              >
+                <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+                  Pick what you want to do, then tap an opening.
+                </div>
+                {/* Action chips */}
+                <div
+                  className="flex flex-wrap gap-1.5"
+                  data-testid="teach-picker-actions"
+                  role="radiogroup"
+                  aria-label="Pick a lesson type"
                 >
-                  "{s}"
-                </button>
-              ))}
-            </div>
-          )}
+                  {PICKER_ACTIONS.map((a) => {
+                    const selected = a.id === pickerAction;
+                    return (
+                      <button
+                        key={a.id}
+                        type="button"
+                        role="radio"
+                        aria-checked={selected}
+                        onClick={() => setPickerAction(a.id)}
+                        className="px-2.5 py-1.5 rounded-full border text-xs font-semibold transition-colors"
+                        style={{
+                          borderColor: selected
+                            ? 'var(--color-accent, #06b6d4)'
+                            : 'var(--color-border)',
+                          backgroundColor: selected
+                            ? 'var(--color-accent, #06b6d4)'
+                            : 'transparent',
+                          color: selected
+                            ? 'var(--color-bg)'
+                            : 'var(--color-text)',
+                        }}
+                        data-testid={`teach-picker-action-${a.id}`}
+                      >
+                        {a.label}
+                      </button>
+                    );
+                  })}
+                </div>
+                {/* Description of what the selected action does. */}
+                <div
+                  className="text-xs italic px-1"
+                  style={{ color: 'var(--color-text-muted)' }}
+                  data-testid="teach-picker-description"
+                >
+                  {activeAction.description}
+                </div>
+                {/* Opening chips — favorites if any, fallback popular otherwise. */}
+                <div
+                  className="text-[11px] font-medium uppercase tracking-wide px-1"
+                  style={{ color: 'var(--color-text-muted)' }}
+                >
+                  {openingsSourceLabel}
+                </div>
+                <div
+                  className="flex flex-wrap gap-1.5"
+                  data-testid="teach-picker-openings"
+                >
+                  {openingNames.map((name) => (
+                    <button
+                      key={name}
+                      type="button"
+                      onClick={() => void handleSubmit(activeAction.buildInput(name))}
+                      className="px-2.5 py-1.5 rounded-md border text-xs hover:opacity-80 transition-opacity"
+                      style={{
+                        borderColor: 'var(--color-border)',
+                        color: 'var(--color-text)',
+                      }}
+                      data-testid={`teach-picker-opening-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                    >
+                      {name}
+                    </button>
+                  ))}
+                </div>
+                {/* Free-form starter examples — kept compact under the picker
+                    so the user knows they can also just type a question. */}
+                <details
+                  className="text-xs"
+                  style={{ color: 'var(--color-text-muted)' }}
+                >
+                  <summary className="cursor-pointer select-none">
+                    Or ask a free-form question…
+                  </summary>
+                  <div className="mt-2 space-y-1.5">
+                    {SUGGESTIONS.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => void handleSubmit(s)}
+                        className="block w-full text-left px-2 py-1.5 rounded-md border text-xs hover:bg-theme-bg"
+                        style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
+                        data-testid={`teach-suggestion-${s.slice(0, 12).replace(/\W+/g, '-').toLowerCase()}`}
+                      >
+                        "{s}"
+                      </button>
+                    ))}
+                  </div>
+                </details>
+              </div>
+            );
+          })()}
 
           {/* Rolodex Start button (WO-ROLODEX-PLUMBING-01 item 3a).
               When the page was opened via `?opening=<name>`, the
@@ -3018,6 +3303,20 @@ function WalkthroughControls({
             >
               <ChevronRight size={16} />
               Continue learning
+            </button>
+          )}
+          {tree && (
+            <button
+              onClick={() => {
+                walkthrough.stop();
+                void navigate(`/coach/play?opening=${encodeURIComponent(tree.openingName)}`);
+              }}
+              className="w-full flex items-center justify-center gap-2 px-3 py-3 rounded-lg bg-theme-accent text-theme-bg text-sm font-semibold min-h-[48px] transition-colors"
+              style={goldGlowStrongStyle}
+              data-testid="walkthrough-leaf-play-real"
+            >
+              <ChevronRight size={16} />
+              Play this line out yourself
             </button>
           )}
           {tree && extractDeepDiveOptions(tree).length > 0 && (

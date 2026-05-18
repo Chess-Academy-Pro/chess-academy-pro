@@ -325,7 +325,60 @@ export function findShortestCanonicalPgn(canonicalName: string): string | null {
   // No sub-variations to surface as forks — use the longest same-
   // name PGN so the walkthrough extends to whatever depth the DB
   // (canonical or extended) carries.
-  return matches.reduce((a, b) => (a.pgn.length > b.pgn.length ? a : b)).pgn;
+  const longestSameName = matches.reduce((a, b) =>
+    a.pgn.length > b.pgn.length ? a : b,
+  );
+  const longestPlies = longestSameName.pgn.split(/\s+/).filter(Boolean).length;
+  // Cross-name extension: when the same-name spine ends short of
+  // middlegame depth, the DB sometimes carries the SAME line under a
+  // different (more-specific) name with extra plies. E.g.
+  //   "Vienna Game: Frankenstein-Dracula Variation"       → 6 plies
+  //   "Vienna Game: Stanley Variation,
+  //                 Frankenstein-Dracula Variation"       → 20 plies
+  // Both have identical PGN prefixes; the longer one is literally
+  // the canonical line continued. The user typed the shorter
+  // variation name and expects the walkthrough to reach the
+  // middlegame — let the deeper continuation drive the spine. Bound:
+  // the candidate's PGN MUST start with the same-name longest's PGN
+  // (so we never break out of the named position).
+  if (longestPlies < SPINE_EXTENSION_THRESHOLD) {
+    const extended = findLongestPgnExtending(longestSameName.pgn);
+    if (extended && extended !== longestSameName.pgn) {
+      return extended;
+    }
+  }
+  return longestSameName.pgn;
+}
+
+/** Ply count below which `findShortestCanonicalPgn` looks for a
+ *  cross-name PGN extension. 10 covers most middlegame transitions. */
+const SPINE_EXTENSION_THRESHOLD = 10;
+/** Hard cap on the extended-spine length. ~20 plies is comfortably
+ *  in the middlegame for any opening and keeps the walkthrough
+ *  tractable. */
+const SPINE_EXTENSION_MAX_PLIES = 20;
+
+/** Find the longest DB PGN that has `basePgn` as a (strict or equal)
+ *  prefix. Used by `findShortestCanonicalPgn` to extend thin named
+ *  variations into the middlegame using DB entries stored under
+ *  different (more-specific) names. Returns null when no entry
+ *  extends the base, or when the extension cap is already at the
+ *  threshold (same as the base, no real extension). */
+function findLongestPgnExtending(basePgn: string): string | null {
+  const entries = openingsData;
+  const basePrefix = basePgn + ' ';
+  let best: { pgn: string; plies: number } | null = null;
+  for (const e of entries) {
+    if (e.pgn !== basePgn && !e.pgn.startsWith(basePrefix)) continue;
+    const plies = e.pgn.split(/\s+/).filter(Boolean).length;
+    if (!best || plies > best.plies) best = { pgn: e.pgn, plies };
+  }
+  if (!best) return null;
+  // Cap at SPINE_EXTENSION_MAX_PLIES so the walkthrough doesn't grow
+  // unbounded for openings the DB carries to 25-30 plies.
+  if (best.plies <= SPINE_EXTENSION_MAX_PLIES) return best.pgn;
+  const capped = best.pgn.split(/\s+/).filter(Boolean).slice(0, SPINE_EXTENSION_MAX_PLIES).join(' ');
+  return capped;
 }
 
 /** Resolve a user-typed opening name against the Lichess DB and

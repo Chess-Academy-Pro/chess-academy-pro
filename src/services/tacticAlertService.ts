@@ -233,10 +233,15 @@ export interface GameplayTacticAlert {
  * fires for ALL players regardless of rating — that's a separate system.
  */
 export function getTacticLookahead(playerRating: number): number {
-  if (playerRating < 1000) return 1;  // Alert 1 move before
-  if (playerRating < 1400) return 2;  // Alert 2 moves before
-  if (playerRating < 1800) return 3;  // Alert 3 moves before
-  return 4;                            // Strong players: 4 moves before (plan ahead!)
+  // David's call (2026-05-18): "1 or 2 for beginners, 4 for intermediate
+  // users. This pushes the user to think ahead more bettering their
+  // game." + "Don't forget about advanced players!" — advanced gets
+  // a deeper scan so the coach can frame tactics they're expected
+  // to calculate without help (3 full moves out).
+  if (playerRating < 1000) return 1;  // Beginner: just the immediate threat
+  if (playerRating < 1400) return 2;  // Improver: 1 full move ahead
+  if (playerRating < 1800) return 4;  // Intermediate: 2 full moves ahead — calculate
+  return 6;                            // Advanced (1800+): 3 full moves ahead — calculate the whole sequence
 }
 
 /**

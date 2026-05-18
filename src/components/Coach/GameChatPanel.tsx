@@ -2,6 +2,8 @@ import { useState, useCallback, useRef, useEffect, forwardRef, useImperativeHand
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../../stores/appStore';
+import { buildTacticsLiveContext } from '../../services/liveTacticsContext';
+import { validateTacticClaims } from '../../services/tacticClaimValidator';
 import { sanitizeCoachText, sanitizeCoachStream, formatForSpeech } from '../../services/sanitizeCoachText';
 import { routeChatIntent } from '../../services/coachSessionRouter';
 import { detectNarrationToggle, applyNarrationToggle } from '../../services/coachAgentRunner';
@@ -612,12 +614,26 @@ export const GameChatPanel = forwardRef<GameChatPanelHandle, GameChatPanelProps>
         let streamMarkupBuf = '';
         let streamSafeBuf = '';
         try {
+          // Tactical context for the in-game chat — when the student
+          // asks "what's the threat?" or "what should I play?" mid-
+          // game, the brain gets the named patterns + PV scan so it
+          // can answer by tactic name instead of citing eval alone.
+          const gameChatStudentColor = fen.split(' ')[1] === 'b' ? 'b' : 'w';
+          const gameChatStudentRating =
+            useAppStore.getState().activeProfile?.puzzleRating ?? 1200;
+          const gameChatTactics = buildTacticsLiveContext(
+            fen,
+            null,
+            gameChatStudentColor,
+            gameChatStudentRating,
+          );
           const liveState: LiveState = {
             surface: 'game-chat',
             fen,
             moveHistory: history,
             userJustDid: text,
             currentRoute: '/coach/play',
+            tactics: gameChatTactics,
           };
           void logAppAudit({
             kind: 'coach-surface-migrated',
@@ -837,6 +853,24 @@ export const GameChatPanel = forwardRef<GameChatPanelHandle, GameChatPanelProps>
           // assistant text into the prompt; if [[ACTION:...]] markup
           // is in there, the LLM learns the wrong protocol.
           const assistantText = sanitizeCoachText(textWithoutBoardTags);
+          // G3 enforcement on in-game chat replies. Bounded vocabulary
+          // is the gameChatTactics block we attached to the envelope
+          // above; out-of-vocab claims surface as audit events.
+          const inGameValidation = validateTacticClaims(assistantText, gameChatTactics);
+          if (inGameValidation.violations.length > 0) {
+            void logAppAudit({
+              kind: 'claim-validator-trip',
+              category: 'subsystem',
+              source: 'GameChatPanel.inGameAsk.tacticClaimValidator',
+              summary: `out-of-vocab tactics: ${inGameValidation.violations.map((v) => v.type).join(', ')}`,
+              details: JSON.stringify({
+                violations: inGameValidation.violations,
+                surface: 'chat-in-game',
+                fen: fen || null,
+              }),
+              fen: fen || undefined,
+            });
+          }
           const assistantMsg: ChatMessageType = {
             id: `gmsg-${Date.now()}-resp`,
             role: 'assistant',

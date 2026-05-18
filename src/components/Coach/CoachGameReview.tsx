@@ -29,6 +29,8 @@ import { coachService } from '../../coach/coachService';
 import type { LiveState } from '../../coach/types';
 import { useCoachMemoryStore } from '../../stores/coachMemoryStore';
 import { useAppStore } from '../../stores/appStore';
+import { buildTacticsLiveContext } from '../../services/liveTacticsContext';
+import { validateTacticClaims } from '../../services/tacticClaimValidator';
 import { resolveCoachNarration } from '../../utils/coachNarration';
 import { logAppAudit } from '../../services/appAuditor';
 import { CLASSIFICATION_STYLES } from './classificationStyles';
@@ -500,12 +502,31 @@ export function CoachGameReview(props: CoachGameReviewProps): JSX.Element {
     const fenForQ = move?.fen ?? STARTING_FEN;
 
     const abortSignal = askAbortRef.current.signal;
+    // Tactical context for the review surface — the brain gets the
+    // named patterns visible at the position the student is asking
+    // about (forks/pins/hanging/etc.) plus the depth-N PV scan, so
+    // post-game commentary can articulate "you missed an x-ray on
+    // move 14" by pattern instead of just citing the eval swing.
+    // No cached Stockfish analysis at the ask site (review uses its
+    // own per-move analysis stream); immediate + hanging detection
+    // still fires from the FEN alone, and the brain falls back to
+    // the existing eval-context prose for upcoming threats.
+    const reviewStudentColor = fenForQ.split(' ')[1] === 'b' ? 'b' : 'w';
+    const reviewStudentRating =
+      useAppStore.getState().activeProfile?.puzzleRating ?? 1200;
+    const reviewTactics = buildTacticsLiveContext(
+      fenForQ,
+      null,
+      reviewStudentColor,
+      reviewStudentRating,
+    );
     const reviewLiveState: LiveState = {
       surface: 'review',
       fen: fenForQ,
       moveHistory: moves.slice(0, Math.max(0, moveIdx + 1)).map((m) => m.san),
       userJustDid: question,
       currentRoute: '/coach/play',
+      tactics: reviewTactics,
     };
     void logAppAudit({
       kind: 'coach-surface-migrated',
@@ -617,6 +638,22 @@ export function CoachGameReview(props: CoachGameReviewProps): JSX.Element {
       .then((answer) => {
         // WO-BRAIN-04: persist coach reply into conversation history.
         if (!abortSignal.aborted && answer.text.trim().length > 0) {
+          // G3 enforcement on the review-ask reply.
+          const validation = validateTacticClaims(answer.text, reviewTactics);
+          if (validation.violations.length > 0) {
+            void logAppAudit({
+              kind: 'claim-validator-trip',
+              category: 'subsystem',
+              source: 'CoachGameReview.askResponse.tacticClaimValidator',
+              summary: `out-of-vocab tactics: ${validation.violations.map((v) => v.type).join(', ')}`,
+              details: JSON.stringify({
+                violations: validation.violations,
+                surface: 'review',
+                fen: fenForQ,
+              }),
+              fen: fenForQ,
+            });
+          }
           useCoachMemoryStore.getState().appendConversationMessage({
             surface: 'chat-review-ask',
             role: 'coach',

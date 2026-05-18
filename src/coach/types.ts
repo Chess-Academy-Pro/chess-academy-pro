@@ -146,6 +146,58 @@ export interface LiveState {
    *  black-to-move position with the white-side mental model, and
    *  chess.js correctly rejected it 5 trips in a row. */
   whoseTurn?: 'white' | 'black';
+  /** Pre-computed tactical context for the current FEN. Surfaces with
+   *  Stockfish PV access (CoachTeachPage, CoachGamePage) build this via
+   *  classifyPosition + scanUpcomingTactics so the brain can NAME
+   *  tactics by pattern (fork, pin, skewer, back-rank threat, etc.)
+   *  across opening, middlegame, and endgame phases instead of just
+   *  citing the eval number. Without this block the brain knows the
+   *  position is +2.0 but cannot articulate *why* it's +2.0.
+   *
+   *  G3 contract (same shape as opening / master-play grounding):
+   *  the brain's tactical vocabulary is bounded by what this block
+   *  contains. It must not invent tactics that didn't appear in the
+   *  pre-computed scan. */
+  tactics?: TacticsLiveContext;
+}
+
+/** Pre-computed tactical context attached to the envelope's live
+ *  state. See `LiveState.tactics`. */
+export interface TacticsLiveContext {
+  /** Tactics on the board RIGHT NOW for the side to move
+   *  (forks/pins/skewers/back-rank/etc.). */
+  immediate: Array<{
+    /** Canonical pattern name (fork, pin, skewer, discovery, double_check,
+     *  back_rank, removal_of_guard). */
+    type: string;
+    /** Human-readable description, e.g. "Knight on d5 forks queen on c7
+     *  and rook on f6". */
+    description: string;
+    /** Squares involved in the tactic. */
+    squares: string[];
+  }>;
+  /** Undefended attacked pieces (either color). */
+  hanging: Array<{ square: string; piece: string; color: 'w' | 'b' }>;
+  /** Tactics in the opponent's principal variation — THREATS to warn
+   *  the student about. */
+  threats: Array<{
+    type: string;
+    description: string;
+    depthAhead: number;
+    line: string[];
+  }>;
+  /** Tactics in the student's principal variation — OPPORTUNITIES
+   *  the student should aim for. */
+  opportunities: Array<{
+    type: string;
+    description: string;
+    depthAhead: number;
+    line: string[];
+  }>;
+  /** Half-move depth the PV scan covered (rating-adaptive via
+   *  `getTacticLookahead`). The brain must not claim a tactic
+   *  further out than this depth. */
+  lookaheadDepth: number;
 }
 
 // ─── Envelope (what every LLM call contains) ─────────────────────────────────

@@ -26,6 +26,7 @@ import {
 import { SENTENCE_END_RE, unwrapSpineError } from '../../services/sanitizeCoachText';
 import { logAppAudit } from '../../services/appAuditor';
 import { useAppStore } from '../../stores/appStore';
+import { buildTacticsLiveContext } from '../../services/liveTacticsContext';
 import type { StockfishAnalysis } from '../../types';
 
 const START_FEN =
@@ -113,6 +114,19 @@ export function ExplainPositionSessionView({
           `Explain in 4-6 sentences: assessment, plans, tactics to watch for.`,
         ].join('\n');
 
+        // Tactical context — sf analysis is already in scope (we ran
+        // Stockfish on targetFen to power the explain prompt), so the
+        // forward PV scan fires here too. Explain-position's job is
+        // exactly tactical articulation, so this is high-value wiring.
+        const explainStudentColor = targetFen.split(' ')[1] === 'b' ? 'b' : 'w';
+        const explainStudentRating =
+          useAppStore.getState().activeProfile?.puzzleRating ?? 1200;
+        const explainTactics = buildTacticsLiveContext(
+          targetFen,
+          sf,
+          explainStudentColor,
+          explainStudentRating,
+        );
         let streamed = '';
         const result = await coachService.ask(
           {
@@ -124,6 +138,7 @@ export function ExplainPositionSessionView({
               evalCp: sf.isMate ? undefined : sf.evaluation,
               evalMateIn: sf.mateIn ?? undefined,
               userJustDid: 'Loaded a position into Explain',
+              tactics: explainTactics,
             },
           },
           {
@@ -192,6 +207,16 @@ export function ExplainPositionSessionView({
         `Answer in 2-4 sentences. Stay grounded in the position.`,
       ].join('\n');
 
+      // Tactical context for the follow-up question.
+      const askStudentColor = targetFen.split(' ')[1] === 'b' ? 'b' : 'w';
+      const askStudentRating =
+        useAppStore.getState().activeProfile?.puzzleRating ?? 1200;
+      const askTactics = buildTacticsLiveContext(
+        targetFen,
+        analysis,
+        askStudentColor,
+        askStudentRating,
+      );
       let response = '';
       const result = await coachService.ask(
         {
@@ -203,6 +228,7 @@ export function ExplainPositionSessionView({
             evalCp: analysis.isMate ? undefined : analysis.evaluation,
             evalMateIn: analysis.mateIn ?? undefined,
             userJustDid: `Asked: "${question.slice(0, 60)}"`,
+            tactics: askTactics,
           },
         },
         {
