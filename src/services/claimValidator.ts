@@ -26,11 +26,21 @@
  *     (returns ok:true). Layer B decides whether to pre-inject;
  *     casual chat ("hi", "what's the Sicilian?") doesn't go through
  *     the validator. coachApi only validates when it injected context.
- *   - When `context.current.source === 'none'`, even a single SAN /
- *     percentage / player name is a violation — the LLM was supposed
- *     to say "I can't verify which moves are sound" instead.
- *   - When `context` has data, claims are checked against the union
- *     of current.moves + lookahead.*.moves + topGames.
+ *   - Two grounding sources count as "has data":
+ *       (1) MASTER-PLAY — `context.current` with `source !== 'none'`
+ *           and a non-empty `moves[]`. Carries SAN popularity,
+ *           percentages, game counts, ratings, `topGames` attribution.
+ *       (2) OPENING-DB — `context.dbEntries[]` populated from
+ *           `openings-lichess.json` (canonical Lichess names + PGNs).
+ *           Carries SANs and historical names (Steinitz, Marshall, …)
+ *           but NO frequency / rating data.
+ *     SAN and player-name validation accept matches from EITHER source.
+ *     Percentage / game-count / rating / year / comparative validation
+ *     still requires master-play data (DB has none).
+ *   - When BOTH sources are empty (rare — only when the prefetch failed
+ *     AND no opening was named or detected), even a single SAN /
+ *     percentage / player name is a violation: the LLM was supposed to
+ *     say "I can't verify which moves are sound" instead.
  *
  * Returns a `ClaimValidationResult` with `ok` flag and an array of
  * `ClaimViolation` describing each tripped claim. Callers (coachApi)
@@ -113,6 +123,16 @@ function collectKnownSans(context: MasterPlayContext): Set<string> {
     // The transition move itself is also "known" — it's what the
     // LLM was told the position would arise from.
     set.add(lookahead.moveFromCurrent);
+  }
+  // DB-grounding: every SAN in a related opening-DB entry is canon.
+  // This is the "Steinitz Gambit plays 3.f4" path — when the user
+  // asks about a named opening, its canonical move sequence (and the
+  // move sequences of its named sub-variations) count as book theory
+  // even if not in the live Lichess top-N for the exact current FEN.
+  if (context.dbEntries) {
+    for (const e of context.dbEntries) {
+      for (const san of e.sans) set.add(san);
+    }
   }
   return set;
 }
@@ -220,11 +240,27 @@ const CANONICAL_PLAYERS: ReadonlyArray<{ display: string; matchers: RegExp[] }> 
 const YEAR_RE = /\b(19[0-9]{2}|20[0-2][0-9])\b/g;
 
 function playerSeenInContext(canonical: string, context: MasterPlayContext): boolean {
-  if (!context.current.topGames || context.current.topGames.length === 0) return false;
   const surname = canonical.toLowerCase();
-  for (const g of context.current.topGames) {
-    if ((g.white ?? '').toLowerCase().includes(surname)) return true;
-    if ((g.black ?? '').toLowerCase().includes(surname)) return true;
+  // First: master-play `topGames` attribution (live Lichess or local DB).
+  if (context.current.topGames && context.current.topGames.length > 0) {
+    for (const g of context.current.topGames) {
+      if ((g.white ?? '').toLowerCase().includes(surname)) return true;
+      if ((g.black ?? '').toLowerCase().includes(surname)) return true;
+    }
+  }
+  // DB-grounding fallback: the player's name embedded in a canonical
+  // opening/variation name counts as historical attribution. Examples:
+  // "Steinitz Gambit" → Steinitz; "Marshall Attack" → Marshall;
+  // "Petroff's Defense" → Petroff; "Alekhine's Defense" → Alekhine;
+  // "Tal Manoeuvre" → Tal. Without this, the validator killed every
+  // response that mentioned Steinitz on a Vienna Steinitz Gambit
+  // question because the position's master-play topGames didn't
+  // happen to feature Steinitz playing — but the opening is LITERALLY
+  // named after him.
+  if (context.dbEntries) {
+    for (const e of context.dbEntries) {
+      if (e.name.toLowerCase().includes(surname)) return true;
+    }
   }
   return false;
 }
@@ -265,8 +301,14 @@ export function validateClaims(
   }
 
   const violations: ClaimViolation[] = [];
-  const hasData = context.current.source !== 'none' && context.current.moves.length > 0;
-  const knownSans = hasData ? collectKnownSans(context) : new Set<string>();
+  const hasMasterData = context.current.source !== 'none' && context.current.moves.length > 0;
+  const hasDbData = (context.dbEntries?.length ?? 0) > 0;
+  // "hasData" here means we have ANY grounding source — live
+  // master-play OR canonical opening DB. The DB-grounding extension
+  // means an empty Lichess explorer no longer forces a stock-out when
+  // the question is about a named opening that exists in the DB.
+  const hasData = hasMasterData || hasDbData;
+  const knownSans = collectKnownSans(context);
 
   // ── SAN check ────────────────────────────────────────────────────
   const sans = extractSans(response);
@@ -289,13 +331,16 @@ export function validateClaims(
   }
 
   // ── Percentage check ─────────────────────────────────────────────
-  const contextPcts = hasData ? pctNumbersFromContext(context.current) : [];
+  // Percentages, game counts, ratings, and comparative claims still
+  // require live master-play data — the openings DB has no popularity
+  // statistics. So these checks use `hasMasterData` not `hasData`.
+  const contextPcts = hasMasterData ? pctNumbersFromContext(context.current) : [];
   for (const m of contextPcts) void m; // capacity hint only
   let p: RegExpExecArray | null;
   PERCENT_RE.lastIndex = 0;
   while ((p = PERCENT_RE.exec(response))) {
     const value = parseNumber(p[1]);
-    if (!hasData) {
+    if (!hasMasterData) {
       violations.push({
         kind: 'numeric',
         claim: p[0],
@@ -313,12 +358,12 @@ export function validateClaims(
   }
 
   // ── Game count check ─────────────────────────────────────────────
-  const contextCounts = hasData ? gameCountsFromContext(context.current) : new Set<number>();
+  const contextCounts = hasMasterData ? gameCountsFromContext(context.current) : new Set<number>();
   let c: RegExpExecArray | null;
   GAME_COUNT_RE.lastIndex = 0;
   while ((c = GAME_COUNT_RE.exec(response))) {
     const value = parseNumber(c[1]);
-    if (!hasData) {
+    if (!hasMasterData) {
       violations.push({
         kind: 'numeric',
         claim: c[0],
@@ -337,14 +382,14 @@ export function validateClaims(
   }
 
   // ── Rating check ─────────────────────────────────────────────────
-  const contextRatings = hasData ? ratingsFromContext(context.current) : new Set<number>();
+  const contextRatings = hasMasterData ? ratingsFromContext(context.current) : new Set<number>();
   // Only require explicit "rated/rating ..." patterns to flag — bare
   // 4-digit numbers without rating context could just be years.
   let r: RegExpExecArray | null;
   RATING_RE.lastIndex = 0;
   while ((r = RATING_RE.exec(response))) {
     const value = parseNumber(r[1]);
-    if (!hasData) {
+    if (!hasMasterData) {
       violations.push({
         kind: 'numeric',
         claim: r[0],
@@ -362,7 +407,7 @@ export function validateClaims(
   }
   // Bare 4-digit numbers in chess-rating range: only flag when the
   // sentence also contains chess-rating cues to avoid year false-positives.
-  if (hasData) {
+  if (hasMasterData) {
     RATING_BARE_RE.lastIndex = 0;
     while ((r = RATING_BARE_RE.exec(response))) {
       const value = parseNumber(r[1]);
@@ -392,8 +437,8 @@ export function validateClaims(
             kind: 'entity',
             claim: player.display,
             reason: hasData
-              ? `mentions ${player.display} but no topGames attribution in this turn's master-play context`
-              : `mentions ${player.display} but master-play context has no data (cannot attribute)`,
+              ? `mentions ${player.display} but no topGames attribution in this turn's master-play context, and no opening-DB entry name matches`
+              : `mentions ${player.display} but neither master-play nor opening-DB context has data (cannot attribute)`,
           });
         }
         break;
@@ -417,7 +462,7 @@ export function validateClaims(
       violations.push({
         kind: 'entity',
         claim: y[0],
-        reason: hasData
+        reason: hasMasterData
           ? `attributes a game/event to ${year} but no topGame in this turn's context matches that year`
           : `attributes a year ${year} but master-play context has no data`,
       });
@@ -425,13 +470,17 @@ export function validateClaims(
   }
 
   // ── Comparative check ────────────────────────────────────────────
+  // Comparative claims ("most popular", "best-scoring") require live
+  // master-play popularity data — the opening DB has no frequency
+  // statistics. Skip this check entirely when only DB grounding
+  // applies.
   const topMove = topMoveFromContext(context);
   for (const pat of COMPARATIVE_PATTERNS) {
     pat.lastIndex = 0;
     let cm: RegExpExecArray | null;
     while ((cm = pat.exec(response))) {
       const claimed = cm[1];
-      if (!hasData) {
+      if (!hasMasterData) {
         violations.push({
           kind: 'comparative',
           claim: cm[0],
