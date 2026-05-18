@@ -133,6 +133,53 @@ export function WalkthroughMode({
   // omitting the prop so the contract is explicit.
   const applyStep = useCallback((_idx: number) => { /* board derives from hook state */ }, []);
 
+  // Resolve the annotation entry that pairs with a given ply (1-indexed
+  // step from useStrictNarration: step 0 is the overview, step N is the
+  // N-th move). Shared by both the voice narrator (`getNarrationFor`)
+  // and the on-screen card (`baseAnnotation`) so they NEVER show
+  // different narration for the same step — caught in 2026-05-18
+  // audit where the SAN-first card lookup returned ply-3 narration on
+  // the ply-19 card because both plies played `d5`.
+  //
+  // Resolution order:
+  //   1. annotations[i] when its SAN matches the played SAN at ply i+1
+  //      (the common case: stubs are 1:1 with the PGN).
+  //   2. SAN-first with OCCURRENCE COUNTING — the N-th occurrence of
+  //      `playedSan` in expectedMoves[0..idx] maps to the N-th
+  //      occurrence in `annotations`. Without counting, repeated
+  //      SANs (Naroditsky Alapin trap-0: Black ply-3 d5 AND White
+  //      ply-19 d5) collapsed to the first occurrence on every later
+  //      hit.
+  //   3. Bare annotations[i] when SAN doesn't agree.
+  //   4. null when nothing fits — caller decides whether to silence
+  //      voice or render a synthesised placeholder.
+  const resolveAnnotationForStep = useCallback(
+    (step: number): OpeningMoveAnnotation | null => {
+      if (step <= 0 || !annotations) return null;
+      const idx = step - 1;
+      const playedSan = expectedMoves[idx]?.san;
+      const byIdx = annotations[idx];
+      if (byIdx && playedSan && byIdx.san === playedSan) return byIdx;
+      if (playedSan) {
+        let targetOccurrence = 0;
+        for (let i = 0; i <= idx; i += 1) {
+          if (expectedMoves[i]?.san === playedSan) targetOccurrence += 1;
+        }
+        let seen = 0;
+        for (const ann of annotations) {
+          if (ann.san === playedSan) {
+            seen += 1;
+            if (seen === targetOccurrence) return ann;
+          }
+        }
+        const bySan = annotations.find((a) => a.san === playedSan);
+        if (bySan) return bySan;
+      }
+      return byIdx ?? null;
+    },
+    [annotations, expectedMoves],
+  );
+
   const getNarrationFor = useCallback((idx: number): string => {
     // Audit-log every empty return so silent rapid-fire bugs surface
     // in the in-app audit log with a specific reason — no need to
@@ -153,10 +200,26 @@ export function WalkthroughMode({
     if (idx === 0) return '';
     if (!NARRATE[autoPlaySpeed]) return logEmpty('drill mode (NARRATE flag is false)', `autoPlaySpeed=${autoPlaySpeed}`);
     if (!annotations) return logEmpty('annotations not loaded yet', `total=null`);
-    const ann = annotations[idx - 1];
+    // Pair the spoken narration with the SAME annotation entry the
+    // on-screen card uses — see `resolveAnnotationForStep`. Bare
+    // `annotations[idx-1]` would silently drift on lines with
+    // repeated SANs (Naroditsky Alapin trap-0).
+    const ann = resolveAnnotationForStep(idx);
     if (!ann) return logEmpty('no annotation at this index', `idx=${idx} of ${annotations.length}`);
     const fullText = ann.narration ?? ann.annotation;
     if (!fullText) return logEmpty('annotation has no text', `narration=${ann.narration === undefined ? 'undef' : `"${(ann.narration ?? '').slice(0, 20)}"`} annotation=${!ann.annotation ? '<empty>' : `"${ann.annotation.slice(0, 20)}"`}`);
+
+    // Suppress synthesised PGN-only stubs and generic templated filler.
+    // Without this gate, the first plies of any opening whose curated
+    // annotations are missing get their bare SAN ("e4", "c5", "Nf3")
+    // spoken aloud during the ~7s window before the LLM enricher
+    // finishes — caught in 2026-05-18 audit (findings 59/62/65: bare
+    // SAN textLength=2 spoken). Silence is acceptable per §Narration
+    // Voice Rules; the LLM-enriched real narration arrives on the next
+    // step transition once the parallel enrichment promise resolves.
+    if (isGenericAnnotationText(fullText)) {
+      return logEmpty('generic/bare-SAN stub — narrator will replace shortly', `text="${fullText.slice(0, 30)}"`);
+    }
 
     const limit = SENTENCE_LIMIT[autoPlaySpeed];
     if (limit !== null) {
@@ -165,7 +228,7 @@ export function WalkthroughMode({
       return out;
     }
     return fullText;
-  }, [annotations, autoPlaySpeed]);
+  }, [annotations, autoPlaySpeed, resolveAnnotationForStep]);
 
   const narration = useStrictNarration({
     stepCount: expectedMoves.length + 1, // +1 for overview at step 0
@@ -448,31 +511,19 @@ export function WalkthroughMode({
     return () => { cancelled = true; };
   }, [currentFen, showLichessEffective]);
 
-  // Current annotation for the move that was just played — enhanced with DB narrations.
-  //
-  // Resolution strategy: prefer a SAN match, fall back to index match,
-  // fall back to a synthesised "this is theory" line. An opening-content
-  // audit found 92 annotation files where the annotation SANs are in a
-  // different order than the canonical PGN's (SAN-first lookup handles
-  // that) and 66 files where annotations end before the PGN does (the
-  // synthesised fallback handles that — walkthrough never shows a stale
-  // bubble while the board keeps moving).
+  // Current annotation for the move that was just played — enhanced
+  // with DB narrations. Goes through the SHARED `resolveAnnotationForStep`
+  // helper so the on-screen card and the spoken narration are always
+  // fed from the same annotation entry. Synthesised "this is theory"
+  // placeholder kicks in when the helper returns null (moves past the
+  // end of the annotation array).
   const baseAnnotation = useMemo((): OpeningMoveAnnotation | null => {
     if (!annotations) return null;
     if (currentMoveIndex === 0) return null;
     const idx = currentMoveIndex - 1;
+    const resolved = resolveAnnotationForStep(currentMoveIndex);
+    if (resolved) return resolved;
     const playedSan = expectedMoves[idx]?.san;
-    if (playedSan) {
-      const bySan = annotations.find((a) => a.san === playedSan);
-      if (bySan) return bySan;
-    }
-    const byIdx = annotations[idx];
-    if (byIdx) return byIdx;
-    // Final fallback: synthesise a placeholder for moves past the end
-    // of the annotation array. Repair pass appends tail entries to
-    // the files on disk, but this keeps the UI robust if any file is
-    // still incomplete (external content, regeneration in progress,
-    // etc.).
     if (playedSan) {
       return {
         san: playedSan,
@@ -480,7 +531,7 @@ export function WalkthroughMode({
       };
     }
     return null;
-  }, [annotations, currentMoveIndex, expectedMoves]);
+  }, [annotations, currentMoveIndex, expectedMoves, resolveAnnotationForStep]);
 
   // The displayed annotation is the base annotation (curated JSON +
   // LLM enrichment). The legacy `enhanceWithNarration` override was
