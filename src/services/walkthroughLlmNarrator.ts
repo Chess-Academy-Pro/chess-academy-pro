@@ -22,10 +22,14 @@ import { isGenericAnnotationText } from './walkthroughNarration';
 import { db } from '../db/schema';
 
 /** Cache version — bump to invalidate all previously-cached narrations
- *  when the prompt / output format changes. v2 invalidates entries
- *  cached before the WalkthroughMode merge fix that lets curated
- *  `annotation` text win over potentially-filler LLM output. */
-const CACHE_VERSION = 'v2';
+ *  when the prompt / output format changes. v3 invalidates entries
+ *  cached before the curator-context fix that feeds the opening's
+ *  overview / keyIdeas / variation explanation INTO the LLM prompt
+ *  so per-move narration aligns with the variation's actual point
+ *  (caught after a 2026-05-17 audit showed a Fantasy Caro walkthrough
+ *  describing the Classical Caro because the LLM had no idea what
+ *  variation it was narrating). */
+const CACHE_VERSION = 'v3';
 
 export interface WalkthroughNarrationInput {
   openingName: string;
@@ -41,6 +45,32 @@ export interface WalkthroughNarrationInput {
    * whose entry is empty or generic filler.
    */
   existingNarrations?: (string | undefined)[];
+  /**
+   * Curator framing for the WHOLE opening — the overview text written
+   * for the parent opening page. Without this, the LLM doesn't know
+   * what the opening's strategic identity is and generates generic
+   * commentary that often contradicts the variation's actual purpose
+   * (e.g. recommending Nxe4 recapture in a Fantasy Caro where the
+   * whole point is fxe4 for the open f-file). Pass `overview` from
+   * OpeningRecord here.
+   */
+  openingOverview?: string;
+  /**
+   * Curator framing for the WHOLE opening — keyIdeas bullets from the
+   * parent opening page. Same purpose as openingOverview: gives the
+   * LLM the strategic themes to weave into per-move narration. Pass
+   * `keyIdeas` from OpeningRecord here.
+   */
+  openingKeyIdeas?: string[];
+  /**
+   * Curator framing for the SPECIFIC variation — the explanation text
+   * from the variation entry. This is the most important context:
+   * it usually walks the actual move sequence and names the key
+   * structural ideas (e.g. "after fxe4 you have the open f-file and
+   * the Bc4 aimed at f7"). Without this, the LLM generates per-move
+   * text that may directly contradict the variation's mainline plan.
+   */
+  variationExplanation?: string;
 }
 
 export interface WalkthroughNarrationResult {
@@ -104,6 +134,11 @@ export async function generateWalkthroughNarrations(
     input.variationName,
     perMove,
     needsGeneration,
+    {
+      openingOverview: input.openingOverview,
+      openingKeyIdeas: input.openingKeyIdeas,
+      variationExplanation: input.variationExplanation,
+    },
   );
 
   // Fold LLM output back into the full array, preserving curated
@@ -151,11 +186,18 @@ function buildPerMoveContext(startFen: string, sanMoves: string[]): PerMoveConte
   return out;
 }
 
+interface CuratorContext {
+  openingOverview?: string;
+  openingKeyIdeas?: string[];
+  variationExplanation?: string;
+}
+
 async function requestLlmNarrations(
   openingName: string,
   variationName: string | undefined,
   perMove: PerMoveContext[],
   indices: number[],
+  curator: CuratorContext = {},
 ): Promise<string[]> {
   const moveList = perMove
     .map(
@@ -171,15 +213,42 @@ async function requestLlmNarrations(
 
   const systemAdditions = [
     'You are a chess opening coach writing per-move narration for a walkthrough lesson.',
+    'You are given CURATOR CONTEXT describing the opening and the specific variation\'s strategic identity. Your per-move narrations MUST align with that context — never recommend a recapture, plan, or piece manoeuvre that contradicts what the curator framed. If the curator says "the whole point is fxe4 opening the f-file," do NOT recommend Nxe4 in your move-by-move narration.',
     'For EVERY move tagged [NARRATE], produce ONE narration sentence (max 28 words) that actually teaches. Follow ARA: Annotation (what was played and where), Reasoning (the purpose — a concrete feature like central control, piece activity, king safety, a specific plan), Action (what this move threatens, prepares, or restricts).',
-    'Cite concrete squares, files, diagonals, or pieces. Do NOT say "develops naturally", "heads toward the critical moment", "position is roughly equal", or any generic filler. If the move is a standard developing move, explain WHY that particular square matters in this opening.',
+    'Cite concrete squares, files, diagonals, or pieces. Do NOT say "develops naturally", "heads toward the critical moment", "position is roughly equal", or any generic filler. If the move is a standard developing move, explain WHY that particular square matters in THIS opening (the curator context tells you).',
     'For moves tagged [skip], return an empty string in that slot.',
     'Return a JSON array of strings, exactly one entry per move in order. No markdown, no prose before or after.',
   ].join(' ');
 
+  // Build a curator-framing block IF the caller supplied context. The
+  // LLM uses this to align per-move narration with the parent opening
+  // page's overview/keyIdeas and the variation's own explanation —
+  // preventing the cross-variation hallucinations the v2 prompt
+  // produced (Fantasy Caro narrations describing Classical Caro plans,
+  // etc.).
+  const curatorBlock: string[] = [];
+  if (curator.openingOverview && curator.openingOverview.trim()) {
+    curatorBlock.push('CURATOR — Opening overview:', curator.openingOverview.trim(), '');
+  }
+  if (curator.openingKeyIdeas && curator.openingKeyIdeas.length > 0) {
+    curatorBlock.push(
+      'CURATOR — Key strategic ideas (use these to inform your narration; do NOT contradict):',
+      ...curator.openingKeyIdeas.map((idea, i) => `${i + 1}. ${idea}`),
+      '',
+    );
+  }
+  if (curator.variationExplanation && curator.variationExplanation.trim()) {
+    curatorBlock.push(
+      'CURATOR — This specific variation\'s strategic point (ALIGN your per-move narration with this):',
+      curator.variationExplanation.trim(),
+      '',
+    );
+  }
+
   const userMessage = [
     header,
     '',
+    ...curatorBlock,
     'Move list (annotate only moves tagged [NARRATE]):',
     moveList,
     '',
@@ -225,7 +294,19 @@ function buildCacheKey(
 ): string {
   const pgnHash = simpleHash(perMove.map((m) => m.san).join(' '));
   const variation = input.variationName ? `:${input.variationName}` : '';
-  return `walkthrough-narr:${CACHE_VERSION}:${input.openingName}${variation}:${pgnHash}`;
+  // Mix curator context into the cache key so that edits to the
+  // overview / keyIdeas / variation explanation invalidate stale
+  // cached narration. Without this, rewriting the curator data
+  // (as happened in the 2026-05-17 narration sweep) would leave the
+  // cached LLM output stuck on the OLD framing.
+  const curatorSig = simpleHash(
+    [
+      input.openingOverview ?? '',
+      (input.openingKeyIdeas ?? []).join('|'),
+      input.variationExplanation ?? '',
+    ].join('::'),
+  );
+  return `walkthrough-narr:${CACHE_VERSION}:${input.openingName}${variation}:${pgnHash}:${curatorSig}`;
 }
 
 /** Cheap FNV-style string hash — collision-resistant enough for a

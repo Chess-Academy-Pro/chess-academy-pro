@@ -292,10 +292,22 @@ export function WalkthroughMode({
     // OpeningDetailPage when the variation card is selected, the LLM
     // result usually lands by the time the user hits Play, so we skip
     // the bare-SAN stub window entirely on first visit.
+    // Pass curator context (opening overview + key ideas + variation
+    // explanation) to the LLM narrator. Without these, the LLM
+    // hallucinates per-move text that often contradicts the actual
+    // variation's strategic point — e.g. the 2026-05-17 audit caught
+    // a Fantasy Caro walkthrough recommending Nxe4 recapture (a
+    // Classical Caro move) because the LLM had no idea which Caro
+    // variation it was narrating. With curator context, the LLM sees
+    // the curator's framing ("the whole point is fxe4 opening the
+    // f-file") and aligns its per-move text accordingly.
     const llmPromise = generateWalkthroughNarrations({
       openingName: opening.name,
       variationName: variation?.name,
       pgn: activePgn,
+      openingOverview: opening.overview ?? undefined,
+      openingKeyIdeas: opening.keyIdeas ?? undefined,
+      variationExplanation: variation?.explanation,
     }).catch(() => null as null | { narrations: string[]; fromCache: boolean });
 
     void (async () => {
@@ -324,6 +336,29 @@ export function WalkthroughMode({
             source: 'WalkthroughMode.loadAnnotations',
             summary: `synthesised PGN-only stubs for ${opening.id}/${effectiveKey ?? 'main'}`,
             details: `variation="${variation?.name ?? '<none>'}" plies=${stubCount}`,
+          });
+        }).catch(() => {/* never break */});
+      } else if (data.length < expectedMoves.length) {
+        // PARTIAL annotations: the loader found a subline but it walks
+        // FEWER plies than the active PGN. Without topping up, moves
+        // past the annotation's end hit the per-move "Continuing this
+        // line: X is a known theory move" fallback (caught on the
+        // 2026-05-17 Fantasy Caro audit). Top up with synthesised
+        // stubs so the LLM enricher loop below fills them with real
+        // narration that matches the actual position.
+        const hadCount = data.length;
+        const topUp = synthesisedFromPgn.slice(hadCount);
+        const missingCount = topUp.length;
+        const newTotal = hadCount + missingCount;
+        data = [...data, ...topUp];
+        const pgnLen = expectedMoves.length;
+        void import('../../services/appAuditor').then(({ logAppAudit }) => {
+          void logAppAudit({
+            kind: 'walkthrough-narration-empty',
+            category: 'subsystem',
+            source: 'WalkthroughMode.loadAnnotations',
+            summary: `topped-up annotations for ${opening.id}/${effectiveKey ?? 'main'}`,
+            details: `variation="${variation?.name ?? '<none>'}" had=${hadCount} pgn=${pgnLen} stubsAdded=${missingCount} newTotal=${newTotal}`,
           });
         }).catch(() => {/* never break */});
       }
