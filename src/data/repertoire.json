@@ -3042,7 +3042,7 @@
     "pgn": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6 Nc3 Qe8 d5 Na6 Rb1 Bd7 b4 c6 dxc6 bxc6 a3 Nc7 Bb2 Ne6 c5 d5 Ne5 d4 Na4 Ng4 Nf3 Rd8 Nxd4 Nxd4",
     "color": "black",
     "style": "Aggressive, Unbalanced",
-    "overview": "The Dutch Defence is a bold, aggressive choice that immediately unbalances the position. By playing ...f5 on move one, you declare your intention to attack the kingside. The Leningrad variation with ...g6 and ...Bg7 is the most popular — you get a King's Indian-type setup with the extra punch of ...f5 already played. It's not the most solid opening, but it creates the kind of fighting positions where anything can happen.",
+    "overview": "The Dutch Defence is one of chess's most provocative responses to 1.d4 — popularised by 19th-century English master Henry Bird (the Bird Variation 1.d4 e6 2.Nf3 f5 carries his name) and championed throughout the 1950s-60s by the Soviet Leningrad chess school (Spassky, Tal, Korchnoi) who developed the …g6 + …Bg7 + …f5 fianchetto treatment. Boris Spassky used the Leningrad Dutch in tournament play; Danish GM Bent Larsen made it a famous weapon. By playing …f5 on move one, you declare your intention to attack the kingside. The Leningrad variation gives you a King's Indian-style setup with …f5 already played. Not the most solid opening — but fighting positions where anything can happen.",
     "keyIdeas": [
       "...f5 controls e4 and prepares a kingside pawn storm with ...g5 or ...e5",
       "The Leningrad setup with ...g6 and ...Bg7 combines solidity with aggression",
@@ -3136,7 +3136,7 @@
     "pgn": "d4 Nf6 c4 c5 d5 e6 Nc3 exd5 cxd5 d6 Nf3 g6 e4 Bg7 Be2 O-O O-O Re8 Nd2 Na6 Re1 Nc7 a4 b6 h3 Rb8 Bb5 Re7 Bf1 a6 Nc4 b5 Na5 Bd7 Bf4 Nfe8 axb5 axb5 Bg5 Bf6",
     "color": "black",
     "style": "Dynamic, Asymmetrical",
-    "overview": "The Modern Benoni is one of the most dynamic openings in chess. After ...c5 and ...exd5, you get a lopsided pawn structure where Black has a queenside pawn majority and White has a central majority. The resulting positions are razor-sharp — Black attacks on the queenside with ...b5 while White pushes for e5 or f4-f5. It's Tal's spirit in opening form — unbalanced, aggressive, and full of tactical potential.",
+    "overview": "The Modern Benoni's name traces back to the 1825 chess book 'Ben-Oni' by Aaron Reinganum (Hebrew for 'son of sorrow'), though the modern treatment emerged in the 1950s. Mikhail Tal — the 'Magician from Riga' — used the Benoni for spectacular tactical wins in his 1960 World Championship run against Botvinnik; Bobby Fischer played it in his Candidates Tournaments of 1959-1971; Garry Kasparov used it as his main wins-with-Black weapon against Karpov in the 1980s. After …c5 and …exd5, you get a lopsided pawn structure where Black has a queenside pawn majority and White has a central majority. Both sides race their pawn breaks — Black with …b5, White with e5 or f4-f5. Tal's spirit in opening form — unbalanced, aggressive, full of tactical potential.",
     "keyIdeas": [
       "Black's queenside majority (a7, b7, c5, d6) aims for ...b5 with a passed pawn",
       "The Bg7 controls the a1-h8 diagonal and supports the ...b5 push",
@@ -3230,7 +3230,7 @@
     "pgn": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6 Nc3 d6 e4 Bxf1 Kxf1 g6 g3 Bg7 Kg2 O-O Nf3 Nbd7 Re1 Qa5 Bf4",
     "color": "black",
     "style": "Positional, Gambit",
-    "overview": "The Benko Gambit is one of the most spectacular positional gambits in chess. After 3...b5, Black sacrifices a pawn to rip open the a- and b-files and get long-lasting queenside pressure. The beauty of this opening is that Black's compensation doesn't fade — those open files and the fianchettoed bishop on g7 create permanent pressure that can last well into the endgame.",
+    "overview": "The Benko Gambit is named after Hungarian-American GM Pal Benko, who defected from Hungary in 1957 and spent his career championing the gambit before formally publishing his definitive Benko Gambit book in 1974. The opening became serious tournament theory in the 1970s-1980s as players like Topalov and Karpov played both sides; today it remains a respected weapon when Black needs winning chances against 1.d4. It's one of chess's most spectacular POSITIONAL gambits — Black sacrifices the b-pawn to rip open the a- and b-files and get long-lasting queenside pressure. The beauty: Black's compensation doesn't fade — the open files and the fianchettoed Bg7 create permanent pressure that lasts into the endgame.",
     "keyIdeas": [
       "Sacrifice the b-pawn to open the a- and b-files for rook pressure",
       "The fianchettoed bishop on g7 is a monster along the long diagonal",
@@ -3324,7 +3324,7 @@
     "pgn": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O Nc3 Ne4 Qc2 Nxc3 Qxc3 f5 Bf4 Bf6 Qe3 Re8 Rfd1 a5 Rac1 Na6 Bg5 d6 a3 a4 Qd2 Be4 Bxf6 Qxf6 e3 Red8",
     "color": "black",
     "style": "Positional, Solid",
-    "overview": "The Queen's Indian Defence is one of the most solid and flexible systems in chess. After 3...b6, Black develops the bishop to b7 to control the central light squares, especially e4 and d5. This is the go-to response when White plays 3.Nf3 instead of 3.Nc3. It's been a favorite of world champions like Karpov and Kramnik because of its rock-solid nature.",
+    "overview": "The Queen's Indian Defence emerged from the hypermodern revolution of the 1920s, developed alongside the Nimzo-Indian by Aron Nimzowitsch and refined by Akiba Rubinstein. World Champions Anatoly Karpov and Vladimir Kramnik made it the cornerstone of their Black repertoire — both used it extensively in championship matches and rarely lost. After 3...b6 (the move that defines the opening), Black develops the bishop to b7 controlling the central light squares e4 and d5. This is Black's go-to response when White plays 3.Nf3 instead of 3.Nc3 (preventing the Nimzo). Solid, flexible, and trusted by champions — perfect for players who want to never lose with Black.",
     "keyIdeas": [
       "Control the e4 square with the bishop on b7 and pawns on e6/d5",
       "The bishop on b7 is the star piece — it fights for the long diagonal a8-h1",
@@ -3418,7 +3418,7 @@
     "pgn": "d4 Nf6 c4 e5 dxe5 Ng4 Bf4 Nc6 Nf3 Bb4+ Nbd2 Qe7 a3 Ngxe5 Nxe5 Nxe5 e3 Bxd2+ Qxd2 O-O Be2 d6 O-O Bf5",
     "color": "black",
     "style": "Gambit, Tactical",
-    "overview": "The Budapest Gambit is a surprise weapon against 1.d4. Black immediately strikes with 2...e5, sacrificing a pawn to get rapid development and active piece play. Most 1.d4 players don't face this often, so you'll frequently catch opponents off-guard. The key is that Black gets the pawn back quickly in most lines while keeping active pieces.",
+    "overview": "The Budapest Gambit was first played at the 1896 Budapest tournament (giving it the name) but only became serious tournament theory in 1916 when Hungarian master István Abonyi defeated GM Géza Maróczy with the gambit at Budapest — shocking the chess world. The opening had brief popularity in the 1920s before being analyzed into respectability by Akiba Rubinstein and later played by Bronstein in the 1960s. Today it's a surprise weapon against 1.d4 — most modern d4 players are unprepared for 2...e5. Black sacrifices a pawn for rapid development and active piece play; the key is that Black gets the pawn back quickly in most lines while keeping active pieces.",
     "keyIdeas": [
       "Surprise value — most d4 players are unprepared for 2...e5",
       "Black recovers the pawn in virtually all main lines with active piece play",
@@ -3512,7 +3512,7 @@
     "pgn": "d4 Nf6 c4 d6 Nc3 Nbd7 e4 e5 Nf3 Be7 Be2 O-O O-O c6 d5 Nc5 Qc2 a5 Be3 Qc7 Nd2 Bd7 Rfc1 h6 b3 Nh7 a3 Bg5 Bxg5 Nxg5 h4 Nh7 Rab1 Na6 Qd1 c5",
     "color": "black",
     "style": "Solid, Positional",
-    "overview": "The Old Indian Defence is a rock-solid system against 1.d4 that flies under the radar. After 2...d6, Black builds a compact pawn structure and aims for ...e5 to challenge the center. It's less theoretical than the King's Indian and gives you a sturdy position where you can outplay opponents in the middlegame. Think of it as the practical player's choice — fewer forced lines, more chess.",
+    "overview": "The Old Indian Defence is the original 'Indian Defence' — played by Indian players in the 19th century, hence the name, predating the King's Indian by decades. It was Mikhail Chigorin's preferred setup against 1.d4 in the late 1800s; modern champion Vladimir Kramnik has used it occasionally as a surprise weapon at elite level. After 2...d6, Black builds a compact pawn structure and aims for …e5 to challenge the centre. Less theoretical than the King's Indian and gives you a sturdy position where you can outplay opponents in the middlegame. The practical player's choice — fewer forced lines, more chess.",
     "keyIdeas": [
       "Build a solid center with ...d6 and ...e5, then develop pieces behind the pawn chain",
       "The knight on d7 supports ...e5 and can reroute to c5 or f8-g6",
@@ -3606,7 +3606,7 @@
     "pgn": "c4 e5 Nc3 Nf6 Nf3 Nc6 g3 Bb4 Bg2 O-O O-O e4 Ng5 Bxc3 bxc3 Re8 f3 exf3 Nxf3 Qe7 e3 d6 d3 Ne5 Nh4 Ng6 Nf5 Qe5 d4 Qe6 Qd3 Ne4 h4 h5 a4 Nf8 Rf4 Qxf5 Rxf5 Bxf5 Qe2 g6",
     "color": "white",
     "style": "Flexible, Positional",
-    "overview": "The English Opening starts with 1.c4 and is one of the most flexible ways to start a game. You're basically playing a Sicilian with an extra tempo, which gives you a huge range of setups. Whether you want to play positionally with a fianchetto or go for sharp lines with d4, the English lets you adapt to whatever your opponent throws at you.",
+    "overview": "The English Opening is named for Howard Staunton (a British player) who used 1.c4 against Saint-Amant in their 1843 match — the first international chess contest ever played. The English became a mainstream weapon when Mikhail Botvinnik used it in his 1948 World Championship victory match; Bobby Fischer played it in critical games of his 1972 Spassky match (notable departures from his usual 1.e4); today it's used by virtually every elite player as an anti-preparation surprise weapon. You're playing a Sicilian with an extra tempo — a huge range of setups available. Adapt to whatever your opponent throws at you.",
     "keyIdeas": [
       "Control d5 with c4 and Nc3 — the mirror image of Black's Sicilian strategy",
       "Fianchetto the king's bishop to g2 for long-term central and queenside control",
@@ -3705,7 +3705,7 @@
     "pgn": "Nf3 d5 c4 d4 e3 Nc6 exd4 Nxd4 Nxd4 Qxd4 Nc3 e5 d3 Bc5 Be3 Qd6 Nb5 Qe7 Bxc5 Qxc5 d4 exd4 Qxd4 Qxd4 Nxd4 Bd7 O-O-O O-O-O c5 Nh6 Bc4 Rhe8 c6 Bxc6 Nxc6 bxc6",
     "color": "white",
     "style": "Hypermodern, Flexible",
-    "overview": "The Reti Opening is a hypermodern classic. Instead of occupying the center with pawns immediately, you control it with pieces from the flanks. Starting with 1.Nf3 gives you incredible flexibility — you can transpose into the English, the Queen's Gambit, the Catalan, or keep things uniquely Reti. It's the Swiss army knife of openings.",
+    "overview": "The Reti Opening is named after Czechoslovak grandmaster Richard Réti, one of the founders of hypermodern chess. Réti unveiled the opening at the 1923 New York tournament, famously beating Capablanca in a celebrated game — Capablanca's first loss in over eight years of tournament play. The hypermodern philosophy: don't occupy the centre with pawns immediately; control it from the flanks with pieces. Starting with 1.Nf3 gives incredible flexibility — transpose into the English, Queen's Gambit, Catalan, or stay uniquely Reti. The Swiss army knife of openings.",
     "keyIdeas": [
       "Control the center from a distance with Nf3, c4, and a fianchettoed bishop",
       "Maximum flexibility — transpose into whatever structure suits the position",
@@ -3804,7 +3804,7 @@
     "pgn": "Nf3 d5 g3 Nf6 Bg2 c6 O-O Bg4 d3 Nbd7 Nbd2 e5 e4 dxe4 dxe4 Bc5 h3 Bh5 Qe2 O-O Nc4 b5 Ncd2 Qc7 Nb3 Rfe8 c4 b4 g4 Bg6 Nh4 a5 Bg5 Be7 Nf5 Nf8",
     "color": "white",
     "style": "Universal, Attacking",
-    "overview": "The King's Indian Attack is a universal system that can be played against almost any Black setup. You develop with Nf3, g3, Bg2, d3, O-O, and Nbd2, then strike with e4. The beauty is that the setup barely changes regardless of what Black plays — against the French, the Sicilian, the Caro-Kann, or even 1...d5, you follow the same development scheme. Bobby Fischer used this to devastating effect.",
+    "overview": "The King's Indian Attack is essentially the King's Indian Defence played in reverse — pioneered by Russian master Réti as part of the hypermodern movement in the 1920s, then resurrected by Bobby Fischer who scored brilliant attacking wins with it during the 1960s. His game vs Myagmarsuren at the 1967 Sousse Interzonal is still studied for its violent kingside finish. Modern bullet/blitz specialists like Hikaru Nakamura use the KIA constantly as a universal weapon. The setup barely changes regardless of what Black plays: develop Nf3, g3, Bg2, d3, O-O, Nbd2, then strike with e4. Against the French, Sicilian, Caro-Kann, or 1...d5 — same scheme every time.",
     "keyIdeas": [
       "Universal setup — same development scheme works against nearly everything",
       "The e4 break is the key central strike, opening lines for the g2 bishop",
@@ -3903,7 +3903,7 @@
     "pgn": "f4 d5 Nf3 Nf6 e3 g6 Be2 Bg7 O-O O-O d3 c5 Qe1 Nc6 Nc3 d4 Nd1 dxe3 Nxe3 Nd5 Nc4 b5 Na3 a6 Kh1 Qc7 Ng5 Nd4 Bd1 Bb7 c3 Nf5 Nc2 Rad8 Ne4 Nb6 Ne3 Rxd3 Nxf5 gxf5 Ng3 e6 Nh5 Qe7 Nxg7 Kxg7 Bc2 Rd7 Be3",
     "color": "white",
     "style": "Aggressive, Unorthodox",
-    "overview": "Bird's Opening with 1.f4 is an underestimated weapon that immediately signals aggressive intentions. White grabs space on the kingside and prepares for a Dutch-like setup where you're a tempo up. Most opponents won't have specific preparation against this, giving you a practical advantage from move one. The plans are straightforward — develop, castle, and launch a kingside attack.",
+    "overview": "Bird's Opening is named after Henry Edward Bird, the eccentric English master who played 1.f4 throughout his career in the late 1800s. Bird wrote extensively about chess openings and championed unorthodox systems; the opening fell into obscurity for most of the 20th century before being revived by Danish GM Bent Larsen in the 1970s. Modern players like Henrik Danielsen have made the Bird their signature weapon. 1.f4 immediately signals aggressive intentions — grab kingside space and prepare a Dutch-like setup where you're a tempo up (since Black hasn't yet committed to a specific defence). Most opponents have zero specific preparation against this, giving you a practical advantage from move one.",
     "keyIdeas": [
       "Grab kingside space with f4 and prepare an attack along the f-file",
       "The Leningrad-style setup with g3, Bg2 gives a solid yet aggressive structure",
@@ -3992,7 +3992,7 @@
     "pgn": "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O Re1 d6 c3 Na5 Bb5 a6 Ba4 b5 Bc2 c5 Nbd2 Nc6 Nf1 Re8 h3 h6 Ng3 Be6 d4 cxd4 cxd4 exd4 Nxd4 Nxd4 Qxd4 Rc8 Bb3 d5 e5 Nd7 Nh5 Bc5 Qf4 Qg5 Qxg5 hxg5 Bxg5",
     "color": "black",
     "style": "Tactical, Active",
-    "overview": "The Two Knights Defence with 3...Nf6 is the fighting response to the Italian game. Rather than playing the solid ...Bc5, you immediately counterattack the e4 pawn. This leads to some of the sharpest and most theoretically rich positions in all of chess. You need to know your stuff, but when you do, Black gets active piece play and concrete counterchances in every line.",
+    "overview": "The Two Knights Defence dates back to Polerio's 1590s analyses and was popularized by Paul Morphy in his 1858 European tour, where his sparkling attacking play with 3...Nf6 immediately challenging e4 dazzled audiences. Wilhelm Steinitz analyzed it deeply in his 1880s championship matches; the line has been a fighting response to the Italian for over 400 years. Rather than playing the solid …Bc5, you immediately counterattack the e4-pawn. This leads to some of the sharpest and most theoretically rich positions in all of chess (the Fried Liver, Traxler, Max Lange all branch from here). You need to know your stuff — but when you do, Black gets active piece play and concrete counterchances in every line.",
     "keyIdeas": [
       "Counterattack e4 immediately with 3...Nf6 instead of passively defending",
       "Against 4.Ng5, the main line with ...d5 leads to sharp, well-analyzed play where Black has full compensation",
@@ -4091,7 +4091,7 @@
     "pgn": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4 O-O d6 cxd4 Bb6 Nc3 Nf6 Ba3 O-O e5 Ng4 h3 Nh6 d5 Nxe5 Nxe5 dxe5 Bxf8 Kxf8 Qh5 Bd4 Rac1 Bf5 Nb5 Bb2",
     "color": "white",
     "style": "Gambit, Romantic",
-    "overview": "The Evans Gambit with 4.b4 is one of the most romantic and dangerous openings in all of chess. You sacrifice a pawn to blast open the center and get a massive lead in development. Every developing choice comes with a threat, and Black has to find a very narrow path to survive. Kasparov himself revived this gambit at the highest level, proving it's not just for club players.",
+    "overview": "The Evans Gambit was invented by Welsh sea captain William Davies Evans in 1827, who first played it during a ship voyage between Wales and Cork. The opening dominated 19th-century chess — Anderssen, Morphy, and Andersen all played it for spectacular attacking wins. It fell out of favour in the early 1900s after Lasker's analyses showed Black's resources, but Garry Kasparov famously revived it at the highest level in his 1995 match against Anand at Riga — beating Anand in a 25-move kingside attack. You sacrifice the b-pawn to blast open the centre and gain a massive development lead. Every move comes with a threat; Black must find a very narrow defensive path.",
     "keyIdeas": [
       "Sacrifice the b-pawn to gain time with c3 and d4, opening the center immediately",
       "The lead in development translates into a powerful initiative with every piece active",
