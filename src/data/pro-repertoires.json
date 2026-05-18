@@ -3248,20 +3248,20 @@
       "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O",
       "color": "white",
       "style": "Classical, Deep",
-      "overview": "Praggnanandhaa's Ruy Lopez is a testament to his deep understanding of classical chess. The Ruy Lopez has been the king of openings for centuries, and Pragg plays it with the patience and precision of a veteran. The idea is simple but profound: develop, castle, and build a slow positional advantage. Pragg's endgame mastery means even a tiny edge from the opening gets converted ruthlessly.",
+      "overview": "Praggnanandhaa's Ruy Lopez is a testament to his deep understanding of classical chess. The Ruy Lopez has been chess's flagship opening for 460 years — named after Spanish priest Ruy López de Segura who analyzed it in his 1561 book 'Libro del Ajedrez'. Steinitz refined the theory in the 1880s; Tarrasch built his teaching career on it; Capablanca, Lasker, Alekhine and every World Champion since has spent years in its mainlines; Fischer reportedly said 'best by test' specifically because the Ruy Lopez exists. Pragg, the Indian prodigy who reached the 2023 World Cup final at age 18, plays it with the patience and precision of a veteran. The idea is simple but profound: develop, castle, and build a slow positional advantage. Pragg's endgame mastery means even a tiny edge gets converted ruthlessly.",
       "keyIdeas": [
-        "Build a classical center with d4 and maintain the tension — this central control is the foundation for all middlegame operations",
-        "Use the bishop on b3 to pressure f7 and control the a2-g8 diagonal — maintaining this pressure forces the opponent to defend passively",
-        "Build the c3+d4 pawn center methodically — the Ruy Lopez's strength comes from this central duo that controls d5, e5, and creates a platform for kingside operations",
-        "Transition into favorable middlegames or endgames where Pragg's technique shines"
+        "Build the classical c3+d4 pawn duo. The full sequence (Bb5→Ba4→Bb3→O-O→Re1→c3→h3→d4) takes 10+ moves but creates an unbreakable central foundation.",
+        "Bb3 stares down the a2-g8 diagonal at f7 forever. Combined with the c3+d4 central duo, this bishop is the Ruy Lopez's most threatening piece in attacking positions.",
+        "Reach favourable middlegames OR endgames — both work. The Ruy Lopez is unique because Black equalises slowly; either the middlegame goes well (you have space) or it doesn't (the endgame is slightly better for you).",
+        "Patience matters more than calculation. Pragg's Ruy Lopez wins come from outwaiting opponents — making the second-best move 40 times in a row while opponents make the third-best."
       ],
       "traps": [
-        "After O-O Nxe4, the Noah's Ark trap is not a threat — Re1 pins the knight and d4 opens the position",
-        "If Black plays d6 too passively, White gets a free hand on the kingside with Ng5"
+        "After 5.O-O Nxe4 (the Open Ruy Lopez), the Noah's Ark Trap idea (where Black wins the bishop pair after …c4) is NOT a threat in modern theory — White plays 6.d4 challenging the centre, then Re1 pinning, then dxe5 reaching favourable IQP-style positions.",
+        "If Black plays …d6 too passively (the old Steinitz Defence), White gets a free hand with Ng5 ideas attacking f7. Black needs active development (…Be7, …O-O, …Nb8-Nd7 reroute) to keep the position playable."
       ],
       "warnings": [
-        "The Ruy Lopez requires patience — do not rush for an attack",
-        "Watch for the Marshall Attack (d5) — Pragg prefers the Anti-Marshall with c3"
+        "The Ruy Lopez requires PATIENCE. Most amateurs lose Ruy positions by trying to attack on move 12 when the position isn't ready. Build slowly, develop completely, then attack.",
+        "Watch for the Marshall Attack (8...d5! gambit). If you're not prepared for it, ALWAYS play 8.h3 first (the Anti-Marshall move order preventing the gambit)."
       ],
       "variations": [
         {
@@ -3301,20 +3301,20 @@
       "pgn": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O",
       "color": "white",
       "style": "Positional, Fianchetto",
-      "overview": "Pragg's Catalan is about maximum positional pressure with minimum risk. The Bg2 dominates the long diagonal, and White slowly squeezes Black's position. What makes Pragg's approach special is his ability to convert tiny positional edges into full points — the Catalan gives him exactly the kind of slow-burn advantage he thrives on.",
+      "overview": "Pragg's Catalan is about maximum positional pressure with minimum risk. The opening was named at the 1929 Barcelona tournament when Savielly Tartakower invented it for the organizers; Botvinnik used it as a championship weapon; Kramnik elevated it to elite status in the 2000s; Carlsen made it his signature 1.d4 weapon. Pragg inherits this lineage and brings exceptional endgame technique — converting tiny Catalan positional edges into full points is exactly his style. The Bg2 dominates the long diagonal across the entire game; the slow squeeze rewards Pragg's deep calculation in seemingly quiet positions.",
       "keyIdeas": [
-        "Fianchetto the bishop and apply pressure along the long diagonal — maintaining this pressure forces the opponent to defend passively",
-        "Play for the c4 pawn break to open the position favorably — this structural feature shapes all future strategic decisions in the position",
-        "Use Nbd2-Nb3-Nc5 maneuver to target Black's queenside — maintaining this pressure forces the opponent to defend passively",
-        "Convert small advantages with precise endgame technique — the structural advantages become more pronounced with fewer pieces on the board"
+        "The Bg2 fianchetto bishop controls the a8-h1 diagonal forever. NEVER trade it lightly — without it the Catalan loses its strategic identity.",
+        "Recover the c4-pawn with patience. Don't grab it immediately with Qxc4 — first play Qc2 + a4 setting up the recovery; the structural pressure is more valuable than the pawn.",
+        "The Nbd2 → Nb3 → Nc5 reroute targets Black's queenside. From c5, the knight attacks b7 AND e6 simultaneously while supporting the long-diagonal pressure.",
+        "Convert small advantages. The Catalan teaches you that 'small positional edges' aren't 'almost equal' — they're 'eventually decisive' if you have the technique. Pragg has it."
       ],
       "traps": [
-        "After dxc4, if Black tries to hold the pawn with b5, a4 cracks the structure open",
-        "Ne5 combined with Bg2 can create devastating pins along the diagonal"
+        "If Black tries to hold the c4-pawn with …b5, you play a4! immediately — undermining the chain. After …c6 (defending b5) axb5 cxb5 — Black's queenside is wrecked AND the Bg2 fires down the now-open diagonal.",
+        "The Ne5 + Bg2 combination creates devastating pins. When Black has developed …Nc6 OR …Bb7, Ne5 attacking targets often wins material along the long diagonal."
       ],
       "warnings": [
-        "The Catalan requires patience — do not try to force the issue too early",
-        "Watch for Black's c5 break which can equalize if timed well"
+        "DON'T try to force tactics. The Catalan is a 50-move opening — premature attacks lose the structural edge.",
+        "Watch Black's …c5 break. If timed correctly (after Black's pieces are fully coordinated), …c5 dissolves the central tension and the Bg2's diagonal becomes less effective."
       ],
       "variations": [
         {
@@ -3354,20 +3354,20 @@
       "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6",
       "color": "black",
       "style": "Dynamic, Fighting",
-      "overview": "Pragg's Najdorf is pure fighting chess. He chooses the sharpest defense in chess because it gives him the asymmetric positions he needs to outplay opponents. Unlike many Najdorf players who rely on memorization, Pragg's strength is his ability to calculate deeply in the middlegame complications that arise from this opening.",
+      "overview": "Pragg's Najdorf is pure fighting chess. The opening is named after Argentine GM Miguel Najdorf, who fled Poland for Argentina in 1939 right before WWII (his entire family was killed in the Holocaust); he made Argentina his home and pioneered the …a6 move in the 1940s. Bobby Fischer immortalised it in his 1972 World Championship run; Kasparov played it for thirty years against Karpov. Pragg, who reached the 2023 World Cup final at age 18 (only the third Indian to reach a World Cup final), chooses the Najdorf for the asymmetric positions he needs to outplay opponents. His exceptional calculation matches the Najdorf's most theoretical lines.",
       "keyIdeas": [
-        "Prepare queenside expansion with b5 while controlling the center — this central control is the foundation for all middlegame operations",
-        "Seize the c-file with ...Rc8 as the foundation of queenside counterplay — the rook pressures c2/c3 and supports tactical ideas like ...Nc4 or ...Rxc3",
-        "Time the e5 break to challenge White's central dominance — this central control is the foundation for all middlegame operations",
-        "Create imbalanced positions where calculation matters more than theory — a key strategic concept in Sicilian Najdorf"
+        "…a6 (the Najdorf move) prepares …b5 queenside expansion AND prevents Nb5 fork tactics. Two strategic functions in one pawn move.",
+        "…Rc8 is the c-file claim. After cxd4 happens, get the rook to c8 quickly — combined with …Qa5 or …Qb6, the c-file becomes Black's primary attacking lane.",
+        "…e5 is the central break. Played at the right moment (after White has committed Nb3 or Be3), it cramps White's d-pawn AND establishes Black's central structure.",
+        "Create asymmetric positions where calculation decides. Pragg's edge is in middlegames where both sides have chances — he calculates 1-2 moves deeper than opponents and that wins games."
       ],
       "traps": [
-        "In the Be3 line, after e5 Nb3 Be6 f3 b5, Black has strong queenside counterplay",
-        "Against Bg5, the Poisoned Pawn Qb6 is available but Pragg prefers solid play with e6"
+        "In the English Attack (Be3 + Qd2 + O-O-O), after Black's standard 6...e5 7.Nb3 Be6 8.f3 setup, the …b5 push starts strong queenside counterplay. The pawn race favours the side that strikes first.",
+        "Against the classical Bg5, the Poisoned Pawn Qb6 line (Fischer's specialty) is available but extremely theoretical. Pragg prefers the solid …e6 setup that offers reliable counterplay without 30 moves of memorisation."
       ],
       "warnings": [
-        "Do not play a6 and b5 mechanically — time them based on White's setup",
-        "The Najdorf can be dangerous if underprepared — know the critical lines"
+        "Don't play …a6 and …b5 mechanically. Time them based on White's setup — premature …b5 loses to a4 attacks; late …b5 lets White consolidate.",
+        "The Najdorf is the most theoretical opening in chess. Without engine-checked preparation, you can be checkmated in 25 moves. Study before you play."
       ],
       "variations": [
         {
@@ -3407,20 +3407,20 @@
       "pgn": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O c3 d5 exd5",
       "color": "white",
       "style": "Positional, Theoretical",
-      "overview": "Niemann's Anti-Marshall is a sophisticated weapon. Instead of allowing the Marshall Attack, Hans takes on d5 and enters a position where his deep preparation gives him a lasting edge. The resulting positions are structurally rich — White gets a central majority and piece activity, while Black must defend precisely. Niemann thrives in these positions where competitive intensity meets deep theory.",
+      "overview": "Niemann's Anti-Marshall is a sophisticated theoretical weapon. The Marshall Attack itself was introduced by American champion Frank Marshall in his 1918 New York game against Capablanca (Marshall had supposedly prepared the gambit for ten years specifically to use against Cuba's chess king). The Anti-Marshall systems (8.h3, 8.a4, 8.exd5) developed in the 1980s-1990s as White's defensive response — today every elite Ruy Lopez player has Anti-Marshall preparation in reserve. Hans Niemann — known for fighting chess and competitive intensity — takes on d5 and enters positions where his deep preparation gives him a lasting edge. White gets a central pawn majority and piece activity, while Black must defend precisely.",
       "keyIdeas": [
-        "Take on d5 to get a favorable pawn structure with d4 coming — this structural feature shapes all future strategic decisions in the position",
-        "Use the central pawn majority to create a passed d-pawn — this central control is the foundation for all middlegame operations",
-        "Develop pieces to active squares while maintaining structural pressure — completing development before committing to a plan gives maximum flexibility",
-        "Transition to favorable endgames with the d-pawn advantage — the structural advantages become more pronounced with fewer pieces on the board"
+        "Take on d5 to neutralise the Marshall AND get a favourable pawn structure. After 9.exd5 Nxd5 10.Nxe5 Nxe5 11.Rxe5 c6 12.d4, you have the central pawn duo and Black has nothing but the doubled c-pawn structure.",
+        "The central pawn majority (d4+e-file pressure) creates a passed d-pawn in the endgame. This is the long-term winning idea even when the position looks balanced.",
+        "Develop actively while maintaining structural pressure. Don't trade pieces prematurely — the central majority matters more with pieces on the board.",
+        "Transition to favourable endgames. The Anti-Marshall middlegames often resolve into endgames where the central majority and structural plusses become decisive."
       ],
       "traps": [
-        "After exd5 Nxd5, Nxe5 is a tempting but incorrect pawn grab — Nxe5 Nxe5 Rxe5 c6 wins the bishop",
-        "Be careful of Bg4 pins — h3 may be needed at the right moment"
+        "After 9.exd5 Nxd5, the natural-looking 10.Nxe5? is a known mistake — after 10...Nxe5 11.Rxe5 c6 the bishop on b3 has no good retreat (Bxd5 cxd5 wins back material AND damages your structure). The correct sequence is 10.Nxe5 Nxe5 11.Rxe5 c6 with d4 coming.",
+        "Be careful of …Bg4 pins. The f3-knight can become tied down to defending the queen; have h3 ready as a prophylactic resource."
       ],
       "warnings": [
-        "Avoid trading too many pieces — the central majority is more valuable with pieces on the board",
-        "Watch for Black's c5 break which can challenge the d4 pawn"
+        "Don't trade too many pieces. The central majority advantage requires PIECES to support the d4-pawn's eventual push to d5. Pure pawn endgames often draw.",
+        "Watch Black's …c5 break challenging d4. If you let Black play …c5 with all pieces developed, the central tension dissolves and your structural edge evaporates."
       ],
       "variations": [
         {
@@ -3460,20 +3460,20 @@
       "pgn": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6",
       "color": "black",
       "style": "Dynamic, Aggressive",
-      "overview": "Niemann's Najdorf is aggressive and uncompromising. He plays it to create the most complex positions possible, trusting his ability to out-calculate opponents in the chaos. Hans approaches the Najdorf with a warrior mentality — every game is a fight, and the Najdorf gives him the sharpest battlefield.",
+      "overview": "Niemann's Najdorf is aggressive and uncompromising — he plays the SHARPEST lines in chess's most theoretical opening. The opening is named after Miguel Najdorf, who fled Poland for Argentina in 1939 before WWII (his entire family was killed in the Holocaust); he pioneered the …a6 move in the 1940s. Bobby Fischer immortalised it in his 1972 World Championship; Kasparov played it for thirty years. Niemann — known for fighting chess and competitive intensity — chooses the Najdorf for maximum complexity. He approaches every game as a battle, and the Najdorf gives him the sharpest battlefield in chess.",
       "keyIdeas": [
-        "Create maximum complexity with sharp Najdorf tabiya — a key strategic concept in Sicilian Najdorf",
-        "Use queenside pawn expansion (b5) to generate counterplay — this structural feature shapes all future strategic decisions in the position",
-        "Time the e5 central break precisely for maximum impact — this central control is the foundation for all middlegame operations",
-        "Fight for every half-pawn of advantage in the middlegame — this structural feature shapes all future strategic decisions in the position"
+        "Create maximum complexity in the Najdorf tabiyas. The English Attack with opposite-side castling pawn races, the Bg5 Poisoned Pawn — these are the chess equivalent of knife fights where calculation decides.",
+        "…b5 queenside expansion is the standard counter to White's kingside attack in opposite-side-castled games. Push it as soon as White commits to the long castle.",
+        "Time the …e5 central break carefully. Played correctly, it cramps White's pieces; played too early, the d5-square becomes a permanent weakness.",
+        "Fight for every half-pawn of advantage. Niemann's edge: he doesn't accept equality — he creates unbalanced positions where opponents have to take risks to compete."
       ],
       "traps": [
-        "After Be3 e5 Nb3, the immediate Nxe4 is a trap — Nxe4 d5 wins a piece",
-        "In the English Attack, premature g5 by White can be met with d5 central break"
+        "After 6.Be3 e5 7.Nb3, if Black plays Nxe4? immediately, 8.Nd5 wins a piece (knight forks on c7+e7 patterns). Always complete development before grabbing central pawns.",
+        "In the English Attack, if White pushes g4-g5 too early without supporting pieces, Black has the central …d5 break opening the centre when White's king is exposed."
       ],
       "warnings": [
-        "The Najdorf demands constant vigilance — one inaccuracy can be fatal",
-        "Against 6.Bg5, know the critical lines of the Poisoned Pawn and e6 variations"
+        "The Najdorf demands CONSTANT vigilance. One inaccuracy in critical positions can lose material in 3 moves. Memorise the main 6-7 White systems and your replies cold.",
+        "Against 6.Bg5, know the critical lines — both the sharp Poisoned Pawn (6...Qb6) AND the solid …e6 setup. You'll need both depending on what your opponent expects."
       ],
       "variations": [
         {
@@ -3513,20 +3513,20 @@
       "pgn": "d4 Nf6 c4 g6 Nc3 d5",
       "color": "black",
       "style": "Dynamic, Counterattacking",
-      "overview": "Niemann's Grunfeld is a declaration of war. By allowing White to build a massive pawn center, Black bets everything on dynamic piece play and tactical counterattacks. The Grunfeld suits Niemann's competitive personality perfectly — it creates the kind of high-tension positions where fighting spirit and calculation determine the winner.",
+      "overview": "Niemann's Grünfeld is a declaration of war. Austrian master Ernst Grünfeld invented this defence in 1922 against Aron Nimzowitsch — letting White have the centre, then attacking it from the wings. Bobby Fischer played it as his main weapon in his 1972 World Championship match; Kasparov-Karpov 1986-1990 featured legendary Grünfeld battles where Kasparov's preparation drove the theory deeper than anyone imagined. Hans Niemann's competitive personality suits the Grünfeld perfectly — it creates high-tension positions where fighting spirit and calculation determine the winner. By allowing White to build a massive pawn centre, Black bets everything on dynamic piece play and tactical counterattacks.",
       "keyIdeas": [
-        "Allow White to build a big center, then undermine it with c5 and e5 — this central control is the foundation for all middlegame operations",
-        "Use the fianchettoed bishop on g7 as a long-range weapon targeting d4 — maintaining this pressure forces the opponent to defend passively",
-        "Generate tactical counterplay against White's overextended center — this central control is the foundation for all middlegame operations",
-        "Convert piece activity into material or positional gains — a key strategic concept in Grunfeld Defense"
+        "The Grünfeld philosophy: LET White build d4+e4+c3, then dismantle it with …c5, …Bg7 pressure, and …Qa5/Qb6 tactics. Hypermodern chess in pure form.",
+        "The Bg7 fianchetto is your most important piece — it stares at d4 (and via the long diagonal, at a1 where White's rook lives) for the entire game.",
+        "Generate tactical counterplay before White consolidates. The Grünfeld is a race: if White gets to play h3, Re1, Bd3 calmly, the centre is unbreakable; if you strike first with …c5, the centre collapses.",
+        "Convert piece activity into material or positional gains. The Grünfeld's bishop pair + active rooks + half-open c-file are all assets — use them to win small advantages that compound."
       ],
       "traps": [
-        "After cxd5 Nxd5 e4 Nxc3 bxc3, the position looks great for White but Black has c5 and Bg7 counterplay",
-        "In the Exchange Variation, Qa5 can cause tactical problems if White is not careful"
+        "In the Exchange Variation (5.cxd5 Nxd5 6.e4 Nxc3 7.bxc3 Bg7), the position LOOKS great for White but Black has 8.Nf3 c5 9.Rb1 (or 9.Be3) coming, and the Bg7 is already aimed at the a1-rook (…Bxa1 ideas).",
+        "The …Qa5 sortie can cause tactical problems for White. Combined with the Bg7 fianchetto and the half-open c-file, …Qa5 puts unexpected pressure on White's queenside that requires precise defence."
       ],
       "warnings": [
-        "The Grunfeld requires precise timing — attacking the center too early can backfire",
-        "Against the Russian System (Qb3), Black must know the theoretical lines well"
+        "The Grünfeld requires PRECISE timing of central breaks. Attacking the centre too early lets White consolidate; too late lets White play d4-d5 cramping you.",
+        "Against the Russian System (4.Qb3), Black MUST know the theoretical lines well. The Qb3 puts immediate pressure on d5 and the wrong reply hands White a big edge."
       ],
       "variations": [
         {
