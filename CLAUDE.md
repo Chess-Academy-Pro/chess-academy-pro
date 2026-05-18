@@ -1049,6 +1049,7 @@ After every `git push origin main`:
    | `/weaknesses` (or its tab/row → review flow) | `scripts/audit-weaknesses.mjs` |
    | `/openings/*` | `scripts/audit-openings-ui.mjs` (coordinate — often 🚧 in flight) |
    | `/openings/:id` trap + warning tiles | `scripts/audit-opening-trap-tiles.mjs` |
+   | every opening subline (deep walk, ~1-2h) | `scripts/audit-openings-deep-walkthrough.mjs` |
    | `src/data/repertoire.json` trap/warning content | `scripts/audit-repertoire-orientation.mjs` (data-only — runs without a browser) |
    | `src/data/pro-repertoires.json` trap/warning content | `scripts/audit-trap-orientation.mjs` (data-only — runs without a browser) |
    | `/` (dashboard) + SmartSearchBar | `scripts/audit-dashboard.mjs` |

@@ -52,8 +52,9 @@ import { join } from 'node:path';
 const BASE_URL = process.env.AUDIT_SMOKE_URL ?? 'http://localhost:5173';
 const HEADED = process.env.AUDIT_SMOKE_HEADED === '1';
 const SCOPE = (process.env.AUDIT_SCOPE ?? 'all').toLowerCase();
-const PER_PLY_TIMEOUT_MS = 6000;
-const SETTLE_AFTER_MOUNT_MS = 1500;
+const PER_PLY_TIMEOUT_MS = 2500;
+const PER_PLY_POLL_MS = 120;
+const SETTLE_AFTER_MOUNT_MS = 800;
 const MAX_PLIES_PER_LINE = 30;
 const stamp = new Date().toISOString().replace(/[:.]/g, '-');
 const OUT_DIR = process.env.AUDIT_OUT_DIR ?? `audit-reports/openings-deep-walkthrough-${stamp}`;
@@ -269,11 +270,17 @@ async function main() {
   console.log(`[deep-walk] out=${OUT_DIR}`);
 
   const prev = await loadResume();
+  // Only count successful runs as "done" so resume retries any
+  // subline that errored on the prior attempt.
   const done = new Set(
-    (prev?.results ?? []).map((r) => `${r.openingId}::${r.sublineType}::${r.sublineIndex ?? 'main'}`),
+    (prev?.results ?? [])
+      .filter((r) => !r.runtime?.error && (r.pliesCaptured ?? 0) > 0)
+      .map((r) => `${r.openingId}::${r.sublineType}::${r.sublineIndex ?? 'main'}`),
   );
-  const results = prev?.results ?? [];
-  console.log(`[deep-walk] resume: ${done.size} already done`);
+  const results = (prev?.results ?? []).filter(
+    (r) => !r.runtime?.error && (r.pliesCaptured ?? 0) > 0,
+  );
+  console.log(`[deep-walk] resume: ${done.size} already done, retrying any errored`);
 
   const executablePath = await resolveChromiumExecutable(HEADED);
   if (executablePath) console.log(`[deep-walk] chromium = ${executablePath}`);
@@ -405,20 +412,25 @@ async function main() {
       // Settle so the LLM enricher has a chance to fill in narration.
       await page.waitForTimeout(SETTLE_AFTER_MOUNT_MS);
 
-      // Walk each ply via the Next nav.
+      // Walk each ply via the Next nav. Heavy use of short locator
+      // timeouts here because we poll up to ~20 times per ply — a
+      // 2s default-timeout textContent multiplied by N polls would
+      // make each subline run for minutes. Use page.evaluate to grab
+      // everything in a single synchronous DOM read.
       const captureCurrent = async () => {
-        const cardEmpty = await page.locator('[data-testid="annotation-card-empty"]').first().isVisible().catch(() => false);
-        const overview = await page.locator('[data-testid="walkthrough-overview"]').first().isVisible().catch(() => false);
-        const label = await page.locator('[data-testid="annotation-move-label"]').first()
-          .textContent({ timeout: 2000 }).catch(() => null);
-        const text = await page.locator('[data-testid="annotation-text"]').first()
-          .textContent({ timeout: 2000 }).catch(() => null);
-        return {
-          cardEmpty,
-          overview,
-          label: (label ?? '').trim(),
-          text: (text ?? '').trim(),
-        };
+        return await page.evaluate(() => {
+          const $ = (sel) => document.querySelector(sel);
+          const card = $('[data-testid="annotation-card-empty"]');
+          const overview = $('[data-testid="walkthrough-overview"]');
+          const labelEl = $('[data-testid="annotation-move-label"]');
+          const textEl = $('[data-testid="annotation-text"]');
+          return {
+            cardEmpty: Boolean(card),
+            overview: Boolean(overview),
+            label: (labelEl?.textContent ?? '').trim(),
+            text: (textEl?.textContent ?? '').trim(),
+          };
+        }).catch(() => ({ cardEmpty: false, overview: false, label: '', text: '' }));
       };
       const advance = async () => {
         for (const sel of [
@@ -442,7 +454,7 @@ async function main() {
         const t0 = Date.now();
         let snap = null;
         while (Date.now() - t0 < PER_PLY_TIMEOUT_MS) {
-          await page.waitForTimeout(250);
+          await page.waitForTimeout(PER_PLY_POLL_MS);
           const s = await captureCurrent();
           if (s.label && s.label !== lastLabel) { snap = s; lastLabel = s.label; break; }
           if (s.cardEmpty && !s.overview) { snap = s; break; }
