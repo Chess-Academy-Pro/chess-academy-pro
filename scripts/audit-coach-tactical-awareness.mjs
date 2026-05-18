@@ -145,6 +145,33 @@ async function main() {
     if (tacticsEvent) break;
     await page.waitForTimeout(500);
   }
+
+  // Wait further for the brain's streaming response so we can capture
+  // the actual narration. Anthropic streaming + tool roundtrips can
+  // take 30-60s before the answer-returned audit lands. If no LLM key
+  // is configured this loop expires harmlessly.
+  console.log('  waiting for brain reply (Anthropic streaming)…');
+  const brainDeadline = Date.now() + 90_000;
+  let brainAnswer = null;
+  while (Date.now() < brainDeadline) {
+    brainAnswer = intercepted.find(
+      (e) => e.kind === 'coach-brain-answer-returned',
+    );
+    if (brainAnswer) break;
+    await page.waitForTimeout(750);
+  }
+  // Capture the coach's chat message text from the memory store
+  // events (those carry the rendered prose the user sees).
+  const coachReply = [...intercepted]
+    .reverse()
+    .find(
+      (e) =>
+        e.kind === 'coach-memory-conversation-appended' &&
+        (e.summary ?? '').startsWith('chat-teach/coach:'),
+    );
+  const replyText = coachReply
+    ? (coachReply.summary ?? '').replace(/^chat-teach\/coach:\s*/, '')
+    : null;
   await page.screenshot({ path: join(OUT_DIR, 'after-ask.png'), fullPage: false }).catch(() => undefined);
 
   // ── Parse the audit payload ─────────────────────────────────────
@@ -185,6 +212,16 @@ async function main() {
   console.log('\n[tactical] === assertions ===');
   assertTruthy('tactics-ctx audit event fired', tacticsEvent, 'buildLiveTactics ran inside handleSubmit');
   assertTruthy('audit summary parsed cleanly', parsed, 'shape matches "immediate=N hanging=N threats=N opps=N depth=N"');
+  if (brainAnswer) {
+    console.log(`  ✓ bonus: coach-brain-answer-returned fired: ${(brainAnswer.summary ?? '').slice(0, 140)}`);
+  } else {
+    console.log('  ⚠ no brain answer in 90s — LLM key may be missing OR call still in flight');
+  }
+  if (replyText) {
+    console.log(`\n[tactical] === COACH REPLY ===`);
+    console.log(replyText.slice(0, 1500));
+    console.log();
+  }
   if (parsed) {
     // Starting position with no cached analysis: immediate=0 hanging=0
     // threats=0 opps=0. The contract is proved by the helper running
